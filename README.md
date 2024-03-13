@@ -1,10 +1,18 @@
-# create-svelte
+# Skylarks-FE-Next
+New experimental frontend for the [website of the Berlin Skylarks Baseball & Softball Club](https://www.tib-baseball.de/). 
+Built with SvelteKit, Skeleton UI and Tailwind CSS.
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+Not actively used in production at the moment.
 
-## Creating a project
+## Status quo
+The website is served as a standard TYPO3 CMS website with PHP-based Fluid templates, enriched with some basic JavaScript.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Intended end result
+The website is split into a modern frontend (this repository) and a headless backend focused solely on providing data.
+
+---
+
+## SvelteKit generated documentation
 
 ```bash
 # create a new project in the current directory
