@@ -11,9 +11,10 @@
 <nav class="list-nav py-3 px-6">
     <ul class="md:flex items-end md:flex-row gap-6">
         <li><a href="/aktuelles">Aktuelles</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="/contact">Contact</a></li>
+        <li><a href="/gamecenter">Gamecenter</a></li>
+        <li><a href="/tabellen">Tabellen</a></li>
+        <li><a href="/teams">Teams</a></li>
+        <li><a href="/verein">Verein</a></li>
+        <li><a href="/kontakt">Kontakt</a></li>
     </ul>
 </nav>

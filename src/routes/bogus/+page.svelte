@@ -1,1 +1,0 @@
-<h1>This is the bogus page with static content</h1>
