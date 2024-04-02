@@ -8,7 +8,7 @@
     }
 </script>
 
-<nav class="list-nav py-3 px-6">
+<nav class="list-nav py-1 px-6">
     <ul class="md:flex items-end md:flex-row gap-6">
         <li><a href="/aktuelles">Aktuelles</a></li>
         <li><a href="/gamecenter">Gamecenter</a></li>

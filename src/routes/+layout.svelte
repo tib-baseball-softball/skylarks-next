@@ -65,6 +65,7 @@
             </svelte:fragment>
         </AppBar>
     </svelte:fragment>
+    <hr class="!border-t-2">
 
     <!-- (Default Page Content slot) -->
     <div id="pageContainer" class="flex items-center justify-center">
@@ -74,7 +75,7 @@
     </div>
 
     <svelte:fragment slot="pageFooter">
-        <hr class="divider">
+        <hr class="!border-t-2">
         <Footer></Footer>
     </svelte:fragment>
 </AppShell>
