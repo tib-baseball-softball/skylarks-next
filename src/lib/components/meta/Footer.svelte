@@ -3,7 +3,7 @@
         <img src="/Facebook_Logo_Primary.svg" alt="Facebook brand logo" width="50em">
     </a>
     <a href="https://www.instagram.com/berlinskylarks/" target="_blank" rel="noreferrer">
-        <img src="/Facebook_Logo_Primary.svg" alt="Facebook brand logo" width="50em">
+        <img class="m-1" src="/Instagram_Glyph_Gradient.png" alt="Facebook brand logo" width="40em">
     </a>
 </section>
 <nav class="list-nav py-3 px-6">
