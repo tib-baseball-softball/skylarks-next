@@ -69,7 +69,7 @@
 
     <!-- (Default Page Content slot) -->
     <div id="pageContainer" class="flex items-center justify-center">
-        <div class="flex flex-col justify-center content-center max-w-[92%] md:max-w-[85%] xl:max-w-[75%]">
+        <div class="flex flex-col justify-center content-center w-[92%] md:w-[85%] xl:w-[75%]">
             <slot/>
         </div>
     </div>

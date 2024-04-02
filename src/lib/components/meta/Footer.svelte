@@ -6,7 +6,7 @@
         <img class="m-1" src="/Instagram_Glyph_Gradient.png" alt="Facebook brand logo" width="40em">
     </a>
 </section>
-<nav class="list-nav py-3 px-6">
+<nav class="list-nav pt-1 pb-3 px-6">
     <ul class="flex items-end justify-center gap-4">
         <li><a href="/impressum">Impressum</a></li>
         <li><a href="/datenschutz">Datenschutzerklärung</a></li>
