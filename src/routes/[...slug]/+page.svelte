@@ -4,7 +4,7 @@
     export let data;
 
     $: page = data.pageObject
-    $: contentObjects = data.contentObjects
+    $: contentObjects = data.contentObjects ?? []
 </script>
 
 <article class="prose dark:prose-invert max-w-none">
