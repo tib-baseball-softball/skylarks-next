@@ -6,6 +6,7 @@
     import { LightSwitch } from '@skeletonlabs/skeleton';
     import {initializeStores, Drawer, getDrawerStore} from '@skeletonlabs/skeleton';
     import Footer from "$lib/components/meta/Footer.svelte";
+    import {selectedSeason} from "../stores";
 
     initializeStores();
 
@@ -59,8 +60,11 @@
                 </section>
             </svelte:fragment>
             <svelte:fragment slot="trail">
-                <div class="me-5">
-                    <LightSwitch></LightSwitch>
+                <div class="me-5 flex gap-5">
+                    <p class="flex-shrink-0">Saison: {$selectedSeason}</p>
+                    <div class="me-5">
+                        <LightSwitch/>
+                    </div>
                 </div>
             </svelte:fragment>
         </AppBar>
