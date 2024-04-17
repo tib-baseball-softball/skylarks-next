@@ -1,14 +1,16 @@
 <script lang="ts">
-    import type {PageServerData} from "../../../.svelte-kit/types/src/routes/gamecenter/$types";
+    import type {LayoutServerData} from "../../../.svelte-kit/types/src/routes/gamecenter/$types";
     import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte";
     import MatchTeaserCard from "$lib/components/match/MatchTeaserCard.svelte";
+    import {ProgressBar} from "@skeletonlabs/skeleton";
 
-    export let data: PageServerData
+    export let data: LayoutServerData
 </script>
 
 <SeasonSelector/>
 {#await data.streamed.matches}
     <p>Loading matches...</p>
+    <ProgressBar />
 {:then matches}
     <section>
         <header>
