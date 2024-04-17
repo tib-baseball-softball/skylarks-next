@@ -4,7 +4,7 @@
     export let match: Match
 </script>
 
-<a class="block card card-hover variant-ghost-surface" href="#">
+<a class="block card card-hover variant-ghost-surface" href="gamecenter/game-detail/{match.id}">
     <header class="card-header">
         <h3>{match.league.name}</h3>
         <p>{match.time}</p>
