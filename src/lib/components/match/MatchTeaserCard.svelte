@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type {Match} from "../../../../../bsm-js/src/model/Match";
+    import type {Match} from "../../../../../bsm.js/src/model/Match";
 
     export let match: Match
 </script>
