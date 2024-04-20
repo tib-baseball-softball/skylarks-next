@@ -18,7 +18,7 @@
         <img src="{awayLogo}" alt="team logo for {match.away_team_name}" width="35"/>
     </div>
 
-    <div class="font-extrabold flex justify-center">
+    <div class="font-extrabold flex justify-center text-lg">
         <span class:text-surface-600-300-token={winner === GameWinner.home}>{match.away_runs ?? " "}</span>
         <span>&nbsp;:&nbsp;</span>
         <span class:text-surface-600-300-token={winner === GameWinner.away}>{match.home_runs ?? " "}</span>

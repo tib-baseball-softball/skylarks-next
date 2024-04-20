@@ -10,7 +10,7 @@
     export let matchesNext: Promise<Match[]>
 </script>
 
-<div class="card variant-ringed-tertiary">
+<div class="card overview-card variant-soft-surface dark:border dark:border-tertiary-500-400-token">
     <header class="card-header">
         <h2 class="h3">Aktuelle Spiele</h2>
     </header>
@@ -32,6 +32,6 @@
         </TabGroup>
     </section>
     <footer class="card-footer flex justify-end">
-        <a href="/gamecenter" class="btn variant-ghost-primary px-10">Gamecenter</a>
+        <a href="/gamecenter" class="btn variant-filled-primary dark:variant-ghost-primary px-10">Gamecenter</a>
     </footer>
 </div>
