@@ -1,6 +1,7 @@
 <script lang="ts">
     import {ProgressRadial, Tab, TabGroup} from "@skeletonlabs/skeleton";
     import MatchMainInfoSection from "$lib/components/match/MatchMainInfoSection.svelte";
+    import MatchBoxscoreSection from "$lib/components/match/MatchBoxscoreSection.svelte";
 
     export let data
 
@@ -36,9 +37,11 @@
                 </div>
             {:else if tabSet === 1}
                 {#await data.singleGameStats}
-                    <ProgressRadial />
+                    <ProgressRadial/>
                 {:then boxscore}
-                    {@html boxscore.full_boxscore_html}
+                    {#if boxscore !== undefined}
+                        <MatchBoxscoreSection {boxscore}/>
+                    {/if}
                 {:catch error}
                     <p>error loading boxscore: {error.message}</p>
                 {/await}
