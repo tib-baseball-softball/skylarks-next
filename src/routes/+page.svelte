@@ -12,9 +12,9 @@
     <section id="Hero" class="hero w-screen h-[20em] rounded-lg">
             <div class="hero-overlay bg-opacity-60"></div>
             <div class="hero-content">
-                <div class="max-w-md">
-                    <h1 class="h1">Berlin Skylarks</h1>
-                    <p class="mb-5">{page.meta.subtitle}</p>
+                <div class="max-w-md text-white variant-glass-surface p-3 rounded-xl">
+                    <h1 class="h1 mb-2">Berlin Skylarks</h1>
+                    <p class="">{page.meta.subtitle}</p>
                 </div>
             </div>
     </section>
