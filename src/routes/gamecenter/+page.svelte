@@ -14,7 +14,7 @@
 {:then matches}
     <section>
         <header>
-            <h2 class="h2">Spiele</h2>
+            <h2 class="h2 my-3">Spiele</h2>
         </header>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
             {#each matches as match}

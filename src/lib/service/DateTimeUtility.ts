@@ -5,6 +5,11 @@ export class DateTimeUtility {
         minute: "2-digit"
     })
 
+    public static readonly dateTimeFormatMedium = new Intl.DateTimeFormat("de-DE", {
+        dateStyle: "medium",
+        timeStyle: "short"
+    })
+
     /**
      * Slightly overcomplicated method to parse the BSM "time" string into something usable, with help from generative AI.
      *
