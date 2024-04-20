@@ -1,4 +1,4 @@
-export enum GameResult {
+export enum MatchState {
     notYetPlayed,
     cancelled,
     derby,
