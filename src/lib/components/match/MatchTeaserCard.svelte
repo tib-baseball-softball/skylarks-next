@@ -19,7 +19,7 @@
         <p>{match.time}</p>
     </header>
     <hr class="mt-2 mx-3"/>
-    <section class="p-4">
+    <section class="p-4 flex flex-col gap-2">
         <MatchTeaserCardRow logo="{awayLogo}" teamName="{match.away_team_name}" score="{match.away_runs}" subduedScore="{winner === GameWinner.home}"/>
         <MatchTeaserCardRow logo="{homeLogo}" teamName="{match.home_team_name}" score="{match.home_runs}" subduedScore="{winner === GameWinner.away}"/>
     </section>

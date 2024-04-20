@@ -1,5 +1,6 @@
 <script lang="ts">
     import TeaserCard from "$lib/components/teaser/TeaserCard.svelte";
+    import CurrentMatchesOverviewCard from "$lib/components/match/CurrentMatchesOverviewCard.svelte";
 
     export let data
 
@@ -19,10 +20,15 @@
     </section>
 
     <section id="Scores">
-
+        <CurrentMatchesOverviewCard
+                matchesCurrent="{data.streamed.matchesCurrent}"
+                matchesPrevious="{data.streamed.matchesPrevious}"
+                matchesNext="{data.streamed.matchesNext}"
+        />
     </section>
+
     <section id="News">
-        <h2>News Content Section</h2>
+        <h2 class="h2 mb-3">Aktuelle News</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
             {#each contentObjects as co}
                 {#if co.type === "pagelist_sub"}

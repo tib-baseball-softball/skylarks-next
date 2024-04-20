@@ -1,8 +1,8 @@
 import {PUBLIC_BACKEND_URL} from "$env/static/public";
 import type {Typo3Page} from "$lib/model/Typo3Page";
-import type {PageLoad} from "../../.svelte-kit/types/src/routes/[...slug]/$types";
+import type {PageLoad} from "../../.svelte-kit/types/src/routes/$types";
 
-export const load = (async ({ fetch }) => {
+export const load = (async ({ fetch, data }) => {
     const url = `${PUBLIC_BACKEND_URL}`
 
     const response = await fetch(url, {
@@ -15,5 +15,10 @@ export const load = (async ({ fetch }) => {
     return {
         pageObject: responseData,
         contentObjects: responseData.content.colPos0,
+        streamed: {
+            matchesCurrent: data?.matchesCurrent,
+            matchesPrevious: data?.matchesPrevious,
+            matchesNext: data?.matchesNext,
+        }
     }
 }) satisfies PageLoad
