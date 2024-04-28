@@ -36,7 +36,7 @@
         >
             <svelte:fragment slot="lead">
                 <div class="flex items-center justify-content-around">
-                    <button class="md:hidden btn btn-sm mr-4" on:click={drawerOpen}>
+                    <button class="lg:hidden btn btn-sm mr-4" on:click={drawerOpen}>
                     <span>
                         <svg viewBox="0 0 100 80" class="fill-token w-4 h-4">
                             <rect width="100" height="20"/>
@@ -49,13 +49,13 @@
             </svelte:fragment>
 
             <svelte:fragment slot="default">
-                <section class="flex w-full justify-center items-center hidden md:flex py-2">
+                <section class="w-full justify-center items-center hidden lg:flex py-2">
                     <a href="/">
-                        <img width="60" src="/berlin_skylarks_logo.svg" alt="Skylarks Team Logo">
+                        <img class="min-w-16" src="/berlin_skylarks_logo.svg" alt="Skylarks Team Logo">
                     </a>
                     <Navigation></Navigation>
                     <a href="https://tib1848ev.de/" target="_blank">
-                        <img width="50" src="/tib_logo.svg" alt="TiB Logo">
+                        <img class="min-w-8 max-w-14" src="/tib_logo.svg" alt="TiB Logo">
                     </a>
                 </section>
             </svelte:fragment>
