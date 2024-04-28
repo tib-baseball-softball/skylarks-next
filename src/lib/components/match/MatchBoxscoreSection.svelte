@@ -6,6 +6,7 @@
 </script>
 
 <section>
+    <h2 class="h3 my-2">Linescore</h2>
     <Linescore linescore="{boxscore.linescore}"/>
 </section>
 
