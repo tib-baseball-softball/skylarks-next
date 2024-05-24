@@ -1,9 +1,9 @@
-import {MatchAPIRequest} from "../../../bsm.js/src/service/MatchAPIRequest";
+import {MatchAPIRequest} from "bsm.js";
 import {BSM_API_KEY} from "$env/static/private";
 import {PUBLIC_CLUB_ID} from "$env/static/public";
 import {selectedSeason} from "../stores";
 import {get} from "svelte/store";
-import {Gameday} from "../../../bsm.js/src/enum/Gameday";
+import {Gameday} from "bsm.js";
 import type {PageServerLoad} from "../../.svelte-kit/types/src/routes/$types";
 
 export const load = (async ({ fetch }) => {

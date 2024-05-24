@@ -1,7 +1,7 @@
-import type { Match } from "../../../../../../bsm.js/src/model/Match"
+import type { Match } from "bsm.js"
 import {error} from "@sveltejs/kit";
 import {BSM_API_KEY} from "$env/static/private";
-import {MatchAPIRequest} from "../../../../../../bsm.js/src/service/MatchAPIRequest";
+import {MatchAPIRequest} from "bsm.js";
 
 export async function load({ parent, params }) {
     const data = await parent()
