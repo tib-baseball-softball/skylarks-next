@@ -5,8 +5,8 @@
     export let teamName: string
 </script>
 
-<div class="table-container">
-    <table class="table table-compact max-w-[75%]">
+<div class="table-container max-w-[75%] dark:border-2">
+    <table class="table table-compact">
         <thead>
         <tr>
             <th data-cell-for="player">
