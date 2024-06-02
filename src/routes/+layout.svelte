@@ -19,7 +19,7 @@
 
 <Drawer width="w-[70%]">
     <h2 class="p-4">Berlin Skylarks</h2>
-    <hr/>
+    <hr class="mb-2"/>
     <Navigation></Navigation>
 </Drawer>
 
