@@ -12,7 +12,7 @@
     <ul class="lg:flex items-end lg:flex-row gap-6">
         <li><a href="/aktuelles">Aktuelles</a></li>
         <li><a href="/gamecenter">Gamecenter</a></li>
-        <li><a href="/tabellen">Tabellen</a></li>
+        <li><a href="/ligen">Ligen</a></li>
         <li><a href="/teams">Teams</a></li>
         <li><a href="/verein">Verein</a></li>
         <li><a href="/kontakt">Kontakt</a></li>
