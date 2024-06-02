@@ -1,13 +1,58 @@
 <script lang="ts">
-    import type {MatchBoxscore} from "../../../../../bsm.js/src/model/MatchBoxscore";
+    import type {MatchBoxscore} from "bsm.js"
     import Linescore from "$lib/components/match/Linescore.svelte";
+    import MatchBoxscoreOffensiveTable from "$lib/components/match/MatchBoxscoreOffensiveTable.svelte";
+    import MatchBoxscoreAdditionalStatsSection from "$lib/components/match/MatchBoxscoreAdditionalStatsSection.svelte";
+    import MatchBoxscorePitchingTable from "$lib/components/match/MatchBoxscorePitchingTable.svelte";
 
     export let boxscore: MatchBoxscore
+    const awayTeamName = boxscore.linescore.away.league_entry.team?.name ?? "Away Team"
+    const homeTeamName = boxscore.linescore.home.league_entry.team?.name ?? "Home Team"
 </script>
 
-<section>
+<section class="mt-2 mb-6">
     <h2 class="h3 my-2">Linescore</h2>
     <Linescore linescore="{boxscore.linescore}"/>
 </section>
 
-{@html boxscore.full_boxscore_html}
+<h2 class="h3 my-2">Offensive</h2>
+
+<!--ROAD TEAM-->
+
+<MatchBoxscoreOffensiveTable
+        teamName="{awayTeamName}"
+        matchStats="{boxscore.offensive_away}">
+</MatchBoxscoreOffensiveTable>
+
+<MatchBoxscoreAdditionalStatsSection
+    stats="{boxscore.additional_away}">
+</MatchBoxscoreAdditionalStatsSection>
+
+<hr class="my-4"/>
+
+<!--HOME TEAM-->
+
+<MatchBoxscoreOffensiveTable
+    teamName="{homeTeamName}"
+    matchStats="{boxscore.offensive_home}">
+</MatchBoxscoreOffensiveTable>
+
+<MatchBoxscoreAdditionalStatsSection
+        stats="{boxscore.additional_home}">
+</MatchBoxscoreAdditionalStatsSection>
+
+<hr class="my-4"/>
+
+<section class="flex flex-col gap-4 mb-3">
+    <h2 class="h3 my-2">Pitching</h2>
+
+    <MatchBoxscorePitchingTable
+            matchStats="{boxscore.pitching_away}"
+            teamName="{awayTeamName}">
+    </MatchBoxscorePitchingTable>
+
+    <MatchBoxscorePitchingTable
+            matchStats="{boxscore.pitching_home}"
+            teamName="{homeTeamName}">
+    </MatchBoxscorePitchingTable>
+</section>

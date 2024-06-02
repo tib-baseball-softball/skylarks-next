@@ -14,7 +14,7 @@ export const load = (async ({ fetch, data }) => {
 
     return {
         pageObject: responseData,
-        contentObjects: responseData.content.colPos0,
+        contentObjects: responseData?.content?.colPos0 ?? [],
         streamed: {
             matchesCurrent: data?.matchesCurrent,
             matchesPrevious: data?.matchesPrevious,
