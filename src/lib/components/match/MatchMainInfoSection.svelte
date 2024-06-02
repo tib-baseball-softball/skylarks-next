@@ -4,6 +4,7 @@
     import {DateTimeUtility} from "$lib/service/DateTimeUtility";
     import type {Match} from "bsm.js"
     import {GameWinner} from "$lib/enum/GameWinner";
+    import {CalendarMonthOutline, CalendarMonthSolid, ClipboardListOutline} from "flowbite-svelte-icons";
 
     export let match: Match
 
@@ -18,6 +19,7 @@
     <header class="pt-2 pb-3">
         <h2 class="h4 font-medium">Eckdaten</h2>
     </header>
+
     <div class="flex justify-center">
         <div class="grid grid-cols-3 sm:w-[80%] place-items-center gap-3">
             <img class="w-14 xl:w-24" src="{awayLogo}" alt="team logo for {match.away_team_name}"/>
@@ -35,13 +37,21 @@
             <div>{match.home_team_name}</div>
         </div>
     </div>
+
     <div class="grid grid-cols-2 place-items-stretch gap-3 md:gap-8 my-2 md:my-5 pb-2 sm:pb-4 lg:pb-5">
         <div class="card variant-ghost-primary dark:variant-soft-primary p-3">
-            <p class="mb-2 font-medium">Datum</p>
+            <div class="flex gap-2">
+                <CalendarMonthOutline size="lg"/>
+                <p class="mb-2 font-medium">Datum</p>
+            </div>
+
             <p>{DateTimeUtility.dateTimeFormatMedium.format(matchDate)}</p>
         </div>
         <div class="card variant-ghost-primary dark:variant-soft-primary p-3">
-            <p class="mb-2 font-medium">Status</p>
+            <div class="flex gap-2">
+                <ClipboardListOutline size="lg"/>
+                <p class="mb-2 font-medium">Status</p>
+            </div>
             <p>{match.human_state}</p>
         </div>
     </div>

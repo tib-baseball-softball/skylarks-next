@@ -19,6 +19,7 @@
     "@tailwindcss/typography": "0.5.10",
     "@types/node": "20.11.20",
     "autoprefixer": "10.4.17",
+    "flowbite-svelte-icons": "^1.6.1",
     "postcss": "8.4.35",
     "svelte": "^4.2.7",
     "svelte-check": "^3.6.0",
