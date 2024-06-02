@@ -1,5 +1,6 @@
 <script lang="ts">
     import type {Table} from "bsm.js";
+    import {PUBLIC_TEAM_NAME} from "$env/static/public";
 
     export let table: Table
 </script>
@@ -20,7 +21,7 @@
 
         <tbody>
         {#each table?.rows ?? [] as row}
-            <tr>
+            <tr class:text-primary-500-400-token={row.team_name.includes(PUBLIC_TEAM_NAME)}>
                 <td>{row.rank}</td>
                 <td>{row.team_name}</td>
                 <td>{row.wins_count}</td>
