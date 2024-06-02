@@ -1,9 +1,9 @@
 <script lang="ts">
     import type {MatchBoxscore} from "bsm.js"
-    import Linescore from "$lib/components/match/Linescore.svelte";
-    import MatchBoxscoreOffensiveTable from "$lib/components/match/MatchBoxscoreOffensiveTable.svelte";
-    import MatchBoxscoreAdditionalStatsSection from "$lib/components/match/MatchBoxscoreAdditionalStatsSection.svelte";
-    import MatchBoxscorePitchingTable from "$lib/components/match/MatchBoxscorePitchingTable.svelte";
+    import Linescore from "$lib/components/boxscore/Linescore.svelte";
+    import MatchBoxscoreOffensiveTable from "$lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte";
+    import MatchBoxscoreAdditionalStatsSection from "$lib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte";
+    import MatchBoxscorePitchingTable from "$lib/components/boxscore/MatchBoxscorePitchingTable.svelte";
 
     export let boxscore: MatchBoxscore
     const awayTeamName = boxscore.linescore.away.league_entry.team?.name ?? "Away Team"

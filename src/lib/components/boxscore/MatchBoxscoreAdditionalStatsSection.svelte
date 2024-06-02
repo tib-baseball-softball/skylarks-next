@@ -1,7 +1,7 @@
 <script lang="ts">
     import type {AdditionalMatchStats} from "bsm.js";
     import MatchBoxscoreAdditionalStatsSectionEntry
-        from "$lib/components/match/MatchBoxscoreAdditionalStatsSectionEntry.svelte";
+        from "$lib/components/boxscore/MatchBoxscoreAdditionalStatsSectionEntry.svelte";
 
     export let stats: AdditionalMatchStats
 </script>

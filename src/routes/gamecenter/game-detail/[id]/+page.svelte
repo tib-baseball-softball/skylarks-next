@@ -1,7 +1,7 @@
 <script lang="ts">
     import {ProgressRadial, Tab, TabGroup} from "@skeletonlabs/skeleton";
     import MatchMainInfoSection from "$lib/components/match/MatchMainInfoSection.svelte";
-    import MatchBoxscoreSection from "$lib/components/match/MatchBoxscoreSection.svelte";
+    import MatchBoxscoreSection from "$lib/components/boxscore/MatchBoxscoreSection.svelte";
 
     export let data
 
