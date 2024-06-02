@@ -25,7 +25,7 @@
 </MatchBoxscoreOffensiveTable>
 
 <MatchBoxscoreAdditionalStatsSection
-    stats="{boxscore.additional_away}">
+        stats="{boxscore.additional_away}">
 </MatchBoxscoreAdditionalStatsSection>
 
 <hr class="my-4"/>
@@ -33,8 +33,8 @@
 <!--HOME TEAM-->
 
 <MatchBoxscoreOffensiveTable
-    teamName="{homeTeamName}"
-    matchStats="{boxscore.offensive_home}">
+        teamName="{homeTeamName}"
+        matchStats="{boxscore.offensive_home}">
 </MatchBoxscoreOffensiveTable>
 
 <MatchBoxscoreAdditionalStatsSection

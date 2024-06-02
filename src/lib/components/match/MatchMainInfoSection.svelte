@@ -4,7 +4,7 @@
     import {DateTimeUtility} from "$lib/service/DateTimeUtility";
     import type {Match} from "bsm.js"
     import {GameWinner} from "$lib/enum/GameWinner";
-    import {CalendarMonthOutline, CalendarMonthSolid, ClipboardListOutline} from "flowbite-svelte-icons";
+    import {CalendarMonthOutline, ClipboardListOutline} from "flowbite-svelte-icons";
 
     export let match: Match
 
