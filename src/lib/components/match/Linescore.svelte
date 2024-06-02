@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type {Linescore} from "../../../../../bsm.js/src/model/Linescore";
+    import type {Linescore} from "bsm.js";
     import {range} from "$lib/functions/range";
 
     export let linescore: Linescore
@@ -47,7 +47,7 @@
     </table>
 </div>
 
-<style>
+<style lang="postcss">
     /* adapted from Skeleton table style */
 
     .linescore {
@@ -78,7 +78,7 @@
     }
 
     .linescore thead th {
-        @apply border-l border-surface-500/20 font-bold p-4 text-lg xl:text-xl;
+        @apply border-l border-surface-500/20 font-bold p-4;
     }
 
     .linescore thead th:first-child {
@@ -92,7 +92,7 @@
     }
 
     .linescore tbody td {
-        @apply border-l border-surface-500/20 px-3 py-4 align-top whitespace-nowrap md:whitespace-normal xl:text-lg;
+        @apply border-l border-surface-500/20 px-3 py-4 align-top whitespace-nowrap md:whitespace-normal;
     }
 
     .linescore tbody td:first-child {
