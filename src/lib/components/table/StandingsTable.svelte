@@ -4,7 +4,7 @@
     export let table: Table
 </script>
 
-<div class="table-container">
+<div class="table-container dark:border-2">
     <table class="table">
         <thead>
         <tr>

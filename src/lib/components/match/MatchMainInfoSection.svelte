@@ -2,7 +2,8 @@
     import {LogoUtility} from "$lib/service/LogoUtility";
     import {MatchUtility} from "$lib/service/MatchUtility";
     import {DateTimeUtility} from "$lib/service/DateTimeUtility";
-    import type {Match} from "../../../../../bsm.js/src/model/Match";
+    import type {Match} from "bsm.js"
+    import {GameWinner} from "$lib/enum/GameWinner";
 
     export let match: Match
 
@@ -22,9 +23,9 @@
             <img class="w-14 xl:w-24" src="{awayLogo}" alt="team logo for {match.away_team_name}"/>
 
             <div class="font-bold text-4xl lg:text-6xl xl:text-7xl">
-                <span>{match.away_runs}</span>
+                <span class:text-surface-500-400-token={winner === GameWinner.home}>{match.away_runs}</span>
                 <span>&nbsp;-&nbsp;</span>
-                <span>{match.home_runs}</span>
+                <span class:text-surface-500-400-token={winner === GameWinner.away}>{match.home_runs}</span>
             </div>
 
             <img class="w-14 xl:w-24" src="{homeLogo}" alt="team logo for {match.home_team_name}"/>
