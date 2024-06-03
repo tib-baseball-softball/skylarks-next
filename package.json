@@ -31,6 +31,6 @@
   },
   "type": "module",
   "dependencies": {
-    "bsm.js": "^0.0.4"
+    "bsm.js": "^0.0.5"
   }
 }
