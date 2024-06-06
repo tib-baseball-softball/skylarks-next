@@ -39,7 +39,7 @@
                 {#await data.singleGameStats}
                     <ProgressRadial/>
                 {:then boxscore}
-                    {#if boxscore !== undefined}
+                    {#if boxscore}
                         <MatchBoxscoreSection {boxscore}/>
                     {/if}
                 {:catch error}
