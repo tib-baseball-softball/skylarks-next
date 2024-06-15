@@ -32,6 +32,6 @@
   "type": "module",
   "dependencies": {
     "@vincjo/datatables": "^1.14.9",
-    "bsm.js": "^0.0.5"
+    "bsm.js": "^0.0.6"
   }
 }
