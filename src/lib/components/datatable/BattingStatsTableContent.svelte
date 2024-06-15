@@ -1,9 +1,8 @@
 <script lang="ts">
     import ThSort from "$lib/components/datatable/ThSort.svelte";
     import type {DataHandler} from "@vincjo/datatables";
-    import type {StatsType} from "bsm.js";
 
-    export let handler: DataHandler<any>[]
+    export let handler: DataHandler<any>
     export let type: "personal" | "seasonal"
     const rows = handler.getRows();
 </script>
@@ -13,6 +12,11 @@
     {#if type === "personal"}
         <th>Name</th>
     {/if}
+
+    {#if type === "seasonal"}
+        <th>Saison</th>
+    {/if}
+
     <ThSort {handler} orderBy="values.games">G</ThSort>
     <ThSort {handler} orderBy="games_started">GS</ThSort>
     <ThSort {handler} orderBy="plate_appearances">PA</ThSort>
@@ -42,8 +46,13 @@
 {#each $rows as row}
     <tr>
         {#if type === "personal"}
-            <td>{row.person.first_name} {row.person.last_name}</td>
+            <td><a class="anchor" href="/players/{row.person.id}">{row.person.first_name} {row.person.last_name}</a></td>
         {/if}
+
+        {#if type === "seasonal"}
+            <td>{row.league.season} ({row.league.acronym})</td>
+        {/if}
+
         <td>{row.values.games}</td>
         <td>{row.values.games_started}</td>
         <td>{row.values.plate_appearances}</td>

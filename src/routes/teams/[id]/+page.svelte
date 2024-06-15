@@ -21,7 +21,7 @@
         <ProgressRadial/>
     {:then batting}
         {#if batting}
-            <BaseballStatsDatatable type="{StatsType.batting}" data="{batting.data}"/>
+            <BaseballStatsDatatable type="{StatsType.batting}" data="{batting.data}" tableType="personal"/>
         {/if}
     {:catch error}
         <p>error loading: {error.message}</p>
