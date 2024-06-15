@@ -5,16 +5,16 @@
     export let data
 
     $: page = data.pageObject
-    $: contentObjects = data.contentObjects ?? []
+//    $: contentObjects = data.contentObjects ?? []
 </script>
 
-<div class="w-full space-y-5 mt-2">
+<div class="w-full space-y-5 mt-2 mb-5">
     <section id="Hero" class="hero w-screen h-[20em] rounded-lg">
             <div class="hero-overlay bg-opacity-60"></div>
             <div class="hero-content">
                 <div class="max-w-md text-white variant-glass-surface p-3 rounded-xl">
                     <h1 class="h1 mb-2">Berlin Skylarks</h1>
-                    <p class="">{page.meta.subtitle}</p>
+                    <p class="">{page?.meta?.subtitle ?? "Baseball & Softball im Herzen Berlins"}</p>
                 </div>
             </div>
     </section>
@@ -27,7 +27,7 @@
         />
     </section>
 
-    <section id="News">
+<!--    <section id="News">
         <h2 class="h2 mb-3">Aktuelle News</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
             {#each contentObjects as co}
@@ -38,13 +38,13 @@
                 {/if}
             {/each}
         </div>
-    </section>
+    </section>-->
 
-    <section class="">
+<!--    <section class="">
         <a class="btn variant-filled" href="/skylarks-zwischenzeugnis-2022">Testseite mit Inhalten</a>
         <a class="btn variant-filled" href="/skylarks-holen-den-titel">Spielbericht</a>
         <p>Inhalt</p>
-    </section>
+    </section>-->
 </div>
 
 <style>
