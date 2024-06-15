@@ -1,11 +1,11 @@
-import {TablesAPIRequest} from "bsm.js";
+import {type LeagueGroup, TablesAPIRequest} from "bsm.js";
 import {BSM_API_KEY} from "$env/static/private";
 import {error} from "@sveltejs/kit";
 
 export async function load({ parent, params }) {
     const data = await parent()
     const leagueGroups = await data.leagueGroups
-    const leagueGroup = leagueGroups.find((leagueGroup) => leagueGroup.id === Number(params.id))
+    const leagueGroup: LeagueGroup | undefined = leagueGroups.find((leagueGroup) => leagueGroup.id === Number(params.id))
 
     if (!leagueGroup) {
         throw error(404)
