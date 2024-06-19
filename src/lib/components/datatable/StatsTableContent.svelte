@@ -53,4 +53,11 @@
         {/if}
     </tr>
 {/each}
+
+{#if $rows.length === 0}
+    <tr>
+        <th class="py-4" colspan="8">Keine Daten für diese Kategorie vorhanden.</th>
+    </tr>
+{/if}
+
 </tbody>
