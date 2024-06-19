@@ -1,12 +1,11 @@
 <script lang="ts">
     import type {DataHandler} from "@vincjo/datatables";
     import {StatsType} from "bsm.js";
-    import BattingStatsHeaderRow from "$lib/components/datatable/BattingStatsHeaderRow.svelte";
-    import BattingStatsContentRow from "$lib/components/datatable/BattingStatsContentRow.svelte";
-    import PitchingStatsContentRow from "$lib/components/datatable/PitchingStatsContentRow.svelte";
-    import PitchingStatsHeaderRow from "$lib/components/datatable/PitchingStatsHeaderRow.svelte";
+    import StatsHeaderRow from "$lib/components/datatable/StatsHeaderRow.svelte";
+    import StatsContentRow from "$lib/components/datatable/StatsContentRow.svelte";
+    import type {StatisticsData} from "bsm.js/dist/model/AbstractStatisticsEntry";
 
-    export let handler: DataHandler<any>
+    export let handler: DataHandler<StatisticsData<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics">>
     export let tableType: "personal" | "seasonal"
     export let type: StatsType
 
@@ -23,34 +22,21 @@
         <th>Saison</th>
     {/if}
 
-    {#if type === StatsType.batting}
-        <BattingStatsHeaderRow {handler}/>
-    {/if}
-
-    {#if type === StatsType.pitching}
-        <PitchingStatsHeaderRow {handler}/>
-    {/if}
-
+    <StatsHeaderRow {handler} {type}/>
 </tr>
 </thead>
 <tbody>
 {#each $rows as row}
     <tr>
         {#if tableType === "personal"}
-            <td><a class="anchor" href="/players/{row.person.id}">{row.person.first_name} {row.person.last_name}</a></td>
+            <td><a class="anchor" href="/players/{row?.person?.id}">{row?.person?.first_name} {row?.person?.last_name}</a></td>
         {/if}
 
         {#if tableType === "seasonal"}
-            <td>{row.league.season} ({row.league.acronym})</td>
+            <td>{row?.league?.season} ({row?.league?.acronym})</td>
         {/if}
 
-        {#if type === StatsType.batting}
-            <BattingStatsContentRow {row}/>
-        {/if}
-
-        {#if type === StatsType.pitching}
-            <PitchingStatsContentRow {row}/>
-        {/if}
+        <StatsContentRow {row} {type}/>
     </tr>
 {/each}
 
