@@ -15,7 +15,9 @@
     }
 </script>
 
-<h1 class="h1 my-4">Spieler*innenprofil</h1>
+{#await data.battingStats then batting}
+    <h1 class="h1 my-4">Spieler*innenprofil für {batting.person?.first_name} {batting.person?.last_name}</h1>
+{/await}
 
 <h2 class="h2 my-4">Statistiken</h2>
 
