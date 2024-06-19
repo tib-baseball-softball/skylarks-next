@@ -34,7 +34,7 @@ export async function load({ parent, params}) {
     return {
         clubTeam: clubTeam,
         battingStats: battingStats,
-        pitchingStats:pitchingStats,
+        pitchingStats: pitchingStats,
         fieldingStats: fieldingStats,
     }
 }

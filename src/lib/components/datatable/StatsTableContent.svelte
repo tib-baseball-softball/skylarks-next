@@ -3,6 +3,8 @@
     import {StatsType} from "bsm.js";
     import BattingStatsHeaderRow from "$lib/components/datatable/BattingStatsHeaderRow.svelte";
     import BattingStatsContentRow from "$lib/components/datatable/BattingStatsContentRow.svelte";
+    import PitchingStatsContentRow from "$lib/components/datatable/PitchingStatsContentRow.svelte";
+    import PitchingStatsHeaderRow from "$lib/components/datatable/PitchingStatsHeaderRow.svelte";
 
     export let handler: DataHandler<any>
     export let tableType: "personal" | "seasonal"
@@ -24,6 +26,11 @@
     {#if type === StatsType.batting}
         <BattingStatsHeaderRow {handler}/>
     {/if}
+
+    {#if type === StatsType.pitching}
+        <PitchingStatsHeaderRow {handler}/>
+    {/if}
+
 </tr>
 </thead>
 <tbody>
@@ -39,6 +46,10 @@
 
         {#if type === StatsType.batting}
             <BattingStatsContentRow {row}/>
+        {/if}
+
+        {#if type === StatsType.pitching}
+            <PitchingStatsContentRow {row}/>
         {/if}
     </tr>
 {/each}
