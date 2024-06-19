@@ -5,6 +5,7 @@
 
     export let type: StatsType
     export let handler: DataHandler<any>
+    export let tableType: "personal" | "seasonal"
 </script>
 
 {#if type === StatsType.batting}
@@ -73,6 +74,9 @@
     <ThSort {handler} orderBy="passed_balls">PB</ThSort>
     <ThSort {handler} orderBy="stolen_bases">SB</ThSort>
     <ThSort {handler} orderBy="caught_stealings">CS</ThSort>
+    <ThSort {handler} orderBy="fielding_average">FA</ThSort>
+{/if}
+{#if tableType === "seasonal" && type === StatsType.fielding}
     <ThSort {handler} orderBy="pitcher">P</ThSort>
     <ThSort {handler} orderBy="catcher">C</ThSort>
     <ThSort {handler} orderBy="first_baseman">1B</ThSort>
@@ -82,6 +86,4 @@
     <ThSort {handler} orderBy="left_fielder">LF</ThSort>
     <ThSort {handler} orderBy="center_fielder">CF</ThSort>
     <ThSort {handler} orderBy="right_fielder">RF</ThSort>
-    <ThSort {handler} orderBy="fielding_average">FA</ThSort>
-
 {/if}

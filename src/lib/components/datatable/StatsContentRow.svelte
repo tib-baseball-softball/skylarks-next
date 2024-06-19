@@ -4,6 +4,7 @@
 
     export let type: StatsType
     export let row: StatisticsData<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics">
+    export let tableType: "personal" | "seasonal"
 </script>
 
 {#if type === StatsType.batting}
@@ -71,6 +72,9 @@
     <td>{row.values.passed_balls}</td>
     <td>{row.values.stolen_bases}</td>
     <td>{row.values.caught_stealings}</td>
+    <td>{row.values.fielding_average}</td>
+{/if}
+{#if tableType === "seasonal" && type === StatsType.fielding}
     <td>{row.values.pitcher}</td>
     <td>{row.values.catcher}</td>
     <td>{row.values.first_baseman}</td>
@@ -80,5 +84,4 @@
     <td>{row.values.left_fielder}</td>
     <td>{row.values.center_fielder}</td>
     <td>{row.values.right_fielder}</td>
-    <td>{row.values.fielding_average}</td>
 {/if}

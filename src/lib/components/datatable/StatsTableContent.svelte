@@ -22,7 +22,7 @@
         <th>Saison</th>
     {/if}
 
-    <StatsHeaderRow {handler} {type}/>
+    <StatsHeaderRow {handler} {type} {tableType}/>
 </tr>
 </thead>
 <tbody>
@@ -36,7 +36,7 @@
             <td>{row?.league?.season} ({row?.league?.acronym})</td>
         {/if}
 
-        <StatsContentRow {row} {type}/>
+        <StatsContentRow {row} {type} {tableType}/>
     </tr>
 {/each}
 
