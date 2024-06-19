@@ -1,6 +1,12 @@
 import {error} from "@sveltejs/kit";
 import type {ClubTeam} from "bsm.js/dist/model/ClubTeam";
-import {type BattingStatisticsEntry, StatsAPIRequest, StatsType} from "bsm.js";
+import {
+    type BattingStatisticsEntry,
+    type FieldingStatisticsEntry,
+    type PitchingStatisticsEntry,
+    StatsAPIRequest,
+    StatsType
+} from "bsm.js";
 import {BSM_API_KEY} from "$env/static/private";
 
 export async function load({ parent, params}) {
@@ -22,11 +28,13 @@ export async function load({ parent, params}) {
     }
 
     const battingStats = statsRequest.getStatisticsForLeagueEntry<BattingStatisticsEntry>(leagueEntry.id, StatsType.batting)
-    //const pitchingStats = statsRequest.getStatisticsForLeagueEntry(leagueEntry.id, StatsType.pitching)
-    //const fieldingStats = statsRequest.getStatisticsForLeagueEntry(leagueEntry.id, StatsType.fielding)
+    const pitchingStats = statsRequest.getStatisticsForLeagueEntry<PitchingStatisticsEntry>(leagueEntry.id, StatsType.pitching)
+    const fieldingStats = statsRequest.getStatisticsForLeagueEntry<FieldingStatisticsEntry>(leagueEntry.id, StatsType.fielding)
 
     return {
         clubTeam: clubTeam,
-        battingStats: battingStats
+        battingStats: battingStats,
+        pitchingStats:pitchingStats,
+        fieldingStats: fieldingStats,
     }
 }

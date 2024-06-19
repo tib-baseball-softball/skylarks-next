@@ -3,7 +3,6 @@
     import type {ClubTeam} from "bsm.js/dist/model/ClubTeam";
     import {ProgressRadial} from "@skeletonlabs/skeleton";
     import BaseballStatsDatatable from "$lib/components/datatable/BaseballStatsDatatable.svelte";
-    import {StatsType} from "bsm.js";
 
     export let data: PageServerData
     $: clubTeam = data.clubTeam as ClubTeam
@@ -21,7 +20,7 @@
         <ProgressRadial/>
     {:then batting}
         {#if batting}
-            <BaseballStatsDatatable type="{StatsType.batting}" data="{batting.data}" tableType="personal"/>
+            <BaseballStatsDatatable data="{batting.data}" tableType="personal"/>
         {/if}
     {:catch error}
         <p>error loading: {error.message}</p>
