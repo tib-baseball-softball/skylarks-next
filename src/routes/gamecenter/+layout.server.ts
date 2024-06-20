@@ -3,7 +3,7 @@ import {BSM_API_KEY} from "$env/static/private";
 import {PUBLIC_CLUB_ID} from "$env/static/public";
 import {Gameday} from "bsm.js";
 import type {LayoutServerLoad} from "../../../.svelte-kit/types/src/routes/gamecenter/$types";
-import {selectedSeason} from "../../stores";
+import {preferences} from "$lib/stores";
 import {get} from "svelte/store";
 
 export const load = (async () => {
@@ -11,7 +11,7 @@ export const load = (async () => {
 
     return {
         streamed: {
-            matches: matchRequest.loadGamesForClub(Number(PUBLIC_CLUB_ID), get(selectedSeason), Gameday.any)
+            matches: matchRequest.loadGamesForClub(Number(PUBLIC_CLUB_ID), get(preferences).selectedSeason, Gameday.any)
         }
     }
 }) satisfies LayoutServerLoad

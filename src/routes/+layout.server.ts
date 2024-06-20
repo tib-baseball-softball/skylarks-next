@@ -2,7 +2,7 @@ import type {LayoutServerLoad} from "../../.svelte-kit/types/src/routes/$types";
 import {LeagueGroupAPIRequest} from "bsm.js";
 import {BSM_API_KEY} from "$env/static/private";
 import {get} from "svelte/store";
-import {selectedSeason} from "../stores";
+import {preferences} from "$lib/stores";
 import {ClubTeamsAPIRequest} from "bsm.js/dist/service/ClubTeamsAPIRequest";
 import {PUBLIC_CLUB_ID} from "$env/static/public";
 
@@ -12,6 +12,6 @@ export const load = (async () => {
 
     return {
         clubTeams: clubTeamRequest.getTeamsForClub(Number(PUBLIC_CLUB_ID)),
-        leagueGroups: leagueGroupRequest.getLeagueGroupsForClub(get(selectedSeason))
+        leagueGroups: leagueGroupRequest.getLeagueGroupsForClub(get(preferences).selectedSeason)
     }
 }) satisfies LayoutServerLoad
