@@ -16,7 +16,7 @@
     export let tableType: "personal" | "seasonal"
 
     let type: StatsType = StatsType.batting
-    let summaryData: StatisticsData<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics"> | undefined = data.batting.summaries.at(0)
+    let summaryData: StatisticsSummary<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics"> | undefined = data.batting.summaries.at(0)
 
     const handler = new DataHandler<StatisticsData<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics">>(data.batting.data, {rowsPerPage: rowsPerPage})
 
