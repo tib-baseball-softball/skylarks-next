@@ -37,6 +37,8 @@
                 {:then boxscore}
                     {#if boxscore}
                         <MatchBoxscoreSection {boxscore}/>
+                    {:else }
+                        <p>Kein Boxscore vorhanden.</p>
                     {/if}
                 {:catch error}
                     <p>error loading boxscore: {error.message}</p>
