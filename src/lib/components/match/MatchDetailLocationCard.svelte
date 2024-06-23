@@ -55,6 +55,6 @@
 
     <div class="flex items-center gap-3 self-end">
         <LinkOutline/>
-        <a class="anchor" href="{buildMapsURL()}">In Google Maps öffnen</a>
+        <a class="anchor" target="_blank" href="{buildMapsURL()}">In Google Maps öffnen</a>
     </div>
 </div>
