@@ -2,8 +2,7 @@
     import type {Match} from "bsm.js";
     import {
         BuildingOutline, HomeOutline,
-        LinkOutline, MapPinOutline,
-        TableRowOutline
+        LinkOutline, MapPinOutline
     } from "flowbite-svelte-icons";
 
     export let match: Match
