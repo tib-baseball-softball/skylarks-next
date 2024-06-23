@@ -1,3 +1,7 @@
+import type {Gameday} from "bsm.js";
+
 export type AppPreferences = {
-    selectedSeason: number
+    selectedSeason: number,
+    gameday: Gameday,
+    leagueGroupID: number
 }

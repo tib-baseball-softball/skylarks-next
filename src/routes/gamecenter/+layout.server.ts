@@ -11,7 +11,7 @@ export const load = (async () => {
 
     return {
         streamed: {
-            matches: matchRequest.loadGamesForClub(Number(PUBLIC_CLUB_ID), get(preferences).selectedSeason, Gameday.any)
+            matches: matchRequest.loadGamesForClub(Number(PUBLIC_CLUB_ID), get(preferences).selectedSeason, Gameday.current)
         }
     }
 }) satisfies LayoutServerLoad
