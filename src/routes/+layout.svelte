@@ -7,6 +7,7 @@
     import {initializeStores, Drawer, getDrawerStore} from '@skeletonlabs/skeleton';
     import Footer from "$lib/components/meta/Footer.svelte";
     import {preferences} from "$lib/stores";
+    import {ExclamationCircleOutline} from "flowbite-svelte-icons";
 
     initializeStores();
 
@@ -75,6 +76,14 @@
     <div id="pageContainer" class="flex items-center justify-center">
         <div class="flex flex-col justify-center content-center w-[92%] md:w-[85%] xl:w-[75%]">
             <slot/>
+
+            <aside class="alert variant-ghost-error">
+                <ExclamationCircleOutline size="xl"/>
+                <div class="alert-message">
+                    <h3 class="h3">Alpha-Version</h3>
+                    <p>Hier funktioniert noch nicht alles wie gewünscht. Fehler und merkwürdiges Verhalten sind zu erwarten.</p>
+                </div>
+            </aside>
         </div>
     </div>
 
