@@ -1,0 +1,41 @@
+<script lang="ts">
+    import type {Match} from "bsm.js";
+    import {
+        PenOutline,
+        UserOutline
+    } from "flowbite-svelte-icons";
+
+    export let match: Match
+</script>
+
+<div class="card variant-ghost-surface p-3">
+    <h4 class="h6">Umpire</h4>
+
+    <div class="flex flex-col gap-2 mt-1">
+        {#each match.umpire_assignments as umpire}
+            <div class="flex items-center gap-3">
+                <UserOutline/>
+                <div>
+                    <p>{umpire.license.person.last_name}, {umpire.license.person.first_name}</p>
+                    <p class="text-sm font-light">{umpire.license.number}</p>
+                </div>
+            </div>
+        {/each}
+    </div>
+
+    <hr class="my-3">
+
+    <h4 class="h6">Scorer</h4>
+
+    <div class="flex flex-col gap-2 mt-1">
+        {#each match.scorer_assignments as scorer}
+            <div class="flex items-center gap-3">
+                <PenOutline/>
+                <div>
+                    <p>{scorer.license.person.last_name}, {scorer.license.person.first_name}</p>
+                    <p class="text-sm font-light">{scorer.license.number}</p>
+                </div>
+            </div>
+        {/each}
+    </div>
+</div>
