@@ -12,7 +12,7 @@
     import StatsContentRow from "$lib/components/datatable/StatsContentRow.svelte";
 
     export let data: StatsDataset
-    export let rowsPerPage: number = 25
+    export let rowsPerPage: number = 10
     export let tableType: "personal" | "seasonal"
 
     let type: StatsType = StatsType.batting
