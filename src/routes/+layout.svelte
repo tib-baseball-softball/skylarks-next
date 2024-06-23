@@ -49,7 +49,7 @@
             </svelte:fragment>
 
             <svelte:fragment slot="default">
-                <section class="w-full justify-center items-center hidden lg:flex py-2">
+                <section class="w-full justify-between items-center hidden lg:flex py-2">
                     <a href="/">
                         <img class="min-w-16" src="/berlin_skylarks_logo.svg" alt="Skylarks Team Logo">
                     </a>
