@@ -25,9 +25,11 @@
             <img class="w-14 xl:w-24" src="{awayLogo}" alt="team logo for {match.away_team_name}"/>
 
             <div class="font-bold text-4xl lg:text-6xl xl:text-7xl">
-                <span class:text-surface-500-400-token={winner === GameWinner.home}>{match.away_runs}</span>
-                <span>&nbsp;-&nbsp;</span>
-                <span class:text-surface-500-400-token={winner === GameWinner.away}>{match.home_runs}</span>
+                {#if match.away_runs && match.home_runs}
+                    <span class:text-surface-500-400-token={winner === GameWinner.home}>{match.away_runs}</span>
+                    <span>&nbsp;-&nbsp;</span>
+                    <span class:text-surface-500-400-token={winner === GameWinner.away}>{match.home_runs}</span>
+                {/if}
             </div>
 
             <img class="w-14 xl:w-24" src="{homeLogo}" alt="team logo for {match.home_team_name}"/>
