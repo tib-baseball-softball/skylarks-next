@@ -5,9 +5,29 @@
     import {Gameday} from "bsm.js";
     import {preferences} from "$lib/stores";
     import LeagueFilter from "$lib/components/utility/LeagueFilter.svelte";
+    import {browser} from "$app/environment";
+
+    async function reloadGameData(gameday: Gameday, season: number) {
+        if (!browser) {
+            return
+        }
+
+        const basePath = "/api/matches"
+        const params = [
+           [ "season", season.toString() ],
+           [ "gameday", gameday]
+        ]
+
+        const urlParams = new URLSearchParams(params)
+        const urlWithParams = `${basePath}?${urlParams.toString()}`
+
+        data.streamed.matches = (await fetch(urlWithParams)).json()
+    }
 
     export let data
     $: leagueGroups = data.leagueGroups
+
+    $: reloadGameData($preferences.gameday, $preferences.selectedSeason)
 </script>
 
 
