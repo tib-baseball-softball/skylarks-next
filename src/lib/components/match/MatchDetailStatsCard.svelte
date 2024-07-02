@@ -43,6 +43,10 @@
 
     <div class="flex items-center gap-3">
         <LinkOutline/>
-        <a class="anchor" target="_blank" href="{match.scoresheet_url}">Link zum Scoresheet</a>
+        {#if match.scoresheet_url}
+            <a class="anchor" target="_blank" href="{match.scoresheet_url}">Link zum Scoresheet</a>
+        {:else}
+            <span>Kein Scoresheet vorhanden.</span>
+        {/if}
     </div>
 </div>
