@@ -8,8 +8,8 @@
 
     export let match: Match
 
-    const awayLogo = LogoUtility.getLogoPathForTeamName(match.away_team_name)
-    const homeLogo = LogoUtility.getLogoPathForTeamName(match.home_team_name)
+    const awayLogo = LogoUtility.getLogoPathForTeamName(match.away_league_entry.team)
+    const homeLogo = LogoUtility.getLogoPathForTeamName(match.home_league_entry.team)
 
     const winner = MatchUtility.getWinnerForMatch(match)
     const matchState = MatchUtility.getMatchState(match)
@@ -20,7 +20,7 @@
    class="grid grid-cols-3 px-3 py-1 gap-x-2 border-b border-surface-400-500-token justify-around items-center">
     <div class="flex justify-end items-center gap-2">
         <div>{match.away_league_entry.team?.short_name}</div>
-        <img src="{awayLogo}" alt="team logo for {match.away_team_name}" width="35"/>
+        <img src="{awayLogo}" alt="team logo for {match.away_team_name}" width="35" loading="lazy"/>
     </div>
 
     {#if matchState === MatchState.notYetPlayed}
@@ -50,7 +50,7 @@
     {/if}
 
     <div class="flex justify-start items-center gap-2">
-        <img src="{homeLogo}" alt="team logo for {match.away_team_name}" width="35"/>
+        <img src="{homeLogo}" alt="team logo for {match.away_team_name}" width="35" loading="lazy"/>
         <div>{match.home_league_entry.team?.short_name}</div>
     </div>
 </a>

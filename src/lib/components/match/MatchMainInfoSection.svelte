@@ -8,8 +8,8 @@
 
     export let match: Match
 
-    const awayLogo = LogoUtility.getLogoPathForTeamName(match.away_team_name)
-    const homeLogo = LogoUtility.getLogoPathForTeamName(match.home_team_name)
+    const awayLogo = LogoUtility.getLogoPathForTeamName(match.away_league_entry.team)
+    const homeLogo = LogoUtility.getLogoPathForTeamName(match.home_league_entry.team)
 
     const winner = MatchUtility.getWinnerForMatch(match)
     const matchDate = DateTimeUtility.parseDateFromBSMString(match.time)
@@ -22,7 +22,7 @@
 
     <div class="flex justify-center">
         <div class="grid grid-cols-3 sm:w-[80%] place-items-center gap-3">
-            <img class="w-14 xl:w-24" src="{awayLogo}" alt="team logo for {match.away_team_name}"/>
+            <img class="w-14 xl:w-24" src="{awayLogo}" alt="team logo for {match.away_team_name}" loading="lazy"/>
 
             <div class="font-bold text-4xl lg:text-6xl xl:text-7xl">
                 {#if match.away_runs && match.home_runs}
@@ -32,7 +32,7 @@
                 {/if}
             </div>
 
-            <img class="w-14 xl:w-24" src="{homeLogo}" alt="team logo for {match.home_team_name}"/>
+            <img class="w-14 xl:w-24" src="{homeLogo}" alt="team logo for {match.home_team_name}" loading="lazy"/>
 
             <div>{match.away_team_name}</div>
             <div></div>

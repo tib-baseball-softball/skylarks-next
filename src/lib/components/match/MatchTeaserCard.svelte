@@ -8,8 +8,8 @@
 
     export let match: Match
 
-    const awayLogo = LogoUtility.getLogoPathForTeamName(match.away_team_name)
-    const homeLogo = LogoUtility.getLogoPathForTeamName(match.home_team_name)
+    const awayLogo = LogoUtility.getLogoPathForTeamName(match.away_league_entry.team)
+    const homeLogo = LogoUtility.getLogoPathForTeamName(match.home_league_entry.team)
 
     const winner = MatchUtility.getWinnerForMatch(match)
     const matchDate = DateTimeUtility.parseDateFromBSMString(match.time)

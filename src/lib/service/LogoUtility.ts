@@ -1,3 +1,5 @@
+import type {Team} from "bsm.js";
+
 export class LogoUtility {
     private static readonly FILE_PATH: string = '/TeamLogos/';
 
@@ -11,7 +13,7 @@ export class LogoUtility {
         'dockers': LogoUtility.FILE_PATH + 'dockers.png',
         'dragons': LogoUtility.FILE_PATH + 'dragons.png',
         'dukes': LogoUtility.FILE_PATH + 'dukes.png',
-        'eagles': LogoUtility.FILE_PATH + 'eagles.png',
+        'mahlow': LogoUtility.FILE_PATH + 'eagles.png',
         'flamingos': LogoUtility.FILE_PATH + 'flamingos.png',
         'knights': LogoUtility.FILE_PATH + 'knights.png',
         'poorpigs': LogoUtility.FILE_PATH + 'poorpigs.png',
@@ -30,12 +32,24 @@ export class LogoUtility {
         'wallbreakers': LogoUtility.FILE_PATH + 'wallbreakers.png'
     };
 
-    public static getLogoPathForTeamName(teamName: string): string {
+    /**
+     * Loads the logo for respective team. Since BSM logos are often of bad quality and cap logos are generally better
+     * suited, we prefer locally saved ones for Berlin clubs and use the BSM definition only as fallback.
+     *
+     * @param team the team to check for existing logo
+     */
+    public static getLogoPathForTeamName(team?: Team): string {
         for (const key in LogoUtility.TEAM_LOGOS) {
-            if (teamName.toLowerCase().includes(key)) {
+            if (team?.name.toLowerCase().includes(key)) {
                 return LogoUtility.TEAM_LOGOS[key];
             }
         }
-        return LogoUtility.FILE_PATH + 'default.svg';
+
+        if (team.clubs.at(0)) {
+            const club = team.clubs[0]
+            return club.logo_url ?? LogoUtility.FILE_PATH + 'default.svg'
+        }
+
+        return LogoUtility.FILE_PATH + 'default.svg'
     }
 }
