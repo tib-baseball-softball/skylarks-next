@@ -1,12 +1,12 @@
 <script lang="ts">
     import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte";
-    import MatchTeaserCard from "$lib/components/match/MatchTeaserCard.svelte";
     import {ProgressBar, SlideToggle, Tab, TabGroup} from "@skeletonlabs/skeleton";
     import {Gameday} from "bsm.js";
     import {preferences} from "$lib/stores";
     import LeagueFilter from "$lib/components/utility/LeagueFilter.svelte";
     import {goto} from "$app/navigation";
     import {browser} from "$app/environment";
+    import GamecenterMatchSection from "$lib/components/match/GamecenterMatchSection.svelte";
 
     const DEFAULT_LEAGUE_GROUP_ID = 0
 
@@ -29,7 +29,7 @@
         reloadGameData()
     }
 
-    let showExternal = true
+    let showExternal = false
 </script>
 
 
@@ -67,20 +67,16 @@
 </section>
 
 {#await data.streamed.matches}
+
     <p>Loading matches...</p>
     <ProgressBar/>
+
 {:then matches}
-    <section>
-        <header>
-            <h2 class="h2 my-3">Spiele</h2>
-        </header>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mb-6">
-            {#each matches as match}
-                <MatchTeaserCard {match}/>
-            {/each}
-        </div>
-    </section>
+
+    <GamecenterMatchSection {matches} {showExternal}/>
 
 {:catch error}
+
     <p>error loading matches: {error.message}</p>
+
 {/await}
