@@ -6,11 +6,21 @@ import {MatchAPIRequest} from "bsm.js";
 export async function load({ parent, params }) {
     const data = await parent()
     const matches = await data.streamed.matches
-    const match = matches.find((match: Match) => match.id === Number(params.id))
-
-    if (!match) throw error(404)
+    let match = matches.find((match: Match) => match.id === Number(params.id))
 
     const matchRequest = new MatchAPIRequest(BSM_API_KEY)
+
+    // if not already found in data, load it yourself
+    if (!match) {
+        try {
+            match = await matchRequest.loadSingleMatch(Number(params.id))
+        }
+        catch (e) {
+            console.error(e.message)
+        }
+    }
+
+    if (!match) throw error(404, "Spiel konnte nicht gefunden werden.")
 
     return {
         match: match,

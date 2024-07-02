@@ -1,44 +1,53 @@
 <script lang="ts">
     import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte";
     import MatchTeaserCard from "$lib/components/match/MatchTeaserCard.svelte";
-    import {ProgressBar, Tab, TabGroup} from "@skeletonlabs/skeleton";
+    import {ProgressBar, SlideToggle, Tab, TabGroup} from "@skeletonlabs/skeleton";
     import {Gameday} from "bsm.js";
     import {preferences} from "$lib/stores";
     import LeagueFilter from "$lib/components/utility/LeagueFilter.svelte";
+    import {goto} from "$app/navigation";
     import {browser} from "$app/environment";
 
-    async function reloadGameData(gameday: Gameday, season: number) {
-        if (!browser) {
-            return
+    const DEFAULT_LEAGUE_GROUP_ID = 0
+
+    const reloadGameData = () => {
+        if (browser) {
+            let queryString = `?gameday=${$preferences.gameday}&season=${$preferences.selectedSeason}`
+
+            if ($preferences.leagueGroupID !== DEFAULT_LEAGUE_GROUP_ID) {
+                queryString = queryString + `&leagueGroup=${$preferences.leagueGroupID}`
+            }
+            goto(queryString)
         }
-
-        const basePath = "/api/matches"
-        const params = [
-           [ "season", season.toString() ],
-           [ "gameday", gameday]
-        ]
-
-        const urlParams = new URLSearchParams(params)
-        const urlWithParams = `${basePath}?${urlParams.toString()}`
-
-        data.streamed.matches = (await fetch(urlWithParams)).json()
     }
 
     export let data
     $: leagueGroups = data.leagueGroups
 
-    $: reloadGameData($preferences.gameday, $preferences.selectedSeason)
+    $: {
+        console.log(`preferences ${$preferences.toString()} changed - reload`)
+        reloadGameData()
+    }
+
+    let showExternal = true
 </script>
 
 
-<div class="my-2 md:flex justify-between items-center">
+<div class="my-2 md:flex justify-between items-start">
     <h1 class="h1">Gamecenter</h1>
 
-    <div class="flex gap-2">
-        {#await leagueGroups then groups}
-            <LeagueFilter leagueGroups="{groups}"/>
-        {/await}
-        <SeasonSelector/>
+    <div>
+        <div class="flex gap-2">
+            {#await leagueGroups then groups}
+                <LeagueFilter leagueGroups="{groups}"/>
+            {/await}
+            <SeasonSelector/>
+        </div>
+
+        <div class="flex gap-2 my-4 justify-end">
+            <SlideToggle size="sm" name="slide" active="bg-surface-900 dark:bg-tertiary-700" bind:checked={showExternal} />
+            <p>Zeige externe Spiele</p>
+        </div>
     </div>
 </div>
 
@@ -46,7 +55,7 @@
     <label id="gameday_label">Spieltag</label>
     <TabGroup justify="justify-center" labelledby="gameday_label">
         <Tab bind:group={$preferences.gameday} name="tabPrevious" value={Gameday.previous}>Voriger</Tab>
-        <Tab bind:group={$preferences.gameday} name="tabCurrent" value={Gameday.current}>Aktuell</Tab>
+        <Tab bind:group={$preferences.gameday} name="tabCurrent" value={Gameday.current}>Aktueller</Tab>
         <Tab bind:group={$preferences.gameday} name="tabNext" value={Gameday.next}>Nächster</Tab>
         <Tab bind:group={$preferences.gameday} name="tabAny" value={Gameday.any}>Alle</Tab>
         <!-- Tab Panels --->
