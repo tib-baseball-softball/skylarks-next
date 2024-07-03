@@ -8,11 +8,22 @@ import {
     StatsType
 } from "bsm.js";
 import {BSM_API_KEY} from "$env/static/private";
+import {ClubTeamsAPIRequest} from "bsm.js/dist/service/ClubTeamsAPIRequest";
+import {PUBLIC_CLUB_ID} from "$env/static/public";
 
-export async function load({ parent, params}) {
+export async function load({ parent, params, url }) {
     const data = await parent()
-    const clubTeams = await data.clubTeams ?? []
-    const clubTeam: ClubTeam | undefined = clubTeams.find((clubTeam) => clubTeam.id === Number(params.id))
+    let clubTeams = await data.clubTeams
+
+    // this is kind of hacky because I could not find an API call to get a single team, so if the collection is empty
+    // we have to load them all again...could also be a skill issue with SvelteKit
+    if (clubTeams?.length === 0) {
+        const clubTeamRequest = new  ClubTeamsAPIRequest(BSM_API_KEY)
+        const season = url.searchParams.get("season")?.toString() ?? clubTeamRequest.defaultSeason
+        clubTeams = await clubTeamRequest.getTeamsForClub(Number(PUBLIC_CLUB_ID), Number(season))
+    }
+
+    const clubTeam: ClubTeam | undefined = clubTeams?.find((clubTeam) => clubTeam.id === Number(params.id))
 
     if (!clubTeam) {
         throw error(404)

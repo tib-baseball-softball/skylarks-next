@@ -1,11 +1,10 @@
 <script lang="ts">
-    import type {PageServerData} from "../../../../.svelte-kit/types/src/routes/teams/[id]/$types";
     import type {ClubTeam} from "bsm.js/dist/model/ClubTeam";
     import {ProgressRadial} from "@skeletonlabs/skeleton";
     import BaseballStatsDatatable from "$lib/components/datatable/BaseballStatsDatatable.svelte";
     import type {StatsDataset} from "$lib/types/StatsDataset";
 
-    export let data: PageServerData
+    export let data
     $: clubTeam = data.clubTeam as ClubTeam
 
     async function getData(): Promise<StatsDataset> {
