@@ -77,7 +77,7 @@
         <div class="flex flex-col justify-center content-center w-[92%] md:w-[85%] xl:w-[75%]">
             <slot/>
 
-            <aside class="alert variant-ghost-error">
+            <aside class="alert variant-ghost-error my-5">
                 <ExclamationCircleOutline size="xl"/>
                 <div class="alert-message">
                     <h3 class="h3">Alpha-Version</h3>
