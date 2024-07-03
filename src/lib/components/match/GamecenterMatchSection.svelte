@@ -2,6 +2,7 @@
     import MatchTeaserCard from "$lib/components/match/MatchTeaserCard.svelte";
     import type {Match} from "bsm.js";
     import {PUBLIC_TEAM_NAME} from "$env/static/public";
+    import ContentFilteredUnavailable from "$lib/components/match/ContentFilteredUnavailable.svelte";
 
     export let matches: Match[] = []
     export let showExternal = false
@@ -19,11 +20,19 @@
                 <MatchTeaserCard {match}/>
             {/each}
 
+            {#if matches.length === 0}
+                <ContentFilteredUnavailable/>
+            {/if}
+
         {:else}
 
             {#each skylarksGames as match}
                 <MatchTeaserCard {match}/>
             {/each}
+
+            {#if skylarksGames.length === 0}
+                <ContentFilteredUnavailable/>
+            {/if}
 
         {/if}
     </div>
