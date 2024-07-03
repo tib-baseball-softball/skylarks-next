@@ -16,7 +16,9 @@ export async function load({ parent, params }) {
             match = await matchRequest.loadSingleMatch(Number(params.id))
         }
         catch (e) {
-            console.error(e.message)
+            if (e instanceof Error) {
+                console.error(e.message)
+            }
         }
     }
 
