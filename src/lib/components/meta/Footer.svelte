@@ -8,7 +8,7 @@
 </section>
 <nav class="list-nav pt-1 pb-3 px-6">
     <ul class="flex items-end justify-center gap-4">
-        <li><a href="/impressum">Impressum</a></li>
-        <li><a href="/datenschutz">Datenschutzerklärung</a></li>
+        <li><a href="/legalnotice">Impressum</a></li>
+        <li><a href="/privacy">Datenschutzerklärung</a></li>
     </ul>
 </nav>
