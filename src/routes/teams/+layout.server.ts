@@ -1,4 +1,4 @@
-import {ClubTeamsAPIRequest} from "bsm.js/dist/service/ClubTeamsAPIRequest";
+import {ClubTeamsAPIRequest} from "bsm.js";
 import {BSM_API_KEY} from "$env/static/private";
 import {PUBLIC_CLUB_ID} from "$env/static/public";
 

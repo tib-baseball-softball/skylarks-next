@@ -3,7 +3,7 @@ import {LeagueGroupAPIRequest} from "bsm.js";
 import {BSM_API_KEY} from "$env/static/private";
 import {get} from "svelte/store";
 import {preferences} from "$lib/stores";
-import {ClubTeamsAPIRequest} from "bsm.js/dist/service/ClubTeamsAPIRequest";
+import {ClubTeamsAPIRequest} from "bsm.js";
 import {PUBLIC_CLUB_ID} from "$env/static/public";
 
 export const load = (async () => {

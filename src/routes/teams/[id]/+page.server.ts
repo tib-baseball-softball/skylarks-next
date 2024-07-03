@@ -5,10 +5,10 @@ import {
     type FieldingStatisticsEntry,
     type PitchingStatisticsEntry,
     StatsAPIRequest,
+    ClubTeamsAPIRequest,
     StatsType
 } from "bsm.js";
 import {BSM_API_KEY} from "$env/static/private";
-import {ClubTeamsAPIRequest} from "bsm.js/dist/service/ClubTeamsAPIRequest";
 import {PUBLIC_CLUB_ID} from "$env/static/public";
 
 export async function load({ parent, params, url }) {
