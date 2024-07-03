@@ -6,8 +6,13 @@
     export let data: PageServerData
 </script>
 
-<h1 class="h1 mb-3">Ligen</h1>
-<SeasonSelector/>
+<div class="my-2 md:flex justify-between items-center">
+    <h1 class="h1 mb-3">Ligen</h1>
+    <div>
+        <SeasonSelector/>
+    </div>
+</div>
+
 {#await data.clubTeams}
     <p>Lade Teams...</p>
     <ProgressBar/>
