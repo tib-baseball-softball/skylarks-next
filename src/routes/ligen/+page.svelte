@@ -2,9 +2,12 @@
     import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte";
     import {ProgressBar} from "@skeletonlabs/skeleton";
     import type {PageServerData} from "../../../.svelte-kit/types/src/routes/ligen/$types";
+    import ReloadUponSeasonChange from "$lib/components/navigation/ReloadUponSeasonChange.svelte";
 
     export let data: PageServerData
 </script>
+
+<ReloadUponSeasonChange/>
 
 <h1 class="h1 mb-3">Ligen</h1>
 <SeasonSelector/>
