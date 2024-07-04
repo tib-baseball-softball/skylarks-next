@@ -21,7 +21,7 @@
 <Drawer width="w-[70%]">
     <h2 class="p-4">Berlin Skylarks</h2>
     <hr class="mb-2"/>
-    <Navigation></Navigation>
+    <Navigation showLinkToMain="{true}"></Navigation>
 </Drawer>
 
 <AppShell

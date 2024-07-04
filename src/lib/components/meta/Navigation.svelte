@@ -1,20 +1,27 @@
 <script lang="ts">
-    import { getDrawerStore } from "@skeletonlabs/skeleton";
+    import {getDrawerStore} from "@skeletonlabs/skeleton";
 
     const drawerStore = getDrawerStore();
 
     function drawerClose(): void {
         drawerStore.close();
     }
+
+    export let showLinkToMain = false
 </script>
 
 <nav class="list-nav py-1 px-6">
     <ul class="lg:flex items-end lg:flex-row gap-6">
-<!--        <li><a href="/aktuelles">Aktuelles</a></li>-->
-        <li><a href="/gamecenter">Gamecenter</a></li>
-        <li><a href="/ligen">Ligen</a></li>
-        <li><a href="/teams">Teams</a></li>
-<!--        <li><a href="/verein">Verein</a></li>-->
-<!--        <li><a href="/kontakt">Kontakt</a></li>-->
+
+        {#if showLinkToMain}
+            <li><a href="/" on:click={drawerClose}>Start</a></li>
+        {/if}
+
+        <!--        <li><a href="/aktuelles" on:click={drawerClose}>Aktuelles</a></li>-->
+        <li><a href="/gamecenter" on:click={drawerClose}>Gamecenter</a></li>
+        <li><a href="/ligen" on:click={drawerClose}>Ligen</a></li>
+        <li><a href="/teams" on:click={drawerClose}>Teams</a></li>
+        <!--        <li><a href="/verein" on:click={drawerClose}>Verein</a></li>-->
+        <!--        <li><a href="/kontakt" on:click={drawerClose}>Kontakt</a></li>-->
     </ul>
 </nav>
