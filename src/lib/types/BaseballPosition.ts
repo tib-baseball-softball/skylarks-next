@@ -1,0 +1,2 @@
+export type BaseballPosition = "Pitcher" | "Catcher" | "First Base" | "Second Base" | "Third Base" | "Shortstop" |
+    "Left Field" | "Right Field" | "Center Field" | "Utility" | "Infield" | "Outfield"
