@@ -27,7 +27,7 @@ export const load = (async ({ url }) => {
     if (leagueGroup && leagueGroup !== "0") {
         matchesPromise = matchRequest.loadAllGames(Number(season), gameday, Number(leagueGroup), search)
     } else {
-        matchesPromise = matchRequest.loadGamesForClub(PUBLIC_CLUB_ID, Number(season), gameday)
+        matchesPromise = matchRequest.loadGamesForClub(Number(PUBLIC_CLUB_ID), Number(season), gameday)
     }
 
     return {
