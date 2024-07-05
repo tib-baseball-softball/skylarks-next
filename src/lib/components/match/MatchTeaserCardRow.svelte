@@ -1,7 +1,7 @@
 <script lang="ts">
     export let logo: string
     export let teamName: string
-    export let score: string | null
+    export let score: number | undefined
     export let subduedScore: boolean
 </script>
 
