@@ -2,16 +2,17 @@
     import type {Match} from "../../../../../bsm.js/src/model/Match";
     import {LogoUtility} from "$lib/service/LogoUtility";
     import MatchTeaserCardRow from "$lib/components/match/MatchTeaserCardRow.svelte";
-    import {MatchUtility} from "$lib/service/MatchUtility";
     import {GameWinner} from "$lib/enum/GameWinner";
     import {DateTimeUtility} from "$lib/service/DateTimeUtility";
+    import {MatchDecorator} from "$lib/service/MatchDecorator";
 
     export let match: Match
 
     const awayLogo = LogoUtility.getLogoPathForTeamName(match.away_league_entry.team)
     const homeLogo = LogoUtility.getLogoPathForTeamName(match.home_league_entry.team)
 
-    const winner = MatchUtility.getWinnerForMatch(match)
+    const matchDecorator = new MatchDecorator(match)
+    const winner = matchDecorator.getWinnerForMatch()
     const matchDate = DateTimeUtility.parseDateFromBSMString(match.time)
 </script>
 

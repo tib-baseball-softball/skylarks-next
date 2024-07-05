@@ -1,17 +1,19 @@
 <script lang="ts">
     import {LogoUtility} from "$lib/service/LogoUtility";
-    import {MatchUtility} from "$lib/service/MatchUtility";
     import {DateTimeUtility} from "$lib/service/DateTimeUtility";
     import type {Match} from "bsm.js"
     import {GameWinner} from "$lib/enum/GameWinner";
     import {CalendarMonthOutline, ClipboardListOutline} from "flowbite-svelte-icons";
+    import {MatchDecorator} from "$lib/service/MatchDecorator";
 
     export let match: Match
 
     const awayLogo = LogoUtility.getLogoPathForTeamName(match.away_league_entry.team)
     const homeLogo = LogoUtility.getLogoPathForTeamName(match.home_league_entry.team)
 
-    const winner = MatchUtility.getWinnerForMatch(match)
+    const matchDecorator = new MatchDecorator(match)
+
+    const winner = matchDecorator.getWinnerForMatch()
     const matchDate = DateTimeUtility.parseDateFromBSMString(match.time)
 </script>
 
