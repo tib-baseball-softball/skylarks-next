@@ -3,6 +3,7 @@
     import {ProgressRadial} from "@skeletonlabs/skeleton";
     import BaseballStatsDatatable from "$lib/components/datatable/BaseballStatsDatatable.svelte";
     import type {StatsDataset} from "$lib/types/StatsDataset";
+    import TeamDetailInfoCard from "$lib/components/team/TeamDetailInfoCard.svelte";
 
     export let data
     $: clubTeam = data.clubTeam as ClubTeam
@@ -18,11 +19,18 @@
 
 <h1 class="h1 my-4">{clubTeam.team.name} (Saison {clubTeam.team.season})</h1>
 
-<p>weitere Infos zum Team</p>
+<section class="my-5">
+    <h2 class="h2">Informationen</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
 
-<h2 class="h2 my-4">Statistiken</h2>
+        <TeamDetailInfoCard {clubTeam}/>
+
+    </div>
+</section>
+
 
 <section class="my-2">
+    <h2 class="h2">Statistiken</h2>
     {#await getData()}
         <ProgressRadial/>
     {:then stats}
@@ -34,3 +42,9 @@
     {/await}
 
 </section>
+
+<style lang="postcss">
+    h2 {
+        @apply mb-4
+    }
+</style>
