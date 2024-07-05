@@ -12,7 +12,7 @@
 <h1 class="h1 my-4">{leagueGroup.name} ({leagueGroup.season})</h1>
 
 <section class="my-5">
-    <h2 class="h3">Informationen</h2>
+    <h2 class="h2">Informationen</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
 
         <LeagueDetailInfoCard {leagueGroup}/>
@@ -22,7 +22,7 @@
 
 <section class="my-3">
 
-    <h2 class="h3">Tabelle</h2>
+    <h2 class="h2">Tabelle</h2>
     {#await expectedTable}
         <ProgressRadial/>
     {:then table}
@@ -37,6 +37,6 @@
 
 <style lang="postcss">
     h2 {
-        @apply mb-2
+        @apply mb-3
     }
 </style>

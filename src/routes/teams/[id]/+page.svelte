@@ -45,6 +45,6 @@
 
 <style lang="postcss">
     h2 {
-        @apply mb-4
+        @apply mb-3
     }
 </style>
