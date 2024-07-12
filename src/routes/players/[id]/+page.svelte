@@ -5,6 +5,7 @@
     import type {StatsDataset} from "$lib/types/StatsDataset";
     import PlayerHeaderSection from "$lib/components/player/PlayerHeaderSection.svelte";
     import type {Player} from "$lib/model/Player";
+    import PlayerDataCard from "$lib/components/player/PlayerDataCard.svelte";
 
     export let data: PageServerData
 
@@ -35,9 +36,12 @@
 {:then player}
     {#if player}
         <h2 class="h2 my-4">Profildaten</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+
             <PlayerHeaderSection {player}/>
-        </div>
+            <PlayerDataCard {player}/>
+
+        </section>
     {/if}
 {:catch error}
     <p>error loading: {error.message}</p>

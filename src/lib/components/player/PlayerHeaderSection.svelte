@@ -8,7 +8,7 @@
 <div class="card variant-ghost-surface p-3">
     <div class="flex justify-center">
         {#if player.media?.length > 0}
-            <img class="rounded-lg" src="{player.media.at(0)?.url}" alt="{player.media.at(0)?.alt}" loading="lazy">
+            <img class="rounded-lg max-h-72" src="{player.media.at(0)?.url}" alt="{player.media.at(0)?.alt}" loading="lazy">
         {:else}
             No image
         {/if}
