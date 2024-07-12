@@ -19,6 +19,7 @@ jobs:
       PUBLIC_CLUB_ID: ${{ vars.PUBLIC_CLUB_ID }}
       PUBLIC_TEAM_NAME: ${{ vars.PUBLIC_TEAM_NAME }}
       BSM_API_KEY: ${{ secrets.BSM_API_KEY }}
+      SKYLARKS_API_AUTH_HEADER: ${{ secrets.SKYLARKS_API_AUTH_HEADER }}
 
     steps:
       - uses: actions/checkout@v4

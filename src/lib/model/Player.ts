@@ -16,7 +16,7 @@ export interface Player {
     coach: string;
     slug: string;
     bsm_id: number;
-    teamname: string;
     media: Media[];
     positions: BaseballPosition[];
+    teams: {uid: number, name: string}[]
 }
