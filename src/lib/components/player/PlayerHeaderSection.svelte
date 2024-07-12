@@ -10,7 +10,7 @@
         {#if player.media?.length > 0}
             <img class="rounded-lg max-h-72" src="{player.media.at(0)?.url}" alt="{player.media.at(0)?.alt}" loading="lazy">
         {:else}
-            No image
+            <img class="rounded-lg max-h-72" src="/team-placeholder-white.jpg" alt="Player fallback" loading="lazy">
         {/if}
     </div>
 
