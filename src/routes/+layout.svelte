@@ -1,6 +1,6 @@
 <script lang="ts">
     import '../app.postcss';
-    import {AppBar} from "@skeletonlabs/skeleton";
+    import {AppBar, Modal} from "@skeletonlabs/skeleton";
     import {AppShell} from "@skeletonlabs/skeleton";
     import Navigation from "$lib/components/meta/Navigation.svelte";
     import { LightSwitch } from '@skeletonlabs/skeleton';
@@ -8,6 +8,7 @@
     import Footer from "$lib/components/meta/Footer.svelte";
     import {preferences} from "$lib/stores";
     import {ExclamationCircleOutline} from "flowbite-svelte-icons";
+    import LoginBadge from "$lib/auth/LoginBadge.svelte";
 
     initializeStores();
 
@@ -23,6 +24,8 @@
     <hr class="mb-2"/>
     <Navigation showLinkToMain="{true}"></Navigation>
 </Drawer>
+
+<Modal />
 
 <AppShell
         slotSidebarLeft="bg-surface-500/5 w-0 md:w-64"
@@ -62,10 +65,15 @@
             </svelte:fragment>
             <svelte:fragment slot="trail">
                 <div class="me-5 flex gap-5">
+
                     <p class="flex-shrink-0">Saison: {$preferences.selectedSeason}</p>
+
                     <div class="me-5">
                         <LightSwitch/>
                     </div>
+
+                    <LoginBadge signupAllowed={true} />
+
                 </div>
             </svelte:fragment>
         </AppBar>
@@ -78,7 +86,9 @@
             <slot/>
 
             <aside class="alert variant-ghost-error my-5">
+
                 <ExclamationCircleOutline size="xl"/>
+                
                 <div class="alert-message">
                     <h3 class="h3">Alpha-Version</h3>
                     <p>Hier funktioniert noch nicht alles wie gewünscht. Fehler und merkwürdiges Verhalten sind zu erwarten.</p>

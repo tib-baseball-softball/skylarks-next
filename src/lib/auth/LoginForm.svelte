@@ -1,0 +1,121 @@
+<script lang="ts">
+    import {Tab, TabGroup} from "@skeletonlabs/skeleton";
+
+    const {
+        authCollection = "users",
+        passwordLogin = true,
+        signupAllowed = true,
+    } = $props();
+    import {client, providerLogin} from "../pocketbase";
+
+    const coll = client.collection(authCollection)
+
+    const form = $state({
+        email: "",
+        name: "",
+        password: "",
+        passwordConfirm: "",
+    })
+    let signup = false
+
+    async function submit(e: SubmitEvent) {
+        e.preventDefault()
+
+        if (signup) {
+            await coll.create({...form})
+        }
+        // signin
+        await coll.authWithPassword(form.email, form.password)
+    }
+
+    let tabSet = $state(0);
+</script>
+
+{#snippet signin()}
+    <input class="input" bind:value={form.email} required type="text" placeholder="email"/>
+    <input
+        bind:value={form.password}
+        class="input"
+        required
+        type="password"
+        placeholder="password"
+    />
+
+    <button class="btn variant-ghost-primary" type="submit" onclick={() => (signup = false)}>Sign In</button>
+{/snippet}
+
+<div class="card">
+    <form onsubmit={submit}>
+        {#if passwordLogin}
+            {#if signupAllowed}
+                <TabGroup>
+                    <Tab bind:group={tabSet} name="tab1" value={0}>Login</Tab>
+                    <Tab bind:group={tabSet} name="tab2" value={1}>Registrieren</Tab>
+                    
+                    <svelte:fragment slot="panel">
+                        {#if tabSet === 0}
+                            {@render signin()}
+                        {:else if tabSet === 1}
+
+                            <input
+                                class="input"
+                                bind:value={form.email}
+                                required
+                                type="text"
+                                placeholder="email"
+                            />
+                            <input
+                                class="input"
+                                bind:value={form.password}
+                                required
+                                type="password"
+                                placeholder="password"
+                            />
+                            <input
+                                class="input"
+                                bind:value={form.passwordConfirm}
+                                required
+                                type="password"
+                                placeholder="confirm password"
+                            />
+                            <input
+                                class="input"
+                                bind:value={form.name}
+                                required
+                                type="text"
+                                placeholder="name / label"
+                            />
+                            <input type="hidden" name="register" value={true}/>
+                            <button class="btn variant-ghost-primary" type="submit" onclick={() => (signup = true)}>
+                                Registrieren
+                            </button>
+
+                        {/if}
+                    </svelte:fragment>
+
+                </TabGroup>
+            {:else}
+                <h2>Login</h2>
+                {@render signin()}
+            {/if}
+        {/if}
+
+        {#await coll.listAuthMethods({$autoCancel: false}) then methods}
+
+            {#each methods.authProviders as p}
+                <button class="btn variant-ghost-tertiary" type="button" onclick={() => providerLogin(p, coll)}
+                >Sign-in with {p.name}</button
+                >
+            {/each}
+
+        {:catch error}
+            <!-- pocketbase not working -->
+        {/await}
+    </form>
+</div>
+
+<style lang="postcss">
+    input, .btn {
+        @apply m-2
+    }
+</style>
