@@ -16,10 +16,10 @@
     }
 
     function updatePreferences(event: Event) {
-        const target = event.target as HTMLSelectElement;
+        //const target = event.target as HTMLSelectElement;
         preferences.update((current: AppPreferences) => ({
             ...current,
-            leagueGroupID: parseInt(target?.value, 10)
+            leagueGroupID: selectedID
         }));
     }
 </script>
