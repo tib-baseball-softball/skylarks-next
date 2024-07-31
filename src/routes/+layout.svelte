@@ -1,6 +1,6 @@
 <script lang="ts">
     import '../app.postcss';
-    import {AppBar, Modal} from "@skeletonlabs/skeleton";
+    import {AppBar, Modal, Toast} from "@skeletonlabs/skeleton";
     import {AppShell} from "@skeletonlabs/skeleton";
     import Navigation from "$lib/components/meta/Navigation.svelte";
     import { LightSwitch } from '@skeletonlabs/skeleton';
@@ -25,7 +25,9 @@
     <Navigation showLinkToMain="{true}"></Navigation>
 </Drawer>
 
+<!--Singletons-->
 <Modal />
+<Toast />
 
 <AppShell
         slotSidebarLeft="bg-surface-500/5 w-0 md:w-64"

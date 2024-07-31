@@ -4,17 +4,21 @@
   import LoginForm from "./LoginForm.svelte";
   import Dialog from "$lib/auth/Dialog.svelte";
   import {Avatar} from "@skeletonlabs/skeleton";
+  import { getToastStore } from '@skeletonlabs/skeleton';
+
+  const toastStore = getToastStore();
   const { signupAllowed = true } = $props();
+
   async function logout() {
     client.authStore.clear();
   }
 
   const unsubscribe = client.authStore.onChange((token, model) => {
     if (model) {
-      const { name, username } = model;
-      alert(`Signed in as ${name || username || "Admin"}`);
+      const { email } = model;
+      toastStore.trigger({ message: `Angemeldet als ${email}`, background: "variant-filled-success"})
     } else {
-      alert(`Signed out`);
+      toastStore.trigger({ message: "Abmeldung erfolgreich"})
     }
   }, false);
   onDestroy(() => {
