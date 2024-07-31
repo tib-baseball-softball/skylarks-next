@@ -1,16 +1,22 @@
 <script lang="ts">
     import '../app.postcss';
-    import {AppBar, Modal, Toast} from "@skeletonlabs/skeleton";
+    import {AppBar, Modal, type ModalComponent, Toast} from "@skeletonlabs/skeleton";
     import {AppShell} from "@skeletonlabs/skeleton";
     import Navigation from "$lib/components/meta/Navigation.svelte";
-    import { LightSwitch } from '@skeletonlabs/skeleton';
+    import {LightSwitch} from '@skeletonlabs/skeleton';
     import {initializeStores, Drawer, getDrawerStore} from '@skeletonlabs/skeleton';
     import Footer from "$lib/components/meta/Footer.svelte";
     import {preferences} from "$lib/stores";
     import {ExclamationCircleOutline} from "flowbite-svelte-icons";
     import LoginBadge from "$lib/auth/LoginBadge.svelte";
+    import LoginForm from "$lib/auth/LoginForm.svelte";
 
     initializeStores();
+
+    const modalRegistry: Record<string, ModalComponent> = {
+        // Set a unique modal ID, then pass the component reference
+        loginForm: {ref: LoginForm},
+    }
 
     const drawerStore = getDrawerStore();
 
@@ -26,19 +32,19 @@
 </Drawer>
 
 <!--Singletons-->
-<Modal />
-<Toast />
+<Modal components={modalRegistry}/>
+<Toast/>
 
 <AppShell
-        slotSidebarLeft="bg-surface-500/5 w-0 md:w-64"
-        regionPage="relative"
-        slotPageHeader="sticky top-0 z-10"
+    slotSidebarLeft="bg-surface-500/5 w-0 md:w-64"
+    regionPage="relative"
+    slotPageHeader="sticky top-0 z-10"
 >
     <svelte:fragment slot="header">
         <AppBar
-                gridColumns="grid-cols-6"
-                slotDefault="place-self-center place-content-between w-full col-span-4"
-                slotTrail="place-content-end"
+            gridColumns="grid-cols-6"
+            slotDefault="place-self-center place-content-between w-full col-span-4"
+            slotTrail="place-content-end"
         >
             <svelte:fragment slot="lead">
                 <div class="flex items-center justify-content-around">
@@ -74,7 +80,7 @@
                         <LightSwitch/>
                     </div>
 
-                    <LoginBadge signupAllowed={true} />
+                    <LoginBadge signupAllowed={true}/>
 
                 </div>
             </svelte:fragment>
@@ -90,10 +96,11 @@
             <aside class="alert variant-ghost-error my-5">
 
                 <ExclamationCircleOutline size="xl"/>
-                
+
                 <div class="alert-message">
                     <h3 class="h3">Alpha-Version</h3>
-                    <p>Hier funktioniert noch nicht alles wie gewünscht. Fehler und merkwürdiges Verhalten sind zu erwarten.</p>
+                    <p>Hier funktioniert noch nicht alles wie gewünscht. Fehler und merkwürdiges Verhalten sind zu
+                        erwarten.</p>
                 </div>
             </aside>
         </div>
