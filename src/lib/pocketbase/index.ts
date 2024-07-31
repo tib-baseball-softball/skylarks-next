@@ -11,9 +11,11 @@ import { readable, type Readable, type Subscriber } from "svelte/store";
 import { browser } from "$app/environment";
 import { invalidateAll } from "$app/navigation";
 import {PUBLIC_POCKETBASE_URL} from "$env/static/public";
+import {TypedPocketBase} from "typed-pocketbase";
+import type { Schema } from "$lib/model/pb-types";
 
 // TODO: check possible problems with server loading
-export const client = new PocketBase(PUBLIC_POCKETBASE_URL)
+export const client = new TypedPocketBase<Schema>(PUBLIC_POCKETBASE_URL)
 
 export const authModel = readable<AuthModel | AdminModel | null>(
   null,

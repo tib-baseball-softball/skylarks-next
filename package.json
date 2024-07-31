@@ -34,6 +34,7 @@
     "@vincjo/datatables": "^1.14.9",
     "bsm.js": "^0.1",
     "pocketbase": "^0.21.4",
-    "svelte-persisted-store": "^0.11.0"
+    "svelte-persisted-store": "^0.11.0",
+    "typed-pocketbase": "^0.1.1"
   }
 }
