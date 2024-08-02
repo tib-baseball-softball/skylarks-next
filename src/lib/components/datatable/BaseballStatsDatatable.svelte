@@ -10,6 +10,7 @@
     import type {StatisticsData, StatisticsSummary} from "bsm.js/dist/model/AbstractStatisticsEntry";
     import type {StatsDataset} from "$lib/types/StatsDataset";
     import StatsContentRow from "$lib/components/datatable/StatsContentRow.svelte";
+    import StatsBlock from "$lib/components/utility/StatsBlock.svelte";
 
     export let data: StatsDataset
     export let rowsPerPage: number = 10
@@ -53,6 +54,13 @@
 
         <RowsPerPage {handler}/>
     </header>
+
+    <div class="flex flex-col">
+        <div class="stats stats-vertical sm:stats-horizontal variant-soft-surface rounded-container-token">
+            <StatsBlock {type} row="{summaryData}"/>
+        </div>
+    </div>
+
     <!-- Table -->
     <table class="table table-hover table-compact w-full table-auto">
 
@@ -74,3 +82,12 @@
         <Pagination {handler}/>
     </footer>
 </div>
+
+<style lang="postcss">
+    .stats {
+        @apply md:mt-4 !important;
+        @apply md:mb-3 !important;
+        @apply lg:mt-6 !important;
+        @apply lg:mb-4 !important;
+    }
+</style>

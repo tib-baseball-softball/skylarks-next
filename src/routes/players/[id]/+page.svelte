@@ -47,7 +47,7 @@
     <p>error loading: {error.message}</p>
 {/await}
 
-<h2 class="h2 my-4">Statistiken</h2>
+<h2 class="h2 my-6 lg:mt-10 mb-8">Statistiken</h2>
 
 {#await getData()}
     <ProgressBar/>
