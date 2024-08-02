@@ -59,4 +59,8 @@ export class MatchDecorator {
             return MatchState.final
         }
     }
+
+    public isPlayoffGame(): boolean {
+        return this.match.match_id.includes("PO")
+    }
 }
