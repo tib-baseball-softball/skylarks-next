@@ -12,7 +12,7 @@
     import LoginForm from "$lib/auth/LoginForm.svelte";
     import AccountModal from "$lib/auth/AccountModal.svelte";
 
-    initializeStores();
+    initializeStores()
 
     const modalRegistry: Record<string, ModalComponent> = {
         // Set a unique modal ID, then pass the component reference
@@ -20,16 +20,22 @@
         accountOverview: {ref: AccountModal}
     }
 
-    const drawerStore = getDrawerStore();
+    const drawerStore = getDrawerStore()
 
     function drawerOpen(): void {
-        drawerStore.open({});
+        drawerStore.open({})
     }
 </script>
 
 <Drawer width="w-[70%]">
-    <h2 class="p-4">Berlin Skylarks</h2>
+    <div class="flex justify-around p-2">
+        <img class="max-w-14" src="/berlin_skylarks_logo.svg" alt="Skylarks Team Logo">
+
+        <h2 class="p-4">Berlin Skylarks</h2>
+    </div>
+
     <hr class="mb-2"/>
+
     <Navigation showLinkToMain="{true}"></Navigation>
 </Drawer>
 
@@ -37,6 +43,7 @@
 <Modal components={modalRegistry}/>
 <Toast/>
 
+<!--Main-->
 <AppShell
     slotSidebarLeft="bg-surface-500/5 w-0 md:w-64"
     regionPage="relative"
@@ -64,30 +71,33 @@
 
             <svelte:fragment slot="default">
                 <section class="w-full justify-between items-center hidden lg:flex py-2">
-                    <a href="/">
+
+                    <a href="/" class="">
                         <img class="min-w-16" src="/berlin_skylarks_logo.svg" alt="Skylarks Team Logo">
                     </a>
+
                     <Navigation></Navigation>
-                    <a href="https://tib1848ev.de/" target="_blank">
-                        <img class="min-w-8 max-w-14" src="/tib_logo.svg" alt="TiB Logo">
-                    </a>
+
+                    <!--ugly hack alert-->
+                    <div></div>
                 </section>
             </svelte:fragment>
+
             <svelte:fragment slot="trail">
-                <div class="me-5 flex gap-5">
+                <div class="lg:me-5 flex items-center gap-5 flex-shrink-0">
 
-                    <p class="flex-shrink-0">Saison: {$preferences.selectedSeason}</p>
 
-                    <div class="me-5">
-                        <LightSwitch/>
-                    </div>
+                    <LightSwitch/>
+
 
                     <LoginBadge signupAllowed={true}/>
 
                 </div>
             </svelte:fragment>
+
         </AppBar>
     </svelte:fragment>
+
     <hr class="!border-t-2">
 
     <!-- (Default Page Content slot) -->

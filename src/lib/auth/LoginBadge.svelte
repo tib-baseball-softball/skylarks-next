@@ -50,7 +50,9 @@
 
         <Avatar
             initials={$authModel?.first_name?.charAt(0).toUpperCase() + $authModel?.last_name?.charAt(0).toUpperCase()}
-            background="bg-primary-500"
+            background="variant-filled-primary"
+            width="w-14"
+            fill="fill-white"
         />
 
     </button>
