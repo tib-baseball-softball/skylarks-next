@@ -6,11 +6,11 @@
     import {LightSwitch} from '@skeletonlabs/skeleton';
     import {initializeStores, Drawer, getDrawerStore} from '@skeletonlabs/skeleton';
     import Footer from "$lib/components/meta/Footer.svelte";
-    import {preferences} from "$lib/stores";
     import {ExclamationCircleOutline} from "flowbite-svelte-icons";
     import LoginBadge from "$lib/auth/LoginBadge.svelte";
     import LoginForm from "$lib/auth/LoginForm.svelte";
     import AccountModal from "$lib/auth/AccountModal.svelte";
+    import {PUBLIC_AUTH_FUNCS_ENABLED} from "$env/static/public";
 
     initializeStores()
 
@@ -86,11 +86,11 @@
             <svelte:fragment slot="trail">
                 <div class="lg:me-5 flex items-center gap-5 flex-shrink-0">
 
-
                     <LightSwitch/>
 
-
-                    <LoginBadge signupAllowed={true}/>
+                    {#if PUBLIC_AUTH_FUNCS_ENABLED === "true"}
+                        <LoginBadge signupAllowed={true}/>
+                    {/if}
 
                 </div>
             </svelte:fragment>
