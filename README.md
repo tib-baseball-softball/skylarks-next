@@ -1,5 +1,5 @@
-# Skylarks-FE-Next
-New experimental frontend for the [website of the Berlin Skylarks Baseball & Softball Club](https://www.tib-baseball.de/).
+# Skylarks-Next
+New experimental website/progressive web app for the [website of the Berlin Skylarks Baseball & Softball Club](https://www.tib-baseball.de/).
 Built with SvelteKit, Skeleton UI and Tailwind CSS.
 
 ## Concept / Background
@@ -8,13 +8,15 @@ As of now, different types of data are being processed in different backends:
 * The main backend [Baseball & Softball Manager / BSM](https://bsm.baseball-softball.de/) of the German Baseball & Softball Federation (DBV).
   * Everything related to organised play is processed there (clubs, games, leagues, teams, player, stats)
   * Accessed via REST API (provided by BSM - _external_)
-* The current Skylarks website, served as a [TYPO3 CMS](https://typo3.org/) website (PHP-based).
-  * Processes additional data that is distinct from BSM data: club teams, player profiles (with more data than what is available in BSM), 
+* [The current Skylarks website](https://www.tib-baseball.de/), served as a [TYPO3 CMS](https://typo3.org/) website (PHP-based).
+  * Processes mostly typical CMS content (articles, info pages), but also additional team data that is distinct from BSM data: club teams, player profiles (with more data than what is available in BSM), 
   training times, game reports
-  * Mainly displayed in the TYPO3 frontend directly, but can also be accessed via REST API (custom - _internal_)
+  * Mainly displayed in the TYPO3 frontend directly, but is also partly accessible via REST API (custom - _internal_)
+
+* _To be added_: A proper backend for custom business logic. Current plan is creating something Go-based, using [Pocketbase](https://pocketbase.io/) as a framework.
 
 ## Project goal
-This project is intended as a pure frontend that collects data from these sources and displays it in a user-friendly way. 
+This project is intended as a pure frontend that collects data from various relevant sources and displays it in a user-friendly way. 
 Since usage is expected to be predominantly mobile, focus is on providing a Progressive Web App with mobile-first design.
 
 ## Project requirements
