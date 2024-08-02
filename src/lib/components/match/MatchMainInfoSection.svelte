@@ -26,8 +26,8 @@
         <div class="grid grid-cols-3 sm:w-[80%] place-items-center gap-3">
             <img class="w-14 xl:w-24" src="{awayLogo}" alt="team logo for {match.away_team_name}" loading="lazy"/>
 
-            <div class="font-bold text-4xl lg:text-6xl xl:text-7xl">
-                {#if match.away_runs && match.home_runs}
+            <div class="font-bold text-3xl lg:text-6xl xl:text-7xl">
+                {#if match.away_runs !== undefined && match.home_runs !== undefined}
                     <span class:text-surface-500-400-token={winner === GameWinner.home}>{match.away_runs}</span>
                     <span>&nbsp;-&nbsp;</span>
                     <span class:text-surface-500-400-token={winner === GameWinner.away}>{match.home_runs}</span>

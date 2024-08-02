@@ -18,7 +18,7 @@ export class MatchDecorator {
     }
 
     public getWinnerForMatch(): GameWinner {
-        if (!this.match?.home_runs || !this.match?.away_runs) {
+        if (this.match?.home_runs === undefined || this.match?.away_runs === undefined) {
             return GameWinner.none
         }
 
