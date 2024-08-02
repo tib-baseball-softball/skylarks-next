@@ -1,13 +1,13 @@
 <script lang="ts">
     import {Tab, TabGroup} from "@skeletonlabs/skeleton";
+    import {client, providerLogin} from "../pocketbase";
 
     const {
         authCollection = "users",
         passwordLogin = true,
         signupAllowed = true,
         parent = null,
-    } = $props();
-    import {client, providerLogin} from "../pocketbase";
+    } = $props()
 
     const coll = client.collection(authCollection)
 
@@ -21,6 +21,7 @@
 
     async function submit(e: SubmitEvent) {
         e.preventDefault()
+        //@ts-ignore
         parent.onClose();
 
         if (signup) {

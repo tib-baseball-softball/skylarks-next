@@ -10,12 +10,14 @@
     import {ExclamationCircleOutline} from "flowbite-svelte-icons";
     import LoginBadge from "$lib/auth/LoginBadge.svelte";
     import LoginForm from "$lib/auth/LoginForm.svelte";
+    import AccountModal from "$lib/auth/AccountModal.svelte";
 
     initializeStores();
 
     const modalRegistry: Record<string, ModalComponent> = {
         // Set a unique modal ID, then pass the component reference
         loginForm: {ref: LoginForm},
+        accountOverview: {ref: AccountModal}
     }
 
     const drawerStore = getDrawerStore();
