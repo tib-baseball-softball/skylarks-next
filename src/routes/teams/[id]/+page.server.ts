@@ -6,7 +6,7 @@ import {
     type PitchingStatisticsEntry,
     StatsAPIRequest,
     ClubTeamsAPIRequest,
-    StatsType
+    StatsType, TablesAPIRequest
 } from "bsm.js";
 import {BSM_API_KEY} from "$env/static/private";
 import {PUBLIC_CLUB_ID} from "$env/static/public";
@@ -42,10 +42,16 @@ export async function load({ parent, params, url }) {
     const pitchingStats = statsRequest.getStatisticsForLeagueEntry<PitchingStatisticsEntry>(leagueEntry.id, StatsType.pitching)
     const fieldingStats = statsRequest.getStatisticsForLeagueEntry<FieldingStatisticsEntry>(leagueEntry.id, StatsType.fielding)
 
+    const leagueGroups = await data.leagueGroups
+    const leagueGroup = leagueGroups?.find((group) => group.league.id === leagueEntry.league.id)
+
+    const tableRequest = new TablesAPIRequest(BSM_API_KEY)
+
     return {
         clubTeam: clubTeam,
         battingStats: battingStats,
         pitchingStats: pitchingStats,
         fieldingStats: fieldingStats,
+        table: leagueGroup ? tableRequest.getSingleTable(leagueGroup.id) : null,
     }
 }

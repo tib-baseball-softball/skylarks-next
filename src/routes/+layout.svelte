@@ -1,39 +1,59 @@
 <script lang="ts">
     import '../app.postcss';
-    import {AppBar} from "@skeletonlabs/skeleton";
+    import {AppBar, Modal, type ModalComponent, Toast} from "@skeletonlabs/skeleton";
     import {AppShell} from "@skeletonlabs/skeleton";
     import Navigation from "$lib/components/meta/Navigation.svelte";
-    import { LightSwitch } from '@skeletonlabs/skeleton';
+    import {LightSwitch} from '@skeletonlabs/skeleton';
     import {initializeStores, Drawer, getDrawerStore} from '@skeletonlabs/skeleton';
     import Footer from "$lib/components/meta/Footer.svelte";
-    import {preferences} from "$lib/stores";
     import {ExclamationCircleOutline} from "flowbite-svelte-icons";
+    import LoginBadge from "$lib/auth/LoginBadge.svelte";
+    import LoginForm from "$lib/auth/LoginForm.svelte";
+    import AccountModal from "$lib/auth/AccountModal.svelte";
+    import {PUBLIC_AUTH_FUNCS_ENABLED} from "$env/static/public";
 
-    initializeStores();
+    initializeStores()
 
-    const drawerStore = getDrawerStore();
+    const modalRegistry: Record<string, ModalComponent> = {
+        // Set a unique modal ID, then pass the component reference
+        loginForm: {ref: LoginForm},
+        accountOverview: {ref: AccountModal}
+    }
+
+    const drawerStore = getDrawerStore()
 
     function drawerOpen(): void {
-        drawerStore.open({});
+        drawerStore.open({})
     }
 </script>
 
 <Drawer width="w-[70%]">
-    <h2 class="p-4">Berlin Skylarks</h2>
+    <div class="flex justify-around p-2">
+        <img class="max-w-14" src="/berlin_skylarks_logo.svg" alt="Skylarks Team Logo">
+
+        <h2 class="p-4">Berlin Skylarks</h2>
+    </div>
+
     <hr class="mb-2"/>
+
     <Navigation showLinkToMain="{true}"></Navigation>
 </Drawer>
 
+<!--Singletons-->
+<Modal components={modalRegistry}/>
+<Toast/>
+
+<!--Main-->
 <AppShell
-        slotSidebarLeft="bg-surface-500/5 w-0 md:w-64"
-        regionPage="relative"
-        slotPageHeader="sticky top-0 z-10"
+    slotSidebarLeft="bg-surface-500/5 w-0 md:w-64"
+    regionPage="relative"
+    slotPageHeader="sticky top-0 z-10"
 >
     <svelte:fragment slot="header">
         <AppBar
-                gridColumns="grid-cols-6"
-                slotDefault="place-self-center place-content-between w-full col-span-4"
-                slotTrail="place-content-end"
+            gridColumns="grid-cols-6"
+            slotDefault="place-self-center place-content-between w-full col-span-4"
+            slotTrail="place-content-end"
         >
             <svelte:fragment slot="lead">
                 <div class="flex items-center justify-content-around">
@@ -51,25 +71,33 @@
 
             <svelte:fragment slot="default">
                 <section class="w-full justify-between items-center hidden lg:flex py-2">
-                    <a href="/">
+
+                    <a href="/" class="">
                         <img class="min-w-16" src="/berlin_skylarks_logo.svg" alt="Skylarks Team Logo">
                     </a>
+
                     <Navigation></Navigation>
-                    <a href="https://tib1848ev.de/" target="_blank">
-                        <img class="min-w-8 max-w-14" src="/tib_logo.svg" alt="TiB Logo">
-                    </a>
+
+                    <!--ugly hack alert-->
+                    <div></div>
                 </section>
             </svelte:fragment>
+
             <svelte:fragment slot="trail">
-                <div class="me-5 flex gap-5">
-                    <p class="flex-shrink-0">Saison: {$preferences.selectedSeason}</p>
-                    <div class="me-5">
-                        <LightSwitch/>
-                    </div>
+                <div class="lg:me-5 flex items-center gap-5 flex-shrink-0">
+
+                    <LightSwitch/>
+
+                    {#if PUBLIC_AUTH_FUNCS_ENABLED === "true"}
+                        <LoginBadge signupAllowed={true}/>
+                    {/if}
+
                 </div>
             </svelte:fragment>
+
         </AppBar>
     </svelte:fragment>
+
     <hr class="!border-t-2">
 
     <!-- (Default Page Content slot) -->
@@ -78,10 +106,13 @@
             <slot/>
 
             <aside class="alert variant-ghost-error my-5">
+
                 <ExclamationCircleOutline size="xl"/>
+
                 <div class="alert-message">
                     <h3 class="h3">Alpha-Version</h3>
-                    <p>Hier funktioniert noch nicht alles wie gewünscht. Fehler und merkwürdiges Verhalten sind zu erwarten.</p>
+                    <p>Hier funktioniert noch nicht alles wie gewünscht. Fehler und merkwürdiges Verhalten sind zu
+                        erwarten.</p>
                 </div>
             </aside>
         </div>

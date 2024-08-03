@@ -17,7 +17,10 @@
     const matchDate = DateTimeUtility.parseDateFromBSMString(match.time)
 </script>
 
-<a class="block card card-hover variant-ghost-surface" href="gamecenter/game-detail/{match.id}">
+<a
+    class=" block card card-hover  {matchDecorator.isPlayoffGame() === true ? 'variant-ghost-primary' : 'variant-ghost-surface'}"
+    href="gamecenter/game-detail/{match.id}"
+>
 
     <header class="card-header">
         <div class="flex justify-between items-center">
