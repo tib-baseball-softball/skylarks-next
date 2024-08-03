@@ -45,7 +45,7 @@ export async function login(
     const user = { ...rest, email, password, confirmPassword: password };
     await client.collection("users").create(user);
   }
-  await client.collection("users").authWithPassword(email, password);
+  await client.collection("users").authWithPassword(email, password, { expand: "club" });
 }
 
 export function logout() {

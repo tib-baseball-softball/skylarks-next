@@ -28,7 +28,7 @@
             await coll.create({...form})
         }
         // signin
-        await coll.authWithPassword(form.email, form.password)
+        await coll.authWithPassword(form.email, form.password, { expand: "club" })
     }
 
     let tabSet = $state(0);

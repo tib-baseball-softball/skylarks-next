@@ -91,8 +91,8 @@
     "indexes": [
       "CREATE INDEX `idx_zbjtgYA` ON `users` (\n  `teams`,\n  `club`\n)"
     ],
-    "listRule": "club = @request.auth.club.id",
-    "viewRule": "club = @request.auth.club.id",
+    "listRule": "club = @request.auth.club",
+    "viewRule": "club = @request.auth.club",
     "createRule": "",
     "updateRule": "id = @request.auth.id",
     "deleteRule": null,
@@ -144,8 +144,8 @@
       }
     ],
     "indexes": [],
-    "listRule": null,
-    "viewRule": null,
+    "listRule": "@request.auth.id != \"\" && id ?~ @request.auth.club.id",
+    "viewRule": "@request.auth.id != \"\" && id ?~ @request.auth.club.id",
     "createRule": null,
     "updateRule": null,
     "deleteRule": null,
