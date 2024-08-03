@@ -91,11 +91,11 @@
     "indexes": [
       "CREATE INDEX `idx_zbjtgYA` ON `users` (\n  `teams`,\n  `club`\n)"
     ],
-    "listRule": "id = @request.auth.id",
-    "viewRule": "id = @request.auth.id",
-    "createRule": null,
+    "listRule": "club = @request.auth.club.id",
+    "viewRule": "club = @request.auth.club.id",
+    "createRule": "",
     "updateRule": "id = @request.auth.id",
-    "deleteRule": "id = @request.auth.id",
+    "deleteRule": null,
     "options": {
       "allowEmailAuth": true,
       "allowOAuth2Auth": true,
@@ -313,6 +313,63 @@
     "options": {}
   },
   {
+    "id": "ap0vz28x8jh6gv6",
+    "name": "requestcaches",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "system": false,
+        "id": "9dpotreq",
+        "name": "hash",
+        "type": "text",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "system": false,
+        "id": "1w3p0urw",
+        "name": "url",
+        "type": "text",
+        "required": true,
+        "presentable": true,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "system": false,
+        "id": "r69uqln5",
+        "name": "responseBody",
+        "type": "json",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "maxSize": 2000000
+        }
+      }
+    ],
+    "indexes": [
+      "CREATE INDEX `idx_8P8482G` ON `requestcaches` (`hash`)"
+    ],
+    "listRule": null,
+    "viewRule": "@request.auth.id != \"\"",
+    "createRule": null,
+    "updateRule": null,
+    "deleteRule": null,
+    "options": {}
+  },
+  {
     "id": "fltkvrsbbvzf9cf",
     "name": "teams",
     "type": "base",
@@ -382,8 +439,8 @@
     "indexes": [
       "CREATE INDEX `idx_vBz1jG9` ON `teams` (`bsm_league_group`)"
     ],
-    "listRule": null,
-    "viewRule": null,
+    "listRule": "",
+    "viewRule": "",
     "createRule": null,
     "updateRule": null,
     "deleteRule": null,
