@@ -1,5 +1,6 @@
 <script lang="ts">
     import {getDrawerStore} from "@skeletonlabs/skeleton";
+    import {client} from "$lib/pocketbase";
 
     const drawerStore = getDrawerStore();
 
@@ -23,5 +24,9 @@
         <li><a href="/teams" on:click={drawerClose}>Teams</a></li>
         <!--        <li><a href="/verein" on:click={drawerClose}>Verein</a></li>-->
         <!--        <li><a href="/kontakt" on:click={drawerClose}>Kontakt</a></li>-->
+        
+        {#if client.authStore.isValid}
+            <li><a href="/account" on:click={drawerClose}>Account</a></li>
+        {/if}
     </ul>
 </nav>

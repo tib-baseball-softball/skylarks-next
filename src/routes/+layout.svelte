@@ -103,6 +103,7 @@
     <!-- (Default Page Content slot) -->
     <div id="pageContainer" class="flex items-center justify-center">
         <div class="flex flex-col justify-center content-center w-[92%] md:w-[85%] xl:w-[75%]">
+        
             <slot/>
 
             <aside class="alert variant-ghost-error my-5">
