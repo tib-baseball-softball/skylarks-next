@@ -7,7 +7,7 @@ import (
     "github.com/pocketbase/pocketbase/core"
     "github.com/pocketbase/pocketbase/tools/cron"
     "github.com/subosito/gotenv"
-    "github.com/tib-baseball-softball/skylarks-next/pkg/cronjobs"
+    "github.com/tib-baseball-softball/skylarks-next/cronjobs"
     "log"
     "net/http"
 )
@@ -47,6 +47,9 @@ func main() {
         scheduler := cron.New()
 
         scheduler.MustAdd("TeamsImport", "* * * * *", cronjobs.ImportTeams)
+        scheduler.MustAdd("GamesImport", "* * * * *", func() {
+            cronjobs.ImportGames(app)
+        })
 
         scheduler.Start()
 
