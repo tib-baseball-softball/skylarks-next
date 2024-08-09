@@ -14,6 +14,10 @@
         {#each results as match}
             <CurrentMatchRow {match}/>
         {/each}
+
+        {#if results.length === 0}
+            <p>Keine Spiele in diesem Zeitraum.</p>
+        {/if}
     </section>
 
 {:catch error}
