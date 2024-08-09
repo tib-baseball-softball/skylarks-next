@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type {Match} from "../../../../../bsm.js/src/model/Match";
+    import type {Match} from "bsm.js";
     import {LogoUtility} from "$lib/service/LogoUtility";
     import {GameWinner} from "$lib/enum/GameWinner";
     import {MatchState} from "$lib/enum/MatchState";

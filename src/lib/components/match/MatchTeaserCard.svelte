@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type {Match} from "../../../../../bsm.js/src/model/Match";
+    import type {Match} from "bsm.js";
     import {LogoUtility} from "$lib/service/LogoUtility";
     import MatchTeaserCardRow from "$lib/components/match/MatchTeaserCardRow.svelte";
     import {GameWinner} from "$lib/enum/GameWinner";

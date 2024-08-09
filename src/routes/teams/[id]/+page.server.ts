@@ -1,5 +1,5 @@
 import {error} from "@sveltejs/kit";
-import type {ClubTeam} from "bsm.js/dist/model/ClubTeam";
+import type {ClubTeam} from "bsm.js";
 import {
     type BattingStatisticsEntry,
     type FieldingStatisticsEntry,

@@ -7,7 +7,7 @@
     import {StatsType} from "bsm.js";
     import StatsTableContent from "$lib/components/datatable/StatsTableContent.svelte";
     import {RadioGroup, RadioItem} from "@skeletonlabs/skeleton";
-    import type {StatisticsData, StatisticsSummary} from "bsm.js/dist/model/AbstractStatisticsEntry";
+    import type {StatisticsData, StatisticsSummary} from "bsm.js";
     import type {StatsDataset} from "$lib/types/StatsDataset";
     import StatsContentRow from "$lib/components/datatable/StatsContentRow.svelte";
     import StatsBlock from "$lib/components/utility/StatsBlock.svelte";

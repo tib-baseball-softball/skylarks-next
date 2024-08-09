@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type {OffensiveMatchStats} from "bsm.js/dist";
+    import type {OffensiveMatchStats} from "bsm.js";
 
     export let matchStats: OffensiveMatchStats
     export let teamName: string

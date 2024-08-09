@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type {ClubTeam} from "bsm.js/dist/model/ClubTeam";
+    import type {ClubTeam} from "bsm.js";
     import {ProgressRadial} from "@skeletonlabs/skeleton";
     import BaseballStatsDatatable from "$lib/components/datatable/BaseballStatsDatatable.svelte";
     import type {StatsDataset} from "$lib/types/StatsDataset";

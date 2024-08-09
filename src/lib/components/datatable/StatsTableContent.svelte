@@ -3,7 +3,7 @@
     import {StatsType} from "bsm.js";
     import StatsHeaderRow from "$lib/components/datatable/StatsHeaderRow.svelte";
     import StatsContentRow from "$lib/components/datatable/StatsContentRow.svelte";
-    import type {StatisticsData} from "bsm.js/dist/model/AbstractStatisticsEntry";
+    import type {StatisticsData} from "bsm.js";
 
     export let handler: DataHandler<StatisticsData<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics">>
     export let tableType: "personal" | "seasonal"

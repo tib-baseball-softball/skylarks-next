@@ -1,6 +1,6 @@
 <script lang="ts">
     import {Tab, TabGroup} from "@skeletonlabs/skeleton";
-    import type {Match} from "../../../../../bsm.js/src/model/Match";
+    import type {Match} from "bsm.js";
     import CurrentMatchBlock from "$lib/components/match/CurrentMatchBlock.svelte";
 
     let tabSet: number = 1;

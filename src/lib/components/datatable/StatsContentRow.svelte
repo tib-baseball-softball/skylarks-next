@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type {StatisticsData} from "bsm.js/dist/model/AbstractStatisticsEntry";
+    import type {StatisticsData} from "bsm.js";
     import {StatsType} from "bsm.js";
 
     export let type: StatsType

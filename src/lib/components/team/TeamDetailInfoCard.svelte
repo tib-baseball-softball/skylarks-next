@@ -4,7 +4,7 @@
         CloseOutline,
         FileLinesOutline, FlagOutline, TagOutline, UsersGroupOutline
     } from "flowbite-svelte-icons";
-    import type {ClubTeam} from "bsm.js/dist/model/ClubTeam";
+    import type {ClubTeam} from "bsm.js";
 
     export let clubTeam: ClubTeam
 </script>

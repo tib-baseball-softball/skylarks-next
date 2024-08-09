@@ -1,6 +1,6 @@
 <script lang="ts">
     import {StatsType} from "bsm.js";
-    import type {StatisticsData} from "bsm.js/dist/model/AbstractStatisticsEntry";
+    import type {StatisticsData} from "bsm.js";
     import StatsBlockContent from "$lib/components/utility/StatsBlockContent.svelte";
 
     interface props {
