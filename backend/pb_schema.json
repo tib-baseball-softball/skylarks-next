@@ -91,8 +91,8 @@
     "indexes": [
       "CREATE INDEX `idx_zbjtgYA` ON `users` (\n  `teams`,\n  `club`\n)"
     ],
-    "listRule": "club = @request.auth.club",
-    "viewRule": "club = @request.auth.club",
+    "listRule": "@request.auth.id != \"\" && (\n    // the same user as the authenticated one\n    id = @request.auth.id ||\n    // or share the same club\n    club.id ?= @request.auth.club.id\n)",
+    "viewRule": "@request.auth.id != \"\" && (\n    // the same user as the authenticated one\n    id = @request.auth.id ||\n    // or share the same club\n    club.id ?= @request.auth.club.id\n)",
     "createRule": "",
     "updateRule": "id = @request.auth.id",
     "deleteRule": null,
@@ -300,6 +300,16 @@
           "maxSelect": 1,
           "displayFields": null
         }
+      },
+      {
+        "system": false,
+        "id": "dfcjwv48",
+        "name": "cancelled",
+        "type": "bool",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {}
       }
     ],
     "indexes": [
@@ -439,8 +449,8 @@
     "indexes": [
       "CREATE INDEX `idx_vBz1jG9` ON `teams` (`bsm_league_group`)"
     ],
-    "listRule": "",
-    "viewRule": "",
+    "listRule": "@request.auth.id != \"\" && id ?~ @request.auth.teams.id",
+    "viewRule": "@request.auth.id != \"\" && id ?~ @request.auth.teams.id",
     "createRule": null,
     "updateRule": null,
     "deleteRule": null,

@@ -192,6 +192,7 @@ export interface EventsResponse extends BaseCollectionResponse {
 	participants: Array<string>;
 	attire: string;
 	team: string;
+	cancelled: boolean;
 }
 
 export interface EventsCreate extends BaseCollectionCreate {
@@ -205,6 +206,7 @@ export interface EventsCreate extends BaseCollectionCreate {
 	participants?: MaybeArray<string>;
 	attire?: string;
 	team: string;
+	cancelled?: boolean;
 }
 
 export interface EventsUpdate extends BaseCollectionUpdate {
@@ -222,6 +224,7 @@ export interface EventsUpdate extends BaseCollectionUpdate {
 	'participants-'?: MaybeArray<string>;
 	attire?: string;
 	team?: string;
+	cancelled?: boolean;
 }
 
 export interface EventsCollection {
@@ -310,6 +313,37 @@ export interface TeamsCollection {
 	};
 }
 
+// ===== requestcaches =====
+
+export interface RequestcachesResponse extends BaseCollectionResponse {
+	collectionName: 'requestcaches';
+	hash: string;
+	url: string;
+	responseBody: any;
+}
+
+export interface RequestcachesCreate extends BaseCollectionCreate {
+	hash: string;
+	url: string;
+	responseBody: any;
+}
+
+export interface RequestcachesUpdate extends BaseCollectionUpdate {
+	hash?: string;
+	url?: string;
+	responseBody?: any;
+}
+
+export interface RequestcachesCollection {
+	type: 'base';
+	collectionId: string;
+	collectionName: 'requestcaches';
+	response: RequestcachesResponse;
+	create: RequestcachesCreate;
+	update: RequestcachesUpdate;
+	relations: Record<string, never>;
+}
+
 // ===== Schema =====
 
 export type Schema = {
@@ -317,4 +351,5 @@ export type Schema = {
 	events: EventsCollection;
 	clubs: ClubsCollection;
 	teams: TeamsCollection;
+	requestcaches: RequestcachesCollection;
 };
