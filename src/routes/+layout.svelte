@@ -11,6 +11,7 @@
     import LoginForm from "$lib/auth/LoginForm.svelte";
     import AccountModal from "$lib/auth/AccountModal.svelte";
     import {PUBLIC_AUTH_FUNCS_ENABLED} from "$env/static/public";
+    import {onMount} from "svelte";
 
     initializeStores()
 
@@ -25,6 +26,14 @@
     function drawerOpen(): void {
         drawerStore.open({})
     }
+
+    // LightSwitch Workaround: https://github.com/skeletonlabs/skeleton/issues/2598
+    onMount(() => {
+        const e = document.documentElement.classList, t = localStorage.getItem("modeUserPrefers") === "false",
+            n = !("modeUserPrefers" in localStorage), r = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        t || n && r ? e.add("dark") : e.remove("dark")
+    })
+
 </script>
 
 <Drawer width="w-[70%]">
@@ -103,7 +112,7 @@
     <!-- (Default Page Content slot) -->
     <div id="pageContainer" class="flex items-center justify-center">
         <div class="flex flex-col justify-center content-center w-[92%] md:w-[85%] xl:w-[75%]">
-        
+
             <slot/>
 
             <aside class="alert variant-ghost-error my-5">
