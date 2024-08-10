@@ -47,7 +47,7 @@ func main() {
         scheduler := cron.New()
 
         scheduler.MustAdd("TeamsImport", "* * * * *", cronjobs.ImportTeams)
-        scheduler.MustAdd("GamesImport", "* * * * *", func() {
+        scheduler.MustAdd("GamesImport", "0 * * * *", func() {
             cronjobs.ImportGames(app)
         })
 
