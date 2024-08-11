@@ -6,6 +6,7 @@ import (
     "github.com/pocketbase/pocketbase/apis"
     "github.com/pocketbase/pocketbase/core"
     "github.com/pocketbase/pocketbase/tools/cron"
+    "github.com/spf13/cobra"
     "github.com/subosito/gotenv"
     "github.com/tib-baseball-softball/skylarks-next/cronjobs"
     "log"
@@ -41,6 +42,23 @@ func main() {
         }
 
         return nil
+    })
+
+    app.RootCmd.AddCommand(&cobra.Command{
+        Use: "import:games",
+        Run: func(cmd *cobra.Command, args []string) {
+            cronjobs.ImportGames(app)
+        },
+    })
+
+    app.RootCmd.AddCommand(&cobra.Command{
+        Use: "import:leagues",
+        Run: func(cmd *cobra.Command, args []string) {
+            err := cronjobs.ImportLeagueGroups(app)
+            if err != nil {
+                log.Print("Error while running cronjob LeagueGroupImport: " + err.Error())
+            }
+        },
     })
 
     app.OnBeforeServe().Add(func(e *core.ServeEvent) error {
