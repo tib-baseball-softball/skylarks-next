@@ -141,6 +141,20 @@
           "max": null,
           "noDecimal": true
         }
+      },
+      {
+        "system": false,
+        "id": "odlns7mr",
+        "name": "bsm_api_key",
+        "type": "text",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
       }
     ],
     "indexes": [],

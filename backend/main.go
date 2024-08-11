@@ -46,7 +46,13 @@ func main() {
     app.OnBeforeServe().Add(func(e *core.ServeEvent) error {
         scheduler := cron.New()
 
-        scheduler.MustAdd("TeamsImport", "* * * * *", cronjobs.ImportTeams)
+        scheduler.MustAdd("LeagueGroupImport", "0 * * * *", func() {
+            err := cronjobs.ImportLeagueGroups(app)
+            if err != nil {
+                log.Print("Error while running cronjob LeagueGroupImport: " + err.Error())
+            }
+        })
+
         scheduler.MustAdd("GamesImport", "0 * * * *", func() {
             cronjobs.ImportGames(app)
         })

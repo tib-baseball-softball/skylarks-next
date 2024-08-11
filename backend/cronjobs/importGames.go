@@ -1,15 +1,12 @@
 package cronjobs
 
 import (
-    "encoding/json"
     "github.com/pocketbase/pocketbase"
     "github.com/pocketbase/pocketbase/models"
     "github.com/pocketbase/pocketbase/tools/types"
     "github.com/tib-baseball-softball/skylarks-next/bsm"
     "github.com/tib-baseball-softball/skylarks-next/model"
-    "io"
     "log"
-    "net/http"
     "sync"
     "time"
 )
@@ -21,14 +18,31 @@ func ImportGames(app *pocketbase.PocketBase) {
         return
     }
 
+    currentYear := types.NowDateTime().Time().Year()
     var wg sync.WaitGroup
 
     for _, team := range teams {
         wg.Add(1)
         go func() {
             defer wg.Done()
-            matches := fetchMatchesForLeagueGroup(team.GetString("bsm_league_group"))
-            err := createOrUpdateEvents(app, matches, team.Id)
+            // only run this job for events this season (refreshing games past years should rarely ever be relevant)
+            leagueGroup, err := app.Dao().FindFirstRecordByData("leaguegroups", "bsm_id", team.GetInt("bsm_id"))
+            if err != nil {
+                log.Print("Error fetching League Group record: ", err)
+                return
+            }
+            if leagueGroup.GetInt("season") != currentYear {
+                return
+            }
+            club := team.ExpandedOne("club")
+
+            matches, err := fetchMatchesForLeagueGroup(team.GetString("bsm_league_group"), club.GetString("bsm_api_key"))
+            if err != nil {
+				log.Print(err)
+				return
+			}
+
+            err = createOrUpdateEvents(app, matches, team.Id)
             if err != nil {
                 log.Print(err)
                 return
@@ -37,37 +51,22 @@ func ImportGames(app *pocketbase.PocketBase) {
     }
 
     wg.Wait()
-    log.Println("Game Import sucessfully imported new game events")
+    log.Println("Game Import successfully imported new game events")
 }
 
-func fetchMatchesForLeagueGroup(league string) []model.Match {
+func fetchMatchesForLeagueGroup(league string, apiKey string) ([]model.Match, error) {
 
     params := make(map[string]string)
     params["filters[leagues][]"] = league
     params["search"] = "skylarks"
 
-    url := bsm.GetAPIURL("matches.json", params)
+    url := bsm.GetAPIURL("matches.json", params, apiKey)
+    matches, err := bsm.FetchResource[[]model.Match](url.String())
 
-    resp, err := http.Get(url.String())
     if err != nil {
-        log.Print(err)
-        return nil
-    }
-
-    body, err := io.ReadAll(resp.Body)
-    if err != nil {
-        log.Print(err)
-        return nil
-    }
-
-    var apiResponse []model.Match
-    err = json.Unmarshal(body, &apiResponse)
-    if err != nil {
-        log.Print(err)
-        return nil
-    }
-
-    return apiResponse
+		return nil, err
+	}
+    return matches, nil
 }
 
 func createOrUpdateEvents(app *pocketbase.PocketBase, matches []model.Match, teamID string) (err error) {
@@ -82,13 +81,13 @@ func createOrUpdateEvents(app *pocketbase.PocketBase, matches []model.Match, tea
             }
 
             record = models.NewRecord(collection)
-            err = setRecordValues(record, match, teamID)
+            err = setEventRecordValues(record, match, teamID)
             if err != nil {
                 return err
             }
         }
         // no error - update existing record
-        err = setRecordValues(record, match, teamID)
+        err = setEventRecordValues(record, match, teamID)
         if err != nil {
             return err
         }
@@ -101,7 +100,7 @@ func createOrUpdateEvents(app *pocketbase.PocketBase, matches []model.Match, tea
     return
 }
 
-func setRecordValues(record *models.Record, match model.Match, teamID string) (err error) {
+func setEventRecordValues(record *models.Record, match model.Match, teamID string) (err error) {
     starttime, err := types.ParseDateTime(match.Time)
     if err != nil {
         return err

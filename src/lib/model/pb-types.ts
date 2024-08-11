@@ -246,11 +246,13 @@ export interface ClubsResponse extends BaseCollectionResponse {
 	collectionName: 'clubs';
 	name: string;
 	bsm_id: number;
+	bsm_api_key: string;
 }
 
 export interface ClubsCreate extends BaseCollectionCreate {
 	name?: string;
 	bsm_id?: number;
+	bsm_api_key?: string;
 }
 
 export interface ClubsUpdate extends BaseCollectionUpdate {
@@ -258,6 +260,7 @@ export interface ClubsUpdate extends BaseCollectionUpdate {
 	bsm_id?: number;
 	'bsm_id+'?: number;
 	'bsm_id-'?: number;
+	bsm_api_key?: string;
 }
 
 export interface ClubsCollection {

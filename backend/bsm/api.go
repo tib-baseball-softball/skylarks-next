@@ -1,12 +1,16 @@
 package bsm
 
 import (
+    "encoding/json"
+    "io"
     "log"
+    "net/http"
     "net/url"
     "os"
 )
 
-func GetAPIURL(resource string, params map[string]string) *url.URL {
+// GetAPIURL Construct a BSM API URL from a given path, appending all query parameters and the API key automatically
+func GetAPIURL(resource string, params map[string]string, apiKey string) *url.URL {
 	urlString := os.Getenv("BSM_API_URL")
 	urlString = urlString + "/" + resource
 	
@@ -16,7 +20,7 @@ func GetAPIURL(resource string, params map[string]string) *url.URL {
     }
 
     query := reqURL.Query()
-    query.Add("api_key", os.Getenv("BSM_API_KEY"))
+    query.Add("api_key", apiKey)
     
     for key, value := range params {
         query.Add(key, value)
@@ -25,4 +29,26 @@ func GetAPIURL(resource string, params map[string]string) *url.URL {
     reqURL.RawQuery = query.Encode()
 	
 	return reqURL
+}
+
+// FetchResource thin wrapper over http + json funcs to prevent repetition in code
+func FetchResource[T any](url string) (T, error) {
+    var apiResponse T
+
+    resp, err := http.Get(url)
+    if err != nil {
+        return apiResponse, err
+    }
+
+    body, err := io.ReadAll(resp.Body)
+    if err != nil {
+        return apiResponse, err
+    }
+
+    err = json.Unmarshal(body, &apiResponse)
+    if err != nil {
+        return apiResponse, err
+    }
+
+    return apiResponse, nil
 }
