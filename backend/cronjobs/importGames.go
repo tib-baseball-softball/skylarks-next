@@ -1,6 +1,7 @@
 package cronjobs
 
 import (
+    "encoding/json"
     "github.com/pocketbase/pocketbase"
     "github.com/pocketbase/pocketbase/models"
     "github.com/pocketbase/pocketbase/tools/types"
@@ -55,13 +56,12 @@ func ImportGames(app *pocketbase.PocketBase) {
 }
 
 func fetchMatchesForLeagueGroup(league string, apiKey string) ([]model.Match, error) {
-
     params := make(map[string]string)
     params["filters[leagues][]"] = league
     params["search"] = "skylarks"
 
     url := bsm.GetAPIURL("matches.json", params, apiKey)
-    matches, err := bsm.FetchResource[[]model.Match](url.String())
+    matches, _, err := bsm.FetchResource[[]model.Match](url.String())
 
     if err != nil {
 		return nil, err
@@ -107,12 +107,18 @@ func setEventRecordValues(record *models.Record, match model.Match, teamID strin
     }
     endtime := starttime.Time().Add(time.Hour * 3)
 
+    matchJSON, err := json.Marshal(match)
+    if err != nil {
+        return err
+    }
+
     record.Set("title", match.AwayTeamName + " @ " + match.HomeTeamName)
     record.Set("bsm_id", match.ID)
     record.Set("starttime", starttime.String())
     record.Set("endtime", endtime.String())
     record.Set("type", "game")
     record.Set("team", teamID)
+    record.Set("match_object", string(matchJSON))
 
     return
 }

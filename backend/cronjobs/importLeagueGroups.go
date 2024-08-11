@@ -51,7 +51,7 @@ func fetchLeagueGroupsForCurrentSeason(apiKey string) ([]model.LeagueGroup, erro
 	params["filters[seasons][]"] = strconv.Itoa(currentYear)
 	
 	url := bsm.GetAPIURL("league_groups.json", params, apiKey)
-	leagueGroups, err := bsm.FetchResource[[]model.LeagueGroup](url.String())
+	leagueGroups, _, err := bsm.FetchResource[[]model.LeagueGroup](url.String())
 	if err != nil {
 		return nil, err
 	}

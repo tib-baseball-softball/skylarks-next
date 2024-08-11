@@ -32,23 +32,25 @@ func GetAPIURL(resource string, params map[string]string, apiKey string) *url.UR
 }
 
 // FetchResource thin wrapper over http + json funcs to prevent repetition in code
-func FetchResource[T any](url string) (T, error) {
+func FetchResource[T any](url string) (T, string, error) {
     var apiResponse T
+    var responseBody string
 
     resp, err := http.Get(url)
     if err != nil {
-        return apiResponse, err
+        return apiResponse, responseBody, err
     }
 
     body, err := io.ReadAll(resp.Body)
     if err != nil {
-        return apiResponse, err
+        return apiResponse, responseBody, err
     }
 
+    responseBody = string(body)
     err = json.Unmarshal(body, &apiResponse)
     if err != nil {
-        return apiResponse, err
+        return apiResponse, responseBody, err
     }
 
-    return apiResponse, nil
+    return apiResponse, responseBody, nil
 }
