@@ -27,7 +27,7 @@ func ImportGames(app *pocketbase.PocketBase) {
         go func() {
             defer wg.Done()
             // only run this job for events this season (refreshing games past years should rarely ever be relevant)
-            leagueGroup, err := app.Dao().FindFirstRecordByData("leaguegroups", "bsm_id", team.GetInt("bsm_id"))
+            leagueGroup, err := app.Dao().FindFirstRecordByData("leaguegroups", "bsm_id", team.GetInt("bsm_league_group"))
             if err != nil {
                 log.Print("Error fetching League Group record: ", err)
                 return
@@ -35,7 +35,16 @@ func ImportGames(app *pocketbase.PocketBase) {
             if leagueGroup.GetInt("season") != currentYear {
                 return
             }
+
+            if errs := app.Dao().ExpandRecord(team, []string{"club"}, nil); len(errs) > 0 {
+                log.Printf("failed to expand: %v", errs)
+                return
+            }
             club := team.ExpandedOne("club")
+            if club == nil {
+                log.Print("ERROR: Could not load club data for API key, aborting...")
+                return
+            }
 
             matches, err := fetchMatchesForLeagueGroup(team.GetString("bsm_league_group"), club.GetString("bsm_api_key"))
             if err != nil {
@@ -118,7 +127,7 @@ func setEventRecordValues(record *models.Record, match model.Match, teamID strin
     record.Set("endtime", endtime.String())
     record.Set("type", "game")
     record.Set("team", teamID)
-    record.Set("match_object", string(matchJSON))
+    record.Set("match_json", string(matchJSON))
 
     return
 }
