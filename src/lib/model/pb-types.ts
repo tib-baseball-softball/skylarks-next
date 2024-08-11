@@ -318,20 +318,20 @@ export interface TeamsCollection {
 export interface RequestcachesResponse extends BaseCollectionResponse {
 	collectionName: 'requestcaches';
 	hash: string;
-	url: string;
 	responseBody: any;
+	url: string;
 }
 
 export interface RequestcachesCreate extends BaseCollectionCreate {
 	hash: string;
-	url: string;
 	responseBody: any;
+	url: string | URL;
 }
 
 export interface RequestcachesUpdate extends BaseCollectionUpdate {
 	hash?: string;
-	url?: string;
 	responseBody?: any;
+	url?: string | URL;
 }
 
 export interface RequestcachesCollection {
@@ -344,6 +344,44 @@ export interface RequestcachesCollection {
 	relations: Record<string, never>;
 }
 
+// ===== leaguegroups =====
+
+export interface LeaguegroupsResponse extends BaseCollectionResponse {
+	collectionName: 'leaguegroups';
+	bsm_id: number;
+	season: number;
+	acronym: string;
+	name: string;
+}
+
+export interface LeaguegroupsCreate extends BaseCollectionCreate {
+	bsm_id: number;
+	season: number;
+	acronym: string;
+	name: string;
+}
+
+export interface LeaguegroupsUpdate extends BaseCollectionUpdate {
+	bsm_id?: number;
+	'bsm_id+'?: number;
+	'bsm_id-'?: number;
+	season?: number;
+	'season+'?: number;
+	'season-'?: number;
+	acronym?: string;
+	name?: string;
+}
+
+export interface LeaguegroupsCollection {
+	type: 'base';
+	collectionId: string;
+	collectionName: 'leaguegroups';
+	response: LeaguegroupsResponse;
+	create: LeaguegroupsCreate;
+	update: LeaguegroupsUpdate;
+	relations: Record<string, never>;
+}
+
 // ===== Schema =====
 
 export type Schema = {
@@ -352,4 +390,5 @@ export type Schema = {
 	clubs: ClubsCollection;
 	teams: TeamsCollection;
 	requestcaches: RequestcachesCollection;
+	leaguegroups: LeaguegroupsCollection;
 };

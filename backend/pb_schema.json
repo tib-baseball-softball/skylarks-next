@@ -139,7 +139,7 @@
         "options": {
           "min": null,
           "max": null,
-          "noDecimal": false
+          "noDecimal": true
         }
       }
     ],
@@ -323,6 +323,77 @@
     "options": {}
   },
   {
+    "id": "v46okut7xdcifdl",
+    "name": "leaguegroups",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "system": false,
+        "id": "md7wkckl",
+        "name": "bsm_id",
+        "type": "number",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "noDecimal": true
+        }
+      },
+      {
+        "system": false,
+        "id": "kydzznbv",
+        "name": "season",
+        "type": "number",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "noDecimal": true
+        }
+      },
+      {
+        "system": false,
+        "id": "lj9hwzjm",
+        "name": "acronym",
+        "type": "text",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "system": false,
+        "id": "p81r0nlu",
+        "name": "name",
+        "type": "text",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      }
+    ],
+    "indexes": [],
+    "listRule": "// this does not contain any sensitive information\n@request.auth.id != \"\"",
+    "viewRule": "@request.auth.id != \"\"",
+    "createRule": null,
+    "updateRule": null,
+    "deleteRule": null,
+    "options": {}
+  },
+  {
     "id": "ap0vz28x8jh6gv6",
     "name": "requestcaches",
     "type": "base",
@@ -344,20 +415,6 @@
       },
       {
         "system": false,
-        "id": "1w3p0urw",
-        "name": "url",
-        "type": "text",
-        "required": true,
-        "presentable": true,
-        "unique": false,
-        "options": {
-          "min": null,
-          "max": null,
-          "pattern": ""
-        }
-      },
-      {
-        "system": false,
         "id": "r69uqln5",
         "name": "responseBody",
         "type": "json",
@@ -366,6 +423,19 @@
         "unique": false,
         "options": {
           "maxSize": 2000000
+        }
+      },
+      {
+        "system": false,
+        "id": "d66krk0w",
+        "name": "url",
+        "type": "url",
+        "required": true,
+        "presentable": true,
+        "unique": false,
+        "options": {
+          "exceptDomains": [],
+          "onlyDomains": []
         }
       }
     ],
