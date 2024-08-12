@@ -1,7 +1,6 @@
 <script lang="ts">
     import '../app.postcss';
     import {AppBar, Modal, type ModalComponent, Toast} from "@skeletonlabs/skeleton";
-    import {AppShell} from "@skeletonlabs/skeleton";
     import Navigation from "$lib/components/meta/Navigation.svelte";
     import {LightSwitch} from '@skeletonlabs/skeleton';
     import {initializeStores, Drawer, getDrawerStore} from '@skeletonlabs/skeleton';
@@ -53,12 +52,11 @@
 <Toast/>
 
 <!--Main-->
-<AppShell
-    slotSidebarLeft="bg-surface-500/5 w-0 md:w-64"
-    regionPage="relative"
-    slotPageHeader="sticky top-0 z-10"
->
-    <svelte:fragment slot="header">
+
+<div class="h-screen grid grid-rows-[auto_1fr_auto]">
+    <!-- Header -->
+    <header>
+
         <AppBar
             gridColumns="grid-cols-6"
             slotDefault="place-self-center place-content-between w-full col-span-4"
@@ -105,13 +103,21 @@
             </svelte:fragment>
 
         </AppBar>
-    </svelte:fragment>
 
-    <hr class="!border-t-2">
+    </header>
 
-    <!-- (Default Page Content slot) -->
-    <div id="pageContainer" class="flex items-center justify-center">
-        <div class="flex flex-col justify-center content-center w-[92%] md:w-[85%] xl:w-[75%]">
+    <!-- Grid Column -->
+
+    <div class="container grid grid-cols-1 md:grid-cols-[auto_1fr_auto]">
+
+        <!-- Sidebar (Left) -->
+        <aside class="bg-surface-500/5 p-4 sticky top-0 col-span-1 hidden h-screen lg:block">
+            <div>TEXTdfszjdszjzdfj</div>
+        </aside>
+
+        <!-- Main -->
+
+        <main class="col-span-1 space-y-4 mx-4 md:mx-6 lg:mx-8 mb-4 lg:mb-6">
 
             <slot/>
 
@@ -125,11 +131,16 @@
                         erwarten.</p>
                 </div>
             </aside>
-        </div>
+
+        </main>
+
+
     </div>
 
-    <svelte:fragment slot="pageFooter">
+
+    <!-- Footer -->
+    <footer>
         <hr class="!border-t-2">
         <Footer></Footer>
-    </svelte:fragment>
-</AppShell>
+    </footer>
+</div>
