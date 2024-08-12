@@ -60,6 +60,7 @@
             slotDefault="place-self-center place-content-between w-full col-span-4"
             slotTrail="place-content-end"
             padding="p-3"
+            background="bg-surface-500/5"
         >
             <svelte:fragment slot="lead">
                 <div class="flex items-center justify-content-start">
@@ -101,6 +102,7 @@
 
         </AppBar>
 
+        <hr class="!border-b-2">
     </header>
 
     <!-- Grid Column -->
