@@ -193,6 +193,7 @@ export interface EventsResponse extends BaseCollectionResponse {
 	attire: string;
 	team: string;
 	cancelled: boolean;
+	match_json: any;
 }
 
 export interface EventsCreate extends BaseCollectionCreate {
@@ -207,6 +208,7 @@ export interface EventsCreate extends BaseCollectionCreate {
 	attire?: string;
 	team: string;
 	cancelled?: boolean;
+	match_json?: any;
 }
 
 export interface EventsUpdate extends BaseCollectionUpdate {
@@ -225,6 +227,7 @@ export interface EventsUpdate extends BaseCollectionUpdate {
 	attire?: string;
 	team?: string;
 	cancelled?: boolean;
+	match_json?: any;
 }
 
 export interface EventsCollection {
