@@ -1,14 +1,24 @@
 <script lang="ts">
-    import {getDrawerStore} from "@skeletonlabs/skeleton";
+    import {Accordion, AccordionItem, getDrawerStore} from "@skeletonlabs/skeleton";
     import {client} from "$lib/pocketbase";
     import {
-        HomeOutline, ProfileCardOutline, TableRowOutline, TicketOutline, UsersGroupOutline
+        ChartPieOutline,
+        HomeOutline, LockOutline, ProfileCardOutline, TableRowOutline, TicketOutline, UsersGroupOutline, UsersOutline
     } from "flowbite-svelte-icons";
+    import {browser} from "$app/environment";
+    import type {TeamsResponse} from "$lib/model/pb-types";
 
     const drawerStore = getDrawerStore();
 
     function drawerClose(): void {
         drawerStore.close();
+    }
+
+    async function getUserTeams(): Promise<TeamsResponse[]> {
+        if (browser) {
+            return await client.collection("teams").getFullList()
+        }
+        return []
     }
 </script>
 
@@ -48,18 +58,51 @@
 
     </ul>
 
-    <hr class="my-2"/>
+    {#if client.authStore.isValid}
+        <hr class="my-2"/>
 
-    <ul>
-        <li>
-            {#if client.authStore.isValid}
-                <a href="/account" on:click={drawerClose}>
-                    <ProfileCardOutline size="lg"/>
-                    <span>Account</span>
-                </a>
-            {/if}
-        </li>
-    </ul>
+        <Accordion
+            regionPanel="space-y-1"
+        >
+            <AccordionItem open>
+                <svelte:fragment slot="lead">
+                    <LockOutline size="lg"/>
+                </svelte:fragment>
+
+                <svelte:fragment slot="summary">
+                    <span>Kaderplanung</span>
+                </svelte:fragment>
+
+                <svelte:fragment slot="content">
+
+                    <a href="/account" on:click={drawerClose}>
+                        <ProfileCardOutline size="lg"/>
+                        <span>Meine Seite</span>
+                    </a>
+
+                    {#await getUserTeams() then teams}
+                        {#each teams as team}
+                            <a href="/account/team/{team.id}" on:click={drawerClose}>
+                                <UsersOutline size="lg"/>
+                                <span>{team.name}</span>
+                            </a>
+                        {/each}
+                    {/await}
+
+                    <hr/>
+
+                    <a href="#" on:click={drawerClose}>
+                        <ChartPieOutline size="lg"/>
+                        <span>Admin Dashboard</span>
+                    </a>
+
+                </svelte:fragment>
+            </AccordionItem>
+            <!-- ... -->
+        </Accordion>
+
+
+    {/if}
 </nav>
 
 <style lang="postcss">
@@ -70,5 +113,9 @@
     a {
         display: flex;
         @apply items-center;
+    }
+
+    span {
+        @apply text-nowrap;
     }
 </style>

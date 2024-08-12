@@ -116,7 +116,7 @@
 
         <!-- Main -->
 
-        <main class="col-span-1 space-y-4 mx-4 md:mx-6 lg:mx-8 mb-4 lg:mb-6">
+        <main class="col-span-1 space-y-4 lg:space-y-6 mx-4 md:mx-6 lg:mx-8 mb-4 lg:mb-6">
 
             <slot/>
 
