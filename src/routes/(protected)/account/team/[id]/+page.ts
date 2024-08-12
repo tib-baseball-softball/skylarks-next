@@ -9,7 +9,7 @@ export const load = (async ({ parent, params }) => {
     let team = teams.find((team) => team.id === params.id)
     
     if (!team) {
-        team = await client.collection("teams").getOne<TeamsResponse>(params.id)
+        team = await client.collection("teams").getOne<TeamsResponse>(params.id, {expand: "club"})
     }
     if (!team) throw error(404, "Team nicht gefunden")
     

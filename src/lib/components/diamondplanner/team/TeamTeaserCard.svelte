@@ -13,7 +13,7 @@
     let {team}: props = $props()
 </script>
 
-<a href="/account/team/{team.id}" class="card card-hover block variant-ghost-surface p-3">
+<article class="card card-hover block variant-ghost-surface p-3">
 
     <div class="flex items-center gap-3 self-end">
         <FileLinesOutline/>
@@ -53,4 +53,4 @@
         </div>
     </div>
 
-</a>
+</article>

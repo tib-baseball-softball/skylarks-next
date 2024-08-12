@@ -293,6 +293,7 @@ export interface TeamsResponse extends BaseCollectionResponse {
 	bsm_league_group: number;
 	age_group: 'adults' | 'minors';
 	club: string;
+	description: string;
 }
 
 export interface TeamsCreate extends BaseCollectionCreate {
@@ -300,6 +301,7 @@ export interface TeamsCreate extends BaseCollectionCreate {
 	bsm_league_group?: number;
 	age_group: 'adults' | 'minors';
 	club: string;
+	description?: string;
 }
 
 export interface TeamsUpdate extends BaseCollectionUpdate {
@@ -309,6 +311,7 @@ export interface TeamsUpdate extends BaseCollectionUpdate {
 	'bsm_league_group-'?: number;
 	age_group?: 'adults' | 'minors';
 	club?: string;
+	description?: string;
 }
 
 export interface TeamsCollection {
