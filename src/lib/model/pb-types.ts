@@ -142,6 +142,7 @@ export interface UsersResponse extends AuthCollectionResponse {
 	avatar: string;
 	teams: Array<string>;
 	club: Array<string>;
+	admin_for: Array<string>;
 }
 
 export interface UsersCreate extends AuthCollectionCreate {
@@ -150,6 +151,7 @@ export interface UsersCreate extends AuthCollectionCreate {
 	avatar?: File | null;
 	teams?: MaybeArray<string>;
 	club?: MaybeArray<string>;
+	admin_for?: MaybeArray<string>;
 }
 
 export interface UsersUpdate extends AuthCollectionUpdate {
@@ -162,6 +164,9 @@ export interface UsersUpdate extends AuthCollectionUpdate {
 	club?: MaybeArray<string>;
 	'club+'?: MaybeArray<string>;
 	'club-'?: MaybeArray<string>;
+	admin_for?: MaybeArray<string>;
+	'admin_for+'?: MaybeArray<string>;
+	'admin_for-'?: MaybeArray<string>;
 }
 
 export interface UsersCollection {
@@ -174,6 +179,7 @@ export interface UsersCollection {
 	relations: {
 		teams: TeamsCollection[];
 		club: ClubsCollection[];
+		admin_for: TeamsCollection[];
 		'events(participants)': EventsCollection[];
 	};
 }
@@ -314,6 +320,7 @@ export interface TeamsCollection {
 	update: TeamsUpdate;
 	relations: {
 		'users(teams)': UsersCollection[];
+		'users(admin_for)': UsersCollection[];
 		'events(team)': EventsCollection[];
 		club: ClubsCollection;
 	};

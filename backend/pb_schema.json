@@ -86,6 +86,22 @@
           "maxSelect": null,
           "displayFields": null
         }
+      },
+      {
+        "system": false,
+        "id": "wnkevvbz",
+        "name": "admin_for",
+        "type": "relation",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "collectionId": "fltkvrsbbvzf9cf",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": null,
+          "displayFields": null
+        }
       }
     ],
     "indexes": [
