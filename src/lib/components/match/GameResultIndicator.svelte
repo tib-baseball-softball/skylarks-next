@@ -9,7 +9,7 @@
     const matchState = matchDecorator.getMatchState()
 </script>
 
-<div class="text-xl font-semibold">
+<div class="text-lg font-semibold">
     {#if matchState === MatchState.won}
         <span class="text-success-700 dark:text-success-500">W</span>
     {:else if matchState === MatchState.lost}
@@ -19,8 +19,8 @@
     {:else if matchState === MatchState.final}
         <span>F</span>
     {:else if matchState === MatchState.notYetPlayed}
-        <span class="text-lg">TBD</span>
+        <span class="text-md">TBD</span>
     {:else if matchState === MatchState.cancelled}
-        <span class="text-lg">PPD</span>
+        <span class="text-md">PPD</span>
     {/if}
 </div>
