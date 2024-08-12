@@ -35,23 +35,21 @@
 
 </script>
 
-<Drawer width="w-[70%]">
+<Drawer width="w-[70%] sm:w-[40%]">
     <div class="flex justify-around p-2">
         <img class="max-w-14" src="/berlin_skylarks_logo.svg" alt="Skylarks Team Logo">
 
-        <h2 class="p-4">Berlin Skylarks</h2>
+        <h2 class="p-4 antialiased">Berlin Skylarks</h2>
     </div>
 
     <hr class="mb-2"/>
 
-    <Navigation showLinkToMain="{true}"></Navigation>
+    <Navigation></Navigation>
 </Drawer>
 
 <!--Singletons-->
 <Modal components={modalRegistry}/>
 <Toast/>
-
-<!--Main-->
 
 <div class="h-screen grid grid-rows-[auto_1fr_auto]">
     <!-- Header -->
@@ -61,10 +59,11 @@
             gridColumns="grid-cols-6"
             slotDefault="place-self-center place-content-between w-full col-span-4"
             slotTrail="place-content-end"
+            padding="p-3"
         >
             <svelte:fragment slot="lead">
-                <div class="flex items-center justify-content-around">
-                    <button class="lg:hidden btn btn-sm mr-4" on:click={drawerOpen}>
+                <div class="flex items-center justify-content-start">
+                    <button class="md:hidden btn btn-sm mr-4" on:click={drawerOpen}>
                     <span>
                         <svg viewBox="0 0 100 80" class="fill-token w-4 h-4">
                             <rect width="100" height="20"/>
@@ -73,20 +72,18 @@
                         </svg>
                     </span>
                     </button>
+
+                    <a href="/" class="hidden md:block ms-3">
+                        <img class="min-w-16" src="/berlin_skylarks_logo.svg" alt="Skylarks Team Logo">
+                    </a>
                 </div>
             </svelte:fragment>
 
             <svelte:fragment slot="default">
-                <section class="w-full justify-between items-center hidden lg:flex py-2">
+                <section class="w-full justify-center items-center hidden lg:flex py-2">
 
-                    <a href="/" class="">
-                        <img class="min-w-16" src="/berlin_skylarks_logo.svg" alt="Skylarks Team Logo">
-                    </a>
 
-                    <Navigation></Navigation>
 
-                    <!--ugly hack alert-->
-                    <div></div>
                 </section>
             </svelte:fragment>
 
@@ -111,8 +108,8 @@
     <div class="container grid grid-cols-1 md:grid-cols-[auto_1fr_auto]">
 
         <!-- Sidebar (Left) -->
-        <aside class="bg-surface-500/5 p-4 sticky top-0 col-span-1 hidden h-screen lg:block">
-            <div>TEXTdfszjdszjzdfj</div>
+        <aside class="bg-surface-500/5 p-2 sticky top-0 col-span-1 hidden h-screen md:block">
+            <Navigation></Navigation>
         </aside>
 
         <!-- Main -->
@@ -133,10 +130,7 @@
             </aside>
 
         </main>
-
-
     </div>
-
 
     <!-- Footer -->
     <footer>
