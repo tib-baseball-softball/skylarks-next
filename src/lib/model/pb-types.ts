@@ -181,6 +181,7 @@ export interface UsersCollection {
 		club: ClubsCollection[];
 		admin_for: TeamsCollection[];
 		'events(participants)': EventsCollection[];
+		'users_events_mm(user)': UsersEventsMmCollection[];
 	};
 }
 
@@ -200,6 +201,7 @@ export interface EventsResponse extends BaseCollectionResponse {
 	team: string;
 	cancelled: boolean;
 	match_json: any;
+	guests: string;
 }
 
 export interface EventsCreate extends BaseCollectionCreate {
@@ -215,6 +217,7 @@ export interface EventsCreate extends BaseCollectionCreate {
 	team: string;
 	cancelled?: boolean;
 	match_json?: any;
+	guests?: string;
 }
 
 export interface EventsUpdate extends BaseCollectionUpdate {
@@ -234,6 +237,7 @@ export interface EventsUpdate extends BaseCollectionUpdate {
 	team?: string;
 	cancelled?: boolean;
 	match_json?: any;
+	guests?: string;
 }
 
 export interface EventsCollection {
@@ -246,6 +250,7 @@ export interface EventsCollection {
 	relations: {
 		participants: UsersCollection[];
 		team: TeamsCollection;
+		'users_events_mm(event)': UsersEventsMmCollection[];
 	};
 }
 
@@ -256,12 +261,14 @@ export interface ClubsResponse extends BaseCollectionResponse {
 	name: string;
 	bsm_id: number;
 	bsm_api_key: string;
+	acronym: string;
 }
 
 export interface ClubsCreate extends BaseCollectionCreate {
 	name?: string;
 	bsm_id?: number;
 	bsm_api_key?: string;
+	acronym?: string;
 }
 
 export interface ClubsUpdate extends BaseCollectionUpdate {
@@ -270,6 +277,7 @@ export interface ClubsUpdate extends BaseCollectionUpdate {
 	'bsm_id+'?: number;
 	'bsm_id-'?: number;
 	bsm_api_key?: string;
+	acronym?: string;
 }
 
 export interface ClubsCollection {
@@ -398,6 +406,43 @@ export interface LeaguegroupsCollection {
 	relations: Record<string, never>;
 }
 
+// ===== users_events_mm =====
+
+export interface UsersEventsMmResponse extends BaseCollectionResponse {
+	collectionName: 'users_events_mm';
+	user: string;
+	event: string;
+	comment: string;
+	state: '' | 'in' | 'out' | 'maybe';
+}
+
+export interface UsersEventsMmCreate extends BaseCollectionCreate {
+	user?: string;
+	event?: string;
+	comment?: string;
+	state?: '' | 'in' | 'out' | 'maybe';
+}
+
+export interface UsersEventsMmUpdate extends BaseCollectionUpdate {
+	user?: string;
+	event?: string;
+	comment?: string;
+	state?: '' | 'in' | 'out' | 'maybe';
+}
+
+export interface UsersEventsMmCollection {
+	type: 'base';
+	collectionId: string;
+	collectionName: 'users_events_mm';
+	response: UsersEventsMmResponse;
+	create: UsersEventsMmCreate;
+	update: UsersEventsMmUpdate;
+	relations: {
+		user: UsersCollection;
+		event: EventsCollection;
+	};
+}
+
 // ===== Schema =====
 
 export type Schema = {
@@ -407,4 +452,5 @@ export type Schema = {
 	teams: TeamsCollection;
 	requestcaches: RequestcachesCollection;
 	leaguegroups: LeaguegroupsCollection;
+	users_events_mm: UsersEventsMmCollection;
 };

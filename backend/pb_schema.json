@@ -171,6 +171,20 @@
           "max": null,
           "pattern": ""
         }
+      },
+      {
+        "system": false,
+        "id": "r175a7vd",
+        "name": "acronym",
+        "type": "text",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
       }
     ],
     "indexes": [],
@@ -351,6 +365,20 @@
         "unique": false,
         "options": {
           "maxSize": 2000000
+        }
+      },
+      {
+        "system": false,
+        "id": "umjy80lx",
+        "name": "guests",
+        "type": "text",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
         }
       }
     ],
@@ -577,6 +605,86 @@
     "viewRule": "@request.auth.id != \"\" && id ?~ @request.auth.teams.id",
     "createRule": null,
     "updateRule": null,
+    "deleteRule": null,
+    "options": {}
+  },
+  {
+    "id": "ngighvrbraklj58",
+    "name": "users_events_mm",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "system": false,
+        "id": "3isihple",
+        "name": "user",
+        "type": "relation",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "collectionId": "_pb_users_auth_",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": null
+        }
+      },
+      {
+        "system": false,
+        "id": "if3a1hof",
+        "name": "event",
+        "type": "relation",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "collectionId": "zyst8ardf4onbwz",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": null
+        }
+      },
+      {
+        "system": false,
+        "id": "awtxtncq",
+        "name": "comment",
+        "type": "text",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "system": false,
+        "id": "2wrlbkod",
+        "name": "state",
+        "type": "select",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "values": [
+            "in",
+            "out",
+            "maybe"
+          ]
+        }
+      }
+    ],
+    "indexes": [
+      "CREATE INDEX `idx_YCrorbP` ON `users_events_mm` (\n  `user`,\n  `event`\n)"
+    ],
+    "listRule": "event.team.id ?= @request.auth.teams.id",
+    "viewRule": "event.team.id ?= @request.auth.teams.id",
+    "createRule": "@request.auth.id != \"\"",
+    "updateRule": "user.id = @request.auth.id",
     "deleteRule": null,
     "options": {}
   }
