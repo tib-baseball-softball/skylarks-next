@@ -16,7 +16,7 @@
 
     async function getUserTeams(): Promise<TeamsResponse[]> {
         if (browser) {
-            return await client.collection("teams").getFullList()
+            return await client.collection("teams").getFullList({expand: "club"})
         }
         return []
     }
@@ -84,7 +84,7 @@
                         {#each teams as team}
                             <a href="/account/team/{team.id}" on:click={drawerClose}>
                                 <UsersOutline size="lg"/>
-                                <span>{team.name}</span>
+                                <span>{team.name} ({team?.expand?.club?.acronym})</span>
                             </a>
                         {/each}
                     {/await}
