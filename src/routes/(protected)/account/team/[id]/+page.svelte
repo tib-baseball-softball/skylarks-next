@@ -24,9 +24,7 @@
 {:then events}
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
         {#each events.items as event}
-            <a href="/account/event/{event.id}">
-                <EventTeaser {event} link={true}/>
-            </a>
+            <EventTeaser {event} link={true}/>
         {/each}
         {#if events.items.length === 0}
             <p>Keine Events verfügbar.</p>
