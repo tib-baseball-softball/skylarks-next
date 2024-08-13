@@ -110,7 +110,7 @@
     <div class="container grid grid-cols-1 md:grid-cols-[auto_1fr_auto]">
 
         <!-- Sidebar (Left) -->
-        <aside class="bg-surface-500/5 p-2 sticky top-0 col-span-1 hidden h-screen md:block">
+        <aside class="bg-surface-500/5 p-2 sticky top-0 col-span-1 hidden h-screen md:block lg:min-w-72">
             <Navigation></Navigation>
         </aside>
 

@@ -10,8 +10,21 @@ export class DateTimeUtility {
         timeStyle: "short"
     })
 
+    public static readonly eventDateFormat: DateTimeFormatOptions = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+    }
+
+    public static readonly eventTimeFormat: DateTimeFormatOptions = {
+        hour: 'numeric',
+        minute: 'numeric',
+    }
+
     /**
      * Slightly overcomplicated method to parse the BSM "time" string into something usable, with help from generative AI.
+     * BSM does not use ISO 8601 format.
      *
      * Format example: 2024-04-07 12:05:00 +0200
      */

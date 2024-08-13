@@ -202,6 +202,7 @@ export interface EventsResponse extends BaseCollectionResponse {
 	cancelled: boolean;
 	match_json: any;
 	guests: string;
+	location: string;
 }
 
 export interface EventsCreate extends BaseCollectionCreate {
@@ -218,6 +219,7 @@ export interface EventsCreate extends BaseCollectionCreate {
 	cancelled?: boolean;
 	match_json?: any;
 	guests?: string;
+	location?: string;
 }
 
 export interface EventsUpdate extends BaseCollectionUpdate {
@@ -238,6 +240,7 @@ export interface EventsUpdate extends BaseCollectionUpdate {
 	cancelled?: boolean;
 	match_json?: any;
 	guests?: string;
+	location?: string;
 }
 
 export interface EventsCollection {

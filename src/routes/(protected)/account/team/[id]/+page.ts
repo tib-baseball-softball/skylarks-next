@@ -13,7 +13,7 @@ export const load = (async ({ parent, params }) => {
     }
     if (!team) throw error(404, "Team nicht gefunden")
     
-    const events = client.collection("events").getList<EventsResponse>(1, 50, {
+    const events = client.collection("events").getList<EventsResponse>(1, 10, {
         filter: `starttime >= @todayStart && team = "${team.id}"`,
         sort: '+starttime',
         expand: "participants",
