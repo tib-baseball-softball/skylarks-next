@@ -1,4 +1,4 @@
-import {client} from "$lib/pocketbase";
+import {client, watch} from "$lib/pocketbase";
 import {error} from "@sveltejs/kit";
 import type {EventsResponse, TeamsResponse} from "$lib/model/pb-types";
 
@@ -13,10 +13,9 @@ export const load = (async ({ parent, params }) => {
     }
     if (!team) throw error(404, "Team nicht gefunden")
     
-    const events = client.collection("events").getList<EventsResponse>(1, 10, {
+    const events = await watch<EventsResponse>("events", {
         filter: `starttime >= @todayStart && team = "${team.id}"`,
         sort: '+starttime',
-        expand: "participants",
     })
     
     return {
