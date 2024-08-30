@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type {EventsResponse} from "$lib/model/pb-types";
+    import type {EventsResponse, ParticipationsResponse} from "$lib/model/pb-types";
     import EventTypeBadge from "$lib/components/diamondplanner/event/EventTypeBadge.svelte";
     import {DateTimeUtility} from "$lib/service/DateTimeUtility";
     import {
@@ -21,9 +21,20 @@
     const meetingTime = new Date(event.meetingtime)
 
     let selected = $state('')
+
+    let participations: ParticipationsResponse[] = event?.expand?.participations_via_event
+    let participationsIn = participations?.filter((participation) => {
+        return participation.state === "in"
+    })
+    let participationsMaybe = participations?.filter((participation) => {
+        return participation.state === "maybe"
+    })
+    let participationsOut = participations?.filter((participation) => {
+        return participation.state === "out"
+    })
 </script>
 
-<article class="card variant-ghost-surface text-sm h-full" class:card-hover={link}>
+<article class="card variant-soft-surface text-sm h-full" class:card-hover={link}>
 
     <a href="/account/event/{event.id}">
 
@@ -66,6 +77,12 @@
                 <div class="flex col-span-2 gap-2">
                     <MapPinAltOutline/>
                     <p>{event?.location ? event.location : "Kein Ort angegeben."}</p>
+                </div>
+
+                <div class="flex col-span-2 justify-around">
+                    <div>In: {participationsIn?.length ?? 0}</div>
+                    <div>Evtl.: {participationsMaybe?.length ?? 0}</div>
+                    <div>Out: {participationsOut?.length ?? 0}</div>
                 </div>
 
             </div>

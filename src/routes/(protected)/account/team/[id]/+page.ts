@@ -16,7 +16,8 @@ export const load = (async ({ parent, params }) => {
     const events = await watch<EventsResponse>("events", {
         filter: `starttime >= @todayStart && team = "${team.id}"`,
         sort: '+starttime',
-    })
+        expand: "participations_via_event.user"
+    }, 1, 6)
     
     return {
         team: team,

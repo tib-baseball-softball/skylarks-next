@@ -18,11 +18,7 @@
 
     <h2>Teilnehmende</h2>
 
-    <ul>
-        {#each event.expand?.participants as participant}
-            <li>{participant.first_name} {participant.last_name}</li>
-        {/each}
-    </ul>
+
 
 {:catch error}
     <p>Fehler beim Laden: {error.message}</p>
