@@ -1,5 +1,9 @@
 <script lang="ts">
-    import type {EventsResponse, ParticipationsResponse} from "$lib/model/pb-types";
+    import type {
+        EventsResponse,
+        ParticipationsCreate,
+        ParticipationsResponse,
+    } from "$lib/model/pb-types";
     import EventTypeBadge from "$lib/components/diamondplanner/event/EventTypeBadge.svelte";
     import {DateTimeUtility} from "$lib/service/DateTimeUtility";
     import {
@@ -9,6 +13,10 @@
         CloseOutline,
         MapPinAltOutline, QuestionCircleOutline
     } from "flowbite-svelte-icons";
+    import {authModel} from "$lib/pocketbase";
+    import type {EventParticipationState} from "$lib/types/EventParticipationState";
+    import {sendParticipationData} from "$lib/functions/sendParticipationData";
+    import {invalidateAll} from "$app/navigation";
 
     interface props {
         event: EventsResponse
@@ -20,18 +28,37 @@
     const startTime = new Date(event.starttime)
     const meetingTime = new Date(event.meetingtime)
 
-    let selected = $state('')
-
-    let participations: ParticipationsResponse[] = event?.expand?.participations_via_event
-    let participationsIn = participations?.filter((participation) => {
+    let participations: ParticipationsResponse[] = $derived(event?.expand?.participations_via_event)
+    let participationsIn = $derived(participations?.filter((participation) => {
         return participation.state === "in"
-    })
-    let participationsMaybe = participations?.filter((participation) => {
+    }))
+    let participationsMaybe = $derived(participations?.filter((participation) => {
         return participation.state === "maybe"
-    })
-    let participationsOut = participations?.filter((participation) => {
+    }))
+    let participationsOut = $derived(participations?.filter((participation) => {
         return participation.state === "out"
+    }))
+
+    let userParticipation: ParticipationsCreate = $state({
+        id: "",
+        user: $authModel?.id,
+        event: event.id,
+        state: "",
     })
+
+    async function updateParticipationStatus(state: EventParticipationState): Promise<void> {
+        userParticipation = await sendParticipationData(state, userParticipation)
+        await invalidateAll()
+    }
+
+    $effect(() => {
+        participations?.forEach((participation) => {
+            if (participation.user === $authModel?.id) {
+                userParticipation = participation
+            }
+        })
+    })
+
 </script>
 
 <article class="card variant-soft-surface text-sm h-full" class:card-hover={link}>
@@ -79,12 +106,6 @@
                     <p>{event?.location ? event.location : "Kein Ort angegeben."}</p>
                 </div>
 
-                <div class="flex col-span-2 justify-around">
-                    <div>In: {participationsIn?.length ?? 0}</div>
-                    <div>Evtl.: {participationsMaybe?.length ?? 0}</div>
-                    <div>Out: {participationsOut?.length ?? 0}</div>
-                </div>
-
             </div>
         </section>
 
@@ -94,30 +115,36 @@
 
         <hr class="my-2">
 
-        <div class="flex justify-end gap-2 flex-wrap">
+        <div class="flex justify-end items-end gap-2 flex-wrap">
 
             <button
-                class="chip variant-ringed-success"
-                onclick={() => {  }}
+                class="chip"
+                class:variant-filled-success={userParticipation.state === "in"}
+                class:variant-ringed-success={userParticipation.state !== "in"}
+                onclick={() => updateParticipationStatus("in")}
             >
                 <span><CheckOutline size="sm"/></span>
-                <span>In</span>
+                <span>{participationsIn?.length ?? 0}</span>
             </button>
 
             <button
                 class="chip variant-ringed-warning"
-                onclick={() => {  }}
+                class:variant-filled-warning={userParticipation.state === "maybe"}
+                class:variant-ringed-warning={userParticipation.state !== "maybe"}
+                onclick={() => updateParticipationStatus("maybe")}
             >
                 <span><QuestionCircleOutline size="sm"/></span>
-                <span>Evtl.</span>
+                <span>{participationsMaybe?.length ?? 0}</span>
             </button>
 
             <button
-                class="chip variant-ringed-error"
-                onclick={() => {  }}
+                class="chip"
+                class:variant-filled-error={userParticipation.state === "out"}
+                class:variant-ringed-error={userParticipation.state !== "out"}
+                onclick={() => updateParticipationStatus("out") }
             >
                 <span><CloseOutline size="sm"/></span>
-                <span>Out</span>
+                <span>{participationsOut?.length ?? 0}</span>
             </button>
 
         </div>
