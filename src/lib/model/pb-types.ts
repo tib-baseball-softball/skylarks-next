@@ -180,8 +180,7 @@ export interface UsersCollection {
 		teams: TeamsCollection[];
 		club: ClubsCollection[];
 		admin_for: TeamsCollection[];
-		'events(participants)': EventsCollection[];
-		'users_events_mm(user)': UsersEventsMmCollection[];
+		'participations(user)': ParticipationsCollection[];
 	};
 }
 
@@ -196,7 +195,6 @@ export interface EventsResponse extends BaseCollectionResponse {
 	meetingtime: string;
 	endtime: string;
 	type: 'game' | 'practice' | 'misc';
-	participants: Array<string>;
 	attire: string;
 	team: string;
 	cancelled: boolean;
@@ -213,7 +211,6 @@ export interface EventsCreate extends BaseCollectionCreate {
 	meetingtime: string | Date;
 	endtime?: string | Date;
 	type: 'game' | 'practice' | 'misc';
-	participants?: MaybeArray<string>;
 	attire?: string;
 	team: string;
 	cancelled?: boolean;
@@ -232,9 +229,6 @@ export interface EventsUpdate extends BaseCollectionUpdate {
 	meetingtime?: string | Date;
 	endtime?: string | Date;
 	type?: 'game' | 'practice' | 'misc';
-	participants?: MaybeArray<string>;
-	'participants+'?: MaybeArray<string>;
-	'participants-'?: MaybeArray<string>;
 	attire?: string;
 	team?: string;
 	cancelled?: boolean;
@@ -251,9 +245,8 @@ export interface EventsCollection {
 	create: EventsCreate;
 	update: EventsUpdate;
 	relations: {
-		participants: UsersCollection[];
 		team: TeamsCollection;
-		'users_events_mm(event)': UsersEventsMmCollection[];
+		'participations(event)': ParticipationsCollection[];
 	};
 }
 
@@ -409,37 +402,37 @@ export interface LeaguegroupsCollection {
 	relations: Record<string, never>;
 }
 
-// ===== users_events_mm =====
+// ===== participations =====
 
-export interface UsersEventsMmResponse extends BaseCollectionResponse {
-	collectionName: 'users_events_mm';
+export interface ParticipationsResponse extends BaseCollectionResponse {
+	collectionName: 'participations';
 	user: string;
 	event: string;
 	comment: string;
 	state: '' | 'in' | 'out' | 'maybe';
 }
 
-export interface UsersEventsMmCreate extends BaseCollectionCreate {
+export interface ParticipationsCreate extends BaseCollectionCreate {
 	user?: string;
 	event?: string;
 	comment?: string;
 	state?: '' | 'in' | 'out' | 'maybe';
 }
 
-export interface UsersEventsMmUpdate extends BaseCollectionUpdate {
+export interface ParticipationsUpdate extends BaseCollectionUpdate {
 	user?: string;
 	event?: string;
 	comment?: string;
 	state?: '' | 'in' | 'out' | 'maybe';
 }
 
-export interface UsersEventsMmCollection {
+export interface ParticipationsCollection {
 	type: 'base';
 	collectionId: string;
-	collectionName: 'users_events_mm';
-	response: UsersEventsMmResponse;
-	create: UsersEventsMmCreate;
-	update: UsersEventsMmUpdate;
+	collectionName: 'participations';
+	response: ParticipationsResponse;
+	create: ParticipationsCreate;
+	update: ParticipationsUpdate;
 	relations: {
 		user: UsersCollection;
 		event: EventsCollection;
@@ -455,5 +448,5 @@ export type Schema = {
 	teams: TeamsCollection;
 	requestcaches: RequestcachesCollection;
 	leaguegroups: LeaguegroupsCollection;
-	users_events_mm: UsersEventsMmCollection;
+	participations: ParticipationsCollection;
 };

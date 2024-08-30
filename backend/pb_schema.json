@@ -301,22 +301,6 @@
       },
       {
         "system": false,
-        "id": "cd62sclj",
-        "name": "participants",
-        "type": "relation",
-        "required": false,
-        "presentable": false,
-        "unique": false,
-        "options": {
-          "collectionId": "_pb_users_auth_",
-          "cascadeDelete": false,
-          "minSelect": null,
-          "maxSelect": null,
-          "displayFields": null
-        }
-      },
-      {
-        "system": false,
         "id": "mqvs6rh9",
         "name": "attire",
         "type": "text",
@@ -380,10 +364,24 @@
           "max": null,
           "pattern": ""
         }
+      },
+      {
+        "system": false,
+        "id": "ezkvq7xi",
+        "name": "location",
+        "type": "text",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
       }
     ],
     "indexes": [
-      "CREATE INDEX `idx_zuKuzAF` ON `events` (\n  `starttime`,\n  `type`,\n  `title`,\n  `bsm_id`,\n  `meetingtime`,\n  `team`,\n  `participants`\n)"
+      "CREATE INDEX `idx_zuKuzAF` ON `events` (\n  `starttime`,\n  `type`,\n  `title`,\n  `bsm_id`,\n  `meetingtime`,\n  `team`\n)"
     ],
     "listRule": "",
     "viewRule": "",
@@ -460,6 +458,86 @@
     "viewRule": "@request.auth.id != \"\"",
     "createRule": null,
     "updateRule": null,
+    "deleteRule": null,
+    "options": {}
+  },
+  {
+    "id": "ngighvrbraklj58",
+    "name": "participations",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "system": false,
+        "id": "3isihple",
+        "name": "user",
+        "type": "relation",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "collectionId": "_pb_users_auth_",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": null
+        }
+      },
+      {
+        "system": false,
+        "id": "if3a1hof",
+        "name": "event",
+        "type": "relation",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "collectionId": "zyst8ardf4onbwz",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": null
+        }
+      },
+      {
+        "system": false,
+        "id": "awtxtncq",
+        "name": "comment",
+        "type": "text",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "system": false,
+        "id": "2wrlbkod",
+        "name": "state",
+        "type": "select",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "values": [
+            "in",
+            "out",
+            "maybe"
+          ]
+        }
+      }
+    ],
+    "indexes": [
+      "CREATE INDEX `idx_YCrorbP` ON `participations` (\n  `user`,\n  `event`\n)"
+    ],
+    "listRule": "event.team.id ?= @request.auth.teams.id",
+    "viewRule": "event.team.id ?= @request.auth.teams.id",
+    "createRule": "@request.auth.id != \"\"",
+    "updateRule": "user.id = @request.auth.id",
     "deleteRule": null,
     "options": {}
   },
@@ -605,86 +683,6 @@
     "viewRule": "@request.auth.id != \"\" && id ?~ @request.auth.teams.id",
     "createRule": null,
     "updateRule": null,
-    "deleteRule": null,
-    "options": {}
-  },
-  {
-    "id": "ngighvrbraklj58",
-    "name": "users_events_mm",
-    "type": "base",
-    "system": false,
-    "schema": [
-      {
-        "system": false,
-        "id": "3isihple",
-        "name": "user",
-        "type": "relation",
-        "required": false,
-        "presentable": false,
-        "unique": false,
-        "options": {
-          "collectionId": "_pb_users_auth_",
-          "cascadeDelete": false,
-          "minSelect": null,
-          "maxSelect": 1,
-          "displayFields": null
-        }
-      },
-      {
-        "system": false,
-        "id": "if3a1hof",
-        "name": "event",
-        "type": "relation",
-        "required": false,
-        "presentable": false,
-        "unique": false,
-        "options": {
-          "collectionId": "zyst8ardf4onbwz",
-          "cascadeDelete": false,
-          "minSelect": null,
-          "maxSelect": 1,
-          "displayFields": null
-        }
-      },
-      {
-        "system": false,
-        "id": "awtxtncq",
-        "name": "comment",
-        "type": "text",
-        "required": false,
-        "presentable": false,
-        "unique": false,
-        "options": {
-          "min": null,
-          "max": null,
-          "pattern": ""
-        }
-      },
-      {
-        "system": false,
-        "id": "2wrlbkod",
-        "name": "state",
-        "type": "select",
-        "required": false,
-        "presentable": false,
-        "unique": false,
-        "options": {
-          "maxSelect": 1,
-          "values": [
-            "in",
-            "out",
-            "maybe"
-          ]
-        }
-      }
-    ],
-    "indexes": [
-      "CREATE INDEX `idx_YCrorbP` ON `users_events_mm` (\n  `user`,\n  `event`\n)"
-    ],
-    "listRule": "event.team.id ?= @request.auth.teams.id",
-    "viewRule": "event.team.id ?= @request.auth.teams.id",
-    "createRule": "@request.auth.id != \"\"",
-    "updateRule": "user.id = @request.auth.id",
     "deleteRule": null,
     "options": {}
   }
