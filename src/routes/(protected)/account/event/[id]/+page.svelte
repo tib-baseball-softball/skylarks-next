@@ -1,12 +1,10 @@
 <script lang="ts">
-    import {ProgressRadial} from "@skeletonlabs/skeleton";
+    import EventParticipationSection from "$lib/components/diamondplanner/event/EventParticipationSection.svelte";
 
-    let {data} = $props()
+    let { data } = $props();
 </script>
 
-{#await data.event}
-    <ProgressRadial/>
-{:then event}
+{#await data.event then event}
     <h1>{event.title}</h1>
 
     <p>Desc: {event.desc}</p>
@@ -18,8 +16,7 @@
 
     <h2>Teilnehmende</h2>
 
-
-
+    <EventParticipationSection {event} />
 {:catch error}
     <p>Fehler beim Laden: {error.message}</p>
 {/await}
