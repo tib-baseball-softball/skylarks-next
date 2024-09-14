@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { authModel, client } from "../pocketbase";
+    import { client } from "../pocketbase";
+    import { authModel } from "$lib/pocketbase/Auth";
 
     const { parent } = $props();
 

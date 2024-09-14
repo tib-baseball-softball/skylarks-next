@@ -1,6 +1,7 @@
 <script lang="ts">
     import {Tab, TabGroup} from "@skeletonlabs/skeleton";
-    import {client, providerLogin} from "../pocketbase";
+    import {client} from "../pocketbase";
+    import { providerLogin } from "$lib/pocketbase/Auth";
 
     const {
         authCollection = "users",

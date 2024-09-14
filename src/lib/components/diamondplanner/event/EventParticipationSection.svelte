@@ -11,8 +11,8 @@
     } from "flowbite-svelte-icons";
     import type { EventParticipationState } from "$lib/types/EventParticipationState";
     import { sendParticipationData } from "$lib/functions/sendParticipationData";
-    import { invalidateAll } from "$app/navigation";
-    import { authModel } from "$lib/pocketbase";
+    import { invalidate } from "$app/navigation";
+    import { authModel } from "$lib/pocketbase/Auth";
 
     interface props {
         event: EventsResponse;
@@ -55,7 +55,7 @@
         userParticipation.state = state;
         userParticipation.comment = comment;
         userParticipation = await sendParticipationData(userParticipation);
-        await invalidateAll();
+        await invalidate("event:list");
     }
 
     $effect(() => {

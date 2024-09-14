@@ -1,8 +1,9 @@
-import { client, watch } from "$lib/pocketbase";
+import { client } from "$lib/pocketbase";
 import { error } from "@sveltejs/kit";
 import type { EventsResponse, TeamsResponse } from "$lib/model/pb-types";
+import { watch } from "$lib/pocketbase/RecordOperations";
 
-export const load = async ({ fetch, parent, params }) => {
+export const load = async ({ fetch, parent, params, depends }) => {
   const data = await parent();
   const teams: TeamsResponse[] = await data.teams;
 
@@ -13,7 +14,7 @@ export const load = async ({ fetch, parent, params }) => {
       .collection("teams")
       .getOne<TeamsResponse>(params.id, { expand: "club" });
   }
-  if (!team) throw error(404, "Team nicht gefunden");
+  if (!team) throw error(404, "Team not found");
 
   const events = await watch<EventsResponse>(
     "events",
@@ -25,6 +26,8 @@ export const load = async ({ fetch, parent, params }) => {
     1,
     6,
   );
+
+  depends("event:list")
 
   return {
     team: team,

@@ -1,7 +1,8 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
-  import { authModel, client } from "$lib/pocketbase";
+  import { client } from "$lib/pocketbase";
   import type { Snippet } from "svelte";
+  import { authModel } from "$lib/pocketbase/Auth";
 
   const {
     destination,
