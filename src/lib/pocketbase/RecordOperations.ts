@@ -1,6 +1,6 @@
 import { browser } from "$app/environment";
 import type { RecordModel, RecordListOptions, ListResult, UnsubscribeFunc } from "pocketbase";
-import { type Subscriber, readable } from "svelte/store";
+import { type Readable, type Subscriber, readable } from "svelte/store";
 import { client } from ".";
 import type { PageStore } from "./PageStore";
 
@@ -52,7 +52,57 @@ function object2formdata(obj: {}) {
   return fd;
 }
 
-export async function watch<T extends RecordModel>(
+export async function watchSingleRecord<T extends RecordModel>(
+  idOrName: string,
+  recordID: string,
+  queryParams = {} as RecordListOptions,
+  realtime = browser,
+): Promise<Readable<T>> {
+  const collection = client.collection(idOrName);
+  let result = await collection.getOne<T>(recordID, queryParams);
+
+  let set: Subscriber<T>;
+  let unsubRealtime: UnsubscribeFunc | undefined;
+
+  const store = readable<T>(result, (_set) => {
+    set = _set;
+    // watch for changes (only if you're in the browser)
+    if (realtime)
+      collection.subscribe<T>(
+        recordID,
+        ({ action, record }) => {
+          (async function (action: string) {
+
+            switch (action) {
+              case "update":
+                result = record
+              case "create":
+              case "delete":
+            }
+            return result;
+          })(action).then((record) => set((result = record)));
+        },
+        queryParams,
+      )
+        // remember for later
+        .then((unsub) => (unsubRealtime = unsub));
+  });
+
+  return {
+    ...store,
+    subscribe(run, invalidate) {
+      const unsubStore = store.subscribe(run, invalidate);
+      return async () => {
+        unsubStore();
+        // ISSUE: Technically, we should AWAIT here, but that will slow down navigation UX.
+        if (unsubRealtime) /* await */ unsubRealtime();
+      };
+    },
+  };
+}
+
+
+export async function watchWithPagination<T extends RecordModel>(
   idOrName: string,
   queryParams = {} as RecordListOptions,
   page = 1,

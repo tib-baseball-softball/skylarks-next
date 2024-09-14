@@ -1,8 +1,8 @@
 import type { EventsResponse } from "$lib/model/pb-types";
-import { client } from "$lib/pocketbase";
+import { watchSingleRecord } from "$lib/pocketbase/RecordOperations";
 
 export const load = (async ({ fetch, params, depends }) => {
-  const event = client.collection("events").getOne<EventsResponse>(params.id, {
+  const event = await watchSingleRecord<EventsResponse>("events", params.id, {
     expand: "participations_via_event.user",
     fetch: fetch
   })
