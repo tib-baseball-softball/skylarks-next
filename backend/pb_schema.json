@@ -102,6 +102,19 @@
           "maxSelect": null,
           "displayFields": null
         }
+      },
+      {
+        "system": false,
+        "id": "pmb9b15d",
+        "name": "last_login",
+        "type": "date",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": "",
+          "max": ""
+        }
       }
     ],
     "indexes": [

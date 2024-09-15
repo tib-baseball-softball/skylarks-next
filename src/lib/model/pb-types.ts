@@ -143,6 +143,7 @@ export interface UsersResponse extends AuthCollectionResponse {
 	teams: Array<string>;
 	club: Array<string>;
 	admin_for: Array<string>;
+	last_login: string;
 }
 
 export interface UsersCreate extends AuthCollectionCreate {
@@ -152,6 +153,7 @@ export interface UsersCreate extends AuthCollectionCreate {
 	teams?: MaybeArray<string>;
 	club?: MaybeArray<string>;
 	admin_for?: MaybeArray<string>;
+	last_login?: string | Date;
 }
 
 export interface UsersUpdate extends AuthCollectionUpdate {
@@ -167,6 +169,7 @@ export interface UsersUpdate extends AuthCollectionUpdate {
 	admin_for?: MaybeArray<string>;
 	'admin_for+'?: MaybeArray<string>;
 	'admin_for-'?: MaybeArray<string>;
+	last_login?: string | Date;
 }
 
 export interface UsersCollection {
