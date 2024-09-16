@@ -24,7 +24,7 @@
             </h2>
         </header>
 
-        <EventCoreInfo {event}/>
+        <EventCoreInfo {event} classes={"p-4"}/>
     </a>
 
     <footer class="card-footer">

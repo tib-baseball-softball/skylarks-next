@@ -5,15 +5,16 @@
 
     interface props {
         event: EventsResponse;
+        classes?: string;
     }
 
-    const { event }: props = $props();
+    const { event, classes = "" }: props = $props();
 
     const startTime = new Date(event.starttime);
     const meetingTime = new Date(event.meetingtime);
 </script>
 
-<section class="p-4">
+<section class={classes}>
     <div class="grid grid-cols-2 gap-4">
         <div class="flex col-span-2 gap-2">
             <CalendarMonthOutline />
