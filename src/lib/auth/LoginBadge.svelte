@@ -33,12 +33,12 @@
             if (model) {
                 const { email } = model;
                 toastStore.trigger({
-                    message: `Angemeldet als ${email}`,
+                    message: `Signed in as ${email}`,
                     background: "variant-filled-success",
                 });
                 invalidateAll();
             } else {
-                toastStore.trigger({ message: "Abmeldung erfolgreich" });
+                toastStore.trigger({ message: "Logout successful" });
                 invalidateAll();
             }
         }

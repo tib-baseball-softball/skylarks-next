@@ -2,6 +2,7 @@
     import {Tab, TabGroup} from "@skeletonlabs/skeleton";
     import {client} from "../pocketbase";
     import { providerLogin } from "$lib/pocketbase/Auth";
+    import { goto } from "$app/navigation";
 
     const {
         authCollection = "users",
@@ -27,9 +28,11 @@
 
         if (signup) {
             await coll.create({...form})
+            goto("/signupconfirm")
+        } else {
+            await coll.authWithPassword(form.email, form.password, { expand: "club" })
+            goto("/account")
         }
-        // signin
-        await coll.authWithPassword(form.email, form.password, { expand: "club" })
     }
 
     let tabSet = $state(0);
@@ -43,6 +46,8 @@
         required
         type="password"
         placeholder="password"
+        minlength="8"
+        maxlength="72"
     />
 
     <button class="btn variant-ghost-primary" type="submit" onclick={() => (signup = false)}>Sign In</button>
@@ -59,14 +64,16 @@
 
                         <svelte:fragment slot="panel">
                             {#if tabSet === 0}
+
                                 {@render signin()}
+
                             {:else if tabSet === 1}
 
                                 <input
                                     class="input"
                                     bind:value={form.email}
                                     required
-                                    type="text"
+                                    type="email"
                                     placeholder="email"
                                 />
                                 <input
@@ -75,6 +82,8 @@
                                     required
                                     type="password"
                                     placeholder="password"
+                                    minlength="8"
+                                    maxlength="72"
                                 />
                                 <input
                                     class="input"
@@ -82,6 +91,8 @@
                                     required
                                     type="password"
                                     placeholder="confirm password"
+                                    minlength="8"
+                                    maxlength="72"
                                 />
                                 <input
                                     class="input"
@@ -92,7 +103,7 @@
                                 />
                                 <input type="hidden" name="register" value={true}/>
                                 <button class="btn variant-ghost-primary" type="submit" onclick={() => (signup = true)}>
-                                    Registrieren
+                                    Register
                                 </button>
 
                             {/if}
@@ -115,6 +126,7 @@
 
             {:catch error}
                 <!-- pocketbase not working -->
+                <p>There seems to be an error while contacting the backend. Please try again later.</p>
             {/await}
         </form>
     </div>
