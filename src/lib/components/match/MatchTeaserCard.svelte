@@ -9,8 +9,8 @@
 
     export let match: Match
 
-    const awayLogo = LogoUtility.getLogoPathForTeamName(match.away_league_entry.team)
-    const homeLogo = LogoUtility.getLogoPathForTeamName(match.home_league_entry.team)
+    const awayLogo = LogoUtility.getLogoPathForTeamName(match?.away_league_entry?.team)
+    const homeLogo = LogoUtility.getLogoPathForTeamName(match?.home_league_entry?.team)
 
     const matchDecorator = new MatchDecorator(match)
     const winner = matchDecorator.getWinnerForMatch()
@@ -19,13 +19,13 @@
 
 <a
     class=" block card card-hover text-sm {matchDecorator.isPlayoffGame() === true ? 'variant-ghost-primary' : 'variant-ghost-surface'}"
-    href="gamecenter/game-detail/{match.id}"
+    href="/gamecenter/game-detail/{match.id}"
 >
 
     <header class="card-header">
         <div class="flex justify-between items-center">
             <div>
-                <h3 class="font-medium">{match.league.name}</h3>
+                <h3 class="font-medium">{match.league?.name}</h3>
                 <p class="font-light">{DateTimeUtility.dateTimeFormatMedium.format(matchDate)}</p>
             </div>
             <GameResultIndicator {match}/>
