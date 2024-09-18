@@ -314,16 +314,18 @@
       },
       {
         "system": false,
-        "id": "mqvs6rh9",
+        "id": "qjqfnhhz",
         "name": "attire",
-        "type": "text",
+        "type": "relation",
         "required": false,
         "presentable": false,
         "unique": false,
         "options": {
-          "min": null,
-          "max": null,
-          "pattern": ""
+          "collectionId": "us8qzkfxgxfqs43",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": null
         }
       },
       {
@@ -694,6 +696,95 @@
     ],
     "listRule": "@request.auth.id != \"\" && id ?~ @request.auth.teams.id",
     "viewRule": "@request.auth.id != \"\" && id ?~ @request.auth.teams.id",
+    "createRule": null,
+    "updateRule": null,
+    "deleteRule": null,
+    "options": {}
+  },
+  {
+    "id": "us8qzkfxgxfqs43",
+    "name": "uniformsets",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "system": false,
+        "id": "coohls3d",
+        "name": "name",
+        "type": "text",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "system": false,
+        "id": "7wcbi2qn",
+        "name": "cap",
+        "type": "text",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "system": false,
+        "id": "e0ucwahg",
+        "name": "jersey",
+        "type": "text",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "system": false,
+        "id": "jwzh7bhd",
+        "name": "pants",
+        "type": "text",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "system": false,
+        "id": "p9zjf0ay",
+        "name": "club",
+        "type": "relation",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "collectionId": "z806hmy5um3qy5x",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": null
+        }
+      }
+    ],
+    "indexes": [
+      "CREATE INDEX `idx_m6a1WEk` ON `uniformsets` (`club`)"
+    ],
+    "listRule": "@request.auth.id != \"\" && club.id ?~ @request.auth.club.id",
+    "viewRule": "@request.auth.id != \"\" && club.id ?~ @request.auth.club.id",
     "createRule": null,
     "updateRule": null,
     "deleteRule": null,

@@ -248,6 +248,7 @@ export interface EventsCollection {
 	create: EventsCreate;
 	update: EventsUpdate;
 	relations: {
+		attire: UniformsetsCollection;
 		team: TeamsCollection;
 		'participations(event)': ParticipationsCollection[];
 	};
@@ -289,6 +290,7 @@ export interface ClubsCollection {
 	relations: {
 		'users(club)': UsersCollection[];
 		'teams(club)': TeamsCollection[];
+		'uniformsets(club)': UniformsetsCollection[];
 	};
 }
 
@@ -442,6 +444,46 @@ export interface ParticipationsCollection {
 	};
 }
 
+// ===== uniformsets =====
+
+export interface UniformsetsResponse extends BaseCollectionResponse {
+	collectionName: 'uniformsets';
+	name: string;
+	cap: string;
+	jersey: string;
+	pants: string;
+	club: string;
+}
+
+export interface UniformsetsCreate extends BaseCollectionCreate {
+	name: string;
+	cap: string;
+	jersey: string;
+	pants: string;
+	club: string;
+}
+
+export interface UniformsetsUpdate extends BaseCollectionUpdate {
+	name?: string;
+	cap?: string;
+	jersey?: string;
+	pants?: string;
+	club?: string;
+}
+
+export interface UniformsetsCollection {
+	type: 'base';
+	collectionId: string;
+	collectionName: 'uniformsets';
+	response: UniformsetsResponse;
+	create: UniformsetsCreate;
+	update: UniformsetsUpdate;
+	relations: {
+		'events(attire)': EventsCollection[];
+		club: ClubsCollection;
+	};
+}
+
 // ===== Schema =====
 
 export type Schema = {
@@ -452,4 +494,5 @@ export type Schema = {
 	requestcaches: RequestcachesCollection;
 	leaguegroups: LeaguegroupsCollection;
 	participations: ParticipationsCollection;
+	uniformsets: UniformsetsCollection;
 };
