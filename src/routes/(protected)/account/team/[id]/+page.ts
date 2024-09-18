@@ -1,22 +1,22 @@
 import { client } from "$lib/pocketbase";
 import { error } from "@sveltejs/kit";
-import type { EventsResponse, TeamsResponse } from "$lib/model/pb-types";
 import { watchWithPagination } from "$lib/pocketbase/RecordOperations";
+import type { ExpandedEvent, ExpandedTeam } from "$lib/model/ExpandedResponse.js";
 
 export const load = async ({ fetch, parent, params, depends }) => {
   const data = await parent();
-  const teams: TeamsResponse[] = await data.teams;
+  const teams: ExpandedTeam[] = await data.teams;
 
   let team = teams.find((team) => team.id === params.id);
 
   if (!team) {
     team = await client
       .collection("teams")
-      .getOne<TeamsResponse>(params.id, { expand: "club" });
+      .getOne<ExpandedTeam>(params.id, { expand: "club" });
   }
   if (!team) throw error(404, "Team not found");
 
-  const events = await watchWithPagination<EventsResponse>(
+  const events = await watchWithPagination<ExpandedEvent>(
     "events",
     {
       filter: `starttime >= @todayStart && team = "${team.id}"`,

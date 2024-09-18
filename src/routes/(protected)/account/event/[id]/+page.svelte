@@ -3,7 +3,6 @@
   import EventParticipationSection from "$lib/components/diamondplanner/event/EventParticipationSection.svelte";
   import EventTypeBadge from "$lib/components/diamondplanner/event/EventTypeBadge.svelte";
   import MatchTeaserCard from "$lib/components/match/MatchTeaserCard.svelte";
-  import type { ParticipationsResponse } from "$lib/model/pb-types.js";
   import { CheckOutline, QuestionCircleOutline } from "flowbite-svelte-icons";
   import CloseOutline from "flowbite-svelte-icons/CloseOutline.svelte";
 
@@ -13,9 +12,8 @@
 
   // TODO: get this data via backend hook
 
-  let participations: ParticipationsResponse[] = $derived(
-    $event?.expand?.participations_via_event,
-  );
+  let participations = $derived($event?.expand?.participations_via_event ?? []);
+
   let participationsIn = $derived(
     participations?.filter((participation) => {
       return participation.state === "in";
@@ -69,7 +67,7 @@
       <section class="p-4 flex flex-wrap gap-1 lg:gap-2">
         {#each participationsIn as inResponse}
           <div class="chip variant-ghost-success">
-            {inResponse?.expand?.user.first_name}
+            {inResponse?.expand?.user?.first_name}
           </div>
         {/each}
       </section>
@@ -83,7 +81,7 @@
       <section class="p-4">
         {#each participationsMaybe as maybeResponse}
           <div class="chip variant-ghost-warning">
-            {maybeResponse?.expand?.user.first_name}
+            {maybeResponse?.expand?.user?.first_name}
           </div>
         {/each}
       </section>
@@ -97,7 +95,7 @@
       <section class="p-4">
         {#each participationsOut as outResponse}
           <div class="chip variant-ghost-error">
-            {outResponse?.expand?.user.first_name}
+            {outResponse?.expand?.user?.first_name}
           </div>
         {/each}
       </section>
