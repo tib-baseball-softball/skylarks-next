@@ -21,7 +21,7 @@ export const load = async ({ fetch, parent, params, depends }) => {
     {
       filter: `starttime >= @todayStart && team = "${team.id}"`,
       sort: "+starttime",
-      expand: "participations_via_event.user",
+      expand: "participations_via_event.user, attire",
     },
     1,
     6,

@@ -2,6 +2,8 @@
   import EventCoreInfo from "$lib/components/diamondplanner/event/EventCoreInfo.svelte";
   import EventParticipationSection from "$lib/components/diamondplanner/event/EventParticipationSection.svelte";
   import EventTypeBadge from "$lib/components/diamondplanner/event/EventTypeBadge.svelte";
+  import Baseball from "$lib/components/icons/Baseball.svelte";
+  import Shirt from "$lib/components/icons/Shirt.svelte";
   import MatchTeaserCard from "$lib/components/match/MatchTeaserCard.svelte";
   import { CheckOutline, QuestionCircleOutline } from "flowbite-svelte-icons";
   import CloseOutline from "flowbite-svelte-icons/CloseOutline.svelte";
@@ -47,6 +49,17 @@
 
   <EventCoreInfo event={$event} classes={"space-y-6"} />
 
+  {#if $event.expand.attire}
+    <h3 class="h3">Attire</h3>
+    <div class="card variant-soft-surface md:w-[50%]">
+      <div class="p-4 grid grid-cols-3 gap-2 md:gap-3 place-items-center">
+        <Baseball strokeColor={$event.expand.attire.cap} />
+        <Shirt fillColor={$event.expand.attire.jersey} />
+        <Baseball strokeColor={$event.expand.attire.pants} />
+      </div>
+    </div>
+  {/if}
+
   <hr class="!my-8" />
 
   <div class="flex justify-between items-center">
@@ -78,7 +91,7 @@
         <span><QuestionCircleOutline size="lg" /></span>
         <h3 class="h4">Maybe</h3>
       </header>
-      <section class="p-4">
+      <section class="p-4 flex flex-wrap gap-1 lg:gap-2">
         {#each participationsMaybe as maybeResponse}
           <div class="chip variant-ghost-warning">
             {maybeResponse?.expand?.user?.first_name}
@@ -92,7 +105,7 @@
         <span><CloseOutline size="lg" /></span>
         <h3 class="h4">Out</h3>
       </header>
-      <section class="p-4">
+      <section class="p-4 flex flex-wrap gap-1 lg:gap-2">
         {#each participationsOut as outResponse}
           <div class="chip variant-ghost-error">
             {outResponse?.expand?.user?.first_name}
