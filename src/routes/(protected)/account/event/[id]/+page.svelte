@@ -57,7 +57,7 @@
   <hr class="!my-8" />
 
   <div class="flex justify-between items-center">
-    <h2 class="h4">My Participation</h2>
+    <h2 class="h3">My Participation</h2>
     <EventParticipationSection event={$event} />
   </div>
 
