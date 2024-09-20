@@ -1,3 +1,7 @@
+<script>
+    import { HeartSolid, HtmlSolid, CssSolid, AppleSolid } from "flowbite-svelte-icons";
+
+</script>
 <section class="flex justify-center items-center gap-8 mt-5">
     <a href="https://www.facebook.com/TiBBaseball/" target="_blank" rel="noreferrer">
         <img src="/Facebook_Logo_Primary.svg" alt="Facebook brand logo" width="50em">
@@ -21,3 +25,12 @@
     </ul>
 
 </nav>
+
+<div class="flex justify-end items-center gap-2 pb-3 mx-4">
+    <span>Built with</span>
+    <HeartSolid size="lg"/>,
+    <HtmlSolid size="lg" />,
+    <CssSolid size="lg" />
+    <span>on a</span>
+    <AppleSolid size="lg" />
+</div>
