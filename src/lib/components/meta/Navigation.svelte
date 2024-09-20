@@ -6,7 +6,7 @@
         HomeOutline, LockOutline, ProfileCardOutline, TableRowOutline, TicketOutline, UsersGroupOutline, UsersOutline
     } from "flowbite-svelte-icons";
     import {browser} from "$app/environment";
-    import type {TeamsResponse} from "$lib/model/pb-types";
+    import type { ExpandedTeam } from "$lib/model/ExpandedResponse";
 
     const drawerStore = getDrawerStore();
 
@@ -14,7 +14,7 @@
         drawerStore.close();
     }
 
-    async function getUserTeams(): Promise<TeamsResponse[]> {
+    async function getUserTeams(): Promise<ExpandedTeam[]> {
         if (browser) {
             return await client.collection("teams").getFullList({expand: "club"})
         }

@@ -26,12 +26,6 @@
                 class="badge variant-filled-primary"
                 onclick={closeModal}
             >
-                {#if $authModel?.avatar}
-                    <img
-                        src={client.getFileUrl($authModel, $authModel?.avatar)}
-                        alt="profile pic"
-                    />
-                {/if}
                 <samp
                     >{`${$authModel?.first_name ?? ""} ${$authModel?.last_name ?? ""}`}</samp
                 >

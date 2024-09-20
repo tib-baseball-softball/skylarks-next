@@ -14,7 +14,7 @@
     let {team, link = false}: props = $props()
 </script>
 
-<article class="card block variant-ghost-surface p-3" class:card-hover={link}>
+<article class="card block variant-soft-surface p-3" class:card-hover={link}>
 
     <div class="flex items-center gap-3 self-end">
         <FileLinesOutline/>

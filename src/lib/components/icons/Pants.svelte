@@ -15,7 +15,6 @@ class="w-12 h-12"
   xmlns="http://www.w3.org/2000/svg"
   xmlns:xlink="http://www.w3.org/1999/xlink"
   xml:space="preserve"
-  xmlns:serif="http://www.serif.com/"
   style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"
 >
   <g transform="matrix(1.37485,0,0,1.41096,-73.5011,-13.3092)">
