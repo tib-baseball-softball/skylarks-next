@@ -3,12 +3,13 @@
 
     interface props {
         block: SingleStatElement
+        classes?: string
     }
 
-    let {block}: props = $props()
+    let {block, classes = ""}: props = $props()
 </script>
 
-<div class="stat">
+<div class="stat {classes}">
     <div class="stat-title">{block.title}</div>
     <div class="stat-value">{block.value}</div>
     <div class="stat-desc">{block.desc}</div>

@@ -1,5 +1,6 @@
 <script>
-    import { HeartSolid, HtmlSolid, CssSolid, AppleSolid } from "flowbite-svelte-icons";
+    import { HeartSolid } from "flowbite-svelte-icons";
+    import Svelte from "../icons/Svelte.svelte";
 
 </script>
 <section class="flex justify-center items-center gap-8 mt-5">
@@ -28,9 +29,7 @@
 
 <div class="flex justify-end items-center gap-2 pb-3 mx-4">
     <span>Built with</span>
-    <HeartSolid size="lg"/>,
-    <HtmlSolid size="lg" />,
-    <CssSolid size="lg" />
-    <span>on a</span>
-    <AppleSolid size="lg" />
+    <HeartSolid size="lg"/>
+    and
+    <Svelte fillColor={"currentColor"} classes="w-6"/>
 </div>
