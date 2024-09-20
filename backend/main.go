@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/labstack/echo/v5"
 	"github.com/pocketbase/pocketbase"
@@ -69,31 +70,33 @@ func main() {
 		Run: func(cmd *cobra.Command, args []string) {
 			err := cronjobs.ImportLeagueGroups(app)
 			if err != nil {
-				log.Print("Error while running cronjob LeagueGroupImport: " + err.Error())
+				log.Print("Error while running LeagueGroupImport: " + err.Error())
 			}
 		},
 	})
 
 	//------------------- Cronjobs -------------------------//
 
-	app.OnBeforeServe().Add(func(e *core.ServeEvent) error {
-		scheduler := cron.New()
+	if os.Getenv("APPLICATION_CONTEXT") != "Development" {
+		app.OnBeforeServe().Add(func(e *core.ServeEvent) error {
+			scheduler := cron.New()
 
-		scheduler.MustAdd("LeagueGroupImport", "0 * * * *", func() {
-			err := cronjobs.ImportLeagueGroups(app)
-			if err != nil {
-				log.Print("Error while running cronjob LeagueGroupImport: " + err.Error())
-			}
+			scheduler.MustAdd("LeagueGroupImport", "0 * * * *", func() {
+				err := cronjobs.ImportLeagueGroups(app)
+				if err != nil {
+					log.Print("Error while running cronjob LeagueGroupImport: " + err.Error())
+				}
+			})
+
+			scheduler.MustAdd("GamesImport", "0 * * * *", func() {
+				cronjobs.ImportGames(app)
+			})
+
+			scheduler.Start()
+
+			return nil
 		})
-
-		scheduler.MustAdd("GamesImport", "0 * * * *", func() {
-			cronjobs.ImportGames(app)
-		})
-
-		scheduler.Start()
-
-		return nil
-	})
+	}
 
 	if err := app.Start(); err != nil {
 		log.Fatal(err)
