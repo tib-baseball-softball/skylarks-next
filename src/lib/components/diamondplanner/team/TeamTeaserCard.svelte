@@ -1,7 +1,7 @@
 <script lang="ts">
     import {
-        ClipboardCleanOutline,
         ClipboardOutline,
+        ClipboardListOutline,
         FileLinesOutline, InfoCircleOutline
     } from "flowbite-svelte-icons";
     import type {TeamsResponse} from "$lib/model/pb-types";
@@ -47,7 +47,7 @@
      <hr class="my-2">
     
     <div class="flex items-center gap-3">
-        <ClipboardCleanOutline/>
+        <ClipboardListOutline/>
         <div>
             <p>{team.age_group}</p>
             <p class="text-sm font-light">Altersgruppe</p>

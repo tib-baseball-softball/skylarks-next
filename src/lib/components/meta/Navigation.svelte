@@ -2,7 +2,7 @@
     import {Accordion, AccordionItem, getDrawerStore} from "@skeletonlabs/skeleton";
     import {client} from "$lib/pocketbase";
     import {
-        ChartPieOutline,
+        ChartMixedOutline,
         HomeOutline, LockOutline, ProfileCardOutline, TableRowOutline, TicketOutline, UsersGroupOutline, UsersOutline
     } from "flowbite-svelte-icons";
     import {browser} from "$app/environment";
@@ -92,7 +92,7 @@
                     <hr/>
 
                     <a href="#" on:click={drawerClose}>
-                        <ChartPieOutline size="lg"/>
+                        <ChartMixedOutline size="lg"/>
                         <span>Admin Dashboard</span>
                     </a>
 
