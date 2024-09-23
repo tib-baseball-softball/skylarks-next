@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { EventsResponse } from "$lib/model/pb-types";
     import { DateTimeUtility } from "$lib/service/DateTimeUtility";
-    import { CalendarMonthOutline, ClockOutline, MapPinAltOutline } from "flowbite-svelte-icons";
+    import { CalendarMonthOutline, ClockOutline, MapPinOutline } from "flowbite-svelte-icons";
 
     interface props {
         event: EventsResponse;
@@ -56,7 +56,7 @@
         </div>
 
         <div class="flex col-span-2 gap-2">
-            <MapPinAltOutline />
+            <MapPinOutline />
             <p>
                 {event?.location ? event.location : "Kein Ort angegeben."}
             </p>

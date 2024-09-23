@@ -1,22 +1,19 @@
 <script lang="ts">
   import TeamTeaserCard from "$lib/components/diamondplanner/team/TeamTeaserCard.svelte";
-  import {
-    UserOutline,
-    EnvelopeOutline,
-    ShieldOutline,
-    TagOutline,
-    InfoCircleOutline,
-  } from "flowbite-svelte-icons";
-  import { authModel } from "$lib/pocketbase/Auth";
-  import type { CustomAuthModel } from "$lib/model/ExpandedResponse.js";
-  import {
-    Avatar,
-    type ConicStop,
-    ConicGradient,
-  } from "@skeletonlabs/skeleton";
-  import { client } from "$lib/pocketbase";
+    import UserDataCard from "$lib/components/diamondplanner/user/UserDataCard.svelte";
   import StatsBlockContent from "$lib/components/utility/StatsBlockContent.svelte";
+  import type { CustomAuthModel } from "$lib/model/ExpandedResponse.js";
+  import { authModel } from "$lib/pocketbase/Auth";
   import type { SingleStatElement } from "$lib/types/SingleStatElement.js";
+  import {
+      ConicGradient,
+      type ConicStop
+  } from "@skeletonlabs/skeleton";
+  import {
+      InfoCircleOutline,
+      ShieldOutline,
+      TagOutline
+  } from "flowbite-svelte-icons";
 
   const model = $authModel as CustomAuthModel;
 
@@ -59,39 +56,11 @@
 
 <h1 class="h1 lg:mt-4">My Dashboard</h1>
 
+
 <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
-  <div class="card variant-glass-surface lg:col-span-2 shadow-lg">
-    <header class="card-header">
-      <h2 class="h4 font-semibold">User Data</h2>
-    </header>
 
-    <section class="p-4 flex flex-col sm:flex-row gap-4 lg:gap-3 sm:items-center">
-      <Avatar src={client.files.getUrl(model, model?.avatar)} />
-
-      <div class="grid grid-cols-1 gap-2 col-span-4">
-        <div class="flex items-center gap-3">
-          <UserOutline size="lg" />
-          <div>
-            <p>{`${model?.first_name ?? ""} ${model?.last_name ?? ""}`}</p>
-            <p class="text-sm font-light">Name</p>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-3">
-          <EnvelopeOutline size="lg" />
-          <div>
-            <p>{model?.email}</p>
-            <p class="text-sm font-light">email address</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer class="card-footer flex justify-end">
-      <button class="btn variant-ghost-primary">Edit</button>
-    </footer>
-  </div>
-
+  <UserDataCard {model}/>
+  
   {#each model.expand.club as club}
     <div class="card variant-glass-primary shadow-lg">
       <header class="card-header">
