@@ -4,10 +4,10 @@
         ClipboardListOutline,
         FileLinesOutline, InfoCircleOutline
     } from "flowbite-svelte-icons";
-    import type {TeamsResponse} from "$lib/model/pb-types";
+    import type { ExpandedTeam } from "$lib/model/ExpandedResponse";
 
     interface props {
-        team: TeamsResponse
+        team: ExpandedTeam
         link: boolean
     }
 

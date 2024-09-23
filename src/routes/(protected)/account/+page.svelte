@@ -59,13 +59,13 @@
 
 <h1 class="h1 lg:mt-4">My Dashboard</h1>
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-3">
+<div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
   <div class="card variant-glass-surface lg:col-span-2 shadow-lg">
     <header class="card-header">
       <h2 class="h4 font-semibold">User Data</h2>
     </header>
 
-    <section class="p-4 grid grid-cols-5 gap-2 lg:gap-3 items-center">
+    <section class="p-4 flex flex-col sm:flex-row gap-4 lg:gap-3 sm:items-center">
       <Avatar src={client.files.getUrl(model, model?.avatar)} />
 
       <div class="grid grid-cols-1 gap-2 col-span-4">
