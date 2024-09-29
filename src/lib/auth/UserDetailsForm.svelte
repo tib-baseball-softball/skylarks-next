@@ -103,9 +103,7 @@
     {/if}
 
     <div class="flex justify-end gap-3 mt-3">
-      <button type="submit" class="mt-2 btn variant-ghost-primary"
-        >Confirm</button
-      >
+      <button type="submit" class="mt-2 btn variant-ghost-primary">Confirm</button>
     </div>
   </form>
 </div>

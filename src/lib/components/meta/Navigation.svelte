@@ -22,7 +22,7 @@
     }
 </script>
 
-<nav class="list-nav py-1 px-4">
+<nav class="list-nav py-1 px-1 lg:px-4">
     <ul class="subpixel-antialiased">
 
         <li>

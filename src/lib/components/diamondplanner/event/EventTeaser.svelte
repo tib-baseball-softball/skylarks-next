@@ -13,7 +13,7 @@
 </script>
 
 <article
-    class="card variant-soft-surface text-sm h-full"
+    class="card variant-soft-surface shadow-xl text-sm h-full"
     class:card-hover={link}
 >
     <a href="/account/event/{event.id}">

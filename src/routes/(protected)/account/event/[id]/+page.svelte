@@ -11,6 +11,8 @@
     InfoCircleOutline,
     CalendarEditOutline,
     CalendarPlusOutline,
+    EditOutline,
+    TrashBinOutline,
   } from "flowbite-svelte-icons";
   import CloseOutline from "flowbite-svelte-icons/CloseOutline.svelte";
 
@@ -190,9 +192,15 @@
 
         <section class="p-4 space-y-3">
           <div class="flex flex-col gap-2 lg:gap-3">
-            <button class="btn variant-ghost-surface">Edit Event</button>
+            <button class="btn variant-ghost-surface">
+              <EditOutline/>
+              <span>Edit Event</span>
+            </button>
 
-            <button class="btn variant-ghost-error">Delete Event</button>
+            <button class="btn variant-ghost-error">
+              <TrashBinOutline/>
+              <span>Delete Event</span>
+            </button>
           </div>
         </section>
       </div>

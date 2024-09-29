@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { CustomAuthModel } from "$lib/model/ExpandedResponse";
     import { Avatar, getModalStore, type ModalComponent, type ModalSettings } from "@skeletonlabs/skeleton";
-    import { EnvelopeOutline, UserOutline } from "flowbite-svelte-icons";
+    import { EnvelopeOutline, UserOutline, UserEditOutline } from "flowbite-svelte-icons";
     import { client } from "$lib/pocketbase";
     import UserDetailsForm from "$lib/auth/UserDetailsForm.svelte";
 
@@ -55,6 +55,8 @@
     </section>
 
     <footer class="card-footer flex justify-end">
-      <button class="btn variant-ghost-primary" onclick="{() => triggerModal()}">Edit</button>
+      <button aria-label="edit user data" class="btn variant-ghost-primary" onclick="{() => triggerModal()}">
+        <UserEditOutline/>
+      </button>
     </footer>
   </div>
