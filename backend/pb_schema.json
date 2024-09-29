@@ -89,22 +89,6 @@
       },
       {
         "system": false,
-        "id": "wnkevvbz",
-        "name": "admin_for",
-        "type": "relation",
-        "required": false,
-        "presentable": false,
-        "unique": false,
-        "options": {
-          "collectionId": "fltkvrsbbvzf9cf",
-          "cascadeDelete": false,
-          "minSelect": null,
-          "maxSelect": null,
-          "displayFields": null
-        }
-      },
-      {
-        "system": false,
         "id": "pmb9b15d",
         "name": "last_login",
         "type": "date",
@@ -115,10 +99,170 @@
           "min": "",
           "max": ""
         }
+      },
+      {
+        "system": false,
+        "id": "sip8g281",
+        "name": "birthday",
+        "type": "date",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": "",
+          "max": ""
+        }
+      },
+      {
+        "system": false,
+        "id": "jtdzmnqg",
+        "name": "number",
+        "type": "text",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "system": false,
+        "id": "utqdvith",
+        "name": "position",
+        "type": "select",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "maxSelect": 15,
+          "values": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14"
+          ]
+        }
+      },
+      {
+        "system": false,
+        "id": "elzgs2s7",
+        "name": "bats",
+        "type": "select",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "values": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ]
+        }
+      },
+      {
+        "system": false,
+        "id": "gahyjvnk",
+        "name": "throws",
+        "type": "select",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "values": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ]
+        }
+      },
+      {
+        "system": false,
+        "id": "xal9xfhx",
+        "name": "image",
+        "type": "file",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "mimeTypes": [],
+          "thumbs": [],
+          "maxSelect": 1,
+          "maxSize": 5242880,
+          "protected": false
+        }
+      },
+      {
+        "system": false,
+        "id": "wqhoic1y",
+        "name": "umpire",
+        "type": "select",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "values": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4"
+          ]
+        }
+      },
+      {
+        "system": false,
+        "id": "0plahfdr",
+        "name": "scorer",
+        "type": "select",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "values": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ]
+        }
+      },
+      {
+        "system": false,
+        "id": "po2giadm",
+        "name": "bsm_id",
+        "type": "number",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "noDecimal": true
+        }
       }
     ],
     "indexes": [
-      "CREATE INDEX `idx_zbjtgYA` ON `users` (\n  `teams`,\n  `club`\n)"
+      "CREATE INDEX `idx_zbjtgYA` ON `users` (\n  `teams`,\n  `club`\n)",
+      "CREATE INDEX `idx_LkeR6Uf` ON `users` (\n  `bsm_id`,\n  `club`,\n  `teams`\n)"
     ],
     "listRule": "@request.auth.id != \"\" && (\n    // the same user as the authenticated one\n    id = @request.auth.id ||\n    // or share the same club\n    club.id ?= @request.auth.club.id\n)",
     "viewRule": "@request.auth.id != \"\" && (\n    // the same user as the authenticated one\n    id = @request.auth.id ||\n    // or share the same club\n    club.id ?= @request.auth.club.id\n)",
@@ -198,13 +342,31 @@
           "max": null,
           "pattern": ""
         }
+      },
+      {
+        "system": false,
+        "id": "rvymt3c3",
+        "name": "admins",
+        "type": "relation",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "collectionId": "_pb_users_auth_",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": null,
+          "displayFields": null
+        }
       }
     ],
-    "indexes": [],
+    "indexes": [
+      "CREATE INDEX `idx_lntUaHC` ON `clubs` (\n  `bsm_id`,\n  `name`\n)"
+    ],
     "listRule": "@request.auth.id != \"\" && id ?~ @request.auth.club.id",
     "viewRule": "@request.auth.id != \"\" && id ?~ @request.auth.club.id",
     "createRule": null,
-    "updateRule": null,
+    "updateRule": "@request.auth.id != \"\" && @request.auth.id ?~ admins",
     "deleteRule": null,
     "options": {}
   },
@@ -398,11 +560,11 @@
     "indexes": [
       "CREATE INDEX `idx_zuKuzAF` ON `events` (\n  `starttime`,\n  `type`,\n  `title`,\n  `bsm_id`,\n  `meetingtime`,\n  `team`\n)"
     ],
-    "listRule": "",
-    "viewRule": "",
-    "createRule": null,
-    "updateRule": null,
-    "deleteRule": null,
+    "listRule": "@request.auth.id != \"\" && team.id ?~ @request.auth.teams.id",
+    "viewRule": "@request.auth.id != \"\" && team.id ?~ @request.auth.teams.id",
+    "createRule": "@request.auth.id != \"\" && @request.auth.id ?> team.admins",
+    "updateRule": "@request.auth.id != \"\" && @request.auth.id ?> team.admins",
+    "deleteRule": "@request.auth.id != \"\" && @request.auth.id ?> team.admins",
     "options": {}
   },
   {
@@ -689,16 +851,33 @@
         "options": {
           "convertUrls": false
         }
+      },
+      {
+        "system": false,
+        "id": "ccuf3ho4",
+        "name": "admins",
+        "type": "relation",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "collectionId": "_pb_users_auth_",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": null,
+          "displayFields": null
+        }
       }
     ],
     "indexes": [
-      "CREATE INDEX `idx_vBz1jG9` ON `teams` (`bsm_league_group`)"
+      "CREATE INDEX `idx_vBz1jG9` ON `teams` (`bsm_league_group`)",
+      "CREATE INDEX `idx_enGi1E4` ON `teams` (\n  `name`,\n  `bsm_league_group`,\n  `club`\n)"
     ],
     "listRule": "@request.auth.id != \"\" && id ?~ @request.auth.teams.id",
     "viewRule": "@request.auth.id != \"\" && id ?~ @request.auth.teams.id",
     "createRule": null,
-    "updateRule": null,
-    "deleteRule": null,
+    "updateRule": "@request.auth.id != \"\" && @request.auth.id ?> admins",
+    "deleteRule": "@request.auth.id != \"\" && @request.auth.id ?> admins",
     "options": {}
   },
   {

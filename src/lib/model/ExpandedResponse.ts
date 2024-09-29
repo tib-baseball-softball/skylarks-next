@@ -10,7 +10,8 @@ export type ExpandedEvent = Extension<EventsResponse, {
                 user: UsersResponse
             } 
         }>[],
-        attire?: UniformsetsResponse
+        attire?: UniformsetsResponse,
+        team?: ExpandedTeam
     }
 }>
 
