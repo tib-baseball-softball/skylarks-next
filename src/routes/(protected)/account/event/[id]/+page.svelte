@@ -4,7 +4,14 @@
   import EventParticipationSection from "$lib/components/diamondplanner/event/EventParticipationSection.svelte";
   import EventTypeBadge from "$lib/components/diamondplanner/event/EventTypeBadge.svelte";
   import MatchTeaserCard from "$lib/components/match/MatchTeaserCard.svelte";
-  import { CheckOutline, QuestionCircleOutline } from "flowbite-svelte-icons";
+  import { authModel } from "$lib/pocketbase/Auth";
+  import {
+    CheckOutline,
+    QuestionCircleOutline,
+    InfoCircleOutline,
+    CalendarEditOutline,
+    CalendarPlusOutline,
+  } from "flowbite-svelte-icons";
   import CloseOutline from "flowbite-svelte-icons/CloseOutline.svelte";
 
   let { data } = $props();
@@ -65,7 +72,7 @@
 
   <h2 class="h2">Participants</h2>
   <section class="grid grid-cols-1 md:grid-cols-3 gap-2 lg:gap-3">
-    <div class="card variant-soft-success flex-grow">
+    <div class="card variant-ghost-success flex-grow">
       <header class="card-header flex items-center gap-2">
         <span><CheckOutline size="lg" /></span>
         <h3 class="h4">In</h3>
@@ -80,7 +87,7 @@
       </section>
     </div>
 
-    <div class="card variant-soft-warning flex-grow">
+    <div class="card variant-ghost-warning flex-grow">
       <header class="card-header flex items-center gap-2">
         <span><QuestionCircleOutline size="lg" /></span>
         <h3 class="h4">Maybe</h3>
@@ -94,7 +101,7 @@
       </section>
     </div>
 
-    <div class="card variant-soft-error flex-grow">
+    <div class="card variant-ghost-error flex-grow">
       <header class="card-header flex items-center gap-2">
         <span><CloseOutline size="lg" /></span>
         <h3 class="h4">Out</h3>
@@ -118,12 +125,79 @@
     </section>
   {/if}
 
-  <hr class="my-2" />
+  {#if $event.expand?.team?.admins.includes($authModel?.id)}
+    <hr class="my-2" />
 
-  <h2 class="h2">Admin Info</h2>
-  <p>BSM-ID: {$event.bsm_id}</p>
-  <p>Created: {$event.created}</p>
-  <p>Updated: {$event.updated}</p>
+    <h2 class="h2">Admin Section</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-3">
+      <div class="card variant-ringed-surface">
+        <header class="card-header">
+          <h3 class="h4 font-semibold">Event Details</h3>
+        </header>
+
+        <section class="p-4 space-y-2">
+          <div class="flex items-center gap-3">
+            <InfoCircleOutline />
+            <div>
+              <p class="text-sm font-light">BSM event ID</p>
+              <p>{$event.bsm_id}</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <CalendarPlusOutline />
+            <div>
+              <p class="text-sm font-light">Created</p>
+              <p>{new Date($event.created).toLocaleString()}</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <CalendarEditOutline />
+            <div>
+              <p class="text-sm font-light">Last Updated</p>
+              <p>{new Date($event.updated).toLocaleString()}</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="card variant-ringed-surface">
+        <header class="card-header">
+          <h3 class="h4 font-semibold">Add Guest player</h3>
+        </header>
+
+        <section class="p-4 space-y-2">
+          <form onsubmit={() => console.log("guest player submitted")}>
+            <label class="label">
+              Name
+              <input
+                type="text"
+                class="input mt-1"
+                placeholder="Enter the guest player's name"
+              />
+            </label>
+            <button type="submit" class="mt-3 btn variant-soft">Submit</button>
+          </form>
+        </section>
+      </div>
+
+      <div class="card variant-ringed-surface">
+        <header class="card-header">
+          <h3 class="h4 font-semibold">Actions</h3>
+        </header>
+
+        <section class="p-4 space-y-3">
+          <div class="flex flex-col gap-2 lg:gap-3">
+            <button class="btn variant-ghost-surface">Edit Event</button>
+
+            <button class="btn variant-ghost-error">Delete Event</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  {/if}
 </div>
 
 <style lang="postcss">
