@@ -5,9 +5,13 @@
     import StatsContentRow from "$lib/components/datatable/StatsContentRow.svelte";
     import type {StatisticsData} from "bsm.js";
 
-    export let handler: DataHandler<StatisticsData<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics">>
-    export let tableType: "personal" | "seasonal"
-    export let type: StatsType
+    interface Props {
+        handler: DataHandler<StatisticsData<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics">>;
+        tableType: "personal" | "seasonal";
+        type: StatsType;
+    }
+
+    let { handler, tableType, type }: Props = $props();
 
     const rows = handler.getRows();
 </script>

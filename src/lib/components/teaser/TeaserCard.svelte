@@ -1,6 +1,10 @@
 <script lang="ts">
-    export let header: String
-    export let teaserText: String
+    interface Props {
+        header: String;
+        teaserText: String;
+    }
+
+    let { header, teaserText }: Props = $props();
 </script>
 
 <div class="card">

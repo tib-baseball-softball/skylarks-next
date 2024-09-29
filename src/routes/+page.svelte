@@ -2,9 +2,13 @@
     import TeaserCard from "$lib/components/teaser/TeaserCard.svelte";
     import CurrentMatchesOverviewCard from "$lib/components/match/CurrentMatchesOverviewCard.svelte";
 
-    export let data
+    interface Props {
+        data: any;
+    }
 
-    $: page = data.pageObject
+    let { data }: Props = $props();
+
+    let page = $derived(data.pageObject)
 //    $: contentObjects = data.contentObjects ?? []
 </script>
 

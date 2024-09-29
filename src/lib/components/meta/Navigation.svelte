@@ -26,7 +26,7 @@
     <ul class="subpixel-antialiased">
 
         <li>
-            <a href="/" on:click={drawerClose}>
+            <a href="/" onclick={drawerClose}>
                 <HomeOutline size="lg"/>
                 <span>Start</span>
             </a>
@@ -34,20 +34,20 @@
 
         <!--        <li><a href="/aktuelles" on:click={drawerClose}>Aktuelles</a></li>-->
         <li>
-            <a href="/gamecenter" on:click={drawerClose}>
+            <a href="/gamecenter" onclick={drawerClose}>
                 <TicketOutline size="lg"/>
                 <span>Gamecenter</span>
             </a>
         </li>
         <li>
 
-            <a href="/ligen" on:click={drawerClose}>
+            <a href="/ligen" onclick={drawerClose}>
                 <TableRowOutline size="lg"/>
                 <span>Ligen</span>
             </a>
         </li>
         <li>
-            <a href="/teams" on:click={drawerClose}>
+            <a href="/teams" onclick={drawerClose}>
                 <UsersGroupOutline size="lg"/>
                 <span>Teams</span>
             </a>
@@ -75,14 +75,14 @@
 
                 <svelte:fragment slot="content">
 
-                    <a href="/account" on:click={drawerClose}>
+                    <a href="/account" onclick={drawerClose}>
                         <ProfileCardOutline size="lg"/>
                         <span>Meine Seite</span>
                     </a>
 
                     {#await getUserTeams() then teams}
                         {#each teams as team}
-                            <a href="/account/team/{team.id}" on:click={drawerClose}>
+                            <a href="/account/team/{team.id}" onclick={drawerClose}>
                                 <UsersOutline size="lg"/>
                                 <span>{team.name} ({team?.expand?.club?.acronym})</span>
                             </a>
@@ -91,7 +91,7 @@
 
                     <hr/>
 
-                    <a href="#" on:click={drawerClose}>
+                    <a href="#" onclick={drawerClose}>
                         <ChartMixedOutline size="lg"/>
                         <span>Admin Dashboard</span>
                     </a>

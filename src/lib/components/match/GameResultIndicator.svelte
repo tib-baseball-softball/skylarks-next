@@ -3,7 +3,11 @@
     import {MatchDecorator} from "$lib/service/MatchDecorator";
     import {MatchState} from "$lib/enum/MatchState";
 
-    export let match: Match
+    interface Props {
+        match: Match;
+    }
+
+    let { match }: Props = $props();
 
     const matchDecorator = new MatchDecorator(match)
     const matchState = matchDecorator.getMatchState()

@@ -1,7 +1,11 @@
 <script lang="ts">
     import type {Typo3ContentObject} from "$lib/model/Typo3ContentObject";
 
-    export let co: Typo3ContentObject
+    interface Props {
+        co: Typo3ContentObject;
+    }
+
+    let { co }: Props = $props();
 </script>
 
 <section>

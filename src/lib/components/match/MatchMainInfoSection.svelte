@@ -6,7 +6,11 @@
     import {CalendarMonthOutline, ClipboardListOutline} from "flowbite-svelte-icons";
     import {MatchDecorator} from "$lib/service/MatchDecorator";
 
-    export let match: Match
+    interface Props {
+        match: Match;
+    }
+
+    let { match }: Props = $props();
 
     const awayLogo = LogoUtility.getLogoPathForTeamName(match.away_league_entry.team)
     const homeLogo = LogoUtility.getLogoPathForTeamName(match.home_league_entry.team)

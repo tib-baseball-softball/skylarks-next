@@ -3,7 +3,11 @@
     import {ProgressRadial} from "@skeletonlabs/skeleton";
     import CurrentMatchRow from "$lib/components/match/CurrentMatchRow.svelte";
 
-    export let matches: Promise<Match[]>
+    interface Props {
+        matches: Promise<Match[]>;
+    }
+
+    let { matches }: Props = $props();
 </script>
 
 {#await matches}

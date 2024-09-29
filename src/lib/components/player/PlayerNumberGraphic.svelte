@@ -1,6 +1,10 @@
 <script lang="ts">
-    export let content: string
-    export let classes = "variant-filled-primary"
+    interface Props {
+        content: string;
+        classes?: string;
+    }
+
+    let { content, classes = "variant-filled-primary" }: Props = $props();
 </script>
 
 <span class="text-4xl font-bold {classes}">

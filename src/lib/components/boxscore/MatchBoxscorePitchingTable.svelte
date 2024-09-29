@@ -1,8 +1,12 @@
 <script lang="ts">
     import type {PitchingMatchStats} from "bsm.js";
 
-    export let matchStats: PitchingMatchStats
-    export let teamName: string
+    interface Props {
+        matchStats: PitchingMatchStats;
+        teamName: string;
+    }
+
+    let { matchStats, teamName }: Props = $props();
 </script>
 
 <div class="table-container lg:max-w-[75%] dark:border-2">

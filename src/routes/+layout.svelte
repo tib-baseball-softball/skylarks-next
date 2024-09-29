@@ -12,6 +12,12 @@
     import {PUBLIC_AUTH_FUNCS_ENABLED} from "$env/static/public";
     import {onMount} from "svelte";
 
+    interface Props {
+        children?: import('svelte').Snippet;
+    }
+
+    let { children }: Props = $props();
+
     initializeStores()
 
     const modalRegistry: Record<string, ModalComponent> = {
@@ -64,7 +70,7 @@
         >
             <svelte:fragment slot="lead">
                 <div class="flex items-center justify-content-start">
-                    <button class="md:hidden btn btn-sm mr-4" on:click={drawerOpen}>
+                    <button aria-label="open navigation" class="md:hidden btn btn-sm mr-4" onclick={drawerOpen}>
                     <span>
                         <svg viewBox="0 0 100 80" class="fill-token w-4 h-4">
                             <rect width="100" height="20"/>
@@ -74,7 +80,7 @@
                     </span>
                     </button>
 
-                    <a href="/" class="hidden md:block ms-3">
+                    <a aria-label="to home page" href="/" class="hidden md:block ms-3">
                         <img class="min-w-16" src="/berlin_skylarks_logo.svg" alt="Skylarks Team Logo">
                     </a>
                 </div>
@@ -118,7 +124,7 @@
 
         <main class="col-span-1 space-y-4 lg:space-y-6 mx-4 md:mx-6 lg:mx-8 mb-4 lg:mb-6">
 
-            <slot/>
+            {@render children?.()}
 
             <aside class="alert variant-ghost-error my-5">
 

@@ -6,7 +6,11 @@
     } from "flowbite-svelte-icons";
     import type {ClubTeam} from "bsm.js";
 
-    export let clubTeam: ClubTeam
+    interface Props {
+        clubTeam: ClubTeam;
+    }
+
+    let { clubTeam }: Props = $props();
 </script>
 
 <div class="card variant-ghost-surface p-3">

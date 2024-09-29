@@ -2,7 +2,11 @@
     import type {Linescore} from "bsm.js";
     import {range} from "$lib/functions/range";
 
-    export let linescore: Linescore
+    interface Props {
+        linescore: Linescore;
+    }
+
+    let { linescore }: Props = $props();
 
     const innings = range(1, linescore.played_innings)
 </script>

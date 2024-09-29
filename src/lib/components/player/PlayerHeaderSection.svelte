@@ -2,7 +2,11 @@
     import type {Player} from "$lib/model/Player";
     import PlayerNumberGraphic from "$lib/components/player/PlayerNumberGraphic.svelte";
 
-    export let player: Player
+    interface Props {
+        player: Player;
+    }
+
+    let { player }: Props = $props();
 </script>
 
 <div class="card variant-ghost-surface p-3">

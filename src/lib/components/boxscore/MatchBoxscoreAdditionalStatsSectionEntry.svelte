@@ -1,7 +1,11 @@
 <script lang="ts">
     import type {AdditionalStat} from "bsm.js";
 
-    export let entries: AdditionalStat[]
+    interface Props {
+        entries: AdditionalStat[];
+    }
+
+    let { entries }: Props = $props();
 </script>
 
 <span class="entries">

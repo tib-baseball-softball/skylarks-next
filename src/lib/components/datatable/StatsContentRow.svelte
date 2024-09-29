@@ -2,9 +2,13 @@
     import type {StatisticsData} from "bsm.js";
     import {StatsType} from "bsm.js";
 
-    export let type: StatsType
-    export let row: StatisticsData<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics">
-    export let tableType: "personal" | "seasonal"
+    interface Props {
+        type: StatsType;
+        row: StatisticsData<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics">;
+        tableType: "personal" | "seasonal";
+    }
+
+    let { type, row, tableType }: Props = $props();
 </script>
 
 {#if type === StatsType.batting}

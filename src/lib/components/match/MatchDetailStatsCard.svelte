@@ -7,7 +7,11 @@
         TableRowOutline
     } from "flowbite-svelte-icons";
 
-    export let match: Match
+    interface Props {
+        match: Match;
+    }
+
+    let { match }: Props = $props();
 </script>
 
 <div class="card variant-ghost-surface p-3">

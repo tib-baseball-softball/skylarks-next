@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { run } from 'svelte/legacy';
+
     import Search from '$lib/components/datatable/Search.svelte';
     import RowsPerPage from '$lib/components/datatable/RowsPerPage.svelte';
     import RowCount from '$lib/components/datatable/RowCount.svelte';
@@ -12,12 +14,16 @@
     import StatsContentRow from "$lib/components/datatable/StatsContentRow.svelte";
     import StatsBlock from "$lib/components/utility/StatsBlock.svelte";
 
-    export let data: StatsDataset
-    export let rowsPerPage: number = 10
-    export let tableType: "personal" | "seasonal"
+    interface Props {
+        data: StatsDataset;
+        rowsPerPage?: number;
+        tableType: "personal" | "seasonal";
+    }
 
-    let type: StatsType = StatsType.batting
-    let summaryData: StatisticsSummary<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics"> | undefined = data.batting.summaries.at(0)
+    let { data, rowsPerPage = 10, tableType }: Props = $props();
+
+    let type: StatsType = $state(StatsType.batting)
+    let summaryData: StatisticsSummary<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics"> | undefined = $state(data.batting.summaries.at(0))
 
     const handler = new DataHandler<StatisticsData<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics">>(data.batting.data, {rowsPerPage: rowsPerPage})
 
@@ -38,7 +44,9 @@
         }
     }
 
-    $: changeDataForHandler(type)
+    run(() => {
+        changeDataForHandler(type)
+    });
 </script>
 
 <div class=" overflow-x-auto space-y-4 table-container">
