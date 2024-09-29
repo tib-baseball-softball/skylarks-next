@@ -40,6 +40,9 @@
   "overrides": {
     "@skeletonlabs/skeleton": {
       "svelte": "$svelte"
+    },
+    "flowbite-svelte-icons": {
+      "svelte": "$svelte"
     }
   }
 }
