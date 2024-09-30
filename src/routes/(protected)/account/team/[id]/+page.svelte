@@ -116,7 +116,7 @@
       <span>New Event</span>
     </button>
 
-    <a href="#" class="btn variant-ghost-tertiary">
+    <a href="/account/team/{data.team.id}/members" class="btn variant-ghost-tertiary">
       <UsersGroupOutline />
       <span>Player List</span>
     </a>

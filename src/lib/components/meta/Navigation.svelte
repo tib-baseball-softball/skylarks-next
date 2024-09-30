@@ -86,6 +86,11 @@
                                 <UsersOutline size="lg"/>
                                 <span>{team.name} ({team?.expand?.club?.acronym})</span>
                             </a>
+
+                            <a class="ms-3" href="/account/team/{team.id}/members" onclick={drawerClose}>
+                                <UsersGroupOutline size="lg"/>
+                                <span>Players</span>
+                            </a>
                         {/each}
                     {/await}
 
