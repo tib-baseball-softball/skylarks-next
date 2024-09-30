@@ -1,4 +1,4 @@
-import type { ParticipationsCreate, ParticipationsResponse, ParticipationsUpdate } from "$lib/model/pb-types"
+import type { ParticipationsCreate, ParticipationsResponse } from "$lib/model/pb-types"
 import { client } from "$lib/pocketbase"
 
 export async function sendParticipationData(data: ParticipationsCreate): Promise<ParticipationsResponse> {

@@ -1,17 +1,17 @@
 <script lang="ts">
-    import type { EventsResponse } from "$lib/model/pb-types";
+    import type { ExpandedEvent } from "$lib/model/ExpandedResponse";
     import { DateTimeUtility } from "$lib/service/DateTimeUtility";
     import { CalendarMonthOutline, ClockOutline, MapPinOutline } from "flowbite-svelte-icons";
 
     interface props {
-        event: EventsResponse;
+        event: ExpandedEvent;
         classes?: string;
     }
 
     const { event, classes = "" }: props = $props();
 
-    const startTime = new Date(event.starttime);
-    const meetingTime = new Date(event.meetingtime);
+    const startTime = $derived(new Date(event.starttime));
+    const meetingTime = $derived(new Date(event.meetingtime));
 </script>
 
 <section class={classes}>
