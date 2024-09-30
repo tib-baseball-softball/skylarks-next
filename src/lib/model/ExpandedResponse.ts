@@ -22,10 +22,7 @@ export type ExpandedTeam = Extension<TeamsResponse, {
 }>
 
 export type CustomAuthModel = Extension<AuthModel, {
-    first_name?: string,
-    last_name?: string,
     email: string,
-    last_login: string,
-}>
+} & UsersResponse>
 
 export type EventType = EventsResponse['type']

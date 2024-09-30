@@ -47,11 +47,16 @@
   }
 </script>
 
-<div class="card p-6">
+<div class="card p-6 max-w-xl">
   <header class="text-xl font-semibold">
     Edit User Data for {model.first_name}
     {model.last_name}
   </header>
+
+  <p class="mt-2 font-light">
+    This data is only used for internal purposes and never shown anywhere publicly.
+    (Your team and club administrators have access).
+  </p>
 
   <form onsubmit={submitForm} class="mt-4 space-y-3">
     <input
@@ -101,6 +106,10 @@
         <p>{file.name} ({file.size} bytes)</p>
       {/each}
     {/if}
+
+    <p class="font-light">
+      This is your app profile picture. It will not be used for your player profile image.
+    </p>
 
     <div class="flex justify-end gap-3 mt-3">
       <button type="submit" class="mt-2 btn variant-ghost-primary">Confirm</button>

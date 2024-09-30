@@ -1,18 +1,16 @@
 <script lang="ts">
   import TeamTeaserCard from "$lib/components/diamondplanner/team/TeamTeaserCard.svelte";
-    import UserDataCard from "$lib/components/diamondplanner/user/UserDataCard.svelte";
+  import PlayerDataProfileSection from "$lib/components/diamondplanner/user/PlayerDataProfileSection.svelte";
+  import UserDataCard from "$lib/components/diamondplanner/user/UserDataCard.svelte";
   import StatsBlockContent from "$lib/components/utility/StatsBlockContent.svelte";
   import type { CustomAuthModel } from "$lib/model/ExpandedResponse.js";
   import { authModel } from "$lib/pocketbase/Auth";
   import type { SingleStatElement } from "$lib/types/SingleStatElement.js";
+  import { ConicGradient, type ConicStop } from "@skeletonlabs/skeleton";
   import {
-      ConicGradient,
-      type ConicStop
-  } from "@skeletonlabs/skeleton";
-  import {
-      InfoCircleOutline,
-      ShieldOutline,
-      TagOutline
+    InfoCircleOutline,
+    ShieldOutline,
+    TagOutline,
   } from "flowbite-svelte-icons";
 
   const model = $authModel as CustomAuthModel;
@@ -56,11 +54,9 @@
 
 <h1 class="h1 lg:mt-4">My Dashboard</h1>
 
-
 <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
+  <UserDataCard {model} />
 
-  <UserDataCard {model}/>
-  
   {#each model.expand.club as club}
     <div class="card variant-glass-primary shadow-lg">
       <header class="card-header">
@@ -141,3 +137,9 @@
     {/each}
   </div>
 {/await}
+
+<h2 class="h2 mt-3">My Player Data</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-3">
+  <PlayerDataProfileSection />
+</div>
