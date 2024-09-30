@@ -7,25 +7,29 @@
     CogOutline,
     UsersGroupOutline,
   } from "flowbite-svelte-icons";
-    import { goto } from "$app/navigation";
+  import { goto } from "$app/navigation";
+  import type { EventType } from "$lib/model/ExpandedResponse.js";
 
   let { data } = $props();
   const events = $derived(data.events);
+  let currentPage = $derived($events.page);
 
   let showEvents = $state("next");
+  let sorting: "asc" | "desc" = $state("asc");
+  let showTypes: EventType | "any" = $state("any");
 
   const reloadWithQuery = () => {
-    let queryString = `?filter=${showEvents}`;
+    let queryString = `?timeframe=${showEvents}&page=${currentPage}&sort=${sorting}&type=${showTypes}`;
 
     goto(queryString, {
-        noScroll: true,
+      noScroll: true,
     });
   };
 
   $effect.pre(() => {
-    console.log(showEvents)
-    reloadWithQuery()
-  })
+    console.log(showEvents);
+    reloadWithQuery();
+  });
 </script>
 
 <h1 class="h2">{data.team.name} ({data.team?.expand?.club.name})</h1>
@@ -43,7 +47,7 @@
 
 <h2 class="h3">Team Events</h2>
 
-<div class="flex gap-4">
+<div class="flex flex-wrap gap-4">
   <label class="flex items-center space-x-2">
     <input
       class="radio"
@@ -55,6 +59,7 @@
     />
     <p>Next</p>
   </label>
+
   <label class="flex items-center space-x-2">
     <input
       class="radio"
@@ -65,13 +70,35 @@
     />
     <p>Past</p>
   </label>
+
+  <span class="divider-vertical h-10 mx-3"></span>
+  
+  <label class="label flex items-center gap-2">
+    Sort
+    <select class="select" bind:value={sorting} onchange={reloadWithQuery}>
+      <option value="asc">Ascending</option>
+      <option value="desc">Descending</option>
+    </select>
+  </label>
+
+  <span class="divider-vertical h-10 mx-3"></span>
+
+  <label class="label flex items-center gap-2">
+    Show
+    <select class="select" bind:value={showTypes} onchange={reloadWithQuery}>
+      <option value="any">All</option>
+      <option value="game">Games</option>
+      <option value="practice">Practices</option>
+      <option value="misc">Other</option>
+    </select>
+  </label>
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
   {#each $events.items as event}
     <EventTeaser {event} link={true} />
   {:else}
-    <p>Keine Events verfügbar.</p>
+    <p>No events available with the current filters.</p>
   {/each}
 </div>
 

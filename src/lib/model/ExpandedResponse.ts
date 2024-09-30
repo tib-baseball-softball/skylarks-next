@@ -6,9 +6,9 @@ export type Extension<T, E> = T & E
 export type ExpandedEvent = Extension<EventsResponse, {
     expand: {
         participations_via_event?: Extension<ParticipationsResponse, {
-            expand:{
+            expand: {
                 user: UsersResponse
-            } 
+            }
         }>[],
         attire?: UniformsetsResponse,
         team?: ExpandedTeam
@@ -27,3 +27,5 @@ export type CustomAuthModel = Extension<AuthModel, {
     email: string,
     last_login: string,
 }>
+
+export type EventType = EventsResponse['type']

@@ -16,19 +16,35 @@ export const load = async ({ fetch, parent, params, url, depends }) => {
   }
   if (!team) throw error(404, "Team not found");
 
-  let filter = url.searchParams.get("filter")
+  //Construct PocketBase filter string from query parameters
 
-  if (!filter || filter === "next") {
-    filter = `starttime >= @todayStart && team = "${team.id}"`
-  } else if (filter === "past") {
-    filter = `starttime <= @todayStart && team = "${team.id}"`
+  let filter = `team = "${team.id}"`
+
+  let timeframe = url.searchParams.get("timeframe")
+
+  if (!timeframe || timeframe === "next") {
+    filter = filter.concat(`&& starttime >= @todayStart`)
+  } else if (timeframe === "past") {
+    filter = filter.concat(`&& starttime <= @todayStart`)
   }
+
+  const showTypes = url.searchParams.get("type") ?? "any"
+
+  if (showTypes !== "any") {
+    filter = filter.concat(`&& type = "${showTypes}"`)
+  }
+
+  // add sort parameter
 
   let sort = "+starttime"
   
   if (url.searchParams.get("sort") === "desc") {
     sort = "-starttime"
   }
+
+  // check pagination info
+
+  const pageNumber = Number(url.searchParams.get("page")) ?? 1;
 
   const events = await watchWithPagination<ExpandedEvent>(
     "events",
@@ -38,7 +54,7 @@ export const load = async ({ fetch, parent, params, url, depends }) => {
       expand: "participations_via_event.user, attire",
       fetch: fetch
     },
-    1,
+    pageNumber,
     6,
   );
 
