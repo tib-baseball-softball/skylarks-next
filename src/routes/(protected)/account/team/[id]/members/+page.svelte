@@ -1,9 +1,11 @@
 <script lang="ts">
-  let { data } = $props();
+    import TeamMemberDatatable from "$lib/components/datatable/TeamMemberDatatable.svelte";
 
-  const players = $derived(data.players)
+    let { data } = $props();
+
+    const players = $derived(data.players);
 </script>
 
-{#each $players.items as player}
-  <p>{player.last_name}</p>
-{/each}
+<h1 class="h1">Team members for Team "{data.team.name}"</h1>
+
+<TeamMemberDatatable data={$players.items} />
