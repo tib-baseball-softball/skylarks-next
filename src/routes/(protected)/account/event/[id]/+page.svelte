@@ -86,60 +86,62 @@
         </section>
     {/if}
 
-    <hr class="!my-8" />
+    {#if !$event.cancelled}
+        <hr class="!my-8" />
 
-    <div class="flex justify-between items-center">
-        <h2 class="h3">My Participation</h2>
-        <EventParticipationSection event={$event} />
-    </div>
-
-    <hr class="my-8" />
-
-    <h2 class="h2">Participants</h2>
-    <section class="grid grid-cols-1 md:grid-cols-3 gap-2 lg:gap-3">
-        <div class="card variant-ghost-success flex-grow">
-            <header class="card-header flex items-center gap-2">
-                <span><CheckOutline size="lg" /></span>
-                <h3 class="h4">In</h3>
-            </header>
-
-            <section class="p-4 flex flex-wrap gap-1 lg:gap-2">
-                {#each participationsIn as inResponse}
-                    <div class="chip variant-ghost-success">
-                        {inResponse?.expand?.user?.first_name}
-                    </div>
-                {/each}
-            </section>
+        <div class="flex justify-between items-center">
+            <h2 class="h3">My Participation</h2>
+            <EventParticipationSection event={$event} />
         </div>
 
-        <div class="card variant-ghost-warning flex-grow">
-            <header class="card-header flex items-center gap-2">
-                <span><QuestionCircleOutline size="lg" /></span>
-                <h3 class="h4">Maybe</h3>
-            </header>
-            <section class="p-4 flex flex-wrap gap-1 lg:gap-2">
-                {#each participationsMaybe as maybeResponse}
-                    <div class="chip variant-ghost-warning">
-                        {maybeResponse?.expand?.user?.first_name}
-                    </div>
-                {/each}
-            </section>
-        </div>
+        <hr class="my-8" />
 
-        <div class="card variant-ghost-error flex-grow">
-            <header class="card-header flex items-center gap-2">
-                <span><CloseOutline size="lg" /></span>
-                <h3 class="h4">Out</h3>
-            </header>
-            <section class="p-4 flex flex-wrap gap-1 lg:gap-2">
-                {#each participationsOut as outResponse}
-                    <div class="chip variant-ghost-error">
-                        {outResponse?.expand?.user?.first_name}
-                    </div>
-                {/each}
-            </section>
-        </div>
-    </section>
+        <h2 class="h2">Participants</h2>
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-2 lg:gap-3">
+            <div class="card variant-ghost-success flex-grow">
+                <header class="card-header flex items-center gap-2">
+                    <span><CheckOutline size="lg" /></span>
+                    <h3 class="h4">In</h3>
+                </header>
+
+                <section class="p-4 flex flex-wrap gap-1 lg:gap-2">
+                    {#each participationsIn as inResponse}
+                        <div class="chip variant-ghost-success">
+                            {inResponse?.expand?.user?.first_name}
+                        </div>
+                    {/each}
+                </section>
+            </div>
+
+            <div class="card variant-ghost-warning flex-grow">
+                <header class="card-header flex items-center gap-2">
+                    <span><QuestionCircleOutline size="lg" /></span>
+                    <h3 class="h4">Maybe</h3>
+                </header>
+                <section class="p-4 flex flex-wrap gap-1 lg:gap-2">
+                    {#each participationsMaybe as maybeResponse}
+                        <div class="chip variant-ghost-warning">
+                            {maybeResponse?.expand?.user?.first_name}
+                        </div>
+                    {/each}
+                </section>
+            </div>
+
+            <div class="card variant-ghost-error flex-grow">
+                <header class="card-header flex items-center gap-2">
+                    <span><CloseOutline size="lg" /></span>
+                    <h3 class="h4">Out</h3>
+                </header>
+                <section class="p-4 flex flex-wrap gap-1 lg:gap-2">
+                    {#each participationsOut as outResponse}
+                        <div class="chip variant-ghost-error">
+                            {outResponse?.expand?.user?.first_name}
+                        </div>
+                    {/each}
+                </section>
+            </div>
+        </section>
+    {/if}
 
     {#if $event.match_json}
         <section>
