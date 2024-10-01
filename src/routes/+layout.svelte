@@ -11,6 +11,7 @@
     import AccountModal from "$lib/auth/AccountModal.svelte";
     import {PUBLIC_AUTH_FUNCS_ENABLED} from "$env/static/public";
     import {onMount} from "svelte";
+    import EventForm from '$lib/components/forms/EventForm.svelte';
 
     interface Props {
         children?: import('svelte').Snippet;
@@ -28,8 +29,11 @@
 
     const drawerStore = getDrawerStore()
 
-    function drawerOpen(): void {
-        drawerStore.open({})
+    function navDrawerOpen(): void {
+        drawerStore.open({
+          id: "nav",
+          width: "w-[70%] sm:w-[40%]"
+        })
     }
 
     // LightSwitch Workaround: https://github.com/skeletonlabs/skeleton/issues/2598
@@ -41,7 +45,9 @@
 
 </script>
 
-<Drawer width="w-[70%] sm:w-[40%]">
+<Drawer>
+    {#if $drawerStore.id === "nav"}
+
     <div class="flex justify-around p-2">
         <img class="max-w-14" src="/berlin_skylarks_logo.svg" alt="Skylarks Team Logo">
 
@@ -51,6 +57,10 @@
     <hr class="mb-2"/>
 
     <Navigation></Navigation>
+
+    {:else if $drawerStore.id === "event-form"}
+        <EventForm/>
+    {/if}
 </Drawer>
 
 <!--Singletons-->
@@ -70,7 +80,7 @@
         >
             <svelte:fragment slot="lead">
                 <div class="flex items-center justify-content-start">
-                    <button aria-label="open navigation" class="md:hidden btn btn-sm mr-4" onclick={drawerOpen}>
+                    <button aria-label="open navigation" class="md:hidden btn btn-sm mr-4" onclick={navDrawerOpen}>
                     <span>
                         <svg viewBox="0 0 100 80" class="fill-token w-4 h-4">
                             <rect width="100" height="20"/>
