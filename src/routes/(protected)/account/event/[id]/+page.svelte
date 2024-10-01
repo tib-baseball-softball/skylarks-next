@@ -57,19 +57,28 @@
 
 <div class="event-container">
     <div class="flex items-center gap-3">
-        <h1 class="h1">{$event.title}</h1>
+        <h1 class="h1" class:line-through={$event.cancelled}>{$event.title}</h1>
         <div>
             <EventTypeBadge type={$event.type} />
         </div>
     </div>
 
-    <article class="!mb-8">
+    {#if $event.cancelled}
+        <span class="badge variant-filled-error">
+            <CloseOutline />
+            Cancelled
+        </span>
+    {/if}
+
+    <article class="!mb-8" class:line-through={$event.cancelled}>
         <section>
             <p>{$event.desc}</p>
         </section>
     </article>
 
-    <EventCoreInfo event={$event} classes={"space-y-6"} />
+    <div class="space-y-6" class:line-through={$event.cancelled}>
+        <EventCoreInfo event={$event} />
+    </div>
 
     {#if $event.expand.attire}
         <section>
