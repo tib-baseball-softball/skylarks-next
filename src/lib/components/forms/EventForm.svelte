@@ -12,9 +12,19 @@
     } from "@skeletonlabs/skeleton";
     import { getToastStore } from "@skeletonlabs/skeleton";
     import { CloseOutline } from "flowbite-svelte-icons";
+    import Flatpickr from "../utility/Flatpickr.svelte";
+    import type { Options } from "flatpickr/dist/types/options";
 
     const toastStore = getToastStore();
     const drawerStore = getDrawerStore();
+
+    const datePickerOptions: Options = {
+        enableTime: true,
+        dateFormat: "c", // ISO 8601
+        altInput: true,
+        altFormat: "j F Y - H:i",
+        time_24hr: true,
+    };
 
     const toastSettingsSuccess: ToastSettings = {
         message: "Event saved successfully.",
@@ -109,32 +119,25 @@
 
             <label class="label">
                 Start
-                <input
-                    name="starttime"
-                    class="input p-2"
-                    required
-                    type="datetime"
+                <Flatpickr
                     bind:value={form.starttime}
+                    options={datePickerOptions}
                 />
             </label>
 
             <label class="label">
                 Meeting
-                <input
-                    name="meetingtime"
-                    class="input p-2"
-                    type="datetime"
+                <Flatpickr
                     bind:value={form.meetingtime}
+                    options={datePickerOptions}
                 />
             </label>
 
             <label class="label">
                 End
-                <input
-                    name="endtime"
-                    class="input p-2"
-                    type="datetime"
+                <Flatpickr
                     bind:value={form.endtime}
+                    options={datePickerOptions}
                 />
             </label>
 
