@@ -4,11 +4,7 @@
     import type { CustomAuthModel } from "$lib/model/ExpandedResponse";
     import { Avatar } from "@skeletonlabs/skeleton";
     import { client } from "$lib/pocketbase";
-    import {
-        CheckCircleSolid,
-        EditOutline,
-        MinusSolid,
-    } from "flowbite-svelte-icons";
+    import { CheckCircleSolid, EditOutline } from "flowbite-svelte-icons";
     import LocalDate from "../utility/LocalDate.svelte";
 
     interface Props {
