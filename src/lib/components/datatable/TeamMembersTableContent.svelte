@@ -4,14 +4,19 @@
     import type { CustomAuthModel } from "$lib/model/ExpandedResponse";
     import { Avatar } from "@skeletonlabs/skeleton";
     import { client } from "$lib/pocketbase";
-    import { CheckCircleSolid, EditOutline } from "flowbite-svelte-icons";
+    import {
+        CheckCircleSolid,
+        EditOutline,
+        LockOpenOutline,
+    } from "flowbite-svelte-icons";
     import LocalDate from "../utility/LocalDate.svelte";
 
     interface Props {
         handler: DataHandler<CustomAuthModel>;
+        showAdminSection?: boolean;
     }
 
-    let { handler }: Props = $props();
+    let { handler, showAdminSection = false }: Props = $props();
 
     const rows = $derived(handler.getRows());
 </script>
@@ -24,7 +29,10 @@
         <ThSort {handler} orderBy="bsm_id">BSM ID</ThSort>
         <ThSort {handler} orderBy="position">Position</ThSort>
         <ThSort {handler} orderBy="last_login">Last Login</ThSort>
-        <th>Actions</th>
+
+        {#if showAdminSection}
+            <th>Actions</th>
+        {/if}
     </tr>
 </thead>
 
@@ -103,17 +111,24 @@
                 <LocalDate date={row.last_login} />
             </td>
 
-            <td class="space-x-1">
-                <button class="btn btn-sm variant-ghost-primary">
-                    <EditOutline />
-                    Edit
-                </button>
+            {#if showAdminSection}
+                <td class="space-x-1">
+                    <button class="btn btn-sm variant-ghost-primary">
+                        <EditOutline />
+                        Edit
+                    </button>
 
-                <button class="btn btn-sm variant-ghost-warning">
-                    <EditOutline />
-                    Remove
-                </button>
-            </td>
+                    <button class="btn btn-sm variant-ghost-tertiary">
+                        <LockOpenOutline />
+                        Make Admin
+                    </button>
+
+                    <button class="btn btn-sm variant-ghost-warning">
+                        <EditOutline />
+                        Remove
+                    </button>
+                </td>
+            {/if}
         </tr>
     {/each}
 

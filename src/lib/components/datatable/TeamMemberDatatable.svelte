@@ -10,9 +10,10 @@
     interface Props {
         data: CustomAuthModel[];
         rowsPerPage?: number;
+        showAdminSection?: boolean;
     }
 
-    let { data, rowsPerPage = 25 }: Props = $props();
+    let { data, rowsPerPage = 25, showAdminSection = false }: Props = $props();
 
     const handler = $derived(
         new DataHandler<CustomAuthModel>(data, {
@@ -31,7 +32,7 @@
 
     <!-- Table -->
     <table class="table table-hover table-compact w-full table-auto">
-        <TeamMembersTableContent {handler} />
+        <TeamMembersTableContent {handler} {showAdminSection} />
 
         <tfoot> </tfoot>
     </table>
