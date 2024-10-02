@@ -876,8 +876,8 @@
     "listRule": "@request.auth.id != \"\" && id ?~ @request.auth.teams.id",
     "viewRule": "@request.auth.id != \"\" && id ?~ @request.auth.teams.id",
     "createRule": null,
-    "updateRule": "@request.auth.id != \"\" && @request.auth.id ?> admins",
-    "deleteRule": "@request.auth.id != \"\" && @request.auth.id ?> admins",
+    "updateRule": "@request.auth.id != \"\" && admins ?~ @request.auth.id  ",
+    "deleteRule": "@request.auth.id != \"\" && admins ?~ @request.auth.id",
     "options": {}
   },
   {

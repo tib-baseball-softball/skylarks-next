@@ -44,6 +44,16 @@
         },
     });
 
+    const teamSettings: DrawerSettings = $derived({
+        id: "team-form",
+        position: "right",
+        width: "w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%]",
+        meta: {
+            club: data.team?.expand?.club,
+            team: data.team,
+        },
+    });
+
     $effect.pre(() => {
         console.log(showEvents);
         reloadWithQuery();
@@ -234,7 +244,10 @@
 
             <section class="p-4 space-y-3">
                 <div class="flex flex-col gap-2 lg:gap-3">
-                    <button class="btn variant-ghost-surface">
+                    <button
+                        class="btn variant-ghost-surface"
+                        onclick={() => drawerStore.open(teamSettings)}
+                    >
                         <CogOutline />
                         <span>General Settings</span>
                     </button>

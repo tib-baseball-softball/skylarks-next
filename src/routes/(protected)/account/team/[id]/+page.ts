@@ -37,7 +37,7 @@ export const load = async ({ fetch, parent, params, url, depends }) => {
   // add sort parameter
 
   let sort = "+starttime"
-  
+
   if (url.searchParams.get("sort") === "desc") {
     sort = "-starttime"
   }

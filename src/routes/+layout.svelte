@@ -12,6 +12,7 @@
     import {PUBLIC_AUTH_FUNCS_ENABLED} from "$env/static/public";
     import {onMount} from "svelte";
     import EventForm from '$lib/components/forms/EventForm.svelte';
+    import TeamForm from '$lib/components/forms/TeamForm.svelte';
 
     interface Props {
         children?: import('svelte').Snippet;
@@ -60,6 +61,8 @@
 
     {:else if $drawerStore.id === "event-form"}
         <EventForm/>
+    {:else if $drawerStore.id === "team-form"}
+        <TeamForm/>
     {/if}
 </Drawer>
 
