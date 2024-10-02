@@ -30,7 +30,11 @@
         id: "event-form",
         position: "right",
         width: "w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%]",
-        meta: $event,
+        meta: {
+            event: $event,
+            club: $event?.expand?.team?.club,
+            team: $event?.expand?.team?.id,
+        },
     });
     // TODO: get this data via backend hook
 

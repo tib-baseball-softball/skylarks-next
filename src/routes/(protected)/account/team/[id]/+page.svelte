@@ -9,6 +9,10 @@
     } from "flowbite-svelte-icons";
     import { goto } from "$app/navigation";
     import type { EventType } from "$lib/model/ExpandedResponse.js";
+    import {
+        getDrawerStore,
+        type DrawerSettings,
+    } from "@skeletonlabs/skeleton";
 
     let { data } = $props();
     const events = $derived(data.events);
@@ -25,6 +29,18 @@
             noScroll: true,
         });
     };
+
+    const drawerStore = getDrawerStore();
+    const settings: DrawerSettings = $derived({
+        id: "event-form",
+        position: "right",
+        width: "w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%]",
+        meta: {
+            event: null,
+            club: data.team?.club,
+            team: data.team,
+        },
+    });
 
     $effect.pre(() => {
         console.log(showEvents);
@@ -115,7 +131,10 @@
     </header>
 
     <div class="flex flex-wrap items-center gap-2 lg:gap-3">
-        <button class="btn variant-ghost-primary">
+        <button
+            class="btn variant-ghost-primary"
+            onclick={() => drawerStore.open(settings)}
+        >
             <CalendarPlusOutline />
             <span>New Event</span>
         </button>

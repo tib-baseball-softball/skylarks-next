@@ -36,12 +36,27 @@
         background: "variant-filled-error",
     };
 
-    const form: ExpandedEvent = $state($drawerStore.meta);
+    const form: ExpandedEvent = $state(
+        $drawerStore.meta.event ?? {
+            id: "",
+            title: "",
+            starttime: "",
+            meetingtime: "",
+            endtime: "",
+            desc: "",
+            location: "",
+            type: "",
+            attire: "",
+            cancelled: false,
+            bsm_id: "",
+            team: $drawerStore.meta?.team?.id,
+        },
+    );
 
     const attireOptions = client
         .collection("uniformsets")
         .getFullList<UniformsetsResponse>({
-            filter: `club = "${$drawerStore.meta.expand?.team?.club}"`,
+            filter: `club = "${$drawerStore.meta.club}"`,
         });
 
     async function submitForm(e: SubmitEvent) {
@@ -54,6 +69,10 @@
                 result = await client
                     .collection("events")
                     .update<ExpandedEvent>(form.id, form);
+            } else {
+                result = await client
+                    .collection("events")
+                    .create<ExpandedEvent>(form);
             }
         } catch {
             toastStore.trigger(toastSettingsError);
@@ -84,16 +103,14 @@
 
     <form onsubmit={submitForm} class="mt-4 space-y-3">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-3 xl:gap-4">
-            {#if form.id}
-                <input
-                    name="id"
-                    autocomplete="off"
-                    class="input"
-                    type="hidden"
-                    readonly
-                    bind:value={form.id}
-                />
-            {/if}
+            <input
+                name="id"
+                autocomplete="off"
+                class="input"
+                type="hidden"
+                readonly
+                bind:value={form.id}
+            />
 
             <label class="label">
                 Title
