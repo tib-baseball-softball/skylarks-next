@@ -272,7 +272,7 @@
     "options": {
       "allowEmailAuth": true,
       "allowOAuth2Auth": true,
-      "allowUsernameAuth": true,
+      "allowUsernameAuth": false,
       "exceptEmailDomains": null,
       "manageRule": null,
       "minPasswordLength": 8,
@@ -562,9 +562,9 @@
     ],
     "listRule": "@request.auth.id != \"\" && team.id ?~ @request.auth.teams.id",
     "viewRule": "@request.auth.id != \"\" && team.id ?~ @request.auth.teams.id",
-    "createRule": "@request.auth.id != \"\" && @request.auth.id ?> team.admins",
-    "updateRule": "@request.auth.id != \"\" && @request.auth.id ?> team.admins",
-    "deleteRule": "@request.auth.id != \"\" && @request.auth.id ?> team.admins",
+    "createRule": "@request.auth.id != \"\" && team.admins ?~ @request.auth.id",
+    "updateRule": "@request.auth.id != \"\" && team.admins ?~ @request.auth.id",
+    "deleteRule": "@request.auth.id != \"\" && team.admins ?~ @request.auth.id",
     "options": {}
   },
   {
