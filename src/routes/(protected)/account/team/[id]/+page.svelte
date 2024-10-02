@@ -2,9 +2,11 @@
     import TeamTeaserCard from "$lib/components/diamondplanner/team/TeamTeaserCard.svelte";
     import EventTeaser from "$lib/components/diamondplanner/event/EventTeaser.svelte";
     import Paginator from "$lib/pocketbase/Paginator.svelte";
+    import { authModel } from "$lib/pocketbase/Auth";
     import {
         CalendarPlusOutline,
         CogOutline,
+        TrashBinOutline,
         UsersGroupOutline,
     } from "flowbite-svelte-icons";
     import { goto } from "$app/navigation";
@@ -31,7 +33,7 @@
     };
 
     const drawerStore = getDrawerStore();
-    const settings: DrawerSettings = $derived({
+    const singleEventSettings: DrawerSettings = $derived({
         id: "event-form",
         position: "right",
         width: "w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%]",
@@ -127,18 +129,10 @@
 <hr class="!my-8" />
 <section class="space-y-2 lg:space-y-4">
     <header>
-        <h2 class="h3">Actions and Links</h2>
+        <h2 class="h3">Links</h2>
     </header>
 
     <div class="flex flex-wrap items-center gap-2 lg:gap-3">
-        <button
-            class="btn variant-ghost-primary"
-            onclick={() => drawerStore.open(settings)}
-        >
-            <CalendarPlusOutline />
-            <span>New Event</span>
-        </button>
-
         <a
             href="/account/team/{data.team.id}/members"
             class="btn variant-ghost-tertiary"
@@ -146,10 +140,126 @@
             <UsersGroupOutline />
             <span>Player List</span>
         </a>
-
-        <a href="#" class="btn variant-ghost-surface">
-            <CogOutline />
-            <span>Settings</span>
-        </a>
     </div>
 </section>
+
+{#if data.team.admins.includes($authModel?.id)}
+    <hr class="my-2" />
+
+    <h2 class="h3">Admin Section</h2>
+
+    <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-3"
+    >
+        <div class="card admin-card variant-ringed-surface">
+            <div>
+                <header class="card-header">
+                    <h3 class="h4 font-semibold">Games</h3>
+                </header>
+
+                <section class="p-4 space-y-3">
+                    <p class="font-light">
+                        Events of type "Game" don't need to be created manually.
+                        All data can be imported from BSM and kept in sync with
+                        the current state.
+                    </p>
+                </section>
+            </div>
+            <footer class="card-footer">
+                <div class="flex flex-col gap-2 lg:gap-3">
+                    <button class="btn variant-ghost-primary">
+                        <CalendarPlusOutline />
+                        <span>Setup Games Import</span>
+                    </button>
+                </div>
+            </footer>
+        </div>
+
+        <div class="card admin-card variant-ringed-surface">
+            <div>
+                <header class="card-header">
+                    <h3 class="h4 font-semibold">Practice Sets</h3>
+                </header>
+
+                <section class="p-4 space-y-3">
+                    <p class="font-light">
+                        Practice Sets are recurring series of events of type
+                        "Practice" that take place on the same day every week.
+                    </p>
+                </section>
+            </div>
+            <footer class="card-footer">
+                <div class="flex flex-col gap-2 lg:gap-3">
+                    <button
+                        class="btn variant-ghost-secondary dark:variant-filled-secondary dark:border"
+                    >
+                        <CalendarPlusOutline />
+                        <span>Create Practice Set</span>
+                    </button>
+                </div>
+            </footer>
+        </div>
+
+        <div class="card admin-card variant-ringed-surface">
+            <div>
+                <header class="card-header">
+                    <h3 class="h4 font-semibold">Single Events</h3>
+                </header>
+
+                <section class="p-4 space-y-3">
+                    <p class="font-light">
+                        Single Events are not connected to any other events and
+                        don't contain additional logic. Well suited for one-off
+                        occurrences.
+                    </p>
+                </section>
+            </div>
+            <footer class="card-footer">
+                <div class="flex flex-col gap-2 lg:gap-3">
+                    <button
+                        class="btn variant-ghost-tertiary"
+                        onclick={() => drawerStore.open(singleEventSettings)}
+                    >
+                        <CalendarPlusOutline />
+                        <span>Create Single Event</span>
+                    </button>
+                </div>
+            </footer>
+        </div>
+
+        <div class="card admin-card variant-ringed-surface">
+            <header class="card-header">
+                <h3 class="h4 font-semibold">Team Settings</h3>
+            </header>
+
+            <section class="p-4 space-y-3">
+                <div class="flex flex-col gap-2 lg:gap-3">
+                    <button class="btn variant-ghost-surface">
+                        <CogOutline />
+                        <span>General Settings</span>
+                    </button>
+                </div>
+            </section>
+
+            <footer class="card-footer mt-2">
+                <div
+                    class="flex flex-col gap-2 lg:gap-3 rounded-token variant-ringed-error px-2 py-3"
+                >
+                    <header class="mx-2">Danger Zone</header>
+                    <button class="btn variant-ghost-error mx-2">
+                        <TrashBinOutline />
+                        <span>Delete Team</span>
+                    </button>
+                </div>
+            </footer>
+        </div>
+    </div>
+{/if}
+
+<style lang="postcss">
+    .admin-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+</style>
