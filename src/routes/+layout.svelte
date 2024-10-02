@@ -136,17 +136,6 @@
 
             {@render children?.()}
 
-            <aside class="alert variant-ghost-error my-5">
-
-                <ExclamationCircleOutline size="xl"/>
-
-                <div class="alert-message">
-                    <h3 class="h3">Alpha-Version</h3>
-                    <p>Hier funktioniert noch nicht alles wie gewünscht. Fehler und merkwürdiges Verhalten sind zu
-                        erwarten.</p>
-                </div>
-            </aside>
-
         </main>
     </div>
 
