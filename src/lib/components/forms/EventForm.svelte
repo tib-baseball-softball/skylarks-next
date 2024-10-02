@@ -97,7 +97,11 @@
             <CloseOutline />
         </button>
         <header class="text-xl font-semibold">
-            <h2 class="h3">Edit Event "{form?.title}"</h2>
+            {#if form.id}
+                <h2 class="h3">Edit Event "{form?.title}"</h2>
+            {:else}
+                <h2 class="h3">Create new Event</h2>
+            {/if}
         </header>
     </div>
 
