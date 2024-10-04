@@ -1,10 +1,14 @@
 <script lang="ts">
     import Text from "$lib/components/contentObjects/Text.svelte";
 
-    export let data;
+    interface Props {
+        data: any;
+    }
 
-    $: page = data.pageObject
-    $: contentObjects = data.contentObjects ?? []
+    let { data }: Props = $props();
+
+    let page = $derived(data.pageObject)
+    let contentObjects = $derived(data.contentObjects ?? [])
 </script>
 
 <article class="prose dark:prose-invert max-w-none">

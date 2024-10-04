@@ -11,6 +11,14 @@
     import AccountModal from "$lib/auth/AccountModal.svelte";
     import {PUBLIC_AUTH_FUNCS_ENABLED} from "$env/static/public";
     import {onMount} from "svelte";
+    import EventForm from '$lib/components/forms/EventForm.svelte';
+    import TeamForm from '$lib/components/forms/TeamForm.svelte';
+
+    interface Props {
+        children?: import('svelte').Snippet;
+    }
+
+    let { children }: Props = $props();
 
     initializeStores()
 
@@ -22,8 +30,11 @@
 
     const drawerStore = getDrawerStore()
 
-    function drawerOpen(): void {
-        drawerStore.open({})
+    function navDrawerOpen(): void {
+        drawerStore.open({
+          id: "nav",
+          width: "w-[70%] sm:w-[40%]"
+        })
     }
 
     // LightSwitch Workaround: https://github.com/skeletonlabs/skeleton/issues/2598
@@ -35,7 +46,9 @@
 
 </script>
 
-<Drawer width="w-[70%] sm:w-[40%]">
+<Drawer>
+    {#if $drawerStore.id === "nav"}
+
     <div class="flex justify-around p-2">
         <img class="max-w-14" src="/berlin_skylarks_logo.svg" alt="Skylarks Team Logo">
 
@@ -45,6 +58,12 @@
     <hr class="mb-2"/>
 
     <Navigation></Navigation>
+
+    {:else if $drawerStore.id === "event-form"}
+        <EventForm/>
+    {:else if $drawerStore.id === "team-form"}
+        <TeamForm/>
+    {/if}
 </Drawer>
 
 <!--Singletons-->
@@ -64,7 +83,7 @@
         >
             <svelte:fragment slot="lead">
                 <div class="flex items-center justify-content-start">
-                    <button class="md:hidden btn btn-sm mr-4" on:click={drawerOpen}>
+                    <button aria-label="open navigation" class="md:hidden btn btn-sm mr-4" onclick={navDrawerOpen}>
                     <span>
                         <svg viewBox="0 0 100 80" class="fill-token w-4 h-4">
                             <rect width="100" height="20"/>
@@ -74,7 +93,7 @@
                     </span>
                     </button>
 
-                    <a href="/" class="hidden md:block ms-3">
+                    <a aria-label="to home page" href="/" class="hidden md:block ms-3">
                         <img class="min-w-16" src="/berlin_skylarks_logo.svg" alt="Skylarks Team Logo">
                     </a>
                 </div>
@@ -118,18 +137,7 @@
 
         <main class="col-span-1 space-y-4 lg:space-y-6 mx-4 md:mx-6 lg:mx-8 mb-4 lg:mb-6">
 
-            <slot/>
-
-            <aside class="alert variant-ghost-error my-5">
-
-                <ExclamationCircleOutline size="xl"/>
-
-                <div class="alert-message">
-                    <h3 class="h3">Alpha-Version</h3>
-                    <p>Hier funktioniert noch nicht alles wie gewünscht. Fehler und merkwürdiges Verhalten sind zu
-                        erwarten.</p>
-                </div>
-            </aside>
+            {@render children?.()}
 
         </main>
     </div>

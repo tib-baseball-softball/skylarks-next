@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { run } from 'svelte/legacy';
+
     import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte";
     import {ProgressBar, SlideToggle, Tab, TabGroup} from "@skeletonlabs/skeleton";
     import {Gameday} from "bsm.js";
@@ -21,15 +23,19 @@
         }
     }
 
-    export let data
-    $: leagueGroups = data.leagueGroups
-
-    $: {
-        console.log(`preferences ${$preferences.toString()} changed - reload`)
-        reloadGameData()
+    interface Props {
+        data: any;
     }
 
-    let showExternal = false
+    let { data }: Props = $props();
+    let leagueGroups = $derived(data.leagueGroups)
+
+    run(() => {
+        console.log(`preferences ${$preferences.toString()} changed - reload`)
+        reloadGameData()
+    });
+
+    let showExternal = $state(false)
 </script>
 
 

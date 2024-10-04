@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { run } from 'svelte/legacy';
+
     import {browser} from "$app/environment";
     import {preferences} from "$lib/stores";
     import {goto} from "$app/navigation";
@@ -11,8 +13,8 @@
         }
     }
 
-    $: {
+    run(() => {
         console.log(`preferences ${$preferences.toString()} changed - reload`)
         reloadUponSeasonChange()
-    }
+    });
 </script>

@@ -18,4 +18,7 @@ type Match struct {
     ScoresheetURL  *string `json:"scoresheet_url,omitempty"`
     HomeTeamName   string  `json:"home_team_name"`
     AwayTeamName   string  `json:"away_team_name"`
+    HomeLeagueEntry       LeagueEntry         `json:"home_league_entry"`
+    AwayLeagueEntry       LeagueEntry         `json:"away_league_entry"`
+    League                League              `json:"league"`
 }

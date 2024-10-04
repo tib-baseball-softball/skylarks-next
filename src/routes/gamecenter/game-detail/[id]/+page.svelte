@@ -6,10 +6,14 @@
     import MatchDetailLocationCard from "$lib/components/match/MatchDetailLocationCard.svelte";
     import MatchDetailOfficialsCard from "$lib/components/match/MatchDetailOfficialsCard.svelte";
 
-    export let data
+    interface Props {
+        data: any;
+    }
 
-    $: match = data.match
-    let tabSet: number = 0
+    let { data }: Props = $props();
+
+    let match = $derived(data.match)
+    let tabSet: number = $state(0)
 </script>
 
 <h1 class="h2 mt-3">Details zu Spiel {match.match_id}</h1>

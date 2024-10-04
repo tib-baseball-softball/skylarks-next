@@ -4,9 +4,13 @@
     import StandingsTable from "$lib/components/table/StandingsTable.svelte";
     import LeagueDetailInfoCard from "$lib/components/league/LeagueDetailInfoCard.svelte";
 
-    export let data: PageServerData
-    $: expectedTable = data.table
-    $: leagueGroup = data.leagueGroup
+    interface Props {
+        data: PageServerData;
+    }
+
+    let { data }: Props = $props();
+    let expectedTable = $derived(data.table)
+    let leagueGroup = $derived(data.leagueGroup)
 </script>
 
 <h1 class="h1 my-4">{leagueGroup.name} ({leagueGroup.season})</h1>

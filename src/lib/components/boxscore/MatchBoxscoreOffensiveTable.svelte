@@ -1,8 +1,12 @@
 <script lang="ts">
     import type {OffensiveMatchStats} from "bsm.js";
 
-    export let matchStats: OffensiveMatchStats
-    export let teamName: string
+    interface Props {
+        matchStats: OffensiveMatchStats;
+        teamName: string;
+    }
+
+    let { matchStats, teamName }: Props = $props();
 </script>
 
 <div class="table-container lg:max-w-[75%] dark:border-2">

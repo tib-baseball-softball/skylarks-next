@@ -1,13 +1,16 @@
-import {client} from "$lib/pocketbase";
-import type {LayoutLoad} from "../../../../.svelte-kit/types/src/routes/(protected)/account/$types";
-import type {TeamsResponse} from "$lib/model/pb-types";
+import { client } from "$lib/pocketbase";
+import type { LayoutLoad } from "../../../../.svelte-kit/types/src/routes/(protected)/account/$types";
+import type { ExpandedTeam } from "$lib/model/ExpandedResponse";
 
-export const load = (async ({ }) => {
-    const teams = client.collection("teams").getFullList<TeamsResponse>({
-        expand: "club"
-    })
+export const load = (async ({ fetch, depends }) => {
+  const teams = client.collection("teams").getFullList<ExpandedTeam>({
+    expand: "club",
+    fetch: fetch
+  })
 
-    return {
-        teams: teams
-    }
+  depends("teams:list")
+
+  return {
+    teams: teams
+  }
 }) satisfies LayoutLoad

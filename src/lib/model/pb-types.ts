@@ -142,7 +142,16 @@ export interface UsersResponse extends AuthCollectionResponse {
 	avatar: string;
 	teams: Array<string>;
 	club: Array<string>;
-	admin_for: Array<string>;
+	last_login: string;
+	birthday: string;
+	number: string;
+	position: Array<'0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12' | '13' | '14'>;
+	bats: '' | '0' | '1' | '2' | '3';
+	throws: '' | '0' | '1' | '2' | '3';
+	image: string;
+	umpire: '' | '0' | '1' | '2' | '3' | '4';
+	scorer: '' | '0' | '1' | '2' | '3';
+	bsm_id: number;
 }
 
 export interface UsersCreate extends AuthCollectionCreate {
@@ -151,7 +160,16 @@ export interface UsersCreate extends AuthCollectionCreate {
 	avatar?: File | null;
 	teams?: MaybeArray<string>;
 	club?: MaybeArray<string>;
-	admin_for?: MaybeArray<string>;
+	last_login?: string | Date;
+	birthday?: string | Date;
+	number?: string;
+	position?: MaybeArray<'0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12' | '13' | '14'>;
+	bats?: '' | '0' | '1' | '2' | '3';
+	throws?: '' | '0' | '1' | '2' | '3';
+	image?: File | null;
+	umpire?: '' | '0' | '1' | '2' | '3' | '4';
+	scorer?: '' | '0' | '1' | '2' | '3';
+	bsm_id?: number;
 }
 
 export interface UsersUpdate extends AuthCollectionUpdate {
@@ -164,9 +182,20 @@ export interface UsersUpdate extends AuthCollectionUpdate {
 	club?: MaybeArray<string>;
 	'club+'?: MaybeArray<string>;
 	'club-'?: MaybeArray<string>;
-	admin_for?: MaybeArray<string>;
-	'admin_for+'?: MaybeArray<string>;
-	'admin_for-'?: MaybeArray<string>;
+	last_login?: string | Date;
+	birthday?: string | Date;
+	number?: string;
+	position?: MaybeArray<'0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12' | '13' | '14'>;
+	'position+'?: MaybeArray<'0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12' | '13' | '14'>;
+	'position-'?: MaybeArray<'0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12' | '13' | '14'>;
+	bats?: '' | '0' | '1' | '2' | '3';
+	throws?: '' | '0' | '1' | '2' | '3';
+	image?: File | null;
+	umpire?: '' | '0' | '1' | '2' | '3' | '4';
+	scorer?: '' | '0' | '1' | '2' | '3';
+	bsm_id?: number;
+	'bsm_id+'?: number;
+	'bsm_id-'?: number;
 }
 
 export interface UsersCollection {
@@ -179,9 +208,9 @@ export interface UsersCollection {
 	relations: {
 		teams: TeamsCollection[];
 		club: ClubsCollection[];
-		admin_for: TeamsCollection[];
-		'events(participants)': EventsCollection[];
-		'users_events_mm(user)': UsersEventsMmCollection[];
+		'clubs(admins)': ClubsCollection[];
+		'teams(admins)': TeamsCollection[];
+		'participations(user)': ParticipationsCollection[];
 	};
 }
 
@@ -196,7 +225,6 @@ export interface EventsResponse extends BaseCollectionResponse {
 	meetingtime: string;
 	endtime: string;
 	type: 'game' | 'practice' | 'misc';
-	participants: Array<string>;
 	attire: string;
 	team: string;
 	cancelled: boolean;
@@ -213,7 +241,6 @@ export interface EventsCreate extends BaseCollectionCreate {
 	meetingtime: string | Date;
 	endtime?: string | Date;
 	type: 'game' | 'practice' | 'misc';
-	participants?: MaybeArray<string>;
 	attire?: string;
 	team: string;
 	cancelled?: boolean;
@@ -232,9 +259,6 @@ export interface EventsUpdate extends BaseCollectionUpdate {
 	meetingtime?: string | Date;
 	endtime?: string | Date;
 	type?: 'game' | 'practice' | 'misc';
-	participants?: MaybeArray<string>;
-	'participants+'?: MaybeArray<string>;
-	'participants-'?: MaybeArray<string>;
 	attire?: string;
 	team?: string;
 	cancelled?: boolean;
@@ -251,9 +275,9 @@ export interface EventsCollection {
 	create: EventsCreate;
 	update: EventsUpdate;
 	relations: {
-		participants: UsersCollection[];
+		attire: UniformsetsCollection;
 		team: TeamsCollection;
-		'users_events_mm(event)': UsersEventsMmCollection[];
+		'participations(event)': ParticipationsCollection[];
 	};
 }
 
@@ -265,6 +289,7 @@ export interface ClubsResponse extends BaseCollectionResponse {
 	bsm_id: number;
 	bsm_api_key: string;
 	acronym: string;
+	admins: Array<string>;
 }
 
 export interface ClubsCreate extends BaseCollectionCreate {
@@ -272,6 +297,7 @@ export interface ClubsCreate extends BaseCollectionCreate {
 	bsm_id?: number;
 	bsm_api_key?: string;
 	acronym?: string;
+	admins?: MaybeArray<string>;
 }
 
 export interface ClubsUpdate extends BaseCollectionUpdate {
@@ -281,6 +307,9 @@ export interface ClubsUpdate extends BaseCollectionUpdate {
 	'bsm_id-'?: number;
 	bsm_api_key?: string;
 	acronym?: string;
+	admins?: MaybeArray<string>;
+	'admins+'?: MaybeArray<string>;
+	'admins-'?: MaybeArray<string>;
 }
 
 export interface ClubsCollection {
@@ -292,7 +321,9 @@ export interface ClubsCollection {
 	update: ClubsUpdate;
 	relations: {
 		'users(club)': UsersCollection[];
+		admins: UsersCollection[];
 		'teams(club)': TeamsCollection[];
+		'uniformsets(club)': UniformsetsCollection[];
 	};
 }
 
@@ -305,6 +336,7 @@ export interface TeamsResponse extends BaseCollectionResponse {
 	age_group: 'adults' | 'minors';
 	club: string;
 	description: string;
+	admins: Array<string>;
 }
 
 export interface TeamsCreate extends BaseCollectionCreate {
@@ -313,6 +345,7 @@ export interface TeamsCreate extends BaseCollectionCreate {
 	age_group: 'adults' | 'minors';
 	club: string;
 	description?: string;
+	admins?: MaybeArray<string>;
 }
 
 export interface TeamsUpdate extends BaseCollectionUpdate {
@@ -323,6 +356,9 @@ export interface TeamsUpdate extends BaseCollectionUpdate {
 	age_group?: 'adults' | 'minors';
 	club?: string;
 	description?: string;
+	admins?: MaybeArray<string>;
+	'admins+'?: MaybeArray<string>;
+	'admins-'?: MaybeArray<string>;
 }
 
 export interface TeamsCollection {
@@ -334,9 +370,9 @@ export interface TeamsCollection {
 	update: TeamsUpdate;
 	relations: {
 		'users(teams)': UsersCollection[];
-		'users(admin_for)': UsersCollection[];
 		'events(team)': EventsCollection[];
 		club: ClubsCollection;
+		admins: UsersCollection[];
 	};
 }
 
@@ -409,40 +445,80 @@ export interface LeaguegroupsCollection {
 	relations: Record<string, never>;
 }
 
-// ===== users_events_mm =====
+// ===== participations =====
 
-export interface UsersEventsMmResponse extends BaseCollectionResponse {
-	collectionName: 'users_events_mm';
+export interface ParticipationsResponse extends BaseCollectionResponse {
+	collectionName: 'participations';
 	user: string;
 	event: string;
 	comment: string;
 	state: '' | 'in' | 'out' | 'maybe';
 }
 
-export interface UsersEventsMmCreate extends BaseCollectionCreate {
+export interface ParticipationsCreate extends BaseCollectionCreate {
 	user?: string;
 	event?: string;
 	comment?: string;
 	state?: '' | 'in' | 'out' | 'maybe';
 }
 
-export interface UsersEventsMmUpdate extends BaseCollectionUpdate {
+export interface ParticipationsUpdate extends BaseCollectionUpdate {
 	user?: string;
 	event?: string;
 	comment?: string;
 	state?: '' | 'in' | 'out' | 'maybe';
 }
 
-export interface UsersEventsMmCollection {
+export interface ParticipationsCollection {
 	type: 'base';
 	collectionId: string;
-	collectionName: 'users_events_mm';
-	response: UsersEventsMmResponse;
-	create: UsersEventsMmCreate;
-	update: UsersEventsMmUpdate;
+	collectionName: 'participations';
+	response: ParticipationsResponse;
+	create: ParticipationsCreate;
+	update: ParticipationsUpdate;
 	relations: {
 		user: UsersCollection;
 		event: EventsCollection;
+	};
+}
+
+// ===== uniformsets =====
+
+export interface UniformsetsResponse extends BaseCollectionResponse {
+	collectionName: 'uniformsets';
+	name: string;
+	cap: string;
+	jersey: string;
+	pants: string;
+	club: string;
+}
+
+export interface UniformsetsCreate extends BaseCollectionCreate {
+	name: string;
+	cap: string;
+	jersey: string;
+	pants: string;
+	club: string;
+}
+
+export interface UniformsetsUpdate extends BaseCollectionUpdate {
+	name?: string;
+	cap?: string;
+	jersey?: string;
+	pants?: string;
+	club?: string;
+}
+
+export interface UniformsetsCollection {
+	type: 'base';
+	collectionId: string;
+	collectionName: 'uniformsets';
+	response: UniformsetsResponse;
+	create: UniformsetsCreate;
+	update: UniformsetsUpdate;
+	relations: {
+		'events(attire)': EventsCollection[];
+		club: ClubsCollection;
 	};
 }
 
@@ -455,5 +531,6 @@ export type Schema = {
 	teams: TeamsCollection;
 	requestcaches: RequestcachesCollection;
 	leaguegroups: LeaguegroupsCollection;
-	users_events_mm: UsersEventsMmCollection;
+	participations: ParticipationsCollection;
+	uniformsets: UniformsetsCollection;
 };

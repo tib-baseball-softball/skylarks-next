@@ -3,11 +3,15 @@
     import type {Match} from "bsm.js";
     import CurrentMatchBlock from "$lib/components/match/CurrentMatchBlock.svelte";
 
-    let tabSet: number = 1;
+    let tabSet: number = $state(1);
 
-    export let matchesCurrent: Promise<Match[]>
-    export let matchesPrevious: Promise<Match[]>
-    export let matchesNext: Promise<Match[]>
+    interface Props {
+        matchesCurrent: Promise<Match[]>;
+        matchesPrevious: Promise<Match[]>;
+        matchesNext: Promise<Match[]>;
+    }
+
+    let { matchesCurrent, matchesPrevious, matchesNext }: Props = $props();
 </script>
 
 <div class="card overview-card variant-soft-surface dark:border dark:border-tertiary-500-400-token">

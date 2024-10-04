@@ -4,7 +4,11 @@
     import ReloadUponSeasonChange from "$lib/components/navigation/ReloadUponSeasonChange.svelte";
     import {preferences} from "$lib/stores";
 
-    export let data
+    interface Props {
+        data: any;
+    }
+
+    let { data }: Props = $props();
 </script>
 
 <div class="my-2 md:flex justify-between items-center">

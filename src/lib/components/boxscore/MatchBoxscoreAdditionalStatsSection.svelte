@@ -3,7 +3,11 @@
     import MatchBoxscoreAdditionalStatsSectionEntry
         from "$lib/components/boxscore/MatchBoxscoreAdditionalStatsSectionEntry.svelte";
 
-    export let stats: AdditionalMatchStats
+    interface Props {
+        stats: AdditionalMatchStats;
+    }
+
+    let { stats }: Props = $props();
 </script>
 
 <section class="my-3">

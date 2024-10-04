@@ -1,5 +1,9 @@
 <script lang="ts">
-    import type {PageStore} from ".";
+    import type { PageStore } from "$lib/pocketbase/PageStore";
+    import {
+        ChevronDoubleLeftOutline,
+        ChevronDoubleRightOutline,
+    } from "flowbite-svelte-icons";
 
     const {
         store,
@@ -11,28 +15,31 @@
 </script>
 
 {#if showIfSinglePage || $store.totalPages > 1}
-    <div class="paginator">
-        <button
-            type="button"
-            onclick={() => store.prev()}
-            disabled={$store.page <= 1}>&laquo;
-        </button
-        >
-        <div>page {$store.page} of {$store.totalPages}</div>
-        <button
-            type="button"
-            onclick={() => store.next()}
-            disabled={$store.page >= $store.totalPages}>&raquo;
-        </button
-        >
+    <div
+        class="paginator flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 justify-between"
+    >
+        <div class="paginator-controls btn-group variant-soft-surface">
+            <button
+                class="fill-current"
+                type="button"
+                onclick={() => store.prev()}
+                disabled={$store.page <= 1}
+            >
+                <ChevronDoubleLeftOutline />
+            </button>
+
+            <button class="pointer-events-none !text-sm"
+                >{$store.page}/{$store.totalPages}</button
+            >
+
+            <button
+                class="fill-current"
+                type="button"
+                onclick={() => store.next()}
+                disabled={$store.page >= $store.totalPages}
+            >
+                <ChevronDoubleRightOutline />
+            </button>
+        </div>
     </div>
 {/if}
-
-<style lang="postcss">
-    .paginator {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        margin: auto;
-    }
-</style>

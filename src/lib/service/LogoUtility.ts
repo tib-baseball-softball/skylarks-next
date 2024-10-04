@@ -45,7 +45,7 @@ export class LogoUtility {
             }
         }
 
-        if (team.clubs.at(0)) {
+        if (team?.clubs.at(0)) {
             const club = team.clubs[0]
             return club.logo_url ?? LogoUtility.FILE_PATH + 'default.svg'
         }

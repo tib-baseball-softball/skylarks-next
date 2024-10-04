@@ -7,7 +7,11 @@
     import type {Player} from "$lib/model/Player";
     import PlayerDataCard from "$lib/components/player/PlayerDataCard.svelte";
 
-    export let data: PageServerData
+    interface Props {
+        data: PageServerData;
+    }
+
+    let { data }: Props = $props();
 
     async function getData(): Promise<StatsDataset> {
         return {

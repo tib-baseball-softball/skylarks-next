@@ -1,8 +1,17 @@
 <script lang="ts">
-    export let logo: string
-    export let teamName: string
-    export let score: number | undefined
-    export let subduedScore: boolean
+    interface Props {
+        logo: string;
+        teamName: string;
+        score: number | undefined;
+        subduedScore: boolean;
+    }
+
+    let {
+        logo,
+        teamName,
+        score,
+        subduedScore
+    }: Props = $props();
 </script>
 
 <div class="flex justify-between items-center">

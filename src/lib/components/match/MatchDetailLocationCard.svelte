@@ -5,7 +5,11 @@
         LinkOutline, MapPinOutline
     } from "flowbite-svelte-icons";
 
-    export let match: Match
+    interface Props {
+        match: Match;
+    }
+
+    let { match }: Props = $props();
 
     function buildMapsURL(): string {
         const baseURL = "https://www.google.com/maps/search/"

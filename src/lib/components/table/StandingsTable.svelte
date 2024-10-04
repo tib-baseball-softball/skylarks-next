@@ -2,7 +2,11 @@
     import type {Table} from "bsm.js";
     import {PUBLIC_TEAM_NAME} from "$env/static/public";
 
-    export let table: Table
+    interface Props {
+        table: Table;
+    }
+
+    let { table }: Props = $props();
 </script>
 
 <div class="table-container dark:border-2">

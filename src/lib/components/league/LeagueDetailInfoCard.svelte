@@ -4,7 +4,11 @@
         FileLinesOutline, FlagOutline, TagOutline, UsersGroupOutline
     } from "flowbite-svelte-icons";
 
-    export let leagueGroup: LeagueGroup
+    interface Props {
+        leagueGroup: LeagueGroup;
+    }
+
+    let { leagueGroup }: Props = $props();
 </script>
 
 <div class="card variant-ghost-surface p-3">

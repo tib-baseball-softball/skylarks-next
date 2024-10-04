@@ -4,8 +4,12 @@
     import {PUBLIC_TEAM_NAME} from "$env/static/public";
     import ContentFilteredUnavailable from "$lib/components/match/ContentFilteredUnavailable.svelte";
 
-    export let matches: Match[] = []
-    export let showExternal = false
+    interface Props {
+        matches?: Match[];
+        showExternal?: boolean;
+    }
+
+    let { matches = [], showExternal = false }: Props = $props();
     let skylarksGames = matches.filter(match => match.away_team_name.includes(PUBLIC_TEAM_NAME) || match.home_team_name.includes(PUBLIC_TEAM_NAME))
 </script>
 

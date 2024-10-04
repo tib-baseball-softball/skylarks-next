@@ -116,5 +116,14 @@
 		"transition",
 		"width",
 		"zIndex"
+	],
+	"sqltools.useNodeRuntime": true,
+	"sqltools.connections": [
+		{
+			"previewLimit": 50,
+			"driver": "SQLite",
+			"database": "${workspaceFolder:skylarks-next}/backend/pb_data/data.db",
+			"name": "PB DP"
+		}
 	]
 }

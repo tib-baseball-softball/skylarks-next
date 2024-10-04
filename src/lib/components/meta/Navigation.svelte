@@ -2,11 +2,11 @@
     import {Accordion, AccordionItem, getDrawerStore} from "@skeletonlabs/skeleton";
     import {client} from "$lib/pocketbase";
     import {
-        ChartPieOutline,
+        ChartMixedOutline,
         HomeOutline, LockOutline, ProfileCardOutline, TableRowOutline, TicketOutline, UsersGroupOutline, UsersOutline
     } from "flowbite-svelte-icons";
     import {browser} from "$app/environment";
-    import type {TeamsResponse} from "$lib/model/pb-types";
+    import type { ExpandedTeam } from "$lib/model/ExpandedResponse";
 
     const drawerStore = getDrawerStore();
 
@@ -14,7 +14,7 @@
         drawerStore.close();
     }
 
-    async function getUserTeams(): Promise<TeamsResponse[]> {
+    async function getUserTeams(): Promise<ExpandedTeam[]> {
         if (browser) {
             return await client.collection("teams").getFullList({expand: "club"})
         }
@@ -22,11 +22,11 @@
     }
 </script>
 
-<nav class="list-nav py-1 px-4">
+<nav class="list-nav py-1 px-1 lg:px-4">
     <ul class="subpixel-antialiased">
 
         <li>
-            <a href="/" on:click={drawerClose}>
+            <a href="/" onclick={drawerClose}>
                 <HomeOutline size="lg"/>
                 <span>Start</span>
             </a>
@@ -34,20 +34,20 @@
 
         <!--        <li><a href="/aktuelles" on:click={drawerClose}>Aktuelles</a></li>-->
         <li>
-            <a href="/gamecenter" on:click={drawerClose}>
+            <a href="/gamecenter" onclick={drawerClose}>
                 <TicketOutline size="lg"/>
                 <span>Gamecenter</span>
             </a>
         </li>
         <li>
 
-            <a href="/ligen" on:click={drawerClose}>
+            <a href="/ligen" onclick={drawerClose}>
                 <TableRowOutline size="lg"/>
                 <span>Ligen</span>
             </a>
         </li>
         <li>
-            <a href="/teams" on:click={drawerClose}>
+            <a href="/teams" onclick={drawerClose}>
                 <UsersGroupOutline size="lg"/>
                 <span>Teams</span>
             </a>
@@ -75,24 +75,29 @@
 
                 <svelte:fragment slot="content">
 
-                    <a href="/account" on:click={drawerClose}>
+                    <a href="/account" onclick={drawerClose}>
                         <ProfileCardOutline size="lg"/>
                         <span>Meine Seite</span>
                     </a>
 
                     {#await getUserTeams() then teams}
                         {#each teams as team}
-                            <a href="/account/team/{team.id}" on:click={drawerClose}>
+                            <a href="/account/team/{team.id}" onclick={drawerClose}>
                                 <UsersOutline size="lg"/>
                                 <span>{team.name} ({team?.expand?.club?.acronym})</span>
+                            </a>
+
+                            <a class="ms-3" href="/account/team/{team.id}/members" onclick={drawerClose}>
+                                <UsersGroupOutline size="lg"/>
+                                <span>Players</span>
                             </a>
                         {/each}
                     {/await}
 
                     <hr/>
 
-                    <a href="#" on:click={drawerClose}>
-                        <ChartPieOutline size="lg"/>
+                    <a href="#" onclick={drawerClose}>
+                        <ChartMixedOutline size="lg"/>
                         <span>Admin Dashboard</span>
                     </a>
 

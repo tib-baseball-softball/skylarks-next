@@ -5,7 +5,11 @@
     import MatchBoxscoreAdditionalStatsSection from "$lib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte";
     import MatchBoxscorePitchingTable from "$lib/components/boxscore/MatchBoxscorePitchingTable.svelte";
 
-    export let boxscore: MatchBoxscore
+    interface Props {
+        boxscore: MatchBoxscore;
+    }
+
+    let { boxscore }: Props = $props();
     const awayTeamName = boxscore.linescore.away.league_entry.team?.name ?? "Away Team"
     const homeTeamName = boxscore.linescore.home.league_entry.team?.name ?? "Home Team"
 </script>
