@@ -2,12 +2,12 @@ name: Deploy to Production Server
 
 on:
   workflow_dispatch:
-  push:
-    paths-ignore:
-      - '**/README.md'
-      - 'docs/**'
-    branches:
-      - main
+  #push:
+    #paths-ignore:
+    #  - '**/README.md'
+    #  - 'docs/**'
+    #branches:
+    #  - main
 
 jobs:
   deploy:
