@@ -1,43 +1,48 @@
 <script lang="ts">
-    import { run } from 'svelte/legacy';
+    import { run } from "svelte/legacy";
 
     import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte";
-    import {ProgressBar, SlideToggle, Tab, TabGroup} from "@skeletonlabs/skeleton";
-    import {Gameday} from "bsm.js";
-    import {preferences} from "$lib/stores";
+    import {
+        ProgressBar,
+        SlideToggle,
+        Tab,
+        TabGroup,
+    } from "@skeletonlabs/skeleton";
+    import { Gameday } from "bsm.js";
+    import { preferences } from "$lib/stores";
     import LeagueFilter from "$lib/components/utility/LeagueFilter.svelte";
-    import {goto} from "$app/navigation";
-    import {browser} from "$app/environment";
+    import { goto } from "$app/navigation";
+    import { browser } from "$app/environment";
     import GamecenterMatchSection from "$lib/components/match/GamecenterMatchSection.svelte";
 
-    const DEFAULT_LEAGUE_GROUP_ID = 0
+    const DEFAULT_LEAGUE_GROUP_ID = 0;
 
     const reloadGameData = () => {
         if (browser) {
-            let queryString = `?gameday=${$preferences.gameday}&season=${$preferences.selectedSeason}`
+            let queryString = `?gameday=${$preferences.gameday}&season=${$preferences.selectedSeason}`;
 
             if ($preferences.leagueGroupID !== DEFAULT_LEAGUE_GROUP_ID) {
-                queryString = queryString + `&leagueGroup=${$preferences.leagueGroupID}`
+                queryString =
+                    queryString + `&leagueGroup=${$preferences.leagueGroupID}`;
             }
-            goto(queryString)
+            goto(queryString);
         }
-    }
+    };
 
     interface Props {
         data: any;
     }
 
     let { data }: Props = $props();
-    let leagueGroups = $derived(data.leagueGroups)
+    let leagueGroups = $derived(data.leagueGroups);
 
     run(() => {
-        console.log(`preferences ${$preferences.toString()} changed - reload`)
-        reloadGameData()
+        console.log(`preferences ${$preferences.toString()} changed - reload`);
+        reloadGameData();
     });
 
-    let showExternal = $state(false)
+    let showExternal = $state(false);
 </script>
-
 
 <div class="my-2 md:flex justify-between items-start">
     <h1 class="h1">Gamecenter</h1>
@@ -45,44 +50,58 @@
     <div>
         <div class="flex gap-2">
             {#await leagueGroups then groups}
-                <LeagueFilter leagueGroups="{groups}"/>
+                <LeagueFilter leagueGroups={groups} />
             {/await}
-            <SeasonSelector/>
+            <SeasonSelector />
         </div>
 
         <div class="flex gap-2 my-4 justify-end">
-            <SlideToggle size="sm" name="slide" active="bg-surface-900 dark:bg-tertiary-700" bind:checked={showExternal} />
+            <SlideToggle
+                size="sm"
+                name="slide"
+                active="bg-surface-900 dark:bg-tertiary-700"
+                bind:checked={showExternal}
+            />
             <p>Zeige externe Spiele</p>
         </div>
     </div>
 </div>
 
 <section class="mb-5 mt-3">
-    <label id="gameday_label">Spieltag</label>
-    <TabGroup justify="justify-center" labelledby="gameday_label">
-        <Tab bind:group={$preferences.gameday} name="tabPrevious" value={Gameday.previous}>Voriger</Tab>
-        <Tab bind:group={$preferences.gameday} name="tabCurrent" value={Gameday.current}>Aktueller</Tab>
-        <Tab bind:group={$preferences.gameday} name="tabNext" value={Gameday.next}>Nächster</Tab>
-        <Tab bind:group={$preferences.gameday} name="tabAny" value={Gameday.any}>Alle</Tab>
-        <!-- Tab Panels --->
-        <svelte:fragment slot="panel">
-
-
-        </svelte:fragment>
-    </TabGroup>
+    <label id="gameday_label">
+        Spieltag
+        <TabGroup justify="justify-center" labelledby="gameday_label">
+            <Tab
+                bind:group={$preferences.gameday}
+                name="tabPrevious"
+                value={Gameday.previous}>Voriger</Tab
+            >
+            <Tab
+                bind:group={$preferences.gameday}
+                name="tabCurrent"
+                value={Gameday.current}>Aktueller</Tab
+            >
+            <Tab
+                bind:group={$preferences.gameday}
+                name="tabNext"
+                value={Gameday.next}>Nächster</Tab
+            >
+            <Tab
+                bind:group={$preferences.gameday}
+                name="tabAny"
+                value={Gameday.any}>Alle</Tab
+            >
+            <!-- Tab Panels --->
+            <svelte:fragment slot="panel"></svelte:fragment>
+        </TabGroup>
+    </label>
 </section>
 
 {#await data.streamed.matches}
-
     <p>Loading matches...</p>
-    <ProgressBar/>
-
+    <ProgressBar />
 {:then matches}
-
-    <GamecenterMatchSection {matches} {showExternal}/>
-
+    <GamecenterMatchSection {matches} {showExternal} />
 {:catch error}
-
     <p>error loading matches: {error.message}</p>
-
 {/await}
