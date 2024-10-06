@@ -24,25 +24,26 @@
 
 <h1 class="h1 my-4">{clubTeam.team.name} (Saison {clubTeam.team.season})</h1>
 
-<section class="my-5">
-    <h2 class="h2">Informationen</h2>
-    <div
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-6 xl:gap-8"
-    >
-        <TeamDetailInfoCard {clubTeam} />
+<section class="my-5 lg:max-w-[50%]">
+    <h2 class="h2">Information</h2>
 
-        {#await data?.table}
-            <ProgressRadial />
-        {:then table}
-            {#if table}
-                <div class="col-span-2">
-                    <StandingsTable {table} />
-                </div>
-            {/if}
-        {:catch error}
-            <p>error loading: {error.message}</p>
-        {/await}
-    </div>
+    <TeamDetailInfoCard {clubTeam} />
+</section>
+
+<section>
+    <h2 class="h2">Standings</h2>
+
+    {#await data?.table}
+        <ProgressRadial />
+    {:then table}
+        {#if table}
+            <div class="col-span-2 standings-container">
+                <StandingsTable {table} />
+            </div>
+        {/if}
+    {:catch error}
+        <p>error loading: {error.message}</p>
+    {/await}
 </section>
 
 <section class="my-2">
@@ -61,5 +62,12 @@
 <style lang="postcss">
     h2 {
         @apply mb-3;
+    }
+
+    /* ugly hack to prevent table overflow */
+    @media (min-width: 1400px) and (max-width: 1800px) {
+        .standings-container {
+            @apply max-w-[90%];
+        }
     }
 </style>

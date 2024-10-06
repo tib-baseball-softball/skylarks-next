@@ -1,10 +1,12 @@
 <script lang="ts">
-    import type {StatisticsData} from "bsm.js";
-    import {StatsType} from "bsm.js";
+    import type { StatisticsData } from "bsm.js";
+    import { StatsType } from "bsm.js";
 
     interface Props {
         type: StatsType;
-        row: StatisticsData<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics">;
+        row: StatisticsData<
+            "BattingStatistics" | "PitchingStatistics" | "FieldingStatistics"
+        >;
         tableType: "personal" | "seasonal";
     }
 
@@ -31,10 +33,10 @@
     <td>{row.values.sacrifice_hits}</td>
     <td>{row.values.sacrifice_flys}</td>
     <td>{row.values.interferences}</td>
-    <td>{row.values.batting_average}</td>
+    <td class="font-semibold">{row.values.batting_average}</td>
     <td>{row.values.on_base_percentage}</td>
     <td>{row.values.slugging_percentage}</td>
-    <td>{row.values.on_base_plus_slugging}</td>
+    <td class="font-semibold">{row.values.on_base_plus_slugging}</td>
 {/if}
 
 {#if type === StatsType.pitching}
@@ -56,7 +58,7 @@
     <td>{row.values.intentional_base_on_balls}</td>
     <td>{row.values.hit_by_pitches}</td>
     <td>{row.values.interferences}</td>
-    <td>{row.values.earned_runs_average}</td>
+    <td class="font-semibold">{row.values.earned_runs_average}</td>
     <td>{row.values.innings_pitched}</td>
     <td>{row.values.walks_and_hits_per_innings_pitched}</td>
     <td>{row.values.wins}</td>
@@ -76,7 +78,7 @@
     <td>{row.values.passed_balls}</td>
     <td>{row.values.stolen_bases}</td>
     <td>{row.values.caught_stealings}</td>
-    <td>{row.values.fielding_average}</td>
+    <td class="font-semibold">{row.values.fielding_average}</td>
 {/if}
 {#if tableType === "seasonal" && type === StatsType.fielding}
     <td>{row.values.pitcher}</td>

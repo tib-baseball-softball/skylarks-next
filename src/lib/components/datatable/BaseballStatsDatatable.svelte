@@ -52,12 +52,12 @@
         }
     }
 
-    run(() => {
+    $effect.pre(() => {
         changeDataForHandler(type);
     });
 </script>
 
-<div class=" overflow-x-auto space-y-4 table-container">
+<div class="overflow-x-auto space-y-4 table-container">
     <!-- Header -->
     <header class="flex justify-between gap-4">
         <Search {handler} />
@@ -118,5 +118,12 @@
         @apply md:mb-3 !important;
         @apply lg:mt-6 !important;
         @apply lg:mb-4 !important;
+    }
+
+    /* ugly hack to prevent table overflow */
+    @media (min-width: 1400px) and (max-width: 1800px) {
+        .table-container {
+            @apply max-w-[90%];
+        }
     }
 </style>
