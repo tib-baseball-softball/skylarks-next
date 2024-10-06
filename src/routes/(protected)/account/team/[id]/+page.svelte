@@ -13,6 +13,8 @@
     import type { EventType } from "$lib/model/ExpandedResponse.js";
     import {
         getDrawerStore,
+        RadioGroup,
+        RadioItem,
         type DrawerSettings,
     } from "@skeletonlabs/skeleton";
 
@@ -75,33 +77,31 @@
 
 <h2 class="h3">Team Events</h2>
 
-<div class="flex flex-wrap gap-4 variant-soft-surface px-4 py-3 rounded-token">
-    <label class="flex items-center space-x-2">
-        <input
-            class="radio"
-            type="radio"
-            checked
-            name="radio-next"
-            value="next"
-            bind:group={showEvents}
-        />
-        <p>Next</p>
+<div
+    class="flex flex-wrap gap-4 lg:gap-8 variant-soft-surface px-4 py-3 rounded-token"
+>
+    <label
+        class="flex items-center gap-2 flex-grow justify-between md:flex-grow-0"
+    >
+        Timeframe
+        <RadioGroup>
+            <RadioItem
+                checked
+                name="radio-next"
+                value="next"
+                bind:group={showEvents}
+            >
+                Next
+            </RadioItem>
+            <RadioItem name="radio-past" value="past" bind:group={showEvents}>
+                Past
+            </RadioItem>
+        </RadioGroup>
     </label>
 
-    <label class="flex items-center space-x-2">
-        <input
-            class="radio"
-            type="radio"
-            name="radio-past"
-            value="past"
-            bind:group={showEvents}
-        />
-        <p>Past</p>
-    </label>
-
-    <span class="divider-vertical h-10 mx-3"></span>
-
-    <label class="label flex items-center gap-2">
+    <label
+        class="label flex items-center gap-2 flex-grow justify-between md:flex-grow-0"
+    >
         Sort
         <select class="select" bind:value={sorting} onchange={reloadWithQuery}>
             <option value="asc">Ascending</option>
@@ -109,10 +109,10 @@
         </select>
     </label>
 
-    <span class="divider-vertical h-10 mx-3"></span>
-
-    <label class="label flex items-center gap-2">
-        Show
+    <label
+        class="label flex items-center gap-2 flex-grow justify-between md:flex-grow-0"
+    >
+        Type
         <select
             class="select"
             bind:value={showTypes}
