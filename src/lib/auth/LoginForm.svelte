@@ -3,6 +3,7 @@
     import {client} from "../pocketbase";
     import { providerLogin } from "$lib/pocketbase/Auth";
     import { goto } from "$app/navigation";
+    import type { AuthProviderInfo } from "pocketbase";
 
     const {
         authCollection = "users",
@@ -33,6 +34,14 @@
             await coll.authWithPassword(form.email, form.password, { expand: "club" })
             goto("/account")
         }
+    }
+
+    async function submitOAuthRequest(provider: AuthProviderInfo) {
+      providerLogin(provider, coll)
+      goto("/account")
+
+      //@ts-ignore
+      parent.onClose()
     }
 
     let tabSet = $state(0);
@@ -118,9 +127,9 @@
 
             {#await coll.listAuthMethods({$autoCancel: false}) then methods}
 
-                {#each methods.authProviders as p}
-                    <button class="btn variant-ghost-tertiary" type="button" onclick={() => providerLogin(p, coll)}
-                    >Sign-in with {p.name}</button
+                {#each methods.authProviders as provider}
+                    <button class="btn variant-ghost-tertiary" type="button" onclick={() => submitOAuthRequest(provider)}
+                    >Sign-in with {provider.name}</button
                     >
                 {/each}
 
