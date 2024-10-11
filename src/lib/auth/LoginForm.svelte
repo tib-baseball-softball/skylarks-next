@@ -38,7 +38,6 @@
 
     async function submitOAuthRequest(provider: AuthProviderInfo) {
       providerLogin(provider, coll)
-      goto("/account")
 
       //@ts-ignore
       parent.onClose()
