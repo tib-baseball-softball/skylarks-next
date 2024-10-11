@@ -5,7 +5,6 @@
     import {LightSwitch} from '@skeletonlabs/skeleton';
     import {initializeStores, Drawer, getDrawerStore} from '@skeletonlabs/skeleton';
     import Footer from "$lib/components/meta/Footer.svelte";
-    import {ExclamationCircleOutline} from "flowbite-svelte-icons";
     import LoginBadge from "$lib/auth/LoginBadge.svelte";
     import LoginForm from "$lib/auth/LoginForm.svelte";
     import AccountModal from "$lib/auth/AccountModal.svelte";

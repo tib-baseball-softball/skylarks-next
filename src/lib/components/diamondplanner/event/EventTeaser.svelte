@@ -1,7 +1,6 @@
 <script lang="ts">
     import EventTypeBadge from "$lib/components/diamondplanner/event/EventTypeBadge.svelte";
     import type { ExpandedEvent } from "$lib/model/ExpandedResponse";
-    import postcss from "postcss";
     import EventCoreInfo from "./EventCoreInfo.svelte";
     import EventParticipationSection from "./EventParticipationSection.svelte";
     import { CloseOutline } from "flowbite-svelte-icons";
