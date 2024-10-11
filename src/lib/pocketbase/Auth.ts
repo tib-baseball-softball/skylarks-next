@@ -1,10 +1,10 @@
 import { invalidateAll } from "$app/navigation";
-import type { AuthModel, AdminModel, AuthProviderInfo, RecordService } from "pocketbase";
+import type { AuthModel, AuthProviderInfo, RecordService } from "pocketbase";
 import { readable } from "svelte/store";
 import { client } from ".";
 import { save } from "./RecordOperations";
 
-export const authModel = readable<AuthModel | AdminModel | null>(
+export const authModel = readable<AuthModel | null>(
   null,
   function (set, update) {
     client.authStore.onChange((token, model) => {

@@ -4,25 +4,25 @@ import type { ClubsResponse, EventsResponse, ParticipationsResponse, TeamsRespon
 export type Extension<T, E> = T & E
 
 export type ExpandedEvent = Extension<EventsResponse, {
-    expand: {
-        participations_via_event?: Extension<ParticipationsResponse, {
-            expand: {
-                user: UsersResponse
-            }
-        }>[],
-        attire?: UniformsetsResponse,
-        team?: ExpandedTeam
-    }
+  expand: {
+    participations_via_event?: Extension<ParticipationsResponse, {
+      expand: {
+        user: UsersResponse
+      }
+    }>[],
+    attire?: UniformsetsResponse,
+    team?: ExpandedTeam
+  }
 }>
 
 export type ExpandedTeam = Extension<TeamsResponse, {
-    expand: {
-        club: ClubsResponse
-    }
+  expand: {
+    club: ClubsResponse
+  }
 }>
 
 export type CustomAuthModel = Extension<AuthModel, {
-    email: string,
+  email?: string,
 } & UsersResponse>
 
 export type EventType = EventsResponse['type']
