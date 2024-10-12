@@ -1,8 +1,8 @@
-import { invalidateAll } from "$app/navigation";
-import type { AuthModel, AuthProviderInfo, RecordService } from "pocketbase";
-import { readable } from "svelte/store";
-import { client } from ".";
-import { save } from "./RecordOperations";
+import {invalidateAll} from "$app/navigation";
+import type {AuthModel, AuthProviderInfo, RecordService} from "pocketbase";
+import {readable} from "svelte/store";
+import {client} from ".";
+import {save} from "./RecordOperations";
 
 export const authModel = readable<AuthModel | null>(
   null,
@@ -29,12 +29,12 @@ export async function login(
   rest: { [key: string]: any } = {},
 ) {
   if (register) {
-    const user = { ...rest, email, password, confirmPassword: password };
+    const user = {...rest, email, password, confirmPassword: password};
     await client.collection("users").create(user);
   }
   await client
     .collection("users")
-    .authWithPassword(email, password, { expand: "club" });
+    .authWithPassword(email, password, {expand: "club"});
 }
 
 export function logout() {
@@ -50,9 +50,12 @@ export async function providerLogin(
     createData: {
       // emailVisibility: true,
     },
+    query: {
+      expand: "club"
+    }
   });
   // update user "record" if "meta" has info it doesn't have
-  const { meta, record } = authResponse;
+  const {meta, record} = authResponse;
   let changes = {} as { [key: string]: any };
   if (!record.name && meta?.name) {
     changes.name = meta.name;
@@ -61,7 +64,7 @@ export async function providerLogin(
     const response = await fetch(meta.avatarUrl);
     if (response.ok) {
       const type = response.headers.get("content-type") ?? "image/jpeg";
-      changes.avatar = new File([await response.blob()], "avatar", { type });
+      changes.avatar = new File([await response.blob()], "avatar", {type});
     }
   }
   if (Object.keys(changes).length) {
