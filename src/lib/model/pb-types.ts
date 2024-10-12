@@ -293,11 +293,11 @@ export interface ClubsResponse extends BaseCollectionResponse {
 }
 
 export interface ClubsCreate extends BaseCollectionCreate {
-	name?: string;
-	bsm_id?: number;
+	name: string;
+	bsm_id: number;
 	bsm_api_key?: string;
 	acronym?: string;
-	admins?: MaybeArray<string>;
+	admins: MaybeArray<string>;
 }
 
 export interface ClubsUpdate extends BaseCollectionUpdate {

@@ -267,7 +267,7 @@
     "listRule": "@request.auth.id != \"\" && (\n    // the same user as the authenticated one\n    id = @request.auth.id ||\n    // or share the same club\n    club.id ?= @request.auth.club.id\n)",
     "viewRule": "@request.auth.id != \"\" && (\n    // the same user as the authenticated one\n    id = @request.auth.id ||\n    // or share the same club\n    club.id ?= @request.auth.club.id\n)",
     "createRule": "",
-    "updateRule": "id = @request.auth.id",
+    "updateRule": "id = @request.auth.id // user editing themselves\n||\nclub.admins ?= @request.auth.id // editing user is Club admin",
     "deleteRule": null,
     "options": {
       "allowEmailAuth": true,
@@ -292,7 +292,7 @@
         "id": "lmqq9nog",
         "name": "name",
         "type": "text",
-        "required": false,
+        "required": true,
         "presentable": true,
         "unique": false,
         "options": {
@@ -306,7 +306,7 @@
         "id": "0tjealgq",
         "name": "bsm_id",
         "type": "number",
-        "required": false,
+        "required": true,
         "presentable": false,
         "unique": false,
         "options": {
@@ -348,7 +348,7 @@
         "id": "rvymt3c3",
         "name": "admins",
         "type": "relation",
-        "required": false,
+        "required": true,
         "presentable": false,
         "unique": false,
         "options": {
