@@ -3,9 +3,9 @@
   import {client} from "$lib/pocketbase";
   import {getDrawerStore, getToastStore, type ToastSettings,} from "@skeletonlabs/skeleton";
   import {CloseOutline} from "flowbite-svelte-icons";
-  import type {ClubsResponse, UsersUpdate} from "$lib/model/pb-types";
+  import type {ClubsResponse, UsersResponse, UsersUpdate} from "$lib/model/pb-types";
   import {authModel} from "$lib/pocketbase/Auth";
-  import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
+  import type {CustomAuthModel, ExpandedClub} from "$lib/model/ExpandedResponse";
 
   const toastStore = getToastStore();
   const drawerStore = getDrawerStore();
@@ -22,16 +22,21 @@
     background: "variant-filled-error",
   };
 
-  const form: ClubsResponse = $state(
+  const form: ExpandedClub = $state(
     $drawerStore.meta.club ?? {
       id: "",
       name: "",
       bsm_id: 0,
       bsm_api_key: "",
       acronym: "",
-      admins: [], // TODO: handle
+      admins: [],
     },
   );
+
+  let selectedAdmins: UsersResponse[] = $derived(form.expand.admins)
+
+  // API rule disallows users external to club
+  const allUsersForClub = client.collection("users").getFullList<UsersResponse>()
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
@@ -40,6 +45,10 @@
 
     try {
       if (form.id) {
+        form.admins = selectedAdmins.map((admin) => {
+          return admin.id
+        })
+
         result = await client
           .collection("clubs")
           .update<ClubsResponse>(form.id, form);
@@ -66,6 +75,35 @@
     }
     invalidateAll()
     drawerStore.close();
+  }
+
+  let adminSelect: HTMLSelectElement | undefined = $state()
+
+  function addAdminToSelection(users: UsersResponse[]) {
+    if (!adminSelect || adminSelect?.value === "") {
+      return
+    }
+    const selectedUser = users.find((user) => user.id === adminSelect?.value)
+    const adminExists = selectedAdmins.find((admin) => admin.id === selectedUser?.id)
+
+    if (selectedUser && adminSelect && !adminExists) {
+      selectedAdmins.push(selectedUser)
+    }
+    adminSelect.value = ""
+  }
+
+  function removeAdminFromSelection(admin: UsersResponse) {
+    const userRef = selectedAdmins.find(entry => entry.id === admin.id)
+
+    // TODO: check if last
+
+    if (userRef) {
+      const index = selectedAdmins.indexOf(userRef)
+
+      if (index !== -1) {
+        selectedAdmins.splice(index, 1)
+      }
+    }
   }
 </script>
 
@@ -147,6 +185,43 @@
                     If set, all game events for the club can be automatically imported.
                 </span>
             </label>
+
+            {#if form.id /* we are editing and might want to change admins */}
+                <label class="label space-y-3 md:col-span-2">
+                    <span>Club Admins</span><br>
+
+                    {#each selectedAdmins as admin}
+                        <button
+                            type="button"
+                            class="chip variant-filled-primary me-1 lg:me-2"
+                            onclick={() => removeAdminFromSelection(admin)}
+                        >
+                            <span>{admin.first_name} {admin.last_name}</span>
+                            <CloseOutline size="xs"/>
+                        </button>
+                    {/each}
+
+                    {#await allUsersForClub then users}
+                        <div>Select to add as admin:</div>
+                        <select
+                            class="select"
+                            bind:this={adminSelect}
+                            onchange={() => addAdminToSelection(users)}
+                        >
+                            <option selected value="">None</option>
+                            {#each users as user}
+                                <option value={user.id}>{user.first_name} {user.last_name}</option>
+                            {/each}
+                        </select>
+                    {/await}
+
+                    <span class="text-sm">
+                        Caution: You can remove yourself as admin, losing all access rights!
+                        <br>
+                        It is not possible to remove the last admin from a club.
+                    </span>
+                </label>
+            {/if}
         </div>
 
         <hr class="!my-5"/>

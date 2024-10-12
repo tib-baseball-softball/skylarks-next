@@ -12,7 +12,8 @@ export const load = (async ({fetch, depends}) => {
 
   const clubs = client.collection("clubs").getFullList<ClubsResponse>({
     // TODO: filter for own - API rule might not be enough
-    fetch: fetch
+    fetch: fetch,
+    expand: "admins",
   });
 
   depends("teams:list")

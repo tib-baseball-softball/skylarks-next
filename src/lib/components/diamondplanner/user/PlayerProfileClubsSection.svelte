@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type {ClubsResponse} from "$lib/model/pb-types";
   import {
     ArrowLeftToBracketOutline,
+    EditOutline,
     InfoCircleOutline,
     PlusOutline,
     ShieldOutline,
@@ -9,10 +9,10 @@
   } from "flowbite-svelte-icons";
   import {type DrawerSettings, getDrawerStore} from "@skeletonlabs/skeleton";
   import {authModel} from "$lib/pocketbase/Auth";
-  import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
+  import type {CustomAuthModel, ExpandedClub} from "$lib/model/ExpandedResponse";
 
   interface Props {
-    clubs: ClubsResponse[]
+    clubs: ExpandedClub[]
   }
 
   const model = $authModel as CustomAuthModel
@@ -24,12 +24,14 @@
     position: "right",
     width: "w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%]",
     meta: {
-      club: null
+      club: null,
+      admins: null,
     },
   })
 
-  function openDrawer(club?: ClubsResponse) {
+  function openDrawer(club?: ExpandedClub) {
     clubAddEditSettings.meta.club = club
+    clubAddEditSettings.meta.admins = club?.expand?.admins
     drawerStore.open(clubAddEditSettings)
   }
 </script>
@@ -69,7 +71,8 @@
         {#if club.admins.includes(model.id)}
             <footer class="card-footer flex justify-end">
                 <button class="btn variant-ghost-secondary" onclick={() => openDrawer(club)}>
-                    Edit Club
+                    <EditOutline/>
+                    <span>Edit Club</span>
                 </button>
             </footer>
         {/if}
