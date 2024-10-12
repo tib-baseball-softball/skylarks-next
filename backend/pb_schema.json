@@ -365,8 +365,8 @@
     ],
     "listRule": "@request.auth.id != \"\" && id ?~ @request.auth.club.id",
     "viewRule": "@request.auth.id != \"\" && id ?~ @request.auth.club.id",
-    "createRule": null,
-    "updateRule": "@request.auth.id != \"\" && @request.auth.id ?~ admins",
+    "createRule": "@request.auth.id != \"\"",
+    "updateRule": "@request.auth.id != \"\" && admins ?~ @request.auth.id",
     "deleteRule": null,
     "options": {}
   },
