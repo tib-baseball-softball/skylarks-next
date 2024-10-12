@@ -1,34 +1,37 @@
 <script lang="ts">
-    import type {ClubsResponse} from "$lib/model/pb-types";
-    import {
-        ArrowLeftToBracketOutline,
-        InfoCircleOutline,
-        PlusOutline,
-        ShieldOutline,
-        TagOutline
-    } from "flowbite-svelte-icons";
-    import {type DrawerSettings, getDrawerStore} from "@skeletonlabs/skeleton";
+  import type {ClubsResponse} from "$lib/model/pb-types";
+  import {
+    ArrowLeftToBracketOutline,
+    InfoCircleOutline,
+    PlusOutline,
+    ShieldOutline,
+    TagOutline
+  } from "flowbite-svelte-icons";
+  import {type DrawerSettings, getDrawerStore} from "@skeletonlabs/skeleton";
+  import {authModel} from "$lib/pocketbase/Auth";
+  import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
 
-    interface Props {
-        clubs: ClubsResponse[]
-    }
+  interface Props {
+    clubs: ClubsResponse[]
+  }
 
-    let {clubs}: Props = $props()
+  const model = $authModel as CustomAuthModel
+  let {clubs}: Props = $props()
 
-    const drawerStore = getDrawerStore()
-    let clubAddEditSettings: DrawerSettings = $state({
-        id: "club-form",
-        position: "right",
-        width: "w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%]",
-        meta: {
-            club: null
-        },
-    })
+  const drawerStore = getDrawerStore()
+  let clubAddEditSettings: DrawerSettings = $derived({
+    id: "club-form",
+    position: "right",
+    width: "w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%]",
+    meta: {
+      club: null
+    },
+  })
 
-    function openDrawer(club?: ClubsResponse) {
-        clubAddEditSettings.meta.club = club
-        drawerStore.open(clubAddEditSettings)
-    }
+  function openDrawer(club?: ClubsResponse) {
+    clubAddEditSettings.meta.club = club
+    drawerStore.open(clubAddEditSettings)
+  }
 </script>
 
 {#each clubs as club}
@@ -62,6 +65,14 @@
                 </div>
             </div>
         </section>
+
+        {#if club.admins.includes(model.id)}
+            <footer class="card-footer flex justify-end">
+                <button class="btn variant-ghost-secondary" onclick={() => openDrawer(club)}>
+                    Edit Club
+                </button>
+            </footer>
+        {/if}
     </div>
 {/each}
 

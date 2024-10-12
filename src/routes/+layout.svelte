@@ -13,6 +13,7 @@
     import EventForm from '$lib/components/forms/EventForm.svelte';
     import TeamForm from '$lib/components/forms/TeamForm.svelte';
     import PlayerDataForm from '$lib/components/forms/PlayerDataForm.svelte';
+    import ClubForm from "$lib/components/forms/ClubForm.svelte";
 
     interface Props {
         children?: import('svelte').Snippet;
@@ -65,6 +66,8 @@
         <TeamForm/>
     {:else if $drawerStore.id === "player-data-form"}
         <PlayerDataForm/>
+    {:else if $drawerStore.id === "club-form"}
+        <ClubForm/>
     {/if}
 </Drawer>
 
