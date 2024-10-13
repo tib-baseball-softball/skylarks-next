@@ -873,11 +873,11 @@
       "CREATE INDEX `idx_vBz1jG9` ON `teams` (`bsm_league_group`)",
       "CREATE INDEX `idx_enGi1E4` ON `teams` (\n  `name`,\n  `bsm_league_group`,\n  `club`\n)"
     ],
-    "listRule": "@request.auth.id != \"\" && id ?~ @request.auth.teams.id",
-    "viewRule": "@request.auth.id != \"\" && id ?~ @request.auth.teams.id",
+    "listRule": "@request.auth.id != \"\" && \n(id ?~ @request.auth.teams.id || club.admins.id ?= @request.auth.id)",
+    "viewRule": "@request.auth.id != \"\" && \n(id ?~ @request.auth.teams.id || club.admins.id ?= @request.auth.id)",
     "createRule": null,
-    "updateRule": "@request.auth.id != \"\" && admins ?~ @request.auth.id  ",
-    "deleteRule": "@request.auth.id != \"\" && admins ?~ @request.auth.id",
+    "updateRule": "@request.auth.id != \"\" && \n(admins.id ?= @request.auth.id || club.admins.id ?= @request.auth.id)",
+    "deleteRule": "@request.auth.id != \"\" && \n(admins.id ?= @request.auth.id || club.admins.id ?= @request.auth.id)",
     "options": {}
   },
   {
