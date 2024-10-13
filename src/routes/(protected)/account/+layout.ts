@@ -10,7 +10,8 @@ export const load = (async ({fetch, depends}) => {
   const teams = client.collection("teams").getFullList<ExpandedTeam>({
     filter: `"${model.teams}" ?~ id`,
     expand: "club",
-    fetch: fetch
+    fetch: fetch,
+    sort: "+name",
   })
 
   const clubs = client.collection("clubs").getFullList<ExpandedClub>({

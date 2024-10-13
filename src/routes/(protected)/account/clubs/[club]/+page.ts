@@ -1,6 +1,7 @@
 import type {PageLoad} from "./$types";
 import {client} from "$lib/pocketbase";
 import type {ExpandedClub, ExpandedTeam} from "$lib/model/ExpandedResponse";
+import type {UniformsetsResponse} from "$lib/model/pb-types";
 
 export const load = (async ({fetch, params, depends}) => {
 
@@ -13,6 +14,12 @@ export const load = (async ({fetch, params, depends}) => {
     filter: `club.id = "${club.id}"`,
     fetch: fetch,
     expand: "club",
+    sort: "+name",
+  })
+
+  const uniformSets = await client.collection("uniformsets").getFullList<UniformsetsResponse>({
+    filter: `club.id = "${club.id}"`,
+    fetch: fetch,
   })
 
   depends("club:single")
@@ -20,5 +27,6 @@ export const load = (async ({fetch, params, depends}) => {
   return {
     club: club,
     teams: teams,
+    uniformSets: uniformSets,
   }
 }) satisfies PageLoad
