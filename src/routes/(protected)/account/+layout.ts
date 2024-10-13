@@ -8,12 +8,13 @@ export const load = (async ({fetch, depends}) => {
   const model = get(authModel) as unknown as CustomAuthModel;
 
   const teams = client.collection("teams").getFullList<ExpandedTeam>({
+    filter: `"${model.teams}" ?~ id`,
     expand: "club",
     fetch: fetch
   })
 
   const clubs = client.collection("clubs").getFullList<ExpandedClub>({
-    filter: `id ?= "${model.club}"`,
+    filter: `"${model.club}" ?~ id`,
     fetch: fetch,
     expand: "admins",
   });

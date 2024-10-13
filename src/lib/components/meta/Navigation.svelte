@@ -41,7 +41,7 @@
       return await client
         .collection("clubs")
         .getFullList<ExpandedClub>({
-          filter: `id ?= "${model.club}"`
+          filter: `"${model.club}" ?~ id`,
         })
     }
     return []
@@ -133,37 +133,39 @@
                     <svelte:fragment slot="content">
                         {#await getUserClubs() then clubs}
                             {#each clubs as club}
-                                <a href="/clubs/{club.id}" onclick={drawerClose}>
+                                <a href="/account/clubs/{club.id}" onclick={drawerClose}>
                                     <ShieldOutline size="lg"/>
                                     <div>{club.name} ({club.acronym})</div>
                                 </a>
                             {/each}
                         {/await}
 
-                        <hr class="mx-8">
+                        {#if teams?.length > 0}
+                            <hr class="mx-8">
 
-                        {#each teams as team}
-                            <a
-                                href="/account/team/{team.id}"
-                                onclick={drawerClose}
-                            >
-                                <UsersOutline size="lg"/>
-                                <div
-                                >{team.name} ({team?.expand?.club
-                                    ?.acronym})
-                                </div
+                            {#each teams as team}
+                                <a
+                                    href="/account/team/{team.id}"
+                                    onclick={drawerClose}
                                 >
-                            </a>
+                                    <UsersOutline size="lg"/>
+                                    <div
+                                    >{team.name} ({team?.expand?.club
+                                        ?.acronym})
+                                    </div
+                                    >
+                                </a>
 
-                            <a
-                                class="ms-3"
-                                href="/account/team/{team.id}/members"
-                                onclick={drawerClose}
-                            >
-                                <UsersGroupOutline size="lg"/>
-                                <span>Players</span>
-                            </a>
-                        {/each}
+                                <a
+                                    class="ms-3"
+                                    href="/account/team/{team.id}/members"
+                                    onclick={drawerClose}
+                                >
+                                    <UsersGroupOutline size="lg"/>
+                                    <span>Players</span>
+                                </a>
+                            {/each}
+                        {/if}
                     </svelte:fragment>
                 </AccordionItem>
             </Accordion>

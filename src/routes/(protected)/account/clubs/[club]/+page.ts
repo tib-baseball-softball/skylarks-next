@@ -1,16 +1,24 @@
 import type {PageLoad} from "./$types";
 import {client} from "$lib/pocketbase";
-import type {ExpandedClub} from "$lib/model/ExpandedResponse";
+import type {ExpandedClub, ExpandedTeam} from "$lib/model/ExpandedResponse";
 
 export const load = (async ({fetch, params, depends}) => {
+
   const club = await client.collection('clubs').getOne<ExpandedClub>(params.club, {
     expand: "admins",
     fetch: fetch,
   })
 
+  const teams = await client.collection("teams").getFullList<ExpandedTeam>({
+    filter: `club.id = "${club.id}"`,
+    fetch: fetch,
+    expand: "club",
+  })
+
   depends("club:single")
 
   return {
-    club: club
+    club: club,
+    teams: teams,
   }
 }) satisfies PageLoad
