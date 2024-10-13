@@ -1,7 +1,6 @@
 import {client} from "$lib/pocketbase";
 import type {LayoutLoad} from "../../../../.svelte-kit/types/src/routes/(protected)/account/$types";
-import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
-import type {ClubsResponse} from "$lib/model/pb-types";
+import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/model/ExpandedResponse";
 import {authModel} from "$lib/pocketbase/Auth";
 import {get} from "svelte/store";
 
@@ -13,7 +12,7 @@ export const load = (async ({fetch, depends}) => {
     fetch: fetch
   })
 
-  const clubs = client.collection("clubs").getFullList<ClubsResponse>({
+  const clubs = client.collection("clubs").getFullList<ExpandedClub>({
     filter: `id ?= "${model.club}"`,
     fetch: fetch,
     expand: "admins",
