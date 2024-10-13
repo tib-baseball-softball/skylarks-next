@@ -76,12 +76,17 @@
                 <span>Teams</span>
             </a>
         </li>
-        <!--        <li><a href="/verein" on:click={drawerClose}>Verein</a></li>-->
-        <!--        <li><a href="/kontakt" on:click={drawerClose}>Kontakt</a></li>-->
+        <li>
+            <a href="/club" onclick={drawerClose}>
+                <ShieldOutline size="lg"/>
+                <span>Club</span>
+            </a>
+        </li>
+        <!--        <li><a href="/kontakt" on:click={drawerClose}>Contact</a></li>-->
     </ul>
 
     {#if client.authStore.isValid}
-        <hr class="my-2"/>
+        <hr class="my-2 main-divider"/>
 
         <Accordion regionPanel="space-y-1">
             <AccordionItem open>
@@ -122,7 +127,7 @@
                     </svelte:fragment>
 
                     <svelte:fragment slot="summary">
-                        <span>Clubs & Teams</span>
+                        <span>My Clubs & Teams</span>
                     </svelte:fragment>
 
                     <svelte:fragment slot="content">
@@ -186,6 +191,10 @@
 </nav>
 
 <style lang="postcss">
+    hr.main-divider {
+        @apply border-primary-500-400-token;
+    }
+
     li {
         @apply my-2;
     }
