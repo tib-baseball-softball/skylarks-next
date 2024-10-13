@@ -95,6 +95,12 @@
             </span>
         </label>
 
+        <div class="text-sm !mt-4">
+            You can use the special identifiers <code class="code">B</code> and <code class="code">Bird</code> to get
+            the Skylarks Home and Road Cap instead of a
+            generic colored one.
+        </div>
+
         <label class="label">
             <span>Jersey Color</span>
             <span class="grid grid-cols-[auto_1fr] gap-2">
