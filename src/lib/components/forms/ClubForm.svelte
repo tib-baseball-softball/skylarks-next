@@ -93,9 +93,14 @@
   }
 
   function removeAdminFromSelection(admin: UsersResponse) {
+    if (selectedAdmins.length === 1) {
+      toastStore.trigger({
+        message: "You cannot remove the last admin for a club!",
+        background: "variant-filled-warning"
+      })
+      return
+    }
     const userRef = selectedAdmins.find(entry => entry.id === admin.id)
-
-    // TODO: check if last
 
     if (userRef) {
       const index = selectedAdmins.indexOf(userRef)
@@ -216,9 +221,9 @@
                     {/await}
 
                     <span class="text-sm">
-                        Caution: You can remove yourself as admin, losing all access rights!
-                        <br>
                         It is not possible to remove the last admin from a club.
+                        <br>
+                        Caution: You can remove yourself as admin, losing all access rights!
                     </span>
                 </label>
             {/if}
