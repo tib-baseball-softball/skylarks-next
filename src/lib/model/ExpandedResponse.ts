@@ -34,6 +34,12 @@ export type ExpandedClub = Extension<ClubsResponse, {
   }
 }>
 
+export type ExpandedUniformSet = Extension<UniformsetsResponse, {
+  expand?: {
+    club?: ClubsResponse
+  }
+}>
+
 export type CustomAuthModel = Extension<AuthModel, {
   email?: string,
 } & UsersResponse>

@@ -1,7 +1,6 @@
 import type {PageLoad} from "./$types";
 import {client} from "$lib/pocketbase";
-import type {ExpandedClub, ExpandedTeam} from "$lib/model/ExpandedResponse";
-import type {UniformsetsResponse} from "$lib/model/pb-types";
+import type {ExpandedClub, ExpandedTeam, ExpandedUniformSet} from "$lib/model/ExpandedResponse";
 
 export const load = (async ({fetch, params, depends}) => {
 
@@ -17,9 +16,10 @@ export const load = (async ({fetch, params, depends}) => {
     sort: "+name",
   })
 
-  const uniformSets = await client.collection("uniformsets").getFullList<UniformsetsResponse>({
+  const uniformSets = await client.collection("uniformsets").getFullList<ExpandedUniformSet>({
     filter: `club.id = "${club.id}"`,
     fetch: fetch,
+    expand: "club",
   })
 
   depends("club:single")
