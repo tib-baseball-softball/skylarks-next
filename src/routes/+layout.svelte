@@ -1,64 +1,71 @@
 <script lang="ts">
-    import '../app.postcss';
-    import {AppBar, Modal, type ModalComponent, Toast} from "@skeletonlabs/skeleton";
-    import Navigation from "$lib/components/meta/Navigation.svelte";
-    import {LightSwitch} from '@skeletonlabs/skeleton';
-    import {initializeStores, Drawer, getDrawerStore} from '@skeletonlabs/skeleton';
-    import Footer from "$lib/components/meta/Footer.svelte";
-    import LoginBadge from "$lib/auth/LoginBadge.svelte";
-    import LoginForm from "$lib/auth/LoginForm.svelte";
-    import AccountModal from "$lib/auth/AccountModal.svelte";
-    import {PUBLIC_AUTH_FUNCS_ENABLED} from "$env/static/public";
-    import {onMount} from "svelte";
-    import EventForm from '$lib/components/forms/EventForm.svelte';
-    import TeamForm from '$lib/components/forms/TeamForm.svelte';
-    import PlayerDataForm from '$lib/components/forms/PlayerDataForm.svelte';
-    import ClubForm from "$lib/components/forms/ClubForm.svelte";
+  import '../app.postcss';
+  import {
+    AppBar,
+    Drawer,
+    getDrawerStore,
+    initializeStores,
+    LightSwitch,
+    Modal,
+    type ModalComponent,
+    Toast
+  } from "@skeletonlabs/skeleton";
+  import Navigation from "$lib/components/meta/Navigation.svelte";
+  import Footer from "$lib/components/meta/Footer.svelte";
+  import LoginBadge from "$lib/auth/LoginBadge.svelte";
+  import LoginForm from "$lib/auth/LoginForm.svelte";
+  import AccountModal from "$lib/auth/AccountModal.svelte";
+  import {PUBLIC_AUTH_FUNCS_ENABLED} from "$env/static/public";
+  import {onMount} from "svelte";
+  import EventForm from '$lib/components/forms/EventForm.svelte';
+  import TeamForm from '$lib/components/forms/TeamForm.svelte';
+  import PlayerDataForm from '$lib/components/forms/PlayerDataForm.svelte';
+  import ClubForm from "$lib/components/forms/ClubForm.svelte";
 
-    interface Props {
-        children?: import('svelte').Snippet;
-    }
+  interface Props {
+    children?: import('svelte').Snippet;
+  }
 
-    let { children }: Props = $props();
+  let {children}: Props = $props();
 
-    initializeStores()
+  initializeStores()
 
-    const modalRegistry: Record<string, ModalComponent> = {
-        // Set a unique modal ID, then pass the component reference
-        loginForm: {ref: LoginForm},
-        accountOverview: {ref: AccountModal}
-    }
+  const modalRegistry: Record<string, ModalComponent> = {
+    // Set a unique modal ID, then pass the component reference
+    loginForm: {ref: LoginForm},
+    accountOverview: {ref: AccountModal}
+  }
 
-    const drawerStore = getDrawerStore()
+  const drawerStore = getDrawerStore()
 
-    function navDrawerOpen(): void {
-        drawerStore.open({
-          id: "nav",
-          width: "w-[70%] sm:w-[40%]"
-        })
-    }
-
-    // LightSwitch Workaround: https://github.com/skeletonlabs/skeleton/issues/2598
-    onMount(() => {
-        const e = document.documentElement.classList, t = localStorage.getItem("modeUserPrefers") === "false",
-            n = !("modeUserPrefers" in localStorage), r = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        t || n && r ? e.add("dark") : e.remove("dark")
+  function navDrawerOpen(): void {
+    drawerStore.open({
+      id: "nav",
+      width: "w-[70%] sm:w-[40%]"
     })
+  }
+
+  // LightSwitch Workaround: https://github.com/skeletonlabs/skeleton/issues/2598
+  onMount(() => {
+    const e = document.documentElement.classList, t = localStorage.getItem("modeUserPrefers") === "false",
+      n = !("modeUserPrefers" in localStorage), r = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    t || n && r ? e.add("dark") : e.remove("dark")
+  })
 
 </script>
 
 <Drawer>
     {#if $drawerStore.id === "nav"}
 
-    <div class="flex justify-around p-2">
-        <img class="max-w-14" src="/berlin_skylarks_logo.svg" alt="Skylarks Team Logo">
+        <div class="flex justify-around p-2">
+            <img class="max-w-14" src="/berlin_skylarks_logo.svg" alt="Skylarks Team Logo">
 
-        <h2 class="p-4 antialiased">Berlin Skylarks</h2>
-    </div>
+            <h2 class="p-4 antialiased">Berlin Skylarks</h2>
+        </div>
 
-    <hr class="mb-2"/>
+        <hr class="mb-2"/>
 
-    <Navigation></Navigation>
+        <Navigation></Navigation>
 
     {:else if $drawerStore.id === "event-form"}
         <EventForm/>
@@ -108,7 +115,6 @@
                 <section class="w-full justify-center items-center hidden lg:flex py-2">
 
 
-
                 </section>
             </svelte:fragment>
 
@@ -134,7 +140,8 @@
     <div class="container grid grid-cols-1 md:grid-cols-[auto_1fr_auto]">
 
         <!-- Sidebar (Left) -->
-        <aside class="bg-surface-500/5 p-2 sticky top-0 col-span-1 hidden h-screen md:block lg:min-w-72">
+        <aside
+            class="bg-surface-500/5 p-2 sticky top-0 col-span-1 hidden h-screen md:block max-w-64 lg:max-w-72 xl:max-w-80">
             <Navigation></Navigation>
         </aside>
 
