@@ -3,12 +3,36 @@
   import TeamTeaserCard from "$lib/components/diamondplanner/team/TeamTeaserCard.svelte";
   import UniformSetInfoCard from "$lib/components/diamondplanner/uniformset/UniformSetInfoCard.svelte";
   import {PlusOutline} from "flowbite-svelte-icons";
+  import type {CustomAuthModel, ExpandedClub, ExpandedTeam, ExpandedUniformSet} from "$lib/model/ExpandedResponse";
+  import {authModel} from "$lib/pocketbase/Auth";
+  import {getModalStore, type ModalComponent, type ModalSettings} from "@skeletonlabs/skeleton";
+  import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
 
   let {data} = $props()
 
-  let club = $derived(data.club)
-  let teams = $derived(data.teams)
-  let uniformSets = $derived(data.uniformSets)
+  const model = $authModel as CustomAuthModel;
+
+  let club: ExpandedClub = $derived(data.club)
+  let teams: ExpandedTeam[] = $derived(data.teams)
+  let uniformSets: ExpandedUniformSet[] = $derived(data.uniformSets)
+
+  const modalStore = getModalStore();
+
+  function triggerModal() {
+    const modalComponent: ModalComponent = {
+      ref: UniformSetForm,
+      props: {
+        uniformSet: null,
+        clubID: club.id,
+      },
+    };
+
+    const modal: ModalSettings = {
+      type: "component",
+      component: modalComponent,
+    };
+    modalStore.trigger(modal);
+  }
 </script>
 
 <h1 class="h1">{club.name}</h1>
@@ -33,7 +57,10 @@
         <UniformSetInfoCard {uniformSet}/>
     {/each}
 </section>
-<button class="btn variant-ghost-primary">
-    <PlusOutline/>
-    <span>Create new</span>
-</button>
+
+{#if club?.admins.includes(model.id)}
+    <button class="btn variant-ghost-primary" onclick={triggerModal}>
+        <PlusOutline/>
+        <span>Create new</span>
+    </button>
+{/if}

@@ -964,9 +964,9 @@
     ],
     "listRule": "@request.auth.id != \"\" && club.id ?~ @request.auth.club.id",
     "viewRule": "@request.auth.id != \"\" && club.id ?~ @request.auth.club.id",
-    "createRule": null,
-    "updateRule": null,
-    "deleteRule": null,
+    "createRule": "@request.auth.id != \"\" && club.admins.id ?= @request.auth.id",
+    "updateRule": "@request.auth.id != \"\" && club.admins.id ?= @request.auth.id",
+    "deleteRule": "@request.auth.id != \"\" && club.admins.id ?= @request.auth.id",
     "options": {}
   }
 ]
