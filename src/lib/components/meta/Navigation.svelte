@@ -155,15 +155,6 @@
                                     </div
                                     >
                                 </a>
-
-                                <a
-                                    class="ms-3"
-                                    href="/account/team/{team.id}/members"
-                                    onclick={drawerClose}
-                                >
-                                    <UsersGroupOutline size="lg"/>
-                                    <span>Players</span>
-                                </a>
                             {/each}
                         {/if}
                     </svelte:fragment>
