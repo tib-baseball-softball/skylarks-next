@@ -10,7 +10,7 @@
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
   },
   "devDependencies": {
-    "@skeletonlabs/skeleton": "2.8.0",
+    "@skeletonlabs/skeleton": "2.10.3",
     "@skeletonlabs/tw-plugin": "0.3.1",
     "@sveltejs/adapter-node": "^5.2.0",
     "@sveltejs/kit": "^2.5.27",
@@ -19,7 +19,7 @@
     "@tailwindcss/typography": "0.5.10",
     "@types/node": "20.11.20",
     "autoprefixer": "10.4.17",
-    "flowbite-svelte-icons": "^2.0.0-next.16",
+    "flowbite-svelte-icons": "^2.0.2",
     "postcss": "8.4.35",
     "svelte": "^5.0.0",
     "svelte-check": "^4.0.0",
@@ -37,13 +37,5 @@
     "pocketbase": "^0.21.4",
     "svelte-persisted-store": "^0.11.0",
     "typed-pocketbase": "^0.1.1"
-  },
-  "overrides": {
-    "@skeletonlabs/skeleton": {
-      "svelte": "$svelte"
-    },
-    "flowbite-svelte-icons": {
-      "svelte": "$svelte"
-    }
   }
 }
