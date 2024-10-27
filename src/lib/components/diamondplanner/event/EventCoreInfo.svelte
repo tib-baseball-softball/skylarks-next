@@ -1,14 +1,14 @@
 <script lang="ts">
-    import type { ExpandedEvent } from "$lib/model/ExpandedResponse";
-    import { DateTimeUtility } from "$lib/service/DateTimeUtility";
-    import { CalendarMonthOutline, ClockOutline, MapPinOutline } from "flowbite-svelte-icons";
+    import type {ExpandedEvent} from "$lib/model/ExpandedResponse";
+    import {DateTimeUtility} from "$lib/service/DateTimeUtility";
+    import {CalendarMonthOutline, ClockOutline, MapPinOutline} from "flowbite-svelte-icons";
 
     interface props {
         event: ExpandedEvent;
         classes?: string;
     }
 
-    const { event, classes = "" }: props = $props();
+    const {event, classes = ""}: props = $props();
 
     const startTime = $derived(new Date(event.starttime));
     const meetingTime = $derived(new Date(event.meetingtime));
@@ -17,7 +17,7 @@
 <section class={classes}>
     <div class="grid grid-cols-2 gap-4">
         <div class="flex col-span-2 gap-2">
-            <CalendarMonthOutline />
+            <CalendarMonthOutline/>
             <p class="font-bold">
                 {startTime.toLocaleDateString(
                     "de-DE",
@@ -27,15 +27,15 @@
         </div>
 
         <div class="flex gap-2">
-            <ClockOutline />
+            <ClockOutline/>
             <p>
-                Treffen:
+                Meet:
                 {#if event.meetingtime}
                     <span class="font-bold"
-                        >{meetingTime?.toLocaleTimeString(
-                            "de-DE",
-                            DateTimeUtility.eventTimeFormat,
-                        )}</span
+                    >{meetingTime?.toLocaleTimeString(
+                        "de-DE",
+                        DateTimeUtility.eventTimeFormat,
+                    )}</span
                     >
                 {:else}
                     <span class="font-medium">---</span>
@@ -44,21 +44,21 @@
         </div>
 
         <div class="flex gap-2">
-            <ClockOutline />
+            <ClockOutline/>
             <p>
                 Start: <span class="font-bold"
-                    >{startTime.toLocaleTimeString(
-                        "de-DE",
-                        DateTimeUtility.eventTimeFormat,
-                    )}</span
-                >
+            >{startTime.toLocaleTimeString(
+                "de-DE",
+                DateTimeUtility.eventTimeFormat,
+            )}</span
+            >
             </p>
         </div>
 
         <div class="flex col-span-2 gap-2">
-            <MapPinOutline />
+            <MapPinOutline/>
             <p>
-                {event?.location ? event.location : "Kein Ort angegeben."}
+                {event?.location ? event.location : "No location provided."}
             </p>
         </div>
     </div>

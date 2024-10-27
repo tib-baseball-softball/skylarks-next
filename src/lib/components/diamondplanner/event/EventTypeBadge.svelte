@@ -8,9 +8,9 @@
     function getDisplayString(): string {
         switch (type) {
             case "game":
-                return "Spiel"
+                return "Game"
             case "practice":
-                return "Training"
+                return "Practice"
             default:
                 return "Event"
         }
@@ -18,11 +18,11 @@
 </script>
 
 <span
-    class="badge"
-    class:variant-filled-primary={type === "game"}
-    class:variant-filled-secondary={type === "practice"}
-    class:dark:border={type === "practice"}
-    class:variant-filled-tertiary={type === "misc"}
+        class="badge"
+        class:variant-filled-primary={type === "game"}
+        class:variant-filled-secondary={type === "practice"}
+        class:dark:border={type === "practice"}
+        class:variant-filled-tertiary={type === "misc"}
 >
 {getDisplayString()}
 </span>
