@@ -500,7 +500,7 @@
         "unique": false,
         "options": {
           "collectionId": "fltkvrsbbvzf9cf",
-          "cascadeDelete": false,
+          "cascadeDelete": true,
           "minSelect": null,
           "maxSelect": 1,
           "displayFields": null
@@ -654,7 +654,7 @@
         "unique": false,
         "options": {
           "collectionId": "_pb_users_auth_",
-          "cascadeDelete": false,
+          "cascadeDelete": true,
           "minSelect": null,
           "maxSelect": 1,
           "displayFields": null
@@ -670,7 +670,7 @@
         "unique": false,
         "options": {
           "collectionId": "zyst8ardf4onbwz",
-          "cascadeDelete": false,
+          "cascadeDelete": true,
           "minSelect": null,
           "maxSelect": 1,
           "displayFields": null
@@ -952,7 +952,7 @@
         "unique": false,
         "options": {
           "collectionId": "z806hmy5um3qy5x",
-          "cascadeDelete": false,
+          "cascadeDelete": true,
           "minSelect": null,
           "maxSelect": 1,
           "displayFields": null
