@@ -8,10 +8,12 @@
     interface Props {
         id: string,
         modelName: string,
-        action: (id: string) => void
+        action: (id: string) => void,
+        classes?: string,
+        buttonText?: string,
     }
 
-    let {id, modelName, action}: Props = $props()
+    let {id, modelName, action, classes = "btn-sm btn-icon variant-ghost-error", buttonText = ""}: Props = $props()
 
     function triggerDeleteModal() {
         const modal: ModalSettings = {
@@ -44,7 +46,11 @@
     }
 </script>
 
-<button class="btn btn-sm btn-icon variant-ghost-error" aria-label="delete ${modelName}"
+<button class="btn {classes}" aria-label="delete ${modelName}"
         onclick="{triggerDeleteModal}">
     <TrashBinOutline/>
+
+    {#if buttonText}
+        <span>{buttonText}</span>
+    {/if}
 </button>

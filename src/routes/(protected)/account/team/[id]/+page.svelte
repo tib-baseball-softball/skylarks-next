@@ -2,23 +2,15 @@
     import TeamTeaserCard from "$lib/components/diamondplanner/team/TeamTeaserCard.svelte";
     import EventTeaser from "$lib/components/diamondplanner/event/EventTeaser.svelte";
     import Paginator from "$lib/pocketbase/Paginator.svelte";
-    import { authModel } from "$lib/pocketbase/Auth";
-    import {
-        CalendarPlusOutline,
-        CogOutline,
-        TrashBinOutline,
-        UsersGroupOutline,
-    } from "flowbite-svelte-icons";
-    import { goto } from "$app/navigation";
-    import type { EventType } from "$lib/model/ExpandedResponse.js";
-    import {
-        getDrawerStore,
-        RadioGroup,
-        RadioItem,
-        type DrawerSettings,
-    } from "@skeletonlabs/skeleton";
+    import {authModel} from "$lib/pocketbase/Auth";
+    import {CalendarPlusOutline, CogOutline, UsersGroupOutline,} from "flowbite-svelte-icons";
+    import {goto, invalidateAll} from "$app/navigation";
+    import type {EventType} from "$lib/model/ExpandedResponse.js";
+    import {type DrawerSettings, getDrawerStore, RadioGroup, RadioItem,} from "@skeletonlabs/skeleton";
+    import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
+    import {client} from "$lib/pocketbase";
 
-    let { data } = $props();
+    let {data} = $props();
     const events = $derived(data.events);
     let currentPage = $derived($events.page);
 
@@ -56,6 +48,12 @@
         },
     });
 
+    function teamDeleteAction(id: string) {
+        goto(`/account`)
+        client.collection("teams").delete(id)
+        invalidateAll()
+    }
+
     $effect.pre(() => {
         console.log(showEvents);
         reloadWithQuery();
@@ -72,24 +70,24 @@
         <section class="p-4">{@html data.team.description}</section>
     </article>
 
-    <TeamTeaserCard team={data.team} link={false} />
+    <TeamTeaserCard team={data.team} link={false}/>
 </div>
 
 <h2 class="h3">Team Events</h2>
 
 <div
-    class="flex flex-wrap gap-4 lg:gap-8 variant-soft-surface px-4 py-3 rounded-token"
+        class="flex flex-wrap gap-4 lg:gap-8 variant-soft-surface px-4 py-3 rounded-token"
 >
     <label
-        class="flex items-center gap-2 flex-grow justify-between md:flex-grow-0"
+            class="flex items-center gap-2 flex-grow justify-between md:flex-grow-0"
     >
         Timeframe
         <RadioGroup>
             <RadioItem
-                checked
-                name="radio-next"
-                value="next"
-                bind:group={showEvents}
+                    checked
+                    name="radio-next"
+                    value="next"
+                    bind:group={showEvents}
             >
                 Next
             </RadioItem>
@@ -100,7 +98,7 @@
     </label>
 
     <label
-        class="label flex items-center gap-2 flex-grow justify-between md:flex-grow-0"
+            class="label flex items-center gap-2 flex-grow justify-between md:flex-grow-0"
     >
         Sort
         <select class="select" bind:value={sorting} onchange={reloadWithQuery}>
@@ -110,13 +108,13 @@
     </label>
 
     <label
-        class="label flex items-center gap-2 flex-grow justify-between md:flex-grow-0"
+            class="label flex items-center gap-2 flex-grow justify-between md:flex-grow-0"
     >
         Type
         <select
-            class="select"
-            bind:value={showTypes}
-            onchange={reloadWithQuery}
+                class="select"
+                bind:value={showTypes}
+                onchange={reloadWithQuery}
         >
             <option value="any">All</option>
             <option value="game">Games</option>
@@ -128,15 +126,15 @@
 
 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
     {#each $events.items as event}
-        <EventTeaser {event} link={true} />
+        <EventTeaser {event} link={true}/>
     {:else}
         <p>No events available with the current filters.</p>
     {/each}
 </div>
 
-<Paginator store={events} showIfSinglePage={false} />
+<Paginator store={events} showIfSinglePage={false}/>
 
-<hr class="!my-8" />
+<hr class="!my-8"/>
 <section class="space-y-2 lg:space-y-4">
     <header>
         <h2 class="h3">Links</h2>
@@ -144,22 +142,22 @@
 
     <div class="flex flex-wrap items-center gap-2 lg:gap-3">
         <a
-            href="/account/team/{data.team.id}/members"
-            class="btn variant-ghost-tertiary"
+                href="/account/team/{data.team.id}/members"
+                class="btn variant-ghost-tertiary"
         >
-            <UsersGroupOutline />
+            <UsersGroupOutline/>
             <span>Player List</span>
         </a>
     </div>
 </section>
 
 {#if data.team.admins.includes($authModel?.id)}
-    <hr class="my-2" />
+    <hr class="my-2"/>
 
     <h2 class="h3">Admin Section</h2>
 
     <div
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-3"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-3"
     >
         <div class="card admin-card variant-ringed-surface">
             <div>
@@ -178,7 +176,7 @@
             <footer class="card-footer">
                 <div class="flex flex-col gap-2 lg:gap-3">
                     <button class="btn variant-ghost-primary">
-                        <CalendarPlusOutline />
+                        <CalendarPlusOutline/>
                         <span>Setup Games Import</span>
                     </button>
                 </div>
@@ -201,9 +199,9 @@
             <footer class="card-footer">
                 <div class="flex flex-col gap-2 lg:gap-3">
                     <button
-                        class="btn variant-ghost-secondary dark:variant-filled-secondary dark:border"
+                            class="btn variant-ghost-secondary dark:variant-filled-secondary dark:border"
                     >
-                        <CalendarPlusOutline />
+                        <CalendarPlusOutline/>
                         <span>Create Practice Set</span>
                     </button>
                 </div>
@@ -227,10 +225,10 @@
             <footer class="card-footer">
                 <div class="flex flex-col gap-2 lg:gap-3">
                     <button
-                        class="btn variant-ghost-tertiary"
-                        onclick={() => drawerStore.open(singleEventSettings)}
+                            class="btn variant-ghost-tertiary"
+                            onclick={() => drawerStore.open(singleEventSettings)}
                     >
-                        <CalendarPlusOutline />
+                        <CalendarPlusOutline/>
                         <span>Create Single Event</span>
                     </button>
                 </div>
@@ -245,10 +243,10 @@
             <section class="p-4 space-y-3">
                 <div class="flex flex-col gap-2 lg:gap-3">
                     <button
-                        class="btn variant-ghost-surface"
-                        onclick={() => drawerStore.open(teamSettings)}
+                            class="btn variant-ghost-surface"
+                            onclick={() => drawerStore.open(teamSettings)}
                     >
-                        <CogOutline />
+                        <CogOutline/>
                         <span>General Settings</span>
                     </button>
                 </div>
@@ -256,13 +254,17 @@
 
             <footer class="card-footer mt-2">
                 <div
-                    class="flex flex-col gap-2 lg:gap-3 rounded-token variant-ringed-error px-2 py-3"
+                        class="flex flex-col gap-2 lg:gap-3 rounded-token variant-ringed-error px-2 py-3"
                 >
                     <header class="mx-2">Danger Zone</header>
-                    <button class="btn variant-ghost-error mx-2">
-                        <TrashBinOutline />
-                        <span>Delete Team</span>
-                    </button>
+
+                    <DeleteButton
+                            id={data.team.id}
+                            modelName="Team"
+                            action={teamDeleteAction}
+                            classes="variant-ghost-error mx-1"
+                            buttonText="Delete Team"
+                    />
                 </div>
             </footer>
         </div>
