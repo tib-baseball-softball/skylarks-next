@@ -1,20 +1,15 @@
 <script lang="ts">
-    import {EditOutline, TrashBinOutline} from "flowbite-svelte-icons";
+    import {EditOutline} from "flowbite-svelte-icons";
     import Cap from "$lib/components/icons/Cap.svelte";
     import Shirt from "$lib/components/icons/Shirt.svelte";
     import Pants from "$lib/components/icons/Pants.svelte";
-    import {
-        getModalStore,
-        getToastStore,
-        type ModalComponent,
-        type ModalSettings,
-        type ToastSettings
-    } from "@skeletonlabs/skeleton";
+    import {getModalStore, type ModalComponent, type ModalSettings} from "@skeletonlabs/skeleton";
     import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
     import type {CustomAuthModel, ExpandedUniformSet} from "$lib/model/ExpandedResponse";
     import {authModel} from "$lib/pocketbase/Auth";
     import {client} from "$lib/pocketbase";
     import {invalidate} from "$app/navigation";
+    import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
 
     interface Props {
         uniformSet: ExpandedUniformSet
@@ -25,7 +20,6 @@
     const model = $authModel as CustomAuthModel;
 
     const modalStore = getModalStore();
-    const toastStore = getToastStore();
 
     function triggerEditModal() {
         const modalComponent: ModalComponent = {
@@ -43,35 +37,9 @@
         modalStore.trigger(modal);
     }
 
-    function triggerDeleteModal() {
-        const modal: ModalSettings = {
-            type: 'confirm',
-            title: 'Please Confirm',
-            body: 'Are you sure you wish to delete this uniform set?',
-            response: (r: boolean) => {
-                if (r) {
-                    try {
-                        client.collection("uniformsets").delete(uniformSet.id)
-                        invalidate("club:single")
-
-                        const toastSettingsDeletions: ToastSettings = {
-                            message: "Uniform Set deleted successfully.",
-                            background: "variant-filled-success",
-                        };
-
-                        toastStore.trigger(toastSettingsDeletions)
-                    } catch {
-                        const toastSettingsDeletions: ToastSettings = {
-                            message: "Error deleting Uniform Set.",
-                            background: "variant-filled-error",
-                        };
-
-                        toastStore.trigger(toastSettingsDeletions)
-                    }
-                }
-            },
-        };
-        modalStore.trigger(modal);
+    function deleteAction(id: string) {
+        client.collection("uniformsets").delete(id)
+        invalidate("club:single")
     }
 </script>
 
@@ -102,10 +70,8 @@
                     onclick={triggerEditModal}>
                 <EditOutline/>
             </button>
-            <button class="btn btn-sm btn-icon variant-ghost-error" aria-label="delete uniform set"
-                    onclick="{triggerDeleteModal}">
-                <TrashBinOutline/>
-            </button>
+
+            <DeleteButton id={uniformSet.id} modelName="Uniform Set" action={deleteAction}/>
         {/if}
     </footer>
 </article>
