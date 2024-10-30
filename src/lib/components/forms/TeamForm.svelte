@@ -1,15 +1,10 @@
 <script lang="ts">
-    import { invalidate } from "$app/navigation";
-    import type { ExpandedTeam } from "$lib/model/ExpandedResponse";
-    import { client } from "$lib/pocketbase";
-    import {
-        getDrawerStore,
-        RadioGroup,
-        RadioItem,
-        type ToastSettings,
-    } from "@skeletonlabs/skeleton";
-    import { getToastStore } from "@skeletonlabs/skeleton";
-    import { CloseOutline } from "flowbite-svelte-icons";
+    import {invalidate} from "$app/navigation";
+    import type {ExpandedTeam} from "$lib/model/ExpandedResponse";
+    import {client} from "$lib/pocketbase";
+    import {getDrawerStore, getToastStore, RadioGroup, RadioItem, type ToastSettings,} from "@skeletonlabs/skeleton";
+    import {CloseOutline} from "flowbite-svelte-icons";
+    import {authModel} from "$lib/pocketbase/Auth";
 
     const toastStore = getToastStore();
     const drawerStore = getDrawerStore();
@@ -31,6 +26,7 @@
             age_group: "",
             club: $drawerStore.meta.club.id, // no binding, cannot be changed via this form
             description: "",
+            admins: [],
         },
     );
 
@@ -45,6 +41,9 @@
                     .collection("teams")
                     .update<ExpandedTeam>(form.id, form);
             } else {
+                // a user creating a team becomes its first admin
+                form.admins.push($authModel?.id)
+
                 result = await client
                     .collection("teams")
                     .create<ExpandedTeam>(form);
@@ -58,6 +57,7 @@
             toastStore.trigger(toastSettingsSuccess);
         }
         invalidate("teams:list");
+        invalidate("club:single");
         drawerStore.close();
     }
 </script>
@@ -65,17 +65,17 @@
 <article class="p-6">
     <div class="flex items-center gap-5">
         <button
-            aria-label="cancel and close"
-            class="btn variant-ghost-surface"
-            onclick={drawerStore.close}
+                aria-label="cancel and close"
+                class="btn variant-ghost-surface"
+                onclick={drawerStore.close}
         >
-            <CloseOutline />
+            <CloseOutline/>
         </button>
         <header class="text-xl font-semibold">
             {#if form.id}
                 <h2 class="h3">Edit Team "{form?.name}"</h2>
             {:else}
-                <h2 class="h3">Create new Event</h2>
+                <h2 class="h3">Create new Team</h2>
             {/if}
         </header>
     </div>
@@ -83,34 +83,34 @@
     <form onsubmit={submitForm} class="mt-4 space-y-3">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-3 xl:gap-4">
             <input
-                name="id"
-                autocomplete="off"
-                class="input"
-                type="hidden"
-                readonly
-                bind:value={form.id}
+                    name="id"
+                    autocomplete="off"
+                    class="input"
+                    type="hidden"
+                    readonly
+                    bind:value={form.id}
             />
 
             <label class="label">
                 Name
                 <input
-                    name="title"
-                    class="input"
-                    required
-                    type="text"
-                    bind:value={form.name}
+                        name="title"
+                        class="input"
+                        required
+                        type="text"
+                        bind:value={form.name}
                 />
             </label>
 
             <label class="label">
                 Club
                 <input
-                    name="id"
-                    autocomplete="off"
-                    class="input"
-                    type="text"
-                    readonly
-                    value={$drawerStore.meta.club?.name}
+                        name="id"
+                        autocomplete="off"
+                        class="input"
+                        type="text"
+                        readonly
+                        value={$drawerStore.meta.club?.name}
                 />
             </label>
 
@@ -118,16 +118,16 @@
                 Type
                 <RadioGroup>
                     <RadioItem
-                        bind:group={form.age_group}
-                        name="age_group"
-                        value={"adults"}
+                            bind:group={form.age_group}
+                            name="age_group"
+                            value={"adults"}
                     >
                         Adults
                     </RadioItem>
                     <RadioItem
-                        bind:group={form.age_group}
-                        name="type"
-                        value={"minors"}
+                            bind:group={form.age_group}
+                            name="type"
+                            value={"minors"}
                     >
                         Minors
                     </RadioItem>
@@ -137,15 +137,15 @@
             <label class="label col-span-2">
                 Description
                 <textarea
-                    name="desc"
-                    class="textarea"
-                    rows="8"
-                    bind:value={form.description}
+                        name="desc"
+                        class="textarea"
+                        rows="8"
+                        bind:value={form.description}
                 ></textarea>
             </label>
         </div>
 
-        <hr class="!my-5" />
+        <hr class="!my-5"/>
 
         <div class="flex justify-center gap-3">
             <button type="submit" class="mt-2 btn variant-ghost-primary">

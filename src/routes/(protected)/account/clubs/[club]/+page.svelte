@@ -5,7 +5,13 @@
     import {PlusOutline} from "flowbite-svelte-icons";
     import type {CustomAuthModel, ExpandedClub, ExpandedTeam, ExpandedUniformSet} from "$lib/model/ExpandedResponse";
     import {authModel} from "$lib/pocketbase/Auth";
-    import {getModalStore, type ModalComponent, type ModalSettings} from "@skeletonlabs/skeleton";
+    import {
+        type DrawerSettings,
+        getDrawerStore,
+        getModalStore,
+        type ModalComponent,
+        type ModalSettings
+    } from "@skeletonlabs/skeleton";
     import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
 
     let {data} = $props()
@@ -17,8 +23,19 @@
     let uniformSets: ExpandedUniformSet[] = $derived(data.uniformSets)
 
     const modalStore = getModalStore();
+    const drawerStore = getDrawerStore();
 
-    function triggerModal() {
+    const teamSettings: DrawerSettings = $derived({
+        id: "team-form",
+        position: "right",
+        width: "w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%]",
+        meta: {
+            club: club,
+            team: null,
+        },
+    });
+
+    function triggerUniformModal() {
         const modalComponent: ModalComponent = {
             ref: UniformSetForm,
             props: {
@@ -35,26 +52,47 @@
     }
 </script>
 
+<svelte:head>
+    <title>Details for {club.name}</title>
+    <meta name="description" content="Club overview page for the {club.name} with info about teams and uniform sets."/>
+</svelte:head>
+
 <h1 class="h1">{club.name}</h1>
 
 <section class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
     <ClubDetailCard {club}/>
 </section>
 
-<h2 class="h2">Club Teams</h2>
+<section class="!mt-8">
+    <header>
+        <h2 class="h2 mb-3">Club Teams</h2>
+    </header>
 
-<section class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
-    {#each teams as team}
-        <a href="/account/team/{team.id}">
-            <TeamTeaserCard {team} link={true}/>
-        </a>
-    {/each}
+    <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
+        {#each teams as team}
+            <a href="/account/team/{team.id}">
+                <TeamTeaserCard {team} link={true}/>
+            </a>
+        {/each}
+
+        {#if teams.length === 0}
+            <span>This club does not have any teams yet.</span>
+        {/if}
+    </div>
+
+    {#if club?.admins.includes(model.id)}
+        <button class="btn variant-ghost-primary" onclick={() => drawerStore.open(teamSettings)}>
+            <PlusOutline/>
+            <span>Create new</span>
+        </button>
+    {/if}
 </section>
 
-<section>
+<section class="!mt-8">
     <header>
         <h2 class="h2 mb-3">Uniform Sets</h2>
     </header>
+
     <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
         {#each uniformSets as uniformSet}
             <UniformSetInfoCard {uniformSet}/>
@@ -62,7 +100,7 @@
     </div>
 
     {#if club?.admins.includes(model.id)}
-        <button class="btn variant-ghost-primary" onclick={triggerModal}>
+        <button class="btn variant-ghost-primary" onclick={triggerUniformModal}>
             <PlusOutline/>
             <span>Create new</span>
         </button>
