@@ -135,14 +135,6 @@
 </nav>
 
 <style lang="postcss">
-    hr.main-divider {
-        @apply border-primary-500-400-token;
-    }
-
-    li {
-        @apply my-2;
-    }
-
     a {
         display: flex;
         @apply items-center;
