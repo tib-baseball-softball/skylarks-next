@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {Tab, TabGroup} from "@skeletonlabs/skeleton";
+  import {getToastStore, Tab, TabGroup, type ToastSettings} from "@skeletonlabs/skeleton";
   import {client} from "../pocketbase";
   import {providerLogin} from "$lib/pocketbase/Auth";
   import {goto} from "$app/navigation";
@@ -13,6 +13,12 @@
   } = $props()
 
   const coll = $derived(client.collection(authCollection))
+  const toastStore = getToastStore()
+
+  const failSettings: ToastSettings = {
+    message: "There was an error processing your authentication request.",
+    background: "variant-filled-error"
+  }
 
   const form = $state({
     email: "",
@@ -27,11 +33,27 @@
     parent.onClose();
 
     if (signup) {
-      await coll.create({...form})
-      goto("/signupconfirm")
+      try {
+        await coll.create({...form});
+        const signupSuccessful = await coll.requestVerification(form.email)
+
+        if (signupSuccessful) {
+          goto("/signupconfirm")
+        } else {
+          toastStore.trigger(failSettings)
+        }
+      } catch {
+        toastStore.trigger(failSettings)
+      }
+
     } else {
-      await coll.authWithPassword(form.email, form.password, {expand: "club"})
-      goto("/account", {invalidateAll: true})
+      try {
+        await coll.authWithPassword(form.email, form.password, {expand: "club"})
+        goto("/account", {invalidateAll: true})
+      } catch (error) {
+        console.error(error)
+        toastStore.trigger(failSettings)
+      }
     }
   }
 
