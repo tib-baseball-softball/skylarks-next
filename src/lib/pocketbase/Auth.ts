@@ -5,45 +5,26 @@ import {client} from ".";
 import {save} from "./RecordOperations";
 
 export const authModel = readable<AuthModel | null>(
-  null,
-  function (set, update) {
-    client.authStore.onChange((token, model) => {
-      update((oldval) => {
-        if (
-          (oldval?.isValid && !model?.isValid) ||
-          (!oldval?.isValid && model?.isValid)
-        ) {
-          // if the auth changed, invalidate all page load data
-          invalidateAll();
-        }
-        return model;
-      });
-    }, true);
-  },
+    null,
+    function (set, update) {
+      client.authStore.onChange((token, model) => {
+        update((oldval) => {
+          if (
+              (oldval?.isValid && !model?.isValid) ||
+              (!oldval?.isValid && model?.isValid)
+          ) {
+            // if the auth changed, invalidate all page load data
+            invalidateAll();
+          }
+          return model;
+        });
+      }, true);
+    },
 );
 
-export async function login(
-  email: string,
-  password: string,
-  register = false,
-  rest: { [key: string]: any } = {},
-) {
-  if (register) {
-    const user = {...rest, email, password, confirmPassword: password};
-    await client.collection("users").create(user);
-  }
-  await client
-    .collection("users")
-    .authWithPassword(email, password, {expand: "club"});
-}
-
-export function logout() {
-  client.authStore.clear();
-}
-
 export async function providerLogin(
-  provider: AuthProviderInfo,
-  authCollection: RecordService,
+    provider: AuthProviderInfo,
+    authCollection: RecordService,
 ) {
   const authResponse = await authCollection.authWithOAuth2({
     provider: provider.name,
