@@ -30,7 +30,18 @@ func main() {
 	//------------------- Hooks -------------------------//
 
 	app.OnRecordAuthRequest("users").Add(func(e *core.RecordAuthEvent) error {
-		hooks.SetLastLogin(app, e.Record)
+		err := hooks.SetLastLogin(app, e.Record)
+		if err != nil {
+			app.Logger().Error(
+				"Error upon setting auth record last login field",
+				"error", err,
+			)
+		}
+		return nil
+	})
+
+	app.OnRecordBeforeCreateRequest("users").Add(func(e *core.RecordCreateEvent) error {
+		// TODO: validate signup Key
 		return nil
 	})
 

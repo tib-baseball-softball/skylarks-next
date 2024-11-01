@@ -24,6 +24,7 @@
     email: "",
     password: "",
     passwordConfirm: "",
+    signupKey: "",
   })
   let signup = false
 
@@ -103,7 +104,7 @@
                 {#if signupAllowed}
                     <TabGroup flex="grow" class="my-2" active="variant-ghost border-b-2 border-surface-900-50-token">
                         <Tab bind:group={tabSet} name="tab1" value={0}>Log In</Tab>
-                        <Tab bind:group={tabSet} name="tab2" value={1}>Sign Up</Tab>
+                        <Tab bind:group={tabSet} name="tab2" value={1}>Create Account</Tab>
 
                         <svelte:fragment slot="panel">
                             {#if tabSet === 0}
@@ -149,9 +150,27 @@
                                     />
                                 </label>
 
+                                <label class="label !mt-4">
+                                    <span class="ps-2">Signup Key</span>
+                                    <input
+                                            bind:value={form.signupKey}
+                                            class="input"
+                                            name="signup_key"
+                                            placeholder="minimum 8 characters"
+                                            minlength="8"
+                                            required
+                                            type="text"
+                                    />
+                                    <span class="text-sm ps-2">
+                                        A valid signup key needs to be entered upon user account creation.
+                                        If you do not have a signup key, please contact your team manager.
+                                    </span>
+                                </label>
+
                                 <input type="hidden" name="register" value={true}/>
 
-                                <button class="btn variant-ghost-primary" type="submit" onclick={() => (signup = true)}>
+                                <button class="btn variant-ghost-primary !mt-4" type="submit"
+                                        onclick={() => (signup = true)}>
                                     Register new account
                                 </button>
                             {/if}
