@@ -67,7 +67,7 @@
 <h2 class="h3">Team Events</h2>
 
 <div
-        class="flex flex-wrap gap-4 lg:gap-8 variant-soft-surface px-4 py-3 rounded-token"
+        class="flex flex-wrap gap-4 lg:gap-8 variant-soft-surface justify-between px-4 py-3 rounded-token"
 >
     <label
             class="flex items-center gap-2 flex-grow justify-between md:flex-grow-0"
@@ -88,30 +88,22 @@
         </RadioGroup>
     </label>
 
-    <label
-            class="label flex items-center gap-2 flex-grow justify-between md:flex-grow-0"
-    >
+    <label class="label flex items-center gap-2 flex-grow justify-between md:flex-grow-0">
         Sort
-        <select class="select" bind:value={sorting} onchange={reloadWithQuery}>
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-        </select>
+        <RadioGroup>
+            <RadioItem checked name="radio-asc" value="asc" bind:group={sorting}>Ascending</RadioItem>
+            <RadioItem checked name="radio-desc" value="desc" bind:group={sorting}>Descending</RadioItem>
+        </RadioGroup>
     </label>
 
-    <label
-            class="label flex items-center gap-2 flex-grow justify-between md:flex-grow-0"
-    >
+    <label class="label flex items-center gap-2 flex-grow justify-between md:flex-grow-0">
         Type
-        <select
-                class="select"
-                bind:value={showTypes}
-                onchange={reloadWithQuery}
-        >
-            <option value="any">All</option>
-            <option value="game">Games</option>
-            <option value="practice">Practices</option>
-            <option value="misc">Other</option>
-        </select>
+        <RadioGroup padding="px-2 md:px-4 py-1">
+            <RadioItem padding="px-4 py-1" checked name="radio-any" value="any" bind:group={showTypes}>All</RadioItem>
+            <RadioItem checked name="radio-game" value="game" bind:group={showTypes}>Game</RadioItem>
+            <RadioItem checked name="radio-practice" value="practice" bind:group={showTypes}>Practice</RadioItem>
+            <RadioItem checked name="radio-misc" value="misc" bind:group={showTypes}>Other</RadioItem>
+        </RadioGroup>
     </label>
 </div>
 
