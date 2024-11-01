@@ -25,9 +25,7 @@
 {#await data.teams then teams}
     <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
         {#each teams as team}
-            <a href="/account/team/{team.id}">
-                <TeamListTeaser {team} link={true}/>
-            </a>
+            <TeamListTeaser {team} link={true}/>
         {/each}
 
         {#if teams?.length === 0}
