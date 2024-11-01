@@ -1,10 +1,10 @@
 <script lang="ts">
     import {ClipboardListOutline, ClipboardOutline, FileLinesOutline, InfoCircleOutline} from "flowbite-svelte-icons";
-    import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
-    import {authModel} from "$lib/pocketbase/Auth";
-    import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
-    import {client} from "$lib/pocketbase";
-    import {invalidate} from "$app/navigation";
+    import type {ExpandedTeam} from "$lib/model/ExpandedResponse";
+
+    /**
+     * Used on Team Detail page.
+     */
 
     interface props {
         team: ExpandedTeam
@@ -12,13 +12,6 @@
     }
 
     let {team, link = false}: props = $props()
-
-    const model = $authModel as CustomAuthModel;
-
-    function deleteAction(id: string) {
-        client.collection("teams").delete(id)
-        invalidate("club:single")
-    }
 </script>
 
 <article class="card block variant-soft-surface p-3" class:card-hover={link}>
@@ -62,8 +55,3 @@
     </div>
 
 </article>
-{#if team?.expand?.club?.admins.includes(model.id) || team?.admins.includes(model.id)}
-    <div class="flex justify-end">
-        <DeleteButton id={team.id} modelName="Team" action={deleteAction}/>
-    </div>
-{/if}

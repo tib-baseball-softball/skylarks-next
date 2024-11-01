@@ -1,6 +1,5 @@
 <script lang="ts">
     import ClubDetailCard from "$lib/components/diamondplanner/club/ClubDetailCard.svelte";
-    import TeamTeaserCard from "$lib/components/diamondplanner/team/TeamTeaserCard.svelte";
     import UniformSetInfoCard from "$lib/components/diamondplanner/uniformset/UniformSetInfoCard.svelte";
     import {PlusOutline} from "flowbite-svelte-icons";
     import type {CustomAuthModel, ExpandedClub, ExpandedTeam, ExpandedUniformSet} from "$lib/model/ExpandedResponse";
@@ -13,6 +12,7 @@
         type ModalSettings
     } from "@skeletonlabs/skeleton";
     import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
+    import TeamListTeaser from "$lib/components/diamondplanner/team/TeamListTeaser.svelte";
 
     let {data} = $props()
 
@@ -71,7 +71,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
         {#each teams as team}
             <a href="/account/team/{team.id}">
-                <TeamTeaserCard {team} link={true}/>
+                <TeamListTeaser {team} link={true}/>
             </a>
         {/each}
 

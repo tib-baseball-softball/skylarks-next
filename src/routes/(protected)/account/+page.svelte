@@ -1,13 +1,13 @@
 <script lang="ts">
-  import TeamTeaserCard from "$lib/components/diamondplanner/team/TeamTeaserCard.svelte";
-  import UserDataCard from "$lib/components/diamondplanner/user/UserDataCard.svelte";
-  import type {CustomAuthModel} from "$lib/model/ExpandedResponse.js";
-  import {authModel} from "$lib/pocketbase/Auth";
-  import PlayerProfileClubsSection from "$lib/components/diamondplanner/user/PlayerProfileClubsSection.svelte";
+    import UserDataCard from "$lib/components/diamondplanner/user/UserDataCard.svelte";
+    import type {CustomAuthModel} from "$lib/model/ExpandedResponse.js";
+    import {authModel} from "$lib/pocketbase/Auth";
+    import PlayerProfileClubsSection from "$lib/components/diamondplanner/user/PlayerProfileClubsSection.svelte";
+    import TeamListTeaser from "$lib/components/diamondplanner/team/TeamListTeaser.svelte";
 
-  const model = $authModel as CustomAuthModel;
+    const model = $authModel as CustomAuthModel;
 
-  let {data} = $props();
+    let {data} = $props();
 </script>
 
 <h1 class="h1 lg:mt-4">My Dashboard</h1>
@@ -26,7 +26,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
         {#each teams as team}
             <a href="/account/team/{team.id}">
-                <TeamTeaserCard {team} link={true}/>
+                <TeamListTeaser {team} link={true}/>
             </a>
         {/each}
 
