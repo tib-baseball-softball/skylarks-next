@@ -5,19 +5,16 @@
     ChartLineUpOutline,
     ChartMixedOutline,
     FileShieldOutline,
-    HomeOutline,
     LockOutline,
     ProfileCardOutline,
     ShieldOutline,
-    TableRowOutline,
-    TicketOutline,
     UserCircleOutline,
-    UsersGroupOutline,
     UsersOutline,
     UsersSolid,
   } from "flowbite-svelte-icons";
   import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/model/ExpandedResponse";
   import {authModel} from "$lib/pocketbase/Auth";
+  import StaticNavigationLinks from "$lib/components/navigation/StaticNavigationLinks.svelte";
 
   interface Props {
     clubs: ExpandedClub[],
@@ -41,45 +38,11 @@
 </script>
 
 <nav class="list-nav py-1 px-1 lg:px-4">
-    <ul class="subpixel-antialiased">
-        <li>
-            <a href="/" onclick={drawerClose}>
-                <HomeOutline size="lg"/>
-                <span>Start</span>
-            </a>
-        </li>
-
-        <!--        <li><a href="/aktuelles" on:click={drawerClose}>Aktuelles</a></li>-->
-        <li>
-            <a href="/gamecenter" onclick={drawerClose}>
-                <TicketOutline size="lg"/>
-                <span>Gamecenter</span>
-            </a>
-        </li>
-        <li>
-            <a href="/ligen" onclick={drawerClose}>
-                <TableRowOutline size="lg"/>
-                <span>Leagues</span>
-            </a>
-        </li>
-        <li>
-            <a href="/teams" onclick={drawerClose}>
-                <UsersGroupOutline size="lg"/>
-                <span>Teams</span>
-            </a>
-        </li>
-        <li>
-            <a href="/club" onclick={drawerClose}>
-                <ShieldOutline size="lg"/>
-                <span>Club</span>
-            </a>
-        </li>
-        <!--        <li><a href="/kontakt" on:click={drawerClose}>Contact</a></li>-->
+    <ul class="subpixel-antialiased lg:hidden">
+        <StaticNavigationLinks/>
     </ul>
 
     {#if isUserAuthenticated}
-        <hr class="my-2 main-divider"/>
-
         <Accordion regionPanel="space-y-1">
             <AccordionItem open>
                 <svelte:fragment slot="lead">
