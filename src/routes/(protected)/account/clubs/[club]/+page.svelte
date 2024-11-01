@@ -1,7 +1,7 @@
 <script lang="ts">
     import ClubDetailCard from "$lib/components/diamondplanner/club/ClubDetailCard.svelte";
     import UniformSetInfoCard from "$lib/components/diamondplanner/uniformset/UniformSetInfoCard.svelte";
-    import {PlusOutline} from "flowbite-svelte-icons";
+    import {EnvelopeOutline, PlusOutline} from "flowbite-svelte-icons";
     import type {CustomAuthModel, ExpandedClub, ExpandedTeam, ExpandedUniformSet} from "$lib/model/ExpandedResponse";
     import {authModel} from "$lib/pocketbase/Auth";
     import {
@@ -104,3 +104,36 @@
         </button>
     {/if}
 </section>
+
+{#if club?.admins.includes(model.id)}
+    <hr class="my-2"/>
+
+    <section>
+        <header>
+            <h2 class="h3 mb-3">Admin Section</h2>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-3">
+            <article class="card admin-card variant-ringed-surface">
+                <header class="card-header">
+                    <h3 class="h4 font-semibold">Club deletion</h3>
+                </header>
+
+                <section class="p-4 space-y-2">
+                    <p>Deleting a club will delete all team, event and participation data. For safety reasons, a club
+                        can therefore only be deleted by a superadmin.</p>
+                    <p>Please contact your club's administration.</p>
+                </section>
+
+                <footer class="card-footer flex">
+                    <a class="btn variant-ghost-secondary dark:variant-filled-secondary dark:border grow"
+                       href="mailto:webmaster@tib-baseball.de">
+                        <EnvelopeOutline/>
+                        <span class="ms-2">Contact</span>
+                    </a>
+                </footer>
+            </article>
+        </div>
+    </section>
+{/if}
+
