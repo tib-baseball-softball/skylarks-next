@@ -1,51 +1,37 @@
 <script lang="ts">
-  import {Accordion, AccordionItem, getDrawerStore,} from "@skeletonlabs/skeleton";
-  import {client} from "$lib/pocketbase";
-  import {
-    ChartLineUpOutline,
-    ChartMixedOutline,
-    FileShieldOutline,
-    HomeOutline,
-    LockOutline,
-    ProfileCardOutline,
-    ShieldOutline,
-    TableRowOutline,
-    TicketOutline,
-    UserCircleOutline,
-    UsersGroupOutline,
-    UsersOutline,
-    UsersSolid,
-  } from "flowbite-svelte-icons";
-  import {browser} from "$app/environment";
-  import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/model/ExpandedResponse";
-  import {authModel} from "$lib/pocketbase/Auth";
+    import {Accordion, AccordionItem, getDrawerStore,} from "@skeletonlabs/skeleton";
+    import {client} from "$lib/pocketbase";
+    import {
+        ChartLineUpOutline,
+        ChartMixedOutline,
+        FileShieldOutline,
+        HomeOutline,
+        LockOutline,
+        ProfileCardOutline,
+        ShieldOutline,
+        TableRowOutline,
+        TicketOutline,
+        UserCircleOutline,
+        UsersGroupOutline,
+        UsersOutline,
+        UsersSolid,
+    } from "flowbite-svelte-icons";
+    import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/model/ExpandedResponse";
+    import {authModel} from "$lib/pocketbase/Auth";
 
-  const drawerStore = getDrawerStore();
-  const model = $authModel as CustomAuthModel;
-
-  function drawerClose(): void {
-    drawerStore.close();
-  }
-
-  async function getUserTeams(): Promise<ExpandedTeam[]> {
-    if (browser) {
-      return await client
-        .collection("teams")
-        .getFullList({expand: "club"});
+    interface Props {
+        clubs: ExpandedClub[],
+        teams: ExpandedTeam[],
     }
-    return [];
-  }
 
-  async function getUserClubs(): Promise<ExpandedClub[]> {
-    if (browser) {
-      return await client
-        .collection("clubs")
-        .getFullList<ExpandedClub>({
-          filter: `"${model.club}" ?~ id`,
-        })
+    let {clubs, teams}: Props = $props()
+
+    const drawerStore = getDrawerStore();
+    const model = $derived($authModel) as CustomAuthModel;
+
+    function drawerClose(): void {
+        drawerStore.close();
     }
-    return []
-  }
 </script>
 
 <nav class="list-nav py-1 px-1 lg:px-4">
@@ -119,48 +105,44 @@
 
         <hr class="my-2"/>
 
-        {#await getUserTeams() then teams}
-            <Accordion regionPanel="space-y-1">
-                <AccordionItem open>
-                    <svelte:fragment slot="lead">
-                        <UsersSolid size="lg"/>
-                    </svelte:fragment>
+        <Accordion regionPanel="space-y-1">
+            <AccordionItem open>
+                <svelte:fragment slot="lead">
+                    <UsersSolid size="lg"/>
+                </svelte:fragment>
 
-                    <svelte:fragment slot="summary">
-                        <span>My Clubs & Teams</span>
-                    </svelte:fragment>
+                <svelte:fragment slot="summary">
+                    <span>My Clubs & Teams</span>
+                </svelte:fragment>
 
-                    <svelte:fragment slot="content">
-                        {#await getUserClubs() then clubs}
-                            {#each clubs as club}
-                                <a href="/account/clubs/{club.id}" onclick={drawerClose}>
-                                    <ShieldOutline size="lg"/>
-                                    <div>{club.name} ({club.acronym})</div>
-                                </a>
-                            {/each}
-                        {/await}
+                <svelte:fragment slot="content">
+                    {#each clubs as club}
+                        <a href="/account/clubs/{club.id}" onclick={drawerClose}>
+                            <ShieldOutline size="lg"/>
+                            <div>{club.name} ({club.acronym})</div>
+                        </a>
+                    {/each}
 
-                        {#if teams?.length > 0}
-                            <hr class="mx-8">
+                    {#if teams?.length > 0}
+                        <hr class="mx-8">
 
-                            {#each teams as team}
-                                <a
+                        {#each teams as team}
+                            <a
                                     href="/account/team/{team.id}"
                                     onclick={drawerClose}
+                            >
+                                <UsersOutline size="lg"/>
+                                <div
+                                >{team.name} ({team?.expand?.club
+                                    ?.acronym})
+                                </div
                                 >
-                                    <UsersOutline size="lg"/>
-                                    <div
-                                    >{team.name} ({team?.expand?.club
-                                        ?.acronym})
-                                    </div
-                                    >
-                                </a>
-                            {/each}
-                        {/if}
-                    </svelte:fragment>
-                </AccordionItem>
-            </Accordion>
-        {/await}
+                            </a>
+                        {/each}
+                    {/if}
+                </svelte:fragment>
+            </AccordionItem>
+        </Accordion>
 
         <hr class="my-2"/>
 

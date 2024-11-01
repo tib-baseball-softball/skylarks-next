@@ -1,6 +1,7 @@
 <script lang="ts">
     import {getModalStore, getToastStore, type ModalSettings, type ToastSettings} from "@skeletonlabs/skeleton";
     import {TrashBinOutline} from "flowbite-svelte-icons";
+    import {invalidate} from "$app/navigation";
 
     const modalStore = getModalStore();
     const toastStore = getToastStore();
@@ -31,6 +32,7 @@
                         };
 
                         toastStore.trigger(toastSettingsDeletions)
+                        invalidate("nav:load")
                     } catch {
                         const toastSettingsDeletions: ToastSettings = {
                             message: `Error deleting ${modelName}.`,

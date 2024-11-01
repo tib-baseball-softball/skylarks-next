@@ -58,6 +58,7 @@
         }
         invalidate("teams:list");
         invalidate("club:single");
+        invalidate("nav:load")
         drawerStore.close();
     }
 </script>

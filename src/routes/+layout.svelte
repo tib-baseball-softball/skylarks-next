@@ -1,56 +1,58 @@
 <script lang="ts">
-  import '../app.postcss';
-  import {
-    AppBar,
-    Drawer,
-    getDrawerStore,
-    initializeStores,
-    LightSwitch,
-    Modal,
-    type ModalComponent,
-    Toast
-  } from "@skeletonlabs/skeleton";
-  import Navigation from "$lib/components/meta/Navigation.svelte";
-  import Footer from "$lib/components/meta/Footer.svelte";
-  import LoginBadge from "$lib/auth/LoginBadge.svelte";
-  import LoginForm from "$lib/auth/LoginForm.svelte";
-  import AccountModal from "$lib/auth/AccountModal.svelte";
-  import {PUBLIC_AUTH_FUNCS_ENABLED} from "$env/static/public";
-  import {onMount} from "svelte";
-  import EventForm from '$lib/components/forms/EventForm.svelte';
-  import TeamForm from '$lib/components/forms/TeamForm.svelte';
-  import PlayerDataForm from '$lib/components/forms/PlayerDataForm.svelte';
-  import ClubForm from "$lib/components/forms/ClubForm.svelte";
+    import '../app.postcss';
+    import {
+        AppBar,
+        Drawer,
+        getDrawerStore,
+        initializeStores,
+        LightSwitch,
+        Modal,
+        type ModalComponent,
+        Toast
+    } from "@skeletonlabs/skeleton";
+    import Navigation from "$lib/components/meta/Navigation.svelte";
+    import Footer from "$lib/components/meta/Footer.svelte";
+    import LoginBadge from "$lib/auth/LoginBadge.svelte";
+    import LoginForm from "$lib/auth/LoginForm.svelte";
+    import AccountModal from "$lib/auth/AccountModal.svelte";
+    import {PUBLIC_AUTH_FUNCS_ENABLED} from "$env/static/public";
+    import {onMount} from "svelte";
+    import EventForm from '$lib/components/forms/EventForm.svelte';
+    import TeamForm from '$lib/components/forms/TeamForm.svelte';
+    import PlayerDataForm from '$lib/components/forms/PlayerDataForm.svelte';
+    import ClubForm from "$lib/components/forms/ClubForm.svelte";
+    import type {LayoutData} from "../../.svelte-kit/types/src/routes/$types";
 
-  interface Props {
-    children?: import('svelte').Snippet;
-  }
+    interface Props {
+        data: LayoutData
+        children?: import('svelte').Snippet;
+    }
 
-  let {children}: Props = $props();
+    let {data, children}: Props = $props();
 
-  initializeStores()
+    initializeStores()
 
-  const modalRegistry: Record<string, ModalComponent> = {
-    // Set a unique modal ID, then pass the component reference
-    loginForm: {ref: LoginForm},
-    accountOverview: {ref: AccountModal}
-  }
+    const modalRegistry: Record<string, ModalComponent> = {
+        // Set a unique modal ID, then pass the component reference
+        loginForm: {ref: LoginForm},
+        accountOverview: {ref: AccountModal}
+    }
 
-  const drawerStore = getDrawerStore()
+    const drawerStore = getDrawerStore()
 
-  function navDrawerOpen(): void {
-    drawerStore.open({
-      id: "nav",
-      width: "w-[70%] sm:w-[40%]"
+    function navDrawerOpen(): void {
+        drawerStore.open({
+            id: "nav",
+            width: "w-[70%] sm:w-[40%]"
+        })
+    }
+
+    // LightSwitch Workaround: https://github.com/skeletonlabs/skeleton/issues/2598
+    onMount(() => {
+        const e = document.documentElement.classList, t = localStorage.getItem("modeUserPrefers") === "false",
+            n = !("modeUserPrefers" in localStorage), r = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        t || n && r ? e.add("dark") : e.remove("dark")
     })
-  }
-
-  // LightSwitch Workaround: https://github.com/skeletonlabs/skeleton/issues/2598
-  onMount(() => {
-    const e = document.documentElement.classList, t = localStorage.getItem("modeUserPrefers") === "false",
-      n = !("modeUserPrefers" in localStorage), r = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    t || n && r ? e.add("dark") : e.remove("dark")
-  })
 
 </script>
 
@@ -65,7 +67,7 @@
 
         <hr class="mb-2"/>
 
-        <Navigation></Navigation>
+        <Navigation clubs={data.clubs} teams={data.teams}/>
 
     {:else if $drawerStore.id === "event-form"}
         <EventForm/>
@@ -87,11 +89,11 @@
     <header>
 
         <AppBar
-            gridColumns="grid-cols-6"
-            slotDefault="place-self-center place-content-between w-full col-span-4"
-            slotTrail="place-content-end"
-            padding="p-3"
-            background="bg-surface-500/5"
+                gridColumns="grid-cols-6"
+                slotDefault="place-self-center place-content-between w-full col-span-4"
+                slotTrail="place-content-end"
+                padding="p-3"
+                background="bg-surface-500/5"
         >
             <svelte:fragment slot="lead">
                 <div class="flex items-center justify-content-start">
@@ -141,8 +143,8 @@
 
         <!-- Sidebar (Left) -->
         <aside
-            class="bg-surface-500/5 p-2 sticky top-0 col-span-1 hidden h-screen md:block max-w-64 lg:max-w-72 xl:max-w-80">
-            <Navigation></Navigation>
+                class="bg-surface-500/5 p-2 sticky top-0 col-span-1 hidden h-screen md:block max-w-64 lg:max-w-72 xl:max-w-80">
+            <Navigation clubs={data.clubs} teams={data.teams}/>
         </aside>
 
         <!-- Main -->
