@@ -23,14 +23,15 @@
   };
 
   const form: ExpandedClub = $state(
-    $drawerStore.meta.club ?? {
-      id: "",
-      name: "",
-      bsm_id: 0,
-      bsm_api_key: "",
-      acronym: "",
-      admins: [],
-    },
+      $drawerStore.meta.club ?? {
+        id: "",
+        name: "",
+        bsm_id: 0,
+        bsm_api_key: "",
+        signup_key: "",
+        acronym: "",
+        admins: [],
+      },
   );
 
   let selectedAdmins: UsersResponse[] = $derived(form.expand.admins)
@@ -50,15 +51,15 @@
         })
 
         result = await client
-          .collection("clubs")
-          .update<ClubsResponse>(form.id, form);
+            .collection("clubs")
+            .update<ClubsResponse>(form.id, form);
       } else {
         // a user creating a club becomes its first admin
         form.admins.push(model.id)
 
         result = await client
-          .collection("clubs")
-          .create<ClubsResponse>(form);
+            .collection("clubs")
+            .create<ClubsResponse>(form);
 
         // a user needs to become a member of the new club
         await client.collection("users").update<UsersUpdate>(model.id, {
@@ -115,9 +116,9 @@
 <article class="p-6">
     <div class="flex items-center gap-5">
         <button
-            aria-label="cancel and close"
-            class="btn variant-ghost-surface"
-            onclick={drawerStore.close}
+                aria-label="cancel and close"
+                class="btn variant-ghost-surface"
+                onclick={drawerStore.close}
         >
             <CloseOutline/>
         </button>
@@ -130,46 +131,50 @@
         </header>
     </div>
 
-    <form onsubmit={submitForm} class="mt-4 space-y-3">
+    <form class="mt-4 space-y-3" onsubmit={submitForm}>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 xl:gap-4">
             <input
-                name="id"
-                autocomplete="off"
-                class="input"
-                type="hidden"
-                readonly
-                bind:value={form.id}
+                    autocomplete="off"
+                    bind:value={form.id}
+                    class="input"
+                    name="id"
+                    readonly
+                    type="hidden"
             />
 
             <label class="label">
-                Name
+                <span>Name</span>
                 <input
-                    name="name"
-                    class="input"
-                    required
-                    type="text"
-                    bind:value={form.name}
+                        bind:value={form.name}
+                        class="input"
+                        name="name"
+                        required
+                        type="text"
                 />
             </label>
 
             <label class="label">
+                <span>
                 Acronym
+                </span>
                 <input
-                    name="acronym"
-                    class="input"
-                    type="text"
-                    bind:value={form.acronym}
+                        bind:value={form.acronym}
+                        class="input"
+                        name="acronym"
+                        type="text"
                 />
             </label>
 
             <label class="label">
+                <span>
                 BSM Club ID
+                </span>
                 <input
-                    name="bsm_id"
-                    class="input"
-                    type="number"
-                    required
-                    bind:value={form.bsm_id}
+                        bind:value={form.bsm_id}
+                        class="input"
+                        name="bsm_id"
+                        required
+                        type="number"
                 >
                 <span class="text-sm">Can be found in the BSM address bar while editing
                     (e.g. <span class="italic">https://bsm.baseball-softball.de/clubs/xxx/edit</span>).
@@ -178,16 +183,37 @@
             </label>
 
             <label class="label">
+                <span>
                 BSM API Key
+                </span>
                 <input
-                    name="bsm_api_key"
-                    class="input"
-                    type="text"
-                    bind:value={form.bsm_api_key}
+                        bind:value={form.bsm_api_key}
+                        class="input"
+                        name="bsm_api_key"
+                        type="text"
                 />
                 <span class="text-sm">
                     Must be created in BSM in a user's account that has the role "Team Administration".
                     If set, all game events for the club can be automatically imported.
+                </span>
+            </label>
+
+            <label class="label">
+                <span>
+                Signup Key
+                </span>
+                <input
+                        bind:value={form.signup_key}
+                        class="input"
+                        name="signup_key"
+                        placeholder="minimum 8 characters"
+                        minlength="8"
+                        required
+                        type="text"
+                />
+                <span class="text-sm">
+                    A valid signup key needs to be entered upon user account creation.
+                    New users are automatically added as members to the club corresponding to the signup key used.
                 </span>
             </label>
 
@@ -197,9 +223,9 @@
 
                     {#each selectedAdmins as admin}
                         <button
-                            type="button"
-                            class="chip variant-filled-primary me-1 lg:me-2"
-                            onclick={() => removeAdminFromSelection(admin)}
+                                type="button"
+                                class="chip variant-filled-primary me-1 lg:me-2"
+                                onclick={() => removeAdminFromSelection(admin)}
                         >
                             <span>{admin.first_name} {admin.last_name}</span>
                             <CloseOutline size="xs"/>
@@ -209,9 +235,9 @@
                     {#await allUsersForClub then users}
                         <div>Select to add as admin:</div>
                         <select
-                            class="select"
-                            bind:this={adminSelect}
-                            onchange={() => addAdminToSelection(users)}
+                                class="select"
+                                bind:this={adminSelect}
+                                onchange={() => addAdminToSelection(users)}
                         >
                             <option selected value="">None</option>
                             {#each users as user}
@@ -232,7 +258,7 @@
         <hr class="!my-5"/>
 
         <div class="flex justify-center gap-3">
-            <button type="submit" class="mt-2 btn variant-ghost-primary">
+            <button class="mt-2 btn variant-ghost-primary" type="submit">
                 Submit
             </button>
         </div>

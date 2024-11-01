@@ -331,6 +331,20 @@
       },
       {
         "system": false,
+        "id": "cdlmsvsz",
+        "name": "signup_key",
+        "type": "text",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": 8,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "system": false,
         "id": "r175a7vd",
         "name": "acronym",
         "type": "text",
