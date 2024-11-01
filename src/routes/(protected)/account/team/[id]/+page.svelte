@@ -3,12 +3,13 @@
     import EventTeaser from "$lib/components/diamondplanner/event/EventTeaser.svelte";
     import Paginator from "$lib/pocketbase/Paginator.svelte";
     import {authModel} from "$lib/pocketbase/Auth";
-    import {CalendarPlusOutline, CogOutline, UsersGroupOutline,} from "flowbite-svelte-icons";
+    import {CalendarPlusOutline, UsersGroupOutline,} from "flowbite-svelte-icons";
     import {goto, invalidateAll} from "$app/navigation";
     import type {EventType} from "$lib/model/ExpandedResponse.js";
     import {type DrawerSettings, getDrawerStore, RadioGroup, RadioItem,} from "@skeletonlabs/skeleton";
     import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
     import {client} from "$lib/pocketbase";
+    import TeamEditButton from "$lib/components/team/TeamEditButton.svelte";
 
     let {data} = $props();
     const events = $derived(data.events);
@@ -34,16 +35,6 @@
         meta: {
             event: null,
             club: data.team?.club,
-            team: data.team,
-        },
-    });
-
-    const teamSettings: DrawerSettings = $derived({
-        id: "team-form",
-        position: "right",
-        width: "w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%]",
-        meta: {
-            club: data.team?.expand?.club,
             team: data.team,
         },
     });
@@ -242,20 +233,12 @@
 
             <section class="p-4 space-y-3">
                 <div class="flex flex-col gap-2 lg:gap-3">
-                    <button
-                            class="btn variant-ghost-surface"
-                            onclick={() => drawerStore.open(teamSettings)}
-                    >
-                        <CogOutline/>
-                        <span>General Settings</span>
-                    </button>
+                    <TeamEditButton club={data.team?.expand?.club} team={data.team} classes="variant-ghost-surface"/>
                 </div>
             </section>
 
             <footer class="card-footer mt-2">
-                <div
-                        class="flex flex-col gap-2 lg:gap-3 rounded-token variant-ringed-error px-2 py-3"
-                >
+                <div class="flex flex-col gap-2 lg:gap-3 rounded-token variant-ringed-error px-2 py-3">
                     <header class="mx-2">Danger Zone</header>
 
                     <DeleteButton
