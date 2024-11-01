@@ -37,9 +37,9 @@
 
             <div class="flex flex-wrap gap-2 justify-end">
                 {#each $authModel?.expand?.club as club}
-                    <span class="badge variant-filled-tertiary"
-                    >{club.name}</span
-                    >
+                    <a href="/account/clubs/{club.id}" class="badge variant-filled-tertiary" onclick={closeModal}>
+                        {club.name}
+                    </a>
                 {/each}
             </div>
         </div>
