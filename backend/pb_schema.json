@@ -268,7 +268,7 @@
     "viewRule": "@request.auth.id != \"\" && (\n    // the same user as the authenticated one\n    id = @request.auth.id ||\n    // or share the same club\n    club.id ?= @request.auth.club.id\n)",
     "createRule": "",
     "updateRule": "id = @request.auth.id // user editing themselves\n||\nclub.admins ?= @request.auth.id // editing user is Club admin",
-    "deleteRule": null,
+    "deleteRule": "id = @request.auth.id // users can delete themselves",
     "options": {
       "allowEmailAuth": true,
       "allowOAuth2Auth": true,
