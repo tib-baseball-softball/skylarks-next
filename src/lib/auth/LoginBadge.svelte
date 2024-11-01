@@ -21,10 +21,6 @@
     component: "accountOverview",
   };
 
-  async function logout() {
-    client.authStore.clear();
-  }
-
   const unsubscribe = client.authStore.onChange((token, model) => {
     // do not do any auth stuff on the server
     if (browser) {
@@ -52,26 +48,26 @@
 
         {#if $authModel.avatar}
             <Avatar
-                src={client.files.getUrl($authModel, $authModel.avatar)}
-                width="w-14"
+                    src={client.files.getUrl($authModel, $authModel.avatar)}
+                    width="w-14"
             />
 
         {:else}
 
             <Avatar
-                initials={$authModel?.first_name?.charAt(0).toUpperCase() +
+                    initials={$authModel?.first_name?.charAt(0).toUpperCase() +
           $authModel?.last_name?.charAt(0).toUpperCase()}
-                background="variant-filled-primary"
-                width="w-14"
-                fill="fill-white"
+                    background="variant-filled-primary"
+                    width="w-14"
+                    fill="fill-white"
             />
 
         {/if}
     </button>
 {:else}
     <button
-        class="btn variant-ghost-primary"
-        onclick={() => modalStore.trigger(loginModal)}
+            class="btn variant-ghost-primary"
+            onclick={() => modalStore.trigger(loginModal)}
     >
         {signupAllowed ? "Login / Register" : "Login"}
     </button>

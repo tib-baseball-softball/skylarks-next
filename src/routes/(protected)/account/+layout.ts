@@ -4,21 +4,33 @@ import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/model/Expan
 import {authModel} from "$lib/pocketbase/Auth";
 import {get} from "svelte/store";
 
-export const load = (async ({fetch, depends}) => {
+export const load = (async ({fetch, depends, parent}) => {
   const model = get(authModel) as unknown as CustomAuthModel;
+  const data = await parent()
 
-  const teams = client.collection("teams").getFullList<ExpandedTeam>({
-    filter: `"${model.teams}" ?~ id`,
-    expand: "club",
-    fetch: fetch,
-    sort: "+name",
-  })
+  if (!client.authStore.isValid) {
+    return
+  }
 
-  const clubs = client.collection("clubs").getFullList<ExpandedClub>({
-    filter: `"${model.club}" ?~ id`,
-    fetch: fetch,
-    expand: "admins",
-  });
+  let clubs = data.clubs
+  let teams = data.teams
+
+  if (!teams) {
+    teams = await client.collection("teams").getFullList<ExpandedTeam>({
+      filter: `"${model?.teams}" ?~ id`,
+      expand: "club",
+      fetch: fetch,
+      sort: "+name",
+    })
+  }
+
+  if (!clubs) {
+    clubs = await client.collection("clubs").getFullList<ExpandedClub>({
+      filter: `"${model?.club}" ?~ id`,
+      fetch: fetch,
+      expand: "admins",
+    });
+  }
 
   depends("teams:list")
 

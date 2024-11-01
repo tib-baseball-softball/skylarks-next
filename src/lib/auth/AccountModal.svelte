@@ -1,19 +1,19 @@
 <script lang="ts">
-    import { client } from "../pocketbase";
-    import { authModel } from "$lib/pocketbase/Auth";
+  import {client} from "../pocketbase";
+  import {authModel} from "$lib/pocketbase/Auth";
 
-    const { parent } = $props();
+  const {parent} = $props();
 
-    async function logout() {
-        //@ts-ignore
-        parent.onClose();
-        client.authStore.clear();
-    }
+  async function logout() {
+    //@ts-ignore
+    parent.onClose();
+    client.authStore.clear();
+  }
 
-    async function closeModal() {
-        // @ts-ignore
-        parent.onClose();
-    }
+  async function closeModal() {
+    // @ts-ignore => this is why this is wrapped in another function
+    parent.onClose();
+  }
 </script>
 
 <div class="w-modal-slim">
@@ -22,12 +22,12 @@
             <p>Eingeloggt als:</p>
 
             <a
-                href="/account"
-                class="badge variant-filled-primary"
-                onclick={closeModal}
+                    href="/account"
+                    class="badge variant-filled-primary"
+                    onclick={closeModal}
             >
                 <samp
-                    >{`${$authModel?.first_name ?? ""} ${$authModel?.last_name ?? ""}`}</samp
+                >{`${$authModel?.first_name ?? ""} ${$authModel?.last_name ?? ""}`}</samp
                 >
             </a>
         </div>
@@ -38,14 +38,15 @@
             <div class="flex flex-wrap gap-2 justify-end">
                 {#each $authModel?.expand?.club as club}
                     <span class="badge variant-filled-tertiary"
-                        >{club.name}</span
+                    >{club.name}</span
                     >
                 {/each}
             </div>
         </div>
 
         <button class="btn variant-ghost-primary mb-1" onclick={logout}
-            >Abmelden</button
+        >Abmelden
+        </button
         >
     </div>
 </div>

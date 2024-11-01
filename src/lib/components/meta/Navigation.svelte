@@ -1,37 +1,43 @@
 <script lang="ts">
-    import {Accordion, AccordionItem, getDrawerStore,} from "@skeletonlabs/skeleton";
-    import {client} from "$lib/pocketbase";
-    import {
-        ChartLineUpOutline,
-        ChartMixedOutline,
-        FileShieldOutline,
-        HomeOutline,
-        LockOutline,
-        ProfileCardOutline,
-        ShieldOutline,
-        TableRowOutline,
-        TicketOutline,
-        UserCircleOutline,
-        UsersGroupOutline,
-        UsersOutline,
-        UsersSolid,
-    } from "flowbite-svelte-icons";
-    import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/model/ExpandedResponse";
-    import {authModel} from "$lib/pocketbase/Auth";
+  import {Accordion, AccordionItem, getDrawerStore,} from "@skeletonlabs/skeleton";
+  import {client} from "$lib/pocketbase";
+  import {
+    ChartLineUpOutline,
+    ChartMixedOutline,
+    FileShieldOutline,
+    HomeOutline,
+    LockOutline,
+    ProfileCardOutline,
+    ShieldOutline,
+    TableRowOutline,
+    TicketOutline,
+    UserCircleOutline,
+    UsersGroupOutline,
+    UsersOutline,
+    UsersSolid,
+  } from "flowbite-svelte-icons";
+  import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/model/ExpandedResponse";
+  import {authModel} from "$lib/pocketbase/Auth";
 
-    interface Props {
-        clubs: ExpandedClub[],
-        teams: ExpandedTeam[],
-    }
+  interface Props {
+    clubs: ExpandedClub[],
+    teams: ExpandedTeam[],
+  }
 
-    let {clubs, teams}: Props = $props()
+  let {clubs, teams}: Props = $props()
 
-    const drawerStore = getDrawerStore();
-    const model = $derived($authModel) as CustomAuthModel;
+  const drawerStore = getDrawerStore();
+  const model = $derived($authModel) as CustomAuthModel;
 
-    function drawerClose(): void {
-        drawerStore.close();
-    }
+  let isUserAuthenticated = $state(client.authStore.isValid)
+
+  function drawerClose(): void {
+    drawerStore.close();
+  }
+
+  $effect(() => {
+    isUserAuthenticated = !!model;
+  })
 </script>
 
 <nav class="list-nav py-1 px-1 lg:px-4">
@@ -71,7 +77,7 @@
         <!--        <li><a href="/kontakt" on:click={drawerClose}>Contact</a></li>-->
     </ul>
 
-    {#if client.authStore.isValid}
+    {#if isUserAuthenticated}
         <hr class="my-2 main-divider"/>
 
         <Accordion regionPanel="space-y-1">
