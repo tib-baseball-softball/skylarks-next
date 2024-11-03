@@ -1,9 +1,8 @@
 <script lang="ts">
   import {getToastStore, Tab, TabGroup, type ToastSettings} from "@skeletonlabs/skeleton";
   import {client} from "../pocketbase";
-  import {providerLogin} from "$lib/pocketbase/Auth";
   import {goto} from "$app/navigation";
-  import type {AuthProviderInfo} from "pocketbase";
+  import OAuthProviderButton from "$lib/auth/OAuthProviderButton.svelte";
 
   const {
     authCollection = "users",
@@ -58,25 +57,17 @@
     }
   }
 
-  async function submitOAuthRequest(provider: AuthProviderInfo) {
-    providerLogin(provider, coll)
-    goto("/account", {invalidateAll: true})
-
-    //@ts-ignore
-    parent.onClose()
-  }
-
   let tabSet = $state(0);
 </script>
 
 {#snippet signin()}
     <label class="label">
-        <span class="ps-2">Your email</span>
+        <span class="">Your email</span>
         <input class="input" bind:value={form.email} required type="text" placeholder="name@provider.com"/>
     </label>
 
     <label class="label">
-        <span class="ps-2">Your password</span>
+        <span class="">Your password</span>
         <input
                 bind:value={form.password}
                 class="input"
@@ -88,15 +79,15 @@
         />
     </label>
 
-    <button class="btn variant-ghost-primary" type="submit" onclick={() => (signup = false)}>
+    <button class="btn mt-2 variant-ghost-primary" type="submit" onclick={() => (signup = false)}>
         Login to your account
     </button>
 {/snippet}
 
 <div class="w-modal">
-    <article class="card p-6">
+    <article class="card p-3 md:p-6">
         <header class="mb-4">
-            <h2 class="h4 font-semibold">Sign in to DiamondPlanner</h2>
+            <h2 class="h4 font-semibold">Sign in to Skylarks Diamond Planner</h2>
         </header>
 
         <form onsubmit={submit}>
@@ -114,7 +105,7 @@
                             {:else if tabSet === 1}
 
                                 <label class="label">
-                                    <span class="ps-2">Your email</span>
+                                    <span class="">Your email</span>
                                     <input
                                             class="input"
                                             bind:value={form.email}
@@ -124,34 +115,38 @@
                                     />
                                 </label>
 
-                                <label class="label">
-                                    <span class="ps-2">Your password</span>
-                                    <input
-                                            class="input"
-                                            bind:value={form.password}
-                                            required
-                                            type="password"
-                                            placeholder="**********"
-                                            minlength="8"
-                                            maxlength="72"
-                                    />
-                                </label>
+                                <div class="grid grid-cols-2 gap-2">
+
+
+                                    <label class="label">
+                                        <span class="">Your password</span>
+                                        <input
+                                                class="input"
+                                                bind:value={form.password}
+                                                required
+                                                type="password"
+                                                placeholder="**********"
+                                                minlength="8"
+                                                maxlength="72"
+                                        />
+                                    </label>
+
+                                    <label class="label">
+                                        <span class="">Confirm password</span>
+                                        <input
+                                                class="input"
+                                                bind:value={form.passwordConfirm}
+                                                required
+                                                type="password"
+                                                placeholder="confirm password"
+                                                minlength="8"
+                                                maxlength="72"
+                                        />
+                                    </label>
+                                </div>
 
                                 <label class="label">
-                                    <span class="ps-2">Confirm password</span>
-                                    <input
-                                            class="input"
-                                            bind:value={form.passwordConfirm}
-                                            required
-                                            type="password"
-                                            placeholder="confirm password"
-                                            minlength="8"
-                                            maxlength="72"
-                                    />
-                                </label>
-
-                                <label class="label !mt-4">
-                                    <span class="ps-2">Signup Key</span>
+                                    <span class="">Signup Key</span>
                                     <input
                                             bind:value={form.signupKey}
                                             class="input"
@@ -161,7 +156,7 @@
                                             required
                                             type="text"
                                     />
-                                    <span class="text-sm ps-2">
+                                    <span class="block text-sm font-light">
                                         A valid signup key needs to be entered upon user account creation.
                                         If you do not have a signup key, please contact your team manager.
                                     </span>
@@ -169,7 +164,7 @@
 
                                 <input type="hidden" name="register" value={true}/>
 
-                                <button class="btn variant-ghost-primary !mt-4" type="submit"
+                                <button class="btn variant-ghost-primary my-2" type="submit"
                                         onclick={() => (signup = true)}>
                                     Register new account
                                 </button>
@@ -185,19 +180,29 @@
 
             {#await coll.listAuthMethods({$autoCancel: false}) then methods}
                 {#if methods.authProviders.length > 0}
+                    <hr class="my-2">
 
-                    <p class="px-2 py-2 text-surface-600-300-token">or sign in with</p>
+                    <div class="mx-2 mt-3 text-surface-600-300-token font-light flex justify-center">
+                        <span>or sign in with</span>
+                    </div>
 
-                    {#each methods.authProviders as provider}
-                        <button
-                                class="btn variant-ghost-tertiary"
-                                type="button"
-                                onclick={() => submitOAuthRequest(provider)}
-                        >
+                    <div class="my-3 md:my-5 flex flex-wrap gap-6 justify-center">
+                        {#each methods.authProviders as provider}
+                            <OAuthProviderButton authProvider={provider} collection={coll} parent={parent}/>
+                        {/each}
+                    </div>
 
-                            <span class="capitalize">{provider.name}</span>
-                        </button>
-                    {/each}
+                    <button aria-label="open popover with info about " popovertarget="hint-external" type="button"
+                            class="anchor">
+                        Note
+                    </button>
+
+                    <p id="hint-external" popover="auto"
+                       class="mt-1 font-light text-sm variant-filled rounded-token p-2 absolute">
+                        Note: it is possible to associate a local account with an
+                        external provider by using the same email address. A single account can be associated with more
+                        than one external provider.
+                    </p>
                 {/if}
             {:catch error}
                 <!-- pocketbase not working -->
@@ -208,11 +213,16 @@
 </div>
 
 <style lang="postcss">
-    input, .btn {
-        @apply m-2;
+    .label {
+        @apply my-1;
+        @apply md:my-2
     }
 
-    .label {
-        @apply my-2;
+    /** TODO: this needs some work */
+    :popover-open {
+        @apply mx-4;
+        @apply md:mx-44;
+        @apply md:mt-24;
+        @apply lg:w-[640px];
     }
 </style>

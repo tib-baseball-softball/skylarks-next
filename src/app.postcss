@@ -12,9 +12,8 @@ html, body {
 }
 
 body {
-    background-image:
-            radial-gradient(at 0% 0%, rgba(var(--color-secondary-500) / 0.33) 0px, transparent 50%),
-            radial-gradient(at 91% 11%, rgba(var(--color-primary-500) / 0.33) 0px, transparent 50%);
+    background-image: radial-gradient(at 0% 0%, rgba(var(--color-secondary-500) / 0.33) 0px, transparent 50%),
+    radial-gradient(at 91% 11%, rgba(var(--color-primary-500) / 0.33) 0px, transparent 50%);
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -103,5 +102,22 @@ h1 {
 
     .stats-vertical {
         @apply divide-x-0 divide-y overflow-y-auto;
+    }
+}
+
+/** Applies to all logos that have different variants for dark and light mode. */
+.dark {
+    .dark-logo {
+        @apply hidden;
+    }
+}
+
+.light-logo {
+    @apply hidden;
+}
+
+.dark {
+    .light-logo {
+        @apply block;
     }
 }
