@@ -1,20 +1,20 @@
 import {ClubTeamsAPIRequest} from "bsm.js";
-import {BSM_API_KEY} from "$env/static/private";
-import {PUBLIC_CLUB_ID} from "$env/static/public";
+import {env} from "$env/dynamic/private";
+import {env as publicEnv} from "$env/dynamic/public";
 
-export const load = (async ({ parent, url }) => {
-    const data = await parent()
+export const load = (async ({parent, url}) => {
+  const data = await parent()
 
-    let clubTeams = data.clubTeams
+  let clubTeams = data.clubTeams
 
-    const clubTeamRequest = new ClubTeamsAPIRequest(BSM_API_KEY)
-    const season = url.searchParams.get("season")
+  const clubTeamRequest = new ClubTeamsAPIRequest(env.BSM_API_KEY)
+  const season = url.searchParams.get("season")
 
-    if (season) {
-        clubTeams = clubTeamRequest.getTeamsForClub(Number(PUBLIC_CLUB_ID), Number(season))
-    }
+  if (season) {
+    clubTeams = clubTeamRequest.getTeamsForClub(Number(publicEnv.PUBLIC_CLUB_ID), Number(season))
+  }
 
-    return {
-        clubTeams: clubTeams
-    }
+  return {
+    clubTeams: clubTeams
+  }
 })

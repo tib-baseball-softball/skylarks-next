@@ -1,12 +1,12 @@
 <script lang="ts">
-    import type {Table} from "bsm.js";
-    import {PUBLIC_TEAM_NAME} from "$env/static/public";
+  import type {Table} from "bsm.js";
+  import {env} from "$env/dynamic/public";
 
-    interface Props {
-        table: Table;
-    }
+  interface Props {
+    table: Table;
+  }
 
-    let { table }: Props = $props();
+  let {table}: Props = $props();
 </script>
 
 <div class="table-container dark:border-2">
@@ -25,7 +25,7 @@
 
         <tbody>
         {#each table?.rows ?? [] as row}
-            <tr class:text-primary-500-400-token={row.team_name.includes(PUBLIC_TEAM_NAME)}>
+            <tr class:text-primary-500-400-token={row.team_name.includes(env.PUBLIC_TEAM_NAME)}>
                 <td>{row.rank}</td>
                 <td>{row.team_name}</td>
                 <td>{row.wins_count}</td>

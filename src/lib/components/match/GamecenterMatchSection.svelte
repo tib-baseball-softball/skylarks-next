@@ -1,16 +1,16 @@
 <script lang="ts">
-    import MatchTeaserCard from "$lib/components/match/MatchTeaserCard.svelte";
-    import type {Match} from "bsm.js";
-    import {PUBLIC_TEAM_NAME} from "$env/static/public";
-    import ContentFilteredUnavailable from "$lib/components/match/ContentFilteredUnavailable.svelte";
+  import MatchTeaserCard from "$lib/components/match/MatchTeaserCard.svelte";
+  import type {Match} from "bsm.js";
+  import {env} from "$env/dynamic/public";
+  import ContentFilteredUnavailable from "$lib/components/match/ContentFilteredUnavailable.svelte";
 
-    interface Props {
-        matches?: Match[];
-        showExternal?: boolean;
-    }
+  interface Props {
+    matches?: Match[];
+    showExternal?: boolean;
+  }
 
-    let { matches = [], showExternal = false }: Props = $props();
-    let skylarksGames = matches.filter(match => match.away_team_name.includes(PUBLIC_TEAM_NAME) || match.home_team_name.includes(PUBLIC_TEAM_NAME))
+  let {matches = [], showExternal = false}: Props = $props();
+  let skylarksGames = matches.filter(match => match.away_team_name.includes(env.PUBLIC_TEAM_NAME) || match.home_team_name.includes(env.PUBLIC_TEAM_NAME))
 </script>
 
 <section>

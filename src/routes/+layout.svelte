@@ -15,7 +15,7 @@
   import LoginBadge from "$lib/auth/LoginBadge.svelte";
   import LoginForm from "$lib/auth/LoginForm.svelte";
   import AccountModal from "$lib/auth/AccountModal.svelte";
-  import {PUBLIC_AUTH_FUNCS_ENABLED} from "$env/static/public";
+  import {env} from "$env/dynamic/public"
   import {onMount} from "svelte";
   import EventForm from '$lib/components/forms/EventForm.svelte';
   import TeamForm from '$lib/components/forms/TeamForm.svelte';
@@ -127,7 +127,7 @@
 
                     <LightSwitch/>
 
-                    {#if PUBLIC_AUTH_FUNCS_ENABLED === "true"}
+                    {#if env.PUBLIC_AUTH_FUNCS_ENABLED === "true"}
                         <LoginBadge signupAllowed={true}/>
                     {/if}
 
