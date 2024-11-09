@@ -1,10 +1,12 @@
 module github.com/tib-baseball-softball/skylarks-next
 
-go 1.22.6
+go 1.23
+
+toolchain go1.23.2
 
 require (
 	github.com/labstack/echo/v5 v5.0.0-20230722203903-ec5b858dab61
-	github.com/pocketbase/pocketbase v0.22.22
+	github.com/pocketbase/pocketbase v0.23.0-rc12
 	github.com/spf13/cobra v1.8.1
 	github.com/subosito/gotenv v1.6.0
 )
