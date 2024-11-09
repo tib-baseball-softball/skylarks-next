@@ -49,7 +49,7 @@ func main() {
 			return e.String(http.StatusOK, "Hello ballplayers!")
 		})
 
-		return nil
+		return se.Next()
 	})
 
 	//------------------- Commands -------------------------//
