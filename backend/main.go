@@ -7,7 +7,6 @@ import (
 
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/tools/cron"
 	"github.com/spf13/cobra"
 	"github.com/subosito/gotenv"
 	"github.com/tib-baseball-softball/skylarks-next/cronjobs"
@@ -75,23 +74,15 @@ func main() {
 	//------------------- Cronjobs -------------------------//
 
 	if os.Getenv("APPLICATION_CONTEXT") != "Development" {
-		app.OnServe().BindFunc(func(e *core.ServeEvent) error {
-			scheduler := cron.New()
+		app.Cron().MustAdd("LeagueGroupImport", "0 * * * *", func() {
+			err := cronjobs.ImportLeagueGroups(app)
+			if err != nil {
+				app.Logger().Error("Error while running cronjob LeagueGroupImport: " + err.Error())
+			}
+		})
 
-			scheduler.MustAdd("LeagueGroupImport", "0 * * * *", func() {
-				err := cronjobs.ImportLeagueGroups(app)
-				if err != nil {
-					log.Print("Error while running cronjob LeagueGroupImport: " + err.Error())
-				}
-			})
-
-			scheduler.MustAdd("GamesImport", "0 * * * *", func() {
-				cronjobs.ImportGames(app)
-			})
-
-			scheduler.Start()
-
-			return nil
+		app.Cron().MustAdd("GamesImport", "0 * * * *", func() {
+			cronjobs.ImportGames(app)
 		})
 	}
 
