@@ -1,7 +1,7 @@
 <script lang="ts">
   import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
   import {client} from "$lib/pocketbase";
-  import {authModel} from "$lib/pocketbase/Auth";
+  import {authModel} from "$lib/pocketbase/Auth.svelte";
 
   interface props {
     parent: any;
@@ -60,22 +60,22 @@
 
     <form onsubmit={submitForm} class="mt-4 space-y-3">
         <input
-            name="id"
-            autocomplete="off"
-            class="input"
-            type="hidden"
-            readonly
-            bind:value={form.id}
+                name="id"
+                autocomplete="off"
+                class="input"
+                type="hidden"
+                readonly
+                bind:value={form.id}
         />
 
         <label class="label">
             E-Mail
             <input
-                name="email"
-                class="input"
-                bind:value={form.email}
-                required
-                type="email"
+                    name="email"
+                    class="input"
+                    bind:value={form.email}
+                    required
+                    type="email"
             />
         </label>
 
@@ -92,11 +92,11 @@
         <label class="label">
             Profile Image
             <input
-                class="input"
-                name="avatar"
-                type="file"
-                accept="image/*"
-                bind:files
+                    class="input"
+                    name="avatar"
+                    type="file"
+                    accept="image/*"
+                    bind:files
             />
         </label>
 

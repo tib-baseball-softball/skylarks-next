@@ -1,54 +1,54 @@
 <script lang="ts">
-    import TeamTeaserCard from "$lib/components/diamondplanner/team/TeamTeaserCard.svelte";
-    import EventTeaser from "$lib/components/diamondplanner/event/EventTeaser.svelte";
-    import Paginator from "$lib/pocketbase/Paginator.svelte";
-    import {authModel} from "$lib/pocketbase/Auth";
-    import {CalendarPlusOutline, UsersGroupOutline,} from "flowbite-svelte-icons";
-    import {goto, invalidateAll} from "$app/navigation";
-    import type {EventType} from "$lib/model/ExpandedResponse.js";
-    import {type DrawerSettings, getDrawerStore, RadioGroup, RadioItem,} from "@skeletonlabs/skeleton";
-    import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
-    import {client} from "$lib/pocketbase";
-    import TeamEditButton from "$lib/components/team/TeamEditButton.svelte";
+  import TeamTeaserCard from "$lib/components/diamondplanner/team/TeamTeaserCard.svelte";
+  import EventTeaser from "$lib/components/diamondplanner/event/EventTeaser.svelte";
+  import Paginator from "$lib/pocketbase/Paginator.svelte";
+  import {authModel} from "$lib/pocketbase/Auth.svelte";
+  import {CalendarPlusOutline, UsersGroupOutline,} from "flowbite-svelte-icons";
+  import {goto, invalidateAll} from "$app/navigation";
+  import type {EventType} from "$lib/model/ExpandedResponse.js";
+  import {type DrawerSettings, getDrawerStore, RadioGroup, RadioItem,} from "@skeletonlabs/skeleton";
+  import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
+  import {client} from "$lib/pocketbase";
+  import TeamEditButton from "$lib/components/team/TeamEditButton.svelte";
 
-    let {data} = $props();
-    const events = $derived(data.events);
-    let currentPage = $derived($events.page);
+  let {data} = $props();
+  const events = $derived(data.events);
+  let currentPage = $derived($events.page);
 
-    let showEvents = $state("next");
-    let sorting: "asc" | "desc" = $state("asc");
-    let showTypes: EventType | "any" = $state("any");
+  let showEvents = $state("next");
+  let sorting: "asc" | "desc" = $state("asc");
+  let showTypes: EventType | "any" = $state("any");
 
-    const reloadWithQuery = () => {
-        let queryString = `?timeframe=${showEvents}&page=${currentPage}&sort=${sorting}&type=${showTypes}`;
+  const reloadWithQuery = () => {
+    let queryString = `?timeframe=${showEvents}&page=${currentPage}&sort=${sorting}&type=${showTypes}`;
 
-        goto(queryString, {
-            noScroll: true,
-        });
-    };
-
-    const drawerStore = getDrawerStore();
-    const singleEventSettings: DrawerSettings = $derived({
-        id: "event-form",
-        position: "right",
-        width: "w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%]",
-        meta: {
-            event: null,
-            club: data.team?.club,
-            team: data.team,
-        },
+    goto(queryString, {
+      noScroll: true,
     });
+  };
 
-    function teamDeleteAction(id: string) {
-        goto(`/account`)
-        client.collection("teams").delete(id)
-        invalidateAll()
-    }
+  const drawerStore = getDrawerStore();
+  const singleEventSettings: DrawerSettings = $derived({
+    id: "event-form",
+    position: "right",
+    width: "w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%]",
+    meta: {
+      event: null,
+      club: data.team?.club,
+      team: data.team,
+    },
+  });
 
-    $effect.pre(() => {
-        console.log(showEvents);
-        reloadWithQuery();
-    });
+  function teamDeleteAction(id: string) {
+    goto(`/account`)
+    client.collection("teams").delete(id)
+    invalidateAll()
+  }
+
+  $effect.pre(() => {
+    console.log(showEvents);
+    reloadWithQuery();
+  });
 </script>
 
 <h1 class="h2">{data.team.name} ({data.team?.expand?.club.name})</h1>

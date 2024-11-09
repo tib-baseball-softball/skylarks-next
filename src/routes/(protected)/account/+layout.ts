@@ -1,7 +1,7 @@
 import {client} from "$lib/pocketbase";
 import type {LayoutLoad} from "../../../../.svelte-kit/types/src/routes/(protected)/account/$types";
 import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/model/ExpandedResponse";
-import {authModel} from "$lib/pocketbase/Auth";
+import {authModel} from "$lib/pocketbase/Auth.svelte";
 import {get} from "svelte/store";
 
 export const load = (async ({fetch, depends, parent}) => {

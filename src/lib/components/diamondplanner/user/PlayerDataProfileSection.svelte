@@ -4,7 +4,7 @@
   import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
   import type {Player} from "$lib/model/Player";
   import {client} from "$lib/pocketbase";
-  import {authModel} from "$lib/pocketbase/Auth";
+  import {authModel} from "$lib/pocketbase/Auth.svelte";
   import {type DrawerSettings, getDrawerStore,} from "@skeletonlabs/skeleton";
   import {EditOutline, LinkOutline} from "flowbite-svelte-icons";
 

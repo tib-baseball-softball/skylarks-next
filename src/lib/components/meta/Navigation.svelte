@@ -13,7 +13,7 @@
     UsersSolid,
   } from "flowbite-svelte-icons";
   import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/model/ExpandedResponse";
-  import {authModel} from "$lib/pocketbase/Auth";
+  import {authModel} from "$lib/pocketbase/Auth.svelte";
   import StaticNavigationLinks from "$lib/components/navigation/StaticNavigationLinks.svelte";
 
   interface Props {

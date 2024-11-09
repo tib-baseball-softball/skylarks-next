@@ -1,46 +1,46 @@
 <script lang="ts">
-    import {EditOutline} from "flowbite-svelte-icons";
-    import Cap from "$lib/components/icons/Cap.svelte";
-    import Shirt from "$lib/components/icons/Shirt.svelte";
-    import Pants from "$lib/components/icons/Pants.svelte";
-    import {getModalStore, type ModalComponent, type ModalSettings} from "@skeletonlabs/skeleton";
-    import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
-    import type {CustomAuthModel, ExpandedUniformSet} from "$lib/model/ExpandedResponse";
-    import {authModel} from "$lib/pocketbase/Auth";
-    import {client} from "$lib/pocketbase";
-    import {invalidate} from "$app/navigation";
-    import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
+  import {EditOutline} from "flowbite-svelte-icons";
+  import Cap from "$lib/components/icons/Cap.svelte";
+  import Shirt from "$lib/components/icons/Shirt.svelte";
+  import Pants from "$lib/components/icons/Pants.svelte";
+  import {getModalStore, type ModalComponent, type ModalSettings} from "@skeletonlabs/skeleton";
+  import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
+  import type {CustomAuthModel, ExpandedUniformSet} from "$lib/model/ExpandedResponse";
+  import {authModel} from "$lib/pocketbase/Auth.svelte";
+  import {client} from "$lib/pocketbase";
+  import {invalidate} from "$app/navigation";
+  import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
 
-    interface Props {
-        uniformSet: ExpandedUniformSet
-    }
+  interface Props {
+    uniformSet: ExpandedUniformSet
+  }
 
-    let {uniformSet}: Props = $props()
+  let {uniformSet}: Props = $props()
 
-    const model = $authModel as CustomAuthModel;
+  const model = $authModel as CustomAuthModel;
 
-    const modalStore = getModalStore();
+  const modalStore = getModalStore();
 
-    function triggerEditModal() {
-        const modalComponent: ModalComponent = {
-            ref: UniformSetForm,
-            props: {
-                uniformSet: uniformSet,
-                clubID: uniformSet.club,
-            },
-        };
+  function triggerEditModal() {
+    const modalComponent: ModalComponent = {
+      ref: UniformSetForm,
+      props: {
+        uniformSet: uniformSet,
+        clubID: uniformSet.club,
+      },
+    };
 
-        const modal: ModalSettings = {
-            type: "component",
-            component: modalComponent,
-        };
-        modalStore.trigger(modal);
-    }
+    const modal: ModalSettings = {
+      type: "component",
+      component: modalComponent,
+    };
+    modalStore.trigger(modal);
+  }
 
-    function deleteAction(id: string) {
-        client.collection("uniformsets").delete(id)
-        invalidate("club:single")
-    }
+  function deleteAction(id: string) {
+    client.collection("uniformsets").delete(id)
+    invalidate("club:single")
+  }
 </script>
 
 <article class="card variant-soft-surface shadow-md">

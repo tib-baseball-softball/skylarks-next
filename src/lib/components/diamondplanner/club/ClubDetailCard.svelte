@@ -1,7 +1,7 @@
 <script lang="ts">
   import {EditOutline, InfoCircleOutline, ShieldOutline, TagOutline} from "flowbite-svelte-icons";
   import type {CustomAuthModel, ExpandedClub} from "$lib/model/ExpandedResponse";
-  import {authModel} from "$lib/pocketbase/Auth";
+  import {authModel} from "$lib/pocketbase/Auth.svelte";
   import {type DrawerSettings, getDrawerStore} from "@skeletonlabs/skeleton";
 
   interface Props {

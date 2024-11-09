@@ -4,7 +4,7 @@
   import {getDrawerStore, getToastStore, type ToastSettings,} from "@skeletonlabs/skeleton";
   import {CloseOutline} from "flowbite-svelte-icons";
   import type {ClubsResponse, UsersResponse, UsersUpdate} from "$lib/model/pb-types";
-  import {authModel} from "$lib/pocketbase/Auth";
+  import {authModel} from "$lib/pocketbase/Auth.svelte";
   import type {CustomAuthModel, ExpandedClub} from "$lib/model/ExpandedResponse";
 
   const toastStore = getToastStore();

@@ -2,7 +2,7 @@ import type {LayoutLoad} from "../../.svelte-kit/types/src/routes/$types";
 import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/model/ExpandedResponse";
 import {browser} from "$app/environment";
 import {client} from "$lib/pocketbase";
-import {authModel} from "$lib/pocketbase/Auth";
+import {authModel} from "$lib/pocketbase/Auth.svelte";
 import {get} from "svelte/store";
 
 /**

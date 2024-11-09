@@ -1,6 +1,6 @@
 <script lang="ts">
   import {client} from "../pocketbase";
-  import {authModel} from "$lib/pocketbase/Auth";
+  import {authModel} from "$lib/pocketbase/Auth.svelte";
 
   const {parent} = $props();
 

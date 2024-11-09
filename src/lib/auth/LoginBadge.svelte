@@ -4,7 +4,7 @@
   import {Avatar, getModalStore, getToastStore, type ModalSettings} from "@skeletonlabs/skeleton";
   import {browser} from "$app/environment";
   import {invalidateAll} from "$app/navigation";
-  import {authModel} from "$lib/pocketbase/Auth";
+  import {authModel} from "$lib/pocketbase/Auth.svelte";
 
   const modalStore = getModalStore();
   const toastStore = getToastStore();
