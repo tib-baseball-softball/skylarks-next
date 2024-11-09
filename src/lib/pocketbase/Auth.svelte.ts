@@ -1,24 +1,33 @@
 import {invalidateAll} from "$app/navigation";
-import type {AuthModel, AuthProviderInfo, AuthRecord, RecordService} from "pocketbase";
+import type {AuthProviderInfo, AuthRecord, RecordService} from "pocketbase";
 import {readable} from "svelte/store";
 import {client} from ".";
 import {save} from "./RecordOperations";
+import {dev} from "$app/environment";
+import {env} from "$env/dynamic/public";
 
+/**
+ * Reminder: This absolutely has to stay out of all server-side code.
+ */
 export const authModel = readable<AuthRecord | null>(
-    null,
+    null, // initial value of store
     function (set, update) {
       client.authStore.onChange((token, model) => {
-        update((oldval) => {
-          if (
-              (oldval?.isValid && !model?.isValid) ||
-              (!oldval?.isValid && model?.isValid)
-          ) {
-            // if the auth changed, invalidate all page load data
-            invalidateAll();
-          }
-          return model;
-        });
-      }, true);
+            if (dev && env.PUBLIC_LOG_LEVEL === "DEBUG") {
+              console.log(model)
+            }
+            update((oldval) => {
+              if (
+                  (oldval?.isValid && !model?.isValid) ||
+                  (!oldval?.isValid && model?.isValid)
+              ) {
+                // if the auth changed, invalidate all page load data
+                invalidateAll();
+              }
+              return model;
+            });
+          }, true // fireImmediately
+      );
     },
 );
 

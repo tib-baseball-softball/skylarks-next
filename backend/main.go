@@ -34,7 +34,7 @@ func main() {
 				"error", err,
 			)
 		}
-		return nil
+		return e.Next()
 	})
 
 	app.OnRecordCreateRequest("users").BindFunc(func(e *core.RecordRequestEvent) error {
