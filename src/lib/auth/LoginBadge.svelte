@@ -48,7 +48,7 @@
 
         {#if $authModel.avatar}
             <Avatar
-                    src={client.files.getUrl($authModel, $authModel.avatar)}
+                    src={client.files.getURL($authModel, $authModel.avatar)}
                     width="w-14"
             />
 
