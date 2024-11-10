@@ -1,26 +1,5 @@
-import {invalidateAll} from "$app/navigation";
-import type {AuthModel, AuthProviderInfo, RecordService} from "pocketbase";
-import {readable} from "svelte/store";
-import {client} from ".";
+import type {AuthProviderInfo, RecordService} from "pocketbase";
 import {save} from "./RecordOperations";
-
-export const authModel = readable<AuthModel | null>(
-    null,
-    function (set, update) {
-      client.authStore.onChange((token, model) => {
-        update((oldval) => {
-          if (
-              (oldval?.isValid && !model?.isValid) ||
-              (!oldval?.isValid && model?.isValid)
-          ) {
-            // if the auth changed, invalidate all page load data
-            invalidateAll();
-          }
-          return model;
-        });
-      }, true);
-    },
-);
 
 export async function providerLogin(
     provider: AuthProviderInfo,

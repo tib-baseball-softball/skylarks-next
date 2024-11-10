@@ -1,6 +1,6 @@
 <script lang="ts">
   import type {AuthProviderInfo, RecordModel, RecordService} from "pocketbase";
-  import {providerLogin} from "$lib/pocketbase/Auth";
+  import {providerLogin} from "$lib/pocketbase/Auth.svelte";
   import {goto} from "$app/navigation";
 
   /**

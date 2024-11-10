@@ -1,6 +1,6 @@
 <script lang="ts">
-  import {client} from "../pocketbase";
-  import {authModel} from "$lib/pocketbase/Auth";
+  import {authSettings, client} from "../pocketbase/index.svelte";
+  import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
 
   const {parent} = $props();
 
@@ -14,6 +14,8 @@
     // @ts-ignore => this is why this is wrapped in another function
     parent.onClose();
   }
+
+  const authModel = authSettings.record as CustomAuthModel
 </script>
 
 <div class="w-modal-slim">
@@ -27,7 +29,7 @@
                     onclick={closeModal}
             >
                 <samp
-                >{`${$authModel?.first_name ?? ""} ${$authModel?.last_name ?? ""}`}</samp
+                >{`${authModel?.first_name ?? ""} ${authModel?.last_name ?? ""}`}</samp
                 >
             </a>
         </div>
@@ -36,7 +38,7 @@
             <p>Club:</p>
 
             <div class="flex flex-wrap gap-2 justify-end">
-                {#each $authModel?.expand?.club as club}
+                {#each authModel?.expand?.club as club}
                     <a href="/account/clubs/{club.id}" class="badge variant-filled-tertiary" onclick={closeModal}>
                         {club.name}
                     </a>

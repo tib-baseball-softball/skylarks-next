@@ -1,8 +1,7 @@
 <script lang="ts">
-  import { goto } from "$app/navigation";
-  import { client } from "$lib/pocketbase";
-  import type { Snippet } from "svelte";
-  import { authModel } from "$lib/pocketbase/Auth";
+  import {goto} from "$app/navigation";
+  import {authSettings, client} from "$lib/pocketbase/index.svelte";
+  import type {Snippet} from "svelte";
 
   const {
     destination,
@@ -20,12 +19,10 @@
       goto(destination)
     }
   })
-
-  const authorized = $derived($authModel)
 </script>
 
-{#if authorized}
-  {@render children()}
+{#if authSettings.record}
+    {@render children()}
 {:else if otherwise}
-  {@render otherwise()}
+    {@render otherwise()}
 {/if}

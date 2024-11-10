@@ -3,7 +3,7 @@ package cronjobs
 import (
 	"encoding/json"
 	"github.com/pocketbase/pocketbase"
-	"github.com/pocketbase/pocketbase/models"
+	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
 	"github.com/tib-baseball-softball/skylarks-next/bsm"
 	"github.com/tib-baseball-softball/skylarks-next/model"
@@ -13,7 +13,7 @@ import (
 )
 
 func ImportGames(app *pocketbase.PocketBase) {
-	teams, err := app.Dao().FindRecordsByFilter("teams", "bsm_league_group != 0", "", 0, 0)
+	teams, err := app.FindRecordsByFilter("teams", "bsm_league_group != 0", "", 0, 0)
 	if err != nil {
 		log.Print("Error fetching existing team records: ", err)
 		return
@@ -27,7 +27,7 @@ func ImportGames(app *pocketbase.PocketBase) {
 		go func() {
 			defer wg.Done()
 			// only run this job for events this season (refreshing games past years should rarely ever be relevant)
-			leagueGroup, err := app.Dao().FindFirstRecordByData("leaguegroups", "bsm_id", team.GetInt("bsm_league_group"))
+			leagueGroup, err := app.FindFirstRecordByData("leaguegroups", "bsm_id", team.GetInt("bsm_league_group"))
 			if err != nil {
 				log.Print("Error fetching League Group record: ", err)
 				return
@@ -36,7 +36,7 @@ func ImportGames(app *pocketbase.PocketBase) {
 				return
 			}
 
-			if errs := app.Dao().ExpandRecord(team, []string{"club"}, nil); len(errs) > 0 {
+			if errs := app.ExpandRecord(team, []string{"club"}, nil); len(errs) > 0 {
 				log.Printf("failed to expand: %v", errs)
 				return
 			}
@@ -80,16 +80,16 @@ func fetchMatchesForLeagueGroup(league string, apiKey string) ([]model.Match, er
 
 func createOrUpdateEvents(app *pocketbase.PocketBase, matches []model.Match, teamID string) (err error) {
 	for _, match := range matches {
-		record, err := app.Dao().FindFirstRecordByData("events", "bsm_id", match.ID)
+		record, err := app.FindFirstRecordByData("events", "bsm_id", match.ID)
 
 		// if not found, it throws an error, so create new record
 		if err != nil {
-			collection, err := app.Dao().FindCollectionByNameOrId("events")
+			collection, err := app.FindCollectionByNameOrId("events")
 			if err != nil {
 				return err
 			}
 
-			record = models.NewRecord(collection)
+			record = core.NewRecord(collection)
 			err = setEventRecordValues(record, match, teamID)
 			if err != nil {
 				return err
@@ -101,7 +101,7 @@ func createOrUpdateEvents(app *pocketbase.PocketBase, matches []model.Match, tea
 			return err
 		}
 
-		if err := app.Dao().SaveRecord(record); err != nil {
+		if err := app.Save(record); err != nil {
 			log.Print("Persisting event record failed: ", err)
 			return err
 		}
@@ -109,7 +109,7 @@ func createOrUpdateEvents(app *pocketbase.PocketBase, matches []model.Match, tea
 	return
 }
 
-func setEventRecordValues(record *models.Record, match model.Match, teamID string) (err error) {
+func setEventRecordValues(record *core.Record, match model.Match, teamID string) (err error) {
 	starttime, err := types.ParseDateTime(match.Time)
 	if err != nil {
 		return err
@@ -121,7 +121,7 @@ func setEventRecordValues(record *models.Record, match model.Match, teamID strin
 		return err
 	}
 
-    record.Set("title", match.AwayTeamName + " @ " + match.HomeTeamName)
+	record.Set("title", match.AwayTeamName+" @ "+match.HomeTeamName)
 	record.Set("bsm_id", match.ID)
 	record.Set("starttime", starttime.String())
 	record.Set("endtime", endtime.String())

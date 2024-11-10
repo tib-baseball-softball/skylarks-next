@@ -1,6 +1,6 @@
 <script lang="ts">
   import {Accordion, AccordionItem, getDrawerStore,} from "@skeletonlabs/skeleton";
-  import {client} from "$lib/pocketbase";
+  import {authSettings} from "$lib/pocketbase/index.svelte";
   import {
     ChartLineUpOutline,
     ChartMixedOutline,
@@ -13,7 +13,6 @@
     UsersSolid,
   } from "flowbite-svelte-icons";
   import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/model/ExpandedResponse";
-  import {authModel} from "$lib/pocketbase/Auth";
   import StaticNavigationLinks from "$lib/components/navigation/StaticNavigationLinks.svelte";
 
   interface Props {
@@ -24,17 +23,15 @@
   let {clubs, teams}: Props = $props()
 
   const drawerStore = getDrawerStore();
-  const model = $derived($authModel) as CustomAuthModel;
+  const model = authSettings.record as CustomAuthModel;
 
-  let isUserAuthenticated = $state(client.authStore.isValid)
+  let isUserAuthenticated = $derived(!!authSettings.record)
 
   function drawerClose(): void {
     drawerStore.close();
   }
 
-  $effect(() => {
-    isUserAuthenticated = !!model;
-  })
+
 </script>
 
 <nav class="list-nav py-1 px-1 lg:px-4">

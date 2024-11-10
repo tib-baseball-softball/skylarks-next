@@ -1,66 +1,67 @@
 <script lang="ts">
-    import {invalidate} from "$app/navigation";
-    import type {ExpandedTeam} from "$lib/model/ExpandedResponse";
-    import {client} from "$lib/pocketbase";
-    import {getDrawerStore, getToastStore, RadioGroup, RadioItem, type ToastSettings,} from "@skeletonlabs/skeleton";
-    import {CloseOutline} from "flowbite-svelte-icons";
-    import {authModel} from "$lib/pocketbase/Auth";
+  import {invalidate} from "$app/navigation";
+  import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
+  import {authSettings, client} from "$lib/pocketbase/index.svelte";
+  import {getDrawerStore, getToastStore, RadioGroup, RadioItem, type ToastSettings,} from "@skeletonlabs/skeleton";
+  import {CloseOutline} from "flowbite-svelte-icons";
 
-    const toastStore = getToastStore();
-    const drawerStore = getDrawerStore();
+  const toastStore = getToastStore();
+  const drawerStore = getDrawerStore();
 
-    const toastSettingsSuccess: ToastSettings = {
-        message: "Team data saved successfully.",
-        background: "variant-filled-success",
-    };
+  const authModel = authSettings.record as CustomAuthModel
 
-    const toastSettingsError: ToastSettings = {
-        message: "An error occurred while saving team data.",
-        background: "variant-filled-error",
-    };
+  const toastSettingsSuccess: ToastSettings = {
+    message: "Team data saved successfully.",
+    background: "variant-filled-success",
+  };
 
-    const form: ExpandedTeam = $state(
-        $drawerStore.meta.team ?? {
-            id: "",
-            name: "",
-            age_group: "",
-            club: $drawerStore.meta.club.id, // no binding, cannot be changed via this form
-            description: "",
-            admins: [],
-        },
-    );
+  const toastSettingsError: ToastSettings = {
+    message: "An error occurred while saving team data.",
+    background: "variant-filled-error",
+  };
 
-    async function submitForm(e: SubmitEvent) {
-        e.preventDefault();
+  const form: ExpandedTeam = $state(
+      $drawerStore.meta.team ?? {
+        id: "",
+        name: "",
+        age_group: "",
+        club: $drawerStore.meta.club.id, // no binding, cannot be changed via this form
+        description: "",
+        admins: [],
+      },
+  );
 
-        let result: ExpandedTeam | null = null;
+  async function submitForm(e: SubmitEvent) {
+    e.preventDefault();
 
-        try {
-            if (form.id) {
-                result = await client
-                    .collection("teams")
-                    .update<ExpandedTeam>(form.id, form);
-            } else {
-                // a user creating a team becomes its first admin
-                form.admins.push($authModel?.id)
+    let result: ExpandedTeam | null = null;
 
-                result = await client
-                    .collection("teams")
-                    .create<ExpandedTeam>(form);
-            }
-        } catch {
-            toastStore.trigger(toastSettingsError);
-            drawerStore.close();
-        }
+    try {
+      if (form.id) {
+        result = await client
+            .collection("teams")
+            .update<ExpandedTeam>(form.id, form);
+      } else {
+        // a user creating a team becomes its first admin
+        form.admins.push(authModel?.id)
 
-        if (result) {
-            toastStore.trigger(toastSettingsSuccess);
-        }
-        invalidate("teams:list");
-        invalidate("club:single");
-        invalidate("nav:load")
-        drawerStore.close();
+        result = await client
+            .collection("teams")
+            .create<ExpandedTeam>(form);
+      }
+    } catch {
+      toastStore.trigger(toastSettingsError);
+      drawerStore.close();
     }
+
+    if (result) {
+      toastStore.trigger(toastSettingsSuccess);
+    }
+    invalidate("teams:list");
+    invalidate("club:single");
+    invalidate("nav:load")
+    drawerStore.close();
+  }
 </script>
 
 <article class="p-6">

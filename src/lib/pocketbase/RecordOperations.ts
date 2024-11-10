@@ -1,8 +1,8 @@
-import { browser } from "$app/environment";
-import type { RecordModel, RecordListOptions, ListResult, UnsubscribeFunc } from "pocketbase";
-import { type Readable, type Subscriber, readable } from "svelte/store";
-import { client } from ".";
-import type { PageStore } from "./PageStore";
+import {browser} from "$app/environment";
+import type {ListResult, RecordListOptions, RecordModel, UnsubscribeFunc} from "pocketbase";
+import {type Readable, readable, type Subscriber} from "svelte/store";
+import {client} from "./index.svelte";
+import type {PageStore} from "./PageStore";
 
 /*
  * Save (create/update) a record (a plain object). Automatically converts to
@@ -23,9 +23,9 @@ export async function save<T>(collection: string, record: any, create = false) {
 function object2formdata(obj: {}) {
   // check if any field's value is an instanceof FileList
   if (
-    !Object.values(obj).some(
-      (val) => val instanceof FileList || val instanceof File,
-    )
+      !Object.values(obj).some(
+          (val) => val instanceof FileList || val instanceof File,
+      )
   ) {
     // if not, just return the original object
     return obj;
@@ -53,10 +53,10 @@ function object2formdata(obj: {}) {
 }
 
 export async function watchSingleRecord<T extends RecordModel>(
-  idOrName: string,
-  recordID: string,
-  queryParams = {} as RecordListOptions,
-  realtime = browser,
+    idOrName: string,
+    recordID: string,
+    queryParams = {} as RecordListOptions,
+    realtime = browser,
 ): Promise<Readable<T>> {
   const collection = client.collection(idOrName);
   let result = await collection.getOne<T>(recordID, queryParams);
@@ -69,23 +69,23 @@ export async function watchSingleRecord<T extends RecordModel>(
     // watch for changes (only if you're in the browser)
     if (realtime)
       collection.subscribe<T>(
-        recordID,
-        ({ action, record }) => {
-          (async function (action: string) {
+          recordID,
+          ({action, record}) => {
+            (async function (action: string) {
 
-            switch (action) {
-              case "update":
-                result = record
-              case "create":
-              case "delete":
-            }
-            return result;
-          })(action).then((record) => set((result = record)));
-        },
-        queryParams,
+              switch (action) {
+                case "update":
+                  result = record
+                case "create":
+                case "delete":
+              }
+              return result;
+            })(action).then((record) => set((result = record)));
+          },
+          queryParams,
       )
-        // remember for later
-        .then((unsub) => (unsubRealtime = unsub));
+          // remember for later
+          .then((unsub) => (unsubRealtime = unsub));
   });
 
   return {
@@ -103,11 +103,11 @@ export async function watchSingleRecord<T extends RecordModel>(
 
 
 export async function watchWithPagination<T extends RecordModel>(
-  idOrName: string,
-  queryParams = {} as RecordListOptions,
-  page = 1,
-  perPage = 20,
-  realtime = browser,
+    idOrName: string,
+    queryParams = {} as RecordListOptions,
+    page = 1,
+    perPage = 20,
+    realtime = browser,
 ): Promise<PageStore<T>> {
   const collection = client.collection(idOrName);
   let result = await collection.getList<T>(page, perPage, queryParams);
@@ -119,41 +119,41 @@ export async function watchWithPagination<T extends RecordModel>(
     // watch for changes (only if you're in the browser)
     if (realtime)
       collection
-        .subscribe<T>(
-          "*",
-          ({ action, record }) => {
-            (async function (action: string) {
-              // see https://github.com/pocketbase/pocketbase/discussions/505
-              switch (action) {
-                // ISSUE: no subscribe event when a record is modified and no longer fits the "filter"
-                // @see https://github.com/pocketbase/pocketbase/issues/4717
-                case "update":
-                case "create":
-                  // record = await expand(queryParams.expand, record);
-                  const index = result.items.findIndex(
-                    (r) => r.id === record.id,
-                  );
-                  // replace existing if found, otherwise append
-                  if (index >= 0) {
-                    result.items[index] = record;
-                    return result.items;
-                  } else {
-                    return [...result.items, record];
+          .subscribe<T>(
+              "*",
+              ({action, record}) => {
+                (async function (action: string) {
+                  // see https://github.com/pocketbase/pocketbase/discussions/505
+                  switch (action) {
+                      // ISSUE: no subscribe event when a record is modified and no longer fits the "filter"
+                      // @see https://github.com/pocketbase/pocketbase/issues/4717
+                    case "update":
+                    case "create":
+                      // record = await expand(queryParams.expand, record);
+                      const index = result.items.findIndex(
+                          (r) => r.id === record.id,
+                      );
+                      // replace existing if found, otherwise append
+                      if (index >= 0) {
+                        result.items[index] = record;
+                        return result.items;
+                      } else {
+                        return [...result.items, record];
+                      }
+                    case "delete":
+                      return result.items.filter((item) => item.id !== record.id);
                   }
-                case "delete":
-                  return result.items.filter((item) => item.id !== record.id);
-              }
-              return result.items;
-            })(action).then((items) => set((result = { ...result, items })));
-          },
-          queryParams,
-        )
-        // remember for later
-        .then((unsub) => (unsubRealtime = unsub));
+                  return result.items;
+                })(action).then((items) => set((result = {...result, items})));
+              },
+              queryParams,
+          )
+          // remember for later
+          .then((unsub) => (unsubRealtime = unsub));
   });
 
   async function setPage(newpage: number) {
-    const { page, totalPages, perPage } = result;
+    const {page, totalPages, perPage} = result;
     if (page > 0 && page <= totalPages) {
       set((result = await collection.getList(newpage, perPage, queryParams)));
     }

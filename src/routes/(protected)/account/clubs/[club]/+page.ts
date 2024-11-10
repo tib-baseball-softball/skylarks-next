@@ -1,5 +1,5 @@
 import type {PageLoad} from "./$types";
-import {client} from "$lib/pocketbase";
+import {client} from "$lib/pocketbase/index.svelte";
 import type {ExpandedClub, ExpandedTeam, ExpandedUniformSet} from "$lib/model/ExpandedResponse";
 
 export const load = (async ({fetch, params, depends}) => {

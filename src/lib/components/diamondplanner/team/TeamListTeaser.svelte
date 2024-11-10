@@ -1,29 +1,28 @@
 <script lang="ts">
-    import {ClipboardListOutline, ClipboardOutline, InfoCircleOutline} from "flowbite-svelte-icons";
-    import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
-    import {authModel} from "$lib/pocketbase/Auth";
-    import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
-    import {client} from "$lib/pocketbase";
-    import {invalidate} from "$app/navigation";
-    import TeamEditButton from "$lib/components/team/TeamEditButton.svelte";
+  import {ClipboardListOutline, ClipboardOutline, InfoCircleOutline} from "flowbite-svelte-icons";
+  import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
+  import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
+  import {authSettings, client} from "$lib/pocketbase/index.svelte";
+  import {invalidate} from "$app/navigation";
+  import TeamEditButton from "$lib/components/team/TeamEditButton.svelte";
 
-    /**
-     * Used for Teams in List Teasers and on Club Page.
-     */
+  /**
+   * Used for Teams in List Teasers and on Club Page.
+   */
 
-    interface props {
-        team: ExpandedTeam
-        link: boolean
-    }
+  interface props {
+    team: ExpandedTeam
+    link: boolean
+  }
 
-    let {team, link = false}: props = $props()
+  let {team, link = false}: props = $props()
 
-    const model = $authModel as CustomAuthModel;
+  const model = authSettings.record as CustomAuthModel;
 
-    function deleteAction(id: string) {
-        client.collection("teams").delete(id)
-        invalidate("club:single")
-    }
+  function deleteAction(id: string) {
+    client.collection("teams").delete(id)
+    invalidate("club:single")
+  }
 </script>
 
 <article class="card variant-glass-surface block shadow-lg" class:card-hover={link}>

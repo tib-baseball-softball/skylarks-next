@@ -1,55 +1,55 @@
 <script lang="ts">
-    import ClubDetailCard from "$lib/components/diamondplanner/club/ClubDetailCard.svelte";
-    import UniformSetInfoCard from "$lib/components/diamondplanner/uniformset/UniformSetInfoCard.svelte";
-    import {EnvelopeOutline, PlusOutline} from "flowbite-svelte-icons";
-    import type {CustomAuthModel, ExpandedClub, ExpandedTeam, ExpandedUniformSet} from "$lib/model/ExpandedResponse";
-    import {authModel} from "$lib/pocketbase/Auth";
-    import {
-        type DrawerSettings,
-        getDrawerStore,
-        getModalStore,
-        type ModalComponent,
-        type ModalSettings
-    } from "@skeletonlabs/skeleton";
-    import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
-    import TeamListTeaser from "$lib/components/diamondplanner/team/TeamListTeaser.svelte";
+  import ClubDetailCard from "$lib/components/diamondplanner/club/ClubDetailCard.svelte";
+  import UniformSetInfoCard from "$lib/components/diamondplanner/uniformset/UniformSetInfoCard.svelte";
+  import {EnvelopeOutline, PlusOutline} from "flowbite-svelte-icons";
+  import type {CustomAuthModel, ExpandedClub, ExpandedTeam, ExpandedUniformSet} from "$lib/model/ExpandedResponse";
+  import {
+    type DrawerSettings,
+    getDrawerStore,
+    getModalStore,
+    type ModalComponent,
+    type ModalSettings
+  } from "@skeletonlabs/skeleton";
+  import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
+  import TeamListTeaser from "$lib/components/diamondplanner/team/TeamListTeaser.svelte";
+  import {authSettings} from "$lib/pocketbase/index.svelte";
 
-    let {data} = $props()
+  let {data} = $props()
 
-    const model = $authModel as CustomAuthModel;
+  const model = authSettings.record as CustomAuthModel;
 
-    let club: ExpandedClub = $derived(data.club)
-    let teams: ExpandedTeam[] = $derived(data.teams)
-    let uniformSets: ExpandedUniformSet[] = $derived(data.uniformSets)
+  let club: ExpandedClub = $derived(data.club)
+  let teams: ExpandedTeam[] = $derived(data.teams)
+  let uniformSets: ExpandedUniformSet[] = $derived(data.uniformSets)
 
-    const modalStore = getModalStore();
-    const drawerStore = getDrawerStore();
+  const modalStore = getModalStore();
+  const drawerStore = getDrawerStore();
 
-    const teamSettings: DrawerSettings = $derived({
-        id: "team-form",
-        position: "right",
-        width: "w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%]",
-        meta: {
-            club: club,
-            team: null,
-        },
-    });
+  const teamSettings: DrawerSettings = $derived({
+    id: "team-form",
+    position: "right",
+    width: "w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%]",
+    meta: {
+      club: club,
+      team: null,
+    },
+  });
 
-    function triggerUniformModal() {
-        const modalComponent: ModalComponent = {
-            ref: UniformSetForm,
-            props: {
-                uniformSet: null,
-                clubID: club.id,
-            },
-        };
+  function triggerUniformModal() {
+    const modalComponent: ModalComponent = {
+      ref: UniformSetForm,
+      props: {
+        uniformSet: null,
+        clubID: club.id,
+      },
+    };
 
-        const modal: ModalSettings = {
-            type: "component",
-            component: modalComponent,
-        };
-        modalStore.trigger(modal);
-    }
+    const modal: ModalSettings = {
+      type: "component",
+      component: modalComponent,
+    };
+    modalStore.trigger(modal);
+  }
 </script>
 
 <svelte:head>

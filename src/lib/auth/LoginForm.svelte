@@ -1,6 +1,6 @@
 <script lang="ts">
   import {getToastStore, Tab, TabGroup, type ToastSettings} from "@skeletonlabs/skeleton";
-  import {client} from "../pocketbase";
+  import {client} from "../pocketbase/index.svelte";
   import {goto} from "$app/navigation";
   import OAuthProviderButton from "$lib/auth/OAuthProviderButton.svelte";
 
@@ -179,7 +179,7 @@
             {/if}
 
             {#await coll.listAuthMethods({$autoCancel: false}) then methods}
-                {#if methods.authProviders.length > 0}
+                {#if methods.oauth2.providers.length > 0}
                     <hr class="my-2">
 
                     <div class="mx-2 mt-3 text-surface-600-300-token font-light flex justify-center">
@@ -187,7 +187,7 @@
                     </div>
 
                     <div class="my-3 md:my-5 flex flex-wrap gap-6 justify-center">
-                        {#each methods.authProviders as provider}
+                        {#each methods.oauth2.providers as provider}
                             <OAuthProviderButton authProvider={provider} collection={coll} parent={parent}/>
                         {/each}
                     </div>

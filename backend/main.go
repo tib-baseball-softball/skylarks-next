@@ -5,11 +5,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/labstack/echo/v5"
 	"github.com/pocketbase/pocketbase"
-	"github.com/pocketbase/pocketbase/apis"
 	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/tools/cron"
 	"github.com/spf13/cobra"
 	"github.com/subosito/gotenv"
 	"github.com/tib-baseball-softball/skylarks-next/cronjobs"
@@ -29,7 +26,7 @@ func main() {
 
 	//------------------- Hooks -------------------------//
 
-	app.OnRecordAuthRequest("users").Add(func(e *core.RecordAuthEvent) error {
+	app.OnRecordAuthRequest("users").BindFunc(func(e *core.RecordAuthRequestEvent) error {
 		err := hooks.SetLastLogin(app, e.Record)
 		if err != nil {
 			app.Logger().Error(
@@ -37,34 +34,22 @@ func main() {
 				"error", err,
 			)
 		}
-		return nil
+		return e.Next()
 	})
 
-	app.OnRecordBeforeCreateRequest("users").Add(func(e *core.RecordCreateEvent) error {
+	app.OnRecordCreateRequest("users").BindFunc(func(e *core.RecordRequestEvent) error {
 		// TODO: validate signup Key
 		return nil
 	})
 
 	//------------------- Custom Routes -------------------------//
 
-	app.OnBeforeServe().Add(func(e *core.ServeEvent) error {
-		// add new "GET /hello" route to the app router (echo)
-		_, err := e.Router.AddRoute(echo.Route{
-			Method: http.MethodGet,
-			Path:   "/hello",
-			Handler: func(c echo.Context) error {
-				return c.String(200, "Hello ballplayers!")
-			},
-			Middlewares: []echo.MiddlewareFunc{
-				apis.ActivityLogger(app),
-			},
+	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
+		se.Router.GET("/hello", func(e *core.RequestEvent) error {
+			return e.String(http.StatusOK, "Hello ballplayers!")
 		})
 
-		if err != nil {
-			log.Fatal("Could not register /hello route")
-		}
-
-		return nil
+		return se.Next()
 	})
 
 	//------------------- Commands -------------------------//
@@ -89,23 +74,15 @@ func main() {
 	//------------------- Cronjobs -------------------------//
 
 	if os.Getenv("APPLICATION_CONTEXT") != "Development" {
-		app.OnBeforeServe().Add(func(e *core.ServeEvent) error {
-			scheduler := cron.New()
+		app.Cron().MustAdd("LeagueGroupImport", "0 * * * *", func() {
+			err := cronjobs.ImportLeagueGroups(app)
+			if err != nil {
+				app.Logger().Error("Error while running cronjob LeagueGroupImport: " + err.Error())
+			}
+		})
 
-			scheduler.MustAdd("LeagueGroupImport", "0 * * * *", func() {
-				err := cronjobs.ImportLeagueGroups(app)
-				if err != nil {
-					log.Print("Error while running cronjob LeagueGroupImport: " + err.Error())
-				}
-			})
-
-			scheduler.MustAdd("GamesImport", "0 * * * *", func() {
-				cronjobs.ImportGames(app)
-			})
-
-			scheduler.Start()
-
-			return nil
+		app.Cron().MustAdd("GamesImport", "0 * * * *", func() {
+			cronjobs.ImportGames(app)
 		})
 	}
 

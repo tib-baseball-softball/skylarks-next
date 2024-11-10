@@ -1,10 +1,10 @@
-import { client } from "$lib/pocketbase";
-import { error } from "@sveltejs/kit";
-import type { ExpandedTeam } from "$lib/model/ExpandedResponse.js";
-import type { PageLoad } from "./$types";
-import { EventService } from "$lib/service/EventService";
+import {client} from "$lib/pocketbase/index.svelte";
+import {error} from "@sveltejs/kit";
+import type {ExpandedTeam} from "$lib/model/ExpandedResponse.js";
+import type {PageLoad} from "./$types";
+import {EventService} from "$lib/service/EventService";
 
-export const load = (async ({ fetch, parent, params, url, depends }) => {
+export const load = (async ({fetch, parent, params, url, depends}) => {
   const data = await parent();
   const teams: ExpandedTeam[] = await data.teams;
 
@@ -12,8 +12,8 @@ export const load = (async ({ fetch, parent, params, url, depends }) => {
 
   if (!team) {
     team = await client
-      .collection("teams")
-      .getOne<ExpandedTeam>(params.id, { expand: "club" });
+        .collection("teams")
+        .getOne<ExpandedTeam>(params.id, {expand: "club"});
   }
   if (!team) throw error(404, "Team not found");
 

@@ -1,16 +1,15 @@
 <script lang="ts">
   import {invalidateAll} from "$app/navigation";
-  import {client} from "$lib/pocketbase";
+  import {authSettings, client} from "$lib/pocketbase/index.svelte";
   import {getDrawerStore, getToastStore, type ToastSettings,} from "@skeletonlabs/skeleton";
   import {CloseOutline} from "flowbite-svelte-icons";
   import type {ClubsResponse, UsersResponse, UsersUpdate} from "$lib/model/pb-types";
-  import {authModel} from "$lib/pocketbase/Auth";
   import type {CustomAuthModel, ExpandedClub} from "$lib/model/ExpandedResponse";
 
   const toastStore = getToastStore();
   const drawerStore = getDrawerStore();
 
-  const model = $authModel as CustomAuthModel
+  const model = authSettings.record as CustomAuthModel
 
   const toastSettingsSuccess: ToastSettings = {
     message: "Club data saved successfully.",
