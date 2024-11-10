@@ -37,9 +37,8 @@ func main() {
 		return e.Next()
 	})
 
-	app.OnRecordCreateRequest("users").BindFunc(func(e *core.RecordRequestEvent) error {
-		// TODO: validate signup Key
-		return nil
+	app.OnRecordCreateRequest("users").BindFunc(func(event *core.RecordRequestEvent) error {
+		return hooks.ValidateSignupKey(app, event)
 	})
 
 	//------------------- Custom Routes -------------------------//
