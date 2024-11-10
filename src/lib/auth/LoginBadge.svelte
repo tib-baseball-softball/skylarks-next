@@ -1,10 +1,9 @@
 <script lang="ts">
-  import {onDestroy} from "svelte";
-  import {client} from "../pocketbase";
+  import {client} from "../pocketbase/index.svelte";
   import {Avatar, getModalStore, getToastStore, type ModalSettings} from "@skeletonlabs/skeleton";
   import {browser} from "$app/environment";
   import {invalidateAll} from "$app/navigation";
-  import {authModel} from "$lib/pocketbase/Auth.svelte";
+  import {authSettings} from "$lib/pocketbase/index.svelte";
 
   const modalStore = getModalStore();
   const toastStore = getToastStore();
@@ -21,7 +20,7 @@
     component: "accountOverview",
   };
 
-  const unsubscribe = client.authStore.onChange((token, model) => {
+  client.authStore.onChange((_token, model) => {
     // do not do any auth stuff on the server
     if (browser) {
       if (model) {
@@ -36,27 +35,24 @@
         invalidateAll();
       }
     }
-  }, false);
+  })
 
-  onDestroy(() => {
-    unsubscribe();
-  });
 </script>
 
-{#if $authModel}
+{#if authSettings.record}
     <button class="badge" onclick={() => modalStore.trigger(accountOverview)}>
 
-        {#if $authModel.avatar}
+        {#if authSettings.record?.avatar}
             <Avatar
-                    src={client.files.getURL($authModel, $authModel.avatar)}
+                    src={client.files.getURL(authSettings.record, authSettings.record?.avatar)}
                     width="w-14"
             />
 
         {:else}
 
             <Avatar
-                    initials={$authModel?.first_name?.charAt(0).toUpperCase() +
-          $authModel?.last_name?.charAt(0).toUpperCase()}
+                    initials={authSettings.record?.first_name?.charAt(0).toUpperCase() +
+          authSettings.record?.last_name?.charAt(0)?.toUpperCase()}
                     background="variant-filled-primary"
                     width="w-14"
                     fill="fill-white"

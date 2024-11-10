@@ -1,25 +1,22 @@
 <script lang="ts">
   import type {ParticipationsCreate} from "$lib/model/pb-types";
-  import {
-    CheckOutline,
-    CloseOutline,
-    QuestionCircleOutline,
-  } from "flowbite-svelte-icons";
+  import {CheckOutline, CloseOutline, QuestionCircleOutline,} from "flowbite-svelte-icons";
   import type {EventParticipationState} from "$lib/types/EventParticipationState";
   import {sendParticipationData} from "$lib/functions/sendParticipationData";
   import {invalidate} from "$app/navigation";
-  import {authModel} from "$lib/pocketbase/Auth.svelte";
-  import type {ExpandedEvent} from "$lib/model/ExpandedResponse";
+  import type {CustomAuthModel, ExpandedEvent} from "$lib/model/ExpandedResponse";
+  import {authSettings} from "$lib/pocketbase/index.svelte";
 
   interface props {
     event: ExpandedEvent;
   }
 
+  const authModel = authSettings.record as CustomAuthModel
   const {event}: props = $props();
 
   let userParticipation: ParticipationsCreate = $derived({
     id: "",
-    user: $authModel?.id,
+    user: authModel?.id,
     event: event.id,
     state: "",
     comment: "",
@@ -55,7 +52,7 @@
 
   $effect.pre(() => {
     participations?.forEach((participation) => {
-      if (participation.user === $authModel?.id) {
+      if (participation.user === authModel?.id) {
         userParticipation.id = participation.id;
         userParticipation.state = participation.state;
         userParticipation.comment = participation.comment;

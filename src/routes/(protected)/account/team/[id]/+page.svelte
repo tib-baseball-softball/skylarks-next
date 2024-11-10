@@ -2,13 +2,12 @@
   import TeamTeaserCard from "$lib/components/diamondplanner/team/TeamTeaserCard.svelte";
   import EventTeaser from "$lib/components/diamondplanner/event/EventTeaser.svelte";
   import Paginator from "$lib/pocketbase/Paginator.svelte";
-  import {authModel} from "$lib/pocketbase/Auth.svelte";
   import {CalendarPlusOutline, UsersGroupOutline,} from "flowbite-svelte-icons";
   import {goto, invalidateAll} from "$app/navigation";
-  import type {EventType} from "$lib/model/ExpandedResponse.js";
+  import type {CustomAuthModel, EventType} from "$lib/model/ExpandedResponse.js";
   import {type DrawerSettings, getDrawerStore, RadioGroup, RadioItem,} from "@skeletonlabs/skeleton";
   import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
-  import {client} from "$lib/pocketbase";
+  import {authSettings, client} from "$lib/pocketbase/index.svelte";
   import TeamEditButton from "$lib/components/team/TeamEditButton.svelte";
 
   let {data} = $props();
@@ -49,6 +48,8 @@
     console.log(showEvents);
     reloadWithQuery();
   });
+
+  const authModel = authSettings.record as CustomAuthModel
 </script>
 
 <h1 class="h2">{data.team.name} ({data.team?.expand?.club.name})</h1>
@@ -134,7 +135,7 @@
     </div>
 </section>
 
-{#if data.team.admins.includes($authModel?.id)}
+{#if data.team.admins.includes(authModel?.id)}
     <hr class="my-2"/>
 
     <h2 class="h3">Admin Section</h2>

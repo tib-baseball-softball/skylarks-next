@@ -3,7 +3,7 @@
   import ThSort from "./ThSort.svelte";
   import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
   import {Avatar} from "@skeletonlabs/skeleton";
-  import {client} from "$lib/pocketbase";
+  import {client} from "$lib/pocketbase/index.svelte";
   import {CheckCircleSolid, EditOutline, LockOpenOutline,} from "flowbite-svelte-icons";
   import LocalDate from "../utility/LocalDate.svelte";
 

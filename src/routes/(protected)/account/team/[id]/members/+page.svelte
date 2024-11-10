@@ -1,13 +1,13 @@
 <script lang="ts">
   import TeamMemberDatatable from "$lib/components/datatable/TeamMemberDatatable.svelte";
-  import {authModel} from "$lib/pocketbase/Auth.svelte";
+  import {authSettings} from "$lib/pocketbase/index.svelte";
 
   let {data} = $props();
 
   const players = $derived(data.players);
 
   const showAdminSection = $derived(
-      data.team.admins.includes($authModel?.id),
+      data.team.admins.includes(authSettings?.record?.id),
   );
 </script>
 

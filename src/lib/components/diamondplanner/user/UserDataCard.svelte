@@ -2,7 +2,7 @@
   import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
   import {Avatar, getModalStore, type ModalComponent, type ModalSettings} from "@skeletonlabs/skeleton";
   import {EnvelopeOutline, UserEditOutline, UserOutline} from "flowbite-svelte-icons";
-  import {client} from "$lib/pocketbase";
+  import {client} from "$lib/pocketbase/index.svelte";
   import UserDetailsForm from "$lib/auth/UserDetailsForm.svelte";
 
   interface props {

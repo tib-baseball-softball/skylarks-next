@@ -1,6 +1,6 @@
 <script lang="ts">
   import {getToastStore, Tab, TabGroup, type ToastSettings} from "@skeletonlabs/skeleton";
-  import {client} from "../pocketbase";
+  import {client} from "../pocketbase/index.svelte";
   import {goto} from "$app/navigation";
   import OAuthProviderButton from "$lib/auth/OAuthProviderButton.svelte";
 

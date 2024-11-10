@@ -1,9 +1,7 @@
 import type {LayoutLoad} from "../../.svelte-kit/types/src/routes/$types";
-import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/model/ExpandedResponse";
+import type {ExpandedClub, ExpandedTeam} from "$lib/model/ExpandedResponse";
 import {browser} from "$app/environment";
-import {client} from "$lib/pocketbase";
-import {authModel} from "$lib/pocketbase/Auth.svelte";
-import {get} from "svelte/store";
+import {authSettings, client} from "$lib/pocketbase/index.svelte";
 
 /**
  * This loads club and team data for the extended DiamondPlanner nav bar.
@@ -27,7 +25,7 @@ export const load = (async ({fetch, depends}) => {
           sort: "+name",
         });
 
-    const model = get(authModel) as CustomAuthModel
+    const model = authSettings.record
     clubs = await client
         .collection("clubs")
         .getFullList<ExpandedClub>({

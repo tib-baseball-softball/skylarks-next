@@ -1,13 +1,14 @@
 <script lang="ts">
   import {invalidate} from "$app/navigation";
-  import type {ExpandedTeam} from "$lib/model/ExpandedResponse";
-  import {client} from "$lib/pocketbase";
+  import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
+  import {authSettings, client} from "$lib/pocketbase/index.svelte";
   import {getDrawerStore, getToastStore, RadioGroup, RadioItem, type ToastSettings,} from "@skeletonlabs/skeleton";
   import {CloseOutline} from "flowbite-svelte-icons";
-  import {authModel} from "$lib/pocketbase/Auth.svelte";
 
   const toastStore = getToastStore();
   const drawerStore = getDrawerStore();
+
+  const authModel = authSettings.record as CustomAuthModel
 
   const toastSettingsSuccess: ToastSettings = {
     message: "Team data saved successfully.",
@@ -42,7 +43,7 @@
             .update<ExpandedTeam>(form.id, form);
       } else {
         // a user creating a team becomes its first admin
-        form.admins.push($authModel?.id)
+        form.admins.push(authModel?.id)
 
         result = await client
             .collection("teams")

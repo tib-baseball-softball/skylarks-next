@@ -3,12 +3,11 @@
   import PlayerHeaderSection from "$lib/components/player/PlayerHeaderSection.svelte";
   import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
   import type {Player} from "$lib/model/Player";
-  import {client} from "$lib/pocketbase";
-  import {authModel} from "$lib/pocketbase/Auth.svelte";
+  import {authSettings, client} from "$lib/pocketbase/index.svelte";
   import {type DrawerSettings, getDrawerStore,} from "@skeletonlabs/skeleton";
   import {EditOutline, LinkOutline} from "flowbite-svelte-icons";
 
-  const model = $authModel as CustomAuthModel;
+  const model = authSettings.record as CustomAuthModel;
 
   const drawerStore = getDrawerStore();
   const playerSettings: DrawerSettings = $derived({

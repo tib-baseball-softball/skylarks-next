@@ -4,21 +4,18 @@
   import EventParticipationSection from "$lib/components/diamondplanner/event/EventParticipationSection.svelte";
   import EventTypeBadge from "$lib/components/diamondplanner/event/EventTypeBadge.svelte";
   import MatchTeaserCard from "$lib/components/match/MatchTeaserCard.svelte";
-  import {authModel} from "$lib/pocketbase/Auth.svelte";
   import {
-    CheckOutline,
-    QuestionCircleOutline,
-    InfoCircleOutline,
     CalendarEditOutline,
     CalendarPlusOutline,
+    CheckOutline,
     EditOutline,
+    InfoCircleOutline,
+    QuestionCircleOutline,
     TrashBinOutline,
   } from "flowbite-svelte-icons";
   import CloseOutline from "flowbite-svelte-icons/CloseOutline.svelte";
-  import {
-    getDrawerStore,
-    type DrawerSettings,
-  } from "@skeletonlabs/skeleton";
+  import {type DrawerSettings, getDrawerStore,} from "@skeletonlabs/skeleton";
+  import {authSettings} from "$lib/pocketbase/index.svelte";
 
   const drawerStore = getDrawerStore();
 
@@ -156,7 +153,7 @@
         </section>
     {/if}
 
-    {#if $event.expand?.team?.admins.includes($authModel?.id)}
+    {#if $event.expand?.team?.admins.includes(authSettings?.record?.id)}
         <hr class="my-2"/>
 
         <h2 class="h2">Admin Section</h2>

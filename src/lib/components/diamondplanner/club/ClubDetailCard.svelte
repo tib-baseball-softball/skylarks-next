@@ -1,8 +1,8 @@
 <script lang="ts">
   import {EditOutline, InfoCircleOutline, ShieldOutline, TagOutline} from "flowbite-svelte-icons";
   import type {CustomAuthModel, ExpandedClub} from "$lib/model/ExpandedResponse";
-  import {authModel} from "$lib/pocketbase/Auth.svelte";
   import {type DrawerSettings, getDrawerStore} from "@skeletonlabs/skeleton";
+  import {authSettings} from "$lib/pocketbase/index.svelte";
 
   interface Props {
     club: ExpandedClub
@@ -12,7 +12,7 @@
 
   const drawerStore = getDrawerStore()
 
-  const model = $authModel as CustomAuthModel
+  const model = authSettings.record as CustomAuthModel
 
   let clubAddEditSettings: DrawerSettings = $derived({
     id: "club-form",

@@ -1,11 +1,12 @@
 <script lang="ts">
   import UserDataCard from "$lib/components/diamondplanner/user/UserDataCard.svelte";
-  import type {CustomAuthModel} from "$lib/model/ExpandedResponse.js";
-  import {authModel} from "$lib/pocketbase/Auth.svelte";
   import PlayerProfileClubsSection from "$lib/components/diamondplanner/user/PlayerProfileClubsSection.svelte";
   import TeamListTeaser from "$lib/components/diamondplanner/team/TeamListTeaser.svelte";
+  import {authSettings} from "$lib/pocketbase/index.svelte";
+  import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
 
-  const model = $authModel as CustomAuthModel;
+  const model = authSettings.record as CustomAuthModel;
+
 
   let {data} = $props();
 </script>

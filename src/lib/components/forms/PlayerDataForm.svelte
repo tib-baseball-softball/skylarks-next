@@ -1,16 +1,15 @@
 <script lang="ts">
   import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
-  import {client} from "$lib/pocketbase";
+  import {authSettings, client} from "$lib/pocketbase/index.svelte";
   import {
     getDrawerStore,
+    getToastStore,
     InputChip,
     RadioGroup,
     RadioItem,
     type ToastSettings,
   } from "@skeletonlabs/skeleton";
-  import {getToastStore} from "@skeletonlabs/skeleton";
   import {CloseOutline} from "flowbite-svelte-icons";
-  import {authModel} from "$lib/pocketbase/Auth.svelte";
   import {
     getAllBaseballPositionStringValues,
     positionEnumStringValuesToKeys,
@@ -30,7 +29,7 @@
     background: "variant-filled-error",
   };
 
-  const model = $authModel as CustomAuthModel;
+  const model = authSettings.record as CustomAuthModel;
   const form = $state({
     id: model.id ?? "",
     number: model.number ?? "",

@@ -3,7 +3,6 @@
   import UniformSetInfoCard from "$lib/components/diamondplanner/uniformset/UniformSetInfoCard.svelte";
   import {EnvelopeOutline, PlusOutline} from "flowbite-svelte-icons";
   import type {CustomAuthModel, ExpandedClub, ExpandedTeam, ExpandedUniformSet} from "$lib/model/ExpandedResponse";
-  import {authModel} from "$lib/pocketbase/Auth.svelte";
   import {
     type DrawerSettings,
     getDrawerStore,
@@ -13,10 +12,11 @@
   } from "@skeletonlabs/skeleton";
   import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
   import TeamListTeaser from "$lib/components/diamondplanner/team/TeamListTeaser.svelte";
+  import {authSettings} from "$lib/pocketbase/index.svelte";
 
   let {data} = $props()
 
-  const model = $authModel as CustomAuthModel;
+  const model = authSettings.record as CustomAuthModel;
 
   let club: ExpandedClub = $derived(data.club)
   let teams: ExpandedTeam[] = $derived(data.teams)

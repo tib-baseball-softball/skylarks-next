@@ -1,9 +1,8 @@
 <script lang="ts">
   import {ClipboardListOutline, ClipboardOutline, InfoCircleOutline} from "flowbite-svelte-icons";
   import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
-  import {authModel} from "$lib/pocketbase/Auth.svelte";
   import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
-  import {client} from "$lib/pocketbase";
+  import {authSettings, client} from "$lib/pocketbase/index.svelte";
   import {invalidate} from "$app/navigation";
   import TeamEditButton from "$lib/components/team/TeamEditButton.svelte";
 
@@ -18,7 +17,7 @@
 
   let {team, link = false}: props = $props()
 
-  const model = $authModel as CustomAuthModel;
+  const model = authSettings.record as CustomAuthModel;
 
   function deleteAction(id: string) {
     client.collection("teams").delete(id)

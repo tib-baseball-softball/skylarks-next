@@ -6,8 +6,7 @@
   import {getModalStore, type ModalComponent, type ModalSettings} from "@skeletonlabs/skeleton";
   import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
   import type {CustomAuthModel, ExpandedUniformSet} from "$lib/model/ExpandedResponse";
-  import {authModel} from "$lib/pocketbase/Auth.svelte";
-  import {client} from "$lib/pocketbase";
+  import {authSettings, client} from "$lib/pocketbase/index.svelte";
   import {invalidate} from "$app/navigation";
   import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
 
@@ -17,7 +16,7 @@
 
   let {uniformSet}: Props = $props()
 
-  const model = $authModel as CustomAuthModel;
+  const model = authSettings.record as CustomAuthModel;
 
   const modalStore = getModalStore();
 
