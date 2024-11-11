@@ -35,9 +35,9 @@ func ValidateSignupKey(app *pocketbase.PocketBase, event *core.RecordRequestEven
 
 	isValid := false
 	for _, club := range clubs {
-		if signupKeyUsed != "" && club.signupKey == signupKeyUsed {
+		if signupKeyUsed != "" && club.SignupKey == signupKeyUsed {
 			isValid = true
-			event.Record.Set("club", club.id)
+			event.Record.Set("club", club.Id)
 			break
 		}
 	}
@@ -55,14 +55,14 @@ func ValidateSignupKey(app *pocketbase.PocketBase, event *core.RecordRequestEven
 	return event.Next()
 }
 
-// Reduced club record with just the relevant fields
-type club struct {
-	id        string `db:"id"`
-	signupKey string `db:"signup_key"`
+// Club Reduced record with just the relevant fields
+type Club struct {
+	Id        string `db:"id"`
+	SignupKey string `db:"signup_key"`
 }
 
-func getValidSignupKeys(app *pocketbase.PocketBase) ([]club, error) {
-	var clubs []club
+func getValidSignupKeys(app *pocketbase.PocketBase) ([]Club, error) {
+	var clubs []Club
 
 	err := app.DB().
 		NewQuery("SELECT id, signup_key FROM clubs WHERE signup_key != '';").
