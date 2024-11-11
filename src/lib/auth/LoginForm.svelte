@@ -23,7 +23,7 @@
     email: "",
     password: "",
     passwordConfirm: "",
-    signupKey: "",
+    signup_key: "",
   })
   let signup = false
 
@@ -148,7 +148,7 @@
                                 <label class="label">
                                     <span class="">Signup Key</span>
                                     <input
-                                            bind:value={form.signupKey}
+                                            bind:value={form.signup_key}
                                             class="input"
                                             name="signup_key"
                                             placeholder="minimum 8 characters"

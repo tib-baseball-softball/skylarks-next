@@ -22,7 +22,6 @@ func SetLastLogin(app *pocketbase.PocketBase, record *core.Record) (err error) {
 }
 
 func ValidateSignupKey(app *pocketbase.PocketBase, event *core.RecordRequestEvent) error {
-	// TODO: not working yet
 	clubs, err := getValidSignupKeys(app)
 	if err != nil {
 		errorText := "failed to get valid signup clubs"
@@ -31,13 +30,20 @@ func ValidateSignupKey(app *pocketbase.PocketBase, event *core.RecordRequestEven
 		return errors.New(errorText)
 	}
 
-	signupKeyUsed := event.Record.GetString("signup_key")
+	// read signup key from request body as it's not present in the user record
+	body := struct {
+		SignupKey string `json:"signup_key"`
+	}{}
+	if err := event.BindBody(&body); err != nil {
+		return event.BadRequestError("Failed to read request body", err)
+	}
 
 	isValid := false
 	for _, club := range clubs {
-		if signupKeyUsed != "" && club.SignupKey == signupKeyUsed {
+		if body.SignupKey != "" && club.SignupKey == body.SignupKey {
 			isValid = true
 			event.Record.Set("club", club.Id)
+			event.Record.Set("signup_key", body.SignupKey)
 			break
 		}
 	}
@@ -49,7 +55,7 @@ func ValidateSignupKey(app *pocketbase.PocketBase, event *core.RecordRequestEven
 		if err != nil {
 			return err
 		}
-		return errors.New("signup key invalid")
+		return event.BadRequestError("signup key invalid", err)
 	}
 
 	return event.Next()
