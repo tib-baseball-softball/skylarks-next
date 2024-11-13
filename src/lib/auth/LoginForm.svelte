@@ -48,8 +48,11 @@
 
     } else {
       try {
-        await coll.authWithPassword(form.email, form.password, {expand: "club"})
-        goto("/account", {invalidateAll: true})
+        const authResponse = await coll.authWithPassword(form.email, form.password, {expand: "club"})
+
+        if (authResponse) {
+          goto("/account", {invalidateAll: true})
+        }
       } catch (error) {
         console.error(error)
         toastStore.trigger(failSettings)
@@ -188,9 +191,24 @@
 
                     <div class="my-3 md:my-5 flex flex-wrap gap-6 justify-center">
                         {#each methods.oauth2.providers as provider}
-                            <OAuthProviderButton authProvider={provider} collection={coll} parent={parent}/>
+
+                            {#if tabSet === 0}
+                                <!--Login Buttons - no signupKey-->
+                                <OAuthProviderButton authProvider={provider} collection={coll} parent={parent}/>
+                            {:else}
+                                <!--Signup Buttons - with signupKey state prop-->
+                                <OAuthProviderButton authProvider={provider} collection={coll} parent={parent}
+                                                     signup_key={form.signup_key}/>
+                            {/if}
+
                         {/each}
                     </div>
+
+                    {#if tabSet === 1}
+                        <div class="mx-2 mt-3 text-surface-600-300-token font-light flex justify-center">
+                            <span>signup key (see above) still required!</span>
+                        </div>
+                    {/if}
 
                     <button aria-label="open popover with info about " popovertarget="hint-external" type="button"
                             class="anchor">

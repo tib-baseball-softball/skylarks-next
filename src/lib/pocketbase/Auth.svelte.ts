@@ -4,14 +4,15 @@ import {save} from "./RecordOperations";
 export async function providerLogin(
     provider: AuthProviderInfo,
     authCollection: RecordService,
+    signup_key = "",
 ) {
   const authResponse = await authCollection.authWithOAuth2({
     provider: provider.name,
     createData: {
-      // emailVisibility: true,
+      signup_key: signup_key
     },
     query: {
-      expand: "club"
+      expand: "club",
     }
   });
   // update user "record" if "meta" has info it doesn't have

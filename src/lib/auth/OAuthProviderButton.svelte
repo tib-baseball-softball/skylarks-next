@@ -1,7 +1,8 @@
 <script lang="ts">
-  import type {AuthProviderInfo, RecordModel, RecordService} from "pocketbase";
+  import type {AuthProviderInfo, RecordAuthResponse, RecordModel, RecordService} from "pocketbase";
   import {providerLogin} from "$lib/pocketbase/Auth.svelte";
   import {goto} from "$app/navigation";
+  import {getToastStore} from "@skeletonlabs/skeleton";
 
   /**
    * Shows a button to log in with an external service. Uses branded image if available,
@@ -12,16 +13,31 @@
     authProvider: AuthProviderInfo,
     collection: RecordService<RecordModel>
     parent: any
+    signup_key?: string
   }
 
-  const {authProvider, collection, parent}: Props = $props()
+  const toastStore = getToastStore()
+
+  const {authProvider, collection, parent, signup_key = ""}: Props = $props()
 
   async function submitOAuthRequest(provider: AuthProviderInfo) {
-    providerLogin(provider, collection)
-    goto("/account", {invalidateAll: true})
+    let authResponse: RecordAuthResponse<RecordModel> | undefined
+    try {
+      authResponse = await providerLogin(provider, collection, signup_key)
+    } catch (error) {
+      console.error(error)
+      toastStore.trigger({
+        message: "There was an error processing your authentication request via external provider. Please double-check your signup key",
+        background: "variant-filled-error",
+      })
+    }
 
     //@ts-ignore
     parent.onClose()
+
+    if (authResponse) {
+      goto("/account", {invalidateAll: true})
+    }
   }
 
   const isGenericProvider = $derived(
