@@ -494,6 +494,20 @@
         "type": "number"
       },
       {
+        "autogeneratePattern": "",
+        "hidden": true,
+        "id": "text1259466490",
+        "max": 0,
+        "min": 0,
+        "name": "signup_key",
+        "pattern": "",
+        "presentable": false,
+        "primaryKey": false,
+        "required": false,
+        "system": false,
+        "type": "text"
+      },
+      {
         "hidden": false,
         "id": "_pbf_autodate_created_",
         "name": "created",
@@ -963,6 +977,20 @@
         "presentable": false,
         "system": true,
         "type": "autodate"
+      },
+      {
+        "autogeneratePattern": "",
+        "hidden": true,
+        "id": "text3866985172",
+        "max": 0,
+        "min": 0,
+        "name": "sentTo",
+        "pattern": "",
+        "presentable": false,
+        "primaryKey": false,
+        "required": false,
+        "system": true,
+        "type": "text"
       }
     ],
     "indexes": [
@@ -1036,7 +1064,7 @@
       },
       {
         "autogeneratePattern": "",
-        "hidden": true,
+        "hidden": false,
         "id": "cdlmsvsz",
         "max": 0,
         "min": 8,
@@ -1387,6 +1415,19 @@
         "required": true,
         "system": false,
         "type": "text"
+      },
+      {
+        "cascadeDelete": false,
+        "collectionId": "z806hmy5um3qy5x",
+        "hidden": false,
+        "id": "relation2780639523",
+        "maxSelect": 999,
+        "minSelect": 0,
+        "name": "clubs",
+        "presentable": false,
+        "required": false,
+        "system": false,
+        "type": "relation"
       },
       {
         "hidden": false,

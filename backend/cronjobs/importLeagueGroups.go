@@ -6,7 +6,6 @@ import (
 	"github.com/pocketbase/pocketbase/tools/types"
 	"github.com/tib-baseball-softball/skylarks-next/bsm"
 	"github.com/tib-baseball-softball/skylarks-next/model"
-	"log"
 	"strconv"
 	"sync"
 )
@@ -25,19 +24,19 @@ func ImportLeagueGroups(app *pocketbase.PocketBase) (err error) {
 			defer wg.Done()
 			leagueGroups, err := fetchLeagueGroupsForCurrentSeason(club.GetString("bsm_api_key"))
 			if err != nil {
-				log.Print(err)
+				app.Logger().Error(err.Error())
 				return
 			}
-			err = createOrUpdateLeagueGroups(app, leagueGroups)
+			err = createOrUpdateLeagueGroups(app, leagueGroups, club)
 			if err != nil {
-				log.Print(err)
+				app.Logger().Error(err.Error())
 				return
 			}
 		}()
 	}
 
 	wg.Wait()
-	log.Println("League Group Import successfully imported all league groups")
+	app.Logger().Info("League Group Import successfully imported all league groups")
 	return nil
 }
 
@@ -57,7 +56,7 @@ func fetchLeagueGroupsForCurrentSeason(apiKey string) ([]model.LeagueGroup, erro
 }
 
 // TODO: try to make generic
-func createOrUpdateLeagueGroups(app *pocketbase.PocketBase, leagueGroups []model.LeagueGroup) (err error) {
+func createOrUpdateLeagueGroups(app *pocketbase.PocketBase, leagueGroups []model.LeagueGroup, club *core.Record) (err error) {
 	for _, leagueGroup := range leagueGroups {
 		record, err := app.FindFirstRecordByData("leaguegroups", "bsm_id", leagueGroup.ID)
 
@@ -69,30 +68,31 @@ func createOrUpdateLeagueGroups(app *pocketbase.PocketBase, leagueGroups []model
 			}
 
 			record = core.NewRecord(collection)
-			err = setLeagueGroupRecordValues(record, leagueGroup)
+			err = setLeagueGroupRecordValues(record, leagueGroup, club)
 			if err != nil {
 				return err
 			}
 		}
 		// no error - update existing record
-		err = setLeagueGroupRecordValues(record, leagueGroup)
+		err = setLeagueGroupRecordValues(record, leagueGroup, club)
 		if err != nil {
 			return err
 		}
 
 		if err := app.Save(record); err != nil {
-			log.Print("Persisting LeagueGroup record failed: ", err)
+			app.Logger().Error("Persisting LeagueGroup record failed: ", err)
 			return err
 		}
 	}
 	return
 }
 
-func setLeagueGroupRecordValues(record *core.Record, leagueGroup model.LeagueGroup) (err error) {
+func setLeagueGroupRecordValues(record *core.Record, leagueGroup model.LeagueGroup, club *core.Record) (err error) {
 	record.Set("bsm_id", leagueGroup.ID)
 	record.Set("season", leagueGroup.Season)
 	record.Set("name", leagueGroup.Name)
 	record.Set("acronym", leagueGroup.Acronym)
+	record.Set("clubs+", club.Id)
 
 	return
 }
