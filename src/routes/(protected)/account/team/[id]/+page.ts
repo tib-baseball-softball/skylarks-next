@@ -13,7 +13,10 @@ export const load = (async ({fetch, parent, params, url, depends}) => {
   if (!team) {
     team = await client
         .collection("teams")
-        .getOne<ExpandedTeam>(params.id, {expand: "club"});
+        .getOne<ExpandedTeam>(params.id, {
+          expand: "club",
+          fetch: fetch
+        });
   }
   if (!team) throw error(404, "Team not found");
 
