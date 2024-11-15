@@ -11,16 +11,21 @@ import (
 )
 
 // ImportLeagueGroups imports league groups concurrently, either for one given club or all clubs in the database.
-func ImportLeagueGroups(app *pocketbase.PocketBase, clubID *string) (err error) {
+func ImportLeagueGroups(app *pocketbase.PocketBase, clubID *string, season *int) (err error) {
 	filter := "bsm_id != 0"
 
 	if clubID != nil {
-		filter = filter + " && id = " + *clubID
+		filter = filter + " && id = '" + *clubID + "'"
 	}
 
 	clubs, err := app.FindRecordsByFilter("clubs", filter, "", 0, 0)
 	if err != nil {
 		return err
+	}
+
+	selectedSeason := types.NowDateTime().Time().Year()
+	if season != nil {
+		selectedSeason = *season
 	}
 
 	var wg sync.WaitGroup
@@ -29,7 +34,7 @@ func ImportLeagueGroups(app *pocketbase.PocketBase, clubID *string) (err error) 
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			leagueGroups, err := fetchLeagueGroupsForCurrentSeason(club.GetString("bsm_api_key"))
+			leagueGroups, err := fetchLeagueGroupsForCurrentSeason(club.GetString("bsm_api_key"), selectedSeason)
 			if err != nil {
 				app.Logger().Error(err.Error())
 				return
@@ -48,11 +53,9 @@ func ImportLeagueGroups(app *pocketbase.PocketBase, clubID *string) (err error) 
 }
 
 // the API key used determines which club LeagueGroups are loaded for
-func fetchLeagueGroupsForCurrentSeason(apiKey string) ([]model.LeagueGroup, error) {
-	currentYear := types.NowDateTime().Time().Year()
-
+func fetchLeagueGroupsForCurrentSeason(apiKey string, season int) ([]model.LeagueGroup, error) {
 	params := make(map[string]string)
-	params["filters[seasons][]"] = strconv.Itoa(currentYear)
+	params["filters[seasons][]"] = strconv.Itoa(season)
 
 	url := bsm.GetAPIURL("league_groups.json", params, apiKey)
 	leagueGroups, _, err := bsm.FetchResource[[]model.LeagueGroup](url.String())

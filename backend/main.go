@@ -41,6 +41,10 @@ func main() {
 		return hooks.ValidateSignupKey(app, event)
 	})
 
+	app.OnRecordsListRequest("leaguegroups").BindFunc(func(event *core.RecordsListRequestEvent) error {
+		return hooks.TriggerLeagueImport(app, event)
+	})
+
 	//------------------- Custom Routes -------------------------//
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
@@ -74,7 +78,7 @@ func main() {
 	app.RootCmd.AddCommand(&cobra.Command{
 		Use: "import:leagues",
 		Run: func(cmd *cobra.Command, args []string) {
-			err := cronjobs.ImportLeagueGroups(app, nil)
+			err := cronjobs.ImportLeagueGroups(app, nil, nil)
 			if err != nil {
 				log.Print("Error while running LeagueGroupImport: " + err.Error())
 			}
@@ -85,7 +89,7 @@ func main() {
 
 	if os.Getenv("APPLICATION_CONTEXT") != "Development" {
 		app.Cron().MustAdd("LeagueGroupImport", "0 * * * *", func() {
-			err := cronjobs.ImportLeagueGroups(app, nil)
+			err := cronjobs.ImportLeagueGroups(app, nil, nil)
 			if err != nil {
 				app.Logger().Error("Error while running cronjob LeagueGroupImport: " + err.Error())
 			}

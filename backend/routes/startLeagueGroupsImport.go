@@ -27,7 +27,7 @@ func StartLeagueGroupsImport(app *pocketbase.PocketBase) func(event *core.Reques
 			return apis.NewUnauthorizedError("only club admins can start league imports", nil)
 		}
 
-		err = cronjobs.ImportLeagueGroups(app, &clubID)
+		err = cronjobs.ImportLeagueGroups(app, &clubID, nil)
 		if err != nil {
 			return err
 		}
