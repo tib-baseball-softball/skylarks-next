@@ -10,8 +10,15 @@ import (
 	"sync"
 )
 
-func ImportLeagueGroups(app *pocketbase.PocketBase) (err error) {
-	clubs, err := app.FindRecordsByFilter("clubs", "bsm_id != 0", "", 0, 0)
+// ImportLeagueGroups imports league groups concurrently, either for one given club or all clubs in the database.
+func ImportLeagueGroups(app *pocketbase.PocketBase, clubID *string) (err error) {
+	filter := "bsm_id != 0"
+
+	if clubID != nil {
+		filter = filter + " && id = " + *clubID
+	}
+
+	clubs, err := app.FindRecordsByFilter("clubs", filter, "", 0, 0)
 	if err != nil {
 		return err
 	}
@@ -55,7 +62,6 @@ func fetchLeagueGroupsForCurrentSeason(apiKey string) ([]model.LeagueGroup, erro
 	return leagueGroups, nil
 }
 
-// TODO: try to make generic
 func createOrUpdateLeagueGroups(app *pocketbase.PocketBase, leagueGroups []model.LeagueGroup, club *core.Record) (err error) {
 	for _, leagueGroup := range leagueGroups {
 		record, err := app.FindFirstRecordByData("leaguegroups", "bsm_id", leagueGroup.ID)
