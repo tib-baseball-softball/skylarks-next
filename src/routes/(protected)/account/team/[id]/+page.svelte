@@ -2,13 +2,12 @@
   import TeamTeaserCard from "$lib/components/diamondplanner/team/TeamTeaserCard.svelte";
   import EventTeaser from "$lib/components/diamondplanner/event/EventTeaser.svelte";
   import Paginator from "$lib/pocketbase/Paginator.svelte";
-  import {CalendarPlusOutline, UsersGroupOutline,} from "flowbite-svelte-icons";
-  import {goto, invalidateAll} from "$app/navigation";
+  import {UsersGroupOutline,} from "flowbite-svelte-icons";
+  import {goto} from "$app/navigation";
   import type {CustomAuthModel, EventType} from "$lib/model/ExpandedResponse.js";
-  import {type DrawerSettings, getDrawerStore, RadioGroup, RadioItem,} from "@skeletonlabs/skeleton";
-  import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
-  import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  import TeamEditButton from "$lib/components/team/TeamEditButton.svelte";
+  import {RadioGroup, RadioItem,} from "@skeletonlabs/skeleton";
+  import {authSettings} from "$lib/pocketbase/index.svelte";
+  import TeamAdminSection from "$lib/components/diamondplanner/team/TeamAdminSection.svelte";
 
   let {data} = $props();
   const events = $derived(data.events);
@@ -25,24 +24,6 @@
       noScroll: true,
     });
   };
-
-  const drawerStore = getDrawerStore();
-  const singleEventSettings: DrawerSettings = $derived({
-    id: "event-form",
-    position: "right",
-    width: "w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%]",
-    meta: {
-      event: null,
-      club: data.team?.club,
-      team: data.team,
-    },
-  });
-
-  function teamDeleteAction(id: string) {
-    goto(`/account`)
-    client.collection("teams").delete(id)
-    invalidateAll()
-  }
 
   $effect.pre(() => {
     console.log(showEvents);
@@ -138,119 +119,5 @@
 {#if data.team.admins.includes(authModel?.id)}
     <hr class="my-2"/>
 
-    <h2 class="h3">Admin Section</h2>
-
-    <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-3"
-    >
-        <div class="card admin-card variant-ringed-surface">
-            <div>
-                <header class="card-header">
-                    <h3 class="h4 font-semibold">Games</h3>
-                </header>
-
-                <section class="p-4 space-y-3">
-                    <p class="font-light">
-                        Events of type "Game" don't need to be created manually.
-                        All data can be imported from BSM and kept in sync with
-                        the current state.
-                    </p>
-                </section>
-            </div>
-            <footer class="card-footer">
-                <div class="flex flex-col gap-2 lg:gap-3">
-                    <button class="btn variant-ghost-primary">
-                        <CalendarPlusOutline/>
-                        <span>Setup Games Import</span>
-                    </button>
-                </div>
-            </footer>
-        </div>
-
-        <div class="card admin-card variant-ringed-surface">
-            <div>
-                <header class="card-header">
-                    <h3 class="h4 font-semibold">Practice Sets</h3>
-                </header>
-
-                <section class="p-4 space-y-3">
-                    <p class="font-light">
-                        Practice Sets are recurring series of events of type
-                        "Practice" that take place on the same day every week.
-                    </p>
-                </section>
-            </div>
-            <footer class="card-footer">
-                <div class="flex flex-col gap-2 lg:gap-3">
-                    <button
-                            class="btn variant-ghost-secondary dark:variant-filled-secondary dark:border"
-                    >
-                        <CalendarPlusOutline/>
-                        <span>Create Practice Set</span>
-                    </button>
-                </div>
-            </footer>
-        </div>
-
-        <div class="card admin-card variant-ringed-surface">
-            <div>
-                <header class="card-header">
-                    <h3 class="h4 font-semibold">Single Events</h3>
-                </header>
-
-                <section class="p-4 space-y-3">
-                    <p class="font-light">
-                        Single Events are not connected to any other events and
-                        don't contain additional logic. Well suited for one-off
-                        occurrences.
-                    </p>
-                </section>
-            </div>
-            <footer class="card-footer">
-                <div class="flex flex-col gap-2 lg:gap-3">
-                    <button
-                            class="btn variant-ghost-tertiary"
-                            onclick={() => drawerStore.open(singleEventSettings)}
-                    >
-                        <CalendarPlusOutline/>
-                        <span>Create Single Event</span>
-                    </button>
-                </div>
-            </footer>
-        </div>
-
-        <div class="card admin-card variant-ringed-surface">
-            <header class="card-header">
-                <h3 class="h4 font-semibold">Team Settings</h3>
-            </header>
-
-            <section class="p-4 space-y-3">
-                <div class="flex flex-col gap-2 lg:gap-3">
-                    <TeamEditButton club={data.team?.expand?.club} team={data.team} classes="variant-ghost-surface"/>
-                </div>
-            </section>
-
-            <footer class="card-footer mt-2">
-                <div class="flex flex-col gap-2 lg:gap-3 rounded-token variant-ringed-error px-2 py-3">
-                    <header class="mx-2">Danger Zone</header>
-
-                    <DeleteButton
-                            id={data.team.id}
-                            modelName="Team"
-                            action={teamDeleteAction}
-                            classes="variant-ghost-error mx-1"
-                            buttonText="Delete Team"
-                    />
-                </div>
-            </footer>
-        </div>
-    </div>
+    <TeamAdminSection team={data.team}/>
 {/if}
-
-<style lang="postcss">
-    .admin-card {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-</style>
