@@ -21,7 +21,7 @@
         <header class="card-header">
             <h2>
                 <EventTypeBadge type={event.type}/>
-                <span class="ms-1 font-medium h4">{event?.title}</span>
+                <span class="ms-1 font-bold h5">{event?.title}</span>
             </h2>
         </header>
 

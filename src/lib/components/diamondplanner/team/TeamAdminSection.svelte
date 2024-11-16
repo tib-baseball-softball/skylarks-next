@@ -2,10 +2,17 @@
   import TeamEditButton from "$lib/components/team/TeamEditButton.svelte";
   import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
   import {CalendarPlusOutline} from "flowbite-svelte-icons";
-  import {type DrawerSettings, getDrawerStore} from "@skeletonlabs/skeleton";
+  import {
+    type DrawerSettings,
+    getDrawerStore,
+    getModalStore,
+    type ModalComponent,
+    type ModalSettings
+  } from "@skeletonlabs/skeleton";
   import {goto, invalidateAll} from "$app/navigation";
   import {client} from "$lib/pocketbase/index.svelte";
   import type {ExpandedTeam} from "$lib/model/ExpandedResponse";
+  import TeamGamesModal from "$lib/components/forms/TeamGamesModal.svelte";
 
   interface Props {
     team: ExpandedTeam
@@ -14,6 +21,8 @@
   let {team}: Props = $props()
 
   const drawerStore = getDrawerStore();
+  const modalStore = getModalStore();
+
   const singleEventSettings: DrawerSettings = $derived({
     id: "event-form",
     position: "right",
@@ -29,6 +38,19 @@
     goto(`/account`)
     client.collection("teams").delete(id)
     invalidateAll()
+  }
+
+  function triggerModal() {
+    const modalComponent: ModalComponent = {
+      ref: TeamGamesModal,
+      props: {team: team},
+    };
+
+    const modal: ModalSettings = {
+      type: "component",
+      component: modalComponent,
+    };
+    modalStore.trigger(modal);
   }
 </script>
 
@@ -53,7 +75,7 @@
         </div>
         <footer class="card-footer">
             <div class="flex flex-col gap-2 lg:gap-3">
-                <button class="btn variant-ghost-primary">
+                <button class="btn variant-ghost-primary" onclick={() => triggerModal()}>
                     <CalendarPlusOutline/>
                     <span>Setup Games Import</span>
                 </button>

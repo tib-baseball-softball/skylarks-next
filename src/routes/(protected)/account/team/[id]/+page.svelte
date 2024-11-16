@@ -116,7 +116,7 @@
     </div>
 </section>
 
-{#if data.team.admins.includes(authModel?.id)}
+{#if data.team.admins.includes(authModel?.id) || data.team?.expand?.club?.admins.includes(authModel?.id)}
     <hr class="my-2"/>
 
     <TeamAdminSection team={data.team}/>
