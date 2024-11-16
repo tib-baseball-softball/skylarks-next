@@ -1131,11 +1131,11 @@
   },
   {
     "id": "zyst8ardf4onbwz",
-    "listRule": "@request.auth.id != \"\" && team.id ?~ @request.auth.teams.id",
-    "viewRule": "@request.auth.id != \"\" && team.id ?~ @request.auth.teams.id",
-    "createRule": "@request.auth.id != \"\" && team.admins ?~ @request.auth.id",
-    "updateRule": "@request.auth.id != \"\" && team.admins ?~ @request.auth.id",
-    "deleteRule": "@request.auth.id != \"\" && team.admins ?~ @request.auth.id",
+    "listRule": "@request.auth.id != \"\" && \n(team.id ?~ @request.auth.teams.id || team.club.admins ?~ @request.auth.id)",
+    "viewRule": "@request.auth.id != \"\" && \n(team.id ?~ @request.auth.teams.id || team.club.admins ?~ @request.auth.id)",
+    "createRule": "@request.auth.id != \"\" && \n(team.admins ?~ @request.auth.id || team.club.admins ?~ @request.auth.id)",
+    "updateRule": "@request.auth.id != \"\" && \n(team.admins ?~ @request.auth.id || team.club.admins ?~ @request.auth.id)",
+    "deleteRule": "@request.auth.id != \"\" && \n(team.admins ?~ @request.auth.id || team.club.admins ?~ @request.auth.id)",
     "name": "events",
     "type": "base",
     "fields": [
