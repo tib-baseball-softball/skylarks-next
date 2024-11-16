@@ -1,6 +1,7 @@
 package cronjobs
 
 import (
+	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
@@ -13,12 +14,14 @@ import (
 // ImportLeagueGroups imports league groups concurrently, either for one given club or all clubs in the database.
 func ImportLeagueGroups(app *pocketbase.PocketBase, clubID *string, season *int) (err error) {
 	filter := "bsm_id != 0"
+	params := dbx.Params{}
 
 	if clubID != nil {
-		filter = filter + " && id = '" + *clubID + "'"
+		filter = filter + " && id = {:clubID}"
+		params["clubID"] = *clubID
 	}
 
-	clubs, err := app.FindRecordsByFilter("clubs", filter, "", 0, 0)
+	clubs, err := app.FindRecordsByFilter("clubs", filter, "", 0, 0, params)
 	if err != nil {
 		return err
 	}

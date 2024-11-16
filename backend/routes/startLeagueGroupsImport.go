@@ -27,13 +27,13 @@ func StartLeagueGroupsImport(app *pocketbase.PocketBase) func(event *core.Reques
 			return apis.NewUnauthorizedError("only club admins can start league imports", nil)
 		}
 
-		err = cronjobs.ImportLeagueGroups(app, &clubID, nil)
+		err = cronjobs.ImportLeagueGroups(app, &club.Id, nil)
 		if err != nil {
 			return err
 		}
 
 		response := struct{ message string }{
-			"import cron for club ID " + clubID + " has been run successfully",
+			"import cron for club ID " + club.Id + " has been run successfully",
 		}
 		return event.JSON(http.StatusOK, response)
 	}
