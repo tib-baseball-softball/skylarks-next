@@ -1,9 +1,10 @@
 <script lang="ts">
   import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
   import {Avatar, getModalStore, type ModalComponent, type ModalSettings} from "@skeletonlabs/skeleton";
-  import {EnvelopeOutline, UserEditOutline, UserOutline} from "flowbite-svelte-icons";
+  import {EnvelopeOutline, UserEditOutline, UserOutline, EditOutline} from "flowbite-svelte-icons";
   import {client} from "$lib/pocketbase/index.svelte";
   import UserDetailsForm from "$lib/auth/UserDetailsForm.svelte";
+  import ChangeEmailForm from "$lib/auth/ChangeEmailForm.svelte";
 
   interface props {
     model: CustomAuthModel
@@ -13,9 +14,22 @@
 
   const modalStore = getModalStore();
 
-  function triggerModal() {
+  function triggerDetailsModal() {
     const modalComponent: ModalComponent = {
       ref: UserDetailsForm,
+      props: {},
+    };
+
+    const modal: ModalSettings = {
+      type: "component",
+      component: modalComponent,
+    };
+    modalStore.trigger(modal);
+  }
+
+  function triggerEmailChangeModal() {
+    const modalComponent: ModalComponent = {
+      ref: ChangeEmailForm,
       props: {},
     };
 
@@ -54,8 +68,14 @@
         </div>
     </section>
 
-    <footer class="card-footer flex justify-end">
-        <button aria-label="edit user data" class="btn variant-ghost-primary" onclick="{() => triggerModal()}">
+    <footer class="card-footer flex justify-end gap-2">
+        <button aria-label="change email address" class="btn variant-ghost-secondary"
+                onclick="{() => triggerEmailChangeModal()}">
+            <EditOutline/>
+            <EnvelopeOutline/>
+        </button>
+
+        <button aria-label="edit user data" class="btn variant-ghost-primary" onclick="{() => triggerDetailsModal()}">
             <UserEditOutline/>
         </button>
     </footer>

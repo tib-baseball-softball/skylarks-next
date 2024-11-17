@@ -14,7 +14,6 @@
 
   const form = $state({
     id: model.id,
-    email: model.email,
     firstName: model.first_name,
     lastName: model.last_name,
   });
@@ -26,7 +25,6 @@
     const formData = new FormData();
 
     formData.append("id", form.id);
-    formData.append("email", form.email);
 
     if (form.firstName) {
       formData.append("first_name", form.firstName);
@@ -66,17 +64,6 @@
                 readonly
                 bind:value={form.id}
         />
-
-        <label class="label">
-            E-Mail
-            <input
-                    name="email"
-                    class="input"
-                    bind:value={form.email}
-                    required
-                    type="email"
-            />
-        </label>
 
         <label class="label">
             First Name(s)
