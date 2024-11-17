@@ -43,16 +43,27 @@
   }
 
   async function loadClubLeagueGroups() {
-    leagueGroups = await client
+    const RELOAD_DELAY = 15000 // 15 seconds
+    const loadLeagueGroups = client
         .collection("leaguegroups")
-        .getFullList({
+        .getFullList<LeaguegroupsResponse>({
           filter: `season = '${season}' && clubs ?~ '${team.club}'`,
           query: {
             // adding those parameters triggers a hook to load league groups from BSM if response is empty
             season: season,
             club: team.club
           }
-        })
+        });
+
+    leagueGroups = await loadLeagueGroups
+
+    // give the backend hook some time to get the requested LeagueGroups and try again
+    if (leagueGroups.length === 0) {
+      setTimeout(async () => {
+            leagueGroups = await loadLeagueGroups
+          }, RELOAD_DELAY
+      )
+    }
   }
 
   async function submitForm(e: SubmitEvent) {
