@@ -1,8 +1,10 @@
 <script lang="ts">
-  import {getToastStore, Tab, TabGroup, type ToastSettings} from "@skeletonlabs/skeleton";
+  import {getToastStore, SlideToggle, Tab, TabGroup, type ToastSettings} from "@skeletonlabs/skeleton";
   import {client} from "../pocketbase/index.svelte";
   import {goto} from "$app/navigation";
   import OAuthProviderButton from "$lib/auth/OAuthProviderButton.svelte";
+  import PasswordRequestButton from "$lib/auth/PasswordRequestButton.svelte";
+  import {slide, fade} from "svelte/transition";
 
   const {
     authCollection = "users",
@@ -61,30 +63,56 @@
   }
 
   let tabSet = $state(0);
+  let forgotPassword = $state(false)
 </script>
 
 {#snippet signin()}
     <label class="label">
         <span class="">Your email</span>
-        <input class="input" bind:value={form.email} required type="text" placeholder="name@provider.com"/>
+        <input class="input" bind:value={form.email} required type="email" placeholder="name@provider.com"/>
     </label>
 
-    <label class="label">
-        <span class="">Your password</span>
-        <input
-                bind:value={form.password}
-                class="input"
-                required
-                type="password"
-                placeholder="**********"
-                minlength="8"
-                maxlength="72"
-        />
-    </label>
+    {#if !forgotPassword}
+        <label class="label" transition:slide>
+            <span class="">Your password</span>
+            <input
+                    bind:value={form.password}
+                    class="input"
+                    required
+                    type="password"
+                    placeholder="**********"
+                    minlength="8"
+                    maxlength="72"
+            />
+        </label>
 
-    <button class="btn mt-2 variant-ghost-primary" type="submit" onclick={() => (signup = false)}>
-        Login to your account
-    </button>
+        <button
+                transition:slide
+                class="btn mt-2 variant-ghost-primary"
+                type="submit"
+                onclick={() => (signup = false)}
+                disabled={form.email === "" || form.password === ""}
+        >
+            Login to your account
+        </button>
+    {/if}
+
+    <div class="block md:flex gap-6 items-center justify-start my-6">
+        <SlideToggle size="sm" name="forgot password" bind:checked={forgotPassword}>Forgot Password?</SlideToggle>
+
+        {#if forgotPassword}
+            <div class="mt-2 md:mt-0" transition:fade>
+                <PasswordRequestButton
+                        email={form.email}
+                        additionalAction={parent.onClose}
+                        disabled={form.email === ""}
+                        classes="btn anchor p-0"
+                >
+                    Reset Password
+                </PasswordRequestButton>
+            </div>
+        {/if}
+    </div>
 {/snippet}
 
 <div class="w-modal">
@@ -167,8 +195,12 @@
 
                                 <input type="hidden" name="register" value={true}/>
 
-                                <button class="btn variant-ghost-primary my-2" type="submit"
-                                        onclick={() => (signup = true)}>
+                                <button
+                                        class="btn variant-ghost-primary my-2"
+                                        type="submit"
+                                        onclick={() => (signup = true)}
+                                        disabled={form.email === "" || form.password === "" || form.passwordConfirm === "" || form.signup_key === ""}
+                                >
                                     Register new account
                                 </button>
                             {/if}

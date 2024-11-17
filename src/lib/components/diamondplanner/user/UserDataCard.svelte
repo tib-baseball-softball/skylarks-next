@@ -1,10 +1,15 @@
 <script lang="ts">
   import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
-  import {Avatar, getModalStore, type ModalComponent, type ModalSettings} from "@skeletonlabs/skeleton";
-  import {EnvelopeOutline, UserEditOutline, UserOutline, EditOutline} from "flowbite-svelte-icons";
+  import {
+    Avatar,
+    getModalStore, type ModalComponent,
+    type ModalSettings
+  } from "@skeletonlabs/skeleton";
+  import {EnvelopeOutline, UserOutline, EditOutline, LockOutline} from "flowbite-svelte-icons";
   import {client} from "$lib/pocketbase/index.svelte";
   import UserDetailsForm from "$lib/auth/UserDetailsForm.svelte";
   import ChangeEmailForm from "$lib/auth/ChangeEmailForm.svelte";
+  import PasswordRequestButton from "$lib/auth/PasswordRequestButton.svelte";
 
   interface props {
     model: CustomAuthModel
@@ -69,6 +74,11 @@
     </section>
 
     <footer class="card-footer flex justify-end gap-2">
+        <PasswordRequestButton email={model.email} classes="btn variant-ghost-secondary">
+            <EditOutline/>
+            <LockOutline/>
+        </PasswordRequestButton>
+
         <button aria-label="change email address" class="btn variant-ghost-secondary"
                 onclick="{() => triggerEmailChangeModal()}">
             <EditOutline/>
@@ -76,7 +86,8 @@
         </button>
 
         <button aria-label="edit user data" class="btn variant-ghost-primary" onclick="{() => triggerDetailsModal()}">
-            <UserEditOutline/>
+            <EditOutline/>
+            <UserOutline/>
         </button>
     </footer>
 </div>
