@@ -164,7 +164,7 @@
         </section>
     {/if}
 
-    {#if $event.expand?.team?.admins.includes(authRecord.id)}
+    {#if $event.expand?.team?.admins.includes(authRecord.id) || $event?.expand?.team?.expand?.club?.admins.includes(authRecord.id)}
         <hr class="my-2"/>
 
         <h2 class="h2">Admin Section</h2>
