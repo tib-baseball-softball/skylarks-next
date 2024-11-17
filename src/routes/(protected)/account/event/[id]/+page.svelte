@@ -16,6 +16,7 @@
   import CloseOutline from "flowbite-svelte-icons/CloseOutline.svelte";
   import {type DrawerSettings, getDrawerStore,} from "@skeletonlabs/skeleton";
   import {authSettings} from "$lib/pocketbase/index.svelte";
+  import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
 
   const drawerStore = getDrawerStore();
 
@@ -54,6 +55,9 @@
         return participation.state === "out";
       }),
   );
+
+  const authRecord = authSettings.record as CustomAuthModel
+  const canParticipate = $derived(authRecord.teams.includes($event.team))
 </script>
 
 <div class="event-container">
@@ -92,7 +96,14 @@
 
         <div class="flex justify-between items-center">
             <h2 class="h3">My Participation</h2>
-            <EventParticipationSection event={$event}/>
+
+            {#if canParticipate}
+                <EventParticipationSection event={$event}/>
+            {:else}
+                <div class="flex justify-end">
+                    <p>Only team members can participate in events.</p>
+                </div>
+            {/if}
         </div>
 
         <hr class="my-8"/>
@@ -153,7 +164,7 @@
         </section>
     {/if}
 
-    {#if $event.expand?.team?.admins.includes(authSettings?.record?.id)}
+    {#if $event.expand?.team?.admins.includes(authRecord.id)}
         <hr class="my-2"/>
 
         <h2 class="h2">Admin Section</h2>

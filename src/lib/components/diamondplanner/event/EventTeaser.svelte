@@ -1,16 +1,22 @@
 <script lang="ts">
   import EventTypeBadge from "$lib/components/diamondplanner/event/EventTypeBadge.svelte";
-  import type {ExpandedEvent} from "$lib/model/ExpandedResponse";
+  import type {CustomAuthModel, ExpandedEvent} from "$lib/model/ExpandedResponse";
   import EventCoreInfo from "./EventCoreInfo.svelte";
   import EventParticipationSection from "./EventParticipationSection.svelte";
   import {CloseOutline} from "flowbite-svelte-icons";
+  import {authSettings} from "$lib/pocketbase/index.svelte";
 
   interface props {
-    event: ExpandedEvent;
-    link: boolean;
+    event: ExpandedEvent
+    link: boolean
   }
 
   const {event, link}: props = $props();
+
+  const authRecord = authSettings.record as CustomAuthModel
+
+  // club admins can see the team and change settings, but not participate
+  const canParticipate = $derived(authRecord.teams.includes(event.team))
 </script>
 
 <article
@@ -38,7 +44,13 @@
                 </span>
             </div>
         {:else}
-            <EventParticipationSection {event}/>
+            {#if canParticipate}
+                <EventParticipationSection {event}/>
+            {:else}
+                <div class="flex justify-end">
+                    <p>Only team members can participate in events.</p>
+                </div>
+            {/if}
         {/if}
     </footer>
 </article>
