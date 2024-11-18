@@ -45,3 +45,4 @@ export type CustomAuthModel = Extension<AuthRecord, {
 } & UsersResponse>
 
 export type EventType = EventsResponse['type']
+export type ParticipationType = ParticipationsResponse['state']
