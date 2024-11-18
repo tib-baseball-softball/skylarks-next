@@ -66,6 +66,12 @@ func main() {
 		return se.Next()
 	})
 
+	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
+		se.Router.GET("/api/stats/{user}", routes.GetUserStats())
+
+		return se.Next()
+	})
+
 	//------------------- Commands -------------------------//
 
 	app.RootCmd.AddCommand(&cobra.Command{
