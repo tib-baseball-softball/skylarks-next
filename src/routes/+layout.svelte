@@ -141,7 +141,7 @@
 
     <!-- Grid Column -->
 
-    <div class="container grid grid-cols-1 md:grid-cols-[auto_1fr_auto]">
+    <div class="container grid grid-cols-1 md:grid-cols-[auto_1fr]">
 
         <!-- Sidebar (Left) -->
         <aside
