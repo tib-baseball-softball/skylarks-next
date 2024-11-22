@@ -1,7 +1,6 @@
 package stats
 
 import (
-	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/tib-baseball-softball/skylarks-next/enum"
 	"strconv"
@@ -50,28 +49,6 @@ func LoadUserStats(user *core.Record, requestEvent *core.RequestEvent) (Personal
 		Total:    eventCounts.Misc,
 	}
 
-	var participations []ParticipationByPerson
-
-	query := requestEvent.App.DB().
-		Select(
-			"users.id",
-			"users.last_name",
-			"users.first_name",
-			"events.type",
-			"COUNT(CASE WHEN participations.state = 'in' THEN participations.id END)    AS inCount",
-			"COUNT(CASE WHEN participations.state = 'out' THEN participations.id END)   AS outCount",
-			"COUNT(CASE WHEN participations.state = 'maybe' THEN participations.id END) AS maybeCount",
-			"COUNT(participations.id)",
-		).
-		From("users").
-		LeftJoin("participations", dbx.NewExp("participations.user = users.id")).
-		InnerJoin("events", dbx.NewExp("participations.event = events.id")).
-		GroupBy("users.id", "users.first_name", "users.last_name", "events.type")
-
-	if user.Id != "" {
-		query.AndWhere(dbx.NewExp("users.id = {:id}", dbx.Params{"id": user.Id}))
-	}
-
 	if seasonParam != "" {
 		season, err := strconv.Atoi(seasonParam)
 		if err != nil {
@@ -79,8 +56,6 @@ func LoadUserStats(user *core.Record, requestEvent *core.RequestEvent) (Personal
 			return statsItem, err
 		}
 		statsItem.Season = season
-
-		query.AndWhere(dbx.NewExp("strftime('%Y', events.starttime) = {:season}", dbx.Params{"season": seasonParam}))
 	}
 
 	if eventTypeParam != "" {
@@ -90,13 +65,10 @@ func LoadUserStats(user *core.Record, requestEvent *core.RequestEvent) (Personal
 			return statsItem, err
 		}
 		statsItem.Type = eventType
-
-		query.AndWhere(dbx.NewExp("events.type = {:eventType}", dbx.Params{"eventType": eventTypeParam}))
 	}
 
-	err = query.All(&participations)
+	participations, err := GetParticipationStats(user, requestEvent.App, seasonParam, eventTypeParam, err)
 	if err != nil {
-		requestEvent.App.Logger().Error("failed to load participations: %v", err)
 		return statsItem, err
 	}
 	// query can only get the totals for which participation data exists,
