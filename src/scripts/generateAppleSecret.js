@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 // @ts-nocheck
 import PocketBase from 'pocketbase';
 import dotenv from 'dotenv';
@@ -26,12 +28,13 @@ async function authenticateAndGenerateSecret() {
     }
 
     try {
-        await pb.admins.authWithPassword(adminEmail, adminPassword);
+        await pb.collection("_superusers").authWithPassword(adminEmail, adminPassword);
         console.log('Authenticated successfully!');
 
         const secret = await pb.settings.generateAppleClientSecret(
             clientId,
             teamId,
+
             keyId,
             privateKey,
             duration
