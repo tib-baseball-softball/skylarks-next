@@ -11,6 +11,7 @@ type PersonalAttendanceStatsItem struct {
 	ParticipationTotals []ParticipationTotal         `json:"participationTotals"`
 	Type                enum.EventType               `json:"type"`
 	Values              []ParticipationStatsByPerson `json:"values"`
+	TeamName            string                       `json:"teamName"`
 }
 
 type AttendanceTotal struct {

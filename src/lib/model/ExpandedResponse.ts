@@ -1,4 +1,4 @@
-import type {AuthRecord} from "pocketbase"
+import type {RecordModel} from "pocketbase"
 import type {
   ClubsResponse,
   EventsResponse,
@@ -40,7 +40,7 @@ export type ExpandedUniformSet = Extension<UniformsetsResponse, {
   }
 }>
 
-export type CustomAuthModel = Extension<AuthRecord, {
+export type CustomAuthModel = Extension<RecordModel, {
   email?: string,
 } & UsersResponse>
 

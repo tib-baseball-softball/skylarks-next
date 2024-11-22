@@ -11,6 +11,17 @@ func LoadUserStats(user *core.Record, requestEvent *core.RequestEvent) (Personal
 	statsItem := PersonalAttendanceStatsItem{}
 	seasonParam := requestEvent.Request.URL.Query().Get("season")
 	eventTypeParam := requestEvent.Request.URL.Query().Get("eventType")
+	teamParam := requestEvent.Request.URL.Query().Get("team")
+
+	if teamParam != "" {
+		team, err := requestEvent.App.FindRecordById("teams", teamParam, nil)
+		if err != nil {
+			return statsItem, err
+		}
+		statsItem.TeamName = team.GetString("name")
+	} else {
+		statsItem.TeamName = "All Teams"
+	}
 
 	if seasonParam != "" {
 		season, err := strconv.Atoi(seasonParam)
@@ -30,7 +41,7 @@ func LoadUserStats(user *core.Record, requestEvent *core.RequestEvent) (Personal
 		statsItem.Type = eventType
 	}
 
-	eventCounts, err := GetEventCounts(requestEvent.App, user, seasonParam)
+	eventCounts, err := GetEventCounts(requestEvent.App, user, seasonParam, teamParam)
 	if err != nil {
 		requestEvent.App.Logger().Error("failed to get eventCounts: %v", err)
 		return statsItem, err
@@ -67,7 +78,7 @@ func LoadUserStats(user *core.Record, requestEvent *core.RequestEvent) (Personal
 		Total:    eventCounts.Misc,
 	}
 
-	participations, err := GetParticipationStats(user, requestEvent.App, seasonParam, eventTypeParam, err)
+	participations, err := GetParticipationStats(user, requestEvent.App, seasonParam, eventTypeParam, teamParam)
 	if err != nil {
 		return statsItem, err
 	}

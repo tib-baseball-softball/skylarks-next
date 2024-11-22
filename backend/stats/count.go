@@ -16,7 +16,7 @@ type EventCounts struct {
 	AllEvents int `db:"all_events"`
 }
 
-func GetEventCounts(app core.App, user *core.Record, season string) (EventCounts, error) {
+func GetEventCounts(app core.App, user *core.Record, season string, team string) (EventCounts, error) {
 	result := EventCounts{}
 	query := app.DB().
 		Select(
@@ -38,6 +38,10 @@ func GetEventCounts(app core.App, user *core.Record, season string) (EventCounts
 
 	if season != "" {
 		query.AndWhere(dbx.NewExp("strftime('%Y', events.starttime) = {:season}", dbx.Params{"season": season}))
+	}
+
+	if team != "" {
+		query.AndWhere(dbx.NewExp("events.team = {:team}", dbx.Params{"team": team}))
 	}
 
 	err := query.One(&result)

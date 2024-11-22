@@ -16,7 +16,7 @@ type ParticipationStatsByPerson struct {
 	TotalCount int    `db:"TotalCount" json:"totalCount"`
 }
 
-func GetParticipationStats(user *core.Record, app core.App, seasonParam string, eventTypeParam string, err error) ([]ParticipationStatsByPerson, error) {
+func GetParticipationStats(user *core.Record, app core.App, seasonParam string, eventTypeParam string, team string) ([]ParticipationStatsByPerson, error) {
 	var participations []ParticipationStatsByPerson
 
 	query := app.DB().
@@ -47,7 +47,11 @@ func GetParticipationStats(user *core.Record, app core.App, seasonParam string, 
 		query.AndWhere(dbx.NewExp("events.type = {:eventType}", dbx.Params{"eventType": eventTypeParam}))
 	}
 
-	err = query.All(&participations)
+	if team != "" {
+		query.AndWhere(dbx.NewExp("events.team = {:team}", dbx.Params{"team": team}))
+	}
+
+	err := query.All(&participations)
 	if err != nil {
 		app.Logger().Error("failed to load participations: %v", err)
 		return participations, err

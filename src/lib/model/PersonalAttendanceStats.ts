@@ -4,10 +4,13 @@ export interface PersonalAttendanceStatsItem {
   season: number
   attendanceTotals: AttendanceTotal[]
   participationTotals: ParticipationTotal[]
-  totalPossibleEvents: number
+  totalPossibleEvents: number,
+  type: EventType,
+  values: ParticipationStatsByPerson[]
+  teamName: string
 }
 
-export type ParticipationByPerson = {
+export type ParticipationStatsByPerson = {
   id: string;
   lastName: string;
   firstName: string;
