@@ -4,125 +4,129 @@ import (
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/tib-baseball-softball/skylarks-next/enum"
-	"github.com/tib-baseball-softball/skylarks-next/model"
-	"github.com/tib-baseball-softball/skylarks-next/utility"
 	"strconv"
 )
 
 // LoadUserStats gets participation stats by event type and participation state
-func LoadUserStats(user *core.Record, requestEvent *core.RequestEvent) (model.PersonalAttendanceStatsItem, error) {
-	statsItem := model.PersonalAttendanceStatsItem{}
-	seasonParam := requestEvent.Request.URL.Query().Get("seasonParam")
+func LoadUserStats(user *core.Record, requestEvent *core.RequestEvent) (PersonalAttendanceStatsItem, error) {
+	statsItem := PersonalAttendanceStatsItem{}
+	seasonParam := requestEvent.Request.URL.Query().Get("season")
+	eventTypeParam := requestEvent.Request.URL.Query().Get("eventType")
 
-	filter := "user = {:user}"
-	var start string
-	var end string
-
-	if seasonParam != "" {
-		season, err := strconv.Atoi(seasonParam)
-		if err != nil {
-			return statsItem, err
-		}
-		statsItem.Season = season
-
-		start, end = utility.YearStartAndEnd(season)
-		filter = filter + " && created >= {:start} && created <= {:end}"
-	}
-
-	participations, err := requestEvent.App.FindRecordsByFilter(
-		"participations",
-		filter,
-		"",
-		0,
-		0,
-		dbx.Params{
-			"user":  user.Id,
-			"start": start,
-			"end":   end,
-		},
-	)
+	eventCounts, err := GetEventCounts(requestEvent.App, user)
 	if err != nil {
+		requestEvent.App.Logger().Error("failed to get eventCounts: %v", err)
 		return statsItem, err
 	}
+	statsItem.TotalPossibleEvents = eventCounts.AllEvents
 
-	if errs := requestEvent.App.ExpandRecords(participations, []string{"event"}, nil); len(errs) > 0 {
-		requestEvent.App.Logger().Error("failed to expand records: %v", errs)
-	}
-	statsItem.TotalPossibleEvents = len(participations)
-
-	totalsIn := model.ParticipationTotal{
+	// data structure for frontend
+	totalsIn := ParticipationTotal{
 		Type:   enum.In,
 		Amount: 0,
 	}
-	totalsMaybe := model.ParticipationTotal{
+	totalsMaybe := ParticipationTotal{
 		Type:   enum.Maybe,
 		Amount: 0,
 	}
-	totalsOut := model.ParticipationTotal{
+	totalsOut := ParticipationTotal{
 		Type:   enum.Out,
 		Amount: 0,
 	}
 
-	totalsGames := model.AttendanceTotal{
+	totalsGames := AttendanceTotal{
 		Type:     enum.Game,
 		Attended: 0,
-		Total:    0,
+		Total:    eventCounts.Games,
 	}
-	totalsPractice := model.AttendanceTotal{
+	totalsPractice := AttendanceTotal{
 		Type:     enum.Practice,
 		Attended: 0,
-		Total:    0,
+		Total:    eventCounts.Practices,
 	}
-	totalsMisc := model.AttendanceTotal{
+	totalsMisc := AttendanceTotal{
 		Type:     enum.Misc,
 		Attended: 0,
-		Total:    0,
+		Total:    eventCounts.Misc,
 	}
 
-	for _, participation := range participations {
-		// raw participation states
-		state := participation.GetString("state")
-		switch state {
-		case string(enum.In):
-			totalsIn.Amount++
-		case string(enum.Maybe):
-			totalsMaybe.Amount++
-		case string(enum.Out):
-			totalsOut.Amount++
-		}
-		// attendance by type
-		event := participation.ExpandedOne("event")
-		if event == nil {
-			requestEvent.App.Logger().Error("failed to expand records: no event", "event", event)
-			continue
-		}
-		eventType, err := enum.ParseEventType(event.GetString("type"))
-		if err != nil {
-			requestEvent.App.Logger().Error("failed to expand records: invalid event type", "eventType", eventType)
-			continue
-		}
+	var participations []ParticipationByPerson
 
+	query := requestEvent.App.DB().
+		Select(
+			"users.id",
+			"users.last_name",
+			"users.first_name",
+			"events.type",
+			"COUNT(CASE WHEN participations.state = 'in' THEN participations.id END)    AS inCount",
+			"COUNT(CASE WHEN participations.state = 'out' THEN participations.id END)   AS outCount",
+			"COUNT(CASE WHEN participations.state = 'maybe' THEN participations.id END) AS maybeCount",
+			"COUNT(participations.id)",
+		).
+		From("users").
+		LeftJoin("participations", dbx.NewExp("participations.user = users.id")).
+		InnerJoin("events", dbx.NewExp("participations.event = events.id")).
+		GroupBy("users.id", "users.first_name", "users.last_name", "events.type")
+
+	if user.Id != "" {
+		query.AndWhere(dbx.NewExp("users.id = {:id}", dbx.Params{"id": user.Id}))
+	}
+
+	if seasonParam != "" {
+		season, err := strconv.Atoi(seasonParam)
+		if err != nil {
+			requestEvent.App.Logger().Error("failed to parse season: %v", err)
+			return statsItem, err
+		}
+		statsItem.Season = season
+
+		query.AndWhere(dbx.NewExp("strftime('%Y', events.starttime) = {:season}", dbx.Params{"season": seasonParam}))
+	}
+
+	if eventTypeParam != "" {
+		eventType, err := enum.ParseEventType(eventTypeParam)
+		if err != nil {
+			requestEvent.App.Logger().Error("failed to parse eventType: %v", err)
+			return statsItem, err
+		}
+		statsItem.Type = eventType
+
+		query.AndWhere(dbx.NewExp("events.type = {:eventType}", dbx.Params{"eventType": eventTypeParam}))
+	}
+
+	err = query.All(&participations)
+	if err != nil {
+		requestEvent.App.Logger().Error("failed to load participations: %v", err)
+		return statsItem, err
+	}
+	// query can only get the totals for which participation data exists,
+	// add raw possible totals from previous query
+	for i, participation := range participations {
+		eventType, err := enum.ParseEventType(participation.Type)
+		if err != nil {
+			requestEvent.App.Logger().Error("failed to parse eventType: %v", err)
+			return statsItem, err
+		}
 		switch eventType {
 		case enum.Game:
-			totalsGames.Total++
-			if state == string(enum.In) {
-				totalsGames.Attended++
-			}
+			participations[i].TotalCount = eventCounts.Games
+			totalsGames.Attended = participation.InCount
 		case enum.Practice:
-			totalsPractice.Total++
-			if state == string(enum.In) {
-				totalsPractice.Attended++
-			}
+			participations[i].TotalCount = eventCounts.Practices
+			totalsPractice.Attended = participation.InCount
 		case enum.Misc:
-			totalsMisc.Total++
-			if state == string(enum.In) {
-				totalsMisc.Attended++
-			}
+			participations[i].TotalCount = eventCounts.Misc
+			totalsMisc.Attended = participation.InCount
 		}
+
+		totalsIn.Amount = totalsIn.Amount + participation.InCount
+		totalsMaybe.Amount = totalsMaybe.Amount + participation.MaybeCount
+		totalsOut.Amount = totalsOut.Amount + participation.OutCount
 	}
 
 	statsItem.ParticipationTotals = append(statsItem.ParticipationTotals, totalsIn, totalsMaybe, totalsOut)
 	statsItem.AttendanceTotals = append(statsItem.AttendanceTotals, totalsPractice, totalsMisc, totalsGames)
+	statsItem.Values = append(statsItem.Values, participations...)
 
 	return statsItem, nil
 }

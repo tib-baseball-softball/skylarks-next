@@ -7,6 +7,17 @@ export interface PersonalAttendanceStatsItem {
   totalPossibleEvents: number
 }
 
+export type ParticipationByPerson = {
+  id: string;
+  lastName: string;
+  firstName: string;
+  type: Exclude<EventType, "">;
+  inCount: number;
+  outCount: number;
+  maybeCount: number;
+  totalCount: number;
+}
+
 export interface AttendanceTotal {
   type: EventType
   attended: number

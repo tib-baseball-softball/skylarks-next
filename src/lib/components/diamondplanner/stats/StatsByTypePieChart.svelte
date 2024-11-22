@@ -18,17 +18,21 @@
   };
 
   function mapToConicStops(participationTotals: ParticipationTotal[]): ConicStop[] {
-    const totalAmount = participationTotals.reduce((sum, p) => sum + p.amount, 0);
+    let totalAmount = statsItem.totalPossibleEvents;
+    if (!totalAmount) {
+      totalAmount = 1 // don't divide by zero
+    }
 
     let currentStart = 0;
-    return participationTotals.map((p) => {
+    return participationTotals.map((p, i) => {
       const percentage = (p.amount / totalAmount) * 100;
       const conicStop: ConicStop = {
         label: capitalize(p.type),
         color: PARTICIPATION_COLORS[p.type],
         start: currentStart,
-        end: currentStart + percentage,
+        end: i === participationTotals.length - 1 ? 100 : currentStart + percentage,
       };
+
       currentStart = conicStop.end;
       return conicStop;
     });
