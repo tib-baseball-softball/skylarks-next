@@ -5,6 +5,7 @@ import (
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/apis"
 	"github.com/pocketbase/pocketbase/core"
+	"github.com/tib-baseball-softball/skylarks-next/stats"
 	"net/http"
 	"slices"
 )
@@ -31,22 +32,27 @@ func GetGamesCount(app *pocketbase.PocketBase) func(e *core.RequestEvent) error 
 			return apis.NewBadRequestError("query param for season is required", nil)
 		}
 
-		type Result struct {
-			Count int `json:"count" db:"count"`
-		}
-		result := Result{}
-		err := app.DB().
-			Select("COUNT(events.id) AS count").
-			From("events").
-			Where(dbx.NewExp("bsm_id != 0")).
-			AndWhere(dbx.NewExp("team = {:team}", dbx.Params{"team": teamID})).
-			AndWhere(dbx.NewExp("strftime('%Y', events.starttime) = {:season}", dbx.Params{"season": season})).
-			One(&result)
-
+		result, err := LoadCount(app, teamID, season)
 		if err != nil {
 			return apis.NewInternalServerError("Error querying event", err)
 		}
 
 		return e.JSON(http.StatusOK, result)
 	}
+}
+
+func LoadCount(app *pocketbase.PocketBase, teamID string, season string) (stats.SimpleCount, error) {
+	result := stats.SimpleCount{}
+	err := app.DB().
+		Select("COUNT(events.id) AS count").
+		From("events").
+		Where(dbx.NewExp("bsm_id != 0")).
+		AndWhere(dbx.NewExp("team = {:team}", dbx.Params{"team": teamID})).
+		AndWhere(dbx.NewExp("strftime('%Y', events.starttime) = {:season}", dbx.Params{"season": season})).
+		One(&result)
+
+	if err != nil {
+		return result, err
+	}
+	return result, nil
 }
