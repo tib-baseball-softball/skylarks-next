@@ -86,7 +86,7 @@
     </div>
 
     {#if $event.expand.attire}
-        <section>
+        <section class="mt-3 lg:mt-5">
             <EventAttireSection attire={$event.expand.attire}/>
         </section>
     {/if}
@@ -165,7 +165,7 @@
     {/if}
 
     {#if $event.expand?.team?.admins.includes(authRecord.id) || $event?.expand?.team?.expand?.club?.admins.includes(authRecord.id)}
-        <hr class="my-2"/>
+        <hr class="mt-6"/>
 
         <h2 class="h2">Admin Section</h2>
 
@@ -221,8 +221,7 @@
                                     placeholder="Enter the guest player's name"
                             />
                         </label>
-                        <button type="submit" class="mt-3 btn variant-soft"
-                        >Submit
+                        <button type="submit" class="mt-3 btn variant-soft">Submit
                         </button
                         >
                     </form>
@@ -258,5 +257,9 @@
 <style lang="postcss">
     .event-container {
         @apply space-y-4 lg:space-y-6 xl:space-y-7;
+    }
+
+    h2, h3 {
+        @apply my-3
     }
 </style>
