@@ -8,6 +8,8 @@
   import {RadioGroup, RadioItem,} from "@skeletonlabs/skeleton";
   import {authSettings} from "$lib/pocketbase/index.svelte";
   import TeamAdminSection from "$lib/components/diamondplanner/team/TeamAdminSection.svelte";
+  import {cubicOut} from "svelte/easing";
+  import {fly} from "svelte/transition";
 
   let {data} = $props();
   const events = $derived(data.events);
@@ -90,8 +92,12 @@
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 lg:gap-4 2xl:gap-5">
-    {#each $events.items as event}
-        <EventTeaser {event} link={true}/>
+    {#each $events.items as event, index}
+        {#key $events.items}
+            <div in:fly|global={{ y: 50, duration: index*300 + 100, delay: 200, easing: cubicOut }}>
+                <EventTeaser {event} link={true}/>
+            </div>
+        {/key}
     {:else}
         <p>No events available with the current filters.</p>
     {/each}
