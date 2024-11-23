@@ -90,11 +90,15 @@
             <h3 class="h4">Maybe</h3>
         </header>
         <section class="p-4 flex flex-wrap gap-1 lg:gap-2">
-            {#each participationsMaybe as maybeResponse}
-                <div class="chip variant-ghost-warning">
-                    {maybeResponse?.expand?.user?.first_name}
-                </div>
-            {/each}
+            {#key participations}
+                {#each participationsMaybe as maybeResponse}
+                    <div in:fade|global={{delay: 200}}>
+                        <div class="chip variant-ghost-warning">
+                            {maybeResponse?.expand?.user?.first_name}
+                        </div>
+                    </div>
+                {/each}
+            {/key}
         </section>
     </div>
 
@@ -104,11 +108,15 @@
             <h3 class="h4">Out</h3>
         </header>
         <section class="p-4 flex flex-wrap gap-1 lg:gap-2">
-            {#each participationsOut as outResponse}
-                <div class="chip variant-ghost-error">
-                    {outResponse?.expand?.user?.first_name}
-                </div>
-            {/each}
+            {#key participations}
+                {#each participationsOut as outResponse}
+                    <div in:fade|global={{delay: 200}}>
+                        <div class="chip variant-ghost-error">
+                            {outResponse?.expand?.user?.first_name}
+                        </div>
+                    </div>
+                {/each}
+            {/key}
         </section>
     </div>
 </section>
