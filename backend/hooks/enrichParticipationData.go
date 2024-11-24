@@ -86,6 +86,7 @@ func addUserParticipation(app core.App, user *core.Record, record *core.Record) 
 	if err != nil && errors.Is(err, sql.ErrNoRows) {
 		// not found - that is perfectly valid, user has not participated in this event yet, so set to null in JSON
 		record.Set("userParticipation", nil)
+		return nil
 	}
 	if errs := app.ExpandRecord(userParticipation, []string{"user"}, nil); len(errs) > 0 {
 		return fmt.Errorf("failed to expand: %v", errs)
