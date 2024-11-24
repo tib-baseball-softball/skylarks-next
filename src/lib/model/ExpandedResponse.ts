@@ -19,7 +19,13 @@ export type ExpandedEvent = Extension<EventsResponse, {
     }>[],
     attire?: UniformsetsResponse,
     team?: ExpandedTeam
-  }
+  },
+  participations: {
+    in: ExpandedParticipation[],
+    out: ExpandedParticipation[],
+    maybe: ExpandedParticipation[],
+  },
+  userParticipation: ExpandedParticipation
 }>
 
 export type ExpandedTeam = Extension<TeamsResponse, {
@@ -37,6 +43,12 @@ export type ExpandedClub = Extension<ClubsResponse, {
 export type ExpandedUniformSet = Extension<UniformsetsResponse, {
   expand?: {
     club?: ClubsResponse
+  }
+}>
+
+export type ExpandedParticipation = Extension<ParticipationsResponse, {
+  expand?: {
+    user?: CustomAuthModel
   }
 }>
 
