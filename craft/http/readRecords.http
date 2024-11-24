@@ -1,0 +1,5 @@
+### GET Single Event
+GET {{pbURL}}/api/collections/events/records/{{eventID}}
+Authorization: {{adminToken}}
+
+###

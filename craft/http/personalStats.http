@@ -1,5 +1,5 @@
 ### GET stats for 2024
-GET http://127.0.0.1:8090/api/stats/s7da2dokqwi9c5k?season=2024
+GET {{pbURL}}/api/stats/s7da2dokqwi9c5k?season=2024
 Authorization:  {{adminToken}}
 
 ###
