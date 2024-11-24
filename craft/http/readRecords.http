@@ -2,4 +2,8 @@
 GET {{pbURL}}/api/collections/events/records/{{eventID}}
 Authorization: {{adminToken}}
 
+### GET Events List
+GET {{pbURL}}/api/collections/events/records
+Authorization: {{adminToken}}
+
 ###

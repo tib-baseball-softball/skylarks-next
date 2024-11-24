@@ -45,6 +45,10 @@ func main() {
 		return hooks.TriggerLeagueImport(app, event)
 	})
 
+	app.OnRecordEnrich("events").BindFunc(func(event *core.RecordEnrichEvent) error {
+		return hooks.AddEventParticipationData(app, event)
+	})
+
 	//------------------- Custom Routes -------------------------//
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
