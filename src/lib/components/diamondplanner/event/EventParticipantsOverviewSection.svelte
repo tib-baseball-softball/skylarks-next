@@ -14,27 +14,6 @@
 
   const authRecord = authSettings.record as CustomAuthModel
 
-  // TODO: get this data via backend hook
-  let participations = $derived(
-      event?.expand?.participations_via_event ?? [],
-  );
-
-  let participationsIn = $derived(
-      participations?.filter((participation) => {
-        return participation.state === "in";
-      }),
-  );
-  let participationsMaybe = $derived(
-      participations?.filter((participation) => {
-        return participation.state === "maybe";
-      }),
-  );
-  let participationsOut = $derived(
-      participations?.filter((participation) => {
-        return participation.state === "out";
-      }),
-  );
-
   const displayedGuestPlayers = $derived(event.guests.split(","))
   const isAdmin = $derived(event.expand?.team?.admins.includes(authRecord.id) || event?.expand?.team?.expand?.club?.admins.includes(authRecord.id))
 
@@ -55,8 +34,8 @@
         </header>
 
         <section class="p-4 flex flex-wrap gap-1 lg:gap-2">
-            {#key participations}
-                {#each participationsIn as inResponse}
+            {#key event.participations.in}
+                {#each event.participations.in as inResponse}
                     <div in:fade|global={{delay: 200}}>
                         <div class="chip variant-ghost-success">
                             {inResponse?.expand?.user?.first_name}
@@ -90,8 +69,8 @@
             <h3 class="h4">Maybe</h3>
         </header>
         <section class="p-4 flex flex-wrap gap-1 lg:gap-2">
-            {#key participations}
-                {#each participationsMaybe as maybeResponse}
+            {#key event.participations.maybe}
+                {#each event.participations.maybe as maybeResponse}
                     <div in:fade|global={{delay: 200}}>
                         <div class="chip variant-ghost-warning">
                             {maybeResponse?.expand?.user?.first_name}
@@ -108,8 +87,8 @@
             <h3 class="h4">Out</h3>
         </header>
         <section class="p-4 flex flex-wrap gap-1 lg:gap-2">
-            {#key participations}
-                {#each participationsOut as outResponse}
+            {#key event.participations.out}
+                {#each event.participations.out as outResponse}
                     <div in:fade|global={{delay: 200}}>
                         <div class="chip variant-ghost-error">
                             {outResponse?.expand?.user?.first_name}

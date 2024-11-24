@@ -25,7 +25,7 @@ export type ExpandedEvent = Extension<EventsResponse, {
     out: ExpandedParticipation[],
     maybe: ExpandedParticipation[],
   },
-  userParticipation: ExpandedParticipation
+  userParticipation?: ExpandedParticipation
 }>
 
 export type ExpandedTeam = Extension<TeamsResponse, {

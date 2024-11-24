@@ -3,8 +3,8 @@
   import {CheckOutline, CloseOutline, QuestionCircleOutline,} from "flowbite-svelte-icons";
   import type {EventParticipationState} from "$lib/types/EventParticipationState";
   import {sendParticipationData} from "$lib/functions/sendParticipationData";
-  import {invalidate} from "$app/navigation";
   import type {CustomAuthModel, ExpandedEvent} from "$lib/model/ExpandedResponse";
+  import {invalidate} from "$app/navigation";
   import {authSettings} from "$lib/pocketbase/index.svelte";
 
   interface props {
@@ -14,7 +14,7 @@
   const authModel = authSettings.record as CustomAuthModel
   const {event}: props = $props();
 
-  let userParticipation: ParticipationsCreate = $derived({
+  let userParticipation: ParticipationsCreate = $derived(event.userParticipation ?? {
     id: "",
     user: authModel?.id,
     event: event.id,
@@ -24,23 +24,6 @@
 
   let comment = $state("");
 
-  let participations = $derived(event?.expand?.participations_via_event);
-  let participationsIn = $derived(
-      participations?.filter((participation) => {
-        return participation.state === "in";
-      }),
-  );
-  let participationsMaybe = $derived(
-      participations?.filter((participation) => {
-        return participation.state === "maybe";
-      }),
-  );
-  let participationsOut = $derived(
-      participations?.filter((participation) => {
-        return participation.state === "out";
-      }),
-  );
-
   async function updateParticipationStatus(
       state: EventParticipationState,
   ): Promise<void> {
@@ -49,16 +32,6 @@
     await sendParticipationData(userParticipation);
     await invalidate("event:list");
   }
-
-  $effect.pre(() => {
-    participations?.forEach((participation) => {
-      if (participation.user === authModel?.id) {
-        userParticipation.id = participation.id;
-        userParticipation.state = participation.state;
-        userParticipation.comment = participation.comment;
-      }
-    });
-  });
 </script>
 
 <section class="flex justify-end items-end gap-2 flex-wrap">
@@ -69,7 +42,7 @@
             onclick={() => updateParticipationStatus("in")}
     >
         <span><CheckOutline size="sm"/></span>
-        <span>{participationsIn?.length ?? 0}</span>
+        <span>{event.participations.in.length ?? 0}</span>
     </button>
 
     <button
@@ -79,7 +52,7 @@
             onclick={() => updateParticipationStatus("maybe")}
     >
         <span><QuestionCircleOutline size="sm"/></span>
-        <span>{participationsMaybe?.length ?? 0}</span>
+        <span>{event.participations.maybe.length ?? 0}</span>
     </button>
 
     <button
@@ -89,6 +62,6 @@
             onclick={() => updateParticipationStatus("out")}
     >
         <span><CloseOutline size="sm"/></span>
-        <span>{participationsOut?.length ?? 0}</span>
+        <span>{event.participations.out.length ?? 0}</span>
     </button>
 </section>
