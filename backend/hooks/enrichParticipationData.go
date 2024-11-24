@@ -3,6 +3,7 @@ package hooks
 import (
 	"database/sql"
 	"errors"
+	"fmt"
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/tib-baseball-softball/skylarks-next/enum"
@@ -21,9 +22,12 @@ func AddEventParticipationData(app core.App, event *core.RecordEnrichEvent) erro
 }
 
 func enrichParticipationData(app core.App, user *core.Record, record *core.Record) error {
-	addUserParticipation(app, user, record)
+	err := addUserParticipation(app, user, record)
+	if err != nil {
+		return err
+	}
 
-	err := addParticipationsByType(app, record)
+	err = addParticipationsByType(app, record)
 	if err != nil {
 		return err
 	}
@@ -44,7 +48,9 @@ func addParticipationsByType(app core.App, record *core.Record) error {
 		app.Logger().Error("EnrichParticipationData error", err)
 		return err
 	}
-	app.ExpandRecords(participations, []string{"user"}, nil)
+	if errs := app.ExpandRecords(participations, []string{"user"}, nil); len(errs) > 0 {
+		return fmt.Errorf("failed to expand: %v", errs)
+	}
 
 	participationsByType := model.ParticipationsByType{
 		In:    []*core.Record{},
@@ -71,7 +77,7 @@ func addParticipationsByType(app core.App, record *core.Record) error {
 	return nil
 }
 
-func addUserParticipation(app core.App, user *core.Record, record *core.Record) {
+func addUserParticipation(app core.App, user *core.Record, record *core.Record) error {
 	userParticipation, err := app.FindFirstRecordByFilter(
 		"participations",
 		"user = {:userID} && event = {:eventID}",
@@ -81,5 +87,10 @@ func addUserParticipation(app core.App, user *core.Record, record *core.Record) 
 		// not found - that is perfectly valid, user has not participated in this event yet, so set to null in JSON
 		record.Set("userParticipation", nil)
 	}
+	if errs := app.ExpandRecord(userParticipation, []string{"user"}, nil); len(errs) > 0 {
+		return fmt.Errorf("failed to expand: %v", errs)
+	}
+
 	record.Set("userParticipation", userParticipation)
+	return nil
 }
