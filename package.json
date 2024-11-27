@@ -35,7 +35,7 @@
     "@vincjo/datatables": "^1.14.9",
     "bsm.js": "^0.1",
     "flatpickr": "^4.6.13",
-    "pocketbase": "^0.22.0-rc2",
+    "pocketbase": "^0.22.0",
     "svelte-persisted-store": "^0.12.0",
     "typed-pocketbase": "^0.1.1"
   }
