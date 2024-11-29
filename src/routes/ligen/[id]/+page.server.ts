@@ -17,7 +17,7 @@ export async function load({parent, params}) {
   }
 
   if (!leagueGroup) {
-    throw error(404)
+    throw error(404, "leagueGroup not found")
   }
 
   const tableRequest = new TablesAPIRequest(env.BSM_API_KEY)

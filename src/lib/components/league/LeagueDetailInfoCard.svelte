@@ -1,17 +1,15 @@
 <script lang="ts">
-    import type {LeagueGroup} from "bsm.js";
-    import {
-        FileLinesOutline, FlagOutline, TagOutline, UsersGroupOutline
-    } from "flowbite-svelte-icons";
+  import type {LeagueGroup} from "bsm.js";
+  import {FileLinesOutline, FlagOutline, TagOutline, UsersGroupOutline} from "flowbite-svelte-icons";
 
-    interface Props {
-        leagueGroup: LeagueGroup;
-    }
+  interface Props {
+    leagueGroup: LeagueGroup;
+  }
 
-    let { leagueGroup }: Props = $props();
+  let {leagueGroup}: Props = $props();
 </script>
 
-<div class="card variant-ghost-surface p-3">
+<article class="card variant-soft-surface p-3">
 
     <div class="flex items-center gap-3 self-end">
         <FileLinesOutline/>
@@ -51,4 +49,4 @@
         </div>
     </div>
 
-</div>
+</article>
