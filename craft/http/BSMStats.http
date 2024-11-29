@@ -1,0 +1,8 @@
+### GET stats for LeagueGroup
+GET {{bsmURL}}/league_groups/5732/statistics/batting.json
+
+### GET Top 10 for league in OPS
+GET {{bsmURL}}/league_groups/5732/top10/batting/on_base_plus_slugging.json
+
+### GET Top 10 for league in hits
+GET {{bsmURL}}/league_groups/5732/top10/batting/hits.json
