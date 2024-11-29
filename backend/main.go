@@ -76,6 +76,12 @@ func main() {
 		return se.Next()
 	})
 
+	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
+		se.Router.GET("/api/bsm/relay/top10/{league}", routes.GetLeagueLeaders())
+
+		return se.Next()
+	})
+
 	//------------------- Commands -------------------------//
 
 	app.RootCmd.AddCommand(&cobra.Command{

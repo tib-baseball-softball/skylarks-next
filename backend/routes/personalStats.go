@@ -5,6 +5,7 @@ import (
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/tib-baseball-softball/skylarks-next/middlewares"
 	"github.com/tib-baseball-softball/skylarks-next/stats"
+	"net/http"
 )
 
 func GetUserStats() func(event *core.RequestEvent) error {
@@ -30,6 +31,6 @@ func GetUserStats() func(event *core.RequestEvent) error {
 			return err
 		}
 
-		return event.JSON(200, statsItem)
+		return event.JSON(http.StatusOK, statsItem)
 	}
 }
