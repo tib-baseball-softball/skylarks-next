@@ -55,7 +55,12 @@
     t || n && r ? e.add("dark") : e.remove("dark")
   })
 
+  let showSidebar = $derived(data.clubs.length > 0 || data.teams.length > 0)
 </script>
+
+<svelte:head>
+    <title>Berlin Skylarks Web App</title>
+</svelte:head>
 
 <Drawer>
     {#if $drawerStore.id === "nav"}
@@ -141,20 +146,22 @@
 
     <!-- Grid Column -->
 
-    <div class="container grid grid-cols-1 md:grid-cols-[auto_1fr]">
+    <div class="grid grid-cols-1 md:grid-cols-[auto_1fr]">
 
         <!-- Sidebar (Left) -->
-        <aside
-                class="bg-surface-500/5 p-2 sticky top-0 col-span-1 hidden h-screen md:block max-w-64 lg:max-w-72 xl:max-w-80">
-            <Navigation clubs={data.clubs} teams={data.teams}/>
-        </aside>
+        {#if showSidebar}
+            <aside class="bg-surface-500/5 p-2 sticky top-0 col-span-1 hidden h-screen md:block w-64 lg:w-72 xl:w-80">
+                <Navigation clubs={data.clubs} teams={data.teams}/>
+            </aside>
+        {:else}
+            <!-- hack: render empty div to not mess up the grid -->
+            <div aria-hidden="true" class="hidden md:block"></div>
+        {/if}
 
         <!-- Main -->
 
-        <main class="col-span-1 space-y-4 lg:space-y-6 mx-4 md:mx-6 lg:mx-8 mb-4 lg:mb-6">
-
+        <main class="col-span-1 space-y-4 lg:space-y-6 w-[93%] md:w-[90%] lg:w-[85%] justify-self-center">
             {@render children?.()}
-
         </main>
     </div>
 
