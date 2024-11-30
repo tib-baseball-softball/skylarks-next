@@ -6,7 +6,7 @@ services:
       - proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.skylarks-next-frontend.rule=Host(`skylarks.obnx.dev`)"
+      - "traefik.http.routers.skylarks-next-frontend.rule=Host(`app.berlinskylarks.de`)"
       - "traefik.http.routers.skylarks-next-frontend.entrypoints=websecure"
       - "traefik.http.routers.skylarks-next-frontend.tls.certresolver=letsEncrypt"
 
