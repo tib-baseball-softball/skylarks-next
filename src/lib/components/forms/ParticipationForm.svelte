@@ -46,7 +46,17 @@
         </div>
 
         <form onsubmit={submitForm} class="mt-4 space-y-3">
-            <div class="grid grid-cols-1 gap-2 md:gap-3 lg:gap-4">
+            <div class="grid grid-cols-2 gap-2 md:gap-3 lg:gap-4">
+
+                <div class="space-y-1">
+                    <p class="text-sm font-light">Created</p>
+                    <p>{new Date(participation.created).toLocaleString()}</p>
+                </div>
+
+                <div class="space-y-1">
+                    <p class="text-sm font-light">Last Updated</p>
+                    <p>{new Date(participation.updated).toLocaleString()}</p>
+                </div>
 
                 <input
                         name="id"
@@ -57,7 +67,7 @@
                         bind:value={form.id}
                 />
 
-                <label class="label">
+                <label class="label col-span-2">
                     <span class="block">Comment</span>
                     <input
                             name="id"
@@ -69,7 +79,7 @@
                     />
                 </label>
 
-                <label class="label">
+                <label class="label col-span-2">
                     <span class="block">State</span>
 
                     <RadioGroup display="flex">
@@ -90,7 +100,7 @@
                     </RadioGroup>
                 </label>
 
-                <div class="flex justify-center">
+                <div class="flex justify-center col-span-2">
                     <button type="submit" class="mt-2 btn variant-ghost-primary">
                         Submit
                     </button>
