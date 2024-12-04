@@ -27,7 +27,7 @@
 
 <h2 class="h2">Participants</h2>
 <section class="grid grid-cols-1 md:grid-cols-3 gap-2 lg:gap-3">
-    <div class="card variant-ghost-success flex-grow">
+    <article class="card variant-ghost-success flex-grow">
         <header class="card-header flex items-center gap-2">
             <span><CheckOutline size="lg"/></span>
             <h3 class="h4">In</h3>
@@ -48,7 +48,7 @@
                         <div in:fade|global={{delay: 200}}>
                             <button
                                     aria-label="guest player name, click removes the player from the event"
-                                    class="chip variant-soft"
+                                    class="chip variant-soft dark:variant-soft-success"
                                     onclick={() => removeGuestPlayer(guestPlayer)}
                             >
                                 {guestPlayer}
@@ -61,13 +61,14 @@
                 {/each}
             {/key}
         </section>
-    </div>
+    </article>
 
-    <div class="card variant-ghost-warning flex-grow">
+    <article class="card variant-ghost-warning flex-grow">
         <header class="card-header flex items-center gap-2">
             <span><QuestionCircleOutline size="lg"/></span>
             <h3 class="h4">Maybe</h3>
         </header>
+
         <section class="p-4 flex flex-wrap gap-1 lg:gap-2">
             {#key event.participations.maybe}
                 {#each event.participations.maybe as maybeResponse}
@@ -79,13 +80,14 @@
                 {/each}
             {/key}
         </section>
-    </div>
+    </article>
 
-    <div class="card variant-ghost-error flex-grow">
+    <article class="card variant-ghost-error flex-grow">
         <header class="card-header flex items-center gap-2">
             <span><CloseOutline size="lg"/></span>
             <h3 class="h4">Out</h3>
         </header>
+
         <section class="p-4 flex flex-wrap gap-1 lg:gap-2">
             {#key event.participations.out}
                 {#each event.participations.out as outResponse}
@@ -97,7 +99,7 @@
                 {/each}
             {/key}
         </section>
-    </div>
+    </article>
 </section>
 
 {#if isAdmin}
