@@ -5,6 +5,8 @@
   import {fade} from "svelte/transition";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
   import type {EventsUpdate} from "$lib/model/pb-types";
+  import IndividualParticipationEditButton
+    from "$lib/components/diamondplanner/event/IndividualParticipationEditButton.svelte";
 
   interface Props {
     event: ExpandedEvent
@@ -15,7 +17,7 @@
   const authRecord = authSettings.record as CustomAuthModel
 
   const displayedGuestPlayers = $derived(event.guests.split(","))
-  const isAdmin = $derived(event.expand?.team?.admins.includes(authRecord.id) || event?.expand?.team?.expand?.club?.admins.includes(authRecord.id))
+  const isAdmin = $derived((event.expand?.team?.admins.includes(authRecord.id) || event?.expand?.team?.expand?.club?.admins.includes(authRecord.id)) ?? false)
 
   async function removeGuestPlayer(playerToRemove: string) {
     const newGuestPlayerList = displayedGuestPlayers.filter((player) => player !== playerToRemove)
@@ -37,9 +39,11 @@
             {#key event.participations.in}
                 {#each event.participations.in as inResponse}
                     <div in:fade|global={{delay: 200}}>
-                        <div class="chip variant-ghost-success">
-                            {inResponse?.expand?.user?.first_name}
-                        </div>
+                        <IndividualParticipationEditButton
+                                participation={inResponse}
+                                {isAdmin}
+                                classes="chip variant-ghost-success"
+                        />
                     </div>
                 {/each}
 
@@ -73,9 +77,11 @@
             {#key event.participations.maybe}
                 {#each event.participations.maybe as maybeResponse}
                     <div in:fade|global={{delay: 200}}>
-                        <div class="chip variant-ghost-warning">
-                            {maybeResponse?.expand?.user?.first_name}
-                        </div>
+                        <IndividualParticipationEditButton
+                                participation={maybeResponse}
+                                {isAdmin}
+                                classes="chip variant-ghost-warning"
+                        />
                     </div>
                 {/each}
             {/key}
@@ -92,21 +98,17 @@
             {#key event.participations.out}
                 {#each event.participations.out as outResponse}
                     <div in:fade|global={{delay: 200}}>
-                        <div class="chip variant-ghost-error">
-                            {outResponse?.expand?.user?.first_name}
-                        </div>
+                        <IndividualParticipationEditButton
+                                participation={outResponse}
+                                {isAdmin}
+                                classes="chip variant-ghost-error"
+                        />
                     </div>
                 {/each}
             {/key}
         </section>
     </article>
 </section>
-
-{#if isAdmin}
-    <button type="button" class="my-3 btn variant-ghost">
-        Edit
-    </button>
-{/if}
 
 <style lang="postcss">
     h2, h3 {

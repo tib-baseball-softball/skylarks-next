@@ -22,13 +22,10 @@
     comment: "",
   });
 
-  let comment = $state("");
-
   async function updateParticipationStatus(
       state: EventParticipationState,
   ): Promise<void> {
     userParticipation.state = state;
-    userParticipation.comment = comment;
     await sendParticipationData(userParticipation);
     await invalidate("event:list");
   }
