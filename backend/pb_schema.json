@@ -1131,8 +1131,8 @@
   },
   {
     "id": "zyst8ardf4onbwz",
-    "listRule": "@request.auth.id != \"\" && \n(team.id ?~ @request.auth.teams.id || team.club.admins ?~ @request.auth.id)",
-    "viewRule": "@request.auth.id != \"\" && \n(team.id ?~ @request.auth.teams.id || team.club.admins ?~ @request.auth.id)",
+    "listRule": "@request.auth.id != \"\" && \n(team.id ?~ @request.auth.teams.id || team.admins ?~ @request.auth.id || team.club.admins ?~ @request.auth.id)",
+    "viewRule": "@request.auth.id != \"\" && \n(team.id ?~ @request.auth.teams.id || team.admins ?~ @request.auth.id || team.club.admins ?~ @request.auth.id)",
     "createRule": "@request.auth.id != \"\" && \n(team.admins ?~ @request.auth.id || team.club.admins ?~ @request.auth.id)",
     "updateRule": "@request.auth.id != \"\" && \n(team.admins ?~ @request.auth.id || team.club.admins ?~ @request.auth.id)",
     "deleteRule": "@request.auth.id != \"\" && \n(team.admins ?~ @request.auth.id || team.club.admins ?~ @request.auth.id)",
@@ -1307,6 +1307,20 @@
         "max": 0,
         "min": 0,
         "name": "location",
+        "pattern": "",
+        "presentable": false,
+        "primaryKey": false,
+        "required": false,
+        "system": false,
+        "type": "text"
+      },
+      {
+        "autogeneratePattern": "",
+        "hidden": false,
+        "id": "text974127405",
+        "max": 0,
+        "min": 0,
+        "name": "series",
         "pattern": "",
         "presentable": false,
         "primaryKey": false,
@@ -1639,7 +1653,7 @@
       }
     ],
     "indexes": [
-      "CREATE INDEX `idx_8P8482G` ON `requestcaches` (`hash`)"
+      "CREATE UNIQUE INDEX `idx_8P8482G` ON `requestcaches` (`hash`)"
     ],
     "system": false
   },

@@ -283,6 +283,7 @@ export interface EventsResponse extends BaseCollectionResponse {
 	match_json?: EventsMatch_json
 	guests: string;
 	location: string;
+	series: string;
 	created: string;
 	updated: string;
 }
@@ -302,6 +303,7 @@ export interface EventsCreate extends BaseCollectionCreate {
 	match_json?: Record<string, any> | Array<any> | null;
 	guests?: string;
 	location?: string;
+	series?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -323,6 +325,7 @@ export interface EventsUpdate extends BaseCollectionUpdate {
 	match_json?: Record<string, any> | Array<any> | null;
 	guests?: string;
 	location?: string;
+	series?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
