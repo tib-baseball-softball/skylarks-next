@@ -340,6 +340,7 @@ export interface EventsCollection {
 	relations: {
 		attire: UniformsetsCollection;
 		team: TeamsCollection;
+		series: EventseriesCollection;
 		participations_via_event: ParticipationsCollection[];
 	};
 }
@@ -464,6 +465,7 @@ export interface TeamsCollection {
 		events_via_team: EventsCollection[];
 		club: ClubsCollection;
 		admins: UsersCollection[];
+		eventseries_via_team: EventseriesCollection[];
 	};
 }
 
@@ -893,6 +895,62 @@ export interface AuthOriginsCollection {
 
 // ==== end of _authOrigins block =====
 
+// ==== start of eventseries block =====
+
+
+export interface EventseriesResponse extends BaseCollectionResponse {
+	collectionName: 'eventseries';
+	id: string;
+	interval: number;
+	weekday: number;
+	end: string;
+	team: string;
+	start: string;
+	created: string;
+	updated: string;
+}
+
+export interface EventseriesCreate extends BaseCollectionCreate {
+	id: string;
+	interval: number;
+	weekday?: number;
+	end?: string | Date;
+	team: string;
+	start: string | Date;
+	created?: string | Date;
+	updated?: string | Date;
+}
+
+export interface EventseriesUpdate extends BaseCollectionUpdate {
+	id?: string;
+	interval?: number;
+	'interval+'?: number;
+	'interval-'?: number;
+	weekday?: number;
+	'weekday+'?: number;
+	'weekday-'?: number;
+	end?: string | Date;
+	team?: string;
+	start?: string | Date;
+	created?: string | Date;
+	updated?: string | Date;
+}
+
+export interface EventseriesCollection {
+	type: 'base';
+	collectionId: string;
+	collectionName: 'eventseries';
+	response: EventseriesResponse;
+	create: EventseriesCreate;
+	update: EventseriesUpdate;
+	relations: {
+		events_via_series: EventsCollection[];
+		team: TeamsCollection;
+	};
+}
+
+// ==== end of eventseries block =====
+
 
 // ===== Schema =====
 
@@ -910,4 +968,5 @@ export type Schema = {
 	_mfas: MfasCollection;
 	_otps: OtpsCollection;
 	_authOrigins: AuthOriginsCollection;
+	eventseries: EventseriesCollection;
 }
