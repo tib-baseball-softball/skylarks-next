@@ -1,56 +1,68 @@
+import type {Options} from "flatpickr/dist/types/options";
+
 export class DateTimeUtility {
-    public static readonly timeFormatShort = new Intl.DateTimeFormat("de-DE", {
-        weekday: "short",
-        hour: "2-digit",
-        minute: "2-digit"
-    })
+  public static readonly timeFormatShort = new Intl.DateTimeFormat("de-DE", {
+    weekday: "short",
+    hour: "2-digit",
+    minute: "2-digit"
+  })
 
-    public static readonly dateTimeFormatMedium = new Intl.DateTimeFormat("de-DE", {
-        dateStyle: "medium",
-        timeStyle: "short"
-    })
+  public static readonly dateTimeFormatMedium = new Intl.DateTimeFormat("de-DE", {
+    dateStyle: "medium",
+    timeStyle: "short"
+  })
 
-    public static readonly eventDateFormat: DateTimeFormatOptions = {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-    }
+  //@ts-ignore
+  public static readonly eventDateFormat: DateTimeFormatOptions = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+  }
 
-    public static readonly eventTimeFormat: DateTimeFormatOptions = {
-        hour: 'numeric',
-        minute: 'numeric',
-    }
+  //@ts-ignore
+  public static readonly eventTimeFormat: DateTimeFormatOptions = {
+    hour: 'numeric',
+    minute: 'numeric',
+  }
 
-    /**
-     * Slightly overcomplicated method to parse the BSM "time" string into something usable, with help from generative AI.
-     * BSM does not use ISO 8601 format.
-     *
-     * Format example: 2024-04-07 12:05:00 +0200
-     */
-    public static parseDateFromBSMString(formattedString: string): Date {
-        const dateParts = formattedString.split(/[- :]/);
+  public static readonly datePickerOptions: Options = {
+    enableTime: true,
+    dateFormat: "c", // ISO 8601
+    altInput: true,
+    altFormat: "j F Y - H:i",
+    time_24hr: true,
+  }
 
-        // Extracting date parts
-        const year = parseInt(dateParts[0], 10);
-        const month = parseInt(dateParts[1], 10) - 1; // Month is zero-based
-        const day = parseInt(dateParts[2], 10);
-        const hour = parseInt(dateParts[3], 10);
-        const minute = parseInt(dateParts[4], 10);
-        const second = parseInt(dateParts[5], 10);
+  /**
+   * Slightly overcomplicated method to parse the BSM "time" string into something usable, with help from generative AI.
+   * BSM does not use ISO 8601 format.
+   *
+   * Format example: 2024-04-07 12:05:00 +0200
+   */
+  public static parseDateFromBSMString(formattedString: string): Date {
+    const dateParts = formattedString.split(/[- :]/);
 
-        // Extracting time zone offset
-        const timezoneOffsetHours = parseInt(dateParts[6].substring(0, 3), 10);
-        const timezoneOffsetMinutes = parseInt(dateParts[6].substring(3), 10);
-        const timezoneOffset = (timezoneOffsetHours * 60) + timezoneOffsetMinutes;
+    // Extracting date parts
+    const year = parseInt(dateParts[0], 10);
+    const month = parseInt(dateParts[1], 10) - 1; // Month is zero-based
+    const day = parseInt(dateParts[2], 10);
+    const hour = parseInt(dateParts[3], 10);
+    const minute = parseInt(dateParts[4], 10);
+    const second = parseInt(dateParts[5], 10);
 
-        // Creating date object
-        const date = new Date(year, month, day, hour, minute, second);
+    // Extracting time zone offset
+    const timezoneOffsetHours = parseInt(dateParts[6].substring(0, 3), 10);
+    const timezoneOffsetMinutes = parseInt(dateParts[6].substring(3), 10);
+    const timezoneOffset = (timezoneOffsetHours * 60) + timezoneOffsetMinutes;
 
-        // Adjusting for time zone offset
-        const utcTime = date.getTime() + (date.getTimezoneOffset() * 60000);
-        const adjustedTime = utcTime + (timezoneOffset * 60000);
+    // Creating date object
+    const date = new Date(year, month, day, hour, minute, second);
 
-        return new Date(adjustedTime);
-    }
+    // Adjusting for time zone offset
+    const utcTime = date.getTime() + (date.getTimezoneOffset() * 60000);
+    const adjustedTime = utcTime + (timezoneOffset * 60000);
+
+    return new Date(adjustedTime);
+  }
 }

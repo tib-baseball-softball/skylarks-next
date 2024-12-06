@@ -13,12 +13,14 @@
   import {client} from "$lib/pocketbase/index.svelte";
   import type {ExpandedTeam} from "$lib/model/ExpandedResponse";
   import TeamGamesModal from "$lib/components/forms/TeamGamesModal.svelte";
+  import type {EventseriesResponse} from "$lib/model/pb-types.ts";
 
   interface Props {
-    team: ExpandedTeam
+    team: ExpandedTeam,
+    eventSeries: EventseriesResponse[],
   }
 
-  let {team}: Props = $props()
+  let {team, eventSeries}: Props = $props()
 
   const drawerStore = getDrawerStore();
   const modalStore = getModalStore();
@@ -31,6 +33,17 @@
       event: null,
       club: team?.club,
       team: team,
+    },
+  });
+
+  const eventSeriesSettings: DrawerSettings = $derived({
+    id: "eventseries-view",
+    position: "right",
+    width: "w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%]",
+    meta: {
+      club: team?.club,
+      team: team,
+      eventSeries: eventSeries,
     },
   });
 
@@ -86,13 +99,13 @@
     <div class="card admin-card variant-ringed-surface">
         <div>
             <header class="card-header">
-                <h3 class="h4 font-semibold">Practice Sets</h3>
+                <h3 class="h4 font-semibold">Event Series</h3>
             </header>
 
             <section class="p-4 space-y-3">
                 <p class="font-light">
-                    Practice Sets are recurring series of events of type
-                    "Practice" that take place on the same day every week.
+                    Manage all recurring series of events (mostly of type
+                    "Practice") that take place on the same day every week.
                 </p>
             </section>
         </div>
@@ -100,9 +113,10 @@
             <div class="flex flex-col gap-2 lg:gap-3">
                 <button
                         class="btn variant-ghost-secondary dark:variant-filled-secondary dark:border"
+                        onclick={() => drawerStore.open(eventSeriesSettings)}
                 >
                     <CalendarPlusOutline/>
-                    <span>Create Practice Set</span>
+                    <span>Manage Event Series</span>
                 </button>
             </div>
         </footer>

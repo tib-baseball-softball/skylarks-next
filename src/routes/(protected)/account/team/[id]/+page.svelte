@@ -125,5 +125,5 @@
 {#if data.team.admins.includes(authModel?.id) || data.team?.expand?.club?.admins.includes(authModel?.id)}
     <hr class="my-2"/>
 
-    <TeamAdminSection team={data.team}/>
+    <TeamAdminSection team={data.team} eventSeries={data.eventSeries}/>
 {/if}

@@ -901,40 +901,46 @@ export interface AuthOriginsCollection {
 export interface EventseriesResponse extends BaseCollectionResponse {
 	collectionName: 'eventseries';
 	id: string;
+	title: string;
 	interval: number;
 	weekday: number;
-	end: string;
+	series_start: string;
+	series_end: string;
 	team: string;
-	start: string;
-	time: string;
+	starttime: string;
+	endtime: string;
 	created: string;
 	updated: string;
 }
 
 export interface EventseriesCreate extends BaseCollectionCreate {
 	id: string;
+	title: string;
 	interval: number;
 	weekday?: number;
-	end?: string | Date;
+	series_start: string | Date;
+	series_end?: string | Date;
 	team: string;
-	start: string | Date;
-	time: string;
+	starttime: string;
+	endtime?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
 
 export interface EventseriesUpdate extends BaseCollectionUpdate {
 	id?: string;
+	title?: string;
 	interval?: number;
 	'interval+'?: number;
 	'interval-'?: number;
 	weekday?: number;
 	'weekday+'?: number;
 	'weekday-'?: number;
-	end?: string | Date;
+	series_start?: string | Date;
+	series_end?: string | Date;
 	team?: string;
-	start?: string | Date;
-	time?: string;
+	starttime?: string;
+	endtime?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }

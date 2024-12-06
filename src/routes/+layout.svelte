@@ -23,6 +23,7 @@
   import ClubForm from "$lib/components/forms/ClubForm.svelte";
   import type {LayoutData} from "../../.svelte-kit/types/src/routes/$types";
   import StaticNavigationLinks from "$lib/components/navigation/StaticNavigationLinks.svelte";
+  import EventSeriesView from "$lib/components/diamondplanner/event/EventSeriesView.svelte";
 
   interface Props {
     data: LayoutData
@@ -83,6 +84,8 @@
         <PlayerDataForm/>
     {:else if $drawerStore.id === "club-form"}
         <ClubForm/>
+    {:else if $drawerStore.id === "eventseries-view"}
+        <EventSeriesView/>
     {/if}
 </Drawer>
 

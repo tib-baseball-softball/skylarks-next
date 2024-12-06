@@ -13,18 +13,10 @@
   } from "@skeletonlabs/skeleton";
   import {CloseOutline} from "flowbite-svelte-icons";
   import Flatpickr from "../utility/Flatpickr.svelte";
-  import type {Options} from "flatpickr/dist/types/options";
+  import {DateTimeUtility} from "$lib/service/DateTimeUtility.js";
 
   const toastStore = getToastStore();
   const drawerStore = getDrawerStore();
-
-  const datePickerOptions: Options = {
-    enableTime: true,
-    dateFormat: "c", // ISO 8601
-    altInput: true,
-    altFormat: "j F Y - H:i",
-    time_24hr: true,
-  };
 
   const toastSettingsSuccess: ToastSettings = {
     message: "Event saved successfully.",
@@ -35,6 +27,8 @@
     message: "An error occurred while saving the event.",
     background: "variant-filled-error",
   };
+
+  const isCreatingNewEvent = $derived($drawerStore.meta.event === undefined || $drawerStore.meta.event === null)
 
   const form: ExpandedEvent = $state(
       $drawerStore.meta.event ?? {
@@ -142,7 +136,7 @@
                 Start
                 <Flatpickr
                         bind:value={form.starttime}
-                        options={datePickerOptions}
+                        options={DateTimeUtility.datePickerOptions}
                 />
             </label>
 
@@ -150,7 +144,7 @@
                 Meeting
                 <Flatpickr
                         bind:value={form.meetingtime}
-                        options={datePickerOptions}
+                        options={DateTimeUtility.datePickerOptions}
                 />
             </label>
 
@@ -158,9 +152,11 @@
                 End
                 <Flatpickr
                         bind:value={form.endtime}
-                        options={datePickerOptions}
+                        options={DateTimeUtility.datePickerOptions}
                 />
             </label>
+
+            <span></span>
 
             <label class="label md:col-span-2">
                 Description
