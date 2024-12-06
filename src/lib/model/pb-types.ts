@@ -1,3 +1,19 @@
+// === start of custom type ===
+  // Events.EventsMatch_json.match_json
+  export type EventsMatch_json = Array<{
+ 
+  }>;
+  // === end of custom type ===
+
+
+// === start of custom type ===
+  // Requestcaches.RequestcachesResponseBody.responseBody
+  export type RequestcachesResponseBody = Array<{
+ 
+  }>;
+  // === end of custom type ===
+
+
 /**
  * This file was @generated using typed-pocketbase
  */
@@ -48,6 +64,10 @@ export interface AuthCollectionResponse extends BaseCollectionResponse {
 	 * Auth record email address.
 	 */
 	email: string;
+	/**
+	 * Auth record email address.
+	 */
+	tokenKey?: string;
 	/**
 	 * Whether to show/hide the auth record email when fetching the record data.
 	 */
@@ -132,11 +152,17 @@ export interface ViewCollectionRecord {
 // utilities
 
 type MaybeArray<T> = T | T[];
+// ==== start of users block =====
 
-// ===== users =====
 
 export interface UsersResponse extends AuthCollectionResponse {
 	collectionName: 'users';
+	id: string;
+	tokenKey: string;
+	email: string;
+	emailVisibility: boolean;
+	verified: boolean;
+	username: string;
 	first_name: string;
 	last_name: string;
 	avatar: string;
@@ -152,9 +178,19 @@ export interface UsersResponse extends AuthCollectionResponse {
 	umpire: '' | '0' | '1' | '2' | '3' | '4';
 	scorer: '' | '0' | '1' | '2' | '3';
 	bsm_id: number;
+	signup_key: string;
+	created: string;
+	updated: string;
 }
 
 export interface UsersCreate extends AuthCollectionCreate {
+	id: string;
+	password: string;
+	tokenKey: string;
+	email?: string;
+	emailVisibility?: boolean;
+	verified?: boolean;
+	username: string;
 	first_name?: string;
 	last_name?: string;
 	avatar?: File | null;
@@ -170,9 +206,18 @@ export interface UsersCreate extends AuthCollectionCreate {
 	umpire?: '' | '0' | '1' | '2' | '3' | '4';
 	scorer?: '' | '0' | '1' | '2' | '3';
 	bsm_id?: number;
+	signup_key?: string;
+	created?: string | Date;
+	updated?: string | Date;
 }
 
 export interface UsersUpdate extends AuthCollectionUpdate {
+	id?: string;
+	tokenKey?: string;
+	email?: string;
+	emailVisibility?: boolean;
+	verified?: boolean;
+	username?: string;
 	first_name?: string;
 	last_name?: string;
 	avatar?: File | null;
@@ -196,6 +241,9 @@ export interface UsersUpdate extends AuthCollectionUpdate {
 	bsm_id?: number;
 	'bsm_id+'?: number;
 	'bsm_id-'?: number;
+	signup_key?: string;
+	created?: string | Date;
+	updated?: string | Date;
 }
 
 export interface UsersCollection {
@@ -208,16 +256,20 @@ export interface UsersCollection {
 	relations: {
 		teams: TeamsCollection[];
 		club: ClubsCollection[];
-		'clubs(admins)': ClubsCollection[];
-		'teams(admins)': TeamsCollection[];
-		'participations(user)': ParticipationsCollection[];
+		clubs_via_admins: ClubsCollection[];
+		teams_via_admins: TeamsCollection[];
+		participations_via_user: ParticipationsCollection[];
 	};
 }
 
-// ===== events =====
+// ==== end of users block =====
+
+// ==== start of events block =====
+
 
 export interface EventsResponse extends BaseCollectionResponse {
 	collectionName: 'events';
+	id: string;
 	bsm_id: number;
 	title: string;
 	desc: string;
@@ -228,12 +280,15 @@ export interface EventsResponse extends BaseCollectionResponse {
 	attire: string;
 	team: string;
 	cancelled: boolean;
-	match_json: any;
+	match_json?: EventsMatch_json
 	guests: string;
 	location: string;
+	created: string;
+	updated: string;
 }
 
 export interface EventsCreate extends BaseCollectionCreate {
+	id: string;
 	bsm_id?: number;
 	title: string;
 	desc?: string;
@@ -244,12 +299,15 @@ export interface EventsCreate extends BaseCollectionCreate {
 	attire?: string;
 	team: string;
 	cancelled?: boolean;
-	match_json?: any;
+	match_json?: Record<string, any> | Array<any> | null;
 	guests?: string;
 	location?: string;
+	created?: string | Date;
+	updated?: string | Date;
 }
 
 export interface EventsUpdate extends BaseCollectionUpdate {
+	id?: string;
 	bsm_id?: number;
 	'bsm_id+'?: number;
 	'bsm_id-'?: number;
@@ -262,9 +320,11 @@ export interface EventsUpdate extends BaseCollectionUpdate {
 	attire?: string;
 	team?: string;
 	cancelled?: boolean;
-	match_json?: any;
+	match_json?: Record<string, any> | Array<any> | null;
 	guests?: string;
 	location?: string;
+	created?: string | Date;
+	updated?: string | Date;
 }
 
 export interface EventsCollection {
@@ -277,32 +337,42 @@ export interface EventsCollection {
 	relations: {
 		attire: UniformsetsCollection;
 		team: TeamsCollection;
-		'participations(event)': ParticipationsCollection[];
+		participations_via_event: ParticipationsCollection[];
 	};
 }
 
-// ===== clubs =====
+// ==== end of events block =====
+
+// ==== start of clubs block =====
+
 
 export interface ClubsResponse extends BaseCollectionResponse {
 	collectionName: 'clubs';
+	id: string;
 	name: string;
 	bsm_id: number;
 	bsm_api_key: string;
 	signup_key: string;
 	acronym: string;
 	admins: Array<string>;
+	created: string;
+	updated: string;
 }
 
 export interface ClubsCreate extends BaseCollectionCreate {
+	id: string;
 	name: string;
 	bsm_id: number;
 	bsm_api_key?: string;
 	signup_key: string;
 	acronym?: string;
 	admins: MaybeArray<string>;
+	created?: string | Date;
+	updated?: string | Date;
 }
 
 export interface ClubsUpdate extends BaseCollectionUpdate {
+	id?: string;
 	name?: string;
 	bsm_id?: number;
 	'bsm_id+'?: number;
@@ -313,6 +383,8 @@ export interface ClubsUpdate extends BaseCollectionUpdate {
 	admins?: MaybeArray<string>;
 	'admins+'?: MaybeArray<string>;
 	'admins-'?: MaybeArray<string>;
+	created?: string | Date;
+	updated?: string | Date;
 }
 
 export interface ClubsCollection {
@@ -323,35 +395,46 @@ export interface ClubsCollection {
 	create: ClubsCreate;
 	update: ClubsUpdate;
 	relations: {
-		'users(club)': UsersCollection[];
+		users_via_club: UsersCollection[];
 		admins: UsersCollection[];
-		'teams(club)': TeamsCollection[];
-		'uniformsets(club)': UniformsetsCollection[];
+		teams_via_club: TeamsCollection[];
+		leaguegroups_via_clubs: LeaguegroupsCollection[];
+		uniformsets_via_club: UniformsetsCollection[];
 	};
 }
 
-// ===== teams =====
+// ==== end of clubs block =====
+
+// ==== start of teams block =====
+
 
 export interface TeamsResponse extends BaseCollectionResponse {
 	collectionName: 'teams';
+	id: string;
 	name: string;
 	bsm_league_group: number;
 	age_group: 'adults' | 'minors';
 	club: string;
 	description: string;
 	admins: Array<string>;
+	created: string;
+	updated: string;
 }
 
 export interface TeamsCreate extends BaseCollectionCreate {
+	id: string;
 	name: string;
 	bsm_league_group?: number;
 	age_group: 'adults' | 'minors';
 	club: string;
 	description?: string;
 	admins?: MaybeArray<string>;
+	created?: string | Date;
+	updated?: string | Date;
 }
 
 export interface TeamsUpdate extends BaseCollectionUpdate {
+	id?: string;
 	name?: string;
 	bsm_league_group?: number;
 	'bsm_league_group+'?: number;
@@ -362,6 +445,8 @@ export interface TeamsUpdate extends BaseCollectionUpdate {
 	admins?: MaybeArray<string>;
 	'admins+'?: MaybeArray<string>;
 	'admins-'?: MaybeArray<string>;
+	created?: string | Date;
+	updated?: string | Date;
 }
 
 export interface TeamsCollection {
@@ -372,32 +457,44 @@ export interface TeamsCollection {
 	create: TeamsCreate;
 	update: TeamsUpdate;
 	relations: {
-		'users(teams)': UsersCollection[];
-		'events(team)': EventsCollection[];
+		users_via_teams: UsersCollection[];
+		events_via_team: EventsCollection[];
 		club: ClubsCollection;
 		admins: UsersCollection[];
 	};
 }
 
-// ===== requestcaches =====
+// ==== end of teams block =====
+
+// ==== start of requestcaches block =====
+
 
 export interface RequestcachesResponse extends BaseCollectionResponse {
 	collectionName: 'requestcaches';
+	id: string;
 	hash: string;
-	responseBody: any;
+	responseBody?: RequestcachesResponseBody
 	url: string;
+	created: string;
+	updated: string;
 }
 
 export interface RequestcachesCreate extends BaseCollectionCreate {
+	id: string;
 	hash: string;
-	responseBody: any;
+	responseBody?: RequestcachesResponseBody
 	url: string | URL;
+	created?: string | Date;
+	updated?: string | Date;
 }
 
 export interface RequestcachesUpdate extends BaseCollectionUpdate {
+	id?: string;
 	hash?: string;
-	responseBody?: any;
+	responseBody?: RequestcachesResponseBody
 	url?: string | URL;
+	created?: string | Date;
+	updated?: string | Date;
 }
 
 export interface RequestcachesCollection {
@@ -410,24 +507,36 @@ export interface RequestcachesCollection {
 	relations: Record<string, never>;
 }
 
-// ===== leaguegroups =====
+// ==== end of requestcaches block =====
+
+// ==== start of leaguegroups block =====
+
 
 export interface LeaguegroupsResponse extends BaseCollectionResponse {
 	collectionName: 'leaguegroups';
+	id: string;
 	bsm_id: number;
 	season: number;
 	acronym: string;
 	name: string;
+	clubs: Array<string>;
+	created: string;
+	updated: string;
 }
 
 export interface LeaguegroupsCreate extends BaseCollectionCreate {
+	id: string;
 	bsm_id: number;
 	season: number;
 	acronym: string;
 	name: string;
+	clubs?: MaybeArray<string>;
+	created?: string | Date;
+	updated?: string | Date;
 }
 
 export interface LeaguegroupsUpdate extends BaseCollectionUpdate {
+	id?: string;
 	bsm_id?: number;
 	'bsm_id+'?: number;
 	'bsm_id-'?: number;
@@ -436,6 +545,11 @@ export interface LeaguegroupsUpdate extends BaseCollectionUpdate {
 	'season-'?: number;
 	acronym?: string;
 	name?: string;
+	clubs?: MaybeArray<string>;
+	'clubs+'?: MaybeArray<string>;
+	'clubs-'?: MaybeArray<string>;
+	created?: string | Date;
+	updated?: string | Date;
 }
 
 export interface LeaguegroupsCollection {
@@ -445,31 +559,45 @@ export interface LeaguegroupsCollection {
 	response: LeaguegroupsResponse;
 	create: LeaguegroupsCreate;
 	update: LeaguegroupsUpdate;
-	relations: Record<string, never>;
+	relations: {
+		clubs: ClubsCollection[];
+	};
 }
 
-// ===== participations =====
+// ==== end of leaguegroups block =====
+
+// ==== start of participations block =====
+
 
 export interface ParticipationsResponse extends BaseCollectionResponse {
 	collectionName: 'participations';
+	id: string;
 	user: string;
 	event: string;
 	comment: string;
 	state: '' | 'in' | 'out' | 'maybe';
+	created: string;
+	updated: string;
 }
 
 export interface ParticipationsCreate extends BaseCollectionCreate {
+	id: string;
 	user?: string;
 	event?: string;
 	comment?: string;
 	state?: '' | 'in' | 'out' | 'maybe';
+	created?: string | Date;
+	updated?: string | Date;
 }
 
 export interface ParticipationsUpdate extends BaseCollectionUpdate {
+	id?: string;
 	user?: string;
 	event?: string;
 	comment?: string;
 	state?: '' | 'in' | 'out' | 'maybe';
+	created?: string | Date;
+	updated?: string | Date;
 }
 
 export interface ParticipationsCollection {
@@ -485,31 +613,43 @@ export interface ParticipationsCollection {
 	};
 }
 
-// ===== uniformsets =====
+// ==== end of participations block =====
+
+// ==== start of uniformsets block =====
+
 
 export interface UniformsetsResponse extends BaseCollectionResponse {
 	collectionName: 'uniformsets';
+	id: string;
 	name: string;
 	cap: string;
 	jersey: string;
 	pants: string;
 	club: string;
+	created: string;
+	updated: string;
 }
 
 export interface UniformsetsCreate extends BaseCollectionCreate {
+	id: string;
 	name: string;
 	cap: string;
 	jersey: string;
 	pants: string;
 	club: string;
+	created?: string | Date;
+	updated?: string | Date;
 }
 
 export interface UniformsetsUpdate extends BaseCollectionUpdate {
+	id?: string;
 	name?: string;
 	cap?: string;
 	jersey?: string;
 	pants?: string;
 	club?: string;
+	created?: string | Date;
+	updated?: string | Date;
 }
 
 export interface UniformsetsCollection {
@@ -520,10 +660,236 @@ export interface UniformsetsCollection {
 	create: UniformsetsCreate;
 	update: UniformsetsUpdate;
 	relations: {
-		'events(attire)': EventsCollection[];
+		events_via_attire: EventsCollection[];
 		club: ClubsCollection;
 	};
 }
+
+// ==== end of uniformsets block =====
+
+// ==== start of _superusers block =====
+
+
+export interface SuperusersResponse extends AuthCollectionResponse {
+	collectionName: '_superusers';
+	id: string;
+	tokenKey: string;
+	email: string;
+	emailVisibility: boolean;
+	verified: boolean;
+	created: string;
+	updated: string;
+}
+
+export interface SuperusersCreate extends AuthCollectionCreate {
+	id: string;
+	password: string;
+	tokenKey: string;
+	email: string;
+	emailVisibility?: boolean;
+	verified?: boolean;
+	created?: string | Date;
+	updated?: string | Date;
+}
+
+export interface SuperusersUpdate extends AuthCollectionUpdate {
+	id?: string;
+	tokenKey?: string;
+	email?: string;
+	emailVisibility?: boolean;
+	verified?: boolean;
+	created?: string | Date;
+	updated?: string | Date;
+}
+
+export interface SuperusersCollection {
+	type: 'auth';
+	collectionId: string;
+	collectionName: '_superusers';
+	response: SuperusersResponse;
+	create: SuperusersCreate;
+	update: SuperusersUpdate;
+	relations: Record<string, never>;
+}
+
+// ==== end of _superusers block =====
+
+// ==== start of _externalAuths block =====
+
+
+export interface ExternalAuthsResponse extends BaseCollectionResponse {
+	collectionName: '_externalAuths';
+	id: string;
+	collectionRef: string;
+	recordRef: string;
+	provider: string;
+	providerId: string;
+	created: string;
+	updated: string;
+}
+
+export interface ExternalAuthsCreate extends BaseCollectionCreate {
+	id: string;
+	collectionRef: string;
+	recordRef: string;
+	provider: string;
+	providerId: string;
+	created?: string | Date;
+	updated?: string | Date;
+}
+
+export interface ExternalAuthsUpdate extends BaseCollectionUpdate {
+	id?: string;
+	collectionRef?: string;
+	recordRef?: string;
+	provider?: string;
+	providerId?: string;
+	created?: string | Date;
+	updated?: string | Date;
+}
+
+export interface ExternalAuthsCollection {
+	type: 'base';
+	collectionId: string;
+	collectionName: '_externalAuths';
+	response: ExternalAuthsResponse;
+	create: ExternalAuthsCreate;
+	update: ExternalAuthsUpdate;
+	relations: Record<string, never>;
+}
+
+// ==== end of _externalAuths block =====
+
+// ==== start of _mfas block =====
+
+
+export interface MfasResponse extends BaseCollectionResponse {
+	collectionName: '_mfas';
+	id: string;
+	collectionRef: string;
+	recordRef: string;
+	method: string;
+	created: string;
+	updated: string;
+}
+
+export interface MfasCreate extends BaseCollectionCreate {
+	id: string;
+	collectionRef: string;
+	recordRef: string;
+	method: string;
+	created?: string | Date;
+	updated?: string | Date;
+}
+
+export interface MfasUpdate extends BaseCollectionUpdate {
+	id?: string;
+	collectionRef?: string;
+	recordRef?: string;
+	method?: string;
+	created?: string | Date;
+	updated?: string | Date;
+}
+
+export interface MfasCollection {
+	type: 'base';
+	collectionId: string;
+	collectionName: '_mfas';
+	response: MfasResponse;
+	create: MfasCreate;
+	update: MfasUpdate;
+	relations: Record<string, never>;
+}
+
+// ==== end of _mfas block =====
+
+// ==== start of _otps block =====
+
+
+export interface OtpsResponse extends BaseCollectionResponse {
+	collectionName: '_otps';
+	id: string;
+	collectionRef: string;
+	recordRef: string;
+	created: string;
+	updated: string;
+	sentTo: string;
+}
+
+export interface OtpsCreate extends BaseCollectionCreate {
+	id: string;
+	collectionRef: string;
+	recordRef: string;
+	password: string;
+	created?: string | Date;
+	updated?: string | Date;
+	sentTo?: string;
+}
+
+export interface OtpsUpdate extends BaseCollectionUpdate {
+	id?: string;
+	collectionRef?: string;
+	recordRef?: string;
+	created?: string | Date;
+	updated?: string | Date;
+	sentTo?: string;
+}
+
+export interface OtpsCollection {
+	type: 'base';
+	collectionId: string;
+	collectionName: '_otps';
+	response: OtpsResponse;
+	create: OtpsCreate;
+	update: OtpsUpdate;
+	relations: Record<string, never>;
+}
+
+// ==== end of _otps block =====
+
+// ==== start of _authOrigins block =====
+
+
+export interface AuthOriginsResponse extends BaseCollectionResponse {
+	collectionName: '_authOrigins';
+	id: string;
+	collectionRef: string;
+	recordRef: string;
+	fingerprint: string;
+	created: string;
+	updated: string;
+}
+
+export interface AuthOriginsCreate extends BaseCollectionCreate {
+	id: string;
+	collectionRef: string;
+	recordRef: string;
+	fingerprint: string;
+	created?: string | Date;
+	updated?: string | Date;
+}
+
+export interface AuthOriginsUpdate extends BaseCollectionUpdate {
+	id?: string;
+	collectionRef?: string;
+	recordRef?: string;
+	fingerprint?: string;
+	created?: string | Date;
+	updated?: string | Date;
+}
+
+export interface AuthOriginsCollection {
+	type: 'base';
+	collectionId: string;
+	collectionName: '_authOrigins';
+	response: AuthOriginsResponse;
+	create: AuthOriginsCreate;
+	update: AuthOriginsUpdate;
+	relations: Record<string, never>;
+}
+
+// ==== end of _authOrigins block =====
+
 
 // ===== Schema =====
 
@@ -536,4 +902,9 @@ export type Schema = {
 	leaguegroups: LeaguegroupsCollection;
 	participations: ParticipationsCollection;
 	uniformsets: UniformsetsCollection;
-};
+	_superusers: SuperusersCollection;
+	_externalAuths: ExternalAuthsCollection;
+	_mfas: MfasCollection;
+	_otps: OtpsCollection;
+	_authOrigins: AuthOriginsCollection;
+}

@@ -1,6 +1,6 @@
 import {env} from "$env/dynamic/public"
 import type {Schema} from "$lib/model/pb-types";
-import {TypedPocketBase} from "typed-pocketbase";
+import {TypedPocketBase} from "@tigawanna/typed-pocketbase";
 import type {AuthRecord} from "pocketbase";
 import {browser, dev} from "$app/environment";
 import type {CustomAuthModel} from "$lib/model/ExpandedResponse";

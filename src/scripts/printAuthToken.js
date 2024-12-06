@@ -9,8 +9,8 @@ dotenv.config({
 });
 
 const pbUrl = process.env.PUBLIC_POCKETBASE_URL;
-const adminEmail = process.env.ADMIN_EMAIL;
-const adminPassword = process.env.ADMIN_PASSWORD;
+const adminEmail = process.env.POCKETBASE_EMAIL;
+const adminPassword = process.env.POCKETBASE_PASSWORD;
 
 const pb = new PocketBase(pbUrl);
 
