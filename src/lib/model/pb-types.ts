@@ -906,6 +906,7 @@ export interface EventseriesResponse extends BaseCollectionResponse {
 	end: string;
 	team: string;
 	start: string;
+	time: string;
 	created: string;
 	updated: string;
 }
@@ -917,6 +918,7 @@ export interface EventseriesCreate extends BaseCollectionCreate {
 	end?: string | Date;
 	team: string;
 	start: string | Date;
+	time: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -932,6 +934,7 @@ export interface EventseriesUpdate extends BaseCollectionUpdate {
 	end?: string | Date;
 	team?: string;
 	start?: string | Date;
+	time?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }

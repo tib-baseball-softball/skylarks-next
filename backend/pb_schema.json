@@ -1437,6 +1437,20 @@
         "type": "date"
       },
       {
+        "autogeneratePattern": "",
+        "hidden": false,
+        "id": "text1872009285",
+        "max": 0,
+        "min": 0,
+        "name": "time",
+        "pattern": "^(?:[01]\\d|2[0-3]):(?:[0-5]\\d):(?:[0-5]\\d)$",
+        "presentable": false,
+        "primaryKey": false,
+        "required": true,
+        "system": false,
+        "type": "text"
+      },
+      {
         "hidden": false,
         "id": "autodate2990389176",
         "name": "created",
