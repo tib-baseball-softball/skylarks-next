@@ -2,13 +2,12 @@ package hooks
 
 import (
 	"errors"
-	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/core"
 	"net/http"
 	"time"
 )
 
-func SetLastLogin(app *pocketbase.PocketBase, record *core.Record) (err error) {
+func SetLastLogin(app core.App, record *core.Record) (err error) {
 	currentTime := time.Now()
 	record.Set("last_login", currentTime)
 
@@ -21,7 +20,7 @@ func SetLastLogin(app *pocketbase.PocketBase, record *core.Record) (err error) {
 	return nil
 }
 
-func ValidateSignupKey(app *pocketbase.PocketBase, event *core.RecordRequestEvent) error {
+func ValidateSignupKey(app core.App, event *core.RecordRequestEvent) error {
 	clubs, err := getValidSignupKeys(app)
 	if err != nil {
 		errorText := "failed to get valid signup clubs"
@@ -67,7 +66,7 @@ type Club struct {
 	SignupKey string `db:"signup_key"`
 }
 
-func getValidSignupKeys(app *pocketbase.PocketBase) ([]Club, error) {
+func getValidSignupKeys(app core.App) ([]Club, error) {
 	var clubs []Club
 
 	err := app.DB().

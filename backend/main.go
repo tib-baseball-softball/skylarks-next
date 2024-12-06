@@ -27,7 +27,7 @@ func main() {
 	//------------------- Hooks -------------------------//
 
 	app.OnRecordAuthRequest("users").BindFunc(func(e *core.RecordAuthRequestEvent) error {
-		err := hooks.SetLastLogin(app, e.Record)
+		err := hooks.SetLastLogin(e.App, e.Record)
 		if err != nil {
 			app.Logger().Error(
 				"Error upon setting auth record last login field",
@@ -38,15 +38,15 @@ func main() {
 	})
 
 	app.OnRecordCreateRequest("users").BindFunc(func(event *core.RecordRequestEvent) error {
-		return hooks.ValidateSignupKey(app, event)
+		return hooks.ValidateSignupKey(event.App, event)
 	})
 
 	app.OnRecordsListRequest("leaguegroups").BindFunc(func(event *core.RecordsListRequestEvent) error {
-		return hooks.TriggerLeagueImport(app, event)
+		return hooks.TriggerLeagueImport(event.App, event)
 	})
 
 	app.OnRecordEnrich("events").BindFunc(func(event *core.RecordEnrichEvent) error {
-		return hooks.AddEventParticipationData(app, event)
+		return hooks.AddEventParticipationData(event.App, event)
 	})
 
 	//------------------- Custom Routes -------------------------//
