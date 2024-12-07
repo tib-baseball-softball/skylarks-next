@@ -2,7 +2,7 @@ import type {RecordModel} from "pocketbase"
 import type {
   ClubsResponse,
   EventsCreate,
-  EventseriesResponse,
+  EventseriesCreate,
   EventsResponse,
   ParticipationsResponse,
   TeamsResponse,
@@ -61,7 +61,9 @@ export type CustomAuthModel = Extension<RecordModel, {
 export type EventType = EventsResponse['type']
 export type ParticipationType = ParticipationsResponse['state']
 
-export type EventSeriesCreationData = Extension<EventseriesResponse, {
+export type EventSeriesCreationData = Extension<EventseriesCreate, {
   location: EventsCreate['location'],
   desc: EventsCreate['desc'],
+  series_start: string
+  series_end: string
 }>
