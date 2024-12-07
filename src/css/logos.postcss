@@ -1,0 +1,16 @@
+/** Applies to all logos that have different variants for dark and light mode. */
+.dark {
+    .dark-logo {
+        @apply hidden;
+    }
+}
+
+.light-logo {
+    @apply hidden;
+}
+
+.dark {
+    .light-logo {
+        @apply block;
+    }
+}

@@ -35,7 +35,7 @@
   const authModel = authSettings.record as CustomAuthModel
 </script>
 
-<h1 class="h2">{data.team.name} ({data.team?.expand?.club.name})</h1>
+<h1 class="h1">{data.team.name} ({data.team?.expand?.club.name})</h1>
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-3">
     <article class="card variant-soft-surface lg:col-span-2">
