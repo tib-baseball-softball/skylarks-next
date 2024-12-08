@@ -49,6 +49,10 @@ func main() {
 		return hooks.AddEventParticipationData(event.App, event)
 	})
 
+	app.OnRecordAfterCreateSuccess("eventseries").BindFunc(func(e *core.RecordEvent) error {
+		return hooks.CreateEventsForSeries(e)
+	})
+
 	//------------------- Custom Routes -------------------------//
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
