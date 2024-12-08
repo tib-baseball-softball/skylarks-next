@@ -21,6 +21,13 @@ export class DateTimeUtility {
   }
 
   //@ts-ignore
+  public static readonly eventSeriesDateFormat: DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+  }
+
+  //@ts-ignore
   public static readonly eventTimeFormat: DateTimeFormatOptions = {
     hour: 'numeric',
     minute: 'numeric',

@@ -5,6 +5,7 @@
   import type {EventSeriesCreationData, ExpandedTeam} from "$lib/model/ExpandedResponse.ts";
   import EventSeriesForm from "$lib/components/forms/EventSeriesForm.svelte";
   import {slide} from "svelte/transition";
+  import EventSeriesListItem from "$lib/components/diamondplanner/eventseries/EventSeriesListItem.svelte";
 
   const drawerStore = getDrawerStore();
 
@@ -20,7 +21,7 @@
   }
 </script>
 
-<article class="p-6 space-y-3">
+<article class="p-3 sm:p-4 lg:p-6 space-y-3">
     <div class="flex items-center gap-5">
         <button
                 aria-label="cancel and close"
@@ -34,20 +35,24 @@
         </header>
     </div>
 
-    <h3 class="h3 !mt-6">Active event series</h3>
+    <h3 class="h3 !mt-6">Active Event Series</h3>
 
     {#each eventSeries as series}
-        <div>{series.title}</div>
+        <EventSeriesListItem eventSeries={series}/>
+
+        <div class="flex gap-2">
+            <button class="btn variant-ghost" onclick={() => setupAndShowForm(series)}>Edit</button>
+            <button class="btn variant-ghost-error">Delete</button>
+        </div>
     {/each}
 
     {#if eventSeries.length === 0}
         <section class="font-light space-y-4">
             <div>No event series have been set up for this team yet.</div>
-
         </section>
     {/if}
-    <button class="btn variant-ghost-primary" onclick={() => setupAndShowForm(null)}>
-        Add event series
+    <button class="btn variant-ghost-primary !mt-6" onclick={() => setupAndShowForm(null)}>
+        Add new Event Series
     </button>
 
     <hr class="!my-6">

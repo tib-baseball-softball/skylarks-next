@@ -2,7 +2,7 @@
   import {invalidate} from "$app/navigation";
   import type {EventSeriesCreationData, ExpandedTeam} from "$lib/model/ExpandedResponse.ts";
   import {client} from "$lib/pocketbase/index.svelte.js";
-  import {getToastStore, type ToastSettings,} from "@skeletonlabs/skeleton";
+  import {getDrawerStore, getToastStore, type ToastSettings,} from "@skeletonlabs/skeleton";
   import {DateTimeUtility} from "$lib/service/DateTimeUtility.js";
   import Flatpickr from "$lib/components/utility/Flatpickr.svelte";
   import {Weekday} from "$lib/types/Weekday.ts";
@@ -16,6 +16,7 @@
   let {eventSeries, team, showForm = $bindable()}: Props = $props()
 
   const toastStore = getToastStore();
+  const drawerStore = getDrawerStore()
 
   const toastSettingsSuccess: ToastSettings = {
     message: "Event Series saved successfully.",
@@ -27,7 +28,7 @@
     background: "variant-filled-error",
   };
 
-  const form: EventSeriesCreationData = $state(
+  const form: EventSeriesCreationData = $derived(
       eventSeries ?? {
         id: "",
         title: "",
@@ -64,14 +65,15 @@
     if (result) {
       toastStore.trigger(toastSettingsSuccess);
       showForm = false
+      drawerStore.close()
+      await invalidate("event:list");
     }
-    invalidate("event:list");
   }
 </script>
 
 <h3 class="h3">
     {#if eventSeries}
-        Edit Event Series{eventSeries.title}
+        Edit Event Series "{eventSeries.title}"
     {:else}
         Create new Event Series for {team.name}
     {/if}

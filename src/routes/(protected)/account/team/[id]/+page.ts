@@ -24,7 +24,8 @@ export const load = (async ({fetch, parent, params, url, depends}) => {
   const eventService = new EventService()
   const events = await eventService.loadEventStore(team.id, url, fetch)
   const eventSeries = await client.collection("eventseries").getFullList<EventseriesResponse>({
-    filter: `team = "${team.id}"`
+    filter: `team = "${team.id}"`,
+    fetch: fetch
   });
 
   depends("event:list")
