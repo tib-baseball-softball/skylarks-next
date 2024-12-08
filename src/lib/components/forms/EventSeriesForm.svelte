@@ -28,19 +28,21 @@
     background: "variant-filled-error",
   };
 
+  const formDefault = $state({
+    id: "",
+    title: "",
+    starttime: "",
+    endtime: "",
+    interval: 7,
+    series_start: "",
+    series_end: "",
+    desc: "",
+    location: "",
+    team: team?.id,
+  })
+
   const form: EventSeriesCreationData = $derived(
-      eventSeries ?? {
-        id: "",
-        title: "",
-        starttime: "",
-        endtime: "",
-        interval: 7,
-        series_start: "",
-        series_end: "",
-        desc: "",
-        location: "",
-        team: team?.id,
-      },
+      eventSeries ?? formDefault,
   );
 
   async function submitForm(e: SubmitEvent) {
@@ -105,7 +107,7 @@
             />
         </label>
 
-        <label class="label col-span-2 mt-3">
+        <label class="label md:col-span-2 mt-3">
             Title
             <input
                     name="title"
