@@ -8,7 +8,7 @@ Authorization: {{adminToken}}
   "interval": 7,
   "weekday": 1,
   "series_start": "2025-01-01 10:00:00.123Z",
-  "series_end": "2025-03-01 10:00:00.123Z",
+  "series_end": "2025-02-01 10:00:00.123Z",
   "team": "{{teamID}}",
   "starttime": "18:00",
   "endtime": "20:00"

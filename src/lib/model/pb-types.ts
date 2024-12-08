@@ -4,15 +4,12 @@
  
   }>;
   // === end of custom type ===
-
-
 // === start of custom type ===
   // Requestcaches.RequestcachesResponseBody.responseBody
   export type RequestcachesResponseBody = Array<{
  
   }>;
   // === end of custom type ===
-
 
 /**
  * This file was @generated using typed-pocketbase
@@ -300,7 +297,7 @@ export interface EventsCreate extends BaseCollectionCreate {
 	attire?: string;
 	team: string;
 	cancelled?: boolean;
-	match_json?: Record<string, any> | Array<any> | null;
+	match_json?: EventsMatch_json
 	guests?: string;
 	location?: string;
 	series?: string;
@@ -322,7 +319,7 @@ export interface EventsUpdate extends BaseCollectionUpdate {
 	attire?: string;
 	team?: string;
 	cancelled?: boolean;
-	match_json?: Record<string, any> | Array<any> | null;
+	match_json?: EventsMatch_json
 	guests?: string;
 	location?: string;
 	series?: string;
@@ -909,6 +906,8 @@ export interface EventseriesResponse extends BaseCollectionResponse {
 	team: string;
 	starttime: string;
 	endtime: string;
+	desc: string;
+	location: string;
 	created: string;
 	updated: string;
 }
@@ -923,6 +922,8 @@ export interface EventseriesCreate extends BaseCollectionCreate {
 	team: string;
 	starttime: string;
 	endtime?: string;
+	desc?: string;
+	location?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -941,6 +942,8 @@ export interface EventseriesUpdate extends BaseCollectionUpdate {
 	team?: string;
 	starttime?: string;
 	endtime?: string;
+	desc?: string;
+	location?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }

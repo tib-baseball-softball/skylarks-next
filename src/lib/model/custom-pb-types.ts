@@ -4,12 +4,9 @@
  
   }>;
   // === end of custom type ===
-
-
 // === start of custom type ===
   // Requestcaches.RequestcachesResponseBody.responseBody
   export type RequestcachesResponseBody = Array<{
  
   }>;
   // === end of custom type ===
-

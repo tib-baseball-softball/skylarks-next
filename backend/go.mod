@@ -6,7 +6,7 @@ toolchain go1.23.4
 
 require (
 	github.com/pocketbase/dbx v1.10.1
-	github.com/pocketbase/pocketbase v0.23.4
+	github.com/pocketbase/pocketbase v0.23.5
 	github.com/spf13/cobra v1.8.1
 	github.com/subosito/gotenv v1.6.0
 )

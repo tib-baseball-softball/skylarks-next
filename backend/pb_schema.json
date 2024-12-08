@@ -1479,6 +1479,28 @@
         "type": "text"
       },
       {
+        "convertURLs": false,
+        "hidden": false,
+        "id": "editor196455508",
+        "maxSize": 0,
+        "name": "desc",
+        "presentable": false,
+        "required": false,
+        "system": false,
+        "type": "editor"
+      },
+      {
+        "convertURLs": false,
+        "hidden": false,
+        "id": "editor1587448267",
+        "maxSize": 0,
+        "name": "location",
+        "presentable": false,
+        "required": false,
+        "system": false,
+        "type": "editor"
+      },
+      {
         "hidden": false,
         "id": "autodate2990389176",
         "name": "created",
