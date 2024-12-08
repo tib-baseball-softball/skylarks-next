@@ -27,24 +27,24 @@
             <!-- Start Time -->
             <div class="flex flex-col items-start">
                 <span class="text-sm font-medium">Start Time:</span>
-                <time class="text-sm md:text-base">{eventSeries.starttime}</time>
+                <time datetime="{eventSeries.starttime}" class="text-sm md:text-base">{eventSeries.starttime}</time>
             </div>
             <!-- Start Date -->
             <div class="flex flex-col items-start">
                 <span class="text-sm font-medium">Series Start Date:</span>
-                <time class="text-sm md:text-base">
+                <time class="text-sm md:text-base" datetime="{eventSeries.series_start}">
                     {startDate.toLocaleDateString("de-DE", DateTimeUtility.eventSeriesDateFormat)}
                 </time>
             </div>
             <!-- End Time -->
             <div class="flex flex-col items-start">
                 <span class="text-sm font-medium">End Time:</span>
-                <time class="text-sm md:text-base">{eventSeries.endtime}</time>
+                <time class="text-sm md:text-base" datetime="{eventSeries.endtime}">{eventSeries.endtime}</time>
             </div>
             <!-- End Date -->
             <div class="flex flex-col items-start">
                 <span class="text-sm font-medium">Series End Date:</span>
-                <time class="text-sm md:text-base">
+                <time class="text-sm md:text-base" datetime="{eventSeries.series_end}">
                     {endDate.toLocaleDateString("de-DE", DateTimeUtility.eventSeriesDateFormat)}
                 </time>
             </div>
