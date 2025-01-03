@@ -39,8 +39,7 @@ func generateSeriesEvents(app core.App, e *core.RecordEvent) ([]*core.Record, er
 	startTimeString := eventSeries.GetString("starttime")
 	endTimeString := eventSeries.GetString("endtime")
 
-	// MARK: using hardcoded time zone for Germany here
-	location, err := time.LoadLocation("Europe/Berlin")
+	location, err := time.LoadLocation("UTC")
 	if err != nil {
 		return nil, err
 	}
@@ -80,8 +79,6 @@ func generateSeriesEvents(app core.App, e *core.RecordEvent) ([]*core.Record, er
 		if err != nil {
 			return nil, err
 		}
-
-		// TODO: fix timezone issues
 
 		if eventStart.After(eventSeries.GetDateTime("series_start").Time()) && eventStart.Before(endDate) {
 			event := core.NewRecord(eventCollection)

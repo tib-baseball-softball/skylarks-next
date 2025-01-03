@@ -42,6 +42,44 @@ export class DateTimeUtility {
   }
 
   /**
+   * Time snippets are entered as strings from HTML time picker (`10:00`).
+   * Convert these to UTC before sending to backend.
+   * @param time
+   */
+  public static convertTimeToUTC(time: string): string {
+    if (!/^\d{2}:\d{2}$/.test(time)) {
+      throw new Error("Invalid time format. Expected 'HH:mm'.");
+    }
+
+    const [hours, minutes] = time.split(":").map(Number);
+
+    // Create a Date object for the current date and the given time in the user's local time zone
+    const now = new Date();
+    const localDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes);
+
+    const utcHours = localDate.getUTCHours();
+    const utcMinutes = localDate.getUTCMinutes();
+
+    return `${utcHours.toString().padStart(2, "0")}:${utcMinutes.toString().padStart(2, "0")}`;
+  }
+
+  public static convertTimeFromUTC(utcTime: string): string {
+    if (!/^\d{2}:\d{2}$/.test(utcTime)) {
+      throw new Error("Invalid time format. Expected 'HH:mm'.");
+    }
+
+    const [utcHours, utcMinutes] = utcTime.split(":").map(Number);
+
+    const utcDate = new Date();
+    utcDate.setUTCHours(utcHours, utcMinutes, 0, 0);
+
+    const localHours = utcDate.getHours();
+    const localMinutes = utcDate.getMinutes();
+
+    return `${localHours.toString().padStart(2, "0")}:${localMinutes.toString().padStart(2, "0")}`;
+  }
+
+  /**
    * Slightly overcomplicated method to parse the BSM "time" string into something usable, with help from generative AI.
    * BSM does not use ISO 8601 format.
    *
