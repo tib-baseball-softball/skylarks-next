@@ -7,25 +7,35 @@ import (
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/tib-baseball-softball/skylarks-next/stats"
 	"net/http"
-	"slices"
 )
 
 // GetGamesCount returns the amount of official league games in the database for a given team and season.
 // Requires valid auth record that belongs to the team queried.
 func GetGamesCount(app *pocketbase.PocketBase) func(e *core.RequestEvent) error {
 	return func(e *core.RequestEvent) error {
+		// verify access status
 		requireAuth := apis.RequireAuth()
 		if err := requireAuth.Func(e); err != nil {
 			return err
 		}
 
-		authTeams := e.Auth.GetStringSlice("teams")
 		teamID := e.Request.PathValue("team")
-
-		if !slices.Contains(authTeams, teamID) {
-			return apis.NewUnauthorizedError("Only members can query team game count", nil)
+		team, err := app.FindRecordById("teams", teamID)
+		if err != nil {
+			return e.BadRequestError("Failed to load teams record", err)
 		}
 
+		info, err := e.RequestInfo()
+		if err != nil {
+			return e.BadRequestError("Failed to retrieve request info", err)
+		}
+
+		canAccess, err := e.App.CanAccessRecord(team, info, team.Collection().ViewRule)
+		if !canAccess {
+			return e.ForbiddenError("Only members and admins can query team game count", err)
+		}
+
+		// do actual work
 		season := e.Request.URL.Query().Get("season")
 
 		if season == "" {
