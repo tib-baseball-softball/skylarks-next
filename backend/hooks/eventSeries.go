@@ -1,6 +1,7 @@
 package hooks
 
 import (
+	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
 	"github.com/tib-baseball-softball/skylarks-next/enum"
@@ -25,6 +26,35 @@ func CreateEventsForSeries(e *core.RecordEvent) error {
 		return err
 	}
 
+	return e.Next()
+}
+
+func DeleteEventsForSeries(e *core.RecordEvent) error {
+	eventSeries := e.Record
+
+	eventsToBeDeleted, err := e.App.FindRecordsByFilter(
+		"events",
+		"series = {:seriesID}",
+		"",
+		0,
+		0,
+		dbx.Params{"seriesID": eventSeries.Id},
+	)
+	if err != nil {
+		return err
+	}
+
+	err = e.App.RunInTransaction(func(txApp core.App) error {
+		for _, record := range eventsToBeDeleted {
+			if err := txApp.Delete(record); err != nil {
+				return err
+			}
+		}
+		return nil
+	})
+	if err != nil {
+		return err
+	}
 	return e.Next()
 }
 

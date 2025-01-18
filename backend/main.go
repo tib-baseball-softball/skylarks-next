@@ -53,6 +53,10 @@ func main() {
 		return hooks.CreateEventsForSeries(e)
 	})
 
+	app.OnRecordDelete("eventseries").BindFunc(func(e *core.RecordEvent) error {
+		return hooks.DeleteEventsForSeries(e)
+	})
+
 	//------------------- Custom Routes -------------------------//
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
