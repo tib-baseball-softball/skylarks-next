@@ -50,7 +50,11 @@ func main() {
 	})
 
 	app.OnRecordAfterCreateSuccess("eventseries").BindFunc(func(e *core.RecordEvent) error {
-		return hooks.CreateEventsForSeries(e)
+		return hooks.CreateOrUpdateEventsForSeries(e)
+	})
+
+	app.OnRecordAfterUpdateSuccess("eventseries").BindFunc(func(e *core.RecordEvent) error {
+		return hooks.CreateOrUpdateEventsForSeries(e)
 	})
 
 	app.OnRecordDelete("eventseries").BindFunc(func(e *core.RecordEvent) error {
