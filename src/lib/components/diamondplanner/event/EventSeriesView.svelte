@@ -9,6 +9,7 @@
   import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
   import {client} from "$lib/pocketbase/index.svelte.ts";
   import {invalidateAll} from "$app/navigation";
+  import {DateTimeUtility} from "$lib/service/DateTimeUtility.ts";
 
   const drawerStore = getDrawerStore();
 
@@ -20,6 +21,12 @@
 
   function setupAndShowForm(eventSeries: EventSeriesCreationData | null) {
     selectedEventSeries = eventSeries
+
+    // this is pretty ugly, but the form needs to get local times instead of UTC values
+    if (eventSeries && selectedEventSeries && eventSeries.endtime) {
+      selectedEventSeries.starttime = DateTimeUtility.convertTimeFromUTC(eventSeries.starttime)
+      selectedEventSeries.endtime = DateTimeUtility.convertTimeFromUTC(eventSeries.endtime)
+    }
     showForm = true
   }
 
