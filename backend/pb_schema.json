@@ -1643,9 +1643,9 @@
     "id": "ngighvrbraklj58",
     "listRule": "event.team.id ?= @request.auth.teams.id",
     "viewRule": "event.team.id ?= @request.auth.teams.id",
-    "createRule": "@request.auth.id != \"\"",
-    "updateRule": "user.id = @request.auth.id",
-    "deleteRule": null,
+    "createRule": "@request.auth.id != \"\" && event.team.id ?= @request.auth.teams.id",
+    "updateRule": "user.id = @request.auth.id || @request.auth.id ?= event.team.admins",
+    "deleteRule": "@request.auth.id ?= event.team.admins",
     "name": "participations",
     "type": "base",
     "fields": [
