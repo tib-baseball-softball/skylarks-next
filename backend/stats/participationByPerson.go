@@ -53,7 +53,7 @@ func GetParticipationStats(user *core.Record, app core.App, seasonParam string, 
 
 	err := query.All(&participations)
 	if err != nil {
-		app.Logger().Error("failed to load participations: %v", err)
+		app.Logger().Error("failed to load participations: %v", "error", err)
 		return participations, err
 	}
 	return participations, nil

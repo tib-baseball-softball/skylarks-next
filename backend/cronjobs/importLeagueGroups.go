@@ -91,7 +91,7 @@ func createOrUpdateLeagueGroups(app core.App, leagueGroups []model.LeagueGroup, 
 		}
 
 		if err := app.Save(record); err != nil {
-			app.Logger().Error("Persisting LeagueGroup record failed: ", err)
+			app.Logger().Error("Persisting LeagueGroup record failed: ", "error", err)
 			return err
 		}
 	}

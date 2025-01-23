@@ -14,7 +14,7 @@ func AddEventParticipationData(app core.App, event *core.RecordEnrichEvent) erro
 	event.Record.WithCustomData(true)
 	err := enrichParticipationData(app, event.RequestInfo.Auth, event.Record)
 	if err != nil {
-		app.Logger().Error("EnrichParticipationData error", err)
+		app.Logger().Error("EnrichParticipationData error", "error", err)
 		return err
 	}
 
@@ -45,7 +45,7 @@ func addParticipationsByType(app core.App, record *core.Record) error {
 		dbx.Params{"eventID": record.Id},
 	)
 	if err != nil {
-		app.Logger().Error("EnrichParticipationData error", err)
+		app.Logger().Error("EnrichParticipationData error", "error", err)
 		return err
 	}
 	if errs := app.ExpandRecords(participations, []string{"user"}, nil); len(errs) > 0 {

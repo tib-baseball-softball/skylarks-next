@@ -26,7 +26,7 @@ func LoadUserStats(user *core.Record, requestEvent *core.RequestEvent) (Personal
 	if seasonParam != "" {
 		season, err := strconv.Atoi(seasonParam)
 		if err != nil {
-			requestEvent.App.Logger().Error("failed to parse season: %v", err)
+			requestEvent.App.Logger().Error("failed to parse season: %v", "error", err)
 			return statsItem, err
 		}
 		statsItem.Season = season
@@ -35,7 +35,7 @@ func LoadUserStats(user *core.Record, requestEvent *core.RequestEvent) (Personal
 	if eventTypeParam != "" {
 		eventType, err := enum.ParseEventType(eventTypeParam)
 		if err != nil {
-			requestEvent.App.Logger().Error("failed to parse eventType: %v", err)
+			requestEvent.App.Logger().Error("failed to parse eventType: %v", "error", err)
 			return statsItem, err
 		}
 		statsItem.Type = eventType
@@ -43,7 +43,7 @@ func LoadUserStats(user *core.Record, requestEvent *core.RequestEvent) (Personal
 
 	eventCounts, err := GetEventCounts(requestEvent.App, user, seasonParam, teamParam)
 	if err != nil {
-		requestEvent.App.Logger().Error("failed to get eventCounts: %v", err)
+		requestEvent.App.Logger().Error("failed to get eventCounts: %v", "error", err)
 		return statsItem, err
 	}
 	statsItem.TotalPossibleEvents = eventCounts.AllEvents
@@ -87,7 +87,7 @@ func LoadUserStats(user *core.Record, requestEvent *core.RequestEvent) (Personal
 	for i, participation := range participations {
 		eventType, err := enum.ParseEventType(participation.Type)
 		if err != nil {
-			requestEvent.App.Logger().Error("failed to parse eventType: %v", err)
+			requestEvent.App.Logger().Error("failed to parse eventType: %v", "error", err)
 			return statsItem, err
 		}
 		switch eventType {
