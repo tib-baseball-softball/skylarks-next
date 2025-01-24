@@ -38,7 +38,7 @@ func GetGamesCount(app core.App) func(e *core.RequestEvent) error {
 		season := e.Request.URL.Query().Get("season")
 
 		if season == "" {
-			return apis.NewBadRequestError("query param for season is required", nil)
+			return apis.NewBadRequestError("Query param for season is required", nil)
 		}
 
 		result, err := LoadCount(app, teamID, season)
