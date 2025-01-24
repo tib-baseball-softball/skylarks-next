@@ -220,3 +220,8 @@ vite.config.ts.timestamp-*
 .idea
 *private.env.json
 /backend/go_build_github_com_tib_baseball_softball_skylarks_next
+/backend/test_pb_data/storage/
+/backend/test_pb_data/auxiliary.db-shm
+/backend/test_pb_data/auxiliary.db-wal
+/backend/test_pb_data/data.db-shm
+/backend/test_pb_data/data.db-wal
