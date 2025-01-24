@@ -21,8 +21,7 @@ func init() {
 	}
 }
 
-func main() {
-	app := pocketbase.New()
+func bindAppHooks(app core.App) {
 
 	//------------------- Hooks -------------------------//
 
@@ -94,6 +93,27 @@ func main() {
 		return se.Next()
 	})
 
+	//------------------- Cronjobs -------------------------//
+
+	if os.Getenv("APPLICATION_CONTEXT") != "Development" {
+		app.Cron().MustAdd("LeagueGroupImport", "0 * * * *", func() {
+			err := cronjobs.ImportLeagueGroups(app, nil, nil)
+			if err != nil {
+				app.Logger().Error("Error while running cronjob LeagueGroupImport: " + err.Error())
+			}
+		})
+
+		app.Cron().MustAdd("GamesImport", "0 * * * *", func() {
+			cronjobs.ImportGames(app)
+		})
+	}
+}
+
+func main() {
+	app := pocketbase.New()
+
+	bindAppHooks(app)
+
 	//------------------- Commands -------------------------//
 
 	app.RootCmd.AddCommand(&cobra.Command{
@@ -112,21 +132,6 @@ func main() {
 			}
 		},
 	})
-
-	//------------------- Cronjobs -------------------------//
-
-	if os.Getenv("APPLICATION_CONTEXT") != "Development" {
-		app.Cron().MustAdd("LeagueGroupImport", "0 * * * *", func() {
-			err := cronjobs.ImportLeagueGroups(app, nil, nil)
-			if err != nil {
-				app.Logger().Error("Error while running cronjob LeagueGroupImport: " + err.Error())
-			}
-		})
-
-		app.Cron().MustAdd("GamesImport", "0 * * * *", func() {
-			cronjobs.ImportGames(app)
-		})
-	}
 
 	if err := app.Start(); err != nil {
 		log.Fatal(err)

@@ -2,7 +2,6 @@ package routes
 
 import (
 	"github.com/pocketbase/dbx"
-	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/apis"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/tib-baseball-softball/skylarks-next/stats"
@@ -11,7 +10,7 @@ import (
 
 // GetGamesCount returns the amount of official league games in the database for a given team and season.
 // Requires valid auth record that belongs to the team queried.
-func GetGamesCount(app *pocketbase.PocketBase) func(e *core.RequestEvent) error {
+func GetGamesCount(app core.App) func(e *core.RequestEvent) error {
 	return func(e *core.RequestEvent) error {
 		// verify access status
 		requireAuth := apis.RequireAuth()
@@ -51,7 +50,7 @@ func GetGamesCount(app *pocketbase.PocketBase) func(e *core.RequestEvent) error 
 	}
 }
 
-func LoadCount(app *pocketbase.PocketBase, teamID string, season string) (stats.SimpleCount, error) {
+func LoadCount(app core.App, teamID string, season string) (stats.SimpleCount, error) {
 	result := stats.SimpleCount{}
 	err := app.DB().
 		Select("COUNT(events.id) AS count").

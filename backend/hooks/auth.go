@@ -25,7 +25,7 @@ func ValidateSignupKey(app core.App, event *core.RecordRequestEvent) error {
 	if err != nil {
 		errorText := "failed to get valid signup clubs"
 
-		app.Logger().Error(errorText)
+		app.Logger().Error(errorText, "error", err)
 		return errors.New(errorText)
 	}
 

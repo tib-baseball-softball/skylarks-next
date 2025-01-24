@@ -1,7 +1,6 @@
 package routes
 
 import (
-	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/apis"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/tib-baseball-softball/skylarks-next/cronjobs"
@@ -10,7 +9,7 @@ import (
 )
 
 // StartLeagueGroupsImport runs import cron for league groups exactly once for one specific club.
-func StartLeagueGroupsImport(app *pocketbase.PocketBase) func(event *core.RequestEvent) error {
+func StartLeagueGroupsImport(app core.App) func(event *core.RequestEvent) error {
 	return func(event *core.RequestEvent) error {
 		requireAuth := apis.RequireAuth()
 		if err := requireAuth.Func(event); err != nil {

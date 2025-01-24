@@ -2,7 +2,6 @@ package cronjobs
 
 import (
 	"encoding/json"
-	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
 	"github.com/tib-baseball-softball/skylarks-next/bsm"
@@ -12,7 +11,7 @@ import (
 	"time"
 )
 
-func ImportGames(app *pocketbase.PocketBase) {
+func ImportGames(app core.App) {
 	teams, err := app.FindRecordsByFilter("teams", "bsm_league_group != 0", "", 0, 0)
 	if err != nil {
 		log.Print("Error fetching existing team records: ", err)
@@ -78,7 +77,7 @@ func fetchMatchesForLeagueGroup(league string, apiKey string) ([]model.Match, er
 	return matches, nil
 }
 
-func createOrUpdateEvents(app *pocketbase.PocketBase, matches []model.Match, teamID string) (err error) {
+func createOrUpdateEvents(app core.App, matches []model.Match, teamID string) (err error) {
 	for _, match := range matches {
 		record, err := app.FindFirstRecordByData("events", "bsm_id", match.ID)
 
