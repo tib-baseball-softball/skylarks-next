@@ -4,7 +4,7 @@
   import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
   import {Avatar, getModalStore, getToastStore, type ModalSettings} from "@skeletonlabs/skeleton";
   import {client} from "$lib/pocketbase/index.svelte";
-  import {CheckCircleSolid, EditOutline, LockOpenOutline, LockOutline, TrashBinOutline} from "flowbite-svelte-icons";
+  import {CheckCircleSolid, LockOpenOutline, LockOutline, TrashBinOutline} from "flowbite-svelte-icons";
   import LocalDate from "../utility/LocalDate.svelte";
   import type {TeamsUpdate, UsersUpdate} from "$lib/model/pb-types.ts";
   import {invalidateAll} from "$app/navigation";
@@ -26,7 +26,7 @@
         "admins+": model.id
       })
       toastStore.trigger({
-        message: `User "${model.first_name + " " + model.last_name}" has been made an admin for team "${team.name}"`,
+        message: `User "${model.first_name + " " + model.last_name}" has been added as an admin for team "${team.name}"`,
         background: "variant-filled-success"
       })
       await invalidateAll()
@@ -182,24 +182,24 @@
 
     {#if showAdminSection}
       <td class="space-x-1 space-y-1">
-        <button class="btn btn-sm variant-ghost-primary">
-          <EditOutline/>
-          Edit
-        </button>
+        <!--        <button class="btn btn-sm variant-ghost-primary">-->
+        <!--          <EditOutline/>-->
+        <!--          Edit-->
+        <!--        </button>-->
 
         {#if team.admins.includes(row.id)}
-          <button class="btn btn-sm variant-ghost-warning" onclick={() => removeUserAsAdmin(row)}>
+          <button class="badge variant-ghost-warning" onclick={() => removeUserAsAdmin(row)}>
             <LockOutline/>
-            Remove Admin
+            Revoke Admin Access
           </button>
         {:else }
-          <button class="btn btn-sm variant-ghost-tertiary" onclick={() => makeUserAdmin(row)}>
+          <button class="badge variant-ghost-tertiary" onclick={() => makeUserAdmin(row)}>
             <LockOpenOutline/>
             Make Admin
           </button>
         {/if}
 
-        <button class="btn btn-sm variant-ghost-error" onclick={() => deleteUserFromTeam(row)}>
+        <button class="badge variant-ghost-error" onclick={() => deleteUserFromTeam(row)}>
           <TrashBinOutline/>
           Remove
         </button>
