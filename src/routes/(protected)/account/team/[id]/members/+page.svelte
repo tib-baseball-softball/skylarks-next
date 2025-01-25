@@ -17,6 +17,11 @@
   });
 </script>
 
+<svelte:head>
+  <title>Members of {data.team.name}</title>
+  <meta name="description" content="Team member list for {data.team.name}."/>
+</svelte:head>
+
 <h1 class="h1">Team members for Team "{data.team.name}"</h1>
 
 <TeamMemberDatatable data={$players.items} team={data.team} {showAdminSection}/>

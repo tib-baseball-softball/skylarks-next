@@ -2,11 +2,11 @@
   import type {DataHandler} from "@vincjo/datatables";
   import ThSort from "./ThSort.svelte";
   import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
-  import {Avatar, getToastStore} from "@skeletonlabs/skeleton";
+  import {Avatar, getModalStore, getToastStore, type ModalSettings} from "@skeletonlabs/skeleton";
   import {client} from "$lib/pocketbase/index.svelte";
   import {CheckCircleSolid, EditOutline, LockOpenOutline, LockOutline, TrashBinOutline} from "flowbite-svelte-icons";
   import LocalDate from "../utility/LocalDate.svelte";
-  import type {TeamsUpdate} from "$lib/model/pb-types.ts";
+  import type {TeamsUpdate, UsersUpdate} from "$lib/model/pb-types.ts";
   import {invalidateAll} from "$app/navigation";
 
   interface Props {
@@ -15,6 +15,7 @@
     showAdminSection?: boolean;
   }
 
+  const modalStore = getModalStore();
   const toastStore = getToastStore()
 
   let {handler, team, showAdminSection = false}: Props = $props();
@@ -55,6 +56,35 @@
         background: "variant-filled-error"
       })
     }
+  }
+
+  async function deleteUserFromTeam(model: CustomAuthModel) {
+    const modal: ModalSettings = {
+      type: 'confirm',
+      title: 'Please Confirm',
+      body: `Are you sure you wish to remove "${model.first_name + " " + model.last_name}" from "${team.name}"?`,
+      response: async (r: boolean) => {
+        if (r) {
+          try {
+            await client.collection("users").update<UsersUpdate>(model.id, {
+              "teams-": team.id
+            })
+            toastStore.trigger({
+              message: `User "${model.first_name + " " + model.last_name}" has been removed as member from team "${team.name}"`,
+              background: "variant-filled-success"
+            })
+            await invalidateAll()
+          } catch (error) {
+            console.error(error)
+            toastStore.trigger({
+              message: "An error occurred while removing user as team member",
+              background: "variant-filled-error"
+            })
+          }
+        }
+      },
+    };
+    modalStore.trigger(modal);
   }
 
   const rows = $derived(handler.getRows());
@@ -151,7 +181,7 @@
     </td>
 
     {#if showAdminSection}
-      <td class="space-x-1">
+      <td class="space-x-1 space-y-1">
         <button class="btn btn-sm variant-ghost-primary">
           <EditOutline/>
           Edit
@@ -169,7 +199,7 @@
           </button>
         {/if}
 
-        <button class="btn btn-sm variant-ghost-error">
+        <button class="btn btn-sm variant-ghost-error" onclick={() => deleteUserFromTeam(row)}>
           <TrashBinOutline/>
           Remove
         </button>
