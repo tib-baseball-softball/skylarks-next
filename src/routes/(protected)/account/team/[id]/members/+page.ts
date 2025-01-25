@@ -6,7 +6,7 @@ import {error} from '@sveltejs/kit';
 
 export const load = (async ({fetch, parent, params, depends}) => {
   const data = await parent();
-  const teams: ExpandedTeam[] = await data.teams;
+  const teams: ExpandedTeam[] = data.teams;
 
   let team = teams.find((team) => team.id === params.id);
 
