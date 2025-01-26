@@ -27,4 +27,6 @@
 
 <TeamMemberDatatable data={$players.items} team={data.team} {showAdminSection}/>
 
-<TeamAddMemberButton team={data.team} club={data.team?.expand?.club}/>
+{#if showAdminSection}
+  <TeamAddMemberButton team={data.team} club={data.team?.expand?.club}/>
+{/if}
