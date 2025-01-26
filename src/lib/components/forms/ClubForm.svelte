@@ -5,6 +5,7 @@
   import {CloseOutline} from "flowbite-svelte-icons";
   import type {ClubsResponse, UsersResponse, UsersUpdate} from "$lib/model/pb-types";
   import type {CustomAuthModel, ExpandedClub} from "$lib/model/ExpandedResponse";
+  import MultiSelectCombobox from "$lib/components/utility/MultiSelectCombobox.svelte";
 
   const toastStore = getToastStore();
   const drawerStore = getDrawerStore();
@@ -74,42 +75,8 @@
     if (result) {
       toastStore.trigger(toastSettingsSuccess);
     }
-    invalidateAll()
+    await invalidateAll()
     drawerStore.close();
-  }
-
-  let adminSelect: HTMLSelectElement | undefined = $state()
-
-  function addAdminToSelection(users: UsersResponse[]) {
-    if (!adminSelect || adminSelect?.value === "") {
-      return
-    }
-    const selectedUser = users.find((user) => user.id === adminSelect?.value)
-    const adminExists = selectedAdmins.find((admin) => admin.id === selectedUser?.id)
-
-    if (selectedUser && adminSelect && !adminExists) {
-      selectedAdmins.push(selectedUser)
-    }
-    adminSelect.value = ""
-  }
-
-  function removeAdminFromSelection(admin: UsersResponse) {
-    if (selectedAdmins.length === 1) {
-      toastStore.trigger({
-        message: "You cannot remove the last admin for a club!",
-        background: "variant-filled-warning"
-      })
-      return
-    }
-    const userRef = selectedAdmins.find(entry => entry.id === admin.id)
-
-    if (userRef) {
-      const index = selectedAdmins.indexOf(userRef)
-
-      if (index !== -1) {
-        selectedAdmins.splice(index, 1)
-      }
-    }
   }
 </script>
 
@@ -221,29 +188,8 @@
         <label class="label space-y-3 md:col-span-2">
           <span>Club Admins</span><br>
 
-          {#each selectedAdmins as admin}
-            <button
-                    type="button"
-                    class="chip variant-filled-primary me-1 lg:me-2"
-                    onclick={() => removeAdminFromSelection(admin)}
-            >
-              <span>{admin.first_name} {admin.last_name}</span>
-              <CloseOutline size="xs"/>
-            </button>
-          {/each}
-
           {#await allUsersForClub then users}
-            <div>Select to add as admin:</div>
-            <select
-                    class="select"
-                    bind:this={adminSelect}
-                    onchange={() => addAdminToSelection(users)}
-            >
-              <option selected value="">None</option>
-              {#each users as user}
-                <option value={user.id}>{user.first_name} {user.last_name}</option>
-              {/each}
-            </select>
+            <MultiSelectCombobox itemName="Admin" selectedItems={selectedAdmins} allItems={users}/>
           {/await}
 
           <span class="text-sm">
