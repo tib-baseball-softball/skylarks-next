@@ -34,7 +34,7 @@
       },
   );
 
-  let selectedAdmins: UsersResponse[] = $derived(form.expand.admins)
+  let selectedAdmins: UsersResponse[] = $state(form.expand.admins)
 
   const allUsersForClub = client.collection("users").getFullList<UsersResponse>({
     filter: `club ?~ '${$drawerStore.meta.club.id}'`
@@ -189,7 +189,7 @@
           <span>Club Admins</span><br>
 
           {#await allUsersForClub then users}
-            <MultiSelectCombobox itemName="Admin" selectedItems={selectedAdmins} allItems={users}/>
+            <MultiSelectCombobox itemName="Admin" bind:selectedItems={selectedAdmins} allItems={users}/>
           {/await}
 
           <span class="text-sm">

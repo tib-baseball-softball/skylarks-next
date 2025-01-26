@@ -1,6 +1,7 @@
 <script lang="ts">
   import TeamMemberDatatable from "$lib/components/datatable/TeamMemberDatatable.svelte";
   import {authSettings} from "$lib/pocketbase/index.svelte";
+  import TeamAddMemberButton from "$lib/components/team/TeamAddMemberButton.svelte";
 
   let {data} = $props();
 
@@ -25,3 +26,5 @@
 <h1 class="h1">Team members for Team "{data.team.name}"</h1>
 
 <TeamMemberDatatable data={$players.items} team={data.team} {showAdminSection}/>
+
+<TeamAddMemberButton team={data.team} club={data.team?.expand?.club}/>

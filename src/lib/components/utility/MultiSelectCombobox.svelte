@@ -10,9 +10,10 @@
     itemName: string
     selectedItems: T[]
     allItems: T[]
+    allowDeletionOfLastItem?: boolean
   }
 
-  let {itemName, selectedItems = $bindable(), allItems}: Props = $props()
+  let {itemName, selectedItems = $bindable(), allItems, allowDeletionOfLastItem = false}: Props = $props()
 
   const toastStore = getToastStore()
   let selectElement: HTMLSelectElement | undefined = $state()
@@ -31,7 +32,7 @@
   }
 
   function removeItemFromSelection(itemToRemove: T) {
-    if (selectedItems.length === 1) {
+    if (!allowDeletionOfLastItem && selectedItems.length === 1) {
       toastStore.trigger({
         message: `You cannot remove the last ${itemName}!`,
         background: "variant-filled-warning"
