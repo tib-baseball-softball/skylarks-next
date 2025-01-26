@@ -156,6 +156,9 @@
 
     <main class="col-span-1 space-y-4 lg:space-y-6 w-[93%] md:w-[90%] lg:w-[85%] justify-self-center">
       {@render children?.()}
+      <noscript>This website is actually a JavaScript application with lots of functionality. You need to enable
+        JavaScript for it to work.
+      </noscript>
     </main>
   </div>
 
