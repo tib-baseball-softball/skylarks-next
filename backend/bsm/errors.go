@@ -8,5 +8,5 @@ type URLWhitelistError struct {
 }
 
 func (e *URLWhitelistError) Error() string {
-	return fmt.Sprintf("%d - %s", e.url, e.message)
+	return fmt.Sprintf("%s - %s", e.url, e.message)
 }
