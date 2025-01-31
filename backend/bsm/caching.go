@@ -9,11 +9,30 @@ import (
 	"github.com/tib-baseball-softball/skylarks-next/utility"
 	"net/url"
 	"os"
+	"regexp"
 	"sync"
 	"time"
 )
 
-const cacheLifetimeMinutes = 60
+const (
+	cacheLifetimeMinutes = 60
+)
+
+var cacheURLWhitelist = []*regexp.Regexp{
+	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/clubs/\d+/licenses\.json(?:\?.*)?$`),
+	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/clubs/\d+\.json(?:\?.*)?$`),
+}
+
+// isValidBSMURL checks if the given url matches any regex in cacheURLWhitelist
+func isValidBSMURL(u *url.URL) bool {
+	urlStr := u.String()
+	for _, re := range cacheURLWhitelist {
+		if re.MatchString(urlStr) {
+			return true
+		}
+	}
+	return false
+}
 
 func GetLeagueTop10Data(app core.App, leagueID string, statsType string) (model.LeaderboardSummary, error) {
 	leagueLeaderboard := model.LeaderboardSummary{
@@ -67,8 +86,8 @@ func GetLeagueTop10Data(app core.App, leagueID string, statsType string) (model.
 func GetCachedBSMResponse(app core.App, url *url.URL) (string, error) {
 	var ret string
 
-	if url.Host != os.Getenv("BSM_API_HOST") {
-		return ret, errors.New("only BSM URLs are allowed")
+	if url.Host != os.Getenv("BSM_API_HOST") || !isValidBSMURL(url) {
+		return ret, &URLWhitelistError{url.String(), "Only whitelisted BSM URLs are allowed"}
 	}
 	hash := utility.GetMD5Hash(url.String())
 

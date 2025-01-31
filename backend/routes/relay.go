@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"errors"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/tib-baseball-softball/skylarks-next/bsm"
 	"net/http"
@@ -33,8 +34,13 @@ func GetRelayedBSMData() func(e *core.RequestEvent) error {
 
 		cachedResponseBody, err := bsm.GetCachedBSMResponse(e.App, &urlWithKey)
 		if err != nil {
-			e.App.Logger().Error("Failed to get cached BSM response", "error", err)
-			return e.JSON(http.StatusInternalServerError, "Internal error occurred")
+			var bsmErr *bsm.URLWhitelistError
+			if errors.As(err, &bsmErr) {
+				return e.JSON(http.StatusBadRequest, err.Error())
+			} else {
+				e.App.Logger().Error("Failed to get cached BSM response", "error", err)
+				return e.JSON(http.StatusInternalServerError, "Internal error occurred")
+			}
 		}
 
 		return e.Blob(http.StatusOK, "application/json", []byte(cachedResponseBody))
