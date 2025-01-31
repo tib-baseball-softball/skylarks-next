@@ -18,7 +18,7 @@
   />
 </div>
 
-<div class="card p-3 variant-ghost shadow-md">
+<div class="card p-3 variant-soft dark:border dark:border-surface-500 shadow-xl">
   <div class="container">
     <ClipboardListOutline size="lg"/>
     <span>{club.short_name}</span>

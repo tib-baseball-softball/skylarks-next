@@ -13,7 +13,7 @@
 
 <a
         href={href}
-        class="card variant-ghost flex items-center p-4 shadow-md"
+        class="card variant-soft dark:border dark:border-surface-500 flex items-center p-4 shadow-xl"
 >
   <article>
     {@render icon()}
