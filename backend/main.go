@@ -93,6 +93,11 @@ func bindAppHooks(app core.App) {
 		return se.Next()
 	})
 
+	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
+		se.Router.GET("/api/bsm/relay", routes.GetRelayedBSMData())
+		return se.Next()
+	})
+
 	//------------------- Cronjobs -------------------------//
 
 	if os.Getenv("APPLICATION_CONTEXT") != "Development" {
