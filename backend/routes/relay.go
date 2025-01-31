@@ -36,7 +36,7 @@ func GetRelayedBSMData() func(e *core.RequestEvent) error {
 		if err != nil {
 			var bsmErr *bsm.URLWhitelistError
 			if errors.As(err, &bsmErr) {
-				return e.JSON(http.StatusBadRequest, err.Error())
+				return e.JSON(http.StatusForbidden, err.Error())
 			} else {
 				e.App.Logger().Error("Failed to get cached BSM response", "error", err)
 				return e.JSON(http.StatusInternalServerError, "Internal error occurred")
