@@ -9,16 +9,13 @@
   } from "flowbite-svelte-icons";
   import ClubInfoSection from "$lib/components/club/ClubInfoSection.svelte";
   import ClubGridItem from "$lib/components/club/ClubGridItem.svelte";
+  import type {PageProps} from './$types';
 
-  interface Props {
-    data: any
-  }
-
-  let {data}: Props = $props()
+  let {data}: PageProps = $props();
 </script>
 
 <!-- Club Info Section -->
-<ClubInfoSection club={data}/>
+<ClubInfoSection club={data.bsmClubData}/>
 
 <!-- Grid Section -->
 <div class="grid grid-cols-2 md:grid-cols-3 gap-4 !mb-4">

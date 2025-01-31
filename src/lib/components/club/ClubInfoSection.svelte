@@ -21,7 +21,7 @@
 <div class="card p-3 variant-ghost shadow-md">
   <div class="container">
     <ClipboardListOutline size="lg"/>
-    <span>{club?.short_name ?? "BEA"}</span>
+    <span>{club.short_name}</span>
   </div>
 
   <hr class="my-2">
@@ -29,7 +29,7 @@
   <div class="container">
     <LabelOutline size="lg"/>
     <span>
-        {club?.acronym ?? "BEA"}/ 0{club?.organization_id} {club?.number}
+        {club.acronym} / 0{club?.organization_id} {club.number}
       </span>
   </div>
 
@@ -37,7 +37,7 @@
 
   <div class="container">
     <ShieldOutline size="lg"/>
-    <span>{club?.main_club ?? "Test Name"}</span>
+    <span>{club.main_club}</span>
   </div>
 </div>
 
