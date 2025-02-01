@@ -10,7 +10,7 @@
     type ModalComponent,
     Toast,
   } from "@skeletonlabs/skeleton";
-  import Navigation from "$lib/components/meta/Navigation.svelte";
+  import SidebarNavigation from "$lib/components/meta/SidebarNavigation.svelte";
   import Footer from "$lib/components/meta/Footer.svelte";
   import LoginBadge from "$lib/auth/LoginBadge.svelte";
   import LoginForm from "$lib/auth/LoginForm.svelte";
@@ -23,6 +23,8 @@
   import type {LayoutData} from "../../.svelte-kit/types/src/routes/$types";
   import StaticNavigationLinks from "$lib/components/navigation/StaticNavigationLinks.svelte";
   import EventSeriesView from "$lib/components/diamondplanner/event/EventSeriesView.svelte";
+  import BottomNavigation from "$lib/components/navigation/BottomNavigation.svelte";
+  import {authSettings} from "$lib/pocketbase/index.svelte.ts";
 
   interface Props {
     data: LayoutData
@@ -49,6 +51,7 @@
   }
 
   let showSidebar = $derived(data.clubs.length > 0 || data.teams.length > 0)
+  let isUserAuthenticated = $derived(!!authSettings.record)
 </script>
 
 <svelte:head>
@@ -67,7 +70,7 @@
 
     <hr class="mb-2"/>
 
-    <Navigation clubs={data.clubs} teams={data.teams}/>
+    <SidebarNavigation clubs={data.clubs} teams={data.teams}/>
 
   {:else if $drawerStore.id === "event-form"}
     <EventForm/>
@@ -99,7 +102,8 @@
     >
       <svelte:fragment slot="lead">
         <div class="flex items-center justify-content-start">
-          <button aria-label="open navigation" class="md:hidden btn btn-sm mr-4" onclick={navDrawerOpen}>
+          {#if isUserAuthenticated}
+            <button aria-label="open navigation" class="md:hidden btn btn-sm mr-4" onclick={navDrawerOpen}>
                     <span>
                         <svg viewBox="0 0 100 80" class="fill-token w-4 h-4">
                             <rect width="100" height="20"/>
@@ -107,7 +111,8 @@
                             <rect y="60" width="100" height="20"/>
                         </svg>
                     </span>
-          </button>
+            </button>
+          {/if}
 
           <a aria-label="to home page" href="/" class="hidden md:block ms-3">
             <img class="min-w-16" src="/berlin_skylarks_logo.svg" alt="Skylarks Team Logo">
@@ -118,7 +123,7 @@
       <svelte:fragment slot="default">
         <section class="">
           <ul class="w-full justify-center items-center hidden lg:flex py-2 gap-2 xl:gap-16">
-            <StaticNavigationLinks/>
+            <StaticNavigationLinks classes="rounded-token gap-2 py-1 px-2"/>
           </ul>
         </section>
       </svelte:fragment>
@@ -145,7 +150,7 @@
     <!-- Sidebar (Left) -->
     {#if showSidebar}
       <aside class="bg-surface-500/5 p-2 sticky top-0 col-span-1 hidden h-screen md:block w-64 lg:w-72 xl:w-80">
-        <Navigation clubs={data.clubs} teams={data.teams}/>
+        <SidebarNavigation clubs={data.clubs} teams={data.teams}/>
       </aside>
     {:else}
       <!-- hack: render empty div to not mess up the grid -->
@@ -161,6 +166,10 @@
       </noscript>
     </main>
   </div>
+
+  <!-- Bottom Nav (Fixed to bottom of page) for mobile -->
+
+  <BottomNavigation/>
 
   <!-- Footer -->
   <footer>
