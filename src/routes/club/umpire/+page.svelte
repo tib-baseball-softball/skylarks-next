@@ -13,7 +13,7 @@
   <ProgressBar/>
 
 {:then umpireLicenses}
-  <LicenseList licenses={umpireLicenses}/>
+  <LicenseList licenses={umpireLicenses} showSoftballSection={true}/>
 {:catch error}
   <p>error loading: {error.message}</p>
 {/await}
