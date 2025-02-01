@@ -6,13 +6,13 @@
     license: License,
   }
 
-  let {license}: Props = $props()
+  let {license}: Props = $props();
 </script>
 
-<div class="container">
+<a href="/club/license/{license.id}" class="container">
   <LicenseLevelIndicator level={license.level}/>
   <span>{license.person.last_name}, {license.person.first_name}</span>
-</div>
+</a>
 
 <style lang="postcss">
     .container {

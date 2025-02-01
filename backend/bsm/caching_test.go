@@ -20,6 +20,7 @@ func TestIsValidBSMURL(t *testing.T) {
 		{"https://bsm.baseball-softball.de/league_groups/5732/standings?season=2024", true},
 		{"https://bsm.baseball-softball.de/league_groups/8888/stats", true},
 		{"https://bsm.baseball-softball.de/league_groups/5732.json", true},
+		{"https://bsm.baseball-softball.de/licenses/999999.json", true},
 
 		// Invalid URLs
 		{"https://bsm.baseball-softball.de/clubs/abc/licenses.json", false},
@@ -29,6 +30,8 @@ func TestIsValidBSMURL(t *testing.T) {
 		{"https://bsm.baseball-softball.de/league_groups/abc/details", false},
 		{"https://bsm.baseball-softball.de/clubs/485/player_lists.json", false},
 		{"https://bsm.baseball-softball.de/people/123.json", false},
+		{"https://bsm.baseball-softball.de/licenses/abcd.json", false},
+		{"https://bsm.baseball-softball.de/licenses/6000.xml", false},
 	}
 
 	for _, tt := range tests {
