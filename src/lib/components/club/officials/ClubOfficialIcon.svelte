@@ -35,7 +35,7 @@
 
 <div
         class="wrapper"
-        class:primary={clubOfficial.category === "Vorstand/Abteilungsleitung"}
+        class:primary={clubOfficial.category === "Vorstand/Abteilungsleitung" || clubOfficial.category === "Kasse/Finanzen"}
 >
   {@render iconSnippet()}
 </div>

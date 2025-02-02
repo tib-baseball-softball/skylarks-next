@@ -15,7 +15,9 @@
 
       {#each clubOfficials as clubOfficial, index}
         <li class="p-0.5">
-          <ClubOfficialRow {clubOfficial}/>
+          <a href="/club/officials/{clubOfficial.id}">
+            <ClubOfficialRow {clubOfficial}/>
+          </a>
         </li>
 
         {#if index + 1 < clubOfficials.length}
