@@ -4,7 +4,7 @@
   interface Props {
     icon: Snippet,
     categoryName: string,
-    rowValue: string,
+    rowValue: string | number,
   }
 
   let {icon, categoryName, rowValue}: Props = $props();
@@ -12,9 +12,11 @@
 
 <div class="container">
   {@render icon()}
-  <p>
-    <strong class="me-2">{categoryName}:</strong>{rowValue}
-  </p>
+  <dl class="container">
+    <dt><strong class="">{categoryName}:</strong></dt>
+    <dd>{rowValue}</dd>
+  </dl>
+
 </div>
 
 <style lang="postcss">

@@ -5,12 +5,12 @@ export class DateTimeUtility {
     weekday: "short",
     hour: "2-digit",
     minute: "2-digit"
-  })
+  });
 
   public static readonly dateTimeFormatMedium = new Intl.DateTimeFormat("de-DE", {
     dateStyle: "medium",
     timeStyle: "short"
-  })
+  });
 
   //@ts-ignore
   public static readonly eventDateFormat: DateTimeFormatOptions = {
@@ -18,20 +18,20 @@ export class DateTimeUtility {
     year: 'numeric',
     month: 'numeric',
     day: 'numeric',
-  }
+  };
 
   //@ts-ignore
   public static readonly eventSeriesDateFormat: DateTimeFormatOptions = {
     year: 'numeric',
     month: 'numeric',
     day: 'numeric',
-  }
+  };
 
   //@ts-ignore
   public static readonly eventTimeFormat: DateTimeFormatOptions = {
     hour: 'numeric',
     minute: 'numeric',
-  }
+  };
 
   public static readonly datePickerOptions: Options = {
     enableTime: true,
@@ -39,6 +39,32 @@ export class DateTimeUtility {
     altInput: true,
     altFormat: "j F Y - H:i",
     time_24hr: true,
+  };
+
+  public static getRelativeTimeString(date: Date, locale: string = navigator.language): string {
+    const now = new Date();
+    const diff = date.getTime() - now.getTime(); // Difference in milliseconds
+
+    const formatter = new Intl.RelativeTimeFormat(locale, {numeric: 'auto'});
+
+    const units: { unit: Intl.RelativeTimeFormatUnit; value: number }[] = [
+      {unit: 'year', value: 1000 * 60 * 60 * 24 * 365},
+      {unit: 'month', value: 1000 * 60 * 60 * 24 * 30},
+      {unit: 'week', value: 1000 * 60 * 60 * 24 * 7},
+      {unit: 'day', value: 1000 * 60 * 60 * 24},
+      {unit: 'hour', value: 1000 * 60 * 60},
+      {unit: 'minute', value: 1000 * 60},
+      {unit: 'second', value: 1000}
+    ];
+
+    for (const {unit, value} of units) {
+      const relativeValue = Math.round(diff / value);
+      if (Math.abs(relativeValue) > 0) {
+        return formatter.format(relativeValue, unit);
+      }
+    }
+
+    return "just now";
   }
 
   /**
