@@ -1,7 +1,7 @@
 <script lang="ts">
   import type {PageProps} from './$types';
-  import {AwardOutline, InfoCircleOutline, LandmarkOutline, MapPinAltOutline} from "flowbite-svelte-icons";
   import ClubDetailSection from "$lib/components/club/ClubDetailSection.svelte";
+  import {Info, MapPinHouse, Section, Trophy} from "lucide-svelte";
 
   let {data}: PageProps = $props();
 </script>
@@ -10,7 +10,7 @@
 
 <ClubDetailSection title="Team Basics">
   {#snippet icon()}
-    <InfoCircleOutline size="xl"/>
+    <Info/>
   {/snippet}
 
   <div class="flex justify-center">
@@ -30,7 +30,7 @@
 
 <ClubDetailSection title="Achievements">
   {#snippet icon()}
-    <AwardOutline size="xl"/>
+    <Trophy/>
   {/snippet}
 
   <p>{data.bsmClubData?.successes}</p>
@@ -38,7 +38,7 @@
 
 <ClubDetailSection title="Legal Info">
   {#snippet icon()}
-    <LandmarkOutline size="xl"/>
+    <Section/>
   {/snippet}
 
   <p><strong>Chairman:</strong> {data.bsmClubData?.chairman}</p>
@@ -48,7 +48,7 @@
 
 <ClubDetailSection title="Location">
   {#snippet icon()}
-    <MapPinAltOutline size="xl"/>
+    <MapPinHouse/>
   {/snippet}
 
   <p><strong>Address:</strong> {data.bsmClubData?.address_addon}</p>
