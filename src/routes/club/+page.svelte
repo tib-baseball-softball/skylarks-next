@@ -1,15 +1,8 @@
 <script lang="ts">
-  import {
-    BookOutline,
-    FireOutline,
-    PenOutline,
-    UsersGroupOutline,
-    UsersGroupSolid,
-    UsersOutline,
-  } from "flowbite-svelte-icons";
   import ClubInfoSection from "$lib/components/club/ClubInfoSection.svelte";
   import ClubGridItem from "$lib/components/club/ClubGridItem.svelte";
   import type {PageProps} from './$types';
+  import {BookText, Diamond, Pencil, Users} from "lucide-svelte";
 
   let {data}: PageProps = $props();
 </script>
@@ -25,7 +18,7 @@
           description="More Info"
   >
     {#snippet icon()}
-      <BookOutline size="lg"/>
+      <BookText/>
     {/snippet}
   </ClubGridItem>
 
@@ -35,7 +28,7 @@
           description="Adult and Youth"
   >
     {#snippet icon()}
-      <UsersGroupSolid size="lg"/>
+      <Users/>
     {/snippet}
   </ClubGridItem>
 
@@ -45,7 +38,7 @@
           description="Keeping statistics"
   >
     {#snippet icon()}
-      <PenOutline size="lg"/>
+      <Pencil/>
     {/snippet}
   </ClubGridItem>
 
@@ -55,7 +48,7 @@
           description="Our Referees"
   >
     {#snippet icon()}
-      <UsersGroupOutline size="lg"/>
+      <Users/>
     {/snippet}
   </ClubGridItem>
 
@@ -65,7 +58,7 @@
           description="The Lark's Nest"
   >
     {#snippet icon()}
-      <FireOutline size="lg"/>
+      <Diamond/>
     {/snippet}
   </ClubGridItem>
 
@@ -75,7 +68,7 @@
           description="Club Administration"
   >
     {#snippet icon()}
-      <UsersOutline size="lg"/>
+      <Users/>
     {/snippet}
   </ClubGridItem>
 </div>

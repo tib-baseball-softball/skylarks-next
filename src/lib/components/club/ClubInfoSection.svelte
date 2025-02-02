@@ -1,9 +1,9 @@
 <script lang="ts">
   import type {Club} from "bsm.js";
-  import {ClipboardListOutline, LabelOutline, ShieldOutline} from "flowbite-svelte-icons";
+  import {ClipboardList, Shield, Tag} from "lucide-svelte";
 
   interface Props {
-    club: Club
+    club: Club;
   }
 
   let {club}: Props = $props();
@@ -20,14 +20,14 @@
 
 <div class="card p-3 variant-soft dark:border dark:border-surface-500 shadow-xl">
   <div class="container">
-    <ClipboardListOutline size="lg"/>
+    <ClipboardList/>
     <span>{club.short_name}</span>
   </div>
 
   <hr class="my-2">
 
   <div class="container">
-    <LabelOutline size="lg"/>
+    <Tag/>
     <span>
         {club.acronym} / 0{club?.organization_id} {club.number}
       </span>
@@ -36,7 +36,7 @@
   <hr class="my-2">
 
   <div class="container">
-    <ShieldOutline size="lg"/>
+    <Shield/>
     <span>{club.main_club}</span>
   </div>
 </div>
