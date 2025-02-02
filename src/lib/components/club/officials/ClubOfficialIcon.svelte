@@ -33,6 +33,19 @@
   <Icon/>
 {/snippet}
 
-<div>
+<div
+        class="wrapper"
+        class:primary={clubOfficial.category === "Vorstand/Abteilungsleitung"}
+>
   {@render iconSnippet()}
 </div>
+
+<style lang="postcss">
+    .wrapper {
+        color: light-dark(rgb(var(--color-secondary-500)), rgb(var(--color-tertiary-500)));
+    }
+
+    .wrapper.primary {
+        color: rgb(var(--color-primary-500));
+    }
+</style>
