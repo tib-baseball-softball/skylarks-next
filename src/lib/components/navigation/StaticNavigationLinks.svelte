@@ -4,10 +4,10 @@
   import {page} from "$app/state";
 
   interface Props {
-    classes?: string
+    classes?: string;
   }
 
-  let {classes = ""}: Props = $props()
+  let {classes = ""}: Props = $props();
 
   const drawerStore = getDrawerStore();
 
@@ -24,28 +24,28 @@
 </li>
 
 <li>
-  <a class="{classes}" class:variant-filled-primary={page.url.pathname === "/gamecenter"} href="/gamecenter"
+  <a class="{classes}" class:variant-filled-primary={page.url.pathname.startsWith("/gamecenter")} href="/gamecenter"
      onclick={drawerClose}>
     <TicketOutline size="lg"/>
     <span>Games</span>
   </a>
 </li>
 <li>
-  <a class="{classes}" class:variant-filled-primary={page.url.pathname === "/ligen"} href="/ligen"
+  <a class="{classes}" class:variant-filled-primary={page.url.pathname.startsWith("/ligen")} href="/ligen"
      onclick={drawerClose}>
     <TableRowOutline size="lg"/>
     <span>Leagues</span>
   </a>
 </li>
 <li>
-  <a class="{classes}" class:variant-filled-primary={page.url.pathname === "/teams"} href="/teams"
+  <a class="{classes}" class:variant-filled-primary={page.url.pathname.startsWith("/teams")} href="/teams"
      onclick={drawerClose}>
     <UsersGroupOutline size="lg"/>
     <span>Teams</span>
   </a>
 </li>
 <li>
-  <a class="{classes}" class:variant-filled-primary={page.url.pathname === "/club"} href="/club"
+  <a class="{classes}" class:variant-filled-primary={page.url.pathname.startsWith("/club")} href="/club"
      onclick={drawerClose}>
     <ShieldOutline size="lg"/>
     <span>Club</span>
