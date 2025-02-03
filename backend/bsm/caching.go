@@ -24,6 +24,7 @@ var cacheURLWhitelist = []*regexp.Regexp{
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/league_groups/\d+(\.json|/.*)?(?:\?.*)?$`),
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/licenses/\d+\.json(?:\?.*)?$`),
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/clubs/\d+/club_functions\.json(?:\?.*)?$`),
+	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/clubs/\d+/fields\.json(?:\?.*)?$`),
 }
 
 // isValidBSMURL checks if the given url matches any regex in cacheURLWhitelist
