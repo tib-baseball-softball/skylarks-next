@@ -1,11 +1,11 @@
 <script lang="ts">
-    import {invalidate} from "$app/navigation";
-    import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
-    import {authSettings, client} from "$lib/pocketbase/index.svelte";
-    import {getDrawerStore, getToastStore, RadioGroup, RadioItem, type ToastSettings,} from "@skeletonlabs/skeleton";
-    import {CloseOutline} from "flowbite-svelte-icons";
+  import {invalidate} from "$app/navigation";
+  import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
+  import {authSettings, client} from "$lib/pocketbase/index.svelte";
+  import {getDrawerStore, getToastStore, RadioGroup, RadioItem, type ToastSettings,} from "@skeletonlabs/skeleton";
+  import {CloseOutline} from "flowbite-svelte-icons";
 
-    const toastStore = getToastStore();
+  const toastStore = getToastStore();
   const drawerStore = getDrawerStore();
 
   const authModel = authSettings.record as CustomAuthModel;
