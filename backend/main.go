@@ -13,11 +13,14 @@ import (
 	"os"
 )
 
+// / Loads environment.
+//   - Locally: from .env file
+//   - Production: from container env
 func init() {
-	err := gotenv.Load()
+	_ = gotenv.Load()
 
-	if err != nil {
-		log.Fatal("Error loading environment variables.")
+	if os.Getenv("APPLICATION_CONTEXT") == "" {
+		log.Fatal("APPLICATION_CONTEXT not set, error loading environment variables")
 	}
 }
 
