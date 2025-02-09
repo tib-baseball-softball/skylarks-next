@@ -81,7 +81,7 @@ pnpm run dev -- --open
 
 ### Production
 
-- BE: not yet online
+- BE: https://pb.berlinskylarks.de/
 - FE: https://app.berlinskylarks.de/
 
 ## Deployment
