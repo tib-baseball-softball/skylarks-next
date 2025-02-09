@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/pocketbase/pocketbase"
+	"github.com/pocketbase/pocketbase/apis"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/spf13/cobra"
 	"github.com/subosito/gotenv"
@@ -61,6 +62,15 @@ func bindAppHooks(app core.App) {
 
 	app.OnRecordDelete("eventseries").BindFunc(func(e *core.RecordEvent) error {
 		return hooks.DeleteEventsForSeries(e)
+	})
+
+	//------------------- Serve static dir -------------------------//
+
+	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
+		// serves static files from the provided public dir (if it exists)
+		se.Router.GET("/{path...}", apis.Static(os.DirFS("./pb_public"), false))
+
+		return se.Next()
 	})
 
 	//------------------- Custom Routes -------------------------//
