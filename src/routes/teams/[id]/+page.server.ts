@@ -44,12 +44,18 @@ export async function load({parent, params, url}) {
   const pitchingStats = statsRequest.getStatisticsForLeagueEntry<PitchingStatisticsEntry>(leagueEntry.id, StatsType.pitching);
   const fieldingStats = statsRequest.getStatisticsForLeagueEntry<FieldingStatisticsEntry>(leagueEntry.id, StatsType.fielding);
 
-  const leagueGroups = await data.leagueGroups;
+  let leagueGroups = await data.leagueGroups;
   let leagueGroup = leagueGroups?.find((group) => group.league.id === leagueEntry.league.id);
 
+  // Caution: LeagueGroups can still be unavailable even though ClubTeams are
   if (!leagueGroup) {
     const leagueGroupRequest = new LeagueGroupAPIRequest(env.BSM_API_KEY);
-    leagueGroup = await leagueGroupRequest.getSingleLeagueGroup(leagueEntry.league.id);
+    try {
+      leagueGroups = await leagueGroupRequest.getLeagueGroupsForClub(Number(url.searchParams.get("season")) ?? leagueGroupRequest.defaultSeason);
+      leagueGroup = leagueGroups?.find((group) => group.league.id === leagueEntry.league.id);
+    } catch (e) {
+      console.error("Could not load league group", e);
+    }
   }
 
   const tableRequest = new TablesAPIRequest(env.BSM_API_KEY);
