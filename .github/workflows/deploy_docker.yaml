@@ -26,7 +26,7 @@ jobs:
 
       - name: Build and push Docker images
         run: |
-          docker build -f /backend/Dockerfile -t ${{ vars.DOCKER_PB_IMAGE }} /backend
+          docker build -f backend/Dockerfile -t ${{ vars.DOCKER_PB_IMAGE }} backend
           docker build -t ${{ vars.DOCKER_IMAGE }} .
           docker push ${{ vars.DOCKER_PB_IMAGE }}
           docker push ${{ vars.DOCKER_IMAGE }}
