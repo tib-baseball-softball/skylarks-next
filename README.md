@@ -54,7 +54,7 @@ cp .env.dist .env
 
 * BSM API key (from BSM user account with at the club admin scope for Berlin Skylarks)
 * API Auth Header (from `.env` on TYPO3 host server)
-* `PUBLIC_BACKEND_URL` can either be set to a TYPO3 dev environment running locally or the production URL
+* `PUBLIC_TYPO3_URL` can either be set to a TYPO3 dev environment running locally or the production URL
 
 3. Get project dependencies
 

@@ -31,7 +31,7 @@ services:
 
     # why no stack.env: https://github.com/portainer/portainer/issues/10902
     environment:
-      - "PUBLIC_BACKEND_URL=${PUBLIC_BACKEND_URL}"
+      - "PUBLIC_TYPO3_URL=${PUBLIC_TYPO3_URL}"
       - "PUBLIC_POCKETBASE_URL=${PUBLIC_POCKETBASE_URL}"
       - "PUBLIC_CLUB_ID=${PUBLIC_CLUB_ID}"
       - "PUBLIC_TEAM_NAME=${PUBLIC_TEAM_NAME}"
