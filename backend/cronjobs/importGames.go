@@ -41,19 +41,19 @@ func ImportGames(app core.App) {
 			}
 			club := team.ExpandedOne("club")
 			if club == nil {
-				app.Logger().Error("ERROR: Could not load club data for API key, aborting...")
+				app.Logger().Error("Could not load club data for API key")
 				return
 			}
 
 			matches, err := fetchMatchesForLeagueGroup(team.GetString("bsm_league_group"), club.GetString("bsm_api_key"))
 			if err != nil {
-				app.Logger().Error(err.Error())
+				app.Logger().Error("Could not fetch Matches for leagueGroup", "error", err, "team", team, "apiKey", club.GetString("bsm_api_key"))
 				return
 			}
 
 			err = createOrUpdateEvents(app, matches, team.Id)
 			if err != nil {
-				app.Logger().Error(err.Error())
+				app.Logger().Error("Error creating or updating events: ", "error", err, "matches", matches, "team", team.Id)
 				return
 			}
 		}()
