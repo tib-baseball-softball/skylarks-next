@@ -140,5 +140,7 @@ func setEventRecordValues(app core.App, record *core.Record, match model.Match, 
 	record.Set("team", teamID)
 	record.Set("match_json", string(matchJSON))
 
+	app.Logger().Debug("Record populated with fields", "record", record)
+
 	return
 }
