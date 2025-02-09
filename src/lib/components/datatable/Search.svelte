@@ -1,17 +1,18 @@
 <script lang="ts">
-    import type { DataHandler } from '@vincjo/datatables';
-    interface Props {
-        handler: DataHandler;
-    }
+  import type {DataHandler} from '@vincjo/datatables';
 
-    let { handler }: Props = $props();
-    let value: string = $state("");
+  interface Props {
+    handler: DataHandler;
+  }
+
+  let {handler}: Props = $props();
+  let value: string = $state("");
 </script>
 
 <input
         class="input sm:w-64 w-36 variant-ringed-primary"
         type="search"
-        placeholder="Suchen..."
+        placeholder="Search..."
         bind:value
         oninput={() => handler.search(value)}
 />

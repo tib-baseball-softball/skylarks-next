@@ -48,8 +48,8 @@
   {/await}
 </section>
 
-<section class="my-2">
-  <h2 class="h2">Statistiken</h2>
+<section class="my-2 !mb-4">
+  <h2 class="h2">Stats</h2>
   {#await getData()}
     <ProgressRadial/>
   {:then stats}
