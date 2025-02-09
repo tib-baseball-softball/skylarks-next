@@ -85,19 +85,22 @@ func createOrUpdateEvents(app core.App, matches []model.Match, teamID string) (e
 		if err != nil {
 			collection, err := app.FindCollectionByNameOrId("events")
 			if err != nil {
-				return err
+				app.Logger().Error("Error fetching event collection: ", "error", err)
+				continue
 			}
 
 			record = core.NewRecord(collection)
-			err = setEventRecordValues(record, match, teamID)
+			err = setEventRecordValues(app, record, match, teamID)
 			if err != nil {
-				return err
+				app.Logger().Error("Error setting event record: ", "error", err)
+				continue
 			}
 		} else {
 			// no error - update existing record
-			err = setEventRecordValues(record, match, teamID)
+			err = setEventRecordValues(app, record, match, teamID)
 			if err != nil {
-				return err
+				app.Logger().Error("Error setting event record: ", "error", err)
+				continue
 			}
 		}
 
@@ -109,13 +112,19 @@ func createOrUpdateEvents(app core.App, matches []model.Match, teamID string) (e
 	return
 }
 
-func setEventRecordValues(record *core.Record, match model.Match, teamID string) (err error) {
+func setEventRecordValues(app core.App, record *core.Record, match model.Match, teamID string) (err error) {
 	starttime, err := types.ParseDateTime(match.Time)
 	if err != nil {
 		return err
 	}
 	endtime := starttime.Time().Add(time.Hour * 3)
 	meetingtime := starttime.Time().Add(-2*time.Hour - 30*time.Minute)
+
+	app.Logger().Debug("Current Date Values", "starttime", starttime, "endtime", endtime, "meetingtime", meetingtime)
+
+	if meetingtime.String() == "" {
+		meetingtime = starttime.Time()
+	}
 
 	matchJSON, err := json.Marshal(match)
 	if err != nil {
