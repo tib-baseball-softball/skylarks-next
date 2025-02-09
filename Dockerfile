@@ -1,5 +1,6 @@
 FROM node:22-alpine AS builder
 WORKDIR /app
+RUN npm i -g corepack # workaround, corepack should enable on its own
 RUN corepack enable && corepack prepare pnpm@latest --activate
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
@@ -9,6 +10,7 @@ RUN pnpm prune --prod
 
 FROM node:22-alpine
 WORKDIR /app
+RUN npm i -g corepack # workaround, corepack should enable on its own
 RUN corepack enable && corepack prepare pnpm@latest --activate
 COPY --from=builder /app/build build/
 COPY --from=builder /app/node_modules node_modules/
