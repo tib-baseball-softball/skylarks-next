@@ -53,7 +53,7 @@ func ImportGames(app core.App) {
 
 			err = createOrUpdateEvents(app, matches, team.Id)
 			if err != nil {
-				app.Logger().Error("Error creating or updating events: ", "error", err, "matches", matches, "team", team.Id)
+				app.Logger().Error("Error creating or updating events", "error", err, "team", team.Id)
 				return
 			}
 		}()
@@ -93,16 +93,17 @@ func createOrUpdateEvents(app core.App, matches []model.Match, teamID string) (e
 			if err != nil {
 				return err
 			}
-		}
-		// no error - update existing record
-		err = setEventRecordValues(record, match, teamID)
-		if err != nil {
-			return err
+		} else {
+			// no error - update existing record
+			err = setEventRecordValues(record, match, teamID)
+			if err != nil {
+				return err
+			}
 		}
 
 		if err := app.Save(record); err != nil {
-			app.Logger().Error("Persisting event record failed: ", "error", err)
-			return err
+			app.Logger().Error("Persisting event record failed", "error", err, "record", record, "teamID", teamID, "match", match)
+			continue
 		}
 	}
 	return
