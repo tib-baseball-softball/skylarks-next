@@ -7,6 +7,8 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o pocketbase
 
 FROM ubuntu:latest
 WORKDIR /app
+RUN apt update
+RUN apt install -y ca-certificates
 COPY --from=builder /app/pocketbase ./
 COPY --from=builder /app/pb_public ./pb_public
 
