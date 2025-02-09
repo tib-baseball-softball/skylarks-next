@@ -13,9 +13,9 @@ services:
       - pb_data:/app/pb_data
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.facts.rule=Host(`pb.berlinskylarks.de`)"
-      - "traefik.http.routers.facts.entrypoints=websecure"
-      - "traefik.http.routers.facts.tls.certresolver=letsEncrypt"
+      - "traefik.http.routers.skylarks-next-backend.rule=Host(`pb.berlinskylarks.de`)"
+      - "traefik.http.routers.skylarks-next-backend.entrypoints=websecure"
+      - "traefik.http.routers.skylarks-next-backend.tls.certresolver=letsEncrypt"
       - "traefik.docker.network=proxy"
 
   frontend:
