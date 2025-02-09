@@ -28,7 +28,7 @@ func ImportGames(app core.App) {
 			// only run this job for events this season (refreshing games past years should rarely ever be relevant)
 			leagueGroup, err := app.FindFirstRecordByData("leaguegroups", "bsm_id", team.GetInt("bsm_league_group"))
 			if err != nil {
-				log.Print("Error fetching League Group record: ", err)
+				app.Logger().Error("Error fetching League Group record: ", "error", err)
 				return
 			}
 			if leagueGroup.GetInt("season") != currentYear {
@@ -36,31 +36,31 @@ func ImportGames(app core.App) {
 			}
 
 			if errs := app.ExpandRecord(team, []string{"club"}, nil); len(errs) > 0 {
-				log.Printf("failed to expand: %v", errs)
+				app.Logger().Error("failed to expand:", "errors", errs)
 				return
 			}
 			club := team.ExpandedOne("club")
 			if club == nil {
-				log.Print("ERROR: Could not load club data for API key, aborting...")
+				app.Logger().Error("ERROR: Could not load club data for API key, aborting...")
 				return
 			}
 
 			matches, err := fetchMatchesForLeagueGroup(team.GetString("bsm_league_group"), club.GetString("bsm_api_key"))
 			if err != nil {
-				log.Print(err)
+				app.Logger().Error(err.Error())
 				return
 			}
 
 			err = createOrUpdateEvents(app, matches, team.Id)
 			if err != nil {
-				log.Print(err)
+				app.Logger().Error(err.Error())
 				return
 			}
 		}()
 	}
 
 	wg.Wait()
-	log.Println("Game Import successfully imported new game events")
+	app.Logger().Info("Game Import successfully imported new game events")
 }
 
 func fetchMatchesForLeagueGroup(league string, apiKey string) ([]model.Match, error) {
@@ -101,7 +101,7 @@ func createOrUpdateEvents(app core.App, matches []model.Match, teamID string) (e
 		}
 
 		if err := app.Save(record); err != nil {
-			log.Print("Persisting event record failed: ", err)
+			app.Logger().Error("Persisting event record failed: ", "error", err)
 			return err
 		}
 	}
