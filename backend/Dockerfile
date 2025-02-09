@@ -8,7 +8,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o pocketbase
 FROM ubuntu:latest
 WORKDIR /app
 COPY --from=builder /app/pocketbase ./
-COPY --from=builder /app/pb_public ./
+COPY --from=builder /app/pb_public ./pb_public
 
 EXPOSE 8090
 
