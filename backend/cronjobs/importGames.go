@@ -104,6 +104,7 @@ func createOrUpdateEvents(app core.App, matches []model.Match, teamID string) (e
 			}
 		}
 
+		app.Logger().Debug("Record data immediately before persist call", "record", record)
 		if err := app.Save(record); err != nil {
 			app.Logger().Error("Persisting event record failed", "error", err, "record", record, "teamID", teamID, "match", match)
 			continue
