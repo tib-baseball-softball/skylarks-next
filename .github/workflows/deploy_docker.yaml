@@ -1,12 +1,12 @@
 name: Deploy Production (Docker)
 
 on:
-  #push:
-  #paths-ignore:
-  #  - '**/README.md'
-  #  - 'docs/**'
-  #branches:
-  #  - main
+  push:
+    paths-ignore:
+      - '**/README.md'
+      - 'docs/**'
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
