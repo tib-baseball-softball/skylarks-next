@@ -1,12 +1,12 @@
 <script lang="ts">
-    import {client} from "../pocketbase/index.svelte";
-    import {Avatar, getModalStore, getToastStore, type ModalSettings} from "@skeletonlabs/skeleton";
-    import {browser} from "$app/environment";
-    import {invalidateAll} from "$app/navigation";
-    import {authSettings} from "$lib/pocketbase/index.svelte";
-    import {LucideLogIn} from "lucide-svelte";
+  import {client} from "../pocketbase/index.svelte";
+  import {Avatar, getModalStore, getToastStore, type ModalSettings} from "@skeletonlabs/skeleton";
+  import {browser} from "$app/environment";
+  import {invalidateAll} from "$app/navigation";
+  import {authSettings} from "$lib/pocketbase/index.svelte";
+  import {LucideLogIn} from "lucide-svelte";
 
-    const modalStore = getModalStore();
+  const modalStore = getModalStore();
   const toastStore = getToastStore();
 
   const {signupAllowed = true} = $props();
