@@ -149,8 +149,9 @@ export interface ViewCollectionRecord {
 // utilities
 
 type MaybeArray<T> = T | T[];
-// ==== start of users block =====
 
+// ===== users block =====
+// ===== users =====
 
 export interface UsersResponse extends AuthCollectionResponse {
 	collectionName: 'users';
@@ -175,15 +176,12 @@ export interface UsersResponse extends AuthCollectionResponse {
 	umpire: '' | '0' | '1' | '2' | '3' | '4';
 	scorer: '' | '0' | '1' | '2' | '3';
 	bsm_id: number;
-	signup_key: string;
 	created: string;
 	updated: string;
 }
 
 export interface UsersCreate extends AuthCollectionCreate {
-	id: string;
-	password: string;
-	tokenKey: string;
+	id?: string;
 	email?: string;
 	emailVisibility?: boolean;
 	verified?: boolean;
@@ -203,18 +201,16 @@ export interface UsersCreate extends AuthCollectionCreate {
 	umpire?: '' | '0' | '1' | '2' | '3' | '4';
 	scorer?: '' | '0' | '1' | '2' | '3';
 	bsm_id?: number;
-	signup_key?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
 
 export interface UsersUpdate extends AuthCollectionUpdate {
-	id?: string;
-	tokenKey?: string;
+	id: string;
 	email?: string;
 	emailVisibility?: boolean;
 	verified?: boolean;
-	username?: string;
+	username: string;
 	first_name?: string;
 	last_name?: string;
 	avatar?: File | null;
@@ -238,7 +234,6 @@ export interface UsersUpdate extends AuthCollectionUpdate {
 	bsm_id?: number;
 	'bsm_id+'?: number;
 	'bsm_id-'?: number;
-	signup_key?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -259,10 +254,8 @@ export interface UsersCollection {
 	};
 }
 
-// ==== end of users block =====
-
-// ==== start of events block =====
-
+// ===== events block =====
+// ===== events =====
 
 export interface EventsResponse extends BaseCollectionResponse {
 	collectionName: 'events';
@@ -286,7 +279,7 @@ export interface EventsResponse extends BaseCollectionResponse {
 }
 
 export interface EventsCreate extends BaseCollectionCreate {
-	id: string;
+	id?: string;
 	bsm_id?: number;
 	title: string;
 	desc?: string;
@@ -306,18 +299,18 @@ export interface EventsCreate extends BaseCollectionCreate {
 }
 
 export interface EventsUpdate extends BaseCollectionUpdate {
-	id?: string;
+	id: string;
 	bsm_id?: number;
 	'bsm_id+'?: number;
 	'bsm_id-'?: number;
-	title?: string;
+	title: string;
 	desc?: string;
-	starttime?: string | Date;
-	meetingtime?: string | Date;
+	starttime: string | Date;
+	meetingtime: string | Date;
 	endtime?: string | Date;
-	type?: 'game' | 'practice' | 'misc';
+	type: 'game' | 'practice' | 'misc';
 	attire?: string;
-	team?: string;
+	team: string;
 	cancelled?: boolean;
 	match_json?: EventsMatch_json
 	guests?: string;
@@ -342,17 +335,14 @@ export interface EventsCollection {
 	};
 }
 
-// ==== end of events block =====
-
-// ==== start of clubs block =====
-
+// ===== clubs block =====
+// ===== clubs =====
 
 export interface ClubsResponse extends BaseCollectionResponse {
 	collectionName: 'clubs';
 	id: string;
 	name: string;
 	bsm_id: number;
-	bsm_api_key: string;
 	signup_key: string;
 	acronym: string;
 	admins: Array<string>;
@@ -361,10 +351,9 @@ export interface ClubsResponse extends BaseCollectionResponse {
 }
 
 export interface ClubsCreate extends BaseCollectionCreate {
-	id: string;
+	id?: string;
 	name: string;
-	bsm_id: number;
-	bsm_api_key?: string;
+	bsm_id?: number;
 	signup_key: string;
 	acronym?: string;
 	admins: MaybeArray<string>;
@@ -373,15 +362,14 @@ export interface ClubsCreate extends BaseCollectionCreate {
 }
 
 export interface ClubsUpdate extends BaseCollectionUpdate {
-	id?: string;
-	name?: string;
+	id: string;
+	name: string;
 	bsm_id?: number;
 	'bsm_id+'?: number;
 	'bsm_id-'?: number;
-	bsm_api_key?: string;
-	signup_key?: string;
+	signup_key: string;
 	acronym?: string;
-	admins?: MaybeArray<string>;
+	admins: MaybeArray<string>;
 	'admins+'?: MaybeArray<string>;
 	'admins-'?: MaybeArray<string>;
 	created?: string | Date;
@@ -404,10 +392,8 @@ export interface ClubsCollection {
 	};
 }
 
-// ==== end of clubs block =====
-
-// ==== start of teams block =====
-
+// ===== teams block =====
+// ===== teams =====
 
 export interface TeamsResponse extends BaseCollectionResponse {
 	collectionName: 'teams';
@@ -423,7 +409,7 @@ export interface TeamsResponse extends BaseCollectionResponse {
 }
 
 export interface TeamsCreate extends BaseCollectionCreate {
-	id: string;
+	id?: string;
 	name: string;
 	bsm_league_group?: number;
 	age_group: 'adults' | 'minors';
@@ -435,13 +421,13 @@ export interface TeamsCreate extends BaseCollectionCreate {
 }
 
 export interface TeamsUpdate extends BaseCollectionUpdate {
-	id?: string;
-	name?: string;
+	id: string;
+	name: string;
 	bsm_league_group?: number;
 	'bsm_league_group+'?: number;
 	'bsm_league_group-'?: number;
-	age_group?: 'adults' | 'minors';
-	club?: string;
+	age_group: 'adults' | 'minors';
+	club: string;
 	description?: string;
 	admins?: MaybeArray<string>;
 	'admins+'?: MaybeArray<string>;
@@ -466,10 +452,8 @@ export interface TeamsCollection {
 	};
 }
 
-// ==== end of teams block =====
-
-// ==== start of requestcaches block =====
-
+// ===== requestcaches block =====
+// ===== requestcaches =====
 
 export interface RequestcachesResponse extends BaseCollectionResponse {
 	collectionName: 'requestcaches';
@@ -482,7 +466,7 @@ export interface RequestcachesResponse extends BaseCollectionResponse {
 }
 
 export interface RequestcachesCreate extends BaseCollectionCreate {
-	id: string;
+	id?: string;
 	hash: string;
 	responseBody?: RequestcachesResponseBody
 	url: string | URL;
@@ -491,10 +475,10 @@ export interface RequestcachesCreate extends BaseCollectionCreate {
 }
 
 export interface RequestcachesUpdate extends BaseCollectionUpdate {
-	id?: string;
-	hash?: string;
+	id: string;
+	hash: string;
 	responseBody?: RequestcachesResponseBody
-	url?: string | URL;
+	url: string | URL;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -509,10 +493,8 @@ export interface RequestcachesCollection {
 	relations: Record<string, never>;
 }
 
-// ==== end of requestcaches block =====
-
-// ==== start of leaguegroups block =====
-
+// ===== leaguegroups block =====
+// ===== leaguegroups =====
 
 export interface LeaguegroupsResponse extends BaseCollectionResponse {
 	collectionName: 'leaguegroups';
@@ -527,7 +509,7 @@ export interface LeaguegroupsResponse extends BaseCollectionResponse {
 }
 
 export interface LeaguegroupsCreate extends BaseCollectionCreate {
-	id: string;
+	id?: string;
 	bsm_id: number;
 	season: number;
 	acronym: string;
@@ -538,15 +520,15 @@ export interface LeaguegroupsCreate extends BaseCollectionCreate {
 }
 
 export interface LeaguegroupsUpdate extends BaseCollectionUpdate {
-	id?: string;
-	bsm_id?: number;
+	id: string;
+	bsm_id: number;
 	'bsm_id+'?: number;
 	'bsm_id-'?: number;
-	season?: number;
+	season: number;
 	'season+'?: number;
 	'season-'?: number;
-	acronym?: string;
-	name?: string;
+	acronym: string;
+	name: string;
 	clubs?: MaybeArray<string>;
 	'clubs+'?: MaybeArray<string>;
 	'clubs-'?: MaybeArray<string>;
@@ -566,10 +548,8 @@ export interface LeaguegroupsCollection {
 	};
 }
 
-// ==== end of leaguegroups block =====
-
-// ==== start of participations block =====
-
+// ===== participations block =====
+// ===== participations =====
 
 export interface ParticipationsResponse extends BaseCollectionResponse {
 	collectionName: 'participations';
@@ -583,7 +563,7 @@ export interface ParticipationsResponse extends BaseCollectionResponse {
 }
 
 export interface ParticipationsCreate extends BaseCollectionCreate {
-	id: string;
+	id?: string;
 	user?: string;
 	event?: string;
 	comment?: string;
@@ -593,7 +573,7 @@ export interface ParticipationsCreate extends BaseCollectionCreate {
 }
 
 export interface ParticipationsUpdate extends BaseCollectionUpdate {
-	id?: string;
+	id: string;
 	user?: string;
 	event?: string;
 	comment?: string;
@@ -615,10 +595,8 @@ export interface ParticipationsCollection {
 	};
 }
 
-// ==== end of participations block =====
-
-// ==== start of uniformsets block =====
-
+// ===== uniformsets block =====
+// ===== uniformsets =====
 
 export interface UniformsetsResponse extends BaseCollectionResponse {
 	collectionName: 'uniformsets';
@@ -633,7 +611,7 @@ export interface UniformsetsResponse extends BaseCollectionResponse {
 }
 
 export interface UniformsetsCreate extends BaseCollectionCreate {
-	id: string;
+	id?: string;
 	name: string;
 	cap: string;
 	jersey: string;
@@ -644,12 +622,12 @@ export interface UniformsetsCreate extends BaseCollectionCreate {
 }
 
 export interface UniformsetsUpdate extends BaseCollectionUpdate {
-	id?: string;
-	name?: string;
-	cap?: string;
-	jersey?: string;
-	pants?: string;
-	club?: string;
+	id: string;
+	name: string;
+	cap: string;
+	jersey: string;
+	pants: string;
+	club: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -667,10 +645,8 @@ export interface UniformsetsCollection {
 	};
 }
 
-// ==== end of uniformsets block =====
-
-// ==== start of _superusers block =====
-
+// ===== _superusers block =====
+// ===== _superusers =====
 
 export interface SuperusersResponse extends AuthCollectionResponse {
 	collectionName: '_superusers';
@@ -684,9 +660,7 @@ export interface SuperusersResponse extends AuthCollectionResponse {
 }
 
 export interface SuperusersCreate extends AuthCollectionCreate {
-	id: string;
-	password: string;
-	tokenKey: string;
+	id?: string;
 	email: string;
 	emailVisibility?: boolean;
 	verified?: boolean;
@@ -695,9 +669,8 @@ export interface SuperusersCreate extends AuthCollectionCreate {
 }
 
 export interface SuperusersUpdate extends AuthCollectionUpdate {
-	id?: string;
-	tokenKey?: string;
-	email?: string;
+	id: string;
+	email: string;
 	emailVisibility?: boolean;
 	verified?: boolean;
 	created?: string | Date;
@@ -714,10 +687,8 @@ export interface SuperusersCollection {
 	relations: Record<string, never>;
 }
 
-// ==== end of _superusers block =====
-
-// ==== start of _externalAuths block =====
-
+// ===== _externalAuths block =====
+// ===== _externalAuths =====
 
 export interface ExternalAuthsResponse extends BaseCollectionResponse {
 	collectionName: '_externalAuths';
@@ -731,7 +702,7 @@ export interface ExternalAuthsResponse extends BaseCollectionResponse {
 }
 
 export interface ExternalAuthsCreate extends BaseCollectionCreate {
-	id: string;
+	id?: string;
 	collectionRef: string;
 	recordRef: string;
 	provider: string;
@@ -741,11 +712,11 @@ export interface ExternalAuthsCreate extends BaseCollectionCreate {
 }
 
 export interface ExternalAuthsUpdate extends BaseCollectionUpdate {
-	id?: string;
-	collectionRef?: string;
-	recordRef?: string;
-	provider?: string;
-	providerId?: string;
+	id: string;
+	collectionRef: string;
+	recordRef: string;
+	provider: string;
+	providerId: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -760,10 +731,8 @@ export interface ExternalAuthsCollection {
 	relations: Record<string, never>;
 }
 
-// ==== end of _externalAuths block =====
-
-// ==== start of _mfas block =====
-
+// ===== _mfas block =====
+// ===== _mfas =====
 
 export interface MfasResponse extends BaseCollectionResponse {
 	collectionName: '_mfas';
@@ -776,7 +745,7 @@ export interface MfasResponse extends BaseCollectionResponse {
 }
 
 export interface MfasCreate extends BaseCollectionCreate {
-	id: string;
+	id?: string;
 	collectionRef: string;
 	recordRef: string;
 	method: string;
@@ -785,10 +754,10 @@ export interface MfasCreate extends BaseCollectionCreate {
 }
 
 export interface MfasUpdate extends BaseCollectionUpdate {
-	id?: string;
-	collectionRef?: string;
-	recordRef?: string;
-	method?: string;
+	id: string;
+	collectionRef: string;
+	recordRef: string;
+	method: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -803,10 +772,8 @@ export interface MfasCollection {
 	relations: Record<string, never>;
 }
 
-// ==== end of _mfas block =====
-
-// ==== start of _otps block =====
-
+// ===== _otps block =====
+// ===== _otps =====
 
 export interface OtpsResponse extends BaseCollectionResponse {
 	collectionName: '_otps';
@@ -815,26 +782,22 @@ export interface OtpsResponse extends BaseCollectionResponse {
 	recordRef: string;
 	created: string;
 	updated: string;
-	sentTo: string;
 }
 
 export interface OtpsCreate extends BaseCollectionCreate {
-	id: string;
+	id?: string;
 	collectionRef: string;
 	recordRef: string;
-	password: string;
 	created?: string | Date;
 	updated?: string | Date;
-	sentTo?: string;
 }
 
 export interface OtpsUpdate extends BaseCollectionUpdate {
-	id?: string;
-	collectionRef?: string;
-	recordRef?: string;
+	id: string;
+	collectionRef: string;
+	recordRef: string;
 	created?: string | Date;
 	updated?: string | Date;
-	sentTo?: string;
 }
 
 export interface OtpsCollection {
@@ -847,10 +810,8 @@ export interface OtpsCollection {
 	relations: Record<string, never>;
 }
 
-// ==== end of _otps block =====
-
-// ==== start of _authOrigins block =====
-
+// ===== _authOrigins block =====
+// ===== _authOrigins =====
 
 export interface AuthOriginsResponse extends BaseCollectionResponse {
 	collectionName: '_authOrigins';
@@ -863,7 +824,7 @@ export interface AuthOriginsResponse extends BaseCollectionResponse {
 }
 
 export interface AuthOriginsCreate extends BaseCollectionCreate {
-	id: string;
+	id?: string;
 	collectionRef: string;
 	recordRef: string;
 	fingerprint: string;
@@ -872,10 +833,10 @@ export interface AuthOriginsCreate extends BaseCollectionCreate {
 }
 
 export interface AuthOriginsUpdate extends BaseCollectionUpdate {
-	id?: string;
-	collectionRef?: string;
-	recordRef?: string;
-	fingerprint?: string;
+	id: string;
+	collectionRef: string;
+	recordRef: string;
+	fingerprint: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -890,10 +851,8 @@ export interface AuthOriginsCollection {
 	relations: Record<string, never>;
 }
 
-// ==== end of _authOrigins block =====
-
-// ==== start of eventseries block =====
-
+// ===== eventseries block =====
+// ===== eventseries =====
 
 export interface EventseriesResponse extends BaseCollectionResponse {
 	collectionName: 'eventseries';
@@ -913,7 +872,7 @@ export interface EventseriesResponse extends BaseCollectionResponse {
 }
 
 export interface EventseriesCreate extends BaseCollectionCreate {
-	id: string;
+	id?: string;
 	title: string;
 	interval: number;
 	weekday?: number;
@@ -929,18 +888,18 @@ export interface EventseriesCreate extends BaseCollectionCreate {
 }
 
 export interface EventseriesUpdate extends BaseCollectionUpdate {
-	id?: string;
-	title?: string;
-	interval?: number;
+	id: string;
+	title: string;
+	interval: number;
 	'interval+'?: number;
 	'interval-'?: number;
 	weekday?: number;
 	'weekday+'?: number;
 	'weekday-'?: number;
-	series_start?: string | Date;
+	series_start: string | Date;
 	series_end?: string | Date;
-	team?: string;
-	starttime?: string;
+	team: string;
+	starttime: string;
 	endtime?: string;
 	desc?: string;
 	location?: string;
@@ -960,9 +919,6 @@ export interface EventseriesCollection {
 		team: TeamsCollection;
 	};
 }
-
-// ==== end of eventseries block =====
-
 
 // ===== Schema =====
 
