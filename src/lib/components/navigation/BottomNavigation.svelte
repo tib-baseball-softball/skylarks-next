@@ -4,7 +4,7 @@
 
 <nav class="lg:hidden bottom-nav bg-surface-200 dark:bg-surface-800 border-t border-surface-500">
   <ul class="flex">
-    <StaticNavigationLinks classes="flex-col py-1 text-sm"/>
+    <StaticNavigationLinks classes="flex-col py-1.5 text-sm"/>
   </ul>
 </nav>
 

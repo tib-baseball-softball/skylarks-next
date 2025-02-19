@@ -1,11 +1,12 @@
 <script lang="ts">
-  import {client} from "../pocketbase/index.svelte";
-  import {Avatar, getModalStore, getToastStore, type ModalSettings} from "@skeletonlabs/skeleton";
-  import {browser} from "$app/environment";
-  import {invalidateAll} from "$app/navigation";
-  import {authSettings} from "$lib/pocketbase/index.svelte";
+    import {client} from "../pocketbase/index.svelte";
+    import {Avatar, getModalStore, getToastStore, type ModalSettings} from "@skeletonlabs/skeleton";
+    import {browser} from "$app/environment";
+    import {invalidateAll} from "$app/navigation";
+    import {authSettings} from "$lib/pocketbase/index.svelte";
+    import {LucideLogIn} from "lucide-svelte";
 
-  const modalStore = getModalStore();
+    const modalStore = getModalStore();
   const toastStore = getToastStore();
 
   const {signupAllowed = true} = $props();
@@ -35,36 +36,37 @@
         invalidateAll();
       }
     }
-  })
+  });
 
 </script>
 
 {#if authSettings.record}
-    <button class="badge" onclick={() => modalStore.trigger(accountOverview)}>
+  <button class="badge" onclick={() => modalStore.trigger(accountOverview)}>
 
-        {#if authSettings.record?.avatar}
-            <Avatar
-                    src={client.files.getURL(authSettings.record, authSettings.record?.avatar)}
-                    width="w-14"
-            />
+    {#if authSettings.record?.avatar}
+      <Avatar
+              src={client.files.getURL(authSettings.record, authSettings.record?.avatar)}
+              width="w-14"
+      />
 
-        {:else}
+    {:else}
 
-            <Avatar
-                    initials={authSettings.record?.first_name?.charAt(0).toUpperCase() +
+      <Avatar
+              initials={authSettings.record?.first_name?.charAt(0).toUpperCase() +
           authSettings.record?.last_name?.charAt(0)?.toUpperCase()}
-                    background="variant-filled-primary"
-                    width="w-14"
-                    fill="fill-white"
-            />
+              background="variant-filled-primary"
+              width="w-14"
+              fill="fill-white"
+      />
 
-        {/if}
-    </button>
+    {/if}
+  </button>
 {:else}
-    <button
-            class="btn variant-ghost-primary"
-            onclick={() => modalStore.trigger(loginModal)}
-    >
-        {signupAllowed ? "Login / Register" : "Login"}
-    </button>
+  <button
+          class="btn variant-ghost-primary"
+          onclick={() => modalStore.trigger(loginModal)}
+          title={signupAllowed ? "Login / Register" : "Login"}
+  >
+    <LucideLogIn/>
+  </button>
 {/if}

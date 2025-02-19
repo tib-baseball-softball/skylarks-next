@@ -21,7 +21,7 @@
 
 <nav class="list-nav pt-1 pb-3 px-6">
 
-  <ul class="flex items-center justify-center gap-4">
+  <ul class="flex mb-3 flex-col md:flex-row items-center justify-center md:gap-4">
     <li><a href="/terms">Terms & Conditions</a></li>
     <li><a href="/legalnotice">Impressum</a></li>
     <li><a href="/privacy">Datenschutzerklärung</a></li>
