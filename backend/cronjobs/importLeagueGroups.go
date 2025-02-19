@@ -38,12 +38,12 @@ func ImportLeagueGroups(app core.App, clubID *string, season *int) (err error) {
 			defer wg.Done()
 			leagueGroups, err := fetchLeagueGroupsForCurrentSeason(club.GetString("bsm_api_key"), selectedSeason)
 			if err != nil {
-				app.Logger().Error(err.Error())
+				app.Logger().Error("Error fetching league groups", "error", err, "club", club.GetString("name"), "season", selectedSeason)
 				return
 			}
 			err = createOrUpdateLeagueGroups(app, leagueGroups, club)
 			if err != nil {
-				app.Logger().Error(err.Error())
+				// Logging happens in called method where more exact data is available.
 				return
 			}
 		}()
@@ -75,30 +75,24 @@ func createOrUpdateLeagueGroups(app core.App, leagueGroups []model.LeagueGroup, 
 		if err != nil {
 			collection, err := app.FindCollectionByNameOrId("leaguegroups")
 			if err != nil {
+				app.Logger().Error("Error getting collection", "error", err)
 				return err
 			}
-
 			record = core.NewRecord(collection)
-			err = setLeagueGroupRecordValues(record, leagueGroup, club)
-			if err != nil {
-				return err
-			}
+			setLeagueGroupRecordValues(record, leagueGroup, club)
 		}
 		// no error - update existing record
-		err = setLeagueGroupRecordValues(record, leagueGroup, club)
-		if err != nil {
-			return err
-		}
+		setLeagueGroupRecordValues(record, leagueGroup, club)
 
 		if err := app.Save(record); err != nil {
-			app.Logger().Error("Persisting LeagueGroup record failed: ", "error", err)
+			app.Logger().Error("Persisting LeagueGroup record failed: ", "error", err, "leagueGroup", leagueGroup, "record", record)
 			return err
 		}
 	}
 	return
 }
 
-func setLeagueGroupRecordValues(record *core.Record, leagueGroup model.LeagueGroup, club *core.Record) (err error) {
+func setLeagueGroupRecordValues(record *core.Record, leagueGroup model.LeagueGroup, club *core.Record) {
 	record.Set("bsm_id", leagueGroup.ID)
 	record.Set("season", leagueGroup.Season)
 	record.Set("name", leagueGroup.Name)
