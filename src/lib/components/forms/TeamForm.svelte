@@ -3,7 +3,7 @@
   import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
   import {getDrawerStore, getToastStore, RadioGroup, RadioItem, type ToastSettings,} from "@skeletonlabs/skeleton";
-  import {CloseOutline} from "flowbite-svelte-icons";
+  import {X} from "lucide-svelte";
 
   const toastStore = getToastStore();
   const drawerStore = getDrawerStore();
@@ -71,7 +71,7 @@
             class="btn variant-ghost-surface"
             onclick={drawerStore.close}
     >
-      <CloseOutline/>
+      <X/>
     </button>
     <header class="text-xl font-semibold">
       {#if form.id}

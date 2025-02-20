@@ -4,10 +4,10 @@
   import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
   import {Avatar, getModalStore, getToastStore, type ModalSettings} from "@skeletonlabs/skeleton";
   import {client} from "$lib/pocketbase/index.svelte";
-  import {CheckCircleSolid, LockOpenOutline, LockOutline, TrashBinOutline} from "flowbite-svelte-icons";
   import LocalDate from "../utility/LocalDate.svelte";
   import type {TeamsUpdate, UsersUpdate} from "$lib/model/pb-types.ts";
   import {invalidateAll} from "$app/navigation";
+  import {CircleCheck, Lock, LockOpen, Trash} from "lucide-svelte";
 
   interface Props {
     handler: DataHandler<CustomAuthModel>;
@@ -16,7 +16,7 @@
   }
 
   const modalStore = getModalStore();
-  const toastStore = getToastStore()
+  const toastStore = getToastStore();
 
   let {handler, team, showAdminSection = false}: Props = $props();
 
@@ -24,18 +24,18 @@
     try {
       await client.collection("teams").update<TeamsUpdate>(team.id, {
         "admins+": model.id
-      })
+      });
       toastStore.trigger({
         message: `User "${model.first_name + " " + model.last_name}" has been added as an admin for team "${team.name}"`,
         background: "variant-filled-success"
-      })
-      await invalidateAll()
+      });
+      await invalidateAll();
     } catch (error) {
-      console.error(error)
+      console.error(error);
       toastStore.trigger({
         message: "An error occurred while adding user as admin",
         background: "variant-filled-error"
-      })
+      });
     }
   }
 
@@ -43,18 +43,18 @@
     try {
       await client.collection("teams").update<TeamsUpdate>(team.id, {
         "admins-": model.id
-      })
+      });
       toastStore.trigger({
         message: `User "${model.first_name + " " + model.last_name}" has been removed as admin for team "${team.name}"`,
         background: "variant-filled-success"
-      })
-      await invalidateAll()
+      });
+      await invalidateAll();
     } catch (error) {
-      console.error(error)
+      console.error(error);
       toastStore.trigger({
         message: "An error occurred while removing user as admin",
         background: "variant-filled-error"
-      })
+      });
     }
   }
 
@@ -68,18 +68,18 @@
           try {
             await client.collection("users").update<UsersUpdate>(model.id, {
               "teams-": team.id
-            })
+            });
             toastStore.trigger({
               message: `User "${model.first_name + " " + model.last_name}" has been removed as member from team "${team.name}"`,
               background: "variant-filled-success"
-            })
-            await invalidateAll()
+            });
+            await invalidateAll();
           } catch (error) {
-            console.error(error)
+            console.error(error);
             toastStore.trigger({
               message: "An error occurred while removing user as team member",
               background: "variant-filled-error"
-            })
+            });
           }
         }
       },
@@ -128,7 +128,7 @@
     <td class="flex gap-1">
       {#if row.verified}
         <div>
-          <CheckCircleSolid
+          <CircleCheck
                   class="text-success-600 dark:text-success-500"
           />
         </div>
@@ -189,18 +189,18 @@
 
         {#if team.admins.includes(row.id)}
           <button class="badge variant-ghost-warning" onclick={() => removeUserAsAdmin(row)}>
-            <LockOutline/>
+            <Lock class="m-0.5" size="18"/>
             Revoke Admin Access
           </button>
         {:else }
           <button class="badge variant-ghost-tertiary" onclick={() => makeUserAdmin(row)}>
-            <LockOpenOutline/>
+            <LockOpen class="m-0.5" size="18"/>
             Make Admin
           </button>
         {/if}
 
         <button class="badge variant-ghost-error" onclick={() => deleteUserFromTeam(row)}>
-          <TrashBinOutline/>
+          <Trash class="m-0.5" size="18"/>
           Remove
         </button>
       </td>

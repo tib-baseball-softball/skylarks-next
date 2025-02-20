@@ -2,12 +2,12 @@
   import TeamTeaserCard from "$lib/components/diamondplanner/team/TeamTeaserCard.svelte";
   import EventTeaser from "$lib/components/diamondplanner/event/EventTeaser.svelte";
   import Paginator from "$lib/pocketbase/Paginator.svelte";
-  import {UsersGroupOutline,} from "flowbite-svelte-icons";
   import {goto} from "$app/navigation";
   import type {CustomAuthModel, EventType} from "$lib/model/ExpandedResponse.js";
   import {RadioGroup, RadioItem,} from "@skeletonlabs/skeleton";
   import {authSettings} from "$lib/pocketbase/index.svelte";
   import TeamAdminSection from "$lib/components/diamondplanner/team/TeamAdminSection.svelte";
+  import {Users} from "lucide-svelte";
 
   let {data} = $props();
   const events = $derived(data.events);
@@ -112,7 +112,7 @@
             href="/account/team/{data.team.id}/members"
             class="btn variant-ghost-tertiary"
     >
-      <UsersGroupOutline/>
+      <Users/>
       <span>Player List</span>
     </a>
   </div>

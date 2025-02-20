@@ -2,33 +2,33 @@
   //@ts-ignore
   import type {UsersResponse} from "$lib/model/pb-types.ts";
   import {getToastStore} from "@skeletonlabs/skeleton";
-  import {CloseOutline} from "flowbite-svelte-icons";
+  import {X} from "lucide-svelte";
 
   // TODO: this should be even more generic
 
   interface Props {
-    itemName: string
-    selectedItems: T[]
-    allItems: T[]
-    allowDeletionOfLastItem?: boolean
+    itemName: string;
+    selectedItems: T[];
+    allItems: T[];
+    allowDeletionOfLastItem?: boolean;
   }
 
-  let {itemName, selectedItems = $bindable(), allItems, allowDeletionOfLastItem = false}: Props = $props()
+  let {itemName, selectedItems = $bindable(), allItems, allowDeletionOfLastItem = false}: Props = $props();
 
-  const toastStore = getToastStore()
-  let selectElement: HTMLSelectElement | undefined = $state()
+  const toastStore = getToastStore();
+  let selectElement: HTMLSelectElement | undefined = $state();
 
   function addItemToSelection(users: T[]) {
     if (!selectElement || selectElement?.value === "") {
-      return
+      return;
     }
-    const selectedUser = users.find((user) => user.id === selectElement?.value)
-    const adminExists = selectedItems.find((admin) => admin.id === selectedUser?.id)
+    const selectedUser = users.find((user) => user.id === selectElement?.value);
+    const adminExists = selectedItems.find((admin) => admin.id === selectedUser?.id);
 
     if (selectedUser && selectElement && !adminExists) {
-      selectedItems.push(selectedUser)
+      selectedItems.push(selectedUser);
     }
-    selectElement.value = ""
+    selectElement.value = "";
   }
 
   function removeItemFromSelection(itemToRemove: T) {
@@ -36,16 +36,16 @@
       toastStore.trigger({
         message: `You cannot remove the last ${itemName}!`,
         background: "variant-filled-warning"
-      })
-      return
+      });
+      return;
     }
-    const itemRef = selectedItems.find(entry => entry.id === itemToRemove.id)
+    const itemRef = selectedItems.find(entry => entry.id === itemToRemove.id);
 
     if (itemRef) {
-      const index = selectedItems.indexOf(itemRef)
+      const index = selectedItems.indexOf(itemRef);
 
       if (index !== -1) {
-        selectedItems.splice(index, 1)
+        selectedItems.splice(index, 1);
       }
     }
   }
@@ -58,7 +58,7 @@
           onclick={() => removeItemFromSelection(selectItem)}
   >
     <span>{selectItem.first_name} {selectItem.last_name}</span>
-    <CloseOutline size="xs"/>
+    <X size="12"/>
   </button>
 {/each}
 

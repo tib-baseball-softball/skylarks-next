@@ -1,9 +1,9 @@
 <script lang="ts">
   import type {Snippet} from "svelte";
   import {Dialog, type WithoutChild} from "bits-ui";
-  import {CloseOutline} from "flowbite-svelte-icons";
   import {fly} from "svelte/transition";
   import {cubicInOut} from "svelte/easing";
+  import {X} from "lucide-svelte";
 
   /**
    * Modal dialog based on headless bits-ui building blocks.
@@ -48,7 +48,7 @@
             <div class="flex gap-5 items-center mb-2">
 
               <Dialog.Close class="btn variant-ghost-surface">
-                <CloseOutline/>
+                <X/>
               </Dialog.Close>
 
               <Dialog.Title class="text-xl font-semibold">

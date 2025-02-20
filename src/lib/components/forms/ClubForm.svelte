@@ -2,15 +2,15 @@
   import {invalidateAll} from "$app/navigation";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
   import {getDrawerStore, getToastStore, type ToastSettings,} from "@skeletonlabs/skeleton";
-  import {CloseOutline} from "flowbite-svelte-icons";
   import type {ClubsResponse, UsersResponse, UsersUpdate} from "$lib/model/pb-types";
   import type {CustomAuthModel, ExpandedClub} from "$lib/model/ExpandedResponse";
   import MultiSelectCombobox from "$lib/components/utility/MultiSelectCombobox.svelte";
+  import {X} from "lucide-svelte";
 
   const toastStore = getToastStore();
   const drawerStore = getDrawerStore();
 
-  const model = authSettings.record as CustomAuthModel
+  const model = authSettings.record as CustomAuthModel;
 
   const toastSettingsSuccess: ToastSettings = {
     message: "Club data saved successfully.",
@@ -34,11 +34,11 @@
       },
   );
 
-  let selectedAdmins: UsersResponse[] = $state(form.expand.admins)
+  let selectedAdmins: UsersResponse[] = $state(form.expand.admins);
 
   const allUsersForClub = client.collection("users").getFullList<UsersResponse>({
     filter: `club ?~ '${$drawerStore.meta.club.id}'`
-  })
+  });
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
@@ -48,15 +48,15 @@
     try {
       if (form.id) {
         form.admins = selectedAdmins.map((admin) => {
-          return admin.id
-        })
+          return admin.id;
+        });
 
         result = await client
             .collection("clubs")
             .update<ClubsResponse>(form.id, form);
       } else {
         // a user creating a club becomes its first admin
-        form.admins.push(model.id)
+        form.admins.push(model.id);
 
         result = await client
             .collection("clubs")
@@ -65,7 +65,7 @@
         // a user needs to become a member of the new club
         await client.collection("users").update<UsersUpdate>(model.id, {
           "club+": result.id
-        })
+        });
       }
     } catch {
       toastStore.trigger(toastSettingsError);
@@ -75,7 +75,7 @@
     if (result) {
       toastStore.trigger(toastSettingsSuccess);
     }
-    await invalidateAll()
+    await invalidateAll();
     drawerStore.close();
   }
 </script>
@@ -87,7 +87,7 @@
             class="btn variant-ghost-surface"
             onclick={drawerStore.close}
     >
-      <CloseOutline/>
+      <X/>
     </button>
     <header class="text-xl font-semibold">
       {#if form.id}

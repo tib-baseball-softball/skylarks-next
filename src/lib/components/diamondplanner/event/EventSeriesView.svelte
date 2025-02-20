@@ -1,6 +1,5 @@
 <script lang="ts">
   import {getDrawerStore} from "@skeletonlabs/skeleton";
-  import {CloseOutline} from "flowbite-svelte-icons";
   import type {EventseriesResponse} from "$lib/model/pb-types.ts";
   import type {EventSeriesCreationData, ExpandedTeam} from "$lib/model/ExpandedResponse.ts";
   import EventSeriesForm from "$lib/components/forms/EventSeriesForm.svelte";
@@ -10,30 +9,31 @@
   import {client} from "$lib/pocketbase/index.svelte.ts";
   import {invalidateAll} from "$app/navigation";
   import {DateTimeUtility} from "$lib/service/DateTimeUtility.ts";
+  import {X} from "lucide-svelte";
 
   const drawerStore = getDrawerStore();
 
-  const eventSeries: EventseriesResponse[] = $derived($drawerStore.meta.eventSeries ?? [])
-  const team: ExpandedTeam = $derived($drawerStore.meta.team)
+  const eventSeries: EventseriesResponse[] = $derived($drawerStore.meta.eventSeries ?? []);
+  const team: ExpandedTeam = $derived($drawerStore.meta.team);
 
-  let showForm = $state(false)
-  let selectedEventSeries: EventSeriesCreationData | null = $state(null)
+  let showForm = $state(false);
+  let selectedEventSeries: EventSeriesCreationData | null = $state(null);
 
   function setupAndShowForm(eventSeries: EventSeriesCreationData | null) {
-    selectedEventSeries = eventSeries
+    selectedEventSeries = eventSeries;
 
     // this is pretty ugly, but the form needs to get local times instead of UTC values
     if (eventSeries && selectedEventSeries && eventSeries.endtime) {
-      selectedEventSeries.starttime = DateTimeUtility.convertTimeFromUTC(eventSeries.starttime)
-      selectedEventSeries.endtime = DateTimeUtility.convertTimeFromUTC(eventSeries.endtime)
+      selectedEventSeries.starttime = DateTimeUtility.convertTimeFromUTC(eventSeries.starttime);
+      selectedEventSeries.endtime = DateTimeUtility.convertTimeFromUTC(eventSeries.endtime);
     }
-    showForm = true
+    showForm = true;
   }
 
   function deleteEventSeries(id: string) {
-    drawerStore.close()
-    client.collection("eventseries").delete(id)
-    invalidateAll()
+    drawerStore.close();
+    client.collection("eventseries").delete(id);
+    invalidateAll();
   }
 </script>
 
@@ -44,7 +44,7 @@
             class="btn variant-ghost-surface"
             onclick={drawerStore.close}
     >
-      <CloseOutline/>
+      <X/>
     </button>
     <header class="text-xl font-semibold">
       <h2 class="h3">Manage Event Series for {team?.name}</h2>

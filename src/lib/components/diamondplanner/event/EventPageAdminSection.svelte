@@ -1,17 +1,17 @@
 <script lang="ts">
-  import {CalendarEditOutline, CalendarPlusOutline, EditOutline, InfoCircleOutline} from "flowbite-svelte-icons";
   import type {ExpandedEvent} from "$lib/model/ExpandedResponse";
   import {type DrawerSettings, getDrawerStore} from "@skeletonlabs/skeleton";
   import {client} from "$lib/pocketbase/index.svelte";
   import type {EventsUpdate} from "$lib/model/pb-types";
   import {goto} from "$app/navigation";
   import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
+  import {CalendarArrowDown, CalendarPlus, Edit, Info} from "lucide-svelte";
 
   interface Props {
-    event: ExpandedEvent
+    event: ExpandedEvent;
   }
 
-  let {event}: Props = $props()
+  let {event}: Props = $props();
 
   const drawerStore = getDrawerStore();
 
@@ -28,20 +28,20 @@
 
   let guestPlayerForm = $state({
     name: ""
-  })
+  });
 
   async function submitNewGuestPlayer(e: SubmitEvent) {
-    e.preventDefault()
+    e.preventDefault();
 
     await client.collection("events").update<EventsUpdate>(event.id, {
       guests: event.guests + "," + guestPlayerForm.name
-    })
-    guestPlayerForm.name = ""
+    });
+    guestPlayerForm.name = "";
   }
 
   async function deleteEvent(id: string) {
-    await client.collection("events").delete(id)
-    await goto(`/account/team/${event.team}`)
+    await client.collection("events").delete(id);
+    await goto(`/account/team/${event.team}`);
   }
 </script>
 
@@ -59,7 +59,7 @@
 
     <section class="p-4 space-y-2">
       <div class="flex items-center gap-3">
-        <InfoCircleOutline/>
+        <Info/>
         <div>
           <p class="text-sm font-light">BSM event ID</p>
           <p>{event.bsm_id}</p>
@@ -67,7 +67,7 @@
       </div>
 
       <div class="flex items-center gap-3">
-        <CalendarPlusOutline/>
+        <CalendarPlus/>
         <div>
           <p class="text-sm font-light">Created</p>
           <p>{new Date(event.created).toLocaleString()}</p>
@@ -75,7 +75,7 @@
       </div>
 
       <div class="flex items-center gap-3">
-        <CalendarEditOutline/>
+        <CalendarArrowDown/>
         <div>
           <p class="text-sm font-light">Last Updated</p>
           <p>{new Date(event.updated).toLocaleString()}</p>
@@ -120,7 +120,7 @@
                 class="btn variant-ghost-surface"
                 onclick={() => drawerStore.open(settings)}
         >
-          <EditOutline/>
+          <Edit/>
           <span>Edit Event</span>
         </button>
 
