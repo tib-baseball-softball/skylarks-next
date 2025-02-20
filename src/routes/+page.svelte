@@ -1,14 +1,8 @@
 <script lang="ts">
   import CurrentMatchesOverviewCard from "$lib/components/match/CurrentMatchesOverviewCard.svelte";
+  import type {PageProps} from "./$types";
 
-  interface Props {
-    data: any;
-  }
-
-  let {data}: Props = $props();
-
-  let page = $derived(data.pageObject);
-  //    $: contentObjects = data.contentObjects ?? []
+  let {data}: PageProps = $props();
 </script>
 
 <div class="w-full space-y-5 mt-2 mb-5">
@@ -19,9 +13,8 @@
               class="max-w-md text-white variant-glass-surface p-3 rounded-xl"
       >
         <h1 class="h1 mb-2">Berlin Skylarks</h1>
-        <p class="">
-          {page?.meta?.subtitle ??
-          "Baseball & Softball in the Heart of Berlin"}
+        <p>
+          Baseball & Softball in the Heart of Berlin
         </p>
       </div>
     </div>
@@ -35,24 +28,6 @@
     />
   </section>
 
-  <!--    <section id="News">
-      <h2 class="h2 mb-3">Aktuelle News</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
-          {#each contentObjects as co}
-              {#if co.type === "pagelist_sub"}
-                  {#each co.content.pages as page}
-                      <TeaserCard header="{page.title}" teaserText="Lorem ipsum dolor sit amet"></TeaserCard>
-                  {/each}
-              {/if}
-          {/each}
-      </div>
-  </section>-->
-
-  <!--    <section class="">
-      <a class="btn variant-filled" href="/skylarks-zwischenzeugnis-2022">Testseite mit Inhalten</a>
-      <a class="btn variant-filled" href="/skylarks-holen-den-titel">Spielbericht</a>
-      <p>Inhalt</p>
-  </section>-->
 </div>
 
 <style>
