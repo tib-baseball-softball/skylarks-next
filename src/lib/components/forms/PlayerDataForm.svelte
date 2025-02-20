@@ -132,7 +132,7 @@
                 allowUpperCase={true}
                 chips="variant-filled-primary"
         />
-        <div class="flex flex-wrap gap-2 md:col-span-2">
+        <span class="flex flex-wrap gap-2 md:col-span-2">
           {#each possiblePositionValues as value}
             <button
                     type="button"
@@ -142,7 +142,7 @@
               {value}
             </button>
           {/each}
-        </div>
+        </span>
       </label>
 
       <label class="label flex flex-col gap-1 md:col-span-2">

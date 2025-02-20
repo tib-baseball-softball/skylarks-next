@@ -1,7 +1,7 @@
 <script lang="ts">
-  import {HomeOutline, ShieldOutline, TableRowOutline, TicketOutline, UsersGroupOutline} from "flowbite-svelte-icons";
   import {getDrawerStore} from "@skeletonlabs/skeleton";
   import {page} from "$app/state";
+  import {Home, Shield, Table, Ticket, Users} from "lucide-svelte";
 
   interface Props {
     classes?: string;
@@ -18,7 +18,7 @@
 
 <li>
   <a class="{classes}" class:variant-filled-primary={page.url.pathname === "/"} href="/" onclick={drawerClose}>
-    <HomeOutline size="lg"/>
+    <Home/>
     <span>Start</span>
   </a>
 </li>
@@ -26,28 +26,28 @@
 <li>
   <a class="{classes}" class:variant-filled-primary={page.url.pathname.startsWith("/gamecenter")} href="/gamecenter"
      onclick={drawerClose}>
-    <TicketOutline size="lg"/>
+    <Ticket/>
     <span>Games</span>
   </a>
 </li>
 <li>
   <a class="{classes}" class:variant-filled-primary={page.url.pathname.startsWith("/ligen")} href="/ligen"
      onclick={drawerClose}>
-    <TableRowOutline size="lg"/>
+    <Table/>
     <span>Leagues</span>
   </a>
 </li>
 <li>
   <a class="{classes}" class:variant-filled-primary={page.url.pathname.startsWith("/teams")} href="/teams"
      onclick={drawerClose}>
-    <UsersGroupOutline size="lg"/>
+    <Users/>
     <span>Teams</span>
   </a>
 </li>
 <li>
   <a class="{classes}" class:variant-filled-primary={page.url.pathname.startsWith("/club")} href="/club"
      onclick={drawerClose}>
-    <ShieldOutline size="lg"/>
+    <Shield/>
     <span>Club</span>
   </a>
 </li>

@@ -60,9 +60,6 @@ importers:
       autoprefixer:
         specifier: 10.4.20
         version: 10.4.20(postcss@8.5.1)
-      flowbite-svelte-icons:
-        specifier: ^2.0.2
-        version: 2.0.2(svelte@5.20.2)(tailwind-merge@2.6.0)(tailwindcss@3.4.17)
       lucide-svelte:
         specifier: ^0.474.0
         version: 0.474.0(svelte@5.20.2)
@@ -836,14 +833,6 @@ packages:
   flatpickr@4.6.13:
     resolution: {integrity: sha512-97PMG/aywoYpB4IvbvUJi0RQi8vearvU0oov1WW3k0WZPBMrTQVqekSX5CjSG/M4Q3i6A/0FKXC7RyAoAUUSPw==}
 
-  flowbite-svelte-icons@2.0.2:
-    resolution: {integrity: sha512-Vkmduy2867Rk8R7TziPirsWkixJnToFBEXRaN4ouJabOx62NQjiBbHFe+HTaMOQmdp4FNMI2Nhtk2I2CQ8r3RQ==}
-    engines: {node: '>=18.0.0', npm: '>=7.0.0'}
-    peerDependencies:
-      svelte: ^5.0.0
-      tailwind-merge: ^2.3.0
-      tailwindcss: ^3.4.3
-
   foreground-child@3.3.0:
     resolution: {integrity: sha512-Ld2g8rrAyMYFXBhEqMz8ZAHBi4J4uS1i/CxGMDnjyFWddMXLVcDp051DZfu+t7+ab7Wv6SMqpWmyFIj5UbfFvg==}
     engines: {node: '>=14'}
@@ -1301,9 +1290,6 @@ packages:
   svelte@5.20.2:
     resolution: {integrity: sha512-aYXJreNUiyTob0QOzRZeBXZMGeFZDch6SrSRV8QTncZb6zj0O3BEdUzPpojuHQ1pTvk+KX7I6rZCXPUf8pTPxA==}
     engines: {node: '>=18'}
-
-  tailwind-merge@2.6.0:
-    resolution: {integrity: sha512-P+Vu1qXfzediirmHOC3xKGAYeZtPcV9g76X+xg2FD4tYgR71ewMA35Y3sCz3zhiN/dwefRpJX0yBcgwi1fXNQA==}
 
   tailwindcss@3.4.17:
     resolution: {integrity: sha512-w33E2aCvSDP0tW9RZuNXadXlkHXqFzSkQew/aIa2i/Sj8fThxwovwlXHSPXTbAHwEIhBFXAedUhP2tueAKP8Og==}
@@ -2133,12 +2119,6 @@ snapshots:
 
   flatpickr@4.6.13: {}
 
-  flowbite-svelte-icons@2.0.2(svelte@5.20.2)(tailwind-merge@2.6.0)(tailwindcss@3.4.17):
-    dependencies:
-      svelte: 5.20.2
-      tailwind-merge: 2.6.0
-      tailwindcss: 3.4.17
-
   foreground-child@3.3.0:
     dependencies:
       cross-spawn: 7.0.6
@@ -2567,8 +2547,6 @@ snapshots:
       locate-character: 3.0.0
       magic-string: 0.30.17
       zimmerframe: 1.1.2
-
-  tailwind-merge@2.6.0: {}
 
   tailwindcss@3.4.17:
     dependencies:

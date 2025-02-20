@@ -1,18 +1,18 @@
 <script lang="ts">
-    import type {LeagueGroup} from "bsm.js";
-    import {FileLinesOutline, FlagOutline, TagOutline, UsersGroupOutline} from "flowbite-svelte-icons";
+  import type {LeagueGroup} from "bsm.js";
+  import {Info, Tag, Users, Volleyball} from "lucide-svelte";
 
-    interface Props {
+  interface Props {
     leagueGroup: LeagueGroup;
   }
 
   let {leagueGroup}: Props = $props();
 </script>
 
-<article class="card variant-soft-surface p-3">
+<article class="card variant-soft-surface p-4">
 
-  <div class="flex items-center gap-3 self-end">
-    <FileLinesOutline/>
+  <div class="container self-end">
+    <Info/>
     <div>
       <p>{leagueGroup.name}</p>
       <p class="text-sm font-light">Name</p>
@@ -21,28 +21,28 @@
 
   <hr class="my-2">
 
-  <div class="flex items-center gap-3">
-    <TagOutline/>
+  <div class="container">
+    <Tag/>
     <div>
       <p>{leagueGroup.acronym}</p>
-      <p class="text-sm font-light">Akronym</p>
+      <p class="text-sm font-light">Acronym</p>
     </div>
   </div>
 
   <hr class="my-2">
 
-  <div class="flex items-center gap-3">
-    <FlagOutline/>
+  <div class="container">
+    <Volleyball/>
     <div>
       <p>{leagueGroup.league.sport}</p>
-      <p class="text-sm font-light">Sportart</p>
+      <p class="text-sm font-light">Sport</p>
     </div>
   </div>
 
   <hr class="my-2">
 
-  <div class="flex items-center gap-3">
-    <UsersGroupOutline/>
+  <div class="container">
+    <Users/>
     <div>
       <p>{leagueGroup.league.age_group}</p>
       <p class="text-sm font-light">Age Group</p>
@@ -50,3 +50,11 @@
   </div>
 
 </article>
+
+<style>
+    .container {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+    }
+</style>

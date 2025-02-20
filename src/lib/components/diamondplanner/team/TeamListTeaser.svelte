@@ -1,12 +1,12 @@
 <script lang="ts">
-    import {ClipboardListOutline, ClipboardOutline, InfoCircleOutline} from "flowbite-svelte-icons";
-    import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
-    import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
-    import {authSettings, client} from "$lib/pocketbase/index.svelte";
-    import {invalidate} from "$app/navigation";
-    import TeamEditButton from "$lib/components/team/TeamEditButton.svelte";
+  import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
+  import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
+  import {authSettings, client} from "$lib/pocketbase/index.svelte";
+  import {invalidate} from "$app/navigation";
+  import TeamEditButton from "$lib/components/team/TeamEditButton.svelte";
+  import {ClipboardList, Dumbbell, ShieldHalf} from "lucide-svelte";
 
-    /**
+  /**
    * Used for Teams in List Teasers and on Club Page.
    */
 
@@ -35,24 +35,24 @@
 
       <div class="space-y-2">
 
-        <div class="flex items-center gap-3">
-          <ClipboardOutline/>
+        <div class="flex items-center gap-4">
+          <ShieldHalf/>
           <div>
             <p>{team?.expand?.club.name}</p>
             <p class="text-sm font-light">Club</p>
           </div>
         </div>
 
-        <div class="flex items-center gap-3">
-          <InfoCircleOutline/>
+        <div class="flex items-center gap-4">
+          <Dumbbell/>
           <div>
             <p>{team.bsm_league_group}</p>
             <p class="text-sm font-light">BSM-Liga (für aktuelle Saison)</p>
           </div>
         </div>
 
-        <div class="flex items-center gap-3">
-          <ClipboardListOutline/>
+        <div class="flex items-center gap-4">
+          <ClipboardList/>
           <div>
             <p>{team.age_group}</p>
             <p class="text-sm font-light">Age Group</p>

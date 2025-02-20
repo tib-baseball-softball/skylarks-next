@@ -1,30 +1,30 @@
 <script lang="ts">
   import {Accordion, AccordionItem, getDrawerStore,} from "@skeletonlabs/skeleton";
   import {authSettings} from "$lib/pocketbase/index.svelte";
-  import {
-    ChartLineUpOutline,
-    ChartMixedOutline,
-    FileShieldOutline,
-    LockOutline,
-    ProfileCardOutline,
-    ShieldOutline,
-    UserCircleOutline,
-    UsersOutline,
-    UsersSolid,
-  } from "flowbite-svelte-icons";
   import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/model/ExpandedResponse";
+  import {
+    ChartColumnStacked,
+    ChartLine,
+    CircleUserRound,
+    IdCard,
+    LockKeyhole,
+    Shield,
+    SquareUserRound,
+    Users,
+    UsersRound
+  } from "lucide-svelte";
 
   interface Props {
     clubs: ExpandedClub[],
     teams: ExpandedTeam[],
   }
 
-  let {clubs, teams}: Props = $props()
+  let {clubs, teams}: Props = $props();
 
   const drawerStore = getDrawerStore();
   const model = authSettings.record as CustomAuthModel;
 
-  let isUserAuthenticated = $derived(!!authSettings.record)
+  let isUserAuthenticated = $derived(!!authSettings.record);
 
   function drawerClose(): void {
     drawerStore.close();
@@ -37,8 +37,9 @@
   {#if isUserAuthenticated}
     <Accordion regionPanel="space-y-1">
       <AccordionItem open>
+
         <svelte:fragment slot="lead">
-          <FileShieldOutline size="lg"/>
+          <SquareUserRound/>
         </svelte:fragment>
 
         <svelte:fragment slot="summary">
@@ -47,20 +48,21 @@
 
         <svelte:fragment slot="content">
           <a href="/account" onclick={drawerClose}>
-            <UserCircleOutline size="lg"/>
+            <CircleUserRound/>
             <span>Dashboard</span>
           </a>
 
           <a href="/stats/{model?.id}" onclick={drawerClose}>
-            <ChartLineUpOutline size="lg"/>
+            <ChartLine/>
             <span>Personal Stats</span>
           </a>
 
           <a href="/account/playerprofile" onclick={drawerClose}>
-            <ProfileCardOutline size="lg"/>
+            <IdCard/>
             <span>Player Profile</span>
           </a>
         </svelte:fragment>
+
       </AccordionItem>
     </Accordion>
 
@@ -69,7 +71,7 @@
     <Accordion regionPanel="space-y-1">
       <AccordionItem open>
         <svelte:fragment slot="lead">
-          <UsersSolid size="lg"/>
+          <UsersRound/>
         </svelte:fragment>
 
         <svelte:fragment slot="summary">
@@ -79,7 +81,7 @@
         <svelte:fragment slot="content">
           {#each clubs as club}
             <a href="/account/clubs/{club.id}" onclick={drawerClose}>
-              <ShieldOutline size="lg"/>
+              <Shield/>
               <div>{club.name} ({club.acronym})</div>
             </a>
           {/each}
@@ -92,7 +94,7 @@
                       href="/account/team/{team.id}"
                       onclick={drawerClose}
               >
-                <UsersOutline size="lg"/>
+                <Users/>
                 <div
                 >{team.name} ({team?.expand?.club
                     ?.acronym})
@@ -110,14 +112,14 @@
     <Accordion regionPanel="space-y-1">
       <AccordionItem open>
         <svelte:fragment slot="lead">
-          <LockOutline size="lg"/>
+          <LockKeyhole/>
         </svelte:fragment>
 
         <svelte:fragment slot="summary">Administration</svelte:fragment>
 
         <svelte:fragment slot="content">
           <a href="#" onclick={drawerClose}>
-            <ChartMixedOutline size="lg"/>
+            <ChartColumnStacked/>
             <span>Admin Dashboard</span>
           </a>
         </svelte:fragment>
