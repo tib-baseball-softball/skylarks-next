@@ -15,7 +15,7 @@
   import LoginBadge from "$lib/auth/LoginBadge.svelte";
   import LoginForm from "$lib/auth/LoginForm.svelte";
   import AccountModal from "$lib/auth/AccountModal.svelte";
-  import {env} from "$env/dynamic/public"
+  import {env} from "$env/dynamic/public";
   import EventForm from '$lib/components/forms/EventForm.svelte';
   import TeamForm from '$lib/components/forms/TeamForm.svelte';
   import PlayerDataForm from '$lib/components/forms/PlayerDataForm.svelte';
@@ -27,35 +27,36 @@
   import {authSettings} from "$lib/pocketbase/index.svelte.ts";
 
   interface Props {
-    data: LayoutData
+    data: LayoutData;
     children?: import('svelte').Snippet;
   }
 
   let {data, children}: Props = $props();
 
-  initializeStores()
+  initializeStores();
 
   const modalRegistry: Record<string, ModalComponent> = {
     // Set a unique modal ID, then pass the component reference
     loginForm: {ref: LoginForm},
     accountOverview: {ref: AccountModal}
-  }
+  };
 
-  const drawerStore = getDrawerStore()
+  const drawerStore = getDrawerStore();
 
   function navDrawerOpen(): void {
     drawerStore.open({
       id: "nav",
       width: "w-[70%] sm:w-[40%]"
-    })
+    });
   }
 
-  let showSidebar = $derived(data.clubs.length > 0 || data.teams.length > 0)
-  let isUserAuthenticated = $derived(!!authSettings.record)
+  let showSidebar = $derived(data.clubs.length > 0 || data.teams.length > 0);
+  let isUserAuthenticated = $derived(!!authSettings.record);
 </script>
 
 <svelte:head>
   <title>Berlin Skylarks Web App</title>
+  <!-- svelte-ignore hydration_html_changed -->
   {@html '<script>(' + autoModeWatcher.toString() + ')();</script>'}
 </svelte:head>
 
