@@ -11,18 +11,18 @@
     destination?: string;
     otherwise?: Snippet<[]>;
     children: Snippet<[]>;
-  } = $props()
+  } = $props();
 
   $effect(() => {
     if (!!destination && client.authStore.isValid) {
       // navigate to destination if specified, and logged in
-      goto(destination)
+      goto(destination);
     }
-  })
+  });
 </script>
 
 {#if authSettings.record}
-    {@render children()}
+  {@render children()}
 {:else if otherwise}
-    {@render otherwise()}
+  {@render otherwise()}
 {/if}

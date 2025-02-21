@@ -12,31 +12,28 @@
   interface Props {
     authProvider: AuthProviderInfo,
     collection: RecordService<RecordModel>
-    parent: any
-    signup_key?: string
+    signup_key?: string,
+    disabled: boolean,
   }
 
-  const toastStore = getToastStore()
+  const toastStore = getToastStore();
 
-  const {authProvider, collection, parent, signup_key = ""}: Props = $props()
+  const {authProvider, collection, signup_key = "", disabled}: Props = $props();
 
   async function submitOAuthRequest(provider: AuthProviderInfo) {
-    let authResponse: RecordAuthResponse<RecordModel> | undefined
+    let authResponse: RecordAuthResponse<RecordModel> | undefined;
     try {
-      authResponse = await providerLogin(provider, collection, signup_key)
+      authResponse = await providerLogin(provider, collection, signup_key);
     } catch (error) {
-      console.error(error)
+      console.error(error);
       toastStore.trigger({
         message: "There was an error processing your authentication request via external provider. Please double-check your signup key",
         background: "variant-filled-error",
-      })
+      });
     }
 
-    //@ts-ignore
-    parent.onClose()
-
     if (authResponse) {
-      goto("/account", {invalidateAll: true})
+      goto("/account", {invalidateAll: true});
     }
   }
 
@@ -45,32 +42,42 @@
       authProvider.name !== "apple" &&
       authProvider.name !== "github" &&
       authProvider.name !== "discord"
-  )
+  );
 </script>
 
 <button
         class:btn={isGenericProvider}
         class:variant-ghost-tertiary={isGenericProvider}
+        disabled={disabled}
         type="button"
         onclick={() => submitOAuthRequest(authProvider)}
         aria-label="sign in with {authProvider.displayName}"
+        class="oauth-button"
 >
-    {#if (authProvider.name === "google")}
-        <img class="light-logo" src="/providers/Google_light.svg" alt="Google logo" width="40">
-        <img class="dark-logo" src="/providers/Google_dark.svg" alt="Google logo" width="40">
+  {#if (authProvider.name === "google")}
+    <img class="light-logo" src="/providers/Google_light.svg" alt="Google logo" width="40">
+    <img class="dark-logo" src="/providers/Google_dark.svg" alt="Google logo" width="40">
 
-    {:else if authProvider.name === "apple"}
-        <img class="light-logo" src="/providers/siwa_apple_light.svg" alt="Apple logo" width="40">
-        <img class="dark-logo" src="/providers/siwa_apple_dark.svg" alt="Apple logo" width="40">
+  {:else if authProvider.name === "apple"}
+    <img class="light-logo" src="/providers/siwa_apple_light.svg" alt="Apple logo" width="40">
+    <img class="dark-logo" src="/providers/siwa_apple_dark.svg" alt="Apple logo" width="40">
 
-    {:else if authProvider.name === "github"}
-        <img class="light-logo" src="/providers/github-mark-white.svg" alt="GitHub logo" width="40">
-        <img class="dark-logo" src="/providers/github-mark.svg" alt="GitHub logo" width="40">
+  {:else if authProvider.name === "github"}
+    <img class="light-logo" src="/providers/github-mark-white.svg" alt="GitHub logo" width="40">
+    <img class="dark-logo" src="/providers/github-mark.svg" alt="GitHub logo" width="40">
 
-    {:else if authProvider.name === "discord"}
-        <img src="/providers/discord_white_in_blue_circle.svg" alt="Discord logo" width="40">
+  {:else if authProvider.name === "discord"}
+    <img src="/providers/discord_white_in_blue_circle.svg" alt="Discord logo" width="40">
 
-    {:else }
-        <span>{authProvider.displayName}</span>
-    {/if}
+  {:else }
+    <span>{authProvider.displayName}</span>
+  {/if}
 </button>
+
+<style>
+    .oauth-button[disabled] {
+        cursor: not-allowed;
+        opacity: 0.8;
+        filter: grayscale(1);
+    }
+</style>

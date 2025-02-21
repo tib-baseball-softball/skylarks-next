@@ -11,11 +11,6 @@
 
   const {signupAllowed = true} = $props();
 
-  const loginModal: ModalSettings = {
-    type: "component",
-    component: "loginForm",
-  };
-
   const accountOverview: ModalSettings = {
     type: "component",
     component: "accountOverview",
@@ -62,11 +57,12 @@
     {/if}
   </button>
 {:else}
-  <button
-          class="btn variant-ghost-primary"
-          onclick={() => modalStore.trigger(loginModal)}
+  <a
+          class="btn variant-ghost-primary flex items-center gap-2"
+          href="/login"
           title={signupAllowed ? "Login / Register" : "Login"}
   >
     <LucideLogIn/>
-  </button>
+    Login
+  </a>
 {/if}
