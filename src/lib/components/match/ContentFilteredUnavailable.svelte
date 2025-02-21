@@ -4,5 +4,5 @@
 
 <div class="flex items-center gap-4 my-3">
   <BookX size="xl"/>
-  <p>Für die gewählten Filter gibt es keine Daten, die angezeigt werden können.</p>
+  <p>There is no data to display for the selected filters.</p>
 </div>
