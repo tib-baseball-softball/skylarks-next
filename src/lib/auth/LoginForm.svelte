@@ -111,149 +111,152 @@
   </div>
 {/snippet}
 
-<div class="flex justify-center !mt-3 !mb-10">
-  <article>
-    <header class="!mb-6">
-      <h1 class="h2">Sign in to Skylarks Diamond Planner</h1>
-    </header>
+<div class="flex justify-center">
+  <div class="flex justify-center !mt-3 !mb-10 md:max-w-[60%] lg:max-w-[55%]">
+    <article>
+      <header class="!mb-6">
+        <h1 class="h2">Sign in to Skylarks Diamond Planner</h1>
+      </header>
 
-    <form onsubmit={submit}>
-      {#if passwordLogin}
-        {#if signupAllowed}
-          <TabGroup flex="grow" class="my-2" active="variant-ghost border-b-2 border-surface-900-50-token">
-            <Tab bind:group={tabSet} name="tab1" value={0}>Log In</Tab>
-            <Tab bind:group={tabSet} name="tab2" value={1}>Create Account</Tab>
+      <form onsubmit={submit}>
+        {#if passwordLogin}
+          {#if signupAllowed}
+            <TabGroup flex="grow" class="my-2" active="variant-ghost border-b-2 border-surface-900-50-token">
+              <Tab bind:group={tabSet} name="tab1" value={0}>Log In</Tab>
+              <Tab bind:group={tabSet} name="tab2" value={1}>Create Account</Tab>
 
-            <svelte:fragment slot="panel">
-              {#if tabSet === 0}
+              <svelte:fragment slot="panel">
+                {#if tabSet === 0}
 
-                {@render signin()}
+                  {@render signin()}
 
-              {:else if tabSet === 1}
-
-                <label class="label">
-                  <span class="">Your email</span>
-                  <input
-                          class="input"
-                          bind:value={form.email}
-                          required
-                          type="email"
-                          placeholder="name@provider.com"
-                  />
-                </label>
-
-                <div class="grid grid-cols-2 gap-2">
-
+                {:else if tabSet === 1}
 
                   <label class="label">
-                    <span class="">Your password</span>
+                    <span class="">Your email</span>
                     <input
                             class="input"
-                            bind:value={form.password}
+                            bind:value={form.email}
                             required
-                            type="password"
-                            placeholder="**********"
-                            minlength="8"
-                            maxlength="72"
+                            type="email"
+                            placeholder="name@provider.com"
                     />
                   </label>
 
-                  <label class="label">
-                    <span class="">Confirm password</span>
-                    <input
-                            class="input"
-                            bind:value={form.passwordConfirm}
-                            required
-                            type="password"
-                            placeholder="confirm password"
-                            minlength="8"
-                            maxlength="72"
-                    />
-                  </label>
-                </div>
+                  <div class="grid grid-cols-2 gap-2">
 
-                <label class="label">
-                  <span class="">Signup Key</span>
-                  <input
-                          bind:value={form.signup_key}
-                          class="input"
-                          name="signup_key"
-                          placeholder="minimum 8 characters"
-                          minlength="8"
-                          required
-                          type="text"
-                  />
-                  <span class="block text-sm font-light">
+
+                    <label class="label">
+                      <span class="">Your password</span>
+                      <input
+                              class="input"
+                              bind:value={form.password}
+                              required
+                              type="password"
+                              placeholder="**********"
+                              minlength="8"
+                              maxlength="72"
+                      />
+                    </label>
+
+                    <label class="label">
+                      <span class="">Confirm password</span>
+                      <input
+                              class="input"
+                              bind:value={form.passwordConfirm}
+                              required
+                              type="password"
+                              placeholder="confirm password"
+                              minlength="8"
+                              maxlength="72"
+                      />
+                    </label>
+                  </div>
+
+                  <label class="label">
+                    <span class="">Signup Key</span>
+                    <input
+                            bind:value={form.signup_key}
+                            class="input"
+                            name="signup_key"
+                            placeholder="minimum 8 characters"
+                            minlength="8"
+                            required
+                            type="text"
+                    />
+                    <span class="block text-sm font-light">
                                         A valid signup key needs to be entered upon user account creation.
                                         If you do not have a signup key, please contact your team manager.
                                     </span>
-                </label>
+                  </label>
 
-                <input type="hidden" name="register" value={true}/>
+                  <input type="hidden" name="register" value={true}/>
 
-                <button
-                        class="btn variant-ghost-primary my-2"
-                        type="submit"
-                        onclick={() => (signup = true)}
-                        disabled={form.email === "" || form.password === "" || form.passwordConfirm === "" || form.signup_key === ""}
-                >
-                  Register new account
-                </button>
-              {/if}
-            </svelte:fragment>
+                  <button
+                          class="btn variant-ghost-primary my-2"
+                          type="submit"
+                          onclick={() => (signup = true)}
+                          disabled={form.email === "" || form.password === "" || form.passwordConfirm === "" || form.signup_key === ""}
+                  >
+                    Register new account
+                  </button>
+                {/if}
+              </svelte:fragment>
 
-          </TabGroup>
-        {:else}
-          <h2>Login</h2>
-          {@render signin()}
+            </TabGroup>
+          {:else}
+            <h2>Login</h2>
+            {@render signin()}
+          {/if}
         {/if}
-      {/if}
 
-      {#await coll.listAuthMethods({requestKey: null}) then methods}
-        {#if methods.oauth2.providers.length > 0}
-          <hr class="my-2">
+        {#await coll.listAuthMethods({requestKey: null}) then methods}
+          {#if methods.oauth2.providers.length > 0}
+            <hr class="my-2">
 
-          <div class="mx-2 mt-3 text-surface-600-300-token font-light flex justify-center">
-            <span>or sign in with</span>
-          </div>
+            <div class="mx-2 mt-3 text-surface-600-300-token font-light flex justify-center">
+              <span>or sign in with</span>
+            </div>
 
-          <div class="my-3 md:my-5 flex flex-wrap gap-6 justify-center">
-            {#each methods.oauth2.providers as provider}
+            <div class="my-3 md:my-5 flex flex-wrap gap-6 justify-center">
+              {#each methods.oauth2.providers as provider}
 
-              {#if tabSet === 0}
-                <!--Login Buttons - no signupKey-->
-                <OAuthProviderButton authProvider={provider} collection={coll} disabled={false}/>
-              {:else}
-                <!--Signup Buttons - with signupKey state prop-->
-                <OAuthProviderButton authProvider={provider} collection={coll}
-                                     signup_key={form.signup_key} disabled={form.signup_key === ""}/>
-              {/if}
+                {#if tabSet === 0}
+                  <!--Login Buttons - no signupKey-->
+                  <OAuthProviderButton authProvider={provider} collection={coll} disabled={false}/>
+                {:else}
+                  <!--Signup Buttons - with signupKey state prop-->
+                  <OAuthProviderButton authProvider={provider} collection={coll}
+                                       signup_key={form.signup_key} disabled={form.signup_key === ""}/>
+                {/if}
 
-            {/each}
-          </div>
+              {/each}
+            </div>
 
-          {#if tabSet === 1 && form.signup_key === ""}
-            <div class="mx-2 mt-3 text-surface-600-300-token font-light flex justify-center" transition:slide>
+            {#if tabSet === 1 && form.signup_key === ""}
+              <div class="mx-2 mt-3 text-surface-600-300-token font-light flex justify-center" transition:slide>
               <span>
                 Even when using an external login provider,
                 a signup key (see above) still required for account creation.
               </span>
-            </div>
-          {/if}
-          <hr class="my-6">
+              </div>
+            {/if}
+            <hr class="my-6">
 
-          <p class="font-light text-sm mt-10">
-            Note: it is possible to associate a local account with an
-            external provider later by using the same email address. A single account can be associated with more
-            than one external provider.
-          </p>
-        {/if}
-      {:catch error}
-        <!-- pocketbase not working -->
-        <p>There seems to be an error while contacting the backend. Please try again later.</p>
-      {/await}
-    </form>
-  </article>
+            <p class="font-light text-sm mt-10">
+              Note: it is possible to associate a local account with an
+              external provider later by using the same email address. A single account can be associated with more
+              than one external provider.
+            </p>
+          {/if}
+        {:catch error}
+          <!-- pocketbase not working -->
+          <p>There seems to be an error while contacting the backend. Please try again later.</p>
+        {/await}
+      </form>
+    </article>
+  </div>
+
 </div>
 
 <style lang="postcss">
