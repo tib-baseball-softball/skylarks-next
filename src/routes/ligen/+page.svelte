@@ -1,13 +1,13 @@
 <script lang="ts">
-    import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte";
-    import {ProgressBar} from "@skeletonlabs/skeleton";
-    import ReloadUponPreferenceChange from "$lib/components/navigation/ReloadUponPreferenceChange.svelte";
-    import {browser} from "$app/environment";
-    import {goto} from "$app/navigation";
-    import {preferences} from "$lib/stores.ts";
-    import type {PageProps} from "./$types";
+  import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte";
+  import {ProgressBar} from "@skeletonlabs/skeleton";
+  import ReloadUponPreferenceChange from "$lib/components/navigation/ReloadUponPreferenceChange.svelte";
+  import {browser} from "$app/environment";
+  import {goto} from "$app/navigation";
+  import {preferences} from "$lib/stores.ts";
+  import type {PageProps} from "./$types";
 
-    const reload = () => {
+  const reload = () => {
     if (browser) {
       let queryString = `?season=${$preferences.selectedSeason}`;
 
@@ -21,14 +21,14 @@
 <ReloadUponPreferenceChange callback={reload}/>
 
 <div class="my-2 md:flex justify-between items-center">
-  <h1 class="h1 mb-3">Ligen</h1>
+  <h1 class="h1 mb-3">Leagues</h1>
   <div>
     <SeasonSelector/>
   </div>
 </div>
 
 {#await data.leagueGroups}
-  <p>Lade Ligen...</p>
+  <p>Loading Leagues...</p>
   <ProgressBar/>
 
 {:then leagueGroups}

@@ -50,37 +50,37 @@
               active="bg-surface-900 dark:bg-tertiary-700"
               bind:checked={showExternal}
       />
-      <p>Zeige externe Spiele</p>
+      <p>Show external games</p>
     </div>
   </div>
 </div>
 
 <section class="mb-5 mt-3">
-  <label id="gameday_label">
-    Spieltag
+  <label id="gameday_label" class="label">
+    Gameday
     <TabGroup justify="justify-center" labelledby="gameday_label">
       <Tab
               bind:group={$preferences.gameday}
               name="tabPrevious"
-              value={Gameday.previous}>Voriger
+              value={Gameday.previous}>Previous
       </Tab
       >
       <Tab
               bind:group={$preferences.gameday}
               name="tabCurrent"
-              value={Gameday.current}>Aktueller
+              value={Gameday.current}>Current
       </Tab
       >
       <Tab
               bind:group={$preferences.gameday}
               name="tabNext"
-              value={Gameday.next}>Nächster
+              value={Gameday.next}>Next
       </Tab
       >
       <Tab
               bind:group={$preferences.gameday}
               name="tabAny"
-              value={Gameday.any}>Alle
+              value={Gameday.any}>All
       </Tab
       >
       <!-- Tab Panels --->
