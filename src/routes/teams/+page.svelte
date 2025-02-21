@@ -1,14 +1,21 @@
 <script lang="ts">
-    import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte";
-    import {ProgressBar} from "@skeletonlabs/skeleton";
-    import ReloadUponSeasonChange from "$lib/components/navigation/ReloadUponSeasonChange.svelte";
-    import {preferences} from "$lib/stores";
+  import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte";
+  import {ProgressBar} from "@skeletonlabs/skeleton";
+  import ReloadUponPreferenceChange from "$lib/components/navigation/ReloadUponPreferenceChange.svelte";
+  import {preferences} from "$lib/stores";
+  import {browser} from "$app/environment";
+  import {goto} from "$app/navigation";
+  import type {PageProps} from "./$types";
 
-    interface Props {
-    data: any;
-  }
+  const reload = () => {
+    if (browser) {
+      let queryString = `?season=${$preferences.selectedSeason}`;
 
-  let {data}: Props = $props();
+      goto(queryString);
+    }
+  };
+
+  let {data}: PageProps = $props();
 </script>
 
 <div class="my-2 md:flex justify-between items-center">
@@ -18,7 +25,7 @@
   </div>
 </div>
 
-<ReloadUponSeasonChange/>
+<ReloadUponPreferenceChange callback={reload}/>
 
 {#await data.clubTeams}
   <p>Loading Teams...</p>
