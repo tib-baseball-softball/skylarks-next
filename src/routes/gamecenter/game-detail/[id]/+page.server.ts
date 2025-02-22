@@ -3,7 +3,6 @@ import {MatchAPIRequest} from "bsm.js";
 import {error} from "@sveltejs/kit";
 import {env} from "$env/dynamic/private";
 import {GameReportClient} from "$lib/types/GameReportClient.ts";
-import type {GameReport} from "$lib/model/GameReport.ts";
 
 export async function load({parent, params, fetch}) {
   const data = await parent();
@@ -26,15 +25,7 @@ export async function load({parent, params, fetch}) {
   if (!match) throw error(404, "Match couldn't be found.");
 
   const reportClient = new GameReportClient(fetch, "");
-  let gameReport: Promise<GameReport> | null;
-
-  try {
-    gameReport = reportClient.loadSingleGameReportForBSMMatchID(match.match_id);
-  } catch (e) {
-    // @ts-ignore
-    console.error(e.message);
-    gameReport = null;
-  }
+  let gameReport = reportClient.loadSingleGameReportForBSMMatchID(match.match_id);
 
   return {
     match: match,
