@@ -6,6 +6,8 @@
   import MatchDetailLocationCard from "$lib/components/match/MatchDetailLocationCard.svelte";
   import MatchDetailOfficialsCard from "$lib/components/match/MatchDetailOfficialsCard.svelte";
   import type {PageProps} from "./$types";
+  import ContentFilteredUnavailable from "$lib/components/match/ContentFilteredUnavailable.svelte";
+  import GameReport from "$lib/components/gameReport/GameReport.svelte";
 
   let {data}: PageProps = $props();
 
@@ -52,15 +54,20 @@
         {/await}
 
       {:else if tabSet === 2}
-        {#if data.gameReport}
-          {#await data.gameReport}
-            <ProgressRadial/>
-          {:then gameReport}
-            {JSON.stringify(gameReport)}
-          {:catch error}
-            <p>error loading Game Report: {error.message}</p>
-          {/await}
-        {/if}
+
+        {#await data.gameReport}
+          <ProgressRadial/>
+        {:then gameReport}
+          {#if gameReport}
+            <GameReport classes="!my-2 md:max-w-[80%] 2xl:max-w-[70%]" report={gameReport}/>
+          {:else }
+            <ContentFilteredUnavailable text="No Game Report available."/>
+          {/if}
+        {:catch error}
+          <p>error loading Game Report: {error.message}</p>
+        {/await}
+
+
       {/if}
     </svelte:fragment>
   </TabGroup>
