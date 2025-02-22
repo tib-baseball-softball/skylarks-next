@@ -1,7 +1,7 @@
 <script lang="ts">
   import type {ClubsResponse, UsersResponse, UsersUpdate} from "$lib/model/pb-types.ts";
   import type {ExpandedTeam} from "$lib/model/ExpandedResponse.ts";
-  import {client} from "$lib/pocketbase/index.svelte.ts";
+  import {client, manualAuthRefresh} from "$lib/pocketbase/index.svelte.ts";
   import MultiSelectCombobox from "$lib/components/utility/MultiSelectCombobox.svelte";
   import {getToastStore} from "@skeletonlabs/skeleton";
   import {invalidateAll} from "$app/navigation";
@@ -38,6 +38,10 @@
         message: `All members have been added to team "${team.name}"`,
         background: "variant-filled-success",
       });
+
+      // set manually in case we have updated the currently logged-in user
+      await manualAuthRefresh();
+
     } catch (error) {
       console.error(error);
       toastStore.trigger({
