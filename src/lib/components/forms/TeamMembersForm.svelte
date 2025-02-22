@@ -12,18 +12,18 @@
     team: ExpandedTeam,
   }
 
-  let {club, team}: Props = $props()
+  let {club, team}: Props = $props();
   const toastStore = getToastStore();
 
   let form = $state({
     id: team.id,
-  })
+  });
 
-  let selectedUsers: UsersResponse[] = $state([])
+  let selectedUsers: UsersResponse[] = $state([]);
 
   const allUsersForClub = client.collection("users").getFullList<UsersResponse>({
     filter: `club ?~ '${club.id}' && teams !~ '${team.id}'` // all users that are club members, but not members of this team
-  })
+  });
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
@@ -32,21 +32,21 @@
       for (const user of selectedUsers) {
         await client.collection("users").update<UsersUpdate>(user.id, {
           "teams+": team.id
-        })
+        });
       }
       toastStore.trigger({
         message: `All members have been added to team "${team.name}"`,
         background: "variant-filled-success",
-      })
+      });
     } catch (error) {
-      console.error(error)
+      console.error(error);
       toastStore.trigger({
         message: "An error occurred while saving user team data",
         background: "variant-filled-error",
-      })
+      });
     }
-    await invalidateAll()
-    closeModal()
+    await invalidateAll();
+    closeModal();
   }
 </script>
 
@@ -69,8 +69,12 @@
       {/if}
 
       {#await allUsersForClub then users}
-        <MultiSelectCombobox itemName="Member" bind:selectedItems={selectedUsers} allItems={users}
-                             allowDeletionOfLastItem={true}/>
+        <MultiSelectCombobox
+                itemName="Member"
+                bind:selectedItems={selectedUsers}
+                allItems={users}
+                allowDeletionOfLastItem={true}
+        />
       {/await}
     </label>
   </div>

@@ -102,7 +102,7 @@
                   bind:value={guestPlayerForm.name}
           />
         </label>
-        <button type="submit" class="mt-3 btn variant-soft">Submit
+        <button type="submit" class="mt-3 btn variant-ghost">Submit
         </button
         >
       </form>
