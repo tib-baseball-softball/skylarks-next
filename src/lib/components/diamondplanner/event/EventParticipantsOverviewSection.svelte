@@ -34,7 +34,7 @@
       <h3 class="h4">In</h3>
     </header>
 
-    <section class="p-4 flex flex-wrap gap-1 lg:gap-2">
+    <section class="p-4 flex flex-wrap gap-2">
       {#key event.participations.in}
         {#each event.participations.in as inResponse}
           <div in:fade|global={{delay: 200}}>
@@ -72,7 +72,7 @@
       <h3 class="h4">Maybe</h3>
     </header>
 
-    <section class="p-4 flex flex-wrap gap-1 lg:gap-2">
+    <section class="p-4 flex flex-wrap gap-2">
       {#key event.participations.maybe}
         {#each event.participations.maybe as maybeResponse}
           <div in:fade|global={{delay: 200}}>
@@ -93,7 +93,7 @@
       <h3 class="h4">Out</h3>
     </header>
 
-    <section class="p-4 flex flex-wrap gap-1 lg:gap-2">
+    <section class="p-4 flex flex-wrap gap-2">
       {#key event.participations.out}
         {#each event.participations.out as outResponse}
           <div in:fade|global={{delay: 200}}>

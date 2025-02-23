@@ -6,6 +6,7 @@
   // for some reason this import is falsely detected as unused
   //@ts-ignore
   import {Popover} from "bits-ui";
+  import {MessageCircleMore} from "lucide-svelte";
 
   interface Props {
     participation: ExpandedParticipation,
@@ -37,12 +38,21 @@
 </script>
 
 <Popover.Root bind:open={isOpen}>
-  <Popover.Trigger class={classes}>
-    {participation?.expand?.user?.first_name}
+  <Popover.Trigger>
+    {#snippet child({props})}
+      <button {...props} class="{classes} relative inline-block">
+        {#if participation.comment}
+          <span class="badge-icon">
+            <MessageCircleMore size="13"/>
+          </span>
+        {/if}
+        {participation?.expand?.user?.first_name}
+      </button>
+    {/snippet}
   </Popover.Trigger>
 
   <Popover.Content>
-    <div class="card variant-glass p-4 text-sm max-w-80 space-y-1">
+    <div class="card variant-glass p-4 text-sm max-w-80 space-y-1 text-black dark:text-white">
 
       <div class="item-container">
         <p class="font-light text-xs">Created:</p>
@@ -71,11 +81,19 @@
 
 </Popover.Root>
 
-<style>
+<style lang="postcss">
     .item-container {
         display: flex;
         align-items: center;
         gap: 0.75rem;
         justify-content: space-between;
+    }
+
+    .badge-icon {
+        top: -10px;
+        right: -10px;
+        z-index: 10;
+        position: absolute;
+        @apply variant-filled-surface;
     }
 </style>
