@@ -1644,8 +1644,8 @@
     "listRule": "event.team.id ?= @request.auth.teams.id",
     "viewRule": "event.team.id ?= @request.auth.teams.id",
     "createRule": "@request.auth.id != \"\" && event.team.id ?= @request.auth.teams.id",
-    "updateRule": "user.id = @request.auth.id || @request.auth.id ?= event.team.admins",
-    "deleteRule": "@request.auth.id ?= event.team.admins",
+    "updateRule": "user.id = @request.auth.id || event.team.admins.id ?= @request.auth.id || event.team.club.admins.id ?= @request.auth.id",
+    "deleteRule": "event.team.admins.id ?= @request.auth.id || event.team.club.admins.id ?= @request.auth.id",
     "name": "participations",
     "type": "base",
     "fields": [
