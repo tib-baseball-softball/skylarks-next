@@ -48,6 +48,14 @@ func bindAppHooks(app core.App) {
 		return hooks.TriggerLeagueImport(event.App, event)
 	})
 
+	app.OnRecordCreateRequest("events").BindFunc(func(e *core.RecordRequestEvent) error {
+		return hooks.ValidateEventTimes(e)
+	})
+
+	app.OnRecordUpdateRequest("events").BindFunc(func(e *core.RecordRequestEvent) error {
+		return hooks.ValidateEventTimes(e)
+	})
+
 	app.OnRecordEnrich("events").BindFunc(func(event *core.RecordEnrichEvent) error {
 		return hooks.AddEventParticipationData(event.App, event)
 	})

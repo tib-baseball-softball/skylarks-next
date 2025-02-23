@@ -1,34 +1,15 @@
 <script lang="ts">
-    import {invalidate} from "$app/navigation";
-    import type {ExpandedEvent} from "$lib/model/ExpandedResponse";
-    import {type UniformsetsResponse} from "$lib/model/pb-types";
-    import {client} from "$lib/pocketbase/index.svelte";
-    import {
-        getDrawerStore,
-        getToastStore,
-        RadioGroup,
-        RadioItem,
-        SlideToggle,
-        type ToastSettings,
-    } from "@skeletonlabs/skeleton";
-    import Flatpickr from "../utility/Flatpickr.svelte";
-    import {DateTimeUtility} from "$lib/service/DateTimeUtility.js";
-    import {X} from "lucide-svelte";
+  import {invalidate} from "$app/navigation";
+  import type {ExpandedEvent} from "$lib/model/ExpandedResponse";
+  import {type UniformsetsResponse} from "$lib/model/pb-types";
+  import {client} from "$lib/pocketbase/index.svelte";
+  import {getDrawerStore, getToastStore, RadioGroup, RadioItem, SlideToggle,} from "@skeletonlabs/skeleton";
+  import Flatpickr from "../utility/Flatpickr.svelte";
+  import {DateTimeUtility} from "$lib/service/DateTimeUtility.js";
+  import {X} from "lucide-svelte";
 
-    const toastStore = getToastStore();
+  const toastStore = getToastStore();
   const drawerStore = getDrawerStore();
-
-  const toastSettingsSuccess: ToastSettings = {
-    message: "Event saved successfully.",
-    background: "variant-filled-success",
-  };
-
-  const toastSettingsError: ToastSettings = {
-    message: "An error occurred while saving the event.",
-    background: "variant-filled-error",
-  };
-
-  const isCreatingNewEvent = $derived($drawerStore.meta.event === undefined || $drawerStore.meta.event === null);
 
   const form: ExpandedEvent = $state(
       $drawerStore.meta.event ?? {
@@ -69,14 +50,20 @@
             .create<ExpandedEvent>(form);
       }
     } catch {
-      toastStore.trigger(toastSettingsError);
+      toastStore.trigger({
+        message: "An error occurred while saving the event.",
+        background: "variant-filled-error",
+      });
       drawerStore.close();
     }
 
     if (result) {
-      toastStore.trigger(toastSettingsSuccess);
+      toastStore.trigger({
+        message: "Event saved successfully.",
+        background: "variant-filled-success",
+      });
     }
-    invalidate("event:list");
+    await invalidate("event:list");
     drawerStore.close();
   }
 </script>
