@@ -1,25 +1,15 @@
 <script lang="ts">
-    import type {Match} from "bsm.js";
-    import {Building2, LandPlot, Link, MapPin} from "lucide-svelte";
+  import type {Match} from "bsm.js";
+  import {Building2, LandPlot, Link, MapPin} from "lucide-svelte";
+  import {MapUtility} from "$lib/service/MapUtility.ts";
 
-    interface Props {
+  interface Props {
     match: Match;
   }
 
   let {match}: Props = $props();
 
-  function buildMapsURL(): string {
-    const baseURL = "https://www.google.com/maps/search/";
-
-    const params = new URLSearchParams({
-      api: "1",
-      map_action: "map",
-      query_place_id: match?.field.name,
-      query: `${match?.field.latitude}, ${match?.field.longitude}`
-    });
-
-    return `${baseURL}?${params.toString()}`;
-  }
+  const mapsLink = $derived(MapUtility.buildGoogleMapsURL(match?.field.name, match?.field.latitude, match?.field.longitude));
 </script>
 
 <div class="card variant-ghost-surface p-3">
@@ -55,6 +45,6 @@
 
   <div class="flex items-center gap-3 self-end">
     <Link/>
-    <a class="anchor" target="_blank" href="{buildMapsURL()}">In Google Maps öffnen</a>
+    <a class="anchor" target="_blank" href="{mapsLink}">In Google Maps öffnen</a>
   </div>
 </div>
