@@ -1831,11 +1831,11 @@
   },
   {
     "id": "fltkvrsbbvzf9cf",
-    "listRule": "@request.auth.id != \"\" && \n(id ?~ @request.auth.teams.id || club.admins.id ?= @request.auth.id)",
-    "viewRule": "@request.auth.id != \"\" && \n(id ?~ @request.auth.teams.id || club.admins.id ?= @request.auth.id)",
+    "listRule": "@request.auth.id != \"\" && \n(id ?~ @request.auth.teams.id || club.admins.id ?= @request.auth.id || @request.auth.club.id ?= club.id)",
+    "viewRule": "@request.auth.id != \"\" && \n(id ?~ @request.auth.teams.id || club.admins.id ?= @request.auth.id || @request.auth.club.id ?= club.id)",
     "createRule": "@request.auth.id != \"\" && \nclub.admins.id ?= @request.auth.id",
     "updateRule": "@request.auth.id != \"\" && \n(admins.id ?= @request.auth.id || club.admins.id ?= @request.auth.id)",
-    "deleteRule": "@request.auth.id != \"\" && \n(admins.id ?= @request.auth.id || club.admins.id ?= @request.auth.id)",
+    "deleteRule": "@request.auth.id != \"\" && club.admins.id ?= @request.auth.id",
     "name": "teams",
     "type": "base",
     "fields": [

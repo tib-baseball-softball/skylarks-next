@@ -17,7 +17,7 @@
 
   let {team, link = false}: props = $props();
 
-  const model = authSettings.record as CustomAuthModel;
+  const model = $derived(authSettings.record as CustomAuthModel);
 
   function deleteAction(id: string) {
     client.collection("teams").delete(id);
@@ -63,21 +63,26 @@
   </a>
 
   <footer class="card-footer">
-    {#if team?.expand?.club?.admins.includes(model.id) || team?.admins.includes(model.id)}
-      <hr class="my-2">
-      <div class="flex justify-end gap-2">
+    <hr class="my-2">
+    <div class="flex justify-end gap-2">
+
+      {#if team?.expand?.club?.admins.includes(model.id) || team?.admins.includes(model.id)}
         <TeamEditButton
                 club={team.expand?.club}
                 team={team}
                 classes="btn-icon variant-ghost-tertiary"
                 showLabel={false}
         />
+      {/if}
+
+      {#if team?.expand?.club?.admins.includes(model.id)}
         <DeleteButton
                 id={team.id}
                 modelName="Team"
                 action={deleteAction}
         />
-      </div>
-    {/if}
+      {/if}
+
+    </div>
   </footer>
 </article>
