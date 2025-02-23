@@ -1,9 +1,9 @@
 <script lang="ts">
-    import type {ExpandedEvent} from "$lib/model/ExpandedResponse";
-    import {DateTimeUtility} from "$lib/service/DateTimeUtility";
-    import {Calendar, Clock, MapPin} from "lucide-svelte";
+  import type {ExpandedEvent} from "$lib/model/ExpandedResponse";
+  import {DateTimeUtility} from "$lib/service/DateTimeUtility";
+  import {Calendar, Clock, MapPin} from "lucide-svelte";
 
-    interface props {
+  interface props {
     event: ExpandedEvent;
     classes?: string;
   }
@@ -11,7 +11,7 @@
   const {event, classes = ""}: props = $props();
 
   const startTime = $derived(new Date(event.starttime));
-  const meetingTime = $derived(new Date(event.meetingtime));
+  const meetingTime = $derived(new Date(event.meetingtime !== "" ? event.meetingtime : event.starttime));
 </script>
 
 <section class={classes}>
@@ -30,7 +30,7 @@
       <Clock size="18"/>
       <p>
         Meet:
-        {#if event.meetingtime}
+        {#if event?.meetingtime}
                     <span class="font-bold"
                     >{meetingTime?.toLocaleTimeString(
                         "de-DE",

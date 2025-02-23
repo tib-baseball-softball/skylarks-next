@@ -284,7 +284,7 @@ export interface EventsCreate extends BaseCollectionCreate {
 	title: string;
 	desc?: string;
 	starttime: string | Date;
-	meetingtime: string | Date;
+	meetingtime?: string | Date;
 	endtime?: string | Date;
 	type: 'game' | 'practice' | 'misc';
 	attire?: string;
@@ -306,7 +306,7 @@ export interface EventsUpdate extends BaseCollectionUpdate {
 	title: string;
 	desc?: string;
 	starttime: string | Date;
-	meetingtime: string | Date;
+	meetingtime?: string | Date;
 	endtime?: string | Date;
 	type: 'game' | 'practice' | 'misc';
 	attire?: string;
