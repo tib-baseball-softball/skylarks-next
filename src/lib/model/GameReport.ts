@@ -14,7 +14,7 @@ export interface GameReport {
   report_second?: string | null;
   preview?: string;
   teaser_image: Media[];
-  header_image?: Media;
+  header_image?: Media[];
   gallery?: Media[] | null;
   date: string; // ISO 8601 date-time format
   title: string;

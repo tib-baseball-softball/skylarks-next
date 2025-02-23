@@ -1,6 +1,7 @@
 <script lang="ts">
   import type {GameReport} from "$lib/model/GameReport.ts";
   import GameReportHeader from "$lib/components/gameReport/GameReportHeader.svelte";
+  import TypoImage from "$lib/components/media/TypoImage.svelte";
 
   interface Props {
     report: GameReport;
@@ -10,8 +11,8 @@
   let {report, classes = ""}: Props = $props();
 </script>
 
-<!-- MARK: Language Tag -->
 <div class="flex justify-center">
+  <!-- MARK: Language Tag (as long as we do not have English content) -->
   <div class="{classes}" lang="de">
     <h2 class="h2 mb-3">{report.title}</h2>
     <article>
@@ -19,17 +20,17 @@
 
       <section class="prose">
         {#if report.header_image}
-          <img
-                  class=""
-                  loading="lazy"
-                  alt={report.header_image.alt}
-                  src={report.header_image.url}
-          />
+          {#each report.header_image as image}
+            <TypoImage media={image}/>
+          {/each}
         {/if}
+
         <div class="mt-3">
           {@html report.introduction}
         </div>
       </section>
+
+      <hr class="!my-6">
 
       <section class="mt-4 prose">
         <h3 class="h3">Bericht Spiel 1</h3>
@@ -54,9 +55,16 @@
       {/if}
 
       {#if report.gallery}
-        <section id="imageCarousel" class="">
-          <h3 class="h3">Bildergalerie</h3>
+        <section class="my-5">
+          <h3 class="h3 mb-3">Bildergalerie</h3>
 
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+
+            {#each report.gallery as image}
+              <TypoImage media={image}/>
+            {/each}
+
+          </div>
         </section>
       {/if}
     </article>
@@ -64,7 +72,12 @@
 </div>
 
 <style>
-    .prose {
+    .prose :global {
         max-width: unset;
+        text-align: justify;
+
+        p {
+            margin: 1rem 0;
+        }
     }
 </style>

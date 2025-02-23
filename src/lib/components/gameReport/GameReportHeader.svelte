@@ -1,6 +1,6 @@
 <script lang="ts">
   import type {GameReport} from "$lib/model/GameReport.ts";
-  import {CalendarDays} from "lucide-svelte";
+  import {CalendarDays, ClipboardList, Pen} from "lucide-svelte";
 
   interface Props {
     report: GameReport;
@@ -23,7 +23,7 @@
   <hr class="my-2">
 
   <div class="container">
-    <CalendarDays/>
+    <ClipboardList/>
     <span class="font-bold">Liga: </span>
     <span>{report.league.name} ({report.league.season})</span>
   </div>
@@ -31,7 +31,7 @@
   <hr class="my-2">
 
   <div class="container">
-    <CalendarDays/>
+    <Pen/>
     <span class="font-bold">Autor: </span>
     <span>{report.author}</span>
   </div>
