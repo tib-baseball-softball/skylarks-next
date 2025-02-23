@@ -404,6 +404,7 @@ export interface TeamsResponse extends BaseCollectionResponse {
 	club: string;
 	description: string;
 	admins: Array<string>;
+	signup_key: string;
 	created: string;
 	updated: string;
 }
@@ -416,6 +417,7 @@ export interface TeamsCreate extends BaseCollectionCreate {
 	club: string;
 	description?: string;
 	admins?: MaybeArray<string>;
+	signup_key?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -432,6 +434,7 @@ export interface TeamsUpdate extends BaseCollectionUpdate {
 	admins?: MaybeArray<string>;
 	'admins+'?: MaybeArray<string>;
 	'admins-'?: MaybeArray<string>;
+	signup_key?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }

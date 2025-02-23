@@ -1931,6 +1931,20 @@
         "type": "relation"
       },
       {
+        "autogeneratePattern": "",
+        "hidden": false,
+        "id": "text1259466490",
+        "max": 0,
+        "min": 0,
+        "name": "signup_key",
+        "pattern": "",
+        "presentable": true,
+        "primaryKey": false,
+        "required": false,
+        "system": false,
+        "type": "text"
+      },
+      {
         "hidden": false,
         "id": "_pbf_autodate_created_",
         "name": "created",
@@ -1953,7 +1967,8 @@
     ],
     "indexes": [
       "CREATE INDEX `idx_vBz1jG9` ON `teams` (`bsm_league_group`)",
-      "CREATE INDEX `idx_enGi1E4` ON `teams` (\n  `name`,\n  `bsm_league_group`,\n  `club`\n)"
+      "CREATE INDEX `idx_enGi1E4` ON `teams` (\n  `name`,\n  `bsm_league_group`,\n  `club`\n)",
+      "CREATE UNIQUE INDEX `idx_ZoMECG3GbQ` ON `teams` (`signup_key`)"
     ],
     "system": false
   },
