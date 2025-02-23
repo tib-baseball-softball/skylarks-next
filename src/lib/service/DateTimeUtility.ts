@@ -41,6 +41,13 @@ export class DateTimeUtility {
     time_24hr: true,
   };
 
+  public static readonly datePickerOptionsNoTime: Options = {
+    enableTime: false,
+    dateFormat: "c", // ISO 8601
+    altInput: true,
+    altFormat: "j F Y",
+  };
+
   public static getRelativeTimeString(date: Date, locale: string = navigator.language): string {
     const now = new Date();
     const diff = date.getTime() - now.getTime(); // Difference in milliseconds

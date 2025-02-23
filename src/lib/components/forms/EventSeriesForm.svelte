@@ -13,10 +13,10 @@
     showForm: boolean
   }
 
-  let {eventSeries, team, showForm = $bindable()}: Props = $props()
+  let {eventSeries, team, showForm = $bindable()}: Props = $props();
 
   const toastStore = getToastStore();
-  const drawerStore = getDrawerStore()
+  const drawerStore = getDrawerStore();
 
   const toastSettingsSuccess: ToastSettings = {
     message: "Event Series saved successfully.",
@@ -39,7 +39,7 @@
     desc: "",
     location: "",
     team: team?.id,
-  })
+  });
 
   const form: EventSeriesCreationData = $derived(
       eventSeries ?? formDefault,
@@ -52,12 +52,12 @@
       form.starttime = DateTimeUtility.convertTimeToUTC(form.starttime);
 
       if (form.endtime) {
-        form.endtime = DateTimeUtility.convertTimeToUTC(form.endtime)
+        form.endtime = DateTimeUtility.convertTimeToUTC(form.endtime);
       }
     } catch (error) {
-      console.error("Invalid format for starttime or endtime in form.")
-      toastStore.trigger(toastSettingsError)
-      return
+      console.error("Invalid format for starttime or endtime in form.");
+      toastStore.trigger(toastSettingsError);
+      return;
     }
 
     let result: EventSeriesCreationData | null = null;
@@ -78,8 +78,8 @@
 
     if (result) {
       toastStore.trigger(toastSettingsSuccess);
-      showForm = false
-      drawerStore.close()
+      showForm = false;
+      drawerStore.close();
       await invalidate("event:list");
     }
   }
@@ -104,20 +104,25 @@
     />
 
     <label class="label">
-      Start of Series
+      Create Events after
       <Flatpickr
               bind:value={form.series_start}
-              options={DateTimeUtility.datePickerOptions}
+              options={DateTimeUtility.datePickerOptionsNoTime}
       />
     </label>
 
     <label class="label">
-      End of Series
+      Create Events before
       <Flatpickr
               bind:value={form.series_end}
-              options={DateTimeUtility.datePickerOptions}
+              options={DateTimeUtility.datePickerOptionsNoTime}
       />
     </label>
+
+    <span class="col-span-2 text-sm font-light block">
+      This selects boundaries between which events will be created.
+      The start date does not have to be the actual training day.
+    </span>
 
     <label class="label md:col-span-2 mt-3">
       Title
