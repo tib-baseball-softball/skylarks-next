@@ -21,9 +21,9 @@ func SetLastLogin(app core.App, record *core.Record) (err error) {
 }
 
 func ValidateSignupKey(app core.App, event *core.RecordRequestEvent) error {
-	clubs, err := getValidSignupKeys(app)
+	teams, err := getValidSignupKeys(app)
 	if err != nil {
-		errorText := "failed to get valid signup clubs"
+		errorText := "failed to get valid signup teams"
 
 		app.Logger().Error(errorText, "error", err)
 		return errors.New(errorText)
@@ -38,10 +38,11 @@ func ValidateSignupKey(app core.App, event *core.RecordRequestEvent) error {
 	}
 
 	isValid := false
-	for _, club := range clubs {
-		if body.SignupKey != "" && club.SignupKey == body.SignupKey {
+	for _, team := range teams {
+		if body.SignupKey != "" && team.SignupKey == body.SignupKey {
 			isValid = true
-			event.Record.Set("club", club.Id)
+			event.Record.Set("teams", team.Id)
+			event.Record.Set("club", team.Club)
 			event.Record.Set("signup_key", body.SignupKey)
 			break
 		}
@@ -60,21 +61,22 @@ func ValidateSignupKey(app core.App, event *core.RecordRequestEvent) error {
 	return event.Next()
 }
 
-// Club Reduced record with just the relevant fields
-type Club struct {
+// Team Reduced record with just the relevant fields
+type Team struct {
 	Id        string `db:"id"`
+	Club      string `db:"club"`
 	SignupKey string `db:"signup_key"`
 }
 
-func getValidSignupKeys(app core.App) ([]Club, error) {
-	var clubs []Club
+func getValidSignupKeys(app core.App) ([]Team, error) {
+	var teams []Team
 
 	err := app.DB().
-		NewQuery("SELECT id, signup_key FROM clubs WHERE signup_key != '';").
-		All(&clubs)
+		NewQuery("SELECT id, club, signup_key FROM teams WHERE signup_key != '';").
+		All(&teams)
 
 	if err != nil {
 		return nil, err
 	}
-	return clubs, nil
+	return teams, nil
 }

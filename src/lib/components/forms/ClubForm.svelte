@@ -158,6 +158,7 @@
                 class="input"
                 name="bsm_api_key"
                 type="text"
+                placeholder="current value not shown for security"
         />
         <span class="text-sm">
                     Must be created in BSM in a user's account that has the role "Team Administration".
