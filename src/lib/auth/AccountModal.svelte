@@ -15,7 +15,7 @@
     parent.onClose();
   }
 
-  const authRecord = authSettings.record as CustomAuthModel;
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
 </script>
 
 <div class="w-modal-slim">

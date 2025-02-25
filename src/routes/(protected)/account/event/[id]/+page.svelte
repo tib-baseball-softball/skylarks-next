@@ -15,7 +15,7 @@
 
   const event = $derived(data.event);
 
-  const authRecord = authSettings.record as CustomAuthModel;
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
   const canParticipate = $derived(authRecord.teams.includes($event.team));
 </script>
 

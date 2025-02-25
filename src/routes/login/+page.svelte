@@ -4,7 +4,7 @@
   import {authSettings, client} from "$lib/pocketbase/index.svelte.ts";
   import type {CustomAuthModel} from "$lib/model/ExpandedResponse.ts";
 
-  const authRecord = authSettings.record as CustomAuthModel;
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
 </script>
 
 {#if browser}

@@ -29,7 +29,7 @@
     background: "variant-filled-error",
   };
 
-  const authRecord = authSettings.record as CustomAuthModel;
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
   const form = $state({
     id: authRecord.id ?? "",
     number: authRecord.number ?? "",

@@ -10,7 +10,7 @@
   const toastStore = getToastStore();
   const drawerStore = getDrawerStore();
 
-  const authRecord = authSettings.record as CustomAuthModel;
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
 
   const toastSettingsSuccess: ToastSettings = {
     message: "Club data saved successfully.",

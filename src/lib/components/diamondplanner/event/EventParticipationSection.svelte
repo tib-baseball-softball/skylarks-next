@@ -11,7 +11,7 @@
     event: ExpandedEvent;
   }
 
-  const authRecord = authSettings.record as CustomAuthModel;
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
   const {event}: props = $props();
 
   let userParticipation: ParticipationsCreate = $derived(event.userParticipation ?? {

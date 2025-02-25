@@ -30,7 +30,7 @@
     reloadWithQuery();
   });
 
-  const authRecord = authSettings.record as CustomAuthModel;
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
 </script>
 
 <h1 class="h1">{data.team.name} ({data.team?.expand?.club.name})</h1>

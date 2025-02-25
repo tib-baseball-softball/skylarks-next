@@ -7,7 +7,7 @@
   import {type DrawerSettings, getDrawerStore,} from "@skeletonlabs/skeleton";
   import {Edit, Link} from "lucide-svelte";
 
-  const authRecord = authSettings.record as CustomAuthModel;
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
 
   const drawerStore = getDrawerStore();
   const playerSettings: DrawerSettings = $derived({

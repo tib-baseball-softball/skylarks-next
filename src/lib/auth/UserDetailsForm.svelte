@@ -6,7 +6,7 @@
     parent: any;
   }
 
-  const authRecord = authSettings.record as CustomAuthModel;
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
 
   let {parent}: props = $props();
 

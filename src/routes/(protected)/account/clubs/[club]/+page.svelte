@@ -16,7 +16,7 @@
 
   let {data} = $props();
 
-  const authRecord = authSettings.record as CustomAuthModel;
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
 
   let club: ExpandedClub = $derived(data.club);
   let teams: ExpandedTeam[] = $derived(data.teams);

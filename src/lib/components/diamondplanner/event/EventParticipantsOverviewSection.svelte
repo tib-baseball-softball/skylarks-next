@@ -13,7 +13,7 @@
 
   let {event}: Props = $props();
 
-  const authRecord = authSettings.record as CustomAuthModel;
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
 
   const displayedGuestPlayers = $derived(event.guests.split(","));
   const isAdmin = $derived((event.expand?.team?.admins.includes(authRecord.id) || event?.expand?.team?.expand?.club?.admins.includes(authRecord.id)) ?? false);

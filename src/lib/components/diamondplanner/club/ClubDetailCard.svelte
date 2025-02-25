@@ -12,7 +12,7 @@
 
   const drawerStore = getDrawerStore();
 
-  const authRecord = authSettings.record as CustomAuthModel;
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
 
   let clubAddEditSettings: DrawerSettings = $derived({
     id: "club-form",

@@ -1,11 +1,11 @@
 <script lang="ts">
-    import UserDataCard from "$lib/components/diamondplanner/user/UserDataCard.svelte";
-    import PlayerProfileClubsSection from "$lib/components/diamondplanner/user/PlayerProfileClubsSection.svelte";
-    import TeamListTeaser from "$lib/components/diamondplanner/team/TeamListTeaser.svelte";
-    import {authSettings} from "$lib/pocketbase/index.svelte";
-    import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
+  import UserDataCard from "$lib/components/diamondplanner/user/UserDataCard.svelte";
+  import PlayerProfileClubsSection from "$lib/components/diamondplanner/user/PlayerProfileClubsSection.svelte";
+  import TeamListTeaser from "$lib/components/diamondplanner/team/TeamListTeaser.svelte";
+  import {authSettings} from "$lib/pocketbase/index.svelte";
+  import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
 
-    const authRecord = authSettings.record as CustomAuthModel;
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
 
 
   let {data} = $props();
