@@ -1,10 +1,10 @@
 <script lang="ts">
-    import type {CustomAuthModel, ExpandedClub} from "$lib/model/ExpandedResponse";
-    import {type DrawerSettings, getDrawerStore} from "@skeletonlabs/skeleton";
-    import {authSettings} from "$lib/pocketbase/index.svelte";
-    import {ClipboardPen, Info, Shield, Tag} from "lucide-svelte";
+  import type {CustomAuthModel, ExpandedClub} from "$lib/model/ExpandedResponse";
+  import {type DrawerSettings, getDrawerStore} from "@skeletonlabs/skeleton";
+  import {authSettings} from "$lib/pocketbase/index.svelte";
+  import {ClipboardPen, Info, Shield, Tag} from "lucide-svelte";
 
-    interface Props {
+  interface Props {
     club: ExpandedClub;
   }
 
@@ -12,7 +12,7 @@
 
   const drawerStore = getDrawerStore();
 
-  const model = authSettings.record as CustomAuthModel;
+  const authRecord = authSettings.record as CustomAuthModel;
 
   let clubAddEditSettings: DrawerSettings = $derived({
     id: "club-form",
@@ -62,7 +62,7 @@
     </div>
   </section>
 
-  {#if club.admins.includes(model.id)}
+  {#if club.admins.includes(authRecord.id)}
     <footer class="card-footer flex justify-end">
       <button class="btn variant-ghost-secondary" onclick={() => openDrawer(club)}>
         <ClipboardPen/>

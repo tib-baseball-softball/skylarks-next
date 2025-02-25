@@ -1,22 +1,22 @@
 <script lang="ts">
-    import type {ParticipationsCreate} from "$lib/model/pb-types";
-    import type {EventParticipationState} from "$lib/types/EventParticipationState";
-    import {sendParticipationData} from "$lib/functions/sendParticipationData";
-    import type {CustomAuthModel, ExpandedEvent} from "$lib/model/ExpandedResponse";
-    import {invalidate} from "$app/navigation";
-    import {authSettings} from "$lib/pocketbase/index.svelte";
-    import {Check, CircleHelp, X} from "lucide-svelte";
+  import type {ParticipationsCreate} from "$lib/model/pb-types";
+  import type {EventParticipationState} from "$lib/types/EventParticipationState";
+  import {sendParticipationData} from "$lib/functions/sendParticipationData";
+  import type {CustomAuthModel, ExpandedEvent} from "$lib/model/ExpandedResponse";
+  import {invalidate} from "$app/navigation";
+  import {authSettings} from "$lib/pocketbase/index.svelte";
+  import {Check, CircleHelp, X} from "lucide-svelte";
 
-    interface props {
+  interface props {
     event: ExpandedEvent;
   }
 
-  const authModel = authSettings.record as CustomAuthModel;
+  const authRecord = authSettings.record as CustomAuthModel;
   const {event}: props = $props();
 
   let userParticipation: ParticipationsCreate = $derived(event.userParticipation ?? {
     id: "",
-    user: authModel?.id,
+    user: authRecord?.id,
     event: event.id,
     state: "",
     comment: "",

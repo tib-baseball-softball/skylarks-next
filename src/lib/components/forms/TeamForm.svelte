@@ -8,7 +8,7 @@
   const toastStore = getToastStore();
   const drawerStore = getDrawerStore();
 
-  const authModel = authSettings.record as CustomAuthModel;
+  const authRecord = authSettings.record as CustomAuthModel;
 
   const toastSettingsSuccess: ToastSettings = {
     message: "Team data saved successfully.",
@@ -44,7 +44,7 @@
             .update<ExpandedTeam>(form.id, form);
       } else {
         // a user creating a team becomes its first admin
-        form.admins.push(authModel?.id);
+        form.admins.push(authRecord?.id);
 
         result = await client
             .collection("teams")

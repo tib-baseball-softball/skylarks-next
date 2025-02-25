@@ -22,7 +22,7 @@
   let {clubs, teams}: Props = $props();
 
   const drawerStore = getDrawerStore();
-  const model = authSettings.record as CustomAuthModel;
+  const authRecord = authSettings.record as CustomAuthModel;
 
   let isUserAuthenticated = $derived(!!authSettings.record);
 
@@ -52,7 +52,7 @@
             <span>Dashboard</span>
           </a>
 
-          <a href="/stats/{model?.id}" onclick={drawerClose}>
+          <a href="/stats/{authRecord?.id}" onclick={drawerClose}>
             <ChartLine/>
             <span>Personal Stats</span>
           </a>

@@ -4,14 +4,14 @@
   import {authSettings, client} from "$lib/pocketbase/index.svelte.ts";
   import type {CustomAuthModel} from "$lib/model/ExpandedResponse.ts";
 
-  const authModel = authSettings.record as CustomAuthModel;
+  const authRecord = authSettings.record as CustomAuthModel;
 </script>
 
 {#if browser}
   {#if client.authStore.isValid}
     <h1 class="h1">Login Page</h1>
     <p>You are logged in as <span
-            class="mx-2 badge variant-filled-primary">{authModel.first_name} {authModel.last_name}</span>.</p>
+            class="mx-2 badge variant-filled-primary">{authRecord.first_name} {authRecord.last_name}</span>.</p>
     <p>You can log out by clicking your avatar in the top right.</p>
     <a class="btn variant-ghost-primary" href="/account">Go to Account Page</a>
   {:else }

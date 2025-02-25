@@ -1,13 +1,13 @@
 <script lang="ts">
-    import PlayerDataCard from "$lib/components/player/PlayerDataCard.svelte";
-    import PlayerHeaderSection from "$lib/components/player/PlayerHeaderSection.svelte";
-    import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
-    import type {Player} from "$lib/model/Player";
-    import {authSettings, client} from "$lib/pocketbase/index.svelte";
-    import {type DrawerSettings, getDrawerStore,} from "@skeletonlabs/skeleton";
-    import {Edit, Link} from "lucide-svelte";
+  import PlayerDataCard from "$lib/components/player/PlayerDataCard.svelte";
+  import PlayerHeaderSection from "$lib/components/player/PlayerHeaderSection.svelte";
+  import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
+  import type {Player} from "$lib/model/Player";
+  import {authSettings, client} from "$lib/pocketbase/index.svelte";
+  import {type DrawerSettings, getDrawerStore,} from "@skeletonlabs/skeleton";
+  import {Edit, Link} from "lucide-svelte";
 
-    const model = authSettings.record as CustomAuthModel;
+  const authRecord = authSettings.record as CustomAuthModel;
 
   const drawerStore = getDrawerStore();
   const playerSettings: DrawerSettings = $derived({
@@ -18,21 +18,21 @@
 
   // suboptimal adapter until data is properly fetched from PocketBase
   let playerObject: Player = $derived({
-    firstname: model.first_name,
-    lastname: model.last_name,
-    fullname: model.first_name + " " + model.last_name,
+    firstname: authRecord.first_name,
+    lastname: authRecord.last_name,
+    fullname: authRecord.first_name + " " + authRecord.last_name,
     birthday: 0,
-    admission: model.created,
-    number: model.number,
-    throwing: model.throws,
-    batting: model.bats,
-    bsm_id: model.bsm_id,
-    positions: model.position,
+    admission: authRecord.created,
+    number: authRecord.number,
+    throwing: authRecord.throws,
+    batting: authRecord.bats,
+    bsm_id: authRecord.bsm_id,
+    positions: authRecord.position,
     teams: [],
     coach: "",
     media: [
       {
-        url: client.files.getURL(model, model.avatar),
+        url: client.files.getURL(authRecord, authRecord.avatar),
         alt: "Player Profile Avatar",
       },
     ],
@@ -66,9 +66,9 @@
         <span>Edit Player Data</span>
       </button>
 
-      {#if model.bsm_id}
+      {#if authRecord.bsm_id}
         <a
-                href="/players/{model?.bsm_id}"
+                href="/players/{authRecord?.bsm_id}"
                 class="btn variant-ghost-secondary"
         >
           <Link/>

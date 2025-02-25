@@ -15,7 +15,7 @@
     parent.onClose();
   }
 
-  const authModel = authSettings.record as CustomAuthModel;
+  const authRecord = authSettings.record as CustomAuthModel;
 </script>
 
 <div class="w-modal-slim">
@@ -29,7 +29,7 @@
               onclick={closeModal}
       >
         <samp
-        >{`${authModel?.first_name ?? ""} ${authModel?.last_name ?? ""}`}</samp
+        >{`${authRecord?.first_name ?? ""} ${authRecord?.last_name ?? ""}`}</samp
         >
       </a>
     </div>
@@ -38,7 +38,7 @@
       <p>Club:</p>
 
       <div class="flex flex-wrap gap-2 justify-end">
-        {#each authModel?.expand?.club as club}
+        {#each authRecord?.expand?.club as club}
           <a href="/account/clubs/{club.id}" class="badge variant-filled-tertiary" onclick={closeModal}>
             {club.name}
           </a>

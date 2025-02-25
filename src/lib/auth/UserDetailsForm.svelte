@@ -6,16 +6,16 @@
     parent: any;
   }
 
-  const model = authSettings.record as CustomAuthModel;
+  const authRecord = authSettings.record as CustomAuthModel;
 
   let {parent}: props = $props();
 
   let files: FileList | null = $state(null);
 
   const form = $state({
-    id: model.id,
-    firstName: model.first_name,
-    lastName: model.last_name,
+    id: authRecord.id,
+    firstName: authRecord.first_name,
+    lastName: authRecord.last_name,
   });
 
   async function submitForm(e: SubmitEvent) {
@@ -45,60 +45,60 @@
 </script>
 
 <div class="card p-6 max-w-xl">
-    <header class="text-xl font-semibold">
-        Edit User Data for {model.first_name}
-        {model.last_name}
-    </header>
+  <header class="text-xl font-semibold">
+    Edit User Data for {authRecord.first_name}
+    {authRecord.last_name}
+  </header>
 
-    <p class="mt-2 font-light">
-        This data is only used for internal purposes and never shown anywhere publicly.
-        (Your team and club administrators have access).
+  <p class="mt-2 font-light">
+    This data is only used for internal purposes and never shown anywhere publicly.
+    (Your team and club administrators have access).
+  </p>
+
+  <form onsubmit={submitForm} class="mt-4 space-y-3">
+    <input
+            name="id"
+            autocomplete="off"
+            class="input"
+            type="hidden"
+            readonly
+            bind:value={form.id}
+    />
+
+    <label class="label">
+      First Name(s)
+      <input name="firstname" class="input" bind:value={form.firstName}/>
+    </label>
+
+    <label class="label">
+      Last Name
+      <input name="lastname" class="input" bind:value={form.lastName}/>
+    </label>
+
+    <label class="label">
+      Profile Image
+      <input
+              class="input"
+              name="avatar"
+              type="file"
+              accept="image/*"
+              bind:files
+      />
+    </label>
+
+    {#if files}
+      <h2>Selected file:</h2>
+      {#each Array.from(files) as file}
+        <p>{file.name} ({file.size} bytes)</p>
+      {/each}
+    {/if}
+
+    <p class="font-light">
+      This is your app profile picture. It will not be used for your player profile image.
     </p>
 
-    <form onsubmit={submitForm} class="mt-4 space-y-3">
-        <input
-                name="id"
-                autocomplete="off"
-                class="input"
-                type="hidden"
-                readonly
-                bind:value={form.id}
-        />
-
-        <label class="label">
-            First Name(s)
-            <input name="firstname" class="input" bind:value={form.firstName}/>
-        </label>
-
-        <label class="label">
-            Last Name
-            <input name="lastname" class="input" bind:value={form.lastName}/>
-        </label>
-
-        <label class="label">
-            Profile Image
-            <input
-                    class="input"
-                    name="avatar"
-                    type="file"
-                    accept="image/*"
-                    bind:files
-            />
-        </label>
-
-        {#if files}
-            <h2>Selected file:</h2>
-            {#each Array.from(files) as file}
-                <p>{file.name} ({file.size} bytes)</p>
-            {/each}
-        {/if}
-
-        <p class="font-light">
-            This is your app profile picture. It will not be used for your player profile image.
-        </p>
-
-        <div class="flex justify-end gap-3 mt-3">
-            <button type="submit" class="mt-2 btn variant-ghost-primary">Confirm</button>
-        </div>
-    </form>
+    <div class="flex justify-end gap-3 mt-3">
+      <button type="submit" class="mt-2 btn variant-ghost-primary">Confirm</button>
+    </div>
+  </form>
 </div>

@@ -7,62 +7,62 @@
     parent: any;
   }
 
-  const model = authSettings.record as CustomAuthModel;
-  const toastStore = getToastStore()
+  const authRecord = authSettings.record as CustomAuthModel;
+  const toastStore = getToastStore();
 
   let {parent}: props = $props();
 
   const form = $state({
-    email: model.email
+    email: authRecord.email
   });
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
     parent.onClose();
 
-    const sent = await client.collection("users").requestEmailChange(form.email)
+    const sent = await client.collection("users").requestEmailChange(form.email);
 
     if (sent) {
       toastStore.trigger({
         message: "A verification email has been sent to your new address.",
         background: "variant-filled-success",
-      })
+      });
     } else {
       toastStore.trigger({
         message: "An error occurred while sending your email change request.",
         background: "variant-filled-error",
-      })
+      });
     }
-    client.authStore.clear()
+    client.authStore.clear();
   }
 </script>
 
 <div class="card p-6 max-w-xl">
-    <header class="text-xl font-semibold">
-        Change email address for {model.first_name}
-        {model.last_name}
-    </header>
+  <header class="text-xl font-semibold">
+    Change email address for {authRecord.first_name}
+    {authRecord.last_name}
+  </header>
 
-    <form onsubmit={submitForm} class="mt-4 space-y-3">
+  <form onsubmit={submitForm} class="mt-4 space-y-3">
 
-        <label class="label">
-            E-Mail
-            <input
-                    name="email"
-                    class="input"
-                    bind:value={form.email}
-                    required
-                    type="email"
-            />
-            <span class="mt-3 font-light text-sm">
+    <label class="label">
+      E-Mail
+      <input
+              name="email"
+              class="input"
+              bind:value={form.email}
+              required
+              type="email"
+      />
+      <span class="mt-3 font-light text-sm">
                 You will be logged out and instructed to verify your new email address.
             </span>
-        </label>
+    </label>
 
-        <div class="flex justify-end gap-3 mt-3">
-            <button disabled={form.email === model.email} type="submit" class="mt-2 btn variant-ghost-primary">
-                Confirm
-            </button>
-        </div>
-    </form>
+    <div class="flex justify-end gap-3 mt-3">
+      <button disabled={form.email === authRecord.email} type="submit" class="mt-2 btn variant-ghost-primary">
+        Confirm
+      </button>
+    </div>
+  </form>
 </div>

@@ -29,22 +29,22 @@
     background: "variant-filled-error",
   };
 
-  const model = authSettings.record as CustomAuthModel;
+  const authRecord = authSettings.record as CustomAuthModel;
   const form = $state({
-    id: model.id ?? "",
-    number: model.number ?? "",
-    bats: model.bats ?? "",
+    id: authRecord.id ?? "",
+    number: authRecord.number ?? "",
+    bats: authRecord.bats ?? "",
     position: [""],
-    throws: model.throws ?? "",
-    image: model.image ?? "",
-    umpire: model.umpire ?? "0",
-    scorer: model.scorer ?? "0",
-    bsm_id: model.bsm_id ?? 0,
+    throws: authRecord.throws ?? "",
+    image: authRecord.image ?? "",
+    umpire: authRecord.umpire ?? "0",
+    scorer: authRecord.scorer ?? "0",
+    bsm_id: authRecord.bsm_id ?? 0,
   });
 
   const possiblePositionValues = getAllBaseballPositionStringValues();
   let selectedPositions: string[] = $state(
-      positionKeysToEnumStringValues(model.position),
+      positionKeysToEnumStringValues(authRecord.position),
   );
   let inputChip: InputChip;
 
@@ -82,7 +82,7 @@
     </button>
     <header class="text-xl font-semibold">
       <h2 class="h3">
-        Edit Player Data for "{`${model.first_name} ${model.last_name}`}"
+        Edit Player Data for "{`${authRecord.first_name} ${authRecord.last_name}`}"
       </h2>
     </header>
   </div>

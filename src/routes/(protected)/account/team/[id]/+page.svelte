@@ -30,7 +30,7 @@
     reloadWithQuery();
   });
 
-  const authModel = authSettings.record as CustomAuthModel;
+  const authRecord = authSettings.record as CustomAuthModel;
 </script>
 
 <h1 class="h1">{data.team.name} ({data.team?.expand?.club.name})</h1>
@@ -118,7 +118,7 @@
   </div>
 </section>
 
-{#if data.team.admins.includes(authModel?.id) || data.team?.expand?.club?.admins.includes(authModel?.id)}
+{#if data.team.admins.includes(authRecord?.id) || data.team?.expand?.club?.admins.includes(authRecord?.id)}
   <hr class="my-2"/>
 
   <TeamAdminSection team={data.team} eventSeries={data.eventSeries}/>

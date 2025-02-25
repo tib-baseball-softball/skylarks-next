@@ -1,22 +1,22 @@
 <script lang="ts">
-    import Cap from "$lib/components/icons/Cap.svelte";
-    import Shirt from "$lib/components/icons/Shirt.svelte";
-    import Pants from "$lib/components/icons/Pants.svelte";
-    import {getModalStore, type ModalComponent, type ModalSettings} from "@skeletonlabs/skeleton";
-    import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
-    import type {CustomAuthModel, ExpandedUniformSet} from "$lib/model/ExpandedResponse";
-    import {authSettings, client} from "$lib/pocketbase/index.svelte";
-    import {invalidate} from "$app/navigation";
-    import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
-    import {Edit} from "lucide-svelte";
+  import Cap from "$lib/components/icons/Cap.svelte";
+  import Shirt from "$lib/components/icons/Shirt.svelte";
+  import Pants from "$lib/components/icons/Pants.svelte";
+  import {getModalStore, type ModalComponent, type ModalSettings} from "@skeletonlabs/skeleton";
+  import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
+  import type {CustomAuthModel, ExpandedUniformSet} from "$lib/model/ExpandedResponse";
+  import {authSettings, client} from "$lib/pocketbase/index.svelte";
+  import {invalidate} from "$app/navigation";
+  import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
+  import {Edit} from "lucide-svelte";
 
-    interface Props {
+  interface Props {
     uniformSet: ExpandedUniformSet;
   }
 
   let {uniformSet}: Props = $props();
 
-  const model = authSettings.record as CustomAuthModel;
+  const authRecord = authSettings.record as CustomAuthModel;
 
   const modalStore = getModalStore();
 
@@ -64,7 +64,7 @@
   </section>
 
   <footer class="card-footer flex justify-end gap-2">
-    {#if uniformSet?.expand?.club?.admins.includes(model.id)}
+    {#if uniformSet?.expand?.club?.admins.includes(authRecord.id)}
       <button class="btn btn-sm btn-icon variant-ghost-tertiary" aria-label="edit uniform set"
               onclick={triggerEditModal}>
         <Edit/>

@@ -1,22 +1,22 @@
 <script lang="ts">
-    import ClubDetailCard from "$lib/components/diamondplanner/club/ClubDetailCard.svelte";
-    import UniformSetInfoCard from "$lib/components/diamondplanner/uniformset/UniformSetInfoCard.svelte";
-    import type {CustomAuthModel, ExpandedClub, ExpandedTeam, ExpandedUniformSet} from "$lib/model/ExpandedResponse";
-    import {
-        type DrawerSettings,
-        getDrawerStore,
-        getModalStore,
-        type ModalComponent,
-        type ModalSettings
-    } from "@skeletonlabs/skeleton";
-    import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
-    import TeamListTeaser from "$lib/components/diamondplanner/team/TeamListTeaser.svelte";
-    import {authSettings} from "$lib/pocketbase/index.svelte";
-    import {Mail, Plus} from "lucide-svelte";
+  import ClubDetailCard from "$lib/components/diamondplanner/club/ClubDetailCard.svelte";
+  import UniformSetInfoCard from "$lib/components/diamondplanner/uniformset/UniformSetInfoCard.svelte";
+  import type {CustomAuthModel, ExpandedClub, ExpandedTeam, ExpandedUniformSet} from "$lib/model/ExpandedResponse";
+  import {
+    type DrawerSettings,
+    getDrawerStore,
+    getModalStore,
+    type ModalComponent,
+    type ModalSettings
+  } from "@skeletonlabs/skeleton";
+  import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
+  import TeamListTeaser from "$lib/components/diamondplanner/team/TeamListTeaser.svelte";
+  import {authSettings} from "$lib/pocketbase/index.svelte";
+  import {Mail, Plus} from "lucide-svelte";
 
-    let {data} = $props();
+  let {data} = $props();
 
-  const model = authSettings.record as CustomAuthModel;
+  const authRecord = authSettings.record as CustomAuthModel;
 
   let club: ExpandedClub = $derived(data.club);
   let teams: ExpandedTeam[] = $derived(data.teams);
@@ -78,7 +78,7 @@
     {/if}
   </div>
 
-  {#if club?.admins.includes(model.id)}
+  {#if club?.admins.includes(authRecord.id)}
     <button class="btn variant-ghost-primary" onclick={() => drawerStore.open(teamSettings)}>
       <Plus/>
       <span>Create new</span>
@@ -97,7 +97,7 @@
     {/each}
   </div>
 
-  {#if club?.admins.includes(model.id)}
+  {#if club?.admins.includes(authRecord.id)}
     <button class="btn variant-ghost-primary" onclick={triggerUniformModal}>
       <Plus/>
       <span>Create new</span>
@@ -105,7 +105,7 @@
   {/if}
 </section>
 
-{#if club?.admins.includes(model.id)}
+{#if club?.admins.includes(authRecord.id)}
   <hr class="my-2"/>
 
   <section>

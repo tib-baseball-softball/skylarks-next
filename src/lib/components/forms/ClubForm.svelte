@@ -10,7 +10,7 @@
   const toastStore = getToastStore();
   const drawerStore = getDrawerStore();
 
-  const model = authSettings.record as CustomAuthModel;
+  const authRecord = authSettings.record as CustomAuthModel;
 
   const toastSettingsSuccess: ToastSettings = {
     message: "Club data saved successfully.",
@@ -55,14 +55,14 @@
             .update<ClubsResponse>(form.id, form);
       } else {
         // a user creating a club becomes its first admin
-        form.admins.push(model.id);
+        form.admins.push(authRecord.id);
 
         result = await client
             .collection("clubs")
             .create<ClubsResponse>(form);
 
         // a user needs to become a member of the new club
-        await client.collection("users").update<UsersUpdate>(model.id, {
+        await client.collection("users").update<UsersUpdate>(authRecord.id, {
           "club+": result.id
         });
       }
