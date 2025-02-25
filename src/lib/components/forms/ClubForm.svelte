@@ -28,7 +28,6 @@
         name: "",
         bsm_id: 0,
         bsm_api_key: "",
-        signup_key: "",
         acronym: "",
         admins: [],
       },
@@ -163,25 +162,6 @@
         <span class="text-sm">
                     Must be created in BSM in a user's account that has the role "Team Administration".
                     If set, all game events for the club can be automatically imported.
-                </span>
-      </label>
-
-      <label class="label">
-                <span>
-                Signup Key
-                </span>
-        <input
-                bind:value={form.signup_key}
-                class="input"
-                name="signup_key"
-                placeholder="minimum 8 characters"
-                minlength="8"
-                required
-                type="text"
-        />
-        <span class="text-sm">
-                    A valid signup key needs to be entered upon user account creation.
-                    New users are automatically added as members to the club corresponding to the signup key used.
                 </span>
       </label>
 

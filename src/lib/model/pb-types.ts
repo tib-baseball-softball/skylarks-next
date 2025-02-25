@@ -343,7 +343,6 @@ export interface ClubsResponse extends BaseCollectionResponse {
 	id: string;
 	name: string;
 	bsm_id: number;
-	signup_key: string;
 	acronym: string;
 	admins: Array<string>;
 	created: string;
@@ -354,7 +353,6 @@ export interface ClubsCreate extends BaseCollectionCreate {
 	id?: string;
 	name: string;
 	bsm_id?: number;
-	signup_key: string;
 	acronym?: string;
 	admins: MaybeArray<string>;
 	created?: string | Date;
@@ -367,7 +365,6 @@ export interface ClubsUpdate extends BaseCollectionUpdate {
 	bsm_id?: number;
 	'bsm_id+'?: number;
 	'bsm_id-'?: number;
-	signup_key: string;
 	acronym?: string;
 	admins: MaybeArray<string>;
 	'admins+'?: MaybeArray<string>;

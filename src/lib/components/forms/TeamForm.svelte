@@ -25,6 +25,7 @@
         id: "",
         name: "",
         age_group: "",
+        signup_key: "",
         club: $drawerStore.meta.club.id, // no binding, cannot be changed via this form
         description: "",
         admins: [],
@@ -57,9 +58,9 @@
     if (result) {
       toastStore.trigger(toastSettingsSuccess);
     }
-    invalidate("teams:list");
-    invalidate("club:single");
-    invalidate("nav:load");
+    await invalidate("teams:list");
+    await invalidate("club:single");
+    await invalidate("nav:load");
     drawerStore.close();
   }
 </script>
@@ -114,6 +115,25 @@
                 readonly
                 value={$drawerStore.meta.club?.name}
         />
+      </label>
+
+      <label class="label col-span-2">
+                <span>
+                Signup Key
+                </span>
+        <input
+                bind:value={form.signup_key}
+                class="input"
+                name="signup_key"
+                placeholder="minimum 8 characters"
+                minlength="8"
+                required
+                type="text"
+        />
+        <span class="text-sm">
+                    A valid signup key needs to be entered upon user account creation.
+                    New users are automatically added as members to the team corresponding to the signup key used.
+                </span>
       </label>
 
       <label class="label flex flex-col gap-1 col-span-2">

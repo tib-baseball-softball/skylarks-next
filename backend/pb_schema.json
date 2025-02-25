@@ -1921,7 +1921,7 @@
         "hidden": false,
         "id": "text1259466490",
         "max": 0,
-        "min": 0,
+        "min": 8,
         "name": "signup_key",
         "pattern": "",
         "presentable": false,

@@ -1,4 +1,4 @@
-import type {RecordModel} from "pocketbase"
+import type {RecordModel} from "pocketbase";
 import type {
   ClubsResponse,
   EventsCreate,
@@ -8,7 +8,7 @@ import type {
   TeamsResponse,
   UniformsetsResponse,
   UsersResponse
-} from "./pb-types"
+} from "./pb-types";
 
 export type Extension<T, E> = T & E
 
@@ -37,6 +37,7 @@ export type ExpandedTeam = Extension<TeamsResponse, {
 }>
 
 export type ExpandedClub = Extension<ClubsResponse, {
+  bsm_api_key: string
   expand: {
     admins: UsersResponse[]
   }
