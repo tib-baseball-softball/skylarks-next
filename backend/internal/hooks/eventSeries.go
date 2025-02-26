@@ -5,7 +5,7 @@ import (
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
-	"github.com/tib-baseball-softball/skylarks-next/stats"
+	"github.com/tib-baseball-softball/skylarks-next/internal/stats"
 	"time"
 )
 

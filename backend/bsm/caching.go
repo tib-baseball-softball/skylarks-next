@@ -5,7 +5,7 @@ import (
 	"errors"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
-	"github.com/tib-baseball-softball/skylarks-next/utility"
+	"github.com/tib-baseball-softball/skylarks-next/internal/utility"
 	"net/url"
 	"os"
 	"regexp"

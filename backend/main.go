@@ -6,9 +6,9 @@ import (
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/spf13/cobra"
 	"github.com/subosito/gotenv"
-	"github.com/tib-baseball-softball/skylarks-next/cronjobs"
-	"github.com/tib-baseball-softball/skylarks-next/hooks"
-	"github.com/tib-baseball-softball/skylarks-next/routes"
+	cronjobs2 "github.com/tib-baseball-softball/skylarks-next/internal/cronjobs"
+	hooks2 "github.com/tib-baseball-softball/skylarks-next/internal/hooks"
+	routes2 "github.com/tib-baseball-softball/skylarks-next/internal/routes"
 	"log"
 	"net/http"
 	"os"
@@ -30,7 +30,7 @@ func bindAppHooks(app core.App) {
 	//------------------- Hooks -------------------------//
 
 	app.OnRecordAuthRequest("users").BindFunc(func(e *core.RecordAuthRequestEvent) error {
-		err := hooks.SetLastLogin(e.App, e.Record)
+		err := hooks2.SetLastLogin(e.App, e.Record)
 		if err != nil {
 			app.Logger().Error(
 				"Error upon setting auth record last login field",
@@ -41,35 +41,35 @@ func bindAppHooks(app core.App) {
 	})
 
 	app.OnRecordCreateRequest("users").BindFunc(func(event *core.RecordRequestEvent) error {
-		return hooks.ValidateSignupKey(event.App, event)
+		return hooks2.ValidateSignupKey(event.App, event)
 	})
 
 	app.OnRecordsListRequest("leaguegroups").BindFunc(func(event *core.RecordsListRequestEvent) error {
-		return hooks.TriggerLeagueImport(event.App, event)
+		return hooks2.TriggerLeagueImport(event.App, event)
 	})
 
 	app.OnRecordCreateRequest("events").BindFunc(func(e *core.RecordRequestEvent) error {
-		return hooks.ValidateEventTimes(e)
+		return hooks2.ValidateEventTimes(e)
 	})
 
 	app.OnRecordUpdateRequest("events").BindFunc(func(e *core.RecordRequestEvent) error {
-		return hooks.ValidateEventTimes(e)
+		return hooks2.ValidateEventTimes(e)
 	})
 
 	app.OnRecordEnrich("events").BindFunc(func(event *core.RecordEnrichEvent) error {
-		return hooks.AddEventParticipationData(event.App, event)
+		return hooks2.AddEventParticipationData(event.App, event)
 	})
 
 	app.OnRecordAfterCreateSuccess("eventseries").BindFunc(func(e *core.RecordEvent) error {
-		return hooks.CreateOrUpdateEventsForSeries(e)
+		return hooks2.CreateOrUpdateEventsForSeries(e)
 	})
 
 	app.OnRecordAfterUpdateSuccess("eventseries").BindFunc(func(e *core.RecordEvent) error {
-		return hooks.CreateOrUpdateEventsForSeries(e)
+		return hooks2.CreateOrUpdateEventsForSeries(e)
 	})
 
 	app.OnRecordDelete("eventseries").BindFunc(func(e *core.RecordEvent) error {
-		return hooks.DeleteEventsForSeries(e)
+		return hooks2.DeleteEventsForSeries(e)
 	})
 
 	//------------------- Serve static dir -------------------------//
@@ -91,31 +91,31 @@ func bindAppHooks(app core.App) {
 	})
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
-		se.Router.GET("/api/gamecount/{team}", routes.GetGamesCount(app))
+		se.Router.GET("/api/gamecount/{team}", routes2.GetGamesCount(app))
 
 		return se.Next()
 	})
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
-		se.Router.POST("/api/import/{club}/leagues", routes.StartLeagueGroupsImport(app))
+		se.Router.POST("/api/import/{club}/leagues", routes2.StartLeagueGroupsImport(app))
 
 		return se.Next()
 	})
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
-		se.Router.GET("/api/stats/{user}", routes.GetUserStats())
+		se.Router.GET("/api/stats/{user}", routes2.GetUserStats())
 
 		return se.Next()
 	})
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
-		se.Router.GET("/api/bsm/relay/top10/{league}", routes.GetLeagueLeaders())
+		se.Router.GET("/api/bsm/relay/top10/{league}", routes2.GetLeagueLeaders())
 
 		return se.Next()
 	})
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
-		se.Router.GET("/api/bsm/relay", routes.GetRelayedBSMData())
+		se.Router.GET("/api/bsm/relay", routes2.GetRelayedBSMData())
 		return se.Next()
 	})
 
@@ -123,14 +123,14 @@ func bindAppHooks(app core.App) {
 
 	if os.Getenv("APPLICATION_CONTEXT") != "Development" {
 		app.Cron().MustAdd("LeagueGroupImport", "0 * * * *", func() {
-			err := cronjobs.ImportLeagueGroups(app, nil, nil)
+			err := cronjobs2.ImportLeagueGroups(app, nil, nil)
 			if err != nil {
 				app.Logger().Error("Error while running cronjob LeagueGroupImport: " + err.Error())
 			}
 		})
 
 		app.Cron().MustAdd("GamesImport", "0 * * * *", func() {
-			cronjobs.ImportGames(app)
+			cronjobs2.ImportGames(app)
 		})
 	}
 }
@@ -145,14 +145,14 @@ func main() {
 	app.RootCmd.AddCommand(&cobra.Command{
 		Use: "import:games",
 		Run: func(cmd *cobra.Command, args []string) {
-			cronjobs.ImportGames(app)
+			cronjobs2.ImportGames(app)
 		},
 	})
 
 	app.RootCmd.AddCommand(&cobra.Command{
 		Use: "import:leagues",
 		Run: func(cmd *cobra.Command, args []string) {
-			err := cronjobs.ImportLeagueGroups(app, nil, nil)
+			err := cronjobs2.ImportLeagueGroups(app, nil, nil)
 			if err != nil {
 				log.Print("Error while running LeagueGroupImport: " + err.Error())
 			}

@@ -3,8 +3,8 @@ package routes
 import (
 	"github.com/pocketbase/pocketbase/apis"
 	"github.com/pocketbase/pocketbase/core"
-	"github.com/tib-baseball-softball/skylarks-next/middlewares"
-	"github.com/tib-baseball-softball/skylarks-next/stats"
+	"github.com/tib-baseball-softball/skylarks-next/internal/middlewares"
+	"github.com/tib-baseball-softball/skylarks-next/internal/stats"
 	"net/http"
 )
 

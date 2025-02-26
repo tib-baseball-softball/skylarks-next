@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
-	"github.com/tib-baseball-softball/skylarks-next/stats"
+	stats2 "github.com/tib-baseball-softball/skylarks-next/internal/stats"
 )
 
 func AddEventParticipationData(app core.App, event *core.RecordEnrichEvent) error {
@@ -51,23 +51,23 @@ func addParticipationsByType(app core.App, record *core.Record) error {
 		return fmt.Errorf("failed to expand: %v", errs)
 	}
 
-	participationsByType := stats.ParticipationsByType{
+	participationsByType := stats2.ParticipationsByType{
 		In:    []*core.Record{},
 		Out:   []*core.Record{},
 		Maybe: []*core.Record{},
 	}
 
 	for _, participation := range participations {
-		state, err := stats.ParseParticipationType(participation.GetString("state"))
+		state, err := stats2.ParseParticipationType(participation.GetString("state"))
 		if err != nil {
 			return err
 		}
 		switch state {
-		case stats.In:
+		case stats2.In:
 			participationsByType.In = append(participationsByType.In, participation)
-		case stats.Out:
+		case stats2.Out:
 			participationsByType.Out = append(participationsByType.Out, participation)
-		case stats.Maybe:
+		case stats2.Maybe:
 			participationsByType.Maybe = append(participationsByType.Maybe, participation)
 		}
 	}

@@ -3,7 +3,7 @@ package hooks
 import (
 	"github.com/pocketbase/pocketbase/apis"
 	"github.com/pocketbase/pocketbase/core"
-	"github.com/tib-baseball-softball/skylarks-next/cronjobs"
+	"github.com/tib-baseball-softball/skylarks-next/internal/cronjobs"
 	"strconv"
 )
 

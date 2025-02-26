@@ -4,7 +4,7 @@ import (
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/apis"
 	"github.com/pocketbase/pocketbase/core"
-	"github.com/tib-baseball-softball/skylarks-next/stats"
+	"github.com/tib-baseball-softball/skylarks-next/internal/stats"
 	"net/http"
 )
 
