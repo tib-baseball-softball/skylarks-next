@@ -16,8 +16,8 @@ func GetLeagueLeaders() func(event *core.RequestEvent) error {
 		if leagueID == "" {
 			return event.JSON(http.StatusBadRequest, "league ID missing")
 		}
-		_, err := strconv.Atoi(leagueID)
-		if err != nil {
+		result, err := strconv.Atoi(leagueID)
+		if err != nil || result == 0 {
 			return event.JSON(http.StatusBadRequest, "league ID must be an integer")
 		}
 
