@@ -2,7 +2,7 @@ import type {Match} from "bsm.js";
 import {MatchAPIRequest} from "bsm.js";
 import {error} from "@sveltejs/kit";
 import {env} from "$env/dynamic/private";
-import {GameReportClient} from "$lib/types/GameReportClient.ts";
+import {GameReportClient} from "$lib/service/GameReportClient.ts";
 
 export async function load({parent, params, fetch}) {
   const data = await parent();
