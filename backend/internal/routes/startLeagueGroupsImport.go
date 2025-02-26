@@ -13,22 +13,23 @@ func StartLeagueGroupsImport(app core.App) func(event *core.RequestEvent) error 
 	return func(event *core.RequestEvent) error {
 		requireAuth := apis.RequireAuth()
 		if err := requireAuth.Func(event); err != nil {
-			return err
+			return event.UnauthorizedError("no access", err)
 		}
+
 		clubID := event.Request.PathValue("club")
 		club, err := app.FindFirstRecordByData("clubs", "id", clubID)
 		if err != nil {
-			return err
+			return event.NotFoundError("Club with ID "+clubID+" not found", err)
 		}
 
 		clubAdmin := club.GetStringSlice("admins")
 		if !slices.Contains(clubAdmin, event.Auth.Id) {
-			return apis.NewUnauthorizedError("only club admins can start league imports", nil)
+			return event.ForbiddenError("only club admins can start league imports", nil)
 		}
 
 		err = cronjobs.ImportLeagueGroups(app, &club.Id, nil)
 		if err != nil {
-			return err
+			return event.InternalServerError("error importing league groups", err)
 		}
 
 		response := struct{ message string }{
