@@ -10,6 +10,7 @@ const (
 	testDataDir      = "./test_pb_data"
 	testTeamID       = "847u6a1af1loox5"
 	seasonQueryParam = "2025"
+	validUserId      = "jm866jti5piq9g9"
 )
 
 func generateToken(collectionNameOrId string, email string) (string, error) {
@@ -159,6 +160,66 @@ func TestGetLeagueLeadersEndpoint(t *testing.T) {
 			URL:             "/api/bsm/relay/top10/5732?statsType=pitching",
 			ExpectedStatus:  http.StatusOK,
 			ExpectedContent: []string{"league_id", "stats_type", "data"},
+			TestAppFactory:  setupTestApp,
+		},
+	}
+
+	for _, scenario := range scenarios {
+		scenario.Test(t)
+	}
+}
+
+func TestGetUserStatsEndpoint(t *testing.T) {
+	validToken, err := generateToken("users", "karltestmichel@example.com")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	invalidToken, err := generateToken("users", "otheruser@example.com")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	scenarios := []tests.ApiScenario{
+		{
+			Name:            "Unauthenticated request",
+			Method:          http.MethodGet,
+			URL:             "/api/stats/123",
+			ExpectedStatus:  http.StatusUnauthorized,
+			ExpectedContent: []string{"message", "data", "status"},
+			TestAppFactory:  setupTestApp,
+		},
+		{
+			Name:   "Invalid token",
+			Method: http.MethodGet,
+			URL:    "/api/stats/" + validUserId,
+			Headers: map[string]string{
+				"Authorization": invalidToken,
+			},
+			ExpectedStatus:  http.StatusForbidden,
+			ExpectedContent: []string{"message", "data", "status"},
+			TestAppFactory:  setupTestApp,
+		},
+		{
+			Name:   "User not found",
+			Method: http.MethodGet,
+			URL:    "/api/stats/doesnotexist",
+			Headers: map[string]string{
+				"Authorization": validToken,
+			},
+			ExpectedStatus:  http.StatusNotFound,
+			ExpectedContent: []string{"message", "data", "status"},
+			TestAppFactory:  setupTestApp,
+		},
+		{
+			Name:   "Valid request",
+			Method: http.MethodGet,
+			URL:    "/api/stats/" + validUserId,
+			Headers: map[string]string{
+				"Authorization": validToken,
+			},
+			ExpectedStatus:  http.StatusOK,
+			ExpectedContent: []string{"season", "totalPossibleEvents", "attendanceTotals", "participationTotals", "teamName"},
 			TestAppFactory:  setupTestApp,
 		},
 	}
