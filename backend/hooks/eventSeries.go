@@ -5,7 +5,7 @@ import (
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
-	"github.com/tib-baseball-softball/skylarks-next/enum"
+	"github.com/tib-baseball-softball/skylarks-next/stats"
 	"time"
 )
 
@@ -149,7 +149,7 @@ func generateSeriesEvents(app core.App, e *core.RecordEvent) ([]*core.Record, er
 			event.Set("desc", eventSeries.GetString("desc"))
 			event.Set("location", eventSeries.GetString("location"))
 			event.Set("series", eventSeries.Id)
-			event.Set("type", enum.Practice)
+			event.Set("type", stats.Practice)
 
 			events = append(events, event)
 

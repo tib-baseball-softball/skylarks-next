@@ -5,7 +5,6 @@ import (
 	"errors"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
-	"github.com/tib-baseball-softball/skylarks-next/model"
 	"github.com/tib-baseball-softball/skylarks-next/utility"
 	"net/url"
 	"os"
@@ -38,11 +37,11 @@ func isValidBSMURL(u *url.URL) bool {
 	return false
 }
 
-func GetLeagueTop10Data(app core.App, leagueID string, statsType string) (model.LeaderboardSummary, error) {
-	leagueLeaderboard := model.LeaderboardSummary{
+func GetLeagueTop10Data(app core.App, leagueID string, statsType string) (LeaderboardSummary, error) {
+	leagueLeaderboard := LeaderboardSummary{
 		LeagueID:  leagueID,
 		StatsType: statsType,
-		Data:      make([]model.LeaderboardData, 0),
+		Data:      make([]LeaderboardData, 0),
 	}
 
 	var statsEndpoints []string
@@ -72,7 +71,7 @@ func GetLeagueTop10Data(app core.App, leagueID string, statsType string) (model.
 			if err != nil {
 				return
 			}
-			var leaderboardData model.LeaderboardData
+			var leaderboardData LeaderboardData
 			err = json.Unmarshal([]byte(rawResponseData), &leaderboardData)
 			if err != nil {
 				return

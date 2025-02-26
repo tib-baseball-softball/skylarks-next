@@ -5,7 +5,6 @@ import (
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
 	"github.com/tib-baseball-softball/skylarks-next/bsm"
-	"github.com/tib-baseball-softball/skylarks-next/model"
 	"strconv"
 	"sync"
 )
@@ -55,19 +54,19 @@ func ImportLeagueGroups(app core.App, clubID *string, season *int) (err error) {
 }
 
 // the API key used determines which club LeagueGroups are loaded for
-func fetchLeagueGroupsForCurrentSeason(apiKey string, season int) ([]model.LeagueGroup, error) {
+func fetchLeagueGroupsForCurrentSeason(apiKey string, season int) ([]bsm.LeagueGroup, error) {
 	params := make(map[string]string)
 	params["filters[seasons][]"] = strconv.Itoa(season)
 
 	url := bsm.GetAPIURL("league_groups.json", params, apiKey)
-	leagueGroups, _, err := bsm.FetchResource[[]model.LeagueGroup](url.String())
+	leagueGroups, _, err := bsm.FetchResource[[]bsm.LeagueGroup](url.String())
 	if err != nil {
 		return nil, err
 	}
 	return leagueGroups, nil
 }
 
-func createOrUpdateLeagueGroups(app core.App, leagueGroups []model.LeagueGroup, club *core.Record) (err error) {
+func createOrUpdateLeagueGroups(app core.App, leagueGroups []bsm.LeagueGroup, club *core.Record) (err error) {
 	for _, leagueGroup := range leagueGroups {
 		record, err := app.FindFirstRecordByData("leaguegroups", "bsm_id", leagueGroup.ID)
 
@@ -92,7 +91,7 @@ func createOrUpdateLeagueGroups(app core.App, leagueGroups []model.LeagueGroup, 
 	return
 }
 
-func setLeagueGroupRecordValues(record *core.Record, leagueGroup model.LeagueGroup, club *core.Record) {
+func setLeagueGroupRecordValues(record *core.Record, leagueGroup bsm.LeagueGroup, club *core.Record) {
 	record.Set("bsm_id", leagueGroup.ID)
 	record.Set("season", leagueGroup.Season)
 	record.Set("name", leagueGroup.Name)

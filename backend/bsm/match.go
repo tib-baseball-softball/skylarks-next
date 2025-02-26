@@ -1,4 +1,4 @@
-package model
+package bsm
 
 type Match struct {
 	ID              int         `json:"id"`

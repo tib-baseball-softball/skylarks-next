@@ -1,4 +1,4 @@
-package model
+package bsm
 
 type LeagueGroup struct {
 	ID      int    `json:"id"`

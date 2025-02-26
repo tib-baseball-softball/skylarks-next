@@ -1,4 +1,4 @@
-package model
+package bsm
 
 type Club struct {
 	ID        int    `json:"id"`

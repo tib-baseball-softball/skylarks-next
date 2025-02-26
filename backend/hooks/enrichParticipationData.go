@@ -6,8 +6,7 @@ import (
 	"fmt"
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
-	"github.com/tib-baseball-softball/skylarks-next/enum"
-	"github.com/tib-baseball-softball/skylarks-next/model"
+	"github.com/tib-baseball-softball/skylarks-next/stats"
 )
 
 func AddEventParticipationData(app core.App, event *core.RecordEnrichEvent) error {
@@ -52,23 +51,23 @@ func addParticipationsByType(app core.App, record *core.Record) error {
 		return fmt.Errorf("failed to expand: %v", errs)
 	}
 
-	participationsByType := model.ParticipationsByType{
+	participationsByType := stats.ParticipationsByType{
 		In:    []*core.Record{},
 		Out:   []*core.Record{},
 		Maybe: []*core.Record{},
 	}
 
 	for _, participation := range participations {
-		state, err := enum.ParseParticipationType(participation.GetString("state"))
+		state, err := stats.ParseParticipationType(participation.GetString("state"))
 		if err != nil {
 			return err
 		}
 		switch state {
-		case enum.In:
+		case stats.In:
 			participationsByType.In = append(participationsByType.In, participation)
-		case enum.Out:
+		case stats.Out:
 			participationsByType.Out = append(participationsByType.Out, participation)
-		case enum.Maybe:
+		case stats.Maybe:
 			participationsByType.Maybe = append(participationsByType.Maybe, participation)
 		}
 	}

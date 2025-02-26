@@ -2,7 +2,6 @@ package stats
 
 import (
 	"github.com/pocketbase/pocketbase/core"
-	"github.com/tib-baseball-softball/skylarks-next/enum"
 	"strconv"
 )
 
@@ -33,7 +32,7 @@ func LoadUserStats(user *core.Record, requestEvent *core.RequestEvent) (Personal
 	}
 
 	if eventTypeParam != "" {
-		eventType, err := enum.ParseEventType(eventTypeParam)
+		eventType, err := ParseEventType(eventTypeParam)
 		if err != nil {
 			requestEvent.App.Logger().Error("failed to parse eventType: %v", "error", err)
 			return statsItem, err
@@ -50,30 +49,30 @@ func LoadUserStats(user *core.Record, requestEvent *core.RequestEvent) (Personal
 
 	// data structure for frontend
 	totalsIn := ParticipationTotal{
-		Type:   enum.In,
+		Type:   In,
 		Amount: 0,
 	}
 	totalsMaybe := ParticipationTotal{
-		Type:   enum.Maybe,
+		Type:   Maybe,
 		Amount: 0,
 	}
 	totalsOut := ParticipationTotal{
-		Type:   enum.Out,
+		Type:   Out,
 		Amount: 0,
 	}
 
 	totalsGames := AttendanceTotal{
-		Type:     enum.Game,
+		Type:     Game,
 		Attended: 0,
 		Total:    eventCounts.Games,
 	}
 	totalsPractice := AttendanceTotal{
-		Type:     enum.Practice,
+		Type:     Practice,
 		Attended: 0,
 		Total:    eventCounts.Practices,
 	}
 	totalsMisc := AttendanceTotal{
-		Type:     enum.Misc,
+		Type:     Misc,
 		Attended: 0,
 		Total:    eventCounts.Misc,
 	}
@@ -85,19 +84,19 @@ func LoadUserStats(user *core.Record, requestEvent *core.RequestEvent) (Personal
 	// query can only get the totals for which participation data exists,
 	// add raw possible totals from previous query
 	for i, participation := range participations {
-		eventType, err := enum.ParseEventType(participation.Type)
+		eventType, err := ParseEventType(participation.Type)
 		if err != nil {
 			requestEvent.App.Logger().Error("failed to parse eventType: %v", "error", err)
 			return statsItem, err
 		}
 		switch eventType {
-		case enum.Game:
+		case Game:
 			participations[i].TotalCount = eventCounts.Games
 			totalsGames.Attended = participation.InCount
-		case enum.Practice:
+		case Practice:
 			participations[i].TotalCount = eventCounts.Practices
 			totalsPractice.Attended = participation.InCount
-		case enum.Misc:
+		case Misc:
 			participations[i].TotalCount = eventCounts.Misc
 			totalsMisc.Attended = participation.InCount
 		}

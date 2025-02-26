@@ -1,4 +1,4 @@
-package model
+package bsm
 
 type Person struct {
 	Type        string `json:"type"`

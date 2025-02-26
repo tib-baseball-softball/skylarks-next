@@ -1,4 +1,4 @@
-package model
+package stats
 
 import "github.com/pocketbase/pocketbase/core"
 
