@@ -29,7 +29,8 @@
     background: "variant-filled-error",
   };
 
-  const authRecord = $derived(authSettings.record as CustomAuthModel);
+  // Mark: here we do not need to be reactive as we're editing
+  const authRecord = authSettings.record as CustomAuthModel;
   const form = $state({
     id: authRecord.id ?? "",
     number: authRecord.number ?? "",

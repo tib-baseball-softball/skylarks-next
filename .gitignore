@@ -225,3 +225,4 @@ vite.config.ts.timestamp-*
 /backend/test_pb_data/auxiliary.db-wal
 /backend/test_pb_data/data.db-shm
 /backend/test_pb_data/data.db-wal
+test-results

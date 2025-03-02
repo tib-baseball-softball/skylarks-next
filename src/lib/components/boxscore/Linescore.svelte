@@ -3,54 +3,55 @@
     import {range} from "$lib/functions/range";
 
     interface Props {
-        linescore: Linescore;
-    }
+    linescore: Linescore;
+  }
 
-    let { linescore }: Props = $props();
+  let {linescore}: Props = $props();
 
-    const innings = range(1, linescore.played_innings)
+  const innings = range(1, linescore.played_innings);
 </script>
 
 <div class="table-container dark:border-2">
-    <!-- Native Table Element -->
-    <table class="linescore bg-surface-100-800-token">
+  <!-- Native Table Element -->
+  <table class="linescore bg-surface-100-800-token">
 
-        <thead>
-            <tr>
-                <th></th>
-                {#each innings as inning}
-                    <th>{inning}</th>
-                {/each}
-                <th>R</th>
-                <th>H</th>
-                <th>E</th>
-            </tr>
-        </thead>
+    <thead>
+    <tr>
+      <th></th>
+      {#each innings as inning}
+        <th>{inning}</th>
+      {/each}
+      <th>R</th>
+      <th>H</th>
+      <th>E</th>
+    </tr>
+    </thead>
 
-        <tbody>
-            <tr>
-                <td>{linescore.away.league_entry.team?.name}</td>
-                {#each linescore.away.innings as awayInning}
-                    <td>{awayInning}</td>
-                {/each}
-                <td class="font-extrabold">{linescore.away.runs}</td>
-                <td>{linescore.away.hits}</td>
-                <td>{linescore.away.errors}</td>
-            </tr>
-            <tr>
-                <td>{linescore.home.league_entry.team?.name}</td>
-                {#each linescore.home.innings as homeInning}
-                    <td>{homeInning}</td>
-                {/each}
-                <td class="font-extrabold">{linescore.home.runs}</td>
-                <td>{linescore.home.hits}</td>
-                <td>{linescore.home.errors}</td>
-            </tr>
-        </tbody>
+    <tbody>
+    <tr>
+      <td>{linescore.away.league_entry.team?.name}</td>
+      {#each linescore.away.innings as awayInning}
+        <td>{awayInning}</td>
+      {/each}
+      <td class="font-extrabold">{linescore.away.runs}</td>
+      <td>{linescore.away.hits}</td>
+      <td>{linescore.away.errors}</td>
+    </tr>
+    <tr>
+      <td>{linescore.home.league_entry.team?.name}</td>
+      {#each linescore.home.innings as homeInning}
+        <td>{homeInning}</td>
+      {/each}
+      <td class="font-extrabold">{linescore.home.runs}</td>
+      <td>{linescore.home.hits}</td>
+      <td>{linescore.home.errors}</td>
+    </tr>
+    </tbody>
 
-    </table>
+  </table>
 </div>
 
+<!-- svelte-ignore css_unused_selector -->
 <style lang="postcss">
     /* adapted from Skeleton table style */
 

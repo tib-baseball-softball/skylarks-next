@@ -6,13 +6,15 @@
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest",
+    "test": "vitest && npm run test:e2e",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "generate:types": "typed-pocketbase -d src/lib/model"
+    "generate:types": "typed-pocketbase -d src/lib/model",
+    "test:e2e": "playwright test"
   },
   "devDependencies": {
     "@dotenvx/dotenvx": "^1.37.0",
+    "@playwright/test": "^1.49.1",
     "@skeletonlabs/skeleton": "2.10.4",
     "@skeletonlabs/tw-plugin": "0.4.0",
     "@sveltejs/adapter-node": "^5.2.12",
@@ -47,5 +49,10 @@
     "typed-pocketbase": {
       "pocketbase": "$pocketbase"
     }
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }
