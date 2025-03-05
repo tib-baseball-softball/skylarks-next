@@ -118,7 +118,7 @@
         <svelte:fragment slot="summary">Administration</svelte:fragment>
 
         <svelte:fragment slot="content">
-          <a href="#" onclick={drawerClose}>
+          <a href="/stats/admin" onclick={drawerClose}>
             <ChartColumnStacked/>
             <span>Admin Dashboard</span>
           </a>
