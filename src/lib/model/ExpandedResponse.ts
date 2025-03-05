@@ -33,6 +33,7 @@ export type ExpandedEvent = Extension<EventsResponse, {
 export type ExpandedTeam = Extension<TeamsResponse, {
   expand: {
     club: ClubsResponse
+    admins?: UsersResponse[]
   }
 }>
 

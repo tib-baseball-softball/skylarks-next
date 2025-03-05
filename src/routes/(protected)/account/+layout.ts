@@ -16,7 +16,7 @@ export const load = (async ({fetch, depends, parent}) => {
   if (!teams) {
     teams = await client.collection("teams").getFullList<ExpandedTeam>({
       filter: `"${model?.teams}" ?~ id`,
-      expand: "club",
+      expand: "club,admins",
       fetch: fetch,
       sort: "+name",
     })

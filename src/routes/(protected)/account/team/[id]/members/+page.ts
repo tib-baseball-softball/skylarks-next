@@ -14,7 +14,7 @@ export const load = (async ({fetch, parent, params, depends}) => {
     team = await client
         .collection("teams")
         .getOne<ExpandedTeam>(params.id, {
-          expand: "club",
+          expand: "club,admins",
           fetch: fetch
         });
   }

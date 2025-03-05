@@ -19,7 +19,7 @@ export const load = (async ({fetch, depends}) => {
     teams = await client
         .collection("teams")
         .getFullList<ExpandedTeam>({
-          expand: "club",
+          expand: "club,admins",
           fetch: fetch,
           requestKey: null,
           sort: "+name",

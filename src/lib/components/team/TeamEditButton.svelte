@@ -1,10 +1,10 @@
 <script lang="ts">
-    import {type DrawerSettings, getDrawerStore} from "@skeletonlabs/skeleton";
-    import type {ExpandedTeam} from "$lib/model/ExpandedResponse";
-    import type {ClubsResponse} from "$lib/model/pb-types";
-    import {Edit} from "lucide-svelte";
+  import {type DrawerSettings, getDrawerStore} from "@skeletonlabs/skeleton";
+  import type {ExpandedTeam} from "$lib/model/ExpandedResponse";
+  import type {ClubsResponse} from "$lib/model/pb-types";
+  import {Edit} from "lucide-svelte";
 
-    interface Props {
+  interface Props {
     club: ClubsResponse,
     team: ExpandedTeam,
     classes: string,

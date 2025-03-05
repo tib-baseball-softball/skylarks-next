@@ -4,6 +4,8 @@
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
   import {getDrawerStore, getToastStore, RadioGroup, RadioItem, type ToastSettings,} from "@skeletonlabs/skeleton";
   import {X} from "lucide-svelte";
+  import type {UsersResponse} from "$lib/model/pb-types.ts";
+  import MultiSelectCombobox from "$lib/components/utility/MultiSelectCombobox.svelte";
 
   const toastStore = getToastStore();
   const drawerStore = getDrawerStore();
@@ -32,10 +34,22 @@
       },
   );
 
+  $inspect($drawerStore.meta.team.expand.admins)
+
+  let selectedAdmins: UsersResponse[] = $state(form?.expand?.admins ?? []);
+
+  const allTeamMembers = client.collection("users").getFullList<UsersResponse>({
+    filter: `teams ?~ '${$drawerStore.meta.team.id}'`
+  })
+
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
 
     let result: ExpandedTeam | null = null;
+    
+    form.admins = selectedAdmins.map((admin) => {
+      return admin.id
+    });
 
     try {
       if (form.id) {
@@ -164,6 +178,14 @@
                 rows="8"
                 bind:value={form.description}
         ></textarea>
+      </label>
+
+      <label class="label space-y-3 md:col-span-2">
+        <span>Team Admins</span><br>
+
+        {#await allTeamMembers then users}
+          <MultiSelectCombobox itemName="Admin" bind:selectedItems={selectedAdmins} allItems={users}/>
+        {/await}
       </label>
     </div>
 

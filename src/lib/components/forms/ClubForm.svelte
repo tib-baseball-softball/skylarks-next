@@ -33,7 +33,7 @@
       },
   );
 
-  let selectedAdmins: UsersResponse[] = $state(form.expand.admins);
+  let selectedAdmins: UsersResponse[] = $state(form.expand.admins ?? []);
 
   const allUsersForClub = client.collection("users").getFullList<UsersResponse>({
     filter: `club ?~ '${$drawerStore.meta.club.id}'`
