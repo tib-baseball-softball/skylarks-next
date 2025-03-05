@@ -93,7 +93,7 @@
   {/if}
 </h3>
 <form onsubmit={submitForm} class="mt-4 space-y-3">
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-3 xl:gap-4 2xl:gap-5">
+  <div class="grid grid-cols-2 gap-2 lg:gap-3 xl:gap-4 2xl:gap-5">
     <input
             name="id"
             autocomplete="off"
@@ -124,7 +124,7 @@
       The start date does not have to be the actual training day.
     </span>
 
-    <label class="label md:col-span-2 mt-3">
+    <label class="label col-span-2 md:col-span-1 mt-3">
       Title
       <input
               name="title"
@@ -190,13 +190,13 @@
       <span class="text-sm font-light block">Intervals are saved in days.</span>
     </label>
 
-    <label class="label md:col-span-2">
+    <label class="label col-span-2">
       Description
       <textarea name="desc" class="textarea" bind:value={form.desc}
       ></textarea>
     </label>
 
-    <label class="label md:col-span-2">
+    <label class="label col-span-2">
       Location
       <textarea
               name="location"
