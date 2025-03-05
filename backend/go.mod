@@ -1,6 +1,6 @@
 module github.com/tib-baseball-softball/skylarks-next
 
-go 1.24.0
+go 1.24.1
 
 require (
 	github.com/pocketbase/dbx v1.11.0
