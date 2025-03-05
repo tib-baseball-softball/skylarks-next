@@ -53,6 +53,7 @@
               bind:value={form.email}
               required
               type="email"
+              autocomplete="email"
       />
       <span class="mt-3 font-light text-sm">
                 You will be logged out and instructed to verify your new email address.

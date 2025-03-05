@@ -67,12 +67,12 @@
 
     <label class="label">
       First Name(s)
-      <input name="firstname" class="input" bind:value={form.firstName}/>
+      <input name="firstname" class="input" bind:value={form.firstName} autocomplete="given-name"/>
     </label>
 
     <label class="label">
       Last Name
-      <input name="lastname" class="input" bind:value={form.lastName}/>
+      <input name="lastname" class="input" bind:value={form.lastName} autocomplete="family-name"/>
     </label>
 
     <label class="label">

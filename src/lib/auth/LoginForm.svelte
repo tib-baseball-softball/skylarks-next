@@ -66,7 +66,14 @@
 {#snippet signin()}
   <label class="label">
     <span class="">Your email</span>
-    <input class="input" bind:value={form.email} required type="email" placeholder="name@provider.com"/>
+    <input
+            class="input"
+            bind:value={form.email}
+            required
+            type="email"
+            placeholder="name@provider.com"
+            autocomplete="email"
+    />
   </label>
 
   {#if !forgotPassword}
@@ -80,6 +87,7 @@
               placeholder="**********"
               minlength="8"
               maxlength="72"
+              autocomplete="current-password"
       />
     </label>
 
@@ -140,6 +148,7 @@
                             required
                             type="email"
                             placeholder="name@provider.com"
+                            autocomplete="email"
                     />
                   </label>
 
@@ -156,6 +165,7 @@
                               placeholder="**********"
                               minlength="8"
                               maxlength="72"
+                              autocomplete="new-password"
                       />
                     </label>
 
@@ -169,6 +179,7 @@
                               placeholder="confirm password"
                               minlength="8"
                               maxlength="72"
+                              autocomplete="new-password"
                       />
                     </label>
                   </div>
@@ -183,6 +194,7 @@
                             minlength="8"
                             required
                             type="text"
+                            autocomplete="one-time-code"
                     />
                     <span class="block text-sm font-light">
                                         A valid signup key needs to be entered upon user account creation.
