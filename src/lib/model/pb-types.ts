@@ -272,8 +272,8 @@ export interface EventsResponse extends BaseCollectionResponse {
 	cancelled: boolean;
 	match_json?: EventsMatch_json
 	guests: string;
-	location: string;
 	series: string;
+	location: string;
 	created: string;
 	updated: string;
 }
@@ -292,8 +292,8 @@ export interface EventsCreate extends BaseCollectionCreate {
 	cancelled?: boolean;
 	match_json?: EventsMatch_json
 	guests?: string;
-	location?: string;
 	series?: string;
+	location?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -314,8 +314,8 @@ export interface EventsUpdate extends BaseCollectionUpdate {
 	cancelled?: boolean;
 	match_json?: EventsMatch_json
 	guests?: string;
-	location?: string;
 	series?: string;
+	location?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -331,6 +331,7 @@ export interface EventsCollection {
 		attire: UniformsetsCollection;
 		team: TeamsCollection;
 		series: EventseriesCollection;
+		location: LocationsCollection;
 		participations_via_event: ParticipationsCollection[];
 	};
 }
@@ -386,6 +387,7 @@ export interface ClubsCollection {
 		teams_via_club: TeamsCollection[];
 		leaguegroups_via_clubs: LeaguegroupsCollection[];
 		uniformsets_via_club: UniformsetsCollection[];
+		locations_via_club: LocationsCollection[];
 	};
 }
 
@@ -920,6 +922,97 @@ export interface EventseriesCollection {
 	};
 }
 
+// ===== locations block =====
+// ===== locations =====
+
+export interface LocationsResponse extends BaseCollectionResponse {
+	collectionName: 'locations';
+	id: string;
+	name: string;
+	description: string;
+	address_addon: string;
+	street: string;
+	postal_code: string;
+	country: string;
+	city: string;
+	longitude: number;
+	latitude: number;
+	spectator_total: number;
+	spectator_seats: number;
+	other_information: string;
+	groundrules: string;
+	human_country: string;
+	photo_url: string;
+	club: string;
+	created: string;
+	updated: string;
+}
+
+export interface LocationsCreate extends BaseCollectionCreate {
+	id?: string;
+	name: string;
+	description?: string;
+	address_addon?: string;
+	street?: string;
+	postal_code?: string;
+	country?: string;
+	city?: string;
+	longitude?: number;
+	latitude?: number;
+	spectator_total?: number;
+	spectator_seats?: number;
+	other_information?: string;
+	groundrules?: string;
+	human_country?: string;
+	photo_url?: string | URL;
+	club?: string;
+	created?: string | Date;
+	updated?: string | Date;
+}
+
+export interface LocationsUpdate extends BaseCollectionUpdate {
+	id: string;
+	name: string;
+	description?: string;
+	address_addon?: string;
+	street?: string;
+	postal_code?: string;
+	country?: string;
+	city?: string;
+	longitude?: number;
+	'longitude+'?: number;
+	'longitude-'?: number;
+	latitude?: number;
+	'latitude+'?: number;
+	'latitude-'?: number;
+	spectator_total?: number;
+	'spectator_total+'?: number;
+	'spectator_total-'?: number;
+	spectator_seats?: number;
+	'spectator_seats+'?: number;
+	'spectator_seats-'?: number;
+	other_information?: string;
+	groundrules?: string;
+	human_country?: string;
+	photo_url?: string | URL;
+	club?: string;
+	created?: string | Date;
+	updated?: string | Date;
+}
+
+export interface LocationsCollection {
+	type: 'base';
+	collectionId: string;
+	collectionName: 'locations';
+	response: LocationsResponse;
+	create: LocationsCreate;
+	update: LocationsUpdate;
+	relations: {
+		events_via_location: EventsCollection[];
+		club: ClubsCollection;
+	};
+}
+
 // ===== Schema =====
 
 export type Schema = {
@@ -937,4 +1030,5 @@ export type Schema = {
 	_otps: OtpsCollection;
 	_authOrigins: AuthOriginsCollection;
 	eventseries: EventseriesCollection;
+	locations: LocationsCollection;
 }
