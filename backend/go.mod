@@ -4,7 +4,7 @@ go 1.24.1
 
 require (
 	github.com/pocketbase/dbx v1.11.0
-	github.com/pocketbase/pocketbase v0.25.8
+	github.com/pocketbase/pocketbase v0.25.9
 	github.com/spf13/cobra v1.9.1
 	github.com/subosito/gotenv v1.6.0
 )
