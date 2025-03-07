@@ -130,7 +130,8 @@ func bindAppHooks(app core.App) {
 		})
 
 		app.Cron().MustAdd("GamesImport", "0 * * * *", func() {
-			bsm.ImportGames(app)
+			gamesImportService := bsm.GameImportService{App: app}
+			gamesImportService.ImportGames()
 		})
 	}
 }
@@ -145,7 +146,8 @@ func main() {
 	app.RootCmd.AddCommand(&cobra.Command{
 		Use: "import:games",
 		Run: func(cmd *cobra.Command, args []string) {
-			bsm.ImportGames(app)
+			gamesImportService := bsm.GameImportService{App: app}
+			gamesImportService.ImportGames()
 		},
 	})
 
