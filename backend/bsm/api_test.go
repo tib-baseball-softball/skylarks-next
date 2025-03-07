@@ -10,8 +10,16 @@ import (
 )
 
 func TestGetAPIURL(t *testing.T) {
-	os.Setenv("BSM_API_URL", "https://api.example.com")
-	defer os.Unsetenv("BSM_API_URL")
+	err := os.Setenv("BSM_API_URL", "https://api.example.com")
+	if err != nil {
+		t.Fatalf("failed to set BSM_API_URL")
+	}
+	defer func() {
+		err := os.Unsetenv("BSM_API_URL")
+		if err != nil {
+			t.Fatalf("failed to unset BSM_API_URL")
+		}
+	}()
 
 	resource := "test-resource"
 	params := map[string]string{
@@ -43,7 +51,10 @@ func TestFetchResource(t *testing.T) {
 	// Create a test server
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(mockData)
+		err := json.NewEncoder(w).Encode(mockData)
+		if err != nil {
+			t.Fatalf("failed to encode response")
+		}
 	}))
 	defer server.Close()
 

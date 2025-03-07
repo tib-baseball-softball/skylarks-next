@@ -2,16 +2,35 @@ package bsm
 
 import (
 	"encoding/json"
+	"errors"
+	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
 	"github.com/tib-baseball-softball/skylarks-next/internal/pb"
 	"log"
+	"log/slog"
 	"sync"
 	"time"
 )
 
+type GameImportServiceApp interface {
+	FindRecordsByFilter(
+		collectionModelOrIdentifier any,
+		filter string,
+		sort string,
+		limit int,
+		offset int,
+		params ...dbx.Params,
+	) ([]*core.Record, error)
+	FindFirstRecordByData(collectionModelOrIdentifier any, key string, value any) (*core.Record, error)
+	Logger() *slog.Logger
+	ExpandRecord(record *core.Record, expands []string, optFetchFunc core.ExpandFetchFunc) map[string]error
+	FindCollectionByNameOrId(nameOrId string) (*core.Collection, error)
+	Save(model core.Model) error
+}
+
 type GameImportService struct {
-	App core.App
+	App GameImportServiceApp
 }
 
 func (s GameImportService) ImportGames() {
@@ -161,7 +180,11 @@ func (s GameImportService) createOrUpdateField(team *core.Record, field Field) (
 			return nil, err
 		}
 
-		record = core.NewRecord(collection)
+		if collection != nil {
+			record = core.NewRecord(collection)
+		} else {
+			return nil, errors.New("cannot create new record, collection is nil")
+		}
 	}
 	location := &Location{}
 	location.SetProxyRecord(record)
