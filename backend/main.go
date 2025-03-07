@@ -6,7 +6,7 @@ import (
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/spf13/cobra"
 	"github.com/subosito/gotenv"
-	"github.com/tib-baseball-softball/skylarks-next/internal/cronjobs"
+	"github.com/tib-baseball-softball/skylarks-next/bsm"
 	"github.com/tib-baseball-softball/skylarks-next/internal/hooks"
 	"github.com/tib-baseball-softball/skylarks-next/internal/routes"
 	"log"
@@ -123,14 +123,14 @@ func bindAppHooks(app core.App) {
 
 	if os.Getenv("APPLICATION_CONTEXT") != "Development" {
 		app.Cron().MustAdd("LeagueGroupImport", "0 * * * *", func() {
-			err := cronjobs.ImportLeagueGroups(app, nil, nil)
+			err := bsm.ImportLeagueGroups(app, nil, nil)
 			if err != nil {
 				app.Logger().Error("Error while running cronjob LeagueGroupImport: " + err.Error())
 			}
 		})
 
 		app.Cron().MustAdd("GamesImport", "0 * * * *", func() {
-			cronjobs.ImportGames(app)
+			bsm.ImportGames(app)
 		})
 	}
 }
@@ -145,14 +145,14 @@ func main() {
 	app.RootCmd.AddCommand(&cobra.Command{
 		Use: "import:games",
 		Run: func(cmd *cobra.Command, args []string) {
-			cronjobs.ImportGames(app)
+			bsm.ImportGames(app)
 		},
 	})
 
 	app.RootCmd.AddCommand(&cobra.Command{
 		Use: "import:leagues",
 		Run: func(cmd *cobra.Command, args []string) {
-			err := cronjobs.ImportLeagueGroups(app, nil, nil)
+			err := bsm.ImportLeagueGroups(app, nil, nil)
 			if err != nil {
 				log.Print("Error while running LeagueGroupImport: " + err.Error())
 			}

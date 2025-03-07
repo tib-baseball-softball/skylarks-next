@@ -1,10 +1,9 @@
-package cronjobs
+package bsm
 
 import (
 	"encoding/json"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
-	"github.com/tib-baseball-softball/skylarks-next/bsm"
 	"log"
 	"sync"
 	"time"
@@ -62,13 +61,13 @@ func ImportGames(app core.App) {
 	app.Logger().Info("Game Import successfully imported new game events")
 }
 
-func fetchMatchesForLeagueGroup(league string, apiKey string) ([]bsm.Match, error) {
+func fetchMatchesForLeagueGroup(league string, apiKey string) ([]Match, error) {
 	params := make(map[string]string)
 	params["filters[leagues][]"] = league
 	params["search"] = "skylarks"
 
-	url := bsm.GetAPIURL("matches.json", params, apiKey)
-	matches, _, err := bsm.FetchResource[[]bsm.Match](url.String())
+	url := GetAPIURL("matches.json", params, apiKey)
+	matches, _, err := FetchResource[[]Match](url.String())
 
 	if err != nil {
 		return nil, err
@@ -76,7 +75,7 @@ func fetchMatchesForLeagueGroup(league string, apiKey string) ([]bsm.Match, erro
 	return matches, nil
 }
 
-func createOrUpdateEvents(app core.App, matches []bsm.Match, teamID string) (err error) {
+func createOrUpdateEvents(app core.App, matches []Match, teamID string) (err error) {
 	for _, match := range matches {
 		record, err := app.FindFirstRecordByData("events", "bsm_id", match.ID)
 
@@ -112,7 +111,7 @@ func createOrUpdateEvents(app core.App, matches []bsm.Match, teamID string) (err
 	return
 }
 
-func setEventRecordValues(app core.App, record *core.Record, match bsm.Match, teamID string) (err error) {
+func setEventRecordValues(app core.App, record *core.Record, match Match, teamID string) (err error) {
 	starttime, err := types.ParseDateTime(match.Time)
 	if err != nil {
 		return err

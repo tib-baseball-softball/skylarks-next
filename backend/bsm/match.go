@@ -21,4 +21,5 @@ type Match struct {
 	HomeLeagueEntry LeagueEntry `json:"home_league_entry"`
 	AwayLeagueEntry LeagueEntry `json:"away_league_entry"`
 	League          League      `json:"league"`
+	Field           Location    `json:"field"`
 }
