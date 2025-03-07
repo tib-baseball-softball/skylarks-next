@@ -1,6 +1,17 @@
 package bsm
 
 const (
+	LeagueGroupsCollection = "leaguegroups"
+)
+
+// BSM API filters
+
+const (
+	LeagueFilter = "filters[leagues][]"
+	SearchFilter = "search"
+)
+
+const (
 	TypeBatting  = "batting"
 	TypePitching = "pitching"
 	TypeFielding = "fielding"

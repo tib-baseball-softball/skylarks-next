@@ -944,6 +944,8 @@ export interface LocationsResponse extends BaseCollectionResponse {
 	human_country: string;
 	photo_url: string;
 	club: string;
+	bsm_id: number;
+	internal_name: string;
 	created: string;
 	updated: string;
 }
@@ -966,6 +968,8 @@ export interface LocationsCreate extends BaseCollectionCreate {
 	human_country?: string;
 	photo_url?: string | URL;
 	club?: string;
+	bsm_id?: number;
+	internal_name?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -996,6 +1000,10 @@ export interface LocationsUpdate extends BaseCollectionUpdate {
 	human_country?: string;
 	photo_url?: string | URL;
 	club?: string;
+	bsm_id?: number;
+	'bsm_id+'?: number;
+	'bsm_id-'?: number;
+	internal_name?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }

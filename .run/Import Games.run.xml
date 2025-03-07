@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Import Games" type="GoApplicationRunConfiguration" factoryName="Go Application">
+    <module name="skylarks-fe-next" />
+    <working_directory value="$PROJECT_DIR$/backend" />
+    <parameters value="import:games" />
+    <kind value="PACKAGE" />
+    <package value="github.com/tib-baseball-softball/skylarks-next" />
+    <directory value="$PROJECT_DIR$" />
+    <filePath value="$PROJECT_DIR$/backend/main.go" />
+    <method v="2" />
+  </configuration>
+</component>

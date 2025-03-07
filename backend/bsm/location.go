@@ -14,6 +14,16 @@ func (a *Location) ID() string {
 	return a.Id
 }
 
+func (a *Location) BSMID() int {
+	return a.GetInt("bsm_id")
+}
+
+func (a *Location) SetBSMID(bsmID int) {
+	a.Set("bsm_id", bsmID)
+}
+
+// Name contains mostly useless data like "Baseball"
+// there is also `internal_name` in the record model to have a field that is not overwritten by imports
 func (a *Location) Name() string {
 	return a.GetString("name")
 }
@@ -30,6 +40,7 @@ func (a *Location) SetDescription(description string) {
 	a.Set("description", description)
 }
 
+// AddressAddon for many BSM datasets contains the actual name of the field
 func (a *Location) AddressAddon() string {
 	return a.GetString("address_addon")
 }

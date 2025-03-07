@@ -146,7 +146,8 @@ func main() {
 	app.RootCmd.AddCommand(&cobra.Command{
 		Use: "import:games",
 		Run: func(cmd *cobra.Command, args []string) {
-			gamesImportService := bsm.GameImportService{App: app}
+			// app is a pointer here because commands only work after app.Start()
+			gamesImportService := bsm.GameImportService{App: *app}
 			gamesImportService.ImportGames()
 		},
 	})
