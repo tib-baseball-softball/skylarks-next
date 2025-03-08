@@ -125,5 +125,10 @@
 			"database": "${workspaceFolder:skylarks-next}/backend/pb_data/data.db",
 			"name": "PB DP"
 		}
-	]
+	],
+	"editor.defaultFormatter": null,
+	"editor.formatOnSave": true,
+	"[typescript]": {
+		"editor.defaultFormatter": "vscode.typescript-language-features"
+	}
 }

@@ -1,9 +1,10 @@
-import type {RecordModel} from "pocketbase";
+import type { RecordModel } from "pocketbase";
 import type {
   ClubsResponse,
   EventsCreate,
   EventseriesCreate,
   EventsResponse,
+  LocationsResponse,
   ParticipationsResponse,
   TeamsResponse,
   UniformsetsResponse,
@@ -20,7 +21,8 @@ export type ExpandedEvent = Extension<EventsResponse, {
       }
     }>[],
     attire?: UniformsetsResponse,
-    team?: ExpandedTeam
+    team?: ExpandedTeam,
+    location?: LocationsResponse
   },
   participations: {
     in: ExpandedParticipation[],
