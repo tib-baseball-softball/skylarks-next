@@ -1,20 +1,27 @@
 <script lang="ts">
   import ClubDetailCard from "$lib/components/diamondplanner/club/ClubDetailCard.svelte";
+  import TeamListTeaser from "$lib/components/diamondplanner/team/TeamListTeaser.svelte";
   import UniformSetInfoCard from "$lib/components/diamondplanner/uniformset/UniformSetInfoCard.svelte";
-  import type {CustomAuthModel, ExpandedClub, ExpandedTeam, ExpandedUniformSet} from "$lib/model/ExpandedResponse";
+  import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
+  import * as Sheet from "$lib/components/utility/sheet/index.js";
+  import type {
+    CustomAuthModel,
+    ExpandedClub,
+    ExpandedTeam,
+    ExpandedUniformSet,
+  } from "$lib/model/ExpandedResponse";
+  import { authSettings } from "$lib/pocketbase/index.svelte";
   import {
     type DrawerSettings,
     getDrawerStore,
     getModalStore,
     type ModalComponent,
-    type ModalSettings
+    type ModalSettings,
   } from "@skeletonlabs/skeleton";
-  import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
-  import TeamListTeaser from "$lib/components/diamondplanner/team/TeamListTeaser.svelte";
-  import {authSettings} from "$lib/pocketbase/index.svelte";
-  import {Mail, Plus} from "lucide-svelte";
+  import { Mail, Plus } from "lucide-svelte";
+  import type { PageProps } from "./$types";
 
-  let {data} = $props();
+  let { data }: PageProps = $props();
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
@@ -54,13 +61,16 @@
 
 <svelte:head>
   <title>Details for {club.name}</title>
-  <meta name="description" content="Club overview page for the {club.name} with info about teams and uniform sets."/>
+  <meta
+    name="description"
+    content="Club overview page for the {club.name} with info about teams and uniform sets."
+  />
 </svelte:head>
 
 <h1 class="h1">{club.name}</h1>
 
 <section class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
-  <ClubDetailCard {club}/>
+  <ClubDetailCard {club} />
 </section>
 
 <section class="!mt-8">
@@ -70,7 +80,7 @@
 
   <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
     {#each teams as team}
-      <TeamListTeaser {team} link={true}/>
+      <TeamListTeaser {team} link={true} />
     {/each}
 
     {#if teams.length === 0}
@@ -79,8 +89,11 @@
   </div>
 
   {#if club?.admins.includes(authRecord.id)}
-    <button class="btn variant-ghost-primary" onclick={() => drawerStore.open(teamSettings)}>
-      <Plus/>
+    <button
+      class="btn variant-ghost-primary"
+      onclick={() => drawerStore.open(teamSettings)}
+    >
+      <Plus />
       <span>Create new</span>
     </button>
   {/if}
@@ -93,42 +106,66 @@
 
   <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
     {#each uniformSets as uniformSet}
-      <UniformSetInfoCard {uniformSet}/>
+      <UniformSetInfoCard {uniformSet} />
     {/each}
   </div>
 
   {#if club?.admins.includes(authRecord.id)}
     <button class="btn variant-ghost-primary" onclick={triggerUniformModal}>
-      <Plus/>
+      <Plus />
       <span>Create new</span>
     </button>
   {/if}
 </section>
 
+<section>
+  <Sheet.Root>
+    <Sheet.Trigger>Open</Sheet.Trigger>
+    <Sheet.Content>
+      <Sheet.Header>
+        <Sheet.Title>Are you sure absolutely sure?</Sheet.Title>
+        <Sheet.Description>
+          This action cannot be undone. This will permanently delete your
+          account and remove your data from our servers.
+        </Sheet.Description>
+      </Sheet.Header>
+
+      <div>MÖP</div>
+    </Sheet.Content>
+  </Sheet.Root>
+</section>
+
 {#if club?.admins.includes(authRecord.id)}
-  <hr class="my-2"/>
+  <hr class="my-2" />
 
   <section>
     <header>
       <h2 class="h3 mb-3">Admin Section</h2>
     </header>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-3">
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-3"
+    >
       <article class="card admin-card variant-ringed-surface">
         <header class="card-header">
           <h3 class="h4 font-semibold">Club deletion</h3>
         </header>
 
         <section class="p-4 space-y-2">
-          <p>Deleting a club will delete all team, event and participation data. For safety reasons, a club
-            can therefore only be deleted by a superadmin.</p>
+          <p>
+            Deleting a club will delete all team, event and participation data.
+            For safety reasons, a club can therefore only be deleted by a
+            superadmin.
+          </p>
           <p>Please contact your club's administration.</p>
         </section>
 
         <footer class="card-footer flex">
-          <a class="btn variant-ghost-secondary dark:variant-filled-secondary dark:border grow"
-             href="mailto:webmaster@tib-baseball.de">
-            <Mail/>
+          <a
+            class="btn variant-ghost-secondary dark:variant-filled-secondary dark:border grow"
+            href="mailto:webmaster@tib-baseball.de"
+          >
+            <Mail />
             <span class="ms-2">Contact</span>
           </a>
         </footer>
@@ -136,4 +173,3 @@
     </div>
   </section>
 {/if}
-

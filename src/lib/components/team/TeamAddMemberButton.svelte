@@ -1,7 +1,7 @@
 <script lang="ts">
   import type {ExpandedTeam} from "$lib/model/ExpandedResponse.ts";
   import type {ClubsResponse} from "$lib/model/pb-types.ts";
-  import ProjectDialog from "$lib/components/utility/ProjectDialog.svelte";
+  import Dialog from "$lib/components/utility/Dialog.svelte";
   import TeamMembersForm from "$lib/components/forms/TeamMembersForm.svelte";
   import {Plus} from "lucide-svelte";
 
@@ -13,7 +13,7 @@
   let {club, team}: Props = $props();
 </script>
 
-<ProjectDialog buttonText="Add Members">
+<Dialog buttonText="Add Members">
 
   {#snippet triggerIcon()}
     <Plus/>
@@ -30,4 +30,4 @@
   {/snippet}
 
   <TeamMembersForm {team} {club}/>
-</ProjectDialog>
+  </Dialog>
