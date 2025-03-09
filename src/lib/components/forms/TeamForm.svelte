@@ -34,12 +34,10 @@
       },
   );
 
-  $inspect($drawerStore.meta.team.expand.admins)
-
   let selectedAdmins: UsersResponse[] = $state(form?.expand?.admins ?? []);
 
   const allTeamMembers = client.collection("users").getFullList<UsersResponse>({
-    filter: `teams ?~ '${$drawerStore.meta.team.id}'`
+    filter: `teams ?~ '${$drawerStore.meta?.team?.id}'`
   })
 
   async function submitForm(e: SubmitEvent) {
