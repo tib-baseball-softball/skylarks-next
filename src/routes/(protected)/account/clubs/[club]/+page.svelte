@@ -3,7 +3,6 @@
   import TeamListTeaser from "$lib/components/diamondplanner/team/TeamListTeaser.svelte";
   import UniformSetInfoCard from "$lib/components/diamondplanner/uniformset/UniformSetInfoCard.svelte";
   import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
-  import * as Sheet from "$lib/components/utility/sheet/index.js";
   import type {
     CustomAuthModel,
     ExpandedClub,
@@ -119,21 +118,14 @@
   {/if}
 </section>
 
-<section>
+<section class="!mt-8">
   <header>
     <h2 class="h2 mb-3">Team Locations</h2>
   </header>
 
-  <ClubLocationsSection locations={data?.locations ?? []} />
+  <ClubLocationsSection club={club} locations={data?.locations ?? []} />
 
-  <Sheet.Root>
-    <Sheet.Trigger>Open</Sheet.Trigger>
-    <Sheet.Content>
-      <Sheet.Header></Sheet.Header>
-
-      <div>MÖP</div>
-    </Sheet.Content>
-  </Sheet.Root>
+  
 </section>
 
 {#if club?.admins.includes(authRecord.id)}
