@@ -20,6 +20,7 @@
   } from "@skeletonlabs/skeleton";
   import { Mail, Plus } from "lucide-svelte";
   import type { PageProps } from "./$types";
+  import ClubLocationsSection from "$lib/components/diamondplanner/club/ClubLocationsSection.svelte";
 
   let { data }: PageProps = $props();
 
@@ -119,16 +120,16 @@
 </section>
 
 <section>
+  <header>
+    <h2 class="h2 mb-3">Team Locations</h2>
+  </header>
+
+  <ClubLocationsSection locations={data?.locations ?? []} />
+
   <Sheet.Root>
     <Sheet.Trigger>Open</Sheet.Trigger>
     <Sheet.Content>
-      <Sheet.Header>
-        <Sheet.Title>Are you sure absolutely sure?</Sheet.Title>
-        <Sheet.Description>
-          This action cannot be undone. This will permanently delete your
-          account and remove your data from our servers.
-        </Sheet.Description>
-      </Sheet.Header>
+      <Sheet.Header></Sheet.Header>
 
       <div>MÖP</div>
     </Sheet.Content>

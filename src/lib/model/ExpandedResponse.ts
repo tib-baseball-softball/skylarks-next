@@ -42,7 +42,7 @@ export type ExpandedTeam = Extension<TeamsResponse, {
 export type ExpandedClub = Extension<ClubsResponse, {
   bsm_api_key: string
   expand: {
-    admins: UsersResponse[]
+    admins: UsersResponse[],
   }
 }>
 
