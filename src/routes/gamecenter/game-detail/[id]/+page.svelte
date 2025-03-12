@@ -34,7 +34,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-stretch gap-3 md:gap-4 lg:gap-5">
           <MatchDetailStatsCard {match}/>
 
-          <MatchDetailLocationCard {match}/>
+          <MatchDetailLocationCard field={match?.field}/>
 
           <MatchDetailOfficialsCard {match}/>
         </div>

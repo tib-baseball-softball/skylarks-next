@@ -1684,7 +1684,7 @@
         "min": 0,
         "name": "address_addon",
         "pattern": "",
-        "presentable": false,
+        "presentable": true,
         "primaryKey": false,
         "required": false,
         "system": false,
@@ -1726,7 +1726,7 @@
         "min": 0,
         "name": "country",
         "pattern": "",
-        "presentable": false,
+        "presentable": true,
         "primaryKey": false,
         "required": false,
         "system": false,
@@ -1740,7 +1740,7 @@
         "min": 0,
         "name": "city",
         "pattern": "",
-        "presentable": false,
+        "presentable": true,
         "primaryKey": false,
         "required": false,
         "system": false,
@@ -1862,6 +1862,32 @@
       },
       {
         "hidden": false,
+        "id": "number448833041",
+        "max": null,
+        "min": null,
+        "name": "bsm_id",
+        "onlyInt": true,
+        "presentable": false,
+        "required": false,
+        "system": false,
+        "type": "number"
+      },
+      {
+        "autogeneratePattern": "",
+        "hidden": false,
+        "id": "text2997088205",
+        "max": 0,
+        "min": 0,
+        "name": "internal_name",
+        "pattern": "",
+        "presentable": false,
+        "primaryKey": false,
+        "required": false,
+        "system": false,
+        "type": "text"
+      },
+      {
+        "hidden": false,
         "id": "autodate2990389176",
         "name": "created",
         "onCreate": true,
@@ -1882,7 +1908,7 @@
       }
     ],
     "indexes": [
-      "CREATE INDEX `idx_NcfiHiYnsJ` ON `locations` (\n  `name`,\n  `longitude`,\n  `latitude`\n)"
+      "CREATE INDEX `idx_NcfiHiYnsJ` ON `locations` (\n  `name`,\n  `longitude`,\n  `latitude`,\n  `address_addon`\n)"
     ],
     "system": false
   },

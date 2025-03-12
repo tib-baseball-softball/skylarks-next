@@ -1,10 +1,10 @@
-import {watchSingleRecord} from "$lib/pocketbase/RecordOperations";
-import type {ExpandedEvent} from "$lib/model/ExpandedResponse.js";
-import type {PageLoad} from "./$types";
+import { watchSingleRecord } from "$lib/pocketbase/RecordOperations";
+import type { ExpandedEvent } from "$lib/model/ExpandedResponse.js";
+import type { PageLoad } from "./$types";
 
-export const load = (async ({fetch, params, depends}) => {
+export const load = (async ({ fetch, params, depends }) => {
   const event = await watchSingleRecord<ExpandedEvent>("events", params.id, {
-    expand: "participations_via_event.user, attire, team.admins, team.club",
+    expand: "participations_via_event.user, attire, location, team.admins, team.club",
     fetch: fetch
   })
 

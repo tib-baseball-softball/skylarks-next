@@ -3,6 +3,7 @@ import type {Config} from 'tailwindcss';
 import typography from '@tailwindcss/typography';
 import {skeleton} from '@skeletonlabs/tw-plugin';
 import {skylarksTheme} from "./skylarks.theme";
+import tailwindcssAnimate from "tailwindcss-animate";
 import forms from '@tailwindcss/forms';
 
 export default {
@@ -17,6 +18,7 @@ export default {
   plugins: [
     forms,
     typography,
+    tailwindcssAnimate,
     skeleton({
       themes: {
         custom: [

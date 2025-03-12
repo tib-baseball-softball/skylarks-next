@@ -3,7 +3,7 @@ package hooks
 import (
 	"github.com/pocketbase/pocketbase/apis"
 	"github.com/pocketbase/pocketbase/core"
-	"github.com/tib-baseball-softball/skylarks-next/internal/cronjobs"
+	"github.com/tib-baseball-softball/skylarks-next/bsm"
 	"strconv"
 )
 
@@ -22,7 +22,7 @@ func TriggerLeagueImport(app core.App, event *core.RecordsListRequestEvent) erro
 		return err
 	}
 
-	err = cronjobs.ImportLeagueGroups(app, &club, &season)
+	err = bsm.ImportLeagueGroups(app, &club, &season)
 	if err != nil {
 		return apis.NewInternalServerError("league import failed", err)
 	}

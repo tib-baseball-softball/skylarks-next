@@ -11,7 +11,7 @@
   let {attire}: Props = $props();
 </script>
 
-<h3 class="h3">Attire</h3>
+<h2 class="h2">Uniform</h2>
 <div class="p-4 flex gap-2 md:gap-3 justify-evenly">
     <Cap identifier={attire.cap} classes="w-16"/>
     <Shirt fillColor={attire.jersey} classes="w-12 h-12"/>

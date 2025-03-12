@@ -11,4 +11,15 @@ export class MapUtility {
 
     return `${baseURL}?${params.toString()}`;
   }
+
+  public static buildAppleMapsURL(placeName: string, latitude: number, longitude: number): string {
+    const baseURL = "https://maps.apple.com/";
+
+    const params = new URLSearchParams({
+      q: placeName,
+      ll: `${latitude}, ${longitude}`
+    });
+
+    return `${baseURL}?${params.toString()}`;
+  }
 }

@@ -3,7 +3,7 @@ package routes
 import (
 	"github.com/pocketbase/pocketbase/apis"
 	"github.com/pocketbase/pocketbase/core"
-	"github.com/tib-baseball-softball/skylarks-next/internal/cronjobs"
+	"github.com/tib-baseball-softball/skylarks-next/bsm"
 	"net/http"
 	"slices"
 )
@@ -27,7 +27,7 @@ func StartLeagueGroupsImport(app core.App) func(event *core.RequestEvent) error 
 			return event.ForbiddenError("only club admins can start league imports", nil)
 		}
 
-		err = cronjobs.ImportLeagueGroups(app, &club.Id, nil)
+		err = bsm.ImportLeagueGroups(app, &club.Id, nil)
 		if err != nil {
 			return event.InternalServerError("error importing league groups", err)
 		}

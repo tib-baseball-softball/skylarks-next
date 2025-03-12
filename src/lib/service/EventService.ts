@@ -1,7 +1,7 @@
-import type {ExpandedEvent} from "$lib/model/ExpandedResponse";
-import type {PageStore} from "$lib/pocketbase/PageStore";
-import {watchWithPagination} from "$lib/pocketbase/RecordOperations";
-import type {Fetch} from "$lib/types/Fetch.ts";
+import type { ExpandedEvent } from "$lib/model/ExpandedResponse";
+import type { PageStore } from "$lib/pocketbase/PageStore";
+import { watchWithPagination } from "$lib/pocketbase/RecordOperations";
+import type { Fetch } from "$lib/types/Fetch.ts";
 
 export class EventService {
   /**
@@ -38,15 +38,15 @@ export class EventService {
     const pageNumber = Number(url.searchParams.get("page")) ?? 1;
 
     return await watchWithPagination<ExpandedEvent>(
-        "events",
-        {
-          filter: filter,
-          sort: sort,
-          expand: "participations_via_event.user, attire",
-          fetch: fetch
-        },
-        pageNumber,
-        6,
+      "events",
+      {
+        filter: filter,
+        sort: sort,
+        expand: "participations_via_event.user, attire, location",
+        fetch: fetch
+      },
+      pageNumber,
+      6,
     );
   }
 }
