@@ -39,6 +39,7 @@ services:
       - "BSM_API_KEY=${BSM_API_KEY}"
       - "SKYLARKS_API_AUTH_HEADER=${SKYLARKS_API_AUTH_HEADER}"
       - "PUBLIC_LOG_LEVEL=${PUBLIC_LOG_LEVEL}"
+      - "PUBLIC_TILE_SERVER=${PUBLIC_TILE_SERVER}"
 
 networks:
   proxy:
