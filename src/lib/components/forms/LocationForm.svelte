@@ -1,11 +1,17 @@
 <script lang="ts">
-  import { invalidate } from "$app/navigation";
-  import type { ExpandedClub } from "$lib/model/ExpandedResponse";
-  import type { LocationsResponse, LocationsUpdate } from "$lib/model/pb-types";
-  import { save } from "$lib/pocketbase/RecordOperations";
-  import { getToastStore, type ToastSettings } from "@skeletonlabs/skeleton";
-  import { Edit, Plus } from "lucide-svelte";
+  import {invalidate} from "$app/navigation";
+  import type {ExpandedClub} from "$lib/model/ExpandedResponse";
+  import type {LocationsResponse} from "$lib/model/pb-types";
+  import {save} from "$lib/pocketbase/RecordOperations";
+  import {getToastStore, type ToastSettings} from "@skeletonlabs/skeleton";
+  import {Edit, Plus} from "lucide-svelte";
+  //@ts-ignore
   import * as Sheet from "$lib/components/utility/sheet/index.js";
+  import LeafletMapCoordinatePicker from "$lib/components/map/LeafletMapCoordinatePicker.svelte";
+
+  // Gail S. Halvorsen Park coordinates
+  const DEFAULT_LATITUDE = 52.482762;
+  const DEFAULT_LONGITUDE = 13.407932;
 
   interface Props {
     club: ExpandedClub;
@@ -27,7 +33,7 @@
     background: "variant-filled-error",
   };
 
-  const form: LocationsUpdate = $state(
+  const form = $state(
     location ?? {
       id: "",
       name: "",
@@ -39,11 +45,13 @@
       human_country: "",
       internal_name: "",
       bsm_id: 0,
-      latitude: 0,
-      longitude: 0,
+      latitude: DEFAULT_LATITUDE,
+      longitude: DEFAULT_LONGITUDE,
       club: club.id,
     },
   );
+
+  let open = $state(false)
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
@@ -60,11 +68,12 @@
     if (result) {
       toastStore.trigger(toastSettingsSuccess);
     }
-    invalidate("club:single");
+    await invalidate("club:single");
+    open = false;
   }
 </script>
 
-<Sheet.Root>
+<Sheet.Root bind:open={open}>
   <Sheet.Trigger class={buttonClasses}>
     {#if form.id}
       <Edit />
@@ -225,6 +234,13 @@
             class="input"
           />
         </div>
+
+        <label class="md:col-span-2">
+          Coordinate Map
+          <span class="text-sm font-light block">Select a location on the map to set coordinates automatically</span>
+          <LeafletMapCoordinatePicker bind:latitude={form.latitude} bind:longitude={form.longitude}/>
+        </label>
+
       </div>
 
       <div class="mt-4 flex justify-between items-center">
