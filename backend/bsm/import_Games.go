@@ -101,7 +101,7 @@ func (s GameImportService) fetchMatchesForLeagueGroup(league string, apiKey stri
 
 func (s GameImportService) createOrUpdateEvents(matches []Match, team *core.Record) (err error) {
 	for _, match := range matches {
-		record, err := s.App.FindFirstRecordByData("events", "bsm_id", match.ID)
+		record, foundErr := s.App.FindFirstRecordByData("events", "bsm_id", match.ID)
 
 		location, err := s.createOrUpdateField(team, match.Field)
 		if err != nil {
@@ -109,7 +109,7 @@ func (s GameImportService) createOrUpdateEvents(matches []Match, team *core.Reco
 		}
 
 		// if not found, it throws an error, so create new record
-		if err != nil {
+		if foundErr != nil {
 			collection, err := s.App.FindCollectionByNameOrId("events")
 			if err != nil {
 				s.App.Logger().Error("Error fetching event collection: ", "error", err)
@@ -117,6 +117,10 @@ func (s GameImportService) createOrUpdateEvents(matches []Match, team *core.Reco
 			}
 
 			record = core.NewRecord(collection)
+		}
+		if record == nil {
+			s.App.Logger().Error("event record was unexpectedly nil: ", "error", err, "match", match)
+			continue
 		}
 		// no error - update existing record
 		err = s.setEventRecordValues(record, match, team.Id, location)
