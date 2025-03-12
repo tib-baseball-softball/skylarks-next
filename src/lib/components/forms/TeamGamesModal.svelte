@@ -1,14 +1,14 @@
 <script lang="ts">
-    import type {ExpandedTeam} from "$lib/model/ExpandedResponse";
-    import {client} from "$lib/pocketbase/index.svelte";
-    import {getToastStore, ProgressBar, type ToastSettings,} from "@skeletonlabs/skeleton";
-    import type {LeaguegroupsResponse} from "$lib/model/pb-types";
-    import type {GamesCount} from "$lib/model/GamesCount";
-    import {range} from "$lib/functions/range";
-    import {invalidate} from "$app/navigation";
-    import {X} from "lucide-svelte";
+  import type {ExpandedTeam} from "$lib/model/ExpandedResponse";
+  import {client} from "$lib/pocketbase/index.svelte";
+  import {getToastStore, ProgressBar, type ToastSettings,} from "@skeletonlabs/skeleton";
+  import type {LeaguegroupsResponse} from "$lib/model/pb-types";
+  import type {GamesCount} from "$lib/model/GamesCount";
+  import {range} from "$lib/functions/range";
+  import {invalidate} from "$app/navigation";
+  import {X} from "lucide-svelte";
 
-    interface Props {
+  interface Props {
     team: ExpandedTeam,
     parent: any,
   }
@@ -159,7 +159,7 @@
             <select class="select" bind:value={form.bsm_league_group}>
               <option value="{0}">None</option>
               {#each leagueGroups as leagueGroup}
-                <option value="{leagueGroup.bsm_id}">{leagueGroup.name} ({leagueGroup.bsm_id})</option>
+                <option value="{leagueGroup.bsm_id}">{leagueGroup.acronym} ({leagueGroup.bsm_id})</option>
               {/each}
             </select>
           </label>

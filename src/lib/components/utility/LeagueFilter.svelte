@@ -13,6 +13,6 @@
   <option value="{0}" selected>Alle Ligen</option>
 
   {#each leagueGroups as leagueGroup}
-    <option value="{leagueGroup.id}">{leagueGroup.name}</option>
+    <option value="{leagueGroup.id}">{leagueGroup.name} ({leagueGroup.acronym})</option>
   {/each}
 </select>
