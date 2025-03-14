@@ -55,6 +55,9 @@
     {#if index < locations.length - 1}
       <hr class="my-2 md:my-0"/>
     {/if}
+
+    {:else }
+      <p>This club doesn't have saved locations yet.</p>
   {/each}
 </ul>
 
