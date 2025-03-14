@@ -6,6 +6,7 @@
   import {DateTimeUtility} from "$lib/service/DateTimeUtility.js";
   import Flatpickr from "$lib/components/utility/Flatpickr.svelte";
   import {Weekday} from "$lib/types/Weekday.ts";
+  import type {LocationsResponse} from "$lib/model/pb-types.ts";
 
   interface Props {
     eventSeries: EventSeriesCreationData | null,
@@ -44,6 +45,10 @@
   const form: EventSeriesCreationData = $derived(
       eventSeries ?? formDefault,
   );
+
+  const locationOptions = client.collection("locations").getFullList<LocationsResponse>({
+    filter: `club = "${$drawerStore.meta.team.club}"`,
+  });
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
@@ -196,13 +201,20 @@
       ></textarea>
     </label>
 
-    <label class="label col-span-2">
+    <label class="label md:col-span-2">
       Location
-      <textarea
-              name="location"
-              class="textarea"
+      <select
+              class="select"
               bind:value={form.location}
-      ></textarea>
+      >
+        {#await locationOptions then options}
+          <option value="">None</option>
+          {#each options as option}
+            <option value={option.id}>{option?.address_addon ? option.address_addon : "No additional name"}
+              ({option.name}), {option.street}, {option.postal_code} {option.city}, {option.country}</option>
+          {/each}
+        {/await}
+      </select>
     </label>
 
   </div>
