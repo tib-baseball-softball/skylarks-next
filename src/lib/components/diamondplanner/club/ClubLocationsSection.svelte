@@ -1,13 +1,10 @@
 <script lang="ts">
-  import { invalidate, invalidateAll } from "$app/navigation";
+  import {invalidate} from "$app/navigation";
   import LocationForm from "$lib/components/forms/LocationForm.svelte";
   import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
-  import type {
-    CustomAuthModel,
-    ExpandedClub,
-  } from "$lib/model/ExpandedResponse";
-  import type { LocationsResponse } from "$lib/model/pb-types";
-  import { authSettings, client } from "$lib/pocketbase/index.svelte";
+  import type {CustomAuthModel, ExpandedClub,} from "$lib/model/ExpandedResponse";
+  import type {LocationsResponse} from "$lib/model/pb-types";
+  import {authSettings, client} from "$lib/pocketbase/index.svelte";
 
   interface Props {
     club: ExpandedClub;
@@ -32,10 +29,10 @@
           ? location.address_addon
           : location.internal_name} ({location.name})
       </h3>
-      <div class="">
+      <p>
         {location?.street}, {location.postal_code}
         {location.city}
-      </div>
+      </p>
 
       <div class="place-self-end">
         {#if club?.admins.includes(authRecord.id)}
