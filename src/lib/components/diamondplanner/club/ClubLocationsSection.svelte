@@ -25,7 +25,7 @@
 </script>
 
 <ul class="variant-soft rounded-token p-4 shadow-xl text-sm">
-  {#each locations as location, index}
+  {#each locations as location, index (location.id)}
     <li class="location-grid">
       <h3 class="font-bold">
         {location.address_addon
