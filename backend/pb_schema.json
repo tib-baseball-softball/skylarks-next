@@ -1475,15 +1475,17 @@
         "type": "editor"
       },
       {
-        "convertURLs": false,
+        "cascadeDelete": false,
+        "collectionId": "pbc_1942858786",
         "hidden": false,
-        "id": "editor1587448267",
-        "maxSize": 0,
+        "id": "relation1587448267",
+        "maxSelect": 1,
+        "minSelect": 0,
         "name": "location",
         "presentable": false,
         "required": false,
         "system": false,
-        "type": "editor"
+        "type": "relation"
       },
       {
         "hidden": false,

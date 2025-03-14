@@ -919,6 +919,7 @@ export interface EventseriesCollection {
 	relations: {
 		events_via_series: EventsCollection[];
 		team: TeamsCollection;
+		location: LocationsCollection;
 	};
 }
 
@@ -1017,6 +1018,7 @@ export interface LocationsCollection {
 	update: LocationsUpdate;
 	relations: {
 		events_via_location: EventsCollection[];
+		eventseries_via_location: EventseriesCollection[];
 		club: ClubsCollection;
 	};
 }
