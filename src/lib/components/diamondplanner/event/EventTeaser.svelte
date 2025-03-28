@@ -38,8 +38,8 @@
     <hr class="my-2"/>
     {#if event.cancelled}
       <div class="flex justify-end">
-                <span class="badge variant-filled-error">
-                    <Ban/>
+                <span class="badge variant-filled-error gap-1">
+                    <Ban size="18"/>
                     Cancelled
                 </span>
       </div>

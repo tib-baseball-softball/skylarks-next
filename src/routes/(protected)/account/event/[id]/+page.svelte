@@ -30,7 +30,7 @@
   </div>
 
   {#if $event.cancelled}
-    <span class="badge variant-filled-error">
+    <span class="badge variant-filled-error gap-1">
       <Ban/>
       Cancelled
     </span>
