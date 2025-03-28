@@ -1,61 +1,54 @@
 <script lang="ts">
-  import type { ExpandedEvent } from "$lib/model/ExpandedResponse";
-  import { DateTimeUtility } from "$lib/service/DateTimeUtility";
-  import { Calendar, Clock, MapPin } from "lucide-svelte";
+  import type {ExpandedEvent} from "$lib/model/ExpandedResponse";
+  import {DateTimeUtility} from "$lib/service/DateTimeUtility";
+  import {Calendar, Clock, MapPin} from "lucide-svelte";
+  import TimeSection from "$lib/components/diamondplanner/event/TimeSection.svelte";
+  import type {Snippet} from "svelte";
 
   interface props {
     event: ExpandedEvent;
     classes?: string;
+    additionalTimeSection?: Snippet | undefined;
   }
 
-  const { event, classes = "" }: props = $props();
+  const {event, classes = "", additionalTimeSection = undefined}: props = $props();
 
   const startTime = $derived(new Date(event.starttime));
-  const meetingTime = $derived(
-    new Date(event.meetingtime !== "" ? event.meetingtime : event.starttime),
-  );
 </script>
 
 <section class={classes}>
-  <div class="grid grid-cols-2 gap-4">
-    <div class="section-container col-span-2">
-      <Calendar size="18" />
-      <p class="font-bold">
+  <div class="grid grid-cols-6 gap-4">
+    <div class="flex items-center gap-2 col-span-6">
+      <Calendar size="18"/>
+      <time datetime="{event.starttime}" class="font-bold">
         {startTime.toLocaleDateString("de-DE", DateTimeUtility.eventDateFormat)}
-      </p>
+      </time>
     </div>
 
-    <div class="section-container">
-      <Clock size="18" />
-      <p>
-        Meet:
-        {#if event?.meetingtime}
-          <span class="font-bold"
-            >{meetingTime?.toLocaleTimeString(
-              "de-DE",
-              DateTimeUtility.eventTimeFormat,
-            )}</span
-          >
-        {:else}
-          <span class="font-medium">---</span>
-        {/if}
-      </p>
-    </div>
+    <TimeSection
+            timeValue={event.meetingtime ? event.meetingtime : event.starttime}
+            displayText="Meet:"
+            classes={additionalTimeSection ? "col-span-2" : "col-span-3"}
+    >
+      {#snippet icon()}
+        <Clock size="18"/>
+      {/snippet}
+    </TimeSection>
 
-    <div class="section-container">
-      <Clock size="18" />
-      <p>
-        Start: <span class="font-bold"
-          >{startTime.toLocaleTimeString(
-            "de-DE",
-            DateTimeUtility.eventTimeFormat,
-          )}</span
-        >
-      </p>
-    </div>
+    <TimeSection
+            timeValue={event.starttime}
+            displayText="Start:"
+            classes={additionalTimeSection ? "col-span-2" : "col-span-3"}
+    >
+      {#snippet icon()}
+        <Clock size="18"/>
+      {/snippet}
+    </TimeSection>
 
-    <div class="section-container col-span-2">
-      <MapPin size="18" />
+    {@render additionalTimeSection?.()}
+
+    <div class="flex items-center gap-2 col-span-6">
+      <MapPin size="18"/>
       {#if event?.expand?.location}
         <p>
           {event?.expand?.location.address_addon}, {event?.expand?.location
@@ -67,11 +60,3 @@
     </div>
   </div>
 </section>
-
-<style>
-  .section-container {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-</style>
