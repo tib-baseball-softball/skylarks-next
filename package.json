@@ -43,7 +43,7 @@
   "type": "module",
   "dependencies": {
     "@vincjo/datatables": "^1.14.10",
-    "bits-ui": "^1.3.13",
+    "bits-ui": "^1.3.14",
     "bsm.js": "^0.1.12",
     "flatpickr": "^4.6.13",
     "pocketbase": "^0.25.2",
