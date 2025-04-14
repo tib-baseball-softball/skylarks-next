@@ -18,7 +18,7 @@
   {@render icon()}
   <p>
     {displayText}
-    {#if displayedTime}
+    {#if timeValue}
           <time datetime="{timeValue}" class="font-bold"
           >{displayedTime?.toLocaleTimeString(
               "de-DE",
