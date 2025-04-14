@@ -4,7 +4,7 @@ go 1.24.1
 
 require (
 	github.com/pocketbase/dbx v1.11.0
-	github.com/pocketbase/pocketbase v0.26.5
+	github.com/pocketbase/pocketbase v0.26.6
 	github.com/spf13/cobra v1.9.1
 	github.com/subosito/gotenv v1.6.0
 )
@@ -41,5 +41,5 @@ require (
 	modernc.org/libc v1.61.13 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.8.2 // indirect
-	modernc.org/sqlite v1.36.2 // indirect
+	modernc.org/sqlite v1.36.3 // indirect
 )
