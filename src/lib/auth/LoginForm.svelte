@@ -5,6 +5,8 @@
   import OAuthProviderButton from "$lib/auth/OAuthProviderButton.svelte";
   import PasswordRequestButton from "$lib/auth/PasswordRequestButton.svelte";
   import {fade, slide} from "svelte/transition";
+  import type {UsersUpdate} from "$lib/model/pb-types.ts";
+  import type {Extension} from "$lib/model/ExpandedResponse.js";
 
   const {
     authCollection = "users",
@@ -20,9 +22,11 @@
     background: "variant-filled-error"
   };
 
-  const form = $state({
+  const form: Extension<Partial<UsersUpdate>, { signup_key: string }> = $state({
     email: "",
     password: "",
+    first_name: "",
+    last_name: "",
     passwordConfirm: "",
     signup_key: "",
   });
@@ -34,7 +38,7 @@
     if (signup) {
       try {
         await coll.create({...form});
-        const signupSuccessful = await coll.requestVerification(form.email);
+        const signupSuccessful = await coll.requestVerification(form.email ?? "");
 
         if (signupSuccessful) {
           await goto("/signupconfirm");
@@ -47,7 +51,7 @@
 
     } else {
       try {
-        const authResponse = await coll.authWithPassword(form.email, form.password, {expand: "club"});
+        const authResponse = await coll.authWithPassword(form.email ?? "", form.password ?? "", {expand: "club"});
 
         if (authResponse) {
           await goto("/account", {invalidateAll: true});
@@ -108,7 +112,7 @@
     {#if forgotPassword}
       <div class="mt-2 md:mt-0" transition:fade>
         <PasswordRequestButton
-                email={form.email}
+                email={form.email ?? ""}
                 disabled={form.email === ""}
                 classes="btn anchor p-0"
         >
@@ -152,8 +156,34 @@
                     />
                   </label>
 
-                  <div class="grid grid-cols-2 gap-2">
+                  <div class="grid sm:grid-cols-2 gap-2">
 
+                    <label class="label">
+                      <span class="">First Name</span>
+                      <input
+                              class="input"
+                              bind:value={form.first_name}
+                              placeholder="John"
+                              required
+                              type="text"
+                              autocomplete="given-name"
+                      />
+                    </label>
+
+                    <label class="label">
+                      <span class="">Last Name</span>
+                      <input
+                              class="input"
+                              bind:value={form.last_name}
+                              placeholder="Doe"
+                              required
+                              type="text"
+                              autocomplete="family-name"
+                      />
+                    </label>
+                  </div>
+
+                  <div class="grid sm:grid-cols-2 gap-2">
 
                     <label class="label">
                       <span class="">Your password</span>
@@ -249,7 +279,7 @@
               <div class="mx-2 mt-3 text-surface-600-300-token font-light flex justify-center" transition:slide>
               <span>
                 Even when using an external login provider,
-                a signup key (see above) still required for account creation.
+                a signup key (see above) is still required for account creation.
               </span>
               </div>
             {/if}
