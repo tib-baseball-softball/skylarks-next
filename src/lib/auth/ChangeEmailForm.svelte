@@ -18,11 +18,11 @@
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
-    parent.onClose();
 
     const sent = await client.collection("users").requestEmailChange(form.email);
 
     if (sent) {
+      parent.onClose();
       toastStore.trigger({
         message: "A verification email has been sent to your new address.",
         background: "variant-filled-success",

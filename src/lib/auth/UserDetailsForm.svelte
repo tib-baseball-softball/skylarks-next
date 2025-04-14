@@ -20,7 +20,6 @@
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
-    parent.onClose();
 
     const formData = new FormData();
 
@@ -40,7 +39,7 @@
       }
     }
 
-    await client.collection("users").update(form.id, formData, {expand: "club"});
+    client.collection("users").update(form.id, formData, {expand: "club"}).then(parent.onClose());
   }
 </script>
 

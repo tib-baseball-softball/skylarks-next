@@ -38,15 +38,15 @@
 
   const allTeamMembers = client.collection("users").getFullList<UsersResponse>({
     filter: `teams ?~ '${$drawerStore.meta?.team?.id}'`
-  })
+  });
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
 
     let result: ExpandedTeam | null = null;
-    
+
     form.admins = selectedAdmins.map((admin) => {
-      return admin.id
+      return admin.id;
     });
 
     try {
@@ -64,16 +64,15 @@
       }
     } catch {
       toastStore.trigger(toastSettingsError);
-      drawerStore.close();
     }
 
     if (result) {
       toastStore.trigger(toastSettingsSuccess);
+      drawerStore.close();
+      await invalidate("teams:list");
+      await invalidate("club:single");
+      await invalidate("nav:load");
     }
-    await invalidate("teams:list");
-    await invalidate("club:single");
-    await invalidate("nav:load");
-    drawerStore.close();
   }
 </script>
 

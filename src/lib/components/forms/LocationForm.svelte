@@ -67,9 +67,9 @@
 
     if (result) {
       toastStore.trigger(toastSettingsSuccess);
+      open = false;
     }
     await invalidate("club:single");
-    open = false;
   }
 </script>
 

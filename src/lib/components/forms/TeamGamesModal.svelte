@@ -87,9 +87,9 @@
         background: "variant-filled-success",
       });
       parent.onClose();
-      invalidate("teams:list");
-      invalidate("nav:load");
-      invalidate("clubs:list");
+      await invalidate("teams:list");
+      await invalidate("nav:load");
+      await invalidate("clubs:list");
     }
   }
 </script>

@@ -4,11 +4,6 @@
   import {goto} from "$app/navigation";
   import {getToastStore} from "@skeletonlabs/skeleton";
 
-  /**
-   * Shows a button to log in with an external service. Uses branded image if available,
-   * falls back to simple button if not.
-   */
-
   interface Props {
     authProvider: AuthProviderInfo,
     collection: RecordService<RecordModel>
@@ -33,7 +28,7 @@
     }
 
     if (authResponse) {
-      goto("/account", {invalidateAll: true});
+      await goto("/account", {invalidateAll: true});
     }
   }
 
@@ -44,6 +39,11 @@
       authProvider.name !== "discord"
   );
 </script>
+
+<!--
+@component Shows a button to log in with an external service. Uses branded image if available,
+falls back to simple button if not.
+-->
 
 <button
         class:btn={isGenericProvider}

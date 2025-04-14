@@ -56,7 +56,6 @@
         message: "An error occurred while saving the event.",
         background: "variant-filled-error",
       });
-      drawerStore.close();
     }
 
     if (result) {
@@ -64,9 +63,9 @@
         message: "Event saved successfully.",
         background: "variant-filled-success",
       });
+      drawerStore.close();
     }
     await invalidate("event:list");
-    drawerStore.close();
   }
 </script>
 

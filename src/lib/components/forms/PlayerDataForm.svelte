@@ -62,13 +62,12 @@
           .update<CustomAuthModel>(form.id, form);
     } catch {
       toastStore.trigger(toastSettingsError);
-      drawerStore.close();
     }
 
     if (result) {
       toastStore.trigger(toastSettingsSuccess);
+      drawerStore.close();
     }
-    drawerStore.close();
   }
 </script>
 

@@ -1,11 +1,11 @@
 <script lang="ts">
-    import type {ExpandedParticipation} from "$lib/model/ExpandedResponse";
-    import {RadioGroup, RadioItem} from "@skeletonlabs/skeleton";
-    import {sendParticipationData} from "$lib/functions/sendParticipationData";
-    import {invalidate} from "$app/navigation";
-    import {X} from "lucide-svelte";
+  import type {ExpandedParticipation} from "$lib/model/ExpandedResponse";
+  import {RadioGroup, RadioItem} from "@skeletonlabs/skeleton";
+  import {sendParticipationData} from "$lib/functions/sendParticipationData";
+  import {invalidate} from "$app/navigation";
+  import {X} from "lucide-svelte";
 
-    interface Props {
+  interface Props {
     participation: ExpandedParticipation,
     parent: any,
   }
@@ -22,9 +22,8 @@
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
 
-    await sendParticipationData(form);
-    closeModal();
-    invalidate("event:list");
+    await sendParticipationData(form).then(() => closeModal());
+    await invalidate("event:list");
   }
 </script>
 

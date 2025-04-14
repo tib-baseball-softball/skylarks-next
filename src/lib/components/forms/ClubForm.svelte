@@ -68,14 +68,13 @@
       }
     } catch {
       toastStore.trigger(toastSettingsError);
-      drawerStore.close();
     }
 
     if (result) {
       toastStore.trigger(toastSettingsSuccess);
+      drawerStore.close();
     }
     await invalidateAll();
-    drawerStore.close();
   }
 </script>
 
