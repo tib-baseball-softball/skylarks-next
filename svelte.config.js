@@ -13,7 +13,7 @@ const config = {
         csp: {
             directives: {
                 'script-src': ['self'],
-                'script-src-elem': ['self'],
+                'script-src-elem': ['self', 'unsafe-inline'], // remove `unsafe-inline` in Skeleton v3
                 'style-src': ['self', "unsafe-inline"],
                 'frame-ancestors': ['none'],
             },
