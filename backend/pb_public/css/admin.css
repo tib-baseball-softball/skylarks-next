@@ -30,8 +30,18 @@ h1 {
 .link-container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 0.75rem;
 
     .button-link {
+        padding: 0.5em;
+        background-color: #ba1829;
+        color: white;
+        border-radius: 0.8rem;
+        text-decoration: none;
+    }
+
+    .button-link:hover {
+        opacity: 0.8;
     }
 }
