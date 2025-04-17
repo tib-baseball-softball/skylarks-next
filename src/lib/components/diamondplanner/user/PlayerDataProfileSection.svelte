@@ -6,6 +6,8 @@
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
   import {type DrawerSettings, getDrawerStore,} from "@skeletonlabs/skeleton";
   import {Edit, Link} from "lucide-svelte";
+  import {convertIntKeyToHandedness} from "$lib/types/Handedness.js";
+  import {positionKeysToEnumStringValues} from "$lib/types/BaseballPosition.js";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
@@ -17,17 +19,18 @@
   });
 
   // suboptimal adapter until data is properly fetched from PocketBase
+  //@ts-expect-error
   let playerObject: Player = $derived({
     firstname: authRecord.first_name,
     lastname: authRecord.last_name,
     fullname: authRecord.first_name + " " + authRecord.last_name,
     birthday: 0,
-    admission: authRecord.created,
+    admission: new Date(authRecord.created).toLocaleDateString(),
     number: authRecord.number,
-    throwing: authRecord.throws,
-    batting: authRecord.bats,
+    throwing: convertIntKeyToHandedness(Number(authRecord.throws)),
+    batting: convertIntKeyToHandedness(Number(authRecord.bats)),
     bsm_id: authRecord.bsm_id,
-    positions: authRecord.position,
+    positions: positionKeysToEnumStringValues(authRecord.position),
     teams: [],
     coach: "",
     media: [

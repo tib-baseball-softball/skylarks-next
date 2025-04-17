@@ -20,43 +20,6 @@ export enum BaseballFieldPosition {
   DesignatedPlayer = 14
 }
 
-export function getSingleBaseballPositionLabel(value: BaseballFieldPosition): string {
-  switch (value) {
-    case BaseballFieldPosition.None:
-      return 'None';
-    case BaseballFieldPosition.Pitcher:
-      return 'Pitcher';
-    case BaseballFieldPosition.Catcher:
-      return 'Catcher';
-    case BaseballFieldPosition.FirstBase:
-      return 'First Base';
-    case BaseballFieldPosition.SecondBase:
-      return 'Second Base';
-    case BaseballFieldPosition.ThirdBase:
-      return 'Third Base';
-    case BaseballFieldPosition.Shortstop:
-      return 'Shortstop';
-    case BaseballFieldPosition.LeftField:
-      return 'Left Field';
-    case BaseballFieldPosition.CenterField:
-      return 'Center Field';
-    case BaseballFieldPosition.RightField:
-      return 'Right Field';
-    case BaseballFieldPosition.Outfield:
-      return 'Outfield';
-    case BaseballFieldPosition.Infield:
-      return 'Infield';
-    case BaseballFieldPosition.Utility:
-      return 'Utility';
-    case BaseballFieldPosition.DesignatedHitter:
-      return 'Designated Hitter';
-    case BaseballFieldPosition.DesignatedPlayer:
-      return 'Designated Player';
-    default:
-      return 'Unknown';
-  }
-}
-
 export function getAllBaseballPositionStringValues(): string[] {
   return Object.values(BaseballFieldPosition)
     .filter(value => typeof value === 'string') as string[];

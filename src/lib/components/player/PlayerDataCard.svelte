@@ -13,62 +13,63 @@
 
 <div class="card variant-glass-surface shadow-xl p-3">
   {#if showTeams}
-    <div class="flex items-center gap-3">
-      <Users/>
+    <dl class="flex items-center gap-3">
+      <Users aria-hidden="true"/>
       <div>
-        <p>{player.teams.map((team) => team.name)}</p>
-        <p class="text-sm font-light">Teams</p>
+        <dd>{player.teams.map((team) => team.name)}</dd>
+        <dt class="text-sm font-light">Teams</dt>
       </div>
-    </div>
+    </dl>
 
     <hr class="my-2"/>
   {/if}
 
   <div class="flex items-center gap-3">
-    <UsersRound/>
-    <div>
-      <p>{getAgeFromTimestamp(player.birthday)}</p>
-      <p class="text-sm font-light">Alter</p>
-    </div>
+    <UsersRound aria-hidden="true"/>
+    <dl>
+      <!--do not calculate age for falsy values-->
+      <dd>{player.birthday ? getAgeFromTimestamp(player.birthday) : "Not specified"}</dd>
+      <dt class="text-sm font-light">Age</dt>
+    </dl>
   </div>
 
   <hr class="my-2"/>
 
   <div class="flex items-center gap-3">
-    <Calendar/>
-    <div>
-      <p>{player.admission}</p>
-      <p class="text-sm font-light">Mitglied seit</p>
-    </div>
+    <Calendar aria-hidden="true"/>
+    <dl>
+      <dd>{player.admission}</dd>
+      <dt class="text-sm font-light">Member since</dt>
+    </dl>
   </div>
 
   <hr class="my-2"/>
 
   <div class="flex items-center gap-3">
-    <Dna/>
-    <div>
-      <p>{player.positions.toLocaleString()}</p>
-      <p class="text-sm font-light">Positionen</p>
-    </div>
+    <Dna aria-hidden="true"/>
+    <dl>
+      <dd>{player.positions.toLocaleString()}</dd>
+      <dt class="text-sm font-light">Positions</dt>
+    </dl>
   </div>
 
   <hr class="my-2"/>
 
   <div class="flex items-center gap-3">
-    <Hand/>
-    <div>
-      <p>{player.batting}</p>
-      <p class="text-sm font-light">Schlaghand</p>
-    </div>
+    <Hand aria-hidden="true"/>
+    <dl>
+      <dd>{player.batting}</dd>
+      <dt class="text-sm font-light">Bats</dt>
+    </dl>
   </div>
 
   <hr class="my-2"/>
 
   <div class="flex items-center gap-3">
-    <Hand/>
-    <div>
-      <p>{player.throwing}</p>
-      <p class="text-sm font-light">Wurfhand</p>
-    </div>
+    <Hand aria-hidden="true"/>
+    <dl>
+      <dd>{player.throwing}</dd>
+      <dt class="text-sm font-light">Throws</dt>
+    </dl>
   </div>
 </div>
