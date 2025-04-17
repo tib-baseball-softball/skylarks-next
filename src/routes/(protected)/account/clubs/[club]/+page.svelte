@@ -3,13 +3,8 @@
   import TeamListTeaser from "$lib/components/diamondplanner/team/TeamListTeaser.svelte";
   import UniformSetInfoCard from "$lib/components/diamondplanner/uniformset/UniformSetInfoCard.svelte";
   import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
-  import type {
-    CustomAuthModel,
-    ExpandedClub,
-    ExpandedTeam,
-    ExpandedUniformSet,
-  } from "$lib/model/ExpandedResponse";
-  import { authSettings } from "$lib/pocketbase/index.svelte";
+  import type {CustomAuthModel, ExpandedClub, ExpandedTeam, ExpandedUniformSet,} from "$lib/model/ExpandedResponse";
+  import {authSettings} from "$lib/pocketbase/index.svelte";
   import {
     type DrawerSettings,
     getDrawerStore,
@@ -17,9 +12,8 @@
     type ModalComponent,
     type ModalSettings,
   } from "@skeletonlabs/skeleton";
-  import { Mail, Plus } from "lucide-svelte";
-  import type { PageProps } from "./$types";
-  import ClubLocationsSection from "$lib/components/diamondplanner/club/ClubLocationsSection.svelte";
+  import {Mail, Plus, SquareArrowOutUpRight} from "lucide-svelte";
+  import type {PageProps} from "./$types";
 
   let { data }: PageProps = $props();
 
@@ -123,9 +117,10 @@
     <h2 class="h2 mb-3">Team Locations</h2>
   </header>
 
-  <ClubLocationsSection club={club} locations={data?.locations ?? []} />
-
-  
+  <a class="btn variant-ghost-primary" href="/account/clubs/{club.id}/locations">
+    <span>Locations Page</span>
+    <SquareArrowOutUpRight size="20"/>
+  </a>
 </section>
 
 {#if club?.admins.includes(authRecord.id)}

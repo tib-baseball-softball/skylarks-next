@@ -69,7 +69,7 @@
       toastStore.trigger(toastSettingsSuccess);
       open = false;
     }
-    await invalidate("club:single");
+    await invalidate("club:locations");
   }
 </script>
 

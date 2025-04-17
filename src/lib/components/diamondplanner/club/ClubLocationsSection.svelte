@@ -17,7 +17,7 @@
 
   function locationDeleteAction(id: string) {
     client.collection("locations").delete(id);
-    invalidate("club:single");
+    invalidate("club:locations");
   }
 </script>
 
