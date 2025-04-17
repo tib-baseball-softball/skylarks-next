@@ -1,12 +1,7 @@
 <script lang="ts">
-  import {
-    getModalStore,
-    getToastStore,
-    type ModalSettings,
-    type ToastSettings,
-  } from "@skeletonlabs/skeleton";
-  import { invalidate } from "$app/navigation";
-  import { Trash } from "lucide-svelte";
+  import {getModalStore, getToastStore, type ModalSettings, type ToastSettings,} from "@skeletonlabs/skeleton";
+  import {invalidate} from "$app/navigation";
+  import {Trash} from "lucide-svelte";
 
   const modalStore = getModalStore();
   const toastStore = getToastStore();
@@ -31,7 +26,7 @@
     const modal: ModalSettings = {
       type: "confirm",
       title: "Please Confirm",
-      body: `Are you sure you wish to delete this ${modelName}?`,
+      body: `Are you sure you wish to delete this ${modelName}? In most cases, data cannot be recovered after deletion. Please be certain.`,
       response: (r: boolean) => {
         if (r) {
           try {
