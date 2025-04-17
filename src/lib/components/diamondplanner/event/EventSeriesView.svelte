@@ -28,6 +28,17 @@
       selectedEventSeries.endtime = DateTimeUtility.convertTimeFromUTC(eventSeries.endtime);
     }
     showForm = true;
+
+    // wait for Svelte transition to finish
+    setTimeout(() => {
+      const scrollTarget = document.getElementById("eventSeriesFormContainer");
+
+      scrollTarget?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest",
+      });
+    }, 230)
   }
 
   function deleteEventSeries(id: string) {
@@ -79,9 +90,11 @@
   </button>
 
   <hr class="!my-6">
-  {#if showForm}
-    <div transition:slide={{duration: 230}}>
-      <EventSeriesForm team={team} eventSeries={selectedEventSeries} bind:showForm={showForm}/>
-    </div>
-  {/if}
+  <div id="eventSeriesFormContainer">
+    {#if showForm}
+      <div transition:slide={{duration: 230}}>
+        <EventSeriesForm team={team} eventSeries={selectedEventSeries} bind:showForm={showForm}/>
+      </div>
+    {/if}
+  </div>
 </article>
