@@ -23,8 +23,13 @@ export const load = (async ({fetch, parent, params, url, depends}) => {
 
   const eventService = new EventService()
   const events = await eventService.loadEventStore(team.id, url, fetch)
+
+  const targetDate = new Date();
+  targetDate.setFullYear(targetDate.getFullYear() - 1, 0, 1);
+  const eventSeriesCutoff = targetDate.toISOString()
+
   const eventSeries = await client.collection("eventseries").getFullList<EventseriesResponse>({
-    filter: `team = "${team.id}"`,
+    filter: `team = "${team.id}" && series_start >= "${eventSeriesCutoff}"`,
     fetch: fetch
   });
 
