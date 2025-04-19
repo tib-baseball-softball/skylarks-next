@@ -18,6 +18,7 @@
 
   let showForm = $state(false);
   let selectedEventSeries: EventSeriesCreationData | null = $state(null);
+  let eventSeriesFormContainer: HTMLDivElement
 
   function setupAndShowForm(eventSeries: EventSeriesCreationData | null) {
     selectedEventSeries = eventSeries;
@@ -31,9 +32,7 @@
 
     // wait for Svelte transition to finish
     setTimeout(() => {
-      const scrollTarget = document.getElementById("eventSeriesFormContainer");
-
-      scrollTarget?.scrollIntoView({
+      eventSeriesFormContainer?.scrollIntoView({
         behavior: "smooth",
         block: "start",
         inline: "nearest",
@@ -90,7 +89,8 @@
   </button>
 
   <hr class="!my-6">
-  <div id="eventSeriesFormContainer">
+
+  <div bind:this={eventSeriesFormContainer}>
     {#if showForm}
       <div transition:slide={{duration: 230}}>
         <EventSeriesForm team={team} eventSeries={selectedEventSeries} bind:showForm={showForm}/>
