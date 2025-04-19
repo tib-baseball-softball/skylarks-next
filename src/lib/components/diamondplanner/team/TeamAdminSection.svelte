@@ -14,6 +14,7 @@
   import TeamGamesModal from "$lib/components/forms/TeamGamesModal.svelte";
   import type {EventseriesResponse} from "$lib/model/pb-types.ts";
   import {CalendarPlus} from "lucide-svelte";
+  import EventSeriesView from "$lib/components/diamondplanner/event/EventSeriesView.svelte";
 
   interface Props {
     team: ExpandedTeam,
@@ -33,17 +34,6 @@
       event: null,
       club: team?.club,
       team: team,
-    },
-  });
-
-  const eventSeriesSettings: DrawerSettings = $derived({
-    id: "eventseries-view",
-    position: "right",
-    width: "w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%]",
-    meta: {
-      club: team?.club,
-      team: team,
-      eventSeries: eventSeries,
     },
   });
 
@@ -113,13 +103,11 @@
     </div>
     <footer class="card-footer">
       <div class="flex flex-col gap-2 lg:gap-3">
-        <button
-                class="btn variant-ghost-secondary dark:variant-filled-secondary dark:border"
-                onclick={() => drawerStore.open(eventSeriesSettings)}
-        >
-          <CalendarPlus/>
-          <span>Manage Event Series</span>
-        </button>
+        <EventSeriesView
+                {team}
+                {eventSeries}
+                buttonClasses="btn variant-ghost-secondary dark:variant-filled-secondary dark:border"
+        />
       </div>
     </footer>
   </div>

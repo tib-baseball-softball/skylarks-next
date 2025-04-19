@@ -20,7 +20,6 @@
   import TeamForm from '$lib/components/forms/TeamForm.svelte';
   import type {LayoutData} from "../../.svelte-kit/types/src/routes/$types";
   import StaticNavigationLinks from "$lib/components/navigation/StaticNavigationLinks.svelte";
-  import EventSeriesView from "$lib/components/diamondplanner/event/EventSeriesView.svelte";
   import BottomNavigation from "$lib/components/navigation/BottomNavigation.svelte";
   import {authSettings} from "$lib/pocketbase/index.svelte.ts";
 
@@ -75,8 +74,6 @@
     <EventForm/>
   {:else if $drawerStore.id === "team-form"}
     <TeamForm/>
-  {:else if $drawerStore.id === "eventseries-view"}
-    <EventSeriesView/>
   {/if}
 </Drawer>
 
