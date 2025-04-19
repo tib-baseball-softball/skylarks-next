@@ -1,23 +1,23 @@
 <script lang="ts">
   import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  import {
-    getDrawerStore,
-    getToastStore,
-    InputChip,
-    RadioGroup,
-    RadioItem,
-    type ToastSettings,
-  } from "@skeletonlabs/skeleton";
+  import {getToastStore, InputChip, RadioGroup, RadioItem, type ToastSettings,} from "@skeletonlabs/skeleton";
   import {
     getAllBaseballPositionStringValues,
     positionEnumStringValuesToKeys,
     positionKeysToEnumStringValues,
   } from "$lib/types/BaseballPosition";
-  import {X} from "lucide-svelte";
+  import {Edit} from "lucide-svelte";
+  //@ts-ignore
+  import * as Sheet from "$lib/components/utility/sheet/index.js";
+
+  interface Props {
+    buttonClasses?: string;
+  }
+
+  let { buttonClasses = "" }: Props = $props();
 
   const toastStore = getToastStore();
-  const drawerStore = getDrawerStore();
 
   const toastSettingsSuccess: ToastSettings = {
     message: "Player data saved successfully.",
@@ -43,6 +43,8 @@
     bsm_id: authRecord.bsm_id ?? 0,
   });
 
+  let open = $state(false)
+
   const possiblePositionValues = getAllBaseballPositionStringValues();
   let selectedPositions: string[] = $state(
       positionKeysToEnumStringValues(authRecord.position),
@@ -66,26 +68,25 @@
 
     if (result) {
       toastStore.trigger(toastSettingsSuccess);
-      drawerStore.close();
+      open = false;
     }
   }
 </script>
 
-<article class="p-6">
-  <div class="flex items-center gap-5">
-    <button
-            aria-label="cancel and close"
-            class="btn variant-ghost-surface"
-            onclick={drawerStore.close}
-    >
-      <X/>
-    </button>
+<Sheet.Root bind:open={open}>
+  <Sheet.Trigger class={buttonClasses}>
+    <Edit/>
+    <span>Edit Player Data</span>
+  </Sheet.Trigger>
+
+  <Sheet.Content>
+    <Sheet.Header></Sheet.Header>
+
     <header class="text-xl font-semibold">
       <h2 class="h3">
         Edit Player Data for "{`${authRecord.first_name} ${authRecord.last_name}`}"
       </h2>
     </header>
-  </div>
 
   <form onsubmit={submitForm} class="mt-4 space-y-3">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-3 xl:gap-4">
@@ -271,4 +272,5 @@
       </button>
     </div>
   </form>
-</article>
+  </Sheet.Content>
+</Sheet.Root>

@@ -4,19 +4,12 @@
   import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
   import type {Player} from "$lib/model/Player";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  import {type DrawerSettings, getDrawerStore,} from "@skeletonlabs/skeleton";
-  import {Edit, Link} from "lucide-svelte";
+  import {Link} from "lucide-svelte";
   import {convertIntKeyToHandedness} from "$lib/types/Handedness.js";
   import {positionKeysToEnumStringValues} from "$lib/types/BaseballPosition.js";
+  import PlayerDataForm from "$lib/components/forms/PlayerDataForm.svelte";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
-
-  const drawerStore = getDrawerStore();
-  const playerSettings: DrawerSettings = $derived({
-    id: "player-data-form",
-    position: "right",
-    width: "w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%]",
-  });
 
   // suboptimal adapter until data is properly fetched from PocketBase
   //@ts-expect-error
@@ -61,13 +54,7 @@
 
   <footer class="card-footer">
     <div class="flex flex-col gap-2 lg:gap-3">
-      <button
-              class="btn variant-ghost-primary"
-              onclick={() => drawerStore.open(playerSettings)}
-      >
-        <Edit/>
-        <span>Edit Player Data</span>
-      </button>
+      <PlayerDataForm buttonClasses="btn variant-ghost-primary"></PlayerDataForm>
 
       {#if authRecord.bsm_id}
         <a
