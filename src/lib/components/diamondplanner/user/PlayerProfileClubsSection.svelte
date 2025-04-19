@@ -1,31 +1,14 @@
 <script lang="ts">
-    import {type DrawerSettings, getDrawerStore} from "@skeletonlabs/skeleton";
-    import type {ExpandedClub} from "$lib/model/ExpandedResponse";
-    import ClubDetailCard from "$lib/components/diamondplanner/club/ClubDetailCard.svelte";
-    import {Plus, SquareArrowOutUpRight} from "lucide-svelte";
+  import type {ExpandedClub} from "$lib/model/ExpandedResponse";
+  import ClubDetailCard from "$lib/components/diamondplanner/club/ClubDetailCard.svelte";
+  import {SquareArrowOutUpRight} from "lucide-svelte";
+  import ClubForm from "$lib/components/forms/ClubForm.svelte";
 
-    interface Props {
+  interface Props {
     clubs: ExpandedClub[];
   }
 
   let {clubs}: Props = $props();
-
-  const drawerStore = getDrawerStore();
-  let clubAddEditSettings: DrawerSettings = $derived({
-    id: "club-form",
-    position: "right",
-    width: "w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%]",
-    meta: {
-      club: null,
-      admins: null,
-    },
-  });
-
-  function openDrawer(club?: ExpandedClub) {
-    clubAddEditSettings.meta.club = club;
-    clubAddEditSettings.meta.admins = club?.expand?.admins;
-    drawerStore.open(clubAddEditSettings);
-  }
 </script>
 
 {#each clubs as club}
@@ -47,11 +30,9 @@
     <footer class="card-footer">
       <div class="flex flex-wrap items-center gap-3">
 
-        <button class="btn variant-ghost-primary" onclick={() => openDrawer()}>
-          <Plus/>
-          <span>Create a Club</span>
-        </button>
+        <ClubForm club={null} buttonClasses="btn variant-ghost-primary"/>
 
+        <!--TODO: This doesn't do anything yet-->
         <button class="btn variant-ghost-primary">
           <SquareArrowOutUpRight/>
           <span>Join a Club</span>

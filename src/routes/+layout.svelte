@@ -19,7 +19,6 @@
   import EventForm from '$lib/components/forms/EventForm.svelte';
   import TeamForm from '$lib/components/forms/TeamForm.svelte';
   import PlayerDataForm from '$lib/components/forms/PlayerDataForm.svelte';
-  import ClubForm from "$lib/components/forms/ClubForm.svelte";
   import type {LayoutData} from "../../.svelte-kit/types/src/routes/$types";
   import StaticNavigationLinks from "$lib/components/navigation/StaticNavigationLinks.svelte";
   import EventSeriesView from "$lib/components/diamondplanner/event/EventSeriesView.svelte";
@@ -79,8 +78,6 @@
     <TeamForm/>
   {:else if $drawerStore.id === "player-data-form"}
     <PlayerDataForm/>
-  {:else if $drawerStore.id === "club-form"}
-    <ClubForm/>
   {:else if $drawerStore.id === "eventseries-view"}
     <EventSeriesView/>
   {/if}
