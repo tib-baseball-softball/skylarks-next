@@ -16,7 +16,6 @@
   import LoginForm from "$lib/auth/LoginForm.svelte";
   import AccountModal from "$lib/auth/AccountModal.svelte";
   import {env} from "$env/dynamic/public";
-  import EventForm from '$lib/components/forms/EventForm.svelte';
   import type {LayoutData} from "../../.svelte-kit/types/src/routes/$types";
   import StaticNavigationLinks from "$lib/components/navigation/StaticNavigationLinks.svelte";
   import BottomNavigation from "$lib/components/navigation/BottomNavigation.svelte";
@@ -68,9 +67,6 @@
     <hr class="mb-2"/>
 
     <SidebarNavigation clubs={data.clubs} teams={data.teams}/>
-
-  {:else if $drawerStore.id === "event-form"}
-    <EventForm/>
   {/if}
 </Drawer>
 

@@ -1,30 +1,17 @@
 <script lang="ts">
   import type {ExpandedEvent} from "$lib/model/ExpandedResponse";
-  import {type DrawerSettings, getDrawerStore} from "@skeletonlabs/skeleton";
   import {client} from "$lib/pocketbase/index.svelte";
   import type {EventsUpdate} from "$lib/model/pb-types";
   import {goto} from "$app/navigation";
   import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
   import {CalendarArrowDown, CalendarPlus, Edit, Info} from "lucide-svelte";
+  import EventForm from "$lib/components/forms/EventForm.svelte";
 
   interface Props {
     event: ExpandedEvent;
   }
 
   let {event}: Props = $props();
-
-  const drawerStore = getDrawerStore();
-
-  const settings: DrawerSettings = $derived({
-    id: "event-form",
-    position: "right",
-    width: "w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%]",
-    meta: {
-      event: event,
-      club: event?.expand?.team?.club,
-      team: event?.expand?.team?.id,
-    },
-  });
 
   let guestPlayerForm = $state({
     name: ""
@@ -116,13 +103,18 @@
 
     <section class="p-4 space-y-3">
       <div class="flex flex-col gap-2 lg:gap-3">
-        <button
-                class="btn variant-ghost-surface"
-                onclick={() => drawerStore.open(settings)}
+
+        <EventForm
+                event={event}
+                clubID={event?.expand?.team?.club ?? ""}
+                teamID={event.team}
+                buttonClasses="btn variant-ghost-surface"
         >
-          <Edit/>
-          <span>Edit Event</span>
-        </button>
+          {#snippet triggerContent()}
+            <Edit/>
+            <span>Edit Event</span>
+          {/snippet}
+        </EventForm>
 
         <DeleteButton
                 id={event.id}

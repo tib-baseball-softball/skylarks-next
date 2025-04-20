@@ -1,12 +1,6 @@
 <script lang="ts">
   import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
-  import {
-    type DrawerSettings,
-    getDrawerStore,
-    getModalStore,
-    type ModalComponent,
-    type ModalSettings
-  } from "@skeletonlabs/skeleton";
+  import {getModalStore, type ModalComponent, type ModalSettings} from "@skeletonlabs/skeleton";
   import {goto, invalidateAll} from "$app/navigation";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
   import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
@@ -15,6 +9,7 @@
   import {CalendarPlus} from "lucide-svelte";
   import EventSeriesView from "$lib/components/diamondplanner/event/EventSeriesView.svelte";
   import TeamForm from "$lib/components/forms/TeamForm.svelte";
+  import EventForm from "$lib/components/forms/EventForm.svelte";
 
   interface Props {
     team: ExpandedTeam,
@@ -23,19 +18,7 @@
 
   let {team, eventSeries}: Props = $props();
 
-  const drawerStore = getDrawerStore();
   const modalStore = getModalStore();
-
-  const singleEventSettings: DrawerSettings = $derived({
-    id: "event-form",
-    position: "right",
-    width: "w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%]",
-    meta: {
-      event: null,
-      club: team?.club,
-      team: team,
-    },
-  });
 
   function teamDeleteAction(id: string) {
     goto(`/account`);
@@ -128,13 +111,19 @@
     </div>
     <footer class="card-footer">
       <div class="flex flex-col gap-2 lg:gap-3">
-        <button
-                class="btn variant-ghost-tertiary"
-                onclick={() => drawerStore.open(singleEventSettings)}
+
+        <EventForm
+                event={null}
+                clubID={team?.club ?? ""}
+                teamID={team.id}
+                buttonClasses="btn variant-ghost-tertiary"
         >
-          <CalendarPlus/>
-          <span>Create Single Event</span>
-        </button>
+          {#snippet triggerContent()}
+            <CalendarPlus/>
+            <span>Create Single Event</span>
+          {/snippet}
+        </EventForm>
+
       </div>
     </footer>
   </div>
