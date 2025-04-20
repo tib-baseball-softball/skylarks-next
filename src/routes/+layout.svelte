@@ -12,6 +12,7 @@
   import BottomNavigation from "$lib/components/navigation/BottomNavigation.svelte";
   import {authSettings} from "$lib/pocketbase/index.svelte.ts";
   import NavigationSheet from "$lib/components/navigation/NavigationSheet.svelte";
+  import ToastContainer from "$lib/components/utility/toast/ToastContainer.svelte";
 
   interface Props {
     data: LayoutData;
@@ -41,6 +42,7 @@
 <!--Singletons-->
 <Modal components={modalRegistry}/>
 <Toast/>
+<ToastContainer/>
 
 <div class="h-screen grid grid-rows-[auto_1fr_auto]">
   <!-- Header -->
