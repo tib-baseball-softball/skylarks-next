@@ -1,5 +1,4 @@
 <script lang="ts">
-  import {getDrawerStore} from "@skeletonlabs/skeleton";
   import {page} from "$app/state";
   import {Home, Shield, Table, Ticket, Users} from "lucide-svelte";
 
@@ -8,45 +7,35 @@
   }
 
   let {classes = ""}: Props = $props();
-
-  const drawerStore = getDrawerStore();
-
-  function drawerClose(): void {
-    drawerStore.close();
-  }
 </script>
 
 <li>
-  <a class="{classes}" class:variant-filled-primary={page.url.pathname === "/"} href="/" onclick={drawerClose}>
+  <a class="{classes}" class:variant-filled-primary={page.url.pathname === "/"} href="/">
     <Home/>
     <span>Start</span>
   </a>
 </li>
 
 <li>
-  <a class="{classes}" class:variant-filled-primary={page.url.pathname.startsWith("/gamecenter")} href="/gamecenter"
-     onclick={drawerClose}>
+  <a class="{classes}" class:variant-filled-primary={page.url.pathname.startsWith("/gamecenter")} href="/gamecenter">
     <Ticket/>
     <span>Games</span>
   </a>
 </li>
 <li>
-  <a class="{classes}" class:variant-filled-primary={page.url.pathname.startsWith("/ligen")} href="/ligen"
-     onclick={drawerClose}>
+  <a class="{classes}" class:variant-filled-primary={page.url.pathname.startsWith("/ligen")} href="/ligen">
     <Table/>
     <span>Leagues</span>
   </a>
 </li>
 <li>
-  <a class="{classes}" class:variant-filled-primary={page.url.pathname.startsWith("/teams")} href="/teams"
-     onclick={drawerClose}>
+  <a class="{classes}" class:variant-filled-primary={page.url.pathname.startsWith("/teams")} href="/teams">
     <Users/>
     <span>Teams</span>
   </a>
 </li>
 <li>
-  <a class="{classes}" class:variant-filled-primary={page.url.pathname.startsWith("/club")} href="/club"
-     onclick={drawerClose}>
+  <a class="{classes}" class:variant-filled-primary={page.url.pathname.startsWith("/club")} href="/club">
     <Shield/>
     <span>Club</span>
   </a>

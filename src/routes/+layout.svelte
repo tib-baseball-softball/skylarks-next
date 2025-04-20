@@ -1,15 +1,6 @@
 <script lang="ts">
   import '../app.postcss';
-  import {
-    AppBar,
-    autoModeWatcher,
-    Drawer,
-    getDrawerStore,
-    initializeStores,
-    Modal,
-    type ModalComponent,
-    Toast,
-  } from "@skeletonlabs/skeleton";
+  import {AppBar, autoModeWatcher, initializeStores, Modal, type ModalComponent, Toast,} from "@skeletonlabs/skeleton";
   import SidebarNavigation from "$lib/components/meta/SidebarNavigation.svelte";
   import Footer from "$lib/components/meta/Footer.svelte";
   import LoginBadge from "$lib/auth/LoginBadge.svelte";
@@ -20,6 +11,7 @@
   import StaticNavigationLinks from "$lib/components/navigation/StaticNavigationLinks.svelte";
   import BottomNavigation from "$lib/components/navigation/BottomNavigation.svelte";
   import {authSettings} from "$lib/pocketbase/index.svelte.ts";
+  import NavigationSheet from "$lib/components/navigation/NavigationSheet.svelte";
 
   interface Props {
     data: LayoutData;
@@ -36,15 +28,6 @@
     accountOverview: {ref: AccountModal}
   };
 
-  const drawerStore = getDrawerStore();
-
-  function navDrawerOpen(): void {
-    drawerStore.open({
-      id: "nav",
-      width: "w-[70%] sm:w-[40%]"
-    });
-  }
-
   let showSidebar = $derived(data.clubs.length > 0 || data.teams.length > 0);
   let isUserAuthenticated = $derived(!!authSettings.record);
 </script>
@@ -54,21 +37,6 @@
   <!-- svelte-ignore hydration_html_changed -->
   {@html '<script nonce="%sveltekit.nonce%">(' + autoModeWatcher.toString() + ')();</script>'}
 </svelte:head>
-
-<Drawer>
-  {#if $drawerStore.id === "nav"}
-
-    <div class="flex justify-around p-2">
-      <img class="max-w-14" src="/berlin_skylarks_logo.svg" alt="Skylarks Team Logo">
-
-      <h2 class="p-4 antialiased">Berlin Skylarks</h2>
-    </div>
-
-    <hr class="mb-2"/>
-
-    <SidebarNavigation clubs={data.clubs} teams={data.teams}/>
-  {/if}
-</Drawer>
 
 <!--Singletons-->
 <Modal components={modalRegistry}/>
@@ -88,15 +56,7 @@
       <svelte:fragment slot="lead">
         <div class="flex items-center justify-content-start">
           {#if isUserAuthenticated}
-            <button aria-label="open navigation" class="md:hidden btn btn-sm mr-4" onclick={navDrawerOpen}>
-                    <span>
-                        <svg viewBox="0 0 100 80" class="fill-token w-4 h-4">
-                            <rect width="100" height="20"/>
-                            <rect y="30" width="100" height="20"/>
-                            <rect y="60" width="100" height="20"/>
-                        </svg>
-                    </span>
-            </button>
+            <NavigationSheet clubs={data.clubs} teams={data.teams}/>
           {/if}
 
           <a aria-label="to home page" href="/" class="hidden md:block ms-3">

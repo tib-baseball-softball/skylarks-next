@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {Accordion, AccordionItem, getDrawerStore,} from "@skeletonlabs/skeleton";
+  import {Accordion, AccordionItem,} from "@skeletonlabs/skeleton";
   import {authSettings} from "$lib/pocketbase/index.svelte";
   import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/model/ExpandedResponse";
   import {
@@ -17,20 +17,19 @@
   interface Props {
     clubs: ExpandedClub[],
     teams: ExpandedTeam[],
+    sheetOpen?: boolean,
   }
 
-  let {clubs, teams}: Props = $props();
+  let {clubs, teams, sheetOpen = $bindable()}: Props = $props();
 
-  const drawerStore = getDrawerStore();
   const authRecord = $derived(authSettings.record as CustomAuthModel);
-
   let isUserAuthenticated = $derived(!!authSettings.record);
 
-  function drawerClose(): void {
-    drawerStore.close();
+  function sheetClose(): void {
+    if (sheetOpen) {
+      sheetOpen = false;
+    }
   }
-
-
 </script>
 
 <nav class="list-nav py-1 px-1 lg:px-4">
@@ -47,17 +46,17 @@
         </svelte:fragment>
 
         <svelte:fragment slot="content">
-          <a href="/account" onclick={drawerClose}>
+          <a href="/account" onclick={sheetClose}>
             <CircleUserRound/>
             <span>Dashboard</span>
           </a>
 
-          <a href="/stats/{authRecord?.id}" onclick={drawerClose}>
+          <a href="/stats/{authRecord?.id}" onclick={sheetClose}>
             <ChartLine/>
             <span>Personal Stats</span>
           </a>
 
-          <a href="/account/playerprofile" onclick={drawerClose}>
+          <a href="/account/playerprofile" onclick={sheetClose}>
             <IdCard/>
             <span>Player Profile</span>
           </a>
@@ -79,8 +78,8 @@
         </svelte:fragment>
 
         <svelte:fragment slot="content">
-          {#each clubs as club}
-            <a href="/account/clubs/{club.id}" onclick={drawerClose}>
+          {#each clubs as club (club.id)}
+            <a href="/account/clubs/{club.id}" onclick={sheetClose}>
               <Shield/>
               <div>{club.name} ({club.acronym})</div>
             </a>
@@ -89,10 +88,10 @@
           {#if teams?.length > 0}
             <hr class="mx-8">
 
-            {#each teams as team}
+            {#each teams as team (team.id)}
               <a
                       href="/account/team/{team.id}"
-                      onclick={drawerClose}
+                      onclick={sheetClose}
               >
                 <Users/>
                 <div
@@ -118,7 +117,7 @@
         <svelte:fragment slot="summary">Administration</svelte:fragment>
 
         <svelte:fragment slot="content">
-          <a href="/stats/admin" onclick={drawerClose}>
+          <a href="/stats/admin" onclick={sheetClose}>
             <ChartColumnStacked/>
             <span>Admin Dashboard</span>
           </a>
@@ -131,10 +130,10 @@
 <style lang="postcss">
     a {
         display: flex;
-        @apply items-center;
+        align-items: center;
     }
 
     span {
-        @apply text-nowrap;
+        text-wrap: nowrap;
     }
 </style>

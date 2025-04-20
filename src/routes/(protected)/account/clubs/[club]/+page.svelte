@@ -5,7 +5,7 @@
   import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
   import type {CustomAuthModel, ExpandedClub, ExpandedTeam, ExpandedUniformSet,} from "$lib/model/ExpandedResponse";
   import {authSettings} from "$lib/pocketbase/index.svelte";
-  import {type DrawerSettings, getModalStore, type ModalComponent, type ModalSettings,} from "@skeletonlabs/skeleton";
+  import {getModalStore, type ModalComponent, type ModalSettings,} from "@skeletonlabs/skeleton";
   import {Mail, Plus, SquareArrowOutUpRight} from "lucide-svelte";
   import type {PageProps} from "./$types";
   import TeamForm from "$lib/components/forms/TeamForm.svelte";
@@ -19,16 +19,6 @@
   let uniformSets: ExpandedUniformSet[] = $derived(data.uniformSets);
 
   const modalStore = getModalStore();
-
-  const teamSettings: DrawerSettings = $derived({
-    id: "team-form",
-    position: "right",
-    width: "w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%]",
-    meta: {
-      club: club,
-      team: null,
-    },
-  });
 
   function triggerUniformModal() {
     const modalComponent: ModalComponent = {

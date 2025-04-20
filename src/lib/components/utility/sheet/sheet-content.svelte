@@ -52,7 +52,7 @@
     {...restProps}
   >
     <SheetPrimitive.Close
-      class="btn variant-ghost-surface disabled:pointer-events-none"
+      class="btn variant-ghost-surface disabled:pointer-events-none sheet-close-button"
     >
       <X />
       <span class="sr-only">Close</span>
