@@ -1,5 +1,4 @@
 <script lang="ts">
-  import TeamEditButton from "$lib/components/team/TeamEditButton.svelte";
   import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
   import {
     type DrawerSettings,
@@ -15,6 +14,7 @@
   import type {EventseriesResponse} from "$lib/model/pb-types.ts";
   import {CalendarPlus} from "lucide-svelte";
   import EventSeriesView from "$lib/components/diamondplanner/event/EventSeriesView.svelte";
+  import TeamForm from "$lib/components/forms/TeamForm.svelte";
 
   interface Props {
     team: ExpandedTeam,
@@ -146,7 +146,7 @@
 
     <section class="p-4 space-y-3">
       <div class="flex flex-col gap-2 lg:gap-3">
-        <TeamEditButton club={team?.expand?.club} team={team} classes="variant-ghost-surface"/>
+        <TeamForm club={team?.expand?.club} team={team} buttonClasses="btn variant-ghost-surface"/>
       </div>
     </section>
 

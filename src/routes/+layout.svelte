@@ -17,7 +17,6 @@
   import AccountModal from "$lib/auth/AccountModal.svelte";
   import {env} from "$env/dynamic/public";
   import EventForm from '$lib/components/forms/EventForm.svelte';
-  import TeamForm from '$lib/components/forms/TeamForm.svelte';
   import type {LayoutData} from "../../.svelte-kit/types/src/routes/$types";
   import StaticNavigationLinks from "$lib/components/navigation/StaticNavigationLinks.svelte";
   import BottomNavigation from "$lib/components/navigation/BottomNavigation.svelte";
@@ -72,8 +71,6 @@
 
   {:else if $drawerStore.id === "event-form"}
     <EventForm/>
-  {:else if $drawerStore.id === "team-form"}
-    <TeamForm/>
   {/if}
 </Drawer>
 

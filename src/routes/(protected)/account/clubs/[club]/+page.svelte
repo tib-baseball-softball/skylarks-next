@@ -5,17 +5,12 @@
   import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
   import type {CustomAuthModel, ExpandedClub, ExpandedTeam, ExpandedUniformSet,} from "$lib/model/ExpandedResponse";
   import {authSettings} from "$lib/pocketbase/index.svelte";
-  import {
-    type DrawerSettings,
-    getDrawerStore,
-    getModalStore,
-    type ModalComponent,
-    type ModalSettings,
-  } from "@skeletonlabs/skeleton";
+  import {type DrawerSettings, getModalStore, type ModalComponent, type ModalSettings,} from "@skeletonlabs/skeleton";
   import {Mail, Plus, SquareArrowOutUpRight} from "lucide-svelte";
   import type {PageProps} from "./$types";
+  import TeamForm from "$lib/components/forms/TeamForm.svelte";
 
-  let { data }: PageProps = $props();
+  let {data}: PageProps = $props();
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
@@ -24,7 +19,6 @@
   let uniformSets: ExpandedUniformSet[] = $derived(data.uniformSets);
 
   const modalStore = getModalStore();
-  const drawerStore = getDrawerStore();
 
   const teamSettings: DrawerSettings = $derived({
     id: "team-form",
@@ -56,15 +50,15 @@
 <svelte:head>
   <title>Details for {club.name}</title>
   <meta
-    name="description"
-    content="Club overview page for the {club.name} with info about teams and uniform sets."
+          name="description"
+          content="Club overview page for the {club.name} with info about teams and uniform sets."
   />
 </svelte:head>
 
 <h1 class="h1">{club.name}</h1>
 
 <section class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
-  <ClubDetailCard {club} />
+  <ClubDetailCard {club}/>
 </section>
 
 <section class="!mt-8">
@@ -73,8 +67,8 @@
   </header>
 
   <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
-    {#each teams as team}
-      <TeamListTeaser {team} link={true} />
+    {#each teams as team (team.id)}
+      <TeamListTeaser {team} link={true}/>
     {/each}
 
     {#if teams.length === 0}
@@ -83,13 +77,12 @@
   </div>
 
   {#if club?.admins.includes(authRecord.id)}
-    <button
-      class="btn variant-ghost-primary"
-      onclick={() => drawerStore.open(teamSettings)}
-    >
-      <Plus />
-      <span>Create new</span>
-    </button>
+    <TeamForm
+            team={null}
+            club={club}
+            buttonClasses="btn variant-ghost-primary"
+            showLabel={true}
+    />
   {/if}
 </section>
 
@@ -100,13 +93,13 @@
 
   <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
     {#each uniformSets as uniformSet}
-      <UniformSetInfoCard {uniformSet} />
+      <UniformSetInfoCard {uniformSet}/>
     {/each}
   </div>
 
   {#if club?.admins.includes(authRecord.id)}
     <button class="btn variant-ghost-primary" onclick={triggerUniformModal}>
-      <Plus />
+      <Plus/>
       <span>Create new</span>
     </button>
   {/if}
@@ -124,7 +117,7 @@
 </section>
 
 {#if club?.admins.includes(authRecord.id)}
-  <hr class="my-2" />
+  <hr class="my-2"/>
 
   <section>
     <header>
@@ -132,7 +125,7 @@
     </header>
 
     <div
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-3"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-3"
     >
       <article class="card admin-card variant-ringed-surface">
         <header class="card-header">
@@ -150,10 +143,10 @@
 
         <footer class="card-footer flex">
           <a
-            class="btn variant-ghost-secondary dark:variant-filled-secondary dark:border grow"
-            href="mailto:webmaster@tib-baseball.de"
+                  class="btn variant-ghost-secondary dark:variant-filled-secondary dark:border grow"
+                  href="mailto:webmaster@tib-baseball.de"
           >
-            <Mail />
+            <Mail/>
             <span class="ms-2">Contact</span>
           </a>
         </footer>

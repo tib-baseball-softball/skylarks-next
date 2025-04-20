@@ -3,8 +3,8 @@
   import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
   import {invalidate} from "$app/navigation";
-  import TeamEditButton from "$lib/components/team/TeamEditButton.svelte";
   import {ClipboardList, Dumbbell, ShieldHalf} from "lucide-svelte";
+  import TeamForm from "$lib/components/forms/TeamForm.svelte";
 
   /**
    * Used for Teams in List Teasers and on Club Page.
@@ -67,10 +67,10 @@
     <div class="flex justify-end gap-2">
 
       {#if team?.expand?.club?.admins.includes(model.id) || team?.admins.includes(model.id)}
-        <TeamEditButton
+        <TeamForm
                 club={team.expand?.club}
                 team={team}
-                classes="btn-icon variant-ghost-tertiary"
+                buttonClasses="btn btn-icon variant-ghost-tertiary"
                 showLabel={false}
         />
       {/if}
