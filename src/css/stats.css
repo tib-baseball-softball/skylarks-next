@@ -39,7 +39,7 @@
   .stat-actions {
     @apply col-start-1 whitespace-nowrap;
   }
-  @apply gap-x-4 border-opacity-10 px-6 py-4;
+  @apply gap-x-4 px-6 py-4;
 
   .stat-title {
     @apply text-surface-700-300;

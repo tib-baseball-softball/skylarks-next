@@ -28,12 +28,11 @@
   });
 </script>
 
-<input class="dark:bg-surface-700" type="text" bind:this={datepicker} {value}/>
+<input class="dark:bg-surface-700 input" type="text" bind:this={datepicker} {value}/>
 
 <!-- svelte-ignore css_unused_selector -->
 <style lang="postcss">
     input {
-        @apply input;
         color: unset;
     }
 </style>

@@ -42,18 +42,18 @@
     {#snippet triggerContent()}
       {#if authSettings.record?.avatar}
         <Avatar
+                name=""
                 src={client.files.getURL(authSettings.record, authSettings.record?.avatar)}
-                width="w-14"
+                size="w-14"
         />
 
       {:else}
 
         <Avatar
-                initials={authSettings.record?.first_name?.charAt(0).toUpperCase() +
-          authSettings.record?.last_name?.charAt(0)?.toUpperCase()}
+                name={authSettings.record?.first_name + authSettings.record?.last_name}
                 background="preset-filled-primary-500"
-                width="w-14"
-                fill="fill-white"
+                size="w-14"
+                classes="fill-white"
         />
       {/if}
     {/snippet}

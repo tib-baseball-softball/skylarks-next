@@ -44,6 +44,6 @@
 <style lang="postcss">
     .container {
         display: flex;
-        @apply gap-4;
+        gap: 1rem;
     }
 </style>

@@ -34,7 +34,6 @@ span.flatpickr-weekday {
 }
 
 .flatpickr-months .flatpickr-prev-month, .flatpickr-months .flatpickr-next-month {
-    @apply fill-token!;
     @apply text-surface-950-50!;
 }
 

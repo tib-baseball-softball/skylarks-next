@@ -27,7 +27,7 @@
     {#snippet child({props})}
       <button {...props} class="{classes} relative inline-block">
         {#if participation.comment}
-          <span class="badge-icon">
+          <span class="badge-icon preset-filled-surface-500">
             <MessageCircleMore size="13"/>
           </span>
         {/if}
@@ -93,6 +93,5 @@
         right: -10px;
         z-index: 10;
         position: absolute;
-        @apply preset-filled-surface-500;
     }
 </style>

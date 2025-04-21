@@ -1,7 +1,7 @@
 <script lang="ts">
   import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  import {TagsInput, Segment } from "@skeletonlabs/skeleton-svelte";
+  import {Segment, TagsInput} from "@skeletonlabs/skeleton-svelte";
   import {
     getAllBaseballPositionStringValues,
     positionEnumStringValuesToKeys,
@@ -128,7 +128,7 @@
         Positions
         <TagsInput
                 bind:this={inputChip}
-                bind:value={selectedPositions}
+                value={selectedPositions}
                 name="positions"
                 placeholder="Enter positions or click buttons..."
                 whitelist={possiblePositionValues}

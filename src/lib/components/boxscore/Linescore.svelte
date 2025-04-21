@@ -53,6 +53,7 @@
 
 <!-- svelte-ignore css_unused_selector -->
 <style lang="postcss">
+
     /* adapted from Skeleton table style */
 
     .linescore {
@@ -69,7 +70,7 @@
     }
 
     .linescore-interactive tbody tr {
-        @apply hover:preset-tonal-primary even:hover:preset-tonal-primary cursor-pointer;
+        /*@apply hover:preset-tonal-primary even:hover:preset-tonal-primary cursor-pointer;*/
     }
 
     /* === linescore Head === */

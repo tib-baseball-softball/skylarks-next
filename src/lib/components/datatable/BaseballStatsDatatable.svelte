@@ -1,18 +1,18 @@
 <script lang="ts">
-    import Search from "$lib/components/datatable/Search.svelte";
-    import RowsPerPage from "$lib/components/datatable/RowsPerPage.svelte";
-    import RowCount from "$lib/components/datatable/RowCount.svelte";
-    import Pagination from "$lib/components/datatable/Pagination.svelte";
-    import {DataHandler} from "@vincjo/datatables";
-    import type {StatisticsData, StatisticsSummary} from "bsm.js";
-    import {StatsType} from "bsm.js";
-    import StatsTableContent from "$lib/components/datatable/StatsTableContent.svelte";
-    import {Segment } from "@skeletonlabs/skeleton-svelte";
-    import type {StatsDataset} from "$lib/types/StatsDataset";
-    import StatsContentRow from "$lib/components/datatable/StatsContentRow.svelte";
-    import StatsBlock from "$lib/components/utility/StatsBlock.svelte";
+  import Search from "$lib/components/datatable/Search.svelte";
+  import RowsPerPage from "$lib/components/datatable/RowsPerPage.svelte";
+  import RowCount from "$lib/components/datatable/RowCount.svelte";
+  import Pagination from "$lib/components/datatable/Pagination.svelte";
+  import {DataHandler} from "@vincjo/datatables";
+  import type {StatisticsData, StatisticsSummary} from "bsm.js";
+  import {StatsType} from "bsm.js";
+  import StatsTableContent from "$lib/components/datatable/StatsTableContent.svelte";
+  import {Segment} from "@skeletonlabs/skeleton-svelte";
+  import type {StatsDataset} from "$lib/types/StatsDataset";
+  import StatsContentRow from "$lib/components/datatable/StatsContentRow.svelte";
+  import StatsBlock from "$lib/components/utility/StatsBlock.svelte";
 
-    interface Props {
+  interface Props {
     data: StatsDataset;
     rowsPerPage?: number;
     tableType: "personal" | "seasonal";
@@ -60,25 +60,10 @@
   <header class="flex justify-between gap-4">
     <Search {handler}/>
 
-    <Segment>
-      <Segment.Item
-              bind:group={type}
-              name="batting"
-              value={StatsType.batting}>Batting
-      </Segment.Item
-      >
-      <Segment.Item
-              bind:group={type}
-              name="pitching"
-              value={StatsType.pitching}>Pitching
-      </Segment.Item
-      >
-      <Segment.Item
-              bind:group={type}
-              name="fielding"
-              value={StatsType.fielding}>Fielding
-      </Segment.Item
-      >
+    <Segment value={type}>
+      <Segment.Item value={StatsType.batting}>Batting</Segment.Item>
+      <Segment.Item value={StatsType.pitching}>Pitching</Segment.Item>
+      <Segment.Item value={StatsType.fielding}>Fielding</Segment.Item>
     </Segment>
 
     <RowsPerPage {handler}/>

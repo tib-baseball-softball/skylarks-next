@@ -34,18 +34,18 @@
 
 <nav class="list-nav py-1 px-1 lg:px-4">
   {#if isUserAuthenticated}
-    <Accordion regionPanel="space-y-1">
-      <Accordion.Item open>
+    <Accordion>
+      <Accordion.Item>
 
         {#snippet lead()}
           <SquareUserRound/>
         {/snippet}
 
-        {#snippet summary()}
+        {#snippet control()}
           <span>My Account</span>
         {/snippet}
 
-        {#snippet content()}
+        {#snippet panel()}
           <a href="/account" onclick={sheetClose}>
             <CircleUserRound/>
             <span>Dashboard</span>
@@ -67,17 +67,17 @@
 
     <hr class="my-2"/>
 
-    <Accordion regionPanel="space-y-1">
-      <Accordion.Item open>
+    <Accordion>
+      <Accordion.Item>
         {#snippet lead()}
           <UsersRound/>
         {/snippet}
 
-        {#snippet summary()}
+        {#snippet control()}
           <span>My Clubs & Teams</span>
         {/snippet}
 
-        {#snippet content()}
+        {#snippet panel()}
           {#each clubs as club (club.id)}
             <a href="/account/clubs/{club.id}" onclick={sheetClose}>
               <Shield/>
@@ -108,17 +108,17 @@
 
     <hr class="my-2"/>
 
-    <Accordion regionPanel="space-y-1">
-      <Accordion.Item open>
+    <Accordion>
+      <Accordion.Item>
         {#snippet lead()}
           <LockKeyhole/>
         {/snippet}
 
-        {#snippet summary()}
+        {#snippet control()}
           Administration
         {/snippet}
 
-        {#snippet content()}
+        {#snippet panel()}
           <a href="/stats/admin" onclick={sheetClose}>
             <ChartColumnStacked/>
             <span>Admin Dashboard</span>

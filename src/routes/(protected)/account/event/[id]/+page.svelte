@@ -21,7 +21,7 @@
   const canParticipate = $derived(authRecord.teams.includes($event.team));
 </script>
 
-<div class="event-container">
+<div class="space-y-4 lg:space-y-6 xl:space-y-7">
   <div class="flex items-center gap-3">
     <h1 class="h1" class:line-through={$event.cancelled}>{$event.title}</h1>
     <div>
@@ -107,9 +107,3 @@
     <EventPageAdminSection event={$event}/>
   {/if}
 </div>
-
-<style lang="postcss">
-    .event-container {
-        @apply space-y-4 lg:space-y-6 xl:space-y-7;
-    }
-</style>

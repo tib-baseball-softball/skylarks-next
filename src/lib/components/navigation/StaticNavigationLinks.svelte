@@ -46,7 +46,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        @apply hover:preset-tonal-primary;
+    }
+
+    a:hover {
+        background-color: var(--color-primary-50-950);
+        color: var(--color-primary-950-50);
     }
 
     li {
