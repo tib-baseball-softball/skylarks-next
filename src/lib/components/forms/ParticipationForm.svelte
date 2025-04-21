@@ -59,16 +59,16 @@
       <span class="block">State</span>
 
       <RadioGroup display="flex">
-        <RadioItem fill="!bg-success-500" hover="hover:variant-soft-success" bind:group={form.state}
+        <RadioItem fill="bg-success-500!" hover="hover:variant-soft-success" bind:group={form.state}
                    name="state" value="in">
           In
         </RadioItem>
-        <RadioItem fill="!bg-warning-500" hover="hover:variant-soft-warning" bind:group={form.state}
+        <RadioItem fill="bg-warning-500!" hover="hover:variant-soft-warning" bind:group={form.state}
                    name="state"
                    value="maybe">
           Maybe
         </RadioItem>
-        <RadioItem color="!text-white" fill="!bg-error-500" hover="hover:variant-soft-error"
+        <RadioItem color="text-white!" fill="bg-error-500!" hover="hover:variant-soft-error"
                    bind:group={form.state}
                    name="state" value="out">
           Out

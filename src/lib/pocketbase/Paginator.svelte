@@ -25,7 +25,7 @@
         <ChevronLeft/>
       </button>
 
-      <button class="pointer-events-none !text-sm"
+      <button class="pointer-events-none text-sm!"
       >{$store.page}/{$store.totalPages}</button
       >
 

@@ -1,80 +1,69 @@
 /* DaisyUI stats component adapted */
 
-@layer components {
-    .stats {
-        @apply inline-grid;
-    }
+@utility stats {
+  @apply inline-grid;
 
-    :where(.stats) {
-        @apply grid-flow-col;
-    }
+  :where(&) {
+    @apply grid-flow-col;
+  }
 
-    .stat {
-        @apply inline-grid w-full;
-        grid-template-columns: repeat(1, 1fr);
+  :where(&) {
+    @apply divide-x divide-y-0 overflow-x-auto;
+  }
 
-        .stat-figure {
-            @apply col-start-2 row-span-3 row-start-1 place-self-center justify-self-end;
-        }
+  :is([dir='rtl'] & > :not([hidden]) ~ :not([hidden])) {
+    --tw-divide-x-reverse: 1;
+  }
+}
 
-        .stat-title {
-            @apply col-start-1 whitespace-nowrap;
-        }
+@utility stat {
+  @apply inline-grid w-full;
+  grid-template-columns: repeat(1, 1fr);
 
-        .stat-value {
-            @apply col-start-1 whitespace-nowrap;
-        }
+  .stat-figure {
+    @apply col-start-2 row-span-3 row-start-1 place-self-center justify-self-end;
+  }
 
-        .stat-desc {
-            @apply col-start-1 whitespace-nowrap;
-        }
+  .stat-title {
+    @apply col-start-1 whitespace-nowrap;
+  }
 
-        .stat-actions {
-            @apply col-start-1 whitespace-nowrap;
-        }
-    }
+  .stat-value {
+    @apply col-start-1 whitespace-nowrap;
+  }
 
-    :where(.stats) {
-        @apply divide-x divide-y-0 overflow-x-auto;
-    }
+  .stat-desc {
+    @apply col-start-1 whitespace-nowrap;
+  }
 
-    :is([dir="rtl"] .stats > :not([hidden]) ~ :not([hidden])) {
-        --tw-divide-x-reverse: 1;
-    }
+  .stat-actions {
+    @apply col-start-1 whitespace-nowrap;
+  }
+  @apply gap-x-4 border-opacity-10 px-6 py-4;
 
-    .stat {
-        @apply gap-x-4 border-opacity-10 px-6 py-4;
+  .stat-title {
+    @apply text-surface-600-300-token;
+  }
 
-        .stat-title {
-            @apply text-surface-600-300-token;
-        }
+  .stat-value {
+    @apply text-4xl font-extrabold;
+  }
 
-        .stat-value {
-            @apply text-4xl font-extrabold;
-        }
+  .stat-desc {
+    @apply text-surface-600-300-token text-xs;
+  }
 
-        .stat-desc {
-            @apply text-surface-600-300-token text-xs;
-        }
+  .stat-actions {
+    @apply mt-4;
+  }
+}
 
-        .stat-actions {
-            @apply mt-4;
-        }
-    }
+@utility stats-horizontal {
+  @apply grid-flow-col;
+  @apply divide-x divide-y-0 overflow-x-auto rtl:[--tw-divide-x-reverse:1];
+}
 
-    .stats-horizontal {
-        @apply grid-flow-col;
-    }
-
-    .stats-vertical {
-        @apply grid-flow-row;
-    }
-
-    .stats-horizontal {
-        @apply divide-x divide-y-0 overflow-x-auto rtl:[--tw-divide-x-reverse:1];
-    }
-
-    .stats-vertical {
-        @apply divide-x-0 divide-y overflow-y-auto;
-    }
+@utility stats-vertical {
+  @apply grid-flow-row;
+  @apply divide-x-0 divide-y overflow-y-auto;
 }

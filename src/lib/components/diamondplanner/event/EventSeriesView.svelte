@@ -72,7 +72,7 @@
 
     <div class="space-y-4">
 
-      <h3 class="h3 !mt-6">Active Event Series</h3>
+      <h3 class="h3 mt-6!">Active Event Series</h3>
 
       {#each eventSeries as series}
         <EventSeriesListItem eventSeries={series}/>
@@ -96,11 +96,11 @@
         <div>No event series have been set up for this team yet.</div>
       </section>
     {/if}
-    <button class="btn variant-ghost-primary !mt-6" onclick={() => setupAndShowForm(null)}>
+    <button class="btn variant-ghost-primary mt-6!" onclick={() => setupAndShowForm(null)}>
       Add new Event Series
     </button>
 
-    <hr class="!my-6">
+    <hr class="my-6!">
 
     <div bind:this={eventSeriesFormContainer}>
       {#if showForm}

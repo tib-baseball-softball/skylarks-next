@@ -52,7 +52,7 @@
         class="flex flex-wrap gap-4 lg:gap-8 variant-soft-surface justify-between px-4 py-3 rounded-token"
 >
   <label
-          class="flex items-center gap-2 flex-grow justify-between md:flex-grow-0"
+          class="flex items-center gap-2 grow justify-between md:grow-0"
   >
     Timeframe
     <RadioGroup>
@@ -70,7 +70,7 @@
     </RadioGroup>
   </label>
 
-  <label class="label flex items-center gap-2 flex-grow justify-between md:flex-grow-0">
+  <label class="label flex items-center gap-2 grow justify-between md:grow-0">
     Sort
     <RadioGroup>
       <RadioItem checked name="radio-asc" value="asc" bind:group={sorting}>Ascending</RadioItem>
@@ -78,7 +78,7 @@
     </RadioGroup>
   </label>
 
-  <label class="label flex items-center gap-2 flex-grow justify-between md:flex-grow-0">
+  <label class="label flex items-center gap-2 grow justify-between md:grow-0">
     Type
     <RadioGroup padding="px-2 md:px-4 py-1">
       <RadioItem padding="px-4 py-1" checked name="radio-any" value="any" bind:group={showTypes}>All</RadioItem>
@@ -101,7 +101,7 @@
 
 <Paginator store={events} showIfSinglePage={false}/>
 
-<hr class="!my-8"/>
+<hr class="my-8!"/>
 <section class="space-y-2 lg:space-y-4">
   <header>
     <h2 class="h3">Links</h2>

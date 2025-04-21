@@ -85,7 +85,7 @@
             </span>
   </label>
 
-  <div class="text-sm !mt-4">
+  <div class="text-sm mt-4!">
     You can use the special identifiers <code class="code">B</code> and <code class="code">Bird</code> to get
     the Skylarks Home and Road Cap instead of a
     generic colored one.
@@ -107,7 +107,7 @@
             </span>
   </label>
 
-  <div class="text-sm !mt-4">
+  <div class="text-sm mt-4!">
     Both hexadecimal color values (6 characters with leading '#') and
     <a class="anchor" href="https://developer.mozilla.org/en-US/docs/Web/CSS/named-color" target="_blank">
       named CSS colors

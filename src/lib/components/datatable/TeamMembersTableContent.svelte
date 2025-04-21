@@ -196,7 +196,7 @@
           </button>
         {/if}
 
-        <Dialog triggerClasses="badge variant-ghost-error !gap-0" closeButtonClasses="sr-only">
+        <Dialog triggerClasses="badge variant-ghost-error gap-0!" closeButtonClasses="sr-only">
           {#snippet triggerContent()}
             <Trash class="m-0.5" size="18"/>
             Remove

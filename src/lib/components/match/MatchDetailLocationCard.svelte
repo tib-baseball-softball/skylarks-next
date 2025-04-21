@@ -50,7 +50,7 @@
     </div>
   </div>
 
-  <hr class={showDividers ? "" : "!hidden"} />
+  <hr class={showDividers ? "" : "hidden!"} />
 
   <div class="flex items-center gap-3">
     <MapPin />
@@ -60,7 +60,7 @@
     </div>
   </div>
 
-  <hr class={showDividers ? "" : "!hidden"} />
+  <hr class={showDividers ? "" : "hidden!"} />
 
   <div class="flex items-center gap-3">
     <Building2 />
@@ -70,7 +70,7 @@
     </div>
   </div>
 
-  <hr class={showDividers ? "" : "!hidden"} />
+  <hr class={showDividers ? "" : "hidden!"} />
 
   <div class="flex items-center gap-3 self-end">
     <Link />
@@ -79,7 +79,7 @@
     >
   </div>
 
-  <hr class={showDividers ? "" : "!hidden"} />
+  <hr class={showDividers ? "" : "hidden!"} />
 
   <div class="flex items-center gap-3 self-end">
     <Link />

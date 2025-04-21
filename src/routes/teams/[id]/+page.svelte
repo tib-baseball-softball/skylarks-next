@@ -48,7 +48,7 @@
   {/await}
 </section>
 
-<section class="my-2 !mb-4">
+<section class="my-2 mb-4!">
   <h2 class="h2">Stats</h2>
   {#await getData()}
     <ProgressRadial/>

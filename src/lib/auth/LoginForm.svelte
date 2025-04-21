@@ -126,9 +126,9 @@
 {/snippet}
 
 <div class="flex justify-center">
-  <div class="flex justify-center !mt-3 !mb-10 md:max-w-[60%] lg:max-w-[55%]">
+  <div class="flex justify-center mt-3! mb-10! md:max-w-[60%] lg:max-w-[55%]">
     <article>
-      <header class="!mb-6">
+      <header class="mb-6!">
         <h1 class="h2">Sign in to Skylarks Diamond Planner</h1>
       </header>
 

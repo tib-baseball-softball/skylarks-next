@@ -33,7 +33,7 @@
   <ClubDetailCard {club}/>
 </section>
 
-<section class="!mt-8">
+<section class="mt-8!">
   <header>
     <h2 class="h2 mb-3">Club Teams</h2>
   </header>
@@ -58,7 +58,7 @@
   {/if}
 </section>
 
-<section class="!mt-8">
+<section class="mt-8!">
   <header>
     <h2 class="h2 mb-3">Uniform Sets</h2>
   </header>
@@ -90,7 +90,7 @@
   {/if}
 </section>
 
-<section class="!mt-8">
+<section class="mt-8!">
   <header>
     <h2 class="h2 mb-3">Team Locations</h2>
   </header>

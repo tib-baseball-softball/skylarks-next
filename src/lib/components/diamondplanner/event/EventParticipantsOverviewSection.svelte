@@ -28,7 +28,7 @@
 
 <h2 class="h2">Participants</h2>
 <section class="grid grid-cols-1 md:grid-cols-3 gap-2 lg:gap-3">
-  <article class="card variant-soft-success flex-grow">
+  <article class="card variant-soft-success grow">
     <header class="card-header flex items-center gap-2">
       <span><Check/></span>
       <h3 class="h4">In</h3>
@@ -66,7 +66,7 @@
     </section>
   </article>
 
-  <article class="card variant-soft-warning flex-grow">
+  <article class="card variant-soft-warning grow">
     <header class="card-header flex items-center gap-2">
       <span><CircleHelp/></span>
       <h3 class="h4">Maybe</h3>
@@ -87,7 +87,7 @@
     </section>
   </article>
 
-  <article class="card variant-soft-error flex-grow">
+  <article class="card variant-soft-error grow">
     <header class="card-header flex items-center gap-2">
       <span><X/></span>
       <h3 class="h4">Out</h3>

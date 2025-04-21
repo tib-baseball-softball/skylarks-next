@@ -64,7 +64,7 @@
       {/snippet}
 
       {#snippet trail()}
-        <div class="lg:me-5 flex items-center gap-5 flex-shrink-0">
+        <div class="lg:me-5 flex items-center gap-5 shrink-0">
 
           {#if env.PUBLIC_AUTH_FUNCS_ENABLED === "true"}
             <LoginBadge signupAllowed={true}/>
@@ -75,7 +75,7 @@
 
     </AppBar>
 
-    <hr class="!border-b-2">
+    <hr class="border-b-2!">
   </header>
 
   <!-- Grid Column -->
@@ -108,7 +108,7 @@
 
   <!-- Footer -->
   <footer>
-    <hr class="!border-t-2">
+    <hr class="border-t-2!">
     <Footer></Footer>
   </footer>
 </div>

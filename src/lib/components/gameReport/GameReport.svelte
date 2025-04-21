@@ -30,7 +30,7 @@
         </div>
       </section>
 
-      <hr class="!my-6">
+      <hr class="my-6!">
 
       <section class="mt-4 prose">
         <h3 class="h3">Bericht Spiel 1</h3>

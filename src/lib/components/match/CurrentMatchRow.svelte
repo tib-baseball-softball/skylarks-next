@@ -31,7 +31,7 @@
     {#if matchState === MatchState.notYetPlayed}
 
         <div class="flex justify-center items-center">
-            <span class="variant-soft-surface dark:variant-filled-surface py-0.5 px-2 rounded">
+            <span class="variant-soft-surface dark:variant-filled-surface py-0.5 px-2 rounded-sm">
                 {DateTimeUtility.timeFormatShort.format(matchDate)}
             </span>
         </div>
@@ -39,7 +39,7 @@
     {:else if matchState === MatchState.cancelled}
 
         <div class="flex justify-center items-center">
-            <span class="variant-soft-surface dark:variant-filled-surface py-0.5 px-2 rounded">
+            <span class="variant-soft-surface dark:variant-filled-surface py-0.5 px-2 rounded-sm">
                 PPD
             </span>
         </div>

@@ -36,7 +36,7 @@
     </span>
   {/if}
 
-  <article class="!mb-8" class:line-through={$event.cancelled}>
+  <article class="mb-8!" class:line-through={$event.cancelled}>
     <section>
       <p>{$event.desc}</p>
     </section>
@@ -75,7 +75,7 @@
   </div>
 
   {#if !$event.cancelled}
-    <hr class="!my-8"/>
+    <hr class="my-8!"/>
 
     <div class="flex justify-between items-center">
       <h2 class="h3">My Participation</h2>

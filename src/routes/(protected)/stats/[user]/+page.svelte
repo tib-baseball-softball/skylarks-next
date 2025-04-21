@@ -34,7 +34,7 @@
 <div
         class="flex flex-wrap gap-4 lg:gap-8 variant-soft-surface justify-between px-4 py-3 rounded-token"
 >
-    <label class="label flex items-center gap-2 flex-grow justify-between md:flex-grow-0">
+    <label class="label flex items-center gap-2 grow justify-between md:grow-0">
         Season
         <select class="select" bind:value={selectedSeason}>
             {#each seasonOptions as option}

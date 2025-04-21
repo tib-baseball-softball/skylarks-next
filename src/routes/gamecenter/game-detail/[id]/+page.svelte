@@ -60,7 +60,7 @@
             <ProgressRadial/>
           {:then gameReport}
             {#if gameReport}
-              <GameReport classes="!my-2 md:max-w-[80%] 2xl:max-w-[70%]" report={gameReport}/>
+              <GameReport classes="my-2! md:max-w-[80%] 2xl:max-w-[70%]" report={gameReport}/>
             {:else }
               <ContentFilteredUnavailable text="No Game Report available."/>
             {/if}

@@ -25,7 +25,7 @@
       </span>
   </Sheet.Trigger>
 
-  <Sheet.Content side="left" class="!w-[70%] !sm:w-[40%] !p-0 navigation-sheet-content">
+  <Sheet.Content side="left" class="w-[70%]! !sm:w-[40%] p-0! navigation-sheet-content">
     <Sheet.Header></Sheet.Header>
 
     <a href="/" aria-label="to home page" class="flex justify-around p-2" onclick={() => open = false}>

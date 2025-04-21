@@ -12,7 +12,7 @@
   let softballLicenses = $derived(licenses.filter(license => license.softball === true));
 </script>
 
-<article class="!mb-4">
+<article class="mb-4!">
   <section>
     {#if showSoftballSection}
       <header class="mb-2">

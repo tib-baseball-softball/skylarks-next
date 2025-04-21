@@ -9,7 +9,7 @@
   let {clubOfficials = []}: Props = $props();
 </script>
 
-<article class="!mb-4">
+<article class="mb-4!">
   <section>
     <ul class="card p-3 variant-soft dark:border dark:border-surface-500 shadow-xl">
 

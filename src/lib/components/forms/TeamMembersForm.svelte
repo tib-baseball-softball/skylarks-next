@@ -84,7 +84,7 @@
     </label>
   </div>
 
-  <hr class="!my-5"/>
+  <hr class="my-5!"/>
 
   <div class="flex justify-center gap-3">
     <button class="mt-2 btn variant-ghost-primary" type="submit">

@@ -49,7 +49,7 @@
         <p>{new Date(participation.updated).toLocaleString()}</p>
       </div>
 
-      <div class="item-container !mb-2">
+      <div class="item-container mb-2!">
         <p class="font-light text-xs">Comment/Reason:</p>
         <p>{participation.comment}</p>
       </div>

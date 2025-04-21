@@ -1,10 +1,5 @@
 import {join} from 'path';
 import type {Config} from 'tailwindcss';
-import typography from '@tailwindcss/typography';
-import {skeleton} from '@skeletonlabs/tw-plugin';
-import {skylarksTheme} from "./skylarks.theme";
-import tailwindcssAnimate from "tailwindcss-animate";
-import forms from '@tailwindcss/forms';
 
 export default {
   darkMode: 'media',
@@ -16,15 +11,15 @@ export default {
     extend: {},
   },
   plugins: [
-    forms,
-    typography,
-    tailwindcssAnimate,
-    skeleton({
-      themes: {
-        custom: [
-          skylarksTheme
-        ]
-      },
-    }),
+    // forms,
+    // typography,
+    // tailwindcssAnimate,
+    // skeleton({
+    //   themes: {
+    //     custom: [
+    //       skylarksTheme
+    //     ]
+    //   },
+    // }),
   ],
 } satisfies Config;

@@ -159,7 +159,7 @@
     </p>
 
     <div class="flex justify-center gap-3 col-span-2">
-      <button type="button" class="mt-2 btn variant-ghost-surface !border-surface-50 border">
+      <button type="button" class="mt-2 btn variant-ghost-surface border-surface-50! border">
         Help
       </button>
 

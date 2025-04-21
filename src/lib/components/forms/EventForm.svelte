@@ -224,7 +224,7 @@
         </SlideToggle>
       </div>
 
-      <hr class="!my-5"/>
+      <hr class="my-5!"/>
 
       <div class="flex justify-center gap-3">
         <button type="submit" class="mt-2 btn variant-ghost-primary">

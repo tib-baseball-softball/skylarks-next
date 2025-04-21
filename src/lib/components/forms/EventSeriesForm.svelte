@@ -223,7 +223,7 @@
 
   </div>
 
-  <hr class="!my-5"/>
+  <hr class="my-5!"/>
 
   <div class="flex justify-center gap-3">
     <button type="button" class="btn variant-ghost" onclick={() => {if (showForm) showForm = false}}>
