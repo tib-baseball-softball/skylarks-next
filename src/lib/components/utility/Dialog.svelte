@@ -35,7 +35,7 @@
 </script>
 
 <Dialog.Root bind:open {...restProps}>
-  <Dialog.Trigger class="btn {triggerClasses} flex gap-1" type="button" disabled={disabled}>
+  <Dialog.Trigger class="{triggerClasses} flex gap-1" type="button" disabled={disabled}>
     {@render triggerContent()}
   </Dialog.Trigger>
   <Dialog.Portal>

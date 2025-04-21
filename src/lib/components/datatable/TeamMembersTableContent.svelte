@@ -2,21 +2,21 @@
   import type {DataHandler} from "@vincjo/datatables";
   import ThSort from "./ThSort.svelte";
   import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
-  import {Avatar, getModalStore, type ModalSettings} from "@skeletonlabs/skeleton";
+  import {Avatar} from "@skeletonlabs/skeleton";
   import {client} from "$lib/pocketbase/index.svelte";
   import LocalDate from "../utility/LocalDate.svelte";
   import type {TeamsUpdate, UsersUpdate} from "$lib/model/pb-types.ts";
   import {invalidateAll} from "$app/navigation";
   import {CircleCheck, Lock, LockOpen, Trash} from "lucide-svelte";
   import {toastController} from "$lib/service/ToastController.svelte.ts";
+  import Dialog from "$lib/components/utility/Dialog.svelte";
+  import {closeModal} from "$lib/functions/closeModal.ts";
 
   interface Props {
     handler: DataHandler<CustomAuthModel>;
     team: ExpandedTeam,
     showAdminSection?: boolean;
   }
-
-  const modalStore = getModalStore();
 
   let {handler, team, showAdminSection = false}: Props = $props();
 
@@ -63,34 +63,25 @@
   }
 
   async function deleteUserFromTeam(model: CustomAuthModel) {
-    const modal: ModalSettings = {
-      type: 'confirm',
-      title: 'Please Confirm',
-      body: `Are you sure you wish to remove "${model.first_name + " " + model.last_name}" from "${team.name}"?`,
-      response: async (r: boolean) => {
-        if (r) {
-          try {
-            await client.collection("users").update<UsersUpdate>(model.id, {
-              "teams-": team.id
-            });
-            toastController.trigger({
-              id: crypto.randomUUID(),
-              message: `User "${model.first_name + " " + model.last_name}" has been removed as member from team "${team.name}"`,
-              background: "variant-filled-success"
-            });
-            await invalidateAll();
-          } catch (error) {
-            console.error(error);
-            toastController.trigger({
-              id: crypto.randomUUID(),
-              message: "An error occurred while removing user as team member",
-              background: "variant-filled-error"
-            });
-          }
-        }
-      },
-    };
-    modalStore.trigger(modal);
+    try {
+      await client.collection("users").update<UsersUpdate>(model.id, {
+        "teams-": team.id
+      });
+      toastController.trigger({
+        id: crypto.randomUUID(),
+        message: `User "${model.first_name + " " + model.last_name}" has been removed as member from team "${team.name}"`,
+        background: "variant-filled-success"
+      });
+      await invalidateAll();
+    } catch (error) {
+      console.error(error);
+      toastController.trigger({
+        id: crypto.randomUUID(),
+        message: "An error occurred while removing user as team member",
+        background: "variant-filled-error"
+      });
+    }
+    closeModal();
   }
 
   const rows = $derived(handler.getRows());
@@ -205,10 +196,25 @@
           </button>
         {/if}
 
-        <button class="badge variant-ghost-error" onclick={() => deleteUserFromTeam(row)}>
-          <Trash class="m-0.5" size="18"/>
-          Remove
-        </button>
+        <Dialog triggerClasses="badge variant-ghost-error !gap-0" closeButtonClasses="sr-only">
+          {#snippet triggerContent()}
+            <Trash class="m-0.5" size="18"/>
+            Remove
+          {/snippet}
+
+          {#snippet title()}
+            <span>Please Confirm</span>
+          {/snippet}
+
+          {#snippet description()}
+            <span>Are you sure you wish to remove "{row.first_name + " " + row.last_name}" from "{team.name}"?</span>
+          {/snippet}
+
+          <div class="flex justify-end gap-2 mt-1">
+            <button class="btn variant-ghost-surface" type="button" onclick={closeModal}>Cancel</button>
+            <button class="btn variant-filled" type="button" onclick={() => deleteUserFromTeam(row)}>Confirm</button>
+          </div>
+        </Dialog>
       </td>
     {/if}
   </tr>

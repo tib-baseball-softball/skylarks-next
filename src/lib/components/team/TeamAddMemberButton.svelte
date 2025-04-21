@@ -13,7 +13,7 @@
   let {club, team}: Props = $props();
 </script>
 
-<Dialog triggerClasses="variant-ghost-primary">
+<Dialog triggerClasses="btn variant-ghost-primary">
 
   {#snippet triggerContent()}
     <Plus/>
