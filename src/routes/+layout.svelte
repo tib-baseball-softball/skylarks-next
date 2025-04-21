@@ -25,8 +25,6 @@
 
 <svelte:head>
   <title>Berlin Skylarks Web App</title>
-  <!-- svelte-ignore hydration_html_changed -->
-  {@html '<script nonce="%sveltekit.nonce%">(' + autoModeWatcher.toString() + ')();</script>'}
 </svelte:head>
 
 <!--Singletons-->
