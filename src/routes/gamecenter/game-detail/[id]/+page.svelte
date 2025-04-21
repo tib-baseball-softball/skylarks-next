@@ -28,48 +28,50 @@
     <Tab bind:group={tabSet} name="tabGameReport" value={2}>Game Report</Tab>
 
     <!-- Tab Panels --->
-    <svelte:fragment slot="panel">
-      {#if tabSet === 0}
+    {#snippet panel()}
+      
+        {#if tabSet === 0}
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-stretch gap-3 md:gap-4 lg:gap-5">
-          <MatchDetailStatsCard {match}/>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-stretch gap-3 md:gap-4 lg:gap-5">
+            <MatchDetailStatsCard {match}/>
 
-          <MatchDetailLocationCard field={match?.field}/>
+            <MatchDetailLocationCard field={match?.field}/>
 
-          <MatchDetailOfficialsCard {match}/>
-        </div>
+            <MatchDetailOfficialsCard {match}/>
+          </div>
 
-      {:else if tabSet === 1}
+        {:else if tabSet === 1}
 
-        {#await data.singleGameStats}
-          <ProgressRadial/>
-        {:then boxscore}
-          {#if boxscore}
-            <MatchBoxscoreSection {boxscore}/>
-          {:else }
-            <p>Kein Boxscore vorhanden.</p>
-          {/if}
-        {:catch error}
-          <p>error loading boxscore: {error.message}</p>
-        {/await}
+          {#await data.singleGameStats}
+            <ProgressRadial/>
+          {:then boxscore}
+            {#if boxscore}
+              <MatchBoxscoreSection {boxscore}/>
+            {:else }
+              <p>Kein Boxscore vorhanden.</p>
+            {/if}
+          {:catch error}
+            <p>error loading boxscore: {error.message}</p>
+          {/await}
 
-      {:else if tabSet === 2}
+        {:else if tabSet === 2}
 
-        {#await data.gameReport}
-          <ProgressRadial/>
-        {:then gameReport}
-          {#if gameReport}
-            <GameReport classes="!my-2 md:max-w-[80%] 2xl:max-w-[70%]" report={gameReport}/>
-          {:else }
-            <ContentFilteredUnavailable text="No Game Report available."/>
-          {/if}
-        {:catch error}
-          <p>error loading Game Report: {error.message}</p>
-        {/await}
+          {#await data.gameReport}
+            <ProgressRadial/>
+          {:then gameReport}
+            {#if gameReport}
+              <GameReport classes="!my-2 md:max-w-[80%] 2xl:max-w-[70%]" report={gameReport}/>
+            {:else }
+              <ContentFilteredUnavailable text="No Game Report available."/>
+            {/if}
+          {:catch error}
+            <p>error loading Game Report: {error.message}</p>
+          {/await}
 
 
-      {/if}
-    </svelte:fragment>
+        {/if}
+      
+      {/snippet}
   </TabGroup>
 </section>
 

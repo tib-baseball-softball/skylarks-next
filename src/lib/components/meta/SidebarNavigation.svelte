@@ -37,15 +37,15 @@
     <Accordion regionPanel="space-y-1">
       <AccordionItem open>
 
-        <svelte:fragment slot="lead">
+        {#snippet lead()}
           <SquareUserRound/>
-        </svelte:fragment>
+        {/snippet}
 
-        <svelte:fragment slot="summary">
+        {#snippet summary()}
           <span>My Account</span>
-        </svelte:fragment>
+        {/snippet}
 
-        <svelte:fragment slot="content">
+        {#snippet content()}
           <a href="/account" onclick={sheetClose}>
             <CircleUserRound/>
             <span>Dashboard</span>
@@ -60,7 +60,7 @@
             <IdCard/>
             <span>Player Profile</span>
           </a>
-        </svelte:fragment>
+        {/snippet}
 
       </AccordionItem>
     </Accordion>
@@ -69,15 +69,15 @@
 
     <Accordion regionPanel="space-y-1">
       <AccordionItem open>
-        <svelte:fragment slot="lead">
+        {#snippet lead()}
           <UsersRound/>
-        </svelte:fragment>
+        {/snippet}
 
-        <svelte:fragment slot="summary">
+        {#snippet summary()}
           <span>My Clubs & Teams</span>
-        </svelte:fragment>
+        {/snippet}
 
-        <svelte:fragment slot="content">
+        {#snippet content()}
           {#each clubs as club (club.id)}
             <a href="/account/clubs/{club.id}" onclick={sheetClose}>
               <Shield/>
@@ -102,7 +102,7 @@
               </a>
             {/each}
           {/if}
-        </svelte:fragment>
+        {/snippet}
       </AccordionItem>
     </Accordion>
 
@@ -110,18 +110,20 @@
 
     <Accordion regionPanel="space-y-1">
       <AccordionItem open>
-        <svelte:fragment slot="lead">
+        {#snippet lead()}
           <LockKeyhole/>
-        </svelte:fragment>
+        {/snippet}
 
-        <svelte:fragment slot="summary">Administration</svelte:fragment>
+        {#snippet summary()}
+          Administration
+        {/snippet}
 
-        <svelte:fragment slot="content">
+        {#snippet content()}
           <a href="/stats/admin" onclick={sheetClose}>
             <ChartColumnStacked/>
             <span>Admin Dashboard</span>
           </a>
-        </svelte:fragment>
+        {/snippet}
       </AccordionItem>
     </Accordion>
   {/if}

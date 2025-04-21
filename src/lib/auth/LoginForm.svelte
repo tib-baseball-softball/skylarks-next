@@ -229,9 +229,9 @@
                             autocomplete="one-time-code"
                     />
                     <span class="block text-sm font-light">
-                                        A valid signup key needs to be entered upon user account creation.
-                                        If you do not have a signup key, please contact your team manager.
-                                    </span>
+                                          A valid signup key needs to be entered upon user account creation.
+                                          If you do not have a signup key, please contact your team manager.
+                                      </span>
                   </label>
 
                   <input type="hidden" name="register" value={true}/>

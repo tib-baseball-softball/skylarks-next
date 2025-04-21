@@ -43,7 +43,7 @@
             padding="p-3"
             background="bg-surface-500/5"
     >
-      <svelte:fragment slot="lead">
+      {#snippet lead()}
         <div class="flex items-center justify-content-start">
           {#if isUserAuthenticated}
             <NavigationSheet clubs={data.clubs} teams={data.teams}/>
@@ -53,17 +53,17 @@
             <img class="min-w-16" src="/berlin_skylarks_logo.svg" alt="Skylarks Team Logo">
           </a>
         </div>
-      </svelte:fragment>
+      {/snippet}
 
-      <svelte:fragment slot="default">
+      {#snippet children()}
         <section class="">
           <ul class="w-full justify-center items-center hidden lg:flex py-2 gap-2 xl:gap-16">
             <StaticNavigationLinks classes="rounded-token gap-2 py-1 px-2"/>
           </ul>
         </section>
-      </svelte:fragment>
+      {/snippet}
 
-      <svelte:fragment slot="trail">
+      {#snippet trail()}
         <div class="lg:me-5 flex items-center gap-5 flex-shrink-0">
 
           {#if env.PUBLIC_AUTH_FUNCS_ENABLED === "true"}
@@ -71,7 +71,7 @@
           {/if}
 
         </div>
-      </svelte:fragment>
+      {/snippet}
 
     </AppBar>
 
