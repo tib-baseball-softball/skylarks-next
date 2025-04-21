@@ -2,7 +2,7 @@ import type {Toast} from "$lib/types/Toast.ts";
 
 class ToastController {
   public toasts: Toast[] = $state([])
-  private readonly toastDuration = 5000
+  public readonly toastDuration = 5000
 
   public trigger(toast: Toast) {
     this.toasts.push(toast)
