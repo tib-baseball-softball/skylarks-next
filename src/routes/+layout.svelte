@@ -1,5 +1,5 @@
 <script lang="ts">
-  import '../app.postcss';
+  import '../app.css';
   import {AppBar, autoModeWatcher,} from "@skeletonlabs/skeleton";
   import SidebarNavigation from "$lib/components/meta/SidebarNavigation.svelte";
   import Footer from "$lib/components/meta/Footer.svelte";

@@ -1,0 +1,9 @@
+@import "css/flatpickr.css";
+@import "css/stats.css";
+@import "css/logos.css";
+@import "css/global.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
