@@ -1,45 +1,18 @@
 <script lang="ts">
   import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
-  import {Avatar, getModalStore, type ModalComponent, type ModalSettings} from "@skeletonlabs/skeleton";
+  import {Avatar} from "@skeletonlabs/skeleton";
   import {client} from "$lib/pocketbase/index.svelte";
   import UserDetailsForm from "$lib/auth/UserDetailsForm.svelte";
-  import ChangeEmailForm from "$lib/auth/ChangeEmailForm.svelte";
   import PasswordRequestButton from "$lib/auth/PasswordRequestButton.svelte";
   import {Lock, Mail, User} from "lucide-svelte";
+  import Dialog from "$lib/components/utility/Dialog.svelte";
+  import ChangeEmailForm from "$lib/auth/ChangeEmailForm.svelte";
 
   interface props {
     model: CustomAuthModel;
   }
 
   let {model}: props = $props();
-
-  const modalStore = getModalStore();
-
-  function triggerDetailsModal() {
-    const modalComponent: ModalComponent = {
-      ref: UserDetailsForm,
-      props: {},
-    };
-
-    const modal: ModalSettings = {
-      type: "component",
-      component: modalComponent,
-    };
-    modalStore.trigger(modal);
-  }
-
-  function triggerEmailChangeModal() {
-    const modalComponent: ModalComponent = {
-      ref: ChangeEmailForm,
-      props: {},
-    };
-
-    const modal: ModalSettings = {
-      type: "component",
-      component: modalComponent,
-    };
-    modalStore.trigger(modal);
-  }
 </script>
 
 <div class="card variant-glass-surface lg:col-span-2 shadow-lg">
@@ -75,13 +48,40 @@
       <Lock/>
     </PasswordRequestButton>
 
-    <button aria-label="change email address" class="btn variant-ghost-secondary"
-            onclick="{() => triggerEmailChangeModal()}">
-      <Mail/>
-    </button>
+    <Dialog triggerClasses="btn variant-ghost-secondary">
 
-    <button aria-label="edit user data" class="btn variant-ghost-primary" onclick="{() => triggerDetailsModal()}">
-      <User/>
-    </button>
+      {#snippet triggerContent()}
+        <Mail/>
+      {/snippet}
+
+      {#snippet title()}
+        <header>
+          <h2>
+            Change email address for {model.first_name}
+            {model.last_name}
+          </h2>
+        </header>
+      {/snippet}
+
+      <ChangeEmailForm/>
+    </Dialog>
+
+    <Dialog triggerClasses="btn variant-ghost-primary">
+
+      {#snippet triggerContent()}
+        <User/>
+      {/snippet}
+
+      {#snippet title()}
+        <header>
+          <h2>
+            Edit User Data for {model.first_name}
+            {model.last_name}
+          </h2>
+        </header>
+      {/snippet}
+
+      <UserDetailsForm/>
+    </Dialog>
   </footer>
 </div>
