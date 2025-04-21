@@ -1,8 +1,8 @@
 <script lang="ts">
-    import type {Linescore} from "bsm.js";
-    import {range} from "$lib/functions/range";
+  import type {Linescore} from "bsm.js";
+  import {range} from "$lib/functions/range";
 
-    interface Props {
+  interface Props {
     linescore: Linescore;
   }
 
@@ -87,7 +87,7 @@
     }
 
     .linescore thead th:first-child {
-        @apply border-0
+        @apply border-0;
     }
 
     /* === linescore Body === */
@@ -101,7 +101,7 @@
     }
 
     .linescore tbody td:first-child {
-        @apply border-0 text-left
+        @apply border-0 text-left;
     }
 
     .linescore-compact tbody td {

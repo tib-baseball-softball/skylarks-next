@@ -1,14 +1,10 @@
 <script lang="ts">
-    import type {PageServerData} from "../../../../.svelte-kit/types/src/routes/ligen/[id]/$types";
-    import {ProgressRadial} from "@skeletonlabs/skeleton";
-    import StandingsTable from "$lib/components/table/StandingsTable.svelte";
-    import LeagueDetailInfoCard from "$lib/components/league/LeagueDetailInfoCard.svelte";
+  import {ProgressRadial} from "@skeletonlabs/skeleton";
+  import StandingsTable from "$lib/components/table/StandingsTable.svelte";
+  import LeagueDetailInfoCard from "$lib/components/league/LeagueDetailInfoCard.svelte";
+  import type {PageProps} from "./$types";
 
-    interface Props {
-    data: PageServerData;
-  }
-
-  let {data}: Props = $props();
+  let {data}: PageProps = $props();
   let expectedTable = $derived(data.table);
   let leagueGroup = $derived(data.leagueGroup);
 </script>
@@ -59,6 +55,6 @@
 
 <style lang="postcss">
     h2 {
-        @apply mb-3
+        @apply mb-3;
     }
 </style>

@@ -111,7 +111,7 @@
 
 <style lang="postcss">
     h2, h3 {
-        @apply my-3
+        @apply my-3;
     }
 
     .chip {
