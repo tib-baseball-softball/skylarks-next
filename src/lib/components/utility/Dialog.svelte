@@ -11,29 +11,32 @@
    */
 
   type Props = Dialog.RootProps & {
-    buttonText: string;
+    triggerClasses?: string;
     title: Snippet;
     description: Snippet;
     contentProps?: WithoutChild<Dialog.ContentProps>;
-    triggerIcon: Snippet;
+    triggerContent: Snippet;
+    closeButtonClasses?: string;
+    disabled?: boolean;
   };
 
   let {
     open = $bindable(false),
     children,
-    buttonText,
+    triggerClasses = "",
     contentProps,
     title,
     description,
-    triggerIcon,
+    triggerContent,
+    closeButtonClasses = "",
+    disabled = false,
     ...restProps
   }: Props = $props();
 </script>
 
 <Dialog.Root bind:open {...restProps}>
-  <Dialog.Trigger class="btn variant-ghost-primary flex gap-1">
-    {@render triggerIcon()}
-    {buttonText}
+  <Dialog.Trigger class="btn {triggerClasses} flex gap-1" type="button" disabled={disabled}>
+    {@render triggerContent()}
   </Dialog.Trigger>
   <Dialog.Portal>
     <Dialog.Overlay
@@ -47,7 +50,7 @@
           <div {...props} transition:fly={{y: 150, duration: 100, easing: cubicInOut}}>
             <div class="flex gap-5 items-center mb-2">
 
-              <Dialog.Close class="btn variant-ghost-surface">
+              <Dialog.Close class="btn variant-ghost-surface {closeButtonClasses}">
                 <X/>
               </Dialog.Close>
 
