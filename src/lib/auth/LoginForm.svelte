@@ -8,6 +8,7 @@
   import type {UsersUpdate} from "$lib/model/pb-types.ts";
   import type {Extension} from "$lib/model/ExpandedResponse.js";
   import {toastController} from "$lib/service/ToastController.svelte.ts";
+  import type {Toast} from "$lib/types/Toast.ts";
 
   const {
     authCollection = "users",
@@ -18,6 +19,7 @@
   const coll = $derived(client.collection(authCollection));
 
   const failSettings: Toast = {
+    id: crypto.randomUUID(),
     message: "There was an error processing your authentication request.",
     background: "variant-filled-error"
   };

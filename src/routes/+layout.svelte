@@ -1,10 +1,9 @@
 <script lang="ts">
   import '../app.postcss';
-  import {AppBar, autoModeWatcher, initializeStores, Modal, type ModalComponent, Toast,} from "@skeletonlabs/skeleton";
+  import {AppBar, autoModeWatcher,} from "@skeletonlabs/skeleton";
   import SidebarNavigation from "$lib/components/meta/SidebarNavigation.svelte";
   import Footer from "$lib/components/meta/Footer.svelte";
   import LoginBadge from "$lib/auth/LoginBadge.svelte";
-  import LoginForm from "$lib/auth/LoginForm.svelte";
   import {env} from "$env/dynamic/public";
   import type {LayoutData} from "../../.svelte-kit/types/src/routes/$types";
   import StaticNavigationLinks from "$lib/components/navigation/StaticNavigationLinks.svelte";
@@ -20,13 +19,6 @@
 
   let {data, children}: Props = $props();
 
-  initializeStores();
-
-  const modalRegistry: Record<string, ModalComponent> = {
-    // Set a unique modal ID, then pass the component reference
-    loginForm: {ref: LoginForm},
-  };
-
   let showSidebar = $derived(data.clubs.length > 0 || data.teams.length > 0);
   let isUserAuthenticated = $derived(!!authSettings.record);
 </script>
@@ -38,8 +30,6 @@
 </svelte:head>
 
 <!--Singletons-->
-<Modal components={modalRegistry}/>
-<Toast/>
 <ToastContainer/>
 
 <div class="h-screen grid grid-rows-[auto_1fr_auto]">
