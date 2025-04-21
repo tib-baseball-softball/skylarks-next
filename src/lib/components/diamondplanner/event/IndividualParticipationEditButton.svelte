@@ -1,12 +1,12 @@
 <script lang="ts">
   import type {CustomAuthModel, ExpandedParticipation} from "$lib/model/ExpandedResponse";
-  import {getModalStore, type ModalComponent, type ModalSettings} from "@skeletonlabs/skeleton";
   import {authSettings} from "$lib/pocketbase/index.svelte";
   import ParticipationForm from "$lib/components/forms/ParticipationForm.svelte";
   // for some reason this import is falsely detected as unused
   //@ts-ignore
   import {Popover} from "bits-ui";
   import {MessageCircleMore} from "lucide-svelte";
+  import Dialog from "$lib/components/utility/Dialog.svelte";
 
   interface Props {
     participation: ExpandedParticipation,
@@ -16,22 +16,7 @@
 
   let {participation, isAdmin, classes = ""}: Props = $props();
 
-  const modalStore = getModalStore();
   const authRecord = $derived(authSettings.record as CustomAuthModel);
-
-  function triggerModal() {
-    isOpen = false;
-    const modalComponent: ModalComponent = {
-      ref: ParticipationForm,
-      props: {participation: participation},
-    };
-
-    const modal: ModalSettings = {
-      type: "component",
-      component: modalComponent,
-    };
-    modalStore.trigger(modal);
-  }
 
   const canEdit = $derived(participation.user === authRecord.id || isAdmin);
   let isOpen = $state(false);
@@ -70,9 +55,23 @@
       </div>
 
       {#if canEdit}
-        <button class="btn btn-sm variant-ghost-primary mt-2" onclick={triggerModal}>
-          Edit
-        </button>
+        <Dialog triggerClasses="btn btn-sm variant-ghost-primary mt-2">
+
+          {#snippet triggerContent()}
+            Edit
+          {/snippet}
+
+          {#snippet title()}
+            <header>
+              <h2 class="h3">
+                Edit participation data
+                for {participation?.expand?.user?.first_name} {participation?.expand?.user?.last_name}
+              </h2>
+            </header>
+          {/snippet}
+
+          <ParticipationForm {participation}/>
+        </Dialog>
       {/if}
     </div>
     <Popover.Close/>
