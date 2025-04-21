@@ -5,10 +5,10 @@
   import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
   import type {CustomAuthModel, ExpandedClub, ExpandedTeam, ExpandedUniformSet,} from "$lib/model/ExpandedResponse";
   import {authSettings} from "$lib/pocketbase/index.svelte";
-  import {getModalStore, type ModalComponent, type ModalSettings,} from "@skeletonlabs/skeleton";
   import {Mail, Plus, SquareArrowOutUpRight} from "lucide-svelte";
   import type {PageProps} from "./$types";
   import TeamForm from "$lib/components/forms/TeamForm.svelte";
+  import Dialog from "$lib/components/utility/Dialog.svelte";
 
   let {data}: PageProps = $props();
 
@@ -17,24 +17,6 @@
   let club: ExpandedClub = $derived(data.club);
   let teams: ExpandedTeam[] = $derived(data.teams);
   let uniformSets: ExpandedUniformSet[] = $derived(data.uniformSets);
-
-  const modalStore = getModalStore();
-
-  function triggerUniformModal() {
-    const modalComponent: ModalComponent = {
-      ref: UniformSetForm,
-      props: {
-        uniformSet: null,
-        clubID: club.id,
-      },
-    };
-
-    const modal: ModalSettings = {
-      type: "component",
-      component: modalComponent,
-    };
-    modalStore.trigger(modal);
-  }
 </script>
 
 <svelte:head>
@@ -88,10 +70,23 @@
   </div>
 
   {#if club?.admins.includes(authRecord.id)}
-    <button class="btn variant-ghost-primary" onclick={triggerUniformModal}>
-      <Plus/>
-      <span>Create new</span>
-    </button>
+
+    <Dialog triggerClasses="btn variant-ghost-primary">
+
+      {#snippet triggerContent()}
+        <Plus/>
+        <span>Create new</span>
+      {/snippet}
+
+      {#snippet title()}
+        <header>
+          <h2>Create new Uniform Set</h2>
+        </header>
+      {/snippet}
+
+      <UniformSetForm uniformSet={null} clubID={club.id}/>
+    </Dialog>
+
   {/if}
 </section>
 
