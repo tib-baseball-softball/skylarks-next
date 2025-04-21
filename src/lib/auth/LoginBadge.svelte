@@ -1,13 +1,13 @@
 <script lang="ts">
   import {client} from "../pocketbase/index.svelte";
-  import {Avatar, getModalStore, getToastStore, type ModalSettings} from "@skeletonlabs/skeleton";
+  import {Avatar, getModalStore, type ModalSettings} from "@skeletonlabs/skeleton";
   import {browser} from "$app/environment";
   import {invalidateAll} from "$app/navigation";
   import {authSettings} from "$lib/pocketbase/index.svelte";
   import {LucideLogIn} from "lucide-svelte";
+  import {toastController} from "$lib/service/ToastController.svelte.ts";
 
   const modalStore = getModalStore();
-  const toastStore = getToastStore();
 
   const {signupAllowed = true} = $props();
 
@@ -21,13 +21,17 @@
     if (browser) {
       if (model) {
         const {email} = model;
-        toastStore.trigger({
+        toastController.trigger({
+          id: crypto.randomUUID(),
           message: `Signed in as ${email}`,
           background: "variant-filled-success",
         });
         invalidateAll();
       } else {
-        toastStore.trigger({message: "Logout successful"});
+        toastController.trigger({
+          id: crypto.randomUUID(),
+          message: "Logout successful"
+        });
         invalidateAll();
       }
     }

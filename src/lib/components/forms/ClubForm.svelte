@@ -1,15 +1,14 @@
 <script lang="ts">
   import {invalidateAll} from "$app/navigation";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  import {getToastStore, type ToastSettings,} from "@skeletonlabs/skeleton";
   import type {ClubsResponse, UsersResponse, UsersUpdate} from "$lib/model/pb-types";
   import type {CustomAuthModel, ExpandedClub} from "$lib/model/ExpandedResponse";
   import MultiSelectCombobox from "$lib/components/utility/MultiSelectCombobox.svelte";
   import {ClipboardEdit, Plus} from "lucide-svelte";
   //@ts-ignore
   import * as Sheet from "$lib/components/utility/sheet/index.js";
+  import type {Toast} from "$lib/types/Toast.ts";
 
-  const toastStore = getToastStore();
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
@@ -20,12 +19,14 @@
 
   let { club, buttonClasses = "" }: Props = $props();
 
-  const toastSettingsSuccess: ToastSettings = {
+  const toastSettingsSuccess: Toast = {
+    id: crypto.randomUUID(),
     message: "Club data saved successfully.",
     background: "variant-filled-success",
   };
 
-  const toastSettingsError: ToastSettings = {
+  const toastSettingsError: Toast = {
+    id: crypto.randomUUID(),
     message: "An error occurred while saving club data.",
     background: "variant-filled-error",
   };
@@ -78,11 +79,11 @@
         });
       }
     } catch {
-      toastStore.trigger(toastSettingsError);
+      toastController.trigger(toastSettingsError);
     }
 
     if (result) {
-      toastStore.trigger(toastSettingsSuccess);
+      toastController.trigger(toastSettingsSuccess);
       open = false;
     }
     await invalidateAll();

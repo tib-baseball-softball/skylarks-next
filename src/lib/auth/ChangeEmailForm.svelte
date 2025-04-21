@@ -1,14 +1,13 @@
 <script lang="ts">
   import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  import {getToastStore} from "@skeletonlabs/skeleton";
+  import {toastController} from "$lib/service/ToastController.svelte.ts";
 
   interface props {
     parent: any;
   }
 
   const authRecord = authSettings.record as CustomAuthModel;
-  const toastStore = getToastStore();
 
   let {parent}: props = $props();
 
@@ -23,12 +22,14 @@
 
     if (sent) {
       parent.onClose();
-      toastStore.trigger({
+      toastController.trigger({
+        id: crypto.randomUUID(),
         message: "A verification email has been sent to your new address.",
         background: "variant-filled-success",
       });
     } else {
-      toastStore.trigger({
+      toastController.trigger({
+        id: crypto.randomUUID(),
         message: "An error occurred while sending your email change request.",
         background: "variant-filled-error",
       });

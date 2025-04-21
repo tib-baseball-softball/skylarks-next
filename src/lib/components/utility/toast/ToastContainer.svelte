@@ -6,9 +6,13 @@
 
 <section class="gui-toast-group">
   {#each toastController.toasts as toast (toast.id)}
-      <output transition:fly={{ y: 200, duration: 200 }} animate:flip={{duration: 400}} class="gui-toast {toast.background} rounded-token p-4">
-        {toast.message}
-      </output>
+    <output
+            transition:fly={{ y: 200, duration: 200 }}
+            animate:flip={{duration: 400}}
+            class="gui-toast {toast.background} rounded-token p-4"
+    >
+      {toast.message}
+    </output>
   {/each}
 </section>
 

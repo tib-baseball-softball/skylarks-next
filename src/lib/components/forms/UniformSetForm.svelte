@@ -1,8 +1,9 @@
 <script lang="ts">
   import type {UniformsetsCreate, UniformsetsResponse} from "$lib/model/pb-types";
   import {save} from "$lib/pocketbase/RecordOperations";
-  import {getToastStore, type ToastSettings} from "@skeletonlabs/skeleton";
   import {invalidate} from "$app/navigation";
+  import type {Toast} from "$lib/types/Toast.ts";
+  import {toastController} from "$lib/service/ToastController.svelte.ts";
 
   interface Props {
     uniformSet?: UniformsetsResponse;
@@ -10,14 +11,14 @@
     parent: any;
   }
 
-  const toastStore = getToastStore();
-
-  const toastSettingsSuccess: ToastSettings = {
+  const toastSettingsSuccess: Toast = {
+    id: crypto.randomUUID(),
     message: "Uniform Set data saved successfully.",
     background: "variant-filled-success",
   };
 
-  const toastSettingsError: ToastSettings = {
+  const toastSettingsError: Toast = {
+    id: crypto.randomUUID(),
     message: "An error occurred while saving Uniform Set.",
     background: "variant-filled-error",
   };
@@ -44,11 +45,11 @@
     try {
       result = await save<UniformsetsResponse>("uniformsets", form);
     } catch {
-      toastStore.trigger(toastSettingsError);
+      toastController.trigger(toastSettingsError);
     }
 
     if (result) {
-      toastStore.trigger(toastSettingsSuccess);
+      toastController.trigger(toastSettingsSuccess);
       await invalidate("club:single");
       parent.onClose();
     }

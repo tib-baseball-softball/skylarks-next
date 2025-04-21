@@ -1,7 +1,7 @@
 <script lang="ts">
   import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  import {getToastStore, InputChip, RadioGroup, RadioItem, type ToastSettings,} from "@skeletonlabs/skeleton";
+  import {InputChip, RadioGroup, RadioItem,} from "@skeletonlabs/skeleton";
   import {
     getAllBaseballPositionStringValues,
     positionEnumStringValuesToKeys,
@@ -10,6 +10,8 @@
   import {Edit} from "lucide-svelte";
   //@ts-ignore
   import * as Sheet from "$lib/components/utility/sheet/index.js";
+  import type {Toast} from "$lib/types/Toast.ts";
+  import {toastController} from "$lib/service/ToastController.svelte.ts";
 
   interface Props {
     buttonClasses?: string;
@@ -17,14 +19,14 @@
 
   let { buttonClasses = "" }: Props = $props();
 
-  const toastStore = getToastStore();
-
-  const toastSettingsSuccess: ToastSettings = {
+  const toastSettingsSuccess: Toast = {
+    id: crypto.randomUUID(),
     message: "Player data saved successfully.",
     background: "variant-filled-success",
   };
 
-  const toastSettingsError: ToastSettings = {
+  const toastSettingsError: Toast = {
+    id: crypto.randomUUID(),
     message: "An error occurred while saving player data.",
     background: "variant-filled-error",
   };
@@ -63,11 +65,11 @@
           .collection("users")
           .update<CustomAuthModel>(form.id, form);
     } catch {
-      toastStore.trigger(toastSettingsError);
+      toastController.trigger(toastSettingsError);
     }
 
     if (result) {
-      toastStore.trigger(toastSettingsSuccess);
+      toastController.trigger(toastSettingsSuccess);
       open = false;
     }
   }

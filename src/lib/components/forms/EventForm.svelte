@@ -3,13 +3,14 @@
   import type {ExpandedEvent} from "$lib/model/ExpandedResponse";
   import {type LocationsResponse, type UniformsetsResponse} from "$lib/model/pb-types";
   import {client} from "$lib/pocketbase/index.svelte";
-  import {getToastStore, RadioGroup, RadioItem, SlideToggle,} from "@skeletonlabs/skeleton";
+  import {RadioGroup, RadioItem, SlideToggle,} from "@skeletonlabs/skeleton";
   import Flatpickr from "../utility/Flatpickr.svelte";
   import {DateTimeUtility} from "$lib/service/DateTimeUtility.js";
   //@ts-ignore
   import * as Sheet from "$lib/components/utility/sheet/index.js";
   import type {Snippet} from "svelte";
   import type {Extension} from "$lib/model/ExpandedResponse.js";
+  import {toastController} from "$lib/service/ToastController.svelte.ts";
 
   interface Props {
     event: ExpandedEvent | null;
@@ -22,7 +23,6 @@
   let {event, clubID, teamID, triggerContent, buttonClasses = ""}: Props = $props();
 
   let open = $state(false);
-  const toastStore = getToastStore();
 
   const form: Extension<Partial<ExpandedEvent>, { starttime: string, endtime: string, meetingtime: string }> = $state(
       event ?? {
@@ -67,14 +67,16 @@
         result = await client.collection("events").create<ExpandedEvent>(form);
       }
     } catch {
-      toastStore.trigger({
+      toastController.trigger({
+        id: crypto.randomUUID(),
         message: "An error occurred while saving the event.",
         background: "variant-filled-error",
       });
     }
 
     if (result) {
-      toastStore.trigger({
+      toastController.trigger({
+        id: crypto.randomUUID(),
         message: "Event saved successfully.",
         background: "variant-filled-success",
       });

@@ -1,6 +1,7 @@
 <script lang="ts">
-  import {getModalStore, getToastStore, type ModalSettings} from "@skeletonlabs/skeleton";
+  import {getModalStore, type ModalSettings} from "@skeletonlabs/skeleton";
   import {client} from "$lib/pocketbase/index.svelte";
+  import {toastController} from "$lib/service/ToastController.svelte.ts";
 
   interface Props {
     email: string
@@ -20,10 +21,9 @@
   }: Props = $props();
 
   const modalStore = getModalStore();
-  const toastStore = getToastStore()
 
   function triggerPasswordChangeModal() {
-    additionalAction()
+    additionalAction();
 
     const modal: ModalSettings = {
       type: 'confirm',
@@ -32,20 +32,22 @@
       response: (r: boolean) => {
         if (r) {
           try {
-            client.collection("users").requestPasswordReset(email)
-            toastStore.trigger({
+            client.collection("users").requestPasswordReset(email);
+            toastController.trigger({
+              id: crypto.randomUUID(),
               message: `Sent reset password request to ${email}.`,
               background: "variant-filled-success",
-            })
+            });
             if (client.authStore.isValid) {
-              client.authStore.clear()
+              client.authStore.clear();
             }
 
           } catch {
-            toastStore.trigger({
+            toastController.trigger({
+              id: crypto.randomUUID(),
               message: `Error sending reset password request.`,
               background: "variant-filled-error",
-            })
+            });
           }
         }
       },
@@ -61,5 +63,5 @@
         disabled={disabled}
         onclick="{() => triggerPasswordChangeModal()}"
 >
-    {@render children?.()}
+  {@render children?.()}
 </button>

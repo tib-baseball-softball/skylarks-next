@@ -3,9 +3,9 @@
   import type {ExpandedTeam} from "$lib/model/ExpandedResponse.ts";
   import {client, manualAuthRefresh} from "$lib/pocketbase/index.svelte.ts";
   import MultiSelectCombobox from "$lib/components/utility/MultiSelectCombobox.svelte";
-  import {getToastStore} from "@skeletonlabs/skeleton";
   import {invalidateAll} from "$app/navigation";
   import {closeModal} from "$lib/functions/closeModal.ts";
+  import {toastController} from "$lib/service/ToastController.svelte.ts";
 
   interface Props {
     club: ClubsResponse,
@@ -13,7 +13,6 @@
   }
 
   let {club, team}: Props = $props();
-  const toastStore = getToastStore();
 
   let form = $state({
     id: team.id,
@@ -34,7 +33,8 @@
           "teams+": team.id
         });
       }
-      toastStore.trigger({
+      toastController.trigger({
+        id: crypto.randomUUID(),
         message: `All members have been added to team "${team.name}"`,
         background: "variant-filled-success",
       });
@@ -44,7 +44,8 @@
 
     } catch (error) {
       console.error(error);
-      toastStore.trigger({
+      toastController.trigger({
+        id: crypto.randomUUID(),
         message: "An error occurred while saving user team data",
         background: "variant-filled-error",
       });

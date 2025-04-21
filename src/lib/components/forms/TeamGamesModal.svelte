@@ -1,12 +1,14 @@
 <script lang="ts">
   import type {ExpandedTeam} from "$lib/model/ExpandedResponse";
   import {client} from "$lib/pocketbase/index.svelte";
-  import {getToastStore, ProgressBar, type ToastSettings,} from "@skeletonlabs/skeleton";
+  import {ProgressBar,} from "@skeletonlabs/skeleton";
   import type {LeaguegroupsResponse} from "$lib/model/pb-types";
   import type {GamesCount} from "$lib/model/GamesCount";
   import {range} from "$lib/functions/range";
   import {invalidate} from "$app/navigation";
   import {X} from "lucide-svelte";
+  import type {Toast} from "$lib/types/Toast.ts";
+  import {toastController} from "$lib/service/ToastController.svelte.ts";
 
   interface Props {
     team: ExpandedTeam,
@@ -20,11 +22,11 @@
     parent.onClose();
   }
 
-  const toastSettingsGeneralError: ToastSettings = {
+  const toastSettingsGeneralError: Toast = {
+    id: crypto.randomUUID(),
     message: "An error occurred while saving the event.",
     background: "variant-filled-error",
   };
-  const toastStore = getToastStore();
 
   const currentYear = new Date().getFullYear();
   const cutoffYear = currentYear - 4;
@@ -78,11 +80,12 @@
             .update<ExpandedTeam>(form.id, form);
       }
     } catch {
-      toastStore.trigger(toastSettingsGeneralError);
+      toastController.trigger(toastSettingsGeneralError);
     }
 
     if (result) {
-      toastStore.trigger({
+      toastController.trigger({
+        id: crypto.randomUUID(),
         message: "League has been successfully changed.",
         background: "variant-filled-success",
       });

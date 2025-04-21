@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {getToastStore, SlideToggle, Tab, TabGroup, type ToastSettings} from "@skeletonlabs/skeleton";
+  import {SlideToggle, Tab, TabGroup} from "@skeletonlabs/skeleton";
   import {client} from "../pocketbase/index.svelte";
   import {goto} from "$app/navigation";
   import OAuthProviderButton from "$lib/auth/OAuthProviderButton.svelte";
@@ -7,6 +7,7 @@
   import {fade, slide} from "svelte/transition";
   import type {UsersUpdate} from "$lib/model/pb-types.ts";
   import type {Extension} from "$lib/model/ExpandedResponse.js";
+  import {toastController} from "$lib/service/ToastController.svelte.ts";
 
   const {
     authCollection = "users",
@@ -15,9 +16,8 @@
   } = $props();
 
   const coll = $derived(client.collection(authCollection));
-  const toastStore = getToastStore();
 
-  const failSettings: ToastSettings = {
+  const failSettings: Toast = {
     message: "There was an error processing your authentication request.",
     background: "variant-filled-error"
   };
@@ -43,10 +43,10 @@
         if (signupSuccessful) {
           await goto("/signupconfirm");
         } else {
-          toastStore.trigger(failSettings);
+          toastController.trigger(failSettings);
         }
       } catch {
-        toastStore.trigger(failSettings);
+        toastController.trigger(failSettings);
       }
 
     } else {
@@ -58,7 +58,7 @@
         }
       } catch (error) {
         console.error(error);
-        toastStore.trigger(failSettings);
+        toastController.trigger(failSettings);
       }
     }
   }

@@ -2,11 +2,12 @@
   import {invalidate} from "$app/navigation";
   import type {EventSeriesCreationData, ExpandedTeam} from "$lib/model/ExpandedResponse.ts";
   import {client} from "$lib/pocketbase/index.svelte.js";
-  import {getToastStore, type ToastSettings,} from "@skeletonlabs/skeleton";
   import {DateTimeUtility} from "$lib/service/DateTimeUtility.js";
   import Flatpickr from "$lib/components/utility/Flatpickr.svelte";
   import {Weekday} from "$lib/types/Weekday.ts";
   import type {LocationsResponse} from "$lib/model/pb-types.ts";
+  import type {Toast} from "$lib/types/Toast.ts";
+  import {toastController} from "$lib/service/ToastController.svelte.ts";
 
   interface Props {
     eventSeries: EventSeriesCreationData | null,
@@ -16,14 +17,14 @@
 
   let {eventSeries, team, showForm = $bindable()}: Props = $props();
 
-  const toastStore = getToastStore();
-
-  const toastSettingsSuccess: ToastSettings = {
+  const toastSettingsSuccess: Toast = {
+    id: crypto.randomUUID(),
     message: "Event Series saved successfully.",
     background: "variant-filled-success",
   };
 
-  const toastSettingsError: ToastSettings = {
+  const toastSettingsError: Toast = {
+    id: crypto.randomUUID(),
     message: "An error occurred while saving the event series.",
     background: "variant-filled-error",
   };
@@ -61,7 +62,7 @@
       }
     } catch (error) {
       console.error("Invalid format for starttime or endtime in form.");
-      toastStore.trigger(toastSettingsError);
+      toastController.trigger(toastSettingsError);
       return;
     }
 
@@ -78,11 +79,11 @@
             .create<EventSeriesCreationData>(form);
       }
     } catch {
-      toastStore.trigger(toastSettingsError);
+      toastController.trigger(toastSettingsError);
     }
 
     if (result) {
-      toastStore.trigger(toastSettingsSuccess);
+      toastController.trigger(toastSettingsSuccess);
       showForm = false;
       await invalidate("event:list");
     }

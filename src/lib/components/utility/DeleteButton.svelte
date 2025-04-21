@@ -1,10 +1,11 @@
 <script lang="ts">
-  import {getModalStore, getToastStore, type ModalSettings, type ToastSettings,} from "@skeletonlabs/skeleton";
+  import {getModalStore, type ModalSettings,} from "@skeletonlabs/skeleton";
   import {invalidate} from "$app/navigation";
   import {Trash} from "lucide-svelte";
+  import type {Toast} from "$lib/types/Toast.ts";
+  import {toastController} from "$lib/service/ToastController.svelte.ts";
 
   const modalStore = getModalStore();
-  const toastStore = getToastStore();
 
   interface Props {
     id: string;
@@ -32,20 +33,22 @@
           try {
             action(id);
 
-            const toastSettingsDeletions: ToastSettings = {
+            const toastSettingsDeletions: Toast = {
+              id: crypto.randomUUID(),
               message: `${modelName} deleted successfully.`,
               background: "variant-filled-success",
             };
 
-            toastStore.trigger(toastSettingsDeletions);
+            toastController.trigger(toastSettingsDeletions);
             invalidate("nav:load");
           } catch {
-            const toastSettingsDeletions: ToastSettings = {
+            const toastSettingsDeletions: Toast = {
+              id: crypto.randomUUID(),
               message: `Error deleting ${modelName}.`,
               background: "variant-filled-error",
             };
 
-            toastStore.trigger(toastSettingsDeletions);
+            toastController.trigger(toastSettingsDeletions);
           }
         }
       },

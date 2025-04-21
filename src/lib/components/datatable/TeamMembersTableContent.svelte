@@ -2,12 +2,13 @@
   import type {DataHandler} from "@vincjo/datatables";
   import ThSort from "./ThSort.svelte";
   import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
-  import {Avatar, getModalStore, getToastStore, type ModalSettings} from "@skeletonlabs/skeleton";
+  import {Avatar, getModalStore, type ModalSettings} from "@skeletonlabs/skeleton";
   import {client} from "$lib/pocketbase/index.svelte";
   import LocalDate from "../utility/LocalDate.svelte";
   import type {TeamsUpdate, UsersUpdate} from "$lib/model/pb-types.ts";
   import {invalidateAll} from "$app/navigation";
   import {CircleCheck, Lock, LockOpen, Trash} from "lucide-svelte";
+  import {toastController} from "$lib/service/ToastController.svelte.ts";
 
   interface Props {
     handler: DataHandler<CustomAuthModel>;
@@ -16,7 +17,6 @@
   }
 
   const modalStore = getModalStore();
-  const toastStore = getToastStore();
 
   let {handler, team, showAdminSection = false}: Props = $props();
 
@@ -25,14 +25,16 @@
       await client.collection("teams").update<TeamsUpdate>(team.id, {
         "admins+": model.id
       });
-      toastStore.trigger({
+      toastController.trigger({
+        id: crypto.randomUUID(),
         message: `User "${model.first_name + " " + model.last_name}" has been added as an admin for team "${team.name}"`,
         background: "variant-filled-success"
       });
       await invalidateAll();
     } catch (error) {
       console.error(error);
-      toastStore.trigger({
+      toastController.trigger({
+        id: crypto.randomUUID(),
         message: "An error occurred while adding user as admin",
         background: "variant-filled-error"
       });
@@ -44,14 +46,16 @@
       await client.collection("teams").update<TeamsUpdate>(team.id, {
         "admins-": model.id
       });
-      toastStore.trigger({
+      toastController.trigger({
+        id: crypto.randomUUID(),
         message: `User "${model.first_name + " " + model.last_name}" has been removed as admin for team "${team.name}"`,
         background: "variant-filled-success"
       });
       await invalidateAll();
     } catch (error) {
       console.error(error);
-      toastStore.trigger({
+      toastController.trigger({
+        id: crypto.randomUUID(),
         message: "An error occurred while removing user as admin",
         background: "variant-filled-error"
       });
@@ -69,14 +73,16 @@
             await client.collection("users").update<UsersUpdate>(model.id, {
               "teams-": team.id
             });
-            toastStore.trigger({
+            toastController.trigger({
+              id: crypto.randomUUID(),
               message: `User "${model.first_name + " " + model.last_name}" has been removed as member from team "${team.name}"`,
               background: "variant-filled-success"
             });
             await invalidateAll();
           } catch (error) {
             console.error(error);
-            toastStore.trigger({
+            toastController.trigger({
+              id: crypto.randomUUID(),
               message: "An error occurred while removing user as team member",
               background: "variant-filled-error"
             });

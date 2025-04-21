@@ -3,11 +3,12 @@
   import type {ExpandedClub} from "$lib/model/ExpandedResponse";
   import type {LocationsResponse} from "$lib/model/pb-types";
   import {save} from "$lib/pocketbase/RecordOperations";
-  import {getToastStore, type ToastSettings} from "@skeletonlabs/skeleton";
   import {Edit, Plus} from "lucide-svelte";
   //@ts-ignore
   import * as Sheet from "$lib/components/utility/sheet/index.js";
   import LeafletMapCoordinatePicker from "$lib/components/map/LeafletMapCoordinatePicker.svelte";
+  import type {Toast} from "$lib/types/Toast.ts";
+  import {toastController} from "$lib/service/ToastController.svelte.ts";
 
   // Gail S. Halvorsen Park coordinates
   const DEFAULT_LATITUDE = 52.482762;
@@ -21,14 +22,14 @@
 
   let { location = null, club, buttonClasses = "" }: Props = $props();
 
-  const toastStore = getToastStore();
-
-  const toastSettingsSuccess: ToastSettings = {
+  const toastSettingsSuccess: Toast = {
+    id: crypto.randomUUID(),
     message: "Location data saved successfully.",
     background: "variant-filled-success",
   };
 
-  const toastSettingsError: ToastSettings = {
+  const toastSettingsError: Toast = {
+    id: crypto.randomUUID(),
     message: "An error occurred while saving Location.",
     background: "variant-filled-error",
   };
@@ -62,11 +63,11 @@
     try {
       result = await save<LocationsResponse>("locations", form);
     } catch {
-      toastStore.trigger(toastSettingsError);
+      toastController.trigger(toastSettingsError);
     }
 
     if (result) {
-      toastStore.trigger(toastSettingsSuccess);
+      toastController.trigger(toastSettingsSuccess);
       open = false;
     }
     await invalidate("club:locations");

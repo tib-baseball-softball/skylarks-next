@@ -2,12 +2,14 @@
   import {invalidate} from "$app/navigation";
   import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  import {getToastStore, RadioGroup, RadioItem, type ToastSettings,} from "@skeletonlabs/skeleton";
+  import {RadioGroup, RadioItem,} from "@skeletonlabs/skeleton";
   import {Edit, Plus} from "lucide-svelte";
   import type {ClubsResponse, UsersResponse} from "$lib/model/pb-types.ts";
   import MultiSelectCombobox from "$lib/components/utility/MultiSelectCombobox.svelte";
   //@ts-ignore
   import * as Sheet from "$lib/components/utility/sheet/index.js";
+  import type {Toast} from "$lib/types/Toast.ts";
+  import {toastController} from "$lib/service/ToastController.svelte.ts";
 
   interface Props {
     club: ClubsResponse,
@@ -18,17 +20,18 @@
 
   let {club, team, buttonClasses = "", showLabel = true}: Props = $props();
 
-  const toastStore = getToastStore();
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
   let open = $state(false);
 
-  const toastSettingsSuccess: ToastSettings = {
+  const toastSettingsSuccess: Toast = {
+    id: crypto.randomUUID(),
     message: "Team data saved successfully.",
     background: "variant-filled-success",
   };
 
-  const toastSettingsError: ToastSettings = {
+  const toastSettingsError: Toast = {
+    id: crypto.randomUUID(),
     message: "An error occurred while saving team data.",
     background: "variant-filled-error",
   };
@@ -75,11 +78,11 @@
             .create<ExpandedTeam>(form);
       }
     } catch {
-      toastStore.trigger(toastSettingsError);
+      toastController.trigger(toastSettingsError);
     }
 
     if (result) {
-      toastStore.trigger(toastSettingsSuccess);
+      toastController.trigger(toastSettingsSuccess);
       open = false;
       await invalidate("teams:list");
       await invalidate("club:single");

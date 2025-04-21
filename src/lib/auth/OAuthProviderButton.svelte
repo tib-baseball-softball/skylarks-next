@@ -2,7 +2,7 @@
   import type {AuthProviderInfo, RecordAuthResponse, RecordModel, RecordService} from "pocketbase";
   import {providerLogin} from "$lib/pocketbase/Auth.svelte";
   import {goto} from "$app/navigation";
-  import {getToastStore} from "@skeletonlabs/skeleton";
+  import {toastController} from "$lib/service/ToastController.svelte.ts";
 
   interface Props {
     authProvider: AuthProviderInfo,
@@ -10,8 +10,6 @@
     signup_key?: string,
     disabled: boolean,
   }
-
-  const toastStore = getToastStore();
 
   const {authProvider, collection, signup_key = "", disabled}: Props = $props();
 
@@ -21,7 +19,8 @@
       authResponse = await providerLogin(provider, collection, signup_key);
     } catch (error) {
       console.error(error);
-      toastStore.trigger({
+      toastController.trigger({
+        id: crypto.randomUUID(),
         message: "There was an error processing your authentication request via external provider. Please double-check your signup key",
         background: "variant-filled-error",
       });
