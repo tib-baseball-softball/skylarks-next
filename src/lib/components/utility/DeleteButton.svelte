@@ -1,11 +1,10 @@
 <script lang="ts">
-  import {getModalStore, type ModalSettings,} from "@skeletonlabs/skeleton";
   import {invalidate} from "$app/navigation";
   import {Trash} from "lucide-svelte";
   import type {Toast} from "$lib/types/Toast.ts";
   import {toastController} from "$lib/service/ToastController.svelte.ts";
-
-  const modalStore = getModalStore();
+  import Dialog from "$lib/components/utility/Dialog.svelte";
+  import {closeModal} from "$lib/functions/closeModal.ts";
 
   interface Props {
     id: string;
@@ -23,48 +22,49 @@
     buttonText = "",
   }: Props = $props();
 
-  function triggerDeleteModal() {
-    const modal: ModalSettings = {
-      type: "confirm",
-      title: "Please Confirm",
-      body: `Are you sure you wish to delete this ${modelName}? In most cases, data cannot be recovered after deletion. Please be certain.`,
-      response: (r: boolean) => {
-        if (r) {
-          try {
-            action(id);
+  function deleteItem() {
+    try {
+      action(id);
 
-            const toastSettingsDeletions: Toast = {
-              id: crypto.randomUUID(),
-              message: `${modelName} deleted successfully.`,
-              background: "variant-filled-success",
-            };
+      const toastSettingsDeletions: Toast = {
+        id: crypto.randomUUID(),
+        message: `${modelName} deleted successfully.`,
+        background: "variant-filled-success",
+      };
 
-            toastController.trigger(toastSettingsDeletions);
-            invalidate("nav:load");
-          } catch {
-            const toastSettingsDeletions: Toast = {
-              id: crypto.randomUUID(),
-              message: `Error deleting ${modelName}.`,
-              background: "variant-filled-error",
-            };
+      toastController.trigger(toastSettingsDeletions);
+      invalidate("nav:load");
+    } catch {
+      const toastSettingsDeletions: Toast = {
+        id: crypto.randomUUID(),
+        message: `Error deleting ${modelName}.`,
+        background: "variant-filled-error",
+      };
 
-            toastController.trigger(toastSettingsDeletions);
-          }
-        }
-      },
-    };
-    modalStore.trigger(modal);
+      toastController.trigger(toastSettingsDeletions);
+    }
+    closeModal();
   }
 </script>
 
-<button
-  class="btn {classes}"
-  aria-label="delete ${modelName}"
-  onclick={triggerDeleteModal}
->
-  <Trash />
+<Dialog triggerClasses="btn {classes}" closeButtonClasses="sr-only">
+  {#snippet triggerContent()}
+    <Trash/>
+    {#if buttonText}
+      <span>{buttonText}</span>
+    {/if}
+  {/snippet}
 
-  {#if buttonText}
-    <span>{buttonText}</span>
-  {/if}
-</button>
+  {#snippet title()}
+    <span>Please Confirm</span>
+  {/snippet}
+
+  {#snippet description()}
+    <span>Are you sure you wish to delete this {modelName}? In most cases, data cannot be recovered after deletion. Please be certain.</span>
+  {/snippet}
+
+  <div class="flex justify-end gap-2 mt-1">
+    <button class="btn variant-ghost-surface" type="button" onclick={closeModal}>Cancel</button>
+    <button class="btn variant-filled" type="button" onclick={deleteItem}>Confirm</button>
+  </div>
+</Dialog>
