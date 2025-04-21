@@ -1,6 +1,5 @@
 <script lang="ts">
   import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
-  import {getModalStore, type ModalComponent, type ModalSettings} from "@skeletonlabs/skeleton";
   import {goto, invalidateAll} from "$app/navigation";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
   import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
@@ -10,6 +9,7 @@
   import EventSeriesView from "$lib/components/diamondplanner/event/EventSeriesView.svelte";
   import TeamForm from "$lib/components/forms/TeamForm.svelte";
   import EventForm from "$lib/components/forms/EventForm.svelte";
+  import Dialog from "$lib/components/utility/Dialog.svelte";
 
   interface Props {
     team: ExpandedTeam,
@@ -18,25 +18,10 @@
 
   let {team, eventSeries}: Props = $props();
 
-  const modalStore = getModalStore();
-
   function teamDeleteAction(id: string) {
     goto(`/account`);
     client.collection("teams").delete(id);
     invalidateAll();
-  }
-
-  function triggerModal() {
-    const modalComponent: ModalComponent = {
-      ref: TeamGamesModal,
-      props: {team: team},
-    };
-
-    const modal: ModalSettings = {
-      type: "component",
-      component: modalComponent,
-    };
-    modalStore.trigger(modal);
   }
 
   const model = $derived(authSettings.record as CustomAuthModel);
@@ -63,10 +48,22 @@
     </div>
     <footer class="card-footer">
       <div class="flex flex-col gap-2 lg:gap-3">
-        <button class="btn variant-ghost-primary" onclick={() => triggerModal()}>
-          <CalendarPlus/>
-          <span>Setup Games Import</span>
-        </button>
+
+        <Dialog triggerClasses="btn variant-ghost-primary">
+
+          {#snippet triggerContent()}
+            <CalendarPlus/>
+            <span>Setup Games Import</span>
+          {/snippet}
+
+          {#snippet title()}
+            <header>
+              <h2 class="h3">Games Import Setup for {team.name}</h2>
+            </header>
+          {/snippet}
+
+          <TeamGamesModal {team}/>
+        </Dialog>
       </div>
     </footer>
   </div>
