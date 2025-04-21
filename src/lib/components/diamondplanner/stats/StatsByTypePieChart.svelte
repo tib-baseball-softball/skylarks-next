@@ -1,6 +1,6 @@
 <script lang="ts">
   import type {ParticipationTotal, PersonalAttendanceStatsItem} from "$lib/model/PersonalAttendanceStats";
-  import {ConicGradient, type ConicStop} from "@skeletonlabs/skeleton";
+  import {type ConicStop} from "@skeletonlabs/skeleton-svelte";
   import type {ParticipationType} from "$lib/model/ExpandedResponse";
   import {capitalize} from "$lib/functions/capitalize";
 
@@ -41,7 +41,7 @@
   const conicStops = mapToConicStops(statsItem.participationTotals)
 </script>
 
-<div class="card variant-glass-surface shadow-lg">
+<div class="card preset-tonal-surface shadow-lg">
     <header class="card-header">
         <h2 class="h4 font-semibold">Attendance Stats</h2>
     </header>

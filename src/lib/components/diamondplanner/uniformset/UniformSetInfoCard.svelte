@@ -24,7 +24,7 @@
   }
 </script>
 
-<article class="card variant-soft-surface shadow-md">
+<article class="card preset-tonal-surface shadow-md">
   <header class="card-header">
     <h3 class="h4 font-semibold">{uniformSet.name}</h3>
   </header>
@@ -47,7 +47,7 @@
 
   <footer class="card-footer flex justify-end gap-2">
     {#if uniformSet?.expand?.club?.admins.includes(authRecord.id)}
-      <Dialog triggerClasses="btn btn-sm btn-icon variant-ghost-tertiary">
+      <Dialog triggerClasses="btn btn-sm btn-icon preset-tonal-tertiary border border-tertiary-500">
 
         {#snippet triggerContent()}
           <Edit/>

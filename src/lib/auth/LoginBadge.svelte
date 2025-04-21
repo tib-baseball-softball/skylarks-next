@@ -1,6 +1,6 @@
 <script lang="ts">
   import {client} from "../pocketbase/index.svelte";
-  import {Avatar} from "@skeletonlabs/skeleton";
+  import {Avatar} from "@skeletonlabs/skeleton-svelte";
   import {browser} from "$app/environment";
   import {invalidateAll} from "$app/navigation";
   import {authSettings} from "$lib/pocketbase/index.svelte";
@@ -19,14 +19,14 @@
         toastController.trigger({
           id: crypto.randomUUID(),
           message: `Signed in as ${email}`,
-          background: "variant-filled-success",
+          background: "preset-filled-success-500",
         });
         invalidateAll();
       } else {
         toastController.trigger({
           id: crypto.randomUUID(),
           message: "Logout successful",
-          background: "variant-filled",
+          background: "preset-filled",
         });
         invalidateAll();
       }
@@ -51,7 +51,7 @@
         <Avatar
                 initials={authSettings.record?.first_name?.charAt(0).toUpperCase() +
           authSettings.record?.last_name?.charAt(0)?.toUpperCase()}
-                background="variant-filled-primary"
+                background="preset-filled-primary-500"
                 width="w-14"
                 fill="fill-white"
         />
@@ -68,7 +68,7 @@
 {:else}
 
   <a
-          class="btn variant-ghost-primary flex items-center gap-2"
+          class="btn preset-tonal-primary border border-primary-500 flex items-center gap-2"
           href="/login"
           title={signupAllowed ? "Login / Register" : "Login"}
   >

@@ -18,7 +18,7 @@
   />
 </div>
 
-<div class="card p-3 variant-soft dark:border dark:border-surface-500 shadow-xl">
+<div class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">
   <div class="container">
     <ClipboardList/>
     <span>{club.short_name}</span>

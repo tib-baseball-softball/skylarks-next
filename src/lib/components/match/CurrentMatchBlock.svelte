@@ -1,6 +1,6 @@
 <script lang="ts">
     import type {Match} from "bsm.js";
-    import {ProgressRadial} from "@skeletonlabs/skeleton";
+    import { ProgressRing } from "@skeletonlabs/skeleton-svelte";
     import CurrentMatchRow from "$lib/components/match/CurrentMatchRow.svelte";
 
     interface Props {
@@ -12,7 +12,7 @@
 
 {#await matches}
   <p>Loading matches...</p>
-  <ProgressRadial/>
+  <ProgressRing/>
 {:then results}
   <section class="grid md:grid-flow-col grid-rows-4 grid-cols-1 md:grid-cols-2 gap-y-2">
     {#each results as match}

@@ -11,7 +11,7 @@
   let {player, showTeams = true}: Props = $props();
 </script>
 
-<div class="card variant-glass-surface shadow-xl p-3">
+<div class="card preset-tonal-surface shadow-xl p-3">
   {#if showTeams}
     <dl class="flex items-center gap-3">
       <Users aria-hidden="true"/>

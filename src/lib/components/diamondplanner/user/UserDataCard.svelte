@@ -1,6 +1,6 @@
 <script lang="ts">
   import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
-  import {Avatar} from "@skeletonlabs/skeleton";
+  import {Avatar} from "@skeletonlabs/skeleton-svelte";
   import {client} from "$lib/pocketbase/index.svelte";
   import UserDetailsForm from "$lib/auth/UserDetailsForm.svelte";
   import PasswordRequestButton from "$lib/auth/PasswordRequestButton.svelte";
@@ -15,7 +15,7 @@
   let {model}: props = $props();
 </script>
 
-<div class="card variant-glass-surface lg:col-span-2 shadow-lg">
+<div class="card preset-tonal-surface lg:col-span-2 shadow-lg">
   <header class="card-header">
     <h2 class="h4 font-semibold">User Data</h2>
   </header>
@@ -44,11 +44,11 @@
 
   <footer class="card-footer flex justify-end items-center gap-3 md:gap-4">
     <p>Edit User Data:</p>
-    <PasswordRequestButton email={model.email} classes="btn variant-ghost-secondary">
+    <PasswordRequestButton email={model.email} classes="btn preset-tonal-secondary border border-secondary-500">
       <Lock/>
     </PasswordRequestButton>
 
-    <Dialog triggerClasses="btn variant-ghost-secondary">
+    <Dialog triggerClasses="btn preset-tonal-secondary border border-secondary-500">
 
       {#snippet triggerContent()}
         <Mail/>
@@ -66,7 +66,7 @@
       <ChangeEmailForm/>
     </Dialog>
 
-    <Dialog triggerClasses="btn variant-ghost-primary">
+    <Dialog triggerClasses="btn preset-tonal-primary border border-primary-500">
 
       {#snippet triggerContent()}
         <User/>

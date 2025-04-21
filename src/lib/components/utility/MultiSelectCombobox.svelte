@@ -35,7 +35,7 @@
       toastController.trigger({
         id: crypto.randomUUID(),
         message: `You cannot remove the last ${itemName}!`,
-        background: "variant-filled-warning"
+        background: "preset-filled-warning-500"
       });
       return;
     }
@@ -54,7 +54,7 @@
 {#each selectedItems as selectItem}
   <button
           type="button"
-          class="chip variant-filled-primary me-1 lg:me-2"
+          class="chip preset-filled-primary-500 me-1 lg:me-2"
           onclick={() => removeItemFromSelection(selectItem)}
   >
     <span>{selectItem.first_name} {selectItem.last_name}</span>

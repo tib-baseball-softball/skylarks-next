@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {ProgressRadial} from "@skeletonlabs/skeleton";
+  import { ProgressRing } from "@skeletonlabs/skeleton-svelte";
   import StatsByTypePieChart from "$lib/components/diamondplanner/stats/StatsByTypePieChart.svelte";
   import AttendanceTotalStatsBlock from "$lib/components/diamondplanner/stats/AttendanceTotalStatsBlock.svelte";
   import {goto} from "$app/navigation";
@@ -32,7 +32,7 @@
 <h1 class="h1 lg:mt-4">Stats for {user?.first_name} {user?.last_name}</h1>
 
 <div
-        class="flex flex-wrap gap-4 lg:gap-8 variant-soft-surface justify-between px-4 py-3 rounded-token"
+        class="flex flex-wrap gap-4 lg:gap-8 preset-tonal-surface justify-between px-4 py-3 rounded-base"
 >
     <label class="label flex items-center gap-2 grow justify-between md:grow-0">
         Season
@@ -61,7 +61,7 @@
 {/snippet}
 
 {#await data.statsItem}
-    <ProgressRadial/>
+    <ProgressRing/>
 {:then statsItem}
 
     {#if statsItem}
@@ -73,7 +73,7 @@
 {/await}
 
 {#await Promise.all(data.teamStatsItems)}
-    <ProgressRadial/>
+    <ProgressRing/>
 {:then teamStatsItems}
 
     {#each teamStatsItems as teamStatsItem}

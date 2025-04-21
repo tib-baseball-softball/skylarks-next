@@ -14,13 +14,13 @@
   const toastSettingsSuccess: Toast = {
     id: crypto.randomUUID(),
     message: "Uniform Set data saved successfully.",
-    background: "variant-filled-success",
+    background: "preset-filled-success-500",
   };
 
   const toastSettingsError: Toast = {
     id: crypto.randomUUID(),
     message: "An error occurred while saving Uniform Set.",
-    background: "variant-filled-error",
+    background: "preset-filled-error-500",
   };
 
   let {uniformSet, clubID}: Props = $props();
@@ -116,6 +116,6 @@
   </div>
 
   <div class="flex justify-end gap-3 mt-3">
-    <button type="submit" class="mt-2 btn variant-ghost-primary">Submit</button>
+    <button type="submit" class="mt-2 btn preset-tonal-primary border border-primary-500">Submit</button>
   </div>
 </form>

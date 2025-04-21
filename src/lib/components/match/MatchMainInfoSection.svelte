@@ -21,7 +21,7 @@
   const matchDate = DateTimeUtility.parseDateFromBSMString(match.time);
 </script>
 
-<div class="card variant-ghost-primary px-2 md:px-5">
+<div class="card preset-tonal-primary border border-primary-500 px-2 md:px-5">
   <header class="pt-2 pb-3">
     <h2 class="h4 font-medium">Eckdaten</h2>
   </header>
@@ -32,9 +32,9 @@
 
       <div class="font-bold text-3xl lg:text-6xl xl:text-7xl">
         {#if match.away_runs !== undefined && match.home_runs !== undefined}
-          <span class:text-surface-500-400-token={winner === GameWinner.home}>{match.away_runs}</span>
-          <span>&nbsp;-&nbsp;</span>
-          <span class:text-surface-500-400-token={winner === GameWinner.away}>{match.home_runs}</span>
+          <span class:text-surface-600-400={winner === GameWinner.home}>{match.away_runs}</span>
+          <span> - </span>
+          <span class:text-surface-600-400={winner === GameWinner.away}>{match.home_runs}</span>
         {/if}
       </div>
 
@@ -47,7 +47,7 @@
   </div>
 
   <div class="grid grid-cols-2 place-items-stretch gap-3 md:gap-8 my-2 md:my-5 pb-2 sm:pb-4 lg:pb-5">
-    <div class="card variant-ghost-primary dark:variant-soft-primary p-3">
+    <div class="card preset-tonal-primary border border-primary-500 dark:preset-tonal-primary p-3">
       <div class="flex gap-2">
         <Calendar/>
         <p class="mb-2 font-medium">Datum</p>
@@ -55,7 +55,7 @@
 
       <p>{DateTimeUtility.dateTimeFormatMedium.format(matchDate)}</p>
     </div>
-    <div class="card variant-ghost-primary dark:variant-soft-primary p-3">
+    <div class="card preset-tonal-primary border border-primary-500 dark:preset-tonal-primary p-3">
       <div class="flex gap-2">
         <ClipboardList/>
         <p class="mb-2 font-medium">Status</p>

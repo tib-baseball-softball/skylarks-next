@@ -13,7 +13,7 @@
   const mapsLink = $derived(MapUtility.buildGoogleMapsURL(field?.name, field?.latitude, field?.longitude));
 </script>
 
-<article class="card p-3 variant-soft dark:border dark:border-surface-500 shadow-xl">
+<article class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">
   <GenericDetailRow categoryName="Ballpark Name" rowValue={field.name}>
     {#snippet icon()}
       <div class="primary">

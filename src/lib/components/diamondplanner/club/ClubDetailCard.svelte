@@ -13,7 +13,7 @@
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 </script>
 
-<div class="card variant-glass-primary shadow-lg">
+<div class="card preset-tonal-primary shadow-lg">
   <header class="card-header">
     <h2 class="h4 font-semibold">Club</h2>
   </header>
@@ -46,7 +46,7 @@
 
   {#if club.admins.includes(authRecord.id)}
     <footer class="card-footer flex justify-end">
-      <ClubForm club={club} buttonClasses="btn variant-ghost-secondary"/>
+      <ClubForm club={club} buttonClasses="btn preset-tonal-secondary border border-secondary-500"/>
     </footer>
   {/if}
 </div>

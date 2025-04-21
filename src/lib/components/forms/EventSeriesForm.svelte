@@ -20,13 +20,13 @@
   const toastSettingsSuccess: Toast = {
     id: crypto.randomUUID(),
     message: "Event Series saved successfully.",
-    background: "variant-filled-success",
+    background: "preset-filled-success-500",
   };
 
   const toastSettingsError: Toast = {
     id: crypto.randomUUID(),
     message: "An error occurred while saving the event series.",
-    background: "variant-filled-error",
+    background: "preset-filled-error-500",
   };
 
   const formDefault = $state({
@@ -226,11 +226,11 @@
   <hr class="my-5!"/>
 
   <div class="flex justify-center gap-3">
-    <button type="button" class="btn variant-ghost" onclick={() => {if (showForm) showForm = false}}>
+    <button type="button" class="btn preset-tonal border border-surface-500" onclick={() => {if (showForm) showForm = false}}>
       Cancel
     </button>
 
-    <button type="submit" class="btn variant-ghost-primary">
+    <button type="submit" class="btn preset-tonal-primary border border-primary-500">
       Submit
     </button>
   </div>

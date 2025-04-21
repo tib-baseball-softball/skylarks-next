@@ -25,7 +25,7 @@
   }
 </script>
 
-<article class="card variant-glass-surface block shadow-lg" class:card-hover={link}>
+<article class="card preset-tonal-surface block shadow-lg" class:card-hover={link}>
   <a href="/account/team/{team.id}">
     <header class="card-header">
       <h3 class="h4 font-semibold">{team.name}</h3>
@@ -70,7 +70,7 @@
         <TeamForm
                 club={team.expand?.club}
                 team={team}
-                buttonClasses="btn btn-icon variant-ghost-tertiary"
+                buttonClasses="btn btn-icon preset-tonal-tertiary border border-tertiary-500"
                 showLabel={false}
         />
       {/if}

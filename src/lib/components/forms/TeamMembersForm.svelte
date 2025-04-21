@@ -36,7 +36,7 @@
       toastController.trigger({
         id: crypto.randomUUID(),
         message: `All members have been added to team "${team.name}"`,
-        background: "variant-filled-success",
+        background: "preset-filled-success-500",
       });
 
       // set manually in case we have updated the currently logged-in user
@@ -47,7 +47,7 @@
       toastController.trigger({
         id: crypto.randomUUID(),
         message: "An error occurred while saving user team data",
-        background: "variant-filled-error",
+        background: "preset-filled-error-500",
       });
     }
     await invalidateAll();
@@ -87,7 +87,7 @@
   <hr class="my-5!"/>
 
   <div class="flex justify-center gap-3">
-    <button class="mt-2 btn variant-ghost-primary" type="submit">
+    <button class="mt-2 btn preset-tonal-primary border border-primary-500" type="submit">
       Submit
     </button>
   </div>

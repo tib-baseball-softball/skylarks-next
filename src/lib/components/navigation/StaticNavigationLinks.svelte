@@ -10,32 +10,32 @@
 </script>
 
 <li>
-  <a class="{classes}" class:variant-filled-primary={page.url.pathname === "/"} href="/">
+  <a class="{classes}" class:preset-filled-primary-500={page.url.pathname === "/"} href="/">
     <Home/>
     <span>Start</span>
   </a>
 </li>
 
 <li>
-  <a class="{classes}" class:variant-filled-primary={page.url.pathname.startsWith("/gamecenter")} href="/gamecenter">
+  <a class="{classes}" class:preset-filled-primary-500={page.url.pathname.startsWith("/gamecenter")} href="/gamecenter">
     <Ticket/>
     <span>Games</span>
   </a>
 </li>
 <li>
-  <a class="{classes}" class:variant-filled-primary={page.url.pathname.startsWith("/ligen")} href="/ligen">
+  <a class="{classes}" class:preset-filled-primary-500={page.url.pathname.startsWith("/ligen")} href="/ligen">
     <Table/>
     <span>Leagues</span>
   </a>
 </li>
 <li>
-  <a class="{classes}" class:variant-filled-primary={page.url.pathname.startsWith("/teams")} href="/teams">
+  <a class="{classes}" class:preset-filled-primary-500={page.url.pathname.startsWith("/teams")} href="/teams">
     <Users/>
     <span>Teams</span>
   </a>
 </li>
 <li>
-  <a class="{classes}" class:variant-filled-primary={page.url.pathname.startsWith("/club")} href="/club">
+  <a class="{classes}" class:preset-filled-primary-500={page.url.pathname.startsWith("/club")} href="/club">
     <Shield/>
     <span>Club</span>
   </a>
@@ -46,7 +46,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        @apply hover:variant-glass-primary;
+        @apply hover:preset-tonal-primary;
     }
 
     li {

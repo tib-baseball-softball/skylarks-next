@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {ProgressRadial} from "@skeletonlabs/skeleton";
+  import { ProgressRing } from "@skeletonlabs/skeleton-svelte";
   import StandingsTable from "$lib/components/table/StandingsTable.svelte";
   import LeagueDetailInfoCard from "$lib/components/league/LeagueDetailInfoCard.svelte";
   import type {PageProps} from "./$types";
@@ -17,7 +17,7 @@
 
     <LeagueDetailInfoCard {leagueGroup}/>
 
-    <article class="card variant-soft-surface">
+    <article class="card preset-tonal-surface">
       <header class="card-header">
         <h3 class="h3">League Stats</h3>
       </header>
@@ -30,7 +30,7 @@
         </p>
 
         <footer class="card-footer mt-2">
-          <a href="/ligen/{leagueGroup.id}/stats" class="btn variant-ghost-primary">Go to stats</a>
+          <a href="/ligen/{leagueGroup.id}/stats" class="btn preset-tonal-primary border border-primary-500">Go to stats</a>
         </footer>
       </div>
     </article>
@@ -42,7 +42,7 @@
 
   <h2 class="h2">Tabelle</h2>
   {#await expectedTable}
-    <ProgressRadial/>
+    <ProgressRing/>
   {:then table}
     {#if table}
       <StandingsTable {table}/>

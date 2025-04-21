@@ -47,7 +47,7 @@
       {/if}
 
       {#if report.preview}
-        <section class="card variant-soft dark:border dark:border-surface-500 rounded-token shadow-xl p-4 my-4">
+        <section class="card preset-tonal dark:border dark:border-surface-500 rounded-base shadow-xl p-4 my-4">
           <h3 class="h3">Ausblick</h3>
 
           {@html report.preview}

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {ProgressBar} from "@skeletonlabs/skeleton";
+  import { Progress } from "@skeletonlabs/skeleton-svelte";
   import BaseballStatsDatatable from "$lib/components/datatable/BaseballStatsDatatable.svelte";
   import type {StatsDataset} from "$lib/types/StatsDataset";
   import PlayerHeaderSection from "$lib/components/player/PlayerHeaderSection.svelte";
@@ -25,7 +25,7 @@
 {/await}
 
 {#await data.player}
-  <ProgressBar/>
+  <Progress/>
 {:then player}
   {#if player}
     <h2 class="h2 my-4">Profildaten</h2>
@@ -42,7 +42,7 @@
 <h2 class="h2 my-6 lg:mt-10 mb-8">Statistiken</h2>
 
 {#await getData()}
-  <ProgressBar/>
+  <Progress/>
 {:then stats}
   <BaseballStatsDatatable data={stats} tableType="seasonal"/>
 {:catch error}

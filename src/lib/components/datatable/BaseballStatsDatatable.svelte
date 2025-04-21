@@ -7,7 +7,7 @@
     import type {StatisticsData, StatisticsSummary} from "bsm.js";
     import {StatsType} from "bsm.js";
     import StatsTableContent from "$lib/components/datatable/StatsTableContent.svelte";
-    import {RadioGroup, RadioItem} from "@skeletonlabs/skeleton";
+    import {Segment } from "@skeletonlabs/skeleton-svelte";
     import type {StatsDataset} from "$lib/types/StatsDataset";
     import StatsContentRow from "$lib/components/datatable/StatsContentRow.svelte";
     import StatsBlock from "$lib/components/utility/StatsBlock.svelte";
@@ -60,40 +60,40 @@
   <header class="flex justify-between gap-4">
     <Search {handler}/>
 
-    <RadioGroup>
-      <RadioItem
+    <Segment>
+      <Segment.Item
               bind:group={type}
               name="batting"
               value={StatsType.batting}>Batting
-      </RadioItem
+      </Segment.Item
       >
-      <RadioItem
+      <Segment.Item
               bind:group={type}
               name="pitching"
               value={StatsType.pitching}>Pitching
-      </RadioItem
+      </Segment.Item
       >
-      <RadioItem
+      <Segment.Item
               bind:group={type}
               name="fielding"
               value={StatsType.fielding}>Fielding
-      </RadioItem
+      </Segment.Item
       >
-    </RadioGroup>
+    </Segment>
 
     <RowsPerPage {handler}/>
   </header>
 
   <div class="flex flex-col">
     <div
-            class="stats stats-vertical sm:stats-horizontal variant-soft-surface rounded-container-token"
+            class="stats stats-vertical sm:stats-horizontal preset-tonal-surface rounded-container"
     >
       <StatsBlock {type} row={summaryData}/>
     </div>
   </div>
 
   <!-- Table -->
-  <table class="table table-hover table-compact w-full table-auto">
+  <table class="table  table-compact w-full table-auto">
     <StatsTableContent {handler} {tableType} {type}/>
 
     <tfoot>

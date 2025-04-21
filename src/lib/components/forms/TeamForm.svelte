@@ -2,7 +2,7 @@
   import {invalidate} from "$app/navigation";
   import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  import {RadioGroup, RadioItem,} from "@skeletonlabs/skeleton";
+  import {Segment } from "@skeletonlabs/skeleton-svelte";
   import {Edit, Plus} from "lucide-svelte";
   import type {ClubsResponse, UsersResponse} from "$lib/model/pb-types.ts";
   import MultiSelectCombobox from "$lib/components/utility/MultiSelectCombobox.svelte";
@@ -27,13 +27,13 @@
   const toastSettingsSuccess: Toast = {
     id: crypto.randomUUID(),
     message: "Team data saved successfully.",
-    background: "variant-filled-success",
+    background: "preset-filled-success-500",
   };
 
   const toastSettingsError: Toast = {
     id: crypto.randomUUID(),
     message: "An error occurred while saving team data.",
-    background: "variant-filled-error",
+    background: "preset-filled-error-500",
   };
 
   const form: Partial<ExpandedTeam> = $state(
@@ -176,22 +176,22 @@
 
         <label class="label flex flex-col gap-1 col-span-2">
           Type
-          <RadioGroup>
-            <RadioItem
+          <Segment>
+            <Segment.Item
                     bind:group={form.age_group}
                     name="age_group"
                     value={"adults"}
             >
               Adults
-            </RadioItem>
-            <RadioItem
+            </Segment.Item>
+            <Segment.Item
                     bind:group={form.age_group}
                     name="type"
                     value={"minors"}
             >
               Minors
-            </RadioItem>
-          </RadioGroup>
+            </Segment.Item>
+          </Segment>
         </label>
 
         <label class="label col-span-2">
@@ -216,7 +216,7 @@
       <hr class="my-5!"/>
 
       <div class="flex justify-center gap-3">
-        <button type="submit" class="mt-2 btn variant-ghost-primary">
+        <button type="submit" class="mt-2 btn preset-tonal-primary border border-primary-500">
           Submit
         </button>
       </div>

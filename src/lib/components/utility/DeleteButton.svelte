@@ -18,7 +18,7 @@
     id,
     modelName,
     action,
-    classes = "btn-sm btn-icon variant-ghost-error",
+    classes = "btn-sm btn-icon preset-tonal-error border border-error-500",
     buttonText = "",
   }: Props = $props();
 
@@ -29,7 +29,7 @@
       const toastSettingsDeletions: Toast = {
         id: crypto.randomUUID(),
         message: `${modelName} deleted successfully.`,
-        background: "variant-filled-success",
+        background: "preset-filled-success-500",
       };
 
       toastController.trigger(toastSettingsDeletions);
@@ -38,7 +38,7 @@
       const toastSettingsDeletions: Toast = {
         id: crypto.randomUUID(),
         message: `Error deleting ${modelName}.`,
-        background: "variant-filled-error",
+        background: "preset-filled-error-500",
       };
 
       toastController.trigger(toastSettingsDeletions);
@@ -64,7 +64,7 @@
   {/snippet}
 
   <div class="flex justify-end gap-2 mt-1">
-    <button class="btn variant-ghost-surface" type="button" onclick={closeModal}>Cancel</button>
-    <button class="btn variant-filled" type="button" onclick={deleteItem}>Confirm</button>
+    <button class="btn preset-tonal-surface border border-surface-500" type="button" onclick={closeModal}>Cancel</button>
+    <button class="btn preset-filled" type="button" onclick={deleteItem}>Confirm</button>
   </div>
 </Dialog>

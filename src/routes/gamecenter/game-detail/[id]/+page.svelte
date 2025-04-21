@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {ProgressRadial, Tab, TabGroup} from "@skeletonlabs/skeleton";
+  import {Tab, ProgressRing, Tabs } from "@skeletonlabs/skeleton-svelte";
   import MatchMainInfoSection from "$lib/components/match/MatchMainInfoSection.svelte";
   import MatchBoxscoreSection from "$lib/components/boxscore/MatchBoxscoreSection.svelte";
   import MatchDetailStatsCard from "$lib/components/match/MatchDetailStatsCard.svelte";
@@ -22,7 +22,7 @@
 </section>
 
 <section class="mb-5">
-  <TabGroup justify="justify-center">
+  <Tabs justify="justify-center">
     <Tab bind:group={tabSet} name="tabData" value={0}>Game Data</Tab>
     <Tab bind:group={tabSet} name="tabBoxscore" value={1}>Boxscore</Tab>
     <Tab bind:group={tabSet} name="tabGameReport" value={2}>Game Report</Tab>
@@ -43,7 +43,7 @@
         {:else if tabSet === 1}
 
           {#await data.singleGameStats}
-            <ProgressRadial/>
+            <ProgressRing/>
           {:then boxscore}
             {#if boxscore}
               <MatchBoxscoreSection {boxscore}/>
@@ -57,7 +57,7 @@
         {:else if tabSet === 2}
 
           {#await data.gameReport}
-            <ProgressRadial/>
+            <ProgressRing/>
           {:then gameReport}
             {#if gameReport}
               <GameReport classes="my-2! md:max-w-[80%] 2xl:max-w-[70%]" report={gameReport}/>
@@ -72,6 +72,6 @@
         {/if}
       
       {/snippet}
-  </TabGroup>
+  </Tabs>
 </section>
 

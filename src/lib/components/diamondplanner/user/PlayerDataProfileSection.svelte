@@ -35,7 +35,7 @@
   });
 </script>
 
-<div class="card variant-glass-primary shadow-lg flex flex-col justify-between">
+<div class="card preset-tonal-primary shadow-lg flex flex-col justify-between">
   <header class="card-header">
     <h2 class="h4 font-semibold">Public Profile</h2>
   </header>
@@ -54,12 +54,12 @@
 
   <footer class="card-footer">
     <div class="flex flex-col gap-2 lg:gap-3">
-      <PlayerDataForm buttonClasses="btn variant-ghost-primary"></PlayerDataForm>
+      <PlayerDataForm buttonClasses="btn preset-tonal-primary border border-primary-500"></PlayerDataForm>
 
       {#if authRecord.bsm_id}
         <a
                 href="/players/{authRecord?.bsm_id}"
-                class="btn variant-ghost-secondary"
+                class="btn preset-tonal-secondary border border-secondary-500"
         >
           <Link/>
           <span>Go to Profile Page</span>

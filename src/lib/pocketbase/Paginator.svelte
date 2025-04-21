@@ -15,7 +15,7 @@
   <div
           class="paginator flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 justify-between"
   >
-    <div class="paginator-controls btn-group variant-soft-surface">
+    <div class="paginator-controls  preset-tonal-surface">
       <button
               class="fill-current"
               type="button"

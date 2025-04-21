@@ -86,6 +86,6 @@
   </p>
 
   <div class="flex justify-end gap-3 mt-3">
-    <button type="submit" class="mt-2 btn variant-ghost-primary">Confirm</button>
+    <button type="submit" class="mt-2 btn preset-tonal-primary border border-primary-500">Confirm</button>
   </div>
 </form>

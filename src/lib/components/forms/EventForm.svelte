@@ -3,7 +3,7 @@
   import type {ExpandedEvent} from "$lib/model/ExpandedResponse";
   import {type LocationsResponse, type UniformsetsResponse} from "$lib/model/pb-types";
   import {client} from "$lib/pocketbase/index.svelte";
-  import {RadioGroup, RadioItem, SlideToggle,} from "@skeletonlabs/skeleton";
+  import {Segment, Switch } from "@skeletonlabs/skeleton-svelte";
   import Flatpickr from "../utility/Flatpickr.svelte";
   import {DateTimeUtility} from "$lib/service/DateTimeUtility.js";
   //@ts-ignore
@@ -70,7 +70,7 @@
       toastController.trigger({
         id: crypto.randomUUID(),
         message: "An error occurred while saving the event.",
-        background: "variant-filled-error",
+        background: "preset-filled-error-500",
       });
     }
 
@@ -78,7 +78,7 @@
       toastController.trigger({
         id: crypto.randomUUID(),
         message: "Event saved successfully.",
-        background: "variant-filled-success",
+        background: "preset-filled-success-500",
       });
       open = false;
     }
@@ -191,17 +191,17 @@
 
         <label class="label flex flex-col gap-1 md:col-span-2">
           Type
-          <RadioGroup>
-            <RadioItem bind:group={form.type} name="type" value={"game"}>
+          <Segment>
+            <Segment.Item bind:group={form.type} name="type" value={"game"}>
               Game
-            </RadioItem>
-            <RadioItem bind:group={form.type} name="type" value={"practice"}>
+            </Segment.Item>
+            <Segment.Item bind:group={form.type} name="type" value={"practice"}>
               Practice
-            </RadioItem>
-            <RadioItem bind:group={form.type} name="type" value={"misc"}>
+            </Segment.Item>
+            <Segment.Item bind:group={form.type} name="type" value={"misc"}>
               Other
-            </RadioItem>
-          </RadioGroup>
+            </Segment.Item>
+          </Segment>
         </label>
 
         {#await attireOptions then options}
@@ -215,19 +215,19 @@
           </label>
         {/await}
 
-        <SlideToggle
+        <Switch
                 name="cancelled"
                 active={"bg-primary-500"}
                 bind:checked={form.cancelled}
         >
           Cancelled
-        </SlideToggle>
+        </Switch>
       </div>
 
       <hr class="my-5!"/>
 
       <div class="flex justify-center gap-3">
-        <button type="submit" class="mt-2 btn variant-ghost-primary">
+        <button type="submit" class="mt-2 btn preset-tonal-primary border border-primary-500">
           Submit
         </button>
       </div>

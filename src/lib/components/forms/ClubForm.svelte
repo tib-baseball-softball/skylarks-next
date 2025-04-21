@@ -22,13 +22,13 @@
   const toastSettingsSuccess: Toast = {
     id: crypto.randomUUID(),
     message: "Club data saved successfully.",
-    background: "variant-filled-success",
+    background: "preset-filled-success-500",
   };
 
   const toastSettingsError: Toast = {
     id: crypto.randomUUID(),
     message: "An error occurred while saving club data.",
-    background: "variant-filled-error",
+    background: "preset-filled-error-500",
   };
 
   const form: Partial<ExpandedClub> = $state(
@@ -200,7 +200,7 @@
       <hr class="my-5!"/>
 
       <div class="flex justify-center gap-3">
-        <button class="mt-2 btn variant-ghost-primary" type="submit">
+        <button class="mt-2 btn preset-tonal-primary border border-primary-500" type="submit">
           Submit
         </button>
       </div>

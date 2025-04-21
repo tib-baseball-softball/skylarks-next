@@ -42,7 +42,7 @@
   @apply gap-x-4 border-opacity-10 px-6 py-4;
 
   .stat-title {
-    @apply text-surface-600-300-token;
+    @apply text-surface-700-300;
   }
 
   .stat-value {
@@ -50,7 +50,7 @@
   }
 
   .stat-desc {
-    @apply text-surface-600-300-token text-xs;
+    @apply text-surface-700-300 text-xs;
   }
 
   .stat-actions {

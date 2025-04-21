@@ -37,7 +37,7 @@
   </Popover.Trigger>
 
   <Popover.Content>
-    <div class="card variant-glass p-4 text-sm max-w-80 space-y-1 text-black dark:text-white">
+    <div class="card preset-tonal p-4 text-sm max-w-80 space-y-1 text-black dark:text-white">
 
       <div class="item-container">
         <p class="font-light text-xs">Created:</p>
@@ -55,7 +55,7 @@
       </div>
 
       {#if canEdit}
-        <Dialog triggerClasses="btn btn-sm variant-ghost-primary mt-2">
+        <Dialog triggerClasses="btn btn-sm preset-tonal-primary border border-primary-500 mt-2">
 
           {#snippet triggerContent()}
             Edit
@@ -93,6 +93,6 @@
         right: -10px;
         z-index: 10;
         position: absolute;
-        @apply variant-filled-surface;
+        @apply preset-filled-surface-500;
     }
 </style>

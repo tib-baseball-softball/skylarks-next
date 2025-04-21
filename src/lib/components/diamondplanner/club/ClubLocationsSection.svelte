@@ -21,7 +21,7 @@
   }
 </script>
 
-<ul class="variant-soft rounded-token p-4 shadow-xl text-sm">
+<ul class="preset-tonal rounded-base p-4 shadow-xl text-sm">
   {#each locations as location, index (location.id)}
     <li class="location-grid">
       <h3 class="font-bold">
@@ -39,14 +39,14 @@
           <LocationForm
             {club}
             {location}
-            buttonClasses="btn btn-icon variant-ghost-tertiary my-3"
+            buttonClasses="btn btn-icon preset-tonal-tertiary border border-tertiary-500 my-3"
           />
 
           <DeleteButton
             id={location.id}
             modelName="Location"
             action={locationDeleteAction}
-            classes="variant-ghost-error btn-icon ms-1"
+            classes="preset-tonal-error border border-error-500 btn-icon ms-1"
           />
         {/if}
       </div>
@@ -65,7 +65,7 @@
   <LocationForm
     {club}
     location={null}
-    buttonClasses="btn variant-ghost-primary my-3"
+    buttonClasses="btn preset-tonal-primary border border-primary-500 my-3"
   />
 {/if}
 

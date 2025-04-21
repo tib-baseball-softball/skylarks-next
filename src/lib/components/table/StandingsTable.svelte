@@ -25,7 +25,7 @@
 
         <tbody>
         {#each table?.rows ?? [] as row}
-            <tr class:text-primary-500-400-token={row.team_name.includes(env.PUBLIC_TEAM_NAME)}>
+            <tr class:text-primary-600-400={row.team_name.includes(env.PUBLIC_TEAM_NAME)}>
                 <td>{row.rank}</td>
                 <td>{row.team_name}</td>
                 <td>{row.wins_count}</td>

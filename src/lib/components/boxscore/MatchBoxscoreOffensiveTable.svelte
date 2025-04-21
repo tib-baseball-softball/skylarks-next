@@ -31,7 +31,7 @@
             <tr>
                 <td class="flex" data-cell-for="player">
                     {#if !player.starter}
-                        &nbsp;&nbsp;&nbsp;
+                           
                     {/if}
                     {player.person.last_name}, {player.person.first_name.charAt(0)}.
                     <div class="positions ms-2">

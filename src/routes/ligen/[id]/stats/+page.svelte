@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {ProgressBar, RadioGroup, RadioItem} from "@skeletonlabs/skeleton";
+  import {Progress, Segment } from "@skeletonlabs/skeleton-svelte";
   import {StatsType} from "bsm.js";
   import LeaderboardTable from "$lib/components/table/LeaderboardTable.svelte";
   import {goto} from "$app/navigation";
@@ -24,29 +24,29 @@
 
 <h1 class="h1">Leaderboards for {data.leagueGroup.name} ({data.leagueGroup.season})</h1>
 
-<RadioGroup display="flex">
-    <RadioItem
+<Segment display="flex">
+    <Segment.Item
             bind:group={type}
             name="batting"
             value={StatsType.batting}>Batting
-    </RadioItem
+    </Segment.Item
     >
-    <RadioItem
+    <Segment.Item
             bind:group={type}
             name="pitching"
             value={StatsType.pitching}>Pitching
-    </RadioItem
+    </Segment.Item
     >
-    <RadioItem
+    <Segment.Item
             bind:group={type}
             name="fielding"
             value={StatsType.fielding}>Fielding
-    </RadioItem
+    </Segment.Item
     >
-</RadioGroup>
+</Segment>
 
 {#await data.leaderboardData}
-    <ProgressBar/>
+    <Progress/>
     <div class="placeholder col-span-2"></div>
 {:then leaderboardData}
     <header class="space-y-3">

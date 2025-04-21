@@ -52,7 +52,7 @@
     <TeamForm
             team={null}
             club={club}
-            buttonClasses="btn variant-ghost-primary"
+            buttonClasses="btn preset-tonal-primary border border-primary-500"
             showLabel={true}
     />
   {/if}
@@ -71,7 +71,7 @@
 
   {#if club?.admins.includes(authRecord.id)}
 
-    <Dialog triggerClasses="btn variant-ghost-primary">
+    <Dialog triggerClasses="btn preset-tonal-primary border border-primary-500">
 
       {#snippet triggerContent()}
         <Plus/>
@@ -95,7 +95,7 @@
     <h2 class="h2 mb-3">Team Locations</h2>
   </header>
 
-  <a class="btn variant-ghost-primary" href="/account/clubs/{club.id}/locations">
+  <a class="btn preset-tonal-primary border border-primary-500" href="/account/clubs/{club.id}/locations">
     <span>Locations Page</span>
     <SquareArrowOutUpRight size="20"/>
   </a>
@@ -112,7 +112,7 @@
     <div
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-3"
     >
-      <article class="card admin-card variant-ringed-surface">
+      <article class="card admin-card preset-outlined-surface-500">
         <header class="card-header">
           <h3 class="h4 font-semibold">Club deletion</h3>
         </header>
@@ -128,7 +128,7 @@
 
         <footer class="card-footer flex">
           <a
-                  class="btn variant-ghost-secondary dark:variant-filled-secondary dark:border grow"
+                  class="btn preset-tonal-secondary border border-secondary-500 dark:preset-filled-secondary-500 dark:border grow"
                   href="mailto:webmaster@tib-baseball.de"
           >
             <Mail/>

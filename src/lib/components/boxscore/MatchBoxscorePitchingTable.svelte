@@ -30,7 +30,7 @@
             {#each matchStats.lineup as player}
                 <tr>
                     <td data-cell-for="player">
-                        {player.person.last_name}, {player.person.first_name.charAt(0)}.&nbsp;
+                        {player.person.last_name}, {player.person.first_name.charAt(0)}. 
                         {#if player.values.win_loss_save}
                             ({player.values.win_loss_save})
                         {/if}

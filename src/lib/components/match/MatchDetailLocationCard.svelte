@@ -21,7 +21,7 @@
 
   let {
     field,
-    classes = "card variant-ghost-surface p-3",
+    classes = "card preset-tonal-surface border border-surface-500 p-3",
     showDividers = true,
   }: Props = $props();
 

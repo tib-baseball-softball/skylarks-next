@@ -1,7 +1,7 @@
 <script lang="ts">
   import type {PageProps} from './$types';
   import ClubOfficialsList from "$lib/components/club/officials/ClubOfficialsList.svelte";
-  import {ProgressBar} from "@skeletonlabs/skeleton";
+  import { Progress } from "@skeletonlabs/skeleton-svelte";
 
   let {data}: PageProps = $props();
 </script>
@@ -11,7 +11,7 @@
 
 {#await data.clubOfficials}
   <p>Loading Club Officials...</p>
-  <ProgressBar/>
+  <Progress/>
 
 {:then clubOfficials}
   <ClubOfficialsList clubOfficials={clubOfficials}/>

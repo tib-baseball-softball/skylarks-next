@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {Accordion, AccordionItem,} from "@skeletonlabs/skeleton";
+  import {Accordion} from "@skeletonlabs/skeleton-svelte";
   import {authSettings} from "$lib/pocketbase/index.svelte";
   import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/model/ExpandedResponse";
   import {
@@ -35,7 +35,7 @@
 <nav class="list-nav py-1 px-1 lg:px-4">
   {#if isUserAuthenticated}
     <Accordion regionPanel="space-y-1">
-      <AccordionItem open>
+      <Accordion.Item open>
 
         {#snippet lead()}
           <SquareUserRound/>
@@ -62,13 +62,13 @@
           </a>
         {/snippet}
 
-      </AccordionItem>
+      </Accordion.Item>
     </Accordion>
 
     <hr class="my-2"/>
 
     <Accordion regionPanel="space-y-1">
-      <AccordionItem open>
+      <Accordion.Item open>
         {#snippet lead()}
           <UsersRound/>
         {/snippet}
@@ -103,13 +103,13 @@
             {/each}
           {/if}
         {/snippet}
-      </AccordionItem>
+      </Accordion.Item>
     </Accordion>
 
     <hr class="my-2"/>
 
     <Accordion regionPanel="space-y-1">
-      <AccordionItem open>
+      <Accordion.Item open>
         {#snippet lead()}
           <LockKeyhole/>
         {/snippet}
@@ -124,7 +124,7 @@
             <span>Admin Dashboard</span>
           </a>
         {/snippet}
-      </AccordionItem>
+      </Accordion.Item>
     </Accordion>
   {/if}
 </nav>

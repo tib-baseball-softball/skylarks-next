@@ -40,7 +40,7 @@
   </Dialog.Trigger>
   <Dialog.Portal>
     <Dialog.Overlay
-            class="fixed inset-0 z-50 bg-surface-backdrop-token"/>
+            class="fixed inset-0 z-50 bg-surface-50/50 dark:bg-surface-950/50"/>
     <Dialog.Content forceMount
                     class="fixed left-[50%] top-[50%] z-50 w-full max-w-[94%] translate-x-[-50%] translate-y-[-50%] card p-5 sm:max-w-[640px] md:w-full"
                     {...contentProps}>
@@ -50,7 +50,7 @@
           <div {...props} transition:fly={{y: 150, duration: 100, easing: cubicInOut}}>
             <div class="flex gap-5 items-center mb-2">
 
-              <Dialog.Close class="btn variant-ghost-surface {closeButtonClasses}">
+              <Dialog.Close class="btn preset-tonal-surface border border-surface-500 {closeButtonClasses}">
                 <X/>
               </Dialog.Close>
 

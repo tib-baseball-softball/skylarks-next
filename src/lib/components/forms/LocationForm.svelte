@@ -25,13 +25,13 @@
   const toastSettingsSuccess: Toast = {
     id: crypto.randomUUID(),
     message: "Location data saved successfully.",
-    background: "variant-filled-success",
+    background: "preset-filled-success-500",
   };
 
   const toastSettingsError: Toast = {
     id: crypto.randomUUID(),
     message: "An error occurred while saving Location.",
-    background: "variant-filled-error",
+    background: "preset-filled-error-500",
   };
 
   const form = $state(
@@ -245,8 +245,8 @@
       </div>
 
       <div class="mt-4 flex justify-between items-center">
-        <button type="submit" class="btn variant-ghost-primary">Submit</button>
-        <button type="reset" class="btn variant-ghost ms-2">Reset Form</button>
+        <button type="submit" class="btn preset-tonal-primary border border-primary-500">Submit</button>
+        <button type="reset" class="btn preset-tonal border border-surface-500 ms-2">Reset Form</button>
       </div>
     </form>
   </Sheet.Content>

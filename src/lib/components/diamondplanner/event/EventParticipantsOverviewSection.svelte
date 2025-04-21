@@ -28,7 +28,7 @@
 
 <h2 class="h2">Participants</h2>
 <section class="grid grid-cols-1 md:grid-cols-3 gap-2 lg:gap-3">
-  <article class="card variant-soft-success grow">
+  <article class="card preset-tonal-success grow">
     <header class="card-header flex items-center gap-2">
       <span><Check/></span>
       <h3 class="h4">In</h3>
@@ -41,7 +41,7 @@
             <IndividualParticipationEditButton
                     participation={inResponse}
                     {isAdmin}
-                    classes="chip variant-ghost-success"
+                    classes="chip preset-tonal-success border border-success-500"
             />
           </div>
         {/each}
@@ -51,7 +51,7 @@
             <div in:fade|global={{delay: 200}}>
               <button
                       aria-label="guest player name, click removes the player from the event"
-                      class="chip variant-soft dark:variant-soft-success"
+                      class="chip preset-tonal dark:preset-tonal-success"
                       onclick={() => removeGuestPlayer(guestPlayer)}
               >
                 {guestPlayer}
@@ -66,7 +66,7 @@
     </section>
   </article>
 
-  <article class="card variant-soft-warning grow">
+  <article class="card preset-tonal-warning grow">
     <header class="card-header flex items-center gap-2">
       <span><CircleHelp/></span>
       <h3 class="h4">Maybe</h3>
@@ -79,7 +79,7 @@
             <IndividualParticipationEditButton
                     participation={maybeResponse}
                     {isAdmin}
-                    classes="chip variant-ghost-warning"
+                    classes="chip preset-tonal-warning border border-warning-500"
             />
           </div>
         {/each}
@@ -87,7 +87,7 @@
     </section>
   </article>
 
-  <article class="card variant-soft-error grow">
+  <article class="card preset-tonal-error grow">
     <header class="card-header flex items-center gap-2">
       <span><X/></span>
       <h3 class="h4">Out</h3>
@@ -100,7 +100,7 @@
             <IndividualParticipationEditButton
                     participation={outResponse}
                     {isAdmin}
-                    classes="chip variant-ghost-error"
+                    classes="chip preset-tonal-error border border-error-500"
             />
           </div>
         {/each}

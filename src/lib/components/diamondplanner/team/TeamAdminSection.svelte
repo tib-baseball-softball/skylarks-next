@@ -32,7 +32,7 @@
 <div
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-3"
 >
-  <div class="card admin-card variant-ringed-surface">
+  <div class="card admin-card preset-outlined-surface-500">
     <div>
       <header class="card-header">
         <h3 class="h4 font-semibold">Games</h3>
@@ -49,7 +49,7 @@
     <footer class="card-footer">
       <div class="flex flex-col gap-2 lg:gap-3">
 
-        <Dialog triggerClasses="btn variant-ghost-primary">
+        <Dialog triggerClasses="btn preset-tonal-primary border border-primary-500">
 
           {#snippet triggerContent()}
             <CalendarPlus/>
@@ -68,7 +68,7 @@
     </footer>
   </div>
 
-  <div class="card admin-card variant-ringed-surface">
+  <div class="card admin-card preset-outlined-surface-500">
     <div>
       <header class="card-header">
         <h3 class="h4 font-semibold">Event Series</h3>
@@ -86,13 +86,13 @@
         <EventSeriesView
                 {team}
                 {eventSeries}
-                buttonClasses="btn variant-ghost-secondary dark:variant-filled-secondary dark:border"
+                buttonClasses="btn preset-tonal-secondary border border-secondary-500 dark:preset-filled-secondary-500 dark:border"
         />
       </div>
     </footer>
   </div>
 
-  <div class="card admin-card variant-ringed-surface">
+  <div class="card admin-card preset-outlined-surface-500">
     <div>
       <header class="card-header">
         <h3 class="h4 font-semibold">Single Events</h3>
@@ -113,7 +113,7 @@
                 event={null}
                 clubID={team?.club ?? ""}
                 teamID={team.id}
-                buttonClasses="btn variant-ghost-tertiary"
+                buttonClasses="btn preset-tonal-tertiary border border-tertiary-500"
         >
           {#snippet triggerContent()}
             <CalendarPlus/>
@@ -125,27 +125,27 @@
     </footer>
   </div>
 
-  <div class="card admin-card variant-ringed-surface">
+  <div class="card admin-card preset-outlined-surface-500">
     <header class="card-header">
       <h3 class="h4 font-semibold">Team Settings</h3>
     </header>
 
     <section class="p-4 space-y-3">
       <div class="flex flex-col gap-2 lg:gap-3">
-        <TeamForm club={team?.expand?.club} team={team} buttonClasses="btn variant-ghost-surface"/>
+        <TeamForm club={team?.expand?.club} team={team} buttonClasses="btn preset-tonal-surface border border-surface-500"/>
       </div>
     </section>
 
     {#if team?.expand?.club?.admins.includes(model.id)}
       <footer class="card-footer mt-2">
-        <div class="flex flex-col gap-2 lg:gap-3 rounded-token variant-ringed-error px-2 py-3">
+        <div class="flex flex-col gap-2 lg:gap-3 rounded-base preset-outlined-error-500 px-2 py-3">
           <header class="mx-2">Danger Zone</header>
 
           <DeleteButton
                   id={team.id}
                   modelName="Team"
                   action={teamDeleteAction}
-                  classes="variant-ghost-error mx-1"
+                  classes="preset-tonal-error border border-error-500 mx-1"
                   buttonText="Delete Team"
           />
         </div>

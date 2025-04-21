@@ -32,7 +32,7 @@
         toastController.trigger({
           id: crypto.randomUUID(),
           message: `If we have your email (${email}) on file, you will receive a reset password request in your inbox.`,
-          background: "variant-filled-success",
+          background: "preset-filled-success-500",
         });
       }
 
@@ -44,7 +44,7 @@
       toastController.trigger({
         id: crypto.randomUUID(),
         message: `Error sending reset password request.`,
-        background: "variant-filled-error",
+        background: "preset-filled-error-500",
       });
     }
     closeModal();
@@ -72,7 +72,7 @@
   {/snippet}
 
   <div class="flex justify-end gap-2 mt-1">
-    <button class="btn variant-ghost-surface" type="button" onclick={closeModal}>Cancel</button>
-    <button class="btn variant-filled" type="button" onclick={triggerPasswordChange}>Confirm</button>
+    <button class="btn preset-tonal-surface border border-surface-500" type="button" onclick={closeModal}>Cancel</button>
+    <button class="btn preset-filled" type="button" onclick={triggerPasswordChange}>Confirm</button>
   </div>
 </Dialog>

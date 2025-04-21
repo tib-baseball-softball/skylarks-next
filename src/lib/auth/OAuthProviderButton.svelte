@@ -22,7 +22,7 @@
       toastController.trigger({
         id: crypto.randomUUID(),
         message: "There was an error processing your authentication request via external provider. Please double-check your signup key",
-        background: "variant-filled-error",
+        background: "preset-filled-error-500",
       });
     }
 
@@ -46,7 +46,7 @@ falls back to simple button if not.
 
 <button
         class:btn={isGenericProvider}
-        class:variant-ghost-tertiary={isGenericProvider}
+        class:preset-tonal-tertiary border border-tertiary-500={isGenericProvider}
         disabled={disabled}
         type="button"
         onclick={() => submitOAuthRequest(authProvider)}

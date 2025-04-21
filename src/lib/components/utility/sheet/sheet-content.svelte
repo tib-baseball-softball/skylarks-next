@@ -2,7 +2,7 @@
   import {tv, type VariantProps} from "tailwind-variants";
 
   export const sheetVariants = tv({
-    base: "bg-surface-100-800-token data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 gap-4 p-6 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-480",
+    base: "bg-surface-100-900 data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 gap-4 p-6 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-480",
     variants: {
       side: {
         top: "data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top inset-x-0 top-0 border-b",
@@ -52,7 +52,7 @@
     {...restProps}
   >
     <SheetPrimitive.Close
-      class="btn variant-ghost-surface disabled:pointer-events-none sheet-close-button"
+      class="btn preset-tonal-surface border border-surface-500 disabled:pointer-events-none sheet-close-button"
     >
       <X />
       <span class="sr-only">Close</span>

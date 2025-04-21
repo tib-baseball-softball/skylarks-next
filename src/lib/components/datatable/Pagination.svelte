@@ -11,10 +11,10 @@
 </script>
 
 <!-- Desktop buttons -->
-<section class="btn-group variant-ringed-primary [&>*+*]:border-surface-500 h-10 hidden lg:block">
+<section class=" preset-outlined-primary-500 [&>*+*]:border-surface-500 h-10 hidden lg:block">
     <button
             type="button"
-            class="hover:variant-soft-primary"
+            class="hover:preset-tonal-primary"
             class:disabled={$pageNumber === 1}
             onclick={() => handler.setPage('previous')}
     >
@@ -23,7 +23,7 @@
     {#each $pages as page}
         <button
                 type="button"
-                class="hover:variant-soft-primary"
+                class="hover:preset-tonal-primary"
                 class:active={$pageNumber === page}
                 class:ellipse={page === null}
                 onclick={() => handler.setPage(page)}
@@ -33,7 +33,7 @@
     {/each}
     <button
             type="button"
-            class="hover:variant-soft-primary"
+            class="hover:preset-tonal-primary"
             class:disabled={$pageNumber === $pageCount}
             onclick={() => handler.setPage('next')}
     >
@@ -45,7 +45,7 @@
 <section class="lg:hidden">
     <button
             type="button"
-            class="btn variant-ringed-primary mr-2 mb-2 hover:variant-soft-primary"
+            class="btn preset-outlined-primary-500 mr-2 mb-2 hover:preset-tonal-primary"
             class:disabled={$pageNumber === 1}
             onclick={() => handler.setPage('previous')}
     >
@@ -53,7 +53,7 @@
     </button>
     <button
             type="button"
-            class="btn variant-ringed-primary mb-2 hover:variant-soft-primary"
+            class="btn preset-outlined-primary-500 mb-2 hover:preset-tonal-primary"
             class:disabled={$pageNumber === $pageCount}
             onclick={() => handler.setPage('next')}
     >

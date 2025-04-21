@@ -20,13 +20,13 @@
       toastController.trigger({
         id: crypto.randomUUID(),
         message: "A verification email has been sent to your new address.",
-        background: "variant-filled-success",
+        background: "preset-filled-success-500",
       });
     } else {
       toastController.trigger({
         id: crypto.randomUUID(),
         message: "An error occurred while sending your email change request.",
-        background: "variant-filled-error",
+        background: "preset-filled-error-500",
       });
     }
     client.authStore.clear();
@@ -51,7 +51,7 @@
   </label>
 
   <div class="flex justify-end gap-3 mt-3">
-    <button disabled={form.email === authRecord.email} type="submit" class="mt-2 btn variant-ghost-primary">
+    <button disabled={form.email === authRecord.email} type="submit" class="mt-2 btn preset-tonal-primary border border-primary-500">
       Confirm
     </button>
   </div>

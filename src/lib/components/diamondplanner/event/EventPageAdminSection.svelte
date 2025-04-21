@@ -39,7 +39,7 @@
 <div
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-3"
 >
-  <div class="card variant-ringed-surface">
+  <div class="card preset-outlined-surface-500">
     <header class="card-header">
       <h3 class="h4 font-semibold">Event Details</h3>
     </header>
@@ -71,7 +71,7 @@
     </section>
   </div>
 
-  <div class="card variant-ringed-surface">
+  <div class="card preset-outlined-surface-500">
     <header class="card-header">
       <h3 class="h4 font-semibold">Add Guest player</h3>
     </header>
@@ -89,14 +89,14 @@
                   bind:value={guestPlayerForm.name}
           />
         </label>
-        <button type="submit" class="mt-3 btn variant-ghost">Submit
+        <button type="submit" class="mt-3 btn preset-tonal border border-surface-500">Submit
         </button
         >
       </form>
     </section>
   </div>
 
-  <div class="card variant-ringed-surface">
+  <div class="card preset-outlined-surface-500">
     <header class="card-header">
       <h3 class="h4 font-semibold">Actions</h3>
     </header>
@@ -108,7 +108,7 @@
                 event={event}
                 clubID={event?.expand?.team?.club ?? ""}
                 teamID={event.team}
-                buttonClasses="btn variant-ghost-surface"
+                buttonClasses="btn preset-tonal-surface border border-surface-500"
         >
           {#snippet triggerContent()}
             <Edit/>
@@ -120,7 +120,7 @@
                 id={event.id}
                 modelName="Event"
                 action={deleteEvent}
-                classes="variant-ghost-error"
+                classes="preset-tonal-error border border-error-500"
                 buttonText="Delete Event"
         />
       </div>

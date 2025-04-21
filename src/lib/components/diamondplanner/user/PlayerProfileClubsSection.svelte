@@ -16,7 +16,7 @@
 {/each}
 
 {#if !clubs}
-  <div class="card variant-glass-primary shadow-lg">
+  <div class="card preset-tonal-primary shadow-lg">
     <header class="card-header">
       <h2 class="h4 font-semibold">Club</h2>
     </header>
@@ -30,10 +30,10 @@
     <footer class="card-footer">
       <div class="flex flex-wrap items-center gap-3">
 
-        <ClubForm club={null} buttonClasses="btn variant-ghost-primary"/>
+        <ClubForm club={null} buttonClasses="btn preset-tonal-primary border border-primary-500"/>
 
         <!--TODO: This doesn't do anything yet-->
-        <button class="btn variant-ghost-primary">
+        <button class="btn preset-tonal-primary border border-primary-500">
           <SquareArrowOutUpRight/>
           <span>Join a Club</span>
         </button>

@@ -1,6 +1,6 @@
 <script lang="ts">
   import type {ClubTeam} from "bsm.js";
-  import {ProgressRadial} from "@skeletonlabs/skeleton";
+  import { ProgressRing } from "@skeletonlabs/skeleton-svelte";
   import BaseballStatsDatatable from "$lib/components/datatable/BaseballStatsDatatable.svelte";
   import type {StatsDataset} from "$lib/types/StatsDataset";
   import TeamDetailInfoCard from "$lib/components/team/TeamDetailInfoCard.svelte";
@@ -34,7 +34,7 @@
   <h2 class="h2">Standings</h2>
 
   {#await data?.table}
-    <ProgressRadial/>
+    <ProgressRing/>
   {:then table}
     {#if table}
       <div class="col-span-2 standings-container">
@@ -51,7 +51,7 @@
 <section class="my-2 mb-4!">
   <h2 class="h2">Stats</h2>
   {#await getData()}
-    <ProgressRadial/>
+    <ProgressRing/>
   {:then stats}
     {#if stats.batting && stats.pitching && stats.fielding}
       <BaseballStatsDatatable data={stats} tableType="personal"/>

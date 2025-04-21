@@ -78,13 +78,13 @@
         <EventSeriesListItem eventSeries={series}/>
 
         <div class="flex gap-2">
-          <button class="btn variant-ghost" onclick={() => setupAndShowForm(series)}>Edit</button>
+          <button class="btn preset-tonal border border-surface-500" onclick={() => setupAndShowForm(series)}>Edit</button>
 
           <DeleteButton
                   id={series.id}
                   modelName="Event Series"
                   action={deleteEventSeries}
-                  classes="variant-ghost-error"
+                  classes="preset-tonal-error border border-error-500"
                   buttonText="Delete"
           />
         </div>
@@ -96,7 +96,7 @@
         <div>No event series have been set up for this team yet.</div>
       </section>
     {/if}
-    <button class="btn variant-ghost-primary mt-6!" onclick={() => setupAndShowForm(null)}>
+    <button class="btn preset-tonal-primary border border-primary-500 mt-6!" onclick={() => setupAndShowForm(null)}>
       Add new Event Series
     </button>
 

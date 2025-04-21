@@ -2,7 +2,7 @@
   import type {DataHandler} from "@vincjo/datatables";
   import ThSort from "./ThSort.svelte";
   import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
-  import {Avatar} from "@skeletonlabs/skeleton";
+  import {Avatar} from "@skeletonlabs/skeleton-svelte";
   import {client} from "$lib/pocketbase/index.svelte";
   import LocalDate from "../utility/LocalDate.svelte";
   import type {TeamsUpdate, UsersUpdate} from "$lib/model/pb-types.ts";
@@ -28,7 +28,7 @@
       toastController.trigger({
         id: crypto.randomUUID(),
         message: `User "${model.first_name + " " + model.last_name}" has been added as an admin for team "${team.name}"`,
-        background: "variant-filled-success"
+        background: "preset-filled-success-500"
       });
       await invalidateAll();
     } catch (error) {
@@ -36,7 +36,7 @@
       toastController.trigger({
         id: crypto.randomUUID(),
         message: "An error occurred while adding user as admin",
-        background: "variant-filled-error"
+        background: "preset-filled-error-500"
       });
     }
   }
@@ -49,7 +49,7 @@
       toastController.trigger({
         id: crypto.randomUUID(),
         message: `User "${model.first_name + " " + model.last_name}" has been removed as admin for team "${team.name}"`,
-        background: "variant-filled-success"
+        background: "preset-filled-success-500"
       });
       await invalidateAll();
     } catch (error) {
@@ -57,7 +57,7 @@
       toastController.trigger({
         id: crypto.randomUUID(),
         message: "An error occurred while removing user as admin",
-        background: "variant-filled-error"
+        background: "preset-filled-error-500"
       });
     }
   }
@@ -70,7 +70,7 @@
       toastController.trigger({
         id: crypto.randomUUID(),
         message: `User "${model.first_name + " " + model.last_name}" has been removed as member from team "${team.name}"`,
-        background: "variant-filled-success"
+        background: "preset-filled-success-500"
       });
       await invalidateAll();
     } catch (error) {
@@ -78,7 +78,7 @@
       toastController.trigger({
         id: crypto.randomUUID(),
         message: "An error occurred while removing user as team member",
-        background: "variant-filled-error"
+        background: "preset-filled-error-500"
       });
     }
     closeModal();
@@ -134,7 +134,7 @@
         <div>
           <!-- Icon for some reason not in lib -->
           <svg
-                  class="w-5 h-5 text-error-500-400-token"
+                  class="w-5 h-5 text-error-600-400"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -155,7 +155,7 @@
 
     <td>
       {#if row.number}
-                    <span class="badge-icon p-3 variant-filled-primary"
+                    <span class="badge-icon p-3 preset-filled-primary-500"
                     >{row.number}</span
                     >
       {:else}
@@ -185,18 +185,18 @@
         <!--        </button>-->
 
         {#if team.admins.includes(row.id)}
-          <button class="badge variant-ghost-warning" onclick={() => removeUserAsAdmin(row)}>
+          <button class="badge preset-tonal-warning border border-warning-500" onclick={() => removeUserAsAdmin(row)}>
             <Lock class="m-0.5" size="18"/>
             Revoke Admin Access
           </button>
         {:else }
-          <button class="badge variant-ghost-tertiary" onclick={() => makeUserAdmin(row)}>
+          <button class="badge preset-tonal-tertiary border border-tertiary-500" onclick={() => makeUserAdmin(row)}>
             <LockOpen class="m-0.5" size="18"/>
             Make Admin
           </button>
         {/if}
 
-        <Dialog triggerClasses="badge variant-ghost-error gap-0!" closeButtonClasses="sr-only">
+        <Dialog triggerClasses="badge preset-tonal-error border border-error-500 gap-0!" closeButtonClasses="sr-only">
           {#snippet triggerContent()}
             <Trash class="m-0.5" size="18"/>
             Remove
@@ -211,8 +211,8 @@
           {/snippet}
 
           <div class="flex justify-end gap-2 mt-1">
-            <button class="btn variant-ghost-surface" type="button" onclick={closeModal}>Cancel</button>
-            <button class="btn variant-filled" type="button" onclick={() => deleteUserFromTeam(row)}>Confirm</button>
+            <button class="btn preset-tonal-surface border border-surface-500" type="button" onclick={closeModal}>Cancel</button>
+            <button class="btn preset-filled" type="button" onclick={() => deleteUserFromTeam(row)}>Confirm</button>
           </div>
         </Dialog>
       </td>

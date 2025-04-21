@@ -1,7 +1,7 @@
 <script lang="ts">
   import type {ExpandedTeam} from "$lib/model/ExpandedResponse";
   import {client} from "$lib/pocketbase/index.svelte";
-  import {ProgressBar,} from "@skeletonlabs/skeleton";
+  import { Progress } from "@skeletonlabs/skeleton-svelte";
   import type {LeaguegroupsResponse} from "$lib/model/pb-types";
   import type {GamesCount} from "$lib/model/GamesCount";
   import {range} from "$lib/functions/range";
@@ -19,7 +19,7 @@
   const toastSettingsGeneralError: Toast = {
     id: crypto.randomUUID(),
     message: "An error occurred while saving the event.",
-    background: "variant-filled-error",
+    background: "preset-filled-error-500",
   };
 
   const currentYear = new Date().getFullYear();
@@ -81,7 +81,7 @@
       toastController.trigger({
         id: crypto.randomUUID(),
         message: "League has been successfully changed.",
-        background: "variant-filled-success",
+        background: "preset-filled-success-500",
       });
       closeModal();
       await invalidate("teams:list");
@@ -104,13 +104,13 @@
     />
 
     <div>Current League ID:</div>
-    <div class="badge variant-soft-primary text-lg">
+    <div class="badge preset-tonal-primary text-lg">
       {team.bsm_league_group !== 0 ? team.bsm_league_group : "None selected"}
     </div>
 
     {#await getCurrentGamesCount() then count}
       <div>BSM-imported games in database:</div>
-      <div class="badge variant-soft-primary text-lg">
+      <div class="badge preset-tonal-primary text-lg">
         {count}
       </div>
     {/await}
@@ -131,7 +131,7 @@
     </label>
 
     {#await loadClubLeagueGroups()}
-      <ProgressBar/>
+      <Progress/>
       <div class="placeholder col-span-2"></div>
     {:then result}
       <label class="label col-span-2 md:col-span-1">
@@ -159,11 +159,11 @@
     </p>
 
     <div class="flex justify-center gap-3 col-span-2">
-      <button type="button" class="mt-2 btn variant-ghost-surface border-surface-50! border">
+      <button type="button" class="mt-2 btn preset-tonal-surface border border-surface-500 border-surface-50! border">
         Help
       </button>
 
-      <button type="submit" class="mt-2 btn variant-ghost-primary">
+      <button type="submit" class="mt-2 btn preset-tonal-primary border border-primary-500">
         Submit
       </button>
     </div>

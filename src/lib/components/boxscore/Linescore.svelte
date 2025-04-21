@@ -13,7 +13,7 @@
 
 <div class="table-container dark:border-2">
   <!-- Native Table Element -->
-  <table class="linescore bg-surface-100-800-token">
+  <table class="linescore bg-surface-100-900">
 
     <thead>
     <tr>
@@ -59,7 +59,7 @@
         @apply w-full overflow-hidden;
         /* background */
         /* Theme: Rounded */
-        @apply rounded-container-token;
+        @apply rounded-container;
     }
 
     /* === Hover Styles ==== */
@@ -69,13 +69,13 @@
     }
 
     .linescore-interactive tbody tr {
-        @apply hover:bg-primary-hover-token even:hover:bg-primary-hover-token cursor-pointer;
+        @apply hover:preset-tonal-primary even:hover:preset-tonal-primary cursor-pointer;
     }
 
     /* === linescore Head === */
 
     .linescore thead {
-        @apply variant-soft-primary border-b border-surface-500/20;
+        @apply preset-tonal-primary border-b border-surface-500/20;
     }
 
     .linescore thead tr {

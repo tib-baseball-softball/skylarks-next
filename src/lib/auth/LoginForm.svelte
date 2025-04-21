@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {SlideToggle, Tab, TabGroup} from "@skeletonlabs/skeleton";
+  import {Tab, Switch, Tabs } from "@skeletonlabs/skeleton-svelte";
   import {client} from "../pocketbase/index.svelte";
   import {goto} from "$app/navigation";
   import OAuthProviderButton from "$lib/auth/OAuthProviderButton.svelte";
@@ -21,7 +21,7 @@
   const failSettings: Toast = {
     id: crypto.randomUUID(),
     message: "There was an error processing your authentication request.",
-    background: "variant-filled-error"
+    background: "preset-filled-error-500"
   };
 
   const form: Extension<Partial<UsersUpdate>, { signup_key: string }> = $state({
@@ -99,7 +99,7 @@
 
     <button
             transition:slide
-            class="btn variant-ghost-primary block mt-4"
+            class="btn preset-tonal-primary border border-primary-500 block mt-4"
             type="submit"
             onclick={() => (signup = false)}
             disabled={form.email === "" || form.password === ""}
@@ -109,7 +109,7 @@
   {/if}
 
   <div class="block md:flex gap-6 items-center justify-start my-6">
-    <SlideToggle size="sm" name="forgot password" bind:checked={forgotPassword}>Forgot Password?</SlideToggle>
+    <Switch size="sm" name="forgot password" bind:checked={forgotPassword}>Forgot Password?</Switch>
 
     {#if forgotPassword}
       <div class="mt-2 md:mt-0" transition:fade>
@@ -135,7 +135,7 @@
       <form onsubmit={submit}>
         {#if passwordLogin}
           {#if signupAllowed}
-            <TabGroup flex="grow" class="my-2" active="variant-ghost border-b-2 border-surface-900-50-token">
+            <Tabs flex="grow" class="my-2" active="preset-tonal border border-surface-500 border-b-2 border-surface-950-50">
               <Tab bind:group={tabSet} name="tab1" value={0}>Log In</Tab>
               <Tab bind:group={tabSet} name="tab2" value={1}>Create Account</Tab>
 
@@ -237,7 +237,7 @@
                   <input type="hidden" name="register" value={true}/>
 
                   <button
-                          class="btn variant-ghost-primary my-2"
+                          class="btn preset-tonal-primary border border-primary-500 my-2"
                           type="submit"
                           onclick={() => (signup = true)}
                           disabled={form.email === "" || form.password === "" || form.passwordConfirm === "" || form.signup_key === ""}
@@ -247,7 +247,7 @@
                 {/if}
               </svelte:fragment>
 
-            </TabGroup>
+            </Tabs>
           {:else}
             <h2>Login</h2>
             {@render signin()}
@@ -258,7 +258,7 @@
           {#if methods.oauth2.providers.length > 0}
             <hr class="my-2">
 
-            <div class="mx-2 mt-3 text-surface-600-300-token font-light flex justify-center">
+            <div class="mx-2 mt-3 text-surface-700-300 font-light flex justify-center">
               <span>or sign in with</span>
             </div>
 
@@ -278,7 +278,7 @@
             </div>
 
             {#if tabSet === 1 && form.signup_key === ""}
-              <div class="mx-2 mt-3 text-surface-600-300-token font-light flex justify-center" transition:slide>
+              <div class="mx-2 mt-3 text-surface-700-300 font-light flex justify-center" transition:slide>
               <span>
                 Even when using an external login provider,
                 a signup key (see above) is still required for account creation.

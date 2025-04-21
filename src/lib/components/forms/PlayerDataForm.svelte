@@ -1,7 +1,7 @@
 <script lang="ts">
   import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  import {InputChip, RadioGroup, RadioItem,} from "@skeletonlabs/skeleton";
+  import {TagsInput, Segment } from "@skeletonlabs/skeleton-svelte";
   import {
     getAllBaseballPositionStringValues,
     positionEnumStringValuesToKeys,
@@ -22,13 +22,13 @@
   const toastSettingsSuccess: Toast = {
     id: crypto.randomUUID(),
     message: "Player data saved successfully.",
-    background: "variant-filled-success",
+    background: "preset-filled-success-500",
   };
 
   const toastSettingsError: Toast = {
     id: crypto.randomUUID(),
     message: "An error occurred while saving player data.",
-    background: "variant-filled-error",
+    background: "preset-filled-error-500",
   };
 
   // Mark: here we do not need to be reactive as we're editing
@@ -51,7 +51,7 @@
   let selectedPositions: string[] = $state(
       positionKeysToEnumStringValues(authRecord.position),
   );
-  let inputChip: InputChip;
+  let inputChip: TagsInput;
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
@@ -126,20 +126,20 @@
 
       <label class="label flex flex-col gap-1 md:gap-2 md:col-span-2">
         Positions
-        <InputChip
+        <TagsInput
                 bind:this={inputChip}
                 bind:value={selectedPositions}
                 name="positions"
                 placeholder="Enter positions or click buttons..."
                 whitelist={possiblePositionValues}
                 allowUpperCase={true}
-                chips="variant-filled-primary"
+                chips="preset-filled-primary-500"
         />
         <span class="flex flex-wrap gap-2 md:col-span-2">
           {#each possiblePositionValues as value}
             <button
                     type="button"
-                    class="btn btn-sm variant-ringed-primary"
+                    class="btn btn-sm preset-outlined-primary-500"
                     onclick={() => inputChip.addChip(value)}
             >
               {value}
@@ -150,126 +150,126 @@
 
       <label class="label flex flex-col gap-1 md:col-span-2">
         Bats
-        <RadioGroup>
-          <RadioItem bind:group={form.bats} name="bats" value={"1"}>
+        <Segment>
+          <Segment.Item bind:group={form.bats} name="bats" value={"1"}>
             Left
-          </RadioItem>
-          <RadioItem bind:group={form.bats} name="bats" value={"2"}>
+          </Segment.Item>
+          <Segment.Item bind:group={form.bats} name="bats" value={"2"}>
             Right
-          </RadioItem>
-          <RadioItem bind:group={form.bats} name="bats" value={"3"}>
+          </Segment.Item>
+          <Segment.Item bind:group={form.bats} name="bats" value={"3"}>
             Switch
-          </RadioItem>
-        </RadioGroup>
+          </Segment.Item>
+        </Segment>
       </label>
 
       <label class="label flex flex-col gap-1 md:col-span-2">
         Throws
-        <RadioGroup>
-          <RadioItem
+        <Segment>
+          <Segment.Item
                   bind:group={form.throws}
                   name="throws"
                   value={"1"}
           >
             Left
-          </RadioItem>
-          <RadioItem
+          </Segment.Item>
+          <Segment.Item
                   bind:group={form.throws}
                   name="throws"
                   value={"2"}
           >
             Right
-          </RadioItem>
-          <RadioItem
+          </Segment.Item>
+          <Segment.Item
                   bind:group={form.throws}
                   name="throws"
                   value={"3"}
           >
             Switch
-          </RadioItem>
-        </RadioGroup>
+          </Segment.Item>
+        </Segment>
       </label>
 
       <label class="label flex flex-col gap-1 md:col-span-2">
         Umpire License
-        <RadioGroup>
-          <RadioItem
+        <Segment>
+          <Segment.Item
                   bind:group={form.umpire}
                   name="umpire"
                   value={"0"}
           >
             None
-          </RadioItem>
-          <RadioItem
+          </Segment.Item>
+          <Segment.Item
                   bind:group={form.umpire}
                   name="umpire"
                   value={"1"}
           >
             A
-          </RadioItem>
-          <RadioItem
+          </Segment.Item>
+          <Segment.Item
                   bind:group={form.umpire}
                   name="umpire"
                   value={"2"}
           >
             B
-          </RadioItem>
-          <RadioItem
+          </Segment.Item>
+          <Segment.Item
                   bind:group={form.umpire}
                   name="umpire"
                   value={"3"}
           >
             C
-          </RadioItem>
-          <RadioItem
+          </Segment.Item>
+          <Segment.Item
                   bind:group={form.umpire}
                   name="umpire"
                   value={"4"}
           >
             D
-          </RadioItem>
-        </RadioGroup>
+          </Segment.Item>
+        </Segment>
       </label>
 
       <label class="label flex flex-col gap-1 md:col-span-2">
         Scorer License
-        <RadioGroup>
-          <RadioItem
+        <Segment>
+          <Segment.Item
                   bind:group={form.scorer}
                   name="scorer"
                   value={"0"}
           >
             None
-          </RadioItem>
-          <RadioItem
+          </Segment.Item>
+          <Segment.Item
                   bind:group={form.scorer}
                   name="scorer"
                   value={"1"}
           >
             A
-          </RadioItem>
-          <RadioItem
+          </Segment.Item>
+          <Segment.Item
                   bind:group={form.scorer}
                   name="scorer"
                   value={"2"}
           >
             B
-          </RadioItem>
-          <RadioItem
+          </Segment.Item>
+          <Segment.Item
                   bind:group={form.scorer}
                   name="scorer"
                   value={"3"}
           >
             C
-          </RadioItem>
-        </RadioGroup>
+          </Segment.Item>
+        </Segment>
       </label>
     </div>
 
     <hr class="my-5!"/>
 
     <div class="flex justify-center gap-3">
-      <button type="submit" class="mt-2 btn variant-ghost-primary">
+      <button type="submit" class="mt-2 btn preset-tonal-primary border border-primary-500">
         Submit
       </button>
     </div>

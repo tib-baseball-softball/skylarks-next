@@ -11,7 +11,7 @@
 
 <article class="mb-4!">
   <section>
-    <ul class="card p-3 variant-soft dark:border dark:border-surface-500 shadow-xl">
+    <ul class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">
 
       {#each clubOfficials as clubOfficial, index}
         <li class="p-0.5">

@@ -4,7 +4,7 @@
   import Paginator from "$lib/pocketbase/Paginator.svelte";
   import {goto} from "$app/navigation";
   import type {CustomAuthModel, EventType} from "$lib/model/ExpandedResponse.js";
-  import {RadioGroup, RadioItem,} from "@skeletonlabs/skeleton";
+  import {Segment } from "@skeletonlabs/skeleton-svelte";
   import {authSettings} from "$lib/pocketbase/index.svelte";
   import TeamAdminSection from "$lib/components/diamondplanner/team/TeamAdminSection.svelte";
   import {Users} from "lucide-svelte";
@@ -36,7 +36,7 @@
 <h1 class="h1">{data.team.name} ({data.team?.expand?.club.name})</h1>
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-3">
-  <article class="card variant-soft-surface lg:col-span-2">
+  <article class="card preset-tonal-surface lg:col-span-2">
     <header class="card-header">
       <h2 class="h4 font-medium">Team Description</h2>
     </header>
@@ -49,43 +49,43 @@
 <h2 class="h3">Team Events</h2>
 
 <div
-        class="flex flex-wrap gap-4 lg:gap-8 variant-soft-surface justify-between px-4 py-3 rounded-token"
+        class="flex flex-wrap gap-4 lg:gap-8 preset-tonal-surface justify-between px-4 py-3 rounded-base"
 >
   <label
           class="flex items-center gap-2 grow justify-between md:grow-0"
   >
     Timeframe
-    <RadioGroup>
-      <RadioItem
+    <Segment>
+      <Segment.Item
               checked
               name="radio-next"
               value="next"
               bind:group={showEvents}
       >
         Next
-      </RadioItem>
-      <RadioItem name="radio-past" value="past" bind:group={showEvents}>
+      </Segment.Item>
+      <Segment.Item name="radio-past" value="past" bind:group={showEvents}>
         Past
-      </RadioItem>
-    </RadioGroup>
+      </Segment.Item>
+    </Segment>
   </label>
 
   <label class="label flex items-center gap-2 grow justify-between md:grow-0">
     Sort
-    <RadioGroup>
-      <RadioItem checked name="radio-asc" value="asc" bind:group={sorting}>Ascending</RadioItem>
-      <RadioItem checked name="radio-desc" value="desc" bind:group={sorting}>Descending</RadioItem>
-    </RadioGroup>
+    <Segment>
+      <Segment.Item checked name="radio-asc" value="asc" bind:group={sorting}>Ascending</Segment.Item>
+      <Segment.Item checked name="radio-desc" value="desc" bind:group={sorting}>Descending</Segment.Item>
+    </Segment>
   </label>
 
   <label class="label flex items-center gap-2 grow justify-between md:grow-0">
     Type
-    <RadioGroup padding="px-2 md:px-4 py-1">
-      <RadioItem padding="px-4 py-1" checked name="radio-any" value="any" bind:group={showTypes}>All</RadioItem>
-      <RadioItem checked name="radio-game" value="game" bind:group={showTypes}>Game</RadioItem>
-      <RadioItem checked name="radio-practice" value="practice" bind:group={showTypes}>Practice</RadioItem>
-      <RadioItem checked name="radio-misc" value="misc" bind:group={showTypes}>Other</RadioItem>
-    </RadioGroup>
+    <Segment padding="px-2 md:px-4 py-1">
+      <Segment.Item padding="px-4 py-1" checked name="radio-any" value="any" bind:group={showTypes}>All</Segment.Item>
+      <Segment.Item checked name="radio-game" value="game" bind:group={showTypes}>Game</Segment.Item>
+      <Segment.Item checked name="radio-practice" value="practice" bind:group={showTypes}>Practice</Segment.Item>
+      <Segment.Item checked name="radio-misc" value="misc" bind:group={showTypes}>Other</Segment.Item>
+    </Segment>
   </label>
 </div>
 
@@ -110,7 +110,7 @@
   <div class="flex flex-wrap items-center gap-2 lg:gap-3">
     <a
             href="/account/team/{data.team.id}/members"
-            class="btn variant-ghost-tertiary"
+            class="btn preset-tonal-tertiary border border-tertiary-500"
     >
       <Users/>
       <span>Player List</span>

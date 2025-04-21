@@ -34,8 +34,8 @@
 <section class="flex justify-end items-end gap-2 flex-wrap">
   <button
           class="chip"
-          class:variant-filled-success={userParticipation.state === "in"}
-          class:variant-ringed-success={userParticipation.state !== "in"}
+          class:preset-filled-success-500={userParticipation.state === "in"}
+          class:preset-outlined-success-500={userParticipation.state !== "in"}
           onclick={() => updateParticipationStatus("in")}
   >
     <span><Check size="14"/></span>
@@ -43,9 +43,9 @@
   </button>
 
   <button
-          class="chip variant-ringed-warning"
-          class:variant-filled-warning={userParticipation.state === "maybe"}
-          class:variant-ringed-warning={userParticipation.state !== "maybe"}
+          class="chip preset-outlined-warning-500"
+          class:preset-filled-warning-500={userParticipation.state === "maybe"}
+          class:preset-outlined-warning-500={userParticipation.state !== "maybe"}
           onclick={() => updateParticipationStatus("maybe")}
   >
     <span><CircleHelp size="14"/></span>
@@ -54,8 +54,8 @@
 
   <button
           class="chip"
-          class:variant-filled-error={userParticipation.state === "out"}
-          class:variant-ringed-error={userParticipation.state !== "out"}
+          class:preset-filled-error-500={userParticipation.state === "out"}
+          class:preset-outlined-error-500={userParticipation.state !== "out"}
           onclick={() => updateParticipationStatus("out")}
   >
     <span><X size="14"/></span>

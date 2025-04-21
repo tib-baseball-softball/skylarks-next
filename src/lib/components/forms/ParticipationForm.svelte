@@ -1,6 +1,6 @@
 <script lang="ts">
   import type {ExpandedParticipation} from "$lib/model/ExpandedResponse";
-  import {RadioGroup, RadioItem} from "@skeletonlabs/skeleton";
+  import {Segment } from "@skeletonlabs/skeleton-svelte";
   import {sendParticipationData} from "$lib/functions/sendParticipationData";
   import {invalidate} from "$app/navigation";
   import {closeModal} from "$lib/functions/closeModal.ts";
@@ -58,26 +58,26 @@
     <label class="label col-span-2">
       <span class="block">State</span>
 
-      <RadioGroup display="flex">
-        <RadioItem fill="bg-success-500!" hover="hover:variant-soft-success" bind:group={form.state}
+      <Segment display="flex">
+        <Segment.Item fill="bg-success-500!" hover="hover:preset-tonal-success" bind:group={form.state}
                    name="state" value="in">
           In
-        </RadioItem>
-        <RadioItem fill="bg-warning-500!" hover="hover:variant-soft-warning" bind:group={form.state}
+        </Segment.Item>
+        <Segment.Item fill="bg-warning-500!" hover="hover:preset-tonal-warning" bind:group={form.state}
                    name="state"
                    value="maybe">
           Maybe
-        </RadioItem>
-        <RadioItem color="text-white!" fill="bg-error-500!" hover="hover:variant-soft-error"
+        </Segment.Item>
+        <Segment.Item color="text-white!" fill="bg-error-500!" hover="hover:preset-tonal-error"
                    bind:group={form.state}
                    name="state" value="out">
           Out
-        </RadioItem>
-      </RadioGroup>
+        </Segment.Item>
+      </Segment>
     </label>
 
     <div class="flex justify-center col-span-2">
-      <button type="submit" class="mt-2 btn variant-ghost-primary">
+      <button type="submit" class="mt-2 btn preset-tonal-primary border border-primary-500">
         Submit
       </button>
     </div>

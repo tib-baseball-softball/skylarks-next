@@ -19,10 +19,10 @@
 
 <span
         class="badge"
-        class:variant-filled-primary={type === "game"}
-        class:variant-filled-secondary={type === "practice"}
+        class:preset-filled-primary-500={type === "game"}
+        class:preset-filled-secondary-500={type === "practice"}
         class:dark:border={type === "practice"}
-        class:variant-filled-tertiary={type === "misc"}
+        class:preset-filled-tertiary-500={type === "misc"}
 >
 {getDisplayString()}
 </span>

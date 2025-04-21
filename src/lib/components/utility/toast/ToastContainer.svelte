@@ -9,7 +9,7 @@
     <output
             transition:fly={{ y: 200, duration: 200 }}
             animate:flip={{duration: 400}}
-            class="gui-toast {toast.background} rounded-token p-4"
+            class="gui-toast {toast.background} rounded-base p-4"
     >
       {toast.message}
     </output>

@@ -1,6 +1,6 @@
 <script lang="ts">
   import '../app.css';
-  import {AppBar, autoModeWatcher,} from "@skeletonlabs/skeleton";
+  import {AppBar} from "@skeletonlabs/skeleton-svelte";
   import SidebarNavigation from "$lib/components/meta/SidebarNavigation.svelte";
   import Footer from "$lib/components/meta/Footer.svelte";
   import LoginBadge from "$lib/auth/LoginBadge.svelte";
@@ -58,7 +58,7 @@
       {#snippet children()}
         <section class="">
           <ul class="w-full justify-center items-center hidden lg:flex py-2 gap-2 xl:gap-16">
-            <StaticNavigationLinks classes="rounded-token gap-2 py-1 px-2"/>
+            <StaticNavigationLinks classes="rounded-base gap-2 py-1 px-2"/>
           </ul>
         </section>
       {/snippet}

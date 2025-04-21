@@ -1,6 +1,6 @@
 <script lang="ts">
   import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte";
-  import {ProgressBar, SlideToggle, Tab, TabGroup,} from "@skeletonlabs/skeleton";
+  import {Tab, Progress, Switch, Tabs } from "@skeletonlabs/skeleton-svelte";
   import {Gameday} from "bsm.js";
   import {preferences} from "$lib/stores";
   import LeagueFilter from "$lib/components/utility/LeagueFilter.svelte";
@@ -44,7 +44,7 @@
     </div>
 
     <div class="flex gap-2 my-4 justify-end">
-      <SlideToggle
+      <Switch
               size="sm"
               name="slide"
               active="bg-surface-900 dark:bg-tertiary-700"
@@ -58,7 +58,7 @@
 <section class="mb-5 mt-3">
   <label id="gameday_label" class="label">
     Gameday
-    <TabGroup justify="justify-center" labelledby="gameday_label">
+    <Tabs justify="justify-center" labelledby="gameday_label">
       <Tab
               bind:group={$preferences.gameday}
               name="tabPrevious"
@@ -85,13 +85,13 @@
       >
       <!-- Tab Panels --->
       <svelte:fragment slot="panel"></svelte:fragment>
-    </TabGroup>
+    </Tabs>
   </label>
 </section>
 
 {#await data.streamed.matches}
   <p>Loading matches...</p>
-  <ProgressBar/>
+  <Progress/>
 {:then matches}
   <GamecenterMatchSection {matches} {showExternal}/>
 {:catch error}
