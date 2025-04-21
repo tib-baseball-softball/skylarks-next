@@ -5,7 +5,6 @@
   import Footer from "$lib/components/meta/Footer.svelte";
   import LoginBadge from "$lib/auth/LoginBadge.svelte";
   import LoginForm from "$lib/auth/LoginForm.svelte";
-  import AccountModal from "$lib/auth/AccountModal.svelte";
   import {env} from "$env/dynamic/public";
   import type {LayoutData} from "../../.svelte-kit/types/src/routes/$types";
   import StaticNavigationLinks from "$lib/components/navigation/StaticNavigationLinks.svelte";
@@ -26,7 +25,6 @@
   const modalRegistry: Record<string, ModalComponent> = {
     // Set a unique modal ID, then pass the component reference
     loginForm: {ref: LoginForm},
-    accountOverview: {ref: AccountModal}
   };
 
   let showSidebar = $derived(data.clubs.length > 0 || data.teams.length > 0);

@@ -13,7 +13,7 @@
   type Props = Dialog.RootProps & {
     triggerClasses?: string;
     title: Snippet;
-    description: Snippet;
+    description?: Snippet;
     contentProps?: WithoutChild<Dialog.ContentProps>;
     triggerContent: Snippet;
     closeButtonClasses?: string;
@@ -60,9 +60,11 @@
 
             </div>
 
-            <Dialog.Description>
-              {@render description()}
-            </Dialog.Description>
+            {#if description}
+              <Dialog.Description>
+                {@render description?.()}
+              </Dialog.Description>
+            {/if}
 
             {@render children?.()}
           </div>

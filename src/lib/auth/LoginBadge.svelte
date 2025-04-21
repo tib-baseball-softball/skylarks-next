@@ -1,20 +1,15 @@
 <script lang="ts">
   import {client} from "../pocketbase/index.svelte";
-  import {Avatar, getModalStore, type ModalSettings} from "@skeletonlabs/skeleton";
+  import {Avatar} from "@skeletonlabs/skeleton";
   import {browser} from "$app/environment";
   import {invalidateAll} from "$app/navigation";
   import {authSettings} from "$lib/pocketbase/index.svelte";
   import {LucideLogIn} from "lucide-svelte";
   import {toastController} from "$lib/service/ToastController.svelte.ts";
-
-  const modalStore = getModalStore();
+  import Dialog from "$lib/components/utility/Dialog.svelte";
+  import AccountModal from "$lib/auth/AccountModal.svelte";
 
   const {signupAllowed = true} = $props();
-
-  const accountOverview: ModalSettings = {
-    type: "component",
-    component: "accountOverview",
-  };
 
   client.authStore.onChange((_token, model) => {
     // do not do any auth stuff on the server
@@ -30,7 +25,8 @@
       } else {
         toastController.trigger({
           id: crypto.randomUUID(),
-          message: "Logout successful"
+          message: "Logout successful",
+          background: "variant-filled",
         });
         invalidateAll();
       }
@@ -40,27 +36,37 @@
 </script>
 
 {#if authSettings.record}
-  <button class="badge" onclick={() => modalStore.trigger(accountOverview)}>
 
-    {#if authSettings.record?.avatar}
-      <Avatar
-              src={client.files.getURL(authSettings.record, authSettings.record?.avatar)}
-              width="w-14"
-      />
+  <Dialog triggerClasses="badge">
 
-    {:else}
+    {#snippet triggerContent()}
+      {#if authSettings.record?.avatar}
+        <Avatar
+                src={client.files.getURL(authSettings.record, authSettings.record?.avatar)}
+                width="w-14"
+        />
 
-      <Avatar
-              initials={authSettings.record?.first_name?.charAt(0).toUpperCase() +
+      {:else}
+
+        <Avatar
+                initials={authSettings.record?.first_name?.charAt(0).toUpperCase() +
           authSettings.record?.last_name?.charAt(0)?.toUpperCase()}
-              background="variant-filled-primary"
-              width="w-14"
-              fill="fill-white"
-      />
+                background="variant-filled-primary"
+                width="w-14"
+                fill="fill-white"
+        />
+      {/if}
+    {/snippet}
 
-    {/if}
-  </button>
+    {#snippet title()}
+      <h2>Account Overview</h2>
+    {/snippet}
+
+    <AccountModal/>
+  </Dialog>
+
 {:else}
+
   <a
           class="btn variant-ghost-primary flex items-center gap-2"
           href="/login"
@@ -69,4 +75,5 @@
     <LucideLogIn/>
     Login
   </a>
+
 {/if}
