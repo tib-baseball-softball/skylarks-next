@@ -45,13 +45,11 @@ falls back to simple button if not.
 -->
 
 <button
-        class:btn={isGenericProvider}
-        class:preset-tonal-tertiary border border-tertiary-500={isGenericProvider}
         disabled={disabled}
         type="button"
         onclick={() => submitOAuthRequest(authProvider)}
         aria-label="sign in with {authProvider.displayName}"
-        class="oauth-button"
+        class={['oauth-button', isGenericProvider && 'btn preset-tonal-tertiary border border-tertiary-500']}
 >
   {#if (authProvider.name === "google")}
     <img class="light-logo" src="/providers/Google_light.svg" alt="Google logo" width="40">
@@ -73,6 +71,7 @@ falls back to simple button if not.
   {/if}
 </button>
 
+<!-- svelte-ignore css_unused_selector -->
 <style>
     .oauth-button[disabled] {
         cursor: not-allowed;

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {Tab, Switch, Tabs } from "@skeletonlabs/skeleton-svelte";
+  import {Switch, Tabs} from "@skeletonlabs/skeleton-svelte";
   import {client} from "../pocketbase/index.svelte";
   import {goto} from "$app/navigation";
   import OAuthProviderButton from "$lib/auth/OAuthProviderButton.svelte";
@@ -65,11 +65,11 @@
     }
   }
 
-  let tabSet = $state(0);
+  let tabSet: "login" | "signup" | string = $state("login");
   let forgotPassword = $state(false);
 </script>
 
-{#snippet signin()}
+{#snippet login()}
   <label class="label">
     <span class="">Your email</span>
     <input
@@ -109,7 +109,7 @@
   {/if}
 
   <div class="block md:flex gap-6 items-center justify-start my-6">
-    <Switch size="sm" name="forgot password" bind:checked={forgotPassword}>Forgot Password?</Switch>
+    <Switch name="forgot password" onCheckedChange={(e) => (forgotPassword = e.checked)}>Forgot Password?</Switch>
 
     {#if forgotPassword}
       <div class="mt-2 md:mt-0" transition:fade>
@@ -135,122 +135,136 @@
       <form onsubmit={submit}>
         {#if passwordLogin}
           {#if signupAllowed}
-            <Tabs flex="grow" class="my-2" active="preset-tonal border border-surface-500 border-b-2 border-surface-950-50">
-              <Tab bind:group={tabSet} name="tab1" value={0}>Log In</Tab>
-              <Tab bind:group={tabSet} name="tab2" value={1}>Create Account</Tab>
+            <Tabs value={tabSet} onValueChange={(e) => (tabSet = e.value)} fluid base="my-2">
 
-              <svelte:fragment slot="panel">
-                {#if tabSet === 0}
+              {#snippet list()}
+                <Tabs.Control value="login"
+                              stateActive="preset-tonal border border-surface-500 border-b-2 border-surface-950-50">Log
+                  In
+                </Tabs.Control>
+                <Tabs.Control value="signup"
+                              stateActive="preset-tonal border border-surface-500 border-b-2 border-surface-950-50">
+                  Create Account
+                </Tabs.Control>
+              {/snippet}
 
-                  {@render signin()}
+              {#snippet content()}
 
-                {:else if tabSet === 1}
+                <Tabs.Panel value="login">
+                  <h2>Login</h2>
 
-                  <label class="label">
-                    <span class="">Your email</span>
-                    <input
-                            class="input"
-                            bind:value={form.email}
-                            required
-                            type="email"
-                            placeholder="name@provider.com"
-                            autocomplete="email"
-                    />
-                  </label>
+                  {@render login()}
+                </Tabs.Panel>
 
-                  <div class="grid sm:grid-cols-2 gap-2">
+                <Tabs.Panel value="signup">
 
+                  {@render login()}
+
+                  {#if tabSet === "signup"}
                     <label class="label">
-                      <span class="">First Name</span>
+                      <span class="">Your email</span>
                       <input
                               class="input"
-                              bind:value={form.first_name}
-                              placeholder="John"
+                              bind:value={form.email}
+                              required
+                              type="email"
+                              placeholder="name@provider.com"
+                              autocomplete="email"
+                      />
+                    </label>
+
+                    <div class="grid sm:grid-cols-2 gap-2">
+
+                      <label class="label">
+                        <span class="">First Name</span>
+                        <input
+                                class="input"
+                                bind:value={form.first_name}
+                                placeholder="John"
+                                required
+                                type="text"
+                                autocomplete="given-name"
+                        />
+                      </label>
+
+                      <label class="label">
+                        <span class="">Last Name</span>
+                        <input
+                                class="input"
+                                bind:value={form.last_name}
+                                placeholder="Doe"
+                                required
+                                type="text"
+                                autocomplete="family-name"
+                        />
+                      </label>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 gap-2">
+
+                      <label class="label">
+                        <span class="">Your password</span>
+                        <input
+                                class="input"
+                                bind:value={form.password}
+                                required
+                                type="password"
+                                placeholder="**********"
+                                minlength="8"
+                                maxlength="72"
+                                autocomplete="new-password"
+                        />
+                      </label>
+
+                      <label class="label">
+                        <span class="">Confirm password</span>
+                        <input
+                                class="input"
+                                bind:value={form.passwordConfirm}
+                                required
+                                type="password"
+                                placeholder="confirm password"
+                                minlength="8"
+                                maxlength="72"
+                                autocomplete="new-password"
+                        />
+                      </label>
+                    </div>
+
+                    <label class="label">
+                      <span class="">Signup Key</span>
+                      <input
+                              bind:value={form.signup_key}
+                              class="input"
+                              name="signup_key"
+                              placeholder="minimum 8 characters"
+                              minlength="8"
                               required
                               type="text"
-                              autocomplete="given-name"
+                              autocomplete="one-time-code"
                       />
-                    </label>
-
-                    <label class="label">
-                      <span class="">Last Name</span>
-                      <input
-                              class="input"
-                              bind:value={form.last_name}
-                              placeholder="Doe"
-                              required
-                              type="text"
-                              autocomplete="family-name"
-                      />
-                    </label>
-                  </div>
-
-                  <div class="grid sm:grid-cols-2 gap-2">
-
-                    <label class="label">
-                      <span class="">Your password</span>
-                      <input
-                              class="input"
-                              bind:value={form.password}
-                              required
-                              type="password"
-                              placeholder="**********"
-                              minlength="8"
-                              maxlength="72"
-                              autocomplete="new-password"
-                      />
-                    </label>
-
-                    <label class="label">
-                      <span class="">Confirm password</span>
-                      <input
-                              class="input"
-                              bind:value={form.passwordConfirm}
-                              required
-                              type="password"
-                              placeholder="confirm password"
-                              minlength="8"
-                              maxlength="72"
-                              autocomplete="new-password"
-                      />
-                    </label>
-                  </div>
-
-                  <label class="label">
-                    <span class="">Signup Key</span>
-                    <input
-                            bind:value={form.signup_key}
-                            class="input"
-                            name="signup_key"
-                            placeholder="minimum 8 characters"
-                            minlength="8"
-                            required
-                            type="text"
-                            autocomplete="one-time-code"
-                    />
-                    <span class="block text-sm font-light">
+                      <span class="block text-sm font-light">
                                           A valid signup key needs to be entered upon user account creation.
                                           If you do not have a signup key, please contact your team manager.
                                       </span>
-                  </label>
+                    </label>
 
-                  <input type="hidden" name="register" value={true}/>
+                    <input type="hidden" name="register" value={true}/>
 
-                  <button
-                          class="btn preset-tonal-primary border border-primary-500 my-2"
-                          type="submit"
-                          onclick={() => (signup = true)}
-                          disabled={form.email === "" || form.password === "" || form.passwordConfirm === "" || form.signup_key === ""}
-                  >
-                    Register new account
-                  </button>
-                {/if}
-              </svelte:fragment>
+                    <button
+                            class="btn preset-tonal-primary border border-primary-500 my-2"
+                            type="submit"
+                            onclick={() => (signup = true)}
+                            disabled={form.email === "" || form.password === "" || form.passwordConfirm === "" || form.signup_key === ""}
+                    >
+                      Register new account
+                    </button>
+                  {/if}
+                </Tabs.Panel>
+              {/snippet}
 
             </Tabs>
-          {:else}
-            <h2>Login</h2>
-            {@render signin()}
+
           {/if}
         {/if}
 
@@ -265,7 +279,7 @@
             <div class="my-3 md:my-5 flex flex-wrap gap-6 justify-center">
               {#each methods.oauth2.providers as provider}
 
-                {#if tabSet === 0}
+                {#if tabSet === "login"}
                   <!--Login Buttons - no signupKey-->
                   <OAuthProviderButton authProvider={provider} collection={coll} disabled={false}/>
                 {:else}
@@ -277,7 +291,7 @@
               {/each}
             </div>
 
-            {#if tabSet === 1 && form.signup_key === ""}
+            {#if tabSet === "signup" && form.signup_key === ""}
               <div class="mx-2 mt-3 text-surface-700-300 font-light flex justify-center" transition:slide>
               <span>
                 Even when using an external login provider,
@@ -305,7 +319,11 @@
 
 <style lang="postcss">
     .label {
-        @apply my-1;
-        @apply md:my-2;
+        margin-block: calc(var(--spacing) * 1);
+        @media (width >= 48rem /* 768px */
+        ) {
+            margin-block: calc(var(--spacing) * 2) /* 0.5rem = 8px */
+        ;
+        }
     }
 </style>
