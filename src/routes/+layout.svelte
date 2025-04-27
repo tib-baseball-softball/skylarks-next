@@ -35,9 +35,7 @@
   <header>
 
     <AppBar
-            gridColumns="grid-cols-6"
-            slotDefault="place-self-center place-content-between w-full col-span-4"
-            slotTrail="place-content-end"
+            centerAlign="place-self-center"
             padding="p-3"
             background="bg-surface-500/5"
     >
