@@ -30,12 +30,14 @@
       sheetOpen = false;
     }
   }
+
+  let value = $state(["account", "teamClub", "admin"]);
 </script>
 
 <nav class="list-nav py-1 px-1 lg:px-4">
   {#if isUserAuthenticated}
-    <Accordion>
-      <Accordion.Item>
+    <Accordion {value} onValueChange={(e) => (value = e.value)} multiple collapsible>
+      <Accordion.Item value="account" panelPadding="py-0 px-4">
 
         {#snippet lead()}
           <SquareUserRound/>
@@ -63,12 +65,10 @@
         {/snippet}
 
       </Accordion.Item>
-    </Accordion>
 
-    <hr class="my-2"/>
+      <hr class="hr"/>
 
-    <Accordion>
-      <Accordion.Item>
+      <Accordion.Item value="teamClub" panelPadding="py-0 px-4">
         {#snippet lead()}
           <UsersRound/>
         {/snippet}
@@ -81,12 +81,12 @@
           {#each clubs as club (club.id)}
             <a href="/account/clubs/{club.id}" onclick={sheetClose}>
               <Shield/>
-              <div>{club.name} ({club.acronym})</div>
+              <span>{club.name} ({club.acronym})</span>
             </a>
           {/each}
 
           {#if teams?.length > 0}
-            <hr class="mx-8">
+            <hr class="hr">
 
             {#each teams as team (team.id)}
               <a
@@ -94,22 +94,20 @@
                       onclick={sheetClose}
               >
                 <Users/>
-                <div
+                <span
                 >{team.name} ({team?.expand?.club
                     ?.acronym})
-                </div
+                </span
                 >
               </a>
             {/each}
           {/if}
         {/snippet}
       </Accordion.Item>
-    </Accordion>
 
-    <hr class="my-2"/>
+      <hr class="hr"/>
 
-    <Accordion>
-      <Accordion.Item>
+      <Accordion.Item value="admin" panelPadding="py-0 px-4">
         {#snippet lead()}
           <LockKeyhole/>
         {/snippet}
@@ -133,9 +131,11 @@
     a {
         display: flex;
         align-items: center;
+        margin: 1rem;
     }
 
     span {
-        text-wrap: nowrap;
+        margin-left: 0.5rem;
+        //text-wrap: nowrap;
     }
 </style>
