@@ -3,7 +3,7 @@
   import type {ExpandedEvent} from "$lib/model/ExpandedResponse";
   import {type LocationsResponse, type UniformsetsResponse} from "$lib/model/pb-types";
   import {client} from "$lib/pocketbase/index.svelte";
-  import {Segment, Switch } from "@skeletonlabs/skeleton-svelte";
+  import {Segment, Switch} from "@skeletonlabs/skeleton-svelte";
   import Flatpickr from "../utility/Flatpickr.svelte";
   import {DateTimeUtility} from "$lib/service/DateTimeUtility.js";
   //@ts-ignore
@@ -217,8 +217,7 @@
 
         <Switch
                 name="cancelled"
-                active={"bg-primary-500"}
-                bind:checked={form.cancelled}
+                onCheckedChange={(e) => (form.cancelled = e.checked)}
         >
           Cancelled
         </Switch>

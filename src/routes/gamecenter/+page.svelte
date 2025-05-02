@@ -1,6 +1,6 @@
 <script lang="ts">
   import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte";
-  import {Tab, Progress, Switch, Tabs } from "@skeletonlabs/skeleton-svelte";
+  import {Progress, Switch, Tabs} from "@skeletonlabs/skeleton-svelte";
   import {Gameday} from "bsm.js";
   import {preferences} from "$lib/stores";
   import LeagueFilter from "$lib/components/utility/LeagueFilter.svelte";
@@ -45,10 +45,9 @@
 
     <div class="flex gap-2 my-4 justify-end">
       <Switch
-              size="sm"
               name="slide"
-              active="bg-surface-900 dark:bg-tertiary-700"
-              bind:checked={showExternal}
+              controlActive="bg-surface-900 dark:bg-tertiary-700"
+              onCheckedChange={(e) => (showExternal = e.checked)}
       />
       <p>Show external games</p>
     </div>
