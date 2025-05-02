@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {Tab, ProgressRing, Tabs } from "@skeletonlabs/skeleton-svelte";
+  import {ProgressRing, Tabs} from "@skeletonlabs/skeleton-svelte";
   import MatchMainInfoSection from "$lib/components/match/MatchMainInfoSection.svelte";
   import MatchBoxscoreSection from "$lib/components/boxscore/MatchBoxscoreSection.svelte";
   import MatchDetailStatsCard from "$lib/components/match/MatchDetailStatsCard.svelte";
@@ -12,7 +12,7 @@
   let {data}: PageProps = $props();
 
   let match = $derived(data.match);
-  let tabSet: number = $state(0);
+  let tabSet: "gameData" | "boxscore" | "gameReport" | string = $state("gameData");
 </script>
 
 <h1 class="h2 mt-3">Details zu Spiel {match.match_id}</h1>
@@ -22,56 +22,50 @@
 </section>
 
 <section class="mb-5">
-  <Tabs justify="justify-center">
-    <Tab bind:group={tabSet} name="tabData" value={0}>Game Data</Tab>
-    <Tab bind:group={tabSet} name="tabBoxscore" value={1}>Boxscore</Tab>
-    <Tab bind:group={tabSet} name="tabGameReport" value={2}>Game Report</Tab>
+  <Tabs value={tabSet} onValueChange={(e) => (tabSet = e.value)} listJustify="justify-center">
 
-    <!-- Tab Panels --->
-    {#snippet panel()}
-      
-        {#if tabSet === 0}
+    {#snippet list()}
+      <Tabs.Control value="gameData">Game Data</Tabs.Control>
+      <Tabs.Control value="boxscore">Boxscore</Tabs.Control>
+      <Tabs.Control value="gameReport">Game Report</Tabs.Control>
+    {/snippet}
 
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-stretch gap-3 md:gap-4 lg:gap-5">
-            <MatchDetailStatsCard {match}/>
+    {#snippet content()}
+      <Tabs.Panel value="gameData">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-stretch gap-3 md:gap-4 lg:gap-5">
+          <MatchDetailStatsCard {match}/>
+          <MatchDetailLocationCard field={match?.field}/>
+          <MatchDetailOfficialsCard {match}/>
+        </div>
+      </Tabs.Panel>
 
-            <MatchDetailLocationCard field={match?.field}/>
+      <Tabs.Panel value="boxscore">
+        {#await data.singleGameStats}
+          <ProgressRing/>
+        {:then boxscore}
+          {#if boxscore}
+            <MatchBoxscoreSection {boxscore}/>
+          {:else }
+            <p>Kein Boxscore vorhanden.</p>
+          {/if}
+        {:catch error}
+          <p>error loading boxscore: {error.message}</p>
+        {/await}
+      </Tabs.Panel>
 
-            <MatchDetailOfficialsCard {match}/>
-          </div>
-
-        {:else if tabSet === 1}
-
-          {#await data.singleGameStats}
-            <ProgressRing/>
-          {:then boxscore}
-            {#if boxscore}
-              <MatchBoxscoreSection {boxscore}/>
-            {:else }
-              <p>Kein Boxscore vorhanden.</p>
-            {/if}
-          {:catch error}
-            <p>error loading boxscore: {error.message}</p>
-          {/await}
-
-        {:else if tabSet === 2}
-
-          {#await data.gameReport}
-            <ProgressRing/>
-          {:then gameReport}
-            {#if gameReport}
-              <GameReport classes="my-2! md:max-w-[80%] 2xl:max-w-[70%]" report={gameReport}/>
-            {:else }
-              <ContentFilteredUnavailable text="No Game Report available."/>
-            {/if}
-          {:catch error}
-            <p>error loading Game Report: {error.message}</p>
-          {/await}
-
-
-        {/if}
-      
-      {/snippet}
+      <Tabs.Panel value="gameReport">
+        {#await data.gameReport}
+          <ProgressRing/>
+        {:then gameReport}
+          {#if gameReport}
+            <GameReport classes="my-2! md:max-w-[80%] 2xl:max-w-[70%]" report={gameReport}/>
+          {:else }
+            <ContentFilteredUnavailable text="No Game Report available."/>
+          {/if}
+        {:catch error}
+          <p>error loading Game Report: {error.message}</p>
+        {/await}
+      </Tabs.Panel>
+    {/snippet}
   </Tabs>
 </section>
-

@@ -41,6 +41,6 @@
 <style lang="postcss">
     .container {
         display: flex;
-        @apply gap-4;
+        gap: calc(var(--spacing) * 4);
     }
 </style>
