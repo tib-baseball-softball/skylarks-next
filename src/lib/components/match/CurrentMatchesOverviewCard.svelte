@@ -1,9 +1,9 @@
 <script lang="ts">
-  import {Tab, Tabs } from "@skeletonlabs/skeleton-svelte";
+  import {Tabs} from "@skeletonlabs/skeleton-svelte";
   import type {Match} from "bsm.js";
   import CurrentMatchBlock from "$lib/components/match/CurrentMatchBlock.svelte";
 
-  let tabSet: number = $state(1);
+  let tabSet: "previous" | "current" | "next" | string = $state("current");
 
   interface Props {
     matchesCurrent: Promise<Match[]>;
@@ -21,29 +21,26 @@
     <h2 class="h3">Current Games</h2>
   </header>
   <section class="p-4">
-    <Tabs justify="justify-center" flex="flex-auto">
-      <Tab bind:group={tabSet} name="tab1" value={0}
-      >Previous Gameday
-      </Tab
-      >
-      <Tab bind:group={tabSet} name="tab2" value={1}
-      >Current Gameday
-      </Tab
-      >
-      <Tab bind:group={tabSet} name="tab3" value={2}
-      >Next Gameday
-      </Tab
-      >
-      <!-- Tab Panels --->
-      <svelte:fragment slot="panel">
-        {#if tabSet === 0}
+    <Tabs value={tabSet} onValueChange={(e) => (tabSet = e.value)} listJustify="justify-center" fluid={true}>
+
+      {#snippet list()}
+        <Tabs.Control value="previous">Previous Gameday</Tabs.Control>
+        <Tabs.Control value="current">Current Gameday</Tabs.Control>
+        <Tabs.Control value="next">Next Gameday</Tabs.Control>
+      {/snippet}
+
+      {#snippet content()}
+        
+        <Tabs.Panel value="previous">
           <CurrentMatchBlock matches={matchesPrevious}/>
-        {:else if tabSet === 1}
+        </Tabs.Panel>
+        <Tabs.Panel value="current">
           <CurrentMatchBlock matches={matchesCurrent}/>
-        {:else if tabSet === 2}
+        </Tabs.Panel>
+        <Tabs.Panel value="next">
           <CurrentMatchBlock matches={matchesNext}/>
-        {/if}
-      </svelte:fragment>
+        </Tabs.Panel>
+      {/snippet}
     </Tabs>
   </section>
   <footer class="card-footer flex justify-end">
