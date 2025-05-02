@@ -28,6 +28,14 @@
   let leagueGroups = $derived(data.leagueGroups);
 
   let showExternal = $state(false);
+
+  /**
+   *  enum <=> string conversion necessary
+   */
+  function onGamedayChange(e: { value: string }) {
+    //@ts-expect-error
+    $preferences.gameday = e.value;
+  }
 </script>
 
 <ReloadUponPreferenceChange callback={reloadGameData}/>
@@ -57,42 +65,25 @@
 <section class="mb-5 mt-3">
   <label id="gameday_label" class="label">
     Gameday
-    <Tabs justify="justify-center" labelledby="gameday_label">
-      <Tab
-              bind:group={$preferences.gameday}
-              name="tabPrevious"
-              value={Gameday.previous}>Previous
-      </Tab
-      >
-      <Tab
-              bind:group={$preferences.gameday}
-              name="tabCurrent"
-              value={Gameday.current}>Current
-      </Tab
-      >
-      <Tab
-              bind:group={$preferences.gameday}
-              name="tabNext"
-              value={Gameday.next}>Next
-      </Tab
-      >
-      <Tab
-              bind:group={$preferences.gameday}
-              name="tabAny"
-              value={Gameday.any}>All
-      </Tab
-      >
-      <!-- Tab Panels --->
-      <svelte:fragment slot="panel"></svelte:fragment>
+    <Tabs listJustify="justify-center" onValueChange={onGamedayChange}>
+
+      {#snippet list()}
+        <Tabs.Control value={Gameday.previous}>Previous</Tabs.Control>
+        <Tabs.Control value={Gameday.current}>Current</Tabs.Control>
+        <Tabs.Control value={Gameday.next}>Next</Tabs.Control>
+        <Tabs.Control value={Gameday.any}>All</Tabs.Control>
+      {/snippet}
+
+      {#snippet content()}
+        {#await data.streamed.matches}
+          <p>Loading matches...</p>
+          <Progress/>
+        {:then matches}
+          <GamecenterMatchSection {matches} {showExternal}/>
+        {:catch error}
+          <p>error loading matches: {error.message}</p>
+        {/await}
+      {/snippet}
     </Tabs>
   </label>
 </section>
-
-{#await data.streamed.matches}
-  <p>Loading matches...</p>
-  <Progress/>
-{:then matches}
-  <GamecenterMatchSection {matches} {showExternal}/>
-{:catch error}
-  <p>error loading matches: {error.message}</p>
-{/await}
