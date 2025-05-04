@@ -35,3 +35,11 @@
   and
   <Svelte fillColor={"currentColor"} classes="w-6"/>
 </div>
+
+<style>
+  .list-nav {
+      a:hover {
+          text-decoration: underline;
+      }
+  }
+</style>
