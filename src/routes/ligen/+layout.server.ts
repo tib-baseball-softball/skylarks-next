@@ -1,6 +1,6 @@
 import {LeagueGroupAPIRequest} from "bsm.js";
 import {env} from "$env/dynamic/private";
-import {type LayoutServerLoad} from "./$types";
+import type {LayoutServerLoad} from "./$types";
 
 export const load: LayoutServerLoad = async ({parent, url}) => {
   const data = await parent()

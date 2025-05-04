@@ -1,61 +1,61 @@
-.preset-gradient-red-navy {
+@utility preset-gradient-red-navy {
     background-image: linear-gradient(45deg, var(--color-primary-500), var(--color-secondary-500));
     color: var(--color-primary-contrast-500);
 }
 
-.preset-gradient-red-sand {
+@utility preset-gradient-red-sand {
     background-image: linear-gradient(45deg, var(--color-primary-500), var(--color-tertiary-500));
     color: var(--color-primary-contrast-500);
 }
 
-.preset-gradient-navy-sand {
+@utility preset-gradient-navy-sand {
     background-image: linear-gradient(45deg, var(--color-secondary-500), var(--color-tertiary-500));
     color: var(--color-primary-contrast-500);
 }
 
-.preset-glass-neutral {
+@utility preset-glass-neutral {
     background: color-mix(in oklab, var(--color-surface-50-950) 30%, transparent);
     box-shadow: 0 0 30px color-mix(in oklab, var(--color-surface-50-950) 30%, transparent) inset;
     backdrop-filter: blur(16px);
 }
 
-.preset-glass-primary {
+@utility preset-glass-primary {
     background: color-mix(in oklab, var(--color-primary-500) 40%, transparent);
     box-shadow: 0 0 30px color-mix(in oklab, var(--color-primary-500) 50%, transparent) inset;
     backdrop-filter: blur(16px);
 }
 
-.preset-glass-secondary {
+@utility preset-glass-secondary {
     background: color-mix(in oklab, var(--color-secondary-500) 40%, transparent);
     box-shadow: 0 0 30px color-mix(in oklab, var(--color-secondary-500) 50%, transparent) inset;
     backdrop-filter: blur(16px);
 }
 
-.preset-glass-tertiary {
+@utility preset-glass-tertiary {
     background: color-mix(in oklab, var(--color-tertiary-500) 40%, transparent);
     box-shadow: 0 0 30px color-mix(in oklab, var(--color-tertiary-500) 50%, transparent) inset;
     backdrop-filter: blur(16px);
 }
 
-.preset-glass-success {
+@utility preset-glass-success {
     background: color-mix(in oklab, var(--color-success-500) 40%, transparent);
     box-shadow: 0 0 30px color-mix(in oklab, var(--color-success-500) 50%, transparent) inset;
     backdrop-filter: blur(16px);
 }
 
-.preset-glass-warning {
+@utility preset-glass-warning {
     background: color-mix(in oklab, var(--color-warning-500) 40%, transparent);
     box-shadow: 0 0 30px color-mix(in oklab, var(--color-warning-500) 50%, transparent) inset;
     backdrop-filter: blur(16px);
 }
 
-.preset-glass-error {
+@utility preset-glass-error {
     background: color-mix(in oklab, var(--color-error-500) 40%, transparent);
     box-shadow: 0 0 30px color-mix(in oklab, var(--color-error-500) 50%, transparent) inset;
     backdrop-filter: blur(16px);
 }
 
-.preset-glass-surface {
+@utility preset-glass-surface {
     background: color-mix(in oklab, var(--color-surface-500) 40%, transparent);
     box-shadow: 0 0 30px color-mix(in oklab, var(--color-surface-500) 50%, transparent) inset;
     backdrop-filter: blur(16px);
