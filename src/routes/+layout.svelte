@@ -71,7 +71,7 @@
 
     </AppBar>
 
-    <hr class="border-b-2!">
+    <hr>
   </header>
 
   <!-- Grid Column -->
@@ -104,7 +104,7 @@
 
   <!-- Footer -->
   <footer>
-    <hr class="border-t-2!">
+    <hr>
     <Footer></Footer>
   </footer>
 </div>
