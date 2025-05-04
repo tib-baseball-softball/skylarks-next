@@ -2,6 +2,7 @@
 @import './css/partials/stats.css';
 @import './css/partials/logos.css' layer(base);
 @import './css/partials/linescore.css' layer(base);
+@import './css/partials/card.css';
 @import './css/global.css' layer(base);
 
 @import 'tailwindcss';
@@ -18,24 +19,6 @@
 @plugin "@tailwindcss/typography";
 
 @source "../node_modules/@skeletonlabs/skeleton-svelte/dist";
-
-/*
-  The default border color has changed to `currentcolor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
-  }
-}
 
 @layer utilities {
 }
