@@ -27,7 +27,7 @@
     {#snippet child({props})}
       <button {...props} class="{classes} relative inline-block">
         {#if participation.comment}
-          <span class="badge-icon preset-filled-surface-500">
+          <span class="badge-icon preset-filled-surface-400-600">
             <MessageCircleMore size="13"/>
           </span>
         {/if}
@@ -37,7 +37,7 @@
   </Popover.Trigger>
 
   <Popover.Content>
-    <div class="card preset-tonal p-4 text-sm max-w-80 space-y-1 text-black dark:text-white">
+    <div class="card bg-surface-50 dark:bg-surface-800 border shadow-2xl p-4 text-sm max-w-80 space-y-1 text-black dark:text-white">
 
       <div class="item-container">
         <p class="font-light text-xs">Created:</p>
@@ -89,8 +89,8 @@
     }
 
     .badge-icon {
-        top: -10px;
-        right: -10px;
+        top: -15px;
+        right: -15px;
         z-index: 10;
         position: absolute;
     }

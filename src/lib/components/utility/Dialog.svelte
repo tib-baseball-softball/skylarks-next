@@ -42,7 +42,7 @@
     <Dialog.Overlay
             class="fixed inset-0 z-50 bg-surface-50/50 dark:bg-surface-950/50"/>
     <Dialog.Content forceMount
-                    class="fixed left-[50%] top-[50%] z-50 w-full max-w-[94%] translate-x-[-50%] translate-y-[-50%] card p-5 sm:max-w-[640px] md:w-full"
+                    class="card bg-surface-50 dark:bg-surface-800 border shadow-2xl fixed left-[50%] top-[50%] z-50 w-full max-w-[94%] translate-x-[-50%] translate-y-[-50%] p-5 sm:max-w-[640px] md:w-full"
                     {...contentProps}>
 
       {#snippet child({props, open})}
