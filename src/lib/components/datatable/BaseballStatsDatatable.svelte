@@ -100,16 +100,21 @@
 
 <style lang="postcss">
     .stats {
-        @apply md:mt-4 !important;
-        @apply md:mb-3 !important;
-        @apply lg:mt-6 !important;
-        @apply lg:mb-4 !important;
+        margin-top: 1rem !important;
+        margin-bottom: 0.75rem !important;
+    }
+
+    @media (min-width: 1024px) {
+        .stats {
+            margin-top: 1.5rem !important;
+            margin-bottom: 1rem !important;
+        }
     }
 
     /* ugly hack to prevent table overflow */
     @media (min-width: 1400px) and (max-width: 1800px) {
         .table-wrap {
-            @apply max-w-[90%];
+            max-width: 90%;
         }
     }
 </style>

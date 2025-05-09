@@ -1,6 +1,6 @@
 <script lang="ts">
   import type {ClubTeam} from "bsm.js";
-  import { ProgressRing } from "@skeletonlabs/skeleton-svelte";
+  import {ProgressRing} from "@skeletonlabs/skeleton-svelte";
   import BaseballStatsDatatable from "$lib/components/datatable/BaseballStatsDatatable.svelte";
   import type {StatsDataset} from "$lib/types/StatsDataset";
   import TeamDetailInfoCard from "$lib/components/team/TeamDetailInfoCard.svelte";
@@ -63,13 +63,13 @@
 
 <style lang="postcss">
     h2 {
-        @apply mb-3;
+        margin-bottom: calc(var(--spacing) * 3)
     }
 
     /* ugly hack to prevent table overflow */
     @media (min-width: 1400px) and (max-width: 1800px) {
         .standings-container {
-            @apply max-w-[90%];
+            max-width: 90%;
         }
     }
 </style>

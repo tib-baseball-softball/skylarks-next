@@ -1,6 +1,6 @@
 <script lang="ts">
   import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte";
-  import { Progress } from "@skeletonlabs/skeleton-svelte";
+  import {Progress} from "@skeletonlabs/skeleton-svelte";
   import ReloadUponPreferenceChange from "$lib/components/navigation/ReloadUponPreferenceChange.svelte";
   import {preferences} from "$lib/stores";
   import {browser} from "$app/environment";
@@ -35,7 +35,7 @@
 
   <ul class="list mt-5 flex flex-col gap-3">
     {#each clubTeams ?? [] as clubTeam}
-      <li class="preset-tonal-surface p-3 min-h-14">
+      <li class="preset-tonal-surface dark:preset-filled-surface-300-700 p-3 min-h-14 rounded-base">
         <a href="/teams/{clubTeam.id}?season={$preferences.selectedSeason}">
           <span class="badge preset-tonal-primary border border-primary-500 w-20">{clubTeam.team.league_entries[0].league.acronym}</span>
           <span class="flex-auto ms-3">{clubTeam.team.name}</span>

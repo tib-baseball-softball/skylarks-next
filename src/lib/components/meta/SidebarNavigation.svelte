@@ -138,11 +138,11 @@
     }
 
     a:hover, a:focus {
-      @apply preset-tonal-primary;
+        background-color: var(--color-primary-50-950);
+        color: var(--color-primary-950-50);
     }
 
     span {
         margin-left: 0.5rem;
-        //text-wrap: nowrap;
     }
 </style>
