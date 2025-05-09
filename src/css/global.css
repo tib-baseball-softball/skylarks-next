@@ -1,5 +1,5 @@
 html, body {
-    @apply h-full;
+    height: 100%;
 }
 
 .text-justify {
@@ -7,7 +7,8 @@ html, body {
 }
 
 .h1 {
-    @apply my-2
+    margin-top:  calc(var(--spacing) * 2);
+    margin-bottom:  calc(var(--spacing) * 2);
 }
 
 :root {

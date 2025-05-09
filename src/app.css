@@ -16,6 +16,7 @@
 @import './css/partials/stats.css';
 @import './css/partials/logos.css' layer(base);
 @import './css/partials/linescore.css' layer(base);
+@import './css/partials/buttons.css' layer(utilities);
 @import './css/partials/card.css';
 @import './css/presets.css';
 @import './css/global.css' layer(utilities);
