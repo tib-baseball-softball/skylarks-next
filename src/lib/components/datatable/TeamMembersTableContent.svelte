@@ -179,7 +179,7 @@
     </td>
 
     {#if showAdminSection}
-      <td class="space-x-1 space-y-1">
+      <td class="space-x-1 space-y-1 flex">
         <!--        <button class="btn btn-sm variant-ghost-primary">-->
         <!--          <EditOutline/>-->
         <!--          Edit-->

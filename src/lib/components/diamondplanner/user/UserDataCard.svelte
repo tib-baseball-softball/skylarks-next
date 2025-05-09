@@ -8,11 +8,11 @@
   import Dialog from "$lib/components/utility/Dialog.svelte";
   import ChangeEmailForm from "$lib/auth/ChangeEmailForm.svelte";
 
-  interface props {
+  interface Props {
     model: CustomAuthModel;
   }
 
-  let {model}: props = $props();
+  let {model}: Props = $props();
 </script>
 
 <div class="card preset-tonal-surface lg:col-span-2 shadow-lg">
