@@ -23,7 +23,7 @@
   );
 </script>
 
-<div class=" overflow-x-auto space-y-4 table-container">
+<div class=" overflow-x-auto space-y-4 table-wrap">
   <!-- Header -->
   <header class="flex justify-between gap-4">
     <Search {handler}/>

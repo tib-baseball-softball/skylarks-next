@@ -1,18 +1,18 @@
 <script lang="ts">
-  import type {Table} from "bsm.js";
-  import {env} from "$env/dynamic/public";
+    import type {Table} from "bsm.js";
+    import {env} from "$env/dynamic/public";
 
-  interface Props {
+    interface Props {
     table: Table;
   }
 
   let {table}: Props = $props();
 </script>
 
-<div class="table-container dark:border-2">
-    <table class="table">
-        <thead>
-        <tr>
+<div class="table-wrap">
+    <table class="table border">
+        <thead class="dark:text-surface-contrast-500!">
+        <tr class="preset-ghost-surface">
             <th>#</th>
             <th>Team</th>
             <th>W</th>

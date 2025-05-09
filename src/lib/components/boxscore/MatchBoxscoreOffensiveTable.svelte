@@ -9,7 +9,7 @@
     let { matchStats, teamName }: Props = $props();
 </script>
 
-<div class="table-container lg:max-w-[75%] dark:border-2">
+<div class="table-wrap lg:max-w-[75%] dark:border-2">
     <table class="table table-compact">
         <thead>
         <tr>

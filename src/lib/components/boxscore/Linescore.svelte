@@ -11,7 +11,7 @@
   const innings = range(1, linescore.played_innings);
 </script>
 
-<div class="table-container dark:border-2">
+<div class="table-wrap dark:border-2">
   <!-- Native Table Element -->
   <table class="linescore bg-surface-100-900">
 

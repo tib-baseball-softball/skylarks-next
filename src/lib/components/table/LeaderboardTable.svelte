@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type {LeaderboardData} from "$lib/model/LeaderboardData";
-  import {LeaderboardUtility} from "$lib/service/LeaderboardUtility";
+    import type {LeaderboardData} from "$lib/model/LeaderboardData";
+    import {LeaderboardUtility} from "$lib/service/LeaderboardUtility";
 
-  interface Props {
+    interface Props {
     data: LeaderboardData
   }
 
@@ -16,7 +16,7 @@
         <h3 class="h3">{statName}</h3>
     </header>
 
-    <div class="table-container dark:border-2">
+    <div class="table-wrap dark:border-2">
         <table class="table table-compact">
             <thead>
             <tr>
