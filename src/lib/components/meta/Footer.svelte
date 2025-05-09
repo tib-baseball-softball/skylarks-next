@@ -2,6 +2,7 @@
     import Svelte from "../icons/Svelte.svelte";
     import {Heart} from "lucide-svelte";
 </script>
+
 <section class="flex justify-center items-center gap-8 mt-5">
   <a href="https://www.facebook.com/TiBBaseball/" target="_blank" rel="noreferrer"
      aria-label="to Skylarks Facebook page">
@@ -37,9 +38,9 @@
 </div>
 
 <style>
-  .list-nav {
-      a:hover {
-          text-decoration: underline;
-      }
-  }
+    .list-nav {
+        a:hover {
+            text-decoration: underline;
+        }
+    }
 </style>

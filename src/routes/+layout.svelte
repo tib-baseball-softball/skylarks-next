@@ -103,7 +103,7 @@
   <BottomNavigation/>
 
   <!-- Footer -->
-  <footer>
+  <footer class="pb-16 lg:pb-0">
     <hr>
     <Footer></Footer>
   </footer>
