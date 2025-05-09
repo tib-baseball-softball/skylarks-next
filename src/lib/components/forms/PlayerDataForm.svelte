@@ -13,6 +13,11 @@
   import type {Toast} from "$lib/types/Toast.ts";
   import {toastController} from "$lib/service/ToastController.svelte.ts";
 
+  interface ValidateArgs {
+    inputValue: string;
+    value: string[];
+  }
+
   interface Props {
     buttonClasses?: string;
   }
@@ -51,7 +56,22 @@
   let selectedPositions: string[] = $state(
       positionKeysToEnumStringValues(authRecord.position),
   );
-  let inputChip: TagsInput;
+
+  function validatePositionValue(details: ValidateArgs): boolean {
+    return possiblePositionValues.includes(details.inputValue);
+  }
+
+  function addPosition(value: string) {
+    if (!selectedPositions.includes(value)) {
+      selectedPositions.push(value);
+    } else {
+      toastController.trigger({
+        id: crypto.randomUUID(),
+        message: "Position is already selected.",
+        background: "preset-filled-error-500",
+      })
+    }
+  }
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
@@ -127,20 +147,19 @@
       <label class="label flex flex-col gap-1 md:gap-2 md:col-span-2">
         Positions
         <TagsInput
-                bind:this={inputChip}
                 value={selectedPositions}
                 name="positions"
+                onValueChange={(e) => (selectedPositions = e.value)}
                 placeholder="Enter positions or click buttons..."
-                whitelist={possiblePositionValues}
-                allowUpperCase={true}
-                chips="preset-filled-primary-500"
+                validate={validatePositionValue}
+                tagBackground="preset-filled-primary-500"
         />
         <span class="flex flex-wrap gap-2 md:col-span-2">
           {#each possiblePositionValues as value}
             <button
                     type="button"
                     class="btn btn-sm preset-outlined-primary-500"
-                    onclick={() => inputChip.addChip(value)}
+                    onclick={() => addPosition(value)}
             >
               {value}
             </button>
