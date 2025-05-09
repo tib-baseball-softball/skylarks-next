@@ -1,20 +1,28 @@
+/*
+ * External Imports
+ */
+
+@import 'tailwindcss';
+@import "tw-animate-css";
+@import "@skeletonlabs/skeleton";
+@import "@skeletonlabs/skeleton/optional/presets";
+@import "../skylarks-theme.css";
+
+/**
+ * global custom CSS
+ */
+
 @import './css/partials/flatpickr.css' layer(base);
 @import './css/partials/stats.css';
 @import './css/partials/logos.css' layer(base);
 @import './css/partials/linescore.css' layer(base);
 @import './css/partials/card.css';
 @import './css/presets.css';
-@import './css/global.css' layer(base);
+@import './css/global.css' layer(utilities);
 
-@import 'tailwindcss';
-
-@import "tw-animate-css";
-
-@import "@skeletonlabs/skeleton";
-
-@import "@skeletonlabs/skeleton/optional/presets";
-
-@import "../skylarks-theme.css";
+/*
+ * Tailwind config stuff
+ */
 
 @plugin '@tailwindcss/forms';
 @plugin "@tailwindcss/typography";

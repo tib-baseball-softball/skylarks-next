@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ProgressRing } from "@skeletonlabs/skeleton-svelte";
+  import {ProgressRing} from "@skeletonlabs/skeleton-svelte";
   import StandingsTable from "$lib/components/table/StandingsTable.svelte";
   import LeagueDetailInfoCard from "$lib/components/league/LeagueDetailInfoCard.svelte";
   import type {PageProps} from "./$types";
@@ -22,7 +22,7 @@
         <h3 class="h3">League Stats</h3>
       </header>
 
-      <div class="flex flex-col justify-between items-end h-[80%]">
+      <div class="flex flex-col justify-between items-end">
 
         <p class="p-4">
           Statistics about current league leaders in various statistical categories can be found on a
@@ -55,6 +55,6 @@
 
 <style lang="postcss">
     h2 {
-        @apply mb-3;
+        margin-bottom: calc(var(--spacing) * 3);
     }
 </style>

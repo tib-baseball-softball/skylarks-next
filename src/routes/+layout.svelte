@@ -37,7 +37,7 @@
     <AppBar
             centerAlign="place-self-center"
             padding="p-3"
-            background="bg-surface-500/5"
+            background="bg-surface-500/5 dark:bg-surface-800"
     >
       {#snippet lead()}
         <div class="flex items-center justify-content-start">
@@ -80,7 +80,7 @@
 
     <!-- Sidebar (Left) -->
     {#if showSidebar}
-      <aside class="bg-surface-500/5 p-2 sticky top-0 col-span-1 hidden h-screen md:block w-64 lg:w-72 xl:w-80">
+      <aside class="bg-surface-500/5 dark:bg-surface-800 p-2 sticky top-0 col-span-1 hidden h-screen md:block w-64 lg:w-72 xl:w-80 border-r border-surface-200 dark:border-surface-100">
         <SidebarNavigation clubs={data.clubs} teams={data.teams}/>
       </aside>
     {:else}
