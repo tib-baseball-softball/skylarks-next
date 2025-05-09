@@ -109,7 +109,8 @@
       <div class="flex items-center gap-2">
         <Avatar
                 src={client.files.getURL(row, row.avatar)}
-                width="w-10"
+                name={row.first_name + row.last_name}
+                size="w-12"
         />
         <div>
           <span>{row.first_name} {row.last_name}</span>

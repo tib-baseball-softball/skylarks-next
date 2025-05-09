@@ -42,7 +42,7 @@
     {#snippet triggerContent()}
       {#if authSettings.record?.avatar}
         <Avatar
-                name=""
+                name={authSettings.record?.first_name + authSettings.record?.last_name}
                 src={client.files.getURL(authSettings.record, authSettings.record?.avatar)}
                 size="w-14"
         />

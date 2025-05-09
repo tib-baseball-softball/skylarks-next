@@ -21,7 +21,7 @@
   </header>
 
   <section class="p-4 flex flex-col sm:flex-row gap-4 lg:gap-12 sm:items-center">
-    <Avatar src={client.files.getURL(model, model?.avatar)}/>
+    <Avatar src={client.files.getURL(model, model?.avatar)} name={`${model?.first_name ?? ""} ${model?.last_name ?? ""}`}/>
 
     <div class="grid grid-cols-1 gap-2 col-span-4">
       <div class="flex items-center gap-3">
