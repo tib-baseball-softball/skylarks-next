@@ -32,9 +32,11 @@
 
 <div class="flex justify-end items-center gap-2 pb-3 mx-4">
   <span>Built with</span>
-  <Heart/>
+  <Heart class="text-primary-500"/>
   and
-  <Svelte fillColor={"currentColor"} classes="w-6"/>
+  <a href="https://svelte.dev/" target="_blank" title="Svelte JavaScript Framework website">
+    <Svelte fillColor={"#ff3e00"} classes="w-6"/>
+  </a>
 </div>
 
 <style>
