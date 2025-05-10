@@ -24,25 +24,10 @@
 
 <h1 class="h1">Leaderboards for {data.leagueGroup.name} ({data.leagueGroup.season})</h1>
 
-<Segment display="flex">
-    <Segment.Item
-            bind:group={type}
-            name="batting"
-            value={StatsType.batting}>Batting
-    </Segment.Item
-    >
-    <Segment.Item
-            bind:group={type}
-            name="pitching"
-            value={StatsType.pitching}>Pitching
-    </Segment.Item
-    >
-    <Segment.Item
-            bind:group={type}
-            name="fielding"
-            value={StatsType.fielding}>Fielding
-    </Segment.Item
-    >
+<Segment name="stats-type" value={type} onValueChange={(e) => (type = e.value ?? StatsType.batting)} display="flex">
+    <Segment.Item value={StatsType.batting} classes="flex-grow">Batting</Segment.Item>
+    <Segment.Item value={StatsType.pitching} classes="flex-grow">Pitching</Segment.Item>
+    <Segment.Item value={StatsType.fielding} classes="flex-grow">Fielding</Segment.Item>
 </Segment>
 
 {#await data.leaderboardData}

@@ -2,7 +2,7 @@
   import {invalidate} from "$app/navigation";
   import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  import {Segment } from "@skeletonlabs/skeleton-svelte";
+  import {Segment} from "@skeletonlabs/skeleton-svelte";
   import {Edit, Plus} from "lucide-svelte";
   import type {ClubsResponse, UsersResponse} from "$lib/model/pb-types.ts";
   import MultiSelectCombobox from "$lib/components/utility/MultiSelectCombobox.svelte";
@@ -176,19 +176,11 @@
 
         <label class="label flex flex-col gap-1 col-span-2">
           Type
-          <Segment>
-            <Segment.Item
-                    bind:group={form.age_group}
-                    name="age_group"
-                    value={"adults"}
-            >
+          <Segment name="age_group" value={form.age_group} onValueChange={(e) => (form.age_group = e.value ?? "adults")}>
+            <Segment.Item value={"adults"} classes="flex-grow">
               Adults
             </Segment.Item>
-            <Segment.Item
-                    bind:group={form.age_group}
-                    name="type"
-                    value={"minors"}
-            >
+            <Segment.Item value={"minors"} classes="flex-grow">
               Minors
             </Segment.Item>
           </Segment>

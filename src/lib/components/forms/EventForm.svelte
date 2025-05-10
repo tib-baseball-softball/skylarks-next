@@ -191,14 +191,14 @@
 
         <label class="label flex flex-col gap-1 md:col-span-2">
           Type
-          <Segment>
-            <Segment.Item bind:group={form.type} name="type" value={"game"}>
+          <Segment name="type" value={form.type} onValueChange={(e) => (form.type = e.value ?? "game")}>
+            <Segment.Item value={"game"} classes="flex-grow">
               Game
             </Segment.Item>
-            <Segment.Item bind:group={form.type} name="type" value={"practice"}>
+            <Segment.Item value={"practice"} classes="flex-grow">
               Practice
             </Segment.Item>
-            <Segment.Item bind:group={form.type} name="type" value={"misc"}>
+            <Segment.Item value={"misc"} classes="flex-grow">
               Other
             </Segment.Item>
           </Segment>

@@ -55,16 +55,11 @@
           class="flex items-center gap-2 grow justify-between md:grow-0"
   >
     Timeframe
-    <Segment>
-      <Segment.Item
-              checked
-              name="radio-next"
-              value="next"
-              bind:group={showEvents}
-      >
+    <Segment name="timeframe" value={showEvents} onValueChange={(e) => (showEvents = e.value ?? "next")}>
+      <Segment.Item value="next" classes="flex-grow">
         Next
       </Segment.Item>
-      <Segment.Item name="radio-past" value="past" bind:group={showEvents}>
+      <Segment.Item value="past" classes="flex-grow">
         Past
       </Segment.Item>
     </Segment>
@@ -72,19 +67,19 @@
 
   <label class="label flex items-center gap-2 grow justify-between md:grow-0">
     Sort
-    <Segment>
-      <Segment.Item checked name="radio-asc" value="asc" bind:group={sorting}>Ascending</Segment.Item>
-      <Segment.Item checked name="radio-desc" value="desc" bind:group={sorting}>Descending</Segment.Item>
+    <Segment name="sorting" value={sorting} onValueChange={(e) => (sorting = e.value ?? "asc")}>
+      <Segment.Item value="asc" classes="flex-grow">Ascending</Segment.Item>
+      <Segment.Item value="desc" classes="flex-grow">Descending</Segment.Item>
     </Segment>
   </label>
 
   <label class="label flex items-center gap-2 grow justify-between md:grow-0">
     Type
-    <Segment padding="px-2 md:px-4 py-1">
-      <Segment.Item padding="px-4 py-1" checked name="radio-any" value="any" bind:group={showTypes}>All</Segment.Item>
-      <Segment.Item checked name="radio-game" value="game" bind:group={showTypes}>Game</Segment.Item>
-      <Segment.Item checked name="radio-practice" value="practice" bind:group={showTypes}>Practice</Segment.Item>
-      <Segment.Item checked name="radio-misc" value="misc" bind:group={showTypes}>Other</Segment.Item>
+    <Segment name="type" value={showTypes} onValueChange={(e) => (showTypes = e.value ?? "any")} padding="px-2 md:px-4 py-1">
+      <Segment.Item value="any" padding="px-4 py-1" classes="flex-grow">All</Segment.Item>
+      <Segment.Item value="game" classes="flex-grow">Game</Segment.Item>
+      <Segment.Item value="practice" classes="flex-grow">Practice</Segment.Item>
+      <Segment.Item value="misc" classes="flex-grow">Other</Segment.Item>
     </Segment>
   </label>
 </div>

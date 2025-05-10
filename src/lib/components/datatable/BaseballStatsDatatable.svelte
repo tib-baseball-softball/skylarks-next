@@ -60,10 +60,10 @@
   <header class="flex justify-between gap-4">
     <Search {handler}/>
 
-    <Segment value={type}>
-      <Segment.Item value={StatsType.batting}>Batting</Segment.Item>
-      <Segment.Item value={StatsType.pitching}>Pitching</Segment.Item>
-      <Segment.Item value={StatsType.fielding}>Fielding</Segment.Item>
+    <Segment name="stats-type" value={type} onValueChange={(e) => (type = e.value ?? StatsType.batting)}>
+      <Segment.Item value={StatsType.batting} classes="flex-grow">Batting</Segment.Item>
+      <Segment.Item value={StatsType.pitching} classes="flex-grow">Pitching</Segment.Item>
+      <Segment.Item value={StatsType.fielding} classes="flex-grow">Fielding</Segment.Item>
     </Segment>
 
     <RowsPerPage {handler}/>

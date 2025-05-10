@@ -1,6 +1,5 @@
 <script lang="ts">
   import type {ExpandedParticipation} from "$lib/model/ExpandedResponse";
-  import {Segment } from "@skeletonlabs/skeleton-svelte";
   import {sendParticipationData} from "$lib/functions/sendParticipationData";
   import {invalidate} from "$app/navigation";
   import {closeModal} from "$lib/functions/closeModal.ts";
@@ -55,29 +54,36 @@
       />
     </label>
 
-    <label class="label col-span-2">
-      <span class="block">State</span>
+    <div class="label col-span-2">
+      State
 
-      <Segment display="flex">
-        <Segment.Item fill="bg-success-500!" hover="hover:preset-tonal-success" bind:group={form.state}
-                   name="state" value="in">
+      <span class="flex justify-items-stretch btn-group preset-outlined-surface-200-800">
+        <button
+                type="button"
+                class={["btn hover:preset-ghost-success flex-grow", form.state === "in" && "preset-filled-success-500 text-black"]}
+                onclick={() => form.state = "in"}
+        >
           In
-        </Segment.Item>
-        <Segment.Item fill="bg-warning-500!" hover="hover:preset-tonal-warning" bind:group={form.state}
-                   name="state"
-                   value="maybe">
+        </button>
+        <button
+                type="button"
+                class={["btn hover:preset-ghost-warning flex-grow", form.state === "maybe" && "preset-filled-warning-500 text-black"]}
+                onclick={() => form.state = "maybe"}
+        >
           Maybe
-        </Segment.Item>
-        <Segment.Item color="text-white!" fill="bg-error-500!" hover="hover:preset-tonal-error"
-                   bind:group={form.state}
-                   name="state" value="out">
+        </button>
+        <button
+                type="button"
+                class={["btn hover:preset-ghost-error flex-grow", form.state === "out" && "preset-filled-error-500 text-white"]}
+                onclick={() => form.state = "out"}
+        >
           Out
-        </Segment.Item>
-      </Segment>
-    </label>
+        </button>
+      </span>
+    </div>
 
     <div class="flex justify-center col-span-2">
-      <button type="submit" class="mt-2 btn preset-tonal-primary border border-primary-500">
+      <button type="submit" class="mt-2 btn preset-filled-primary-500">
         Submit
       </button>
     </div>

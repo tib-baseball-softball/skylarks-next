@@ -169,14 +169,14 @@
 
       <label class="label flex flex-col gap-1 md:col-span-2">
         Bats
-        <Segment>
-          <Segment.Item bind:group={form.bats} name="bats" value={"1"}>
+        <Segment name="bats" value={form.bats} onValueChange={(e) => (form.bats = e.value ?? "1")}>
+          <Segment.Item value={"1"} classes="flex-grow">
             Left
           </Segment.Item>
-          <Segment.Item bind:group={form.bats} name="bats" value={"2"}>
+          <Segment.Item value={"2"} classes="flex-grow">
             Right
           </Segment.Item>
-          <Segment.Item bind:group={form.bats} name="bats" value={"3"}>
+          <Segment.Item value={"3"} classes="flex-grow">
             Switch
           </Segment.Item>
         </Segment>
@@ -184,26 +184,14 @@
 
       <label class="label flex flex-col gap-1 md:col-span-2">
         Throws
-        <Segment>
-          <Segment.Item
-                  bind:group={form.throws}
-                  name="throws"
-                  value={"1"}
-          >
+        <Segment name="throws" value={form.throws} onValueChange={(e) => (form.throws = e.value ?? "1")}>
+          <Segment.Item value={"1"} classes="flex-grow">
             Left
           </Segment.Item>
-          <Segment.Item
-                  bind:group={form.throws}
-                  name="throws"
-                  value={"2"}
-          >
+          <Segment.Item value={"2"} classes="flex-grow">
             Right
           </Segment.Item>
-          <Segment.Item
-                  bind:group={form.throws}
-                  name="throws"
-                  value={"3"}
-          >
+          <Segment.Item value={"3"} classes="flex-grow">
             Switch
           </Segment.Item>
         </Segment>
@@ -211,40 +199,20 @@
 
       <label class="label flex flex-col gap-1 md:col-span-2">
         Umpire License
-        <Segment>
-          <Segment.Item
-                  bind:group={form.umpire}
-                  name="umpire"
-                  value={"0"}
-          >
+        <Segment name="umpire" value={form.umpire} onValueChange={(e) => (form.umpire = e.value ?? "0")}>
+          <Segment.Item value={"0"} classes="flex-grow">
             None
           </Segment.Item>
-          <Segment.Item
-                  bind:group={form.umpire}
-                  name="umpire"
-                  value={"1"}
-          >
+          <Segment.Item value={"1"} classes="flex-grow">
             A
           </Segment.Item>
-          <Segment.Item
-                  bind:group={form.umpire}
-                  name="umpire"
-                  value={"2"}
-          >
+          <Segment.Item value={"2"} classes="flex-grow">
             B
           </Segment.Item>
-          <Segment.Item
-                  bind:group={form.umpire}
-                  name="umpire"
-                  value={"3"}
-          >
+          <Segment.Item value={"3"} classes="flex-grow">
             C
           </Segment.Item>
-          <Segment.Item
-                  bind:group={form.umpire}
-                  name="umpire"
-                  value={"4"}
-          >
+          <Segment.Item value={"4"} classes="flex-grow">
             D
           </Segment.Item>
         </Segment>
@@ -252,33 +220,17 @@
 
       <label class="label flex flex-col gap-1 md:col-span-2">
         Scorer License
-        <Segment>
-          <Segment.Item
-                  bind:group={form.scorer}
-                  name="scorer"
-                  value={"0"}
-          >
+        <Segment name="scorer" value={form.scorer} onValueChange={(e) => (form.scorer = e.value ?? "0")}>
+          <Segment.Item value={"0"} classes="flex-grow">
             None
           </Segment.Item>
-          <Segment.Item
-                  bind:group={form.scorer}
-                  name="scorer"
-                  value={"1"}
-          >
+          <Segment.Item value={"1"} classes="flex-grow">
             A
           </Segment.Item>
-          <Segment.Item
-                  bind:group={form.scorer}
-                  name="scorer"
-                  value={"2"}
-          >
+          <Segment.Item value={"2"} classes="flex-grow">
             B
           </Segment.Item>
-          <Segment.Item
-                  bind:group={form.scorer}
-                  name="scorer"
-                  value={"3"}
-          >
+          <Segment.Item value={"3"} classes="flex-grow">
             C
           </Segment.Item>
         </Segment>
