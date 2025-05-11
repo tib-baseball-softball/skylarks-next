@@ -156,7 +156,7 @@
 
     <td>
       {#if row.number}
-                    <span class="badge-icon p-3 preset-filled-primary-500"
+                    <span class="badge-icon p-3 preset-filled-primary-500 text-white text-lg"
                     >{row.number}</span
                     >
       {:else}
@@ -179,7 +179,7 @@
     </td>
 
     {#if showAdminSection}
-      <td class="space-x-1 space-y-1 flex">
+      <td class="flex gap-1 lg:gap-2 justify-end">
         <!--        <button class="btn btn-sm variant-ghost-primary">-->
         <!--          <EditOutline/>-->
         <!--          Edit-->

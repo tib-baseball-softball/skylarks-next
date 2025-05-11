@@ -78,7 +78,7 @@
   </div>
 
   <!-- Table -->
-  <table class="table  table-compact w-full table-auto">
+  <table class="table  table-compact w-full">
     <StatsTableContent {handler} {tableType} {type}/>
 
     <tfoot>

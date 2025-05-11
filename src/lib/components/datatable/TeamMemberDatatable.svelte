@@ -32,7 +32,7 @@
   </header>
 
   <!-- Table -->
-  <table class="table  table-compact w-full table-auto">
+  <table class="table table-compact w-full">
     <TeamMembersTableContent {handler} {team} {showAdminSection}/>
 
     <tfoot></tfoot>

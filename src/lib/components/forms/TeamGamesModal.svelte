@@ -1,7 +1,7 @@
 <script lang="ts">
   import type {ExpandedTeam} from "$lib/model/ExpandedResponse";
   import {client} from "$lib/pocketbase/index.svelte";
-  import { Progress } from "@skeletonlabs/skeleton-svelte";
+  import {Progress} from "@skeletonlabs/skeleton-svelte";
   import type {LeaguegroupsResponse} from "$lib/model/pb-types";
   import type {GamesCount} from "$lib/model/GamesCount";
   import {range} from "$lib/functions/range";
@@ -104,13 +104,13 @@
     />
 
     <div>Current League ID:</div>
-    <div class="badge preset-tonal-primary text-lg">
+    <div class="badge preset-tonal-primary border border-primary-500 text-lg">
       {team.bsm_league_group !== 0 ? team.bsm_league_group : "None selected"}
     </div>
 
     {#await getCurrentGamesCount() then count}
       <div>BSM-imported games in database:</div>
-      <div class="badge preset-tonal-primary text-lg">
+      <div class="badge preset-tonal-primary border border-primary-500 text-lg">
         {count}
       </div>
     {/await}
@@ -159,11 +159,11 @@
     </p>
 
     <div class="flex justify-center gap-3 col-span-2">
-      <button type="button" class="mt-2 btn preset-tonal-surface border border-surface-500 border-surface-50! border">
-        Help
-      </button>
+<!--      <button type="button" class="mt-2 btn preset-filled-surface-600-400">-->
+<!--        Help-->
+<!--      </button>-->
 
-      <button type="submit" class="mt-2 btn preset-tonal-primary border border-primary-500">
+      <button type="submit" class="mt-2 btn preset-filled-primary-500">
         Submit
       </button>
     </div>

@@ -230,7 +230,7 @@
       Cancel
     </button>
 
-    <button type="submit" class="btn preset-tonal-primary border border-primary-500">
+    <button type="submit" class="btn preset-filled-primary-500">
       Submit
     </button>
   </div>

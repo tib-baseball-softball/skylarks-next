@@ -13,7 +13,7 @@
   let {club, team}: Props = $props();
 </script>
 
-<Dialog triggerClasses="btn preset-tonal-primary border border-primary-500">
+<Dialog triggerClasses="btn preset-filled-primary-500">
 
   {#snippet triggerContent()}
     <Plus/>
