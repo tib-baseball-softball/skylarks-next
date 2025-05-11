@@ -23,13 +23,11 @@
   let { location = null, club, buttonClasses = "" }: Props = $props();
 
   const toastSettingsSuccess: Toast = {
-    id: crypto.randomUUID(),
     message: "Location data saved successfully.",
     background: "preset-filled-success-500",
   };
 
   const toastSettingsError: Toast = {
-    id: crypto.randomUUID(),
     message: "An error occurred while saving Location.",
     background: "preset-filled-error-500",
   };

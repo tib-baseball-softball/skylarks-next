@@ -19,7 +19,6 @@
   const coll = $derived(client.collection(authCollection));
 
   const failSettings: Toast = {
-    id: crypto.randomUUID(),
     message: "There was an error processing your authentication request.",
     background: "preset-filled-error-500"
   };

@@ -27,7 +27,6 @@
       action(id);
 
       const toastSettingsDeletions: Toast = {
-        id: crypto.randomUUID(),
         message: `${modelName} deleted successfully.`,
         background: "preset-filled-success-500",
       };
@@ -36,7 +35,6 @@
       invalidate("nav:load");
     } catch {
       const toastSettingsDeletions: Toast = {
-        id: crypto.randomUUID(),
         message: `Error deleting ${modelName}.`,
         background: "preset-filled-error-500",
       };

@@ -68,7 +68,6 @@
       }
     } catch {
       toastController.trigger({
-        id: crypto.randomUUID(),
         message: "An error occurred while saving the event.",
         background: "preset-filled-error-500",
       });
@@ -76,7 +75,6 @@
 
     if (result) {
       toastController.trigger({
-        id: crypto.randomUUID(),
         message: "Event saved successfully.",
         background: "preset-filled-success-500",
       });

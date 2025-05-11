@@ -18,13 +18,11 @@
     if (sent) {
       closeModal()
       toastController.trigger({
-        id: crypto.randomUUID(),
         message: "A verification email has been sent to your new address.",
         background: "preset-filled-success-500",
       });
     } else {
       toastController.trigger({
-        id: crypto.randomUUID(),
         message: "An error occurred while sending your email change request.",
         background: "preset-filled-error-500",
       });

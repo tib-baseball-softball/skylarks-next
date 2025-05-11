@@ -1,24 +1,29 @@
 import type {Toast} from "$lib/types/Toast.ts";
 
 class ToastController {
-  public toasts: Toast[] = $state([])
-  public readonly toastDuration = 5000
+  public toastQueue: Toast[] = $state([]);
+  public readonly toastDuration = 5000;
 
   public trigger(toast: Toast) {
-    this.toasts.push(toast)
+    // Generate a UUID if one is not provided
+    const toastWithId = {
+      ...toast,
+      id: toast.id || crypto.randomUUID()
+    };
+
+    this.toastQueue.push(toastWithId);
 
     setTimeout(() => {
-      const index = this.toasts.findIndex(t => t.id === toast.id)
+      const index = this.toastQueue.findIndex(t => t.id === toastWithId.id);
       if (index !== -1) {
-        this.toasts.splice(index, 1)
+        this.toastQueue.splice(index, 1);
       }
-    }, this.toastDuration)
-
+    }, this.toastDuration);
   }
 
   public clear() {
-    this.toasts = []
+    this.toastQueue = [];
   }
 }
 
-export const toastController = new ToastController()
+export const toastController = new ToastController();

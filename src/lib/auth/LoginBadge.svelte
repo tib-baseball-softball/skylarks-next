@@ -17,14 +17,12 @@
       if (model) {
         const {email} = model;
         toastController.trigger({
-          id: crypto.randomUUID(),
           message: `Signed in as ${email}`,
           background: "preset-filled-success-500",
         });
         invalidateAll();
       } else {
         toastController.trigger({
-          id: crypto.randomUUID(),
           message: "Logout successful",
           background: "preset-filled",
         });

@@ -18,13 +18,11 @@
   let {eventSeries, team, showForm = $bindable()}: Props = $props();
 
   const toastSettingsSuccess: Toast = {
-    id: crypto.randomUUID(),
     message: "Event Series saved successfully.",
     background: "preset-filled-success-500",
   };
 
   const toastSettingsError: Toast = {
-    id: crypto.randomUUID(),
     message: "An error occurred while saving the event series.",
     background: "preset-filled-error-500",
   };

@@ -26,7 +26,6 @@
         "admins+": model.id
       });
       toastController.trigger({
-        id: crypto.randomUUID(),
         message: `User "${model.first_name + " " + model.last_name}" has been added as an admin for team "${team.name}"`,
         background: "preset-filled-success-500"
       });
@@ -34,7 +33,6 @@
     } catch (error) {
       console.error(error);
       toastController.trigger({
-        id: crypto.randomUUID(),
         message: "An error occurred while adding user as admin",
         background: "preset-filled-error-500"
       });
@@ -47,7 +45,6 @@
         "admins-": model.id
       });
       toastController.trigger({
-        id: crypto.randomUUID(),
         message: `User "${model.first_name + " " + model.last_name}" has been removed as admin for team "${team.name}"`,
         background: "preset-filled-success-500"
       });
@@ -55,7 +52,6 @@
     } catch (error) {
       console.error(error);
       toastController.trigger({
-        id: crypto.randomUUID(),
         message: "An error occurred while removing user as admin",
         background: "preset-filled-error-500"
       });
@@ -68,7 +64,6 @@
         "teams-": team.id
       });
       toastController.trigger({
-        id: crypto.randomUUID(),
         message: `User "${model.first_name + " " + model.last_name}" has been removed as member from team "${team.name}"`,
         background: "preset-filled-success-500"
       });
@@ -76,7 +71,6 @@
     } catch (error) {
       console.error(error);
       toastController.trigger({
-        id: crypto.randomUUID(),
         message: "An error occurred while removing user as team member",
         background: "preset-filled-error-500"
       });

@@ -17,7 +17,6 @@
   const {team}: Props = $props();
 
   const toastSettingsGeneralError: Toast = {
-    id: crypto.randomUUID(),
     message: "An error occurred while saving the event.",
     background: "preset-filled-error-500",
   };
@@ -79,7 +78,6 @@
 
     if (result) {
       toastController.trigger({
-        id: crypto.randomUUID(),
         message: "League has been successfully changed.",
         background: "preset-filled-success-500",
       });

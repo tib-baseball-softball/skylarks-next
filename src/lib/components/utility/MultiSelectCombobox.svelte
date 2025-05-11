@@ -33,7 +33,6 @@
   function removeItemFromSelection(itemToRemove: T) {
     if (!allowDeletionOfLastItem && selectedItems.length === 1) {
       toastController.trigger({
-        id: crypto.randomUUID(),
         message: `You cannot remove the last ${itemName}!`,
         background: "preset-filled-warning-500"
       });

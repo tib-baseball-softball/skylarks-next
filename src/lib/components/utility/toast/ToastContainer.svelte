@@ -5,7 +5,7 @@
 </script>
 
 <section class="gui-toast-group">
-  {#each toastController.toasts as toast (toast.id)}
+  {#each toastController.toastQueue as toast (toast.id)}
     <output
             transition:fly={{ y: 200, duration: 200 }}
             animate:flip={{duration: 400}}

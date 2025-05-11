@@ -30,7 +30,6 @@
 
       if (success) {
         toastController.trigger({
-          id: crypto.randomUUID(),
           message: `If we have your email (${email}) on file, you will receive a reset password request in your inbox.`,
           background: "preset-filled-success-500",
         });
@@ -42,7 +41,6 @@
 
     } catch {
       toastController.trigger({
-        id: crypto.randomUUID(),
         message: `Error sending reset password request.`,
         background: "preset-filled-error-500",
       });

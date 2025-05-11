@@ -25,13 +25,11 @@
   let { buttonClasses = "" }: Props = $props();
 
   const toastSettingsSuccess: Toast = {
-    id: crypto.randomUUID(),
     message: "Player data saved successfully.",
     background: "preset-filled-success-500",
   };
 
   const toastSettingsError: Toast = {
-    id: crypto.randomUUID(),
     message: "An error occurred while saving player data.",
     background: "preset-filled-error-500",
   };
@@ -66,7 +64,6 @@
       selectedPositions.push(value);
     } else {
       toastController.trigger({
-        id: crypto.randomUUID(),
         message: "Position is already selected.",
         background: "preset-filled-error-500",
       })

@@ -12,13 +12,11 @@
   }
 
   const toastSettingsSuccess: Toast = {
-    id: crypto.randomUUID(),
     message: "Uniform Set data saved successfully.",
     background: "preset-filled-success-500",
   };
 
   const toastSettingsError: Toast = {
-    id: crypto.randomUUID(),
     message: "An error occurred while saving Uniform Set.",
     background: "preset-filled-error-500",
   };

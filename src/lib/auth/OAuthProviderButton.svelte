@@ -20,7 +20,6 @@
     } catch (error) {
       console.error(error);
       toastController.trigger({
-        id: crypto.randomUUID(),
         message: "There was an error processing your authentication request via external provider. Please double-check your signup key",
         background: "preset-filled-error-500",
       });

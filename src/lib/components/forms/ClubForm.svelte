@@ -21,13 +21,11 @@
   let { club, buttonClasses = "" }: Props = $props();
 
   const toastSettingsSuccess: Toast = {
-    id: crypto.randomUUID(),
     message: "Club data saved successfully.",
     background: "preset-filled-success-500",
   };
 
   const toastSettingsError: Toast = {
-    id: crypto.randomUUID(),
     message: "An error occurred while saving club data.",
     background: "preset-filled-error-500",
   };

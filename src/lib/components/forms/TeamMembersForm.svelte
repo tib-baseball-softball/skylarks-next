@@ -34,7 +34,6 @@
         });
       }
       toastController.trigger({
-        id: crypto.randomUUID(),
         message: `All members have been added to team "${team.name}"`,
         background: "preset-filled-success-500",
       });
@@ -45,7 +44,6 @@
     } catch (error) {
       console.error(error);
       toastController.trigger({
-        id: crypto.randomUUID(),
         message: "An error occurred while saving user team data",
         background: "preset-filled-error-500",
       });
