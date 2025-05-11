@@ -12,7 +12,7 @@
 <div class="table-wrap lg:max-w-[75%] dark:border-2">
     <table class="table table-compact">
         <thead>
-            <tr>
+            <tr class="preset-tonal-surface dark:preset-filled-surface-300-700">
                 <th data-cell-for="player">{teamName} (Pitchers)</th>
                 <th data-cell-for="ip">IP</th>
                 <th data-cell-for="bf">BF</th>
@@ -49,7 +49,7 @@
         </tbody>
 
         <tfoot>
-        <tr data-row-for="summary">
+        <tr class="preset-tonal-surface dark:preset-filled-surface-300-700" data-row-for="summary">
             <td data-cell-for="player">
             </td>
             <td data-cell-for="ip">{matchStats.sum.innings_pitched}
