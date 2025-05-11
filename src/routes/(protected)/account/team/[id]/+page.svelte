@@ -4,7 +4,7 @@
   import Paginator from "$lib/pocketbase/Paginator.svelte";
   import {goto} from "$app/navigation";
   import type {CustomAuthModel, EventType} from "$lib/model/ExpandedResponse.js";
-  import {Segment } from "@skeletonlabs/skeleton-svelte";
+  import {Segment} from "@skeletonlabs/skeleton-svelte";
   import {authSettings} from "$lib/pocketbase/index.svelte";
   import TeamAdminSection from "$lib/components/diamondplanner/team/TeamAdminSection.svelte";
   import {Users} from "lucide-svelte";
@@ -49,37 +49,39 @@
 <h2 class="h3">Team Events</h2>
 
 <div
-        class="flex flex-wrap gap-4 lg:gap-8 preset-tonal-surface justify-between px-4 py-3 rounded-base"
+        class="flex flex-wrap gap-4 xl:flex-nowrap xl:gap-8 preset-tonal-surface justify-between px-4 py-3 rounded-base"
 >
   <label
-          class="flex items-center gap-2 grow justify-between md:grow-0"
+          class="label flex items-center gap-2 grow justify-between xl:justify-start md:grow-0"
   >
     Timeframe
-    <Segment name="timeframe" value={showEvents} onValueChange={(e) => (showEvents = e.value ?? "next")}>
-      <Segment.Item value="next" classes="flex-grow">
+    <Segment name="timeframe" value={showEvents} onValueChange={(e) => (showEvents = e.value ?? "next")} padding="p-1!">
+      <Segment.Item value="next">
         Next
       </Segment.Item>
-      <Segment.Item value="past" classes="flex-grow">
+      <Segment.Item value="past">
         Past
       </Segment.Item>
     </Segment>
   </label>
 
-  <label class="label flex items-center gap-2 grow justify-between md:grow-0">
+  <label class="label flex items-center gap-2 justify-between xl:justify-start grow md:grow-0">
     Sort
-    <Segment name="sorting" value={sorting} onValueChange={(e) => (sorting = e.value ?? "asc")}>
-      <Segment.Item value="asc" classes="flex-grow">Ascending</Segment.Item>
-      <Segment.Item value="desc" classes="flex-grow">Descending</Segment.Item>
+    <Segment name="sorting" value={sorting} onValueChange={(e) => (sorting = e.value ?? "asc")} padding="p-1!"
+             classes="flex-wrap">
+      <Segment.Item value="asc">Ascending</Segment.Item>
+      <Segment.Item value="desc">Descending</Segment.Item>
     </Segment>
   </label>
 
-  <label class="label flex items-center gap-2 grow justify-between md:grow-0">
+  <label class="label flex items-center gap-2 justify-between xl:justify-start grow md:grow-0">
     Type
-    <Segment name="type" value={showTypes} onValueChange={(e) => (showTypes = e.value ?? "any")} padding="px-2 md:px-4 py-1">
-      <Segment.Item value="any" padding="px-4 py-1" classes="flex-grow">All</Segment.Item>
-      <Segment.Item value="game" classes="flex-grow">Game</Segment.Item>
-      <Segment.Item value="practice" classes="flex-grow">Practice</Segment.Item>
-      <Segment.Item value="misc" classes="flex-grow">Other</Segment.Item>
+    <Segment name="type" value={showTypes} onValueChange={(e) => (showTypes = e.value ?? "any")} gap="gap-1"
+             padding="p-1!" classes="flex-wrap">
+      <Segment.Item value="any">All</Segment.Item>
+      <Segment.Item value="game">Game</Segment.Item>
+      <Segment.Item value="practice">Practice</Segment.Item>
+      <Segment.Item value="misc">Other</Segment.Item>
     </Segment>
   </label>
 </div>
