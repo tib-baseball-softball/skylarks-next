@@ -8,6 +8,7 @@
   //@ts-ignore
   import * as Sheet from "$lib/components/utility/sheet/index.js";
   import type {Toast} from "$lib/types/Toast.ts";
+  import {toastController} from "$lib/service/ToastController.svelte.ts";
 
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
@@ -200,7 +201,7 @@
       <hr class="my-5!"/>
 
       <div class="flex justify-center gap-3">
-        <button class="mt-2 btn preset-tonal-primary border border-primary-500" type="submit">
+        <button class="mt-2 btn preset-filled-primary-500" type="submit">
           Submit
         </button>
       </div>

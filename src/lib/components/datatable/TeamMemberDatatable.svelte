@@ -25,7 +25,7 @@
 
 <div class=" overflow-x-auto space-y-4 table-wrap">
   <!-- Header -->
-  <header class="flex justify-between gap-4">
+  <header class="md:flex space-y-2 md:space-y-0 justify-between gap-4">
     <Search {handler}/>
 
     <RowsPerPage {handler}/>

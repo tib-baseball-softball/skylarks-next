@@ -45,24 +45,27 @@
     </div>
   </section>
 
-  <footer class="card-footer flex justify-end gap-2">
+  <footer class="card-footer">
     {#if uniformSet?.expand?.club?.admins.includes(authRecord.id)}
-      <Dialog triggerClasses="btn btn-sm btn-icon preset-tonal-tertiary border border-tertiary-500">
+      <hr class="my-2">
+      <div class="flex justify-end gap-2">
+        <Dialog triggerClasses="btn btn-sm btn-icon preset-tonal-tertiary border border-tertiary-500">
 
-        {#snippet triggerContent()}
-          <Edit/>
-        {/snippet}
+          {#snippet triggerContent()}
+            <Edit/>
+          {/snippet}
 
-        {#snippet title()}
-          <header>
-            <h2>Edit Uniform Set "{uniformSet.name}"</h2>
-          </header>
-        {/snippet}
+          {#snippet title()}
+            <header>
+              <h2>Edit Uniform Set "{uniformSet.name}"</h2>
+            </header>
+          {/snippet}
 
-        <UniformSetForm {uniformSet} clubID={uniformSet.club}/>
-      </Dialog>
+          <UniformSetForm {uniformSet} clubID={uniformSet.club}/>
+        </Dialog>
 
-      <DeleteButton id={uniformSet.id} modelName="Uniform Set" action={deleteAction}/>
+        <DeleteButton id={uniformSet.id} modelName="Uniform Set" action={deleteAction}/>
+      </div>
     {/if}
   </footer>
 </article>

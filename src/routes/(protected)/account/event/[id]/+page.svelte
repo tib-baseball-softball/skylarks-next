@@ -77,11 +77,11 @@
   {#if !$event.cancelled}
     <hr class="my-8!"/>
 
-    <div class="flex justify-between items-center">
-      <h2 class="h3">My Participation</h2>
+    <div class="md:flex md:justify-between md:items-center space-y-2.5 md:space-y-0">
+      <h2 class="h4">My Participation</h2>
 
       {#if canParticipate}
-        <EventParticipationSection event={$event}/>
+        <EventParticipationSection event={$event} chipClasses="flex-grow"/>
       {:else}
         <div class="flex justify-end">
           <p>Only team members can participate in events.</p>

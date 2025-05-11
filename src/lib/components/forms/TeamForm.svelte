@@ -208,7 +208,7 @@
       <hr class="my-5!"/>
 
       <div class="flex justify-center gap-3">
-        <button type="submit" class="mt-2 btn preset-tonal-primary border border-primary-500">
+        <button type="submit" class="mt-2 btn preset-filled-primary-500">
           Submit
         </button>
       </div>

@@ -52,7 +52,7 @@
     <TeamForm
             team={null}
             club={club}
-            buttonClasses="btn preset-tonal-primary border border-primary-500"
+            buttonClasses="btn preset-filled-primary-500"
             showLabel={true}
     />
   {/if}
@@ -71,7 +71,7 @@
 
   {#if club?.admins.includes(authRecord.id)}
 
-    <Dialog triggerClasses="btn preset-tonal-primary border border-primary-500">
+    <Dialog triggerClasses="btn preset-filled-primary-500">
 
       {#snippet triggerContent()}
         <Plus/>
@@ -95,7 +95,7 @@
     <h2 class="h2 mb-3">Team Locations</h2>
   </header>
 
-  <a class="btn preset-tonal-primary border border-primary-500" href="/account/clubs/{club.id}/locations">
+  <a class="btn preset-filled-primary-500" href="/account/clubs/{club.id}/locations">
     <span>Locations Page</span>
     <SquareArrowOutUpRight size="20"/>
   </a>

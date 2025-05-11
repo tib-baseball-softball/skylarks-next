@@ -48,7 +48,13 @@
   <div class="flex items-center gap-3">
     <Dna aria-hidden="true"/>
     <dl>
-      <dd>{player.positions.toLocaleString()}</dd>
+      <dd>
+        <div class="flex flex-wrap">
+          {#each player.positions as position}
+            <span class="position-item">{position}</span>
+          {/each}
+        </div>
+      </dd>
       <dt class="text-sm font-light">Positions</dt>
     </dl>
   </div>
@@ -73,3 +79,9 @@
     </dl>
   </div>
 </div>
+
+<style>
+  .position-item:not(:last-child)::after {
+      content: ",\00a0";
+  }
+</style>
