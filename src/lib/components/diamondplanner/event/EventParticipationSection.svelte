@@ -22,6 +22,9 @@
     comment: "",
   });
 
+  // JS: splitting an empty string by comma returns length `1`
+  const guestCount = $derived(event.guests === "" ? 0 : event.guests.split(",").length)
+
   async function updateParticipationStatus(
       state: EventParticipationState,
   ): Promise<void> {
@@ -39,7 +42,7 @@
           onclick={() => updateParticipationStatus("in")}
   >
     <span><Check size="14"/></span>
-    <span>{event.participations.in.length ?? 0}</span>
+    <span>{(event.participations.in.length ?? 0) + guestCount}</span>
   </button>
 
   <button

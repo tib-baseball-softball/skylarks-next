@@ -47,16 +47,16 @@
         {/each}
 
         {#each displayedGuestPlayers as guestPlayer}
-          {#if guestPlayer /* can be empty string */}
+          {#if guestPlayer /* can be an empty string */}
             <div in:fade|global={{delay: 200}}>
               <button
                       aria-label="guest player name, click removes the player from the event"
-                      class="chip preset-tonal dark:preset-tonal-success"
+                      class="chip guest-chip preset-tonal border border-surface-900-100 gap-1"
                       onclick={() => removeGuestPlayer(guestPlayer)}
               >
                 {guestPlayer}
                 {#if isAdmin}
-                  <Trash class="ms-1" size="10"/>
+                  <Trash size="10"/>
                 {/if}
               </button>
             </div>
@@ -118,7 +118,7 @@
         cursor: default;
     }
 
-    .chip.variant-soft {
+    .chip.guest-chip {
         cursor: pointer;
     }
 </style>

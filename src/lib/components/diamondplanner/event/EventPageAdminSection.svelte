@@ -21,7 +21,7 @@
     e.preventDefault();
 
     await client.collection("events").update<EventsUpdate>(event.id, {
-      guests: event.guests + "," + guestPlayerForm.name
+      guests: event.guests.length === 0 ? guestPlayerForm.name : event.guests + "," + guestPlayerForm.name
     });
     guestPlayerForm.name = "";
   }

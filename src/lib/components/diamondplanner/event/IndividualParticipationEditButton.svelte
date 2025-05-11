@@ -89,8 +89,9 @@
     }
 
     .badge-icon {
+        color: white;
         top: -15px;
-        right: -15px;
+        right: -11px;
         z-index: 10;
         position: absolute;
     }
