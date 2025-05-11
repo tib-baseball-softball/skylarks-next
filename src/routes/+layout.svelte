@@ -62,6 +62,12 @@
       {#snippet trail()}
         <div class="lg:me-5 flex items-center gap-5 shrink-0">
 
+          {#if env.PUBLIC_APPLICATION_CONTEXT !== "Production"}
+            <div class="preset-tonal-warning p-1.5 rounded-container border border-warning-500 text-sm">
+              {env.PUBLIC_APPLICATION_CONTEXT}
+            </div>
+          {/if}
+
           {#if env.PUBLIC_AUTH_FUNCS_ENABLED === "true"}
             <LoginBadge signupAllowed={true}/>
           {/if}
