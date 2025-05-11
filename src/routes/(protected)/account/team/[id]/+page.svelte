@@ -49,10 +49,10 @@
 <h2 class="h3">Team Events</h2>
 
 <div
-        class="flex flex-wrap gap-4 xl:flex-nowrap xl:gap-8 preset-tonal-surface justify-between px-4 py-3 rounded-base"
+        class="flex flex-wrap gap-4 xl:flex-nowrap preset-tonal-surface justify-between px-4 py-3 rounded-base"
 >
   <label
-          class="label flex items-center gap-2 grow justify-between xl:justify-start md:grow-0"
+          class="flex items-center gap-2 grow justify-between xl:justify-start md:grow-0"
   >
     Timeframe
     <Segment name="timeframe" value={showEvents} onValueChange={(e) => (showEvents = e.value ?? "next")} padding="p-1!">
@@ -65,7 +65,7 @@
     </Segment>
   </label>
 
-  <label class="label flex items-center gap-2 justify-between xl:justify-start grow md:grow-0">
+  <label class="flex items-center gap-2 justify-between xl:justify-start grow md:grow-0">
     Sort
     <Segment name="sorting" value={sorting} onValueChange={(e) => (sorting = e.value ?? "asc")} padding="p-1!"
              classes="flex-wrap">
@@ -74,7 +74,7 @@
     </Segment>
   </label>
 
-  <label class="label flex items-center gap-2 justify-between xl:justify-start grow md:grow-0">
+  <label class="flex items-center gap-2 justify-between xl:justify-start grow md:grow-0">
     Type
     <Segment name="type" value={showTypes} onValueChange={(e) => (showTypes = e.value ?? "any")} gap="gap-1"
              padding="p-1!" classes="flex-wrap">

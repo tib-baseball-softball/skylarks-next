@@ -13,7 +13,7 @@
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 </script>
 
-<div class="card bg-primary-100 text-primary-900 shadow-lg">
+<div class="card bg-primary-100 dark:preset-tonal-primary text-primary-900 shadow-lg">
   <header class="card-header">
     <h2 class="h4 font-semibold">Club</h2>
   </header>

@@ -86,7 +86,7 @@
         <EventSeriesView
                 {team}
                 {eventSeries}
-                buttonClasses="btn preset-tonal-secondary border border-secondary-500 dark:preset-filled-secondary-500 dark:border"
+                buttonClasses="btn preset-tonal-secondary border border-secondary-500 dark:preset-filled-secondary-500 dark:border dark:border-white"
         />
       </div>
     </footer>

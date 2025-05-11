@@ -174,7 +174,7 @@
 
         <label class="label flex flex-col gap-1 col-span-2">
           Type
-          <Segment name="age_group" value={form.age_group} onValueChange={(e) => (form.age_group = e.value ?? "adults")}>
+          <Segment name="age_group" value={form.age_group} onValueChange={(e) => (form.age_group = e.value ?? "adults")} classes="dark:preset-outlined-surface-600-400">
             <Segment.Item value={"adults"} classes="flex-grow">
               Adults
             </Segment.Item>
