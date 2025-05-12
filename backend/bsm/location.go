@@ -23,7 +23,7 @@ func (a *Location) SetBSMID(bsmID int) {
 }
 
 // Name contains mostly useless data like "Baseball"
-// there is also `internal_name` in the record model to have a field that is not overwritten by imports
+// there is also `internal_name` in the record model to have a field that automatic imports do not overwrite
 func (a *Location) Name() string {
 	return a.GetString("name")
 }
