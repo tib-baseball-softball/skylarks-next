@@ -144,13 +144,8 @@ func (s GameImportService) setEventRecordValues(record *core.Record, match Match
 		return err
 	}
 	endtime := starttime.Time().Add(time.Hour * 3)
-	meetingtime := starttime.Time().Add(-2*time.Hour - 30*time.Minute)
 
-	s.App.Logger().Debug("Current Date Values", "starttime", starttime, "endtime", endtime, "meetingtime", meetingtime)
-
-	if meetingtime.String() == "" {
-		meetingtime = starttime.Time()
-	}
+	s.App.Logger().Debug("Current Date Values", "starttime", starttime, "endtime", endtime)
 
 	matchJSON, err := json.Marshal(match)
 	if err != nil {
@@ -161,7 +156,6 @@ func (s GameImportService) setEventRecordValues(record *core.Record, match Match
 	record.Set("bsm_id", match.ID)
 	record.Set("starttime", starttime.String())
 	record.Set("endtime", endtime.String())
-	record.Set("meetingtime", meetingtime.String())
 	record.Set("type", "game")
 	record.Set("team", teamID)
 	record.Set("match_json", string(matchJSON))
@@ -172,8 +166,8 @@ func (s GameImportService) setEventRecordValues(record *core.Record, match Match
 	return
 }
 
-// createOrUpdateField Adds field/location to database that can then be set to new events as well as selected for
-// manually created events in frontend.
+// createOrUpdateField Adds field/location to the database that can then be set to new events as well as selected for
+// manually created events in the frontend.
 func (s GameImportService) createOrUpdateField(team *core.Record, field Field) (*Location, error) {
 	record, err := s.App.FindFirstRecordByData(pb.LocationCollection, "bsm_id", field.BSMID)
 
