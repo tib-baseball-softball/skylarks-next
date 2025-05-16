@@ -1,18 +1,22 @@
-name: Deploy Production (Docker)
+name: Reusable Deployment Workflow
 
 on:
-  push:
-    paths-ignore:
-      - '**/README.md'
-      - 'docs/**'
-    branches:
-      - main
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+        description: "Deployment environment (Production or Staging)"
+    secrets:
+      DOCKER_TOKEN:
+        required: true
+      PORTAINER_WEBHOOK_URL:
+        required: true
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    environment: Production
+    environment: ${{ inputs.environment }}
 
     steps:
       - name: Checkout code
