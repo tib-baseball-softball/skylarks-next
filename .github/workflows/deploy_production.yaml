@@ -1,0 +1,19 @@
+name: Deploy Production (Docker)
+
+on:
+  push:
+    paths-ignore:
+      - '**/README.md'
+      - 'docs/**'
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    uses: ./.github/workflows/deploy-template.yaml
+    with:
+      environment: Production
+    secrets:
+      DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+      PORTAINER_WEBHOOK_URL: ${{ secrets.PORTAINER_WEBHOOK_URL }}
