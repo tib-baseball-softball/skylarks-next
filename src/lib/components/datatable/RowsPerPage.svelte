@@ -12,7 +12,7 @@
 
 <aside class="flex place-items-center">
   Show
-  <select class="select ml-2 variant-ringed-primary" bind:value={$rowsPerPage}>
+  <select class="select ml-2 preset-outlined-primary-500" bind:value={$rowsPerPage}>
     {#each options as option}
       <option value={option}>
         {option}

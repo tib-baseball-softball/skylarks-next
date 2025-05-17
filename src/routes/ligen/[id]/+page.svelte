@@ -1,14 +1,10 @@
 <script lang="ts">
-    import type {PageServerData} from "../../../../.svelte-kit/types/src/routes/ligen/[id]/$types";
-    import {ProgressRadial} from "@skeletonlabs/skeleton";
-    import StandingsTable from "$lib/components/table/StandingsTable.svelte";
-    import LeagueDetailInfoCard from "$lib/components/league/LeagueDetailInfoCard.svelte";
+  import {ProgressRing} from "@skeletonlabs/skeleton-svelte";
+  import StandingsTable from "$lib/components/table/StandingsTable.svelte";
+  import LeagueDetailInfoCard from "$lib/components/league/LeagueDetailInfoCard.svelte";
+  import type {PageProps} from "./$types";
 
-    interface Props {
-    data: PageServerData;
-  }
-
-  let {data}: Props = $props();
+  let {data}: PageProps = $props();
   let expectedTable = $derived(data.table);
   let leagueGroup = $derived(data.leagueGroup);
 </script>
@@ -21,12 +17,12 @@
 
     <LeagueDetailInfoCard {leagueGroup}/>
 
-    <article class="card variant-soft-surface">
+    <article class="card preset-tonal-surface">
       <header class="card-header">
         <h3 class="h3">League Stats</h3>
       </header>
 
-      <div class="flex flex-col justify-between items-end h-[80%]">
+      <div class="flex flex-col justify-between items-end">
 
         <p class="p-4">
           Statistics about current league leaders in various statistical categories can be found on a
@@ -34,7 +30,7 @@
         </p>
 
         <footer class="card-footer mt-2">
-          <a href="/ligen/{leagueGroup.id}/stats" class="btn variant-ghost-primary">Go to stats</a>
+          <a href="/ligen/{leagueGroup.id}/stats" class="btn preset-tonal-primary border border-primary-500">Go to stats</a>
         </footer>
       </div>
     </article>
@@ -46,7 +42,7 @@
 
   <h2 class="h2">Tabelle</h2>
   {#await expectedTable}
-    <ProgressRadial/>
+    <ProgressRing/>
   {:then table}
     {#if table}
       <StandingsTable {table}/>
@@ -59,6 +55,6 @@
 
 <style lang="postcss">
     h2 {
-        @apply mb-3
+        margin-bottom: calc(var(--spacing) * 3);
     }
 </style>

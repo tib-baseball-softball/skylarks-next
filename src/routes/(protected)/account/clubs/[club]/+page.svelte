@@ -5,76 +5,42 @@
   import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
   import type {CustomAuthModel, ExpandedClub, ExpandedTeam, ExpandedUniformSet,} from "$lib/model/ExpandedResponse";
   import {authSettings} from "$lib/pocketbase/index.svelte";
-  import {
-    type DrawerSettings,
-    getDrawerStore,
-    getModalStore,
-    type ModalComponent,
-    type ModalSettings,
-  } from "@skeletonlabs/skeleton";
   import {Mail, Plus, SquareArrowOutUpRight} from "lucide-svelte";
   import type {PageProps} from "./$types";
+  import TeamForm from "$lib/components/forms/TeamForm.svelte";
+  import Dialog from "$lib/components/utility/Dialog.svelte";
 
-  let { data }: PageProps = $props();
+  let {data}: PageProps = $props();
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
   let club: ExpandedClub = $derived(data.club);
   let teams: ExpandedTeam[] = $derived(data.teams);
   let uniformSets: ExpandedUniformSet[] = $derived(data.uniformSets);
-
-  const modalStore = getModalStore();
-  const drawerStore = getDrawerStore();
-
-  const teamSettings: DrawerSettings = $derived({
-    id: "team-form",
-    position: "right",
-    width: "w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%]",
-    meta: {
-      club: club,
-      team: null,
-    },
-  });
-
-  function triggerUniformModal() {
-    const modalComponent: ModalComponent = {
-      ref: UniformSetForm,
-      props: {
-        uniformSet: null,
-        clubID: club.id,
-      },
-    };
-
-    const modal: ModalSettings = {
-      type: "component",
-      component: modalComponent,
-    };
-    modalStore.trigger(modal);
-  }
 </script>
 
 <svelte:head>
   <title>Details for {club.name}</title>
   <meta
-    name="description"
-    content="Club overview page for the {club.name} with info about teams and uniform sets."
+          name="description"
+          content="Club overview page for the {club.name} with info about teams and uniform sets."
   />
 </svelte:head>
 
 <h1 class="h1">{club.name}</h1>
 
 <section class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
-  <ClubDetailCard {club} />
+  <ClubDetailCard {club}/>
 </section>
 
-<section class="!mt-8">
+<section class="mt-8!">
   <header>
     <h2 class="h2 mb-3">Club Teams</h2>
   </header>
 
   <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
-    {#each teams as team}
-      <TeamListTeaser {team} link={true} />
+    {#each teams as team (team.id)}
+      <TeamListTeaser {team} link={true}/>
     {/each}
 
     {#if teams.length === 0}
@@ -83,48 +49,60 @@
   </div>
 
   {#if club?.admins.includes(authRecord.id)}
-    <button
-      class="btn variant-ghost-primary"
-      onclick={() => drawerStore.open(teamSettings)}
-    >
-      <Plus />
-      <span>Create new</span>
-    </button>
+    <TeamForm
+            team={null}
+            club={club}
+            buttonClasses="btn preset-filled-primary-500"
+            showLabel={true}
+    />
   {/if}
 </section>
 
-<section class="!mt-8">
+<section class="mt-8!">
   <header>
     <h2 class="h2 mb-3">Uniform Sets</h2>
   </header>
 
   <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
     {#each uniformSets as uniformSet}
-      <UniformSetInfoCard {uniformSet} />
+      <UniformSetInfoCard {uniformSet}/>
     {/each}
   </div>
 
   {#if club?.admins.includes(authRecord.id)}
-    <button class="btn variant-ghost-primary" onclick={triggerUniformModal}>
-      <Plus />
-      <span>Create new</span>
-    </button>
+
+    <Dialog triggerClasses="btn preset-filled-primary-500">
+
+      {#snippet triggerContent()}
+        <Plus/>
+        <span>Create new</span>
+      {/snippet}
+
+      {#snippet title()}
+        <header>
+          <h2>Create new Uniform Set</h2>
+        </header>
+      {/snippet}
+
+      <UniformSetForm uniformSet={null} clubID={club.id}/>
+    </Dialog>
+
   {/if}
 </section>
 
-<section class="!mt-8">
+<section class="mt-8!">
   <header>
     <h2 class="h2 mb-3">Team Locations</h2>
   </header>
 
-  <a class="btn variant-ghost-primary" href="/account/clubs/{club.id}/locations">
+  <a class="btn preset-filled-primary-500" href="/account/clubs/{club.id}/locations">
     <span>Locations Page</span>
     <SquareArrowOutUpRight size="20"/>
   </a>
 </section>
 
 {#if club?.admins.includes(authRecord.id)}
-  <hr class="my-2" />
+  <hr class="my-2"/>
 
   <section>
     <header>
@@ -132,9 +110,9 @@
     </header>
 
     <div
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-3"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-3"
     >
-      <article class="card admin-card variant-ringed-surface">
+      <article class="card admin-card preset-outlined-surface-500">
         <header class="card-header">
           <h3 class="h4 font-semibold">Club deletion</h3>
         </header>
@@ -150,10 +128,10 @@
 
         <footer class="card-footer flex">
           <a
-            class="btn variant-ghost-secondary dark:variant-filled-secondary dark:border grow"
-            href="mailto:webmaster@tib-baseball.de"
+                  class="btn preset-tonal-secondary border border-secondary-500 dark:preset-filled-secondary-500 dark:border grow"
+                  href="mailto:webmaster@tib-baseball.de"
           >
-            <Mail />
+            <Mail/>
             <span class="ms-2">Contact</span>
           </a>
         </footer>

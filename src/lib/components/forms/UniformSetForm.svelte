@@ -1,28 +1,27 @@
 <script lang="ts">
   import type {UniformsetsCreate, UniformsetsResponse} from "$lib/model/pb-types";
   import {save} from "$lib/pocketbase/RecordOperations";
-  import {getToastStore, type ToastSettings} from "@skeletonlabs/skeleton";
   import {invalidate} from "$app/navigation";
+  import type {Toast} from "$lib/types/Toast.ts";
+  import {toastController} from "$lib/service/ToastController.svelte.ts";
+  import {closeModal} from "$lib/functions/closeModal.ts";
 
   interface Props {
-    uniformSet?: UniformsetsResponse;
+    uniformSet?: UniformsetsResponse | null;
     clubID: string;
-    parent: any;
   }
 
-  const toastStore = getToastStore();
-
-  const toastSettingsSuccess: ToastSettings = {
+  const toastSettingsSuccess: Toast = {
     message: "Uniform Set data saved successfully.",
-    background: "variant-filled-success",
+    background: "preset-filled-success-500",
   };
 
-  const toastSettingsError: ToastSettings = {
+  const toastSettingsError: Toast = {
     message: "An error occurred while saving Uniform Set.",
-    background: "variant-filled-error",
+    background: "preset-filled-error-500",
   };
 
-  let {uniformSet, clubID, parent}: Props = $props();
+  let {uniformSet, clubID}: Props = $props();
 
   const form: UniformsetsCreate = $state(
       uniformSet ?? {
@@ -44,89 +43,77 @@
     try {
       result = await save<UniformsetsResponse>("uniformsets", form);
     } catch {
-      toastStore.trigger(toastSettingsError);
+      toastController.trigger(toastSettingsError);
     }
 
     if (result) {
-      toastStore.trigger(toastSettingsSuccess);
+      toastController.trigger(toastSettingsSuccess);
       await invalidate("club:single");
-      parent.onClose();
+      closeModal();
     }
   }
 </script>
 
-<div class="card p-6 max-w-xl">
-  <header>
-    <h2 class="text-xl font-semibold">
-      {#if form.id}
-        Edit Uniform Set "{form.name}"
-      {:else }
-        Create new Uniform Set
-      {/if}
-    </h2>
-  </header>
+<form onsubmit={submitForm} class="mt-4 space-y-3">
+  <input
+          name="id"
+          autocomplete="off"
+          class="input"
+          type="hidden"
+          readonly
+          bind:value={form.id}
+  />
 
-  <form onsubmit={submitForm} class="mt-4 space-y-3">
+  <label class="label">
+    <span>Name</span>
     <input
-            name="id"
-            autocomplete="off"
+            name="name"
             class="input"
-            type="hidden"
-            readonly
-            bind:value={form.id}
+            bind:value={form.name}
+            required
+            type="text"
     />
+  </label>
 
-    <label class="label">
-      <span>Name</span>
-      <input
-              name="name"
-              class="input"
-              bind:value={form.name}
-              required
-              type="text"
-      />
-    </label>
-
-    <label class="label">
-      <span>Cap Color</span>
-      <span class="grid grid-cols-[auto_1fr] gap-2">
+  <label class="label">
+    <span>Cap Color</span>
+    <span class="grid grid-cols-[auto_1fr] gap-2">
                 <input class="input" type="color" bind:value={form.cap}/>
                 <input class="input" type="text" bind:value={form.cap} tabindex="-1" required/>
             </span>
-    </label>
+  </label>
 
-    <div class="text-sm !mt-4">
-      You can use the special identifiers <code class="code">B</code> and <code class="code">Bird</code> to get
-      the Skylarks Home and Road Cap instead of a
-      generic colored one.
-    </div>
+  <div class="text-sm mt-4!">
+    You can use the special identifiers <code class="code">B</code> and <code class="code">Bird</code> to get
+    the Skylarks Home and Road Cap instead of a
+    generic colored one.
+  </div>
 
-    <label class="label">
-      <span>Jersey Color</span>
-      <span class="grid grid-cols-[auto_1fr] gap-2">
+  <label class="label">
+    <span>Jersey Color</span>
+    <span class="grid grid-cols-[auto_1fr] gap-2">
                 <input class="input" type="color" bind:value={form.jersey}/>
                 <input class="input" type="text" bind:value={form.jersey} tabindex="-1" required/>
             </span>
-    </label>
+  </label>
 
-    <label class="label">
-      <span>Pants Color</span>
-      <span class="grid grid-cols-[auto_1fr] gap-2">
+  <label class="label">
+    <span>Pants Color</span>
+    <span class="grid grid-cols-[auto_1fr] gap-2">
                 <input class="input" type="color" bind:value={form.pants}/>
                 <input class="input" type="text" bind:value={form.pants} tabindex="-1" required/>
             </span>
-    </label>
+  </label>
 
-    <div class="text-sm !mt-4">
-      Both hexadecimal color values (6 characters with leading '#') and
-      <a class="anchor" href="https://developer.mozilla.org/en-US/docs/Web/CSS/named-color" target="_blank">
-        named CSS colors
-      </a>
-      can be used.
-    </div>
+  <div class="text-sm mt-4!">
+    Both hexadecimal color values (6 characters with leading '#') and
+    <a class="anchor" href="https://developer.mozilla.org/en-US/docs/Web/CSS/named-color" target="_blank">
+      named CSS colors
+    </a>
+    can be used.
+  </div>
 
-    <div class="flex justify-end gap-3 mt-3">
-      <button type="submit" class="mt-2 btn variant-ghost-primary">Submit</button>
-    </div>
-  </form>
-</div>
+  <div class="flex justify-end gap-3 mt-3">
+    <button type="submit" class="mt-2 btn preset-tonal-primary border border-primary-500">Submit</button>
+  </div>
+</form>

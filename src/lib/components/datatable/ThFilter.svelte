@@ -11,7 +11,7 @@
 
 <th>
     <input
-            class="input text-sm w-full variant-ringed-primary"
+            class="input text-sm w-full preset-outlined-primary-500"
             type="text"
             bind:value
             oninput={() => {

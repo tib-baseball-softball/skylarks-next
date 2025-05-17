@@ -1,8 +1,8 @@
 <script lang="ts" generics="T extends UsersResponse">
   //@ts-ignore
   import type {UsersResponse} from "$lib/model/pb-types.ts";
-  import {getToastStore} from "@skeletonlabs/skeleton";
   import {X} from "lucide-svelte";
+  import {toastController} from "$lib/service/ToastController.svelte.ts";
 
   // TODO: this should be even more generic
 
@@ -15,7 +15,6 @@
 
   let {itemName, selectedItems = $bindable(), allItems, allowDeletionOfLastItem = false}: Props = $props();
 
-  const toastStore = getToastStore();
   let selectElement: HTMLSelectElement | undefined = $state();
 
   function addItemToSelection(users: T[]) {
@@ -33,9 +32,9 @@
 
   function removeItemFromSelection(itemToRemove: T) {
     if (!allowDeletionOfLastItem && selectedItems.length === 1) {
-      toastStore.trigger({
+      toastController.trigger({
         message: `You cannot remove the last ${itemName}!`,
-        background: "variant-filled-warning"
+        background: "preset-filled-warning-500"
       });
       return;
     }
@@ -54,7 +53,7 @@
 {#each selectedItems as selectItem}
   <button
           type="button"
-          class="chip variant-filled-primary me-1 lg:me-2"
+          class="chip preset-filled-primary-500 me-1 lg:me-2"
           onclick={() => removeItemFromSelection(selectItem)}
   >
     <span>{selectItem.first_name} {selectItem.last_name}</span>

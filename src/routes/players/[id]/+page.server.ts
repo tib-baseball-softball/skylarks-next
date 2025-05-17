@@ -1,8 +1,9 @@
 import {type BattingStatisticsEntry, StatsAPIRequest, StatsType} from "bsm.js";
 import {env} from "$env/dynamic/private";
 import {PlayerClient} from "$lib/service/PlayerClient.ts";
+import type {PageServerLoad} from './$types';
 
-export async function load({params, fetch}) {
+export const load: PageServerLoad = async ({params, fetch}) => {
   const statsRequest = new StatsAPIRequest(env.BSM_API_KEY);
 
   const playerBattingStats = statsRequest.getStatisticsForPerson<BattingStatisticsEntry>(Number(params.id), StatsType.batting);

@@ -5,6 +5,7 @@ import (
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
+	"github.com/tib-baseball-softball/skylarks-next/internal/pb"
 	"github.com/tib-baseball-softball/skylarks-next/internal/stats"
 	"time"
 )
@@ -34,7 +35,7 @@ func DeleteEventsForSeries(e *core.RecordEvent) error {
 	eventSeries := e.Record
 
 	eventsToBeDeleted, err := e.App.FindRecordsByFilter(
-		"events",
+		pb.EventsCollection,
 		"series = {:seriesID}",
 		"",
 		0,
@@ -86,13 +87,13 @@ func generateSeriesEvents(app core.App, e *core.RecordEvent) ([]*core.Record, er
 		startDate = startDate.AddDate(0, 0, 1)
 	}
 
-	eventCollection, err := app.FindCollectionByNameOrId("events")
+	eventCollection, err := app.FindCollectionByNameOrId(pb.EventsCollection)
 	if err != nil {
 		return nil, err
 	}
 
 	existingEvents, err := app.FindRecordsByFilter(
-		"events",
+		pb.EventsCollection,
 		"series = {:seriesID}",
 		"",
 		0,

@@ -12,10 +12,11 @@ import {
 } from "bsm.js";
 import {env} from "$env/dynamic/private";
 import {env as publicEnv} from "$env/dynamic/public";
+import type {PageServerLoad} from './$types';
 
-export async function load({parent, params, url}) {
+export const load: PageServerLoad = async ({parent, params, url}) =>  {
   const data = await parent();
-  let clubTeams = await data.clubTeams;
+  let clubTeams: ClubTeam[] | undefined = await data.clubTeams;
 
   // this is kind of hacky because I could not find an API call to get a single team, so if the collection is empty
   // we have to load them all again...could also be a skill issue with SvelteKit

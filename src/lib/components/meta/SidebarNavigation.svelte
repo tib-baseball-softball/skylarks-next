@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {Accordion, AccordionItem, getDrawerStore,} from "@skeletonlabs/skeleton";
+  import {Accordion} from "@skeletonlabs/skeleton-svelte";
   import {authSettings} from "$lib/pocketbase/index.svelte";
   import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/model/ExpandedResponse";
   import {
@@ -17,124 +17,132 @@
   interface Props {
     clubs: ExpandedClub[],
     teams: ExpandedTeam[],
+    sheetOpen?: boolean,
   }
 
-  let {clubs, teams}: Props = $props();
+  let {clubs, teams, sheetOpen = $bindable()}: Props = $props();
 
-  const drawerStore = getDrawerStore();
   const authRecord = $derived(authSettings.record as CustomAuthModel);
-
   let isUserAuthenticated = $derived(!!authSettings.record);
 
-  function drawerClose(): void {
-    drawerStore.close();
+  function sheetClose(): void {
+    if (sheetOpen) {
+      sheetOpen = false;
+    }
   }
 
-
+  let value = $state(["account", "teamClub", "admin"]);
 </script>
 
 <nav class="list-nav py-1 px-1 lg:px-4">
   {#if isUserAuthenticated}
-    <Accordion regionPanel="space-y-1">
-      <AccordionItem open>
+    <Accordion {value} onValueChange={(e) => (value = e.value)} multiple collapsible>
+      <Accordion.Item value="account" panelPadding="py-0 px-4">
 
-        <svelte:fragment slot="lead">
+        {#snippet lead()}
           <SquareUserRound/>
-        </svelte:fragment>
+        {/snippet}
 
-        <svelte:fragment slot="summary">
+        {#snippet control()}
           <span>My Account</span>
-        </svelte:fragment>
+        {/snippet}
 
-        <svelte:fragment slot="content">
-          <a href="/account" onclick={drawerClose}>
+        {#snippet panel()}
+          <a href="/account" onclick={sheetClose}>
             <CircleUserRound/>
             <span>Dashboard</span>
           </a>
 
-          <a href="/stats/{authRecord?.id}" onclick={drawerClose}>
+          <a href="/stats/{authRecord?.id}" onclick={sheetClose}>
             <ChartLine/>
             <span>Personal Stats</span>
           </a>
 
-          <a href="/account/playerprofile" onclick={drawerClose}>
+          <a href="/account/playerprofile" onclick={sheetClose}>
             <IdCard/>
             <span>Player Profile</span>
           </a>
-        </svelte:fragment>
+        {/snippet}
 
-      </AccordionItem>
-    </Accordion>
+      </Accordion.Item>
 
-    <hr class="my-2"/>
+      <hr class="hr"/>
 
-    <Accordion regionPanel="space-y-1">
-      <AccordionItem open>
-        <svelte:fragment slot="lead">
+      <Accordion.Item value="teamClub" panelPadding="py-0 px-4">
+        {#snippet lead()}
           <UsersRound/>
-        </svelte:fragment>
+        {/snippet}
 
-        <svelte:fragment slot="summary">
+        {#snippet control()}
           <span>My Clubs & Teams</span>
-        </svelte:fragment>
+        {/snippet}
 
-        <svelte:fragment slot="content">
-          {#each clubs as club}
-            <a href="/account/clubs/{club.id}" onclick={drawerClose}>
+        {#snippet panel()}
+          {#each clubs as club (club.id)}
+            <a href="/account/clubs/{club.id}" onclick={sheetClose}>
               <Shield/>
-              <div>{club.name} ({club.acronym})</div>
+              <span>{club.name} ({club.acronym})</span>
             </a>
           {/each}
 
           {#if teams?.length > 0}
-            <hr class="mx-8">
+            <hr class="hr">
 
-            {#each teams as team}
+            {#each teams as team (team.id)}
               <a
                       href="/account/team/{team.id}"
-                      onclick={drawerClose}
+                      onclick={sheetClose}
               >
                 <Users/>
-                <div
+                <span
                 >{team.name} ({team?.expand?.club
                     ?.acronym})
-                </div
+                </span
                 >
               </a>
             {/each}
           {/if}
-        </svelte:fragment>
-      </AccordionItem>
-    </Accordion>
+        {/snippet}
+      </Accordion.Item>
 
-    <hr class="my-2"/>
+      <hr class="hr"/>
 
-    <Accordion regionPanel="space-y-1">
-      <AccordionItem open>
-        <svelte:fragment slot="lead">
+      <Accordion.Item value="admin" panelPadding="py-0 px-4">
+        {#snippet lead()}
           <LockKeyhole/>
-        </svelte:fragment>
+        {/snippet}
 
-        <svelte:fragment slot="summary">Administration</svelte:fragment>
+        {#snippet control()}
+          Administration
+        {/snippet}
 
-        <svelte:fragment slot="content">
-          <a href="/stats/admin" onclick={drawerClose}>
+        {#snippet panel()}
+          <a href="/stats/admin" onclick={sheetClose}>
             <ChartColumnStacked/>
             <span>Admin Dashboard</span>
           </a>
-        </svelte:fragment>
-      </AccordionItem>
+        {/snippet}
+      </Accordion.Item>
     </Accordion>
   {/if}
 </nav>
 
 <style lang="postcss">
+    @reference "../../../app.css";
+
     a {
         display: flex;
-        @apply items-center;
+        align-items: center;
+        margin: 0.5rem;
+        padding: 0.4rem;
+    }
+
+    a:hover, a:focus {
+        background-color: var(--color-primary-50-950);
+        color: var(--color-primary-950-50);
     }
 
     span {
-        @apply text-nowrap;
+        margin-left: 0.5rem;
     }
 </style>

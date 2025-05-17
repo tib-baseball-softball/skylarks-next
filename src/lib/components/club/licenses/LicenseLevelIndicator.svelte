@@ -21,6 +21,6 @@
   })
 </script>
 
-<div aria-label="License level {level}:" class="py-0.5 px-2 rounded {colorClasses}">
+<div aria-label="License level {level}:" class="py-0.5 px-2 rounded-sm {colorClasses}">
   {level}
 </div>

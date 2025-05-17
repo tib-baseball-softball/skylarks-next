@@ -7,6 +7,10 @@ on:
         required: true
         type: string
         description: "Deployment environment (Production or Staging)"
+      branch:
+        required: true
+        type: string
+        description: "The branch to check out"
     secrets:
       DOCKER_TOKEN:
         required: true
@@ -21,6 +25,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3

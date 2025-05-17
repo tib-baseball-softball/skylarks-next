@@ -13,10 +13,11 @@
   let {club, team}: Props = $props();
 </script>
 
-<Dialog buttonText="Add Members">
+<Dialog triggerClasses="btn preset-filled-primary-500">
 
-  {#snippet triggerIcon()}
+  {#snippet triggerContent()}
     <Plus/>
+    <span>Add Members</span>
   {/snippet}
 
   {#snippet title()}
@@ -30,4 +31,4 @@
   {/snippet}
 
   <TeamMembersForm {team} {club}/>
-  </Dialog>
+</Dialog>

@@ -1,6 +1,6 @@
 <script lang="ts">
   import type {PageProps} from './$types';
-  import {ProgressBar} from "@skeletonlabs/skeleton";
+  import { Progress } from "@skeletonlabs/skeleton-svelte";
   import LicenseList from "$lib/components/club/licenses/LicenseList.svelte";
 
   let {data}: PageProps = $props();
@@ -10,7 +10,7 @@
 
 {#await data.umpireLicenses}
   <p>Loading Licenses...</p>
-  <ProgressBar/>
+  <Progress/>
 
 {:then umpireLicenses}
   <LicenseList licenses={umpireLicenses} showSoftballSection={true}/>

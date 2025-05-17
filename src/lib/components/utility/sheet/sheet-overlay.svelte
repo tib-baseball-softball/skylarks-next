@@ -13,7 +13,7 @@
 <SheetPrimitive.Overlay
   bind:ref
   class={[
-    "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-surface-backdrop-token",
+    "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-surface-50/50 dark:bg-surface-950/50",
     className,
   ]}
   {...restProps}

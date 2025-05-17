@@ -20,7 +20,7 @@
 </script>
 
 <article
-        class="card variant-soft-surface shadow-xl text-sm h-full"
+        class="card preset-tonal-surface shadow-xl text-sm h-full"
         class:card-hover={link}
 >
   <a href="/account/event/{event.id}" class:line-through={event.cancelled}>
@@ -38,7 +38,7 @@
     <hr class="my-2"/>
     {#if event.cancelled}
       <div class="flex justify-end">
-                <span class="badge variant-filled-error gap-1">
+                <span class="badge preset-filled-error-500 gap-1">
                     <Ban size="18"/>
                     Cancelled
                 </span>

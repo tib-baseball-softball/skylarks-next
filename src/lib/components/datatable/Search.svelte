@@ -10,7 +10,7 @@
 </script>
 
 <input
-        class="input sm:w-64 w-36 variant-ringed-primary"
+        class="input sm:w-64 w-36 preset-outlined-primary-500"
         type="search"
         placeholder="Search..."
         bind:value

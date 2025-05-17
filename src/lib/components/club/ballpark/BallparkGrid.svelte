@@ -12,8 +12,8 @@
   {#each fields as field}
     <a href="/club/ballpark/{field.id}">
       <article
-              class="card p-3 variant-soft dark:border dark:border-surface-500 shadow-xl flex items-center gap-4">
-        <img class="rounded-token" width="80" height="80" loading="lazy" src="{field.photo_url}"
+              class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl flex items-center gap-4">
+        <img class="rounded-base" width="80" height="80" loading="lazy" src="{field.photo_url}"
              alt="a baseball or softball field: {field.name}">
         <p>
           {field.name}

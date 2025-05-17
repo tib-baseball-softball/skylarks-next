@@ -13,7 +13,7 @@
   const admissionDate = $derived(new Date(clubOfficial.admission_date));
 </script>
 
-<article class="card p-3 variant-soft dark:border dark:border-surface-500 shadow-xl">
+<article class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">
   <GenericDetailRow
           categoryName="Title"
           rowValue={clubOfficial.function}
@@ -58,7 +58,7 @@
 
 </article>
 
-<article class="card p-3 variant-soft dark:border dark:border-surface-500 shadow-xl">
+<article class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">
   <a class="anchor" href="mailto:{clubOfficial.mail}">
     <GenericDetailRow
             categoryName="Contact"

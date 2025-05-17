@@ -1,19 +1,19 @@
 /* Customisations for dark mode - official dark theme requires importing different CSS */
 
 .flatpickr-calendar {
-    @apply bg-surface-200-700-token;
+    @apply bg-surface-200-800;
 }
 
 .flatpickr-day {
-    @apply text-surface-900-50-token;
+    @apply text-surface-950-50;
 }
 
 .flatpickr-day.prevMonthDay, .flatpickr-day.nextMonthDay {
-    @apply text-surface-500-400-token;
+    @apply text-surface-600-400;
 }
 
 .flatpickr-time {
-    @apply text-surface-500-400-token !important;
+    @apply text-surface-600-400!;
 }
 
 span.flatpickr-weekday {
@@ -26,7 +26,7 @@ span.flatpickr-weekday {
 }
 
 .flatpickr-time input:hover, .flatpickr-time .flatpickr-am-pm:hover, .flatpickr-time input:focus, .flatpickr-time .flatpickr-am-pm:focus {
-    @apply bg-surface-100-800-token;
+    @apply bg-surface-100-900;
 }
 
 .flatpickr-months .flatpickr-month {
@@ -34,10 +34,9 @@ span.flatpickr-weekday {
 }
 
 .flatpickr-months .flatpickr-prev-month, .flatpickr-months .flatpickr-next-month {
-    @apply fill-token !important;
-    @apply text-surface-900-50-token !important;
+    @apply text-surface-950-50!;
 }
 
 .flatpickr-day.inRange, .flatpickr-day.prevMonthDay.inRange, .flatpickr-day.nextMonthDay.inRange, .flatpickr-day.today.inRange, .flatpickr-day.prevMonthDay.today.inRange, .flatpickr-day.nextMonthDay.today.inRange, .flatpickr-day:hover, .flatpickr-day.prevMonthDay:hover, .flatpickr-day.nextMonthDay:hover, .flatpickr-day:focus, .flatpickr-day.prevMonthDay:focus, .flatpickr-day.nextMonthDay:focus {
-    @apply bg-surface-100-800-token !important;
+    @apply bg-surface-100-900!;
 }

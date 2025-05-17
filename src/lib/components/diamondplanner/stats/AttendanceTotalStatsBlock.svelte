@@ -20,7 +20,7 @@
   };
 </script>
 
-<div class="card variant-glass-surface shadow-lg">
+<div class="card preset-tonal-surface shadow-lg">
     <header class="card-header">
         <h2 class="h4 font-semibold">Totals - {title}</h2>
     </header>

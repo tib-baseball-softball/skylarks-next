@@ -7,7 +7,6 @@ import (
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
 	"github.com/tib-baseball-softball/skylarks-next/internal/pb"
-	"log"
 	"log/slog"
 	"sync"
 	"time"
@@ -36,7 +35,7 @@ type GameImportService struct {
 func (s GameImportService) ImportGames() {
 	teams, err := s.App.FindRecordsByFilter("teams", "bsm_league_group != 0", "", 0, 0)
 	if err != nil {
-		log.Print("Error fetching existing team records: ", err)
+		s.App.Logger().Error("Error fetching existing team records: ", "error", err)
 		return
 	}
 
@@ -101,7 +100,7 @@ func (s GameImportService) fetchMatchesForLeagueGroup(league string, apiKey stri
 
 func (s GameImportService) createOrUpdateEvents(matches []Match, team *core.Record) (err error) {
 	for _, match := range matches {
-		record, foundErr := s.App.FindFirstRecordByData("events", "bsm_id", match.ID)
+		record, foundErr := s.App.FindFirstRecordByData(pb.EventsCollection, "bsm_id", match.ID)
 
 		location, err := s.createOrUpdateField(team, match.Field)
 		if err != nil {
@@ -110,7 +109,7 @@ func (s GameImportService) createOrUpdateEvents(matches []Match, team *core.Reco
 
 		// if not found, it throws an error, so create new record
 		if foundErr != nil {
-			collection, err := s.App.FindCollectionByNameOrId("events")
+			collection, err := s.App.FindCollectionByNameOrId(pb.EventsCollection)
 			if err != nil {
 				s.App.Logger().Error("Error fetching event collection: ", "error", err)
 				continue
@@ -144,36 +143,37 @@ func (s GameImportService) setEventRecordValues(record *core.Record, match Match
 		return err
 	}
 	endtime := starttime.Time().Add(time.Hour * 3)
-	meetingtime := starttime.Time().Add(-2*time.Hour - 30*time.Minute)
-
-	s.App.Logger().Debug("Current Date Values", "starttime", starttime, "endtime", endtime, "meetingtime", meetingtime)
-
-	if meetingtime.String() == "" {
-		meetingtime = starttime.Time()
+	endDateTime, err := types.ParseDateTime(endtime)
+	if err != nil {
+		return err
 	}
+
+	s.App.Logger().Debug("Current Date Values", "starttime", starttime, "endtime", endtime)
 
 	matchJSON, err := json.Marshal(match)
 	if err != nil {
 		return err
 	}
 
-	record.Set("title", match.AwayTeamName+" @ "+match.HomeTeamName)
-	record.Set("bsm_id", match.ID)
-	record.Set("starttime", starttime.String())
-	record.Set("endtime", endtime.String())
-	record.Set("meetingtime", meetingtime.String())
-	record.Set("type", "game")
-	record.Set("team", teamID)
-	record.Set("match_json", string(matchJSON))
-	record.Set("location", location.Id)
+	event := &pb.Events{}
+	event.SetProxyRecord(record)
+
+	event.SetTitle(match.AwayTeamName + " @ " + match.HomeTeamName)
+	event.SetBSMID(match.ID)
+	event.SetStartTime(starttime)
+	event.SetEndTime(endDateTime)
+	event.SetType("game")
+	event.SetTeam(teamID)
+	event.SetMatchJSON(string(matchJSON))
+	event.SetLocation(location.Id)
 
 	s.App.Logger().Debug("Record populated with fields", "record", record)
 
-	return
+	return nil
 }
 
-// createOrUpdateField Adds field/location to database that can then be set to new events as well as selected for
-// manually created events in frontend.
+// createOrUpdateField Adds field/location to the database that can then be set to new events as well as selected for
+// manually created events in the frontend.
 func (s GameImportService) createOrUpdateField(team *core.Record, field Field) (*Location, error) {
 	record, err := s.App.FindFirstRecordByData(pb.LocationCollection, "bsm_id", field.BSMID)
 

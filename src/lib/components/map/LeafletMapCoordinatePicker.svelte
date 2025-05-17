@@ -48,7 +48,7 @@
   });
 </script>
 
-<div bind:this={mapContainer} id="map" class=" shadow-xl rounded-token border-4 border-surface-400-500-token"></div>
+<div bind:this={mapContainer} id="map" class=" shadow-xl rounded-base border-4 border-surface-500"></div>
 
 <style>
     #map {

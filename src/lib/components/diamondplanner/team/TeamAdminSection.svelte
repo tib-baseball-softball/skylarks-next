@@ -1,19 +1,15 @@
 <script lang="ts">
-  import TeamEditButton from "$lib/components/team/TeamEditButton.svelte";
   import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
-  import {
-    type DrawerSettings,
-    getDrawerStore,
-    getModalStore,
-    type ModalComponent,
-    type ModalSettings
-  } from "@skeletonlabs/skeleton";
   import {goto, invalidateAll} from "$app/navigation";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
   import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
   import TeamGamesModal from "$lib/components/forms/TeamGamesModal.svelte";
   import type {EventseriesResponse} from "$lib/model/pb-types.ts";
   import {CalendarPlus} from "lucide-svelte";
+  import EventSeriesView from "$lib/components/diamondplanner/event/EventSeriesView.svelte";
+  import TeamForm from "$lib/components/forms/TeamForm.svelte";
+  import EventForm from "$lib/components/forms/EventForm.svelte";
+  import Dialog from "$lib/components/utility/Dialog.svelte";
 
   interface Props {
     team: ExpandedTeam,
@@ -22,48 +18,10 @@
 
   let {team, eventSeries}: Props = $props();
 
-  const drawerStore = getDrawerStore();
-  const modalStore = getModalStore();
-
-  const singleEventSettings: DrawerSettings = $derived({
-    id: "event-form",
-    position: "right",
-    width: "w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%]",
-    meta: {
-      event: null,
-      club: team?.club,
-      team: team,
-    },
-  });
-
-  const eventSeriesSettings: DrawerSettings = $derived({
-    id: "eventseries-view",
-    position: "right",
-    width: "w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%]",
-    meta: {
-      club: team?.club,
-      team: team,
-      eventSeries: eventSeries,
-    },
-  });
-
   function teamDeleteAction(id: string) {
     goto(`/account`);
     client.collection("teams").delete(id);
     invalidateAll();
-  }
-
-  function triggerModal() {
-    const modalComponent: ModalComponent = {
-      ref: TeamGamesModal,
-      props: {team: team},
-    };
-
-    const modal: ModalSettings = {
-      type: "component",
-      component: modalComponent,
-    };
-    modalStore.trigger(modal);
   }
 
   const model = $derived(authSettings.record as CustomAuthModel);
@@ -74,7 +32,7 @@
 <div
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-3"
 >
-  <div class="card admin-card variant-ringed-surface">
+  <div class="card admin-card preset-outlined-surface-500">
     <div>
       <header class="card-header">
         <h3 class="h4 font-semibold">Games</h3>
@@ -90,15 +48,27 @@
     </div>
     <footer class="card-footer">
       <div class="flex flex-col gap-2 lg:gap-3">
-        <button class="btn variant-ghost-primary" onclick={() => triggerModal()}>
-          <CalendarPlus/>
-          <span>Setup Games Import</span>
-        </button>
+
+        <Dialog triggerClasses="btn preset-tonal-primary border border-primary-500">
+
+          {#snippet triggerContent()}
+            <CalendarPlus/>
+            <span>Setup Games Import</span>
+          {/snippet}
+
+          {#snippet title()}
+            <header>
+              <h2 class="h3">Games Import Setup for {team.name}</h2>
+            </header>
+          {/snippet}
+
+          <TeamGamesModal {team}/>
+        </Dialog>
       </div>
     </footer>
   </div>
 
-  <div class="card admin-card variant-ringed-surface">
+  <div class="card admin-card preset-outlined-surface-500">
     <div>
       <header class="card-header">
         <h3 class="h4 font-semibold">Event Series</h3>
@@ -113,18 +83,16 @@
     </div>
     <footer class="card-footer">
       <div class="flex flex-col gap-2 lg:gap-3">
-        <button
-                class="btn variant-ghost-secondary dark:variant-filled-secondary dark:border"
-                onclick={() => drawerStore.open(eventSeriesSettings)}
-        >
-          <CalendarPlus/>
-          <span>Manage Event Series</span>
-        </button>
+        <EventSeriesView
+                {team}
+                {eventSeries}
+                buttonClasses="btn preset-tonal-secondary border border-secondary-500 dark:preset-filled-secondary-500 dark:border dark:border-white"
+        />
       </div>
     </footer>
   </div>
 
-  <div class="card admin-card variant-ringed-surface">
+  <div class="card admin-card preset-outlined-surface-500">
     <div>
       <header class="card-header">
         <h3 class="h4 font-semibold">Single Events</h3>
@@ -140,38 +108,44 @@
     </div>
     <footer class="card-footer">
       <div class="flex flex-col gap-2 lg:gap-3">
-        <button
-                class="btn variant-ghost-tertiary"
-                onclick={() => drawerStore.open(singleEventSettings)}
+
+        <EventForm
+                event={null}
+                clubID={team?.club ?? ""}
+                teamID={team.id}
+                buttonClasses="btn preset-tonal-tertiary border border-tertiary-500"
         >
-          <CalendarPlus/>
-          <span>Create Single Event</span>
-        </button>
+          {#snippet triggerContent()}
+            <CalendarPlus/>
+            <span>Create Single Event</span>
+          {/snippet}
+        </EventForm>
+
       </div>
     </footer>
   </div>
 
-  <div class="card admin-card variant-ringed-surface">
+  <div class="card admin-card preset-outlined-surface-500">
     <header class="card-header">
       <h3 class="h4 font-semibold">Team Settings</h3>
     </header>
 
     <section class="p-4 space-y-3">
       <div class="flex flex-col gap-2 lg:gap-3">
-        <TeamEditButton club={team?.expand?.club} team={team} classes="variant-ghost-surface"/>
+        <TeamForm club={team?.expand?.club} team={team} buttonClasses="btn preset-tonal-surface border border-surface-500"/>
       </div>
     </section>
 
     {#if team?.expand?.club?.admins.includes(model.id)}
       <footer class="card-footer mt-2">
-        <div class="flex flex-col gap-2 lg:gap-3 rounded-token variant-ringed-error px-2 py-3">
+        <div class="flex flex-col gap-2 lg:gap-3 rounded-base preset-outlined-error-500 px-2 py-3">
           <header class="mx-2">Danger Zone</header>
 
           <DeleteButton
                   id={team.id}
                   modelName="Team"
                   action={teamDeleteAction}
-                  classes="variant-ghost-error mx-1"
+                  classes="preset-tonal-error border border-error-500 mx-1"
                   buttonText="Delete Team"
           />
         </div>

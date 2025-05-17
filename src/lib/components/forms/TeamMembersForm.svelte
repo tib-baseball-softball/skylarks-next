@@ -3,9 +3,9 @@
   import type {ExpandedTeam} from "$lib/model/ExpandedResponse.ts";
   import {client, manualAuthRefresh} from "$lib/pocketbase/index.svelte.ts";
   import MultiSelectCombobox from "$lib/components/utility/MultiSelectCombobox.svelte";
-  import {getToastStore} from "@skeletonlabs/skeleton";
   import {invalidateAll} from "$app/navigation";
   import {closeModal} from "$lib/functions/closeModal.ts";
+  import {toastController} from "$lib/service/ToastController.svelte.ts";
 
   interface Props {
     club: ClubsResponse,
@@ -13,7 +13,6 @@
   }
 
   let {club, team}: Props = $props();
-  const toastStore = getToastStore();
 
   let form = $state({
     id: team.id,
@@ -34,9 +33,9 @@
           "teams+": team.id
         });
       }
-      toastStore.trigger({
+      toastController.trigger({
         message: `All members have been added to team "${team.name}"`,
-        background: "variant-filled-success",
+        background: "preset-filled-success-500",
       });
 
       // set manually in case we have updated the currently logged-in user
@@ -44,9 +43,9 @@
 
     } catch (error) {
       console.error(error);
-      toastStore.trigger({
+      toastController.trigger({
         message: "An error occurred while saving user team data",
-        background: "variant-filled-error",
+        background: "preset-filled-error-500",
       });
     }
     await invalidateAll();
@@ -83,10 +82,10 @@
     </label>
   </div>
 
-  <hr class="!my-5"/>
+  <hr class="my-5!"/>
 
   <div class="flex justify-center gap-3">
-    <button class="mt-2 btn variant-ghost-primary" type="submit">
+    <button class="mt-2 btn preset-tonal-primary border border-primary-500" type="submit">
       Submit
     </button>
   </div>

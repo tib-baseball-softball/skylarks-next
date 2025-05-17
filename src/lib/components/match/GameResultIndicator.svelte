@@ -19,7 +19,7 @@
     {:else if matchState === MatchState.lost}
         <span class="text-error-600 dark:text-error-400">L</span>
     {:else if matchState === MatchState.derby}
-        <span class="text-primary-500-400-token text-2xl">♥</span>
+        <span class="text-primary-600-400 text-2xl">♥</span>
     {:else if matchState === MatchState.final}
         <span>F</span>
     {:else if matchState === MatchState.notYetPlayed}

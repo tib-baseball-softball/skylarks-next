@@ -1,8 +1,8 @@
 <script lang="ts">
-    import type {Linescore} from "bsm.js";
-    import {range} from "$lib/functions/range";
+  import type {Linescore} from "bsm.js";
+  import {range} from "$lib/functions/range";
 
-    interface Props {
+  interface Props {
     linescore: Linescore;
   }
 
@@ -11,9 +11,9 @@
   const innings = range(1, linescore.played_innings);
 </script>
 
-<div class="table-container dark:border-2">
+<div class="table-wrap ">
   <!-- Native Table Element -->
-  <table class="linescore bg-surface-100-800-token">
+  <table class="linescore bg-surface-50 dark:bg-surface-800">
 
     <thead>
     <tr>
@@ -50,65 +50,3 @@
 
   </table>
 </div>
-
-<!-- svelte-ignore css_unused_selector -->
-<style lang="postcss">
-    /* adapted from Skeleton table style */
-
-    .linescore {
-        @apply w-full overflow-hidden;
-        /* background */
-        /* Theme: Rounded */
-        @apply rounded-container-token;
-    }
-
-    /* === Hover Styles ==== */
-
-    .linescore-hover tbody tr {
-        @apply hover:bg-surface-500/20;
-    }
-
-    .linescore-interactive tbody tr {
-        @apply hover:bg-primary-hover-token even:hover:bg-primary-hover-token cursor-pointer;
-    }
-
-    /* === linescore Head === */
-
-    .linescore thead {
-        @apply variant-soft-primary border-b border-surface-500/20;
-    }
-
-    .linescore thead tr {
-        @apply capitalize text-center;
-    }
-
-    .linescore thead th {
-        @apply border-l border-surface-500/20 font-bold p-4;
-    }
-
-    .linescore thead th:first-child {
-        @apply border-0
-    }
-
-    /* === linescore Body === */
-
-    .linescore tbody tr {
-        @apply border-b border-surface-500/20 text-center;
-    }
-
-    .linescore tbody td {
-        @apply border-l border-surface-500/20 px-3 py-4 align-top whitespace-nowrap md:whitespace-normal;
-    }
-
-    .linescore tbody td:first-child {
-        @apply border-0 text-left
-    }
-
-    .linescore-compact tbody td {
-        @apply !py-3;
-    }
-
-    .linescore-comforlinescore tbody td {
-        @apply !py-5;
-    }
-</style>

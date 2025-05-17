@@ -12,7 +12,7 @@
   let softballLicenses = $derived(licenses.filter(license => license.softball === true));
 </script>
 
-<article class="!mb-4">
+<article class="mb-4!">
   <section>
     {#if showSoftballSection}
       <header class="mb-2">
@@ -20,7 +20,7 @@
       </header>
     {/if}
 
-    <ul class="card p-3 variant-soft dark:border dark:border-surface-500 shadow-xl">
+    <ul class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">
 
       {#each baseballLicenses as license, index}
         <li class="p-0.5">
@@ -44,7 +44,7 @@
         <h2 class="h2">Softball</h2>
       </header>
 
-      <ul class="card p-3 variant-soft dark:border dark:border-surface-500 shadow-xl">
+      <ul class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">
 
         {#each softballLicenses as license, index}
           <li>

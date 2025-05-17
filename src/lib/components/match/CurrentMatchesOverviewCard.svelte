@@ -1,9 +1,9 @@
 <script lang="ts">
-  import {Tab, TabGroup} from "@skeletonlabs/skeleton";
+  import {Tabs} from "@skeletonlabs/skeleton-svelte";
   import type {Match} from "bsm.js";
   import CurrentMatchBlock from "$lib/components/match/CurrentMatchBlock.svelte";
 
-  let tabSet: number = $state(1);
+  let tabSet: "previous" | "current" | "next" | string = $state("current");
 
   interface Props {
     matchesCurrent: Promise<Match[]>;
@@ -15,41 +15,38 @@
 </script>
 
 <div
-        class="card overview-card variant-soft-surface dark:border dark:border-tertiary-500-400-token"
+        class="card overview-card preset-tonal-surface dark:border dark:border-tertiary-600-400"
 >
   <header class="card-header">
     <h2 class="h3">Current Games</h2>
   </header>
   <section class="p-4">
-    <TabGroup justify="justify-center" flex="flex-auto">
-      <Tab bind:group={tabSet} name="tab1" value={0}
-      >Previous Gameday
-      </Tab
-      >
-      <Tab bind:group={tabSet} name="tab2" value={1}
-      >Current Gameday
-      </Tab
-      >
-      <Tab bind:group={tabSet} name="tab3" value={2}
-      >Next Gameday
-      </Tab
-      >
-      <!-- Tab Panels --->
-      <svelte:fragment slot="panel">
-        {#if tabSet === 0}
+    <Tabs value={tabSet} onValueChange={(e) => (tabSet = e.value)} listJustify="justify-center" fluid={true}>
+
+      {#snippet list()}
+        <Tabs.Control value="previous">Previous Gameday</Tabs.Control>
+        <Tabs.Control value="current">Current Gameday</Tabs.Control>
+        <Tabs.Control value="next">Next Gameday</Tabs.Control>
+      {/snippet}
+
+      {#snippet content()}
+        
+        <Tabs.Panel value="previous">
           <CurrentMatchBlock matches={matchesPrevious}/>
-        {:else if tabSet === 1}
+        </Tabs.Panel>
+        <Tabs.Panel value="current">
           <CurrentMatchBlock matches={matchesCurrent}/>
-        {:else if tabSet === 2}
+        </Tabs.Panel>
+        <Tabs.Panel value="next">
           <CurrentMatchBlock matches={matchesNext}/>
-        {/if}
-      </svelte:fragment>
-    </TabGroup>
+        </Tabs.Panel>
+      {/snippet}
+    </Tabs>
   </section>
   <footer class="card-footer flex justify-end">
     <a
             href="/gamecenter"
-            class="btn variant-filled-primary dark:variant-ghost-primary px-10"
+            class="btn preset-filled-primary-500 dark:preset-tonal-primary border border-primary-500 px-10"
     >Gamecenter</a
     >
   </footer>

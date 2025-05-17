@@ -13,7 +13,7 @@
 </script>
 
 <section
-        class="{classes} card variant-soft dark:border dark:border-surface-500 rounded-token shadow-xl p-4 my-4">
+        class="{classes} card preset-tonal dark:border dark:border-surface-500 rounded-base shadow-xl p-4 my-4">
   <div class="container">
     <CalendarDays/>
     <span class="font-bold">Veröffentlicht: </span>
@@ -41,6 +41,6 @@
 <style lang="postcss">
     .container {
         display: flex;
-        @apply gap-4;
+        gap: calc(var(--spacing) * 4);
     }
 </style>

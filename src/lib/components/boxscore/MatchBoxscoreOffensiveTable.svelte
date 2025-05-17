@@ -9,10 +9,10 @@
     let { matchStats, teamName }: Props = $props();
 </script>
 
-<div class="table-container lg:max-w-[75%] dark:border-2">
+<div class="table-wrap lg:max-w-[75%] dark:border-2">
     <table class="table table-compact">
         <thead>
-        <tr>
+        <tr class="preset-tonal-surface dark:preset-filled-surface-300-700">
             <th data-cell-for="player">
                 {teamName} (Batters)
             </th>
@@ -31,7 +31,7 @@
             <tr>
                 <td class="flex" data-cell-for="player">
                     {#if !player.starter}
-                        &nbsp;&nbsp;&nbsp;
+                           
                     {/if}
                     {player.person.last_name}, {player.person.first_name.charAt(0)}.
                     <div class="positions ms-2">
@@ -52,7 +52,7 @@
         {/each}
         </tbody>
         <tfoot>
-        <tr data-row-for="summary">
+        <tr class="preset-tonal-surface dark:preset-filled-surface-300-700" data-row-for="summary">
             <td data-cell-for="player">
             </td>
             <td data-cell-for="ab">{matchStats.sum.at_bats}

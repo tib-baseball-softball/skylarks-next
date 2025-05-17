@@ -11,16 +11,16 @@
   <p>Telefon: + 49 30 61 10 10 -13 (-0)<br/>
     E-Mail: vorstand@tib-baseball.de</p>
 
-  <h2>Verbraucher&shy;streit&shy;beilegung/Universal&shy;schlichtungs&shy;stelle</h2>
+  <h2>Verbraucher­streit­beilegung/Universal­schlichtungs­stelle</h2>
   <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle
     teilzunehmen.</p>
 
   <h2>Zentrale Kontaktstelle nach dem Digital Services Act - DSA (Verordnung (EU) 2022/265)</h2>
-  <p>Unsere zentrale Kontaktstelle f&uuml;r Nutzer und Beh&ouml;rden nach Art. 11, 12 DSA erreichen Sie wie folgt:</p>
+  <p>Unsere zentrale Kontaktstelle für Nutzer und Behörden nach Art. 11, 12 DSA erreichen Sie wie folgt:</p>
   <p>E-Mail: vorstand@tib-baseball.de<br/>
     Telefon: + 49 30 61 10 10 -13 (-0)
   </p>
-  <p>Die für den Kontakt zur Verf&uuml;gung stehenden Sprachen sind: Deutsch, Englisch.</p>
+  <p>Die für den Kontakt zur Verfügung stehenden Sprachen sind: Deutsch, Englisch.</p>
   <p>Quelle: <a href="https://www.e-recht24.de">https://www.e-recht24.de</a></p>
 
 </article>

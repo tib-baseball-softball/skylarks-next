@@ -23,16 +23,16 @@
   );
 </script>
 
-<div class=" overflow-x-auto space-y-4 table-container">
+<div class=" overflow-x-auto space-y-4 table-wrap">
   <!-- Header -->
-  <header class="flex justify-between gap-4">
+  <header class="md:flex space-y-2 md:space-y-0 justify-between gap-4">
     <Search {handler}/>
 
     <RowsPerPage {handler}/>
   </header>
 
   <!-- Table -->
-  <table class="table table-hover table-compact w-full table-auto">
+  <table class="table table-compact w-full">
     <TeamMembersTableContent {handler} {team} {showAdminSection}/>
 
     <tfoot></tfoot>
