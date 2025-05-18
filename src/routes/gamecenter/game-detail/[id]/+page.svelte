@@ -26,7 +26,7 @@
 
     {#snippet list()}
       <Tabs.Control value="gameData">Game Data</Tabs.Control>
-      <Tabs.Control value="boxscore">Boxscore</Tabs.Control>
+      <Tabs.Control value="boxscore">Box Score</Tabs.Control>
       <Tabs.Control value="gameReport">Game Report</Tabs.Control>
     {/snippet}
 
@@ -46,7 +46,7 @@
           {#if boxscore}
             <MatchBoxscoreSection {boxscore}/>
           {:else }
-            <p>Kein Boxscore vorhanden.</p>
+            <ContentFilteredUnavailable text="No Box Score available."/>
           {/if}
         {:catch error}
           <p>error loading boxscore: {error.message}</p>
