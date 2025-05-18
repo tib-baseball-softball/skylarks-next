@@ -1,5 +1,7 @@
 <script lang="ts">
-  import {Switch, Tabs} from "@skeletonlabs/skeleton-svelte";
+  import {Switch} from "@skeletonlabs/skeleton-svelte";
+  // @ts-ignore
+  import {Tabs} from "bits-ui";
   import {client} from "../pocketbase/index.svelte";
   import {goto} from "$app/navigation";
   import OAuthProviderButton from "$lib/auth/OAuthProviderButton.svelte";
@@ -134,32 +136,34 @@
       <form onsubmit={submit}>
         {#if passwordLogin}
           {#if signupAllowed}
-            <Tabs value={tabSet} onValueChange={(e) => (tabSet = e.value)} fluid base="my-2">
+            <Tabs.Root
+                    bind:value={tabSet}
+                    class="my-2"
+            >
+              <Tabs.List
+                      class="tabs-list preset-tonal-surface"
+              >
+                <Tabs.Trigger
+                        value="login"
+                        class="tabs-trigger"
+                >Log In</Tabs.Trigger>
+                <Tabs.Trigger
+                        value="signup"
+                        class="tabs-trigger"
+                >Create Account</Tabs.Trigger>
+              </Tabs.List>
 
-              {#snippet list()}
-                <Tabs.Control value="login"
-                              stateActive="preset-tonal border border-surface-500 border-b-2 border-surface-950-50">Log
-                  In
-                </Tabs.Control>
-                <Tabs.Control value="signup"
-                              stateActive="preset-tonal border border-surface-500 border-b-2 border-surface-950-50">
-                  Create Account
-                </Tabs.Control>
-              {/snippet}
+              <Tabs.Content value="login" class="pt-3">
+                <h2>Login</h2>
 
-              {#snippet content()}
+                {@render login()}
+              </Tabs.Content>
 
-                <Tabs.Panel value="login">
-                  <h2>Login</h2>
+              <Tabs.Content value="signup" class="pt-3">
 
-                  {@render login()}
-                </Tabs.Panel>
+                {@render login()}
 
-                <Tabs.Panel value="signup">
-
-                  {@render login()}
-
-                  {#if tabSet === "signup"}
+                {#if tabSet === "signup"}
                     <label class="label">
                       <span class="">Your email</span>
                       <input
@@ -259,10 +263,9 @@
                       Register new account
                     </button>
                   {/if}
-                </Tabs.Panel>
-              {/snippet}
+              </Tabs.Content>
 
-            </Tabs>
+            </Tabs.Root>
 
           {/if}
         {/if}

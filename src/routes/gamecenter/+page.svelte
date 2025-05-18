@@ -1,6 +1,8 @@
 <script lang="ts">
   import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte";
-  import {Progress, Switch, Tabs} from "@skeletonlabs/skeleton-svelte";
+  import {Progress, Switch} from "@skeletonlabs/skeleton-svelte";
+  // @ts-ignore
+  import {Tabs} from "bits-ui";
   import {Gameday} from "bsm.js";
   import {preferences} from "$lib/stores";
   import LeagueFilter from "$lib/components/utility/LeagueFilter.svelte";
@@ -32,9 +34,9 @@
   /**
    *  enum <=> string conversion necessary
    */
-  function onGamedayChange(e: { value: string }) {
+  function onGamedayChange(value: string) {
     //@ts-expect-error
-    $preferences.gameday = e.value;
+    $preferences.gameday = value;
   }
 </script>
 
@@ -65,25 +67,49 @@
 <section class="mb-5 mt-3">
   <label id="gameday_label" class="label">
     Gameday
-    <Tabs listJustify="justify-center" onValueChange={onGamedayChange}>
+    <Tabs.Root
+            value={$preferences.gameday}
+            onValueChange={onGamedayChange}
+            class=""
+    >
+      <Tabs.List
+              class="tabs-list preset-tonal-surface"
+      >
+        <Tabs.Trigger
+                value={Gameday.previous}
+                class="tabs-trigger"
+        >Previous
+        </Tabs.Trigger>
+        <Tabs.Trigger
+                value={Gameday.current}
+                class="tabs-trigger"
+        >Current
+        </Tabs.Trigger>
+        <Tabs.Trigger
+                value={Gameday.next}
+                class="tabs-trigger"
+        >Next
+        </Tabs.Trigger>
+        <Tabs.Trigger
+                value={Gameday.any}
+                class="tabs-trigger"
+        >All
+        </Tabs.Trigger>
+      </Tabs.List>
 
-      {#snippet list()}
-        <Tabs.Control value={Gameday.previous}>Previous</Tabs.Control>
-        <Tabs.Control value={Gameday.current}>Current</Tabs.Control>
-        <Tabs.Control value={Gameday.next}>Next</Tabs.Control>
-        <Tabs.Control value={Gameday.any}>All</Tabs.Control>
-      {/snippet}
+      {#each [Gameday.previous, Gameday.current, Gameday.next, Gameday.any] as value}
+        <Tabs.Content value={value} class="pt-3">
+          {#await data.streamed.matches}
+            <p>Loading matches...</p>
+            <Progress/>
+          {:then matches}
+            <GamecenterMatchSection {matches} {showExternal}/>
+          {:catch error}
+            <p>error loading matches: {error.message}</p>
+          {/await}
+        </Tabs.Content>
+      {/each}
 
-      {#snippet content()}
-        {#await data.streamed.matches}
-          <p>Loading matches...</p>
-          <Progress/>
-        {:then matches}
-          <GamecenterMatchSection {matches} {showExternal}/>
-        {:catch error}
-          <p>error loading matches: {error.message}</p>
-        {/await}
-      {/snippet}
-    </Tabs>
+    </Tabs.Root>
   </label>
 </section>

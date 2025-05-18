@@ -1,5 +1,6 @@
 <script lang="ts">
-  import {Tabs} from "@skeletonlabs/skeleton-svelte";
+  // @ts-ignore
+  import {Tabs} from "bits-ui";
   import type {Match} from "bsm.js";
   import CurrentMatchBlock from "$lib/components/match/CurrentMatchBlock.svelte";
 
@@ -21,27 +22,37 @@
     <h2 class="h3">Current Games</h2>
   </header>
   <section class="p-4">
-    <Tabs value={tabSet} onValueChange={(e) => (tabSet = e.value)} listJustify="justify-center" fluid={true}>
+    <Tabs.Root
+            bind:value={tabSet}
+            class=""
+    >
+      <Tabs.List
+              class="tabs-list border dark:border-white! mb-1 preset-tonal-surface"
+      >
+        <Tabs.Trigger
+                value="previous"
+                class="tabs-trigger"
+        >Previous Gameday</Tabs.Trigger>
+        <Tabs.Trigger
+                value="current"
+                class="tabs-trigger"
+        >Current Gameday</Tabs.Trigger>
+        <Tabs.Trigger
+                value="next"
+                class="tabs-trigger"
+        >Next Gameday</Tabs.Trigger>
+      </Tabs.List>
 
-      {#snippet list()}
-        <Tabs.Control value="previous">Previous Gameday</Tabs.Control>
-        <Tabs.Control value="current">Current Gameday</Tabs.Control>
-        <Tabs.Control value="next">Next Gameday</Tabs.Control>
-      {/snippet}
-
-      {#snippet content()}
-        
-        <Tabs.Panel value="previous">
-          <CurrentMatchBlock matches={matchesPrevious}/>
-        </Tabs.Panel>
-        <Tabs.Panel value="current">
-          <CurrentMatchBlock matches={matchesCurrent}/>
-        </Tabs.Panel>
-        <Tabs.Panel value="next">
-          <CurrentMatchBlock matches={matchesNext}/>
-        </Tabs.Panel>
-      {/snippet}
-    </Tabs>
+      <Tabs.Content value="previous" class="pt-4">
+        <CurrentMatchBlock matches={matchesPrevious}/>
+      </Tabs.Content>
+      <Tabs.Content value="current" class="pt-4">
+        <CurrentMatchBlock matches={matchesCurrent}/>
+      </Tabs.Content>
+      <Tabs.Content value="next" class="pt-4">
+        <CurrentMatchBlock matches={matchesNext}/>
+      </Tabs.Content>
+    </Tabs.Root>
   </section>
   <footer class="card-footer flex justify-end">
     <a
