@@ -27,7 +27,7 @@
             class=""
     >
       <Tabs.List
-              class="tabs-list border dark:border-white! mb-1 preset-tonal-surface"
+              class="tabs-list border mb-1 preset-tonal-surface"
       >
         <Tabs.Trigger
                 value="previous"

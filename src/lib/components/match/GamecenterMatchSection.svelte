@@ -22,6 +22,7 @@
     <h2 class="h2 my-3">Games</h2>
   </header>
   <div
+          data-testid="match-grid"
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mb-6"
   >
     {#if showExternal}

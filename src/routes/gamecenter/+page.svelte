@@ -97,19 +97,20 @@
         </Tabs.Trigger>
       </Tabs.List>
 
-      {#each [Gameday.previous, Gameday.current, Gameday.next, Gameday.any] as value}
-        <Tabs.Content value={value} class="pt-3">
-          {#await data.streamed.matches}
-            <p>Loading matches...</p>
-            <Progress/>
-          {:then matches}
-            <GamecenterMatchSection {matches} {showExternal}/>
-          {:catch error}
-            <p>error loading matches: {error.message}</p>
-          {/await}
-        </Tabs.Content>
-      {/each}
-
+      <Tabs.Content value={$preferences.gameday} class="pt-3">
+        {@render tabsContent()}
+      </Tabs.Content>
     </Tabs.Root>
+
+    {#snippet tabsContent()}
+      {#await data.streamed.matches}
+        <p>Loading matches...</p>
+        <Progress/>
+      {:then matches}
+        <GamecenterMatchSection {matches} {showExternal}/>
+      {:catch error}
+        <p>error loading matches: {error.message}</p>
+      {/await}
+    {/snippet}
   </label>
 </section>
