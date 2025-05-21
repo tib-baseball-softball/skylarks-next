@@ -40,7 +40,7 @@ func LoadUserStats(user *core.Record, requestEvent *core.RequestEvent) (Personal
 		statsItem.Type = eventType
 	}
 
-	eventCounts, err := GetEventCounts(requestEvent.App, user, seasonParam, teamParam)
+	eventCounts, err := GetEventCounts(requestEvent.App, user, seasonParam, teamParam, true)
 	if err != nil {
 		requestEvent.App.Logger().Error("failed to get eventCounts: %v", "error", err)
 		return statsItem, err

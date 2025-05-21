@@ -11,4 +11,5 @@ FROM users
          INNER JOIN events ON participations.event = events.id
 WHERE 1 = 1
   AND users.id = 'USER'
+  AND events.starttime <= datetime('now')
 GROUP BY users.id, users.last_name, users.first_name, events.type;

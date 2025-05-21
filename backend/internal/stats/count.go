@@ -16,7 +16,7 @@ type EventCounts struct {
 	AllEvents int `db:"all_events"`
 }
 
-func GetEventCounts(app core.App, user *core.Record, season string, team string) (EventCounts, error) {
+func GetEventCounts(app core.App, user *core.Record, season string, team string, excludeFutureEvents bool) (EventCounts, error) {
 	result := EventCounts{}
 	query := app.DB().
 		Select(
@@ -33,7 +33,7 @@ func GetEventCounts(app core.App, user *core.Record, season string, team string)
 		for _, team := range teams {
 			expressions = append(expressions, dbx.HashExp{"team": team})
 		}
-		query.Where(dbx.Or(expressions...))
+		query.AndWhere(dbx.Or(expressions...))
 	}
 
 	if season != "" {
@@ -42,6 +42,11 @@ func GetEventCounts(app core.App, user *core.Record, season string, team string)
 
 	if team != "" {
 		query.AndWhere(dbx.NewExp("events.team = {:team}", dbx.Params{"team": team}))
+	}
+
+	// i.e., count only events that have not yet started for attendance stats
+	if excludeFutureEvents {
+		query.AndWhere(dbx.NewExp("events.starttime <= datetime('now')"))
 	}
 
 	err := query.One(&result)

@@ -33,6 +33,7 @@ func GetParticipationStats(user *core.Record, app core.App, seasonParam string, 
 		From("users").
 		LeftJoin("participations", dbx.NewExp("participations.user = users.id")).
 		InnerJoin("events", dbx.NewExp("participations.event = events.id")).
+		Where(dbx.NewExp("events.starttime <= datetime('now')")). // participation stats make no sense for future events
 		GroupBy("users.id", "users.first_name", "users.last_name", "events.type")
 
 	if user.Id != "" {
