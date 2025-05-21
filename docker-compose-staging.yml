@@ -1,7 +1,7 @@
 services:
   backend:
     extends:
-      file: common-services.yml
+      file: docker-compose-common.yml
       service: backend
     image: obnoxieux/skylarks-next-backend:staging
     labels:
@@ -13,7 +13,7 @@ services:
 
   frontend:
     extends:
-      file: common-services.yml
+      file: docker-compose-common.yml
       service: frontend
     image: obnoxieux/skylarks-next:staging
     labels:
