@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import {expect, test} from '@playwright/test';
 
 test('test', async ({ page }) => {
   await page.goto('/');
@@ -7,7 +7,7 @@ test('test', async ({ page }) => {
   await page.getByText('Previous Gameday').click();
   await page.getByText('Previous Gameday').click();
   await page.getByText('Current Gameday').click();
-  await page.locator('label').filter({ hasText: 'Next Gameday' }).click();
+  await page.locator('button').filter({ hasText: 'Next Gameday' }).click();
   await page.getByRole('link', { name: 'Terms & Conditions' }).click();
   await page.getByRole('heading', { name: 'Nutzungsbedingungen für die' }).click();
   await page.getByRole('link', { name: 'Impressum' }).click();

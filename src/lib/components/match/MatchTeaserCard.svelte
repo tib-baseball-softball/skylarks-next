@@ -28,8 +28,8 @@
 <a
     class=" block card card-hover text-sm {matchDecorator.isPlayoffGame() ===
     true
-        ? 'variant-ghost-primary'
-        : 'variant-ghost-surface'}"
+        ? 'preset-tonal-primary border border-primary-500'
+        : 'preset-tonal-surface border border-surface-500'}"
     href="/gamecenter/game-detail/{match.id}"
 >
     <header class="card-header">

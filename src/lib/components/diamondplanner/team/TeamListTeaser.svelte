@@ -3,8 +3,8 @@
   import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
   import {invalidate} from "$app/navigation";
-  import TeamEditButton from "$lib/components/team/TeamEditButton.svelte";
   import {ClipboardList, Dumbbell, ShieldHalf} from "lucide-svelte";
+  import TeamForm from "$lib/components/forms/TeamForm.svelte";
 
   /**
    * Used for Teams in List Teasers and on Club Page.
@@ -25,7 +25,7 @@
   }
 </script>
 
-<article class="card variant-glass-surface block shadow-lg" class:card-hover={link}>
+<article class="card preset-tonal-surface block shadow-lg" class:card-hover={link}>
   <a href="/account/team/{team.id}">
     <header class="card-header">
       <h3 class="h4 font-semibold">{team.name}</h3>
@@ -67,10 +67,10 @@
     <div class="flex justify-end gap-2">
 
       {#if team?.expand?.club?.admins.includes(model.id) || team?.admins.includes(model.id)}
-        <TeamEditButton
+        <TeamForm
                 club={team.expand?.club}
                 team={team}
-                classes="btn-icon variant-ghost-tertiary"
+                buttonClasses="btn btn-icon preset-tonal-tertiary border border-tertiary-500"
                 showLabel={false}
         />
       {/if}

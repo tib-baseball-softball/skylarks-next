@@ -1,19 +1,20 @@
 <script lang="ts">
-  import type {ParticipationTotal, PersonalAttendanceStatsItem} from "$lib/model/PersonalAttendanceStats";
-  import {ConicGradient, type ConicStop} from "@skeletonlabs/skeleton";
-  import type {ParticipationType} from "$lib/model/ExpandedResponse";
-  import {capitalize} from "$lib/functions/capitalize";
+    import type {ParticipationTotal, PersonalAttendanceStatsItem} from "$lib/model/PersonalAttendanceStats";
+    import type {ParticipationType} from "$lib/model/ExpandedResponse";
+    import {capitalize} from "$lib/functions/capitalize";
+    import type {ConicStop} from "$lib/components/utility/ConicGradient/types.ts";
+    import ConicGradient from "$lib/components/utility/ConicGradient/ConicGradient.svelte";
 
-  interface Props {
+    interface Props {
     statsItem: PersonalAttendanceStatsItem
   }
 
   let {statsItem}: Props = $props()
 
   const PARTICIPATION_COLORS: Record<ParticipationType, string> = {
-    in: "rgb(var(--color-success-500))",
-    maybe: "rgb(var(--color-warning-500))",
-    out: "rgb(var(--color-error-500))",
+    in: "var(--color-success-500)",
+    maybe: "var(--color-warning-500)",
+    out: "var(--color-error-500)",
     "": "",
   };
 
@@ -41,7 +42,7 @@
   const conicStops = mapToConicStops(statsItem.participationTotals)
 </script>
 
-<div class="card variant-glass-surface shadow-lg">
+<div class="card preset-tonal-surface shadow-lg">
     <header class="card-header">
         <h2 class="h4 font-semibold">Attendance Stats</h2>
     </header>

@@ -1,8 +1,9 @@
 import {ClubTeamsAPIRequest} from "bsm.js";
 import {env} from "$env/dynamic/private";
 import {env as publicEnv} from "$env/dynamic/public";
+import type {LayoutServerLoad} from './$types';
 
-export const load = (async ({parent, url}) => {
+export const load: LayoutServerLoad = (async ({parent, url}) => {
   const data = await parent()
 
   let clubTeams = data.clubTeams

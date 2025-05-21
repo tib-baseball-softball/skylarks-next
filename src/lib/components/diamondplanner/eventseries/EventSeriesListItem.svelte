@@ -17,7 +17,7 @@
   const endTime = DateTimeUtility.convertTimeFromUTC(eventSeries.endtime)
 </script>
 
-<article class="p-4 variant-glass-surface rounded-token shadow-md">
+<article class="p-4 preset-tonal-surface rounded-base shadow-md">
   <div class="grid grid-cols-1 md:grid-cols-3">
 
     <div class="flex flex-col justify-between mb-3 md:mb-0">

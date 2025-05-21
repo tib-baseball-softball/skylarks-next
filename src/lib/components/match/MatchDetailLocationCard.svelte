@@ -21,7 +21,7 @@
 
   let {
     field,
-    classes = "card variant-ghost-surface p-3",
+    classes = "card preset-tonal-surface border border-surface-500 p-3",
     showDividers = true,
   }: Props = $props();
 
@@ -50,7 +50,7 @@
     </div>
   </div>
 
-  <hr class={showDividers ? "" : "!hidden"} />
+  <hr class={showDividers ? "" : "hidden!"} />
 
   <div class="flex items-center gap-3">
     <MapPin />
@@ -60,7 +60,7 @@
     </div>
   </div>
 
-  <hr class={showDividers ? "" : "!hidden"} />
+  <hr class={showDividers ? "" : "hidden!"} />
 
   <div class="flex items-center gap-3">
     <Building2 />
@@ -70,7 +70,7 @@
     </div>
   </div>
 
-  <hr class={showDividers ? "" : "!hidden"} />
+  <hr class={showDividers ? "" : "hidden!"} />
 
   <div class="flex items-center gap-3 self-end">
     <Link />
@@ -79,7 +79,7 @@
     >
   </div>
 
-  <hr class={showDividers ? "" : "!hidden"} />
+  <hr class={showDividers ? "" : "hidden!"} />
 
   <div class="flex items-center gap-3 self-end">
     <Link />

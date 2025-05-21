@@ -21,7 +21,7 @@
   const canParticipate = $derived(authRecord.teams.includes($event.team));
 </script>
 
-<div class="event-container">
+<div class="space-y-4 lg:space-y-6 xl:space-y-7">
   <div class="flex items-center gap-3">
     <h1 class="h1" class:line-through={$event.cancelled}>{$event.title}</h1>
     <div>
@@ -30,13 +30,13 @@
   </div>
 
   {#if $event.cancelled}
-    <span class="badge variant-filled-error gap-1">
+    <span class="badge preset-filled-error-500 gap-1">
       <Ban/>
       Cancelled
     </span>
   {/if}
 
-  <article class="!mb-8" class:line-through={$event.cancelled}>
+  <article class="mb-8!" class:line-through={$event.cancelled}>
     <section>
       <p>{$event.desc}</p>
     </section>
@@ -75,13 +75,13 @@
   </div>
 
   {#if !$event.cancelled}
-    <hr class="!my-8"/>
+    <hr class="my-8!"/>
 
-    <div class="flex justify-between items-center">
-      <h2 class="h3">My Participation</h2>
+    <div class="md:flex md:justify-between md:items-center space-y-2.5 md:space-y-0">
+      <h2 class="h4">My Participation</h2>
 
       {#if canParticipate}
-        <EventParticipationSection event={$event}/>
+        <EventParticipationSection event={$event} chipClasses="flex-grow"/>
       {:else}
         <div class="flex justify-end">
           <p>Only team members can participate in events.</p>
@@ -107,9 +107,3 @@
     <EventPageAdminSection event={$event}/>
   {/if}
 </div>
-
-<style lang="postcss">
-    .event-container {
-        @apply space-y-4 lg:space-y-6 xl:space-y-7;
-    }
-</style>

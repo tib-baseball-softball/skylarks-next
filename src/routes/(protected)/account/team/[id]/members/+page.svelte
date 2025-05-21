@@ -9,10 +9,10 @@
 
   const showAdminSection = $derived.by(() => {
     if (!authSettings?.record?.id) {
-      return false
+      return false;
     }
     if (data.team?.expand?.club?.admins.includes(authSettings?.record.id)) {
-      return true
+      return true;
     }
     return data.team.admins.includes(authSettings?.record?.id);
   });
@@ -25,7 +25,9 @@
 
 <h1 class="h1">Team members for Team "{data.team.name}"</h1>
 
-<TeamMemberDatatable data={$players.items} team={data.team} {showAdminSection}/>
+<div class="mt-8!">
+  <TeamMemberDatatable data={$players.items} team={data.team} {showAdminSection}/>
+</div>
 
 {#if showAdminSection}
   <TeamAddMemberButton team={data.team} club={data.team?.expand?.club}/>

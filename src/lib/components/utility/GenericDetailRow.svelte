@@ -23,6 +23,6 @@
     .container {
         display: flex;
         align-items: center;
-        @apply gap-4;
+        gap: calc(var(--spacing) * 4)
     }
 </style>

@@ -21,10 +21,10 @@
   }
 </script>
 
-<ul class="variant-soft rounded-token p-4 shadow-xl text-sm">
+<ul class="preset-tonal-surface rounded-base p-4 shadow-xl text-sm">
   {#each locations as location, index (location.id)}
     <li class="location-grid">
-      <h3 class="font-bold">
+      <h3 class="font-bold overflow-hidden">
         {location.address_addon
           ? location.address_addon
           : location.internal_name} ({location.name})
@@ -34,26 +34,26 @@
         {location.city}
       </p>
 
-      <div class="place-self-end">
+      <div class="justify-self-end flex flex-col md:flex-row gap-1 items-center">
         {#if club?.admins.includes(authRecord.id)}
           <LocationForm
             {club}
             {location}
-            buttonClasses="btn btn-icon variant-ghost-tertiary my-3"
+            buttonClasses="btn btn-icon preset-tonal-tertiary border border-tertiary-500"
           />
 
           <DeleteButton
             id={location.id}
             modelName="Location"
             action={locationDeleteAction}
-            classes="variant-ghost-error btn-icon ms-1"
+            classes="preset-tonal-error border border-error-500 btn-icon ms-1"
           />
         {/if}
       </div>
     </li>
 
     {#if index < locations.length - 1}
-      <hr class="my-2 md:my-0"/>
+      <hr class="my-2"/>
     {/if}
 
     {:else }
@@ -65,7 +65,7 @@
   <LocationForm
     {club}
     location={null}
-    buttonClasses="btn variant-ghost-primary my-3"
+    buttonClasses="btn preset-tonal-primary border border-primary-500 my-3"
   />
 {/if}
 

@@ -1,9 +1,10 @@
 <script lang="ts">
-  import {Tab, TabGroup} from "@skeletonlabs/skeleton";
+  // @ts-ignore
+  import {Tabs} from "bits-ui";
   import type {Match} from "bsm.js";
   import CurrentMatchBlock from "$lib/components/match/CurrentMatchBlock.svelte";
 
-  let tabSet: number = $state(1);
+  let tabSet: "previous" | "current" | "next" | string = $state("current");
 
   interface Props {
     matchesCurrent: Promise<Match[]>;
@@ -15,41 +16,48 @@
 </script>
 
 <div
-        class="card overview-card variant-soft-surface dark:border dark:border-tertiary-500-400-token"
+        class="card overview-card preset-tonal-surface dark:border dark:border-tertiary-600-400"
 >
   <header class="card-header">
     <h2 class="h3">Current Games</h2>
   </header>
   <section class="p-4">
-    <TabGroup justify="justify-center" flex="flex-auto">
-      <Tab bind:group={tabSet} name="tab1" value={0}
-      >Previous Gameday
-      </Tab
+    <Tabs.Root
+            bind:value={tabSet}
+            class=""
+    >
+      <Tabs.List
+              class="tabs-list border mb-1 preset-tonal-surface"
       >
-      <Tab bind:group={tabSet} name="tab2" value={1}
-      >Current Gameday
-      </Tab
-      >
-      <Tab bind:group={tabSet} name="tab3" value={2}
-      >Next Gameday
-      </Tab
-      >
-      <!-- Tab Panels --->
-      <svelte:fragment slot="panel">
-        {#if tabSet === 0}
-          <CurrentMatchBlock matches={matchesPrevious}/>
-        {:else if tabSet === 1}
-          <CurrentMatchBlock matches={matchesCurrent}/>
-        {:else if tabSet === 2}
-          <CurrentMatchBlock matches={matchesNext}/>
-        {/if}
-      </svelte:fragment>
-    </TabGroup>
+        <Tabs.Trigger
+                value="previous"
+                class="tabs-trigger"
+        >Previous Gameday</Tabs.Trigger>
+        <Tabs.Trigger
+                value="current"
+                class="tabs-trigger"
+        >Current Gameday</Tabs.Trigger>
+        <Tabs.Trigger
+                value="next"
+                class="tabs-trigger"
+        >Next Gameday</Tabs.Trigger>
+      </Tabs.List>
+
+      <Tabs.Content value="previous" class="pt-4">
+        <CurrentMatchBlock matches={matchesPrevious}/>
+      </Tabs.Content>
+      <Tabs.Content value="current" class="pt-4">
+        <CurrentMatchBlock matches={matchesCurrent}/>
+      </Tabs.Content>
+      <Tabs.Content value="next" class="pt-4">
+        <CurrentMatchBlock matches={matchesNext}/>
+      </Tabs.Content>
+    </Tabs.Root>
   </section>
   <footer class="card-footer flex justify-end">
     <a
             href="/gamecenter"
-            class="btn variant-filled-primary dark:variant-ghost-primary px-10"
+            class="btn preset-filled-primary-500 dark:preset-tonal-primary border border-primary-500 px-10"
     >Gamecenter</a
     >
   </footer>

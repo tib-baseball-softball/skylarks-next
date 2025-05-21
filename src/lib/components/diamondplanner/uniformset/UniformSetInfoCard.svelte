@@ -2,13 +2,13 @@
   import Cap from "$lib/components/icons/Cap.svelte";
   import Shirt from "$lib/components/icons/Shirt.svelte";
   import Pants from "$lib/components/icons/Pants.svelte";
-  import {getModalStore, type ModalComponent, type ModalSettings} from "@skeletonlabs/skeleton";
   import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
   import type {CustomAuthModel, ExpandedUniformSet} from "$lib/model/ExpandedResponse";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
   import {invalidate} from "$app/navigation";
   import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
   import {Edit} from "lucide-svelte";
+  import Dialog from "$lib/components/utility/Dialog.svelte";
 
   interface Props {
     uniformSet: ExpandedUniformSet;
@@ -18,31 +18,13 @@
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
-  const modalStore = getModalStore();
-
-  function triggerEditModal() {
-    const modalComponent: ModalComponent = {
-      ref: UniformSetForm,
-      props: {
-        uniformSet: uniformSet,
-        clubID: uniformSet.club,
-      },
-    };
-
-    const modal: ModalSettings = {
-      type: "component",
-      component: modalComponent,
-    };
-    modalStore.trigger(modal);
-  }
-
   function deleteAction(id: string) {
     client.collection("uniformsets").delete(id);
     invalidate("club:single");
   }
 </script>
 
-<article class="card variant-soft-surface shadow-md">
+<article class="card preset-tonal-surface shadow-md">
   <header class="card-header">
     <h3 class="h4 font-semibold">{uniformSet.name}</h3>
   </header>
@@ -63,14 +45,27 @@
     </div>
   </section>
 
-  <footer class="card-footer flex justify-end gap-2">
+  <footer class="card-footer">
     {#if uniformSet?.expand?.club?.admins.includes(authRecord.id)}
-      <button class="btn btn-sm btn-icon variant-ghost-tertiary" aria-label="edit uniform set"
-              onclick={triggerEditModal}>
-        <Edit/>
-      </button>
+      <hr class="my-2">
+      <div class="flex justify-end gap-2">
+        <Dialog triggerClasses="btn btn-sm btn-icon preset-tonal-tertiary border border-tertiary-500">
 
-      <DeleteButton id={uniformSet.id} modelName="Uniform Set" action={deleteAction}/>
+          {#snippet triggerContent()}
+            <Edit/>
+          {/snippet}
+
+          {#snippet title()}
+            <header>
+              <h2>Edit Uniform Set "{uniformSet.name}"</h2>
+            </header>
+          {/snippet}
+
+          <UniformSetForm {uniformSet} clubID={uniformSet.club}/>
+        </Dialog>
+
+        <DeleteButton id={uniformSet.id} modelName="Uniform Set" action={deleteAction}/>
+      </div>
     {/if}
   </footer>
 </article>

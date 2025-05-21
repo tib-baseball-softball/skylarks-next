@@ -9,7 +9,7 @@
   let {match}: Props = $props();
 </script>
 
-<div class="card variant-ghost-surface p-3">
+<div class="card preset-tonal-surface border border-surface-500 p-3">
   <h4 class="h6">Umpire</h4>
 
   <div class="flex flex-col gap-2 mt-1">

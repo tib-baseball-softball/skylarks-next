@@ -1,12 +1,12 @@
 <script lang="ts">
-    import {LogoUtility} from "$lib/service/LogoUtility";
-    import {DateTimeUtility} from "$lib/service/DateTimeUtility";
-    import type {Match} from "bsm.js";
-    import {GameWinner} from "$lib/enum/GameWinner";
-    import {MatchDecorator} from "$lib/service/MatchDecorator";
-    import {Calendar, ClipboardList} from "lucide-svelte";
+  import {LogoUtility} from "$lib/service/LogoUtility";
+  import {DateTimeUtility} from "$lib/service/DateTimeUtility";
+  import type {Match} from "bsm.js";
+  import {GameWinner} from "$lib/enum/GameWinner";
+  import {MatchDecorator} from "$lib/service/MatchDecorator";
+  import {Calendar, ClipboardList} from "lucide-svelte";
 
-    interface Props {
+  interface Props {
     match: Match;
   }
 
@@ -21,20 +21,20 @@
   const matchDate = DateTimeUtility.parseDateFromBSMString(match.time);
 </script>
 
-<div class="card variant-ghost-primary px-2 md:px-5">
+<div class="card preset-ghost-primary border-primary-500 px-2 md:px-5">
   <header class="pt-2 pb-3">
-    <h2 class="h4 font-medium">Eckdaten</h2>
+    <h2 class="h4 font-medium">Main Info</h2>
   </header>
 
   <div class="flex justify-center">
     <div class="grid grid-cols-3 sm:w-[80%] place-items-center gap-3">
       <img class="w-14 xl:w-24" src="{awayLogo}" alt="team logo for {match.away_team_name}" loading="lazy"/>
 
-      <div class="font-bold text-3xl lg:text-6xl xl:text-7xl">
+      <div class="font-bold text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
         {#if match.away_runs !== undefined && match.home_runs !== undefined}
-          <span class:text-surface-500-400-token={winner === GameWinner.home}>{match.away_runs}</span>
-          <span>&nbsp;-&nbsp;</span>
-          <span class:text-surface-500-400-token={winner === GameWinner.away}>{match.home_runs}</span>
+          <span class:text-surface-600-400={winner === GameWinner.home}>{match.away_runs}</span>
+          <span> - </span>
+          <span class:text-surface-600-400={winner === GameWinner.away}>{match.home_runs}</span>
         {/if}
       </div>
 
@@ -47,15 +47,15 @@
   </div>
 
   <div class="grid grid-cols-2 place-items-stretch gap-3 md:gap-8 my-2 md:my-5 pb-2 sm:pb-4 lg:pb-5">
-    <div class="card variant-ghost-primary dark:variant-soft-primary p-3">
+    <div class="card preset-ghost-primary border-primary-500 dark:preset-tonal-primary p-3">
       <div class="flex gap-2">
         <Calendar/>
-        <p class="mb-2 font-medium">Datum</p>
+        <p class="mb-2 font-medium">Date</p>
       </div>
 
       <p>{DateTimeUtility.dateTimeFormatMedium.format(matchDate)}</p>
     </div>
-    <div class="card variant-ghost-primary dark:variant-soft-primary p-3">
+    <div class="card preset-ghost-primary border-primary-500 dark:preset-tonal-primary p-3">
       <div class="flex gap-2">
         <ClipboardList/>
         <p class="mb-2 font-medium">Status</p>

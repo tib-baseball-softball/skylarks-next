@@ -1,8 +1,8 @@
 <script lang="ts">
   import type {CustomAuthModel, ExpandedClub} from "$lib/model/ExpandedResponse";
-  import {type DrawerSettings, getDrawerStore} from "@skeletonlabs/skeleton";
   import {authSettings} from "$lib/pocketbase/index.svelte";
-  import {ClipboardPen, Info, Shield, Tag} from "lucide-svelte";
+  import {Info, Shield, Tag} from "lucide-svelte";
+  import ClubForm from "$lib/components/forms/ClubForm.svelte";
 
   interface Props {
     club: ExpandedClub;
@@ -10,28 +10,10 @@
 
   let {club}: Props = $props();
 
-  const drawerStore = getDrawerStore();
-
   const authRecord = $derived(authSettings.record as CustomAuthModel);
-
-  let clubAddEditSettings: DrawerSettings = $derived({
-    id: "club-form",
-    position: "right",
-    width: "w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%]",
-    meta: {
-      club: null,
-      admins: null,
-    },
-  });
-
-  function openDrawer(club?: ExpandedClub) {
-    clubAddEditSettings.meta.club = club;
-    clubAddEditSettings.meta.admins = club?.expand?.admins;
-    drawerStore.open(clubAddEditSettings);
-  }
 </script>
 
-<div class="card variant-glass-primary shadow-lg">
+<div class="card bg-primary-100 dark:preset-tonal-primary text-primary-900 shadow-lg">
   <header class="card-header">
     <h2 class="h4 font-semibold">Club</h2>
   </header>
@@ -64,10 +46,7 @@
 
   {#if club.admins.includes(authRecord.id)}
     <footer class="card-footer flex justify-end">
-      <button class="btn variant-ghost-secondary" onclick={() => openDrawer(club)}>
-        <ClipboardPen/>
-        <span>Edit Club</span>
-      </button>
+      <ClubForm club={club} buttonClasses="btn preset-tonal-secondary border border-secondary-500"/>
     </footer>
   {/if}
 </div>

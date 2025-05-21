@@ -3,8 +3,9 @@ import {MatchAPIRequest} from "bsm.js";
 import {error} from "@sveltejs/kit";
 import {env} from "$env/dynamic/private";
 import {GameReportClient} from "$lib/service/GameReportClient.ts";
+import type {PageServerLoad} from "./$types";
 
-export async function load({parent, params, fetch}) {
+export const load: PageServerLoad = async ({parent, params, fetch}) => {
   const data = await parent();
   const matches = await data.streamed.matches;
   let match = matches.find((match: Match) => match.id === Number(params.id));

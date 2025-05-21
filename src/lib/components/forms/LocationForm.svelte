@@ -3,11 +3,12 @@
   import type {ExpandedClub} from "$lib/model/ExpandedResponse";
   import type {LocationsResponse} from "$lib/model/pb-types";
   import {save} from "$lib/pocketbase/RecordOperations";
-  import {getToastStore, type ToastSettings} from "@skeletonlabs/skeleton";
   import {Edit, Plus} from "lucide-svelte";
   //@ts-ignore
   import * as Sheet from "$lib/components/utility/sheet/index.js";
   import LeafletMapCoordinatePicker from "$lib/components/map/LeafletMapCoordinatePicker.svelte";
+  import type {Toast} from "$lib/types/Toast.ts";
+  import {toastController} from "$lib/service/ToastController.svelte.ts";
 
   // Gail S. Halvorsen Park coordinates
   const DEFAULT_LATITUDE = 52.482762;
@@ -21,16 +22,14 @@
 
   let { location = null, club, buttonClasses = "" }: Props = $props();
 
-  const toastStore = getToastStore();
-
-  const toastSettingsSuccess: ToastSettings = {
+  const toastSettingsSuccess: Toast = {
     message: "Location data saved successfully.",
-    background: "variant-filled-success",
+    background: "preset-filled-success-500",
   };
 
-  const toastSettingsError: ToastSettings = {
+  const toastSettingsError: Toast = {
     message: "An error occurred while saving Location.",
-    background: "variant-filled-error",
+    background: "preset-filled-error-500",
   };
 
   const form = $state(
@@ -62,11 +61,11 @@
     try {
       result = await save<LocationsResponse>("locations", form);
     } catch {
-      toastStore.trigger(toastSettingsError);
+      toastController.trigger(toastSettingsError);
     }
 
     if (result) {
-      toastStore.trigger(toastSettingsSuccess);
+      toastController.trigger(toastSettingsSuccess);
       open = false;
     }
     await invalidate("club:locations");
@@ -244,8 +243,8 @@
       </div>
 
       <div class="mt-4 flex justify-between items-center">
-        <button type="submit" class="btn variant-ghost-primary">Submit</button>
-        <button type="reset" class="btn variant-ghost ms-2">Reset Form</button>
+        <button type="submit" class="btn preset-tonal-primary border border-primary-500">Submit</button>
+        <button type="reset" class="btn preset-tonal border border-surface-500 ms-2">Reset Form</button>
       </div>
     </form>
   </Sheet.Content>

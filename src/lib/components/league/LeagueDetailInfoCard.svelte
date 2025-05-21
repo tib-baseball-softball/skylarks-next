@@ -9,7 +9,7 @@
   let {leagueGroup}: Props = $props();
 </script>
 
-<article class="card variant-soft-surface p-4">
+<article class="card preset-tonal-surface p-4">
 
   <div class="container self-end">
     <Info/>

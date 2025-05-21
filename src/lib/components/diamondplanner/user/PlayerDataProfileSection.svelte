@@ -4,19 +4,12 @@
   import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
   import type {Player} from "$lib/model/Player";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  import {type DrawerSettings, getDrawerStore,} from "@skeletonlabs/skeleton";
-  import {Edit, Link} from "lucide-svelte";
+  import {Link} from "lucide-svelte";
   import {convertIntKeyToHandedness} from "$lib/types/Handedness.js";
   import {positionKeysToEnumStringValues} from "$lib/types/BaseballPosition.js";
+  import PlayerDataForm from "$lib/components/forms/PlayerDataForm.svelte";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
-
-  const drawerStore = getDrawerStore();
-  const playerSettings: DrawerSettings = $derived({
-    id: "player-data-form",
-    position: "right",
-    width: "w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%]",
-  });
 
   // suboptimal adapter until data is properly fetched from PocketBase
   //@ts-expect-error
@@ -42,7 +35,7 @@
   });
 </script>
 
-<div class="card variant-glass-primary shadow-lg flex flex-col justify-between">
+<div class="card preset-tonal-primary shadow-lg flex flex-col justify-between">
   <header class="card-header">
     <h2 class="h4 font-semibold">Public Profile</h2>
   </header>
@@ -61,18 +54,12 @@
 
   <footer class="card-footer">
     <div class="flex flex-col gap-2 lg:gap-3">
-      <button
-              class="btn variant-ghost-primary"
-              onclick={() => drawerStore.open(playerSettings)}
-      >
-        <Edit/>
-        <span>Edit Player Data</span>
-      </button>
+      <PlayerDataForm buttonClasses="btn preset-tonal-primary border border-primary-500"></PlayerDataForm>
 
       {#if authRecord.bsm_id}
         <a
                 href="/players/{authRecord?.bsm_id}"
-                class="btn variant-ghost-secondary"
+                class="btn preset-tonal-secondary border border-secondary-500"
         >
           <Link/>
           <span>Go to Profile Page</span>

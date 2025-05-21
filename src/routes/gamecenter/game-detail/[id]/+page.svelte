@@ -1,5 +1,7 @@
 <script lang="ts">
-  import {ProgressRadial, Tab, TabGroup} from "@skeletonlabs/skeleton";
+  import {ProgressRing} from "@skeletonlabs/skeleton-svelte";
+  // @ts-ignore
+  import {Tabs} from "bits-ui";
   import MatchMainInfoSection from "$lib/components/match/MatchMainInfoSection.svelte";
   import MatchBoxscoreSection from "$lib/components/boxscore/MatchBoxscoreSection.svelte";
   import MatchDetailStatsCard from "$lib/components/match/MatchDetailStatsCard.svelte";
@@ -12,7 +14,7 @@
   let {data}: PageProps = $props();
 
   let match = $derived(data.match);
-  let tabSet: number = $state(0);
+  let tabSet: "gameData" | "boxscore" | "gameReport" | string = $state("gameData");
 </script>
 
 <h1 class="h2 mt-3">Details zu Spiel {match.match_id}</h1>
@@ -22,54 +24,62 @@
 </section>
 
 <section class="mb-5">
-  <TabGroup justify="justify-center">
-    <Tab bind:group={tabSet} name="tabData" value={0}>Game Data</Tab>
-    <Tab bind:group={tabSet} name="tabBoxscore" value={1}>Boxscore</Tab>
-    <Tab bind:group={tabSet} name="tabGameReport" value={2}>Game Report</Tab>
 
-    <!-- Tab Panels --->
-    <svelte:fragment slot="panel">
-      {#if tabSet === 0}
+  <Tabs.Root
+          bind:value={tabSet}
+          class=""
+  >
+    <Tabs.List
+            class="tabs-list preset-tonal-surface"
+    >
+      <Tabs.Trigger
+              value="gameData"
+              class="tabs-trigger"
+      >Game Data</Tabs.Trigger>
+      <Tabs.Trigger
+              value="boxscore"
+              class="tabs-trigger"
+      >Box Score</Tabs.Trigger>
+      <Tabs.Trigger
+              value="gameReport"
+              class="tabs-trigger"
+      >Game Report</Tabs.Trigger>
+    </Tabs.List>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-stretch gap-3 md:gap-4 lg:gap-5">
-          <MatchDetailStatsCard {match}/>
+    <Tabs.Content value="gameData" class="pt-3">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-stretch gap-3 md:gap-4 lg:gap-5">
+        <MatchDetailStatsCard {match}/>
+        <MatchDetailLocationCard field={match?.field}/>
+        <MatchDetailOfficialsCard {match}/>
+      </div>
+    </Tabs.Content>
 
-          <MatchDetailLocationCard field={match?.field}/>
+    <Tabs.Content value="boxscore">
+      {#await data.singleGameStats}
+        <ProgressRing/>
+      {:then boxscore}
+        {#if boxscore}
+          <MatchBoxscoreSection {boxscore}/>
+        {:else }
+          <ContentFilteredUnavailable text="No Box Score available."/>
+        {/if}
+      {:catch error}
+        <p>error loading boxscore: {error.message}</p>
+      {/await}
+    </Tabs.Content>
 
-          <MatchDetailOfficialsCard {match}/>
-        </div>
-
-      {:else if tabSet === 1}
-
-        {#await data.singleGameStats}
-          <ProgressRadial/>
-        {:then boxscore}
-          {#if boxscore}
-            <MatchBoxscoreSection {boxscore}/>
-          {:else }
-            <p>Kein Boxscore vorhanden.</p>
-          {/if}
-        {:catch error}
-          <p>error loading boxscore: {error.message}</p>
-        {/await}
-
-      {:else if tabSet === 2}
-
-        {#await data.gameReport}
-          <ProgressRadial/>
-        {:then gameReport}
-          {#if gameReport}
-            <GameReport classes="!my-2 md:max-w-[80%] 2xl:max-w-[70%]" report={gameReport}/>
-          {:else }
-            <ContentFilteredUnavailable text="No Game Report available."/>
-          {/if}
-        {:catch error}
-          <p>error loading Game Report: {error.message}</p>
-        {/await}
-
-
-      {/if}
-    </svelte:fragment>
-  </TabGroup>
+    <Tabs.Content value="gameReport">
+      {#await data.gameReport}
+        <ProgressRing/>
+      {:then gameReport}
+        {#if gameReport}
+          <GameReport classes="my-2! md:max-w-[80%] 2xl:max-w-[70%]" report={gameReport}/>
+        {:else }
+          <ContentFilteredUnavailable text="No Game Report available."/>
+        {/if}
+      {:catch error}
+        <p>error loading Game Report: {error.message}</p>
+      {/await}
+    </Tabs.Content>
+  </Tabs.Root>
 </section>
-

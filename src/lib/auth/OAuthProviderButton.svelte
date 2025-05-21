@@ -2,7 +2,7 @@
   import type {AuthProviderInfo, RecordAuthResponse, RecordModel, RecordService} from "pocketbase";
   import {providerLogin} from "$lib/pocketbase/Auth.svelte";
   import {goto} from "$app/navigation";
-  import {getToastStore} from "@skeletonlabs/skeleton";
+  import {toastController} from "$lib/service/ToastController.svelte.ts";
 
   interface Props {
     authProvider: AuthProviderInfo,
@@ -10,8 +10,6 @@
     signup_key?: string,
     disabled: boolean,
   }
-
-  const toastStore = getToastStore();
 
   const {authProvider, collection, signup_key = "", disabled}: Props = $props();
 
@@ -21,9 +19,9 @@
       authResponse = await providerLogin(provider, collection, signup_key);
     } catch (error) {
       console.error(error);
-      toastStore.trigger({
+      toastController.trigger({
         message: "There was an error processing your authentication request via external provider. Please double-check your signup key",
-        background: "variant-filled-error",
+        background: "preset-filled-error-500",
       });
     }
 
@@ -46,13 +44,11 @@ falls back to simple button if not.
 -->
 
 <button
-        class:btn={isGenericProvider}
-        class:variant-ghost-tertiary={isGenericProvider}
         disabled={disabled}
         type="button"
         onclick={() => submitOAuthRequest(authProvider)}
         aria-label="sign in with {authProvider.displayName}"
-        class="oauth-button"
+        class={['oauth-button', isGenericProvider && 'btn preset-tonal-tertiary border border-tertiary-500']}
 >
   {#if (authProvider.name === "google")}
     <img class="light-logo" src="/providers/Google_light.svg" alt="Google logo" width="40">
@@ -74,6 +70,7 @@ falls back to simple button if not.
   {/if}
 </button>
 
+<!-- svelte-ignore css_unused_selector -->
 <style>
     .oauth-button[disabled] {
         cursor: not-allowed;

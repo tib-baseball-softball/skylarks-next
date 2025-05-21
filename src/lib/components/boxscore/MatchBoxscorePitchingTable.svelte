@@ -9,10 +9,10 @@
     let { matchStats, teamName }: Props = $props();
 </script>
 
-<div class="table-container lg:max-w-[75%] dark:border-2">
+<div class="table-wrap lg:max-w-[75%] dark:border-2">
     <table class="table table-compact">
         <thead>
-            <tr>
+            <tr class="preset-tonal-surface dark:preset-filled-surface-300-700">
                 <th data-cell-for="player">{teamName} (Pitchers)</th>
                 <th data-cell-for="ip">IP</th>
                 <th data-cell-for="bf">BF</th>
@@ -30,7 +30,7 @@
             {#each matchStats.lineup as player}
                 <tr>
                     <td data-cell-for="player">
-                        {player.person.last_name}, {player.person.first_name.charAt(0)}.&nbsp;
+                        {player.person.last_name}, {player.person.first_name.charAt(0)}. 
                         {#if player.values.win_loss_save}
                             ({player.values.win_loss_save})
                         {/if}
@@ -49,7 +49,7 @@
         </tbody>
 
         <tfoot>
-        <tr data-row-for="summary">
+        <tr class="preset-tonal-surface dark:preset-filled-surface-300-700" data-row-for="summary">
             <td data-cell-for="player">
             </td>
             <td data-cell-for="ip">{matchStats.sum.innings_pitched}

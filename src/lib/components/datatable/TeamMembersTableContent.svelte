@@ -2,21 +2,21 @@
   import type {DataHandler} from "@vincjo/datatables";
   import ThSort from "./ThSort.svelte";
   import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
-  import {Avatar, getModalStore, getToastStore, type ModalSettings} from "@skeletonlabs/skeleton";
+  import {Avatar} from "@skeletonlabs/skeleton-svelte";
   import {client} from "$lib/pocketbase/index.svelte";
   import LocalDate from "../utility/LocalDate.svelte";
   import type {TeamsUpdate, UsersUpdate} from "$lib/model/pb-types.ts";
   import {invalidateAll} from "$app/navigation";
   import {CircleCheck, Lock, LockOpen, Trash} from "lucide-svelte";
+  import {toastController} from "$lib/service/ToastController.svelte.ts";
+  import Dialog from "$lib/components/utility/Dialog.svelte";
+  import {closeModal} from "$lib/functions/closeModal.ts";
 
   interface Props {
     handler: DataHandler<CustomAuthModel>;
     team: ExpandedTeam,
     showAdminSection?: boolean;
   }
-
-  const modalStore = getModalStore();
-  const toastStore = getToastStore();
 
   let {handler, team, showAdminSection = false}: Props = $props();
 
@@ -25,16 +25,16 @@
       await client.collection("teams").update<TeamsUpdate>(team.id, {
         "admins+": model.id
       });
-      toastStore.trigger({
+      toastController.trigger({
         message: `User "${model.first_name + " " + model.last_name}" has been added as an admin for team "${team.name}"`,
-        background: "variant-filled-success"
+        background: "preset-filled-success-500"
       });
       await invalidateAll();
     } catch (error) {
       console.error(error);
-      toastStore.trigger({
+      toastController.trigger({
         message: "An error occurred while adding user as admin",
-        background: "variant-filled-error"
+        background: "preset-filled-error-500"
       });
     }
   }
@@ -44,54 +44,45 @@
       await client.collection("teams").update<TeamsUpdate>(team.id, {
         "admins-": model.id
       });
-      toastStore.trigger({
+      toastController.trigger({
         message: `User "${model.first_name + " " + model.last_name}" has been removed as admin for team "${team.name}"`,
-        background: "variant-filled-success"
+        background: "preset-filled-success-500"
       });
       await invalidateAll();
     } catch (error) {
       console.error(error);
-      toastStore.trigger({
+      toastController.trigger({
         message: "An error occurred while removing user as admin",
-        background: "variant-filled-error"
+        background: "preset-filled-error-500"
       });
     }
   }
 
   async function deleteUserFromTeam(model: CustomAuthModel) {
-    const modal: ModalSettings = {
-      type: 'confirm',
-      title: 'Please Confirm',
-      body: `Are you sure you wish to remove "${model.first_name + " " + model.last_name}" from "${team.name}"?`,
-      response: async (r: boolean) => {
-        if (r) {
-          try {
-            await client.collection("users").update<UsersUpdate>(model.id, {
-              "teams-": team.id
-            });
-            toastStore.trigger({
-              message: `User "${model.first_name + " " + model.last_name}" has been removed as member from team "${team.name}"`,
-              background: "variant-filled-success"
-            });
-            await invalidateAll();
-          } catch (error) {
-            console.error(error);
-            toastStore.trigger({
-              message: "An error occurred while removing user as team member",
-              background: "variant-filled-error"
-            });
-          }
-        }
-      },
-    };
-    modalStore.trigger(modal);
+    try {
+      await client.collection("users").update<UsersUpdate>(model.id, {
+        "teams-": team.id
+      });
+      toastController.trigger({
+        message: `User "${model.first_name + " " + model.last_name}" has been removed as member from team "${team.name}"`,
+        background: "preset-filled-success-500"
+      });
+      await invalidateAll();
+    } catch (error) {
+      console.error(error);
+      toastController.trigger({
+        message: "An error occurred while removing user as team member",
+        background: "preset-filled-error-500"
+      });
+    }
+    closeModal();
   }
 
   const rows = $derived(handler.getRows());
 </script>
 
 <thead>
-<tr class="sticky">
+<tr class="sticky preset-tonal-surface dark:preset-filled-surface-300-700">
   <ThSort {handler} orderBy="last_name">Name</ThSort>
   <ThSort {handler} orderBy="verified">Status</ThSort>
   <ThSort {handler} orderBy="number">Number</ThSort>
@@ -107,12 +98,13 @@
 
 <tbody>
 {#each $rows as row}
-  <tr>
+  <tr class="align-middle">
     <td>
       <div class="flex items-center gap-2">
         <Avatar
                 src={client.files.getURL(row, row.avatar)}
-                width="w-10"
+                name={row.first_name + row.last_name}
+                size="w-12"
         />
         <div>
           <span>{row.first_name} {row.last_name}</span>
@@ -125,40 +117,42 @@
       </div>
     </td>
 
-    <td class="flex gap-1">
-      {#if row.verified}
-        <div>
-          <CircleCheck
-                  class="text-success-600 dark:text-success-500"
-          />
-        </div>
-        <div>Verified</div>
-      {:else}
-        <div>
-          <!-- Icon for some reason not in lib -->
-          <svg
-                  class="w-5 h-5 text-error-500-400-token"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-          >
-            <path
-                    fill-rule="evenodd"
-                    d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm5.757-1a1 1 0 1 0 0 2h8.486a1 1 0 1 0 0-2H7.757Z"
-                    clip-rule="evenodd"
+    <td>
+      <div class="flex gap-1">
+        {#if row.verified}
+          <div>
+            <CircleCheck
+                    class="text-success-600 dark:text-success-500"
             />
-          </svg>
-        </div>
-        <div>Unverified</div>
-      {/if}
+          </div>
+          <div>Verified</div>
+        {:else}
+          <div>
+            <!-- Icon for some reason not in lib -->
+            <svg
+                    class="w-5 h-5 text-error-600-400"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+            >
+              <path
+                      fill-rule="evenodd"
+                      d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm5.757-1a1 1 0 1 0 0 2h8.486a1 1 0 1 0 0-2H7.757Z"
+                      clip-rule="evenodd"
+              />
+            </svg>
+          </div>
+          <div>Unverified</div>
+        {/if}
+      </div>
     </td>
 
     <td>
       {#if row.number}
-                    <span class="badge-icon p-3 variant-filled-primary"
+                    <span class="badge-icon p-3 preset-filled-primary-500 text-white text-lg"
                     >{row.number}</span
                     >
       {:else}
@@ -181,28 +175,47 @@
     </td>
 
     {#if showAdminSection}
-      <td class="space-x-1 space-y-1">
-        <!--        <button class="btn btn-sm variant-ghost-primary">-->
-        <!--          <EditOutline/>-->
-        <!--          Edit-->
-        <!--        </button>-->
+      <td>
+        <div class="flex gap-1 lg:gap-2 justify-end">
+          <!--        <button class="btn btn-sm variant-ghost-primary">-->
+          <!--          <EditOutline/>-->
+          <!--          Edit-->
+          <!--        </button>-->
 
-        {#if team.admins.includes(row.id)}
-          <button class="badge variant-ghost-warning" onclick={() => removeUserAsAdmin(row)}>
-            <Lock class="m-0.5" size="18"/>
-            Revoke Admin Access
-          </button>
-        {:else }
-          <button class="badge variant-ghost-tertiary" onclick={() => makeUserAdmin(row)}>
-            <LockOpen class="m-0.5" size="18"/>
-            Make Admin
-          </button>
-        {/if}
+          {#if team.admins.includes(row.id)}
+            <button class="badge preset-tonal-warning border border-warning-500" onclick={() => removeUserAsAdmin(row)}>
+              <Lock class="m-0.5" size="18"/>
+              Revoke Admin Access
+            </button>
+          {:else }
+            <button class="badge preset-tonal-tertiary border border-tertiary-500" onclick={() => makeUserAdmin(row)}>
+              <LockOpen class="m-0.5" size="18"/>
+              Make Admin
+            </button>
+          {/if}
 
-        <button class="badge variant-ghost-error" onclick={() => deleteUserFromTeam(row)}>
-          <Trash class="m-0.5" size="18"/>
-          Remove
-        </button>
+          <Dialog triggerClasses="badge preset-tonal-error border border-error-500 gap-0!" closeButtonClasses="sr-only">
+            {#snippet triggerContent()}
+              <Trash class="m-0.5" size="18"/>
+              Remove
+            {/snippet}
+
+            {#snippet title()}
+              <span>Please Confirm</span>
+            {/snippet}
+
+            {#snippet description()}
+              <span>Are you sure you wish to remove "{row.first_name + " " + row.last_name}" from "{team.name}"?</span>
+            {/snippet}
+
+            <div class="flex justify-end gap-2 mt-1">
+              <button class="btn preset-tonal-surface border border-surface-500" type="button" onclick={closeModal}>
+                Cancel
+              </button>
+              <button class="btn preset-filled" type="button" onclick={() => deleteUserFromTeam(row)}>Confirm</button>
+            </div>
+          </Dialog>
+        </div>
       </td>
     {/if}
   </tr>

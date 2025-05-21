@@ -1,54 +1,27 @@
 <script lang="ts">
   import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
-  import {Avatar, getModalStore, type ModalComponent, type ModalSettings} from "@skeletonlabs/skeleton";
+  import {Avatar} from "@skeletonlabs/skeleton-svelte";
   import {client} from "$lib/pocketbase/index.svelte";
   import UserDetailsForm from "$lib/auth/UserDetailsForm.svelte";
-  import ChangeEmailForm from "$lib/auth/ChangeEmailForm.svelte";
   import PasswordRequestButton from "$lib/auth/PasswordRequestButton.svelte";
   import {Lock, Mail, User} from "lucide-svelte";
+  import Dialog from "$lib/components/utility/Dialog.svelte";
+  import ChangeEmailForm from "$lib/auth/ChangeEmailForm.svelte";
 
-  interface props {
+  interface Props {
     model: CustomAuthModel;
   }
 
-  let {model}: props = $props();
-
-  const modalStore = getModalStore();
-
-  function triggerDetailsModal() {
-    const modalComponent: ModalComponent = {
-      ref: UserDetailsForm,
-      props: {},
-    };
-
-    const modal: ModalSettings = {
-      type: "component",
-      component: modalComponent,
-    };
-    modalStore.trigger(modal);
-  }
-
-  function triggerEmailChangeModal() {
-    const modalComponent: ModalComponent = {
-      ref: ChangeEmailForm,
-      props: {},
-    };
-
-    const modal: ModalSettings = {
-      type: "component",
-      component: modalComponent,
-    };
-    modalStore.trigger(modal);
-  }
+  let {model}: Props = $props();
 </script>
 
-<div class="card variant-glass-surface lg:col-span-2 shadow-lg">
+<div class="card preset-tonal-surface lg:col-span-2 shadow-lg">
   <header class="card-header">
     <h2 class="h4 font-semibold">User Data</h2>
   </header>
 
   <section class="p-4 flex flex-col sm:flex-row gap-4 lg:gap-12 sm:items-center">
-    <Avatar src={client.files.getURL(model, model?.avatar)}/>
+    <Avatar src={client.files.getURL(model, model?.avatar)} name={`${model?.first_name ?? ""} ${model?.last_name ?? ""}`}/>
 
     <div class="grid grid-cols-1 gap-2 col-span-4">
       <div class="flex items-center gap-3">
@@ -71,17 +44,44 @@
 
   <footer class="card-footer flex justify-end items-center gap-3 md:gap-4">
     <p>Edit User Data:</p>
-    <PasswordRequestButton email={model.email} classes="btn variant-ghost-secondary">
+    <PasswordRequestButton email={model.email} classes="btn preset-tonal-secondary border border-secondary-500">
       <Lock/>
     </PasswordRequestButton>
 
-    <button aria-label="change email address" class="btn variant-ghost-secondary"
-            onclick="{() => triggerEmailChangeModal()}">
-      <Mail/>
-    </button>
+    <Dialog triggerClasses="btn preset-tonal-secondary border border-secondary-500">
 
-    <button aria-label="edit user data" class="btn variant-ghost-primary" onclick="{() => triggerDetailsModal()}">
-      <User/>
-    </button>
+      {#snippet triggerContent()}
+        <Mail/>
+      {/snippet}
+
+      {#snippet title()}
+        <header>
+          <h2>
+            Change email address for {model.first_name}
+            {model.last_name}
+          </h2>
+        </header>
+      {/snippet}
+
+      <ChangeEmailForm/>
+    </Dialog>
+
+    <Dialog triggerClasses="btn preset-tonal-primary border border-primary-500">
+
+      {#snippet triggerContent()}
+        <User/>
+      {/snippet}
+
+      {#snippet title()}
+        <header>
+          <h2>
+            Edit User Data for {model.first_name}
+            {model.last_name}
+          </h2>
+        </header>
+      {/snippet}
+
+      <UserDetailsForm/>
+    </Dialog>
   </footer>
 </div>

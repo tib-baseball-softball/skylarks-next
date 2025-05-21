@@ -9,7 +9,7 @@
     let { player }: Props = $props();
 </script>
 
-<div class="card variant-glass-surface shadow-xl p-3">
+<div class="card preset-tonal-surface shadow-xl p-3">
     <div class="flex justify-center">
         {#if player.media?.length > 0}
             <img class="rounded-lg max-h-72" src="{player.media.at(0)?.url}" alt="{player.media.at(0)?.alt}" loading="lazy">

@@ -9,10 +9,11 @@
 
   interface props {
     event: ExpandedEvent;
+    chipClasses?: string;
   }
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
-  const {event}: props = $props();
+  const {event, chipClasses = ""}: props = $props();
 
   let userParticipation: ParticipationsCreate = $derived(event.userParticipation ?? {
     id: "",
@@ -21,6 +22,9 @@
     state: "",
     comment: "",
   });
+
+  // JS: splitting an empty string by comma returns length `1`
+  const guestCount = $derived(event.guests === "" ? 0 : event.guests.split(",").length)
 
   async function updateParticipationStatus(
       state: EventParticipationState,
@@ -33,19 +37,17 @@
 
 <section class="flex justify-end items-end gap-2 flex-wrap">
   <button
-          class="chip"
-          class:variant-filled-success={userParticipation.state === "in"}
-          class:variant-ringed-success={userParticipation.state !== "in"}
+          class="chip {chipClasses} preset-outlined-success-500"
+          class:preset-filled-success-500={userParticipation.state === "in"}
           onclick={() => updateParticipationStatus("in")}
   >
     <span><Check size="14"/></span>
-    <span>{event.participations.in.length ?? 0}</span>
+    <span>{(event.participations.in.length ?? 0) + guestCount}</span>
   </button>
 
   <button
-          class="chip variant-ringed-warning"
-          class:variant-filled-warning={userParticipation.state === "maybe"}
-          class:variant-ringed-warning={userParticipation.state !== "maybe"}
+          class="chip {chipClasses} preset-outlined-warning-500"
+          class:preset-filled-warning-500={userParticipation.state === "maybe"}
           onclick={() => updateParticipationStatus("maybe")}
   >
     <span><CircleHelp size="14"/></span>
@@ -53,9 +55,8 @@
   </button>
 
   <button
-          class="chip"
-          class:variant-filled-error={userParticipation.state === "out"}
-          class:variant-ringed-error={userParticipation.state !== "out"}
+          class="chip {chipClasses} preset-outlined-error-500"
+          class:preset-filled-error-500={userParticipation.state === "out"}
           onclick={() => updateParticipationStatus("out")}
   >
     <span><X size="14"/></span>

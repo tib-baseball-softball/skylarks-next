@@ -18,6 +18,6 @@
     .container {
         display: flex;
         align-items: center;
-        @apply gap-4;
+        gap: 1rem;
     }
 </style>

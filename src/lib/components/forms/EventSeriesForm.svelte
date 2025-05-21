@@ -2,11 +2,12 @@
   import {invalidate} from "$app/navigation";
   import type {EventSeriesCreationData, ExpandedTeam} from "$lib/model/ExpandedResponse.ts";
   import {client} from "$lib/pocketbase/index.svelte.js";
-  import {getDrawerStore, getToastStore, type ToastSettings,} from "@skeletonlabs/skeleton";
   import {DateTimeUtility} from "$lib/service/DateTimeUtility.js";
   import Flatpickr from "$lib/components/utility/Flatpickr.svelte";
   import {Weekday} from "$lib/types/Weekday.ts";
   import type {LocationsResponse} from "$lib/model/pb-types.ts";
+  import type {Toast} from "$lib/types/Toast.ts";
+  import {toastController} from "$lib/service/ToastController.svelte.ts";
 
   interface Props {
     eventSeries: EventSeriesCreationData | null,
@@ -16,17 +17,14 @@
 
   let {eventSeries, team, showForm = $bindable()}: Props = $props();
 
-  const toastStore = getToastStore();
-  const drawerStore = getDrawerStore();
-
-  const toastSettingsSuccess: ToastSettings = {
+  const toastSettingsSuccess: Toast = {
     message: "Event Series saved successfully.",
-    background: "variant-filled-success",
+    background: "preset-filled-success-500",
   };
 
-  const toastSettingsError: ToastSettings = {
+  const toastSettingsError: Toast = {
     message: "An error occurred while saving the event series.",
-    background: "variant-filled-error",
+    background: "preset-filled-error-500",
   };
 
   const formDefault = $state({
@@ -47,7 +45,8 @@
   );
 
   const locationOptions = client.collection("locations").getFullList<LocationsResponse>({
-    filter: `club = "${$drawerStore.meta.team.club}"`,
+    filter: `club = "${team.club}"`,
+    requestKey: `locations-for-eventSeries-${team.id}`,
   });
 
   async function submitForm(e: SubmitEvent) {
@@ -61,7 +60,7 @@
       }
     } catch (error) {
       console.error("Invalid format for starttime or endtime in form.");
-      toastStore.trigger(toastSettingsError);
+      toastController.trigger(toastSettingsError);
       return;
     }
 
@@ -78,13 +77,12 @@
             .create<EventSeriesCreationData>(form);
       }
     } catch {
-      toastStore.trigger(toastSettingsError);
+      toastController.trigger(toastSettingsError);
     }
 
     if (result) {
-      toastStore.trigger(toastSettingsSuccess);
+      toastController.trigger(toastSettingsSuccess);
       showForm = false;
-      drawerStore.close();
       await invalidate("event:list");
     }
   }
@@ -112,7 +110,9 @@
       Create Events after
       <Flatpickr
               bind:value={form.series_start}
-              options={DateTimeUtility.datePickerOptionsNoTime}
+              options={Object.assign(DateTimeUtility.datePickerOptionsNoTime, {
+                  static: true, // render the picker as a child element to the form to work in a sheet portal context
+              })}
       />
     </label>
 
@@ -120,7 +120,9 @@
       Create Events before
       <Flatpickr
               bind:value={form.series_end}
-              options={DateTimeUtility.datePickerOptionsNoTime}
+              options={Object.assign(DateTimeUtility.datePickerOptionsNoTime, {
+                  static: true,
+              })}
       />
     </label>
 
@@ -129,7 +131,7 @@
       The start date does not have to be the actual training day.
     </span>
 
-    <label class="label col-span-2 md:col-span-1 mt-3">
+    <label class="label col-span-2 md:col-span-1 mt-3 md:mt-0">
       Title
       <input
               name="title"
@@ -219,14 +221,14 @@
 
   </div>
 
-  <hr class="!my-5"/>
+  <hr class="my-5!"/>
 
   <div class="flex justify-center gap-3">
-    <button type="button" class="btn variant-ghost" onclick={() => {if (showForm) showForm = false}}>
+    <button type="button" class="btn preset-tonal border border-surface-500" onclick={() => {if (showForm) showForm = false}}>
       Cancel
     </button>
 
-    <button type="submit" class="btn variant-ghost-primary">
+    <button type="submit" class="btn preset-filled-primary-500">
       Submit
     </button>
   </div>

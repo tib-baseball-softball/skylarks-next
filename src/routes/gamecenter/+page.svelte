@@ -1,6 +1,8 @@
 <script lang="ts">
   import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte";
-  import {ProgressBar, SlideToggle, Tab, TabGroup,} from "@skeletonlabs/skeleton";
+  import {Progress, Switch} from "@skeletonlabs/skeleton-svelte";
+  // @ts-ignore
+  import {Tabs} from "bits-ui";
   import {Gameday} from "bsm.js";
   import {preferences} from "$lib/stores";
   import LeagueFilter from "$lib/components/utility/LeagueFilter.svelte";
@@ -28,6 +30,14 @@
   let leagueGroups = $derived(data.leagueGroups);
 
   let showExternal = $state(false);
+
+  /**
+   *  enum <=> string conversion necessary
+   */
+  function onGamedayChange(value: string) {
+    //@ts-expect-error
+    $preferences.gameday = value;
+  }
 </script>
 
 <ReloadUponPreferenceChange callback={reloadGameData}/>
@@ -44,11 +54,10 @@
     </div>
 
     <div class="flex gap-2 my-4 justify-end">
-      <SlideToggle
-              size="sm"
+      <Switch
               name="slide"
-              active="bg-surface-900 dark:bg-tertiary-700"
-              bind:checked={showExternal}
+              controlActive="bg-surface-900 dark:bg-tertiary-700"
+              onCheckedChange={(e) => (showExternal = e.checked)}
       />
       <p>Show external games</p>
     </div>
@@ -58,42 +67,50 @@
 <section class="mb-5 mt-3">
   <label id="gameday_label" class="label">
     Gameday
-    <TabGroup justify="justify-center" labelledby="gameday_label">
-      <Tab
-              bind:group={$preferences.gameday}
-              name="tabPrevious"
-              value={Gameday.previous}>Previous
-      </Tab
+    <Tabs.Root
+            value={$preferences.gameday}
+            onValueChange={onGamedayChange}
+            class=""
+    >
+      <Tabs.List
+              class="tabs-list preset-tonal-surface"
       >
-      <Tab
-              bind:group={$preferences.gameday}
-              name="tabCurrent"
-              value={Gameday.current}>Current
-      </Tab
-      >
-      <Tab
-              bind:group={$preferences.gameday}
-              name="tabNext"
-              value={Gameday.next}>Next
-      </Tab
-      >
-      <Tab
-              bind:group={$preferences.gameday}
-              name="tabAny"
-              value={Gameday.any}>All
-      </Tab
-      >
-      <!-- Tab Panels --->
-      <svelte:fragment slot="panel"></svelte:fragment>
-    </TabGroup>
+        <Tabs.Trigger
+                value={Gameday.previous}
+                class="tabs-trigger"
+        >Previous
+        </Tabs.Trigger>
+        <Tabs.Trigger
+                value={Gameday.current}
+                class="tabs-trigger"
+        >Current
+        </Tabs.Trigger>
+        <Tabs.Trigger
+                value={Gameday.next}
+                class="tabs-trigger"
+        >Next
+        </Tabs.Trigger>
+        <Tabs.Trigger
+                value={Gameday.any}
+                class="tabs-trigger"
+        >All
+        </Tabs.Trigger>
+      </Tabs.List>
+
+      <Tabs.Content value={$preferences.gameday} class="pt-3">
+        {@render tabsContent()}
+      </Tabs.Content>
+    </Tabs.Root>
+
+    {#snippet tabsContent()}
+      {#await data.streamed.matches}
+        <p>Loading matches...</p>
+        <Progress/>
+      {:then matches}
+        <GamecenterMatchSection {matches} {showExternal}/>
+      {:catch error}
+        <p>error loading matches: {error.message}</p>
+      {/await}
+    {/snippet}
   </label>
 </section>
-
-{#await data.streamed.matches}
-  <p>Loading matches...</p>
-  <ProgressBar/>
-{:then matches}
-  <GamecenterMatchSection {matches} {showExternal}/>
-{:catch error}
-  <p>error loading matches: {error.message}</p>
-{/await}

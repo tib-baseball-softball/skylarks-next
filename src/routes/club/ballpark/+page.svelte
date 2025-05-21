@@ -1,6 +1,6 @@
 <script lang="ts">
   import type {PageProps} from './$types';
-  import {ProgressBar} from "@skeletonlabs/skeleton";
+  import { Progress } from "@skeletonlabs/skeleton-svelte";
   import BallparkGrid from "$lib/components/club/ballpark/BallparkGrid.svelte";
 
   let {data}: PageProps = $props();
@@ -11,7 +11,7 @@
 
 {#await data.fields}
   <p>Loading Club Officials...</p>
-  <ProgressBar/>
+  <Progress/>
 
 {:then fields}
   <BallparkGrid fields={fields}/>

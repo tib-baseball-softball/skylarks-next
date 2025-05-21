@@ -18,6 +18,6 @@
 
 <h1 class="h1">{club.name} - Locations</h1>
 
-<section class="!mt-8">
+<section class="mt-8!">
   <ClubLocationsSection club={club} locations={data?.locations ?? []} />
 </section>

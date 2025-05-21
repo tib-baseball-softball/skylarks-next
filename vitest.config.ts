@@ -1,6 +1,8 @@
-import {coverageConfigDefaults, defineConfig} from 'vitest/config'
+import {coverageConfigDefaults, defineConfig} from 'vitest/config';
+import {sveltekit} from "@sveltejs/kit/vite";
 
 export default defineConfig({
+  plugins: [sveltekit()],
   test: {
     globalSetup: './src/test-globals.ts',
     coverage: {

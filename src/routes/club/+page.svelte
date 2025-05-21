@@ -11,7 +11,7 @@
 <ClubInfoSection club={data.bsmClubData}/>
 
 <!-- Grid Section -->
-<div class="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-6 !mb-4">
+<div class="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-6 mb-4!">
   <ClubGridItem
           href="/club/details"
           label="Details"
