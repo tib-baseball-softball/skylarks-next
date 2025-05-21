@@ -36,7 +36,7 @@
     {/snippet}
   </Popover.Trigger>
 
-  <Popover.Content>
+  <Popover.Content class="z-15">
     <div class="card bg-surface-50 dark:bg-surface-800 border shadow-2xl p-4 text-sm max-w-80 space-y-1 text-black dark:text-white">
 
       <div class="item-container">
