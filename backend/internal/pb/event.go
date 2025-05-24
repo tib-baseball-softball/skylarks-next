@@ -9,118 +9,118 @@ const (
 	EventsCollection = "events"
 )
 
-var _ core.RecordProxy = (*Events)(nil)
+var _ core.RecordProxy = (*Event)(nil)
 
-// Events RecordProxy for collection `events`.
+// Event RecordProxy for collection `events`.
 // Provides type-safe struct access to event records.
-type Events struct {
+type Event struct {
 	core.BaseRecordProxy
 }
 
-func (e *Events) ID() string {
+func (e *Event) ID() string {
 	return e.Id
 }
 
-func (e *Events) BSMID() int {
+func (e *Event) BSMID() int {
 	return e.GetInt("bsm_id")
 }
 
-func (e *Events) SetBSMID(bsmID int) {
+func (e *Event) SetBSMID(bsmID int) {
 	e.Set("bsm_id", bsmID)
 }
 
-func (e *Events) Title() string {
+func (e *Event) Title() string {
 	return e.GetString("title")
 }
 
-func (e *Events) SetTitle(title string) {
+func (e *Event) SetTitle(title string) {
 	e.Set("title", title)
 }
 
-func (e *Events) StartTime() types.DateTime {
+func (e *Event) StartTime() types.DateTime {
 	return e.GetDateTime("starttime")
 }
 
-func (e *Events) SetStartTime(startTime types.DateTime) {
+func (e *Event) SetStartTime(startTime types.DateTime) {
 	e.Set("starttime", startTime)
 }
 
-func (e *Events) EndTime() types.DateTime {
+func (e *Event) EndTime() types.DateTime {
 	return e.GetDateTime("endtime")
 }
 
-func (e *Events) SetEndTime(endTime types.DateTime) {
+func (e *Event) SetEndTime(endTime types.DateTime) {
 	e.Set("endtime", endTime)
 }
 
-func (e *Events) MeetingTime() types.DateTime {
+func (e *Event) MeetingTime() types.DateTime {
 	return e.GetDateTime("meetingtime")
 }
 
-func (e *Events) SetMeetingTime(meetingTime types.DateTime) {
+func (e *Event) SetMeetingTime(meetingTime types.DateTime) {
 	e.Set("meetingtime", meetingTime)
 }
 
-func (e *Events) Type() string {
+func (e *Event) Type() string {
 	return e.GetString("type")
 }
 
-func (e *Events) SetType(eventType string) {
+func (e *Event) SetType(eventType string) {
 	e.Set("type", eventType)
 }
 
-func (e *Events) Team() string {
+func (e *Event) Team() string {
 	return e.GetString("team")
 }
 
-func (e *Events) SetTeam(team string) {
+func (e *Event) SetTeam(team string) {
 	e.Set("team", team)
 }
 
-func (e *Events) Location() string {
+func (e *Event) Location() string {
 	return e.GetString("location")
 }
 
-func (e *Events) SetLocation(location string) {
+func (e *Event) SetLocation(location string) {
 	e.Set("location", location)
 }
 
-func (e *Events) MatchJSON() string {
+func (e *Event) MatchJSON() string {
 	return e.GetString("match_json")
 }
 
-func (e *Events) SetMatchJSON(matchJSON string) {
+func (e *Event) SetMatchJSON(matchJSON string) {
 	e.Set("match_json", matchJSON)
 }
 
-func (e *Events) Guests() string {
+func (e *Event) Guests() string {
 	return e.GetString("guests")
 }
 
-func (e *Events) SetGuests(guests string) {
+func (e *Event) SetGuests(guests string) {
 	e.Set("guests", guests)
 }
 
-func (e *Events) IsCancelled() bool {
+func (e *Event) IsCancelled() bool {
 	return e.GetBool("cancelled")
 }
 
-func (e *Events) SetCancelled(cancelled bool) {
+func (e *Event) SetCancelled(cancelled bool) {
 	e.Set("cancelled", cancelled)
 }
 
-func (e *Events) Attire() string {
+func (e *Event) Attire() string {
 	return e.GetString("attire")
 }
 
-func (e *Events) SetAttire(attire string) {
+func (e *Event) SetAttire(attire string) {
 	e.Set("attire", attire)
 }
 
-func (e *Events) Series() string {
+func (e *Event) Series() string {
 	return e.GetString("series")
 }
 
-func (e *Events) SetSeries(series string) {
+func (e *Event) SetSeries(series string) {
 	e.Set("series", series)
 }
