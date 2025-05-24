@@ -37,6 +37,14 @@ func (e *Event) SetTitle(title string) {
 	e.Set("title", title)
 }
 
+func (e *Event) Desc() string {
+	return e.GetString("desc")
+}
+
+func (e *Event) SetDesc(desc string) {
+	e.Set("desc", desc)
+}
+
 func (e *Event) StartTime() types.DateTime {
 	return e.GetDateTime("starttime")
 }
