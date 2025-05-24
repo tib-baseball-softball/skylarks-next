@@ -4,8 +4,10 @@ import (
 	"fmt"
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
+	"github.com/pocketbase/pocketbase/tools/types"
 	"github.com/tib-baseball-softball/skylarks-next/internal/pb"
 	"github.com/tib-baseball-softball/skylarks-next/internal/stats"
+	"os"
 	"time"
 )
 
@@ -97,7 +99,21 @@ func generateSeriesEvents(app core.App, e *core.RecordEvent) ([]*core.Record, er
 		existingEventsMap[key] = eventProxy
 	}
 
-	currentDate := startDate
+	timezone := os.Getenv("TIME_ZONE")
+	if timezone == "" {
+		timezone = "Europe/Berlin"
+	}
+
+	location, err := time.LoadLocation(timezone)
+	if err != nil {
+		return nil, err
+	}
+
+	// reads timezone information to ensure that the later call to `AddDate()` accounts for daylight savings time traversal
+	currentDate, err := types.ParseDateTime(startDate.Time().In(location))
+	if err != nil {
+		return nil, err
+	}
 
 	for currentDate.Before(endDate) {
 		// Create start and end times for this specific event
