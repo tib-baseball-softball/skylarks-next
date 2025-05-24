@@ -99,36 +99,35 @@ func generateSeriesEvents(app core.App, e *core.RecordEvent) ([]*core.Record, er
 
 	currentDate := startDate
 
-	for !currentDate.After(endDate) {
+	for currentDate.Before(endDate) {
 		// Create start and end times for this specific event
 		eventStart := currentDate
 		eventEnd := currentDate.Add(time.Duration(duration) * time.Minute)
 
-		if eventStart.After(eventSeries.SeriesStart()) && eventStart.Before(endDate) {
-			// Check if an event already exists for this time slot
-			key := fmt.Sprintf("%s-%s", eventStart.Time().Format(time.RFC3339), eventEnd.Time().Format(time.RFC3339))
-			event, exists := existingEventsMap[key]
+		// Check if an event already exists for this time slot
+		key := fmt.Sprintf("%s-%s", eventStart.Time().Format(time.RFC3339), eventEnd.Time().Format(time.RFC3339))
+		event, exists := existingEventsMap[key]
 
-			if !exists {
-				// Not found - create a new event
-				event = &pb.Event{}
-				event.SetProxyRecord(core.NewRecord(eventCollection))
-			}
-
-			event.SetStartTime(eventStart)
-			event.SetEndTime(eventEnd)
-			event.SetTitle(eventSeries.Title())
-			event.SetTeam(eventSeries.Team())
-			event.SetDesc(eventSeries.Desc())
-			event.SetLocation(eventSeries.Location())
-			event.SetSeries(eventSeries.Id)
-			event.SetType(stats.Practice.String())
-
-			events = append(events, event.Record)
-
-			// Mark this event as processed
-			delete(existingEventsMap, key)
+		if !exists {
+			// Not found - create a new event
+			event = &pb.Event{}
+			event.SetProxyRecord(core.NewRecord(eventCollection))
 		}
+
+		event.SetStartTime(eventStart)
+		event.SetEndTime(eventEnd)
+		event.SetTitle(eventSeries.Title())
+		event.SetTeam(eventSeries.Team())
+		event.SetDesc(eventSeries.Desc())
+		event.SetLocation(eventSeries.Location())
+		event.SetSeries(eventSeries.Id)
+		event.SetType(stats.Practice.String())
+
+		events = append(events, event.Record)
+
+		// Mark this event as processed
+		delete(existingEventsMap, key)
+
 		currentDate = currentDate.AddDate(0, 0, interval)
 	}
 
