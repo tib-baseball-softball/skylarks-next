@@ -111,6 +111,7 @@ func generateSeriesEvents(app core.App, e *core.RecordEvent) ([]*core.Record, er
 
 			if !exists {
 				// Not found - create a new event
+				event = &pb.Event{}
 				event.SetProxyRecord(core.NewRecord(eventCollection))
 			}
 
