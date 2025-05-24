@@ -4,7 +4,6 @@
   import {client} from "$lib/pocketbase/index.svelte.js";
   import {DateTimeUtility} from "$lib/service/DateTimeUtility.js";
   import Flatpickr from "$lib/components/utility/Flatpickr.svelte";
-  import {Weekday} from "$lib/types/Weekday.ts";
   import type {LocationsResponse} from "$lib/model/pb-types.ts";
   import type {Toast} from "$lib/types/Toast.ts";
   import {toastController} from "$lib/service/ToastController.svelte.ts";
@@ -30,9 +29,8 @@
   const formDefault = $state({
     id: "",
     title: "",
-    starttime: "",
-    endtime: "",
     interval: 7,
+    duration: 0,
     series_start: "",
     series_end: "",
     desc: "",
@@ -51,18 +49,6 @@
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
-
-    try {
-      form.starttime = DateTimeUtility.convertTimeToUTC(form.starttime);
-
-      if (form.endtime) {
-        form.endtime = DateTimeUtility.convertTimeToUTC(form.endtime);
-      }
-    } catch (error) {
-      console.error("Invalid format for starttime or endtime in form.");
-      toastController.trigger(toastSettingsError);
-      return;
-    }
 
     let result: EventSeriesCreationData | null = null;
 
@@ -96,7 +82,7 @@
   {/if}
 </h3>
 <form onsubmit={submitForm} class="mt-4 space-y-3">
-  <div class="grid grid-cols-2 gap-2 lg:gap-3 xl:gap-4 2xl:gap-5">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-3 xl:gap-4 2xl:gap-5">
     <input
             name="id"
             autocomplete="off"
@@ -106,32 +92,34 @@
             bind:value={form.id}
     />
 
-    <label class="label">
-      Create Events after
+    <label class="label md:col-span-2">
+      Series First Occurrence
       <Flatpickr
               bind:value={form.series_start}
-              options={Object.assign(DateTimeUtility.datePickerOptionsNoTime, {
+              options={Object.assign(DateTimeUtility.datePickerOptions, {
                   static: true, // render the picker as a child element to the form to work in a sheet portal context
               })}
       />
     </label>
 
-    <label class="label">
-      Create Events before
+    <span class="md:col-span-2 text-sm font-light block preset-outlined-primary-500 p-2 my-1 rounded-container">
+      This is the first event in your new series. It will have the exact start time you enter here.<br>
+      The next events are then created <em>RECURRING INTERVAL</em> days after the previous one and all will have
+      the end time set to <em>DURATION</em> minutes after their start time.
+    </span>
+
+    <label class="label md:col-span-2">
+      Series End
       <Flatpickr
               bind:value={form.series_end}
               options={Object.assign(DateTimeUtility.datePickerOptionsNoTime, {
                   static: true,
               })}
       />
+      <span class="text-sm font-light block">No events will be created after this date.</span>
     </label>
 
-    <span class="col-span-2 text-sm font-light block">
-      This selects boundaries between which events will be created.
-      The start date does not have to be the actual training day.
-    </span>
-
-    <label class="label col-span-2 md:col-span-1 mt-3 md:mt-0">
+    <label class="label md:col-span-2 mt-3 md:mt-0">
       Title
       <input
               name="title"
@@ -142,50 +130,6 @@
       />
     </label>
 
-    {#snippet timeFormatHint()}
-      <span class="text-sm font-light block">Format: HH:mm</span>
-    {/snippet}
-
-    <label class="label">
-      Event start time
-      <input
-              name="starttime"
-              type="time"
-              class="input"
-              required
-              bind:value={form.starttime}
-      >
-      {@render timeFormatHint()}
-    </label>
-
-    <label class="label">
-      Event end time
-      <input
-              name="endtime"
-              type="time"
-              class="input"
-              bind:value={form.endtime}
-      >
-      {@render timeFormatHint()}
-    </label>
-
-    <label class="label">
-      Day of Week
-      <select
-              class="select"
-              name="weekday"
-              bind:value={form.weekday}
-      >
-        <option value={Weekday.Monday}>Monday</option>
-        <option value={Weekday.Tuesday}>Tuesday</option>
-        <option value={Weekday.Wednesday}>Wednesday</option>
-        <option value={Weekday.Thursday}>Thursday</option>
-        <option value={Weekday.Friday}>Friday</option>
-        <option value={Weekday.Saturday}>Saturday</option>
-        <option value={Weekday.Sunday}>Sunday</option>
-      </select>
-    </label>
-
     <label class="label">
       Recurring Interval
       <input
@@ -194,16 +138,27 @@
               class="input"
               bind:value={form.interval}
       >
-      <span class="text-sm font-light block">Intervals are saved in days.</span>
+      <span class="text-sm font-light block">Interval between each series occurrence (in days).</span>
     </label>
 
-    <label class="label col-span-2">
+    <label class="label">
+      Duration
+      <input
+              name="duration"
+              type="number"
+              class="input"
+              bind:value={form.duration}
+      >
+      <span class="text-sm font-light block">Duration of each event to determine end time (in minutes).</span>
+    </label>
+
+    <label class="label">
       Description
       <textarea name="desc" class="textarea" bind:value={form.desc}
       ></textarea>
     </label>
 
-    <label class="label md:col-span-2">
+    <label class="label">
       Location
       <select
               class="select"

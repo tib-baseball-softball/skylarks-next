@@ -28,6 +28,15 @@ export class DateTimeUtility {
   };
 
   //@ts-ignore
+  public static readonly eventSeriesDateTimeFormat: DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+  };
+
+  //@ts-ignore
   public static readonly eventTimeFormat: DateTimeFormatOptions = {
     hour: 'numeric',
     minute: 'numeric',
