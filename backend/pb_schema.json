@@ -1390,18 +1390,6 @@
       },
       {
         "hidden": false,
-        "id": "number1267652495",
-        "max": 6,
-        "min": 0,
-        "name": "weekday",
-        "onlyInt": true,
-        "presentable": false,
-        "required": false,
-        "system": false,
-        "type": "number"
-      },
-      {
-        "hidden": false,
         "id": "date2675529103",
         "max": "",
         "min": "",
@@ -1418,7 +1406,7 @@
         "min": "",
         "name": "series_end",
         "presentable": false,
-        "required": false,
+        "required": true,
         "system": false,
         "type": "date"
       },
@@ -1434,34 +1422,6 @@
         "required": true,
         "system": false,
         "type": "relation"
-      },
-      {
-        "autogeneratePattern": "",
-        "hidden": false,
-        "id": "text1872009285",
-        "max": 0,
-        "min": 0,
-        "name": "starttime",
-        "pattern": "^(?:[01]\\d|2[0-3]):(?:[0-5]\\d)$",
-        "presentable": false,
-        "primaryKey": false,
-        "required": true,
-        "system": false,
-        "type": "text"
-      },
-      {
-        "autogeneratePattern": "",
-        "hidden": false,
-        "id": "text1417561282",
-        "max": 0,
-        "min": 0,
-        "name": "endtime",
-        "pattern": "^(?:[01]\\d|2[0-3]):(?:[0-5]\\d)$",
-        "presentable": false,
-        "primaryKey": false,
-        "required": false,
-        "system": false,
-        "type": "text"
       },
       {
         "convertURLs": false,
@@ -1489,6 +1449,18 @@
       },
       {
         "hidden": false,
+        "id": "number2254405824",
+        "max": null,
+        "min": null,
+        "name": "duration",
+        "onlyInt": true,
+        "presentable": false,
+        "required": false,
+        "system": false,
+        "type": "number"
+      },
+      {
+        "hidden": false,
         "id": "autodate2990389176",
         "name": "created",
         "onCreate": true,
@@ -1509,7 +1481,8 @@
       }
     ],
     "indexes": [
-      "CREATE INDEX `idx_QVU4dUhywn` ON `eventseries` (`team`)"
+      "CREATE INDEX `idx_QVU4dUhywn` ON `eventseries` (`team`)",
+      "CREATE INDEX `idx_JwbMaKE47A` ON `eventseries` (`series_end`)"
     ],
     "system": false
   },
