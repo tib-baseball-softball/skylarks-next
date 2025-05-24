@@ -12,7 +12,7 @@ import (
 )
 
 func CreateOrUpdateEventsForSeries(e *core.RecordEvent) error {
-	events, err := generateSeriesEvents(e.App, e)
+	events, err := generateSeriesEvents(e.App, e.Record)
 	if err != nil {
 		return err
 	}
@@ -61,9 +61,9 @@ func DeleteEventsForSeries(e *core.RecordEvent) error {
 	return e.Next()
 }
 
-func generateSeriesEvents(app core.App, e *core.RecordEvent) ([]*core.Record, error) {
+func generateSeriesEvents(app core.App, record *core.Record) ([]*core.Record, error) {
 	eventSeries := &pb.EventSeries{}
-	eventSeries.SetProxyRecord(e.Record)
+	eventSeries.SetProxyRecord(record)
 
 	startDate := eventSeries.SeriesStart()
 	endDate := eventSeries.SeriesEnd()
