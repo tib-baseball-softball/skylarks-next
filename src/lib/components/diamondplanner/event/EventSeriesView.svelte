@@ -7,7 +7,6 @@
   import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
   import {client} from "$lib/pocketbase/index.svelte.ts";
   import {invalidateAll} from "$app/navigation";
-  import {DateTimeUtility} from "$lib/service/DateTimeUtility.ts";
   import {CalendarPlus} from "lucide-svelte";
   //@ts-ignore
   import * as Sheet from "$lib/components/utility/sheet/index.js";
@@ -28,12 +27,6 @@
 
   function setupAndShowForm(eventSeries: EventSeriesCreationData | null) {
     selectedEventSeries = eventSeries;
-
-    // this is pretty ugly, but the form needs to get local times instead of UTC values
-    if (eventSeries && selectedEventSeries && eventSeries.endtime) {
-      selectedEventSeries.starttime = DateTimeUtility.convertTimeFromUTC(eventSeries.starttime);
-      selectedEventSeries.endtime = DateTimeUtility.convertTimeFromUTC(eventSeries.endtime);
-    }
     showForm = true;
 
     // wait for Svelte transition to finish
@@ -72,7 +65,7 @@
 
     <div class="space-y-4">
 
-      <h3 class="h3 mt-6!">Active Event Series</h3>
+      <h3 class="h4 mt-6!">Active Event Series</h3>
 
       {#each eventSeries as series}
         <EventSeriesListItem eventSeries={series}/>

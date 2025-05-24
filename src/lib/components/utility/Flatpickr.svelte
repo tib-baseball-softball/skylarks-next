@@ -3,6 +3,11 @@
   import flatpickr from "flatpickr";
   import "flatpickr/dist/flatpickr.css";
   import type {Options} from "flatpickr/dist/types/options";
+  import {browser} from "$app/environment";
+
+  if (browser && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    import("flatpickr/dist/themes/dark.css");
+  }
 
   interface Props {
     value: string; // flatpickr accepts timestamps, date objects and ISO strings, but we work with strings exclusively

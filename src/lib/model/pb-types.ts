@@ -861,14 +861,12 @@ export interface EventseriesResponse extends BaseCollectionResponse {
 	id: string;
 	title: string;
 	interval: number;
-	weekday: number;
 	series_start: string;
 	series_end: string;
 	team: string;
-	starttime: string;
-	endtime: string;
 	desc: string;
 	location: string;
+	duration: number;
 	created: string;
 	updated: string;
 }
@@ -877,14 +875,12 @@ export interface EventseriesCreate extends BaseCollectionCreate {
 	id?: string;
 	title: string;
 	interval: number;
-	weekday?: number;
 	series_start: string | Date;
-	series_end?: string | Date;
+	series_end: string | Date;
 	team: string;
-	starttime: string;
-	endtime?: string;
 	desc?: string;
 	location?: string;
+	duration?: number;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -895,16 +891,14 @@ export interface EventseriesUpdate extends BaseCollectionUpdate {
 	interval: number;
 	'interval+'?: number;
 	'interval-'?: number;
-	weekday?: number;
-	'weekday+'?: number;
-	'weekday-'?: number;
 	series_start: string | Date;
-	series_end?: string | Date;
+	series_end: string | Date;
 	team: string;
-	starttime: string;
-	endtime?: string;
 	desc?: string;
 	location?: string;
+	duration?: number;
+	'duration+'?: number;
+	'duration-'?: number;
 	created?: string | Date;
 	updated?: string | Date;
 }

@@ -25,7 +25,9 @@ export const load = (async ({fetch, params, url}) => {
   if (authSettings?.record?.id === user) {
     userRecord = authSettings.record as CustomAuthModel
   } else {
-    userRecord = await client.collection("users").getOne<CustomAuthModel>(user)
+    userRecord = await client.collection("users").getOne<CustomAuthModel>(user, {
+      fetch: fetch
+    })
   }
 
   let teamStatsItems: Promise<PersonalAttendanceStatsItem>[] = []

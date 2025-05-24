@@ -29,11 +29,14 @@ func GetEventCounts(app core.App, user *core.Record, season string, team string,
 
 	if user != nil {
 		teams := user.GetStringSlice("teams")
-		var expressions []dbx.Expression
-		for _, team := range teams {
-			expressions = append(expressions, dbx.HashExp{"team": team})
+
+		if len(teams) > 0 {
+			var expressions []dbx.Expression
+			for _, team := range teams {
+				expressions = append(expressions, dbx.HashExp{"team": team})
+			}
+			query.AndWhere(dbx.Or(expressions...))
 		}
-		query.AndWhere(dbx.Or(expressions...))
 	}
 
 	if season != "" {
