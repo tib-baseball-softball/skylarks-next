@@ -8,6 +8,7 @@ import (
 	"github.com/subosito/gotenv"
 	"github.com/tib-baseball-softball/skylarks-next/bsm"
 	"github.com/tib-baseball-softball/skylarks-next/internal/hooks"
+	"github.com/tib-baseball-softball/skylarks-next/internal/pb"
 	"github.com/tib-baseball-softball/skylarks-next/internal/routes"
 	"log"
 	"net/http"
@@ -48,27 +49,27 @@ func bindAppHooks(app core.App) {
 		return hooks.TriggerLeagueImport(event.App, event)
 	})
 
-	app.OnRecordCreateRequest("events").BindFunc(func(e *core.RecordRequestEvent) error {
+	app.OnRecordCreateRequest(pb.EventsCollection).BindFunc(func(e *core.RecordRequestEvent) error {
 		return hooks.ValidateEventTimes(e)
 	})
 
-	app.OnRecordUpdateRequest("events").BindFunc(func(e *core.RecordRequestEvent) error {
+	app.OnRecordUpdateRequest(pb.EventsCollection).BindFunc(func(e *core.RecordRequestEvent) error {
 		return hooks.ValidateEventTimes(e)
 	})
 
-	app.OnRecordEnrich("events").BindFunc(func(event *core.RecordEnrichEvent) error {
+	app.OnRecordEnrich(pb.EventsCollection).BindFunc(func(event *core.RecordEnrichEvent) error {
 		return hooks.AddEventParticipationData(event.App, event)
 	})
 
-	app.OnRecordAfterCreateSuccess("eventseries").BindFunc(func(e *core.RecordEvent) error {
+	app.OnRecordAfterCreateSuccess(pb.EventSeriesCollection).BindFunc(func(e *core.RecordEvent) error {
 		return hooks.CreateOrUpdateEventsForSeries(e)
 	})
 
-	app.OnRecordAfterUpdateSuccess("eventseries").BindFunc(func(e *core.RecordEvent) error {
+	app.OnRecordAfterUpdateSuccess(pb.EventSeriesCollection).BindFunc(func(e *core.RecordEvent) error {
 		return hooks.CreateOrUpdateEventsForSeries(e)
 	})
 
-	app.OnRecordDelete("eventseries").BindFunc(func(e *core.RecordEvent) error {
+	app.OnRecordDelete(pb.EventSeriesCollection).BindFunc(func(e *core.RecordEvent) error {
 		return hooks.DeleteEventsForSeries(e)
 	})
 
