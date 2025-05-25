@@ -36,6 +36,13 @@ func GetEventCounts(app core.App, user *core.Record, season string, team string,
 				expressions = append(expressions, dbx.HashExp{"team": team})
 			}
 			query.AndWhere(dbx.Or(expressions...))
+		} else {
+			// We have received a user as parameter, but this user does not have any teams.
+			// That should not happen in normal usage, but catch edge case nonetheless.
+			// The result of the function should be zero events,
+			// since a user without teams does not have any events they could possibly attend.
+			// So: add impossible restriction.
+			query.AndWhere(dbx.NewExp("events.team = {:team}", dbx.Params{"team": "TOTALLY_NONEXISTENT_TEAM"}))
 		}
 	}
 
