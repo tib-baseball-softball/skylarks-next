@@ -155,7 +155,7 @@ func (s GameImportService) setEventRecordValues(record *core.Record, match Match
 		return err
 	}
 
-	event := &pb.Events{}
+	event := &pb.Event{}
 	event.SetProxyRecord(record)
 
 	event.SetTitle(match.AwayTeamName + " @ " + match.HomeTeamName)

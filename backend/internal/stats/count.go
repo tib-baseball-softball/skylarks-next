@@ -29,11 +29,21 @@ func GetEventCounts(app core.App, user *core.Record, season string, team string,
 
 	if user != nil {
 		teams := user.GetStringSlice("teams")
-		var expressions []dbx.Expression
-		for _, team := range teams {
-			expressions = append(expressions, dbx.HashExp{"team": team})
+
+		if len(teams) > 0 {
+			var expressions []dbx.Expression
+			for _, team := range teams {
+				expressions = append(expressions, dbx.HashExp{"team": team})
+			}
+			query.AndWhere(dbx.Or(expressions...))
+		} else {
+			// We have received a user as parameter, but this user does not have any teams.
+			// That should not happen in normal usage, but catch edge case nonetheless.
+			// The result of the function should be zero events,
+			// since a user without teams does not have any events they could possibly attend.
+			// So: add impossible restriction.
+			query.AndWhere(dbx.NewExp("events.team = {:team}", dbx.Params{"team": "TOTALLY_NONEXISTENT_TEAM"}))
 		}
-		query.AndWhere(dbx.Or(expressions...))
 	}
 
 	if season != "" {
