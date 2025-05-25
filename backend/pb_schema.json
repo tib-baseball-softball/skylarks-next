@@ -176,8 +176,8 @@
     "listRule": "@request.auth.id != \"\" && (\n    // the same user as the authenticated one\n    id = @request.auth.id ||\n    // or share the same club\n    club.id ?= @request.auth.club.id\n)",
     "viewRule": "@request.auth.id != \"\" && (\n    // the same user as the authenticated one\n    id = @request.auth.id ||\n    // or share the same club\n    club.id ?= @request.auth.club.id\n)",
     "createRule": "",
-    "updateRule": "id = @request.auth.id // user editing themselves\n||\nclub.admins ?~ @request.auth.id // editing user is Club admin\n||\nclub.teams_via_club.admins.id ?= @request.auth.id // editing user is Team admin for a club team",
-    "deleteRule": "id = @request.auth.id // users can delete themselves",
+    "updateRule": "@request.auth.id != \"\" && \n(id = @request.auth.id // user editing themselves\n||\nclub.admins ?~ @request.auth.id // editing user is Club admin\n||\nclub.teams_via_club.admins.id ?= @request.auth.id) // editing user is Team admin for a club team\n&& (club.id ?= @request.body.club || @request.body.club:isset = false)",
+    "deleteRule": "@request.auth.id != \"\" && id = @request.auth.id // users can delete themselves",
     "name": "users",
     "type": "auth",
     "fields": [
@@ -575,7 +575,7 @@
       }
     },
     "authToken": {
-      "duration": 1209600
+      "duration": 15778476
     },
     "passwordResetToken": {
       "duration": 1800
@@ -1889,11 +1889,11 @@
   },
   {
     "id": "ngighvrbraklj58",
-    "listRule": "event.team.id ?= @request.auth.teams.id",
-    "viewRule": "event.team.id ?= @request.auth.teams.id",
+    "listRule": "@request.auth.id != \"\" && event.team.id ?= @request.auth.teams.id",
+    "viewRule": "@request.auth.id != \"\" && event.team.id ?= @request.auth.teams.id",
     "createRule": "@request.auth.id != \"\" && event.team.id ?= @request.auth.teams.id",
-    "updateRule": "user.id = @request.auth.id || event.team.admins.id ?= @request.auth.id || event.team.club.admins.id ?= @request.auth.id",
-    "deleteRule": "event.team.admins.id ?= @request.auth.id || event.team.club.admins.id ?= @request.auth.id",
+    "updateRule": "@request.auth.id != \"\" && (user.id = @request.auth.id || event.team.admins.id ?= @request.auth.id || event.team.club.admins.id ?= @request.auth.id)",
+    "deleteRule": "@request.auth.id != \"\" && (event.team.admins.id ?= @request.auth.id || event.team.club.admins.id ?= @request.auth.id)",
     "name": "participations",
     "type": "base",
     "fields": [

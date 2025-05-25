@@ -1,0 +1,17 @@
+### add a new club to user with own token (should not be possible)
+PATCH {{pbURL}}/api/collections/users/records/{{testUserID}}
+Content-Type: application/json
+Authorization: {{testUserToken}}
+
+{
+  "club+": "{{externalClub}}"
+}
+
+### edit user without authorization (should not be possible)
+PATCH {{pbURL}}/api/collections/users/records/{{testUserID}}
+Content-Type: application/json
+Authorization: DEFINITELY_NOT_A_TOKEN
+
+{
+  "first_name": "KarlXXX"
+}

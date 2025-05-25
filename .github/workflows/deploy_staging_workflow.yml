@@ -5,6 +5,8 @@ on:
     paths-ignore:
       - '**/README.md'
       - 'docs/**'
+      - 'backend/pb_schema.json'
+      - 'craft/**'
     branches:
       - stage
   workflow_dispatch:
