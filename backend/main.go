@@ -4,6 +4,7 @@ import (
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/apis"
 	"github.com/pocketbase/pocketbase/core"
+	"github.com/pocketbase/pocketbase/plugins/migratecmd"
 	"github.com/spf13/cobra"
 	"github.com/subosito/gotenv"
 	"github.com/tib-baseball-softball/skylarks-next/bsm"
@@ -13,6 +14,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 )
 
 // / Loads environment.
@@ -142,7 +144,13 @@ func main() {
 
 	bindAppHooks(app)
 
-	//------------------- Commands -------------------------//
+	isGoRun := strings.HasPrefix(os.Args[0], os.TempDir())
+
+	migratecmd.MustRegister(app, app.RootCmd, migratecmd.Config{
+		// enable auto creation of migration files when making collection changes in the Dashboard
+		// (the isGoRun check is to enable it only during development)
+		Automigrate: isGoRun,
+	}) //------------------- Commands -------------------------//
 
 	app.RootCmd.AddCommand(&cobra.Command{
 		Use: "import:games",
