@@ -11,6 +11,7 @@ import (
 	"github.com/tib-baseball-softball/skylarks-next/internal/hooks"
 	"github.com/tib-baseball-softball/skylarks-next/internal/pb"
 	"github.com/tib-baseball-softball/skylarks-next/internal/routes"
+	_ "github.com/tib-baseball-softball/skylarks-next/migrations"
 	"log"
 	"net/http"
 	"os"
