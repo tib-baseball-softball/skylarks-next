@@ -10,7 +10,7 @@
 
 </script>
 
-{#if authSettings.record}
+{#if authSettings.record && client.authStore.isValid}
 
   <Dialog triggerClasses="badge">
 
