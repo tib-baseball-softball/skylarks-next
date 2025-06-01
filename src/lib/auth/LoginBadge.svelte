@@ -1,35 +1,12 @@
 <script lang="ts">
   import {client} from "../pocketbase/index.svelte";
   import {Avatar} from "@skeletonlabs/skeleton-svelte";
-  import {browser} from "$app/environment";
-  import {invalidateAll} from "$app/navigation";
   import {authSettings} from "$lib/pocketbase/index.svelte";
   import {LucideLogIn} from "lucide-svelte";
-  import {toastController} from "$lib/service/ToastController.svelte.ts";
   import Dialog from "$lib/components/utility/Dialog.svelte";
   import AccountModal from "$lib/auth/AccountModal.svelte";
 
   const {signupAllowed = true} = $props();
-
-  client.authStore.onChange((_token, model) => {
-    // do not do any auth stuff on the server
-    if (browser) {
-      if (model) {
-        const {email} = model;
-        toastController.trigger({
-          message: `Signed in as ${email}`,
-          background: "preset-filled-success-500",
-        });
-        invalidateAll();
-      } else {
-        toastController.trigger({
-          message: "Logout successful",
-          background: "preset-filled",
-        });
-        invalidateAll();
-      }
-    }
-  });
 
 </script>
 

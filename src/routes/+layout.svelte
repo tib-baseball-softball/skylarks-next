@@ -19,8 +19,8 @@
 
   let {data, children}: Props = $props();
 
-  let showSidebar = $derived(data.clubs.length > 0 || data.teams.length > 0);
   let isUserAuthenticated = $derived(!!authSettings.record);
+  let showSidebar = $derived((data.clubs.length > 0 || data.teams.length > 0) && isUserAuthenticated);
 </script>
 
 <svelte:head>
