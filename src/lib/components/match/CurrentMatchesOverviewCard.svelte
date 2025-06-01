@@ -15,6 +15,10 @@
   let {matchesCurrent, matchesPrevious, matchesNext}: Props = $props();
 </script>
 
+{#snippet gameDayWord()}
+  <span class="hidden lg:inline">Gameday</span>
+{/snippet}
+
 <div
         class="card overview-card preset-tonal-surface dark:border dark:border-tertiary-600-400"
 >
@@ -32,15 +36,22 @@
         <Tabs.Trigger
                 value="previous"
                 class="tabs-trigger"
-        >Previous Gameday</Tabs.Trigger>
+        >
+          Previous
+          {@render gameDayWord()}
+        </Tabs.Trigger>
         <Tabs.Trigger
                 value="current"
                 class="tabs-trigger"
-        >Current Gameday</Tabs.Trigger>
+        >Current
+          {@render gameDayWord()}
+        </Tabs.Trigger>
         <Tabs.Trigger
                 value="next"
                 class="tabs-trigger"
-        >Next Gameday</Tabs.Trigger>
+        >Next
+          {@render gameDayWord()}
+        </Tabs.Trigger>
       </Tabs.List>
 
       <Tabs.Content value="previous" class="pt-4">
