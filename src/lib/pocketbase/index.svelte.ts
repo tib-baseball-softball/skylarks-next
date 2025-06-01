@@ -4,6 +4,8 @@ import {TypedPocketBase} from "@tigawanna/typed-pocketbase";
 import type {AuthRecord, RecordAuthResponse, RecordModel} from "pocketbase";
 import {browser, dev} from "$app/environment";
 import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
+import {toastController} from "$lib/service/ToastController.svelte.ts";
+import {invalidateAll} from "$app/navigation";
 
 // necessary because: https://github.com/pocketbase/pocketbase/discussions/5313
 export function createPocketBaseInstance() {
@@ -27,12 +29,32 @@ class AuthSettings {
 
 export let authSettings = new AuthSettings();
 
+// seems to work only on explicit logout, not on token expiration
 client.authStore.onChange((_token: string, record: AuthRecord) => {
   if (browser) {
     if (dev && env.PUBLIC_LOG_LEVEL === "DEBUG") {
       console.log("Auth Store changed:", record);
     }
     authSettings.record = record;
+  }
+});
+
+client.authStore.onChange((_token, record) => {
+  if (browser) {
+    if (record) {
+      const {email} = record;
+      toastController.trigger({
+        message: `Signed in as ${email}`,
+        background: "preset-filled-success-500",
+      });
+      invalidateAll();
+    } else {
+      toastController.trigger({
+        message: "Logout successful",
+        background: "preset-filled",
+      });
+      invalidateAll();
+    }
   }
 });
 
