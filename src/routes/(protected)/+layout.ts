@@ -11,10 +11,12 @@ export const ssr = false;
  */
 export const load = ({url}) => {
   if (browser) {
+    // we are referencing this here because load functions need to read at least one parameter
+    // that changes on navigation to re-run (this function needs to run on every route).
+    const {pathname} = url;
+
     if (dev) {
-      // we are conditionally logging this here because load functions need to read at least one parameter
-      // that changes on navigation to re-run (this function needs to run on every route).
-      console.log(url.pathname);
+      console.log(pathname);
     }
 
     if (!client.authStore.isValid) {
