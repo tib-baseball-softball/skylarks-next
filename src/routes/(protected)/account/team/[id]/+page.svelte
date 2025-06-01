@@ -49,13 +49,14 @@
 <h2 class="h3">Team Events</h2>
 
 <div
-        class="flex flex-wrap gap-4 xl:flex-nowrap preset-tonal-surface justify-between px-4 py-3 rounded-base"
+        class="flex flex-wrap gap-4 xl:flex-nowrap preset-tonal-surface justify-between px-4 py-3 rounded-base text-sm lg:text-base"
 >
   <label
           class="flex items-center gap-2 grow justify-between xl:justify-start md:grow-0"
   >
     Timeframe
-    <Segment name="timeframe" value={showEvents} onValueChange={(e) => (showEvents = e.value ?? "next")} padding="p-1!">
+    <Segment name="timeframe" value={showEvents} onValueChange={(e) => (showEvents = e.value ?? "next")} padding="p-1!"
+             classes="event-segment-container">
       <Segment.Item value="next">
         Next
       </Segment.Item>
@@ -68,7 +69,7 @@
   <label class="flex items-center gap-2 justify-between xl:justify-start grow md:grow-0">
     Sort
     <Segment name="sorting" value={sorting} onValueChange={(e) => (sorting = e.value ?? "asc")} padding="p-1!"
-             classes="flex-wrap">
+             classes="flex-wrap event-segment-container">
       <Segment.Item value="asc">Ascending</Segment.Item>
       <Segment.Item value="desc">Descending</Segment.Item>
     </Segment>
@@ -77,7 +78,7 @@
   <label class="flex items-center gap-2 justify-between xl:justify-start grow md:grow-0">
     Type
     <Segment name="type" value={showTypes} onValueChange={(e) => (showTypes = e.value ?? "any")} gap="gap-1"
-             padding="p-1!" classes="flex-wrap">
+             padding="p-1!" classes="flex-wrap event-segment-container">
       <Segment.Item value="any">All</Segment.Item>
       <Segment.Item value="game">Game</Segment.Item>
       <Segment.Item value="practice">Practice</Segment.Item>
@@ -120,3 +121,15 @@
 
   <TeamAdminSection team={data.team} eventSeries={data.eventSeries}/>
 {/if}
+
+<style>
+    :global {
+        .event-segment-container {
+            border: 1px solid var(--color-surface-600-400);
+
+            .btn {
+                padding: 0.25rem 0.6rem;
+            }
+        }
+    }
+</style>
