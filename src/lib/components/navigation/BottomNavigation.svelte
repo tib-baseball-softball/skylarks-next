@@ -2,7 +2,9 @@
   import StaticNavigationLinks from "$lib/components/navigation/StaticNavigationLinks.svelte";
 </script>
 
-<nav class="lg:hidden bottom-nav bg-surface-50 dark:bg-surface-800 border-t border-surface-500 dark:border-surface-100">
+<nav
+    class="lg:hidden bottom-nav bg-surface-50 dark:bg-surface-800 border-t border-surface-500 dark:border-surface-100 z-2"
+>
   <ul class="flex">
     <StaticNavigationLinks classes="flex-col py-1.5 text-sm"/>
   </ul>
