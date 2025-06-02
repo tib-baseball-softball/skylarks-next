@@ -19,7 +19,7 @@
 
 {#await data.battingStats then batting}
   <h1 class="h1 my-4">
-    Spieler*innenprofil für {batting.person?.first_name}
+    Player Profile for {batting.person?.first_name}
     {batting.person?.last_name}
   </h1>
 {/await}
@@ -28,18 +28,20 @@
   <Progress/>
 {:then player}
   {#if player}
-    <h2 class="h2 my-4">Profildaten</h2>
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-      <PlayerHeaderSection {player}/>
-      <PlayerDataCard {player}/>
-    </section>
+    <div class="my-8!">
+      <h2 class="h2 my-4">Profile Data</h2>
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+        <PlayerHeaderSection {player}/>
+        <PlayerDataCard {player}/>
+      </section>
+    </div>
   {/if}
 {:catch error}
   <p>An error occurred fetching player data: {error.message}.<br>
     The data source might be temporarily unavailable, please try again later.</p>
 {/await}
 
-<h2 class="h2 my-6 lg:mt-10 mb-8">Statistiken</h2>
+<h2 class="h2 my-6 lg:mt-10 mb-8">Stats</h2>
 
 {#await getData()}
   <Progress/>

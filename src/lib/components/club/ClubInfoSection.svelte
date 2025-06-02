@@ -9,7 +9,7 @@
   let {club}: Props = $props();
 </script>
 
-<h1 class="h1">Club</h1>
+<h1 class="h1 my-4!">Club</h1>
 <div class="flex justify-center">
   <img
           src="/berlin_skylarks_logo.svg"

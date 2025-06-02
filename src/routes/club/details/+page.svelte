@@ -6,7 +6,7 @@
   let {data}: PageProps = $props();
 </script>
 
-<h1 class="h1">Club Details</h1>
+<h1 class="h1 mt-4! mb-6!">Club Details</h1>
 
 <ClubDetailSection title="Team Basics">
   {#snippet icon()}

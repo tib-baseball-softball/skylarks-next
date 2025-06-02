@@ -29,7 +29,7 @@
   });
 </script>
 
-<h1 class="h1 lg:mt-4">Stats for {user?.first_name} {user?.last_name}</h1>
+<h1 class="h1 mt-4! mb-6!">Stats for {user?.first_name} {user?.last_name}</h1>
 
 <div
         class="flex flex-wrap gap-4 lg:gap-8 preset-tonal-surface justify-between px-4 py-3 rounded-base"

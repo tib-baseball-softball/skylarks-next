@@ -6,7 +6,7 @@
   let {data}: PageProps = $props();
 </script>
 
-<h1 class="h1">Scorer Licenses</h1>
+<h1 class="h1 my-4!">Scorer Licenses</h1>
 
 {#await data.scorerLicenses}
   <p>Loading Licenses...</p>

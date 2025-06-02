@@ -13,7 +13,7 @@
 </script>
 
 <article class="mb-4!">
-  <section>
+  <section class="mt-5">
     {#if showSoftballSection}
       <header class="mb-2">
         <h2 class="h2">Baseball</h2>
@@ -39,7 +39,7 @@
   </section>
 
   {#if showSoftballSection}
-    <section class="mt-3">
+    <section class="mt-5">
       <header class="mb-2">
         <h2 class="h2">Softball</h2>
       </header>

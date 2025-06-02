@@ -27,7 +27,7 @@
   />
 </svelte:head>
 
-<h1 class="h1">{club.name}</h1>
+<h1 class="h1 mt-4! mb-6!">{club.name}</h1>
 
 <section class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
   <ClubDetailCard {club}/>

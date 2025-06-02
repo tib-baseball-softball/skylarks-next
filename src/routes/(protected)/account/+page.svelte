@@ -11,7 +11,7 @@
   let {data} = $props();
 </script>
 
-<h1 class="h1 lg:mt-4">My Dashboard</h1>
+<h1 class="h1 mt-4! mb-6!">My Dashboard</h1>
 
 <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
   <UserDataCard model={authRecord}/>
@@ -19,7 +19,7 @@
   <PlayerProfileClubsSection clubs={data.clubs}/>
 </div>
 
-<h2 class="h2 mt-3">My Teams</h2>
+<h2 class="h2 mt-5!">My Teams</h2>
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
   {#each data.teams as team}

@@ -33,9 +33,9 @@
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 </script>
 
-<h1 class="h1">{data.team.name} ({data.team?.expand?.club.name})</h1>
+<h1 class="h1 my-3!">{data.team.name} ({data.team?.expand?.club.name})</h1>
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-3">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 my-6!">
   <article class="card preset-tonal-surface lg:col-span-2">
     <header class="card-header">
       <h2 class="h4 font-medium">Team Description</h2>
