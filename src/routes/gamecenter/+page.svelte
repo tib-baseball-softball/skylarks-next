@@ -4,7 +4,7 @@
   // @ts-ignore
   import {Tabs} from "bits-ui";
   import {Gameday} from "bsm.js";
-  import {preferences} from "$lib/stores";
+  import {preferences} from "$lib/globals.svelte.ts";
   import LeagueFilter from "$lib/components/utility/LeagueFilter.svelte";
   import {goto} from "$app/navigation";
   import {browser} from "$app/environment";
@@ -16,11 +16,11 @@
 
   const reloadGameData = () => {
     if (browser) {
-      let queryString = `?gameday=${$preferences.gameday}&season=${$preferences.selectedSeason}`;
+      let queryString = `?gameday=${preferences.current.gameday}&season=${preferences.current.selectedSeason}`;
 
-      if ($preferences.leagueGroupID !== DEFAULT_LEAGUE_GROUP_ID) {
+      if (preferences.current.leagueGroupID !== DEFAULT_LEAGUE_GROUP_ID) {
         queryString =
-            queryString + `&leagueGroup=${$preferences.leagueGroupID}`;
+            queryString + `&leagueGroup=${preferences.current.leagueGroupID}`;
       }
       goto(queryString);
     }
@@ -36,7 +36,7 @@
    */
   function onGamedayChange(value: string) {
     //@ts-expect-error
-    $preferences.gameday = value;
+    preferences.current.gameday = value;
   }
 </script>
 
@@ -68,7 +68,7 @@
   <label id="gameday_label" class="label">
     Gameday
     <Tabs.Root
-            value={$preferences.gameday}
+            value={preferences.current.gameday}
             onValueChange={onGamedayChange}
             class=""
     >
@@ -97,7 +97,7 @@
         </Tabs.Trigger>
       </Tabs.List>
 
-      <Tabs.Content value={$preferences.gameday} class="pt-3">
+      <Tabs.Content value={preferences.current.gameday} class="pt-3">
         {@render tabsContent()}
       </Tabs.Content>
     </Tabs.Root>
