@@ -12,7 +12,8 @@ import {persistedState} from "svelte-persisted-state";
 export const preferences = persistedState<AppPreferences>('preferences', {
       gameday: Gameday.current,
       selectedSeason: new Date().getFullYear(),
-      leagueGroupID: 0
+      leagueGroupID: 0,
+      favoriteTeamID: 0,
     },
     {
       storage: "local",
