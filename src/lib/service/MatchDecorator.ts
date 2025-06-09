@@ -1,5 +1,4 @@
 import type {Match} from "bsm.js";
-import {env} from "$env/dynamic/public"
 import {GameWinner} from "$lib/enum/GameWinner";
 import {MatchState} from "$lib/enum/MatchState";
 
@@ -13,8 +12,8 @@ export class MatchDecorator {
     this.match = match
   }
 
-  public isDerby(): boolean {
-    return this.match.home_team_name.includes(env.PUBLIC_TEAM_NAME) && this.match.away_team_name.includes(env.PUBLIC_TEAM_NAME)
+  public isDerby(teamName: string): boolean {
+    return this.match.home_team_name.includes(teamName) && this.match.away_team_name.includes(teamName)
   }
 
   public getWinnerForMatch(): GameWinner {
@@ -31,7 +30,7 @@ export class MatchDecorator {
     }
   }
 
-  public getMatchState(): MatchState {
+  public getMatchState(teamName: string): MatchState {
     if (this.match.state === "planned") {
       return MatchState.notYetPlayed
     }
@@ -40,19 +39,19 @@ export class MatchDecorator {
       return MatchState.cancelled
     }
 
-    if (this.isDerby()) {
+    if (this.isDerby(teamName)) {
       return MatchState.derby
     }
 
     const winner = this.getWinnerForMatch()
     if (
-        (winner === GameWinner.home && this.match.home_team_name.includes(env.PUBLIC_TEAM_NAME)) ||
-        (winner === GameWinner.away && this.match.away_team_name.includes(env.PUBLIC_TEAM_NAME))
+        (winner === GameWinner.home && this.match.home_team_name.includes(teamName)) ||
+        (winner === GameWinner.away && this.match.away_team_name.includes(teamName))
     ) {
       return MatchState.won
     } else if (
-        (winner === GameWinner.away && this.match.home_team_name.includes(env.PUBLIC_TEAM_NAME)) ||
-        (winner === GameWinner.home && this.match.away_team_name.includes(env.PUBLIC_TEAM_NAME))
+        (winner === GameWinner.away && this.match.home_team_name.includes(teamName)) ||
+        (winner === GameWinner.home && this.match.away_team_name.includes(teamName))
     ) {
       return MatchState.lost
     } else {
