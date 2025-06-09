@@ -7,8 +7,10 @@ const (
 // BSM API filters
 
 const (
-	LeagueFilter = "filters[leagues][]"
-	SearchFilter = "search"
+	LeagueFilter  = "filters[leagues][]"
+	SearchFilter  = "search"
+	SeasonFilter  = "filters[seasons][]"
+	GamedayFilter = "filters[gamedays][]"
 )
 
 const (

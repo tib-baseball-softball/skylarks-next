@@ -5,7 +5,6 @@ import (
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
 	"github.com/tib-baseball-softball/skylarks-next/internal/pb"
-	"strconv"
 	"sync"
 )
 
@@ -51,19 +50,6 @@ func ImportLeagueGroups(app core.App, clubID *string, season *int) (err error) {
 	wg.Wait()
 	app.Logger().Info("League Group Import successfully imported all league groups")
 	return nil
-}
-
-// the API key used determines which club LeagueGroups are loaded for
-func fetchLeagueGroupsForCurrentSeason(apiKey string, season int) ([]LeagueGroup, error) {
-	params := make(map[string]string)
-	params["filters[seasons][]"] = strconv.Itoa(season)
-
-	url := GetAPIURL("league_groups.json", params, apiKey)
-	leagueGroups, _, err := FetchResource[[]LeagueGroup](url.String())
-	if err != nil {
-		return nil, err
-	}
-	return leagueGroups, nil
 }
 
 func createOrUpdateLeagueGroups(app core.App, leagueGroups []LeagueGroup, club *core.Record) (err error) {
