@@ -15,9 +15,15 @@
 <ClubTeamPicker clubTeams={clubTeams}/>
 
 <section>
+  <h2 class="h2 my-3">Quick Details</h2>
   {#if preferences.current.favoriteTeamID !== 0 && favoriteTeam}
     <FavoriteTeamInfoCard clubTeam={favoriteTeam}/>
   {:else }
-    möp
+    <p>You have not selected a favorite team yet.</p>
   {/if}
+</section>
+
+<section>
+  <h2 class="h2 mt-5 mb-1">Leagues</h2>
+  <p class="text-sm font-light">A single team can be associated to several leagues per season in BSM.</p>
 </section>

@@ -9,7 +9,7 @@
   let {clubTeams = []}: Props = $props();
 </script>
 
-<select class="select min-w-52" bind:value={preferences.current.favoriteTeamID}>
+<select class="select my-4" bind:value={preferences.current.favoriteTeamID}>
   {#each clubTeams as clubTeam}
     <option value="{clubTeam.id}">{clubTeam.team.name} ({clubTeam.team.league_entries.map(entry => entry.league.acronym)})</option>
   {/each}
