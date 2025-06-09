@@ -7,7 +7,7 @@
   let {data}: PageProps = $props();
   const clubTeams = $derived(data.clubTeams ?? []);
 
-  const favoriteTeam = $derived(clubTeams.filter(clubTeam => clubTeam.id === preferences.current.favoriteTeamID).at(0));
+  const favoriteTeam = $derived(clubTeams.find(clubTeam => clubTeam.id === preferences.current.favoriteTeamID));
 </script>
 
 <h1 class="h1">Favorite Team</h1>
