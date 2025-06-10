@@ -90,24 +90,24 @@ func (m *Match) IsPlayoffGame() bool {
 func findNextAndPreviousGame(matches []Match, targetTime time.Time) DisplayGames {
 	var result DisplayGames
 
-	// TODO: check next game empty struct
 	index := slices.IndexFunc(matches, func(m Match) bool {
-		gameTime, _ := time.Parse(time.RFC3339, m.Time)
+		gameTime, _ := time.Parse(TimeFormat, m.Time)
 		return gameTime.After(targetTime) && m.State == "planned"
 	})
 	if index != -1 {
 		result.Next = &matches[index]
 	}
 
-	// for the previous game we are interested not in the first element satisfying the index func, but the last
-	slices.Reverse(matches)
+	matchesReverse := make([]Match, len(matches))
+	copy(matchesReverse, matches)  // proper copy to prevent index pointers from pointing to the same element
+	slices.Reverse(matchesReverse) // for the previous game we are interested in the last element satisfying the index func
 
-	index = slices.IndexFunc(matches, func(m Match) bool {
-		gameTime, _ := time.Parse(time.RFC3339, m.Time)
+	index = slices.IndexFunc(matchesReverse, func(m Match) bool {
+		gameTime, _ := time.Parse(TimeFormat, m.Time)
 		return gameTime.Before(targetTime) && m.State != "planned" && m.State != "cancelled"
 	})
 	if index != -1 {
-		result.Last = &matches[index]
+		result.Last = &matchesReverse[index]
 	}
 
 	return result
