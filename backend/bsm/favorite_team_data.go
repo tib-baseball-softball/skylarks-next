@@ -105,7 +105,6 @@ func LoadHomeData(app core.App, teamID int) ([]HomeDataset, error) {
 			go func(clubTeam Team) {
 				defer wg.Done()
 
-				// TODO: check errors
 				err := LoadHomeTeamTable(clubTeam, leagueGroup.ID, &dataset, apiKey)
 				if err != nil {
 					app.Logger().Error("Error fetching home team table", "error", err, "team", clubTeam.ID, "leagueGroup", leagueGroup.ID)

@@ -27,7 +27,7 @@ type Row struct {
 // LoadSingleTable loads a single Table for a LeagueGroup
 func loadSingleTable(leagueGroupID int, apiKey string) (Table, error) {
 	var table Table
-	url := GetAPIURL("leagues"+strconv.Itoa(leagueGroupID)+"tables.json", make(map[string]string), apiKey)
+	url := GetAPIURL("leagues/"+strconv.Itoa(leagueGroupID)+"/table.json", make(map[string]string), apiKey)
 	table, _, err := FetchResource[Table](url.String())
 	if err != nil {
 		return table, err
