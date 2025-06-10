@@ -1,17 +1,19 @@
 package bsm
 
 import (
+	"strconv"
 	"sync"
 )
 
 // HomeDataset represents the data for a team's home page
 type HomeDataset struct {
-	LeagueGroup   LeagueGroup    `json:"league_group"`
-	NextGame      *Match         `json:"next_game,omitempty"`
-	LastGame      *Match         `json:"last_game,omitempty"`
-	PlayoffSeries *PlayoffSeries `json:"playoff_series,omitempty"`
-	Table         Table          `json:"table"`
-	TableRow      Row            `json:"table_row"`
+	LeagueGroup   LeagueGroup       `json:"league_group"`
+	NextGame      *Match            `json:"next_game,omitempty"`
+	LastGame      *Match            `json:"last_game,omitempty"`
+	PlayoffSeries *PlayoffSeries    `json:"playoff_series,omitempty"`
+	Table         Table             `json:"table"`
+	TableRow      Row               `json:"table_row"`
+	StreakData    []StreakDataEntry `json:"streak_data"`
 }
 
 type DatasetContainer struct {
@@ -37,30 +39,28 @@ type DisplayGames struct {
 	Last *Match
 }
 
-// TODO: implement
-// createStreakDataEntries creates streak data entries for a team
-//func createStreakDataEntries(games []Match, row Row) []StreakDataEntry {
-//	var entries []StreakDataEntry
-//	wins := 0
-//
-//	for i, game := range games {
-//		if game.State != "planned" && game.State != "cancelled" &&
-//			(game.AwayTeamName == row.TeamName || game.HomeTeamName == row.TeamName) {
-//			number := i + 1
-//			won := false
-//
-//			if skylarksWon := game.SkylarksWin(); skylarksWon != nil {
-//				if *skylarksWon {
-//					wins++
-//					won = true
-//				}
-//			}
-//			entries = append(entries, StreakDataEntry{
-//				Game:      strconv.Itoa(number),
-//				WonGame:   won,
-//				WinsCount: wins,
-//			})
-//		}
-//	}
-//	return entries
-//}
+// createStreakDataEntries creates streak data entries for a team. Usable for data visualization in a chart.
+func createStreakDataEntries(games []Match, teamName string) []StreakDataEntry {
+	var entries []StreakDataEntry
+	wins := 0
+
+	for i, game := range games {
+		state := game.GetMatchState(teamName)
+		if state == MatchStateCancelled || state == MatchStateNotYetPlayed {
+			continue
+		}
+
+		won := state == MatchStateWon
+
+		if won {
+			wins++
+		}
+
+		entries = append(entries, StreakDataEntry{
+			Game:      strconv.Itoa(i + 1),
+			WonGame:   won,
+			WinsCount: wins,
+		})
+	}
+	return entries
+}

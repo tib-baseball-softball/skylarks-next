@@ -99,6 +99,7 @@ func LoadHomeData(app core.App, teamID int) ([]HomeDataset, error) {
 					dataset.LastGame = displayGames.Last
 				}
 				createPlayoffSeriesData(&dataset, matches)
+				dataset.StreakData = createStreakDataEntries(matches, clubTeam.Name)
 			}()
 
 			wg.Add(1)
