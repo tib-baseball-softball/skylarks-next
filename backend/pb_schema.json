@@ -2047,9 +2047,23 @@
         "name": "url",
         "onlyDomains": null,
         "presentable": true,
-        "required": true,
+        "required": false,
         "system": false,
         "type": "url"
+      },
+      {
+        "autogeneratePattern": "",
+        "hidden": false,
+        "id": "text1999537002",
+        "max": 0,
+        "min": 0,
+        "name": "identifier",
+        "pattern": "",
+        "presentable": false,
+        "primaryKey": false,
+        "required": false,
+        "system": false,
+        "type": "text"
       },
       {
         "hidden": false,
@@ -2073,7 +2087,8 @@
       }
     ],
     "indexes": [
-      "CREATE UNIQUE INDEX `idx_8P8482G` ON `requestcaches` (`hash`)"
+      "CREATE UNIQUE INDEX `idx_8P8482G` ON `requestcaches` (`hash`)",
+      "CREATE INDEX `idx_0ty87dm7lr` ON `requestcaches` (`identifier`)"
     ],
     "system": false
   },
