@@ -62,7 +62,7 @@ func (r *RequestCache) SetCreated(created types.DateTime) {
 	r.Set("created", created)
 }
 
-// Updated returns the last update timestamp.
+// Updated returns the last update DateTime.
 func (r *RequestCache) Updated() types.DateTime {
 	return r.GetDateTime("updated")
 }

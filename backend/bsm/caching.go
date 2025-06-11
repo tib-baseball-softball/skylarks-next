@@ -95,7 +95,7 @@ func GetCachedBSMResponse(app core.App, url *url.URL) (string, error) {
 	}
 	hash := utility.GetMD5Hash(url.String())
 
-	var record *core.Record
+	var requestCache *pb.RequestCache
 	record, err := app.FindFirstRecordByData(pb.RequestCacheCollection, "hash", hash)
 	if err != nil {
 		// no data - request has never been cached before
@@ -106,8 +106,11 @@ func GetCachedBSMResponse(app core.App, url *url.URL) (string, error) {
 	}
 
 	if record != nil {
+		requestCache = &pb.RequestCache{}
+		requestCache.SetProxyRecord(record)
+
 		currentTime := types.NowDateTime()
-		updated := record.GetDateTime("updated")
+		updated := requestCache.Updated()
 		cutoff := updated.Add(cacheLifetimeMinutes * time.Minute)
 
 		if cutoff.Before(currentTime) {
@@ -122,8 +125,12 @@ func GetCachedBSMResponse(app core.App, url *url.URL) (string, error) {
 			if err != nil {
 				return ret, err
 			}
+
+			// Update requestCache with the new record
+			requestCache = &pb.RequestCache{}
+			requestCache.SetProxyRecord(record)
 		}
-		ret = record.GetString("responseBody")
+		ret = requestCache.ResponseBody()
 	}
 
 	return ret, nil
@@ -142,9 +149,12 @@ func saveToCache(app core.App, url string) (*core.Record, error) {
 	}
 
 	record := core.NewRecord(collection)
-	record.Set("responseBody", body)
-	record.Set("hash", utility.GetMD5Hash(url))
-	record.Set("url", url)
+	cache := &pb.RequestCache{}
+	cache.SetProxyRecord(record)
+
+	cache.SetResponseBody(body)
+	cache.SetHash(utility.GetMD5Hash(url))
+	cache.SetURL(url)
 
 	err = app.Save(record)
 	if err != nil {
