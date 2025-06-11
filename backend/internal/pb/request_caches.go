@@ -69,3 +69,32 @@ func (r *RequestCache) Updated() types.DateTime {
 func (r *RequestCache) SetUpdated(updated types.DateTime) {
 	r.Set("updated", updated)
 }
+
+// SaveDataToCache saves a given string `data` with the provided identifier
+func SaveDataToCache(app core.App, identifier string, data string) error {
+	requestCache := &RequestCache{}
+	collection, err := app.FindCollectionByNameOrId(RequestCacheCollection)
+	if err != nil {
+		return err
+	}
+	record := core.NewRecord(collection)
+	requestCache.SetProxyRecord(record)
+
+	requestCache.SetIdentifier(identifier)
+	requestCache.SetResponseBody(data)
+	if err := app.Save(record); err != nil {
+		return err
+	}
+	return nil
+}
+
+// GetCacheEntryByIdentifier returns the cached response body for a given identifier or an error if not found.
+func GetCacheEntryByIdentifier(app core.App, identifier string) (string, error) {
+	record, err := app.FindFirstRecordByData(RequestCacheCollection, "identifier", identifier)
+	if err != nil {
+		return "", err
+	}
+	requestCache := &RequestCache{}
+	requestCache.SetProxyRecord(record)
+	return requestCache.ResponseBody(), nil
+}
