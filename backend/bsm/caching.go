@@ -99,7 +99,7 @@ func GetCachedBSMResponse(app core.App, url *url.URL) (string, error) {
 	record, err := app.FindFirstRecordByData(pb.RequestCacheCollection, "hash", hash)
 	if err != nil {
 		// no data - request has never been cached before
-		record, err = saveToCache(app, url.String())
+		record, err = saveBSMResponseToCache(app, url.String())
 		if err != nil {
 			return ret, err
 		}
@@ -121,7 +121,7 @@ func GetCachedBSMResponse(app core.App, url *url.URL) (string, error) {
 				return ret, err
 			}
 
-			record, err = saveToCache(app, url.String())
+			record, err = saveBSMResponseToCache(app, url.String())
 			if err != nil {
 				return ret, err
 			}
@@ -136,7 +136,7 @@ func GetCachedBSMResponse(app core.App, url *url.URL) (string, error) {
 	return ret, nil
 }
 
-func saveToCache(app core.App, url string) (*core.Record, error) {
+func saveBSMResponseToCache(app core.App, url string) (*core.Record, error) {
 	_, body, err := FetchResource[any](url)
 	if err != nil {
 		app.Logger().Error("Failed to get data from BSM", "err", err)
