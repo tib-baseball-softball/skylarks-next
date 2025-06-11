@@ -5,6 +5,7 @@ import (
 	"errors"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
+	"github.com/tib-baseball-softball/skylarks-next/internal/pb"
 	"github.com/tib-baseball-softball/skylarks-next/internal/utility"
 	"net/url"
 	"os"
@@ -95,7 +96,7 @@ func GetCachedBSMResponse(app core.App, url *url.URL) (string, error) {
 	hash := utility.GetMD5Hash(url.String())
 
 	var record *core.Record
-	record, err := app.FindFirstRecordByData("requestcaches", "hash", hash)
+	record, err := app.FindFirstRecordByData(pb.RequestCacheCollection, "hash", hash)
 	if err != nil {
 		// no data - request has never been cached before
 		record, err = saveToCache(app, url.String())
@@ -135,7 +136,7 @@ func saveToCache(app core.App, url string) (*core.Record, error) {
 		return nil, err
 	}
 
-	collection, err := app.FindCollectionByNameOrId("requestcaches")
+	collection, err := app.FindCollectionByNameOrId(pb.RequestCacheCollection)
 	if err != nil {
 		return nil, err
 	}
