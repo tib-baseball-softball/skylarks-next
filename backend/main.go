@@ -38,7 +38,7 @@ func bindAppHooks(app core.App) {
 		if err != nil {
 			app.Logger().Error(
 				"Error upon setting auth record last login field",
-				"error", err,
+				"error", err, "user", e.Record.Id,
 			)
 		}
 		return e.Next()
@@ -160,7 +160,9 @@ func main() {
 		// enable auto creation of migration files when making collection changes in the Dashboard
 		// (the isGoRun check is to enable it only during development)
 		Automigrate: isGoRun,
-	}) //------------------- Commands -------------------------//
+	})
+
+	//------------------- Commands -------------------------//
 
 	app.RootCmd.AddCommand(&cobra.Command{
 		Use: "import:games",
