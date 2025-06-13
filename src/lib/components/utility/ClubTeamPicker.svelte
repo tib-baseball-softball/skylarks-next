@@ -4,13 +4,14 @@
 
   interface Props {
     clubTeams?: ClubTeam[];
+    onChange?: () => void;
   }
 
-  let {clubTeams = []}: Props = $props();
+  let {clubTeams = [], onChange = () => {}}: Props = $props();
 </script>
 
-<select class="select my-4" bind:value={preferences.current.favoriteTeamID}>
+<select class="select my-4" bind:value={preferences.current.favoriteTeamID} onchange={() => onChange()}>
   {#each clubTeams as clubTeam}
-    <option value="{clubTeam.id}">{clubTeam.team.name} ({clubTeam.team.league_entries.map(entry => entry.league.acronym)})</option>
+    <option value="{clubTeam.team.id}">{clubTeam.team.name} ({clubTeam.team.league_entries.map(entry => entry.league.acronym)})</option>
   {/each}
 </select>
