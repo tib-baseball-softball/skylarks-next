@@ -1,12 +1,12 @@
 package bsm
 
 // SeriesStatus represents the status of a playoff series
-type SeriesStatus int
+type SeriesStatus string
 
 const (
-	SeriesStatusTied SeriesStatus = iota
-	SeriesStatusLeading
-	SeriesStatusWon
+	SeriesStatusTied    = "tied"
+	SeriesStatusLeading = "leading"
+	SeriesStatusWon     = "won"
 )
 
 // PlayoffTeam represents a team in a playoff series
