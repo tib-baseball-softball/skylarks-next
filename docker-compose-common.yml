@@ -8,6 +8,7 @@ services:
       APPLICATION_CONTEXT: ${APPLICATION_CONTEXT}
       TIME_ZONE: ${TIME_ZONE}
       PUBLIC_POCKETBASE_URL: ${PUBLIC_POCKETBASE_URL}
+      BSM_API_KEY: ${BSM_API_KEY}
     networks:
       - proxy
     volumes:

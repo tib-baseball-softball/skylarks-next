@@ -8,7 +8,7 @@ import {authSettings, client} from "$lib/pocketbase/index.svelte";
  *
  * Should be executed only client-side and only if logged in.
  */
-export const load = (async ({fetch, depends}) => {
+export const load = (async ({data, fetch, depends}) => {
   let clubs: ExpandedClub[] = [];
   let teams: ExpandedTeam[] = [];
 
@@ -38,6 +38,8 @@ export const load = (async ({fetch, depends}) => {
   depends("nav:load");
 
   return {
+    clubTeams: data.clubTeams,
+    leagueGroups: data.leagueGroups,
     clubs: clubs,
     teams: teams,
   };

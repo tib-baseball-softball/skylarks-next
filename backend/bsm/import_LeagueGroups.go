@@ -4,7 +4,7 @@ import (
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
-	"strconv"
+	"github.com/tib-baseball-softball/skylarks-next/internal/pb"
 	"sync"
 )
 
@@ -28,50 +28,41 @@ func ImportLeagueGroups(app core.App, clubID *string, season *int) (err error) {
 		selectedSeason = *season
 	}
 
+	processedClubs := 0
+	processedLeagueGroups := 0
 	var wg sync.WaitGroup
 
 	for _, club := range clubs {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			leagueGroups, err := fetchLeagueGroupsForCurrentSeason(club.GetString("bsm_api_key"), selectedSeason)
+			leagueGroups, err := fetchLeagueGroupsForSeason(club.GetString("bsm_api_key"), selectedSeason)
 			if err != nil {
 				app.Logger().Error("Error fetching league groups", "error", err, "club", club.GetString("name"), "season", selectedSeason)
 				return
 			}
 			err = createOrUpdateLeagueGroups(app, leagueGroups, club)
 			if err != nil {
-				// Logging happens in called method where more exact data is available.
+				// Logging happens in the called method where more detailed data is available.
 				return
 			}
+			processedClubs++
+			processedLeagueGroups += len(leagueGroups)
 		}()
 	}
 
 	wg.Wait()
-	app.Logger().Info("League Group Import successfully imported all league groups")
+	app.Logger().Info("League Group Import successfully imported all league groups", "Number of clubs processed", processedClubs, "Number of league groups processed", processedLeagueGroups)
 	return nil
-}
-
-// the API key used determines which club LeagueGroups are loaded for
-func fetchLeagueGroupsForCurrentSeason(apiKey string, season int) ([]LeagueGroup, error) {
-	params := make(map[string]string)
-	params["filters[seasons][]"] = strconv.Itoa(season)
-
-	url := GetAPIURL("league_groups.json", params, apiKey)
-	leagueGroups, _, err := FetchResource[[]LeagueGroup](url.String())
-	if err != nil {
-		return nil, err
-	}
-	return leagueGroups, nil
 }
 
 func createOrUpdateLeagueGroups(app core.App, leagueGroups []LeagueGroup, club *core.Record) (err error) {
 	for _, leagueGroup := range leagueGroups {
-		record, err := app.FindFirstRecordByData("leaguegroups", "bsm_id", leagueGroup.ID)
+		record, err := app.FindFirstRecordByData(pb.LeagueGroupsCollection, "bsm_id", leagueGroup.ID)
 
 		// if not found, it throws an error, so create new record
 		if err != nil {
-			collection, err := app.FindCollectionByNameOrId("leaguegroups")
+			collection, err := app.FindCollectionByNameOrId(pb.LeagueGroupsCollection)
 			if err != nil {
 				app.Logger().Error("Error getting collection", "error", err)
 				return err
@@ -91,10 +82,14 @@ func createOrUpdateLeagueGroups(app core.App, leagueGroups []LeagueGroup, club *
 }
 
 func setLeagueGroupRecordValues(record *core.Record, leagueGroup LeagueGroup, club *core.Record) {
-	record.Set("bsm_id", leagueGroup.ID)
-	record.Set("season", leagueGroup.Season)
-	record.Set("name", leagueGroup.Name)
-	record.Set("acronym", leagueGroup.Acronym)
+	lg := &pb.LeagueGroup{}
+	lg.SetProxyRecord(record)
+
+	lg.SetBSMID(leagueGroup.ID)
+	lg.SetSeason(leagueGroup.Season)
+	lg.SetName(leagueGroup.Name)
+	lg.SetAcronym(leagueGroup.Acronym)
+	// Use the raw record API for array append operations
 	record.Set("clubs+", club.Id)
 
 	return

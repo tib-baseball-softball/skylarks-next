@@ -10,5 +10,6 @@ type LeagueEntry struct {
 	HumanGameDay              *string `json:"human_game_day,omitempty"`
 	HumanLicenseCriteriaState *string `json:"human_license_criteria_state,omitempty"`
 	Team                      *Team   `json:"team,omitempty"`
+	League                    League  `json:"league"`
 	//Field                       *Field   `json:"field,omitempty"`
 }

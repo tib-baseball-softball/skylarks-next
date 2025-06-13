@@ -11,7 +11,8 @@ import (
 	"os"
 )
 
-// GetAPIURL Construct a BSM API URL from a given path, appending all query parameters and the API key automatically
+// GetAPIURL Construct a BSM API URL from a given path, appending all query parameters and the API key automatically.
+// Resource should be provided without the preceding slash.
 func GetAPIURL(resource string, params map[string]string, apiKey string) *url.URL {
 	urlString := os.Getenv("BSM_API_URL")
 	urlString = urlString + "/" + resource
@@ -33,8 +34,8 @@ func GetAPIURL(resource string, params map[string]string, apiKey string) *url.UR
 	return reqURL
 }
 
-// AppendAPIKey is used in cases where the full URL already exists, but without key.
-// Returns input URL with API key for given club appended.
+// AppendAPIKey is used in cases where the full URL already exists, but without the API key.
+// Returns input URL with the API key for the given club appended.
 func AppendAPIKey(app core.App, url url.URL, clubID string) (url.URL, error) {
 	club, err := app.FindFirstRecordByData("clubs", "bsm_id", clubID)
 	if err != nil {

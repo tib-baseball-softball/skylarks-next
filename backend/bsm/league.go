@@ -1,5 +1,6 @@
 package bsm
 
+// League represents the BSM structure "Liga", corresponds to a playing level.
 type League struct {
 	ID       int    `json:"id"`
 	Type     string `json:"type"`

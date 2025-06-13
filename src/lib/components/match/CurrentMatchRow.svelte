@@ -5,8 +5,9 @@
     import {MatchState} from "$lib/enum/MatchState";
     import {DateTimeUtility} from "$lib/service/DateTimeUtility";
     import {MatchDecorator} from "$lib/service/MatchDecorator";
+    import {env} from "$env/dynamic/public";
 
-   interface Props {
+    interface Props {
       match: Match;
    }
 
@@ -17,7 +18,7 @@
 
     const matchDecorator = new MatchDecorator(match)
     const winner = matchDecorator.getWinnerForMatch()
-    const matchState = matchDecorator.getMatchState()
+    const matchState = matchDecorator.getMatchState(env.PUBLIC_TEAM_NAME)
     const matchDate = DateTimeUtility.parseDateFromBSMString(match.time)
 </script>
 
