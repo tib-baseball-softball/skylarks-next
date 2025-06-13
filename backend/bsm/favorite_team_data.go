@@ -12,7 +12,7 @@ import (
 )
 
 // LoadHomeData loads structured data to display on a single team's home dashboard.
-func LoadHomeData(app core.App, teamID int) ([]HomeDataset, error) {
+func LoadHomeData(app core.App, teamID int, season int) ([]HomeDataset, error) {
 	apiKey := os.Getenv("BSM_API_KEY")
 	if apiKey == "" {
 		return nil, errors.New("default API key not set, aborting")
@@ -31,12 +31,12 @@ func LoadHomeData(app core.App, teamID int) ([]HomeDataset, error) {
 	}()
 
 	go func() {
-		leagueGroup, err := fetchLeagueGroupsForCurrentSeason(apiKey, time.Now().Year())
+		leagueGroupsResponse, err := fetchLeagueGroupsForSeason(apiKey, season)
 		if err != nil {
 			app.Logger().Error("Error fetching league groups", "error", err, "team", teamID)
 			return
 		}
-		leagueChannel <- leagueGroup
+		leagueChannel <- leagueGroupsResponse
 	}()
 
 	clubTeam := <-teamChannel

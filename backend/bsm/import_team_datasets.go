@@ -52,7 +52,7 @@ func ImportTeamDatasets(app core.App) {
 					return
 				}
 
-				datasets, err := LoadHomeData(app, parsedIdentifier.TeamID)
+				datasets, err := LoadHomeData(app, parsedIdentifier.TeamID, currentYear) // we have established earlier that only the current year is of interest
 				responseBody, err := json.Marshal(datasets)
 				if err != nil {
 					app.Logger().Error("ImportTeamDatasets error", "error", err, "cacheIdentifier", requestCache.Identifier())

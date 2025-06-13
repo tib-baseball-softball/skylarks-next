@@ -65,7 +65,7 @@ func GetCachedDatasetResponse(app core.App, teamID int, season int) ([]byte, err
 			}
 		}
 
-		homeDatasets, err := LoadHomeData(app, teamID)
+		homeDatasets, err := LoadHomeData(app, teamID, season)
 		if err != nil {
 			app.Logger().Error("Failed to load home data", "error", err)
 			return ret, err

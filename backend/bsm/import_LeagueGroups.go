@@ -36,7 +36,7 @@ func ImportLeagueGroups(app core.App, clubID *string, season *int) (err error) {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			leagueGroups, err := fetchLeagueGroupsForCurrentSeason(club.GetString("bsm_api_key"), selectedSeason)
+			leagueGroups, err := fetchLeagueGroupsForSeason(club.GetString("bsm_api_key"), selectedSeason)
 			if err != nil {
 				app.Logger().Error("Error fetching league groups", "error", err, "club", club.GetString("name"), "season", selectedSeason)
 				return
