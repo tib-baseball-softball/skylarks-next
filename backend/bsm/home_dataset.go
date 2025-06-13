@@ -2,6 +2,7 @@ package bsm
 
 import (
 	"encoding/json"
+	"errors"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/tib-baseball-softball/skylarks-next/internal/pb"
 	"strconv"
@@ -51,7 +52,7 @@ func GetCachedDatasetResponse(app core.App, teamID int, season int) ([]byte, err
 	cacheRecord, err := pb.GetCacheEntryByIdentifier(app, cacheIdentifier)
 	requestCache.SetProxyRecord(cacheRecord)
 
-	if err != nil || (requestCache != nil && isOutdated(requestCache.Updated()) && time.Now().Year() <= season) {
+	if err != nil || (cacheRecord != nil && isOutdated(requestCache.Updated()) && time.Now().Year() <= season) {
 		// This identifier has not been cached before or has expired.
 		// For this specific set of data, we assume it's not going to change after the season ends.
 
@@ -81,6 +82,10 @@ func GetCachedDatasetResponse(app core.App, teamID int, season int) ([]byte, err
 		return ret, nil
 	} else {
 		// cache hit
+		if requestCache == nil {
+			app.Logger().Error("request cache is unexpectedly nil", "cacheIdentifier", cacheIdentifier)
+			return nil, errors.New("request cache is unexpectedly nil")
+		}
 		ret = []byte(requestCache.ResponseBody())
 		return ret, nil
 	}
