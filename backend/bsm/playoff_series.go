@@ -20,8 +20,8 @@ type PlayoffSeries struct {
 	SeriesGames  []Match                `json:"series_games"`
 	Status       SeriesStatus           `json:"status"`
 	Teams        map[string]PlayoffTeam `json:"teams"`
-	LeadingTeam  *PlayoffTeam           `json:"leading_team,omitempty"`
-	TrailingTeam *PlayoffTeam           `json:"trailing_team,omitempty"`
+	LeadingTeam  *PlayoffTeam           `json:"leading_team"`
+	TrailingTeam *PlayoffTeam           `json:"trailing_team"`
 	SeriesLength int                    `json:"series_length"`
 }
 

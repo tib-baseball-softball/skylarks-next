@@ -13,9 +13,9 @@ import (
 // HomeDataset represents the data for a team's home page
 type HomeDataset struct {
 	LeagueGroup   LeagueGroup       `json:"league_group"`
-	NextGame      *Match            `json:"next_game,omitempty"`
-	LastGame      *Match            `json:"last_game,omitempty"`
-	PlayoffSeries *PlayoffSeries    `json:"playoff_series,omitempty"`
+	NextGame      *Match            `json:"next_game"`
+	LastGame      *Match            `json:"last_game"`
+	PlayoffSeries *PlayoffSeries    `json:"playoff_series"`
 	Table         Table             `json:"table"`
 	TableRow      Row               `json:"table_row"`
 	StreakData    []StreakDataEntry `json:"streak_data"`
