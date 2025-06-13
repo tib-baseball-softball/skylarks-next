@@ -26,6 +26,8 @@ type DatasetContainer struct {
 	datasets []HomeDataset
 }
 
+const homeDatasetCacheTag = "homeDataset"
+
 func (c *DatasetContainer) Add(dataset HomeDataset) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
@@ -46,7 +48,7 @@ type DisplayGames struct {
 
 func GetCachedDatasetResponse(app core.App, teamID int, season int) ([]byte, error) {
 	var ret []byte
-	cacheIdentifier := strconv.Itoa(season) + "_" + strconv.Itoa(teamID) + "_home_dataset"
+	cacheIdentifier := strconv.Itoa(season) + "_" + strconv.Itoa(teamID) + "_" + homeDatasetCacheTag
 
 	requestCache := &pb.RequestCache{}
 	cacheRecord, err := pb.GetCacheEntryByIdentifier(app, cacheIdentifier)

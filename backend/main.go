@@ -142,6 +142,10 @@ func bindAppHooks(app core.App) {
 			gamesImportService := bsm.GameImportService{App: app}
 			gamesImportService.ImportGames()
 		})
+
+		app.Cron().MustAdd("TeamDatasetImport", "30 * * * *", func() {
+			bsm.ImportTeamDatasets(app)
+		})
 	}
 }
 
@@ -174,6 +178,13 @@ func main() {
 			if err != nil {
 				log.Print("Error while running LeagueGroupImport: " + err.Error())
 			}
+		},
+	})
+
+	app.RootCmd.AddCommand(&cobra.Command{
+		Use: "import:teamdatasets",
+		Run: func(cmd *cobra.Command, args []string) {
+			bsm.ImportTeamDatasets(app)
 		},
 	})
 
