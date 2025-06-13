@@ -109,13 +109,7 @@ func GetCachedBSMResponse(app core.App, url *url.URL) (string, error) {
 		requestCache = &pb.RequestCache{}
 		requestCache.SetProxyRecord(record)
 
-		currentTime := types.NowDateTime()
-		updated := requestCache.Updated()
-		cutoff := updated.Add(cacheLifetimeMinutes * time.Minute)
-
-		if cutoff.Before(currentTime) {
-			// cache is outdated, delete and load new
-
+		if isOutdated(requestCache.Updated()) {
 			err = app.Delete(record)
 			if err != nil {
 				return ret, err
@@ -162,4 +156,11 @@ func saveBSMResponseToCache(app core.App, url string) (*core.Record, error) {
 	}
 
 	return record, nil
+}
+
+func isOutdated(cacheTime types.DateTime) bool {
+	currentTime := types.NowDateTime()
+	cutoff := cacheTime.Add(cacheLifetimeMinutes * time.Minute)
+
+	return currentTime.After(cutoff)
 }

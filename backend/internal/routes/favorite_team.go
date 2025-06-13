@@ -20,12 +20,20 @@ func GetFavoriteTeamData() func(e *core.RequestEvent) error {
 			return e.JSON(http.StatusBadRequest, "Team ID must be an integer")
 		}
 
-		homeDatasets, err := bsm.LoadHomeData(e.App, convertedTeamID)
-		if err != nil {
-			e.App.Logger().Error("Failed to load home data", "error", err)
-			return e.JSON(http.StatusInternalServerError, "Internal error occurred")
+		season := e.Request.URL.Query().Get("season")
+		if season == "" {
+			return e.JSON(http.StatusBadRequest, "Season not found in request")
 		}
 
-		return e.JSON(http.StatusOK, homeDatasets)
+		convertedSeason, err := strconv.Atoi(season)
+		if err != nil {
+			return e.JSON(http.StatusBadRequest, "Season must be an integer")
+		}
+
+		response, err := bsm.GetCachedDatasetResponse(e.App, convertedTeamID, convertedSeason)
+		if err != nil {
+			return e.JSON(http.StatusInternalServerError, "Internal error occurred")
+		}
+		return e.Blob(http.StatusOK, "application/json", response)
 	}
 }

@@ -3,6 +3,7 @@ package pb
 import (
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
+	"github.com/tib-baseball-softball/skylarks-next/internal/utility"
 )
 
 const (
@@ -81,6 +82,7 @@ func SaveDataToCache(app core.App, identifier string, data string) error {
 	requestCache.SetProxyRecord(record)
 
 	requestCache.SetIdentifier(identifier)
+	requestCache.SetHash(utility.GetMD5Hash(identifier))
 	requestCache.SetResponseBody(data)
 	if err := app.Save(record); err != nil {
 		return err
@@ -88,13 +90,12 @@ func SaveDataToCache(app core.App, identifier string, data string) error {
 	return nil
 }
 
-// GetCacheEntryByIdentifier returns the cached response body for a given identifier or an error if not found.
-func GetCacheEntryByIdentifier(app core.App, identifier string) (string, error) {
+// GetCacheEntryByIdentifier returns the cache object for a given identifier or an error if not found.
+func GetCacheEntryByIdentifier(app core.App, identifier string) (*core.Record, error) {
 	record, err := app.FindFirstRecordByData(RequestCacheCollection, "identifier", identifier)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
-	requestCache := &RequestCache{}
-	requestCache.SetProxyRecord(record)
-	return requestCache.ResponseBody(), nil
+
+	return record, nil
 }
