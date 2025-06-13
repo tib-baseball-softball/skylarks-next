@@ -148,7 +148,7 @@ func LoadHomeTeamTable(team Team, leagueGroupID int, dataset *HomeDataset, apiKe
 	row := determineTableRow(team, &table)
 
 	dataset.Table = table
-	dataset.TableRow = *row
+	dataset.TableRow = row
 
 	return nil
 }

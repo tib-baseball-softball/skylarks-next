@@ -17,7 +17,7 @@ type HomeDataset struct {
 	LastGame      *Match            `json:"last_game"`
 	PlayoffSeries *PlayoffSeries    `json:"playoff_series"`
 	Table         Table             `json:"table"`
-	TableRow      Row               `json:"table_row"`
+	TableRow      *Row              `json:"table_row"`
 	StreakData    []StreakDataEntry `json:"streak_data"`
 }
 
