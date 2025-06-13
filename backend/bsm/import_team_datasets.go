@@ -69,7 +69,7 @@ func ImportTeamDatasets(app core.App) {
 		}()
 	}
 	wg.Wait()
-	app.Logger().Info("TeamDatasets Import successfully imported new team datasets.", "Number of records processed: ", processedRecords)
+	app.Logger().Info("TeamDatasets Import successfully imported new team datasets.", "Number of records processed", processedRecords)
 }
 
 const teamDatasetCacheIdentifierLength = 3

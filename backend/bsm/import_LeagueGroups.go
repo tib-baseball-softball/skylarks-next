@@ -28,6 +28,8 @@ func ImportLeagueGroups(app core.App, clubID *string, season *int) (err error) {
 		selectedSeason = *season
 	}
 
+	processedClubs := 0
+	processedLeagueGroups := 0
 	var wg sync.WaitGroup
 
 	for _, club := range clubs {
@@ -44,11 +46,13 @@ func ImportLeagueGroups(app core.App, clubID *string, season *int) (err error) {
 				// Logging happens in the called method where more detailed data is available.
 				return
 			}
+			processedClubs++
+			processedLeagueGroups += len(leagueGroups)
 		}()
 	}
 
 	wg.Wait()
-	app.Logger().Info("League Group Import successfully imported all league groups")
+	app.Logger().Info("League Group Import successfully imported all league groups", "Number of clubs processed", processedClubs, "Number of league groups processed", processedLeagueGroups)
 	return nil
 }
 
