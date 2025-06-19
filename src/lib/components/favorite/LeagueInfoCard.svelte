@@ -1,9 +1,7 @@
 <script lang="ts">
   import GenericDetailRow from "$lib/components/utility/GenericDetailRow.svelte";
   import {Crown, Hash, Percent, Sigma, Signpost} from "lucide-svelte";
-  //@ts-expect-error
-  import type {TableRow} from "bsm.js/dist/model/Table";
-  import type {LeagueGroup} from "bsm.js";
+  import type {LeagueGroup, TableRow} from "bsm.js";
 
   interface Props {
     leagueGroup: LeagueGroup;

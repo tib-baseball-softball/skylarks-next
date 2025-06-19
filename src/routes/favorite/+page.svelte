@@ -35,8 +35,12 @@
 </section>
 
 <section>
-  <h2 class="h2 mt-5 mb-1">Team Stats</h2>
-  NONE
+  <h2 class="h2 mt-5 mb-1">Team Stats Links</h2>
+  {#each favoriteTeam?.team.league_entries ?? [] as entry}
+    <a href="/league_entries/{entry.id}?team={favoriteTeam?.team.name}" class="btn preset-filled-primary-500 me-1 my-2" title="to stats page for league entry {entry.league.name}">
+      {entry.league.name}
+    </a>
+  {/each}
 </section>
 
 <section>
@@ -53,7 +57,7 @@
 
       {#if dataset.table_row}
         <LeagueInfoCard leagueGroup={dataset.league_group} tableRow={dataset.table_row}/>
-        {:else}
+      {:else}
         <p>The team "{favoriteTeam?.team.name}" does not have a league entry in this league.</p>
       {/if}
     </section>
