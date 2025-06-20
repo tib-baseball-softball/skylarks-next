@@ -75,14 +75,14 @@
         <h5 class="h5 my-3">Previous Game</h5>
         <MatchTeaserCard match={dataset.last_game}/>
       {:else}
-        <p>No previous game found.</p>
+        <p class="my-3">No previous game found.</p>
       {/if}
 
       {#if dataset.next_game}
         <h5 class="h5 my-3">Next Game</h5>
         <MatchTeaserCard match={dataset.next_game}/>
       {:else}
-        <p>No next game found.</p>
+        <p class="my-3">No next game found.</p>
       {/if}
     </section>
 

@@ -11,6 +11,7 @@
 </script>
 
 <select class="select my-4" bind:value={preferences.current.favoriteTeamID} onchange={() => onChange()}>
+  <option value="{0}">None</option>
   {#each clubTeams as clubTeam}
     <option value="{clubTeam.team.id}">{clubTeam.team.name} ({clubTeam.team.league_entries.map(entry => entry.league.acronym)})</option>
   {/each}

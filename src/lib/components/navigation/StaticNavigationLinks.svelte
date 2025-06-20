@@ -1,6 +1,7 @@
 <script lang="ts">
   import {page} from "$app/state";
   import {Home, Shield, Star, Table, Ticket, Users} from "lucide-svelte";
+  import {preferences} from "$lib/globals.svelte.ts";
 
   interface Props {
     classes?: string;
@@ -17,7 +18,7 @@
 </li>
 
 <li>
-  <a class="{classes}" class:preset-filled-primary-500={page.url.pathname === "/favorite"} href="/favorite">
+  <a class="{classes}" class:preset-filled-primary-500={page.url.pathname === "/favorite"} href="/favorite?season={preferences.current.selectedSeason}">
     <Star/>
     <span>Favorite</span>
   </a>
