@@ -7,6 +7,7 @@
   import MatchTeaserCard from "$lib/components/match/MatchTeaserCard.svelte";
   import StandingsTable from "$lib/components/table/StandingsTable.svelte";
   import LeagueInfoCard from "$lib/components/favorite/LeagueInfoCard.svelte";
+  import PlayoffSheet from "$lib/components/favorite/PlayoffSheet.svelte";
 
   let {data}: PageProps = $props();
   const clubTeams = $derived(data.clubTeams ?? []);
@@ -37,58 +38,70 @@
 <section>
   <h2 class="h2 mt-5 mb-1">Team Stats Links</h2>
   {#each favoriteTeam?.team.league_entries ?? [] as entry}
-    <a href="/league_entries/{entry.id}?team={favoriteTeam?.team.name}" class="btn preset-filled-primary-500 me-1 my-2" title="to stats page for league entry {entry.league.name}">
+    <a href="/league_entries/{entry.id}?team={favoriteTeam?.team.name}" class="btn preset-filled-primary-500 me-1 my-2"
+       title="to stats page for league entry {entry.league.name}">
       {entry.league.name}
     </a>
   {/each}
 </section>
 
-<section>
-  <h2 class="h2 mt-5 mb-1">Data per League</h2>
-  <p class="text-sm font-light">A single team can be associated to several leagues per season in BSM.</p>
-</section>
+{#if favoriteTeam}
+  <section>
+    <h2 class="h2 mt-5 mb-1">Data per League</h2>
+    <p class="text-sm font-light">A single team can be associated to several leagues per season in BSM.</p>
+  </section>
 
-{#await data.datasets}
-  <p>Loading...</p>
-{:then datasets}
-  {#each datasets as dataset}
-    <section>
-      <h3 class="h3 mb-3">{dataset.league_group.name}</h3>
+  {#await data.datasets}
+    <p>Loading...</p>
+  {:then datasets}
+    {#each datasets as dataset}
+      <section>
+        <h3 class="h3 mb-3">{dataset.league_group.name}</h3>
 
-      {#if dataset.table_row}
-        <LeagueInfoCard leagueGroup={dataset.league_group} tableRow={dataset.table_row}/>
-      {:else}
-        <p>The team "{favoriteTeam?.team.name}" does not have a league entry in this league.</p>
+        {#if dataset.table_row}
+          <LeagueInfoCard leagueGroup={dataset.league_group} tableRow={dataset.table_row}/>
+        {:else}
+          <p>The team "{favoriteTeam?.team.name}" does not have a league entry in this league.</p>
+        {/if}
+      </section>
+
+      <section>
+        <h4 class="h4 mb-3">Standings</h4>
+
+        <StandingsTable table={dataset.table}/>
+      </section>
+
+      {#if dataset.playoff_series}
+        <section>
+          <h4 class="h4 mt-5 mb-1">Playoffs</h4>
+          <PlayoffSheet playoffSeries={dataset.playoff_series}>
+            <span>MÖP</span>
+          </PlayoffSheet>
+        </section>
       {/if}
-    </section>
 
-    <section>
-      <h4 class="h4 mb-3">Standings</h4>
+      <section>
+        <h4 class="h4 mb-3">Games</h4>
 
-      <StandingsTable table={dataset.table}/>
-    </section>
+        {#if dataset.last_game}
+          <h5 class="h5 my-3">Previous Game</h5>
+          <MatchTeaserCard match={dataset.last_game}/>
+        {:else}
+          <p class="my-3">No previous game found.</p>
+        {/if}
 
-    <section>
-      <h4 class="h4 mb-3">Games</h4>
+        {#if dataset.next_game}
+          <h5 class="h5 my-3">Next Game</h5>
+          <MatchTeaserCard match={dataset.next_game}/>
+        {:else}
+          <p class="my-3">No next game found.</p>
+        {/if}
+      </section>
 
-      {#if dataset.last_game}
-        <h5 class="h5 my-3">Previous Game</h5>
-        <MatchTeaserCard match={dataset.last_game}/>
-      {:else}
-        <p class="my-3">No previous game found.</p>
-      {/if}
-
-      {#if dataset.next_game}
-        <h5 class="h5 my-3">Next Game</h5>
-        <MatchTeaserCard match={dataset.next_game}/>
-      {:else}
-        <p class="my-3">No next game found.</p>
-      {/if}
-    </section>
-
-  {:else }
-    <p>No data found.</p>
-  {/each}
-{:catch error}
-  <p>Error: {error.message}</p>
-{/await}
+    {:else }
+      <p>No data found.</p>
+    {/each}
+  {:catch error}
+    <p>Error: {error.message}</p>
+  {/await}
+{/if}
