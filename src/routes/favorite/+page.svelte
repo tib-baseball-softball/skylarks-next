@@ -23,10 +23,12 @@
 <div class="lg:flex justify-between items-center">
   <h1 class="h1 shrink-0">Favorite Team</h1>
 
-  <ClubTeamPicker clubTeams={clubTeams} onChange={reloadOnTeamChange}/>
+  <div class="grow-0">
+    <ClubTeamPicker clubTeams={clubTeams} onChange={reloadOnTeamChange}/>
+  </div>
 </div>
 
-<section>
+<section class="max-w-md">
   <h2 class="h2 my-3">Quick Details</h2>
   {#if preferences.current.favoriteTeamID !== 0 && favoriteTeam}
     <FavoriteTeamInfoCard clubTeam={favoriteTeam}/>
@@ -74,28 +76,32 @@
       {#if dataset.playoff_series}
         <section>
           <h4 class="h4 mt-5 mb-1">Playoffs</h4>
-          <PlayoffSheet playoffSeries={dataset.playoff_series}>
-            <span>MÖP</span>
-          </PlayoffSheet>
+          <PlayoffSheet playoffSeries={dataset.playoff_series}></PlayoffSheet>
         </section>
       {/if}
 
       <section>
         <h4 class="h4 mb-3">Games</h4>
 
-        {#if dataset.last_game}
-          <h5 class="h5 my-3">Previous Game</h5>
-          <MatchTeaserCard match={dataset.last_game}/>
-        {:else}
-          <p class="my-3">No previous game found.</p>
-        {/if}
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-6 xl:gap-12">
+          <div>
+            <h5 class="h5 my-3">Previous Game</h5>
+            {#if dataset.last_game}
+              <MatchTeaserCard match={dataset.last_game}/>
+            {:else}
+              <p class="my-3">No previous game found.</p>
+            {/if}
+          </div>
 
-        {#if dataset.next_game}
-          <h5 class="h5 my-3">Next Game</h5>
-          <MatchTeaserCard match={dataset.next_game}/>
-        {:else}
-          <p class="my-3">No next game found.</p>
-        {/if}
+          <div>
+            <h5 class="h5 my-3">Next Game</h5>
+            {#if dataset.next_game}
+              <MatchTeaserCard match={dataset.next_game}/>
+            {:else}
+              <p class="my-3">No next game found.</p>
+            {/if}
+          </div>
+        </div>
       </section>
 
     {:else }
