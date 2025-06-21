@@ -1,0 +1,4 @@
+### GET home dataset for example team
+GET {{pbURL}}/api/team/favorite?team=23219&season=2025
+
+###

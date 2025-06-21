@@ -5,12 +5,9 @@
   import type {StatsDataset} from "$lib/types/StatsDataset";
   import TeamDetailInfoCard from "$lib/components/team/TeamDetailInfoCard.svelte";
   import StandingsTable from "$lib/components/table/StandingsTable.svelte";
+  import type {PageProps} from "./$types";
 
-  interface Props {
-    data: any;
-  }
-
-  let {data}: Props = $props();
+  let {data}: PageProps = $props();
   let clubTeam = $derived(data.clubTeam as ClubTeam);
 
   async function getData(): Promise<StatsDataset> {

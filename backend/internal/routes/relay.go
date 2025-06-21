@@ -8,8 +8,8 @@ import (
 	"net/url"
 )
 
-// GetRelayedBSMData relays BSM request so client-side does not need to know API keys.
-// Uses whitelist for URLs to make sure only public information is disclosed.
+// GetRelayedBSMData relays BSM request so the client-side does not need to know API keys.
+// Uses allowlist for URLs to make sure only public information is disclosed.
 func GetRelayedBSMData() func(e *core.RequestEvent) error {
 	return func(e *core.RequestEvent) error {
 		// request checks

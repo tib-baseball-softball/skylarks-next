@@ -5,19 +5,14 @@
   import Footer from "$lib/components/meta/Footer.svelte";
   import LoginBadge from "$lib/auth/LoginBadge.svelte";
   import {env} from "$env/dynamic/public";
-  import type {LayoutData} from "../../.svelte-kit/types/src/routes/$types";
+  import type {LayoutProps} from "../../.svelte-kit/types/src/routes/$types";
   import StaticNavigationLinks from "$lib/components/navigation/StaticNavigationLinks.svelte";
   import BottomNavigation from "$lib/components/navigation/BottomNavigation.svelte";
   import {authSettings} from "$lib/pocketbase/index.svelte.ts";
   import NavigationSheet from "$lib/components/navigation/NavigationSheet.svelte";
   import ToastContainer from "$lib/components/utility/toast/ToastContainer.svelte";
 
-  interface Props {
-    data: LayoutData;
-    children?: import('svelte').Snippet;
-  }
-
-  let {data, children}: Props = $props();
+  let {data, children}: LayoutProps = $props();
 
   let isUserAuthenticated = $derived(!!authSettings.record);
   let showSidebar = $derived((data.clubs.length > 0 || data.teams.length > 0) && isUserAuthenticated);

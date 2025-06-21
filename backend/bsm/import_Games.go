@@ -39,6 +39,8 @@ func (s GameImportService) ImportGames() {
 		return
 	}
 
+	processedTeams := 0
+	processedMatches := 0
 	currentYear := types.NowDateTime().Time().Year()
 	var wg sync.WaitGroup
 
@@ -77,11 +79,13 @@ func (s GameImportService) ImportGames() {
 				s.App.Logger().Error("Error creating or updating events", "error", err, "team", team.Id)
 				return
 			}
+			processedTeams++
+			processedMatches += len(matches)
 		}()
 	}
 
 	wg.Wait()
-	s.App.Logger().Info("Game Import successfully imported new game events")
+	s.App.Logger().Info("Game Import successfully imported new game events", "Number of teams processed", processedTeams, "Number of matches processed", processedMatches)
 }
 
 func (s GameImportService) fetchMatchesForLeagueGroup(league string, apiKey string) ([]Match, error) {

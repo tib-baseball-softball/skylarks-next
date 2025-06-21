@@ -1,5 +1,11 @@
 package bsm
 
+import (
+	"slices"
+	"strings"
+	"time"
+)
+
 type Match struct {
 	ID              int         `json:"id"`
 	MatchID         string      `json:"match_id"`
@@ -22,4 +28,98 @@ type Match struct {
 	AwayLeagueEntry LeagueEntry `json:"away_league_entry"`
 	League          League      `json:"league"`
 	Field           Field       `json:"field"`
+}
+
+// IsDerby checks if the match is a derby game between teams with the same name
+func (m *Match) IsDerby(teamName string) bool {
+	return strings.Contains(m.HomeTeamName, teamName) &&
+		strings.Contains(m.AwayTeamName, teamName)
+}
+
+// GetWinnerForMatch determines the winner of the match
+func (m *Match) GetWinnerForMatch() GameWinner {
+	if m.HomeRuns == nil || m.AwayRuns == nil {
+		return GameWinnerNone
+	}
+
+	if *m.HomeRuns > *m.AwayRuns {
+		return GameWinnerHome
+	} else if *m.AwayRuns > *m.HomeRuns {
+		return GameWinnerAway
+	}
+
+	return GameWinnerNone
+}
+
+// GetMatchState determines the current state of the match
+func (m *Match) GetMatchState(teamName string) MatchState {
+	if m.State == "planned" {
+		return MatchStateNotYetPlayed
+	}
+
+	if m.State == "cancelled" || m.State == "canceled" {
+		return MatchStateCancelled
+	}
+
+	if m.IsDerby(teamName) {
+		return MatchStateDerby
+	}
+
+	winner := m.GetWinnerForMatch()
+
+	isHomeTeam := strings.Contains(m.HomeTeamName, teamName)
+	isAwayTeam := strings.Contains(m.AwayTeamName, teamName)
+
+	if (winner == GameWinnerHome && isHomeTeam) ||
+		(winner == GameWinnerAway && isAwayTeam) {
+		return MatchStateWon
+	} else if (winner == GameWinnerAway && isHomeTeam) ||
+		(winner == GameWinnerHome && isAwayTeam) {
+		return MatchStateLost
+	}
+
+	return MatchStateFinal
+}
+
+// IsPlayoffGame checks if the match is a playoff game
+func (m *Match) IsPlayoffGame() bool {
+	return strings.Contains(m.MatchID, "PO")
+}
+
+// findNextAndPreviousGame processes game dates to find the next and previous game for a given point in time
+func findNextAndPreviousGame(matches []Match, targetTime time.Time) DisplayGames {
+	var result DisplayGames
+
+	index := slices.IndexFunc(matches, func(m Match) bool {
+		gameTime, _ := time.Parse(TimeFormat, m.Time)
+		return gameTime.After(targetTime) && m.State == "planned"
+	})
+	if index != -1 {
+		result.Next = &matches[index]
+	}
+
+	matchesReverse := make([]Match, len(matches))
+	copy(matchesReverse, matches)  // proper copy to prevent index pointers from pointing to the same element
+	slices.Reverse(matchesReverse) // for the previous game we are interested in the last element satisfying the index func
+
+	index = slices.IndexFunc(matchesReverse, func(m Match) bool {
+		gameTime, _ := time.Parse(TimeFormat, m.Time)
+		return gameTime.Before(targetTime) && m.State != "planned" && m.State != "cancelled"
+	})
+	if index != -1 {
+		result.Last = &matchesReverse[index]
+	}
+
+	return result
+}
+
+// loadMatchesWithFilterParams calls the generic top-level BSM endpoint and expects all filtering to be specified in the query.
+// If no parameters are supplied, the resulting response will only be scoped to the API key, which is most likely a lot.
+func loadMatchesWithFilterParams(params map[string]string, apiKey string) ([]Match, error) {
+	url := GetAPIURL("matches.json", params, apiKey)
+	matches, _, err := FetchResource[[]Match](url.String())
+	if err != nil {
+		return matches, err
+	}
+	return matches, nil
 }
