@@ -8,6 +8,7 @@
   import StandingsTable from "$lib/components/table/StandingsTable.svelte";
   import LeagueInfoCard from "$lib/components/favorite/LeagueInfoCard.svelte";
   import PlayoffSheet from "$lib/components/favorite/PlayoffSheet.svelte";
+  import StreakGraphSection from "$lib/components/favorite/StreakGraphSection.svelte";
 
   let {data}: PageProps = $props();
   const clubTeams = $derived(data.clubTeams ?? []);
@@ -57,7 +58,7 @@
     <p>Loading...</p>
   {:then datasets}
     {#each datasets as dataset}
-      <section>
+      <section class="max-w-md">
         <h3 class="h3 mb-3">{dataset.league_group.name}</h3>
 
         {#if dataset.table_row}
@@ -73,10 +74,17 @@
         <StandingsTable table={dataset.table}/>
       </section>
 
-      {#if dataset.playoff_series}
+      {#if dataset.playoff_series && (dataset.playoff_series?.series_games?.length ?? 0) > 0}
         <section>
           <h4 class="h4 mt-5 mb-1">Playoffs</h4>
           <PlayoffSheet playoffSeries={dataset.playoff_series}></PlayoffSheet>
+        </section>
+      {/if}
+
+      {#if dataset.streak_data.length > 0}
+        <section>
+          <h4 class="h4 mb-3">Graphs and Mood</h4>
+          <StreakGraphSection {dataset}/>
         </section>
       {/if}
 
