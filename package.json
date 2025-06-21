@@ -29,6 +29,7 @@
     "@types/leaflet": "^1.9.18",
     "@types/node": "22.10.10",
     "@vincjo/datatables": "^1.14.10",
+    "apexcharts": "^4.7.0",
     "bits-ui": "^2.8.3",
     "bsm.js": "^0.1.13",
     "flatpickr": "^4.6.13",
