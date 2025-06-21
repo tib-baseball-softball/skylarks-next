@@ -3,6 +3,7 @@
   // @ts-ignore
   import {Tabs} from "bits-ui";
   import LeagueChartGraph from "$lib/components/favorite/LeagueChartGraph.svelte";
+  import WinningPercentageContainer from "$lib/components/favorite/WinningPercentageContainer.svelte";
 
   interface Props {
     dataset: HomeDataset;
@@ -40,7 +41,7 @@
   </Tabs.Content>
 
   <Tabs.Content value="percentage" class="pt-4">
-
+    <WinningPercentageContainer tableRow={dataset.table_row}/>
   </Tabs.Content>
 
   <Tabs.Content value="series" class="pt-4">

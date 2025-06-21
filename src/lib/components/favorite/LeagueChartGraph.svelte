@@ -16,7 +16,7 @@
         return {
           x: row.short_team_name,
           y: row.wins_count,
-          fillColor: row.short_team_name.includes("BEA") ? ColorUtility.SkylarksRed : ColorUtility.SkylarksNavy,
+          fillColor: row.short_team_name.includes("BEA") ? ColorUtility.SkylarksRed : ColorUtility.getDynamicColorNavySand(),
         }
       })
     }],
@@ -56,7 +56,7 @@
         }
       }
     },
-    colors: [ColorUtility.SkylarksNavy]
+    colors: [ColorUtility.getDynamicColorNavySand()]
   };
 </script>
 

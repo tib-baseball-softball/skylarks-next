@@ -17,6 +17,27 @@
       const ApexCharts = (await import('apexcharts')).default;
       chart = new ApexCharts(chartElement, options);
       await chart.render();
+
+      const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+      function changeTheme(event: MediaQueryListEvent | MediaQueryList) {
+        if (event.matches) {
+          chart.updateOptions({
+            theme: {
+              mode: 'dark'
+            }
+          })
+        } else {
+          chart.updateOptions({
+            theme: {
+              mode: 'light'
+            }
+          })
+        }
+      }
+
+      changeTheme(darkModeQuery)
+      darkModeQuery.addEventListener("change", changeTheme)
     }
   });
 
