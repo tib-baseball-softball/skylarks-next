@@ -10,7 +10,7 @@ export type HomeDataset = {
   playoff_series: PlayoffSeries | null,
   table: Table,
   table_row: TableRow | null
-  streak_data: StreakDataEntry[]
+  streak_data: StreakDataEntry[] | null,
 }
 
 export type StreakDataEntry = {

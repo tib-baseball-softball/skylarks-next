@@ -84,7 +84,7 @@
         </section>
       {/if}
 
-      {#if dataset.streak_data.length > 0}
+      {#if dataset.streak_data?.length ?? 0 > 0}
         <section>
           <h4 class="h4 mb-3">Graphs and Mood</h4>
           <StreakGraphSection {dataset}/>
