@@ -1,7 +1,7 @@
 # Skylarks-Next
 
-New experimental website/progressive web app for
-the [website of the Berlin Skylarks Baseball & Softball Club](https://www.tib-baseball.de/).
+Experimental progressive web app for
+the [Berlin Skylarks Baseball & Softball Club](https://www.tib-baseball.de/).
 Built with Pocketbase, SvelteKit, Skeleton UI and Tailwind CSS.
 
 ## Concept / Background
