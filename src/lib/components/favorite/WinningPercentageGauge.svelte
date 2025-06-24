@@ -8,7 +8,7 @@
   }
 
   let {tableRow}: Props = $props();
-  const percentage = $derived(parseFloat(tableRow.quota) * 100);
+  const percentage = $derived(Math.round(parseFloat(tableRow.quota) * 100));
 
   const options: ApexCharts.ApexOptions = $derived({
     chart: {
