@@ -6,12 +6,11 @@
   interface Props {
     streakData: StreakDataEntry[];
   }
-
   let {streakData}: Props = $props();
 
   const options: ApexCharts.ApexOptions = $derived({
     chart: {
-      height: 400,
+      height: 350,
       type: "line",
       stacked: false,
       zoom: {
@@ -84,4 +83,8 @@
   });
 </script>
 
-<ApexChart {options}/>
+<ApexChart {options}>
+  {#snippet beforeContent()}
+    <h5 class="h5">Season Progression</h5>
+  {/snippet}
+</ApexChart>
