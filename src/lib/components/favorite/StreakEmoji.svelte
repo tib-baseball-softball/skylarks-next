@@ -59,7 +59,8 @@
 
 <h5 class="h5">Team Mood</h5>
 <div class="flex justify-center">
-  <div class="flex flex-col items-center gap-4">
+  <div class="flex flex-col items-center gap-6 xl:gap-8">
+    <p class="text-4xl font-bold">{streak}</p>
     <p class="text-8xl">{emoji}</p>
     <p class="font-light text-sm">Clubhouse champagne celebration or dugout fights?</p>
   </div>
