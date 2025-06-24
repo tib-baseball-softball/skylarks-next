@@ -4,6 +4,7 @@
   import {Tabs} from "bits-ui";
   import LeagueChartGraph from "$lib/components/favorite/LeagueChartGraph.svelte";
   import WinningPercentageContainer from "$lib/components/favorite/WinningPercentageContainer.svelte";
+  import StreakContainer from "$lib/components/favorite/StreakContainer.svelte";
 
   interface Props {
     dataset: HomeDataset;
@@ -45,6 +46,6 @@
   </Tabs.Content>
 
   <Tabs.Content value="series" class="pt-4">
-
+    <StreakContainer dataset={dataset}/>
   </Tabs.Content>
 </Tabs.Root>
