@@ -5,7 +5,6 @@ import {browser} from "$app/environment";
 import {preferences} from "$lib/globals.svelte.ts";
 
 export const load: PageLoad = async ({parent, url, fetch}) => {
-  const data = await parent();
   let teamId = Number(url.searchParams.get("team"));
   let season = Number(url.searchParams.get("season"));
 
@@ -32,6 +31,8 @@ export const load: PageLoad = async ({parent, url, fetch}) => {
   } else {
     datasets = new Promise(() => []);
   }
+
+  const data = await parent();
 
   return {
     clubTeams: await data.clubTeams,
