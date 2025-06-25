@@ -7,8 +7,10 @@ const (
 // BSM API filters
 
 const (
-	LeagueFilter = "filters[leagues][]"
-	SearchFilter = "search"
+	LeagueFilter  = "filters[leagues][]"
+	SearchFilter  = "search"
+	SeasonFilter  = "filters[seasons][]"
+	GamedayFilter = "filters[gamedays][]"
 )
 
 const (
@@ -16,6 +18,8 @@ const (
 	TypePitching = "pitching"
 	TypeFielding = "fielding"
 )
+
+const TimeFormat = "2006-01-02 15:04:05 -0700"
 
 // Batting constants
 const (

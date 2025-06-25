@@ -13,8 +13,8 @@
 <div class="container">
   {@render icon()}
   <dl class="container">
-    <dt><strong class="">{categoryName}:</strong></dt>
-    <dd>{rowValue}</dd>
+    <dt class="font-light">{categoryName}:</dt>
+    <dd class="font-bold">{rowValue}</dd>
   </dl>
 
 </div>

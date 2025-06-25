@@ -5,6 +5,7 @@ import (
 	"errors"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
+	"github.com/tib-baseball-softball/skylarks-next/internal/pb"
 	"github.com/tib-baseball-softball/skylarks-next/internal/utility"
 	"net/url"
 	"os"
@@ -94,56 +95,60 @@ func GetCachedBSMResponse(app core.App, url *url.URL) (string, error) {
 	}
 	hash := utility.GetMD5Hash(url.String())
 
-	var record *core.Record
-	record, err := app.FindFirstRecordByData("requestcaches", "hash", hash)
+	var requestCache *pb.RequestCache
+	record, err := app.FindFirstRecordByData(pb.RequestCacheCollection, "hash", hash)
 	if err != nil {
 		// no data - request has never been cached before
-		record, err = saveToCache(app, url.String())
+		record, err = saveBSMResponseToCache(app, url.String())
 		if err != nil {
 			return ret, err
 		}
 	}
 
 	if record != nil {
-		currentTime := types.NowDateTime()
-		updated := record.GetDateTime("updated")
-		cutoff := updated.Add(cacheLifetimeMinutes * time.Minute)
+		requestCache = &pb.RequestCache{}
+		requestCache.SetProxyRecord(record)
 
-		if cutoff.Before(currentTime) {
-			// cache is outdated, delete and load new
-
+		if isOutdated(requestCache.Updated()) {
 			err = app.Delete(record)
 			if err != nil {
 				return ret, err
 			}
 
-			record, err = saveToCache(app, url.String())
+			record, err = saveBSMResponseToCache(app, url.String())
 			if err != nil {
 				return ret, err
 			}
+
+			// Update requestCache with the new record
+			requestCache = &pb.RequestCache{}
+			requestCache.SetProxyRecord(record)
 		}
-		ret = record.GetString("responseBody")
+		ret = requestCache.ResponseBody()
 	}
 
 	return ret, nil
 }
 
-func saveToCache(app core.App, url string) (*core.Record, error) {
+func saveBSMResponseToCache(app core.App, url string) (*core.Record, error) {
 	_, body, err := FetchResource[any](url)
 	if err != nil {
 		app.Logger().Error("Failed to get data from BSM", "err", err)
 		return nil, err
 	}
 
-	collection, err := app.FindCollectionByNameOrId("requestcaches")
+	collection, err := app.FindCollectionByNameOrId(pb.RequestCacheCollection)
 	if err != nil {
 		return nil, err
 	}
 
 	record := core.NewRecord(collection)
-	record.Set("responseBody", body)
-	record.Set("hash", utility.GetMD5Hash(url))
-	record.Set("url", url)
+	cache := &pb.RequestCache{}
+	cache.SetProxyRecord(record)
+
+	cache.SetResponseBody(body)
+	cache.SetHash(utility.GetMD5Hash(url))
+	cache.SetURL(url)
 
 	err = app.Save(record)
 	if err != nil {
@@ -151,4 +156,11 @@ func saveToCache(app core.App, url string) (*core.Record, error) {
 	}
 
 	return record, nil
+}
+
+func isOutdated(cacheTime types.DateTime) bool {
+	currentTime := types.NowDateTime()
+	cutoff := cacheTime.Add(cacheLifetimeMinutes * time.Minute)
+
+	return currentTime.After(cutoff)
 }

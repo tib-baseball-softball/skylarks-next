@@ -4,12 +4,12 @@
   import ReloadUponPreferenceChange from "$lib/components/navigation/ReloadUponPreferenceChange.svelte";
   import {browser} from "$app/environment";
   import {goto} from "$app/navigation";
-  import {preferences} from "$lib/stores.ts";
+  import {preferences} from "$lib/globals.svelte.ts";
   import type {PageProps} from "./$types";
 
   const reload = () => {
     if (browser) {
-      let queryString = `?season=${$preferences.selectedSeason}`;
+      let queryString = `?season=${preferences.current.selectedSeason}`;
 
       goto(queryString);
     }

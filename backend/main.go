@@ -38,7 +38,7 @@ func bindAppHooks(app core.App) {
 		if err != nil {
 			app.Logger().Error(
 				"Error upon setting auth record last login field",
-				"error", err,
+				"error", err, "user", e.Record.Id,
 			)
 		}
 		return e.Next()
@@ -123,6 +123,11 @@ func bindAppHooks(app core.App) {
 		return se.Next()
 	})
 
+	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
+		se.Router.GET("/api/team/favorite", routes.GetFavoriteTeamData())
+		return se.Next()
+	})
+
 	//------------------- Cronjobs -------------------------//
 
 	if os.Getenv("APPLICATION_CONTEXT") != "Development" {
@@ -136,6 +141,10 @@ func bindAppHooks(app core.App) {
 		app.Cron().MustAdd("GamesImport", "0 * * * *", func() {
 			gamesImportService := bsm.GameImportService{App: app}
 			gamesImportService.ImportGames()
+		})
+
+		app.Cron().MustAdd("TeamDatasetImport", "30 * * * *", func() {
+			bsm.ImportTeamDatasets(app)
 		})
 	}
 }
@@ -151,7 +160,9 @@ func main() {
 		// enable auto creation of migration files when making collection changes in the Dashboard
 		// (the isGoRun check is to enable it only during development)
 		Automigrate: isGoRun,
-	}) //------------------- Commands -------------------------//
+	})
+
+	//------------------- Commands -------------------------//
 
 	app.RootCmd.AddCommand(&cobra.Command{
 		Use: "import:games",
@@ -169,6 +180,13 @@ func main() {
 			if err != nil {
 				log.Print("Error while running LeagueGroupImport: " + err.Error())
 			}
+		},
+	})
+
+	app.RootCmd.AddCommand(&cobra.Command{
+		Use: "import:teamdatasets",
+		Run: func(cmd *cobra.Command, args []string) {
+			bsm.ImportTeamDatasets(app)
 		},
 	})
 
