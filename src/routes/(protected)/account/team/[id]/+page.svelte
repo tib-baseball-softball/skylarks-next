@@ -14,8 +14,8 @@
   let currentPage = $derived($events.page);
 
   let showEvents = $state("next");
-  let sorting: "asc" | "desc" = $state("asc");
-  let showTypes: EventType | "any" = $state("any");
+  let sorting: "asc" | "desc" | string = $state("asc");
+  let showTypes: EventType | "any" | string = $state("any");
 
   const reloadWithQuery = () => {
     let queryString = `?timeframe=${showEvents}&page=${currentPage}&sort=${sorting}&type=${showTypes}`;

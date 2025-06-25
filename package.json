@@ -6,13 +6,13 @@
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest && pnpm test:e2e",
+    "test": "dotenvx run -- vitest && pnpm test:e2e",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "generate:types": "typed-pocketbase -d src/lib/model",
-    "test:e2e": "playwright test",
-    "test:ui": "playwright test --ui",
-    "test:unit": "vitest"
+    "test:e2e": "dotenvx run -- playwright test",
+    "test:ui": "dotenvx run -- playwright test --ui",
+    "test:unit": "dotenvx run -- vitest"
   },
   "devDependencies": {
     "@dotenvx/dotenvx": "^1.45.1",
