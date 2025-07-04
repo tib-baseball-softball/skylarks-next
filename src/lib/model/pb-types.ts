@@ -1036,6 +1036,7 @@ export interface AnnouncementsResponse extends BaseCollectionResponse {
 	club: string;
 	team: string;
 	author: string;
+	link_text: string;
 	created: string;
 	updated: string;
 }
@@ -1049,6 +1050,7 @@ export interface AnnouncementsCreate extends BaseCollectionCreate {
 	club?: string;
 	team?: string;
 	author: string;
+	link_text?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -1062,6 +1064,7 @@ export interface AnnouncementsUpdate extends BaseCollectionUpdate {
 	club?: string;
 	team?: string;
 	author: string;
+	link_text?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
