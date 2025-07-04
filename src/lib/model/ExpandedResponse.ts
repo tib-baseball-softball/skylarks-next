@@ -75,6 +75,7 @@ export type EventSeriesCreationData = Extension<EventseriesCreate, {
 
 export type ExpandedAnnouncement = Extension<AnnouncementsResponse, {
   expand?: {
-    author: CustomAuthModel
+    author: CustomAuthModel,
+    club?: ClubsResponse,
   }
 }>

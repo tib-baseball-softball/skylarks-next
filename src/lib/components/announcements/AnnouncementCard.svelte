@@ -1,7 +1,11 @@
 <script lang="ts">
-  import type { ExpandedAnnouncement } from "$lib/model/ExpandedResponse";
-  import { Pencil } from "lucide-svelte";
-  import PriorityBadge from "./PriorityBadge.svelte";
+  import type {
+    ExpandedAnnouncement,
+    ExpandedClub,
+  } from "$lib/model/ExpandedResponse";
+  import Dialog from "../utility/Dialog.svelte";
+  import AnnouncementCoreContent from "./AnnouncementCoreContent.svelte";
+  import AnnouncementDialog from "../forms/AnnouncementForm.svelte";
 
   interface Props {
     announcement: ExpandedAnnouncement;
@@ -11,21 +15,14 @@
 </script>
 
 <article class="card p-4 preset-tonal-surface shadow-xl">
-  <header class="grid grid-cols-6">
-    <h3 class="col-span-5 h4">{announcement.title}</h3>
+  <AnnouncementCoreContent {announcement} textClasses="line-clamp-5" />
 
-    <PriorityBadge priority={announcement.priority} />
-  </header>
+  <hr class="mt-6 mb-2" />
 
-  <p class="my-3 flex gap-3">
-    <Pencil />
-    <span>
-      {announcement.expand?.author.first_name}
-      {announcement.expand?.author.last_name}
-    </span>
-  </p>
-
-  <p class="text-sm">
-    {@html announcement.bodytext}
-  </p>
+  <footer class="mt-3 flex gap-2 justify-end">
+    <a
+      href="/account/announcements/{announcement.id}"
+      class="btn btn-sm preset-filled-primary-500">Read more</a
+    >
+  </footer>
 </article>
