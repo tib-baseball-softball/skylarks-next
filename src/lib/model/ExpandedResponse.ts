@@ -1,5 +1,6 @@
 import type { RecordModel } from "pocketbase";
 import type {
+  AnnouncementsResponse,
   ClubsResponse,
   EventsCreate,
   EventseriesCreate,
@@ -70,4 +71,10 @@ export type EventSeriesCreationData = Extension<EventseriesCreate, {
   desc: EventsCreate['desc'],
   series_start: string
   series_end: string
+}>
+
+export type ExpandedAnnouncement = Extension<AnnouncementsResponse, {
+  expand?: {
+    author: CustomAuthModel
+  }
 }>

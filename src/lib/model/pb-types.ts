@@ -251,6 +251,7 @@ export interface UsersCollection {
 		clubs_via_admins: ClubsCollection[];
 		teams_via_admins: TeamsCollection[];
 		participations_via_user: ParticipationsCollection[];
+		announcements_via_author: AnnouncementsCollection[];
 	};
 }
 
@@ -388,6 +389,7 @@ export interface ClubsCollection {
 		leaguegroups_via_clubs: LeaguegroupsCollection[];
 		uniformsets_via_club: UniformsetsCollection[];
 		locations_via_club: LocationsCollection[];
+		announcements_via_club: AnnouncementsCollection[];
 	};
 }
 
@@ -451,6 +453,7 @@ export interface TeamsCollection {
 		club: ClubsCollection;
 		admins: UsersCollection[];
 		eventseries_via_team: EventseriesCollection[];
+		announcements_via_team: AnnouncementsCollection[];
 	};
 }
 
@@ -463,6 +466,7 @@ export interface RequestcachesResponse extends BaseCollectionResponse {
 	hash: string;
 	responseBody?: RequestcachesResponseBody
 	url: string;
+	identifier: string;
 	created: string;
 	updated: string;
 }
@@ -471,7 +475,8 @@ export interface RequestcachesCreate extends BaseCollectionCreate {
 	id?: string;
 	hash: string;
 	responseBody?: RequestcachesResponseBody
-	url: string | URL;
+	url?: string | URL;
+	identifier?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -480,7 +485,8 @@ export interface RequestcachesUpdate extends BaseCollectionUpdate {
 	id: string;
 	hash: string;
 	responseBody?: RequestcachesResponseBody
-	url: string | URL;
+	url?: string | URL;
+	identifier?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -1017,6 +1023,63 @@ export interface LocationsCollection {
 	};
 }
 
+// ===== announcements block =====
+// ===== announcements =====
+
+export interface AnnouncementsResponse extends BaseCollectionResponse {
+	collectionName: 'announcements';
+	id: string;
+	title: string;
+	bodytext: string;
+	link: string;
+	priority: 'info' | 'warning' | 'danger';
+	club: string;
+	team: string;
+	author: string;
+	created: string;
+	updated: string;
+}
+
+export interface AnnouncementsCreate extends BaseCollectionCreate {
+	id?: string;
+	title: string;
+	bodytext: string;
+	link?: string | URL;
+	priority: 'info' | 'warning' | 'danger';
+	club?: string;
+	team?: string;
+	author: string;
+	created?: string | Date;
+	updated?: string | Date;
+}
+
+export interface AnnouncementsUpdate extends BaseCollectionUpdate {
+	id: string;
+	title: string;
+	bodytext: string;
+	link?: string | URL;
+	priority: 'info' | 'warning' | 'danger';
+	club?: string;
+	team?: string;
+	author: string;
+	created?: string | Date;
+	updated?: string | Date;
+}
+
+export interface AnnouncementsCollection {
+	type: 'base';
+	collectionId: string;
+	collectionName: 'announcements';
+	response: AnnouncementsResponse;
+	create: AnnouncementsCreate;
+	update: AnnouncementsUpdate;
+	relations: {
+		club: ClubsCollection;
+		team: TeamsCollection;
+		author: UsersCollection;
+	};
+}
+
 // ===== Schema =====
 
 export type Schema = {
@@ -1035,4 +1098,5 @@ export type Schema = {
 	_authOrigins: AuthOriginsCollection;
 	eventseries: EventseriesCollection;
 	locations: LocationsCollection;
+	announcements: AnnouncementsCollection;
 }
