@@ -3,34 +3,61 @@
   import TeamListTeaser from "$lib/components/diamondplanner/team/TeamListTeaser.svelte";
   import UniformSetInfoCard from "$lib/components/diamondplanner/uniformset/UniformSetInfoCard.svelte";
   import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
-  import type {CustomAuthModel, ExpandedClub, ExpandedTeam, ExpandedUniformSet,} from "$lib/model/ExpandedResponse";
-  import {authSettings} from "$lib/pocketbase/index.svelte";
-  import {Mail, Plus, SquareArrowOutUpRight} from "lucide-svelte";
-  import type {PageProps} from "./$types";
+  import type {
+    CustomAuthModel,
+    ExpandedClub,
+    ExpandedTeam,
+    ExpandedUniformSet,
+  } from "$lib/model/ExpandedResponse";
+  import { authSettings, client } from "$lib/pocketbase/index.svelte";
+  import { Mail, Plus, SquareArrowOutUpRight } from "lucide-svelte";
+  import type { PageProps } from "./$types";
   import TeamForm from "$lib/components/forms/TeamForm.svelte";
   import Dialog from "$lib/components/utility/Dialog.svelte";
+  import AnnouncementCard from "$lib/components/announcements/AnnouncementCard.svelte";
 
-  let {data}: PageProps = $props();
+  let { data }: PageProps = $props();
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
   let club: ExpandedClub = $derived(data.club);
   let teams: ExpandedTeam[] = $derived(data.teams);
   let uniformSets: ExpandedUniformSet[] = $derived(data.uniformSets);
+  let announcementStore = $derived(data.announcementStore);
 </script>
 
 <svelte:head>
   <title>Details for {club.name}</title>
   <meta
-          name="description"
-          content="Club overview page for the {club.name} with info about teams and uniform sets."
+    name="description"
+    content="Club overview page for the {club.name} with info about teams and uniform sets."
   />
 </svelte:head>
 
 <h1 class="h1 mt-4! mb-6!">{club.name}</h1>
 
 <section class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
-  <ClubDetailCard {club}/>
+  <ClubDetailCard {club} />
+</section>
+
+<section>
+  <header>
+    <h2 class="h2 mb-3">Announcements</h2>
+  </header>
+
+  <div class="">
+    {#if $announcementStore.totalItems > 0}
+      <ul class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 mb-3">
+        {#each $announcementStore.items as announcement (announcement.id)}
+          <li>
+            <AnnouncementCard {announcement} />
+          </li>
+        {/each}
+      </ul>
+    {:else}
+      <p>No announcements available.</p>
+    {/if}
+  </div>
 </section>
 
 <section class="mt-8!">
@@ -38,9 +65,9 @@
     <h2 class="h2 mb-3">Club Teams</h2>
   </header>
 
-  <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
+  <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 mb-3">
     {#each teams as team (team.id)}
-      <TeamListTeaser {team} link={true}/>
+      <TeamListTeaser {team} link={true} />
     {/each}
 
     {#if teams.length === 0}
@@ -50,10 +77,10 @@
 
   {#if club?.admins.includes(authRecord.id)}
     <TeamForm
-            team={null}
-            club={club}
-            buttonClasses="btn preset-filled-primary-500"
-            showLabel={true}
+      team={null}
+      {club}
+      buttonClasses="btn preset-filled-primary-500"
+      showLabel={true}
     />
   {/if}
 </section>
@@ -63,18 +90,16 @@
     <h2 class="h2 mb-3">Uniform Sets</h2>
   </header>
 
-  <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
+  <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 mb-3">
     {#each uniformSets as uniformSet}
-      <UniformSetInfoCard {uniformSet}/>
+      <UniformSetInfoCard {uniformSet} />
     {/each}
   </div>
 
   {#if club?.admins.includes(authRecord.id)}
-
     <Dialog triggerClasses="btn preset-filled-primary-500">
-
       {#snippet triggerContent()}
-        <Plus/>
+        <Plus />
         <span>Create new</span>
       {/snippet}
 
@@ -84,9 +109,8 @@
         </header>
       {/snippet}
 
-      <UniformSetForm uniformSet={null} clubID={club.id}/>
+      <UniformSetForm uniformSet={null} clubID={club.id} />
     </Dialog>
-
   {/if}
 </section>
 
@@ -95,14 +119,17 @@
     <h2 class="h2 mb-3">Team Locations</h2>
   </header>
 
-  <a class="btn preset-filled-primary-500" href="/account/clubs/{club.id}/locations">
+  <a
+    class="btn preset-filled-primary-500"
+    href="/account/clubs/{club.id}/locations"
+  >
     <span>Locations Page</span>
-    <SquareArrowOutUpRight size="20"/>
+    <SquareArrowOutUpRight size="20" />
   </a>
 </section>
 
 {#if club?.admins.includes(authRecord.id)}
-  <hr class="my-2"/>
+  <hr class="my-2" />
 
   <section>
     <header>
@@ -110,7 +137,7 @@
     </header>
 
     <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-3"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-3"
     >
       <article class="card admin-card preset-outlined-surface-500">
         <header class="card-header">
@@ -128,10 +155,10 @@
 
         <footer class="card-footer flex">
           <a
-                  class="btn preset-tonal-secondary border border-secondary-500 dark:preset-filled-secondary-500 dark:border grow"
-                  href="mailto:webmaster@tib-baseball.de"
+            class="btn preset-tonal-secondary border border-secondary-500 dark:preset-filled-secondary-500 dark:border grow"
+            href="mailto:webmaster@tib-baseball.de"
           >
-            <Mail/>
+            <Mail />
             <span class="ms-2">Contact</span>
           </a>
         </footer>
