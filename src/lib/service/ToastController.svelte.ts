@@ -24,6 +24,20 @@ class ToastController {
   public clear() {
     this.toastQueue = [];
   }
+
+  public triggerGenericFormSuccessMessage(modelName: string) {
+    this.trigger({
+      message: `${modelName} data saved successfully.`,
+      background: "preset-filled-success-500"
+    });
+  }
+
+  public triggerGenericFormErrorMessage(modelName: string) {
+    this.trigger({
+      message: `An error occurred while saving ${modelName} data.`,
+      background: "preset-filled-error-500",
+    });
+  }
 }
 
 export const toastController = new ToastController();
