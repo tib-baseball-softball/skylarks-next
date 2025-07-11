@@ -1,6 +1,6 @@
 <script lang="ts">
   import type {PageProps} from "./$types";
-  import {User} from "lucide-svelte";
+  import {Calendar, Clock, User} from "lucide-svelte";
   import PriorityBadge from "$lib/components/announcements/PriorityBadge.svelte";
   import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
@@ -16,6 +16,8 @@
   function deleteAction(id: string) {
     client.collection("announcements").delete(id);
   }
+
+  const updated = $derived($announcement.updated);
 </script>
 
 <div class="flex justify-between items-center gap-4 lg:gap-6">
@@ -25,13 +27,36 @@
 
 <div class="flex justify-center">
   <div>
-    <section>
-      <p class="my-6 flex gap-3 items-center">
+    <section class="my-6 space-y-3">
+      <dl class="flex gap-2 items-center">
+        {#if $announcement.expand?.team}
+          <dt>Team:</dt>
+          <dd class="badge preset-tonal-primary border border-primary-500">
+            {$announcement.expand?.team?.name}
+          </dd>
+        {/if}
+
+        {#if $announcement.expand?.club}
+          <dt>Club:</dt>
+          <dd class="badge preset-tonal-primary border border-primary-500">
+            {$announcement.expand?.club?.name}
+          </dd>
+        {/if}
+      </dl>
+
+      <p class="flex gap-3 items-center">
         <User size="28"/>
-        <span class="h6">
-        {$announcement.expand?.author.first_name}
-          {$announcement.expand?.author.last_name}
-      </span>
+        <span class="h6">{$announcement.expand?.author.first_name} {$announcement.expand?.author.last_name}</span>
+      </p>
+
+      <p class="flex gap-3 items-center">
+        <Calendar size="28"/>
+        <time class="h6" datetime="{updated}">{new Date(updated).toLocaleDateString()}</time>
+      </p>
+
+      <p class="flex gap-3 items-center">
+        <Clock size="28"/>
+        <time class="h6" datetime="{updated}">{new Date(updated).toLocaleTimeString()}</time>
       </p>
     </section>
 
