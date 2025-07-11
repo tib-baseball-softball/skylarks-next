@@ -8,10 +8,13 @@
   import {authSettings} from "$lib/pocketbase/index.svelte";
   import TeamAdminSection from "$lib/components/diamondplanner/team/TeamAdminSection.svelte";
   import {Users} from "lucide-svelte";
+  import AnnouncementSectionContent from "$lib/components/announcements/AnnouncementSectionContent.svelte";
+  import type {PageProps} from "./$types";
 
-  let {data} = $props();
+  let {data}: PageProps = $props();
   const events = $derived(data.events);
   let currentPage = $derived($events.page);
+  let announcementStore = $derived(data.announcementStore);
 
   let showEvents = $state("next");
   let sorting: "asc" | "desc" | string = $state("asc");
@@ -46,7 +49,15 @@
   <TeamTeaserCard team={data.team} link={false}/>
 </div>
 
-<h2 class="h3">Team Events</h2>
+<section class="my-8!">
+  <header>
+    <h2 class="h2 mb-3">Announcements</h2>
+  </header>
+
+  <AnnouncementSectionContent store={announcementStore} />
+</section>
+
+<h2 class="h2">Team Events</h2>
 
 <div
         class="flex flex-wrap gap-4 xl:flex-nowrap preset-tonal-surface justify-between px-4 py-3 rounded-base text-sm lg:text-base"

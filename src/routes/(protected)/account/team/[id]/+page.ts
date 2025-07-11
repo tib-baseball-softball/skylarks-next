@@ -1,10 +1,12 @@
 import {client} from "$lib/pocketbase/index.svelte";
 import {error} from "@sveltejs/kit";
-import type {ExpandedTeam} from "$lib/model/ExpandedResponse.js";
+import type {ExpandedAnnouncement, ExpandedTeam} from "$lib/model/ExpandedResponse.js";
 import type {PageLoad} from "./$types";
 import {EventService} from "$lib/service/EventService";
 import type {EventseriesResponse} from "$lib/model/pb-types.ts";
 import {dev} from "$app/environment";
+import {watchWithPagination} from "$lib/pocketbase/RecordOperations.ts";
+import {page} from "$app/state";
 
 export const load = (async ({fetch, parent, params, url, depends}) => {
   const data = await parent();
@@ -41,11 +43,27 @@ export const load = (async ({fetch, parent, params, url, depends}) => {
     fetch: fetch
   });
 
+  const pageQuery = url.searchParams.get("page") ?? "1"
+  const page = Number(pageQuery)
+
+  const announcements = await watchWithPagination<ExpandedAnnouncement>(
+      "announcements",
+      {
+        filter: `team.id = "${team.id}"`,
+        sort: "-updated",
+        fetch: fetch,
+        expand: "author,club,team"
+      },
+      page,
+      3,
+  );
+
   depends("event:list");
 
   return {
     team: team,
     events: events,
     eventSeries: eventSeries,
+    announcementStore: announcements,
   };
 }) satisfies PageLoad;
