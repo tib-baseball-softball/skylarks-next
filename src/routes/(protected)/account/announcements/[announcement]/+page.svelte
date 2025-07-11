@@ -6,6 +6,7 @@
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
   import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
   import AnnouncementForm from "$lib/components/forms/AnnouncementForm.svelte";
+  import CommentSection from "$lib/components/comments/CommentSection.svelte";
 
   let {data}: PageProps = $props();
   const announcement = $derived(data.announcement);
@@ -63,7 +64,6 @@
 
     <section class="prose text-justify">
       {@html $announcement.bodytext}
-
     </section>
 
     {#if $announcement.link}
@@ -82,6 +82,13 @@
         </a>
       </section>
     {/if}
+
+    <section class="my-6">
+      <header>
+        <h2 class="h4">Comments</h2>
+      </header>
+      <CommentSection comments={$announcement?.expand?.comments_via_announcement ?? []}/>
+    </section>
 
     {#if canEdit}
       <hr class="my-6"/>
