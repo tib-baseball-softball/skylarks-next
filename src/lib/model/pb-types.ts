@@ -252,6 +252,7 @@ export interface UsersCollection {
 		teams_via_admins: TeamsCollection[];
 		participations_via_user: ParticipationsCollection[];
 		announcements_via_author: AnnouncementsCollection[];
+		comments_via_user: CommentsCollection[];
 	};
 }
 
@@ -334,6 +335,7 @@ export interface EventsCollection {
 		series: EventseriesCollection;
 		location: LocationsCollection;
 		participations_via_event: ParticipationsCollection[];
+		comments_via_event: CommentsCollection[];
 	};
 }
 
@@ -1080,6 +1082,55 @@ export interface AnnouncementsCollection {
 		club: ClubsCollection;
 		team: TeamsCollection;
 		author: UsersCollection;
+		comments_via_announcement: CommentsCollection[];
+	};
+}
+
+// ===== comments block =====
+// ===== comments =====
+
+export interface CommentsResponse extends BaseCollectionResponse {
+	collectionName: 'comments';
+	id: string;
+	text: string;
+	user: string;
+	announcement: string;
+	event: string;
+	created: string;
+	updated: string;
+}
+
+export interface CommentsCreate extends BaseCollectionCreate {
+	id?: string;
+	text: string;
+	user: string;
+	announcement?: string;
+	event?: string;
+	created?: string | Date;
+	updated?: string | Date;
+}
+
+export interface CommentsUpdate extends BaseCollectionUpdate {
+	id: string;
+	text: string;
+	user: string;
+	announcement?: string;
+	event?: string;
+	created?: string | Date;
+	updated?: string | Date;
+}
+
+export interface CommentsCollection {
+	type: 'base';
+	collectionId: string;
+	collectionName: 'comments';
+	response: CommentsResponse;
+	create: CommentsCreate;
+	update: CommentsUpdate;
+	relations: {
+		user: UsersCollection;
+		announcement: AnnouncementsCollection;
+		event: EventsCollection;
 	};
 }
 
@@ -1102,4 +1153,5 @@ export type Schema = {
 	eventseries: EventseriesCollection;
 	locations: LocationsCollection;
 	announcements: AnnouncementsCollection;
+	comments: CommentsCollection;
 }
