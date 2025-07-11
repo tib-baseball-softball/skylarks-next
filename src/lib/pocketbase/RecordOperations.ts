@@ -113,6 +113,7 @@ export async function watchWithPagination<T extends RecordModel>(
   let result = await collection.getList<T>(page, perPage, queryParams);
   let set: Subscriber<ListResult<T>>;
   let unsubRealtime: UnsubscribeFunc | undefined;
+
   // fetch first page
   const store = readable<ListResult<T>>(result, (_set) => {
     set = _set;

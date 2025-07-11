@@ -3,18 +3,13 @@
   import TeamListTeaser from "$lib/components/diamondplanner/team/TeamListTeaser.svelte";
   import UniformSetInfoCard from "$lib/components/diamondplanner/uniformset/UniformSetInfoCard.svelte";
   import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
-  import type {
-    CustomAuthModel,
-    ExpandedClub,
-    ExpandedTeam,
-    ExpandedUniformSet,
-  } from "$lib/model/ExpandedResponse";
-  import { authSettings, client } from "$lib/pocketbase/index.svelte";
-  import { Mail, Plus, SquareArrowOutUpRight } from "lucide-svelte";
-  import type { PageProps } from "./$types";
+  import type {CustomAuthModel, ExpandedClub, ExpandedTeam, ExpandedUniformSet,} from "$lib/model/ExpandedResponse";
+  import {authSettings} from "$lib/pocketbase/index.svelte";
+  import {Mail, Plus, SquareArrowOutUpRight} from "lucide-svelte";
+  import type {PageProps} from "./$types";
   import TeamForm from "$lib/components/forms/TeamForm.svelte";
   import Dialog from "$lib/components/utility/Dialog.svelte";
-  import AnnouncementCard from "$lib/components/announcements/AnnouncementCard.svelte";
+  import AnnouncementSectionContent from "$lib/components/announcements/AnnouncementSectionContent.svelte";
 
   let { data }: PageProps = $props();
 
@@ -45,19 +40,7 @@
     <h2 class="h2 mb-3">Announcements</h2>
   </header>
 
-  <div class="">
-    {#if $announcementStore.totalItems > 0}
-      <ul class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 mb-3">
-        {#each $announcementStore.items as announcement (announcement.id)}
-          <li>
-            <AnnouncementCard {announcement} />
-          </li>
-        {/each}
-      </ul>
-    {:else}
-      <p>No announcements available.</p>
-    {/if}
-  </div>
+  <AnnouncementSectionContent store={announcementStore} />
 </section>
 
 <section class="mt-8!">
