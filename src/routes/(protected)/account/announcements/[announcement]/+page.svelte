@@ -15,6 +15,7 @@
 
   function deleteAction(id: string) {
     client.collection("announcements").delete(id);
+    history.back();
   }
 
   const updated = $derived($announcement.updated);

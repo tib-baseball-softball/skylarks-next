@@ -8,7 +8,6 @@
   import * as Sheet from "$lib/components/utility/sheet/index.js";
   import {toastController} from "$lib/service/ToastController.svelte.ts";
 
-
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
   interface Props {
@@ -20,7 +19,6 @@
   }
 
   let {announcement = null, club = null, team = null, buttonClasses = "", showLabel = true}: Props = $props();
-  let formElement: HTMLFormElement;
 
   let form: Partial<ExpandedAnnouncement> = $state(
       announcement ?? {
@@ -58,7 +56,6 @@
     if (result) {
       toastController.triggerGenericFormSuccessMessage("Announcement");
       open = false;
-      formElement.reset()
     }
     await invalidateAll();
   }
@@ -90,7 +87,7 @@
       {/if}
     </header>
 
-    <form bind:this={formElement} class="mt-4 space-y-3" onsubmit={submitForm}>
+    <form class="mt-4 space-y-3" onsubmit={submitForm}>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 xl:gap-4">
         <input
                 autocomplete="off"
@@ -205,6 +202,10 @@
       <div class="flex justify-center gap-3">
         <button class="mt-2 btn preset-filled-primary-500" type="submit">
           Submit
+        </button>
+
+        <button class="mt-2 btn preset-outlined-warning-500" type="reset">
+          Reset form
         </button>
       </div>
     </form>
