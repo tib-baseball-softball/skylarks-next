@@ -20,14 +20,17 @@
   }
 
   let {announcement = null, club = null, team = null, buttonClasses = "", showLabel = true}: Props = $props();
+  let formElement: HTMLFormElement;
 
-  const form: Partial<ExpandedAnnouncement> = $state(
+  let form: Partial<ExpandedAnnouncement> = $state(
       announcement ?? {
         title: "",
         bodytext: "",
         link: "",
         link_text: "",
         author: authRecord?.id,
+        club: club?.id,
+        team: team?.id,
       },
   );
 
@@ -41,11 +44,11 @@
     try {
       if (form.id) {
         result = await client
-            .collection("clubs")
+            .collection("announcements")
             .update<AnnouncementsResponse>(form.id, form);
       } else {
         result = await client
-            .collection("clubs")
+            .collection("announcements")
             .create<AnnouncementsResponse>(form);
       }
     } catch {
@@ -55,6 +58,7 @@
     if (result) {
       toastController.triggerGenericFormSuccessMessage("Announcement");
       open = false;
+      formElement.reset()
     }
     await invalidateAll();
   }
@@ -70,7 +74,7 @@
     {:else}
       <Plus/>
       {#if showLabel}
-        <span>Create Announcement</span>
+        <span>Create new</span>
       {/if}
     {/if}
   </Sheet.Trigger>
@@ -86,7 +90,7 @@
       {/if}
     </header>
 
-    <form class="mt-4 space-y-3" onsubmit={submitForm}>
+    <form bind:this={formElement} class="mt-4 space-y-3" onsubmit={submitForm}>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 xl:gap-4">
         <input
                 autocomplete="off"
@@ -97,7 +101,103 @@
                 type="hidden"
         />
 
+        <input
+                autocomplete="off"
+                bind:value={form.author}
+                class="input"
+                name="author"
+                readonly
+                type="hidden"
+        />
 
+        {#if club}
+          <input
+                  autocomplete="off"
+                  bind:value={club.id}
+                  class="input"
+                  name="club"
+                  readonly
+                  type="hidden"
+          />
+        {/if}
+
+        {#if team}
+          <input
+                  autocomplete="off"
+                  bind:value={team.id}
+                  class="input"
+                  name="team"
+                  readonly
+                  type="hidden"
+          />
+        {/if}
+
+        <label class="label md:col-span-2">
+          <span>Title</span>
+          <input
+                  bind:value={form.title}
+                  class="input"
+                  name="title"
+                  required
+                  type="text"
+          />
+        </label>
+
+        <label class="label md:col-span-2">
+          Announcement Text
+          <textarea name="desc" class="textarea" bind:value={form.bodytext} rows="10" required
+          ></textarea>
+        </label>
+
+        <fieldset class="md:col-span-2 border border-surface-200-800 p-3 rounded-base">
+          <legend class="legend mb-3">Priority</legend>
+          {#each ["info", "warning", "danger"] as prio}
+            <label class="label priority-radio-label flex items-center gap-2 my-1">
+              <input
+                      class="radio"
+                      type="radio"
+                      name="priority"
+                      value={prio}
+                      required
+                      checked={prio === "info"}
+                      bind:group={form.priority}
+              />
+              {prio}
+            </label>
+          {/each}
+        </fieldset>
+
+        <fieldset class="md:col-span-2 border border-surface-200-800 p-3 rounded-base">
+          <legend class="legend mb-3">Link Settings</legend>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <label class="label">
+              <span>Link</span>
+              <input
+                      bind:value={form.link}
+                      class="input"
+                      name="link"
+                      type="url"
+                      placeholder="https://example.com"
+                      pattern="https?://.+"
+                      title="Please enter a valid URL"
+              />
+              <span class="text-sm">Single link in case the announcement is used as a call to action.</span>
+            </label>
+
+            <label class="label">
+              <span>Link Text</span>
+              <input
+                      bind:value={form.link_text}
+                      class="input"
+                      name="link_text"
+                      placeholder="Click here"
+                      type="text"
+              />
+              <span class="text-sm">If not set, the link itself will be used as a the text.</span>
+            </label>
+          </div>
+        </fieldset>
       </div>
 
       <hr class="my-5!"/>
@@ -111,3 +211,9 @@
 
   </Sheet.Content>
 </Sheet.Root>
+
+<style>
+    .priority-radio-label {
+        text-transform: capitalize;
+    }
+</style>

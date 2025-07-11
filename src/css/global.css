@@ -18,3 +18,9 @@ html, body {
 hr, .hr {
     border-color: light-dark(var(--color-surface-200), var(--color-surface-100));
 }
+
+.input {
+    &::placeholder {
+        color: light-dark(var(--color-gray-500), var(--color-gray-400));
+    }
+}

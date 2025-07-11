@@ -10,6 +10,7 @@
   import {Users} from "lucide-svelte";
   import AnnouncementSectionContent from "$lib/components/announcements/AnnouncementSectionContent.svelte";
   import type {PageProps} from "./$types";
+  import AnnouncementForm from "$lib/components/forms/AnnouncementForm.svelte";
 
   let {data}: PageProps = $props();
   const events = $derived(data.events);
@@ -34,6 +35,7 @@
   });
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
+  const canEdit = $derived(data.team.admins.includes(authRecord?.id) || data.team?.expand?.club?.admins.includes(authRecord?.id))
 </script>
 
 <h1 class="h1 my-3!">{data.team.name} ({data.team?.expand?.club.name})</h1>
@@ -49,12 +51,22 @@
   <TeamTeaserCard team={data.team} link={false}/>
 </div>
 
-<section class="my-8!">
+<section class="my-8! space-y-4">
   <header>
     <h2 class="h2 mb-3">Announcements</h2>
   </header>
 
   <AnnouncementSectionContent store={announcementStore} />
+
+  {#if canEdit}
+    <AnnouncementForm
+            announcement={null}
+            team={data.team}
+            club={null}
+            buttonClasses="btn preset-filled-primary-500"
+            showLabel={true}
+    />
+  {/if}
 </section>
 
 <h2 class="h2">Team Events</h2>
@@ -127,7 +139,7 @@
   </div>
 </section>
 
-{#if data.team.admins.includes(authRecord?.id) || data.team?.expand?.club?.admins.includes(authRecord?.id)}
+{#if canEdit}
   <hr class="my-2"/>
 
   <TeamAdminSection team={data.team} eventSeries={data.eventSeries}/>

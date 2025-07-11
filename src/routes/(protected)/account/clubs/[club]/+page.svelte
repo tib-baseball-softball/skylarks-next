@@ -10,6 +10,7 @@
   import TeamForm from "$lib/components/forms/TeamForm.svelte";
   import Dialog from "$lib/components/utility/Dialog.svelte";
   import AnnouncementSectionContent from "$lib/components/announcements/AnnouncementSectionContent.svelte";
+  import AnnouncementForm from "$lib/components/forms/AnnouncementForm.svelte";
 
   let { data }: PageProps = $props();
 
@@ -35,12 +36,22 @@
   <ClubDetailCard {club} />
 </section>
 
-<section class="mt-8!">
+<section class="mt-8! space-y-4">
   <header>
     <h2 class="h2 mb-3">Announcements</h2>
   </header>
 
   <AnnouncementSectionContent store={announcementStore} />
+
+  {#if club?.admins.includes(authRecord.id)}
+    <AnnouncementForm
+            announcement={null}
+            team={null}
+            {club}
+            buttonClasses="btn preset-filled-primary-500"
+            showLabel={true}
+    />
+  {/if}
 </section>
 
 <section class="mt-8!">
