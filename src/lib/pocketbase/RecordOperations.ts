@@ -72,12 +72,8 @@ export async function watchSingleRecord<T extends RecordModel>(
           recordID,
           ({action, record}) => {
             (async function (action: string) {
-
-              switch (action) {
-                case "update":
-                  result = record
-                case "create":
-                case "delete":
+              if (action === "update") {
+                result = record;
               }
               return result;
             })(action).then((record) => set((result = record)));
