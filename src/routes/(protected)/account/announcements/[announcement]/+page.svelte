@@ -5,11 +5,13 @@
   import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
   import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
+  import AnnouncementForm from "$lib/components/forms/AnnouncementForm.svelte";
 
   let {data}: PageProps = $props();
   const announcement = $derived(data.announcement);
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
+  const canEdit = $derived($announcement.expand?.club?.admins.includes(authRecord.id) || $announcement.expand?.team?.admins.includes(authRecord.id));
 
   function deleteAction(id: string) {
     client.collection("announcements").delete(id);
@@ -39,7 +41,7 @@
     </section>
 
     {#if $announcement.link}
-      <section class="my-4">
+      <section class="my-6">
         <header>
           <h2 class="h4">Link</h2>
         </header>
@@ -55,20 +57,28 @@
       </section>
     {/if}
 
-    <section class="my-4">
+    {#if canEdit}
+      <hr class="my-6"/>
 
-      <header>
-        <h2 class="h4">Admin Options</h2>
-      </header>
-      {#if $announcement?.expand?.club?.admins.includes(authRecord.id)}
-        <div class="flex mt-3">
+      <section class="my-8 card p-4 border border-surface-900-100">
+
+        <header>
+          <h2 class="h4">Admin Options</h2>
+        </header>
+        <div class="flex gap-3 mt-3 items-center flex-wrap">
+          <AnnouncementForm showLabel={true} announcement={$announcement} club={$announcement.expand?.club ?? null}
+                            team={$announcement.expand?.team ?? null}
+                            buttonClasses="btn preset-tonal-tertiary border border-tertiary-500"/>
+
           <DeleteButton
                   id={$announcement.id}
                   modelName="Announcement"
                   action={deleteAction}
+                  buttonText="Delete Announcement"
+                  classes="btn preset-tonal-error border border-error-500"
           />
         </div>
-      {/if}
-    </section>
+      </section>
+    {/if}
   </div>
 </div>

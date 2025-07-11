@@ -1,4 +1,4 @@
-import type { RecordModel } from "pocketbase";
+import type {RecordModel} from "pocketbase";
 import type {
   AnnouncementsResponse,
   ClubsResponse,
@@ -77,5 +77,6 @@ export type ExpandedAnnouncement = Extension<AnnouncementsResponse, {
   expand?: {
     author: CustomAuthModel,
     club?: ClubsResponse,
+    team?: TeamsResponse,
   }
 }>

@@ -35,7 +35,7 @@
   <ClubDetailCard {club} />
 </section>
 
-<section>
+<section class="mt-8!">
   <header>
     <h2 class="h2 mb-3">Announcements</h2>
   </header>
@@ -97,7 +97,7 @@
   {/if}
 </section>
 
-<section class="mt-8!">
+<section class="mt-10!">
   <header>
     <h2 class="h2 mb-3">Team Locations</h2>
   </header>
@@ -112,11 +112,11 @@
 </section>
 
 {#if club?.admins.includes(authRecord.id)}
-  <hr class="my-2" />
+  <hr class="mt-10 mb-6" />
 
   <section>
     <header>
-      <h2 class="h3 mb-3">Admin Section</h2>
+      <h2 class="h3 mb-4">Admin Section</h2>
     </header>
 
     <div

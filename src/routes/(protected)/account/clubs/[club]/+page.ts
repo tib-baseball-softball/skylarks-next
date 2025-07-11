@@ -1,8 +1,7 @@
-import type { PageLoad } from "./$types";
-import { client } from "$lib/pocketbase/index.svelte";
-import type { ExpandedAnnouncement, ExpandedClub, ExpandedTeam, ExpandedUniformSet } from "$lib/model/ExpandedResponse";
-import { watchWithPagination } from "$lib/pocketbase/RecordOperations";
-import type { AnnouncementsResponse } from "$lib/model/pb-types";
+import type {PageLoad} from "./$types";
+import {client} from "$lib/pocketbase/index.svelte";
+import type {ExpandedAnnouncement, ExpandedClub, ExpandedTeam, ExpandedUniformSet} from "$lib/model/ExpandedResponse";
+import {watchWithPagination} from "$lib/pocketbase/RecordOperations";
 
 export const load = (async ({ fetch, params, depends, url }) => {
 
@@ -33,7 +32,7 @@ export const load = (async ({ fetch, params, depends, url }) => {
       filter: `club.id = "${club.id}"`,
       sort: "-updated",
       fetch: fetch,
-      expand: "author"
+      expand: "author,club,team"
     },
     page,
     3,
