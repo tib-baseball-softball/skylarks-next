@@ -100,7 +100,7 @@
 
         <input
                 autocomplete="off"
-                bind:value={form.author}
+                value={form.author}
                 class="input"
                 name="author"
                 readonly
@@ -110,7 +110,7 @@
         {#if club}
           <input
                   autocomplete="off"
-                  bind:value={club.id}
+                  value={club.id}
                   class="input"
                   name="club"
                   readonly
@@ -121,7 +121,7 @@
         {#if team}
           <input
                   autocomplete="off"
-                  bind:value={team.id}
+                  value={team.id}
                   class="input"
                   name="team"
                   readonly
