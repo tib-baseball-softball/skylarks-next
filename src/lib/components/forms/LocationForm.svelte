@@ -7,7 +7,6 @@
   //@ts-ignore
   import * as Sheet from "$lib/components/utility/sheet/index.js";
   import LeafletMapCoordinatePicker from "$lib/components/map/LeafletMapCoordinatePicker.svelte";
-  import type {Toast} from "$lib/types/Toast.ts";
   import {toastController} from "$lib/service/ToastController.svelte.ts";
 
   // Gail S. Halvorsen Park coordinates
@@ -22,15 +21,6 @@
 
   let { location = null, club, buttonClasses = "" }: Props = $props();
 
-  const toastSettingsSuccess: Toast = {
-    message: "Location data saved successfully.",
-    background: "preset-filled-success-500",
-  };
-
-  const toastSettingsError: Toast = {
-    message: "An error occurred while saving Location.",
-    background: "preset-filled-error-500",
-  };
 
   const form = $state(
     location ?? {
@@ -61,11 +51,11 @@
     try {
       result = await save<LocationsResponse>("locations", form);
     } catch {
-      toastController.trigger(toastSettingsError);
+      toastController.triggerGenericFormErrorMessage("Location");
     }
 
     if (result) {
-      toastController.trigger(toastSettingsSuccess);
+      toastController.triggerGenericFormSuccessMessage("Location");
       open = false;
     }
     await invalidate("club:locations");

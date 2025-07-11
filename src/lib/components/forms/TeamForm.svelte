@@ -8,7 +8,6 @@
   import MultiSelectCombobox from "$lib/components/utility/MultiSelectCombobox.svelte";
   //@ts-ignore
   import * as Sheet from "$lib/components/utility/sheet/index.js";
-  import type {Toast} from "$lib/types/Toast.ts";
   import {toastController} from "$lib/service/ToastController.svelte.ts";
 
   interface Props {
@@ -24,15 +23,6 @@
 
   let open = $state(false);
 
-  const toastSettingsSuccess: Toast = {
-    message: "Team data saved successfully.",
-    background: "preset-filled-success-500",
-  };
-
-  const toastSettingsError: Toast = {
-    message: "An error occurred while saving team data.",
-    background: "preset-filled-error-500",
-  };
 
   const form: Partial<ExpandedTeam> = $state(
       team ?? {
@@ -76,11 +66,11 @@
             .create<ExpandedTeam>(form);
       }
     } catch {
-      toastController.trigger(toastSettingsError);
+      toastController.triggerGenericFormErrorMessage("Team");
     }
 
     if (result) {
-      toastController.trigger(toastSettingsSuccess);
+      toastController.triggerGenericFormSuccessMessage("Team");
       open = false;
       await invalidate("teams:list");
       await invalidate("club:single");

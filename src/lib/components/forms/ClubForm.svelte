@@ -7,7 +7,6 @@
   import {ClipboardEdit, Plus} from "lucide-svelte";
   //@ts-ignore
   import * as Sheet from "$lib/components/utility/sheet/index.js";
-  import type {Toast} from "$lib/types/Toast.ts";
   import {toastController} from "$lib/service/ToastController.svelte.ts";
 
 
@@ -20,15 +19,6 @@
 
   let { club, buttonClasses = "" }: Props = $props();
 
-  const toastSettingsSuccess: Toast = {
-    message: "Club data saved successfully.",
-    background: "preset-filled-success-500",
-  };
-
-  const toastSettingsError: Toast = {
-    message: "An error occurred while saving club data.",
-    background: "preset-filled-error-500",
-  };
 
   const form: Partial<ExpandedClub> = $state(
       club ?? {
@@ -78,11 +68,11 @@
         });
       }
     } catch {
-      toastController.trigger(toastSettingsError);
+      toastController.triggerGenericFormErrorMessage("Club");
     }
 
     if (result) {
-      toastController.trigger(toastSettingsSuccess);
+      toastController.triggerGenericFormSuccessMessage("Club");
       open = false;
     }
     await invalidateAll();

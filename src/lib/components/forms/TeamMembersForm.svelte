@@ -33,20 +33,14 @@
           "teams+": team.id
         });
       }
-      toastController.trigger({
-        message: `All members have been added to team "${team.name}"`,
-        background: "preset-filled-success-500",
-      });
+      toastController.triggerGenericFormSuccessMessage("Team members");
 
       // set manually in case we have updated the currently logged-in user
       await manualAuthRefresh();
 
     } catch (error) {
       console.error(error);
-      toastController.trigger({
-        message: "An error occurred while saving user team data",
-        background: "preset-filled-error-500",
-      });
+      toastController.triggerGenericFormErrorMessage("Team members");
     }
     await invalidateAll();
     closeModal();
