@@ -5,12 +5,16 @@
   import {DateTimeUtility} from "$lib/service/DateTimeUtility.ts";
   import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
   import {invalidateAll} from "$app/navigation";
+  import {Edit, Send, X} from "lucide-svelte";
+  import {toastController} from "$lib/service/ToastController.svelte.ts";
 
   interface Props {
     comment: ExpandedComment;
   }
 
   let {comment}: Props = $props();
+  let formText = $derived(comment.text);
+  let isEditing = $state(false);
 
   const userFullName = $derived(comment?.expand?.user?.first_name + " " + comment?.expand?.user?.last_name);
   const authRecord = $derived(authSettings.record as CustomAuthModel);
@@ -20,10 +24,47 @@
     const result = await client.collection("comments").delete(id);
 
     if (result) {
-      await invalidateAll()
+      await invalidateAll();
+    }
+  }
+
+  async function updateComment(event: Event) {
+    event.preventDefault();
+
+    try {
+      const result = await client.collection("comments").update(comment.id, {text: formText});
+
+      if (result) {
+        isEditing = false;
+        await invalidateAll();
+      }
+    } catch (e) {
+      toastController.trigger({
+        message: "Error updating comment",
+        background: "preset-filled-error-500",
+      })
     }
   }
 </script>
+
+{#snippet editForm()}
+  <form class="mt-1">
+    <div class="input-group grid-cols-[auto_1fr_auto]">
+      <button type="button" class="ig-btn preset-filled" title="cancel edit" onclick="{() => isEditing = false}">
+        <X/>
+      </button>
+      <input
+              class="ig-input"
+              type="text"
+              placeholder="Your comment..."
+              bind:value={formText}
+      />
+      <button type="submit" class="ig-btn preset-filled" title="Add comment" onclick={updateComment} disabled={!formText}>
+        <Send size={18}/>
+      </button>
+    </div>
+  </form>
+{/snippet}
 
 <div class="avatar-container flex flex-col justify-between gap-2">
   <Avatar
@@ -34,7 +75,7 @@
   />
 
   {#if isLoggedInUser}
-    <DeleteButton modelName="Comment" id={comment.id} action={deleteComment} />
+    <DeleteButton modelName="Comment" id={comment.id} action={deleteComment}/>
   {/if}
 </div>
 
@@ -47,7 +88,19 @@
     </div>
   </div>
 
-  <p class="mt-1">
-    {comment.text}
-  </p>
+  {#if isEditing}
+    {@render editForm()}
+  {:else}
+    <div class="flex flex-wrap items-end gap-1">
+      <p class="mt-1">
+        {comment.text}
+
+      </p>
+      {#if isLoggedInUser}
+        <button type="button" class="btn btn-icon" title="edit comment text" onclick="{() => isEditing = true}">
+          <Edit/>
+        </button>
+      {/if}
+    </div>
+  {/if}
 </div>

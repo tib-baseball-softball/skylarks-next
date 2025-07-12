@@ -62,7 +62,7 @@
 <form class="mt-6">
   <div class="input-group grid-cols-[1fr_auto]">
     <input
-            class="ig-input rounded-base"
+            class="ig-input rounded-s-base"
             type="text"
             placeholder="Your comment..."
             bind:value={commentText}
