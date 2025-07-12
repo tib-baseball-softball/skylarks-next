@@ -43,10 +43,10 @@
 
   <div class="container">
     <Users/>
-    <div>
-      <p>{leagueGroup.league.age_group}</p>
-      <p class="text-sm font-light">Age Group</p>
-    </div>
+    <dl>
+      <dd>{leagueGroup.league.age_group}</dd>
+      <dt class="text-sm font-light">Age Group</dt>
+    </dl>
   </div>
 
 </article>

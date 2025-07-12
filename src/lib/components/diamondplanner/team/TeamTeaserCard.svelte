@@ -1,6 +1,6 @@
 <script lang="ts">
   import type {ExpandedTeam} from "$lib/model/ExpandedResponse";
-  import {File, IdCard, ShieldHalf, Users2} from "lucide-svelte";
+  import {File, IdCard, ShieldHalf, Users} from "lucide-svelte";
 
   /**
    * Used on Team Detail page.
@@ -47,11 +47,11 @@
   <hr class="my-2">
 
   <div class="flex items-center gap-3">
-    <Users2/>
-    <div>
-      <p>{team.age_group}</p>
-      <p class="text-sm font-light">Age Group</p>
-    </div>
+    <Users/>
+    <dl>
+      <dd class="capitalize">{team.age_group}</dd>
+      <dt class="text-sm font-light">Age Group</dt>
+    </dl>
   </div>
 
 </article>
