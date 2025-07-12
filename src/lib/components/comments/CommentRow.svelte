@@ -58,6 +58,7 @@
       </button>
       <input
               id="edit-comment-input-{comment.id}"
+              data-testid="edit-comment-input"
               class="ig-input"
               type="text"
               placeholder="Your comment..."
@@ -84,7 +85,7 @@
   {/if}
 </div>
 
-<div class={["w-full card p-2 rounded-base", isLoggedInUser ? "preset-tonal-primary" : "preset-tonal-surface"]}>
+<div data-testid="comment-container" class={["w-full card p-2 rounded-base", isLoggedInUser ? "preset-tonal-primary" : "preset-tonal-surface"]}>
   <div class="flex justify-between items-center">
     <p class="font-bold text-wrap">{userFullName}</p>
 
