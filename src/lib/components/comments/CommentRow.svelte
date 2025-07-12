@@ -7,12 +7,14 @@
   import {invalidate} from "$app/navigation";
   import {Edit, Send, X} from "lucide-svelte";
   import {toastController} from "$lib/service/ToastController.svelte.ts";
+  import type {ClubsResponse} from "$lib/model/pb-types.ts";
 
   interface Props {
     comment: ExpandedComment;
+    club: ClubsResponse
   }
 
-  let {comment}: Props = $props();
+  let {comment, club}: Props = $props();
   let formText = $derived(comment.text);
   let isEditing = $state(false);
 
@@ -49,11 +51,13 @@
 
 {#snippet editForm()}
   <form class="mt-1">
+    <label class="label mb-2 sr-only" for="edit-comment-input-{comment.id}">Comment</label>
     <div class="input-group grid-cols-[auto_1fr_auto]">
       <button type="button" class="ig-btn preset-filled" title="cancel edit" onclick="{() => isEditing = false}">
         <X/>
       </button>
       <input
+              id="edit-comment-input-{comment.id}"
               class="ig-input"
               type="text"
               placeholder="Your comment..."
@@ -75,7 +79,7 @@
           background="preset-tonal-primary"
   />
 
-  {#if isLoggedInUser}
+  {#if isLoggedInUser || club?.admins.includes(authRecord.id)}
     <DeleteButton modelName="Comment" id={comment.id} action={deleteComment}/>
   {/if}
 </div>
@@ -85,20 +89,20 @@
     <p class="font-bold text-wrap">{userFullName}</p>
 
     <div class={["text-sm font-light", isLoggedInUser ? "" : "text-gray-600 dark:text-gray-400"]}>
-      {DateTimeUtility.dateTimeFormatShort.format(new Date(comment.updated))}
+      {DateTimeUtility.dateTimeFormatShort.format(new Date(comment.created))}
     </div>
   </div>
 
   {#if isEditing}
     {@render editForm()}
   {:else}
-    <div class="flex flex-wrap items-end gap-1">
+    <div class="flex flex-wrap items-end gap-3">
       <p class="mt-1">
         {comment.text}
 
       </p>
       {#if isLoggedInUser}
-        <button type="button" class="btn btn-icon" title="edit comment text" onclick="{() => isEditing = true}">
+        <button type="button" class="btn btn-icon border" title="edit comment text" onclick="{() => isEditing = true}">
           <Edit/>
         </button>
       {/if}

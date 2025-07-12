@@ -20,6 +20,8 @@
   }
 
   const updated = $derived($announcement.updated);
+  //@ts-expect-error - the multi-level expanding trips the typedef up
+  const club = $derived($announcement?.expand?.club ?? $announcement?.expand?.team?.expand?.club)
 </script>
 
 <div class="flex justify-between items-center gap-4 lg:gap-6">
@@ -88,8 +90,12 @@
         <h2 class="h4">Comments</h2>
       </header>
       <div class="mt-4 p-3 md:p-4 border border-surface-900-100 rounded-base">
-        <CommentSection targetID={$announcement.id} targetType="announcement"
-                        comments={$announcement?.expand?.comments_via_announcement ?? []}/>
+        <CommentSection
+                targetID={$announcement.id}
+                targetType="announcement"
+                comments={$announcement?.expand?.comments_via_announcement ?? []}
+                club={club}
+        />
       </div>
     </section>
 
