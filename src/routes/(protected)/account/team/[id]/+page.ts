@@ -58,7 +58,7 @@ export const load = (async ({fetch, parent, params, url, depends}) => {
       3,
   );
 
-  depends("event:list");
+  depends("event:list", "comments:list");
 
   return {
     team: team,

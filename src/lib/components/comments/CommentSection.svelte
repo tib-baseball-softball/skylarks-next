@@ -5,7 +5,7 @@
   import {Send} from "lucide-svelte";
   import type {CommentsCreate, CommentsResponse} from "$lib/model/pb-types.ts";
   import {toastController} from "$lib/service/ToastController.svelte.ts";
-  import {invalidateAll} from "$app/navigation";
+  import {invalidate} from "$app/navigation";
 
   interface Props {
     targetID: string;
@@ -43,7 +43,7 @@
     }
 
     commentText = ""
-    await invalidateAll()
+    await invalidate("comments:list");
   }
 </script>
 

@@ -4,7 +4,7 @@
   import {Avatar} from "@skeletonlabs/skeleton-svelte";
   import {DateTimeUtility} from "$lib/service/DateTimeUtility.ts";
   import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
-  import {invalidateAll} from "$app/navigation";
+  import {invalidate} from "$app/navigation";
   import {Edit, Send, X} from "lucide-svelte";
   import {toastController} from "$lib/service/ToastController.svelte.ts";
 
@@ -24,7 +24,7 @@
     const result = await client.collection("comments").delete(id);
 
     if (result) {
-      await invalidateAll();
+      await invalidate("comments:list");
     }
   }
 
@@ -36,13 +36,13 @@
 
       if (result) {
         isEditing = false;
-        await invalidateAll();
+        await invalidate("comments:list");
       }
     } catch (e) {
       toastController.trigger({
         message: "Error updating comment",
         background: "preset-filled-error-500",
-      })
+      });
     }
   }
 </script>
@@ -59,7 +59,8 @@
               placeholder="Your comment..."
               bind:value={formText}
       />
-      <button type="submit" class="ig-btn preset-filled" title="Add comment" onclick={updateComment} disabled={!formText}>
+      <button type="submit" class="ig-btn preset-filled" title="Add comment" onclick={updateComment}
+              disabled={!formText}>
         <Send size={18}/>
       </button>
     </div>

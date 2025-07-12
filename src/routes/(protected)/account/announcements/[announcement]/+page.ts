@@ -7,7 +7,7 @@ export const load = (async ({ params, fetch, depends }) => {
         fetch: fetch,
         expand: "author,club,team,comments_via_announcement.user"
     });
-    depends("announcement:single");
+    depends("announcement:single", "comments:list");
 
     return {
         announcement: announcement
