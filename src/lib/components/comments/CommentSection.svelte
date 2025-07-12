@@ -50,7 +50,7 @@
 
 {#if comments.length > 0}
   <ul>
-    {#each comments as comment}
+    {#each comments as comment (comment.id)}
       <li class={["my-3 md:my-4 flex gap-2", authRecord.id === comment?.expand?.user?.id && "flex-row-reverse"]}>
         <CommentRow {comment} {club}/>
       </li>
