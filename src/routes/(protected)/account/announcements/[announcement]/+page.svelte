@@ -87,7 +87,10 @@
       <header>
         <h2 class="h4">Comments</h2>
       </header>
-      <CommentSection comments={$announcement?.expand?.comments_via_announcement ?? []}/>
+      <div class="mt-4 p-3 md:p-4 border border-surface-900-100 rounded-base">
+        <CommentSection targetID={$announcement.id} targetType="announcement"
+                        comments={$announcement?.expand?.comments_via_announcement ?? []}/>
+      </div>
     </section>
 
     {#if canEdit}

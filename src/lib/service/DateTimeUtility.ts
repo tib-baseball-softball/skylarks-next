@@ -12,6 +12,11 @@ export class DateTimeUtility {
     timeStyle: "short"
   });
 
+  public static readonly dateTimeFormatShort = new Intl.DateTimeFormat("de-DE", {
+    dateStyle: "short",
+    timeStyle: "short"
+  });
+
   //@ts-ignore
   public static readonly eventDateFormat: DateTimeFormatOptions = {
     weekday: 'long',
