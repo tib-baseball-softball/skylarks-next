@@ -67,17 +67,11 @@
         result = await client.collection("events").create<ExpandedEvent>(form);
       }
     } catch {
-      toastController.trigger({
-        message: "An error occurred while saving the event.",
-        background: "preset-filled-error-500",
-      });
+      toastController.triggerGenericFormErrorMessage("Event");
     }
 
     if (result) {
-      toastController.trigger({
-        message: "Event saved successfully.",
-        background: "preset-filled-success-500",
-      });
+      toastController.triggerGenericFormSuccessMessage("Event");
       open = false;
     }
     await invalidate("event:list");

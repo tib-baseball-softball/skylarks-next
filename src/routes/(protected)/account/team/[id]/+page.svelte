@@ -8,10 +8,14 @@
   import {authSettings} from "$lib/pocketbase/index.svelte";
   import TeamAdminSection from "$lib/components/diamondplanner/team/TeamAdminSection.svelte";
   import {Users} from "lucide-svelte";
+  import AnnouncementSectionContent from "$lib/components/announcements/AnnouncementSectionContent.svelte";
+  import type {PageProps} from "./$types";
+  import AnnouncementForm from "$lib/components/forms/AnnouncementForm.svelte";
 
-  let {data} = $props();
+  let {data}: PageProps = $props();
   const events = $derived(data.events);
   let currentPage = $derived($events.page);
+  let announcementStore = $derived(data.announcementStore);
 
   let showEvents = $state("next");
   let sorting: "asc" | "desc" | string = $state("asc");
@@ -31,6 +35,7 @@
   });
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
+  const canEdit = $derived(data.team.admins.includes(authRecord?.id) || data.team?.expand?.club?.admins.includes(authRecord?.id))
 </script>
 
 <h1 class="h1 my-3!">{data.team.name} ({data.team?.expand?.club.name})</h1>
@@ -46,7 +51,25 @@
   <TeamTeaserCard team={data.team} link={false}/>
 </div>
 
-<h2 class="h3">Team Events</h2>
+<section class="my-8! space-y-4">
+  <header>
+    <h2 class="h2 mb-3">Announcements</h2>
+  </header>
+
+  <AnnouncementSectionContent store={announcementStore} />
+
+  {#if canEdit}
+    <AnnouncementForm
+            announcement={null}
+            team={data.team}
+            club={null}
+            buttonClasses="btn preset-filled-primary-500"
+            showLabel={true}
+    />
+  {/if}
+</section>
+
+<h2 class="h2">Team Events</h2>
 
 <div
         class="flex flex-wrap gap-4 xl:flex-nowrap preset-tonal-surface justify-between px-4 py-3 rounded-base text-sm lg:text-base"
@@ -116,7 +139,7 @@
   </div>
 </section>
 
-{#if data.team.admins.includes(authRecord?.id) || data.team?.expand?.club?.admins.includes(authRecord?.id)}
+{#if canEdit}
   <hr class="my-2"/>
 
   <TeamAdminSection team={data.team} eventSeries={data.eventSeries}/>

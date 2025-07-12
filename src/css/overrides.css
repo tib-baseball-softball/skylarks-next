@@ -3,7 +3,10 @@
  */
 
 @media (prefers-color-scheme: dark) {
-    .input, .select, .textarea {
+
+    .input,
+    .select,
+    .textarea {
         --tw-ring-color: var(--color-surface-400);
     }
 
@@ -20,4 +23,9 @@
   */
 .apexcharts-svg {
     background: none !important;
+}
+
+.prose {
+    --tw-prose-body: light-dark(var(--base-font-color), var(--base-font-color-dark));
+    --tw-prose-bold: light-dark(var(--base-font-color), var(--base-font-color-dark));
 }

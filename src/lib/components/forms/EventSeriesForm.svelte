@@ -5,7 +5,6 @@
   import {DateTimeUtility} from "$lib/service/DateTimeUtility.js";
   import Flatpickr from "$lib/components/utility/Flatpickr.svelte";
   import type {LocationsResponse} from "$lib/model/pb-types.ts";
-  import type {Toast} from "$lib/types/Toast.ts";
   import {toastController} from "$lib/service/ToastController.svelte.ts";
 
   interface Props {
@@ -16,15 +15,6 @@
 
   let {eventSeries, team, showForm = $bindable()}: Props = $props();
 
-  const toastSettingsSuccess: Toast = {
-    message: "Event Series saved successfully.",
-    background: "preset-filled-success-500",
-  };
-
-  const toastSettingsError: Toast = {
-    message: "An error occurred while saving the event series.",
-    background: "preset-filled-error-500",
-  };
 
   const formDefault = $state({
     id: "",
@@ -63,11 +53,11 @@
             .create<EventSeriesCreationData>(form);
       }
     } catch {
-      toastController.trigger(toastSettingsError);
+      toastController.triggerGenericFormErrorMessage("Event Series");
     }
 
     if (result) {
-      toastController.trigger(toastSettingsSuccess);
+      toastController.triggerGenericFormSuccessMessage("Event Series");
       showForm = false;
       await invalidate("event:list");
     }

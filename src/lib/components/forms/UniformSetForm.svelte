@@ -2,7 +2,6 @@
   import type {UniformsetsCreate, UniformsetsResponse} from "$lib/model/pb-types";
   import {save} from "$lib/pocketbase/RecordOperations";
   import {invalidate} from "$app/navigation";
-  import type {Toast} from "$lib/types/Toast.ts";
   import {toastController} from "$lib/service/ToastController.svelte.ts";
   import {closeModal} from "$lib/functions/closeModal.ts";
 
@@ -11,15 +10,6 @@
     clubID: string;
   }
 
-  const toastSettingsSuccess: Toast = {
-    message: "Uniform Set data saved successfully.",
-    background: "preset-filled-success-500",
-  };
-
-  const toastSettingsError: Toast = {
-    message: "An error occurred while saving Uniform Set.",
-    background: "preset-filled-error-500",
-  };
 
   let {uniformSet, clubID}: Props = $props();
 
@@ -43,11 +33,11 @@
     try {
       result = await save<UniformsetsResponse>("uniformsets", form);
     } catch {
-      toastController.trigger(toastSettingsError);
+      toastController.triggerGenericFormErrorMessage("Uniform Set");
     }
 
     if (result) {
-      toastController.trigger(toastSettingsSuccess);
+      toastController.triggerGenericFormSuccessMessage("Uniform Set");
       await invalidate("club:single");
       closeModal();
     }

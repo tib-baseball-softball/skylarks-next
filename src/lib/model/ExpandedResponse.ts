@@ -1,6 +1,8 @@
-import type { RecordModel } from "pocketbase";
+import type {RecordModel} from "pocketbase";
 import type {
+  AnnouncementsResponse,
   ClubsResponse,
+  CommentsResponse,
   EventsCreate,
   EventseriesCreate,
   EventsResponse,
@@ -22,7 +24,8 @@ export type ExpandedEvent = Extension<EventsResponse, {
     }>[],
     attire?: UniformsetsResponse,
     team?: ExpandedTeam,
-    location?: LocationsResponse
+    location?: LocationsResponse,
+    comments_via_event?: ExpandedComment[],
   },
   participations: {
     in: ExpandedParticipation[],
@@ -70,4 +73,19 @@ export type EventSeriesCreationData = Extension<EventseriesCreate, {
   desc: EventsCreate['desc'],
   series_start: string
   series_end: string
+}>
+
+export type ExpandedAnnouncement = Extension<AnnouncementsResponse, {
+  expand?: {
+    author: CustomAuthModel,
+    club?: ClubsResponse,
+    team?: TeamsResponse,
+    comments_via_announcement?: ExpandedComment[],
+  }
+}>
+
+export type ExpandedComment = Extension<CommentsResponse, {
+  expand?: {
+    user?: CustomAuthModel,
+  }
 }>

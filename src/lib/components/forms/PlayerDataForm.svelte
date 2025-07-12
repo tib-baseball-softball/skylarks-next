@@ -10,7 +10,6 @@
   import {Edit} from "lucide-svelte";
   //@ts-ignore
   import * as Sheet from "$lib/components/utility/sheet/index.js";
-  import type {Toast} from "$lib/types/Toast.ts";
   import {toastController} from "$lib/service/ToastController.svelte.ts";
 
   interface ValidateArgs {
@@ -24,15 +23,6 @@
 
   let { buttonClasses = "" }: Props = $props();
 
-  const toastSettingsSuccess: Toast = {
-    message: "Player data saved successfully.",
-    background: "preset-filled-success-500",
-  };
-
-  const toastSettingsError: Toast = {
-    message: "An error occurred while saving player data.",
-    background: "preset-filled-error-500",
-  };
 
   // Mark: here we do not need to be reactive as we're editing
   const authRecord = authSettings.record as CustomAuthModel;
@@ -82,11 +72,11 @@
           .collection("users")
           .update<CustomAuthModel>(form.id, form);
     } catch {
-      toastController.trigger(toastSettingsError);
+      toastController.triggerGenericFormErrorMessage("Player data");
     }
 
     if (result) {
-      toastController.trigger(toastSettingsSuccess);
+      toastController.triggerGenericFormSuccessMessage("Player data");
       open = false;
     }
   }

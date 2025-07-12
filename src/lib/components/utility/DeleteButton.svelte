@@ -62,7 +62,7 @@
   {/snippet}
 
   <div class="flex justify-end gap-2 mt-1">
-    <button class="btn preset-tonal-surface border border-surface-500" type="button" onclick={closeModal}>Cancel</button>
-    <button class="btn preset-filled" type="button" onclick={deleteItem}>Confirm</button>
+    <button data-test-role="modal-cancel" class="btn preset-tonal-surface border border-surface-500" type="button" onclick={closeModal}>Cancel</button>
+    <button data-test-role="modal-confirm" class="btn preset-filled" type="button" onclick={deleteItem}>Confirm</button>
   </div>
 </Dialog>

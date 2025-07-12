@@ -12,6 +12,7 @@
   import {Ban, Clock} from "lucide-svelte";
   import MatchDetailLocationCard from "$lib/components/match/MatchDetailLocationCard.svelte";
   import TimeSection from "$lib/components/diamondplanner/event/TimeSection.svelte";
+  import CommentSection from "$lib/components/comments/CommentSection.svelte";
 
   let {data} = $props();
 
@@ -19,6 +20,9 @@
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
   const canParticipate = $derived(authRecord.teams.includes($event.team));
+
+  //@ts-expect-error - the multi-level expanding trips the typedef up
+  const club = $derived($event?.expand?.club);
 </script>
 
 <div class="space-y-4 lg:space-y-6 xl:space-y-7">
@@ -102,6 +106,20 @@
       </div>
     </section>
   {/if}
+
+  <section class="my-6">
+    <div class="mt-4 p-3 md:p-4 border border-surface-900-100 rounded-base max-w-[65ch] mx-auto">
+      <header>
+        <h2 class="h3">Comments</h2>
+      </header>
+      <CommentSection
+              targetID={$event.id}
+              targetType="event"
+              comments={$event?.expand?.comments_via_event ?? []}
+              club={club}
+      />
+    </div>
+  </section>
 
   {#if $event.expand?.team?.admins.includes(authRecord.id) || $event?.expand?.team?.expand?.club?.admins.includes(authRecord.id)}
     <EventPageAdminSection event={$event}/>

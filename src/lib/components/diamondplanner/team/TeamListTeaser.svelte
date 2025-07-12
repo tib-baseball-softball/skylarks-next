@@ -53,10 +53,10 @@
 
         <div class="flex items-center gap-4">
           <ClipboardList/>
-          <div>
-            <p>{team.age_group}</p>
-            <p class="text-sm font-light">Age Group</p>
-          </div>
+          <dl>
+            <dd class="capitalize">{team.age_group}</dd>
+            <dt class="text-sm font-light">Age Group</dt>
+          </dl>
         </div>
       </div>
     </section>

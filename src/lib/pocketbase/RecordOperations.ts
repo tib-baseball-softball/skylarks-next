@@ -72,12 +72,8 @@ export async function watchSingleRecord<T extends RecordModel>(
           recordID,
           ({action, record}) => {
             (async function (action: string) {
-
-              switch (action) {
-                case "update":
-                  result = record
-                case "create":
-                case "delete":
+              if (action === "update") {
+                result = record;
               }
               return result;
             })(action).then((record) => set((result = record)));
@@ -113,6 +109,7 @@ export async function watchWithPagination<T extends RecordModel>(
   let result = await collection.getList<T>(page, perPage, queryParams);
   let set: Subscriber<ListResult<T>>;
   let unsubRealtime: UnsubscribeFunc | undefined;
+
   // fetch first page
   const store = readable<ListResult<T>>(result, (_set) => {
     set = _set;

@@ -1,0 +1,8 @@
+### GET all comments unauthenticated (needs to be empty)
+GET {{pbURL}}/api/collections/comments/records
+Content-Type: application/json
+
+### GET all comments as test user
+GET {{pbURL}}/api/collections/comments/records
+Content-Type: application/json
+Authorization: {{testUserToken}}
