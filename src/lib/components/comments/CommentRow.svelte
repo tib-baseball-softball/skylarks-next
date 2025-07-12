@@ -102,7 +102,7 @@
 
       </p>
       {#if isLoggedInUser}
-        <button type="button" class="btn btn-icon border" title="edit comment text" onclick="{() => isEditing = true}">
+        <button type="button" class="btn btn-icon btn-sm border" title="edit comment text" onclick="{() => isEditing = true}">
           <Edit/>
         </button>
       {/if}

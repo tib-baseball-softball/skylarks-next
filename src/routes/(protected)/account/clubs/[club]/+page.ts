@@ -32,7 +32,7 @@ export const load = (async ({ fetch, params, depends, url }) => {
       filter: `club.id = "${club.id}"`,
       sort: "-updated",
       fetch: fetch,
-      expand: "author,club,team"
+      expand: "author,club,team,comments_via_announcement.user"
     },
     page,
     3,

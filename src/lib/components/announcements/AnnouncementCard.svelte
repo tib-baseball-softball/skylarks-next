@@ -4,12 +4,14 @@
   import {authSettings, client} from "$lib/pocketbase/index.svelte.ts";
   import AnnouncementForm from "$lib/components/forms/AnnouncementForm.svelte";
   import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
+  import {MessageCircle} from "lucide-svelte";
 
   interface Props {
     announcement: ExpandedAnnouncement;
   }
 
   let {announcement}: Props = $props();
+  let commentCount = announcement?.expand?.comments_via_announcement?.length ?? 0;
 
   function deleteAction(id: string) {
     client.collection("announcements").delete(id);
@@ -47,11 +49,32 @@
         {:else }
           <div aria-hidden="true"></div>
         {/if}
-        <a
-                href="/account/announcements/{announcement.id}"
-                class="btn btn-sm preset-filled-primary-500">Read more</a
-        >
+
+        <div class="flex gap-4">
+          {#if commentCount > 0}
+            <div class="relative inline-block">
+              <span class="sr-only">Number of Comments:</span>
+              <span class="badge-icon preset-filled-primary-500 absolute z-10">
+                {commentCount}
+              </span>
+              <MessageCircle aria-hidden="true"/>
+            </div>
+          {/if}
+
+          <a
+                  href="/account/announcements/{announcement.id}"
+                  class="btn btn-sm preset-filled-primary-500">Read more</a
+          >
+        </div>
       </footer>
     </div>
   </div>
 </article>
+
+<style>
+    .badge-icon {
+        top: -9px;
+        right: -6px;
+        padding: 0.2rem;
+    }
+</style>
