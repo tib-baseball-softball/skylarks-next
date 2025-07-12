@@ -11,8 +11,8 @@
   let {announcement, textClasses = ""}: Props = $props();
 </script>
 
-<header class="grid grid-cols-6">
-  <h3 class="col-span-5 h4">{announcement.title}</h3>
+<header class="flex justify-between hyphens-auto">
+  <h3 class="h4">{announcement.title}</h3>
 
   <PriorityBadge priority={announcement.priority}/>
 </header>
