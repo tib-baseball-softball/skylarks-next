@@ -64,7 +64,7 @@
   <div class="flex items-center gap-3">
     <Hand aria-hidden="true"/>
     <dl>
-      <dd>{player.batting}</dd>
+      <dd class="capitalize">{player.batting}</dd>
       <dt class="text-sm font-light">Bats</dt>
     </dl>
   </div>
@@ -74,7 +74,7 @@
   <div class="flex items-center gap-3">
     <Hand aria-hidden="true"/>
     <dl>
-      <dd>{player.throwing}</dd>
+      <dd class="capitalize">{player.throwing}</dd>
       <dt class="text-sm font-light">Throws</dt>
     </dl>
   </div>
