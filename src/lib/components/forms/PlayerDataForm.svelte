@@ -156,7 +156,7 @@
 
       <label class="label flex flex-col gap-1 md:col-span-2">
         Bats
-        <Segment name="bats" value={form.bats} onValueChange={(e) => (form.bats = e.value ?? "none")}>
+        <Segment classes="input" name="bats" value={form.bats} onValueChange={(e) => (form.bats = e.value ?? "none")}>
           <Segment.Item value={"left"} classes="flex-grow">
             Left
           </Segment.Item>
@@ -171,7 +171,7 @@
 
       <label class="label flex flex-col gap-1 md:col-span-2">
         Throws
-        <Segment name="throws" value={form.throws} onValueChange={(e) => (form.throws = e.value ?? "none")}>
+        <Segment classes="input" name="throws" value={form.throws} onValueChange={(e) => (form.throws = e.value ?? "none")}>
           <Segment.Item value={"left"} classes="flex-grow">
             Left
           </Segment.Item>
@@ -186,7 +186,7 @@
 
       <label class="label flex flex-col gap-1 md:col-span-2">
         Umpire License
-        <Segment name="umpire" value={form.umpire} onValueChange={(e) => (form.umpire = e.value ?? "none")}>
+        <Segment classes="input" name="umpire" value={form.umpire} onValueChange={(e) => (form.umpire = e.value ?? "none")}>
           <Segment.Item value={"none"} classes="flex-grow">
             None
           </Segment.Item>
@@ -207,7 +207,7 @@
 
       <label class="label flex flex-col gap-1 md:col-span-2">
         Scorer License
-        <Segment name="scorer" value={form.scorer} onValueChange={(e) => (form.scorer = e.value ?? "none")}>
+        <Segment classes="input" name="scorer" value={form.scorer} onValueChange={(e) => (form.scorer = e.value ?? "none")}>
           <Segment.Item value={"none"} classes="flex-grow">
             None
           </Segment.Item>
