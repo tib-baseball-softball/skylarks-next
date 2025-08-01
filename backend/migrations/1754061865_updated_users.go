@@ -123,6 +123,10 @@ UPDATE users SET scorer = 'C' WHERE scorer = '3';
 UPDATE users SET scorer = 'D' WHERE scorer = '4';
 `).Execute()
 
+		if err != nil {
+			return err
+		}
+
 		return nil
 	}, func(app core.App) error {
 		// ROLLBACK
