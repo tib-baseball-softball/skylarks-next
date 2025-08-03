@@ -156,14 +156,14 @@
 
       <label class="label flex flex-col gap-1 md:col-span-2">
         Bats
-        <Segment name="bats" value={form.bats} onValueChange={(e) => (form.bats = e.value ?? "1")}>
-          <Segment.Item value={"1"} classes="flex-grow">
+        <Segment classes="input" name="bats" value={form.bats} onValueChange={(e) => (form.bats = e.value ?? "none")}>
+          <Segment.Item value={"left"} classes="flex-grow">
             Left
           </Segment.Item>
-          <Segment.Item value={"2"} classes="flex-grow">
+          <Segment.Item value={"right"} classes="flex-grow">
             Right
           </Segment.Item>
-          <Segment.Item value={"3"} classes="flex-grow">
+          <Segment.Item value={"switch"} classes="flex-grow">
             Switch
           </Segment.Item>
         </Segment>
@@ -171,14 +171,14 @@
 
       <label class="label flex flex-col gap-1 md:col-span-2">
         Throws
-        <Segment name="throws" value={form.throws} onValueChange={(e) => (form.throws = e.value ?? "1")}>
-          <Segment.Item value={"1"} classes="flex-grow">
+        <Segment classes="input" name="throws" value={form.throws} onValueChange={(e) => (form.throws = e.value ?? "none")}>
+          <Segment.Item value={"left"} classes="flex-grow">
             Left
           </Segment.Item>
-          <Segment.Item value={"2"} classes="flex-grow">
+          <Segment.Item value={"right"} classes="flex-grow">
             Right
           </Segment.Item>
-          <Segment.Item value={"3"} classes="flex-grow">
+          <Segment.Item value={"switch"} classes="flex-grow">
             Switch
           </Segment.Item>
         </Segment>
@@ -186,20 +186,20 @@
 
       <label class="label flex flex-col gap-1 md:col-span-2">
         Umpire License
-        <Segment name="umpire" value={form.umpire} onValueChange={(e) => (form.umpire = e.value ?? "0")}>
-          <Segment.Item value={"0"} classes="flex-grow">
+        <Segment classes="input" name="umpire" value={form.umpire} onValueChange={(e) => (form.umpire = e.value ?? "none")}>
+          <Segment.Item value={"none"} classes="flex-grow">
             None
           </Segment.Item>
-          <Segment.Item value={"1"} classes="flex-grow">
+          <Segment.Item value={"A"} classes="flex-grow">
             A
           </Segment.Item>
-          <Segment.Item value={"2"} classes="flex-grow">
+          <Segment.Item value={"B"} classes="flex-grow">
             B
           </Segment.Item>
-          <Segment.Item value={"3"} classes="flex-grow">
+          <Segment.Item value={"C"} classes="flex-grow">
             C
           </Segment.Item>
-          <Segment.Item value={"4"} classes="flex-grow">
+          <Segment.Item value={"D"} classes="flex-grow">
             D
           </Segment.Item>
         </Segment>
@@ -207,18 +207,21 @@
 
       <label class="label flex flex-col gap-1 md:col-span-2">
         Scorer License
-        <Segment name="scorer" value={form.scorer} onValueChange={(e) => (form.scorer = e.value ?? "0")}>
-          <Segment.Item value={"0"} classes="flex-grow">
+        <Segment classes="input" name="scorer" value={form.scorer} onValueChange={(e) => (form.scorer = e.value ?? "none")}>
+          <Segment.Item value={"none"} classes="flex-grow">
             None
           </Segment.Item>
-          <Segment.Item value={"1"} classes="flex-grow">
+          <Segment.Item value={"A"} classes="flex-grow">
             A
           </Segment.Item>
-          <Segment.Item value={"2"} classes="flex-grow">
+          <Segment.Item value={"B"} classes="flex-grow">
             B
           </Segment.Item>
-          <Segment.Item value={"3"} classes="flex-grow">
+          <Segment.Item value={"C"} classes="flex-grow">
             C
+          </Segment.Item>
+          <Segment.Item value={"D"} classes="flex-grow">
+            D
           </Segment.Item>
         </Segment>
       </label>

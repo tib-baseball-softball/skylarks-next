@@ -5,7 +5,6 @@
   import type {Player} from "$lib/model/Player";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
   import {Link} from "lucide-svelte";
-  import {convertIntKeyToHandedness} from "$lib/types/Handedness.js";
   import {positionKeysToEnumStringValues} from "$lib/types/BaseballPosition.js";
   import PlayerDataForm from "$lib/components/forms/PlayerDataForm.svelte";
 
@@ -20,8 +19,8 @@
     birthday: 0,
     admission: new Date(authRecord.created).toLocaleDateString(),
     number: authRecord.number,
-    throwing: convertIntKeyToHandedness(Number(authRecord.throws)),
-    batting: convertIntKeyToHandedness(Number(authRecord.bats)),
+    throwing: authRecord.throws,
+    batting: authRecord.bats,
     bsm_id: authRecord.bsm_id,
     positions: positionKeysToEnumStringValues(authRecord.position),
     teams: [],

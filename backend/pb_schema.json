@@ -412,10 +412,10 @@
         "system": false,
         "type": "select",
         "values": [
-          "0",
-          "1",
-          "2",
-          "3"
+          "none",
+          "left",
+          "right",
+          "switch"
         ]
       },
       {
@@ -428,10 +428,10 @@
         "system": false,
         "type": "select",
         "values": [
-          "0",
-          "1",
-          "2",
-          "3"
+          "none",
+          "left",
+          "right",
+          "switch"
         ]
       },
       {
@@ -458,11 +458,11 @@
         "system": false,
         "type": "select",
         "values": [
-          "0",
-          "1",
-          "2",
-          "3",
-          "4"
+          "none",
+          "A",
+          "B",
+          "C",
+          "D"
         ]
       },
       {
@@ -475,10 +475,11 @@
         "system": false,
         "type": "select",
         "values": [
-          "0",
-          "1",
-          "2",
-          "3"
+          "none",
+          "A",
+          "B",
+          "C",
+          "D"
         ]
       },
       {
@@ -1274,7 +1275,7 @@
     "listRule": "@request.auth.id != \"\" && (@request.auth.club.id ?= event.team.club.id  || @request.auth.club.id ?= announcement.club.id || @request.auth.club.id ?= announcement.team.club.id || @request.auth.teams.id ?= announcement.team.id || announcement.club.admins.id ?= @request.auth.id || announcement.team.admins.id ?= @request.auth.id || event.team.admins.id ?= @request.auth.id || event.team.club.admins.id ?= @request.auth.id)",
     "viewRule": "@request.auth.id != \"\" && (@request.auth.club.id ?= event.team.club.id  || @request.auth.club.id ?= announcement.club.id || @request.auth.club.id ?= announcement.team.club.id || @request.auth.teams.id ?= announcement.team.id || announcement.club.admins.id ?= @request.auth.id || announcement.team.admins.id ?= @request.auth.id || event.team.admins.id ?= @request.auth.id || event.team.club.admins.id ?= @request.auth.id)",
     "createRule": "@request.auth.id != \"\" && (@request.auth.club.id ?= event.team.club.id  || @request.auth.club.id ?= announcement.club.id || event.team.club.admins.id ?= @request.auth.id  || event.team.admins.id ?= @request.auth.id || announcement.club.admins.id ?= @request.auth.id || announcement.team.admins.id ?= @request.auth.id)",
-    "updateRule": "@request.auth.id != \"\" && (@request.auth.club.id ?= @request.body.event.team.club.id  || @request.auth.club.id ?= @request.body.announcement.club.id || @request.body.event.team.club.admins.id ?= @request.auth.id  || @request.body.event.team.admins.id ?= @request.auth.id || @request.body.announcement.club.admins.id ?= @request.auth.id || @request.body.announcement.team.admins.id ?= @request.auth.id)",
+    "updateRule": "@request.auth.id != \"\" && ((@request.body.event:isset = false &&  @request.body.announcement:isset = false && user.id = @request.auth.id) || @request.auth.club.id ?= @request.body.event.team.club.id  || @request.auth.club.id ?= @request.body.announcement.club.id || @request.body.event.team.club.admins.id ?= @request.auth.id  || @request.body.event.team.admins.id ?= @request.auth.id || @request.body.announcement.club.admins.id ?= @request.auth.id || @request.body.announcement.team.admins.id ?= @request.auth.id)",
     "deleteRule": "@request.auth.id != \"\" && (user.id = @request.auth.id || event.team.admins.id ?= @request.auth.id || event.team.club.admins ?= @request.auth.id || announcement.club.admins.id ?= @request.auth.id || announcement.team.admins.id ?= @request.auth.id)",
     "name": "comments",
     "type": "base",
