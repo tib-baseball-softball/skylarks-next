@@ -2,11 +2,11 @@ package bsm
 
 import "fmt"
 
-type URLWhitelistError struct {
+type URLAllowlistError struct {
 	url     string
 	message string
 }
 
-func (e *URLWhitelistError) Error() string {
+func (e *URLAllowlistError) Error() string {
 	return fmt.Sprintf("%s - %s", e.url, e.message)
 }

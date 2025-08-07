@@ -3,12 +3,13 @@ package bsm
 import (
 	"encoding/json"
 	"errors"
-	"github.com/pocketbase/pocketbase/core"
 	"io"
 	"log"
 	"net/http"
 	"net/url"
 	"os"
+
+	"github.com/pocketbase/pocketbase/core"
 )
 
 // GetAPIURL Construct a BSM API URL from a given path, appending all query parameters and the API key automatically.

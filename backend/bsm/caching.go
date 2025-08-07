@@ -3,22 +3,23 @@ package bsm
 import (
 	"encoding/json"
 	"errors"
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/tools/types"
-	"github.com/tib-baseball-softball/skylarks-next/internal/pb"
-	"github.com/tib-baseball-softball/skylarks-next/internal/utility"
 	"net/url"
 	"os"
 	"regexp"
 	"sync"
 	"time"
+
+	"github.com/pocketbase/pocketbase/core"
+	"github.com/pocketbase/pocketbase/tools/types"
+	"github.com/tib-baseball-softball/skylarks-next/internal/pb"
+	"github.com/tib-baseball-softball/skylarks-next/internal/utility"
 )
 
 const (
 	cacheLifetimeMinutes = 60
 )
 
-var cacheURLWhitelist = []*regexp.Regexp{
+var cacheURLAllowlist = []*regexp.Regexp{
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/clubs/\d+/licenses\.json(?:\?.*)?$`),
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/clubs/\d+\.json(?:\?.*)?$`),
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/league_groups/\d+(\.json|/.*)?(?:\?.*)?$`),
@@ -27,10 +28,10 @@ var cacheURLWhitelist = []*regexp.Regexp{
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/clubs/\d+/fields\.json(?:\?.*)?$`),
 }
 
-// isValidBSMURL checks if the given url matches any regex in cacheURLWhitelist
+// isValidBSMURL checks if the given url matches any regex in cacheURLAllowlist
 func isValidBSMURL(u *url.URL) bool {
 	urlStr := u.String()
-	for _, re := range cacheURLWhitelist {
+	for _, re := range cacheURLAllowlist {
 		if re.MatchString(urlStr) {
 			return true
 		}
@@ -91,7 +92,7 @@ func GetCachedBSMResponse(app core.App, url *url.URL) (string, error) {
 	var ret string
 
 	if url.Host != os.Getenv("BSM_API_HOST") || !isValidBSMURL(url) {
-		return ret, &URLWhitelistError{url.String(), "Only whitelisted BSM URLs are allowed"}
+		return ret, &URLAllowlistError{url.String(), "Only allowlisted BSM URLs are allowed"}
 	}
 	hash := utility.GetMD5Hash(url.String())
 

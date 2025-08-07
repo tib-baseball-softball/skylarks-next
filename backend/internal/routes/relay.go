@@ -2,10 +2,11 @@ package routes
 
 import (
 	"errors"
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/tib-baseball-softball/skylarks-next/bsm"
 	"net/http"
 	"net/url"
+
+	"github.com/pocketbase/pocketbase/core"
+	"github.com/tib-baseball-softball/skylarks-next/bsm"
 )
 
 // GetRelayedBSMData relays BSM request so the client-side does not need to know API keys.
@@ -34,7 +35,7 @@ func GetRelayedBSMData() func(e *core.RequestEvent) error {
 
 		cachedResponseBody, err := bsm.GetCachedBSMResponse(e.App, &urlWithKey)
 		if err != nil {
-			var bsmErr *bsm.URLWhitelistError
+			var bsmErr *bsm.URLAllowlistError
 			if errors.As(err, &bsmErr) {
 				return e.JSON(http.StatusForbidden, err.Error())
 			} else {
