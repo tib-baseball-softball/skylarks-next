@@ -11,6 +11,7 @@ const (
 	SearchFilter  = "search"
 	SeasonFilter  = "filters[seasons][]"
 	GamedayFilter = "filters[gamedays][]"
+	CompactFilter = "compact"
 )
 
 const (

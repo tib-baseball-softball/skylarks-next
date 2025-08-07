@@ -3,13 +3,14 @@ package bsm
 import (
 	"encoding/json"
 	"errors"
+	"log/slog"
+	"sync"
+	"time"
+
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
 	"github.com/tib-baseball-softball/skylarks-next/internal/pb"
-	"log/slog"
-	"sync"
-	"time"
 )
 
 type GameImportServiceApp interface {
@@ -92,6 +93,7 @@ func (s GameImportService) fetchMatchesForLeagueGroup(league string, apiKey stri
 	params := make(map[string]string)
 	params[LeagueFilter] = league
 	params[SearchFilter] = "skylarks"
+	// we cannot use compact here, since the field data is not included in the response
 
 	url := GetAPIURL("matches.json", params, apiKey)
 	matches, _, err := FetchResource[[]Match](url.String())

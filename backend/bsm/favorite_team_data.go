@@ -2,13 +2,14 @@ package bsm
 
 import (
 	"errors"
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/tib-baseball-softball/skylarks-next/internal/tib"
 	"os"
 	"slices"
 	"strconv"
 	"sync"
 	"time"
+
+	"github.com/pocketbase/pocketbase/core"
+	"github.com/tib-baseball-softball/skylarks-next/internal/tib"
 )
 
 // LoadHomeData loads structured data to display on a single team's home dashboard.
@@ -83,6 +84,7 @@ func LoadHomeData(app core.App, teamID int, season int) ([]HomeDataset, error) {
 				params[SearchFilter] = tib.TeamSearchParam
 				params[LeagueFilter] = strconv.Itoa(leagueGroup.ID)
 				params[GamedayFilter] = GameDayAny
+				params[CompactFilter] = "true"
 
 				matches, err := loadMatchesWithFilterParams(params, apiKey)
 				if err != nil {
