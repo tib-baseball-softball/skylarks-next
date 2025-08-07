@@ -22,9 +22,9 @@ export const load = (async ({url}) => {
   let matchesPromise: Promise<Match[]>;
 
   if (leagueGroup && leagueGroup !== "0") {
-    matchesPromise = matchRequest.loadAllGames(Number(season), gameday, Number(leagueGroup), search);
+    matchesPromise = matchRequest.loadAllGames(Number(season), gameday, Number(leagueGroup), search, true);
   } else {
-    matchesPromise = matchRequest.loadGamesForClub(Number(publicEnv.PUBLIC_CLUB_ID), Number(season), gameday);
+    matchesPromise = matchRequest.loadGamesForClub(Number(publicEnv.PUBLIC_CLUB_ID), Number(season), gameday, true);
   }
 
   return {

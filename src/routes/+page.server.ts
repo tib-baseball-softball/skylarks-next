@@ -8,9 +8,9 @@ export const load = (async ({fetch}) => {
   const matchRequest = new MatchAPIRequest(env.BSM_API_KEY)
   const appPreferences = preferences.current
 
-  const matchesCurrent = matchRequest.loadGamesForClub(Number(publicEnv.PUBLIC_CLUB_ID), appPreferences.selectedSeason, Gameday.current)
-  const matchesPrevious = matchRequest.loadGamesForClub(Number(publicEnv.PUBLIC_CLUB_ID), appPreferences.selectedSeason, Gameday.previous)
-  const matchesNext = matchRequest.loadGamesForClub(Number(publicEnv.PUBLIC_CLUB_ID), appPreferences.selectedSeason, Gameday.next)
+  const matchesCurrent = matchRequest.loadGamesForClub(Number(publicEnv.PUBLIC_CLUB_ID), appPreferences.selectedSeason, Gameday.current, true)
+  const matchesPrevious = matchRequest.loadGamesForClub(Number(publicEnv.PUBLIC_CLUB_ID), appPreferences.selectedSeason, Gameday.previous, true)
+  const matchesNext = matchRequest.loadGamesForClub(Number(publicEnv.PUBLIC_CLUB_ID), appPreferences.selectedSeason, Gameday.next, true)
 
   return {
     matchesCurrent: matchesCurrent,

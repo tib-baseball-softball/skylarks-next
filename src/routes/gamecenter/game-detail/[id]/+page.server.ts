@@ -15,7 +15,7 @@ export const load: PageServerLoad = async ({parent, params, fetch}) => {
   // if not already found in data, load it yourself
   if (!match) {
     try {
-      match = await matchRequest.loadSingleMatch(Number(params.id));
+      match = await matchRequest.loadSingleMatch(Number(params.id), true);
     } catch (e) {
       if (e instanceof Error) {
         console.error(e.message);
