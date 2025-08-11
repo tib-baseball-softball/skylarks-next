@@ -1,6 +1,13 @@
 package main
 
 import (
+	"log"
+	"net/http"
+	"os"
+	"strings"
+
+	_ "time/tzdata"
+
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/apis"
 	"github.com/pocketbase/pocketbase/core"
@@ -12,10 +19,6 @@ import (
 	"github.com/tib-baseball-softball/skylarks-next/internal/pb"
 	"github.com/tib-baseball-softball/skylarks-next/internal/routes"
 	_ "github.com/tib-baseball-softball/skylarks-next/migrations"
-	"log"
-	"net/http"
-	"os"
-	"strings"
 )
 
 // / Loads environment.
