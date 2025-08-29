@@ -62,7 +62,7 @@ func HandlePlayerChangedMessage(app core.App) func(e *core.RequestEvent) error {
 		player.SetProxyRecord(record)
 
 		if player.BSMID() != 0 {
-			return e.JSON(http.StatusNoContent, "Player already has a BSM ID, changing it is not supported.")
+			return e.NoContent(http.StatusNoContent)
 		} else {
 			player.SetBSMID(message.BSMID)
 			err := app.Save(player.Record)
