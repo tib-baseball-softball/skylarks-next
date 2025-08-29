@@ -18,6 +18,7 @@ import (
 	"github.com/tib-baseball-softball/skylarks-next/internal/hooks"
 	"github.com/tib-baseball-softball/skylarks-next/internal/pb"
 	"github.com/tib-baseball-softball/skylarks-next/internal/routes"
+	"github.com/tib-baseball-softball/skylarks-next/internal/tib"
 	_ "github.com/tib-baseball-softball/skylarks-next/migrations"
 )
 
@@ -128,6 +129,11 @@ func bindAppHooks(app core.App) {
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
 		se.Router.GET("/api/team/favorite", routes.GetFavoriteTeamData())
+		return se.Next()
+	})
+
+	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
+		se.Router.POST("/webhooks/playerChange", tib.HandlePlayerChangedMessage(app))
 		return se.Next()
 	})
 
