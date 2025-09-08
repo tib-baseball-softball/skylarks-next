@@ -18,6 +18,7 @@ import (
 	"github.com/tib-baseball-softball/skylarks-next/internal/hooks"
 	"github.com/tib-baseball-softball/skylarks-next/internal/pb"
 	"github.com/tib-baseball-softball/skylarks-next/internal/routes"
+	"github.com/tib-baseball-softball/skylarks-next/internal/tib"
 	_ "github.com/tib-baseball-softball/skylarks-next/migrations"
 )
 
@@ -36,7 +37,7 @@ func bindAppHooks(app core.App) {
 
 	//------------------- Hooks -------------------------//
 
-	app.OnRecordAuthRequest("users").BindFunc(func(e *core.RecordAuthRequestEvent) error {
+	app.OnRecordAuthRequest(pb.UserCollection).BindFunc(func(e *core.RecordAuthRequestEvent) error {
 		err := hooks.SetLastLogin(e.App, e.Record)
 		if err != nil {
 			app.Logger().Error(
@@ -47,7 +48,7 @@ func bindAppHooks(app core.App) {
 		return e.Next()
 	})
 
-	app.OnRecordCreateRequest("users").BindFunc(func(event *core.RecordRequestEvent) error {
+	app.OnRecordCreateRequest(pb.UserCollection).BindFunc(func(event *core.RecordRequestEvent) error {
 		return hooks.ValidateSignupKey(event.App, event)
 	})
 
@@ -65,6 +66,14 @@ func bindAppHooks(app core.App) {
 
 	app.OnRecordEnrich(pb.EventsCollection).BindFunc(func(event *core.RecordEnrichEvent) error {
 		return hooks.AddEventParticipationData(event.App, event)
+	})
+
+	app.OnRecordAfterCreateSuccess(pb.UserCollection).BindFunc(func(e *core.RecordEvent) error {
+		return tib.SendUpdatedPlayerData(e)
+	})
+
+	app.OnRecordAfterUpdateSuccess(pb.UserCollection).BindFunc(func(e *core.RecordEvent) error {
+		return tib.SendUpdatedPlayerData(e)
 	})
 
 	app.OnRecordAfterCreateSuccess(pb.EventSeriesCollection).BindFunc(func(e *core.RecordEvent) error {
@@ -128,6 +137,11 @@ func bindAppHooks(app core.App) {
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
 		se.Router.GET("/api/team/favorite", routes.GetFavoriteTeamData())
+		return se.Next()
+	})
+
+	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
+		se.Router.POST("/webhooks/playerChange", tib.HandlePlayerChangedMessage(app))
 		return se.Next()
 	})
 

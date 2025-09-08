@@ -2,9 +2,10 @@ package hooks
 
 import (
 	"errors"
-	"github.com/pocketbase/pocketbase/core"
 	"net/http"
 	"time"
+
+	"github.com/pocketbase/pocketbase/core"
 )
 
 func SetLastLogin(app core.App, record *core.Record) (err error) {

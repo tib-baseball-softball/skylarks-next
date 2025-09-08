@@ -2,13 +2,14 @@ package hooks
 
 import (
 	"fmt"
+	"os"
+	"time"
+
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
 	"github.com/tib-baseball-softball/skylarks-next/internal/pb"
 	"github.com/tib-baseball-softball/skylarks-next/internal/stats"
-	"os"
-	"time"
 )
 
 func CreateOrUpdateEventsForSeries(e *core.RecordEvent) error {
