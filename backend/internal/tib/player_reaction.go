@@ -2,11 +2,13 @@ package tib
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"io"
 	"net/http"
 	"os"
 	"strconv"
+	"time"
 
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/tib-baseball-softball/skylarks-next/internal/pb"
@@ -69,31 +71,45 @@ func SendUpdatedPlayerData(e *core.RecordEvent) error {
 
 	url := typo3BaseURL + "/typo3/reaction/" + identifier
 
-	request, err := http.NewRequest(http.MethodPost, url, bytes.NewReader(bodyBytes))
-	if err != nil {
-		e.App.Logger().Error("failed to create request for player change reaction", "error", err)
-		return e.Next()
-	}
-	request.Header.Set("x-api-key", secret)
-	request.Header.Set("Content-Type", "application/json")
-	request.Header.Set("Accept", "application/json")
+	// fire-and-forget the update call in a separate goroutine.
+	// if it fails, we don't want to block the user update request.
+	// the database transaction is already guaranteed to be committed at this point.
+	go func(body []byte, app core.App) {
+		ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+		defer cancel()
 
-	resp, err := http.DefaultClient.Do(request)
-	if err != nil {
-		e.App.Logger().Error("failed to send player change reaction", "error", err)
-		return e.Next()
-	}
-	defer func(Body io.ReadCloser) {
-		err := Body.Close()
+		defer func() {
+			if r := recover(); r != nil {
+				app.Logger().Error("panic in async player update", "recover", r)
+			}
+		}()
+
+		request, err := http.NewRequestWithContext(ctx, http.MethodPost, url, bytes.NewReader(bodyBytes))
 		if err != nil {
-			e.App.Logger().Error("failed to close response body", "error", err)
-			return
+			e.App.Logger().Error("failed to create request for player change reaction", "error", err)
 		}
-	}(resp.Body)
+		request.Header.Set("x-api-key", secret)
+		request.Header.Set("Content-Type", "application/json")
+		request.Header.Set("Accept", "application/json")
 
-	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
-		e.App.Logger().Warn("player change reaction returned non-2xx status", "status", resp.Status)
-	}
+		resp, err := http.DefaultClient.Do(request)
+		if err != nil {
+			e.App.Logger().Error("failed to send player change reaction", "error", err)
+		}
+		defer func(Body io.ReadCloser) {
+			err := Body.Close()
+			if err != nil {
+				e.App.Logger().Error("failed to close response body", "error", err)
+				return
+			}
+		}(resp.Body)
+
+		if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+			e.App.Logger().Warn("player change reaction returned non-2xx status", "status", resp.Status)
+		}
+
+		e.App.Logger().Info("player change reaction sent", "status", resp.Status)
+	}(bodyBytes, e.App)
 
 	return e.Next()
 }
