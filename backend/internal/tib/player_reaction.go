@@ -91,6 +91,8 @@ func SendUpdatedPlayerData(e *core.RecordEvent) error {
 		request.Header.Set("x-api-key", secret)
 		request.Header.Set("Content-Type", "application/json")
 		request.Header.Set("Accept", "application/json")
+		// web server for CMS blocks at least `Go-http-client/2.0`
+		request.Header.Set("User-Agent", "Skylarks Diamond Planner/1.0")
 
 		resp, err := http.DefaultClient.Do(request)
 		if err != nil {
