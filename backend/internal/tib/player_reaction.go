@@ -94,7 +94,7 @@ func SendUpdatedPlayerData(e *core.RecordEvent) error {
 
 		resp, err := http.DefaultClient.Do(request)
 		if err != nil {
-			e.App.Logger().Error("failed to send player change reaction", "error", err)
+			e.App.Logger().Error("failed to send player change reaction", "error", err, "url", url, "payload", payload)
 		}
 		defer func(Body io.ReadCloser) {
 			err := Body.Close()
@@ -105,7 +105,7 @@ func SendUpdatedPlayerData(e *core.RecordEvent) error {
 		}(resp.Body)
 
 		if resp.StatusCode < 200 || resp.StatusCode >= 300 {
-			e.App.Logger().Warn("player change reaction returned non-2xx status", "status", resp.Status)
+			e.App.Logger().Warn("player change reaction returned non-2xx status", "status", resp.Status, "url", url, "payload", payload)
 		}
 
 		e.App.Logger().Info("player change reaction sent", "status", resp.Status)
