@@ -10,6 +10,7 @@
   import type {PageProps} from "./$types";
   import ContentFilteredUnavailable from "$lib/components/match/ContentFilteredUnavailable.svelte";
   import GameReport from "$lib/components/gameReport/GameReport.svelte";
+  import ShareButton from "$lib/components/match/ShareButton.svelte";
 
   let {data}: PageProps = $props();
 
@@ -23,31 +24,33 @@
   <MatchMainInfoSection {match}/>
 </section>
 
-<section class="mb-5">
+<section class="mb-8">
 
   <Tabs.Root
           bind:value={tabSet}
-          class=""
   >
     <Tabs.List
-            class="tabs-list preset-tonal-surface"
+            class="tabs-list preset-tonal-surface mt-6"
     >
       <Tabs.Trigger
+              class="tabs-trigger"
               value="gameData"
-              class="tabs-trigger"
-      >Game Data</Tabs.Trigger>
+      >Game Data
+      </Tabs.Trigger>
       <Tabs.Trigger
+              class="tabs-trigger"
               value="boxscore"
-              class="tabs-trigger"
-      >Box Score</Tabs.Trigger>
+      >Box Score
+      </Tabs.Trigger>
       <Tabs.Trigger
-              value="gameReport"
               class="tabs-trigger"
-      >Game Report</Tabs.Trigger>
+              value="gameReport"
+      >Game Report
+      </Tabs.Trigger>
     </Tabs.List>
 
-    <Tabs.Content value="gameData" class="pt-3">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-stretch gap-3 md:gap-4 lg:gap-5">
+    <Tabs.Content class="pt-4" value="gameData">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-stretch gap-5">
         <MatchDetailStatsCard {match}/>
         <MatchDetailLocationCard field={match?.field}/>
         <MatchDetailOfficialsCard {match}/>
@@ -82,4 +85,12 @@
       {/await}
     </Tabs.Content>
   </Tabs.Root>
+</section>
+
+<section class="my-5!">
+  <ShareButton {match}/>
+  <details class="mt-4">
+    <summary class="font-light">Caveat</summary>
+    <p class="text-sm font-light">Sharing games does not work on Firefox.</p>
+  </details>
 </section>
