@@ -28,9 +28,9 @@
 
   <div class="flex justify-center">
     <div class="grid grid-cols-3 sm:w-[80%] place-items-center gap-3">
-      <img class="w-14 xl:w-24" src="{awayLogo}" alt="team logo for {match.away_team_name}" loading="lazy"/>
+      <img alt="team logo for {match.away_team_name}" class="w-14 xl:w-24" loading="lazy" src="{awayLogo}"/>
 
-      <div class="font-bold text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
+      <div class="font-bold text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
         {#if match.away_runs !== undefined && match.home_runs !== undefined}
           <span class:text-surface-600-400={winner === GameWinner.home}>{match.away_runs}</span>
           <span> - </span>
@@ -38,7 +38,7 @@
         {/if}
       </div>
 
-      <img class="w-14 xl:w-24" src="{homeLogo}" alt="team logo for {match.home_team_name}" loading="lazy"/>
+      <img alt="team logo for {match.home_team_name}" class="w-14 xl:w-24" loading="lazy" src="{homeLogo}"/>
 
       <div>{match.away_team_name}</div>
       <div></div>

@@ -93,6 +93,9 @@ export class DateTimeUtility {
    * BSM does not use ISO 8601 format.
    *
    * Format example: 2024-04-07 12:05:00 +0200
+   *
+   * TODO: refactor this monster.
+   * It looks like Chrome is able to just parse the date string directly in `new Date()`, but Safari is not.
    */
   public static parseDateFromBSMString(formattedString: string): Date {
     const dateParts = formattedString.split(/[- :]/);
@@ -110,7 +113,7 @@ export class DateTimeUtility {
     const timezoneOffsetMinutes = parseInt(dateParts[6].substring(3), 10);
     const timezoneOffset = (timezoneOffsetHours * 60) + timezoneOffsetMinutes;
 
-    // Creating date object
+    // Creating a date object
     const date = new Date(year, month, day, hour, minute, second);
 
     // Adjusting for time zone offset
