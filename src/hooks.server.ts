@@ -1,11 +1,10 @@
-import {key, loadCatalog, loadIDs} from './locales/loader.ssr.svelte.js';
-import {loadLocales, runWithLocale} from 'wuchale/load-utils/server';
-import {locales} from 'virtual:wuchale/locales';
-import type {Handle} from "@sveltejs/kit";
-
 /**
  * @see https://wuchale.dev/adapters/svelte/#sveltekit-ssrssg
  */
+import {loadLocales, runWithLocale} from "wuchale/load-utils/server";
+import type {Handle} from "@sveltejs/kit";
+import {key, loadCatalog, loadIDs} from "virtual:wuchale/proxy";
+import {locales} from "virtual:wuchale/locales";
 
 // load at server startup
 loadLocales(key, loadIDs, loadCatalog, locales);

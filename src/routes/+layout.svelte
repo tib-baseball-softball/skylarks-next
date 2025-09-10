@@ -30,9 +30,9 @@
   <header>
 
     <AppBar
+            background="bg-surface-500/5 dark:bg-surface-800"
             centerAlign="place-self-center"
             padding="p-3"
-            background="bg-surface-500/5 dark:bg-surface-800"
     >
       {#snippet lead()}
         <div class="flex items-center justify-content-start">
