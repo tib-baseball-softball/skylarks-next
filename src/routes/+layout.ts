@@ -1,20 +1,25 @@
-import type { LayoutLoad } from "../../.svelte-kit/types/src/routes/$types";
-import type {
-  CustomAuthModel,
-  ExpandedClub,
-  ExpandedTeam,
-} from "$lib/model/ExpandedResponse";
-import { browser } from "$app/environment";
-import { authSettings, client } from "$lib/pocketbase/index.svelte";
+import type {LayoutLoad} from "../../.svelte-kit/types/src/routes/$types";
+import type {CustomAuthModel, ExpandedClub, ExpandedTeam,} from "$lib/model/ExpandedResponse";
+import {browser} from "$app/environment";
+import {authSettings, client} from "$lib/pocketbase/index.svelte";
+import {loadLocale} from "wuchale/load-utils";
+import '../locales/loader.svelte.js';
+// @ts-ignore
+import {locales} from "virtual:wuchale/locales";
 
 /**
  * This loads club and team data for the extended DiamondPlanner nav bar.
  *
  * Should be executed only client-side and only if logged in.
  */
-export const load = (async ({ data, fetch, depends }) => {
+export const load = (async ({data, fetch, depends, url}) => {
   let clubs: ExpandedClub[] = [];
   let teams: ExpandedTeam[] = [];
+
+  const locale = url.searchParams.get('locale') ?? 'en';
+  if (locales.includes(locale) && browser) {
+    await loadLocale(locale);
+  }
 
   if (browser && client.authStore.isValid) {
     /**

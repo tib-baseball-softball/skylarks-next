@@ -45,7 +45,10 @@
     "tw-animate-css": "^1.3.8",
     "typescript": "^5.9.2",
     "vite": "^7.1.5",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "@wuchale/svelte": "^0.14.3",
+    "@wuchale/vite-plugin": "^0.14.4",
+    "wuchale": "^0.15.8"
   },
   "type": "module",
   "overrides": {

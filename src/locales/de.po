@@ -1,0 +1,3416 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2025-09-10T18:43:43.303Z\n"
+"POT-Creation-Date: 2025-09-10T18:43:43.303Z\n"
+
+#: src/routes/+layout.svelte
+msgid "Berlin Skylarks Web App"
+msgstr ""
+
+#: src/routes/+layout.svelte
+#: src/lib/components/navigation/NavigationSheet.svelte
+msgid "Skylarks Team Logo"
+msgstr ""
+
+#: src/routes/+layout.svelte
+msgid "Production"
+msgstr ""
+
+#: src/routes/+layout.svelte
+msgid ""
+"This website is actually a JavaScript application with lots of functionality. You need to enable\n"
+"JavaScript for it to work."
+msgstr ""
+
+#: src/lib/auth/LoginBadge.svelte
+msgid "Account Overview"
+msgstr ""
+
+#: src/lib/auth/LoginBadge.svelte
+msgid "Login / Register"
+msgstr ""
+
+#: src/lib/auth/LoginBadge.svelte
+#: src/lib/auth/LoginForm.svelte
+msgid "Login"
+msgstr ""
+
+#: src/lib/auth/LoginBadge.svelte
+msgid "<0/> Login"
+msgstr ""
+
+#: src/lib/auth/AccountModal.svelte
+msgid "Logged in as:"
+msgstr ""
+
+#: src/lib/auth/AccountModal.svelte
+#: src/routes/(protected)/account/announcements/[announcement]/+page.svelte
+msgid "Club:"
+msgstr ""
+
+#: src/lib/auth/AccountModal.svelte
+msgid "Log out"
+msgstr ""
+
+#: src/lib/auth/ChangeEmailForm.svelte
+msgid "A verification email has been sent to your new address."
+msgstr ""
+
+#: src/lib/auth/ChangeEmailForm.svelte
+msgid "An error occurred while sending your email change request."
+msgstr ""
+
+#: src/lib/auth/ChangeEmailForm.svelte
+msgid "E-Mail <0/> <1>You will be logged out and instructed to verify your new email address.</1>"
+msgstr ""
+
+#: src/lib/auth/ChangeEmailForm.svelte
+#: src/lib/auth/PasswordRequestButton.svelte
+#: src/lib/auth/UserDetailsForm.svelte
+#: src/lib/components/datatable/TeamMembersTableContent.svelte
+#: src/lib/components/utility/DeleteButton.svelte
+msgid "Confirm"
+msgstr ""
+
+#: src/routes/+page.svelte
+msgid "Hero"
+msgstr ""
+
+#: src/routes/+page.svelte
+#: src/lib/components/navigation/NavigationSheet.svelte
+msgid "Berlin Skylarks"
+msgstr ""
+
+#: src/routes/+page.svelte
+msgid "Baseball & Softball in the Heart of Berlin"
+msgstr "Baseball & Softball im Herzen Berlins"
+
+#: src/routes/+page.svelte
+msgid "Scores"
+msgstr "Spiele"
+
+#: src/lib/auth/LoginForm.svelte
+#: src/lib/auth/LoginForm.svelte
+msgid "Your email"
+msgstr ""
+
+#: src/lib/auth/LoginForm.svelte
+#: src/lib/auth/LoginForm.svelte
+msgid "Your password"
+msgstr ""
+
+#: src/lib/auth/LoginForm.svelte
+msgid "Login to your account"
+msgstr ""
+
+#: src/lib/auth/LoginForm.svelte
+msgid "Forgot Password?"
+msgstr ""
+
+#: src/lib/auth/LoginForm.svelte
+msgid "Reset Password"
+msgstr ""
+
+#: src/lib/auth/LoginForm.svelte
+msgid "Sign in to Skylarks Diamond Planner"
+msgstr ""
+
+#: src/lib/auth/LoginForm.svelte
+msgid "Log In"
+msgstr ""
+
+#: src/lib/auth/LoginForm.svelte
+msgid "Create Account"
+msgstr ""
+
+#: src/lib/auth/LoginForm.svelte
+msgid "First Name"
+msgstr ""
+
+#: src/lib/auth/LoginForm.svelte
+msgid "John"
+msgstr ""
+
+#: src/lib/auth/LoginForm.svelte
+msgid "Last Name"
+msgstr ""
+
+#: src/lib/auth/LoginForm.svelte
+msgid "Doe"
+msgstr ""
+
+#: src/lib/auth/LoginForm.svelte
+msgid "Confirm password"
+msgstr ""
+
+#: src/lib/auth/LoginForm.svelte
+#: src/lib/components/forms/TeamForm.svelte
+msgid "Signup Key"
+msgstr ""
+
+#: src/lib/auth/LoginForm.svelte
+msgid ""
+"A valid signup key needs to be entered upon user account creation.\n"
+"If you do not have a signup key, please contact your team manager."
+msgstr ""
+
+#: src/lib/auth/LoginForm.svelte
+msgid "Register new account"
+msgstr ""
+
+#: src/lib/auth/LoginForm.svelte
+msgid "or sign in with"
+msgstr ""
+
+#: src/lib/auth/LoginForm.svelte
+msgid ""
+"Even when using an external login provider,\n"
+"a signup key (see above) is still required for account creation."
+msgstr ""
+
+#: src/lib/auth/LoginForm.svelte
+msgid ""
+"Note: it is possible to associate a local account with an\n"
+"external provider later by using the same email address. A single account can be associated with more\n"
+"than one external provider."
+msgstr ""
+
+#: src/lib/auth/LoginForm.svelte
+msgid "There seems to be an error while contacting the backend. Please try again later."
+msgstr ""
+
+#: src/lib/auth/OAuthProviderButton.svelte
+#: src/lib/auth/OAuthProviderButton.svelte
+msgid "Google logo"
+msgstr ""
+
+#: src/lib/auth/OAuthProviderButton.svelte
+#: src/lib/auth/OAuthProviderButton.svelte
+msgid "Apple logo"
+msgstr ""
+
+#: src/lib/auth/OAuthProviderButton.svelte
+#: src/lib/auth/OAuthProviderButton.svelte
+msgid "GitHub logo"
+msgstr ""
+
+#: src/lib/auth/OAuthProviderButton.svelte
+msgid "Discord logo"
+msgstr ""
+
+#: src/lib/auth/PasswordRequestButton.svelte
+#: src/lib/components/datatable/TeamMembersTableContent.svelte
+#: src/lib/components/utility/DeleteButton.svelte
+msgid "Please Confirm"
+msgstr ""
+
+#: src/lib/auth/PasswordRequestButton.svelte
+msgid ""
+"Send change password request for <0/>?\n"
+"You will be logged out and an email with instructions will be sent to your address."
+msgstr ""
+
+#: src/lib/auth/PasswordRequestButton.svelte
+#: src/lib/components/datatable/TeamMembersTableContent.svelte
+#: src/lib/components/forms/EventSeriesForm.svelte
+#: src/lib/components/utility/DeleteButton.svelte
+msgid "Cancel"
+msgstr ""
+
+#: src/routes/club/+page.svelte
+msgid "Details"
+msgstr ""
+
+#: src/routes/club/+page.svelte
+msgid "More Info"
+msgstr ""
+
+#: src/routes/club/+page.svelte
+#: src/routes/teams/+page.svelte
+#: src/lib/components/navigation/StaticNavigationLinks.svelte
+#: src/lib/components/player/PlayerDataCard.svelte
+msgid "Teams"
+msgstr ""
+
+#: src/routes/club/+page.svelte
+msgid "Adult and Youth"
+msgstr ""
+
+#: src/routes/club/+page.svelte
+#: src/lib/components/match/MatchDetailOfficialsCard.svelte
+#: src/lib/components/club/officials/ClubOfficialIcon.svelte
+msgid "Scorer"
+msgstr ""
+
+#: src/routes/club/+page.svelte
+msgid "Keeping statistics"
+msgstr ""
+
+#: src/routes/club/+page.svelte
+#: src/lib/components/match/MatchDetailOfficialsCard.svelte
+#: src/lib/components/club/officials/ClubOfficialIcon.svelte
+msgid "Umpire"
+msgstr ""
+
+#: src/routes/club/+page.svelte
+msgid "Our Referees"
+msgstr ""
+
+#: src/routes/club/+page.svelte
+#: src/lib/components/match/MatchDetailLocationCard.svelte
+#: src/routes/club/ballpark/+page.svelte
+msgid "Ballpark"
+msgstr ""
+
+#: src/routes/club/+page.svelte
+msgid "The Lark's Nest"
+msgstr ""
+
+#: src/routes/club/+page.svelte
+msgid "Officials"
+msgstr ""
+
+#: src/routes/club/+page.svelte
+msgid "Club Administration"
+msgstr ""
+
+#: src/lib/auth/UserDetailsForm.svelte
+msgid ""
+"This data is only used for internal purposes and never shown anywhere publicly.\n"
+"(Your team and club administrators have access)."
+msgstr ""
+
+#: src/lib/auth/UserDetailsForm.svelte
+msgid "First Name(s) <0/>"
+msgstr ""
+
+#: src/lib/auth/UserDetailsForm.svelte
+msgid "Last Name <0/>"
+msgstr ""
+
+#: src/lib/auth/UserDetailsForm.svelte
+msgid "Profile Image <0/>"
+msgstr ""
+
+#: src/lib/auth/UserDetailsForm.svelte
+msgid "Selected file:"
+msgstr ""
+
+#: src/lib/auth/UserDetailsForm.svelte
+msgid "{0} ({1} bytes)"
+msgstr ""
+
+#: src/lib/auth/UserDetailsForm.svelte
+msgid "This is your app profile picture. It will not be used for your player profile image."
+msgstr ""
+
+#: src/routes/(protected)/+layout.svelte
+msgid "Internal Area"
+msgstr ""
+
+#: src/routes/(protected)/+layout.svelte
+msgid "Please log in!"
+msgstr ""
+
+#: src/routes/(protected)/+layout.svelte
+msgid "Go to Login Page"
+msgstr ""
+
+#: src/routes/(protected)/+layout.svelte
+msgid "<0/> Login Page"
+msgstr ""
+
+#: src/routes/favorite/+page.svelte
+msgid "Favorite Team"
+msgstr ""
+
+#: src/routes/favorite/+page.svelte
+msgid "Quick Details"
+msgstr ""
+
+#: src/routes/favorite/+page.svelte
+msgid "You have not selected a favorite team yet."
+msgstr ""
+
+#: src/routes/favorite/+page.svelte
+msgid "Team Stats Links"
+msgstr ""
+
+#: src/routes/favorite/+page.svelte
+msgid "Data per League"
+msgstr ""
+
+#: src/routes/favorite/+page.svelte
+msgid "A single team can be associated to several leagues per season in BSM."
+msgstr ""
+
+#: src/routes/favorite/+page.svelte
+msgid "The team \"{0}\" does not have a league entry in this league."
+msgstr ""
+
+#: src/routes/favorite/+page.svelte
+#: src/routes/teams/[id]/+page.svelte
+msgid "Standings"
+msgstr ""
+
+#: src/routes/favorite/+page.svelte
+msgid "Playoffs"
+msgstr ""
+
+#: src/routes/favorite/+page.svelte
+msgid "Graphs and Mood"
+msgstr ""
+
+#: src/routes/favorite/+page.svelte
+#: src/lib/components/match/GamecenterMatchSection.svelte
+#: src/lib/components/navigation/StaticNavigationLinks.svelte
+#: src/lib/components/utility/StatsBlock.svelte
+#: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
+msgid "Games"
+msgstr ""
+
+#: src/routes/favorite/+page.svelte
+msgid "Previous Game"
+msgstr ""
+
+#: src/routes/favorite/+page.svelte
+msgid "No previous game found."
+msgstr ""
+
+#: src/routes/favorite/+page.svelte
+msgid "Next Game"
+msgstr ""
+
+#: src/routes/favorite/+page.svelte
+msgid "No next game found."
+msgstr ""
+
+#: src/routes/favorite/+page.svelte
+msgid "No data found."
+msgstr ""
+
+#: src/routes/favorite/+page.svelte
+msgid "Loading..."
+msgstr ""
+
+#: src/routes/favorite/+page.svelte
+msgid "Error: {0}"
+msgstr ""
+
+#: src/routes/legalnotice/+page.svelte
+#: src/lib/components/meta/Footer.svelte
+msgid "Impressum"
+msgstr ""
+
+#: src/routes/legalnotice/+page.svelte
+msgid "Turngemeinde in Berlin e.V. Abteilung Baseball<0/> Columbiadamm 111<1/> 10965 Berlin"
+msgstr ""
+
+#: src/routes/legalnotice/+page.svelte
+msgid "Vereinsregister: 351 B<0/> Registergericht: Amtsgericht Berlin-Charlottenburg"
+msgstr ""
+
+#: src/routes/legalnotice/+page.svelte
+msgid "Kontakt"
+msgstr ""
+
+#: src/routes/legalnotice/+page.svelte
+#: src/routes/privacy/+page.svelte
+msgid "Telefon: + 49 30 61 10 10 -13 (-0)<0/> E-Mail: vorstand@tib-baseball.de"
+msgstr ""
+
+#: src/routes/legalnotice/+page.svelte
+msgid "Verbraucher­streit­beilegung/Universal­schlichtungs­stelle"
+msgstr ""
+
+#: src/routes/legalnotice/+page.svelte
+msgid ""
+"Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle\n"
+"teilzunehmen."
+msgstr ""
+
+#: src/routes/legalnotice/+page.svelte
+msgid "Zentrale Kontaktstelle nach dem Digital Services Act - DSA (Verordnung (EU) 2022/265)"
+msgstr ""
+
+#: src/routes/legalnotice/+page.svelte
+msgid "Unsere zentrale Kontaktstelle für Nutzer und Behörden nach Art. 11, 12 DSA erreichen Sie wie folgt:"
+msgstr ""
+
+#: src/routes/legalnotice/+page.svelte
+msgid "E-Mail: vorstand@tib-baseball.de<0/> Telefon: + 49 30 61 10 10 -13 (-0)"
+msgstr ""
+
+#: src/routes/legalnotice/+page.svelte
+msgid "Die für den Kontakt zur Verfügung stehenden Sprachen sind: Deutsch, Englisch."
+msgstr ""
+
+#: src/routes/legalnotice/+page.svelte
+#: src/routes/privacy/+page.svelte
+msgid "Quelle: <0>https://www.e-recht24.de</0>"
+msgstr ""
+
+#: src/routes/gamecenter/+page.svelte
+#: src/lib/components/match/CurrentMatchesOverviewCard.svelte
+msgid "Gamecenter"
+msgstr ""
+
+#: src/routes/gamecenter/+page.svelte
+msgid "Show external games"
+msgstr ""
+
+#: src/routes/gamecenter/+page.svelte
+#: src/lib/components/match/CurrentMatchBlock.svelte
+msgid "Loading matches..."
+msgstr ""
+
+#: src/routes/gamecenter/+page.svelte
+#: src/lib/components/forms/TeamGamesModal.svelte
+#: src/lib/components/match/CurrentMatchBlock.svelte
+#: src/routes/ligen/[id]/stats/+page.svelte
+msgid "error loading matches: {0}"
+msgstr ""
+
+#: src/routes/gamecenter/+page.svelte
+msgid "Gameday <0><0><0>Previous</0> <1>Current</1> <2>Next</2> <3>All</3></0> <1/></0> <1/>"
+msgstr ""
+
+#: src/routes/ligen/+page.svelte
+#: src/lib/components/navigation/StaticNavigationLinks.svelte
+msgid "Leagues"
+msgstr ""
+
+#: src/routes/ligen/+page.svelte
+msgid "Loading Leagues..."
+msgstr ""
+
+#: src/routes/ligen/+page.svelte
+#: src/routes/teams/+page.svelte
+#: src/routes/club/scorer/+page.svelte
+#: src/routes/club/officials/+page.svelte
+#: src/routes/players/[id]/+page.svelte
+#: src/routes/club/umpire/+page.svelte
+#: src/routes/club/ballpark/+page.svelte
+#: src/routes/league_entries/[entry]/+page.svelte
+#: src/routes/ligen/[id]/+page.svelte
+#: src/routes/teams/[id]/+page.svelte
+#: src/routes/teams/[id]/+page.svelte
+#: src/routes/(protected)/stats/[user]/+page.svelte
+#: src/routes/(protected)/stats/[user]/+page.svelte
+msgid "error loading: {0}"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+#: src/lib/components/meta/Footer.svelte
+msgid "Datenschutzerklärung"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "1. Datenschutz auf einen Blick"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Allgemeine Hinweise"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Die folgenden Hinweise geben einen einfachen Überblick darüber,\n"
+"was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind\n"
+"alle Daten, mit denen Sie persönlich identifiziert werden können. Ausführliche Informationen zum\n"
+"Thema Datenschutz entnehmen Sie unserer unter diesem Text aufgeführten\n"
+"Datenschutzerklärung."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Datenerfassung auf dieser Website"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Wer ist verantwortlich für die Datenerfassung auf dieser\n"
+"Website?"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen\n"
+"Kontaktdaten können Sie dem Abschnitt „Hinweis zur Verantwortlichen Stelle“ in dieser\n"
+"Datenschutzerklärung entnehmen."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Wie erfassen wir Ihre Daten?"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Ihre Daten werden zum\n"
+"einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z. B. um Daten handeln, die Sie in\n"
+"ein\n"
+"Kontaktformular eingeben."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Andere Daten werden automatisch oder nach Ihrer Einwilligung beim Besuch\n"
+"der Website durch unsere IT-Systeme erfasst. Das sind vor allem technische Daten (z. B. Internetbrowser,\n"
+"Betriebssystem oder Uhrzeit des Seitenaufrufs). Die Erfassung dieser Daten erfolgt automatisch, sobald Sie diese\n"
+"Website betreten."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Wofür nutzen wir Ihre Daten?"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Ein Teil der Daten wird erhoben, um eine\n"
+"fehlerfreie Bereitstellung der Website zu gewährleisten. Andere Daten können zur Analyse Ihres\n"
+"Nutzerverhaltens verwendet werden. Sofern über die Website Verträge geschlossen oder angebahnt\n"
+"werden können, werden die übermittelten Daten auch für Vertragsangebote, Bestellungen oder\n"
+"sonstige Auftragsanfragen verarbeitet."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Welche Rechte haben Sie bezüglich Ihrer Daten?"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer\n"
+"gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung oder\n"
+"Löschung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben,\n"
+"können Sie diese Einwilligung jederzeit für die Zukunft widerrufen. Außerdem haben Sie das Recht,\n"
+"unter bestimmten Umständen die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu\n"
+"verlangen. Des Weiteren steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde\n"
+"zu."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Hierzu sowie zu weiteren Fragen zum Thema Datenschutz können Sie sich jederzeit an uns\n"
+"wenden."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "2. Hosting"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Wir hosten die Inhalte unserer Website bei folgendem Anbieter:"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Hetzner"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Anbieter ist die Hetzner Online GmbH, Industriestr. 25, 91710 Gunzenhausen (nachfolgend\n"
+"Hetzner)."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Details entnehmen Sie der Datenschutzerklärung von Hetzner: <0>https://www.hetzner.com/de/legal/privacy-policy/</0>."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Die Verwendung von Hetzner erfolgt\n"
+"auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Wir haben ein berechtigtes Interesse an einer möglichst\n"
+"zuverlässigen Darstellung unserer Website. Sofern eine entsprechende Einwilligung abgefragt wurde, erfolgt\n"
+"die Verarbeitung ausschließlich auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG,\n"
+"soweit die Einwilligung die Speicherung von Cookies oder den Zugriff auf Informationen im Endgerät des\n"
+"Nutzers (z. B. Device-Fingerprinting) im Sinne des TDDDG umfasst. Die Einwilligung ist jederzeit\n"
+"widerrufbar."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Auftragsverarbeitung"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Wir haben einen Vertrag über Auftragsverarbeitung (AVV) zur Nutzung\n"
+"des oben genannten Dienstes geschlossen. Hierbei handelt es sich um einen datenschutzrechtlich vorgeschriebenen\n"
+"Vertrag, der gewährleistet, dass dieser die personenbezogenen Daten unserer Websitebesucher nur nach\n"
+"unseren Weisungen und unter Einhaltung der DSGVO verarbeitet."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "3. Allgemeine Hinweise und Pflicht­informationen"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Datenschutz"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr\n"
+"ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend den gesetzlichen\n"
+"Datenschutzvorschriften sowie dieser Datenschutzerklärung."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Wenn Sie diese Website benutzen,\n"
+"werden verschiedene personenbezogene Daten erhoben. Personenbezogene Daten sind Daten, mit denen Sie\n"
+"persönlich identifiziert werden können. Die vorliegende Datenschutzerklärung erläutert,\n"
+"welche Daten wir erheben und wofür wir sie nutzen. Sie erläutert auch, wie und zu welchem Zweck das\n"
+"geschieht."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Wir weisen darauf hin, dass die Datenübertragung im Internet (z. B. bei der\n"
+"Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor\n"
+"dem Zugriff durch Dritte ist nicht möglich."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Hinweis zur verantwortlichen Stelle"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Die verantwortliche Stelle für die Datenverarbeitung auf\n"
+"dieser Website ist:"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Abteilungsleitung TiB Baseball<0/> Columbiadamm 111<1/> 10965 Berlin"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen\n"
+"über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z. B. Namen, E-Mail-\n"
+"Adressen o. Ä.) entscheidet."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Speicherdauer"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Soweit innerhalb dieser Datenschutzerklärung keine speziellere Speicherdauer\n"
+"genannt wurde, verbleiben Ihre personenbezogenen Daten bei uns, bis der Zweck für die Datenverarbeitung\n"
+"entfällt. Wenn Sie ein berechtigtes Löschersuchen geltend machen oder eine Einwilligung zur\n"
+"Datenverarbeitung widerrufen, werden Ihre Daten gelöscht, sofern wir keine anderen rechtlich\n"
+"zulässigen Gründe für die Speicherung Ihrer personenbezogenen Daten haben (z. B. steuer-\n"
+"oder handelsrechtliche Aufbewahrungsfristen); im letztgenannten Fall erfolgt die Löschung nach Fortfall\n"
+"dieser Gründe."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Allgemeine Hinweise zu den Rechtsgrundlagen der Datenverarbeitung auf dieser Website"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Sofern Sie\n"
+"in die Datenverarbeitung eingewilligt haben, verarbeiten wir Ihre personenbezogenen Daten auf Grundlage von Art.\n"
+"6 Abs. 1 lit. a DSGVO bzw. Art. 9 Abs. 2 lit. a DSGVO, sofern besondere Datenkategorien nach Art. 9 Abs. 1 DSGVO\n"
+"verarbeitet werden. Im Falle einer ausdrücklichen Einwilligung in die Übertragung personenbezogener\n"
+"Daten in Drittstaaten erfolgt die Datenverarbeitung außerdem auf Grundlage von Art. 49 Abs. 1 lit. a DSGVO.\n"
+"Sofern Sie in die Speicherung von Cookies oder in den Zugriff auf Informationen in Ihr Endgerät (z. B. via\n"
+"Device-Fingerprinting) eingewilligt haben, erfolgt die Datenverarbeitung zusätzlich auf Grundlage von §\n"
+"25 Abs. 1 TDDDG. Die Einwilligung ist jederzeit widerrufbar. Sind Ihre Daten zur Vertragserfüllung oder zur\n"
+"Durchführung vorvertraglicher Maßnahmen erforderlich, verarbeiten wir Ihre Daten auf Grundlage des\n"
+"Art. 6 Abs. 1 lit. b DSGVO. Des Weiteren verarbeiten wir Ihre Daten, sofern diese zur Erfüllung einer\n"
+"rechtlichen Verpflichtung erforderlich sind auf Grundlage von Art. 6 Abs. 1 lit. c DSGVO. Die Datenverarbeitung\n"
+"kann ferner auf Grundlage unseres berechtigten Interesses nach Art. 6 Abs. 1 lit. f DSGVO erfolgen. Über die\n"
+"jeweils im Einzelfall einschlägigen Rechtsgrundlagen wird in den folgenden Absätzen dieser\n"
+"Datenschutzerklärung informiert."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Empfänger von personenbezogenen Daten"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Im Rahmen unserer Geschäftstätigkeit\n"
+"arbeiten wir mit verschiedenen externen Stellen zusammen. Dabei ist teilweise auch eine Übermittlung von\n"
+"personenbezogenen Daten an diese externen Stellen erforderlich. Wir geben personenbezogene Daten nur dann an\n"
+"externe Stellen weiter, wenn dies im Rahmen einer Vertragserfüllung erforderlich ist, wenn wir gesetzlich\n"
+"hierzu verpflichtet sind (z. B. Weitergabe von Daten an Steuerbehörden), wenn wir ein berechtigtes\n"
+"Interesse nach Art. 6 Abs. 1 lit. f DSGVO an der Weitergabe haben oder wenn eine sonstige Rechtsgrundlage die\n"
+"Datenweitergabe erlaubt. Beim Einsatz von Auftragsverarbeitern geben wir personenbezogene Daten unserer\n"
+"Kunden nur auf Grundlage eines gültigen Vertrags über Auftragsverarbeitung weiter. Im Falle einer\n"
+"gemeinsamen Verarbeitung wird ein Vertrag über gemeinsame Verarbeitung geschlossen."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Widerruf Ihrer Einwilligung zur Datenverarbeitung"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Viele Datenverarbeitungsvorgänge sind\n"
+"nur mit Ihrer ausdrücklichen Einwilligung möglich. Sie können eine bereits erteilte Einwilligung\n"
+"jederzeit widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom\n"
+"Widerruf unberührt."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Widerspruchsrecht gegen die Datenerhebung in besonderen Fällen sowie gegen Direktwerbung (Art. 21\n"
+"DSGVO)"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"WENN DIE DATENVERARBEITUNG AUF GRUNDLAGE VON ART. 6 ABS. 1 LIT. E ODER F\n"
+"DSGVO ERFOLGT, HABEN SIE JEDERZEIT DAS RECHT, AUS GRÜNDEN, DIE SICH AUS IHRER\n"
+"BESONDEREN SITUATION ERGEBEN, GEGEN DIE VERARBEITUNG IHRER PERSONENBEZOGENEN DATEN\n"
+"WIDERSPRUCH EINZULEGEN; DIES GILT AUCH FÜR EIN AUF DIESE BESTIMMUNGEN GESTÜTZTES\n"
+"PROFILING. DIE JEWEILIGE RECHTSGRUNDLAGE, AUF DENEN EINE VERARBEITUNG BERUHT, ENTNEHMEN\n"
+"SIE DIESER DATENSCHUTZERKLÄRUNG. WENN SIE WIDERSPRUCH EINLEGEN, WERDEN WIR IHRE\n"
+"BETROFFENEN PERSONENBEZOGENEN DATEN NICHT MEHR VERARBEITEN, ES SEI DENN, WIR\n"
+"KÖNNEN ZWINGENDE SCHUTZWÜRDIGE GRÜNDE FÜR DIE VERARBEITUNG\n"
+"NACHWEISEN, DIE IHRE INTERESSEN, RECHTE UND FREIHEITEN ÜBERWIEGEN ODER DIE\n"
+"VERARBEITUNG DIENT DER GELTENDMACHUNG, AUSÜBUNG ODER VERTEIDIGUNG VON\n"
+"RECHTSANSPRÜCHEN (WIDERSPRUCH NACH ART. 21 ABS. 1 DSGVO)."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"WERDEN IHRE\n"
+"PERSONENBEZOGENEN DATEN VERARBEITET, UM DIREKTWERBUNG ZU BETREIBEN, SO HABEN SIE DAS\n"
+"RECHT, JEDERZEIT WIDERSPRUCH GEGEN DIE VERARBEITUNG SIE BETREFFENDER PERSONENBEZOGENER\n"
+"DATEN ZUM ZWECKE DERARTIGER WERBUNG EINZULEGEN; DIES GILT AUCH FÜR DAS PROFILING,\n"
+"SOWEIT ES MIT SOLCHER DIREKTWERBUNG IN VERBINDUNG STEHT. WENN SIE WIDERSPRECHEN,\n"
+"WERDEN IHRE PERSONENBEZOGENEN DATEN ANSCHLIESSEND NICHT MEHR ZUM ZWECKE DER\n"
+"DIREKTWERBUNG VERWENDET (WIDERSPRUCH NACH ART. 21 ABS. 2 DSGVO)."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Beschwerde­recht bei der zuständigen Aufsichts­behörde"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Im Falle von\n"
+"Verstößen gegen die DSGVO steht den Betroffenen ein Beschwerderecht bei einer\n"
+"Aufsichtsbehörde, insbesondere in dem Mitgliedstaat ihres gewöhnlichen Aufenthalts, ihres\n"
+"Arbeitsplatzes oder des Orts des mutmaßlichen Verstoßes zu. Das Beschwerderecht besteht\n"
+"unbeschadet anderweitiger verwaltungsrechtlicher oder gerichtlicher Rechtsbehelfe."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Recht auf Daten­übertrag­barkeit"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Sie haben das Recht, Daten, die wir auf Grundlage\n"
+"Ihrer Einwilligung oder in Erfüllung eines Vertrags automatisiert verarbeiten, an sich oder an einen Dritten in\n"
+"einem gängigen, maschinenlesbaren Format aushändigen zu lassen. Sofern Sie die direkte\n"
+"Übertragung der Daten an einen anderen Verantwortlichen verlangen, erfolgt dies nur, soweit es technisch\n"
+"machbar ist."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Auskunft, Berichtigung und Löschung"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Sie haben im Rahmen der geltenden gesetzlichen\n"
+"Bestimmungen jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen\n"
+"Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung und ggf. ein Recht auf\n"
+"Berichtigung oder Löschung dieser Daten. Hierzu sowie zu weiteren Fragen zum Thema personenbezogene\n"
+"Daten können Sie sich jederzeit an uns wenden."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Recht auf Einschränkung der Verarbeitung"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Sie haben das Recht, die Einschränkung der\n"
+"Verarbeitung Ihrer personenbezogenen Daten zu verlangen. Hierzu können Sie sich jederzeit an uns wenden.\n"
+"Das Recht auf Einschränkung der Verarbeitung besteht in folgenden Fällen:"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Wenn Sie die\n"
+"Richtigkeit Ihrer bei uns gespeicherten personenbezogenen Daten bestreiten, benötigen wir in der Regel Zeit,\n"
+"um dies zu überprüfen. Für die Dauer der Prüfung haben Sie das Recht, die\n"
+"Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Wenn die\n"
+"Verarbeitung Ihrer personenbezogenen Daten unrechtmäßig geschah/geschieht, können Sie statt\n"
+"der Löschung die Einschränkung der Datenverarbeitung verlangen."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Wenn wir Ihre\n"
+"personenbezogenen Daten nicht mehr benötigen, Sie sie jedoch zur Ausübung, Verteidigung oder\n"
+"Geltendmachung von Rechtsansprüchen benötigen, haben Sie das Recht, statt der Löschung die\n"
+"Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Wenn Sie einen\n"
+"Widerspruch nach Art. 21 Abs. 1 DSGVO eingelegt haben, muss eine Abwägung zwischen Ihren und unseren\n"
+"Interessen vorgenommen werden. Solange noch nicht feststeht, wessen Interessen überwiegen, haben Sie das\n"
+"Recht, die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Wenn Sie die Verarbeitung Ihrer personenbezogenen Daten eingeschränkt haben, dürfen diese\n"
+"Daten – von ihrer Speicherung abgesehen – nur mit Ihrer Einwilligung oder zur Geltendmachung,\n"
+"Ausübung oder Verteidigung von Rechtsansprüchen oder zum Schutz der Rechte einer anderen\n"
+"natürlichen oder juristischen Person oder aus Gründen eines wichtigen öffentlichen Interesses der\n"
+"Europäischen Union oder eines Mitgliedstaats verarbeitet werden."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "SSL- bzw. TLS-Verschlüsselung"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Diese Seite nutzt aus Sicherheitsgründen und zum Schutz\n"
+"der Übertragung vertraulicher Inhalte, wie zum Beispiel Bestellungen oder Anfragen, die Sie an uns als\n"
+"Seitenbetreiber senden, eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen\n"
+"Sie daran, dass die Adresszeile des Browsers von „http://“ auf „https://“ wechselt und\n"
+"an dem Schloss-Symbol in Ihrer Browserzeile."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Wenn die SSL- bzw. TLS-Verschlüsselung aktiviert ist,\n"
+"können die Daten, die Sie an uns übermitteln, nicht von Dritten mitgelesen werden."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "4. Datenerfassung auf dieser Website"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Server-Log-Dateien"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Der Provider der Seiten erhebt und speichert automatisch Informationen in so\n"
+"genannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt. Dies sind:"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Browsertyp und Browserversion"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "verwendetes Betriebssystem"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Referrer URL"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Hostname des zugreifenden Rechners"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Uhrzeit der Serveranfrage"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "IP-Adresse"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Die\n"
+"Erfassung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Der Websitebetreiber hat ein\n"
+"berechtigtes Interesse an der technisch fehlerfreien Darstellung und der Optimierung seiner Website –\n"
+"hierzu müssen die Server-Log-Files erfasst werden."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid "Anfrage per E-Mail, Telefon oder Telefax"
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Wenn Sie uns per E-Mail, Telefon oder Telefax\n"
+"kontaktieren, wird Ihre Anfrage inklusive aller daraus hervorgehenden personenbezogenen Daten (Name, Anfrage)\n"
+"zum Zwecke der Bearbeitung Ihres Anliegens bei uns gespeichert und verarbeitet. Diese Daten geben wir nicht ohne\n"
+"Ihre Einwilligung weiter."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b\n"
+"DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur\n"
+"Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht\n"
+"die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten\n"
+"Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) sofern diese\n"
+"abgefragt\n"
+"wurde; die Einwilligung ist jederzeit widerrufbar."
+msgstr ""
+
+#: src/routes/privacy/+page.svelte
+msgid ""
+"Die von Ihnen an uns per Kontaktanfragen\n"
+"übersandten Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern, Ihre Einwilligung zur\n"
+"Speicherung widerrufen oder der Zweck für die Datenspeicherung entfällt (z. B. nach\n"
+"abgeschlossener Bearbeitung Ihres Anliegens). Zwingende gesetzliche Bestimmungen – insbesondere\n"
+"gesetzliche Aufbewahrungsfristen – bleiben unberührt."
+msgstr ""
+
+#: src/routes/teams/+page.svelte
+msgid "Loading Teams..."
+msgstr ""
+
+#: src/routes/login/+page.svelte
+msgid "Login Page"
+msgstr ""
+
+#: src/routes/login/+page.svelte
+msgid "You are logged in as <0/>."
+msgstr ""
+
+#: src/routes/login/+page.svelte
+msgid "You can log out by clicking your avatar in the top right."
+msgstr ""
+
+#: src/routes/login/+page.svelte
+msgid "Go to Account Page"
+msgstr ""
+
+#: src/routes/signupconfirm/+page.svelte
+msgid "Complete signup process"
+msgstr ""
+
+#: src/routes/signupconfirm/+page.svelte
+msgid "Your account has been successfully created."
+msgstr ""
+
+#: src/routes/signupconfirm/+page.svelte
+msgid "Please check your email to follow the required steps to confirm your account."
+msgstr ""
+
+#: src/lib/components/announcements/AnnouncementCard.svelte
+#: src/lib/components/forms/AnnouncementForm.svelte
+#: src/routes/(protected)/account/announcements/[announcement]/+page.svelte
+msgid "Announcement"
+msgstr ""
+
+#: src/lib/components/announcements/AnnouncementCard.svelte
+msgid "Number of Comments:"
+msgstr ""
+
+#: src/lib/components/announcements/AnnouncementCard.svelte
+msgid "Read more"
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid ""
+"Nutzungsbedingungen für die Web-App der Berlin\n"
+"Skylarks"
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "(English Below)"
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "Die Web-App wird bereitgestellt von der <0>Turngemeinde in Berlin e.V. Abteilung Baseball</0>."
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "1. Geltungsbereich"
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid ""
+"Diese Nutzungsbedingungen regeln die Nutzung der Web-App der Berlin Skylarks („die App“) durch Mitglieder des\n"
+"gemeinnützigen Baseballvereins \"Berlin Skylarks\"."
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "2. Nutzungsvoraussetzungen"
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "Die Nutzung der App ist ausschließlich Vereinsmitgliedern vorbehalten."
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid ""
+"Eine Registrierung und Anmeldung sind erforderlich, um an Vereinsaktivitäten wie Spielen, Turnieren und\n"
+"Trainingseinheiten teilzunehmen."
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "Die Nutzung ist kostenlos und mit dem Mitgliedsbeitrag abgegolten."
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "3. Datenschutz und Datennutzung"
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid ""
+"Alle in der App erhobenen Daten werden ausschließlich zur Organisation und Verwaltung von Vereinsaktivitäten\n"
+"verwendet."
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "Es gibt kein Tracking, keine Werbung, keine Social-Media-Integration und keine Einbindung externer Dienste."
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "Auf Anfrage und bei Beendigung der Mitgliedschaft werden alle personenbezogenen Daten unverzüglich gelöscht."
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "4. Verhaltensregeln"
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid ""
+"Die Mitglieder verpflichten sich, die App ausschließlich im Rahmen ihrer Vereinsmitgliedschaft und in gutem\n"
+"Glauben zu nutzen."
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "Eine missbräuchliche Nutzung, insbesondere zum Schaden des Vereins oder seiner Mitglieder, ist untersagt."
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "5. Open-Source-Kodex"
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "Der gesamte Code der App ist frei verfügbar und kann eingesehen werden."
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "6. Haftungsausschluss"
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid ""
+"Die Berlin Skylarks übernehmen keine Haftung für technische Fehler, Datenverluste oder sonstige Schäden, die aus\n"
+"der Nutzung der App entstehen könnten."
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "7. Änderungen der Nutzungsbedingungen"
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid ""
+"Der Verein behält sich das Recht vor, diese Nutzungsbedingungen bei Bedarf zu aktualisieren. Mitglieder werden\n"
+"über\n"
+"wesentliche Änderungen informiert."
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "8. Kontakt"
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid ""
+"Bei Fragen oder Anliegen zur Nutzung der App kann die Abteilungsleitung der Berlin Skylarks kontaktiert\n"
+"werden:"
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+#: src/routes/terms/+page.svelte
+msgid "vorstand@tib-baseball.de"
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "Bei technischen Fragen und Fehlern:"
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+#: src/routes/terms/+page.svelte
+msgid "app@tib-baseball.de"
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "Terms & Conditions for the Berlin Skylarks Web App"
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "The web app is provided by <0>Turngemeinde in Berlin e.V. Abteilung Baseball</0>."
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "1. Scope"
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid ""
+"These Terms & Conditions govern the use of the Berlin Skylarks web app (\"the App\") by members of the non-profit\n"
+"baseball club \"Berlin Skylarks\"."
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "2. Eligibility"
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "The App is exclusively available to club members."
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid ""
+"Registration and login are required to participate in club activities such as games, tournaments, and training\n"
+"sessions."
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "Use of the App including all backend services is free and covered by the membership fee."
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "3. Data Privacy & Usage"
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "All data collected within the App is used solely for organizing and managing club activities."
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "There is no tracking, no advertising, no social media integration, and no use of external services."
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "Upon request or termination of club membership, all personal data will be promptly deleted."
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "4. Code of Conduct"
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "Members agree to use the App only within the scope of their club membership and in good faith."
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "Misuse, especially actions harmful to the club or its members, is strictly prohibited."
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "5. Open-Source Policy"
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "The entire code of the App is publicly available and can be reviewed."
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "6. Disclaimer of Liability"
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid ""
+"The Berlin Skylarks assume no liability for technical errors, data loss, or any other damages resulting from the\n"
+"use of the App."
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "7. Changes to the Terms & Conditions"
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid ""
+"The club reserves the right to update these Terms & Conditions when necessary. Members will be informed of any\n"
+"significant changes."
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "8. Contact"
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "For any questions or concerns regarding the App, members can contact the Berlin Skylarks board:"
+msgstr ""
+
+#: src/routes/terms/+page.svelte
+msgid "In case of technical issues and bugs:"
+msgstr ""
+
+#: src/lib/components/boxscore/Linescore.svelte
+#: src/lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
+#: src/lib/components/boxscore/MatchBoxscorePitchingTable.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "R"
+msgstr ""
+
+#: src/lib/components/boxscore/Linescore.svelte
+#: src/lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
+#: src/lib/components/boxscore/MatchBoxscorePitchingTable.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "H"
+msgstr ""
+
+#: src/lib/components/boxscore/Linescore.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "E"
+msgstr ""
+
+#: src/lib/components/announcements/PriorityBadge.svelte
+msgid "Info"
+msgstr ""
+
+#: src/lib/components/announcements/PriorityBadge.svelte
+msgid "Important"
+msgstr ""
+
+#: src/lib/components/announcements/PriorityBadge.svelte
+msgid "Critical"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
+msgid "{0} (Batters)"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
+#: src/lib/components/boxscore/MatchBoxscorePitchingTable.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "AB"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "RBI"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
+#: src/lib/components/boxscore/MatchBoxscorePitchingTable.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "K"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
+#: src/lib/components/boxscore/MatchBoxscorePitchingTable.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "BB"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/utility/StatsBlock.svelte
+#: src/lib/components/utility/StatsBlock.svelte
+msgid "AVG"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/utility/StatsBlock.svelte
+msgid "OPS"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
+msgid "BATTING"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
+msgid "2B:"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
+msgid "3B:"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
+msgid "HR:"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
+msgid "SH:"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
+msgid "SF:"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
+msgid "BASERUNNING"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
+msgid "SB:"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
+msgid "CS:"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
+msgid "FIELDING"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
+msgid "E:"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
+msgid "PB:"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
+msgid "DP:"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
+msgid "TP:"
+msgstr ""
+
+#: src/lib/components/announcements/AnnouncementSectionContent.svelte
+msgid "No announcements available."
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscorePitchingTable.svelte
+msgid "{0} (Pitchers)"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscorePitchingTable.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/utility/StatsBlock.svelte
+#: src/lib/components/utility/StatsBlock.svelte
+msgid "IP"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscorePitchingTable.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "BF"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscorePitchingTable.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "ER"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscorePitchingTable.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/utility/StatsBlock.svelte
+msgid "ERA"
+msgstr ""
+
+#: src/lib/components/comments/CommentSection.svelte
+msgid "No comments yet."
+msgstr ""
+
+#: src/lib/components/comments/CommentSection.svelte
+#: src/lib/components/comments/CommentRow.svelte
+#: src/lib/components/comments/CommentRow.svelte
+#: src/lib/components/forms/ParticipationForm.svelte
+msgid "Comment"
+msgstr ""
+
+#: src/lib/components/comments/CommentSection.svelte
+#: src/lib/components/comments/CommentRow.svelte
+msgid "Your comment..."
+msgstr ""
+
+#: src/lib/components/comments/CommentSection.svelte
+#: src/lib/components/comments/CommentRow.svelte
+msgid "Add comment"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscoreSection.svelte
+msgid "Linescore"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscoreSection.svelte
+msgid "Offensive"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscoreSection.svelte
+#: src/lib/components/datatable/BaseballStatsDatatable.svelte
+#: src/routes/ligen/[id]/stats/+page.svelte
+msgid "Pitching"
+msgstr ""
+
+#: src/lib/components/club/ClubInfoSection.svelte
+#: src/lib/components/forms/ClubForm.svelte
+#: src/lib/components/navigation/StaticNavigationLinks.svelte
+#: src/lib/components/diamondplanner/club/ClubDetailCard.svelte
+#: src/lib/components/diamondplanner/team/TeamTeaserCard.svelte
+#: src/lib/components/diamondplanner/team/TeamListTeaser.svelte
+#: src/lib/components/diamondplanner/user/PlayerProfileClubsSection.svelte
+msgid "Club"
+msgstr ""
+
+#: src/lib/components/club/ClubInfoSection.svelte
+#: src/routes/club/details/+page.svelte
+msgid "Skylarks Logo"
+msgstr ""
+
+#: src/lib/components/datatable/BaseballStatsDatatable.svelte
+#: src/routes/ligen/[id]/stats/+page.svelte
+msgid "Batting"
+msgstr ""
+
+#: src/lib/components/datatable/BaseballStatsDatatable.svelte
+#: src/routes/ligen/[id]/stats/+page.svelte
+msgid "Fielding"
+msgstr ""
+
+#: src/lib/components/datatable/BaseballStatsDatatable.svelte
+msgid "Total"
+msgstr ""
+
+#: src/lib/components/datatable/RowCount.svelte
+msgid "Keine Elemente gefunden."
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/utility/StatsBlock.svelte
+msgid "G"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "GS"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "PA"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "2B"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "3B"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "HR"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "IBB"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "HP"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "SB"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "CS"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "SH"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "SF"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "I"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/utility/StatsBlock.svelte
+msgid "OBP"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/utility/StatsBlock.svelte
+msgid "SLG"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "CG"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "BK"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "WP"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "HBP"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/utility/StatsBlock.svelte
+msgid "WHIP"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/favorite/StreakEmoji.svelte
+#: src/lib/components/match/GameResultIndicator.svelte
+#: src/lib/components/table/StandingsTable.svelte
+msgid "W"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/favorite/StreakEmoji.svelte
+#: src/lib/components/match/GameResultIndicator.svelte
+#: src/lib/components/table/StandingsTable.svelte
+msgid "L"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "SV"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/forms/PlayerDataForm.svelte
+#: src/lib/components/forms/PlayerDataForm.svelte
+msgid "A"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "PO"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "DP"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "TP"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "PB"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "FA"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "P"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/forms/PlayerDataForm.svelte
+#: src/lib/components/forms/PlayerDataForm.svelte
+msgid "C"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "1B"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "SS"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "LF"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "CF"
+msgstr ""
+
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+msgid "RF"
+msgstr ""
+
+#: src/lib/components/datatable/RowsPerPage.svelte
+msgid "Show <0/>"
+msgstr ""
+
+#: src/lib/components/datatable/Search.svelte
+msgid "Search..."
+msgstr ""
+
+#: src/lib/components/datatable/StatsTableContent.svelte
+#: src/lib/components/datatable/TeamMembersTableContent.svelte
+#: src/lib/components/favorite/FavoriteTeamInfoCard.svelte
+#: src/lib/components/forms/ClubForm.svelte
+#: src/lib/components/forms/UniformSetForm.svelte
+#: src/lib/components/league/LeagueDetailInfoCard.svelte
+#: src/lib/components/table/LeaderboardTable.svelte
+#: src/lib/components/team/TeamDetailInfoCard.svelte
+#: src/lib/components/diamondplanner/club/ClubDetailCard.svelte
+#: src/lib/components/club/officials/ClubOfficialDetailCard.svelte
+#: src/lib/components/diamondplanner/team/TeamTeaserCard.svelte
+#: src/lib/components/diamondplanner/user/UserDataCard.svelte
+msgid "Name"
+msgstr ""
+
+#: src/lib/components/datatable/StatsTableContent.svelte
+msgid "Saison"
+msgstr ""
+
+#: src/lib/components/datatable/StatsTableContent.svelte
+msgid "Keine Daten für diese Kategorie vorhanden."
+msgstr ""
+
+#: src/lib/components/datatable/TeamMembersTableContent.svelte
+#: src/lib/components/match/MatchMainInfoSection.svelte
+msgid "Status"
+msgstr ""
+
+#: src/lib/components/datatable/TeamMembersTableContent.svelte
+#: src/lib/components/club/licenses/LicenseDetailHolderCard.svelte
+msgid "Number"
+msgstr ""
+
+#: src/lib/components/datatable/TeamMembersTableContent.svelte
+#: src/lib/components/forms/LocationForm.svelte
+msgid "BSM ID"
+msgstr ""
+
+#: src/lib/components/datatable/TeamMembersTableContent.svelte
+msgid "Position"
+msgstr ""
+
+#: src/lib/components/datatable/TeamMembersTableContent.svelte
+msgid "Last Login"
+msgstr ""
+
+#: src/lib/components/datatable/TeamMembersTableContent.svelte
+#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
+msgid "Actions"
+msgstr ""
+
+#: src/lib/components/datatable/TeamMembersTableContent.svelte
+msgid "Verified"
+msgstr ""
+
+#: src/lib/components/datatable/TeamMembersTableContent.svelte
+msgid "Unverified"
+msgstr ""
+
+#: src/lib/components/datatable/TeamMembersTableContent.svelte
+#: src/lib/components/datatable/TeamMembersTableContent.svelte
+#: src/lib/components/forms/TeamGamesModal.svelte
+#: src/lib/components/utility/ClubTeamPicker.svelte
+#: src/lib/components/utility/MultiSelectCombobox.svelte
+msgid "None"
+msgstr ""
+
+#: src/lib/components/datatable/TeamMembersTableContent.svelte
+msgid "<0/> Revoke Admin Access"
+msgstr ""
+
+#: src/lib/components/datatable/TeamMembersTableContent.svelte
+msgid "<0/> Make Admin"
+msgstr ""
+
+#: src/lib/components/datatable/TeamMembersTableContent.svelte
+msgid "<0/> Remove"
+msgstr ""
+
+#: src/lib/components/datatable/TeamMembersTableContent.svelte
+msgid "Are you sure you wish to remove \"{0}\" from \"{1}\"?"
+msgstr ""
+
+#: src/lib/components/datatable/TeamMembersTableContent.svelte
+msgid "No team members to display."
+msgstr ""
+
+#: src/lib/components/favorite/LeagueInfoCard.svelte
+#: src/lib/components/forms/ClubForm.svelte
+#: src/lib/components/league/LeagueDetailInfoCard.svelte
+#: src/lib/components/team/TeamDetailInfoCard.svelte
+#: src/lib/components/diamondplanner/club/ClubDetailCard.svelte
+msgid "Acronym"
+msgstr ""
+
+#: src/lib/components/favorite/LeagueInfoCard.svelte
+msgid "Record"
+msgstr ""
+
+#: src/lib/components/favorite/LeagueInfoCard.svelte
+#: src/lib/components/favorite/WinningPercentageGauge.svelte
+msgid "Pct."
+msgstr ""
+
+#: src/lib/components/favorite/LeagueInfoCard.svelte
+#: src/lib/components/favorite/WinningPercentageContainer.svelte
+msgid "Rank"
+msgstr ""
+
+#: src/lib/components/favorite/LeagueChartGraph.svelte
+msgid "League Wins Visualisation"
+msgstr ""
+
+#: src/lib/components/favorite/PlayoffSheet.svelte
+msgid "Show Playoff Series"
+msgstr ""
+
+#: src/lib/components/favorite/PlayoffSheet.svelte
+msgid "Playoff Series"
+msgstr ""
+
+#: src/lib/components/favorite/PlayoffSheet.svelte
+msgid "{0} lead series"
+msgstr ""
+
+#: src/lib/components/favorite/PlayoffSheet.svelte
+msgid "{0} win series"
+msgstr ""
+
+#: src/lib/components/favorite/PlayoffSheet.svelte
+msgid "Series tied"
+msgstr ""
+
+#: src/lib/components/favorite/PlayoffSheet.svelte
+msgid "Length of series: Best of {0}"
+msgstr ""
+
+#: src/lib/components/favorite/StreakEmoji.svelte
+msgid "Team Mood"
+msgstr ""
+
+#: src/lib/components/favorite/StreakEmoji.svelte
+msgid "Clubhouse champagne celebration or dugout fights?"
+msgstr ""
+
+#: src/lib/components/favorite/StreakGraphSection.svelte
+msgid "Graph"
+msgstr ""
+
+#: src/lib/components/favorite/StreakGraphSection.svelte
+#: src/lib/components/favorite/WinningPercentageContainer.svelte
+msgid "Percentage"
+msgstr ""
+
+#: src/lib/components/favorite/StreakGraphSection.svelte
+msgid "Series"
+msgstr ""
+
+#: src/lib/components/favorite/WinsOverSeasonChart.svelte
+#: src/lib/components/favorite/WinsOverSeasonChart.svelte
+msgid "Wins Count"
+msgstr ""
+
+#: src/lib/components/favorite/WinsOverSeasonChart.svelte
+msgid "Gamedays"
+msgstr ""
+
+#: src/lib/components/favorite/WinsOverSeasonChart.svelte
+msgid "Season Progression"
+msgstr ""
+
+#: src/lib/components/favorite/WinningPercentageContainer.svelte
+msgid "Wins/Losses"
+msgstr ""
+
+#: src/lib/components/favorite/FavoriteTeamInfoCard.svelte
+#: src/lib/components/forms/TeamGamesModal.svelte
+msgid "League"
+msgstr ""
+
+#: src/lib/components/favorite/FavoriteTeamInfoCard.svelte
+msgid "Season"
+msgstr ""
+
+#: src/lib/components/forms/AnnouncementForm.svelte
+msgid "Edit Announcement"
+msgstr ""
+
+#: src/lib/components/forms/AnnouncementForm.svelte
+#: src/lib/components/forms/LocationForm.svelte
+#: src/lib/components/forms/TeamForm.svelte
+#: src/routes/(protected)/account/clubs/[club]/+page.svelte
+msgid "Create new"
+msgstr ""
+
+#: src/lib/components/forms/AnnouncementForm.svelte
+msgid "Edit Announcement \"{0}\""
+msgstr ""
+
+#: src/lib/components/forms/AnnouncementForm.svelte
+msgid "Create new Announcement"
+msgstr ""
+
+#: src/lib/components/forms/AnnouncementForm.svelte
+#: src/lib/components/club/officials/ClubOfficialDetailCard.svelte
+msgid "Title"
+msgstr ""
+
+#: src/lib/components/forms/AnnouncementForm.svelte
+msgid "Announcement Text <0/>"
+msgstr ""
+
+#: src/lib/components/forms/AnnouncementForm.svelte
+msgid "Priority"
+msgstr ""
+
+#: src/lib/components/forms/AnnouncementForm.svelte
+msgid "Link Settings"
+msgstr ""
+
+#: src/lib/components/forms/AnnouncementForm.svelte
+#: src/routes/(protected)/account/announcements/[announcement]/+page.svelte
+msgid "Link"
+msgstr ""
+
+#: src/lib/components/forms/AnnouncementForm.svelte
+msgid "Please enter a valid URL"
+msgstr ""
+
+#: src/lib/components/forms/AnnouncementForm.svelte
+msgid "Single link in case the announcement is used as a call to action."
+msgstr ""
+
+#: src/lib/components/forms/AnnouncementForm.svelte
+msgid "Link Text"
+msgstr ""
+
+#: src/lib/components/forms/AnnouncementForm.svelte
+msgid "Click here"
+msgstr ""
+
+#: src/lib/components/forms/AnnouncementForm.svelte
+msgid "If not set, the link itself will be used as a the text."
+msgstr ""
+
+#: src/lib/components/forms/AnnouncementForm.svelte
+#: src/lib/components/forms/ClubForm.svelte
+#: src/lib/components/forms/LocationForm.svelte
+#: src/lib/components/forms/ParticipationForm.svelte
+#: src/lib/components/forms/EventSeriesForm.svelte
+#: src/lib/components/forms/EventForm.svelte
+#: src/lib/components/forms/PlayerDataForm.svelte
+#: src/lib/components/forms/TeamForm.svelte
+#: src/lib/components/forms/TeamMembersForm.svelte
+#: src/lib/components/forms/UniformSetForm.svelte
+#: src/lib/components/forms/TeamGamesModal.svelte
+#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
+msgid "Submit"
+msgstr ""
+
+#: src/lib/components/forms/AnnouncementForm.svelte
+msgid "Reset form"
+msgstr ""
+
+#: src/lib/components/forms/ClubForm.svelte
+msgid "Edit Club"
+msgstr ""
+
+#: src/lib/components/forms/ClubForm.svelte
+msgid "Create a Club"
+msgstr ""
+
+#: src/lib/components/forms/ClubForm.svelte
+msgid "Edit Club \"{0}\""
+msgstr ""
+
+#: src/lib/components/forms/ClubForm.svelte
+msgid "Create new Club"
+msgstr ""
+
+#: src/lib/components/forms/ClubForm.svelte
+msgid "BSM Club ID"
+msgstr ""
+
+#: src/lib/components/forms/ClubForm.svelte
+msgid ""
+"Can be found in the BSM address bar while editing\n"
+"(e.g. <0>https://bsm.baseball-softball.de/clubs/xxx/edit</0>).\n"
+"Needs to be set for the app to function properly."
+msgstr ""
+
+#: src/lib/components/forms/ClubForm.svelte
+msgid "BSM API Key"
+msgstr ""
+
+#: src/lib/components/forms/ClubForm.svelte
+msgid ""
+"Must be created in BSM in a user's account that has the role \"Team Administration\".\n"
+"If set, all game events for the club can be automatically imported."
+msgstr ""
+
+#: src/lib/components/forms/ClubForm.svelte
+msgid "Club Admins"
+msgstr ""
+
+#: src/lib/components/forms/ClubForm.svelte
+#: src/lib/components/forms/TeamForm.svelte
+msgid "Admin"
+msgstr ""
+
+#: src/lib/components/forms/ClubForm.svelte
+msgid "It is not possible to remove the last admin from a club. <0/> Caution: You can remove yourself as admin, losing all access rights!"
+msgstr ""
+
+#: src/lib/components/forms/LocationForm.svelte
+#: src/routes/club/details/+page.svelte
+#: src/lib/components/diamondplanner/club/ClubLocationsSection.svelte
+msgid "Location"
+msgstr ""
+
+#: src/lib/components/forms/LocationForm.svelte
+msgid "Edit Location \"{0}\""
+msgstr ""
+
+#: src/lib/components/forms/LocationForm.svelte
+msgid "Add New Location"
+msgstr ""
+
+#: src/lib/components/forms/LocationForm.svelte
+msgid "Address Addon*"
+msgstr ""
+
+#: src/lib/components/forms/LocationForm.svelte
+msgid "Often used in BSM data for the field name."
+msgstr ""
+
+#: src/lib/components/forms/LocationForm.svelte
+msgid "Name (Sport)*"
+msgstr ""
+
+#: src/lib/components/forms/LocationForm.svelte
+msgid "Street"
+msgstr ""
+
+#: src/lib/components/forms/LocationForm.svelte
+msgid "Postal Code"
+msgstr ""
+
+#: src/lib/components/forms/LocationForm.svelte
+#: src/lib/components/match/MatchDetailLocationCard.svelte
+msgid "City"
+msgstr ""
+
+#: src/lib/components/forms/LocationForm.svelte
+msgid "Country Code"
+msgstr ""
+
+#: src/lib/components/forms/LocationForm.svelte
+msgid "Country Name"
+msgstr ""
+
+#: src/lib/components/forms/LocationForm.svelte
+msgid "Internal Name"
+msgstr ""
+
+#: src/lib/components/forms/LocationForm.svelte
+msgid ""
+"Custom name field that will not be overwritten by automatic\n"
+"imports."
+msgstr ""
+
+#: src/lib/components/forms/LocationForm.svelte
+msgid "Latitude*"
+msgstr ""
+
+#: src/lib/components/forms/LocationForm.svelte
+msgid "Longitude*"
+msgstr ""
+
+#: src/lib/components/forms/LocationForm.svelte
+msgid "Coordinate Map <0>Select a location on the map to set coordinates automatically</0> <1/>"
+msgstr ""
+
+#: src/lib/components/forms/LocationForm.svelte
+msgid "Reset Form"
+msgstr ""
+
+#: src/lib/components/forms/ParticipationForm.svelte
+#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
+msgid "Created"
+msgstr ""
+
+#: src/lib/components/forms/ParticipationForm.svelte
+#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
+msgid "Last Updated"
+msgstr ""
+
+#: src/lib/components/forms/ParticipationForm.svelte
+msgid "State <0><0>In</0> <1>Maybe</1> <2>Out</2></0>"
+msgstr ""
+
+#: src/lib/components/forms/EventSeriesForm.svelte
+#: src/lib/components/diamondplanner/event/EventSeriesView.svelte
+#: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
+msgid "Event Series"
+msgstr ""
+
+#: src/lib/components/forms/EventSeriesForm.svelte
+msgid "Edit Event Series \"{0}\""
+msgstr ""
+
+#: src/lib/components/forms/EventSeriesForm.svelte
+msgid "Create new Event Series for {0}"
+msgstr ""
+
+#: src/lib/components/forms/EventSeriesForm.svelte
+msgid "Series First Occurrence <0/>"
+msgstr ""
+
+#: src/lib/components/forms/EventSeriesForm.svelte
+msgid ""
+"This is the first event in your new series. It will have the exact start time you enter here.<0/> The next events are then created <1>RECURRING INTERVAL</1> days after the previous one and all will have\n"
+"the end time set to <2>DURATION</2> minutes after their start time."
+msgstr ""
+
+#: src/lib/components/forms/EventSeriesForm.svelte
+msgid "Series End <0/> <1>No events will be created after this date.</1>"
+msgstr ""
+
+#: src/lib/components/forms/EventSeriesForm.svelte
+#: src/lib/components/forms/EventForm.svelte
+msgid "Title <0/>"
+msgstr ""
+
+#: src/lib/components/forms/EventSeriesForm.svelte
+msgid "Recurring Interval <0/> <1>Interval between each series occurrence (in days).</1>"
+msgstr ""
+
+#: src/lib/components/forms/EventSeriesForm.svelte
+msgid "Duration <0/> <1>Duration of each event to determine end time (in minutes).</1>"
+msgstr ""
+
+#: src/lib/components/forms/EventSeriesForm.svelte
+#: src/lib/components/forms/EventForm.svelte
+#: src/lib/components/forms/TeamForm.svelte
+msgid "Description <0/>"
+msgstr ""
+
+#: src/lib/components/forms/EventSeriesForm.svelte
+#: src/lib/components/forms/EventForm.svelte
+msgid "No additional name"
+msgstr ""
+
+#: src/lib/components/forms/EventSeriesForm.svelte
+#: src/lib/components/forms/EventForm.svelte
+msgid "Location <0>None</0>"
+msgstr ""
+
+#: src/lib/components/forms/EventForm.svelte
+#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
+msgid "Event"
+msgstr ""
+
+#: src/lib/components/forms/EventForm.svelte
+msgid "Edit Event \"{0}\""
+msgstr ""
+
+#: src/lib/components/forms/EventForm.svelte
+msgid "Create new Event"
+msgstr ""
+
+#: src/lib/components/forms/EventForm.svelte
+msgid "BSM ID <0/>"
+msgstr ""
+
+#: src/lib/components/forms/EventForm.svelte
+msgid "Start <0/>"
+msgstr ""
+
+#: src/lib/components/forms/EventForm.svelte
+msgid "Meeting <0/>"
+msgstr ""
+
+#: src/lib/components/forms/EventForm.svelte
+msgid "End <0/>"
+msgstr ""
+
+#: src/lib/components/forms/EventForm.svelte
+msgid "Type <0><0>Game</0> <1>Practice</1> <2>Other</2></0>"
+msgstr ""
+
+#: src/lib/components/forms/EventForm.svelte
+msgid "Uniform Set <0/>"
+msgstr ""
+
+#: src/lib/components/forms/EventForm.svelte
+msgid "Cancelled"
+msgstr ""
+
+#: src/lib/components/forms/PlayerDataForm.svelte
+msgid "Position is already selected."
+msgstr ""
+
+#: src/lib/components/forms/PlayerDataForm.svelte
+msgid "Player data"
+msgstr ""
+
+#: src/lib/components/forms/PlayerDataForm.svelte
+msgid "Edit Player Data"
+msgstr ""
+
+#: src/lib/components/forms/PlayerDataForm.svelte
+msgid "Edit Player Data for \"{0}\""
+msgstr ""
+
+#: src/lib/components/forms/PlayerDataForm.svelte
+msgid "Jersey Number <0/>"
+msgstr ""
+
+#: src/lib/components/forms/PlayerDataForm.svelte
+msgid "BSM ID (Player Pass Number) <0/>"
+msgstr ""
+
+#: src/lib/components/forms/PlayerDataForm.svelte
+msgid "Enter positions or click buttons..."
+msgstr ""
+
+#: src/lib/components/forms/PlayerDataForm.svelte
+msgid "Positions <0/> <1/>"
+msgstr ""
+
+#: src/lib/components/forms/PlayerDataForm.svelte
+msgid "Bats <0><0>Left</0> <1>Right</1> <2>Switch</2></0>"
+msgstr ""
+
+#: src/lib/components/forms/PlayerDataForm.svelte
+msgid "Throws <0><0>Left</0> <1>Right</1> <2>Switch</2></0>"
+msgstr ""
+
+#: src/lib/components/forms/PlayerDataForm.svelte
+#: src/lib/components/forms/PlayerDataForm.svelte
+#: src/lib/components/icons/Cap.svelte
+msgid "B"
+msgstr ""
+
+#: src/lib/components/forms/PlayerDataForm.svelte
+#: src/lib/components/forms/PlayerDataForm.svelte
+msgid "D"
+msgstr ""
+
+#: src/lib/components/forms/PlayerDataForm.svelte
+msgid "Umpire License <0><0>None</0> <1>A</1> <2>B</2> <3>C</3> <4>D</4></0>"
+msgstr ""
+
+#: src/lib/components/forms/PlayerDataForm.svelte
+msgid "Scorer License <0><0>None</0> <1>A</1> <2>B</2> <3>C</3> <4>D</4></0>"
+msgstr ""
+
+#: src/lib/components/forms/TeamForm.svelte
+#: src/lib/components/table/StandingsTable.svelte
+#: src/routes/league_entries/[entry]/+page.svelte
+#: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
+#: src/lib/components/diamondplanner/team/TeamListTeaser.svelte
+msgid "Team"
+msgstr ""
+
+#: src/lib/components/forms/TeamForm.svelte
+msgid "Edit Team"
+msgstr ""
+
+#: src/lib/components/forms/TeamForm.svelte
+msgid "Edit Team \"{0}\""
+msgstr ""
+
+#: src/lib/components/forms/TeamForm.svelte
+msgid "Create new Team"
+msgstr ""
+
+#: src/lib/components/forms/TeamForm.svelte
+#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
+msgid "Name <0/>"
+msgstr ""
+
+#: src/lib/components/forms/TeamForm.svelte
+msgid "Club <0/>"
+msgstr ""
+
+#: src/lib/components/forms/TeamForm.svelte
+msgid ""
+"A valid signup key needs to be entered upon user account creation.\n"
+"New users are automatically added as members to the team corresponding to the signup key used."
+msgstr ""
+
+#: src/lib/components/forms/TeamForm.svelte
+msgid "Type <0><0>Adults</0> <1>Minors</1></0>"
+msgstr ""
+
+#: src/lib/components/forms/TeamForm.svelte
+msgid "Team Admins"
+msgstr ""
+
+#: src/lib/components/forms/TeamMembersForm.svelte
+msgid "Selected Users:"
+msgstr ""
+
+#: src/lib/components/forms/TeamMembersForm.svelte
+msgid "Member"
+msgstr ""
+
+#: src/lib/components/forms/UniformSetForm.svelte
+#: src/lib/components/diamondplanner/uniformset/UniformSetInfoCard.svelte
+msgid "Uniform Set"
+msgstr ""
+
+#: src/lib/components/forms/UniformSetForm.svelte
+msgid "Cap Color"
+msgstr ""
+
+#: src/lib/components/forms/UniformSetForm.svelte
+msgid ""
+"You can use the special identifiers <0>B</0> and <1>Bird</1> to get\n"
+"the Skylarks Home and Road Cap instead of a\n"
+"generic colored one."
+msgstr ""
+
+#: src/lib/components/forms/UniformSetForm.svelte
+msgid "Jersey Color"
+msgstr ""
+
+#: src/lib/components/forms/UniformSetForm.svelte
+msgid "Pants Color"
+msgstr ""
+
+#: src/lib/components/forms/UniformSetForm.svelte
+msgid "Both hexadecimal color values (6 characters with leading '#') and <0>named CSS colors</0> can be used."
+msgstr ""
+
+#: src/lib/components/forms/TeamGamesModal.svelte
+msgid "League has been successfully changed."
+msgstr ""
+
+#: src/lib/components/forms/TeamGamesModal.svelte
+msgid "Current Values"
+msgstr ""
+
+#: src/lib/components/forms/TeamGamesModal.svelte
+msgid "Current League ID:"
+msgstr ""
+
+#: src/lib/components/forms/TeamGamesModal.svelte
+msgid "None selected"
+msgstr ""
+
+#: src/lib/components/forms/TeamGamesModal.svelte
+msgid "BSM-imported games in database:"
+msgstr ""
+
+#: src/lib/components/forms/TeamGamesModal.svelte
+msgid "Show leagues for"
+msgstr ""
+
+#: src/lib/components/forms/TeamGamesModal.svelte
+msgid ""
+"To import games automatically, Diamond Planner needs to know the league this team is currently\n"
+"playing in.\n"
+"The league is imported from BSM and changes every season (even if the actual league name is still\n"
+"the same)."
+msgstr ""
+
+#: src/lib/components/gameReport/GameReportHeader.svelte
+msgid "Veröffentlicht:"
+msgstr ""
+
+#: src/lib/components/gameReport/GameReportHeader.svelte
+msgid "Liga:"
+msgstr ""
+
+#: src/lib/components/gameReport/GameReportHeader.svelte
+msgid "Autor:"
+msgstr ""
+
+#: src/lib/components/icons/Pants.svelte
+msgid "Baseball Pants"
+msgstr ""
+
+#: src/lib/components/icons/Cap.svelte
+msgid "Berlin Skylarks Home Cap"
+msgstr ""
+
+#: src/lib/components/icons/Cap.svelte
+msgid "Bird"
+msgstr ""
+
+#: src/lib/components/icons/Cap.svelte
+msgid "Berlin Skylarks Road Cap"
+msgstr ""
+
+#: src/lib/components/gameReport/GameReport.svelte
+msgid "Bericht Spiel 1"
+msgstr ""
+
+#: src/lib/components/gameReport/GameReport.svelte
+msgid "Bericht Spiel 2"
+msgstr ""
+
+#: src/lib/components/gameReport/GameReport.svelte
+msgid "Ausblick"
+msgstr ""
+
+#: src/lib/components/gameReport/GameReport.svelte
+msgid "Bildergalerie"
+msgstr ""
+
+#: src/lib/components/meta/Footer.svelte
+msgid "Facebook brand logo"
+msgstr ""
+
+#: src/lib/components/meta/Footer.svelte
+msgid "Instagram brand logo"
+msgstr ""
+
+#: src/lib/components/meta/Footer.svelte
+msgid "TiB Logo"
+msgstr ""
+
+#: src/lib/components/meta/Footer.svelte
+msgid "Terms & Conditions"
+msgstr ""
+
+#: src/lib/components/meta/Footer.svelte
+msgid "Svelte JavaScript Framework website"
+msgstr ""
+
+#: src/lib/components/meta/Footer.svelte
+msgid "<0>Built with</0> <1/> and <2/>"
+msgstr ""
+
+#: src/lib/components/league/LeagueDetailInfoCard.svelte
+#: src/lib/components/team/TeamDetailInfoCard.svelte
+msgid "Sport"
+msgstr ""
+
+#: src/lib/components/league/LeagueDetailInfoCard.svelte
+#: src/lib/components/team/TeamDetailInfoCard.svelte
+#: src/lib/components/diamondplanner/team/TeamTeaserCard.svelte
+#: src/lib/components/diamondplanner/team/TeamListTeaser.svelte
+msgid "Age Group"
+msgstr ""
+
+#: src/lib/components/icons/Shirt.svelte
+msgid "Baseball Jersey"
+msgstr ""
+
+#: src/lib/components/meta/SidebarNavigation.svelte
+msgid "My Account"
+msgstr ""
+
+#: src/lib/components/meta/SidebarNavigation.svelte
+msgid "Dashboard"
+msgstr ""
+
+#: src/lib/components/meta/SidebarNavigation.svelte
+msgid "Personal Stats"
+msgstr ""
+
+#: src/lib/components/meta/SidebarNavigation.svelte
+msgid "Player Profile"
+msgstr ""
+
+#: src/lib/components/meta/SidebarNavigation.svelte
+msgid "My Clubs & Teams"
+msgstr ""
+
+#: src/lib/components/meta/SidebarNavigation.svelte
+msgid "Administration"
+msgstr ""
+
+#: src/lib/components/meta/SidebarNavigation.svelte
+msgid "Admin Dashboard"
+msgstr ""
+
+#: src/lib/components/match/CurrentMatchBlock.svelte
+msgid "No games for this timeframe."
+msgstr ""
+
+#: src/lib/components/match/CurrentMatchesOverviewCard.svelte
+msgid "Gameday"
+msgstr ""
+
+#: src/lib/components/match/CurrentMatchesOverviewCard.svelte
+msgid "Current Games"
+msgstr ""
+
+#: src/lib/components/match/CurrentMatchesOverviewCard.svelte
+msgid "Previous <0/>"
+msgstr ""
+
+#: src/lib/components/match/CurrentMatchesOverviewCard.svelte
+msgid "Current <0/>"
+msgstr ""
+
+#: src/lib/components/match/CurrentMatchesOverviewCard.svelte
+msgid "Next <0/>"
+msgstr ""
+
+#: src/lib/components/match/GameResultIndicator.svelte
+msgid "F"
+msgstr ""
+
+#: src/lib/components/match/GameResultIndicator.svelte
+msgid "TBD"
+msgstr ""
+
+#: src/lib/components/match/GameResultIndicator.svelte
+#: src/lib/components/match/CurrentMatchRow.svelte
+msgid "PPD"
+msgstr ""
+
+#: src/lib/components/match/MatchDetailLocationCard.svelte
+msgid "Address"
+msgstr ""
+
+#: src/lib/components/match/MatchDetailLocationCard.svelte
+msgid "Open in Google Maps"
+msgstr ""
+
+#: src/lib/components/match/MatchDetailLocationCard.svelte
+msgid "Open in Apple Maps"
+msgstr ""
+
+#: src/lib/components/match/MatchMainInfoSection.svelte
+msgid "Main Info"
+msgstr ""
+
+#: src/lib/components/match/MatchMainInfoSection.svelte
+msgid "Date"
+msgstr ""
+
+#: src/lib/components/match/MatchDetailStatsCard.svelte
+msgid "Liga"
+msgstr ""
+
+#: src/lib/components/match/MatchDetailStatsCard.svelte
+msgid "Spiel-ID"
+msgstr ""
+
+#: src/lib/components/match/MatchDetailStatsCard.svelte
+msgid "geplante Innings"
+msgstr ""
+
+#: src/lib/components/match/MatchDetailStatsCard.svelte
+msgid "Link zum Scoresheet"
+msgstr ""
+
+#: src/lib/components/match/MatchDetailStatsCard.svelte
+msgid "Kein Scoresheet vorhanden."
+msgstr ""
+
+#: src/lib/components/match/ShareButton.svelte
+msgid "Share game data using your browser"
+msgstr ""
+
+#: src/lib/components/match/ShareButton.svelte
+msgid "Share Game <0/>"
+msgstr ""
+
+#: src/lib/components/navigation/StaticNavigationLinks.svelte
+msgid "Start"
+msgstr ""
+
+#: src/lib/components/navigation/StaticNavigationLinks.svelte
+msgid "Favorite"
+msgstr ""
+
+#: src/lib/components/match/MatchDetailOfficialsCard.svelte
+msgid "No umpires assigned yet."
+msgstr ""
+
+#: src/lib/components/match/MatchDetailOfficialsCard.svelte
+msgid "No scorers assigned yet."
+msgstr ""
+
+#: src/lib/components/player/PlayerDataCard.svelte
+msgid "Not specified"
+msgstr ""
+
+#: src/lib/components/player/PlayerDataCard.svelte
+msgid "Age"
+msgstr ""
+
+#: src/lib/components/player/PlayerDataCard.svelte
+msgid "Member since"
+msgstr ""
+
+#: src/lib/components/player/PlayerDataCard.svelte
+msgid "Positions"
+msgstr ""
+
+#: src/lib/components/player/PlayerDataCard.svelte
+msgid "Bats"
+msgstr ""
+
+#: src/lib/components/player/PlayerDataCard.svelte
+msgid "Throws"
+msgstr ""
+
+#: src/lib/components/player/PlayerHeaderSection.svelte
+msgid "Player fallback"
+msgstr ""
+
+#: src/lib/components/team/TeamAddMemberButton.svelte
+msgid "Add Members"
+msgstr ""
+
+#: src/lib/components/team/TeamAddMemberButton.svelte
+msgid "Add Members to team \"{0}\""
+msgstr ""
+
+#: src/lib/components/team/TeamAddMemberButton.svelte
+msgid "Select all {0} members that should be added to the team."
+msgstr ""
+
+#: src/lib/components/table/StandingsTable.svelte
+msgid "Win %"
+msgstr ""
+
+#: src/lib/components/table/StandingsTable.svelte
+msgid "GB"
+msgstr ""
+
+#: src/lib/components/table/StandingsTable.svelte
+msgid "Serie"
+msgstr ""
+
+#: src/lib/components/table/LeaderboardTable.svelte
+msgid "Value"
+msgstr ""
+
+#: src/lib/components/teaser/TeaserCard.svelte
+msgid "LINK"
+msgstr ""
+
+#: src/lib/components/team/TeamDetailInfoCard.svelte
+msgid "Antritt außer Konkurrenz (aK):"
+msgstr ""
+
+#: src/lib/components/utility/LeagueFilter.svelte
+msgid "Alle Ligen"
+msgstr ""
+
+#: src/lib/components/utility/DeleteButton.svelte
+msgid "Are you sure you wish to delete this {0}? In most cases, data cannot be recovered after deletion. Please be certain."
+msgstr ""
+
+#: src/lib/components/utility/ClubTeamPicker.svelte
+msgid "Select Team:"
+msgstr ""
+
+#: src/lib/components/utility/StatsBlock.svelte
+msgid "Batting Average"
+msgstr ""
+
+#: src/lib/components/utility/StatsBlock.svelte
+msgid "On Base Percentage"
+msgstr ""
+
+#: src/lib/components/utility/StatsBlock.svelte
+msgid "Slugging Average"
+msgstr ""
+
+#: src/lib/components/utility/StatsBlock.svelte
+msgid "On Base Plus Slugging"
+msgstr ""
+
+#: src/lib/components/utility/StatsBlock.svelte
+msgid "W - L"
+msgstr ""
+
+#: src/lib/components/utility/StatsBlock.svelte
+msgid "Wins - Losses"
+msgstr ""
+
+#: src/lib/components/utility/StatsBlock.svelte
+msgid "Innings Pitched"
+msgstr ""
+
+#: src/lib/components/utility/StatsBlock.svelte
+msgid "Earned Run Average"
+msgstr ""
+
+#: src/lib/components/utility/StatsBlock.svelte
+msgid "Walks & Hits per Innings Pitched"
+msgstr ""
+
+#: src/lib/components/utility/StatsBlock.svelte
+msgid "Innings Played"
+msgstr ""
+
+#: src/lib/components/utility/StatsBlock.svelte
+msgid "Fielding Average"
+msgstr ""
+
+#: src/lib/components/utility/MultiSelectCombobox.svelte
+msgid "You cannot remove the last {0}!"
+msgstr ""
+
+#: src/lib/components/utility/MultiSelectCombobox.svelte
+msgid "Select to add as {0}:"
+msgstr ""
+
+#: src/routes/(protected)/account/+page.svelte
+msgid "My Dashboard"
+msgstr ""
+
+#: src/routes/(protected)/account/+page.svelte
+msgid "My Teams"
+msgstr ""
+
+#: src/routes/(protected)/account/+page.svelte
+msgid "You are not a member of any teams yet."
+msgstr ""
+
+#: src/routes/club/scorer/+page.svelte
+msgid "Scorer Licenses"
+msgstr ""
+
+#: src/routes/club/scorer/+page.svelte
+#: src/routes/club/umpire/+page.svelte
+msgid "Loading Licenses..."
+msgstr ""
+
+#: src/routes/club/details/+page.svelte
+msgid "Club Details"
+msgstr ""
+
+#: src/routes/club/details/+page.svelte
+msgid "Team Basics"
+msgstr ""
+
+#: src/routes/club/details/+page.svelte
+msgid "Name:"
+msgstr ""
+
+#: src/routes/club/details/+page.svelte
+msgid "Acronym:"
+msgstr ""
+
+#: src/routes/club/details/+page.svelte
+msgid "Main Club:"
+msgstr ""
+
+#: src/routes/club/details/+page.svelte
+msgid "Achievements"
+msgstr ""
+
+#: src/routes/club/details/+page.svelte
+msgid "Legal Info"
+msgstr ""
+
+#: src/routes/club/details/+page.svelte
+msgid "Chairman:"
+msgstr ""
+
+#: src/routes/club/details/+page.svelte
+msgid "Registered Association:"
+msgstr ""
+
+#: src/routes/club/details/+page.svelte
+msgid "Court:"
+msgstr ""
+
+#: src/routes/club/details/+page.svelte
+#: src/lib/components/club/ballpark/BallparkDetailCard.svelte
+msgid "Address:"
+msgstr ""
+
+#: src/routes/club/details/+page.svelte
+msgid "Street:"
+msgstr ""
+
+#: src/routes/club/officials/+page.svelte
+msgid "Club Officials"
+msgstr ""
+
+#: src/routes/club/officials/+page.svelte
+#: src/routes/club/ballpark/+page.svelte
+msgid "Loading Club Officials..."
+msgstr ""
+
+#: src/routes/players/[id]/+page.svelte
+msgid "Player Profile for {0} {1}"
+msgstr ""
+
+#: src/routes/players/[id]/+page.svelte
+msgid "Profile Data"
+msgstr ""
+
+#: src/routes/players/[id]/+page.svelte
+msgid "An error occurred fetching player data: {0}.<0/> The data source might be temporarily unavailable, please try again later."
+msgstr ""
+
+#: src/routes/players/[id]/+page.svelte
+#: src/routes/teams/[id]/+page.svelte
+msgid "Stats"
+msgstr ""
+
+#: src/routes/club/umpire/+page.svelte
+msgid "Umpire Licenses"
+msgstr ""
+
+#: src/routes/league_entries/[entry]/+page.svelte
+msgid "Stats for {0}"
+msgstr ""
+
+#: src/routes/ligen/[id]/+page.svelte
+#: src/routes/teams/[id]/+page.svelte
+msgid "Information"
+msgstr ""
+
+#: src/routes/ligen/[id]/+page.svelte
+msgid "League Stats"
+msgstr ""
+
+#: src/routes/ligen/[id]/+page.svelte
+msgid ""
+"Statistics about current league leaders in various statistical categories can be found on a\n"
+"dedicated subpage."
+msgstr ""
+
+#: src/routes/ligen/[id]/+page.svelte
+msgid "Go to stats"
+msgstr ""
+
+#: src/routes/ligen/[id]/+page.svelte
+msgid "Tabelle"
+msgstr ""
+
+#: src/lib/components/club/ballpark/BallparkDetailCard.svelte
+msgid "Ballpark Name"
+msgstr ""
+
+#: src/lib/components/club/ballpark/BallparkDetailCard.svelte
+msgid "Address Addon"
+msgstr ""
+
+#: src/lib/components/club/ballpark/BallparkDetailCard.svelte
+msgid "Capacity"
+msgstr ""
+
+#: src/lib/components/club/ballpark/BallparkDetailCard.svelte
+msgid "Seats"
+msgstr ""
+
+#: src/lib/components/club/ballpark/BallparkGrid.svelte
+msgid "No ballparks found."
+msgstr ""
+
+#: src/routes/teams/[id]/+page.svelte
+msgid "{0} (Saison {1})"
+msgstr ""
+
+#: src/routes/teams/[id]/+page.svelte
+msgid "No Standings available."
+msgstr ""
+
+#: src/lib/components/club/licenses/LicenseDetailCard.svelte
+msgid "Level"
+msgstr ""
+
+#: src/lib/components/club/licenses/LicenseDetailCard.svelte
+#: src/lib/components/club/licenses/LicenseList.svelte
+msgid "Baseball"
+msgstr ""
+
+#: src/lib/components/club/licenses/LicenseDetailCard.svelte
+#: src/lib/components/club/licenses/LicenseList.svelte
+msgid "Softball"
+msgstr ""
+
+#: src/lib/components/club/licenses/LicenseDetailCard.svelte
+msgid "Sleeve Number"
+msgstr ""
+
+#: src/lib/components/club/licenses/LicenseDetailHolderCard.svelte
+msgid "Holder"
+msgstr ""
+
+#: src/lib/components/club/licenses/LicenseDetailHolderCard.svelte
+msgid "Valid until"
+msgstr ""
+
+#: src/lib/components/club/licenses/LicenseDetailHolderCard.svelte
+msgid "Relative Time"
+msgstr ""
+
+#: src/lib/components/diamondplanner/club/ClubDetailCard.svelte
+msgid "BSM-ID"
+msgstr ""
+
+#: src/lib/components/club/licenses/LicenseList.svelte
+msgid "No baseball licenses available."
+msgstr ""
+
+#: src/lib/components/club/licenses/LicenseList.svelte
+msgid "No softball licenses available."
+msgstr ""
+
+#: src/lib/components/club/licenses/LicenseLevelIndicator.svelte
+msgid "License level {0}:"
+msgstr ""
+
+#: src/lib/components/club/officials/ClubOfficialDetailCard.svelte
+msgid "Category"
+msgstr ""
+
+#: src/lib/components/club/officials/ClubOfficialDetailCard.svelte
+msgid "Since"
+msgstr ""
+
+#: src/lib/components/club/officials/ClubOfficialDetailCard.svelte
+#: src/routes/(protected)/account/clubs/[club]/+page.svelte
+msgid "Contact"
+msgstr ""
+
+#: src/lib/components/diamondplanner/club/ClubLocationsSection.svelte
+msgid "This club doesn't have saved locations yet."
+msgstr ""
+
+#: src/lib/components/club/officials/ClubOfficialIcon.svelte
+msgid "Abteilungsleit"
+msgstr ""
+
+#: src/lib/components/club/officials/ClubOfficialIcon.svelte
+msgid "Kasse"
+msgstr ""
+
+#: src/lib/components/club/officials/ClubOfficialIcon.svelte
+msgid "Schriftwart"
+msgstr ""
+
+#: src/lib/components/club/officials/ClubOfficialIcon.svelte
+msgid "Jugend"
+msgstr ""
+
+#: src/lib/components/club/officials/ClubOfficialsList.svelte
+msgid "No club officials available."
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
+#: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
+#: src/routes/(protected)/account/clubs/[club]/+page.svelte
+msgid "Admin Section"
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
+msgid "Event Details"
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
+msgid "BSM event ID"
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
+msgid "Add Guest player"
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
+msgid "Enter the guest player's name"
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
+msgid "Edit Event"
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
+msgid "Delete Event"
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/EventCoreInfo.svelte
+msgid "Meet:"
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/EventCoreInfo.svelte
+msgid "Start:"
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/EventCoreInfo.svelte
+msgid "No location provided."
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/EventAttireSection.svelte
+msgid "Uniform"
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/EventParticipantsOverviewSection.svelte
+msgid "Participants"
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/EventParticipantsOverviewSection.svelte
+msgid "In"
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/EventParticipantsOverviewSection.svelte
+msgid "Maybe"
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/EventParticipantsOverviewSection.svelte
+msgid "Out"
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/EventSeriesView.svelte
+msgid "Manage Event Series"
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/EventSeriesView.svelte
+msgid "Manage Event Series for {0}"
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/EventSeriesView.svelte
+msgid "Active Event Series"
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/EventSeriesView.svelte
+#: src/lib/components/diamondplanner/event/IndividualParticipationEditButton.svelte
+msgid "Edit"
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/EventSeriesView.svelte
+msgid "Delete"
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/EventSeriesView.svelte
+msgid "No event series have been set up for this team yet."
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/EventSeriesView.svelte
+msgid "Add new Event Series"
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/EventTeaser.svelte
+#: src/routes/(protected)/account/event/[id]/+page.svelte
+msgid "<0/> Cancelled"
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/EventTeaser.svelte
+#: src/routes/(protected)/account/event/[id]/+page.svelte
+msgid "Only team members can participate in events."
+msgstr ""
+
+#: src/lib/components/diamondplanner/eventseries/EventSeriesListItem.svelte
+msgid "every {0} days"
+msgstr ""
+
+#: src/lib/components/diamondplanner/eventseries/EventSeriesListItem.svelte
+msgid "Series First Occurrence:"
+msgstr ""
+
+#: src/lib/components/diamondplanner/eventseries/EventSeriesListItem.svelte
+msgid "Series End After:"
+msgstr ""
+
+#: src/lib/components/diamondplanner/eventseries/EventSeriesListItem.svelte
+msgid "Event Duration:"
+msgstr ""
+
+#: src/lib/components/diamondplanner/eventseries/EventSeriesListItem.svelte
+msgid "P{0}M"
+msgstr ""
+
+#: src/lib/components/diamondplanner/eventseries/EventSeriesListItem.svelte
+msgid "{0} Minutes"
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/IndividualParticipationEditButton.svelte
+msgid "Created:"
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/IndividualParticipationEditButton.svelte
+msgid "Last Updated:"
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/IndividualParticipationEditButton.svelte
+msgid "Comment/Reason:"
+msgstr ""
+
+#: src/lib/components/diamondplanner/event/IndividualParticipationEditButton.svelte
+msgid ""
+"Edit participation data\n"
+"for {0} {1}"
+msgstr ""
+
+#: src/lib/components/diamondplanner/stats/StatsByTypePieChart.svelte
+msgid "Attendance Stats"
+msgstr ""
+
+#: src/lib/components/diamondplanner/stats/StatsByTypePieChart.svelte
+msgid "Events where you did not select anything are counted as \"out\"."
+msgstr ""
+
+#: src/lib/components/diamondplanner/stats/AttendanceTotalStatsBlock.svelte
+msgid "Totals - {0}"
+msgstr ""
+
+#: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
+msgid ""
+"Events of type \"Game\" don't need to be created manually.\n"
+"All data can be imported from BSM and kept in sync with\n"
+"the current state."
+msgstr ""
+
+#: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
+msgid "Setup Games Import"
+msgstr ""
+
+#: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
+msgid "Games Import Setup for {0}"
+msgstr ""
+
+#: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
+msgid ""
+"Manage all recurring series of events (mostly of type\n"
+"\"Practice\") that take place on the same day every week."
+msgstr ""
+
+#: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
+msgid "Single Events"
+msgstr ""
+
+#: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
+msgid ""
+"Single Events are not connected to any other events and\n"
+"don't contain additional logic. Well suited for one-off\n"
+"occurrences."
+msgstr ""
+
+#: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
+msgid "Create Single Event"
+msgstr ""
+
+#: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
+msgid "Team Settings"
+msgstr ""
+
+#: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
+msgid "Danger Zone"
+msgstr ""
+
+#: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
+msgid "Delete Team"
+msgstr ""
+
+#: src/lib/components/diamondplanner/uniformset/UniformSetInfoCard.svelte
+msgid "Edit Uniform Set \"{0}\""
+msgstr ""
+
+#: src/lib/components/diamondplanner/team/TeamTeaserCard.svelte
+#: src/lib/components/diamondplanner/team/TeamListTeaser.svelte
+msgid "BSM-Liga (für aktuelle Saison)"
+msgstr ""
+
+#: src/lib/components/diamondplanner/user/PlayerProfileClubsSection.svelte
+msgid "You are not a member of any clubs yet."
+msgstr ""
+
+#: src/lib/components/diamondplanner/user/PlayerProfileClubsSection.svelte
+msgid "Join a Club"
+msgstr ""
+
+#: src/lib/components/diamondplanner/user/PlayerDataProfileSection.svelte
+msgid "Player Profile Avatar"
+msgstr ""
+
+#: src/lib/components/diamondplanner/user/PlayerDataProfileSection.svelte
+msgid "Public Profile"
+msgstr ""
+
+#: src/lib/components/diamondplanner/user/PlayerDataProfileSection.svelte
+msgid ""
+"You have the option to display your player data in your public\n"
+"profile on the Skylarks website and apps."
+msgstr ""
+
+#: src/lib/components/diamondplanner/user/PlayerDataProfileSection.svelte
+msgid ""
+"Please note that all statistics and basic info such as your name and\n"
+"team affiliation is considered public information when participating\n"
+"in official DBV and BSVBB competitions."
+msgstr ""
+
+#: src/lib/components/diamondplanner/user/PlayerDataProfileSection.svelte
+msgid "Go to Profile Page"
+msgstr ""
+
+#: src/lib/components/diamondplanner/user/UserDataCard.svelte
+msgid "User Data"
+msgstr ""
+
+#: src/lib/components/diamondplanner/user/UserDataCard.svelte
+msgid "email address"
+msgstr ""
+
+#: src/lib/components/diamondplanner/user/UserDataCard.svelte
+msgid "Edit User Data:"
+msgstr ""
+
+#: src/lib/components/diamondplanner/user/UserDataCard.svelte
+msgid "Change email address for {0} {1}"
+msgstr ""
+
+#: src/lib/components/diamondplanner/user/UserDataCard.svelte
+msgid "Edit User Data for {0} {1}"
+msgstr ""
+
+#: src/routes/(protected)/stats/[user]/+page.svelte
+msgid "Stats for {0} {1}"
+msgstr ""
+
+#: src/routes/(protected)/stats/[user]/+page.svelte
+msgid "Season <0/>"
+msgstr ""
+
+#: src/routes/(protected)/account/playerprofile/+page.svelte
+msgid "My Player Data"
+msgstr ""
+
+#: src/routes/(protected)/stats/admin/+page.svelte
+msgid "Stats Admin Dashboard"
+msgstr ""
+
+#: src/routes/(protected)/stats/admin/+page.svelte
+msgid "Not implemented yet."
+msgstr ""
+
+#: src/routes/club/ballpark/[id]/+page.svelte
+msgid "Ballpark Details"
+msgstr ""
+
+#: src/routes/club/ballpark/[id]/+page.svelte
+msgid "How to get there"
+msgstr ""
+
+#: src/routes/club/license/[id]/+page.svelte
+msgid "License Details"
+msgstr ""
+
+#: src/routes/club/license/[id]/+page.svelte
+msgid "No license data due to error."
+msgstr ""
+
+#: src/routes/club/officials/[id]/+page.svelte
+msgid "Official Details"
+msgstr ""
+
+#: src/lib/components/utility/sheet/sheet-content.svelte
+msgid "Close"
+msgstr ""
+
+#: src/routes/gamecenter/game-detail/[id]/+page.svelte
+msgid "Details zu Spiel {0}"
+msgstr ""
+
+#: src/routes/gamecenter/game-detail/[id]/+page.svelte
+#: src/routes/(protected)/account/event/[id]/+page.svelte
+msgid "Game Data"
+msgstr ""
+
+#: src/routes/gamecenter/game-detail/[id]/+page.svelte
+msgid "Box Score"
+msgstr ""
+
+#: src/routes/gamecenter/game-detail/[id]/+page.svelte
+msgid "Game Report"
+msgstr ""
+
+#: src/routes/gamecenter/game-detail/[id]/+page.svelte
+msgid "No Box Score available."
+msgstr ""
+
+#: src/routes/gamecenter/game-detail/[id]/+page.svelte
+msgid "error loading boxscore: {0}"
+msgstr ""
+
+#: src/routes/gamecenter/game-detail/[id]/+page.svelte
+msgid "No Game Report available."
+msgstr ""
+
+#: src/routes/gamecenter/game-detail/[id]/+page.svelte
+msgid "error loading Game Report: {0}"
+msgstr ""
+
+#: src/routes/gamecenter/game-detail/[id]/+page.svelte
+msgid "Caveat"
+msgstr ""
+
+#: src/routes/gamecenter/game-detail/[id]/+page.svelte
+msgid "Sharing games does not work on Firefox."
+msgstr ""
+
+#: src/routes/ligen/[id]/stats/+page.svelte
+msgid "Leaderboards for {0} ({1})"
+msgstr ""
+
+#: src/routes/(protected)/account/announcements/[announcement]/+page.svelte
+msgid "Team:"
+msgstr ""
+
+#: src/routes/(protected)/account/announcements/[announcement]/+page.svelte
+msgid "Link associated with this announcement: {0}"
+msgstr ""
+
+#: src/routes/(protected)/account/announcements/[announcement]/+page.svelte
+#: src/routes/(protected)/account/event/[id]/+page.svelte
+msgid "Comments"
+msgstr ""
+
+#: src/routes/(protected)/account/announcements/[announcement]/+page.svelte
+msgid "Admin Options"
+msgstr ""
+
+#: src/routes/(protected)/account/announcements/[announcement]/+page.svelte
+msgid "Delete Announcement"
+msgstr ""
+
+#: src/routes/(protected)/account/clubs/[club]/locations/+page.svelte
+msgid "Locations for {0}"
+msgstr ""
+
+#: src/routes/(protected)/account/clubs/[club]/locations/+page.svelte
+msgid "All configured locations for {0}, including baseball fields and other venues."
+msgstr ""
+
+#: src/routes/(protected)/account/clubs/[club]/locations/+page.svelte
+msgid "{0} - Locations"
+msgstr ""
+
+#: src/routes/(protected)/account/clubs/[club]/+page.svelte
+msgid "Details for {0}"
+msgstr ""
+
+#: src/routes/(protected)/account/clubs/[club]/+page.svelte
+msgid "Club overview page for the {0} with info about teams and uniform sets."
+msgstr ""
+
+#: src/routes/(protected)/account/clubs/[club]/+page.svelte
+#: src/routes/(protected)/account/team/[id]/+page.svelte
+msgid "Announcements"
+msgstr ""
+
+#: src/routes/(protected)/account/clubs/[club]/+page.svelte
+msgid "Club Teams"
+msgstr ""
+
+#: src/routes/(protected)/account/clubs/[club]/+page.svelte
+msgid "This club does not have any teams yet."
+msgstr ""
+
+#: src/routes/(protected)/account/clubs/[club]/+page.svelte
+msgid "Uniform Sets"
+msgstr ""
+
+#: src/routes/(protected)/account/clubs/[club]/+page.svelte
+msgid "Create new Uniform Set"
+msgstr ""
+
+#: src/routes/(protected)/account/clubs/[club]/+page.svelte
+msgid "Team Locations"
+msgstr ""
+
+#: src/routes/(protected)/account/clubs/[club]/+page.svelte
+msgid "Locations Page"
+msgstr ""
+
+#: src/routes/(protected)/account/clubs/[club]/+page.svelte
+msgid "Club deletion"
+msgstr ""
+
+#: src/routes/(protected)/account/clubs/[club]/+page.svelte
+msgid ""
+"Deleting a club will delete all team, event and participation data.\n"
+"For safety reasons, a club can therefore only be deleted by a\n"
+"superadmin."
+msgstr ""
+
+#: src/routes/(protected)/account/clubs/[club]/+page.svelte
+msgid "Please contact your club's administration."
+msgstr ""
+
+#: src/routes/(protected)/account/event/[id]/+page.svelte
+msgid "End:"
+msgstr ""
+
+#: src/routes/(protected)/account/event/[id]/+page.svelte
+msgid "Location Details"
+msgstr ""
+
+#: src/routes/(protected)/account/event/[id]/+page.svelte
+msgid "My Participation"
+msgstr ""
+
+#: src/routes/(protected)/account/team/[id]/+page.svelte
+msgid "Team Description"
+msgstr ""
+
+#: src/routes/(protected)/account/team/[id]/+page.svelte
+msgid "Team Events"
+msgstr ""
+
+#: src/routes/(protected)/account/team/[id]/+page.svelte
+msgid "Timeframe <0><0>Next</0> <1>Past</1></0>"
+msgstr ""
+
+#: src/routes/(protected)/account/team/[id]/+page.svelte
+msgid "Sort <0><0>Ascending</0> <1>Descending</1></0>"
+msgstr ""
+
+#: src/routes/(protected)/account/team/[id]/+page.svelte
+msgid "Type <0><0>All</0> <1>Game</1> <2>Practice</2> <3>Other</3></0>"
+msgstr ""
+
+#: src/routes/(protected)/account/team/[id]/+page.svelte
+msgid "No events available with the current filters."
+msgstr ""
+
+#: src/routes/(protected)/account/team/[id]/+page.svelte
+msgid "Links"
+msgstr ""
+
+#: src/routes/(protected)/account/team/[id]/+page.svelte
+msgid "Player List"
+msgstr ""
+
+#: src/routes/(protected)/account/team/[id]/members/+page.svelte
+msgid "Members of {0}"
+msgstr ""
+
+#: src/routes/(protected)/account/team/[id]/members/+page.svelte
+msgid "Team member list for {0}."
+msgstr ""
+
+#: src/routes/(protected)/account/team/[id]/members/+page.svelte
+msgid "Team members for Team \"{0}\""
+msgstr ""
