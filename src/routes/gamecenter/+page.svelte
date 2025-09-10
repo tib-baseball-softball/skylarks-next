@@ -98,21 +98,16 @@
       </Tabs.List>
 
       <Tabs.Content class="pt-3" value={preferences.current.gameday}>
-        {#if tabsContent}
-          {@render tabsContent?.()}
-        {/if}
+        {#await data.streamed.matches}
+          <p>Loading matches...</p>
+          <Progress/>
+        {:then matches}
+          <GamecenterMatchSection {matches} {showExternal}/>
+        {:catch error}
+          <p>error loading matches: {error.message}</p>
+        {/await}
       </Tabs.Content>
     </Tabs.Root>
 
-    {#snippet tabsContent()}
-      {#await data.streamed.matches}
-        <p>Loading matches...</p>
-        <Progress/>
-      {:then matches}
-        <GamecenterMatchSection {matches} {showExternal}/>
-      {:catch error}
-        <p>error loading matches: {error.message}</p>
-      {/await}
-    {/snippet}
   </label>
 </section>
