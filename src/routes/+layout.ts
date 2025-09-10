@@ -6,19 +6,19 @@ import '../locales/loader.svelte.js';
 // @ts-ignore
 import {locales} from "virtual:wuchale/locales";
 import {loadLocale} from "wuchale/load-utils";
+import {preferences} from "$lib/globals.svelte.ts";
 
 /**
  * This loads club and team data for the extended DiamondPlanner nav bar.
  *
  * Should be executed only client-side and only if logged in.
  */
-export const load = (async ({data, fetch, depends, url}) => {
+export const load = (async ({data, fetch, depends}) => {
   let clubs: ExpandedClub[] = [];
   let teams: ExpandedTeam[] = [];
 
-  const locale = url.searchParams.get('locale') ?? 'en';
-  if (locales.includes(locale) && browser) {
-    await loadLocale(locale);
+  if (browser) {
+    await loadLocale(preferences.current.locale);
   }
 
   if (browser && client.authStore.isValid) {

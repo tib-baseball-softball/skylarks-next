@@ -10,6 +10,7 @@ import {locales} from "virtual:wuchale/locales";
 // load at server startup
 loadLocales(key, loadIDs, loadCatalog, locales);
 
+// TODO: server will always load English for now
 export const handle: Handle = async ({event, resolve}) => {
   const locale = event.url.searchParams.get('locale') ?? 'en';
   return await runWithLocale(locale, () => resolve(event));
