@@ -1,4 +1,5 @@
-<article lang="de" class="prose dark:prose-invert max-w-none mb-6"><h1 class="mt-4">Datenschutzerklärung</h1>
+<!-- @wc-ignore -->
+<article class="prose dark:prose-invert max-w-none mb-6" lang="de"><h1 class="mt-4">Datenschutzerklärung</h1>
 
   <h2>1. Datenschutz auf einen Blick</h2>
   <h3>Allgemeine Hinweise</h3>
@@ -40,8 +41,8 @@
   <p>Anbieter ist die Hetzner Online GmbH, Industriestr. 25, 91710 Gunzenhausen (nachfolgend
     Hetzner).</p>
   <p>Details entnehmen Sie der Datenschutzerklärung von Hetzner: <a
-          href="https://www.hetzner.com/de/legal/privacy-policy/" target="_blank" rel="noopener
-noreferrer">https://www.hetzner.com/de/legal/privacy-policy/</a>.</p>
+          href="https://www.hetzner.com/de/legal/privacy-policy/" rel="noopener
+noreferrer" target="_blank">https://www.hetzner.com/de/legal/privacy-policy/</a>.</p>
   <p>Die Verwendung von Hetzner erfolgt
     auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Wir haben ein berechtigtes Interesse an einer möglichst
     zuverlässigen Darstellung unserer Website. Sofern eine entsprechende Einwilligung abgefragt wurde, erfolgt
