@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-10T18:43:43.220Z\n"
-"PO-Revision-Date: 2025-09-10T21:01:17.666Z\n"
+"PO-Revision-Date: 2025-09-11T19:47:06.094Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -16,8 +16,8 @@ msgstr ""
 msgid "Berlin Skylarks Web App"
 msgstr "Berlin Skylarks Web App"
 
-#: src/lib/components/navigation/NavigationSheet.svelte
 #: src/routes/+layout.svelte
+#: src/lib/components/navigation/NavigationSheet.svelte
 msgid "Skylarks Team Logo"
 msgstr "Skylarks Team Logo"
 
@@ -37,8 +37,8 @@ msgstr ""
 msgid "Hero"
 msgstr "Hero"
 
-#: src/lib/components/navigation/NavigationSheet.svelte
 #: src/routes/+page.svelte
+#: src/lib/components/navigation/NavigationSheet.svelte
 msgid "Berlin Skylarks"
 msgstr "Berlin Skylarks"
 
@@ -75,11 +75,11 @@ msgstr "An error occurred while sending your email change request."
 msgid "E-Mail <0/> <1>You will be logged out and instructed to verify your new email address.</1>"
 msgstr "E-Mail <0/> <1>You will be logged out and instructed to verify your new email address.</1>"
 
+#: src/lib/auth/ChangeEmailForm.svelte
+#: src/lib/auth/PasswordRequestButton.svelte
+#: src/lib/auth/UserDetailsForm.svelte
 #: src/lib/components/datatable/TeamMembersTableContent.svelte
 #: src/lib/components/utility/DeleteButton.svelte
-#: src/lib/auth/ChangeEmailForm.svelte
-#: src/lib/auth/UserDetailsForm.svelte
-#: src/lib/auth/PasswordRequestButton.svelte
 msgid "Confirm"
 msgstr "Confirm"
 
@@ -154,8 +154,8 @@ msgstr "Doe"
 msgid "Confirm password"
 msgstr "Confirm password"
 
-#: src/lib/components/forms/TeamForm.svelte
 #: src/lib/auth/LoginForm.svelte
+#: src/lib/components/forms/TeamForm.svelte
 msgid "Signup Key"
 msgstr "Signup Key"
 
@@ -216,9 +216,9 @@ msgstr "GitHub logo"
 msgid "Discord logo"
 msgstr "Discord logo"
 
+#: src/lib/auth/PasswordRequestButton.svelte
 #: src/lib/components/datatable/TeamMembersTableContent.svelte
 #: src/lib/components/utility/DeleteButton.svelte
-#: src/lib/auth/PasswordRequestButton.svelte
 msgid "Please Confirm"
 msgstr "Please Confirm"
 
@@ -230,10 +230,10 @@ msgstr ""
 "Send change password request for <0/>?\n"
 "You will be logged out and an email with instructions will be sent to your address."
 
-#: src/lib/components/datatable/TeamMembersTableContent.svelte
-#: src/lib/components/utility/DeleteButton.svelte
-#: src/lib/components/forms/EventSeriesForm.svelte
 #: src/lib/auth/PasswordRequestButton.svelte
+#: src/lib/components/datatable/TeamMembersTableContent.svelte
+#: src/lib/components/forms/EventSeriesForm.svelte
+#: src/lib/components/utility/DeleteButton.svelte
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -294,9 +294,9 @@ msgid "More Info"
 msgstr "More Info"
 
 #: src/routes/club/+page.svelte
-#: src/lib/components/navigation/StaticNavigationLinks.svelte
 #: src/routes/teams/+page.svelte
 #: src/lib/components/player/PlayerDataCard.svelte
+#: src/lib/components/navigation/StaticNavigationLinks.svelte
 msgid "Teams"
 msgstr "Teams"
 
@@ -305,7 +305,6 @@ msgid "Adult and Youth"
 msgstr "Adult and Youth"
 
 #: src/routes/club/+page.svelte
-#: src/lib/components/club/officials/ClubOfficialIcon.svelte
 #: src/lib/components/match/MatchDetailOfficialsCard.svelte
 msgid "Scorer"
 msgstr "Scorer"
@@ -315,7 +314,6 @@ msgid "Keeping statistics"
 msgstr "Keeping statistics"
 
 #: src/routes/club/+page.svelte
-#: src/lib/components/club/officials/ClubOfficialIcon.svelte
 #: src/lib/components/match/MatchDetailOfficialsCard.svelte
 msgid "Umpire"
 msgstr "Umpire"
@@ -325,8 +323,8 @@ msgid "Our Referees"
 msgstr "Our Referees"
 
 #: src/routes/club/+page.svelte
-#: src/routes/club/ballpark/+page.svelte
 #: src/lib/components/match/MatchDetailLocationCard.svelte
+#: src/routes/club/ballpark/+page.svelte
 msgid "Ballpark"
 msgstr "Ballpark"
 
@@ -384,8 +382,8 @@ msgid "Graphs and Mood"
 msgstr "Graphs and Mood"
 
 #: src/routes/favorite/+page.svelte
-#: src/lib/components/navigation/StaticNavigationLinks.svelte
 #: src/lib/components/match/GamecenterMatchSection.svelte
+#: src/lib/components/navigation/StaticNavigationLinks.svelte
 #: src/lib/components/utility/StatsBlock.svelte
 #: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
 msgid "Games"
@@ -419,8 +417,8 @@ msgstr "Loading..."
 msgid "Error: {0}"
 msgstr "Error: {0}"
 
-#: src/lib/components/match/CurrentMatchesOverviewCard.svelte
 #: src/routes/gamecenter/+page.svelte
+#: src/lib/components/match/CurrentMatchesOverviewCard.svelte
 msgid "Gamecenter"
 msgstr "Gamecenter"
 
@@ -432,69 +430,15 @@ msgstr "Show external games"
 msgid "Loading matches..."
 msgstr "Loading matches..."
 
-#: src/routes/ligen/[id]/stats/+page.svelte
-#: src/lib/components/match/CurrentMatchBlock.svelte
 #: src/lib/components/forms/TeamGamesModal.svelte
+#: src/lib/components/match/CurrentMatchBlock.svelte
+#: src/routes/ligen/[id]/stats/+page.svelte
 msgid "error loading matches: {0}"
 msgstr "error loading matches: {0}"
 
-#~ msgid "Gameday <0><0><0>Previous</0> <1>Current</1> <2>Next</2> <3>All</3></0> <1/></0> <1/>"
-#~ msgstr "Gameday <0><0><0>Previous</0> <1>Current</1> <2>Next</2> <3>All</3></0> <1/></0> <1/>"
-
-#: src/routes/legalnotice/+page.svelte
 #: src/lib/components/meta/Footer.svelte
 msgid "Impressum"
 msgstr "Impressum"
-
-#: src/routes/legalnotice/+page.svelte
-msgid "Turngemeinde in Berlin e.V. Abteilung Baseball<0/> Columbiadamm 111<1/> 10965 Berlin"
-msgstr "Turngemeinde in Berlin e.V. Abteilung Baseball<0/> Columbiadamm 111<1/> 10965 Berlin"
-
-#: src/routes/legalnotice/+page.svelte
-msgid "Vereinsregister: 351 B<0/> Registergericht: Amtsgericht Berlin-Charlottenburg"
-msgstr "Vereinsregister: 351 B<0/> Registergericht: Amtsgericht Berlin-Charlottenburg"
-
-#: src/routes/legalnotice/+page.svelte
-msgid "Kontakt"
-msgstr "Kontakt"
-
-#: src/routes/legalnotice/+page.svelte
-#: src/routes/privacy/+page.svelte
-msgid "Telefon: + 49 30 61 10 10 -13 (-0)<0/> E-Mail: vorstand@tib-baseball.de"
-msgstr "Telefon: + 49 30 61 10 10 -13 (-0)<0/> E-Mail: vorstand@tib-baseball.de"
-
-#: src/routes/legalnotice/+page.svelte
-msgid "Verbraucher­streit­beilegung/Universal­schlichtungs­stelle"
-msgstr "Verbraucher­streit­beilegung/Universal­schlichtungs­stelle"
-
-#: src/routes/legalnotice/+page.svelte
-msgid ""
-"Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle\n"
-"teilzunehmen."
-msgstr ""
-"Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle\n"
-"teilzunehmen."
-
-#: src/routes/legalnotice/+page.svelte
-msgid "Zentrale Kontaktstelle nach dem Digital Services Act - DSA (Verordnung (EU) 2022/265)"
-msgstr "Zentrale Kontaktstelle nach dem Digital Services Act - DSA (Verordnung (EU) 2022/265)"
-
-#: src/routes/legalnotice/+page.svelte
-msgid "Unsere zentrale Kontaktstelle für Nutzer und Behörden nach Art. 11, 12 DSA erreichen Sie wie folgt:"
-msgstr "Unsere zentrale Kontaktstelle für Nutzer und Behörden nach Art. 11, 12 DSA erreichen Sie wie folgt:"
-
-#: src/routes/legalnotice/+page.svelte
-msgid "E-Mail: vorstand@tib-baseball.de<0/> Telefon: + 49 30 61 10 10 -13 (-0)"
-msgstr "E-Mail: vorstand@tib-baseball.de<0/> Telefon: + 49 30 61 10 10 -13 (-0)"
-
-#: src/routes/legalnotice/+page.svelte
-msgid "Die für den Kontakt zur Verfügung stehenden Sprachen sind: Deutsch, Englisch."
-msgstr "Die für den Kontakt zur Verfügung stehenden Sprachen sind: Deutsch, Englisch."
-
-#: src/routes/legalnotice/+page.svelte
-#: src/routes/privacy/+page.svelte
-msgid "Quelle: <0>https://www.e-recht24.de</0>"
-msgstr "Quelle: <0>https://www.e-recht24.de</0>"
 
 #: src/routes/login/+page.svelte
 msgid "Login Page"
@@ -512,8 +456,8 @@ msgstr "You can log out by clicking your avatar in the top right."
 msgid "Go to Account Page"
 msgstr "Go to Account Page"
 
-#: src/lib/components/navigation/StaticNavigationLinks.svelte
 #: src/routes/ligen/+page.svelte
+#: src/lib/components/navigation/StaticNavigationLinks.svelte
 msgid "Leagues"
 msgstr "Leagues"
 
@@ -521,682 +465,25 @@ msgstr "Leagues"
 msgid "Loading Leagues..."
 msgstr "Loading Leagues..."
 
-#: src/routes/club/ballpark/+page.svelte
-#: src/routes/club/scorer/+page.svelte
-#: src/routes/club/officials/+page.svelte
-#: src/routes/club/umpire/+page.svelte
-#: src/routes/league_entries/[entry]/+page.svelte
-#: src/routes/ligen/[id]/+page.svelte
-#: src/routes/teams/+page.svelte
-#: src/routes/teams/[id]/+page.svelte
-#: src/routes/teams/[id]/+page.svelte
-#: src/routes/players/[id]/+page.svelte
 #: src/routes/ligen/+page.svelte
+#: src/routes/teams/+page.svelte
+#: src/routes/club/officials/+page.svelte
+#: src/routes/club/scorer/+page.svelte
+#: src/routes/league_entries/[entry]/+page.svelte
+#: src/routes/club/umpire/+page.svelte
+#: src/routes/ligen/[id]/+page.svelte
+#: src/routes/club/ballpark/+page.svelte
+#: src/routes/players/[id]/+page.svelte
+#: src/routes/teams/[id]/+page.svelte
+#: src/routes/teams/[id]/+page.svelte
 #: src/routes/(protected)/stats/[user]/+page.svelte
 #: src/routes/(protected)/stats/[user]/+page.svelte
 msgid "error loading: {0}"
 msgstr "error loading: {0}"
 
-#: src/routes/privacy/+page.svelte
 #: src/lib/components/meta/Footer.svelte
 msgid "Datenschutzerklärung"
 msgstr "Datenschutzerklärung"
-
-#: src/routes/privacy/+page.svelte
-msgid "1. Datenschutz auf einen Blick"
-msgstr "1. Datenschutz auf einen Blick"
-
-#: src/routes/privacy/+page.svelte
-msgid "Allgemeine Hinweise"
-msgstr "Allgemeine Hinweise"
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Die folgenden Hinweise geben einen einfachen Überblick darüber,\n"
-"was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind\n"
-"alle Daten, mit denen Sie persönlich identifiziert werden können. Ausführliche Informationen zum\n"
-"Thema Datenschutz entnehmen Sie unserer unter diesem Text aufgeführten\n"
-"Datenschutzerklärung."
-msgstr ""
-"Die folgenden Hinweise geben einen einfachen Überblick darüber,\n"
-"was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind\n"
-"alle Daten, mit denen Sie persönlich identifiziert werden können. Ausführliche Informationen zum\n"
-"Thema Datenschutz entnehmen Sie unserer unter diesem Text aufgeführten\n"
-"Datenschutzerklärung."
-
-#: src/routes/privacy/+page.svelte
-msgid "Datenerfassung auf dieser Website"
-msgstr "Datenerfassung auf dieser Website"
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Wer ist verantwortlich für die Datenerfassung auf dieser\n"
-"Website?"
-msgstr ""
-"Wer ist verantwortlich für die Datenerfassung auf dieser\n"
-"Website?"
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen\n"
-"Kontaktdaten können Sie dem Abschnitt „Hinweis zur Verantwortlichen Stelle“ in dieser\n"
-"Datenschutzerklärung entnehmen."
-msgstr ""
-"Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen\n"
-"Kontaktdaten können Sie dem Abschnitt „Hinweis zur Verantwortlichen Stelle“ in dieser\n"
-"Datenschutzerklärung entnehmen."
-
-#: src/routes/privacy/+page.svelte
-msgid "Wie erfassen wir Ihre Daten?"
-msgstr "Wie erfassen wir Ihre Daten?"
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Ihre Daten werden zum\n"
-"einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z. B. um Daten handeln, die Sie in\n"
-"ein\n"
-"Kontaktformular eingeben."
-msgstr ""
-"Ihre Daten werden zum\n"
-"einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z. B. um Daten handeln, die Sie in\n"
-"ein\n"
-"Kontaktformular eingeben."
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Andere Daten werden automatisch oder nach Ihrer Einwilligung beim Besuch\n"
-"der Website durch unsere IT-Systeme erfasst. Das sind vor allem technische Daten (z. B. Internetbrowser,\n"
-"Betriebssystem oder Uhrzeit des Seitenaufrufs). Die Erfassung dieser Daten erfolgt automatisch, sobald Sie diese\n"
-"Website betreten."
-msgstr ""
-"Andere Daten werden automatisch oder nach Ihrer Einwilligung beim Besuch\n"
-"der Website durch unsere IT-Systeme erfasst. Das sind vor allem technische Daten (z. B. Internetbrowser,\n"
-"Betriebssystem oder Uhrzeit des Seitenaufrufs). Die Erfassung dieser Daten erfolgt automatisch, sobald Sie diese\n"
-"Website betreten."
-
-#: src/routes/privacy/+page.svelte
-msgid "Wofür nutzen wir Ihre Daten?"
-msgstr "Wofür nutzen wir Ihre Daten?"
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Ein Teil der Daten wird erhoben, um eine\n"
-"fehlerfreie Bereitstellung der Website zu gewährleisten. Andere Daten können zur Analyse Ihres\n"
-"Nutzerverhaltens verwendet werden. Sofern über die Website Verträge geschlossen oder angebahnt\n"
-"werden können, werden die übermittelten Daten auch für Vertragsangebote, Bestellungen oder\n"
-"sonstige Auftragsanfragen verarbeitet."
-msgstr ""
-"Ein Teil der Daten wird erhoben, um eine\n"
-"fehlerfreie Bereitstellung der Website zu gewährleisten. Andere Daten können zur Analyse Ihres\n"
-"Nutzerverhaltens verwendet werden. Sofern über die Website Verträge geschlossen oder angebahnt\n"
-"werden können, werden die übermittelten Daten auch für Vertragsangebote, Bestellungen oder\n"
-"sonstige Auftragsanfragen verarbeitet."
-
-#: src/routes/privacy/+page.svelte
-msgid "Welche Rechte haben Sie bezüglich Ihrer Daten?"
-msgstr "Welche Rechte haben Sie bezüglich Ihrer Daten?"
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer\n"
-"gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung oder\n"
-"Löschung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben,\n"
-"können Sie diese Einwilligung jederzeit für die Zukunft widerrufen. Außerdem haben Sie das Recht,\n"
-"unter bestimmten Umständen die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu\n"
-"verlangen. Des Weiteren steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde\n"
-"zu."
-msgstr ""
-"Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer\n"
-"gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung oder\n"
-"Löschung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben,\n"
-"können Sie diese Einwilligung jederzeit für die Zukunft widerrufen. Außerdem haben Sie das Recht,\n"
-"unter bestimmten Umständen die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu\n"
-"verlangen. Des Weiteren steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde\n"
-"zu."
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Hierzu sowie zu weiteren Fragen zum Thema Datenschutz können Sie sich jederzeit an uns\n"
-"wenden."
-msgstr ""
-"Hierzu sowie zu weiteren Fragen zum Thema Datenschutz können Sie sich jederzeit an uns\n"
-"wenden."
-
-#: src/routes/privacy/+page.svelte
-msgid "2. Hosting"
-msgstr "2. Hosting"
-
-#: src/routes/privacy/+page.svelte
-msgid "Wir hosten die Inhalte unserer Website bei folgendem Anbieter:"
-msgstr "Wir hosten die Inhalte unserer Website bei folgendem Anbieter:"
-
-#: src/routes/privacy/+page.svelte
-msgid "Hetzner"
-msgstr "Hetzner"
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Anbieter ist die Hetzner Online GmbH, Industriestr. 25, 91710 Gunzenhausen (nachfolgend\n"
-"Hetzner)."
-msgstr ""
-"Anbieter ist die Hetzner Online GmbH, Industriestr. 25, 91710 Gunzenhausen (nachfolgend\n"
-"Hetzner)."
-
-#: src/routes/privacy/+page.svelte
-msgid "Details entnehmen Sie der Datenschutzerklärung von Hetzner: <0>https://www.hetzner.com/de/legal/privacy-policy/</0>."
-msgstr "Details entnehmen Sie der Datenschutzerklärung von Hetzner: <0>https://www.hetzner.com/de/legal/privacy-policy/</0>."
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Die Verwendung von Hetzner erfolgt\n"
-"auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Wir haben ein berechtigtes Interesse an einer möglichst\n"
-"zuverlässigen Darstellung unserer Website. Sofern eine entsprechende Einwilligung abgefragt wurde, erfolgt\n"
-"die Verarbeitung ausschließlich auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG,\n"
-"soweit die Einwilligung die Speicherung von Cookies oder den Zugriff auf Informationen im Endgerät des\n"
-"Nutzers (z. B. Device-Fingerprinting) im Sinne des TDDDG umfasst. Die Einwilligung ist jederzeit\n"
-"widerrufbar."
-msgstr ""
-"Die Verwendung von Hetzner erfolgt\n"
-"auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Wir haben ein berechtigtes Interesse an einer möglichst\n"
-"zuverlässigen Darstellung unserer Website. Sofern eine entsprechende Einwilligung abgefragt wurde, erfolgt\n"
-"die Verarbeitung ausschließlich auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG,\n"
-"soweit die Einwilligung die Speicherung von Cookies oder den Zugriff auf Informationen im Endgerät des\n"
-"Nutzers (z. B. Device-Fingerprinting) im Sinne des TDDDG umfasst. Die Einwilligung ist jederzeit\n"
-"widerrufbar."
-
-#: src/routes/privacy/+page.svelte
-msgid "Auftragsverarbeitung"
-msgstr "Auftragsverarbeitung"
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Wir haben einen Vertrag über Auftragsverarbeitung (AVV) zur Nutzung\n"
-"des oben genannten Dienstes geschlossen. Hierbei handelt es sich um einen datenschutzrechtlich vorgeschriebenen\n"
-"Vertrag, der gewährleistet, dass dieser die personenbezogenen Daten unserer Websitebesucher nur nach\n"
-"unseren Weisungen und unter Einhaltung der DSGVO verarbeitet."
-msgstr ""
-"Wir haben einen Vertrag über Auftragsverarbeitung (AVV) zur Nutzung\n"
-"des oben genannten Dienstes geschlossen. Hierbei handelt es sich um einen datenschutzrechtlich vorgeschriebenen\n"
-"Vertrag, der gewährleistet, dass dieser die personenbezogenen Daten unserer Websitebesucher nur nach\n"
-"unseren Weisungen und unter Einhaltung der DSGVO verarbeitet."
-
-#: src/routes/privacy/+page.svelte
-msgid "3. Allgemeine Hinweise und Pflicht­informationen"
-msgstr "3. Allgemeine Hinweise und Pflicht­informationen"
-
-#: src/routes/privacy/+page.svelte
-msgid "Datenschutz"
-msgstr "Datenschutz"
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr\n"
-"ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend den gesetzlichen\n"
-"Datenschutzvorschriften sowie dieser Datenschutzerklärung."
-msgstr ""
-"Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr\n"
-"ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend den gesetzlichen\n"
-"Datenschutzvorschriften sowie dieser Datenschutzerklärung."
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Wenn Sie diese Website benutzen,\n"
-"werden verschiedene personenbezogene Daten erhoben. Personenbezogene Daten sind Daten, mit denen Sie\n"
-"persönlich identifiziert werden können. Die vorliegende Datenschutzerklärung erläutert,\n"
-"welche Daten wir erheben und wofür wir sie nutzen. Sie erläutert auch, wie und zu welchem Zweck das\n"
-"geschieht."
-msgstr ""
-"Wenn Sie diese Website benutzen,\n"
-"werden verschiedene personenbezogene Daten erhoben. Personenbezogene Daten sind Daten, mit denen Sie\n"
-"persönlich identifiziert werden können. Die vorliegende Datenschutzerklärung erläutert,\n"
-"welche Daten wir erheben und wofür wir sie nutzen. Sie erläutert auch, wie und zu welchem Zweck das\n"
-"geschieht."
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Wir weisen darauf hin, dass die Datenübertragung im Internet (z. B. bei der\n"
-"Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor\n"
-"dem Zugriff durch Dritte ist nicht möglich."
-msgstr ""
-"Wir weisen darauf hin, dass die Datenübertragung im Internet (z. B. bei der\n"
-"Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor\n"
-"dem Zugriff durch Dritte ist nicht möglich."
-
-#: src/routes/privacy/+page.svelte
-msgid "Hinweis zur verantwortlichen Stelle"
-msgstr "Hinweis zur verantwortlichen Stelle"
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Die verantwortliche Stelle für die Datenverarbeitung auf\n"
-"dieser Website ist:"
-msgstr ""
-"Die verantwortliche Stelle für die Datenverarbeitung auf\n"
-"dieser Website ist:"
-
-#: src/routes/privacy/+page.svelte
-msgid "Abteilungsleitung TiB Baseball<0/> Columbiadamm 111<1/> 10965 Berlin"
-msgstr "Abteilungsleitung TiB Baseball<0/> Columbiadamm 111<1/> 10965 Berlin"
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen\n"
-"über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z. B. Namen, E-Mail-\n"
-"Adressen o. Ä.) entscheidet."
-msgstr ""
-"Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen\n"
-"über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z. B. Namen, E-Mail-\n"
-"Adressen o. Ä.) entscheidet."
-
-#: src/routes/privacy/+page.svelte
-msgid "Speicherdauer"
-msgstr "Speicherdauer"
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Soweit innerhalb dieser Datenschutzerklärung keine speziellere Speicherdauer\n"
-"genannt wurde, verbleiben Ihre personenbezogenen Daten bei uns, bis der Zweck für die Datenverarbeitung\n"
-"entfällt. Wenn Sie ein berechtigtes Löschersuchen geltend machen oder eine Einwilligung zur\n"
-"Datenverarbeitung widerrufen, werden Ihre Daten gelöscht, sofern wir keine anderen rechtlich\n"
-"zulässigen Gründe für die Speicherung Ihrer personenbezogenen Daten haben (z. B. steuer-\n"
-"oder handelsrechtliche Aufbewahrungsfristen); im letztgenannten Fall erfolgt die Löschung nach Fortfall\n"
-"dieser Gründe."
-msgstr ""
-"Soweit innerhalb dieser Datenschutzerklärung keine speziellere Speicherdauer\n"
-"genannt wurde, verbleiben Ihre personenbezogenen Daten bei uns, bis der Zweck für die Datenverarbeitung\n"
-"entfällt. Wenn Sie ein berechtigtes Löschersuchen geltend machen oder eine Einwilligung zur\n"
-"Datenverarbeitung widerrufen, werden Ihre Daten gelöscht, sofern wir keine anderen rechtlich\n"
-"zulässigen Gründe für die Speicherung Ihrer personenbezogenen Daten haben (z. B. steuer-\n"
-"oder handelsrechtliche Aufbewahrungsfristen); im letztgenannten Fall erfolgt die Löschung nach Fortfall\n"
-"dieser Gründe."
-
-#: src/routes/privacy/+page.svelte
-msgid "Allgemeine Hinweise zu den Rechtsgrundlagen der Datenverarbeitung auf dieser Website"
-msgstr "Allgemeine Hinweise zu den Rechtsgrundlagen der Datenverarbeitung auf dieser Website"
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Sofern Sie\n"
-"in die Datenverarbeitung eingewilligt haben, verarbeiten wir Ihre personenbezogenen Daten auf Grundlage von Art.\n"
-"6 Abs. 1 lit. a DSGVO bzw. Art. 9 Abs. 2 lit. a DSGVO, sofern besondere Datenkategorien nach Art. 9 Abs. 1 DSGVO\n"
-"verarbeitet werden. Im Falle einer ausdrücklichen Einwilligung in die Übertragung personenbezogener\n"
-"Daten in Drittstaaten erfolgt die Datenverarbeitung außerdem auf Grundlage von Art. 49 Abs. 1 lit. a DSGVO.\n"
-"Sofern Sie in die Speicherung von Cookies oder in den Zugriff auf Informationen in Ihr Endgerät (z. B. via\n"
-"Device-Fingerprinting) eingewilligt haben, erfolgt die Datenverarbeitung zusätzlich auf Grundlage von §\n"
-"25 Abs. 1 TDDDG. Die Einwilligung ist jederzeit widerrufbar. Sind Ihre Daten zur Vertragserfüllung oder zur\n"
-"Durchführung vorvertraglicher Maßnahmen erforderlich, verarbeiten wir Ihre Daten auf Grundlage des\n"
-"Art. 6 Abs. 1 lit. b DSGVO. Des Weiteren verarbeiten wir Ihre Daten, sofern diese zur Erfüllung einer\n"
-"rechtlichen Verpflichtung erforderlich sind auf Grundlage von Art. 6 Abs. 1 lit. c DSGVO. Die Datenverarbeitung\n"
-"kann ferner auf Grundlage unseres berechtigten Interesses nach Art. 6 Abs. 1 lit. f DSGVO erfolgen. Über die\n"
-"jeweils im Einzelfall einschlägigen Rechtsgrundlagen wird in den folgenden Absätzen dieser\n"
-"Datenschutzerklärung informiert."
-msgstr ""
-"Sofern Sie\n"
-"in die Datenverarbeitung eingewilligt haben, verarbeiten wir Ihre personenbezogenen Daten auf Grundlage von Art.\n"
-"6 Abs. 1 lit. a DSGVO bzw. Art. 9 Abs. 2 lit. a DSGVO, sofern besondere Datenkategorien nach Art. 9 Abs. 1 DSGVO\n"
-"verarbeitet werden. Im Falle einer ausdrücklichen Einwilligung in die Übertragung personenbezogener\n"
-"Daten in Drittstaaten erfolgt die Datenverarbeitung außerdem auf Grundlage von Art. 49 Abs. 1 lit. a DSGVO.\n"
-"Sofern Sie in die Speicherung von Cookies oder in den Zugriff auf Informationen in Ihr Endgerät (z. B. via\n"
-"Device-Fingerprinting) eingewilligt haben, erfolgt die Datenverarbeitung zusätzlich auf Grundlage von §\n"
-"25 Abs. 1 TDDDG. Die Einwilligung ist jederzeit widerrufbar. Sind Ihre Daten zur Vertragserfüllung oder zur\n"
-"Durchführung vorvertraglicher Maßnahmen erforderlich, verarbeiten wir Ihre Daten auf Grundlage des\n"
-"Art. 6 Abs. 1 lit. b DSGVO. Des Weiteren verarbeiten wir Ihre Daten, sofern diese zur Erfüllung einer\n"
-"rechtlichen Verpflichtung erforderlich sind auf Grundlage von Art. 6 Abs. 1 lit. c DSGVO. Die Datenverarbeitung\n"
-"kann ferner auf Grundlage unseres berechtigten Interesses nach Art. 6 Abs. 1 lit. f DSGVO erfolgen. Über die\n"
-"jeweils im Einzelfall einschlägigen Rechtsgrundlagen wird in den folgenden Absätzen dieser\n"
-"Datenschutzerklärung informiert."
-
-#: src/routes/privacy/+page.svelte
-msgid "Empfänger von personenbezogenen Daten"
-msgstr "Empfänger von personenbezogenen Daten"
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Im Rahmen unserer Geschäftstätigkeit\n"
-"arbeiten wir mit verschiedenen externen Stellen zusammen. Dabei ist teilweise auch eine Übermittlung von\n"
-"personenbezogenen Daten an diese externen Stellen erforderlich. Wir geben personenbezogene Daten nur dann an\n"
-"externe Stellen weiter, wenn dies im Rahmen einer Vertragserfüllung erforderlich ist, wenn wir gesetzlich\n"
-"hierzu verpflichtet sind (z. B. Weitergabe von Daten an Steuerbehörden), wenn wir ein berechtigtes\n"
-"Interesse nach Art. 6 Abs. 1 lit. f DSGVO an der Weitergabe haben oder wenn eine sonstige Rechtsgrundlage die\n"
-"Datenweitergabe erlaubt. Beim Einsatz von Auftragsverarbeitern geben wir personenbezogene Daten unserer\n"
-"Kunden nur auf Grundlage eines gültigen Vertrags über Auftragsverarbeitung weiter. Im Falle einer\n"
-"gemeinsamen Verarbeitung wird ein Vertrag über gemeinsame Verarbeitung geschlossen."
-msgstr ""
-"Im Rahmen unserer Geschäftstätigkeit\n"
-"arbeiten wir mit verschiedenen externen Stellen zusammen. Dabei ist teilweise auch eine Übermittlung von\n"
-"personenbezogenen Daten an diese externen Stellen erforderlich. Wir geben personenbezogene Daten nur dann an\n"
-"externe Stellen weiter, wenn dies im Rahmen einer Vertragserfüllung erforderlich ist, wenn wir gesetzlich\n"
-"hierzu verpflichtet sind (z. B. Weitergabe von Daten an Steuerbehörden), wenn wir ein berechtigtes\n"
-"Interesse nach Art. 6 Abs. 1 lit. f DSGVO an der Weitergabe haben oder wenn eine sonstige Rechtsgrundlage die\n"
-"Datenweitergabe erlaubt. Beim Einsatz von Auftragsverarbeitern geben wir personenbezogene Daten unserer\n"
-"Kunden nur auf Grundlage eines gültigen Vertrags über Auftragsverarbeitung weiter. Im Falle einer\n"
-"gemeinsamen Verarbeitung wird ein Vertrag über gemeinsame Verarbeitung geschlossen."
-
-#: src/routes/privacy/+page.svelte
-msgid "Widerruf Ihrer Einwilligung zur Datenverarbeitung"
-msgstr "Widerruf Ihrer Einwilligung zur Datenverarbeitung"
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Viele Datenverarbeitungsvorgänge sind\n"
-"nur mit Ihrer ausdrücklichen Einwilligung möglich. Sie können eine bereits erteilte Einwilligung\n"
-"jederzeit widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom\n"
-"Widerruf unberührt."
-msgstr ""
-"Viele Datenverarbeitungsvorgänge sind\n"
-"nur mit Ihrer ausdrücklichen Einwilligung möglich. Sie können eine bereits erteilte Einwilligung\n"
-"jederzeit widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom\n"
-"Widerruf unberührt."
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Widerspruchsrecht gegen die Datenerhebung in besonderen Fällen sowie gegen Direktwerbung (Art. 21\n"
-"DSGVO)"
-msgstr ""
-"Widerspruchsrecht gegen die Datenerhebung in besonderen Fällen sowie gegen Direktwerbung (Art. 21\n"
-"DSGVO)"
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"WENN DIE DATENVERARBEITUNG AUF GRUNDLAGE VON ART. 6 ABS. 1 LIT. E ODER F\n"
-"DSGVO ERFOLGT, HABEN SIE JEDERZEIT DAS RECHT, AUS GRÜNDEN, DIE SICH AUS IHRER\n"
-"BESONDEREN SITUATION ERGEBEN, GEGEN DIE VERARBEITUNG IHRER PERSONENBEZOGENEN DATEN\n"
-"WIDERSPRUCH EINZULEGEN; DIES GILT AUCH FÜR EIN AUF DIESE BESTIMMUNGEN GESTÜTZTES\n"
-"PROFILING. DIE JEWEILIGE RECHTSGRUNDLAGE, AUF DENEN EINE VERARBEITUNG BERUHT, ENTNEHMEN\n"
-"SIE DIESER DATENSCHUTZERKLÄRUNG. WENN SIE WIDERSPRUCH EINLEGEN, WERDEN WIR IHRE\n"
-"BETROFFENEN PERSONENBEZOGENEN DATEN NICHT MEHR VERARBEITEN, ES SEI DENN, WIR\n"
-"KÖNNEN ZWINGENDE SCHUTZWÜRDIGE GRÜNDE FÜR DIE VERARBEITUNG\n"
-"NACHWEISEN, DIE IHRE INTERESSEN, RECHTE UND FREIHEITEN ÜBERWIEGEN ODER DIE\n"
-"VERARBEITUNG DIENT DER GELTENDMACHUNG, AUSÜBUNG ODER VERTEIDIGUNG VON\n"
-"RECHTSANSPRÜCHEN (WIDERSPRUCH NACH ART. 21 ABS. 1 DSGVO)."
-msgstr ""
-"WENN DIE DATENVERARBEITUNG AUF GRUNDLAGE VON ART. 6 ABS. 1 LIT. E ODER F\n"
-"DSGVO ERFOLGT, HABEN SIE JEDERZEIT DAS RECHT, AUS GRÜNDEN, DIE SICH AUS IHRER\n"
-"BESONDEREN SITUATION ERGEBEN, GEGEN DIE VERARBEITUNG IHRER PERSONENBEZOGENEN DATEN\n"
-"WIDERSPRUCH EINZULEGEN; DIES GILT AUCH FÜR EIN AUF DIESE BESTIMMUNGEN GESTÜTZTES\n"
-"PROFILING. DIE JEWEILIGE RECHTSGRUNDLAGE, AUF DENEN EINE VERARBEITUNG BERUHT, ENTNEHMEN\n"
-"SIE DIESER DATENSCHUTZERKLÄRUNG. WENN SIE WIDERSPRUCH EINLEGEN, WERDEN WIR IHRE\n"
-"BETROFFENEN PERSONENBEZOGENEN DATEN NICHT MEHR VERARBEITEN, ES SEI DENN, WIR\n"
-"KÖNNEN ZWINGENDE SCHUTZWÜRDIGE GRÜNDE FÜR DIE VERARBEITUNG\n"
-"NACHWEISEN, DIE IHRE INTERESSEN, RECHTE UND FREIHEITEN ÜBERWIEGEN ODER DIE\n"
-"VERARBEITUNG DIENT DER GELTENDMACHUNG, AUSÜBUNG ODER VERTEIDIGUNG VON\n"
-"RECHTSANSPRÜCHEN (WIDERSPRUCH NACH ART. 21 ABS. 1 DSGVO)."
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"WERDEN IHRE\n"
-"PERSONENBEZOGENEN DATEN VERARBEITET, UM DIREKTWERBUNG ZU BETREIBEN, SO HABEN SIE DAS\n"
-"RECHT, JEDERZEIT WIDERSPRUCH GEGEN DIE VERARBEITUNG SIE BETREFFENDER PERSONENBEZOGENER\n"
-"DATEN ZUM ZWECKE DERARTIGER WERBUNG EINZULEGEN; DIES GILT AUCH FÜR DAS PROFILING,\n"
-"SOWEIT ES MIT SOLCHER DIREKTWERBUNG IN VERBINDUNG STEHT. WENN SIE WIDERSPRECHEN,\n"
-"WERDEN IHRE PERSONENBEZOGENEN DATEN ANSCHLIESSEND NICHT MEHR ZUM ZWECKE DER\n"
-"DIREKTWERBUNG VERWENDET (WIDERSPRUCH NACH ART. 21 ABS. 2 DSGVO)."
-msgstr ""
-"WERDEN IHRE\n"
-"PERSONENBEZOGENEN DATEN VERARBEITET, UM DIREKTWERBUNG ZU BETREIBEN, SO HABEN SIE DAS\n"
-"RECHT, JEDERZEIT WIDERSPRUCH GEGEN DIE VERARBEITUNG SIE BETREFFENDER PERSONENBEZOGENER\n"
-"DATEN ZUM ZWECKE DERARTIGER WERBUNG EINZULEGEN; DIES GILT AUCH FÜR DAS PROFILING,\n"
-"SOWEIT ES MIT SOLCHER DIREKTWERBUNG IN VERBINDUNG STEHT. WENN SIE WIDERSPRECHEN,\n"
-"WERDEN IHRE PERSONENBEZOGENEN DATEN ANSCHLIESSEND NICHT MEHR ZUM ZWECKE DER\n"
-"DIREKTWERBUNG VERWENDET (WIDERSPRUCH NACH ART. 21 ABS. 2 DSGVO)."
-
-#: src/routes/privacy/+page.svelte
-msgid "Beschwerde­recht bei der zuständigen Aufsichts­behörde"
-msgstr "Beschwerde­recht bei der zuständigen Aufsichts­behörde"
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Im Falle von\n"
-"Verstößen gegen die DSGVO steht den Betroffenen ein Beschwerderecht bei einer\n"
-"Aufsichtsbehörde, insbesondere in dem Mitgliedstaat ihres gewöhnlichen Aufenthalts, ihres\n"
-"Arbeitsplatzes oder des Orts des mutmaßlichen Verstoßes zu. Das Beschwerderecht besteht\n"
-"unbeschadet anderweitiger verwaltungsrechtlicher oder gerichtlicher Rechtsbehelfe."
-msgstr ""
-"Im Falle von\n"
-"Verstößen gegen die DSGVO steht den Betroffenen ein Beschwerderecht bei einer\n"
-"Aufsichtsbehörde, insbesondere in dem Mitgliedstaat ihres gewöhnlichen Aufenthalts, ihres\n"
-"Arbeitsplatzes oder des Orts des mutmaßlichen Verstoßes zu. Das Beschwerderecht besteht\n"
-"unbeschadet anderweitiger verwaltungsrechtlicher oder gerichtlicher Rechtsbehelfe."
-
-#: src/routes/privacy/+page.svelte
-msgid "Recht auf Daten­übertrag­barkeit"
-msgstr "Recht auf Daten­übertrag­barkeit"
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Sie haben das Recht, Daten, die wir auf Grundlage\n"
-"Ihrer Einwilligung oder in Erfüllung eines Vertrags automatisiert verarbeiten, an sich oder an einen Dritten in\n"
-"einem gängigen, maschinenlesbaren Format aushändigen zu lassen. Sofern Sie die direkte\n"
-"Übertragung der Daten an einen anderen Verantwortlichen verlangen, erfolgt dies nur, soweit es technisch\n"
-"machbar ist."
-msgstr ""
-"Sie haben das Recht, Daten, die wir auf Grundlage\n"
-"Ihrer Einwilligung oder in Erfüllung eines Vertrags automatisiert verarbeiten, an sich oder an einen Dritten in\n"
-"einem gängigen, maschinenlesbaren Format aushändigen zu lassen. Sofern Sie die direkte\n"
-"Übertragung der Daten an einen anderen Verantwortlichen verlangen, erfolgt dies nur, soweit es technisch\n"
-"machbar ist."
-
-#: src/routes/privacy/+page.svelte
-msgid "Auskunft, Berichtigung und Löschung"
-msgstr "Auskunft, Berichtigung und Löschung"
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Sie haben im Rahmen der geltenden gesetzlichen\n"
-"Bestimmungen jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen\n"
-"Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung und ggf. ein Recht auf\n"
-"Berichtigung oder Löschung dieser Daten. Hierzu sowie zu weiteren Fragen zum Thema personenbezogene\n"
-"Daten können Sie sich jederzeit an uns wenden."
-msgstr ""
-"Sie haben im Rahmen der geltenden gesetzlichen\n"
-"Bestimmungen jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen\n"
-"Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung und ggf. ein Recht auf\n"
-"Berichtigung oder Löschung dieser Daten. Hierzu sowie zu weiteren Fragen zum Thema personenbezogene\n"
-"Daten können Sie sich jederzeit an uns wenden."
-
-#: src/routes/privacy/+page.svelte
-msgid "Recht auf Einschränkung der Verarbeitung"
-msgstr "Recht auf Einschränkung der Verarbeitung"
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Sie haben das Recht, die Einschränkung der\n"
-"Verarbeitung Ihrer personenbezogenen Daten zu verlangen. Hierzu können Sie sich jederzeit an uns wenden.\n"
-"Das Recht auf Einschränkung der Verarbeitung besteht in folgenden Fällen:"
-msgstr ""
-"Sie haben das Recht, die Einschränkung der\n"
-"Verarbeitung Ihrer personenbezogenen Daten zu verlangen. Hierzu können Sie sich jederzeit an uns wenden.\n"
-"Das Recht auf Einschränkung der Verarbeitung besteht in folgenden Fällen:"
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Wenn Sie die\n"
-"Richtigkeit Ihrer bei uns gespeicherten personenbezogenen Daten bestreiten, benötigen wir in der Regel Zeit,\n"
-"um dies zu überprüfen. Für die Dauer der Prüfung haben Sie das Recht, die\n"
-"Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen."
-msgstr ""
-"Wenn Sie die\n"
-"Richtigkeit Ihrer bei uns gespeicherten personenbezogenen Daten bestreiten, benötigen wir in der Regel Zeit,\n"
-"um dies zu überprüfen. Für die Dauer der Prüfung haben Sie das Recht, die\n"
-"Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen."
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Wenn die\n"
-"Verarbeitung Ihrer personenbezogenen Daten unrechtmäßig geschah/geschieht, können Sie statt\n"
-"der Löschung die Einschränkung der Datenverarbeitung verlangen."
-msgstr ""
-"Wenn die\n"
-"Verarbeitung Ihrer personenbezogenen Daten unrechtmäßig geschah/geschieht, können Sie statt\n"
-"der Löschung die Einschränkung der Datenverarbeitung verlangen."
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Wenn wir Ihre\n"
-"personenbezogenen Daten nicht mehr benötigen, Sie sie jedoch zur Ausübung, Verteidigung oder\n"
-"Geltendmachung von Rechtsansprüchen benötigen, haben Sie das Recht, statt der Löschung die\n"
-"Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen."
-msgstr ""
-"Wenn wir Ihre\n"
-"personenbezogenen Daten nicht mehr benötigen, Sie sie jedoch zur Ausübung, Verteidigung oder\n"
-"Geltendmachung von Rechtsansprüchen benötigen, haben Sie das Recht, statt der Löschung die\n"
-"Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen."
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Wenn Sie einen\n"
-"Widerspruch nach Art. 21 Abs. 1 DSGVO eingelegt haben, muss eine Abwägung zwischen Ihren und unseren\n"
-"Interessen vorgenommen werden. Solange noch nicht feststeht, wessen Interessen überwiegen, haben Sie das\n"
-"Recht, die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen."
-msgstr ""
-"Wenn Sie einen\n"
-"Widerspruch nach Art. 21 Abs. 1 DSGVO eingelegt haben, muss eine Abwägung zwischen Ihren und unseren\n"
-"Interessen vorgenommen werden. Solange noch nicht feststeht, wessen Interessen überwiegen, haben Sie das\n"
-"Recht, die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen."
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Wenn Sie die Verarbeitung Ihrer personenbezogenen Daten eingeschränkt haben, dürfen diese\n"
-"Daten – von ihrer Speicherung abgesehen – nur mit Ihrer Einwilligung oder zur Geltendmachung,\n"
-"Ausübung oder Verteidigung von Rechtsansprüchen oder zum Schutz der Rechte einer anderen\n"
-"natürlichen oder juristischen Person oder aus Gründen eines wichtigen öffentlichen Interesses der\n"
-"Europäischen Union oder eines Mitgliedstaats verarbeitet werden."
-msgstr ""
-"Wenn Sie die Verarbeitung Ihrer personenbezogenen Daten eingeschränkt haben, dürfen diese\n"
-"Daten – von ihrer Speicherung abgesehen – nur mit Ihrer Einwilligung oder zur Geltendmachung,\n"
-"Ausübung oder Verteidigung von Rechtsansprüchen oder zum Schutz der Rechte einer anderen\n"
-"natürlichen oder juristischen Person oder aus Gründen eines wichtigen öffentlichen Interesses der\n"
-"Europäischen Union oder eines Mitgliedstaats verarbeitet werden."
-
-#: src/routes/privacy/+page.svelte
-msgid "SSL- bzw. TLS-Verschlüsselung"
-msgstr "SSL- bzw. TLS-Verschlüsselung"
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Diese Seite nutzt aus Sicherheitsgründen und zum Schutz\n"
-"der Übertragung vertraulicher Inhalte, wie zum Beispiel Bestellungen oder Anfragen, die Sie an uns als\n"
-"Seitenbetreiber senden, eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen\n"
-"Sie daran, dass die Adresszeile des Browsers von „http://“ auf „https://“ wechselt und\n"
-"an dem Schloss-Symbol in Ihrer Browserzeile."
-msgstr ""
-"Diese Seite nutzt aus Sicherheitsgründen und zum Schutz\n"
-"der Übertragung vertraulicher Inhalte, wie zum Beispiel Bestellungen oder Anfragen, die Sie an uns als\n"
-"Seitenbetreiber senden, eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen\n"
-"Sie daran, dass die Adresszeile des Browsers von „http://“ auf „https://“ wechselt und\n"
-"an dem Schloss-Symbol in Ihrer Browserzeile."
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Wenn die SSL- bzw. TLS-Verschlüsselung aktiviert ist,\n"
-"können die Daten, die Sie an uns übermitteln, nicht von Dritten mitgelesen werden."
-msgstr ""
-"Wenn die SSL- bzw. TLS-Verschlüsselung aktiviert ist,\n"
-"können die Daten, die Sie an uns übermitteln, nicht von Dritten mitgelesen werden."
-
-#: src/routes/privacy/+page.svelte
-msgid "4. Datenerfassung auf dieser Website"
-msgstr "4. Datenerfassung auf dieser Website"
-
-#: src/routes/privacy/+page.svelte
-msgid "Server-Log-Dateien"
-msgstr "Server-Log-Dateien"
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Der Provider der Seiten erhebt und speichert automatisch Informationen in so\n"
-"genannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt. Dies sind:"
-msgstr ""
-"Der Provider der Seiten erhebt und speichert automatisch Informationen in so\n"
-"genannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt. Dies sind:"
-
-#: src/routes/privacy/+page.svelte
-msgid "Browsertyp und Browserversion"
-msgstr "Browsertyp und Browserversion"
-
-#: src/routes/privacy/+page.svelte
-msgid "verwendetes Betriebssystem"
-msgstr "verwendetes Betriebssystem"
-
-#: src/routes/privacy/+page.svelte
-msgid "Referrer URL"
-msgstr "Referrer URL"
-
-#: src/routes/privacy/+page.svelte
-msgid "Hostname des zugreifenden Rechners"
-msgstr "Hostname des zugreifenden Rechners"
-
-#: src/routes/privacy/+page.svelte
-msgid "Uhrzeit der Serveranfrage"
-msgstr "Uhrzeit der Serveranfrage"
-
-#: src/routes/privacy/+page.svelte
-msgid "IP-Adresse"
-msgstr "IP-Adresse"
-
-#: src/routes/privacy/+page.svelte
-msgid "Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen."
-msgstr "Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen."
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Die\n"
-"Erfassung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Der Websitebetreiber hat ein\n"
-"berechtigtes Interesse an der technisch fehlerfreien Darstellung und der Optimierung seiner Website –\n"
-"hierzu müssen die Server-Log-Files erfasst werden."
-msgstr ""
-"Die\n"
-"Erfassung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Der Websitebetreiber hat ein\n"
-"berechtigtes Interesse an der technisch fehlerfreien Darstellung und der Optimierung seiner Website –\n"
-"hierzu müssen die Server-Log-Files erfasst werden."
-
-#: src/routes/privacy/+page.svelte
-msgid "Anfrage per E-Mail, Telefon oder Telefax"
-msgstr "Anfrage per E-Mail, Telefon oder Telefax"
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Wenn Sie uns per E-Mail, Telefon oder Telefax\n"
-"kontaktieren, wird Ihre Anfrage inklusive aller daraus hervorgehenden personenbezogenen Daten (Name, Anfrage)\n"
-"zum Zwecke der Bearbeitung Ihres Anliegens bei uns gespeichert und verarbeitet. Diese Daten geben wir nicht ohne\n"
-"Ihre Einwilligung weiter."
-msgstr ""
-"Wenn Sie uns per E-Mail, Telefon oder Telefax\n"
-"kontaktieren, wird Ihre Anfrage inklusive aller daraus hervorgehenden personenbezogenen Daten (Name, Anfrage)\n"
-"zum Zwecke der Bearbeitung Ihres Anliegens bei uns gespeichert und verarbeitet. Diese Daten geben wir nicht ohne\n"
-"Ihre Einwilligung weiter."
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b\n"
-"DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur\n"
-"Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht\n"
-"die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten\n"
-"Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) sofern diese\n"
-"abgefragt\n"
-"wurde; die Einwilligung ist jederzeit widerrufbar."
-msgstr ""
-"Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b\n"
-"DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur\n"
-"Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht\n"
-"die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten\n"
-"Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) sofern diese\n"
-"abgefragt\n"
-"wurde; die Einwilligung ist jederzeit widerrufbar."
-
-#: src/routes/privacy/+page.svelte
-msgid ""
-"Die von Ihnen an uns per Kontaktanfragen\n"
-"übersandten Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern, Ihre Einwilligung zur\n"
-"Speicherung widerrufen oder der Zweck für die Datenspeicherung entfällt (z. B. nach\n"
-"abgeschlossener Bearbeitung Ihres Anliegens). Zwingende gesetzliche Bestimmungen – insbesondere\n"
-"gesetzliche Aufbewahrungsfristen – bleiben unberührt."
-msgstr ""
-"Die von Ihnen an uns per Kontaktanfragen\n"
-"übersandten Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern, Ihre Einwilligung zur\n"
-"Speicherung widerrufen oder der Zweck für die Datenspeicherung entfällt (z. B. nach\n"
-"abgeschlossener Bearbeitung Ihres Anliegens). Zwingende gesetzliche Bestimmungen – insbesondere\n"
-"gesetzliche Aufbewahrungsfristen – bleiben unberührt."
 
 #: src/routes/signupconfirm/+page.svelte
 msgid "Complete signup process"
@@ -1214,264 +501,8 @@ msgstr "Please check your email to follow the required steps to confirm your acc
 msgid "Loading Teams..."
 msgstr "Loading Teams..."
 
-#: src/routes/terms/+page.svelte
-msgid ""
-"Nutzungsbedingungen für die Web-App der Berlin\n"
-"Skylarks"
-msgstr ""
-"Nutzungsbedingungen für die Web-App der Berlin\n"
-"Skylarks"
-
-#: src/routes/terms/+page.svelte
-msgid "(English Below)"
-msgstr "(English Below)"
-
-#: src/routes/terms/+page.svelte
-msgid "Die Web-App wird bereitgestellt von der <0>Turngemeinde in Berlin e.V. Abteilung Baseball</0>."
-msgstr "Die Web-App wird bereitgestellt von der <0>Turngemeinde in Berlin e.V. Abteilung Baseball</0>."
-
-#: src/routes/terms/+page.svelte
-msgid "1. Geltungsbereich"
-msgstr "1. Geltungsbereich"
-
-#: src/routes/terms/+page.svelte
-msgid ""
-"Diese Nutzungsbedingungen regeln die Nutzung der Web-App der Berlin Skylarks („die App“) durch Mitglieder des\n"
-"gemeinnützigen Baseballvereins \"Berlin Skylarks\"."
-msgstr ""
-"Diese Nutzungsbedingungen regeln die Nutzung der Web-App der Berlin Skylarks („die App“) durch Mitglieder des\n"
-"gemeinnützigen Baseballvereins \"Berlin Skylarks\"."
-
-#: src/routes/terms/+page.svelte
-msgid "2. Nutzungsvoraussetzungen"
-msgstr "2. Nutzungsvoraussetzungen"
-
-#: src/routes/terms/+page.svelte
-msgid "Die Nutzung der App ist ausschließlich Vereinsmitgliedern vorbehalten."
-msgstr "Die Nutzung der App ist ausschließlich Vereinsmitgliedern vorbehalten."
-
-#: src/routes/terms/+page.svelte
-msgid ""
-"Eine Registrierung und Anmeldung sind erforderlich, um an Vereinsaktivitäten wie Spielen, Turnieren und\n"
-"Trainingseinheiten teilzunehmen."
-msgstr ""
-"Eine Registrierung und Anmeldung sind erforderlich, um an Vereinsaktivitäten wie Spielen, Turnieren und\n"
-"Trainingseinheiten teilzunehmen."
-
-#: src/routes/terms/+page.svelte
-msgid "Die Nutzung ist kostenlos und mit dem Mitgliedsbeitrag abgegolten."
-msgstr "Die Nutzung ist kostenlos und mit dem Mitgliedsbeitrag abgegolten."
-
-#: src/routes/terms/+page.svelte
-msgid "3. Datenschutz und Datennutzung"
-msgstr "3. Datenschutz und Datennutzung"
-
-#: src/routes/terms/+page.svelte
-msgid ""
-"Alle in der App erhobenen Daten werden ausschließlich zur Organisation und Verwaltung von Vereinsaktivitäten\n"
-"verwendet."
-msgstr ""
-"Alle in der App erhobenen Daten werden ausschließlich zur Organisation und Verwaltung von Vereinsaktivitäten\n"
-"verwendet."
-
-#: src/routes/terms/+page.svelte
-msgid "Es gibt kein Tracking, keine Werbung, keine Social-Media-Integration und keine Einbindung externer Dienste."
-msgstr "Es gibt kein Tracking, keine Werbung, keine Social-Media-Integration und keine Einbindung externer Dienste."
-
-#: src/routes/terms/+page.svelte
-msgid "Auf Anfrage und bei Beendigung der Mitgliedschaft werden alle personenbezogenen Daten unverzüglich gelöscht."
-msgstr "Auf Anfrage und bei Beendigung der Mitgliedschaft werden alle personenbezogenen Daten unverzüglich gelöscht."
-
-#: src/routes/terms/+page.svelte
-msgid "4. Verhaltensregeln"
-msgstr "4. Verhaltensregeln"
-
-#: src/routes/terms/+page.svelte
-msgid ""
-"Die Mitglieder verpflichten sich, die App ausschließlich im Rahmen ihrer Vereinsmitgliedschaft und in gutem\n"
-"Glauben zu nutzen."
-msgstr ""
-"Die Mitglieder verpflichten sich, die App ausschließlich im Rahmen ihrer Vereinsmitgliedschaft und in gutem\n"
-"Glauben zu nutzen."
-
-#: src/routes/terms/+page.svelte
-msgid "Eine missbräuchliche Nutzung, insbesondere zum Schaden des Vereins oder seiner Mitglieder, ist untersagt."
-msgstr "Eine missbräuchliche Nutzung, insbesondere zum Schaden des Vereins oder seiner Mitglieder, ist untersagt."
-
-#: src/routes/terms/+page.svelte
-msgid "5. Open-Source-Kodex"
-msgstr "5. Open-Source-Kodex"
-
-#: src/routes/terms/+page.svelte
-msgid "Der gesamte Code der App ist frei verfügbar und kann eingesehen werden."
-msgstr "Der gesamte Code der App ist frei verfügbar und kann eingesehen werden."
-
-#: src/routes/terms/+page.svelte
-msgid "6. Haftungsausschluss"
-msgstr "6. Haftungsausschluss"
-
-#: src/routes/terms/+page.svelte
-msgid ""
-"Die Berlin Skylarks übernehmen keine Haftung für technische Fehler, Datenverluste oder sonstige Schäden, die aus\n"
-"der Nutzung der App entstehen könnten."
-msgstr ""
-"Die Berlin Skylarks übernehmen keine Haftung für technische Fehler, Datenverluste oder sonstige Schäden, die aus\n"
-"der Nutzung der App entstehen könnten."
-
-#: src/routes/terms/+page.svelte
-msgid "7. Änderungen der Nutzungsbedingungen"
-msgstr "7. Änderungen der Nutzungsbedingungen"
-
-#: src/routes/terms/+page.svelte
-msgid ""
-"Der Verein behält sich das Recht vor, diese Nutzungsbedingungen bei Bedarf zu aktualisieren. Mitglieder werden\n"
-"über\n"
-"wesentliche Änderungen informiert."
-msgstr ""
-"Der Verein behält sich das Recht vor, diese Nutzungsbedingungen bei Bedarf zu aktualisieren. Mitglieder werden\n"
-"über\n"
-"wesentliche Änderungen informiert."
-
-#: src/routes/terms/+page.svelte
-msgid "8. Kontakt"
-msgstr "8. Kontakt"
-
-#: src/routes/terms/+page.svelte
-msgid ""
-"Bei Fragen oder Anliegen zur Nutzung der App kann die Abteilungsleitung der Berlin Skylarks kontaktiert\n"
-"werden:"
-msgstr ""
-"Bei Fragen oder Anliegen zur Nutzung der App kann die Abteilungsleitung der Berlin Skylarks kontaktiert\n"
-"werden:"
-
-#: src/routes/terms/+page.svelte
-#: src/routes/terms/+page.svelte
-msgid "vorstand@tib-baseball.de"
-msgstr "vorstand@tib-baseball.de"
-
-#: src/routes/terms/+page.svelte
-msgid "Bei technischen Fragen und Fehlern:"
-msgstr "Bei technischen Fragen und Fehlern:"
-
-#: src/routes/terms/+page.svelte
-#: src/routes/terms/+page.svelte
-msgid "app@tib-baseball.de"
-msgstr "app@tib-baseball.de"
-
-#: src/routes/terms/+page.svelte
-msgid "Terms & Conditions for the Berlin Skylarks Web App"
-msgstr "Terms & Conditions for the Berlin Skylarks Web App"
-
-#: src/routes/terms/+page.svelte
-msgid "The web app is provided by <0>Turngemeinde in Berlin e.V. Abteilung Baseball</0>."
-msgstr "The web app is provided by <0>Turngemeinde in Berlin e.V. Abteilung Baseball</0>."
-
-#: src/routes/terms/+page.svelte
-msgid "1. Scope"
-msgstr "1. Scope"
-
-#: src/routes/terms/+page.svelte
-msgid ""
-"These Terms & Conditions govern the use of the Berlin Skylarks web app (\"the App\") by members of the non-profit\n"
-"baseball club \"Berlin Skylarks\"."
-msgstr ""
-"These Terms & Conditions govern the use of the Berlin Skylarks web app (\"the App\") by members of the non-profit\n"
-"baseball club \"Berlin Skylarks\"."
-
-#: src/routes/terms/+page.svelte
-msgid "2. Eligibility"
-msgstr "2. Eligibility"
-
-#: src/routes/terms/+page.svelte
-msgid "The App is exclusively available to club members."
-msgstr "The App is exclusively available to club members."
-
-#: src/routes/terms/+page.svelte
-msgid ""
-"Registration and login are required to participate in club activities such as games, tournaments, and training\n"
-"sessions."
-msgstr ""
-"Registration and login are required to participate in club activities such as games, tournaments, and training\n"
-"sessions."
-
-#: src/routes/terms/+page.svelte
-msgid "Use of the App including all backend services is free and covered by the membership fee."
-msgstr "Use of the App including all backend services is free and covered by the membership fee."
-
-#: src/routes/terms/+page.svelte
-msgid "3. Data Privacy & Usage"
-msgstr "3. Data Privacy & Usage"
-
-#: src/routes/terms/+page.svelte
-msgid "All data collected within the App is used solely for organizing and managing club activities."
-msgstr "All data collected within the App is used solely for organizing and managing club activities."
-
-#: src/routes/terms/+page.svelte
-msgid "There is no tracking, no advertising, no social media integration, and no use of external services."
-msgstr "There is no tracking, no advertising, no social media integration, and no use of external services."
-
-#: src/routes/terms/+page.svelte
-msgid "Upon request or termination of club membership, all personal data will be promptly deleted."
-msgstr "Upon request or termination of club membership, all personal data will be promptly deleted."
-
-#: src/routes/terms/+page.svelte
-msgid "4. Code of Conduct"
-msgstr "4. Code of Conduct"
-
-#: src/routes/terms/+page.svelte
-msgid "Members agree to use the App only within the scope of their club membership and in good faith."
-msgstr "Members agree to use the App only within the scope of their club membership and in good faith."
-
-#: src/routes/terms/+page.svelte
-msgid "Misuse, especially actions harmful to the club or its members, is strictly prohibited."
-msgstr "Misuse, especially actions harmful to the club or its members, is strictly prohibited."
-
-#: src/routes/terms/+page.svelte
-msgid "5. Open-Source Policy"
-msgstr "5. Open-Source Policy"
-
-#: src/routes/terms/+page.svelte
-msgid "The entire code of the App is publicly available and can be reviewed."
-msgstr "The entire code of the App is publicly available and can be reviewed."
-
-#: src/routes/terms/+page.svelte
-msgid "6. Disclaimer of Liability"
-msgstr "6. Disclaimer of Liability"
-
-#: src/routes/terms/+page.svelte
-msgid ""
-"The Berlin Skylarks assume no liability for technical errors, data loss, or any other damages resulting from the\n"
-"use of the App."
-msgstr ""
-"The Berlin Skylarks assume no liability for technical errors, data loss, or any other damages resulting from the\n"
-"use of the App."
-
-#: src/routes/terms/+page.svelte
-msgid "7. Changes to the Terms & Conditions"
-msgstr "7. Changes to the Terms & Conditions"
-
-#: src/routes/terms/+page.svelte
-msgid ""
-"The club reserves the right to update these Terms & Conditions when necessary. Members will be informed of any\n"
-"significant changes."
-msgstr ""
-"The club reserves the right to update these Terms & Conditions when necessary. Members will be informed of any\n"
-"significant changes."
-
-#: src/routes/terms/+page.svelte
-msgid "8. Contact"
-msgstr "8. Contact"
-
-#: src/routes/terms/+page.svelte
-msgid "For any questions or concerns regarding the App, members can contact the Berlin Skylarks board:"
-msgstr "For any questions or concerns regarding the App, members can contact the Berlin Skylarks board:"
-
-#: src/routes/terms/+page.svelte
-msgid "In case of technical issues and bugs:"
-msgstr "In case of technical issues and bugs:"
-
-#: src/lib/components/forms/AnnouncementForm.svelte
 #: src/lib/components/announcements/AnnouncementCard.svelte
+#: src/lib/components/forms/AnnouncementForm.svelte
 #: src/routes/(protected)/account/announcements/[announcement]/+page.svelte
 msgid "Announcement"
 msgstr "Announcement"
@@ -1500,24 +531,24 @@ msgstr "Important"
 msgid "Critical"
 msgstr "Critical"
 
-#: src/lib/components/datatable/StatsHeaderRow.svelte
-#: src/lib/components/datatable/StatsHeaderRow.svelte
 #: src/lib/components/boxscore/Linescore.svelte
 #: src/lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
 #: src/lib/components/boxscore/MatchBoxscorePitchingTable.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
 msgid "R"
 msgstr "R"
 
-#: src/lib/components/datatable/StatsHeaderRow.svelte
-#: src/lib/components/datatable/StatsHeaderRow.svelte
 #: src/lib/components/boxscore/Linescore.svelte
 #: src/lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
 #: src/lib/components/boxscore/MatchBoxscorePitchingTable.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
 msgid "H"
 msgstr "H"
 
-#: src/lib/components/datatable/StatsHeaderRow.svelte
 #: src/lib/components/boxscore/Linescore.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
 msgid "E"
 msgstr "E"
 
@@ -1581,42 +612,42 @@ msgstr "TP:"
 msgid "{0} (Batters)"
 msgstr "{0} (Batters)"
 
-#: src/lib/components/datatable/StatsHeaderRow.svelte
-#: src/lib/components/datatable/StatsHeaderRow.svelte
 #: src/lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
 #: src/lib/components/boxscore/MatchBoxscorePitchingTable.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
 msgid "AB"
 msgstr "AB"
 
-#: src/lib/components/datatable/StatsHeaderRow.svelte
 #: src/lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
 msgid "RBI"
 msgstr "RBI"
 
-#: src/lib/components/datatable/StatsHeaderRow.svelte
-#: src/lib/components/datatable/StatsHeaderRow.svelte
 #: src/lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
 #: src/lib/components/boxscore/MatchBoxscorePitchingTable.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
 msgid "K"
 msgstr "K"
 
-#: src/lib/components/datatable/StatsHeaderRow.svelte
-#: src/lib/components/datatable/StatsHeaderRow.svelte
 #: src/lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
 #: src/lib/components/boxscore/MatchBoxscorePitchingTable.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
 msgid "BB"
 msgstr "BB"
 
-#: src/lib/components/utility/StatsBlock.svelte
-#: src/lib/components/utility/StatsBlock.svelte
-#: src/lib/components/datatable/StatsHeaderRow.svelte
 #: src/lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/utility/StatsBlock.svelte
+#: src/lib/components/utility/StatsBlock.svelte
 msgid "AVG"
 msgstr "AVG"
 
-#: src/lib/components/utility/StatsBlock.svelte
-#: src/lib/components/datatable/StatsHeaderRow.svelte
 #: src/lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/utility/StatsBlock.svelte
 msgid "OPS"
 msgstr "OPS"
 
@@ -1624,27 +655,27 @@ msgstr "OPS"
 msgid "{0} (Pitchers)"
 msgstr "{0} (Pitchers)"
 
-#: src/lib/components/utility/StatsBlock.svelte
-#: src/lib/components/utility/StatsBlock.svelte
-#: src/lib/components/datatable/StatsHeaderRow.svelte
-#: src/lib/components/datatable/StatsHeaderRow.svelte
 #: src/lib/components/boxscore/MatchBoxscorePitchingTable.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/utility/StatsBlock.svelte
+#: src/lib/components/utility/StatsBlock.svelte
 msgid "IP"
 msgstr "IP"
 
-#: src/lib/components/datatable/StatsHeaderRow.svelte
 #: src/lib/components/boxscore/MatchBoxscorePitchingTable.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
 msgid "BF"
 msgstr "BF"
 
-#: src/lib/components/datatable/StatsHeaderRow.svelte
 #: src/lib/components/boxscore/MatchBoxscorePitchingTable.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
 msgid "ER"
 msgstr "ER"
 
-#: src/lib/components/utility/StatsBlock.svelte
-#: src/lib/components/datatable/StatsHeaderRow.svelte
 #: src/lib/components/boxscore/MatchBoxscorePitchingTable.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/utility/StatsBlock.svelte
 msgid "ERA"
 msgstr "ERA"
 
@@ -1656,26 +687,26 @@ msgstr "Linescore"
 msgid "Offensive"
 msgstr "Offensive"
 
-#: src/routes/ligen/[id]/stats/+page.svelte
-#: src/lib/components/datatable/BaseballStatsDatatable.svelte
 #: src/lib/components/boxscore/MatchBoxscoreSection.svelte
+#: src/lib/components/datatable/BaseballStatsDatatable.svelte
+#: src/routes/ligen/[id]/stats/+page.svelte
 msgid "Pitching"
 msgstr "Pitching"
 
+#: src/lib/components/comments/CommentRow.svelte
+#: src/lib/components/comments/CommentRow.svelte
 #: src/lib/components/comments/CommentSection.svelte
-#: src/lib/components/comments/CommentRow.svelte
-#: src/lib/components/comments/CommentRow.svelte
 #: src/lib/components/forms/ParticipationForm.svelte
 msgid "Comment"
 msgstr "Comment"
 
-#: src/lib/components/comments/CommentSection.svelte
 #: src/lib/components/comments/CommentRow.svelte
+#: src/lib/components/comments/CommentSection.svelte
 msgid "Your comment..."
 msgstr "Your comment..."
 
-#: src/lib/components/comments/CommentSection.svelte
 #: src/lib/components/comments/CommentRow.svelte
+#: src/lib/components/comments/CommentSection.svelte
 msgid "Add comment"
 msgstr "Add comment"
 
@@ -1684,12 +715,12 @@ msgid "No comments yet."
 msgstr "No comments yet."
 
 #: src/lib/components/club/ClubInfoSection.svelte
-#: src/lib/components/navigation/StaticNavigationLinks.svelte
-#: src/lib/components/diamondplanner/team/TeamTeaserCard.svelte
-#: src/lib/components/diamondplanner/team/TeamListTeaser.svelte
-#: src/lib/components/diamondplanner/user/PlayerProfileClubsSection.svelte
-#: src/lib/components/diamondplanner/club/ClubDetailCard.svelte
 #: src/lib/components/forms/ClubForm.svelte
+#: src/lib/components/navigation/StaticNavigationLinks.svelte
+#: src/lib/components/diamondplanner/club/ClubDetailCard.svelte
+#: src/lib/components/diamondplanner/team/TeamListTeaser.svelte
+#: src/lib/components/diamondplanner/team/TeamTeaserCard.svelte
+#: src/lib/components/diamondplanner/user/PlayerProfileClubsSection.svelte
 msgid "Club"
 msgstr "Club"
 
@@ -1698,23 +729,19 @@ msgstr "Club"
 msgid "Skylarks Logo"
 msgstr "Skylarks Logo"
 
-#: src/routes/ligen/[id]/stats/+page.svelte
 #: src/lib/components/datatable/BaseballStatsDatatable.svelte
+#: src/routes/ligen/[id]/stats/+page.svelte
 msgid "Batting"
 msgstr "Batting"
 
-#: src/routes/ligen/[id]/stats/+page.svelte
 #: src/lib/components/datatable/BaseballStatsDatatable.svelte
+#: src/routes/ligen/[id]/stats/+page.svelte
 msgid "Fielding"
 msgstr "Fielding"
 
 #: src/lib/components/datatable/BaseballStatsDatatable.svelte
 msgid "Total"
 msgstr "Total"
-
-#: src/lib/components/datatable/RowCount.svelte
-msgid "Keine Elemente gefunden."
-msgstr "Keine Elemente gefunden."
 
 #: src/lib/components/datatable/RowsPerPage.svelte
 msgid "Show <0/>"
@@ -1724,10 +751,10 @@ msgstr "Show <0/>"
 msgid "Search..."
 msgstr "Search..."
 
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
 #: src/lib/components/utility/StatsBlock.svelte
-#: src/lib/components/datatable/StatsHeaderRow.svelte
-#: src/lib/components/datatable/StatsHeaderRow.svelte
-#: src/lib/components/datatable/StatsHeaderRow.svelte
 msgid "G"
 msgstr "G"
 
@@ -1790,13 +817,13 @@ msgstr "SF"
 msgid "I"
 msgstr "I"
 
-#: src/lib/components/utility/StatsBlock.svelte
 #: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/utility/StatsBlock.svelte
 msgid "OBP"
 msgstr "OBP"
 
-#: src/lib/components/utility/StatsBlock.svelte
 #: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/utility/StatsBlock.svelte
 msgid "SLG"
 msgstr "SLG"
 
@@ -1816,22 +843,22 @@ msgstr "WP"
 msgid "HBP"
 msgstr "HBP"
 
-#: src/lib/components/utility/StatsBlock.svelte
 #: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/utility/StatsBlock.svelte
 msgid "WHIP"
 msgstr "WHIP"
 
-#: src/lib/components/table/StandingsTable.svelte
-#: src/lib/components/match/GameResultIndicator.svelte
-#: src/lib/components/favorite/StreakEmoji.svelte
 #: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/favorite/StreakEmoji.svelte
+#: src/lib/components/match/GameResultIndicator.svelte
+#: src/lib/components/table/StandingsTable.svelte
 msgid "W"
 msgstr "W"
 
-#: src/lib/components/table/StandingsTable.svelte
-#: src/lib/components/match/GameResultIndicator.svelte
-#: src/lib/components/favorite/StreakEmoji.svelte
 #: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/favorite/StreakEmoji.svelte
+#: src/lib/components/match/GameResultIndicator.svelte
+#: src/lib/components/table/StandingsTable.svelte
 msgid "L"
 msgstr "L"
 
@@ -1895,28 +922,24 @@ msgstr "CF"
 msgid "RF"
 msgstr "RF"
 
+#: src/lib/components/datatable/StatsTableContent.svelte
 #: src/lib/components/datatable/TeamMembersTableContent.svelte
-#: src/lib/components/forms/UniformSetForm.svelte
+#: src/lib/components/favorite/FavoriteTeamInfoCard.svelte
 #: src/lib/components/league/LeagueDetailInfoCard.svelte
+#: src/lib/components/forms/ClubForm.svelte
+#: src/lib/components/forms/UniformSetForm.svelte
+#: src/lib/components/team/TeamDetailInfoCard.svelte
 #: src/lib/components/table/LeaderboardTable.svelte
 #: src/lib/components/club/officials/ClubOfficialDetailCard.svelte
-#: src/lib/components/favorite/FavoriteTeamInfoCard.svelte
-#: src/lib/components/team/TeamDetailInfoCard.svelte
-#: src/lib/components/datatable/StatsTableContent.svelte
+#: src/lib/components/diamondplanner/club/ClubDetailCard.svelte
 #: src/lib/components/diamondplanner/team/TeamTeaserCard.svelte
 #: src/lib/components/diamondplanner/user/UserDataCard.svelte
-#: src/lib/components/diamondplanner/club/ClubDetailCard.svelte
-#: src/lib/components/forms/ClubForm.svelte
 msgid "Name"
 msgstr "Name"
 
 #: src/lib/components/datatable/StatsTableContent.svelte
 msgid "Saison"
 msgstr "Saison"
-
-#: src/lib/components/datatable/StatsTableContent.svelte
-msgid "Keine Daten für diese Kategorie vorhanden."
-msgstr "Keine Daten für diese Kategorie vorhanden."
 
 #: src/lib/components/datatable/TeamMembersTableContent.svelte
 #: src/lib/components/match/MatchMainInfoSection.svelte
@@ -1956,8 +979,8 @@ msgstr "Unverified"
 
 #: src/lib/components/datatable/TeamMembersTableContent.svelte
 #: src/lib/components/datatable/TeamMembersTableContent.svelte
-#: src/lib/components/utility/ClubTeamPicker.svelte
 #: src/lib/components/forms/TeamGamesModal.svelte
+#: src/lib/components/utility/ClubTeamPicker.svelte
 #: src/lib/components/utility/MultiSelectCombobox.svelte
 msgid "None"
 msgstr "None"
@@ -1995,11 +1018,11 @@ msgstr "Season"
 msgid "League Wins Visualisation"
 msgstr "League Wins Visualisation"
 
-#: src/lib/components/league/LeagueDetailInfoCard.svelte
 #: src/lib/components/favorite/LeagueInfoCard.svelte
+#: src/lib/components/league/LeagueDetailInfoCard.svelte
+#: src/lib/components/forms/ClubForm.svelte
 #: src/lib/components/team/TeamDetailInfoCard.svelte
 #: src/lib/components/diamondplanner/club/ClubDetailCard.svelte
-#: src/lib/components/forms/ClubForm.svelte
 msgid "Acronym"
 msgstr "Acronym"
 
@@ -2083,8 +1106,8 @@ msgstr "Season Progression"
 msgid "Edit Announcement"
 msgstr "Edit Announcement"
 
-#: src/lib/components/forms/LocationForm.svelte
 #: src/lib/components/forms/AnnouncementForm.svelte
+#: src/lib/components/forms/LocationForm.svelte
 #: src/lib/components/forms/TeamForm.svelte
 #: src/routes/(protected)/account/clubs/[club]/+page.svelte
 msgid "Create new"
@@ -2098,8 +1121,8 @@ msgstr "Edit Announcement \"{0}\""
 msgid "Create new Announcement"
 msgstr "Create new Announcement"
 
-#: src/lib/components/club/officials/ClubOfficialDetailCard.svelte
 #: src/lib/components/forms/AnnouncementForm.svelte
+#: src/lib/components/club/officials/ClubOfficialDetailCard.svelte
 msgid "Title"
 msgstr "Title"
 
@@ -2140,18 +1163,18 @@ msgstr "Click here"
 msgid "If not set, the link itself will be used as a the text."
 msgstr "If not set, the link itself will be used as a the text."
 
+#: src/lib/components/forms/AnnouncementForm.svelte
+#: src/lib/components/forms/ClubForm.svelte
+#: src/lib/components/forms/EventSeriesForm.svelte
 #: src/lib/components/forms/LocationForm.svelte
+#: src/lib/components/forms/ParticipationForm.svelte
+#: src/lib/components/forms/PlayerDataForm.svelte
+#: src/lib/components/forms/EventForm.svelte
+#: src/lib/components/forms/TeamForm.svelte
+#: src/lib/components/forms/TeamGamesModal.svelte
 #: src/lib/components/forms/TeamMembersForm.svelte
 #: src/lib/components/forms/UniformSetForm.svelte
-#: src/lib/components/forms/AnnouncementForm.svelte
-#: src/lib/components/forms/TeamGamesModal.svelte
-#: src/lib/components/forms/TeamForm.svelte
-#: src/lib/components/forms/EventForm.svelte
-#: src/lib/components/forms/EventSeriesForm.svelte
-#: src/lib/components/forms/ClubForm.svelte
-#: src/lib/components/forms/PlayerDataForm.svelte
 #: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
-#: src/lib/components/forms/ParticipationForm.svelte
 msgid "Submit"
 msgstr "Submit"
 
@@ -2205,8 +1228,8 @@ msgstr ""
 msgid "Club Admins"
 msgstr "Club Admins"
 
-#: src/lib/components/forms/TeamForm.svelte
 #: src/lib/components/forms/ClubForm.svelte
+#: src/lib/components/forms/TeamForm.svelte
 msgid "Admin"
 msgstr "Admin"
 
@@ -2227,8 +1250,8 @@ msgstr "Edit Event \"{0}\""
 msgid "Create new Event"
 msgstr "Create new Event"
 
-#: src/lib/components/forms/EventForm.svelte
 #: src/lib/components/forms/EventSeriesForm.svelte
+#: src/lib/components/forms/EventForm.svelte
 msgid "Title <0/>"
 msgstr "Title <0/>"
 
@@ -2248,19 +1271,19 @@ msgstr "Meeting <0/>"
 msgid "End <0/>"
 msgstr "End <0/>"
 
-#: src/lib/components/forms/TeamForm.svelte
-#: src/lib/components/forms/EventForm.svelte
 #: src/lib/components/forms/EventSeriesForm.svelte
+#: src/lib/components/forms/EventForm.svelte
+#: src/lib/components/forms/TeamForm.svelte
 msgid "Description <0/>"
 msgstr "Description <0/>"
 
-#: src/lib/components/forms/EventForm.svelte
 #: src/lib/components/forms/EventSeriesForm.svelte
+#: src/lib/components/forms/EventForm.svelte
 msgid "No additional name"
 msgstr "No additional name"
 
-#: src/lib/components/forms/EventForm.svelte
 #: src/lib/components/forms/EventSeriesForm.svelte
+#: src/lib/components/forms/EventForm.svelte
 msgid "Location <0>None</0>"
 msgstr "Location <0>None</0>"
 
@@ -2276,9 +1299,9 @@ msgstr "Uniform Set <0/>"
 msgid "Cancelled"
 msgstr "Cancelled"
 
-#: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
-#: src/lib/components/diamondplanner/event/EventSeriesView.svelte
 #: src/lib/components/forms/EventSeriesForm.svelte
+#: src/lib/components/diamondplanner/event/EventSeriesView.svelte
+#: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
 msgid "Event Series"
 msgstr "Event Series"
 
@@ -2389,13 +1412,13 @@ msgstr "Coordinate Map <0>Select a location on the map to set coordinates automa
 msgid "Reset Form"
 msgstr "Reset Form"
 
-#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
 #: src/lib/components/forms/ParticipationForm.svelte
+#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
 msgid "Created"
 msgstr "Created"
 
-#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
 #: src/lib/components/forms/ParticipationForm.svelte
+#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
 msgid "Last Updated"
 msgstr "Last Updated"
 
@@ -2443,9 +1466,9 @@ msgstr "Bats <0><0>Left</0> <1>Right</1> <2>Switch</2></0>"
 msgid "Throws <0><0>Left</0> <1>Right</1> <2>Switch</2></0>"
 msgstr "Throws <0><0>Left</0> <1>Right</1> <2>Switch</2></0>"
 
-#: src/lib/components/forms/PlayerDataForm.svelte
-#: src/lib/components/forms/PlayerDataForm.svelte
 #: src/lib/components/icons/Cap.svelte
+#: src/lib/components/forms/PlayerDataForm.svelte
+#: src/lib/components/forms/PlayerDataForm.svelte
 msgid "B"
 msgstr "B"
 
@@ -2498,10 +1521,10 @@ msgstr ""
 "The league is imported from BSM and changes every season (even if the actual league name is still\n"
 "the same)."
 
-#: src/routes/league_entries/[entry]/+page.svelte
-#: src/lib/components/table/StandingsTable.svelte
-#: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
 #: src/lib/components/forms/TeamForm.svelte
+#: src/lib/components/table/StandingsTable.svelte
+#: src/routes/league_entries/[entry]/+page.svelte
+#: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
 #: src/lib/components/diamondplanner/team/TeamListTeaser.svelte
 msgid "Team"
 msgstr "Team"
@@ -2637,8 +1660,8 @@ msgstr "Sport"
 
 #: src/lib/components/league/LeagueDetailInfoCard.svelte
 #: src/lib/components/team/TeamDetailInfoCard.svelte
-#: src/lib/components/diamondplanner/team/TeamTeaserCard.svelte
 #: src/lib/components/diamondplanner/team/TeamListTeaser.svelte
+#: src/lib/components/diamondplanner/team/TeamTeaserCard.svelte
 msgid "Age Group"
 msgstr "Age Group"
 
@@ -2698,8 +1721,8 @@ msgstr "Admin Dashboard"
 msgid "No games for this timeframe."
 msgstr "No games for this timeframe."
 
-#: src/lib/components/match/GameResultIndicator.svelte
 #: src/lib/components/match/CurrentMatchRow.svelte
+#: src/lib/components/match/GameResultIndicator.svelte
 msgid "PPD"
 msgstr "PPD"
 
@@ -2867,10 +1890,6 @@ msgstr "Select Team:"
 msgid "Are you sure you wish to delete this {0}? In most cases, data cannot be recovered after deletion. Please be certain."
 msgstr "Are you sure you wish to delete this {0}? In most cases, data cannot be recovered after deletion. Please be certain."
 
-#: src/lib/components/utility/LeagueFilter.svelte
-msgid "Alle Ligen"
-msgstr "Alle Ligen"
-
 #: src/lib/components/utility/MultiSelectCombobox.svelte
 msgid "You cannot remove the last {0}!"
 msgstr "You cannot remove the last {0}!"
@@ -2935,8 +1954,8 @@ msgstr "My Teams"
 msgid "You are not a member of any teams yet."
 msgstr "You are not a member of any teams yet."
 
-#: src/routes/club/ballpark/+page.svelte
 #: src/routes/club/officials/+page.svelte
+#: src/routes/club/ballpark/+page.svelte
 msgid "Loading Club Officials..."
 msgstr "Loading Club Officials..."
 
@@ -3018,8 +2037,8 @@ msgstr "Profile Data"
 msgid "An error occurred fetching player data: {0}.<0/> The data source might be temporarily unavailable, please try again later."
 msgstr "An error occurred fetching player data: {0}.<0/> The data source might be temporarily unavailable, please try again later."
 
-#: src/routes/teams/[id]/+page.svelte
 #: src/routes/players/[id]/+page.svelte
+#: src/routes/teams/[id]/+page.svelte
 msgid "Stats"
 msgstr "Stats"
 
@@ -3143,22 +2162,6 @@ msgstr "Since"
 msgid "Contact"
 msgstr "Contact"
 
-#: src/lib/components/club/officials/ClubOfficialIcon.svelte
-msgid "Abteilungsleit"
-msgstr "Abteilungsleit"
-
-#: src/lib/components/club/officials/ClubOfficialIcon.svelte
-msgid "Kasse"
-msgstr "Kasse"
-
-#: src/lib/components/club/officials/ClubOfficialIcon.svelte
-msgid "Schriftwart"
-msgstr "Schriftwart"
-
-#: src/lib/components/club/officials/ClubOfficialIcon.svelte
-msgid "Jugend"
-msgstr "Jugend"
-
 #: src/lib/components/club/officials/ClubOfficialsList.svelte
 msgid "No club officials available."
 msgstr "No club officials available."
@@ -3179,9 +2182,9 @@ msgstr "Start:"
 msgid "No location provided."
 msgstr "No location provided."
 
+#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
 #: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
 #: src/routes/(protected)/account/clubs/[club]/+page.svelte
-#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
 msgid "Admin Section"
 msgstr "Admin Section"
 
@@ -3376,8 +2379,8 @@ msgstr "Danger Zone"
 msgid "Delete Team"
 msgstr "Delete Team"
 
-#: src/lib/components/diamondplanner/team/TeamTeaserCard.svelte
 #: src/lib/components/diamondplanner/team/TeamListTeaser.svelte
+#: src/lib/components/diamondplanner/team/TeamTeaserCard.svelte
 msgid "BSM-Liga (für aktuelle Saison)"
 msgstr "BSM-Liga (für aktuelle Saison)"
 
@@ -3561,8 +2564,8 @@ msgstr "Details for {0}"
 msgid "Club overview page for the {0} with info about teams and uniform sets."
 msgstr "Club overview page for the {0} with info about teams and uniform sets."
 
-#: src/routes/(protected)/account/team/[id]/+page.svelte
 #: src/routes/(protected)/account/clubs/[club]/+page.svelte
+#: src/routes/(protected)/account/team/[id]/+page.svelte
 msgid "Announcements"
 msgstr "Announcements"
 
@@ -3676,18 +2679,18 @@ msgstr "Team member list for {0}."
 msgid "Team members for Team \"{0}\""
 msgstr "Team members for Team \"{0}\""
 
-#~ msgid "Gameday <0><0><0>Previous</0> <1>Current</1> <2>Next</2> <3>All</3></0> <1>MÖP</1></0> <1/>"
-#~ msgstr "Gameday <0><0><0>Previous</0> <1>Current</1> <2>Next</2> <3>All</3></0> <1>MÖP</1></0> <1/>"
-
 #: src/routes/gamecenter/+page.svelte
 msgid "Gameday <0><0><0>Previous</0> <1>Current</1> <2>Next</2> <3>All</3></0> <1>Loading matches...error loading matches: {0}</1></0>"
 msgstr "Gameday <0><0><0>Previous</0> <1>Current</1> <2>Next</2> <3>All</3></0> <1>Loading matches...error loading matches: {0}</1></0>"
 
-#~ msgid "You are logged in as <0/> . You can log out by clicking your avatar in the top right."
-#~ msgstr "You are logged in as <0/> . You can log out by clicking your avatar in the top right."
+#: src/lib/components/datatable/StatsTableContent.svelte
+msgid "No data available for this category."
+msgstr "No data available for this category."
 
-#~ msgid "EN"
-#~ msgstr "EN"
+#: src/lib/components/datatable/RowCount.svelte
+msgid "No Elements found."
+msgstr "No Elements found."
 
-#~ msgid "DE"
-#~ msgstr "DE"
+#: src/lib/components/utility/LeagueFilter.svelte
+msgid "All Leagues"
+msgstr "All Leagues"

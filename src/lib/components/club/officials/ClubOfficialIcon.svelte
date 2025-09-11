@@ -9,6 +9,7 @@
   let {clubOfficial}: Props = $props();
 
   // this is kind of hacky, but on the iOS side it has been working for 3 years now
+  //@wc-ignore
   let icon: typeof IconType = $derived.by(() => {
     if (clubOfficial.function.includes("Abteilungsleit")) {
       return Crown;
