@@ -19,14 +19,14 @@
 </script>
 
 <svelte:head>
-  <title>Members of {data.team.name}</title>
-  <meta name="description" content="Team member list for {data.team.name}."/>
+  <title>Team Members</title>
+  <meta content="Team member list for {data.team.name}." name="description"/>
 </svelte:head>
 
 <h1 class="h1">Team members for Team "{data.team.name}"</h1>
 
 <div class="mt-8!">
-  <TeamMemberDatatable data={$players.items} team={data.team} {showAdminSection}/>
+  <TeamMemberDatatable data={$players.items} {showAdminSection} team={data.team}/>
 </div>
 
 {#if showAdminSection}

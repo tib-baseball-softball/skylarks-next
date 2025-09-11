@@ -12,7 +12,7 @@
   import AnnouncementSectionContent from "$lib/components/announcements/AnnouncementSectionContent.svelte";
   import AnnouncementForm from "$lib/components/forms/AnnouncementForm.svelte";
 
-  let { data }: PageProps = $props();
+  let {data}: PageProps = $props();
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
@@ -23,17 +23,17 @@
 </script>
 
 <svelte:head>
-  <title>Details for {club.name}</title>
+  <title>Club Details</title>
   <meta
-    name="description"
-    content="Club overview page for the {club.name} with info about teams and uniform sets."
+          content="Club overview page for the {club.name} with info about teams and uniform sets."
+          name="description"
   />
 </svelte:head>
 
 <h1 class="h1 mt-4! mb-6!">{club.name}</h1>
 
 <section class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
-  <ClubDetailCard {club} />
+  <ClubDetailCard {club}/>
 </section>
 
 <section class="mt-8! space-y-4">
@@ -41,7 +41,7 @@
     <h2 class="h2 mb-3">Announcements</h2>
   </header>
 
-  <AnnouncementSectionContent store={announcementStore} />
+  <AnnouncementSectionContent store={announcementStore}/>
 
   {#if club?.admins.includes(authRecord.id)}
     <AnnouncementForm
@@ -61,7 +61,7 @@
 
   <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 mb-3">
     {#each teams as team (team.id)}
-      <TeamListTeaser {team} link={true} />
+      <TeamListTeaser {team} link={true}/>
     {/each}
 
     {#if teams.length === 0}
@@ -71,10 +71,10 @@
 
   {#if club?.admins.includes(authRecord.id)}
     <TeamForm
-      team={null}
-      {club}
-      buttonClasses="btn preset-filled-primary-500"
-      showLabel={true}
+            team={null}
+            {club}
+            buttonClasses="btn preset-filled-primary-500"
+            showLabel={true}
     />
   {/if}
 </section>
@@ -86,14 +86,14 @@
 
   <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 mb-3">
     {#each uniformSets as uniformSet}
-      <UniformSetInfoCard {uniformSet} />
+      <UniformSetInfoCard {uniformSet}/>
     {/each}
   </div>
 
   {#if club?.admins.includes(authRecord.id)}
     <Dialog triggerClasses="btn preset-filled-primary-500">
       {#snippet triggerContent()}
-        <Plus />
+        <Plus/>
         <span>Create new</span>
       {/snippet}
 
@@ -103,7 +103,7 @@
         </header>
       {/snippet}
 
-      <UniformSetForm uniformSet={null} clubID={club.id} />
+      <UniformSetForm uniformSet={null} clubID={club.id}/>
     </Dialog>
   {/if}
 </section>
@@ -114,16 +114,16 @@
   </header>
 
   <a
-    class="btn preset-filled-primary-500"
-    href="/account/clubs/{club.id}/locations"
+          class="btn preset-filled-primary-500"
+          href="/account/clubs/{club.id}/locations"
   >
     <span>Locations Page</span>
-    <SquareArrowOutUpRight size="20" />
+    <SquareArrowOutUpRight size="20"/>
   </a>
 </section>
 
 {#if club?.admins.includes(authRecord.id)}
-  <hr class="mt-10 mb-6" />
+  <hr class="mt-10 mb-6"/>
 
   <section>
     <header>
@@ -131,7 +131,7 @@
     </header>
 
     <div
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-3"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-3"
     >
       <article class="card admin-card preset-outlined-surface-500">
         <header class="card-header">
@@ -149,10 +149,10 @@
 
         <footer class="card-footer flex">
           <a
-            class="btn preset-tonal-secondary border border-secondary-500 dark:preset-filled-secondary-500 dark:border grow"
-            href="mailto:webmaster@tib-baseball.de"
+                  class="btn preset-tonal-secondary border border-secondary-500 dark:preset-filled-secondary-500 dark:border grow"
+                  href="mailto:webmaster@tib-baseball.de"
           >
-            <Mail />
+            <Mail/>
             <span class="ms-2">Contact</span>
           </a>
         </footer>
