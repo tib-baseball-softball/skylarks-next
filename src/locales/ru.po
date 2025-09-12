@@ -49,7 +49,7 @@ msgstr "Веб-приложение Berlin Skylarks"
 #: src/routes/+layout.svelte
 #: src/lib/components/navigation/NavigationSheet.svelte
 msgid "Skylarks Team Logo"
-msgstr "Логотип команды Skylarks```"
+msgstr "Логотип команды Skylarks"
 
 #: src/routes/+layout.svelte
 msgid ""
@@ -2464,7 +2464,7 @@ msgstr "С"
 #: src/lib/components/club/officials/ClubOfficialDetailCard.svelte
 #: src/routes/(protected)/account/clubs/[club]/+page.svelte
 msgid "Contact"
-msgstr "Контакт```"
+msgstr "Контакт"
 
 #: src/routes/club/ballpark/[id]/+page.svelte
 msgid "Ballpark Details"

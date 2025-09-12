@@ -31,7 +31,7 @@ msgid ""
 "JavaScript for it to work."
 msgstr ""
 "Diese Website ist eigentlich eine JavaScript-Anwendung mit vielen Funktionen. Du musst\n"
-"JavaScript aktivieren, damit sie funktioniert.```"
+"JavaScript aktivieren, damit sie funktioniert."
 
 #: src/lib/auth/LoginBadge.svelte
 msgid "Account Overview"
@@ -2655,7 +2655,7 @@ msgstr "Teammitgliederliste für {0}."
 
 #: src/routes/(protected)/account/team/[id]/members/+page.svelte
 msgid "Team members for Team \"{0}\""
-msgstr "Teammitglieder für Team \"{0}\"```"
+msgstr "Teammitglieder für Team \"{0}\""
 
 #: src/routes/gamecenter/+page.svelte
 msgid "Gameday <0><0><0>Previous</0> <1>Current</1> <2>Next</2> <3>All</3></0> <1>Loading matches...error loading matches: {0}</1></0>"

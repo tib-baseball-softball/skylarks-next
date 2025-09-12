@@ -2462,7 +2462,7 @@ msgstr "Od"
 #: src/lib/components/club/officials/ClubOfficialDetailCard.svelte
 #: src/routes/(protected)/account/clubs/[club]/+page.svelte
 msgid "Contact"
-msgstr "Kontakt```"
+msgstr "Kontakt"
 
 #: src/routes/club/ballpark/[id]/+page.svelte
 msgid "Ballpark Details"

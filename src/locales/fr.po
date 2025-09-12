@@ -891,7 +891,7 @@ msgstr "Défense"
 
 #: src/lib/components/datatable/BaseballStatsDatatable.svelte
 msgid "Total"
-msgstr "Total```"
+msgstr "Total"
 
 #: src/lib/components/datatable/TeamMembersTableContent.svelte
 #: src/lib/components/forms/UniformSetForm.svelte
@@ -2463,7 +2463,7 @@ msgstr "Depuis"
 #: src/lib/components/club/officials/ClubOfficialDetailCard.svelte
 #: src/routes/(protected)/account/clubs/[club]/+page.svelte
 msgid "Contact"
-msgstr "Contact```"
+msgstr "Contact"
 
 #: src/routes/club/ballpark/[id]/+page.svelte
 msgid "Ballpark Details"
