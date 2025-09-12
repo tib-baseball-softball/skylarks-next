@@ -18,7 +18,21 @@ export const load = (async ({data, fetch, depends}) => {
   let teams: ExpandedTeam[] = [];
 
   if (browser) {
-    await loadLocale(preferences.current.locale ?? "en");
+    let locale: string;
+    if (preferences.current.locale) {
+      // locale has been set before
+      locale = preferences.current.locale;
+    } else {
+      // locale is unset so far, try to read from browser settings
+      const browserPreferredLocale = navigator.language.slice(0, 2); // Safari has `de-DE`, Chrome and Firefox use `de`
+
+      if (locales.includes(browserPreferredLocale)) {
+        locale = browserPreferredLocale;
+      } else {
+        locale = "en";
+      }
+    }
+    await loadLocale(locale);
   }
 
   if (browser && client.authStore.isValid) {
