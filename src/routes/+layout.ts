@@ -18,7 +18,7 @@ export const load = (async ({data, fetch, depends}) => {
   let teams: ExpandedTeam[] = [];
 
   if (browser) {
-    await loadLocale(preferences.current.locale);
+    await loadLocale(preferences.current.locale ?? "en");
   }
 
   if (browser && client.authStore.isValid) {
