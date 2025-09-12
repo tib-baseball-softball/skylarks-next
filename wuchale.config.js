@@ -3,9 +3,14 @@ import {adapter as svelte} from "@wuchale/svelte";
 import {defineConfig} from "wuchale";
 
 export default defineConfig({
-    // sourceLocale is en by default
+    sourceLocale: "en",
     otherLocales: ['de'],
     adapters: {
-        main: svelte(),
-    }
+        main: svelte({
+            // writeFiles: {
+            //     compiled: true,
+            //     proxy: true,
+            // }
+        }),
+    },
 });

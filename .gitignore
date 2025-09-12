@@ -227,3 +227,5 @@ vite.config.ts.timestamp-*
 /backend/test_pb_data/data.db-wal
 test-results
 /backend/serve
+/src/locales/proxy.svelte.js
+/src/locales/*.compiled.main.svelte.js
