@@ -22,6 +22,7 @@
 @import './css/overrides.css';
 @import './css/global.css' layer(utilities);
 
+@source not "./locales/";
 /*
  * Tailwind config stuff
  */

@@ -55,8 +55,8 @@
 
     <div class="flex gap-2 my-4 justify-end">
       <Switch
-              name="slide"
               controlActive="bg-surface-900 dark:bg-tertiary-700"
+              name="slide"
               onCheckedChange={(e) => (showExternal = e.checked)}
       />
       <p>Show external games</p>
@@ -65,52 +65,49 @@
 </div>
 
 <section class="mb-5 mt-3">
-  <label id="gameday_label" class="label">
+  <label class="label" id="gameday_label">
     Gameday
     <Tabs.Root
-            value={preferences.current.gameday}
-            onValueChange={onGamedayChange}
             class=""
+            onValueChange={onGamedayChange}
+            value={preferences.current.gameday}
     >
       <Tabs.List
               class="tabs-list preset-tonal-surface"
       >
         <Tabs.Trigger
-                value={Gameday.previous}
                 class="tabs-trigger"
+                value={Gameday.previous}
         >Previous
         </Tabs.Trigger>
         <Tabs.Trigger
-                value={Gameday.current}
                 class="tabs-trigger"
+                value={Gameday.current}
         >Current
         </Tabs.Trigger>
         <Tabs.Trigger
-                value={Gameday.next}
                 class="tabs-trigger"
+                value={Gameday.next}
         >Next
         </Tabs.Trigger>
         <Tabs.Trigger
-                value={Gameday.any}
                 class="tabs-trigger"
+                value={Gameday.any}
         >All
         </Tabs.Trigger>
       </Tabs.List>
 
-      <Tabs.Content value={preferences.current.gameday} class="pt-3">
-        {@render tabsContent()}
+      <Tabs.Content class="pt-3" value={preferences.current.gameday}>
+        {#await data.streamed.matches}
+          <p>Loading matches...</p>
+          <Progress/>
+        {:then matches}
+          <GamecenterMatchSection {matches} {showExternal}/>
+        {:catch error}
+          <p>error loading matches: {error.message}</p>
+        {/await}
       </Tabs.Content>
     </Tabs.Root>
 
-    {#snippet tabsContent()}
-      {#await data.streamed.matches}
-        <p>Loading matches...</p>
-        <Progress/>
-      {:then matches}
-        <GamecenterMatchSection {matches} {showExternal}/>
-      {:catch error}
-        <p>error loading matches: {error.message}</p>
-      {/await}
-    {/snippet}
   </label>
 </section>

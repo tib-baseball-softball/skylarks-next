@@ -3,14 +3,13 @@
   import {AppBar} from "@skeletonlabs/skeleton-svelte";
   import SidebarNavigation from "$lib/components/meta/SidebarNavigation.svelte";
   import Footer from "$lib/components/meta/Footer.svelte";
-  import LoginBadge from "$lib/auth/LoginBadge.svelte";
-  import {env} from "$env/dynamic/public";
   import type {LayoutProps} from "../../.svelte-kit/types/src/routes/$types";
   import StaticNavigationLinks from "$lib/components/navigation/StaticNavigationLinks.svelte";
   import BottomNavigation from "$lib/components/navigation/BottomNavigation.svelte";
   import {authSettings} from "$lib/pocketbase/index.svelte.ts";
   import NavigationSheet from "$lib/components/navigation/NavigationSheet.svelte";
   import ToastContainer from "$lib/components/utility/toast/ToastContainer.svelte";
+  import TopAppBarTrailing from "$lib/components/meta/TopAppBarTrailing.svelte";
 
   let {data, children}: LayoutProps = $props();
 
@@ -30,9 +29,9 @@
   <header>
 
     <AppBar
+            background="bg-surface-500/5 dark:bg-surface-800"
             centerAlign="place-self-center"
             padding="p-3"
-            background="bg-surface-500/5 dark:bg-surface-800"
     >
       {#snippet lead()}
         <div class="flex items-center justify-content-start">
@@ -57,15 +56,7 @@
       {#snippet trail()}
         <div class="lg:me-5 flex items-center gap-5 shrink-0">
 
-          {#if env.PUBLIC_APPLICATION_CONTEXT !== "Production"}
-            <div class="preset-tonal-warning p-1.5 rounded-container border border-warning-500 text-sm">
-              {env.PUBLIC_APPLICATION_CONTEXT}
-            </div>
-          {/if}
-
-          {#if env.PUBLIC_AUTH_FUNCS_ENABLED === "true"}
-            <LoginBadge signupAllowed={true}/>
-          {/if}
+          <TopAppBarTrailing/>
 
         </div>
       {/snippet}
