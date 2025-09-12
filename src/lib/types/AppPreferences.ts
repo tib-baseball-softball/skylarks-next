@@ -8,4 +8,4 @@ export type AppPreferences = {
   locale: AppLocales,
 }
 
-export type AppLocales = "de" | "en"
+export type AppLocales = "de" | "en" | "fr" | "es" | "pl" | "ru";

@@ -2,11 +2,9 @@
   import {preferences} from "$lib/globals.svelte.ts";
   import {goto} from "$app/navigation";
   import {page} from "$app/state";
-  import type {AppLocales} from "$lib/types/AppPreferences.ts";
 
-  function setLocaleToPreferences(locale: AppLocales) {
-    preferences.current.locale = locale;
-    goto(page.url.toString(), {
+  function reload() {
+    goto(page.url, {
       noScroll: true,
       keepFocus: true,
       invalidateAll: true,
@@ -14,23 +12,22 @@
   }
 </script>
 
-{#if preferences.current.locale === "de"}
-  <button onclick={() => setLocaleToPreferences("en")}>
-    <span class="preset-outline-surface flag-icon rounded-base">
-    🇩🇪
-    </span>
-  </button>
-{:else }
-  <button class="" onclick={() => setLocaleToPreferences("de")}>
-    <span class="preset-outline-surface flag-icon rounded-base">
-    🇬🇧
-    </span>
-  </button>
-{/if}
+<select bind:value={preferences.current.locale} class="select" onchange={reload}>
+  <option value="en">🇺🇸</option>
+  <option value="de">🇩🇪</option>
+  <option value="fr">🇫🇷</option>
+  <option value="es">🇪🇸</option>
+  <option value="pl">🇵🇱</option>
+  <option value="ru">🇷🇺</option>
+</select>
+
 
 <style>
-    .flag-icon {
+    select {
+        font-size: 1.5rem;
+    }
+
+    option {
         font-size: 2rem;
-        padding: 0.5rem;
     }
 </style>

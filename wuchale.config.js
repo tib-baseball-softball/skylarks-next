@@ -4,7 +4,7 @@ import {defineConfig} from "wuchale";
 
 export default defineConfig({
     sourceLocale: "en",
-    otherLocales: ['de'],
+    otherLocales: ['de', 'fr', 'es', 'pl', 'ru'],
     adapters: {
         main: svelte({
             // writeFiles: {
