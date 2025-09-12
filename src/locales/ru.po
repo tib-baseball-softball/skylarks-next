@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-12T16:35:53.634Z\n"
-"PO-Revision-Date: 2025-09-12T17:19:01.368Z\n"
+"PO-Revision-Date: 2025-09-12T21:56:31.270Z\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: \n"
@@ -33,8 +33,8 @@ msgstr "Результаты"
 msgid "Logged in as:"
 msgstr "Вы вошли как:"
 
-#: src/routes/(protected)/account/announcements/[announcement]/+page.svelte
 #: src/lib/auth/AccountModal.svelte
+#: src/routes/(protected)/account/announcements/[announcement]/+page.svelte
 msgid "Club:"
 msgstr "Клуб:"
 
@@ -71,10 +71,10 @@ msgstr "Произошла ошибка при отправке запроса �
 msgid "E-Mail <0/> <1>You will be logged out and instructed to verify your new email address.</1>"
 msgstr "Электронная почта <0/> <1>Вы будете автоматически вышли из системы, и вам будет предложено подтвердить свой новый адрес электронной почты.</1>"
 
-#: src/lib/components/datatable/TeamMembersTableContent.svelte
+#: src/lib/auth/ChangeEmailForm.svelte
 #: src/lib/auth/UserDetailsForm.svelte
 #: src/lib/auth/PasswordRequestButton.svelte
-#: src/lib/auth/ChangeEmailForm.svelte
+#: src/lib/components/datatable/TeamMembersTableContent.svelte
 #: src/lib/components/utility/DeleteButton.svelte
 msgid "Confirm"
 msgstr "Подтвердить"
@@ -244,8 +244,8 @@ msgstr "{0} ({1} байт)"
 msgid "This is your app profile picture. It will not be used for your player profile image."
 msgstr "Это изображение профиля вашего приложения. Оно не будет использоваться в качестве изображения профиля вашего игрока."
 
-#: src/lib/components/datatable/TeamMembersTableContent.svelte
 #: src/lib/auth/PasswordRequestButton.svelte
+#: src/lib/components/datatable/TeamMembersTableContent.svelte
 #: src/lib/components/utility/DeleteButton.svelte
 msgid "Please Confirm"
 msgstr "Пожалуйста, подтвердите"
@@ -258,10 +258,10 @@ msgstr ""
 "Отправить запрос на изменение пароля для <0/>?\n"
 "Вы будете автоматически вышли из системы, и на ваш адрес электронной почты будет отправлено письмо с инструкциями."
 
-#: src/lib/components/datatable/TeamMembersTableContent.svelte
 #: src/lib/auth/PasswordRequestButton.svelte
-#: src/lib/components/utility/DeleteButton.svelte
+#: src/lib/components/datatable/TeamMembersTableContent.svelte
 #: src/lib/components/forms/EventSeriesForm.svelte
+#: src/lib/components/utility/DeleteButton.svelte
 msgid "Cancel"
 msgstr "Отмена"
 
@@ -273,10 +273,10 @@ msgstr "Подробности"
 msgid "More Info"
 msgstr "Больше информации"
 
-#: src/routes/club/+page.svelte
-#: src/lib/components/navigation/StaticNavigationLinks.svelte
-#: src/routes/teams/+page.svelte
 #: src/lib/components/player/PlayerDataCard.svelte
+#: src/lib/components/navigation/StaticNavigationLinks.svelte
+#: src/routes/club/+page.svelte
+#: src/routes/teams/+page.svelte
 msgid "Teams"
 msgstr "Команды"
 
@@ -284,8 +284,8 @@ msgstr "Команды"
 msgid "Adult and Youth"
 msgstr "Взрослые и молодежь"
 
-#: src/routes/club/+page.svelte
 #: src/lib/components/match/MatchDetailOfficialsCard.svelte
+#: src/routes/club/+page.svelte
 msgid "Scorer"
 msgstr "Счетчик"
 
@@ -293,8 +293,8 @@ msgstr "Счетчик"
 msgid "Keeping statistics"
 msgstr "Ведение статистики"
 
-#: src/routes/club/+page.svelte
 #: src/lib/components/match/MatchDetailOfficialsCard.svelte
+#: src/routes/club/+page.svelte
 msgid "Umpire"
 msgstr "Судья"
 
@@ -302,9 +302,9 @@ msgstr "Судья"
 msgid "Our Referees"
 msgstr "Наши судьи"
 
+#: src/lib/components/match/MatchDetailLocationCard.svelte
 #: src/routes/club/+page.svelte
 #: src/routes/club/ballpark/+page.svelte
-#: src/lib/components/match/MatchDetailLocationCard.svelte
 msgid "Ballpark"
 msgstr "Стадион"
 
@@ -426,19 +426,19 @@ msgstr "Лиги"
 msgid "Loading Leagues..."
 msgstr "Загрузка лиг..."
 
-#: src/routes/club/ballpark/+page.svelte
-#: src/routes/club/scorer/+page.svelte
-#: src/routes/club/officials/+page.svelte
-#: src/routes/club/umpire/+page.svelte
-#: src/routes/ligen/[id]/+page.svelte
-#: src/routes/league_entries/[entry]/+page.svelte
-#: src/routes/(protected)/stats/[user]/+page.svelte
-#: src/routes/(protected)/stats/[user]/+page.svelte
 #: src/routes/ligen/+page.svelte
 #: src/routes/teams/+page.svelte
-#: src/routes/teams/[id]/+page.svelte
-#: src/routes/teams/[id]/+page.svelte
+#: src/routes/club/ballpark/+page.svelte
+#: src/routes/club/officials/+page.svelte
+#: src/routes/club/scorer/+page.svelte
+#: src/routes/ligen/[id]/+page.svelte
 #: src/routes/players/[id]/+page.svelte
+#: src/routes/club/umpire/+page.svelte
+#: src/routes/league_entries/[entry]/+page.svelte
+#: src/routes/teams/[id]/+page.svelte
+#: src/routes/teams/[id]/+page.svelte
+#: src/routes/(protected)/stats/[user]/+page.svelte
+#: src/routes/(protected)/stats/[user]/+page.svelte
 msgid "error loading: {0}"
 msgstr "ошибка загрузки: {0}"
 
@@ -487,10 +487,10 @@ msgstr "Плей-офф"
 msgid "Graphs and Mood"
 msgstr "Графики и настроение"
 
-#: src/lib/components/navigation/StaticNavigationLinks.svelte
-#: src/routes/favorite/+page.svelte
 #: src/lib/components/match/GamecenterMatchSection.svelte
+#: src/lib/components/navigation/StaticNavigationLinks.svelte
 #: src/lib/components/utility/StatsBlock.svelte
+#: src/routes/favorite/+page.svelte
 #: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
 msgid "Games"
 msgstr "Игры"
@@ -523,17 +523,17 @@ msgstr "Загрузка..."
 msgid "Error: {0}"
 msgstr "Ошибка: {0}"
 
+#: src/lib/components/boxscore/Linescore.svelte
 #: src/lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
 #: src/lib/components/boxscore/MatchBoxscorePitchingTable.svelte
-#: src/lib/components/boxscore/Linescore.svelte
 #: src/lib/components/datatable/StatsHeaderRow.svelte
 #: src/lib/components/datatable/StatsHeaderRow.svelte
 msgid "R"
 msgstr "П"
 
+#: src/lib/components/boxscore/Linescore.svelte
 #: src/lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
 #: src/lib/components/boxscore/MatchBoxscorePitchingTable.svelte
-#: src/lib/components/boxscore/Linescore.svelte
 #: src/lib/components/datatable/StatsHeaderRow.svelte
 #: src/lib/components/datatable/StatsHeaderRow.svelte
 msgid "H"
@@ -552,15 +552,15 @@ msgstr "Счет по иннингам"
 msgid "Offensive"
 msgstr "Нападение"
 
-#: src/routes/ligen/[id]/stats/+page.svelte
 #: src/lib/components/boxscore/MatchBoxscoreSection.svelte
 #: src/lib/components/datatable/BaseballStatsDatatable.svelte
+#: src/routes/ligen/[id]/stats/+page.svelte
 msgid "Pitching"
 msgstr "Питчинг"
 
-#: src/routes/(protected)/account/announcements/[announcement]/+page.svelte
-#: src/lib/components/forms/AnnouncementForm.svelte
 #: src/lib/components/announcements/AnnouncementCard.svelte
+#: src/lib/components/forms/AnnouncementForm.svelte
+#: src/routes/(protected)/account/announcements/[announcement]/+page.svelte
 msgid "Announcement"
 msgstr "Объявление"
 
@@ -603,15 +603,15 @@ msgid "BB"
 msgstr "BB"
 
 #: src/lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
-#: src/lib/components/utility/StatsBlock.svelte
-#: src/lib/components/utility/StatsBlock.svelte
 #: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/utility/StatsBlock.svelte
+#: src/lib/components/utility/StatsBlock.svelte
 msgid "AVG"
 msgstr "AVG"
 
 #: src/lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
-#: src/lib/components/utility/StatsBlock.svelte
 #: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/utility/StatsBlock.svelte
 msgid "OPS"
 msgstr "OPS"
 
@@ -620,10 +620,10 @@ msgid "{0} (Pitchers)"
 msgstr "{0} (Питчеры)"
 
 #: src/lib/components/boxscore/MatchBoxscorePitchingTable.svelte
-#: src/lib/components/utility/StatsBlock.svelte
-#: src/lib/components/utility/StatsBlock.svelte
 #: src/lib/components/datatable/StatsHeaderRow.svelte
 #: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/utility/StatsBlock.svelte
+#: src/lib/components/utility/StatsBlock.svelte
 msgid "IP"
 msgstr "IP"
 
@@ -638,8 +638,8 @@ msgid "ER"
 msgstr "ER"
 
 #: src/lib/components/boxscore/MatchBoxscorePitchingTable.svelte
-#: src/lib/components/utility/StatsBlock.svelte
 #: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/utility/StatsBlock.svelte
 msgid "ERA"
 msgstr "ERA"
 
@@ -708,10 +708,10 @@ msgstr "Важно"
 msgid "Critical"
 msgstr "Критично"
 
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/datatable/StatsHeaderRow.svelte
 #: src/lib/components/utility/StatsBlock.svelte
-#: src/lib/components/datatable/StatsHeaderRow.svelte
-#: src/lib/components/datatable/StatsHeaderRow.svelte
-#: src/lib/components/datatable/StatsHeaderRow.svelte
 msgid "G"
 msgstr "И"
 
@@ -774,13 +774,13 @@ msgstr "ЖП"
 msgid "I"
 msgstr "Х"
 
-#: src/lib/components/utility/StatsBlock.svelte
 #: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/utility/StatsBlock.svelte
 msgid "OBP"
 msgstr "ОПБ"
 
-#: src/lib/components/utility/StatsBlock.svelte
 #: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/utility/StatsBlock.svelte
 msgid "SLG"
 msgstr "СЛГ"
 
@@ -800,22 +800,22 @@ msgstr "ГП"
 msgid "HBP"
 msgstr "ППТ"
 
-#: src/lib/components/utility/StatsBlock.svelte
 #: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/utility/StatsBlock.svelte
 msgid "WHIP"
 msgstr "ОПП"
 
-#: src/lib/components/table/StandingsTable.svelte
-#: src/lib/components/match/GameResultIndicator.svelte
-#: src/lib/components/favorite/StreakEmoji.svelte
 #: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/favorite/StreakEmoji.svelte
+#: src/lib/components/match/GameResultIndicator.svelte
+#: src/lib/components/table/StandingsTable.svelte
 msgid "W"
 msgstr "В"
 
-#: src/lib/components/table/StandingsTable.svelte
-#: src/lib/components/match/GameResultIndicator.svelte
-#: src/lib/components/favorite/StreakEmoji.svelte
 #: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/favorite/StreakEmoji.svelte
+#: src/lib/components/match/GameResultIndicator.svelte
+#: src/lib/components/table/StandingsTable.svelte
 msgid "L"
 msgstr "П"
 
@@ -823,9 +823,9 @@ msgstr "П"
 msgid "SV"
 msgstr "СП"
 
-#: src/lib/components/forms/PlayerDataForm.svelte
-#: src/lib/components/forms/PlayerDataForm.svelte
 #: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/forms/PlayerDataForm.svelte
+#: src/lib/components/forms/PlayerDataForm.svelte
 msgid "A"
 msgstr "П"
 
@@ -853,9 +853,9 @@ msgstr "ОП"
 msgid "P"
 msgstr "П"
 
-#: src/lib/components/forms/PlayerDataForm.svelte
-#: src/lib/components/forms/PlayerDataForm.svelte
 #: src/lib/components/datatable/StatsHeaderRow.svelte
+#: src/lib/components/forms/PlayerDataForm.svelte
+#: src/lib/components/forms/PlayerDataForm.svelte
 msgid "C"
 msgstr "К"
 
@@ -879,13 +879,13 @@ msgstr "ЦФ"
 msgid "RF"
 msgstr "ПФ"
 
-#: src/routes/ligen/[id]/stats/+page.svelte
 #: src/lib/components/datatable/BaseballStatsDatatable.svelte
+#: src/routes/ligen/[id]/stats/+page.svelte
 msgid "Batting"
 msgstr "Бэттинг"
 
-#: src/routes/ligen/[id]/stats/+page.svelte
 #: src/lib/components/datatable/BaseballStatsDatatable.svelte
+#: src/routes/ligen/[id]/stats/+page.svelte
 msgid "Fielding"
 msgstr "Игра в поле"
 
@@ -893,18 +893,18 @@ msgstr "Игра в поле"
 msgid "Total"
 msgstr "Всего"
 
+#: src/lib/components/datatable/StatsTableContent.svelte
+#: src/lib/components/forms/ClubForm.svelte
 #: src/lib/components/datatable/TeamMembersTableContent.svelte
 #: src/lib/components/forms/UniformSetForm.svelte
+#: src/lib/components/favorite/FavoriteTeamInfoCard.svelte
 #: src/lib/components/league/LeagueDetailInfoCard.svelte
 #: src/lib/components/table/LeaderboardTable.svelte
-#: src/lib/components/club/officials/ClubOfficialDetailCard.svelte
-#: src/lib/components/favorite/FavoriteTeamInfoCard.svelte
 #: src/lib/components/team/TeamDetailInfoCard.svelte
-#: src/lib/components/datatable/StatsTableContent.svelte
-#: src/lib/components/diamondplanner/user/UserDataCard.svelte
 #: src/lib/components/diamondplanner/club/ClubDetailCard.svelte
-#: src/lib/components/forms/ClubForm.svelte
 #: src/lib/components/diamondplanner/team/TeamTeaserCard.svelte
+#: src/lib/components/diamondplanner/user/UserDataCard.svelte
+#: src/lib/components/club/officials/ClubOfficialDetailCard.svelte
 msgid "Name"
 msgstr "Имя"
 
@@ -954,9 +954,9 @@ msgstr "Не подтверждено"
 
 #: src/lib/components/datatable/TeamMembersTableContent.svelte
 #: src/lib/components/datatable/TeamMembersTableContent.svelte
+#: src/lib/components/forms/TeamGamesModal.svelte
 #: src/lib/components/utility/ClubTeamPicker.svelte
 #: src/lib/components/utility/MultiSelectCombobox.svelte
-#: src/lib/components/forms/TeamGamesModal.svelte
 msgid "None"
 msgstr "Никакие"
 
@@ -980,8 +980,8 @@ msgstr "Вы уверены, что хотите удалить \"{0}\" из \"{
 msgid "No team members to display."
 msgstr "Нет членов команды для отображения."
 
-#: src/lib/components/favorite/FavoriteTeamInfoCard.svelte
 #: src/lib/components/forms/TeamGamesModal.svelte
+#: src/lib/components/favorite/FavoriteTeamInfoCard.svelte
 msgid "League"
 msgstr "Лига"
 
@@ -993,11 +993,11 @@ msgstr "Сезон"
 msgid "League Wins Visualisation"
 msgstr "Визуализация побед в лиге"
 
-#: src/lib/components/league/LeagueDetailInfoCard.svelte
+#: src/lib/components/forms/ClubForm.svelte
 #: src/lib/components/favorite/LeagueInfoCard.svelte
+#: src/lib/components/league/LeagueDetailInfoCard.svelte
 #: src/lib/components/team/TeamDetailInfoCard.svelte
 #: src/lib/components/diamondplanner/club/ClubDetailCard.svelte
-#: src/lib/components/forms/ClubForm.svelte
 msgid "Acronym"
 msgstr "Аббревиатура"
 
@@ -1081,10 +1081,10 @@ msgstr "Победы/Поражения"
 msgid "Edit Announcement"
 msgstr "Редактировать объявление"
 
+#: src/lib/components/forms/AnnouncementForm.svelte
+#: src/lib/components/forms/TeamForm.svelte
 #: src/lib/components/forms/LocationForm.svelte
 #: src/routes/(protected)/account/clubs/[club]/+page.svelte
-#: src/lib/components/forms/TeamForm.svelte
-#: src/lib/components/forms/AnnouncementForm.svelte
 msgid "Create new"
 msgstr "Создать новый"
 
@@ -1096,8 +1096,8 @@ msgstr "Редактировать объявление \"{0}\""
 msgid "Create new Announcement"
 msgstr "Создать новое объявление"
 
-#: src/lib/components/club/officials/ClubOfficialDetailCard.svelte
 #: src/lib/components/forms/AnnouncementForm.svelte
+#: src/lib/components/club/officials/ClubOfficialDetailCard.svelte
 msgid "Title"
 msgstr "Заголовок"
 
@@ -1113,8 +1113,8 @@ msgstr "Приоритет"
 msgid "Link Settings"
 msgstr "Настройки ссылки"
 
-#: src/routes/(protected)/account/announcements/[announcement]/+page.svelte
 #: src/lib/components/forms/AnnouncementForm.svelte
+#: src/routes/(protected)/account/announcements/[announcement]/+page.svelte
 msgid "Link"
 msgstr "Ссылка"
 
@@ -1138,18 +1138,18 @@ msgstr "Нажмите здесь"
 msgid "If not set, the link itself will be used as a the text."
 msgstr "Если не установлено, сама ссылка будет использоваться в качестве текста."
 
-#: src/lib/components/forms/LocationForm.svelte
-#: src/lib/components/forms/TeamMembersForm.svelte
-#: src/lib/components/forms/UniformSetForm.svelte
-#: src/lib/components/forms/PlayerDataForm.svelte
-#: src/lib/components/forms/TeamForm.svelte
 #: src/lib/components/forms/ClubForm.svelte
 #: src/lib/components/forms/AnnouncementForm.svelte
-#: src/lib/components/forms/EventForm.svelte
 #: src/lib/components/forms/TeamGamesModal.svelte
-#: src/lib/components/forms/EventSeriesForm.svelte
-#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
 #: src/lib/components/forms/ParticipationForm.svelte
+#: src/lib/components/forms/UniformSetForm.svelte
+#: src/lib/components/forms/EventSeriesForm.svelte
+#: src/lib/components/forms/TeamForm.svelte
+#: src/lib/components/forms/PlayerDataForm.svelte
+#: src/lib/components/forms/TeamMembersForm.svelte
+#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
+#: src/lib/components/forms/EventForm.svelte
+#: src/lib/components/forms/LocationForm.svelte
 msgid "Submit"
 msgstr "Отправить"
 
@@ -1157,13 +1157,13 @@ msgstr "Отправить"
 msgid "Reset form"
 msgstr "Сбросить форму"
 
+#: src/lib/components/forms/ClubForm.svelte
 #: src/lib/components/club/ClubInfoSection.svelte
 #: src/lib/components/navigation/StaticNavigationLinks.svelte
-#: src/lib/components/diamondplanner/team/TeamListTeaser.svelte
-#: src/lib/components/diamondplanner/user/PlayerProfileClubsSection.svelte
 #: src/lib/components/diamondplanner/club/ClubDetailCard.svelte
-#: src/lib/components/forms/ClubForm.svelte
+#: src/lib/components/diamondplanner/team/TeamListTeaser.svelte
 #: src/lib/components/diamondplanner/team/TeamTeaserCard.svelte
+#: src/lib/components/diamondplanner/user/PlayerProfileClubsSection.svelte
 msgid "Club"
 msgstr "Клуб"
 
@@ -1213,8 +1213,8 @@ msgstr ""
 msgid "Club Admins"
 msgstr "Администраторы клуба"
 
-#: src/lib/components/forms/TeamForm.svelte
 #: src/lib/components/forms/ClubForm.svelte
+#: src/lib/components/forms/TeamForm.svelte
 msgid "Admin"
 msgstr "Админ"
 
@@ -1222,13 +1222,13 @@ msgstr "Админ"
 msgid "It is not possible to remove the last admin from a club. <0/> Caution: You can remove yourself as admin, losing all access rights!"
 msgstr "Невозможно удалить последнего администратора из клуба. <0/> Внимание: вы можете удалить себя как администратора, потеряв все права доступа!"
 
-#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
 #: src/lib/components/forms/ParticipationForm.svelte
+#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
 msgid "Created"
 msgstr "Создано"
 
-#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
 #: src/lib/components/forms/ParticipationForm.svelte
+#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
 msgid "Last Updated"
 msgstr "Последнее обновление"
 
@@ -1236,9 +1236,9 @@ msgstr "Последнее обновление"
 msgid "State <0><0>In</0> <1>Maybe</1> <2>Out</2></0>"
 msgstr "Статус <0><0>В деле</0> <1>Может быть</1> <2>Нет</2></0>"
 
+#: src/lib/components/forms/EventSeriesForm.svelte
 #: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
 #: src/lib/components/diamondplanner/event/EventSeriesView.svelte
-#: src/lib/components/forms/EventSeriesForm.svelte
 msgid "Event Series"
 msgstr "Серия событий"
 
@@ -1266,8 +1266,8 @@ msgstr ""
 msgid "Series End <0/> <1>No events will be created after this date.</1>"
 msgstr "Окончание серии <0/> <1>После этой даты события создаваться не будут.</1>"
 
-#: src/lib/components/forms/EventForm.svelte
 #: src/lib/components/forms/EventSeriesForm.svelte
+#: src/lib/components/forms/EventForm.svelte
 msgid "Title <0/>"
 msgstr "Заголовок <0/>"
 
@@ -1279,27 +1279,27 @@ msgstr "Периодический интервал <0/> <1>Интервал м�
 msgid "Duration <0/> <1>Duration of each event to determine end time (in minutes).</1>"
 msgstr "Длительность <0/> <1>Продолжительность каждого события для определения времени окончания (в минутах).</1>"
 
+#: src/lib/components/forms/EventSeriesForm.svelte
 #: src/lib/components/forms/TeamForm.svelte
 #: src/lib/components/forms/EventForm.svelte
-#: src/lib/components/forms/EventSeriesForm.svelte
 msgid "Description <0/>"
 msgstr "Описание <0/>"
 
-#: src/lib/components/forms/EventForm.svelte
 #: src/lib/components/forms/EventSeriesForm.svelte
+#: src/lib/components/forms/EventForm.svelte
 msgid "No additional name"
 msgstr "Нет дополнительного имени"
 
-#: src/lib/components/forms/EventForm.svelte
 #: src/lib/components/forms/EventSeriesForm.svelte
+#: src/lib/components/forms/EventForm.svelte
 msgid "Location <0>None</0>"
 msgstr "Местоположение <0>Нет</0>"
 
-#: src/routes/league_entries/[entry]/+page.svelte
-#: src/lib/components/table/StandingsTable.svelte
-#: src/lib/components/diamondplanner/team/TeamListTeaser.svelte
 #: src/lib/components/forms/TeamForm.svelte
+#: src/lib/components/table/StandingsTable.svelte
 #: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
+#: src/lib/components/diamondplanner/team/TeamListTeaser.svelte
+#: src/routes/league_entries/[entry]/+page.svelte
 msgid "Team"
 msgstr "Команда"
 
@@ -1348,8 +1348,8 @@ msgstr "Выбранные пользователи:"
 msgid "Member"
 msgstr "Участник"
 
-#: src/lib/components/forms/EventForm.svelte
 #: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
+#: src/lib/components/forms/EventForm.svelte
 msgid "Event"
 msgstr "Событие"
 
@@ -1497,9 +1497,9 @@ msgstr "Игры, импортированные из BSM, в базе данн�
 msgid "Show leagues for"
 msgstr "Показать лиги для"
 
-#: src/routes/ligen/[id]/stats/+page.svelte
-#: src/lib/components/match/CurrentMatchBlock.svelte
 #: src/lib/components/forms/TeamGamesModal.svelte
+#: src/lib/components/match/CurrentMatchBlock.svelte
+#: src/routes/ligen/[id]/stats/+page.svelte
 msgid "error loading matches: {0}"
 msgstr "ошибка загрузки матчей: {0}"
 
@@ -1518,8 +1518,8 @@ msgstr ""
 msgid "Address"
 msgstr "Адрес"
 
-#: src/lib/components/forms/LocationForm.svelte
 #: src/lib/components/match/MatchDetailLocationCard.svelte
+#: src/lib/components/forms/LocationForm.svelte
 msgid "City"
 msgstr "Город"
 
@@ -1531,9 +1531,9 @@ msgstr "Открыть в Google Maps"
 msgid "Open in Apple Maps"
 msgstr "Открыть в Apple Maps"
 
-#: src/routes/club/details/+page.svelte
-#: src/lib/components/forms/LocationForm.svelte
 #: src/lib/components/diamondplanner/club/ClubLocationsSection.svelte
+#: src/lib/components/forms/LocationForm.svelte
+#: src/routes/club/details/+page.svelte
 msgid "Location"
 msgstr "Местоположение"
 
@@ -1687,8 +1687,8 @@ msgstr "Перспектива"
 msgid "Bildergalerie"
 msgstr "Фотогалерея"
 
-#: src/routes/club/details/+page.svelte
 #: src/lib/components/club/ClubInfoSection.svelte
+#: src/routes/club/details/+page.svelte
 msgid "Skylarks Logo"
 msgstr "Логотип Skylarks"
 
@@ -2015,8 +2015,8 @@ msgstr "Зарегистрированная ассоциация:"
 msgid "Court:"
 msgstr "Суд:"
 
-#: src/routes/club/details/+page.svelte
 #: src/lib/components/club/ballpark/BallparkDetailCard.svelte
+#: src/routes/club/details/+page.svelte
 msgid "Address:"
 msgstr "Адрес:"
 
@@ -2070,8 +2070,8 @@ msgstr "Данные профиля"
 msgid "An error occurred fetching player data: {0}.<0/> The data source might be temporarily unavailable, please try again later."
 msgstr "Произошла ошибка при получении данных игрока: {0}.<0/> Источник данных может быть временно недоступен, пожалуйста, попробуйте позже."
 
-#: src/routes/teams/[id]/+page.svelte
 #: src/routes/players/[id]/+page.svelte
+#: src/routes/teams/[id]/+page.svelte
 msgid "Stats"
 msgstr "Статистика"
 
@@ -2111,9 +2111,9 @@ msgstr "Начало:"
 msgid "No location provided."
 msgstr "Местоположение не указано."
 
-#: src/routes/(protected)/account/clubs/[club]/+page.svelte
-#: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
 #: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
+#: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
+#: src/routes/(protected)/account/clubs/[club]/+page.svelte
 msgid "Admin Section"
 msgstr "Раздел администратора"
 
@@ -2617,10 +2617,6 @@ msgstr "Ссылки"
 msgid "Player List"
 msgstr "Список игроков"
 
-#: src/lib/components/meta/TopAppBarTrailing.svelte
-msgid "Production"
-msgstr "Производство"
-
 #: src/routes/(protected)/account/team/[id]/members/+page.svelte
 msgid "Team Members"
 msgstr "Члены команды"
@@ -2690,6 +2686,3 @@ msgstr ""
 #: src/routes/(protected)/account/clubs/[club]/+page.svelte
 msgid "Please contact your club's administration."
 msgstr "Пожалуйста, свяжитесь с администрацией вашего клуба."
-
-#~ msgid "RU"
-#~ msgstr ""
