@@ -21,13 +21,13 @@
 
 <h1 class="h1 my-4">{clubTeam.team.name} (Saison {clubTeam.team.season})</h1>
 
-<section class="my-5 lg:max-w-[50%]">
+<section class="my-10 lg:max-w-[50%]">
   <h2 class="h2">Information</h2>
 
   <TeamDetailInfoCard {clubTeam}/>
 </section>
 
-<section>
+<section class="my-10">
   <h2 class="h2">Standings</h2>
 
   {#await data?.table}
@@ -45,7 +45,11 @@
   {/await}
 </section>
 
-<section class="my-2 mb-4!">
+<section class="my-10">
+  <h2 class="h2">Players</h2>
+</section>
+
+<section class="my-10! mb-4!">
   <h2 class="h2">Stats</h2>
   {#await getData()}
     <ProgressRing/>

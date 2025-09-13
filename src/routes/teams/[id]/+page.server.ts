@@ -14,7 +14,7 @@ import {env} from "$env/dynamic/private";
 import {env as publicEnv} from "$env/dynamic/public";
 import type {PageServerLoad} from './$types';
 
-export const load: PageServerLoad = async ({parent, params, url}) =>  {
+export const load: PageServerLoad = async ({parent, params, url}) => {
   const data = await parent();
   let clubTeams: ClubTeam[] | undefined = await data.clubTeams;
 
@@ -66,6 +66,7 @@ export const load: PageServerLoad = async ({parent, params, url}) =>  {
     battingStats: battingStats,
     pitchingStats: pitchingStats,
     fieldingStats: fieldingStats,
+    leagueGroup: leagueGroup,
     table: leagueGroup ? tableRequest.getSingleTable(leagueGroup.id) : null,
   };
-}
+};
