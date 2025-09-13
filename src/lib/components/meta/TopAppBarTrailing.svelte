@@ -13,6 +13,4 @@
 
 <LocalePicker/>
 
-{#if env.PUBLIC_AUTH_FUNCS_ENABLED === "true"}
-  <LoginBadge signupAllowed={true}/>
-{/if}
+<LoginBadge signupAllowed={true}/>
