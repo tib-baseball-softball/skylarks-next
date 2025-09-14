@@ -27,11 +27,7 @@ export class PlayerClient extends TYPO3Client {
     return player;
   }
 
-  async fetchPlayersByFilters(team?: number): Promise<Player[] | undefined> {
-    let query: PlayerQuery = {};
-    if (team) {
-      query.team = String(team);
-    }
+  async fetchPlayersByFilters(query: PlayerQuery): Promise<Player[] | undefined> {
     const url = this.buildRequestURL("/api/v2/players", query);
 
     const response: Response = await this.fetch(url, {

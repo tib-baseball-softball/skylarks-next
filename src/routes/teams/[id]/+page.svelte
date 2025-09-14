@@ -49,6 +49,15 @@
   <h2 class="h2">Players</h2>
 </section>
 
+{#await data.players}
+{:then players}
+  {#if players}
+    <p>{JSON.stringify(players)}</p>
+  {/if}
+{:catch error}
+  <p>error loading: {error.message}</p>
+{/await}
+
 <section class="my-10! mb-4!">
   <h2 class="h2">Stats</h2>
   {#await getData()}
