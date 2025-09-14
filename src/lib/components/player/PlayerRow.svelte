@@ -4,14 +4,14 @@
 
   interface Props {
     player: Player;
-    visuals?: "image" | "number";
+    visual?: "image" | "number";
   }
 
-  let {player, visuals = "number"}: Props = $props();
+  let {player, visual = "number"}: Props = $props();
 </script>
 
 <div class="player-container flex items-center gap-2">
-  {#if visuals === "number"}
+  {#if visual === "number"}
     <PlayerNumberGraphic content={player.number} classes="preset-filled-primary-500 scale-75"/>
   {:else }
 
