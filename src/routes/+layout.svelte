@@ -47,7 +47,7 @@
 
       {#snippet children()}
         <section class="">
-          <ul class="w-full justify-center items-center hidden lg:flex py-2 gap-2 xl:gap-16">
+          <ul class="w-full justify-center items-center hidden md:flex py-2 gap-2 xl:gap-16">
             <StaticNavigationLinks classes="rounded-base gap-2 py-1 px-2"/>
           </ul>
         </section>

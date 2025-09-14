@@ -3,7 +3,7 @@
 </script>
 
 <nav
-    class="lg:hidden bottom-nav bg-surface-50 dark:bg-surface-800 border-t border-b border-surface-500 dark:border-surface-100 z-2"
+        class="md:hidden bottom-nav bg-surface-50 dark:bg-surface-800 border-t border-b border-surface-500 dark:border-surface-100 z-2"
 >
   <ul class="flex">
     <StaticNavigationLinks classes="flex-col py-1.5 text-sm"/>
