@@ -10,7 +10,7 @@
   let {player, visual = "number"}: Props = $props();
 </script>
 
-<div class="player-container flex items-center gap-2">
+<a class="player-container flex items-center gap-2" href="player/{player.bsm_id}">
   {#if visual === "number"}
     <PlayerNumberGraphic content={player.number} classes="preset-filled-primary-500 scale-75"/>
   {:else }
@@ -26,4 +26,4 @@
     <p>{player.fullname}</p>
     <p class="text-sm font-light">{player.positions.join(", ")}</p>
   </div>
-</div>
+</a>
