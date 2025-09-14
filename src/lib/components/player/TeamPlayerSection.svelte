@@ -29,7 +29,7 @@
 </label>
 
 <div class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">
-  {#each players as player (player.bsm_id)}
+  {#each players as player (player.uid)}
     <PlayerRow {player} {visual}/>
 
     <hr class="my-3">
