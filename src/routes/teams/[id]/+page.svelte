@@ -6,6 +6,7 @@
   import TeamDetailInfoCard from "$lib/components/team/TeamDetailInfoCard.svelte";
   import StandingsTable from "$lib/components/table/StandingsTable.svelte";
   import type {PageProps} from "./$types";
+  import TeamPlayerSection from "$lib/components/player/TeamPlayerSection.svelte";
 
   let {data}: PageProps = $props();
   let clubTeam = $derived(data.clubTeam as ClubTeam);
@@ -47,16 +48,19 @@
 
 <section class="my-10">
   <h2 class="h2">Players</h2>
-</section>
 
-{#await data.players}
-{:then players}
-  {#if players}
-    <p>{JSON.stringify(players)}</p>
-  {/if}
-{:catch error}
-  <p>error loading: {error.message}</p>
-{/await}
+  {#await data.players}
+    <ProgressRing/>
+  {:then players}
+    {#if players}
+      <TeamPlayerSection {players}/>
+    {:else }
+      <p>No Players found for this team.</p>
+    {/if}
+  {:catch error}
+    <p>error loading: {error.message}</p>
+  {/await}
+</section>
 
 <section class="my-10! mb-4!">
   <h2 class="h2">Stats</h2>
