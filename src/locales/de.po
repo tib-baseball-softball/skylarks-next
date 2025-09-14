@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-10T18:43:43.303Z\n"
-"PO-Revision-Date: 2025-09-12T21:56:31.265Z\n"
+"PO-Revision-Date: 2025-09-14T14:34:47.595Z\n"
 "Last-Translator: \n"
 "Language: de\n"
 "Language-Team: \n"
@@ -72,8 +72,8 @@ msgid "E-Mail <0/> <1>You will be logged out and instructed to verify your new e
 msgstr "E-Mail <0/> <1>Du wirst abgemeldet und angewiesen, deine neue E-Mail-Adresse zu bestätigen.</1>"
 
 #: src/lib/auth/ChangeEmailForm.svelte
-#: src/lib/auth/PasswordRequestButton.svelte
 #: src/lib/auth/UserDetailsForm.svelte
+#: src/lib/auth/PasswordRequestButton.svelte
 #: src/lib/components/datatable/TeamMembersTableContent.svelte
 #: src/lib/components/utility/DeleteButton.svelte
 msgid "Confirm"
@@ -443,14 +443,15 @@ msgstr "Ligen werden geladen..."
 #: src/routes/ligen/+page.svelte
 #: src/routes/teams/+page.svelte
 #: src/routes/club/ballpark/+page.svelte
-#: src/routes/club/scorer/+page.svelte
 #: src/routes/club/officials/+page.svelte
-#: src/routes/club/umpire/+page.svelte
 #: src/routes/players/[id]/+page.svelte
-#: src/routes/ligen/[id]/+page.svelte
-#: src/routes/teams/[id]/+page.svelte
-#: src/routes/teams/[id]/+page.svelte
+#: src/routes/club/umpire/+page.svelte
 #: src/routes/league_entries/[entry]/+page.svelte
+#: src/routes/ligen/[id]/+page.svelte
+#: src/routes/club/scorer/+page.svelte
+#: src/routes/teams/[id]/+page.svelte
+#: src/routes/teams/[id]/+page.svelte
+#: src/routes/teams/[id]/+page.svelte
 #: src/routes/(protected)/stats/[user]/+page.svelte
 #: src/routes/(protected)/stats/[user]/+page.svelte
 msgid "error loading: {0}"
@@ -674,20 +675,20 @@ msgstr "ERA"
 msgid "No comments yet."
 msgstr "Noch keine Kommentare."
 
-#: src/lib/components/comments/CommentRow.svelte
-#: src/lib/components/comments/CommentRow.svelte
 #: src/lib/components/comments/CommentSection.svelte
+#: src/lib/components/comments/CommentRow.svelte
+#: src/lib/components/comments/CommentRow.svelte
 #: src/lib/components/forms/ParticipationForm.svelte
 msgid "Comment"
 msgstr "Kommentar"
 
-#: src/lib/components/comments/CommentRow.svelte
 #: src/lib/components/comments/CommentSection.svelte
+#: src/lib/components/comments/CommentRow.svelte
 msgid "Your comment..."
 msgstr "Dein Kommentar..."
 
-#: src/lib/components/comments/CommentRow.svelte
 #: src/lib/components/comments/CommentSection.svelte
+#: src/lib/components/comments/CommentRow.svelte
 msgid "Add comment"
 msgstr "Kommentar hinzufügen"
 
@@ -703,10 +704,10 @@ msgstr "Offensive"
 #: src/lib/components/datatable/BaseballStatsDatatable.svelte
 #: src/routes/ligen/[id]/stats/+page.svelte
 msgid "Pitching"
-msgstr "Skylarks Logo"
+msgstr "Pitching"
 
-#: src/lib/components/forms/ClubForm.svelte
 #: src/lib/components/club/ClubInfoSection.svelte
+#: src/lib/components/forms/ClubForm.svelte
 #: src/lib/components/navigation/StaticNavigationLinks.svelte
 #: src/lib/components/diamondplanner/club/ClubDetailCard.svelte
 #: src/lib/components/diamondplanner/team/TeamListTeaser.svelte
@@ -723,16 +724,16 @@ msgstr "Skylarks Logo"
 #: src/lib/components/datatable/BaseballStatsDatatable.svelte
 #: src/routes/ligen/[id]/stats/+page.svelte
 msgid "Batting"
-msgstr "Verein"
+msgstr "Batting"
 
 #: src/lib/components/datatable/BaseballStatsDatatable.svelte
 #: src/routes/ligen/[id]/stats/+page.svelte
 msgid "Fielding"
-msgstr "Schlagen"
+msgstr "Fielding"
 
 #: src/lib/components/datatable/BaseballStatsDatatable.svelte
 msgid "Total"
-msgstr "Pitching"
+msgstr "Gesamt"
 
 #: src/lib/components/datatable/StatsHeaderRow.svelte
 #: src/lib/components/datatable/StatsHeaderRow.svelte
@@ -836,14 +837,14 @@ msgstr "WHIP"
 #: src/lib/components/match/GameResultIndicator.svelte
 #: src/lib/components/table/StandingsTable.svelte
 msgid "W"
-msgstr "S"
+msgstr "W"
 
 #: src/lib/components/datatable/StatsHeaderRow.svelte
 #: src/lib/components/favorite/StreakEmoji.svelte
 #: src/lib/components/match/GameResultIndicator.svelte
 #: src/lib/components/table/StandingsTable.svelte
 msgid "L"
-msgstr "N"
+msgstr "L"
 
 #: src/lib/components/datatable/StatsHeaderRow.svelte
 msgid "SV"
@@ -913,8 +914,8 @@ msgstr "Zeige"
 msgid "Search..."
 msgstr "Suchen..."
 
-#: src/lib/components/datatable/StatsTableContent.svelte
 #: src/lib/components/datatable/TeamMembersTableContent.svelte
+#: src/lib/components/datatable/StatsTableContent.svelte
 #: src/lib/components/forms/ClubForm.svelte
 #: src/lib/components/forms/UniformSetForm.svelte
 #: src/lib/components/favorite/FavoriteTeamInfoCard.svelte
@@ -1058,8 +1059,8 @@ msgstr "Champagner-Feier im Vereinsheim oder Keilereien im Unterstand?"
 msgid "Graph"
 msgstr "Grafik"
 
-#: src/lib/components/favorite/StreakGraphSection.svelte
 #: src/lib/components/favorite/WinningPercentageContainer.svelte
+#: src/lib/components/favorite/StreakGraphSection.svelte
 msgid "Percentage"
 msgstr "Prozentsatz"
 
@@ -1155,16 +1156,16 @@ msgid "If not set, the link itself will be used as a the text."
 msgstr "Wenn nicht festgelegt, wird der Link selbst als Text verwendet."
 
 #: src/lib/components/forms/AnnouncementForm.svelte
-#: src/lib/components/forms/ClubForm.svelte
 #: src/lib/components/forms/EventForm.svelte
+#: src/lib/components/forms/ClubForm.svelte
 #: src/lib/components/forms/EventSeriesForm.svelte
-#: src/lib/components/forms/LocationForm.svelte
 #: src/lib/components/forms/ParticipationForm.svelte
+#: src/lib/components/forms/UniformSetForm.svelte
 #: src/lib/components/forms/PlayerDataForm.svelte
+#: src/lib/components/forms/LocationForm.svelte
+#: src/lib/components/forms/TeamMembersForm.svelte
 #: src/lib/components/forms/TeamGamesModal.svelte
 #: src/lib/components/forms/TeamForm.svelte
-#: src/lib/components/forms/TeamMembersForm.svelte
-#: src/lib/components/forms/UniformSetForm.svelte
 #: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
 msgid "Submit"
 msgstr "Absenden"
@@ -1318,8 +1319,8 @@ msgid "State <0><0>In</0> <1>Maybe</1> <2>Out</2></0>"
 msgstr "Status <0><0>Teilnahme</0> <1>Vielleicht</1> <2>Keine Teilnahme</2></0>"
 
 #: src/lib/components/forms/EventSeriesForm.svelte
-#: src/lib/components/diamondplanner/event/EventSeriesView.svelte
 #: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
+#: src/lib/components/diamondplanner/event/EventSeriesView.svelte
 msgid "Event Series"
 msgstr "Ereignisserie"
 
@@ -1660,10 +1661,6 @@ msgstr "AGB"
 msgid "Svelte JavaScript Framework website"
 msgstr "Svelte JavaScript Framework-Website"
 
-#: src/lib/components/meta/Footer.svelte
-msgid "<0>Built with</0> <1/> and <2/>"
-msgstr "<0>Erstellt mit</0> <1/> und <2/>"
-
 #: src/lib/components/league/LeagueDetailInfoCard.svelte
 #: src/lib/components/team/TeamDetailInfoCard.svelte
 msgid "Sport"
@@ -1734,7 +1731,7 @@ msgstr "Nächster <0/>"
 
 #: src/lib/components/match/GameResultIndicator.svelte
 msgid "F"
-msgstr "Ausgefallen"
+msgstr "F"
 
 #: src/lib/components/match/GameResultIndicator.svelte
 msgid "TBD"
@@ -1743,7 +1740,7 @@ msgstr "TBD"
 #: src/lib/components/match/CurrentMatchRow.svelte
 #: src/lib/components/match/GameResultIndicator.svelte
 msgid "PPD"
-msgstr "Verschoben"
+msgstr "PPD"
 
 #: src/lib/components/match/MatchDetailLocationCard.svelte
 msgid "Address"
@@ -1834,6 +1831,7 @@ msgid "Throws"
 msgstr "Wirft"
 
 #: src/lib/components/player/PlayerHeaderSection.svelte
+#: src/lib/components/player/PlayerRow.svelte
 msgid "Player fallback"
 msgstr "Spieler-Fallback"
 
@@ -1851,7 +1849,7 @@ msgstr "Alle {0} Mitglieder auswählen, die dem Team hinzugefügt werden sollen.
 
 #: src/lib/components/table/StandingsTable.svelte
 msgid "Win %"
-msgstr "Gewinn %"
+msgstr "Win %"
 
 #: src/lib/components/table/StandingsTable.svelte
 msgid "GB"
@@ -1949,8 +1947,8 @@ msgstr "Du bist noch kein Mitglied eines Teams."
 msgid "Scorer Licenses"
 msgstr "Scorer-Lizenzen"
 
-#: src/routes/club/scorer/+page.svelte
 #: src/routes/club/umpire/+page.svelte
+#: src/routes/club/scorer/+page.svelte
 msgid "Loading Licenses..."
 msgstr "Lade Lizenzen..."
 
@@ -2158,8 +2156,8 @@ msgstr "Dieser Verein hat noch keine gespeicherten Standorte."
 msgid "No club officials available."
 msgstr "Keine Vereinsfunktionäre verfügbar."
 
-#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
 #: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
+#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
 #: src/routes/(protected)/account/clubs/[club]/+page.svelte
 msgid "Admin Section"
 msgstr "Admin-Bereich"
@@ -2676,3 +2674,23 @@ msgstr "Teammitglieder"
 #: src/routes/(protected)/account/clubs/[club]/locations/+page.svelte
 msgid "Club Locations"
 msgstr "Club-Standorte"
+
+#: src/routes/teams/[id]/+page.svelte
+msgid "Players"
+msgstr "Spieler"
+
+#: src/routes/teams/[id]/+page.svelte
+msgid "No Players found for this team."
+msgstr "Keine Spieler für dieses Team gefunden."
+
+#: src/lib/components/player/TeamPlayerSection.svelte
+msgid "Visualization <0><0>Number</0> <1>Image</1></0>"
+msgstr "Visualisierung <0><0>Nummer</0> <1>Bild</1></0>"
+
+#: src/lib/components/meta/Footer.svelte
+msgid "Built with"
+msgstr "Erstellt mit"
+
+#: src/lib/components/meta/Footer.svelte
+msgid "and"
+msgstr "und"
