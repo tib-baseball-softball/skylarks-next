@@ -134,7 +134,7 @@ func GetCachedBSMResponse(app core.App, url *url.URL) (string, error) {
 func saveBSMResponseToCache(app core.App, url string) (*core.Record, error) {
 	_, body, err := FetchResource[any](url)
 	if err != nil {
-		app.Logger().Error("Failed to get data from BSM", "err", err)
+		app.Logger().Error("Failed to get data from BSM", "err", err, "url", url)
 		return nil, err
 	}
 
