@@ -10,7 +10,17 @@
   let {player, visual = "number"}: Props = $props();
 </script>
 
-<a class="player-container flex items-center gap-2" href="player/{player.bsm_id}">
+{#if player.bsm_id > 0}
+  <a class="player-container flex items-center gap-2" href="/players/{player.bsm_id}">
+    {@render rowContent()}
+  </a>
+{:else }
+  <div class="player-container flex items-center gap-2">
+    {@render rowContent()}
+  </div>
+{/if}
+
+{#snippet rowContent()}
   {#if visual === "number"}
     <PlayerNumberGraphic content={player.number} classes="preset-filled-primary-500 scale-75"/>
   {:else }
@@ -26,4 +36,4 @@
     <p>{player.fullname}</p>
     <p class="text-sm font-light">{player.positions.join(", ")}</p>
   </div>
-</a>
+{/snippet}
