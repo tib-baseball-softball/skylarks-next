@@ -1,7 +1,6 @@
 # Skylarks-Next
 
-Experimental progressive web app for
-the [Berlin Skylarks Baseball & Softball Club](https://www.tib-baseball.de/).
+Progressive Web App for the [Berlin Skylarks Baseball & Softball Club](https://www.tib-baseball.de/).
 Built with Pocketbase, SvelteKit, Skeleton UI and Tailwind CSS.
 
 ## Concept / Background
@@ -20,6 +19,14 @@ As of now, different types of data are being processed in different backends:
       training times, game reports
     * Mainly displayed in the TYPO3 frontend directly, but is also partly accessible via REST API
     * _Internal_: custom-built, full club access
+* The backend in this repository
+    * Go-based (package `github.com/tib-baseball-softball/skylarks-next`)
+    * processes administrative data for club and team events (events, announcements, comments, attendance data and
+      statistics)
+    * distinct from both CMS and BSM data
+    * _Internal_: custom-built, full club access
+
+See also: [Project History](docs/History.md)
 
 ## Project goal
 
@@ -27,14 +34,15 @@ As of now, different types of data are being processed in different backends:
 * Progressive Web App with mobile-first design
 * provide backend and frontend logic to carry out team organisation tasks
   (practice and game attendance, teams and members, stats)
-* central hub for team activities
+* -> replace existing external tools for those tasks
+* become _THE_ central hub for team activities
 
 ## Project requirements
 
 * basic familiarity with the concepts of SvelteKit and Svelte - there is an
   excellent [official tutorial](https://learn.svelte.dev/tutorial/welcome-to-svelte) available
 * basic familiarity with Go and TypeScript
-* Node.js `v22` or higher
+* Node.js `v24` or higher
 * access to Berlin Skylarks environment secrets and API keys
 
 ## Local Development
@@ -49,6 +57,7 @@ cd skylarks-fe-next
 2. Set up environment
 
 ```bash
+cp backend/.env.dist backend/.env
 cp .env.dist .env
 ```
 
@@ -58,18 +67,33 @@ cp .env.dist .env
 
 3. Get project dependencies
 
+backend
+
+```bash
+cd backend
+go mod download`
+go run . serve
+```
+
+frontend
+
 ```bash
 pnpm install`
 # yarn/deno/bun could also work, untested
 ```
 
-4. Start the dev server (watches for file changes automatically)
+4. Start the dev server (frontend watches for file changes automatically, backend needs to be restarted manually)
+   backend
 
 ```bash
-pnpm run dev
+go run . serve
+```
 
-# or start the server and open the app in a new browser tab
-pnpm run dev -- --open
+frontend
+
+```bash
+pnpm dev
+
 ```
 
 ## URLs
@@ -86,7 +110,10 @@ pnpm run dev -- --open
 
 ## Deployment
 
-Fully automated via GitHub Actions, deploys on every push to branch `main`, excluding documentation files and folders.
+- Fully automated via GitHub Actions, deploys on every push to branch `main`, excluding documentation files and folders.
+- app is deployed via Docker-Compose in a Portainer stack
+- Traefik router (not deployed via this repository) acts a reverse proxy and forwards requests
+- => Traefik labels need to be set in compose files
 
 ### Server Setup / Manual Deployment
 

@@ -13,8 +13,11 @@ import {
 import {env} from "$env/dynamic/private";
 import {env as publicEnv} from "$env/dynamic/public";
 import type {PageServerLoad} from './$types';
+import {TeamClient} from "$lib/service/TeamClient.ts";
+import {PlayerClient} from "$lib/service/PlayerClient.ts";
+import type {TiBTeam} from "$lib/model/TiBTeam.ts";
 
-export const load: PageServerLoad = async ({parent, params, url}) =>  {
+export const load: PageServerLoad = async ({parent, params, url}) => {
   const data = await parent();
   let clubTeams: ClubTeam[] | undefined = await data.clubTeams;
 
@@ -61,11 +64,20 @@ export const load: PageServerLoad = async ({parent, params, url}) =>  {
 
   const tableRequest = new TablesAPIRequest(env.BSM_API_KEY);
 
+  let team: TiBTeam | undefined = undefined;
+  if (leagueGroup) {
+    const teamClient = new TeamClient(fetch, env.SKYLARKS_API_AUTH_HEADER);
+    const teamResponse = await teamClient.fetchTeamByFilter({league: String(leagueGroup.id)});
+    team = teamResponse?.at(0);
+  }
+  const playerClient = new PlayerClient(fetch, env.SKYLARKS_API_AUTH_HEADER);
+
   return {
     clubTeam: clubTeam,
     battingStats: battingStats,
     pitchingStats: pitchingStats,
     fieldingStats: fieldingStats,
+    players: team ? playerClient.fetchPlayersByFilters({team: String(team.uid)}) : null,
     table: leagueGroup ? tableRequest.getSingleTable(leagueGroup.id) : null,
   };
-}
+};

@@ -9,8 +9,9 @@ export const load: LayoutLoad = async ({fetch}) => {
     query: {
       url: `https://bsm.baseball-softball.de/clubs/${env.PUBLIC_CLUB_ID}.json`,
       club: env.PUBLIC_CLUB_ID,
-    }
-  })
+    },
+    requestKey: env.PUBLIC_CLUB_ID,
+  });
 
   return {
     bsmClubData: bsmClubData
