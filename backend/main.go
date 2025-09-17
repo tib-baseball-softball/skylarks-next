@@ -173,6 +173,10 @@ func main() {
 
 	isGoRun := strings.HasPrefix(os.Args[0], os.TempDir())
 
+	if isGoRun {
+		log.Print("App was started with `go run`, automigrations are active.")
+	}
+
 	migratecmd.MustRegister(app, app.RootCmd, migratecmd.Config{
 		// enable auto creation of migration files when making collection changes in the Dashboard
 		// (the isGoRun check is to enable it only during development)
