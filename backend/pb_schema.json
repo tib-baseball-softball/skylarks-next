@@ -2246,7 +2246,7 @@
       }
     ],
     "indexes": [
-      "CREATE INDEX `idx_YCrorbP` ON `participations` (\n  `user`,\n  `event`\n)"
+      "CREATE UNIQUE INDEX `idx_YCrorbP` ON `participations` (\n  `user`,\n  `event`\n)"
     ],
     "system": false
   },
