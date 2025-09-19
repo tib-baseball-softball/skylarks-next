@@ -7,6 +7,7 @@ import (
 
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
+	"github.com/tib-baseball-softball/skylarks-next/internal/pb"
 	"github.com/tib-baseball-softball/skylarks-next/internal/stats"
 )
 
@@ -36,13 +37,16 @@ func enrichParticipationData(app core.App, user *core.Record, record *core.Recor
 }
 
 func addParticipationsByType(app core.App, record *core.Record) error {
+	event := &pb.Event{}
+	event.SetProxyRecord(record)
+
 	participations, err := app.FindRecordsByFilter(
-		"participations",
+		pb.ParticipationsCollection,
 		"event = {:eventID}",
 		"",
 		0,
 		0,
-		dbx.Params{"eventID": record.Id},
+		dbx.Params{"eventID": event.Id},
 	)
 	if err != nil {
 		app.Logger().Error("EnrichParticipationData error", "error", err)
@@ -52,10 +56,16 @@ func addParticipationsByType(app core.App, record *core.Record) error {
 		return fmt.Errorf("failed to expand: %v", errs)
 	}
 
+	unspecifiedUsers, err := getUserDTOsWithoutParticipations(app, event.Id, event.Team())
+	if err != nil {
+		app.Logger().Error("EnrichParticipationData error", "error", err, "event", event, "team", event.Team())
+	}
+
 	participationsByType := stats.ParticipationsByType{
-		In:    []*core.Record{},
-		Out:   []*core.Record{},
-		Maybe: []*core.Record{},
+		In:          []*core.Record{},
+		Out:         []*core.Record{},
+		Maybe:       []*core.Record{},
+		Unspecified: unspecifiedUsers,
 	}
 
 	for _, participation := range participations {
@@ -94,4 +104,23 @@ func addUserParticipation(app core.App, user *core.Record, record *core.Record) 
 
 	record.Set("userParticipation", userParticipation)
 	return nil
+}
+
+func getUserDTOsWithoutParticipations(app core.App, eventID string, teamID string) ([]stats.UserParticipationDTO, error) {
+	participationDTOS := []stats.UserParticipationDTO{}
+
+	err := app.DB().
+		NewQuery(`
+			SELECT id, first_name, last_name
+			FROM users
+			WHERE EXISTS (SELECT 1 FROM json_each(users.teams) WHERE value = {:teamID})
+			AND (SELECT id FROM participations WHERE event = {:eventID} AND user = users.id) IS NULL`).
+		Bind(dbx.Params{"eventID": eventID, "teamID": teamID}).
+		All(&participationDTOS)
+
+	if err != nil {
+		app.Logger().Error("getUserDTOsWithoutParticipations error", "error", err, "eventID", eventID)
+		return nil, err
+	}
+	return participationDTOS, nil
 }
