@@ -12,6 +12,7 @@ import type {
   UniformsetsResponse,
   UsersResponse
 } from "./pb-types";
+import type {UserParticipationDTO} from "$lib/model/UserParticipationDTO.ts";
 
 export type Extension<T, E> = T & E
 
@@ -31,6 +32,7 @@ export type ExpandedEvent = Extension<EventsResponse, {
     in: ExpandedParticipation[],
     out: ExpandedParticipation[],
     maybe: ExpandedParticipation[],
+    unspecified: UserParticipationDTO[],
   },
   userParticipation?: ExpandedParticipation
 }>

@@ -5,7 +5,8 @@
   import type {EventsUpdate} from "$lib/model/pb-types";
   import IndividualParticipationEditButton
     from "$lib/components/diamondplanner/event/IndividualParticipationEditButton.svelte";
-  import {Check, CircleHelp, Trash, X} from "lucide-svelte";
+  import {Check, CircleQuestionMark, Ghost, Trash, X} from "lucide-svelte";
+  import ExternalParticipationWrapper from "$lib/components/diamondplanner/event/ExternalParticipationWrapper.svelte";
 
   interface Props {
     event: ExpandedEvent;
@@ -68,7 +69,7 @@
 
   <article class="card preset-tonal-warning grow">
     <header class="card-header flex items-center gap-2">
-      <span><CircleHelp/></span>
+      <span><CircleQuestionMark/></span>
       <h3 class="h4">Maybe</h3>
     </header>
 
@@ -101,6 +102,30 @@
                     participation={outResponse}
                     {isAdmin}
                     classes="chip preset-tonal-error border border-error-500"
+            />
+          </div>
+        {/each}
+      {/key}
+    </section>
+  </article>
+</section>
+
+<section class="mt-6!">
+  <article class="card preset-ringed grow">
+    <header class="card-header flex items-center gap-2">
+      <span><Ghost/></span>
+      <h3 class="h4">No Response</h3>
+    </header>
+
+    <section class="p-4 flex flex-wrap gap-2">
+      {#key event.participations.unspecified}
+        {#each event.participations.unspecified as ghostResponse}
+          <div in:fade|global={{delay: 200}}>
+            <ExternalParticipationWrapper
+                    dto={ghostResponse}
+                    eventID={event.id}
+                    {isAdmin}
+                    classes="chip preset-ringed dark:border dark:border-surface-200"
             />
           </div>
         {/each}
