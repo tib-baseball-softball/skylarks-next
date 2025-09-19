@@ -18,39 +18,42 @@
     await sendParticipationData(form).then(() => closeModal());
     await invalidate("event:list");
   }
+
+  const createdDate = participation.created !== "" ? new Date(participation.created).toLocaleString() : "---";
+  const updatedDate = participation.updated !== "" ? new Date(participation.updated).toLocaleString() : "---";
 </script>
 
-<form onsubmit={submitForm} class="mt-4 space-y-3">
+<form class="mt-4 space-y-3" onsubmit={submitForm}>
   <div class="grid grid-cols-2 gap-2 md:gap-3 lg:gap-4">
 
     <dl class="space-y-1">
       <dt class="text-sm font-light">Created</dt>
-      <dd>{new Date(participation.created).toLocaleString()}</dd>
+      <dd>{createdDate}</dd>
     </dl>
 
     <dl class="space-y-1">
       <dt class="text-sm font-light">Last Updated</dt>
-      <dd>{new Date(participation.updated).toLocaleString()}</dd>
+      <dd>{updatedDate}</dd>
     </dl>
 
     <input
-            name="id"
             autocomplete="off"
-            class="input"
-            type="hidden"
-            readonly
             bind:value={form.id}
+            class="input"
+            name="id"
+            readonly
+            type="hidden"
     />
 
     <label class="label col-span-2">
       <span class="block">Comment</span>
       <input
-              name="id"
               autocomplete="off"
-              class="input "
-              type="text"
-              placeholder="background info about your attendance"
               bind:value={form.comment}
+              class="input "
+              name="id"
+              placeholder="background info about your attendance"
+              type="text"
       />
     </label>
 
@@ -59,23 +62,23 @@
 
       <span class="flex justify-items-stretch btn-group preset-outlined-surface-200-800">
         <button
-                type="button"
                 class={["btn hover:preset-ghost-success flex-grow", form.state === "in" && "preset-filled-success-500 text-black"]}
                 onclick={() => form.state = "in"}
+                type="button"
         >
           In
         </button>
         <button
-                type="button"
                 class={["btn hover:preset-ghost-warning flex-grow", form.state === "maybe" && "preset-filled-warning-500 text-black"]}
                 onclick={() => form.state = "maybe"}
+                type="button"
         >
           Maybe
         </button>
         <button
-                type="button"
                 class={["btn hover:preset-ghost-error flex-grow", form.state === "out" && "preset-filled-error-500 text-white"]}
                 onclick={() => form.state = "out"}
+                type="button"
         >
           Out
         </button>
@@ -83,7 +86,7 @@
     </div>
 
     <div class="flex justify-center col-span-2">
-      <button type="submit" class="mt-2 btn preset-filled-primary-500">
+      <button class="mt-2 btn preset-filled-primary-500" type="submit">
         Submit
       </button>
     </div>

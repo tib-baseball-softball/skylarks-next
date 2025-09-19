@@ -20,6 +20,9 @@
 
   const canEdit = $derived(participation.user === authRecord.id || isAdmin);
   let isOpen = $state(false);
+
+  const createdDate = participation.created !== "" ? new Date(participation.created).toLocaleString() : "---";
+  const updatedDate = participation.updated !== "" ? new Date(participation.updated).toLocaleString() : "---";
 </script>
 
 <Popover.Root bind:open={isOpen}>
@@ -41,12 +44,12 @@
 
       <div class="item-container">
         <p class="font-light text-xs">Created:</p>
-        <p>{new Date(participation.created).toLocaleString()}</p>
+        <p>{createdDate}</p>
       </div>
 
       <div class="item-container">
         <p class="font-light text-xs">Last Updated:</p>
-        <p>{new Date(participation.updated).toLocaleString()}</p>
+        <p>{updatedDate}</p>
       </div>
 
       <div class="item-container mb-2!">
