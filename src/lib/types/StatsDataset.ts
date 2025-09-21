@@ -1,12 +1,10 @@
+import type {BattingStatisticValues, FieldingStatisticValues, PitchingStatisticValues} from "bsm.js";
 import {
   type BattingStatisticsEntry,
   type FieldingStatisticsEntry,
   type PitchingStatisticsEntry,
   StatsType
 } from "bsm.js";
-import type {BattingStatisticValues} from "bsm.js/dist/model/BattingStatisticsEntry";
-import type {PitchingStatisticValues} from "bsm.js/dist/model/PitchingStatisticsEntry";
-import type {FieldingStatisticValues} from "bsm.js/dist/model/FieldingStatisticsEntry";
 
 export type StatsDataset = {
   batting: BattingStatisticsEntry,
