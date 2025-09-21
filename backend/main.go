@@ -45,11 +45,15 @@ func bindAppHooks(app core.App) {
 		return e.Next()
 	})
 
+	app.OnRecordAuthWithOAuth2Request(dp.UserCollection).BindFunc(func(e *core.RecordAuthWithOAuth2RequestEvent) error {
+		return dp.OAuthUpdateUserData(e)
+	})
+
 	app.OnRecordCreateRequest(dp.UserCollection).BindFunc(func(event *core.RecordRequestEvent) error {
 		return dp.ValidateSignupKey(event)
 	})
 
-	app.OnRecordsListRequest("leaguegroups").BindFunc(func(event *core.RecordsListRequestEvent) error {
+	app.OnRecordsListRequest(dp.LeagueGroupsCollection).BindFunc(func(event *core.RecordsListRequestEvent) error {
 		return dp.TriggerLeagueImport(event.App, event)
 	})
 

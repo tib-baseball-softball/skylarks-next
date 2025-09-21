@@ -7,6 +7,8 @@ import (
 	"github.com/pocketbase/pocketbase/core"
 )
 
+// ValidateSignupKey checks that a valid signup key is used on every user creation.
+// A user is assigned a team and club based on the signup key used.
 func ValidateSignupKey(e *core.RecordRequestEvent) error {
 	user := &User{}
 	user.SetProxyRecord(e.Record)
