@@ -172,3 +172,11 @@ func (u *User) BSMID() int {
 func (u *User) SetBSMID(id int) {
 	u.Set("bsm_id", id)
 }
+
+func (u *User) SignupKey() string {
+	return u.GetString("signup_key")
+}
+
+func (u *User) SetSignupKey(key string) {
+	u.Set("signup_key", key)
+}

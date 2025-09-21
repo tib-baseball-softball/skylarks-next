@@ -8,6 +8,9 @@ import (
 )
 
 func ValidateSignupKey(app core.App, event *core.RecordRequestEvent) error {
+	user := &User{}
+	user.SetProxyRecord(event.Record)
+
 	teams, err := getValidSignupKeys(app)
 	if err != nil {
 		errorText := "failed to get valid signup teams"
@@ -28,9 +31,9 @@ func ValidateSignupKey(app core.App, event *core.RecordRequestEvent) error {
 	for _, team := range teams {
 		if body.SignupKey != "" && team.SignupKey == body.SignupKey {
 			isValid = true
-			event.Record.Set("teams", team.Id)
-			event.Record.Set("club", team.Club)
-			event.Record.Set("signup_key", body.SignupKey)
+			user.SetTeams([]string{team.Id})
+			user.SetClub([]string{team.Club})
+			user.SetSignupKey(body.SignupKey)
 			break
 		}
 	}
@@ -48,15 +51,15 @@ func ValidateSignupKey(app core.App, event *core.RecordRequestEvent) error {
 	return event.Next()
 }
 
-// Team Reduced record with just the relevant fields
-type Team struct {
+// TeamWithSignupKey Reduced record with just the relevant fields
+type TeamWithSignupKey struct {
 	Id        string `db:"id"`
 	Club      string `db:"club"`
 	SignupKey string `db:"signup_key"`
 }
 
-func getValidSignupKeys(app core.App) ([]Team, error) {
-	var teams []Team
+func getValidSignupKeys(app core.App) ([]TeamWithSignupKey, error) {
+	var teams []TeamWithSignupKey
 
 	err := app.DB().
 		NewQuery("SELECT id, club, signup_key FROM teams WHERE signup_key != '';").
