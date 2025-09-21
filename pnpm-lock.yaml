@@ -9,14 +9,14 @@ importers:
   .:
     dependencies:
       '@wuchale/svelte':
-        specifier: ^0.14.3
-        version: 0.14.3
+        specifier: ^0.15.1
+        version: 0.15.1
       '@wuchale/vite-plugin':
         specifier: ^0.14.6
         version: 0.14.6
       wuchale:
-        specifier: ^0.15.8
-        version: 0.15.8
+        specifier: ^0.16.4
+        version: 0.16.4
     devDependencies:
       '@dotenvx/dotenvx':
         specifier: ^1.50.1
@@ -721,8 +721,8 @@ packages:
   '@vitest/utils@3.2.4':
     resolution: {integrity: sha512-fB2V0JFrQSMsCo9HiSq3Ezpdv4iYaXRG1Sx8edX3MwxfyNn83mKiGzOcH+Fkxt4MHxr3y42fQi1oeAInqgX2QA==}
 
-  '@wuchale/svelte@0.14.3':
-    resolution: {integrity: sha512-tg1Vj7DEg5KASD12DQztp+uI2abK1p+c1V8NViquVKp5PMVyG96In4R8SThb3lisJbMEW6FbiIBXfdx6cCT5+A==}
+  '@wuchale/svelte@0.15.1':
+    resolution: {integrity: sha512-abG52FmZHXpb93c5vx14RFh9W9LpC8oP/nznPi0EfIpQsdYpgGg2Z8EjfFQtSZ2CS/OnSNiYE1GgybgGq/Kunw==}
 
   '@wuchale/vite-plugin@0.14.6':
     resolution: {integrity: sha512-/OPj/tK56xco16YscktzKbdc8hy0MtoEw4Bl5ifACxbTIFZ8CwFudiM37PrIwWqPHPlpzlxTjFdeauIu4X5qow==}
@@ -1498,10 +1498,6 @@ packages:
     engines: {node: '>=8'}
     hasBin: true
 
-  wuchale@0.15.8:
-    resolution: {integrity: sha512-r7aQOgf6eonm7LfG0TlXgkBWg3Wn1+vQWXTWEWlTugPD+0vmkGoTf7aaBQOlEEPdkkFMYB3333otX3C3pMHHvw==}
-    hasBin: true
-
   wuchale@0.16.4:
     resolution: {integrity: sha512-1rvoJxGWQaze+1Ks+/JPDBujNQol7X3JWRo+6eTX92PRW9NPseOEjZUYwnPlAb2uhfHKz4fR3RPOtN6D/KEqfg==}
     hasBin: true
@@ -2024,10 +2020,10 @@ snapshots:
       loupe: 3.2.1
       tinyrainbow: 2.0.0
 
-  '@wuchale/svelte@0.14.3':
+  '@wuchale/svelte@0.15.1':
     dependencies:
       svelte: 5.39.3
-      wuchale: 0.15.8
+      wuchale: 0.16.4
 
   '@wuchale/vite-plugin@0.14.6':
     dependencies:
@@ -2858,16 +2854,6 @@ snapshots:
     dependencies:
       siginfo: 2.0.0
       stackback: 0.0.2
-
-  wuchale@0.15.8:
-    dependencies:
-      '@sveltejs/acorn-typescript': 1.0.5(acorn@8.15.0)
-      acorn: 8.15.0
-      chokidar: 4.0.3
-      magic-string: 0.30.19
-      picomatch: 4.0.3
-      pofile: 1.1.4
-      tinyglobby: 0.2.15
 
   wuchale@0.16.4:
     dependencies:

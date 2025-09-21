@@ -31,7 +31,7 @@
 
 </nav>
 
-<div class="flex justify-end items-center gap-2 pb-3 mx-4">
+<div class="flex justify-end items-center gap-4 pb-3 mx-4">
   <!-- @wc-ignore -->
   {#if env.PUBLIC_APPLICATION_CONTEXT !== "Production"}
     <div class="preset-tonal-warning p-1.5 rounded-container border border-warning-500 text-sm">
@@ -39,12 +39,15 @@
     </div>
   {/if}
 
-  <span>Built with</span>
-  <Heart class="text-primary-500"/>
-  and
-  <a href="https://svelte.dev/" target="_blank" title="Svelte JavaScript Framework website">
-    <Svelte classes="w-6" fillColor={"#ff3e00"}/>
-  </a>
+  <!-- @wc-include -->
+  <span class="flex justify-end items-center gap-2">
+    <span>Built with</span>
+    <Heart class="text-primary-500"/>
+    <span>and</span>
+    <a href="https://svelte.dev/" target="_blank" title="Svelte JavaScript Framework website">
+      <Svelte classes="w-6" fillColor={"#ff3e00"}/>
+    </a>
+  </span>
 </div>
 
 <style>

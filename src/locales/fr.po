@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-12T16:34:19.018Z\n"
-"PO-Revision-Date: 2025-09-21T11:10:12.515Z\n"
+"PO-Revision-Date: 2025-09-21T17:03:06.385Z\n"
 "Last-Translator: \n"
 "Language: fr\n"
 "Language-Team: \n"
@@ -236,6 +236,8 @@ msgstr "Image de profil <0/>"
 msgid "Selected file:"
 msgstr "Fichier sélectionné :"
 
+#. placeholder {0}: file.name
+#. placeholder {1}: file.size
 #: src/lib/auth/UserDetailsForm.svelte
 msgid "{0} ({1} bytes)"
 msgstr "{0} ({1} octets)"
@@ -426,6 +428,20 @@ msgstr "Ligues"
 msgid "Loading Leagues..."
 msgstr "Chargement des ligues..."
 
+#. placeholder {0}: error.message
+#. placeholder {0}: error.message
+#. placeholder {0}: error.message
+#. placeholder {0}: error.message
+#. placeholder {0}: error.message
+#. placeholder {0}: error.message
+#. placeholder {0}: error.message
+#. placeholder {0}: error.message
+#. placeholder {0}: error.message
+#. placeholder {0}: error.message
+#. placeholder {0}: error.message
+#. placeholder {0}: error.message
+#. placeholder {0}: error.message
+#. placeholder {0}: error.message
 #: src/routes/teams/+page.svelte
 #: src/routes/ligen/+page.svelte
 #: src/routes/club/officials/+page.svelte
@@ -471,6 +487,7 @@ msgstr "Données par ligue"
 msgid "A single team can be associated to several leagues per season in BSM."
 msgstr "Une seule équipe peut être associée à plusieurs ligues par saison dans BSM."
 
+#. placeholder {0}: favoriteTeam?.team.name
 #: src/routes/favorite/+page.svelte
 msgid "The team \"{0}\" does not have a league entry in this league."
 msgstr "L’équipe « {0} » n’a pas d’inscription à la ligue dans cette ligue."
@@ -520,6 +537,7 @@ msgstr "Aucune donnée trouvée."
 msgid "Loading..."
 msgstr "Chargement..."
 
+#. placeholder {0}: error.message
 #: src/routes/favorite/+page.svelte
 msgid "Error: {0}"
 msgstr "Erreur : {0}"
@@ -573,6 +591,7 @@ msgstr "Nombre de commentaires :"
 msgid "Read more"
 msgstr "En savoir plus"
 
+#. placeholder {0}: teamName
 #: src/lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
 msgid "{0} (Batters)"
 msgstr "{0} (Frappeurs)"
@@ -616,6 +635,7 @@ msgstr "AVG"
 msgid "OPS"
 msgstr "OPS"
 
+#. placeholder {0}: teamName
 #: src/lib/components/boxscore/MatchBoxscorePitchingTable.svelte
 msgid "{0} (Pitchers)"
 msgstr "{0} (Lanceurs)"
@@ -973,6 +993,8 @@ msgstr "<0/> Nommer administrateur"
 msgid "<0/> Remove"
 msgstr "<0/> Supprimer"
 
+#. placeholder {0}: row.first_name + " " + row.last_name
+#. placeholder {1}: team.name
 #: src/lib/components/datatable/TeamMembersTableContent.svelte
 msgid "Are you sure you wish to remove \"{0}\" from \"{1}\"?"
 msgstr "Êtes-vous sûr de vouloir supprimer « {0} » de « {1} » ?"
@@ -1032,10 +1054,12 @@ msgstr "Afficher les séries éliminatoires"
 msgid "Playoff Series"
 msgstr "Séries éliminatoires"
 
+#. placeholder {0}: playoffSeries.leading_team.name
 #: src/lib/components/favorite/PlayoffSheet.svelte
 msgid "{0} lead series"
 msgstr "{0} mène la série"
 
+#. placeholder {0}: playoffSeries.leading_team.name
 #: src/lib/components/favorite/PlayoffSheet.svelte
 msgid "{0} win series"
 msgstr "{0} gagne la série"
@@ -1044,6 +1068,7 @@ msgstr "{0} gagne la série"
 msgid "Series tied"
 msgstr "Série à égalité"
 
+#. placeholder {0}: playoffSeries.series_length
 #: src/lib/components/favorite/PlayoffSheet.svelte
 msgid "Length of series: Best of {0}"
 msgstr "Durée de la série : Meilleur de {0}"
@@ -1089,6 +1114,7 @@ msgstr "Modifier l'annonce"
 msgid "Create new"
 msgstr "Créer"
 
+#. placeholder {0}: form?.title
 #: src/lib/components/forms/AnnouncementForm.svelte
 msgid "Edit Announcement \"{0}\""
 msgstr "Modifier l'annonce « {0} »"
@@ -1176,6 +1202,7 @@ msgstr "Modifier le club"
 msgid "Create a Club"
 msgstr "Créer un club"
 
+#. placeholder {0}: form?.name
 #: src/lib/components/forms/ClubForm.svelte
 msgid "Edit Club \"{0}\""
 msgstr "Modifier le club « {0} »"
@@ -1243,10 +1270,12 @@ msgstr "État <0><0>Oui</0> <1>Peut-être</1> <2>Non</2></0>"
 msgid "Event Series"
 msgstr "Série d'événements"
 
+#. placeholder {0}: eventSeries.title
 #: src/lib/components/forms/EventSeriesForm.svelte
 msgid "Edit Event Series \"{0}\""
 msgstr "Modifier la série d'événements « {0} »"
 
+#. placeholder {0}: team.name
 #: src/lib/components/forms/EventSeriesForm.svelte
 msgid "Create new Event Series for {0}"
 msgstr "Créer une nouvelle série d'événements pour {0}"
@@ -1308,6 +1337,7 @@ msgstr "Équipe"
 msgid "Edit Team"
 msgstr "Modifier l'équipe"
 
+#. placeholder {0}: form?.name
 #: src/lib/components/forms/TeamForm.svelte
 msgid "Edit Team \"{0}\""
 msgstr "Modifier l'équipe « {0} »"
@@ -1354,6 +1384,7 @@ msgstr "Membre"
 msgid "Event"
 msgstr "Événement"
 
+#. placeholder {0}: form?.title
 #: src/lib/components/forms/EventForm.svelte
 msgid "Edit Event \"{0}\""
 msgstr "Modifier l'événement « {0} »"
@@ -1498,6 +1529,9 @@ msgstr "Matchs importés de BSM dans la base de données :"
 msgid "Show leagues for"
 msgstr "Afficher les ligues pour"
 
+#. placeholder {0}: error.message
+#. placeholder {0}: error.message
+#. placeholder {0}: error.message
 #: src/lib/components/forms/TeamGamesModal.svelte
 #: src/lib/components/match/CurrentMatchBlock.svelte
 #: src/routes/ligen/[id]/stats/+page.svelte
@@ -1537,6 +1571,7 @@ msgstr "Ouvrir dans Apple Maps"
 msgid "Location"
 msgstr "Emplacement"
 
+#. placeholder {0}: form?.address_addon ?? form?.internal_name
 #: src/lib/components/forms/LocationForm.svelte
 msgid "Edit Location \"{0}\""
 msgstr "Modifier l'emplacement « {0} »"
@@ -1837,10 +1872,12 @@ msgstr "Participation hors compétition (aK) :"
 msgid "Add Members"
 msgstr "Ajouter des membres"
 
+#. placeholder {0}: team.name
 #: src/lib/components/team/TeamAddMemberButton.svelte
 msgid "Add Members to team \"{0}\""
 msgstr "Ajouter des membres à l'équipe « {0} »"
 
+#. placeholder {0}: club.name
 #: src/lib/components/team/TeamAddMemberButton.svelte
 msgid "Select all {0} members that should be added to the team."
 msgstr "Sélectionnez tous les {0} membres qui doivent être ajoutés à l'équipe."
@@ -1853,6 +1890,7 @@ msgstr "Sélectionner l'équipe :"
 msgid "All Leagues"
 msgstr "Toutes les ligues"
 
+#. placeholder {0}: modelName
 #: src/lib/components/utility/DeleteButton.svelte
 msgid "Are you sure you wish to delete this {0}? In most cases, data cannot be recovered after deletion. Please be certain."
 msgstr "Êtes-vous sûr de vouloir supprimer ce {0} ? Dans la plupart des cas, les données ne peuvent pas être récupérées après la suppression. Veuillez en être certain."
@@ -1901,10 +1939,12 @@ msgstr "Manches jouées"
 msgid "Fielding Average"
 msgstr "Moyenne de jeu"
 
+#. placeholder {0}: itemName
 #: src/lib/components/utility/MultiSelectCombobox.svelte
 msgid "You cannot remove the last {0}!"
 msgstr "Vous ne pouvez pas supprimer le dernier {0} !"
 
+#. placeholder {0}: itemName
 #: src/lib/components/utility/MultiSelectCombobox.svelte
 msgid "Select to add as {0}:"
 msgstr "Sélectionnez pour ajouter comme {0} :"
@@ -1921,6 +1961,7 @@ msgstr "Données du joueur"
 msgid "Edit Player Data"
 msgstr "Modifier les données du joueur"
 
+#. placeholder {0}: `${authRecord.first_name} ${authRecord.last_name}`
 #: src/lib/components/forms/PlayerDataForm.svelte
 msgid "Edit Player Data for \"{0}\""
 msgstr "Modifier les données du joueur pour « {0} »"
@@ -2055,6 +2096,8 @@ msgstr "Licences d'arbitre"
 msgid "Loading Licenses..."
 msgstr "Chargement des licences..."
 
+#. placeholder {0}: batting.person?.first_name
+#. placeholder {1}: batting.person?.last_name
 #: src/routes/players/[id]/+page.svelte
 msgid "Player Profile for {0} {1}"
 msgstr "Profil du joueur pour {0} {1}"
@@ -2063,6 +2106,7 @@ msgstr "Profil du joueur pour {0} {1}"
 msgid "Profile Data"
 msgstr "Données du profil"
 
+#. placeholder {0}: error.message
 #: src/routes/players/[id]/+page.svelte
 msgid "An error occurred fetching player data: {0}.<0/> The data source might be temporarily unavailable, please try again later."
 msgstr "Une erreur s'est produite lors de la récupération des données du joueur : {0}.<0/> La source de données est peut-être temporairement indisponible, veuillez réessayer plus tard."
@@ -2072,6 +2116,8 @@ msgstr "Une erreur s'est produite lors de la récupération des données du joue
 msgid "Stats"
 msgstr "Stats"
 
+#. placeholder {0}: clubTeam.team.name
+#. placeholder {1}: clubTeam.team.season
 #: src/routes/teams/[id]/+page.svelte
 msgid "{0} (Saison {1})"
 msgstr "{0} (Saison {1})"
@@ -2088,6 +2134,7 @@ msgstr "Licences de marqueur"
 msgid "BSM-ID"
 msgstr "ID BSM"
 
+#. placeholder {0}: data.teamName ?? "Team"
 #: src/routes/league_entries/[entry]/+page.svelte
 msgid "Stats for {0}"
 msgstr "Stats pour {0}"
@@ -2185,6 +2232,8 @@ msgstr "Commentaire/Raison :"
 msgid "Edit"
 msgstr "Modifier"
 
+#. placeholder {0}: participation?.expand?.user?.first_name
+#. placeholder {1}: participation?.expand?.user?.last_name
 #: src/lib/components/diamondplanner/event/IndividualParticipationEditButton.svelte
 msgid ""
 "Edit participation data\n"
@@ -2197,6 +2246,7 @@ msgstr ""
 msgid "Manage Event Series"
 msgstr "Gérer les séries d'événements"
 
+#. placeholder {0}: team?.name
 #: src/lib/components/diamondplanner/event/EventSeriesView.svelte
 msgid "Manage Event Series for {0}"
 msgstr "Gérer les séries d'événements pour {0}"
@@ -2236,6 +2286,7 @@ msgstr ""
 msgid "Setup Games Import"
 msgstr "Configurer l'importation des matchs"
 
+#. placeholder {0}: team.name
 #: src/lib/components/diamondplanner/team/TeamAdminSection.svelte
 msgid "Games Import Setup for {0}"
 msgstr "Configuration de l'importation des matchs pour {0}"
@@ -2278,6 +2329,7 @@ msgstr "Zone de danger"
 msgid "Delete Team"
 msgstr "Supprimer l'équipe"
 
+#. placeholder {0}: title
 #: src/lib/components/diamondplanner/stats/AttendanceTotalStatsBlock.svelte
 msgid "Totals - {0}"
 msgstr "Totaux - {0}"
@@ -2290,6 +2342,7 @@ msgstr "Statistiques de présence"
 msgid "Events where you did not select anything are counted as \"out\"."
 msgstr "Les événements pour lesquels vous n'avez rien sélectionné sont comptabilisés comme \"absent\"."
 
+#. placeholder {0}: uniformSet.name
 #: src/lib/components/diamondplanner/uniformset/UniformSetInfoCard.svelte
 msgid "Edit Uniform Set \"{0}\""
 msgstr "Modifier l'ensemble d'uniformes \"{0}\""
@@ -2336,10 +2389,14 @@ msgstr "adresse e-mail"
 msgid "Edit User Data:"
 msgstr "Modifier les données utilisateur :"
 
+#. placeholder {0}: model.first_name
+#. placeholder {1}: model.last_name
 #: src/lib/components/diamondplanner/user/UserDataCard.svelte
 msgid "Change email address for {0} {1}"
 msgstr "Modifier l'adresse e-mail pour {0} {1}"
 
+#. placeholder {0}: model.first_name
+#. placeholder {1}: model.last_name
 #: src/lib/components/diamondplanner/user/UserDataCard.svelte
 msgid "Edit User Data for {0} {1}"
 msgstr "Modifier les données utilisateur pour {0} {1}"
@@ -2352,6 +2409,7 @@ msgstr "Vous n'êtes pas encore membre d'un club."
 msgid "Join a Club"
 msgstr "Rejoindre un club"
 
+#. placeholder {0}: eventSeries.interval
 #: src/lib/components/diamondplanner/eventseries/EventSeriesListItem.svelte
 msgid "every {0} days"
 msgstr "tous les {0} jours"
@@ -2368,10 +2426,12 @@ msgstr "Fin de la série après :"
 msgid "Event Duration:"
 msgstr "Durée de l'événement :"
 
+#. placeholder {0}: eventSeries.duration
 #: src/lib/components/diamondplanner/eventseries/EventSeriesListItem.svelte
 msgid "P{0}M"
 msgstr "P{0}M"
 
+#. placeholder {0}: eventSeries.duration
 #: src/lib/components/diamondplanner/eventseries/EventSeriesListItem.svelte
 msgid "{0} Minutes"
 msgstr "{0} Minutes"
@@ -2392,6 +2452,8 @@ msgstr "Valide jusqu'au"
 msgid "Relative Time"
 msgstr "Temps relatif"
 
+#. placeholder {0}: user?.first_name
+#. placeholder {1}: user?.last_name
 #: src/routes/(protected)/stats/[user]/+page.svelte
 msgid "Stats for {0} {1}"
 msgstr "Stats pour {0} {1}"
@@ -2418,6 +2480,7 @@ msgstr "Softball"
 msgid "Sleeve Number"
 msgstr "Numéro de manche"
 
+#. placeholder {0}: level
 #: src/lib/components/club/licenses/LicenseLevelIndicator.svelte
 msgid "License level {0}:"
 msgstr "Niveau de licence {0} :"
@@ -2471,6 +2534,7 @@ msgstr "Détails du terrain de baseball"
 msgid "How to get there"
 msgstr "Comment s'y rendre"
 
+#. placeholder {0}: match.match_id
 #: src/routes/gamecenter/game-detail/[id]/+page.svelte
 msgid "Details zu Spiel {0}"
 msgstr "Détails sur le match {0}"
@@ -2492,6 +2556,7 @@ msgstr "Rapport de match"
 msgid "No Box Score available."
 msgstr "Aucun tableau de bord disponible."
 
+#. placeholder {0}: error.message
 #: src/routes/gamecenter/game-detail/[id]/+page.svelte
 msgid "error loading boxscore: {0}"
 msgstr "Erreur lors du chargement du tableau de bord : {0}"
@@ -2500,6 +2565,7 @@ msgstr "Erreur lors du chargement du tableau de bord : {0}"
 msgid "No Game Report available."
 msgstr "Aucun rapport de match disponible."
 
+#. placeholder {0}: error.message
 #: src/routes/gamecenter/game-detail/[id]/+page.svelte
 msgid "error loading Game Report: {0}"
 msgstr "Erreur lors du chargement du rapport de match : {0}"
@@ -2536,6 +2602,7 @@ msgstr "Aucune donnée de licence en raison d'une erreur."
 msgid "Team:"
 msgstr "Équipe :"
 
+#. placeholder {0}: $announcement.link
 #: src/routes/(protected)/account/announcements/[announcement]/+page.svelte
 msgid "Link associated with this announcement: {0}"
 msgstr "Lien associé à cette annonce : {0}"
@@ -2569,6 +2636,8 @@ msgstr "Ma participation"
 msgid "Official Details"
 msgstr "Détails de l'officiel"
 
+#. placeholder {0}: data.leagueGroup.name
+#. placeholder {1}: data.leagueGroup.season
 #: src/routes/ligen/[id]/stats/+page.svelte
 msgid "Leaderboards for {0} ({1})"
 msgstr "Classements pour {0} ({1})"
@@ -2618,10 +2687,12 @@ msgstr "Liste des joueurs"
 msgid "Team Members"
 msgstr "Membres de l'équipe"
 
+#. placeholder {0}: data.team.name
 #: src/routes/(protected)/account/team/[id]/members/+page.svelte
 msgid "Team member list for {0}."
 msgstr "Liste des membres de l'équipe pour {0}."
 
+#. placeholder {0}: data.team.name
 #: src/routes/(protected)/account/team/[id]/members/+page.svelte
 msgid "Team members for Team \"{0}\""
 msgstr "Membres de l'équipe \"{0}\""
@@ -2630,14 +2701,17 @@ msgstr "Membres de l'équipe \"{0}\""
 msgid "Club Locations"
 msgstr "Lieux du club"
 
+#. placeholder {0}: club.name
 #: src/routes/(protected)/account/clubs/[club]/locations/+page.svelte
 msgid "All configured locations for {0}, including baseball fields and other venues."
 msgstr "Tous les lieux configurés pour {0}, y compris les terrains de baseball et autres lieux."
 
+#. placeholder {0}: club.name
 #: src/routes/(protected)/account/clubs/[club]/locations/+page.svelte
 msgid "{0} - Locations"
 msgstr "{0} - Lieux"
 
+#. placeholder {0}: club.name
 #: src/routes/(protected)/account/clubs/[club]/+page.svelte
 msgid "Club overview page for the {0} with info about teams and uniform sets."
 msgstr "Page de présentation du club pour {0} avec des informations sur les équipes et les ensembles d'uniformes."
@@ -2714,3 +2788,32 @@ msgid ""
 "participation statistics. If you want to change a long-running practice series, end the previous one by\n"
 "setting the end date accordingly and create a new series."
 msgstr "Lors de la modification d'une série d'événements, seuls certains champs peuvent être modifiés car la modification d'événements passés affecterait les statistiques de participation. Si vous souhaitez modifier une longue série de pratiques, mettez fin à la série précédente en définissant la date de fin en conséquence et créez une nouvelle série."
+
+#. placeholder {0}: modelName
+#: src/lib/service/ToastController.svelte.ts
+msgid "An error occurred while saving {0} data."
+msgstr ""
+
+#: src/lib/components/meta/Footer.svelte
+msgid "text-primary-500"
+msgstr ""
+
+#: src/lib/components/meta/Footer.svelte
+msgid "https://svelte.dev/"
+msgstr ""
+
+#: src/lib/components/meta/Footer.svelte
+msgid "_blank"
+msgstr ""
+
+#: src/lib/components/meta/Footer.svelte
+msgid "w-6"
+msgstr ""
+
+#: src/lib/components/meta/Footer.svelte
+msgid "#ff3e00"
+msgstr ""
+
+#: src/lib/components/meta/Footer.svelte
+msgid "flex justify-end items-center gap-2"
+msgstr ""
