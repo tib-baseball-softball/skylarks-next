@@ -18,7 +18,7 @@ describe("ToastController", () => {
   beforeEach(() => {
     toastController.clear();
     vi.useFakeTimers();
-    // Mock crypto.randomUUID
+    // @ts-expect-error
     crypto.randomUUID = vi.fn(() => mockUUID);
   });
 
@@ -57,8 +57,8 @@ describe("ToastController", () => {
 
     it("correctly identifies and removes the specific toast by id", () => {
       // Create multiple toasts with different IDs
-      const toast1: Toast = { id: "id1", message: "Message 1" };
-      const toast2: Toast = { id: "id2", message: "Message 2" };
+      const toast1: Toast = {id: "id1", message: "Message 1"};
+      const toast2: Toast = {id: "id2", message: "Message 2"};
 
       // Add both toasts
       toastController.trigger(toast1);
@@ -78,7 +78,7 @@ describe("ToastController", () => {
 
     it("generates a UUID if one is not provided", () => {
       // Create a toast without an ID
-      const toastWithoutId: Toast = { message: "Message without ID" };
+      const toastWithoutId: Toast = {message: "Message without ID"};
 
       // Trigger the toast
       toastController.trigger(toastWithoutId);
@@ -94,7 +94,7 @@ describe("ToastController", () => {
 
     it("uses the provided ID if one is given", () => {
       // Create a toast with an ID
-      const toastWithId: Toast = { id: "provided-id", message: "Message with ID" };
+      const toastWithId: Toast = {id: "provided-id", message: "Message with ID"};
 
       // Trigger the toast
       toastController.trigger(toastWithId);
@@ -111,8 +111,8 @@ describe("ToastController", () => {
   describe("clear", () => {
     it("removes all toasts from the array", () => {
       // Add multiple toasts
-      toastController.trigger({ message: "Message 1" });
-      toastController.trigger({ message: "Message 2" });
+      toastController.trigger({message: "Message 1"});
+      toastController.trigger({message: "Message 2"});
 
       // Should have two toasts
       expect(toastController.toastQueue.length).toBe(2);

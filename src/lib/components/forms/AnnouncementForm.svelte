@@ -3,7 +3,7 @@
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
   import type {AnnouncementsResponse, ClubsResponse, TeamsResponse} from "$lib/model/pb-types";
   import type {CustomAuthModel, ExpandedAnnouncement} from "$lib/model/ExpandedResponse";
-  import {Edit, Plus} from "lucide-svelte";
+  import {Plus, SquarePen} from "lucide-svelte";
   //@ts-ignore
   import * as Sheet from "$lib/components/utility/sheet/index.js";
   import {toastController} from "$lib/service/ToastController.svelte.ts";
@@ -20,6 +20,7 @@
 
   let {announcement = null, club = null, team = null, buttonClasses = "", showLabel = true}: Props = $props();
 
+  // svelte-ignore state_referenced_locally - we want just the initial value here
   let form: Partial<ExpandedAnnouncement> = $state(
       announcement ?? {
         title: "",
@@ -64,7 +65,7 @@
 <Sheet.Root bind:open={open}>
   <Sheet.Trigger class={buttonClasses}>
     {#if form.id}
-      <Edit/>
+      <SquarePen/>
       {#if showLabel}
         <span>Edit Announcement</span>
       {/if}
@@ -100,11 +101,11 @@
 
         <input
                 autocomplete="off"
-                value={form.author}
                 class="input"
                 name="author"
                 readonly
                 type="hidden"
+                value={form.author}
         />
 
         {#if club}
@@ -142,7 +143,7 @@
 
         <label class="label md:col-span-2">
           Announcement Text
-          <textarea name="desc" class="textarea" bind:value={form.bodytext} rows="10" required
+          <textarea bind:value={form.bodytext} class="textarea" name="desc" required rows="10"
           ></textarea>
         </label>
 
@@ -174,10 +175,10 @@
                       bind:value={form.link}
                       class="input"
                       name="link"
-                      type="url"
-                      placeholder="https://example.com"
                       pattern="https?://.+"
+                      placeholder="https://example.com"
                       title="Please enter a valid URL"
+                      type="url"
               />
               <span class="text-sm">Single link in case the announcement is used as a call to action.</span>
             </label>

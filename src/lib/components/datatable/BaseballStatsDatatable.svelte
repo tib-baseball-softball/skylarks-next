@@ -21,17 +21,15 @@
   let {data, rowsPerPage = 10, tableType}: Props = $props();
 
   let type: StatsType = $state(StatsType.batting);
-  let summaryData:
-      | StatisticsSummary<
-      "BattingStatistics" | "PitchingStatistics" | "FieldingStatistics"
-  >
-      | undefined = $state(data.batting.summaries.at(0));
+  let summaryData: StatisticsSummary<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics"> | undefined
+      = $state(data.batting.summaries.at(0));
 
-  const handler = new DataHandler<
-      StatisticsData<
-          "BattingStatistics" | "PitchingStatistics" | "FieldingStatistics"
-      >
-  >(data.batting.data, {rowsPerPage: rowsPerPage});
+  const handler = new DataHandler<StatisticsData<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics">>
+  (data.batting.data, {rowsPerPage: rowsPerPage});
+
+  function changeType(details: any) {
+    type = details.value ?? StatsType.batting;
+  }
 
   function changeDataForHandler(type: StatsType) {
     switch (type) {
@@ -60,10 +58,10 @@
   <header class="md:flex space-y-2 md:space-y-0 justify-between gap-4">
     <Search {handler}/>
 
-    <Segment name="stats-type" value={type} onValueChange={(e) => (type = e.value ?? StatsType.batting)}>
-      <Segment.Item value={StatsType.batting} classes="flex-grow">Batting</Segment.Item>
-      <Segment.Item value={StatsType.pitching} classes="flex-grow">Pitching</Segment.Item>
-      <Segment.Item value={StatsType.fielding} classes="flex-grow">Fielding</Segment.Item>
+    <Segment name="stats-type" onValueChange={changeType} value={type}>
+      <Segment.Item classes="flex-grow" value={StatsType.batting}>Batting</Segment.Item>
+      <Segment.Item classes="flex-grow" value={StatsType.pitching}>Pitching</Segment.Item>
+      <Segment.Item classes="flex-grow" value={StatsType.fielding}>Fielding</Segment.Item>
     </Segment>
 
     <RowsPerPage {handler}/>
@@ -73,7 +71,9 @@
     <div
             class="stats stats-vertical sm:stats-horizontal preset-tonal-surface rounded-container"
     >
-      <StatsBlock {type} row={summaryData}/>
+      {#if summaryData}
+        <StatsBlock row={summaryData} {type}/>
+      {/if}
     </div>
   </div>
 
