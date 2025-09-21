@@ -3,7 +3,9 @@
   import type {ExpandedEvent} from "$lib/model/ExpandedResponse";
   import {type LocationsResponse, type UniformsetsResponse} from "$lib/model/pb-types";
   import {client} from "$lib/pocketbase/index.svelte";
-  import {Segment, Switch} from "@skeletonlabs/skeleton-svelte";
+  import {Switch} from "@skeletonlabs/skeleton-svelte";
+  // @ts-ignore
+  import {Tabs} from "bits-ui";
   import Flatpickr from "../utility/Flatpickr.svelte";
   import {DateTimeUtility} from "$lib/service/DateTimeUtility.js";
   //@ts-ignore
@@ -33,7 +35,7 @@
         endtime: "",
         desc: "",
         location: "",
-        type: undefined,
+        type: "game",
         attire: "",
         cancelled: false,
         bsm_id: 0,
@@ -94,36 +96,36 @@
       {/if}
     </header>
 
-    <form onsubmit={submitForm} class="mt-4 space-y-3">
+    <form class="mt-4 space-y-3" onsubmit={submitForm}>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-3 xl:gap-4">
         <input
-                name="id"
                 autocomplete="off"
-                class="input"
-                type="hidden"
-                readonly
                 bind:value={form.id}
+                class="input"
+                name="id"
+                readonly
+                type="hidden"
         />
 
         <label class="label">
           Title
           <input
-                  name="title"
+                  bind:value={form.title}
                   class="input"
+                  name="title"
                   required
                   type="text"
-                  bind:value={form.title}
           />
         </label>
 
         <label class="label">
           BSM ID
           <input
-                  name="bsm_id"
+                  bind:value={form.bsm_id}
                   class="input"
+                  name="bsm_id"
                   readonly
                   type="text"
-                  bind:value={form.bsm_id}
           />
         </label>
 
@@ -161,15 +163,15 @@
 
         <label class="label md:col-span-2">
           Description
-          <textarea name="desc" class="textarea" bind:value={form.desc}
+          <textarea bind:value={form.desc} class="textarea" name="desc"
           ></textarea>
         </label>
 
         <label class="label md:col-span-2">
           Location
           <select
-                  class="select"
                   bind:value={form.location}
+                  class="select"
           >
             {#await locationOptions then options}
               <option value="">None</option>
@@ -183,17 +185,13 @@
 
         <label class="label flex flex-col gap-1 md:col-span-2">
           Type
-          <Segment name="type" value={form.type} onValueChange={(e) => (form.type = e.value ?? "game")}>
-            <Segment.Item value={"game"} classes="flex-grow">
-              Game
-            </Segment.Item>
-            <Segment.Item value={"practice"} classes="flex-grow">
-              Practice
-            </Segment.Item>
-            <Segment.Item value={"misc"} classes="flex-grow">
-              Other
-            </Segment.Item>
-          </Segment>
+          <Tabs.Root bind:value={form.type}>
+            <Tabs.List class="tabs-list">
+              <Tabs.Trigger class="tabs-trigger flex-grow" value="game">Game</Tabs.Trigger>
+              <Tabs.Trigger class="tabs-trigger flex-grow" value="practice">Practice</Tabs.Trigger>
+              <Tabs.Trigger class="tabs-trigger flex-grow" value="misc">Other</Tabs.Trigger>
+            </Tabs.List>
+          </Tabs.Root>
         </label>
 
         {#await attireOptions then options}
@@ -218,7 +216,7 @@
       <hr class="my-5!"/>
 
       <div class="flex justify-center gap-3">
-        <button type="submit" class="mt-2 btn preset-tonal-primary border border-primary-500">
+        <button class="mt-2 btn preset-tonal-primary border border-primary-500" type="submit">
           Submit
         </button>
       </div>

@@ -7,7 +7,8 @@
   import type {StatisticsData, StatisticsSummary} from "bsm.js";
   import {StatsType} from "bsm.js";
   import StatsTableContent from "$lib/components/datatable/StatsTableContent.svelte";
-  import {Segment} from "@skeletonlabs/skeleton-svelte";
+  // @ts-ignore
+  import {Tabs} from "bits-ui";
   import type {StatsDataset} from "$lib/types/StatsDataset";
   import StatsContentRow from "$lib/components/datatable/StatsContentRow.svelte";
   import StatsBlock from "$lib/components/utility/StatsBlock.svelte";
@@ -58,11 +59,13 @@
   <header class="md:flex space-y-2 md:space-y-0 justify-between gap-4">
     <Search {handler}/>
 
-    <Segment name="stats-type" onValueChange={changeType} value={type}>
-      <Segment.Item classes="flex-grow" value={StatsType.batting}>Batting</Segment.Item>
-      <Segment.Item classes="flex-grow" value={StatsType.pitching}>Pitching</Segment.Item>
-      <Segment.Item classes="flex-grow" value={StatsType.fielding}>Fielding</Segment.Item>
-    </Segment>
+    <Tabs.Root bind:value={type}>
+      <Tabs.List class="tabs-list">
+        <Tabs.Trigger value={StatsType.batting} class="tabs-trigger flex-grow">Batting</Tabs.Trigger>
+        <Tabs.Trigger value={StatsType.pitching} class="tabs-trigger flex-grow">Pitching</Tabs.Trigger>
+        <Tabs.Trigger value={StatsType.fielding} class="tabs-trigger flex-grow">Fielding</Tabs.Trigger>
+      </Tabs.List>
+    </Tabs.Root>
 
     <RowsPerPage {handler}/>
   </header>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-12T16:35:16.263Z\n"
-"PO-Revision-Date: 2025-09-21T17:03:06.390Z\n"
+"PO-Revision-Date: 2025-09-21T17:32:37.225Z\n"
 "Last-Translator: \n"
 "Language: es\n"
 "Language-Team: \n"
@@ -1363,9 +1363,8 @@ msgstr ""
 "Se debe introducir una clave de registro válida al crear la cuenta de usuario.\n"
 "Los nuevos usuarios se añaden automáticamente como miembros al equipo correspondiente a la clave de registro utilizada."
 
-#: src/lib/components/forms/TeamForm.svelte
-msgid "Type <0><0>Adults</0> <1>Minors</1></0>"
-msgstr "Tipo <0><0>Adultos</0> <1>Menores</1></0>"
+#~ msgid "Type <0><0>Adults</0> <1>Minors</1></0>"
+#~ msgstr "Tipo <0><0>Adultos</0> <1>Menores</1></0>"
 
 #: src/lib/components/forms/TeamForm.svelte
 msgid "Team Admins"
@@ -1409,9 +1408,8 @@ msgstr "Reunión <0/>"
 msgid "End <0/>"
 msgstr "Fin <0/>"
 
-#: src/lib/components/forms/EventForm.svelte
-msgid "Type <0><0>Game</0> <1>Practice</1> <2>Other</2></0>"
-msgstr "Tipo <0><0>Juego</0> <1>Práctica</1> <2>Otro</2></0>"
+#~ msgid "Type <0><0>Game</0> <1>Practice</1> <2>Other</2></0>"
+#~ msgstr "Tipo <0><0>Juego</0> <1>Práctica</1> <2>Otro</2></0>"
 
 #: src/lib/components/forms/EventForm.svelte
 msgid "Uniform Set <0/>"
@@ -1982,26 +1980,22 @@ msgstr "Introduzca las posiciones o haga clic en los botones..."
 msgid "Positions <0/> <1/>"
 msgstr "Posiciones <0/> <1/>"
 
-#: src/lib/components/forms/PlayerDataForm.svelte
-msgid "Bats <0><0>Left</0> <1>Right</1> <2>Switch</2></0>"
-msgstr "Batea <0><0>Izquierda</0> <1>Derecha</1> <2>Ambos</2></0>"
+#~ msgid "Bats <0><0>Left</0> <1>Right</1> <2>Switch</2></0>"
+#~ msgstr "Batea <0><0>Izquierda</0> <1>Derecha</1> <2>Ambos</2></0>"
 
-#: src/lib/components/forms/PlayerDataForm.svelte
-msgid "Throws <0><0>Left</0> <1>Right</1> <2>Switch</2></0>"
-msgstr "Lanza <0><0>Izquierda</0> <1>Derecha</1> <2>Ambos</2></0>"
+#~ msgid "Throws <0><0>Left</0> <1>Right</1> <2>Switch</2></0>"
+#~ msgstr "Lanza <0><0>Izquierda</0> <1>Derecha</1> <2>Ambos</2></0>"
 
 #: src/lib/components/forms/PlayerDataForm.svelte
 #: src/lib/components/forms/PlayerDataForm.svelte
 msgid "D"
 msgstr "D"
 
-#: src/lib/components/forms/PlayerDataForm.svelte
-msgid "Umpire License <0><0>None</0> <1>A</1> <2>B</2> <3>C</3> <4>D</4></0>"
-msgstr "Licencia de árbitro <0><0>Ninguna</0> <1>A</1> <2>B</2> <3>C</3> <4>D</4></0>"
+#~ msgid "Umpire License <0><0>None</0> <1>A</1> <2>B</2> <3>C</3> <4>D</4></0>"
+#~ msgstr "Licencia de árbitro <0><0>Ninguna</0> <1>A</1> <2>B</2> <3>C</3> <4>D</4></0>"
 
-#: src/lib/components/forms/PlayerDataForm.svelte
-msgid "Scorer License <0><0>None</0> <1>A</1> <2>B</2> <3>C</3> <4>D</4></0>"
-msgstr "Licencia de anotador <0><0>Ninguna</0> <1>A</1> <2>B</2> <3>C</3> <4>D</4></0>"
+#~ msgid "Scorer License <0><0>None</0> <1>A</1> <2>B</2> <3>C</3> <4>D</4></0>"
+#~ msgstr "Licencia de anotador <0><0>Ninguna</0> <1>A</1> <2>B</2> <3>C</3> <4>D</4></0>"
 
 #: src/routes/club/officials/+page.svelte
 msgid "Club Officials"
@@ -2659,17 +2653,14 @@ msgstr "Anuncios"
 msgid "Team Events"
 msgstr "Eventos del equipo"
 
-#: src/routes/(protected)/account/team/[id]/+page.svelte
-msgid "Timeframe <0><0>Next</0> <1>Past</1></0>"
-msgstr "Plazo <0><0>Próximo</0> <1>Pasado</1></0>"
+#~ msgid "Timeframe <0><0>Next</0> <1>Past</1></0>"
+#~ msgstr "Plazo <0><0>Próximo</0> <1>Pasado</1></0>"
 
-#: src/routes/(protected)/account/team/[id]/+page.svelte
-msgid "Sort <0><0>Ascending</0> <1>Descending</1></0>"
-msgstr "Ordenar <0><0>Ascendente</0> <1>Descendente</1></0>"
+#~ msgid "Sort <0><0>Ascending</0> <1>Descending</1></0>"
+#~ msgstr "Ordenar <0><0>Ascendente</0> <1>Descendente</1></0>"
 
-#: src/routes/(protected)/account/team/[id]/+page.svelte
-msgid "Type <0><0>All</0> <1>Game</1> <2>Practice</2> <3>Other</3></0>"
-msgstr "Tipo <0><0>Todos</0> <1>Partido</1> <2>Práctica</2> <3>Otro</3></0>"
+#~ msgid "Type <0><0>All</0> <1>Game</1> <2>Practice</2> <3>Other</3></0>"
+#~ msgstr "Tipo <0><0>Todos</0> <1>Partido</1> <2>Práctica</2> <3>Otro</3></0>"
 
 #: src/routes/(protected)/account/team/[id]/+page.svelte
 msgid "No events available with the current filters."
@@ -2819,4 +2810,40 @@ msgstr ""
 
 #: src/lib/components/meta/Footer.svelte
 msgid "flex justify-end items-center gap-2"
+msgstr ""
+
+#: src/lib/components/forms/EventForm.svelte
+msgid "Type <0><0><0>Game</0> <1>Practice</1> <2>Other</2></0></0>"
+msgstr ""
+
+#: src/lib/components/forms/TeamForm.svelte
+msgid "Type <0><0><0>Adults</0> <1>Minors</1></0></0>"
+msgstr ""
+
+#: src/routes/(protected)/account/team/[id]/+page.svelte
+msgid "Timeframe <0><0><0>Next</0> <1>Past</1></0></0>"
+msgstr ""
+
+#: src/routes/(protected)/account/team/[id]/+page.svelte
+msgid "Sort <0><0><0>Ascending</0> <1>Descending</1></0></0>"
+msgstr ""
+
+#: src/routes/(protected)/account/team/[id]/+page.svelte
+msgid "Type <0><0><0>All</0> <1>Game</1> <2>Practice</2> <3>Other</3></0></0>"
+msgstr ""
+
+#: src/lib/components/forms/PlayerDataForm.svelte
+msgid "Bats <0><0><0>Left</0> <1>Right</1> <2>Switch</2></0></0>"
+msgstr ""
+
+#: src/lib/components/forms/PlayerDataForm.svelte
+msgid "Throws <0><0><0>Left</0> <1>Right</1> <2>Switch</2></0></0>"
+msgstr ""
+
+#: src/lib/components/forms/PlayerDataForm.svelte
+msgid "Umpire License <0><0><0>None</0> <1>A</1> <2>B</2> <3>C</3> <4>D</4></0></0>"
+msgstr ""
+
+#: src/lib/components/forms/PlayerDataForm.svelte
+msgid "Scorer License <0><0><0>None</0> <1>A</1> <2>B</2> <3>C</3> <4>D</4></0></0>"
 msgstr ""

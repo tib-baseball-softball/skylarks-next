@@ -4,7 +4,8 @@
   import Paginator from "$lib/pocketbase/Paginator.svelte";
   import {goto} from "$app/navigation";
   import type {CustomAuthModel, EventType} from "$lib/model/ExpandedResponse.js";
-  import {Segment} from "@skeletonlabs/skeleton-svelte";
+  // @ts-ignore
+  import {Tabs} from "bits-ui";
   import {authSettings} from "$lib/pocketbase/index.svelte";
   import TeamAdminSection from "$lib/components/diamondplanner/team/TeamAdminSection.svelte";
   import {Users} from "lucide-svelte";
@@ -35,7 +36,7 @@
   });
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
-  const canEdit = $derived(data.team.admins.includes(authRecord?.id) || data.team?.expand?.club?.admins.includes(authRecord?.id))
+  const canEdit = $derived(data.team.admins.includes(authRecord?.id) || data.team?.expand?.club?.admins.includes(authRecord?.id));
 </script>
 
 <h1 class="h1 my-3!">{data.team.name} ({data.team?.expand?.club.name})</h1>
@@ -48,7 +49,7 @@
     <section class="p-4">{@html data.team.description}</section>
   </article>
 
-  <TeamTeaserCard team={data.team} link={false}/>
+  <TeamTeaserCard link={false} team={data.team}/>
 </div>
 
 <section class="my-8! space-y-4">
@@ -56,7 +57,7 @@
     <h2 class="h2 mb-3">Announcements</h2>
   </header>
 
-  <AnnouncementSectionContent store={announcementStore} />
+  <AnnouncementSectionContent store={announcementStore}/>
 
   {#if canEdit}
     <AnnouncementForm
@@ -78,35 +79,34 @@
           class="flex items-center gap-2 grow justify-between xl:justify-start md:grow-0"
   >
     Timeframe
-    <Segment name="timeframe" value={showEvents} onValueChange={(e) => (showEvents = e.value ?? "next")} padding="p-1!"
-             classes="event-segment-container">
-      <Segment.Item value="next">
-        Next
-      </Segment.Item>
-      <Segment.Item value="past">
-        Past
-      </Segment.Item>
-    </Segment>
+    <Tabs.Root bind:value={showEvents}>
+      <Tabs.List class="tabs-list event-segment-container p-1!">
+        <Tabs.Trigger class="tabs-trigger active:preset-filled-error-300-700" value="next">Next</Tabs.Trigger>
+        <Tabs.Trigger class="tabs-trigger active:preset-filled" value="past">Past</Tabs.Trigger>
+      </Tabs.List>
+    </Tabs.Root>
   </label>
 
   <label class="flex items-center gap-2 justify-between xl:justify-start grow md:grow-0">
     Sort
-    <Segment name="sorting" value={sorting} onValueChange={(e) => (sorting = e.value ?? "asc")} padding="p-1!"
-             classes="flex-wrap event-segment-container">
-      <Segment.Item value="asc">Ascending</Segment.Item>
-      <Segment.Item value="desc">Descending</Segment.Item>
-    </Segment>
+    <Tabs.Root bind:value={sorting}>
+      <Tabs.List class="tabs-list flex-wrap event-segment-container p-1!">
+        <Tabs.Trigger class="tabs-trigger" value="asc">Ascending</Tabs.Trigger>
+        <Tabs.Trigger class="tabs-trigger" value="desc">Descending</Tabs.Trigger>
+      </Tabs.List>
+    </Tabs.Root>
   </label>
 
   <label class="flex items-center gap-2 justify-between xl:justify-start grow md:grow-0">
     Type
-    <Segment name="type" value={showTypes} onValueChange={(e) => (showTypes = e.value ?? "any")} gap="gap-1"
-             padding="p-1!" classes="flex-wrap event-segment-container">
-      <Segment.Item value="any">All</Segment.Item>
-      <Segment.Item value="game">Game</Segment.Item>
-      <Segment.Item value="practice">Practice</Segment.Item>
-      <Segment.Item value="misc">Other</Segment.Item>
-    </Segment>
+    <Tabs.Root bind:value={showTypes}>
+      <Tabs.List class="tabs-list flex-wrap event-segment-container p-1! gap-1">
+        <Tabs.Trigger class="tabs-trigger" value="any">All</Tabs.Trigger>
+        <Tabs.Trigger class="tabs-trigger" value="game">Game</Tabs.Trigger>
+        <Tabs.Trigger class="tabs-trigger" value="practice">Practice</Tabs.Trigger>
+        <Tabs.Trigger class="tabs-trigger" value="misc">Other</Tabs.Trigger>
+      </Tabs.List>
+    </Tabs.Root>
   </label>
 </div>
 
@@ -120,7 +120,7 @@
   {/each}
 </div>
 
-<Paginator store={events} showIfSinglePage={false}/>
+<Paginator showIfSinglePage={false} store={events}/>
 
 <hr class="my-8!"/>
 <section class="space-y-2 lg:space-y-4">
@@ -130,8 +130,8 @@
 
   <div class="flex flex-wrap items-center gap-2 lg:gap-3">
     <a
-            href="/account/team/{data.team.id}/members"
             class="btn preset-tonal-tertiary border border-tertiary-500"
+            href="/account/team/{data.team.id}/members"
     >
       <Users/>
       <span>Player List</span>
@@ -150,9 +150,10 @@
         .event-segment-container {
             border: 1px solid var(--color-surface-600-400);
 
-            .btn {
+            .tabs-trigger {
                 padding: 0.25rem 0.6rem;
             }
         }
     }
+
 </style>

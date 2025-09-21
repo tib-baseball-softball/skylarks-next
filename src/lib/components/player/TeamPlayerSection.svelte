@@ -1,7 +1,8 @@
 <script lang="ts">
   import type {Player} from "$lib/model/Player.ts";
   import PlayerRow from "$lib/components/player/PlayerRow.svelte";
-  import {Segment} from "@skeletonlabs/skeleton-svelte";
+  // @ts-ignore
+  import {Tabs} from "bits-ui";
 
   interface Props {
     players: Player[];
@@ -18,14 +19,12 @@
 
 <label class="label flex flex-col gap-1 my-4 lg:max-w-[50%]">
   Visualization
-  <Segment name="visual" onValueChange={changeValue} value={visual}>
-    <Segment.Item classes="flex-grow" value={"number"}>
-      Number
-    </Segment.Item>
-    <Segment.Item classes="flex-grow" value={"image"}>
-      Image
-    </Segment.Item>
-  </Segment>
+  <Tabs.Root bind:value={visual}>
+    <Tabs.List class="tabs-list">
+      <Tabs.Trigger value="number" class="tabs-trigger flex-grow">Number</Tabs.Trigger>
+      <Tabs.Trigger value="image" class="tabs-trigger flex-grow">Image</Tabs.Trigger>
+    </Tabs.List>
+  </Tabs.Root>
 </label>
 
 <div class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">

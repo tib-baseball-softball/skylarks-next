@@ -1,5 +1,7 @@
 <script lang="ts">
-  import {Progress, Segment} from "@skeletonlabs/skeleton-svelte";
+  import {Progress} from "@skeletonlabs/skeleton-svelte";
+  // @ts-ignore
+  import {Tabs} from "bits-ui";
   import {StatsType} from "bsm.js";
   import LeaderboardTable from "$lib/components/table/LeaderboardTable.svelte";
   import {goto} from "$app/navigation";
@@ -26,13 +28,15 @@
   });
 </script>
 
-<h1 class="h1">Leaderboards for {data.leagueGroup.name} ({data.leagueGroup.season})</h1>
+<h1 class="h1 mb-6!">Leaderboards for {data.leagueGroup.name} ({data.leagueGroup.season})</h1>
 
-<Segment classes="flex" name="stats-type" onValueChange={change} value={type}>
-  <Segment.Item classes="flex-grow" value={StatsType.batting}>Batting</Segment.Item>
-  <Segment.Item classes="flex-grow" value={StatsType.pitching}>Pitching</Segment.Item>
-  <Segment.Item classes="flex-grow" value={StatsType.fielding}>Fielding</Segment.Item>
-</Segment>
+<Tabs.Root bind:value={type} class="flex">
+  <Tabs.List class="tabs-list border mb-1 preset-tonal-surface">
+    <Tabs.Trigger class="tabs-trigger flex-grow" value={StatsType.batting}>Batting</Tabs.Trigger>
+    <Tabs.Trigger class="tabs-trigger flex-grow" value={StatsType.pitching}>Pitching</Tabs.Trigger>
+    <Tabs.Trigger class="tabs-trigger flex-grow" value={StatsType.fielding}>Fielding</Tabs.Trigger>
+  </Tabs.List>
+</Tabs.Root>
 
 {#await data.leaderboardData}
   <Progress/>

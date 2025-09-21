@@ -1,13 +1,15 @@
 <script lang="ts">
   import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  import {Segment, TagsInput} from "@skeletonlabs/skeleton-svelte";
+  import {TagsInput} from "@skeletonlabs/skeleton-svelte";
+  // @ts-ignore
+  import {Tabs} from "bits-ui";
   import {
     getAllBaseballPositionStringValues,
     positionEnumStringValuesToKeys,
     positionKeysToEnumStringValues,
   } from "$lib/types/BaseballPosition";
-  import {Edit} from "lucide-svelte";
+  import {SquarePen} from "lucide-svelte";
   //@ts-ignore
   import * as Sheet from "$lib/components/utility/sheet/index.js";
   import {toastController} from "$lib/service/ToastController.svelte.ts";
@@ -21,7 +23,7 @@
     buttonClasses?: string;
   }
 
-  let { buttonClasses = "" }: Props = $props();
+  let {buttonClasses = ""}: Props = $props();
 
 
   // Mark: here we do not need to be reactive as we're editing
@@ -38,7 +40,7 @@
     bsm_id: authRecord.bsm_id ?? 0,
   });
 
-  let open = $state(false)
+  let open = $state(false);
 
   const possiblePositionValues = getAllBaseballPositionStringValues();
   let selectedPositions: string[] = $state(
@@ -56,7 +58,7 @@
       toastController.trigger({
         message: "Position is already selected.",
         background: "preset-filled-error-500",
-      })
+      });
     }
   }
 
@@ -84,7 +86,7 @@
 
 <Sheet.Root bind:open={open}>
   <Sheet.Trigger class={buttonClasses}>
-    <Edit/>
+    <SquarePen/>
     <span>Edit Player Data</span>
   </Sheet.Trigger>
 
@@ -97,51 +99,51 @@
       </h2>
     </header>
 
-  <form onsubmit={submitForm} class="mt-4 space-y-3">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 xl:gap-4">
-      <input
-              name="id"
-              autocomplete="off"
-              class="input"
-              type="hidden"
-              readonly
-              bind:value={form.id}
-      />
-
-      <label class="label">
-        Jersey Number
+    <form class="mt-4 space-y-3" onsubmit={submitForm}>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 xl:gap-4">
         <input
-                name="number"
                 autocomplete="off"
+                bind:value={form.id}
                 class="input"
-                type="number"
-                bind:value={form.number}
-        />
-      </label>
-
-      <label class="label">
-        BSM ID (Player Pass Number)
-        <input
-                name="bsm_id"
-                autocomplete="off"
-                class="input"
-                type="text"
+                name="id"
                 readonly
-                bind:value={form.bsm_id}
+                type="hidden"
         />
-      </label>
 
-      <label class="label flex flex-col gap-1 md:gap-2 md:col-span-2">
-        Positions
-        <TagsInput
-                value={selectedPositions}
-                name="positions"
-                onValueChange={(e) => (selectedPositions = e.value)}
-                placeholder="Enter positions or click buttons..."
-                validate={validatePositionValue}
-                tagBackground="preset-filled-primary-500"
-        />
-        <span class="flex flex-wrap gap-2 md:col-span-2">
+        <label class="label">
+          Jersey Number
+          <input
+                  autocomplete="off"
+                  bind:value={form.number}
+                  class="input"
+                  name="number"
+                  type="number"
+          />
+        </label>
+
+        <label class="label">
+          BSM ID (Player Pass Number)
+          <input
+                  autocomplete="off"
+                  bind:value={form.bsm_id}
+                  class="input"
+                  name="bsm_id"
+                  readonly
+                  type="text"
+          />
+        </label>
+
+        <label class="label flex flex-col gap-1 md:gap-2 md:col-span-2">
+          Positions
+          <TagsInput
+                  name="positions"
+                  onValueChange={(e) => (selectedPositions = e.value)}
+                  placeholder="Enter positions or click buttons..."
+                  tagBackground="preset-filled-primary-500"
+                  validate={validatePositionValue}
+                  value={selectedPositions}
+          />
+          <span class="flex flex-wrap gap-2 md:col-span-2">
           {#each possiblePositionValues as value}
             <button
                     type="button"
@@ -152,88 +154,64 @@
             </button>
           {/each}
         </span>
-      </label>
+        </label>
 
-      <label class="label flex flex-col gap-1 md:col-span-2">
-        Bats
-        <Segment classes="input" name="bats" value={form.bats} onValueChange={(e) => (form.bats = e.value ?? "none")}>
-          <Segment.Item value={"left"} classes="flex-grow">
-            Left
-          </Segment.Item>
-          <Segment.Item value={"right"} classes="flex-grow">
-            Right
-          </Segment.Item>
-          <Segment.Item value={"switch"} classes="flex-grow">
-            Switch
-          </Segment.Item>
-        </Segment>
-      </label>
+        <label class="label flex flex-col gap-1 md:col-span-2">
+          Bats
+          <Tabs.Root bind:value={form.bats} class="input">
+            <Tabs.List class="tabs-list">
+              <Tabs.Trigger class="tabs-trigger flex-grow" value="left">Left</Tabs.Trigger>
+              <Tabs.Trigger class="tabs-trigger flex-grow" value="right">Right</Tabs.Trigger>
+              <Tabs.Trigger class="tabs-trigger flex-grow" value="switch">Switch</Tabs.Trigger>
+            </Tabs.List>
+          </Tabs.Root>
+        </label>
 
-      <label class="label flex flex-col gap-1 md:col-span-2">
-        Throws
-        <Segment classes="input" name="throws" value={form.throws} onValueChange={(e) => (form.throws = e.value ?? "none")}>
-          <Segment.Item value={"left"} classes="flex-grow">
-            Left
-          </Segment.Item>
-          <Segment.Item value={"right"} classes="flex-grow">
-            Right
-          </Segment.Item>
-          <Segment.Item value={"switch"} classes="flex-grow">
-            Switch
-          </Segment.Item>
-        </Segment>
-      </label>
+        <label class="label flex flex-col gap-1 md:col-span-2">
+          Throws
+          <Tabs.Root bind:value={form.throws} class="input">
+            <Tabs.List class="tabs-list">
+              <Tabs.Trigger class="tabs-trigger flex-grow" value="left">Left</Tabs.Trigger>
+              <Tabs.Trigger class="tabs-trigger flex-grow" value="right">Right</Tabs.Trigger>
+              <Tabs.Trigger class="tabs-trigger flex-grow" value="switch">Switch</Tabs.Trigger>
+            </Tabs.List>
+          </Tabs.Root>
+        </label>
 
-      <label class="label flex flex-col gap-1 md:col-span-2">
-        Umpire License
-        <Segment classes="input" name="umpire" value={form.umpire} onValueChange={(e) => (form.umpire = e.value ?? "none")}>
-          <Segment.Item value={"none"} classes="flex-grow">
-            None
-          </Segment.Item>
-          <Segment.Item value={"A"} classes="flex-grow">
-            A
-          </Segment.Item>
-          <Segment.Item value={"B"} classes="flex-grow">
-            B
-          </Segment.Item>
-          <Segment.Item value={"C"} classes="flex-grow">
-            C
-          </Segment.Item>
-          <Segment.Item value={"D"} classes="flex-grow">
-            D
-          </Segment.Item>
-        </Segment>
-      </label>
+        <label class="label flex flex-col gap-1 md:col-span-2">
+          Umpire License
+          <Tabs.Root bind:value={form.umpire} class="input">
+            <Tabs.List class="tabs-list">
+              <Tabs.Trigger class="tabs-trigger flex-grow" value="none">None</Tabs.Trigger>
+              <Tabs.Trigger class="tabs-trigger flex-grow" value="A">A</Tabs.Trigger>
+              <Tabs.Trigger class="tabs-trigger flex-grow" value="B">B</Tabs.Trigger>
+              <Tabs.Trigger class="tabs-trigger flex-grow" value="C">C</Tabs.Trigger>
+              <Tabs.Trigger class="tabs-trigger flex-grow" value="D">D</Tabs.Trigger>
+            </Tabs.List>
+          </Tabs.Root>
+        </label>
 
-      <label class="label flex flex-col gap-1 md:col-span-2">
-        Scorer License
-        <Segment classes="input" name="scorer" value={form.scorer} onValueChange={(e) => (form.scorer = e.value ?? "none")}>
-          <Segment.Item value={"none"} classes="flex-grow">
-            None
-          </Segment.Item>
-          <Segment.Item value={"A"} classes="flex-grow">
-            A
-          </Segment.Item>
-          <Segment.Item value={"B"} classes="flex-grow">
-            B
-          </Segment.Item>
-          <Segment.Item value={"C"} classes="flex-grow">
-            C
-          </Segment.Item>
-          <Segment.Item value={"D"} classes="flex-grow">
-            D
-          </Segment.Item>
-        </Segment>
-      </label>
-    </div>
+        <label class="label flex flex-col gap-1 md:col-span-2">
+          Scorer License
+          <Tabs.Root bind:value={form.scorer} class="input">
+            <Tabs.List class="tabs-list">
+              <Tabs.Trigger class="tabs-trigger flex-grow" value="none">None</Tabs.Trigger>
+              <Tabs.Trigger class="tabs-trigger flex-grow" value="A">A</Tabs.Trigger>
+              <Tabs.Trigger class="tabs-trigger flex-grow" value="B">B</Tabs.Trigger>
+              <Tabs.Trigger class="tabs-trigger flex-grow" value="C">C</Tabs.Trigger>
+              <Tabs.Trigger class="tabs-trigger flex-grow" value="D">D</Tabs.Trigger>
+            </Tabs.List>
+          </Tabs.Root>
+        </label>
+      </div>
 
-    <hr class="my-5!"/>
+      <hr class="my-5!"/>
 
-    <div class="flex justify-center gap-3">
-      <button type="submit" class="mt-2 btn preset-tonal-primary border border-primary-500">
-        Submit
-      </button>
-    </div>
-  </form>
+      <div class="flex justify-center gap-3">
+        <button class="mt-2 btn preset-tonal-primary border border-primary-500" type="submit">
+          Submit
+        </button>
+      </div>
+    </form>
   </Sheet.Content>
 </Sheet.Root>

@@ -12,8 +12,11 @@
 
 .tabs-trigger {
     @apply btn;
-    @apply data-[state=active]:preset-filled-primary-500;
     @apply hover:preset-tonal-primary;
     @apply text-sm;
     @apply md:text-base;
+}
+
+.tabs-trigger[data-state="active"] {
+    @apply preset-filled;
 }

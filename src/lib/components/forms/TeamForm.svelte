@@ -2,7 +2,8 @@
   import {invalidate} from "$app/navigation";
   import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  import {Segment} from "@skeletonlabs/skeleton-svelte";
+  // @ts-ignore
+  import {Tabs} from "bits-ui";
   import {Edit, Plus} from "lucide-svelte";
   import type {ClubsResponse, UsersResponse} from "$lib/model/pb-types.ts";
   import MultiSelectCombobox from "$lib/components/utility/MultiSelectCombobox.svelte";
@@ -164,14 +165,12 @@
 
         <label class="label flex flex-col gap-1 col-span-2">
           Type
-          <Segment name="age_group" value={form.age_group} onValueChange={(e) => (form.age_group = e.value ?? "adults")} classes="dark:preset-outlined-surface-600-400">
-            <Segment.Item value={"adults"} classes="flex-grow">
-              Adults
-            </Segment.Item>
-            <Segment.Item value={"minors"} classes="flex-grow">
-              Minors
-            </Segment.Item>
-          </Segment>
+          <Tabs.Root bind:value={form.age_group} class="dark:preset-outlined-surface-600-400">
+            <Tabs.List class="tabs-list">
+              <Tabs.Trigger value="adults" class="tabs-trigger flex-grow">Adults</Tabs.Trigger>
+              <Tabs.Trigger value="minors" class="tabs-trigger flex-grow">Minors</Tabs.Trigger>
+            </Tabs.List>
+          </Tabs.Root>
         </label>
 
         <label class="label col-span-2">
