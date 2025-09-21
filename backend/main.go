@@ -46,7 +46,7 @@ func bindAppHooks(app core.App) {
 	})
 
 	app.OnRecordCreateRequest(dp.UserCollection).BindFunc(func(event *core.RecordRequestEvent) error {
-		return dp.ValidateSignupKey(event.App, event)
+		return dp.ValidateSignupKey(event)
 	})
 
 	app.OnRecordsListRequest("leaguegroups").BindFunc(func(event *core.RecordsListRequestEvent) error {

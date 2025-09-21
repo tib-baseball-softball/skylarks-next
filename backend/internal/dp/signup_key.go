@@ -7,15 +7,15 @@ import (
 	"github.com/pocketbase/pocketbase/core"
 )
 
-func ValidateSignupKey(app core.App, event *core.RecordRequestEvent) error {
+func ValidateSignupKey(e *core.RecordRequestEvent) error {
 	user := &User{}
-	user.SetProxyRecord(event.Record)
+	user.SetProxyRecord(e.Record)
 
-	teams, err := getValidSignupKeys(app)
+	teams, err := getValidSignupKeys(e.App)
 	if err != nil {
 		errorText := "failed to get valid signup teams"
 
-		app.Logger().Error(errorText, "error", err)
+		e.App.Logger().Error(errorText, "error", err)
 		return errors.New(errorText)
 	}
 
@@ -23,8 +23,8 @@ func ValidateSignupKey(app core.App, event *core.RecordRequestEvent) error {
 	body := struct {
 		SignupKey string `json:"signup_key"`
 	}{}
-	if err := event.BindBody(&body); err != nil {
-		return event.BadRequestError("Failed to read request body", err)
+	if err := e.BindBody(&body); err != nil {
+		return e.BadRequestError("Failed to read request body", err)
 	}
 
 	isValid := false
@@ -39,16 +39,16 @@ func ValidateSignupKey(app core.App, event *core.RecordRequestEvent) error {
 	}
 
 	if !isValid {
-		err := event.JSON(http.StatusBadRequest, map[string]string{
+		err := e.JSON(http.StatusBadRequest, map[string]string{
 			"message": "Signup key invalid",
 		})
 		if err != nil {
 			return err
 		}
-		return event.BadRequestError("signup key invalid", err)
+		return e.BadRequestError("signup key invalid", err)
 	}
 
-	return event.Next()
+	return e.Next()
 }
 
 // TeamWithSignupKey Reduced record with just the relevant fields
