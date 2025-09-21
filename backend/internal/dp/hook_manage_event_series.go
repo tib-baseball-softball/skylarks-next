@@ -89,15 +89,6 @@ func generateSeriesEvents(app core.App, record *core.Record) ([]*core.Record, er
 	var events []*core.Record
 	existingEventsMap := make(map[string]*Event)
 
-	// Create a map of existing events for easy lookup
-	for _, event := range existingEvents {
-		eventProxy := &Event{}
-		eventProxy.SetProxyRecord(event)
-
-		key := fmt.Sprintf("%s-%s", eventProxy.StartTime().Time().Format(time.RFC3339), eventProxy.EndTime().Time().Format(time.RFC3339))
-		existingEventsMap[key] = eventProxy
-	}
-
 	timezone := os.Getenv("TIME_ZONE")
 	if timezone == "" {
 		timezone = "Europe/Berlin"
@@ -106,6 +97,15 @@ func generateSeriesEvents(app core.App, record *core.Record) ([]*core.Record, er
 	location, err := time.LoadLocation(timezone)
 	if err != nil {
 		return nil, err
+	}
+
+	// Create a map of existing events for easy lookup
+	for _, event := range existingEvents {
+		eventProxy := &Event{}
+		eventProxy.SetProxyRecord(event)
+
+		key := fmt.Sprintf("%s---%s", eventProxy.StartTime().Time().In(location).Format(time.RFC3339), eventProxy.EndTime().Time().In(location).Format(time.RFC3339))
+		existingEventsMap[key] = eventProxy
 	}
 
 	// reads timezone information to ensure that the later call to `AddDate()` accounts for daylight savings time traversal
@@ -120,7 +120,7 @@ func generateSeriesEvents(app core.App, record *core.Record) ([]*core.Record, er
 		eventEnd := currentDate.Add(time.Duration(duration) * time.Minute)
 
 		// Check if an event already exists for this time slot
-		key := fmt.Sprintf("%s-%s", eventStart.Time().Format(time.RFC3339), eventEnd.Time().Format(time.RFC3339))
+		key := fmt.Sprintf("%s---%s", eventStart.Time().Format(time.RFC3339), eventEnd.Time().Format(time.RFC3339))
 		event, exists := existingEventsMap[key]
 
 		if !exists {
