@@ -14,10 +14,7 @@ import (
 	"github.com/pocketbase/pocketbase/plugins/migratecmd"
 	"github.com/spf13/cobra"
 	"github.com/subosito/gotenv"
-	"github.com/tib-baseball-softball/skylarks-next/bsm"
-	"github.com/tib-baseball-softball/skylarks-next/internal/hooks"
-	"github.com/tib-baseball-softball/skylarks-next/internal/pb"
-	"github.com/tib-baseball-softball/skylarks-next/internal/routes"
+	"github.com/tib-baseball-softball/skylarks-next/internal/dp"
 	"github.com/tib-baseball-softball/skylarks-next/internal/tib"
 	_ "github.com/tib-baseball-softball/skylarks-next/migrations"
 )
@@ -37,8 +34,8 @@ func bindAppHooks(app core.App) {
 
 	//------------------- Hooks -------------------------//
 
-	app.OnRecordAuthRequest(pb.UserCollection).BindFunc(func(e *core.RecordAuthRequestEvent) error {
-		err := hooks.SetLastLogin(e.App, e.Record)
+	app.OnRecordAuthRequest(dp.UserCollection).BindFunc(func(e *core.RecordAuthRequestEvent) error {
+		err := dp.SetLastLogin(e.App, e.Record)
 		if err != nil {
 			app.Logger().Error(
 				"Error upon setting auth record last login field",
@@ -48,44 +45,44 @@ func bindAppHooks(app core.App) {
 		return e.Next()
 	})
 
-	app.OnRecordCreateRequest(pb.UserCollection).BindFunc(func(event *core.RecordRequestEvent) error {
-		return hooks.ValidateSignupKey(event.App, event)
+	app.OnRecordCreateRequest(dp.UserCollection).BindFunc(func(event *core.RecordRequestEvent) error {
+		return dp.ValidateSignupKey(event.App, event)
 	})
 
 	app.OnRecordsListRequest("leaguegroups").BindFunc(func(event *core.RecordsListRequestEvent) error {
-		return hooks.TriggerLeagueImport(event.App, event)
+		return dp.TriggerLeagueImport(event.App, event)
 	})
 
-	app.OnRecordCreateRequest(pb.EventsCollection).BindFunc(func(e *core.RecordRequestEvent) error {
-		return hooks.ValidateEventTimes(e)
+	app.OnRecordCreateRequest(dp.EventsCollection).BindFunc(func(e *core.RecordRequestEvent) error {
+		return dp.ValidateEventTimes(e)
 	})
 
-	app.OnRecordUpdateRequest(pb.EventsCollection).BindFunc(func(e *core.RecordRequestEvent) error {
-		return hooks.ValidateEventTimes(e)
+	app.OnRecordUpdateRequest(dp.EventsCollection).BindFunc(func(e *core.RecordRequestEvent) error {
+		return dp.ValidateEventTimes(e)
 	})
 
-	app.OnRecordEnrich(pb.EventsCollection).BindFunc(func(event *core.RecordEnrichEvent) error {
-		return hooks.AddEventParticipationData(event.App, event)
+	app.OnRecordEnrich(dp.EventsCollection).BindFunc(func(event *core.RecordEnrichEvent) error {
+		return dp.AddEventParticipationData(event.App, event)
 	})
 
-	app.OnRecordAfterCreateSuccess(pb.UserCollection).BindFunc(func(e *core.RecordEvent) error {
+	app.OnRecordAfterCreateSuccess(dp.UserCollection).BindFunc(func(e *core.RecordEvent) error {
 		return tib.SendUpdatedPlayerData(e)
 	})
 
-	app.OnRecordAfterUpdateSuccess(pb.UserCollection).BindFunc(func(e *core.RecordEvent) error {
+	app.OnRecordAfterUpdateSuccess(dp.UserCollection).BindFunc(func(e *core.RecordEvent) error {
 		return tib.SendUpdatedPlayerData(e)
 	})
 
-	app.OnRecordAfterCreateSuccess(pb.EventSeriesCollection).BindFunc(func(e *core.RecordEvent) error {
-		return hooks.CreateOrUpdateEventsForSeries(e)
+	app.OnRecordAfterCreateSuccess(dp.EventSeriesCollection).BindFunc(func(e *core.RecordEvent) error {
+		return dp.CreateOrUpdateEventsForSeries(e)
 	})
 
-	app.OnRecordAfterUpdateSuccess(pb.EventSeriesCollection).BindFunc(func(e *core.RecordEvent) error {
-		return hooks.CreateOrUpdateEventsForSeries(e)
+	app.OnRecordAfterUpdateSuccess(dp.EventSeriesCollection).BindFunc(func(e *core.RecordEvent) error {
+		return dp.CreateOrUpdateEventsForSeries(e)
 	})
 
-	app.OnRecordDelete(pb.EventSeriesCollection).BindFunc(func(e *core.RecordEvent) error {
-		return hooks.DeleteEventsForSeries(e)
+	app.OnRecordDelete(dp.EventSeriesCollection).BindFunc(func(e *core.RecordEvent) error {
+		return dp.DeleteEventsForSeries(e)
 	})
 
 	//------------------- Serve static dir -------------------------//
@@ -107,36 +104,36 @@ func bindAppHooks(app core.App) {
 	})
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
-		se.Router.GET("/api/gamecount/{team}", routes.GetGamesCount(app))
+		se.Router.GET("/api/gamecount/{team}", dp.GetGamesCount(app))
 
 		return se.Next()
 	})
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
-		se.Router.POST("/api/import/{club}/leagues", routes.StartLeagueGroupsImport(app))
+		se.Router.POST("/api/import/{club}/leagues", dp.StartLeagueGroupsImport(app))
 
 		return se.Next()
 	})
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
-		se.Router.GET("/api/stats/{user}", routes.GetUserStats())
+		se.Router.GET("/api/stats/{user}", dp.GetUserStats())
 
 		return se.Next()
 	})
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
-		se.Router.GET("/api/bsm/relay/top10/{league}", routes.GetLeagueLeaders())
+		se.Router.GET("/api/bsm/relay/top10/{league}", tib.GetLeagueLeaders())
 
 		return se.Next()
 	})
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
-		se.Router.GET("/api/bsm/relay", routes.GetRelayedBSMData())
+		se.Router.GET("/api/bsm/relay", tib.GetRelayedBSMData())
 		return se.Next()
 	})
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
-		se.Router.GET("/api/team/favorite", routes.GetFavoriteTeamData())
+		se.Router.GET("/api/team/favorite", tib.GetFavoriteTeamData())
 		return se.Next()
 	})
 
@@ -149,19 +146,19 @@ func bindAppHooks(app core.App) {
 
 	if os.Getenv("APPLICATION_CONTEXT") != "Development" {
 		app.Cron().MustAdd("LeagueGroupImport", "0 * * * *", func() {
-			err := bsm.ImportLeagueGroups(app, nil, nil)
+			err := dp.ImportLeagueGroups(app, nil, nil)
 			if err != nil {
 				app.Logger().Error("Error while running cronjob LeagueGroupImport: " + err.Error())
 			}
 		})
 
 		app.Cron().MustAdd("GamesImport", "0 * * * *", func() {
-			gamesImportService := bsm.GameImportService{App: app}
+			gamesImportService := dp.GameImportService{App: app}
 			gamesImportService.ImportGames()
 		})
 
 		app.Cron().MustAdd("TeamDatasetImport", "30 * * * *", func() {
-			bsm.ImportTeamDatasets(app)
+			tib.ImportTeamDatasets(app)
 		})
 	}
 }
@@ -189,7 +186,7 @@ func main() {
 		Use: "import:games",
 		Run: func(cmd *cobra.Command, args []string) {
 			// app is a pointer here because commands only work after app.Start()
-			gamesImportService := bsm.GameImportService{App: *app}
+			gamesImportService := dp.GameImportService{App: *app}
 			gamesImportService.ImportGames()
 		},
 	})
@@ -197,7 +194,7 @@ func main() {
 	app.RootCmd.AddCommand(&cobra.Command{
 		Use: "import:leagues",
 		Run: func(cmd *cobra.Command, args []string) {
-			err := bsm.ImportLeagueGroups(app, nil, nil)
+			err := dp.ImportLeagueGroups(app, nil, nil)
 			if err != nil {
 				log.Print("Error while running LeagueGroupImport: " + err.Error())
 			}
@@ -207,7 +204,7 @@ func main() {
 	app.RootCmd.AddCommand(&cobra.Command{
 		Use: "import:teamdatasets",
 		Run: func(cmd *cobra.Command, args []string) {
-			bsm.ImportTeamDatasets(app)
+			tib.ImportTeamDatasets(app)
 		},
 	})
 

@@ -8,7 +8,7 @@ import (
 
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
-	"github.com/tib-baseball-softball/skylarks-next/internal/pb"
+	"github.com/tib-baseball-softball/skylarks-next/internal/dp"
 )
 
 type PlayerChangedMessage struct {
@@ -46,7 +46,7 @@ func HandlePlayerChangedMessage(app core.App) func(e *core.RequestEvent) error {
 		}
 
 		record, err := app.FindFirstRecordByFilter(
-			pb.UserCollection,
+			dp.UserCollection,
 			"first_name = {:firstName} && last_name = {:lastName}",
 			dbx.Params{"firstName": message.FirstName, "lastName": message.LastName},
 		)
@@ -58,7 +58,7 @@ func HandlePlayerChangedMessage(app core.App) func(e *core.RequestEvent) error {
 			return e.JSON(http.StatusNotFound, "Player not found.")
 		}
 
-		player := &pb.User{}
+		player := &dp.User{}
 		player.SetProxyRecord(record)
 
 		if player.BSMID() != 0 {
