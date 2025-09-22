@@ -2,8 +2,6 @@
   import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
   import {TagsInput} from "@skeletonlabs/skeleton-svelte";
-  // @ts-ignore
-  import {Tabs} from "bits-ui";
   import {
     getAllBaseballPositionStringValues,
     positionEnumStringValuesToKeys,
@@ -13,6 +11,7 @@
   //@ts-ignore
   import * as Sheet from "$lib/components/utility/sheet/index.js";
   import {toastController} from "$lib/service/ToastController.svelte.ts";
+  import TabsRadioGroup from "$lib/components/utility/form/TabsRadioGroup.svelte";
 
   interface ValidateArgs {
     inputValue: string;
@@ -24,7 +23,6 @@
   }
 
   let {buttonClasses = ""}: Props = $props();
-
 
   // Mark: here we do not need to be reactive as we're editing
   const authRecord = authSettings.record as CustomAuthModel;
@@ -156,55 +154,34 @@
         </span>
         </label>
 
-        <label class="label flex flex-col gap-1 md:col-span-2">
-          Bats
-          <Tabs.Root bind:value={form.bats} class="input">
-            <Tabs.List class="tabs-list">
-              <Tabs.Trigger class="tabs-trigger flex-grow" value="left">Left</Tabs.Trigger>
-              <Tabs.Trigger class="tabs-trigger flex-grow" value="right">Right</Tabs.Trigger>
-              <Tabs.Trigger class="tabs-trigger flex-grow" value="switch">Switch</Tabs.Trigger>
-            </Tabs.List>
-          </Tabs.Root>
-        </label>
+        <TabsRadioGroup
+                bind:value={form.bats}
+                label="Bats"
+                name="bats"
+                options={["left", "right", "switch"]}
+        />
 
-        <label class="label flex flex-col gap-1 md:col-span-2">
-          Throws
-          <Tabs.Root bind:value={form.throws} class="input">
-            <Tabs.List class="tabs-list">
-              <Tabs.Trigger class="tabs-trigger flex-grow" value="left">Left</Tabs.Trigger>
-              <Tabs.Trigger class="tabs-trigger flex-grow" value="right">Right</Tabs.Trigger>
-              <Tabs.Trigger class="tabs-trigger flex-grow" value="switch">Switch</Tabs.Trigger>
-            </Tabs.List>
-          </Tabs.Root>
-        </label>
+        <TabsRadioGroup
+                bind:value={form.throws}
+                label="Throws"
+                name="throws"
+                options={["left", "right", "switch"]}
+        />
 
-        <label class="label flex flex-col gap-1 md:col-span-2">
-          Umpire License
-          <Tabs.Root bind:value={form.umpire} class="input">
-            <Tabs.List class="tabs-list">
-              <Tabs.Trigger class="tabs-trigger flex-grow" value="none">None</Tabs.Trigger>
-              <Tabs.Trigger class="tabs-trigger flex-grow" value="A">A</Tabs.Trigger>
-              <Tabs.Trigger class="tabs-trigger flex-grow" value="B">B</Tabs.Trigger>
-              <Tabs.Trigger class="tabs-trigger flex-grow" value="C">C</Tabs.Trigger>
-              <Tabs.Trigger class="tabs-trigger flex-grow" value="D">D</Tabs.Trigger>
-            </Tabs.List>
-          </Tabs.Root>
-        </label>
+        <TabsRadioGroup
+                bind:value={form.umpire}
+                label="Umpire License"
+                name="umpire"
+                options={["none", "A", "B", "C", "D"]}
+        />
 
-        <label class="label flex flex-col gap-1 md:col-span-2">
-          Scorer License
-          <Tabs.Root bind:value={form.scorer} class="input">
-            <Tabs.List class="tabs-list">
-              <Tabs.Trigger class="tabs-trigger flex-grow" value="none">None</Tabs.Trigger>
-              <Tabs.Trigger class="tabs-trigger flex-grow" value="A">A</Tabs.Trigger>
-              <Tabs.Trigger class="tabs-trigger flex-grow" value="B">B</Tabs.Trigger>
-              <Tabs.Trigger class="tabs-trigger flex-grow" value="C">C</Tabs.Trigger>
-              <Tabs.Trigger class="tabs-trigger flex-grow" value="D">D</Tabs.Trigger>
-            </Tabs.List>
-          </Tabs.Root>
-        </label>
+        <TabsRadioGroup
+                bind:value={form.scorer}
+                label="Scorer License"
+                name="scorer"
+                options={["none", "A", "B", "C", "D"]}
+        />
       </div>
-
       <hr class="my-5!"/>
 
       <div class="flex justify-center gap-3">

@@ -2,14 +2,13 @@
   import {invalidate} from "$app/navigation";
   import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  // @ts-ignore
-  import {Tabs} from "bits-ui";
-  import {Edit, Plus} from "lucide-svelte";
+  import {Plus, SquarePen} from "lucide-svelte";
   import type {ClubsResponse, UsersResponse} from "$lib/model/pb-types.ts";
   import MultiSelectCombobox from "$lib/components/utility/MultiSelectCombobox.svelte";
   //@ts-ignore
   import * as Sheet from "$lib/components/utility/sheet/index.js";
   import {toastController} from "$lib/service/ToastController.svelte.ts";
+  import TabsRadioGroup from "$lib/components/utility/form/TabsRadioGroup.svelte";
 
   interface Props {
     club: ClubsResponse,
@@ -25,7 +24,7 @@
   let open = $state(false);
 
 
-  const form: Partial<ExpandedTeam> = $state(
+  const form: Partial<ExpandedTeam> & { age_group: string } = $state(
       team ?? {
         id: "",
         name: "",
@@ -84,7 +83,7 @@
   <Sheet.Trigger class={buttonClasses}>
     {#if form.id}
 
-      <Edit/>
+      <SquarePen/>
       {#if showLabel}
         <span>Edit Team</span>
       {/if}
@@ -110,36 +109,36 @@
       {/if}
     </header>
 
-    <form onsubmit={submitForm} class="mt-4 space-y-3">
+    <form class="mt-4 space-y-3" onsubmit={submitForm}>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-3 xl:gap-4">
         <input
-                name="id"
                 autocomplete="off"
-                class="input"
-                type="hidden"
-                readonly
                 bind:value={form.id}
+                class="input"
+                name="id"
+                readonly
+                type="hidden"
         />
 
         <label class="label col-span-2 md:col-span-1">
           Name
           <input
-                  name="title"
+                  bind:value={form.name}
                   class="input"
+                  name="title"
                   required
                   type="text"
-                  bind:value={form.name}
           />
         </label>
 
         <label class="label col-span-2 md:col-span-1">
           Club
           <input
-                  name="id"
                   autocomplete="off"
                   class="input"
-                  type="text"
+                  name="id"
                   readonly
+                  type="text"
                   value={club?.name}
           />
         </label>
@@ -151,9 +150,9 @@
           <input
                   bind:value={form.signup_key}
                   class="input"
+                  minlength="8"
                   name="signup_key"
                   placeholder="minimum 8 characters"
-                  minlength="8"
                   required
                   type="text"
           />
@@ -163,23 +162,20 @@
                 </span>
         </label>
 
-        <label class="label flex flex-col gap-1 col-span-2">
-          Type
-          <Tabs.Root bind:value={form.age_group} class="dark:preset-outlined-surface-600-400">
-            <Tabs.List class="tabs-list">
-              <Tabs.Trigger value="adults" class="tabs-trigger flex-grow">Adults</Tabs.Trigger>
-              <Tabs.Trigger value="minors" class="tabs-trigger flex-grow">Minors</Tabs.Trigger>
-            </Tabs.List>
-          </Tabs.Root>
-        </label>
+        <TabsRadioGroup
+                bind:value={form.age_group}
+                label="Age Group"
+                name="age_group"
+                options={["adults", "minors"]}
+        />
 
         <label class="label col-span-2">
           Description
           <textarea
-                  name="desc"
-                  class="textarea"
-                  rows="8"
                   bind:value={form.description}
+                  class="textarea"
+                  name="desc"
+                  rows="8"
           ></textarea>
         </label>
 
@@ -195,7 +191,7 @@
       <hr class="my-5!"/>
 
       <div class="flex justify-center gap-3">
-        <button type="submit" class="mt-2 btn preset-filled-primary-500">
+        <button class="mt-2 btn preset-filled-primary-500" type="submit">
           Submit
         </button>
       </div>

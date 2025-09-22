@@ -4,8 +4,6 @@
   import {type LocationsResponse, type UniformsetsResponse} from "$lib/model/pb-types";
   import {client} from "$lib/pocketbase/index.svelte";
   import {Switch} from "@skeletonlabs/skeleton-svelte";
-  // @ts-ignore
-  import {Tabs} from "bits-ui";
   import Flatpickr from "../utility/Flatpickr.svelte";
   import {DateTimeUtility} from "$lib/service/DateTimeUtility.js";
   //@ts-ignore
@@ -13,6 +11,7 @@
   import type {Snippet} from "svelte";
   import type {Extension} from "$lib/model/ExpandedResponse.js";
   import {toastController} from "$lib/service/ToastController.svelte.ts";
+  import TabsRadioGroup from "$lib/components/utility/form/TabsRadioGroup.svelte";
 
   interface Props {
     event: ExpandedEvent | null;
@@ -26,7 +25,12 @@
 
   let open = $state(false);
 
-  const form: Extension<Partial<ExpandedEvent>, { starttime: string, endtime: string, meetingtime: string }> = $state(
+  const form: Extension<Partial<ExpandedEvent>, {
+    starttime: string,
+    endtime: string,
+    meetingtime: string,
+    type: string
+  }> = $state(
       event ?? {
         id: "",
         title: "",
@@ -183,16 +187,12 @@
           </select>
         </label>
 
-        <label class="label flex flex-col gap-1 md:col-span-2">
-          Type
-          <Tabs.Root bind:value={form.type}>
-            <Tabs.List class="tabs-list">
-              <Tabs.Trigger class="tabs-trigger flex-grow" value="game">Game</Tabs.Trigger>
-              <Tabs.Trigger class="tabs-trigger flex-grow" value="practice">Practice</Tabs.Trigger>
-              <Tabs.Trigger class="tabs-trigger flex-grow" value="misc">Other</Tabs.Trigger>
-            </Tabs.List>
-          </Tabs.Root>
-        </label>
+        <TabsRadioGroup
+                bind:value={form.type}
+                label="Type"
+                name="type"
+                options={["game", "practice", "misc"]}
+        />
 
         {#await attireOptions then options}
           <label class="label md:col-span-2">

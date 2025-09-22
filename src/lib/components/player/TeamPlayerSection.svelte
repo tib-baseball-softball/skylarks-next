@@ -10,19 +10,14 @@
 
   let {players}: Props = $props();
   let visual: "number" | "image" = $state("number");
-
-  // @ts-expect-error
-  function changeValue(details) {
-    visual = details.value ?? "number";
-  }
 </script>
 
 <label class="label flex flex-col gap-1 my-4 lg:max-w-[50%]">
   Visualization
   <Tabs.Root bind:value={visual}>
-    <Tabs.List class="tabs-list">
-      <Tabs.Trigger value="number" class="tabs-trigger flex-grow">Number</Tabs.Trigger>
-      <Tabs.Trigger value="image" class="tabs-trigger flex-grow">Image</Tabs.Trigger>
+    <Tabs.List class="tabs-list input">
+      <Tabs.Trigger class="tabs-trigger flex-grow" value="number">Number</Tabs.Trigger>
+      <Tabs.Trigger class="tabs-trigger flex-grow" value="image">Image</Tabs.Trigger>
     </Tabs.List>
   </Tabs.Root>
 </label>

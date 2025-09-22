@@ -18,10 +18,6 @@
     });
   };
 
-  function change(e: any) {
-    type = e.value ?? StatsType.batting;
-  }
-
   $effect.pre(() => {
     console.log(type);
     reloadWithQuery();
