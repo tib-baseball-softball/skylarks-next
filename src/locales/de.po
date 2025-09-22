@@ -2786,11 +2786,11 @@ msgstr "Typ <0><0><0>Alle</0> <1>Spiel</1> <2>Training</2> <3>Andere</3></0></0>
 
 #: src/lib/components/forms/PlayerDataForm.svelte
 msgid "Umpire License"
-msgstr "Schiedsrichterlizenz"
+msgstr "Umpirelizenz"
 
 #: src/lib/components/forms/PlayerDataForm.svelte
 msgid "Scorer License"
-msgstr "Punktrichterlizenz"
+msgstr "Scorerlizenz"
 
 #: src/lib/components/forms/EventForm.svelte
 msgid "Type"
