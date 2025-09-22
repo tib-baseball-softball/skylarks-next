@@ -1,15 +1,20 @@
 <script lang="ts">
   import type {EventseriesResponse} from "$lib/model/pb-types.ts";
   import {DateTimeUtility} from "$lib/service/DateTimeUtility.ts";
+  import {EventSeriesUtility} from "$lib/service/EventSeriesUtility.ts";
+  import {preferences} from "$lib/globals.svelte.ts";
 
   interface Props {
-    eventSeries: EventseriesResponse
+    eventSeries: EventseriesResponse;
   }
 
-  let {eventSeries}: Props = $props()
+  let {eventSeries}: Props = $props();
 
-  const startDate = $derived(new Date(eventSeries.series_start))
-  const endDate = $derived(new Date(eventSeries.series_end))
+  const startDate = $derived(new Date(eventSeries.series_start));
+  const endDate = $derived(new Date(eventSeries.series_end));
+
+  const options: { weekday: "long" | "short" | "narrow" | undefined } = {weekday: "long"};
+  const seriesState = $derived(EventSeriesUtility.getSeriesState(startDate, endDate));
 </script>
 
 <article class="p-4 preset-outline-surface rounded-base shadow-md">
@@ -38,7 +43,27 @@
       <!-- Start Time -->
       <div class="flex flex-col items-start">
         <span class="text-sm font-medium">Event Duration:</span>
-        <time datetime="P{eventSeries.duration}M" class="text-sm md:text-base">{eventSeries.duration} Minutes</time>
+        <time class="text-sm md:text-base" datetime="P{eventSeries.duration}M">{eventSeries.duration} Minutes</time>
+      </div>
+
+      <div class="justify-self-start self-center flex gap-2 flex-wrap">
+        <span class="badge block preset-ringed">
+          {new Intl.DateTimeFormat(preferences.current.locale, options).format(startDate)}
+        </span>
+
+        {#if seriesState === "ongoing"}
+        <span class="badge block preset-tonal-primary border border-primary-500">
+          Ongoing
+        </span>
+        {:else if seriesState === "past"}
+          <span class="badge block preset-ringed">
+          Past
+        </span>
+        {:else if seriesState === "future"}
+          <span class="badge block preset-tonal-tertiary border border-tertiary-500">
+          Upcoming
+        </span>
+        {/if}
       </div>
     </div>
   </div>

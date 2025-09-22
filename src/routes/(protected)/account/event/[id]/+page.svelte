@@ -13,6 +13,7 @@
   import MatchDetailLocationCard from "$lib/components/match/MatchDetailLocationCard.svelte";
   import TimeSection from "$lib/components/diamondplanner/event/TimeSection.svelte";
   import CommentSection from "$lib/components/comments/CommentSection.svelte";
+  import type {Match} from "bsm.js";
 
   let {data} = $props();
 
@@ -23,6 +24,8 @@
 
   //@ts-expect-error - the multi-level expanding trips the typedef up
   const club = $derived($event?.expand?.club);
+
+  const matchJSON = $derived($event?.match_json) as unknown as Match;
 </script>
 
 <div class="space-y-4 lg:space-y-6 xl:space-y-7">
@@ -102,7 +105,7 @@
     <section>
       <h2 class="h2 mb-3">Game Data</h2>
       <div class="grid grid-cols-1 md:grid-cols-2">
-        <MatchTeaserCard match={$event.match_json}/>
+        <MatchTeaserCard match={matchJSON}/>
       </div>
     </section>
   {/if}
@@ -113,10 +116,10 @@
         <h2 class="h3">Comments</h2>
       </header>
       <CommentSection
+              club={club}
+              comments={$event?.expand?.comments_via_event ?? []}
               targetID={$event.id}
               targetType="event"
-              comments={$event?.expand?.comments_via_event ?? []}
-              club={club}
       />
     </div>
   </section>

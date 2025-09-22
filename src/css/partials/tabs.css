@@ -1,6 +1,6 @@
 .tabs-list {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     flex-wrap: wrap;
     border-radius: var(--radius-container);
     gap: calc(var(--spacing) * 1);
@@ -12,8 +12,11 @@
 
 .tabs-trigger {
     @apply btn;
-    @apply data-[state=active]:preset-filled-primary-500;
     @apply hover:preset-tonal-primary;
     @apply text-sm;
     @apply md:text-base;
+}
+
+.tabs-trigger[data-state="active"] {
+    @apply preset-filled;
 }

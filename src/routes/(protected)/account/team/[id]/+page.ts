@@ -6,7 +6,6 @@ import {EventService} from "$lib/service/EventService";
 import type {EventseriesResponse} from "$lib/model/pb-types.ts";
 import {dev} from "$app/environment";
 import {watchWithPagination} from "$lib/pocketbase/RecordOperations.ts";
-import {page} from "$app/state";
 
 export const load = (async ({fetch, parent, params, url, depends}) => {
   const data = await parent();
@@ -40,11 +39,12 @@ export const load = (async ({fetch, parent, params, url, depends}) => {
 
   const eventSeries = await client.collection("eventseries").getFullList<EventseriesResponse>({
     filter: `team = "${team.id}" && series_start >= "${eventSeriesCutoff}"`,
-    fetch: fetch
+    fetch: fetch,
+    sort: "+series_start",
   });
 
-  const pageQuery = url.searchParams.get("page") ?? "1"
-  const page = Number(pageQuery)
+  const pageQuery = url.searchParams.get("page") ?? "1";
+  const page = Number(pageQuery);
 
   const announcements = await watchWithPagination<ExpandedAnnouncement>(
       "announcements",

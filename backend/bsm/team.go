@@ -11,7 +11,7 @@ type Team struct {
 	LeagueEntries []LeagueEntry `json:"league_entries"`
 }
 
-func loadSingleTeamByID(ID int, apiKey string) (Team, error) {
+func LoadSingleTeamByID(ID int, apiKey string) (Team, error) {
 	var team Team
 	url := GetAPIURL("teams/"+strconv.Itoa(ID)+".json", make(map[string]string), apiKey)
 	team, _, err := FetchResource[Team](url.String())

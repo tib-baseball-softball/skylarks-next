@@ -25,7 +25,7 @@ type Row struct {
 }
 
 // LoadSingleTable loads a single Table for a LeagueGroup
-func loadSingleTable(leagueGroupID int, apiKey string) (Table, error) {
+func LoadSingleTable(leagueGroupID int, apiKey string) (Table, error) {
 	var table Table
 	url := GetAPIURL("leagues/"+strconv.Itoa(leagueGroupID)+"/table.json", make(map[string]string), apiKey)
 	table, _, err := FetchResource[Table](url.String())
@@ -36,8 +36,8 @@ func loadSingleTable(leagueGroupID int, apiKey string) (Table, error) {
 	return table, nil
 }
 
-// determineTableRow determines the table row for a team
-func determineTableRow(team Team, table *Table) *Row {
+// DetermineTableRow determines the table row for a team
+func DetermineTableRow(team Team, table *Table) *Row {
 	if table == nil || len(table.Rows) == 0 {
 		return nil
 	}

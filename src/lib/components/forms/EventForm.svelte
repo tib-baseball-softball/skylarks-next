@@ -3,7 +3,7 @@
   import type {ExpandedEvent} from "$lib/model/ExpandedResponse";
   import {type LocationsResponse, type UniformsetsResponse} from "$lib/model/pb-types";
   import {client} from "$lib/pocketbase/index.svelte";
-  import {Segment, Switch} from "@skeletonlabs/skeleton-svelte";
+  import {Switch} from "@skeletonlabs/skeleton-svelte";
   import Flatpickr from "../utility/Flatpickr.svelte";
   import {DateTimeUtility} from "$lib/service/DateTimeUtility.js";
   //@ts-ignore
@@ -11,6 +11,7 @@
   import type {Snippet} from "svelte";
   import type {Extension} from "$lib/model/ExpandedResponse.js";
   import {toastController} from "$lib/service/ToastController.svelte.ts";
+  import TabsRadioGroup from "$lib/components/utility/form/TabsRadioGroup.svelte";
 
   interface Props {
     event: ExpandedEvent | null;
@@ -24,7 +25,12 @@
 
   let open = $state(false);
 
-  const form: Extension<Partial<ExpandedEvent>, { starttime: string, endtime: string, meetingtime: string }> = $state(
+  const form: Extension<Partial<ExpandedEvent>, {
+    starttime: string,
+    endtime: string,
+    meetingtime: string,
+    type: string
+  }> = $state(
       event ?? {
         id: "",
         title: "",
@@ -33,7 +39,7 @@
         endtime: "",
         desc: "",
         location: "",
-        type: undefined,
+        type: "game",
         attire: "",
         cancelled: false,
         bsm_id: 0,
@@ -94,36 +100,36 @@
       {/if}
     </header>
 
-    <form onsubmit={submitForm} class="mt-4 space-y-3">
+    <form class="mt-4 space-y-3" onsubmit={submitForm}>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-3 xl:gap-4">
         <input
-                name="id"
                 autocomplete="off"
-                class="input"
-                type="hidden"
-                readonly
                 bind:value={form.id}
+                class="input"
+                name="id"
+                readonly
+                type="hidden"
         />
 
         <label class="label">
           Title
           <input
-                  name="title"
+                  bind:value={form.title}
                   class="input"
+                  name="title"
                   required
                   type="text"
-                  bind:value={form.title}
           />
         </label>
 
         <label class="label">
           BSM ID
           <input
-                  name="bsm_id"
+                  bind:value={form.bsm_id}
                   class="input"
+                  name="bsm_id"
                   readonly
                   type="text"
-                  bind:value={form.bsm_id}
           />
         </label>
 
@@ -161,15 +167,15 @@
 
         <label class="label md:col-span-2">
           Description
-          <textarea name="desc" class="textarea" bind:value={form.desc}
+          <textarea bind:value={form.desc} class="textarea" name="desc"
           ></textarea>
         </label>
 
         <label class="label md:col-span-2">
           Location
           <select
-                  class="select"
                   bind:value={form.location}
+                  class="select"
           >
             {#await locationOptions then options}
               <option value="">None</option>
@@ -181,20 +187,12 @@
           </select>
         </label>
 
-        <label class="label flex flex-col gap-1 md:col-span-2">
-          Type
-          <Segment name="type" value={form.type} onValueChange={(e) => (form.type = e.value ?? "game")}>
-            <Segment.Item value={"game"} classes="flex-grow">
-              Game
-            </Segment.Item>
-            <Segment.Item value={"practice"} classes="flex-grow">
-              Practice
-            </Segment.Item>
-            <Segment.Item value={"misc"} classes="flex-grow">
-              Other
-            </Segment.Item>
-          </Segment>
-        </label>
+        <TabsRadioGroup
+                bind:value={form.type}
+                label="Type"
+                name="type"
+                options={["game", "practice", "misc"]}
+        />
 
         {#await attireOptions then options}
           <label class="label md:col-span-2">
@@ -218,7 +216,7 @@
       <hr class="my-5!"/>
 
       <div class="flex justify-center gap-3">
-        <button type="submit" class="mt-2 btn preset-tonal-primary border border-primary-500">
+        <button class="mt-2 btn preset-tonal-primary border border-primary-500" type="submit">
           Submit
         </button>
       </div>

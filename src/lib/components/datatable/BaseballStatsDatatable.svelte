@@ -7,7 +7,8 @@
   import type {StatisticsData, StatisticsSummary} from "bsm.js";
   import {StatsType} from "bsm.js";
   import StatsTableContent from "$lib/components/datatable/StatsTableContent.svelte";
-  import {Segment} from "@skeletonlabs/skeleton-svelte";
+  // @ts-ignore
+  import {Tabs} from "bits-ui";
   import type {StatsDataset} from "$lib/types/StatsDataset";
   import StatsContentRow from "$lib/components/datatable/StatsContentRow.svelte";
   import StatsBlock from "$lib/components/utility/StatsBlock.svelte";
@@ -21,17 +22,15 @@
   let {data, rowsPerPage = 10, tableType}: Props = $props();
 
   let type: StatsType = $state(StatsType.batting);
-  let summaryData:
-      | StatisticsSummary<
-      "BattingStatistics" | "PitchingStatistics" | "FieldingStatistics"
-  >
-      | undefined = $state(data.batting.summaries.at(0));
+  let summaryData: StatisticsSummary<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics"> | undefined
+      = $state(data.batting.summaries.at(0));
 
-  const handler = new DataHandler<
-      StatisticsData<
-          "BattingStatistics" | "PitchingStatistics" | "FieldingStatistics"
-      >
-  >(data.batting.data, {rowsPerPage: rowsPerPage});
+  const handler = new DataHandler<StatisticsData<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics">>
+  (data.batting.data, {rowsPerPage: rowsPerPage});
+
+  function changeType(details: any) {
+    type = details.value ?? StatsType.batting;
+  }
 
   function changeDataForHandler(type: StatsType) {
     switch (type) {
@@ -60,11 +59,13 @@
   <header class="md:flex space-y-2 md:space-y-0 justify-between gap-4">
     <Search {handler}/>
 
-    <Segment name="stats-type" value={type} onValueChange={(e) => (type = e.value ?? StatsType.batting)}>
-      <Segment.Item value={StatsType.batting} classes="flex-grow">Batting</Segment.Item>
-      <Segment.Item value={StatsType.pitching} classes="flex-grow">Pitching</Segment.Item>
-      <Segment.Item value={StatsType.fielding} classes="flex-grow">Fielding</Segment.Item>
-    </Segment>
+    <Tabs.Root bind:value={type}>
+      <Tabs.List class="tabs-list">
+        <Tabs.Trigger value={StatsType.batting} class="tabs-trigger flex-grow">Batting</Tabs.Trigger>
+        <Tabs.Trigger value={StatsType.pitching} class="tabs-trigger flex-grow">Pitching</Tabs.Trigger>
+        <Tabs.Trigger value={StatsType.fielding} class="tabs-trigger flex-grow">Fielding</Tabs.Trigger>
+      </Tabs.List>
+    </Tabs.Root>
 
     <RowsPerPage {handler}/>
   </header>
@@ -73,7 +74,9 @@
     <div
             class="stats stats-vertical sm:stats-horizontal preset-tonal-surface rounded-container"
     >
-      <StatsBlock {type} row={summaryData}/>
+      {#if summaryData}
+        <StatsBlock row={summaryData} {type}/>
+      {/if}
     </div>
   </div>
 

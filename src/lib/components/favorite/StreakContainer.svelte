@@ -4,13 +4,14 @@
   import WinsOverSeasonChart from "$lib/components/favorite/WinsOverSeasonChart.svelte";
 
   interface Props {
-    dataset: HomeDataset
+    dataset: HomeDataset;
   }
+
   let {dataset}: Props = $props();
 </script>
 
 <section>
-  <WinsOverSeasonChart streakData={dataset.streak_data}/>
+  <WinsOverSeasonChart streakData={dataset?.streak_data ?? []}/>
 </section>
 
 <section class="mt-6!">

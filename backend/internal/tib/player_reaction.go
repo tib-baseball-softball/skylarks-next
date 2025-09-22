@@ -11,7 +11,7 @@ import (
 	"time"
 
 	"github.com/pocketbase/pocketbase/core"
-	"github.com/tib-baseball-softball/skylarks-next/internal/pb"
+	"github.com/tib-baseball-softball/skylarks-next/internal/dp"
 )
 
 type PlayerReactionPayload struct {
@@ -29,7 +29,7 @@ type PlayerReactionPayload struct {
 }
 
 func SendUpdatedPlayerData(e *core.RecordEvent) error {
-	player := &pb.User{}
+	player := &dp.User{}
 	player.SetProxyRecord(e.Record)
 
 	identifier := os.Getenv("PLAYER_UPDATE_REACTION_IDENTIFIER")

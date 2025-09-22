@@ -52,7 +52,7 @@
   {#await data.players}
     <ProgressRing/>
   {:then players}
-    {#if players}
+    {#if Array.isArray(players)}
       <TeamPlayerSection {players}/>
     {:else }
       <p>No Players found for this team.</p>
