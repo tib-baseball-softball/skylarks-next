@@ -73,7 +73,7 @@
 <h2 class="h2">Team Events</h2>
 
 <div
-        class="flex flex-wrap gap-4 xl:flex-nowrap preset-tonal-surface justify-between px-4 py-3 rounded-base text-sm lg:text-base"
+        class="flex flex-wrap gap-4 preset-tonal-surface justify-between px-4 py-3 rounded-base text-sm lg:text-base"
 >
   <label
           class="flex items-center gap-2 grow justify-between xl:justify-start md:grow-0"
