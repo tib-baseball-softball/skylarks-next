@@ -67,11 +67,12 @@
 
       <h3 class="h4 mt-6!">Active Event Series</h3>
 
-      {#each eventSeries as series}
+      {#each eventSeries as series (series.id)}
         <EventSeriesListItem eventSeries={series}/>
 
         <div class="flex gap-2">
-          <button class="btn preset-tonal border border-surface-500" onclick={() => setupAndShowForm(series)}>Edit</button>
+          <button class="btn preset-tonal border border-surface-500" onclick={() => setupAndShowForm(series)}>Edit
+          </button>
 
           <DeleteButton
                   id={series.id}

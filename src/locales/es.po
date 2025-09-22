@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-12T16:35:16.263Z\n"
-"PO-Revision-Date: 2025-09-22T06:52:41.027Z\n"
+"PO-Revision-Date: 2025-09-22T09:05:33.270Z\n"
 "Last-Translator: \n"
 "Language: es\n"
 "Language-Team: \n"
@@ -444,16 +444,16 @@ msgstr "Cargando Ligas..."
 #. placeholder {0}: error.message
 #: src/routes/teams/+page.svelte
 #: src/routes/ligen/+page.svelte
-#: src/routes/club/umpire/+page.svelte
+#: src/routes/club/scorer/+page.svelte
 #: src/routes/club/ballpark/+page.svelte
-#: src/routes/league_entries/[entry]/+page.svelte
+#: src/routes/club/umpire/+page.svelte
 #: src/routes/players/[id]/+page.svelte
+#: src/routes/ligen/[id]/+page.svelte
+#: src/routes/league_entries/[entry]/+page.svelte
 #: src/routes/club/officials/+page.svelte
 #: src/routes/teams/[id]/+page.svelte
 #: src/routes/teams/[id]/+page.svelte
 #: src/routes/teams/[id]/+page.svelte
-#: src/routes/club/scorer/+page.svelte
-#: src/routes/ligen/[id]/+page.svelte
 #: src/routes/(protected)/stats/[user]/+page.svelte
 #: src/routes/(protected)/stats/[user]/+page.svelte
 msgid "error loading: {0}"
@@ -542,16 +542,16 @@ msgstr "Cargando..."
 msgid "Error: {0}"
 msgstr "Error: {0}"
 
-#: src/lib/components/boxscore/Linescore.svelte
 #: src/lib/components/boxscore/MatchBoxscorePitchingTable.svelte
+#: src/lib/components/boxscore/Linescore.svelte
 #: src/lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
 #: src/lib/components/datatable/StatsHeaderRow.svelte
 #: src/lib/components/datatable/StatsHeaderRow.svelte
 msgid "R"
 msgstr "C"
 
-#: src/lib/components/boxscore/Linescore.svelte
 #: src/lib/components/boxscore/MatchBoxscorePitchingTable.svelte
+#: src/lib/components/boxscore/Linescore.svelte
 #: src/lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
 #: src/lib/components/datatable/StatsHeaderRow.svelte
 #: src/lib/components/datatable/StatsHeaderRow.svelte
@@ -668,20 +668,20 @@ msgstr "PCL"
 msgid "No announcements available."
 msgstr "No hay anuncios disponibles."
 
+#: src/lib/components/comments/CommentRow.svelte
+#: src/lib/components/comments/CommentRow.svelte
 #: src/lib/components/comments/CommentSection.svelte
-#: src/lib/components/comments/CommentRow.svelte
-#: src/lib/components/comments/CommentRow.svelte
 #: src/lib/components/forms/ParticipationForm.svelte
 msgid "Comment"
 msgstr "Comentario"
 
-#: src/lib/components/comments/CommentSection.svelte
 #: src/lib/components/comments/CommentRow.svelte
+#: src/lib/components/comments/CommentSection.svelte
 msgid "Your comment..."
 msgstr "Su comentario..."
 
-#: src/lib/components/comments/CommentSection.svelte
 #: src/lib/components/comments/CommentRow.svelte
+#: src/lib/components/comments/CommentSection.svelte
 msgid "Add comment"
 msgstr "Agregar comentario"
 
@@ -914,18 +914,18 @@ msgstr "Fildeo"
 msgid "Total"
 msgstr "Total"
 
-#: src/lib/components/datatable/StatsTableContent.svelte
-#: src/lib/components/favorite/FavoriteTeamInfoCard.svelte
 #: src/lib/components/datatable/TeamMembersTableContent.svelte
+#: src/lib/components/favorite/FavoriteTeamInfoCard.svelte
+#: src/lib/components/datatable/StatsTableContent.svelte
 #: src/lib/components/forms/ClubForm.svelte
-#: src/lib/components/league/LeagueDetailInfoCard.svelte
 #: src/lib/components/forms/UniformSetForm.svelte
+#: src/lib/components/league/LeagueDetailInfoCard.svelte
 #: src/lib/components/table/LeaderboardTable.svelte
 #: src/lib/components/team/TeamDetailInfoCard.svelte
-#: src/lib/components/diamondplanner/club/ClubDetailCard.svelte
 #: src/lib/components/club/officials/ClubOfficialDetailCard.svelte
-#: src/lib/components/diamondplanner/team/TeamTeaserCard.svelte
+#: src/lib/components/diamondplanner/club/ClubDetailCard.svelte
 #: src/lib/components/diamondplanner/user/UserDataCard.svelte
+#: src/lib/components/diamondplanner/team/TeamTeaserCard.svelte
 msgid "Name"
 msgstr "Nombre"
 
@@ -1016,8 +1016,8 @@ msgstr "Temporada"
 msgid "League Wins Visualisation"
 msgstr "Visualización de victorias de la liga"
 
-#: src/lib/components/forms/ClubForm.svelte
 #: src/lib/components/favorite/LeagueInfoCard.svelte
+#: src/lib/components/forms/ClubForm.svelte
 #: src/lib/components/league/LeagueDetailInfoCard.svelte
 #: src/lib/components/team/TeamDetailInfoCard.svelte
 #: src/lib/components/diamondplanner/club/ClubDetailCard.svelte
@@ -1028,13 +1028,13 @@ msgstr "Acrónimo"
 msgid "Record"
 msgstr "Récord"
 
-#: src/lib/components/favorite/WinningPercentageGauge.svelte
 #: src/lib/components/favorite/LeagueInfoCard.svelte
+#: src/lib/components/favorite/WinningPercentageGauge.svelte
 msgid "Pct."
 msgstr "Pct."
 
-#: src/lib/components/favorite/WinningPercentageContainer.svelte
 #: src/lib/components/favorite/LeagueInfoCard.svelte
+#: src/lib/components/favorite/WinningPercentageContainer.svelte
 msgid "Rank"
 msgstr "Clasificación"
 
@@ -1166,17 +1166,17 @@ msgid "If not set, the link itself will be used as a the text."
 msgstr "Si no se establece, el enlace en sí se utilizará como texto."
 
 #: src/lib/components/forms/AnnouncementForm.svelte
-#: src/lib/components/forms/LocationForm.svelte
-#: src/lib/components/forms/EventSeriesForm.svelte
 #: src/lib/components/forms/ClubForm.svelte
-#: src/lib/components/forms/TeamForm.svelte
-#: src/lib/components/forms/TeamGamesModal.svelte
-#: src/lib/components/forms/TeamMembersForm.svelte
-#: src/lib/components/forms/ParticipationForm.svelte
-#: src/lib/components/forms/UniformSetForm.svelte
-#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
+#: src/lib/components/forms/LocationForm.svelte
 #: src/lib/components/forms/EventForm.svelte
 #: src/lib/components/forms/PlayerDataForm.svelte
+#: src/lib/components/forms/TeamForm.svelte
+#: src/lib/components/forms/ParticipationForm.svelte
+#: src/lib/components/forms/TeamGamesModal.svelte
+#: src/lib/components/forms/TeamMembersForm.svelte
+#: src/lib/components/forms/EventSeriesForm.svelte
+#: src/lib/components/forms/UniformSetForm.svelte
+#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
 msgid "Submit"
 msgstr "Enviar"
 
@@ -1296,8 +1296,8 @@ msgstr ""
 msgid "Series End <0/> <1>No events will be created after this date.</1>"
 msgstr "Fin de la serie <0/> <1>No se crearán eventos después de esta fecha.</1>"
 
-#: src/lib/components/forms/EventSeriesForm.svelte
 #: src/lib/components/forms/EventForm.svelte
+#: src/lib/components/forms/EventSeriesForm.svelte
 msgid "Title <0/>"
 msgstr "Título <0/>"
 
@@ -1309,19 +1309,19 @@ msgstr "Intervalo recurrente <0/> <1>Intervalo entre cada ocurrencia de la serie
 msgid "Duration <0/> <1>Duration of each event to determine end time (in minutes).</1>"
 msgstr "Duración <0/> <1>Duración de cada evento para determinar la hora de finalización (en minutos).</1>"
 
-#: src/lib/components/forms/EventSeriesForm.svelte
-#: src/lib/components/forms/TeamForm.svelte
 #: src/lib/components/forms/EventForm.svelte
+#: src/lib/components/forms/TeamForm.svelte
+#: src/lib/components/forms/EventSeriesForm.svelte
 msgid "Description <0/>"
 msgstr "Descripción <0/>"
 
-#: src/lib/components/forms/EventSeriesForm.svelte
 #: src/lib/components/forms/EventForm.svelte
+#: src/lib/components/forms/EventSeriesForm.svelte
 msgid "No additional name"
 msgstr "Sin nombre adicional"
 
-#: src/lib/components/forms/EventSeriesForm.svelte
 #: src/lib/components/forms/EventForm.svelte
+#: src/lib/components/forms/EventSeriesForm.svelte
 msgid "Location <0>None</0>"
 msgstr "Ubicación <0>Ninguna</0>"
 
@@ -1375,8 +1375,8 @@ msgstr "Usuarios seleccionados:"
 msgid "Member"
 msgstr "Miembro"
 
-#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
 #: src/lib/components/forms/EventForm.svelte
+#: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
 msgid "Event"
 msgstr "Evento"
 
@@ -1493,8 +1493,8 @@ msgstr "F"
 msgid "TBD"
 msgstr "TBD"
 
-#: src/lib/components/match/CurrentMatchRow.svelte
 #: src/lib/components/match/GameResultIndicator.svelte
+#: src/lib/components/match/CurrentMatchRow.svelte
 msgid "PPD"
 msgstr "APL"
 
@@ -1681,9 +1681,9 @@ msgstr "Compartir datos del juego usando su navegador"
 msgid "Share Game <0/>"
 msgstr "Compartir juego <0/>"
 
+#: src/lib/components/forms/PlayerDataForm.svelte
+#: src/lib/components/forms/PlayerDataForm.svelte
 #: src/lib/components/icons/Cap.svelte
-#: src/lib/components/forms/PlayerDataForm.svelte
-#: src/lib/components/forms/PlayerDataForm.svelte
 msgid "B"
 msgstr "B"
 
@@ -1804,13 +1804,13 @@ msgstr "Miembro desde"
 msgid "Positions"
 msgstr "Posiciones"
 
-#: src/lib/components/player/PlayerDataCard.svelte
 #: src/lib/components/forms/PlayerDataForm.svelte
+#: src/lib/components/player/PlayerDataCard.svelte
 msgid "Bats"
 msgstr "Batea"
 
-#: src/lib/components/player/PlayerDataCard.svelte
 #: src/lib/components/forms/PlayerDataForm.svelte
+#: src/lib/components/player/PlayerDataCard.svelte
 msgid "Throws"
 msgstr "Lanza"
 
@@ -1830,8 +1830,8 @@ msgstr "PD"
 msgid "Serie"
 msgstr "Serie"
 
-#: src/lib/components/player/PlayerHeaderSection.svelte
 #: src/lib/components/player/PlayerRow.svelte
+#: src/lib/components/player/PlayerHeaderSection.svelte
 msgid "Player fallback"
 msgstr "Reserva de jugador"
 
@@ -2041,8 +2041,8 @@ msgstr "Dirección:"
 msgid "Street:"
 msgstr "Calle:"
 
-#: src/routes/teams/[id]/+page.svelte
 #: src/routes/ligen/[id]/+page.svelte
+#: src/routes/teams/[id]/+page.svelte
 msgid "Information"
 msgstr "Información"
 
@@ -2070,8 +2070,8 @@ msgstr "Tabla"
 msgid "Umpire Licenses"
 msgstr "Licencias de árbitro"
 
-#: src/routes/club/umpire/+page.svelte
 #: src/routes/club/scorer/+page.svelte
+#: src/routes/club/umpire/+page.svelte
 msgid "Loading Licenses..."
 msgstr "Cargando licencias..."
 
@@ -2811,3 +2811,15 @@ msgstr "Tipo"
 #: src/lib/components/player/TeamPlayerSection.svelte
 msgid "Visualization <0><0><0>Number</0> <1>Image</1></0></0>"
 msgstr "Visualización <0><0><0>Número</0> <1>Imagen</1></0></0>"
+
+#: src/lib/components/diamondplanner/eventseries/EventSeriesListItem.svelte
+msgid "Ongoing"
+msgstr "En curso"
+
+#: src/lib/components/diamondplanner/eventseries/EventSeriesListItem.svelte
+msgid "Past"
+msgstr "Pasado"
+
+#: src/lib/components/diamondplanner/eventseries/EventSeriesListItem.svelte
+msgid "Upcoming"
+msgstr "Próximo"

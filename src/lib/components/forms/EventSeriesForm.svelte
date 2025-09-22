@@ -140,6 +140,8 @@
                 class="input"
                 name="interval"
                 type="number"
+                step="7"
+                min="7"
         >
         <span class="text-sm font-light block">Interval between each series occurrence (in days).</span>
       </label>
