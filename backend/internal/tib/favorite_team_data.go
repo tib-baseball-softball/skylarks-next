@@ -70,6 +70,9 @@ func LoadHomeData(app core.App, teamID int, season int) ([]HomeDataset, error) {
 
 			var dataset HomeDataset
 			dataset.LeagueGroup = leagueGroup
+			dataset.TeamID = teamID
+			dataset.Season = season
+			dataset.LeagueGroupID = leagueGroup.ID
 
 			var wg sync.WaitGroup
 

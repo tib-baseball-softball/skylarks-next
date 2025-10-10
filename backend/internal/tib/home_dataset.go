@@ -15,6 +15,9 @@ import (
 
 // HomeDataset represents the data for a team's home page
 type HomeDataset struct {
+	TeamID        int                `json:"team_id"`
+	Season        int                `json:"season"`
+	LeagueGroupID int                `json:"league_group_id"`
 	LeagueGroup   bsm.LeagueGroup    `json:"league_group"`
 	NextGame      *bsm.Match         `json:"next_game"`
 	LastGame      *bsm.Match         `json:"last_game"`
@@ -89,7 +92,7 @@ func GetCachedDatasetResponse(app core.App, teamID int, season int) ([]byte, err
 		// cache hit
 		if requestCache == nil {
 			app.Logger().Error("request cache is unexpectedly nil", "cacheIdentifier", cacheIdentifier)
-			return nil, errors.New("request cache is unexpectedly nil")
+			return nil, errors.New("an internal error occurred")
 		}
 		ret = []byte(requestCache.ResponseBody())
 		return ret, nil

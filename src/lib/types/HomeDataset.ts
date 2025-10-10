@@ -4,6 +4,9 @@ import type {PlayoffSeries} from "$lib/types/PlayoffSeries.ts";
 import type {TableRow} from "bsm.js/dist/model/Table";
 
 export type HomeDataset = {
+  team_id: number
+  season: number
+  league_group_id: number
   league_group: LeagueGroup,
   next_game: Match | null,
   last_game: Match | null,
