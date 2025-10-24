@@ -1,5 +1,4 @@
 <script lang="ts">
-  import {Accordion} from "@skeletonlabs/skeleton-svelte";
   import {authSettings} from "$lib/pocketbase/index.svelte";
   import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/model/ExpandedResponse";
   import {
@@ -11,13 +10,14 @@
     Shield,
     SquareUserRound,
     Users,
-    UsersRound
+    UsersRound,
   } from "lucide-svelte";
+  import AccordionItem from "$lib/components/utility/AccordionItem.svelte";
 
   interface Props {
-    clubs: ExpandedClub[],
-    teams: ExpandedTeam[],
-    sheetOpen?: boolean,
+    clubs: ExpandedClub[];
+    teams: ExpandedTeam[];
+    sheetOpen?: boolean;
   }
 
   let {clubs, teams, sheetOpen = $bindable()}: Props = $props();
@@ -36,110 +36,99 @@
 
 <nav class="list-nav py-1 px-1 lg:px-4">
   {#if isUserAuthenticated}
-    <Accordion {value} onValueChange={(e) => (value = e.value)} multiple collapsible>
-      <Accordion.Item value="account" panelPadding="py-0 px-4">
+    <AccordionItem>
+      {#snippet lead()}
+        <SquareUserRound/>
+      {/snippet}
 
-        {#snippet lead()}
-          <SquareUserRound/>
-        {/snippet}
+      {#snippet control()}
+        <span>My Account</span>
+      {/snippet}
 
-        {#snippet control()}
-          <span>My Account</span>
-        {/snippet}
+      {#snippet panel()}
+        <a href="/account" onclick={sheetClose}>
+          <CircleUserRound/>
+          <span>Dashboard</span>
+        </a>
 
-        {#snippet panel()}
-          <a href="/account" onclick={sheetClose}>
-            <CircleUserRound/>
-            <span>Dashboard</span>
+        <a href="/stats/{authRecord?.id}" onclick={sheetClose}>
+          <ChartLine/>
+          <span>Personal Stats</span>
+        </a>
+
+        <a href="/account/playerprofile" onclick={sheetClose}>
+          <IdCard/>
+          <span>Player Profile</span>
+        </a>
+      {/snippet}
+    </AccordionItem>
+
+    <hr class="hr"/>
+
+    <AccordionItem panelPadding="py-0 px-4">
+      {#snippet lead()}
+        <UsersRound/>
+      {/snippet}
+
+      {#snippet control()}
+        <span>My Clubs & Teams</span>
+      {/snippet}
+
+      {#snippet panel()}
+        {#each clubs as club (club.id)}
+          <a href="/account/clubs/{club.id}" onclick={sheetClose}>
+            <Shield/>
+            <span>{club.name} ({club.acronym})</span>
           </a>
+        {/each}
 
-          <a href="/stats/{authRecord?.id}" onclick={sheetClose}>
-            <ChartLine/>
-            <span>Personal Stats</span>
-          </a>
+        {#if teams?.length > 0}
+          <hr class="hr"/>
 
-          <a href="/account/playerprofile" onclick={sheetClose}>
-            <IdCard/>
-            <span>Player Profile</span>
-          </a>
-        {/snippet}
-
-      </Accordion.Item>
-
-      <hr class="hr"/>
-
-      <Accordion.Item value="teamClub" panelPadding="py-0 px-4">
-        {#snippet lead()}
-          <UsersRound/>
-        {/snippet}
-
-        {#snippet control()}
-          <span>My Clubs & Teams</span>
-        {/snippet}
-
-        {#snippet panel()}
-          {#each clubs as club (club.id)}
-            <a href="/account/clubs/{club.id}" onclick={sheetClose}>
-              <Shield/>
-              <span>{club.name} ({club.acronym})</span>
+          {#each teams as team (team.id)}
+            <a href="/account/team/{team.id}" onclick={sheetClose}>
+              <Users/>
+              <span>{team.name} ({team?.expand?.club?.acronym}) </span>
             </a>
           {/each}
+        {/if}
+      {/snippet}
+    </AccordionItem>
 
-          {#if teams?.length > 0}
-            <hr class="hr">
+    <hr class="hr"/>
 
-            {#each teams as team (team.id)}
-              <a
-                      href="/account/team/{team.id}"
-                      onclick={sheetClose}
-              >
-                <Users/>
-                <span
-                >{team.name} ({team?.expand?.club
-                    ?.acronym})
-                </span
-                >
-              </a>
-            {/each}
-          {/if}
-        {/snippet}
-      </Accordion.Item>
+    <AccordionItem panelPadding="py-0 px-4">
+      {#snippet lead()}
+        <LockKeyhole/>
+      {/snippet}
 
-      <hr class="hr"/>
+      {#snippet control()}
+        Administration
+      {/snippet}
 
-      <Accordion.Item value="admin" panelPadding="py-0 px-4">
-        {#snippet lead()}
-          <LockKeyhole/>
-        {/snippet}
-
-        {#snippet control()}
-          Administration
-        {/snippet}
-
-        {#snippet panel()}
-          <a href="/stats/admin" onclick={sheetClose}>
-            <ChartColumnStacked/>
-            <span>Admin Dashboard</span>
-          </a>
-        {/snippet}
-      </Accordion.Item>
-    </Accordion>
+      {#snippet panel()}
+        <a href="/stats/admin" onclick={sheetClose}>
+          <ChartColumnStacked/>
+          <span>Admin Dashboard</span>
+        </a>
+      {/snippet}
+    </AccordionItem>
   {/if}
 </nav>
 
 <style lang="postcss">
-    @reference "../../../app.css";
-
     a {
         display: flex;
         align-items: center;
-        margin: 0.5rem;
+        margin: 0.3rem;
         padding: 0.4rem;
     }
 
-    a:hover, a:focus {
+    a:hover,
+    a:focus {
         background-color: var(--color-primary-50-950);
         color: var(--color-primary-950-50);
+        border-radius: var(--radius-container);
     }
 
     span {
