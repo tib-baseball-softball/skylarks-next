@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-10T18:43:43.303Z\n"
-"PO-Revision-Date: 2025-10-23T21:14:36.943Z\n"
+"PO-Revision-Date: 2025-10-24T14:34:19.080Z\n"
 "Last-Translator: \n"
 "Language: de\n"
 "Language-Team: \n"
@@ -2775,3 +2775,24 @@ msgstr "Vergangen"
 #: src/lib/components/diamondplanner/eventseries/EventSeriesListItem.svelte
 msgid "Upcoming"
 msgstr "Zukünftig"
+
+#: src/lib/components/boxscore/MatchBoxscoreSection.svelte
+msgid "Away Team"
+msgstr ""
+
+#: src/lib/components/boxscore/MatchBoxscoreSection.svelte
+msgid "Home Team"
+msgstr ""
+
+#: src/lib/components/match/ContentFilteredUnavailable.svelte
+msgid "There is no data to display for the selected filters."
+msgstr ""
+
+#: src/lib/components/forms/TeamGamesModal.svelte
+msgid "An error occurred while saving the event."
+msgstr ""
+
+#. placeholder {0}: season
+#: src/lib/components/diamondplanner/stats/AttendanceTotalStatsBlock.svelte
+msgid "All possible events of this type for {0}"
+msgstr ""
