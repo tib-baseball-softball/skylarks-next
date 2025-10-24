@@ -28,10 +28,6 @@
   const handler = new DataHandler<StatisticsData<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics">>
   (data.batting.data, {rowsPerPage: rowsPerPage});
 
-  function changeType(details: any) {
-    type = details.value ?? StatsType.batting;
-  }
-
   function changeDataForHandler(type: StatsType) {
     switch (type) {
       case StatsType.batting:
@@ -61,9 +57,9 @@
 
     <Tabs.Root bind:value={type}>
       <Tabs.List class="tabs-list">
-        <Tabs.Trigger value={StatsType.batting} class="tabs-trigger flex-grow">Batting</Tabs.Trigger>
-        <Tabs.Trigger value={StatsType.pitching} class="tabs-trigger flex-grow">Pitching</Tabs.Trigger>
-        <Tabs.Trigger value={StatsType.fielding} class="tabs-trigger flex-grow">Fielding</Tabs.Trigger>
+        <Tabs.Trigger class="tabs-trigger flex-grow" value={StatsType.batting}>Batting</Tabs.Trigger>
+        <Tabs.Trigger class="tabs-trigger flex-grow" value={StatsType.pitching}>Pitching</Tabs.Trigger>
+        <Tabs.Trigger class="tabs-trigger flex-grow" value={StatsType.fielding}>Fielding</Tabs.Trigger>
       </Tabs.List>
     </Tabs.Root>
 

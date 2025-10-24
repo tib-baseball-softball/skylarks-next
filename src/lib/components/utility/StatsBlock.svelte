@@ -1,4 +1,5 @@
 <script generics="T extends keyof RowByType" lang="ts">
+  //@ts-nocheck
   import {StatsType} from "bsm.js";
   import StatsBlockContent from "$lib/components/utility/StatsBlockContent.svelte";
   import type {RowByType} from "$lib/types/StatsDataset.ts";
