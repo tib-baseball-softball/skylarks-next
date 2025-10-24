@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {ProgressRing} from "@skeletonlabs/skeleton-svelte";
+  import {Progress} from "@skeletonlabs/skeleton-svelte";
   import StandingsTable from "$lib/components/table/StandingsTable.svelte";
   import LeagueDetailInfoCard from "$lib/components/league/LeagueDetailInfoCard.svelte";
   import type {PageProps} from "./$types";
@@ -42,7 +42,7 @@
 
   <h2 class="h2">Tabelle</h2>
   {#await expectedTable}
-    <ProgressRing/>
+    <Progress/>
   {:then table}
     {#if table}
       <StandingsTable {table}/>

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {ProgressRing} from "@skeletonlabs/skeleton-svelte";
+  import {Progress} from "@skeletonlabs/skeleton-svelte";
   import StatsByTypePieChart from "$lib/components/diamondplanner/stats/StatsByTypePieChart.svelte";
   import AttendanceTotalStatsBlock from "$lib/components/diamondplanner/stats/AttendanceTotalStatsBlock.svelte";
   import {goto} from "$app/navigation";
@@ -61,7 +61,7 @@
 {/snippet}
 
 {#await data.statsItem}
-  <ProgressRing/>
+  <Progress/>
 {:then statsItem}
 
   {#if statsItem}
@@ -73,7 +73,7 @@
 {/await}
 
 {#await Promise.all(data.teamStatsItems)}
-  <ProgressRing/>
+  <Progress/>
 {:then teamStatsItems}
 
   {#each teamStatsItems as teamStatsItem}

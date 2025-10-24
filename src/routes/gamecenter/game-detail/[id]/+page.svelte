@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {ProgressRing} from "@skeletonlabs/skeleton-svelte";
+  import {Progress} from "@skeletonlabs/skeleton-svelte";
   // @ts-ignore
   import {Tabs} from "bits-ui";
   import MatchMainInfoSection from "$lib/components/match/MatchMainInfoSection.svelte";
@@ -59,7 +59,7 @@
 
     <Tabs.Content value="boxscore">
       {#await data.singleGameStats}
-        <ProgressRing/>
+        <Progress/>
       {:then boxscore}
         {#if boxscore}
           <MatchBoxscoreSection {boxscore}/>
@@ -73,7 +73,7 @@
 
     <Tabs.Content value="gameReport">
       {#await data.gameReport}
-        <ProgressRing/>
+        <Progress/>
       {:then gameReport}
         {#if gameReport}
           <GameReport classes="my-2! md:max-w-[80%] 2xl:max-w-[70%]" report={gameReport}/>

@@ -5,7 +5,6 @@
 @import 'tailwindcss';
 @import "tw-animate-css";
 @import "@skeletonlabs/skeleton";
-@import "@skeletonlabs/skeleton/optional/presets";
 @import "../skylarks-theme.css";
 
 /**
@@ -30,7 +29,7 @@
 @plugin '@tailwindcss/forms';
 @plugin "@tailwindcss/typography";
 
-@source "../node_modules/@skeletonlabs/skeleton-svelte/dist";
+@import '@skeletonlabs/skeleton-svelte';
 
 @layer utilities {
 }
