@@ -1,17 +1,17 @@
 <script lang="ts">
   import type {CustomAuthModel, ExpandedComment} from "$lib/model/ExpandedResponse.ts";
   import {authSettings, client} from "$lib/pocketbase/index.svelte.ts";
-  import {Avatar} from "@skeletonlabs/skeleton-svelte";
   import {DateTimeUtility} from "$lib/service/DateTimeUtility.ts";
   import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
   import {invalidate} from "$app/navigation";
-  import {Edit, Send, X} from "lucide-svelte";
+  import {Send, SquarePen, X} from "lucide-svelte";
   import {toastController} from "$lib/service/ToastController.svelte.ts";
   import type {ClubsResponse} from "$lib/model/pb-types.ts";
+  import Avatar from "$lib/components/utility/Avatar.svelte";
 
   interface Props {
     comment: ExpandedComment;
-    club: ClubsResponse
+    club: ClubsResponse;
   }
 
   let {comment, club}: Props = $props();
@@ -74,10 +74,10 @@
 
 <div class="avatar-container flex flex-col justify-between gap-2">
   <Avatar
-          src={client.files.getURL(comment?.expand?.user ?? {}, comment?.expand?.user?.avatar ?? "")}
-          name={userFullName}
-          size="w-11 h-11"
+          --size="2.5rem"
           background="preset-tonal-primary"
+          fallback={`${comment?.expand?.user?.first_name.charAt(0)?.toUpperCase()}${comment?.expand?.user?.last_name.charAt(0)?.toUpperCase()}`}
+          src={client.files.getURL(comment?.expand?.user ?? {}, comment?.expand?.user?.avatar ?? "")}
   />
 
   {#if isLoggedInUser || club?.admins.includes(authRecord.id)}
@@ -85,7 +85,8 @@
   {/if}
 </div>
 
-<div data-testid="comment-container" class={["w-full card p-2 rounded-base", isLoggedInUser ? "preset-tonal-primary" : "preset-tonal-surface"]}>
+<div class={["w-full card p-2 rounded-base", isLoggedInUser ? "preset-tonal-primary" : "preset-tonal-surface"]}
+     data-testid="comment-container">
   <div class="flex justify-between items-center">
     <p class="font-bold text-wrap">{userFullName}</p>
 
@@ -103,8 +104,9 @@
 
       </p>
       {#if isLoggedInUser}
-        <button type="button" class="btn btn-icon btn-sm border" title="edit comment text" onclick="{() => isEditing = true}">
-          <Edit/>
+        <button type="button" class="btn btn-icon btn-sm border" title="edit comment text"
+                onclick="{() => isEditing = true}">
+          <SquarePen/>
         </button>
       {/if}
     </div>

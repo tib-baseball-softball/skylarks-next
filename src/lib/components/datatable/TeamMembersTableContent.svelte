@@ -2,7 +2,6 @@
   import type {DataHandler} from "@vincjo/datatables";
   import ThSort from "./ThSort.svelte";
   import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
-  import {Avatar} from "@skeletonlabs/skeleton-svelte";
   import {client} from "$lib/pocketbase/index.svelte";
   import LocalDate from "../utility/LocalDate.svelte";
   import type {TeamsUpdate, UsersUpdate} from "$lib/model/pb-types.ts";
@@ -11,6 +10,7 @@
   import {toastController} from "$lib/service/ToastController.svelte.ts";
   import Dialog from "$lib/components/utility/Dialog.svelte";
   import {closeModal} from "$lib/functions/closeModal.ts";
+  import Avatar from "$lib/components/utility/Avatar.svelte";
 
   interface Props {
     handler: DataHandler<CustomAuthModel>;
@@ -103,8 +103,8 @@
       <div class="flex items-center gap-2">
         <Avatar
                 src={client.files.getURL(row, row.avatar)}
-                name={row.first_name + row.last_name}
-                size="w-12"
+                fallback={`${row.first_name.charAt(0)?.toUpperCase()}${row.last_name.charAt(0)?.toUpperCase()}`}
+                --size="2.75rem"
         />
         <div>
           <span>{row.first_name} {row.last_name}</span>
