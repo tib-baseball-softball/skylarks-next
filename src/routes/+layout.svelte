@@ -1,6 +1,5 @@
 <script lang="ts">
   import '../app.css';
-  import {AppBar} from "@skeletonlabs/skeleton-svelte";
   import SidebarNavigation from "$lib/components/meta/SidebarNavigation.svelte";
   import Footer from "$lib/components/meta/Footer.svelte";
   import type {LayoutProps} from "../../.svelte-kit/types/src/routes/$types";
@@ -10,6 +9,7 @@
   import NavigationSheet from "$lib/components/navigation/NavigationSheet.svelte";
   import ToastContainer from "$lib/components/utility/toast/ToastContainer.svelte";
   import TopAppBarTrailing from "$lib/components/meta/TopAppBarTrailing.svelte";
+  import AppBar from "$lib/components/meta/AppBar.svelte";
 
   let {data, children}: LayoutProps = $props();
 
@@ -26,13 +26,9 @@
 
 <div class="h-screen grid grid-rows-[auto_1fr_auto]">
   <!-- Header -->
-  <header>
+  <div>
 
-    <AppBar
-            background="bg-surface-500/5 dark:bg-surface-800"
-            centerAlign="place-self-center"
-            padding="p-3"
-    >
+    <AppBar>
       {#snippet lead()}
         <div class="flex items-center justify-content-start">
           {#if isUserAuthenticated}
@@ -64,7 +60,7 @@
     </AppBar>
 
     <hr>
-  </header>
+  </div>
 
   <!-- Grid Column -->
 
