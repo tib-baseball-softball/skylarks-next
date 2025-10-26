@@ -1,7 +1,6 @@
 <script lang="ts">
   import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
   import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  import {TagsInput} from "@skeletonlabs/skeleton-svelte";
   import {
     getAllBaseballPositionStringValues,
     positionEnumStringValuesToKeys,
@@ -12,6 +11,7 @@
   import * as Sheet from "$lib/components/utility/sheet/index.js";
   import {toastController} from "$lib/service/ToastController.svelte.ts";
   import TabsRadioGroup from "$lib/components/utility/form/TabsRadioGroup.svelte";
+  import TagsInput from "$lib/components/utility/TagsInput.svelte";
 
   interface ValidateArgs {
     inputValue: string;
