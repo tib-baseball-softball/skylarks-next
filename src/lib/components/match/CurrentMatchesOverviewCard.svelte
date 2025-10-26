@@ -34,41 +34,41 @@
               class="tabs-list border mb-1 preset-tonal-surface"
       >
         <Tabs.Trigger
+                class="tabs-trigger btn"
                 value="previous"
-                class="tabs-trigger"
         >
           Previous
           {@render gameDayWord()}
         </Tabs.Trigger>
         <Tabs.Trigger
+                class="tabs-trigger btn"
                 value="current"
-                class="tabs-trigger"
         >Current
           {@render gameDayWord()}
         </Tabs.Trigger>
         <Tabs.Trigger
+                class="tabs-trigger btn"
                 value="next"
-                class="tabs-trigger"
         >Next
           {@render gameDayWord()}
         </Tabs.Trigger>
       </Tabs.List>
 
-      <Tabs.Content value="previous" class="pt-4">
+      <Tabs.Content class="pt-4" value="previous">
         <CurrentMatchBlock matches={matchesPrevious}/>
       </Tabs.Content>
-      <Tabs.Content value="current" class="pt-4">
+      <Tabs.Content class="pt-4" value="current">
         <CurrentMatchBlock matches={matchesCurrent}/>
       </Tabs.Content>
-      <Tabs.Content value="next" class="pt-4">
+      <Tabs.Content class="pt-4" value="next">
         <CurrentMatchBlock matches={matchesNext}/>
       </Tabs.Content>
     </Tabs.Root>
   </section>
   <footer class="card-footer flex justify-end">
     <a
-            href="/gamecenter"
             class="btn preset-filled-primary-500 dark:preset-tonal-primary border border-primary-500 px-10"
+            href="/gamecenter"
     >Gamecenter</a
     >
   </footer>

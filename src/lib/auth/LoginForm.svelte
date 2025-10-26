@@ -150,12 +150,12 @@
               >
                 <Tabs.Trigger
                         value="login"
-                        class="tabs-trigger"
+                        class="tabs-trigger btn"
                 >Log In
                 </Tabs.Trigger>
                 <Tabs.Trigger
                         value="signup"
-                        class="tabs-trigger"
+                        class="tabs-trigger btn"
                 >Create Account
                 </Tabs.Trigger>
               </Tabs.List>

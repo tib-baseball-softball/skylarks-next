@@ -77,22 +77,22 @@
               class="tabs-list preset-tonal-surface"
       >
         <Tabs.Trigger
-                class="tabs-trigger"
+                class="tabs-trigger btn"
                 value={Gameday.previous}
         >Previous
         </Tabs.Trigger>
         <Tabs.Trigger
-                class="tabs-trigger"
+                class="tabs-trigger btn"
                 value={Gameday.current}
         >Current
         </Tabs.Trigger>
         <Tabs.Trigger
-                class="tabs-trigger"
+                class="tabs-trigger btn"
                 value={Gameday.next}
         >Next
         </Tabs.Trigger>
         <Tabs.Trigger
-                class="tabs-trigger"
+                class="tabs-trigger btn"
                 value={Gameday.any}
         >All
         </Tabs.Trigger>

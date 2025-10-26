@@ -62,21 +62,21 @@
 
       <span class="flex justify-items-stretch btn-group preset-outlined-surface-200-800">
         <button
-                class={["btn hover:preset-ghost-success flex-grow", form.state === "in" && "preset-filled-success-500 text-black"]}
+                class={["btn hover:preset-tonal-success flex-grow", form.state === "in" && "preset-filled-success-500 text-black"]}
                 onclick={() => form.state = "in"}
                 type="button"
         >
           In
         </button>
         <button
-                class={["btn hover:preset-ghost-warning flex-grow", form.state === "maybe" && "preset-filled-warning-500 text-black"]}
+                class={["btn hover:preset-tonal-warning flex-grow", form.state === "maybe" && "preset-filled-warning-500 text-black"]}
                 onclick={() => form.state = "maybe"}
                 type="button"
         >
           Maybe
         </button>
         <button
-                class={["btn hover:preset-ghost-error flex-grow", form.state === "out" && "preset-filled-error-500 text-white"]}
+                class={["btn hover:preset-tonal-error flex-grow", form.state === "out" && "preset-filled-error-500 text-white"]}
                 onclick={() => form.state = "out"}
                 type="button"
         >

@@ -4,8 +4,8 @@
 
 @import 'tailwindcss';
 @import "tw-animate-css";
-@import "@skeletonlabs/skeleton";
-@import "../skylarks-theme.css";
+@import './css/skeleton/index.css';
+@import './css/skylarks-theme.css';
 
 /**
  * global custom CSS

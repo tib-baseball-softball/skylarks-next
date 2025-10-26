@@ -28,9 +28,9 @@
 
 <Tabs.Root bind:value={type} class="flex">
   <Tabs.List class="tabs-list border mb-1 preset-tonal-surface">
-    <Tabs.Trigger class="tabs-trigger flex-grow" value={StatsType.batting}>Batting</Tabs.Trigger>
-    <Tabs.Trigger class="tabs-trigger flex-grow" value={StatsType.pitching}>Pitching</Tabs.Trigger>
-    <Tabs.Trigger class="tabs-trigger flex-grow" value={StatsType.fielding}>Fielding</Tabs.Trigger>
+    <Tabs.Trigger class="tabs-trigger btn flex-grow" value={StatsType.batting}>Batting</Tabs.Trigger>
+    <Tabs.Trigger class="tabs-trigger btn flex-grow" value={StatsType.pitching}>Pitching</Tabs.Trigger>
+    <Tabs.Trigger class="tabs-trigger btn flex-grow" value={StatsType.fielding}>Fielding</Tabs.Trigger>
   </Tabs.List>
 </Tabs.Root>
 

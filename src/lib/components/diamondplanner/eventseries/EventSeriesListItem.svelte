@@ -17,7 +17,7 @@
   const seriesState = $derived(EventSeriesUtility.getSeriesState(startDate, endDate));
 </script>
 
-<article class="p-4 preset-outline-surface rounded-base shadow-md">
+<article class="p-4 preset-outlined-surface rounded-base shadow-md">
   <div class="grid grid-cols-1 md:grid-cols-3 md:gap-2 lg:gap-4">
 
     <div class="flex flex-col justify-between mb-3 md:mb-0">
@@ -47,7 +47,7 @@
       </div>
 
       <div class="justify-self-start self-center flex gap-2 flex-wrap">
-        <span class="badge block preset-ringed">
+        <span class="badge block preset-outlined">
           {new Intl.DateTimeFormat(preferences.current.locale, options).format(startDate)}
         </span>
 
@@ -56,7 +56,7 @@
           Ongoing
         </span>
         {:else if seriesState === "past"}
-          <span class="badge block preset-ringed">
+          <span class="badge block preset-outlined">
           Past
         </span>
         {:else if seriesState === "future"}

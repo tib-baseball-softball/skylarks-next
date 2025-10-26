@@ -21,7 +21,7 @@
   const matchDate = DateTimeUtility.parseDateFromBSMString(match.time);
 </script>
 
-<div class="card preset-ghost-primary border-primary-500 px-2 md:px-5">
+<div class="card preset-tonal-primary border-primary-500 px-2 md:px-5">
   <header class="pt-2 pb-3">
     <h2 class="h4 font-medium">Main Info</h2>
   </header>
@@ -47,7 +47,7 @@
   </div>
 
   <div class="grid grid-cols-2 place-items-stretch gap-3 md:gap-8 my-2 md:my-5 pb-2 sm:pb-4 lg:pb-5">
-    <div class="card preset-ghost-primary border-primary-500 dark:preset-tonal-primary p-3">
+    <div class="card preset-tonal-primary border-primary-500 dark:preset-tonal-primary p-3">
       <div class="flex gap-2">
         <Calendar/>
         <p class="mb-2 font-medium">Date</p>
@@ -55,7 +55,7 @@
 
       <p>{DateTimeUtility.dateTimeFormatMedium.format(matchDate)}</p>
     </div>
-    <div class="card preset-ghost-primary border-primary-500 dark:preset-tonal-primary p-3">
+    <div class="card preset-tonal-primary border-primary-500 dark:preset-tonal-primary p-3">
       <div class="flex gap-2">
         <ClipboardList/>
         <p class="mb-2 font-medium">Status</p>

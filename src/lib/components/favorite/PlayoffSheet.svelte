@@ -27,7 +27,7 @@
     </Sheet.Header>
 
     <div class="mx-2 my-4">
-      <article class="card preset-ringed-primary p-4">
+      <article class="card preset-outlined-primary p-4">
         <div class="flex flex-col items-center gap-3">
           {#if playoffSeries.status === "leading"}
             <p>{playoffSeries.leading_team.name} lead series</p>

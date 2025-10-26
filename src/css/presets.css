@@ -1,196 +1,62 @@
-@utility preset-gradient-red-navy {
+.preset-gradient-red-navy {
     background-image: linear-gradient(45deg, var(--color-primary-500), var(--color-secondary-500));
     color: var(--color-primary-contrast-500);
 }
 
-@utility preset-gradient-red-sand {
+.preset-gradient-red-sand {
     background-image: linear-gradient(45deg, var(--color-primary-500), var(--color-tertiary-500));
     color: var(--color-primary-contrast-500);
 }
 
-@utility preset-gradient-navy-sand {
+.preset-gradient-navy-sand {
     background-image: linear-gradient(45deg, var(--color-secondary-500), var(--color-tertiary-500));
     color: var(--color-primary-contrast-500);
 }
 
-@utility preset-glass-neutral {
+.preset-glass-neutral {
     background: color-mix(in oklab, var(--color-surface-50-950) 30%, transparent);
     box-shadow: 0 0 30px color-mix(in oklab, var(--color-surface-50-950) 30%, transparent) inset;
     backdrop-filter: blur(16px);
 }
 
-@utility preset-glass-primary {
+.preset-glass-primary {
     background: color-mix(in oklab, var(--color-primary-500) 40%, transparent);
     box-shadow: 0 0 30px color-mix(in oklab, var(--color-primary-500) 50%, transparent) inset;
     backdrop-filter: blur(16px);
 }
 
-@utility preset-glass-secondary {
+.preset-glass-secondary {
     background: color-mix(in oklab, var(--color-secondary-500) 40%, transparent);
     box-shadow: 0 0 30px color-mix(in oklab, var(--color-secondary-500) 50%, transparent) inset;
     backdrop-filter: blur(16px);
 }
 
-@utility preset-glass-tertiary {
+.preset-glass-tertiary {
     background: color-mix(in oklab, var(--color-tertiary-500) 40%, transparent);
     box-shadow: 0 0 30px color-mix(in oklab, var(--color-tertiary-500) 50%, transparent) inset;
     backdrop-filter: blur(16px);
 }
 
-@utility preset-glass-success {
+.preset-glass-success {
     background: color-mix(in oklab, var(--color-success-500) 40%, transparent);
     box-shadow: 0 0 30px color-mix(in oklab, var(--color-success-500) 50%, transparent) inset;
     backdrop-filter: blur(16px);
 }
 
-@utility preset-glass-warning {
+.preset-glass-warning {
     background: color-mix(in oklab, var(--color-warning-500) 40%, transparent);
     box-shadow: 0 0 30px color-mix(in oklab, var(--color-warning-500) 50%, transparent) inset;
     backdrop-filter: blur(16px);
 }
 
-@utility preset-glass-error {
+.preset-glass-error {
     background: color-mix(in oklab, var(--color-error-500) 40%, transparent);
     box-shadow: 0 0 30px color-mix(in oklab, var(--color-error-500) 50%, transparent) inset;
     backdrop-filter: blur(16px);
 }
 
-@utility preset-glass-surface {
+.preset-glass-surface {
     background: color-mix(in oklab, var(--color-surface-500) 40%, transparent);
     box-shadow: 0 0 30px color-mix(in oklab, var(--color-surface-500) 50%, transparent) inset;
     backdrop-filter: blur(16px);
-}
-
-
-/* Outline -- supports ringed and host variants */
-@utility preset-outline-primary {
-    @apply ring-[1px] ring-primary-500 dark:ring-primary-500 ring-inset;
-}
-
-@utility preset-outline-secondary {
-    @apply ring-[1px] ring-secondary-500 dark:ring-secondary-500 ring-inset;
-}
-
-@utility preset-outline-tertiary {
-    @apply ring-[1px] ring-tertiary-500 dark:ring-tertiary-500 ring-inset;
-}
-
-@utility preset-outline-success {
-    @apply ring-[1px] ring-success-500 dark:ring-success-500 ring-inset;
-}
-
-@utility preset-outline-warning {
-    @apply ring-[1px] ring-warning-500 dark:ring-warning-500 ring-inset;
-}
-
-@utility preset-outline-error {
-    @apply ring-[1px] ring-error-500 dark:ring-error-500 ring-inset;
-}
-
-@utility preset-outline-surface {
-    @apply ring-[1px] ring-surface-500 dark:ring-surface-500 ring-inset;
-}
-
-@utility preset-outline {
-    @apply ring-[1px] ring-surface-500 dark:ring-surface-500 ring-inset;
-}
-
-/* ------------------------ */
-
-/* === Ringed === */
-
-@utility preset-ringed {
-    @apply bg-transparent dark:bg-transparent preset-outline;
-}
-
-@utility preset-ringed-primary {
-    @apply bg-transparent dark:bg-transparent preset-outline-primary;
-}
-
-@utility preset-ringed-secondary {
-    @apply bg-transparent dark:bg-transparent preset-outline-secondary;
-}
-
-@utility preset-ringed-tertiary {
-    @apply bg-transparent dark:bg-transparent preset-outline-tertiary;
-}
-
-@utility preset-ringed-success {
-    @apply bg-transparent dark:bg-transparent preset-outline-success;
-}
-
-@utility preset-ringed-warning {
-    @apply bg-transparent dark:bg-transparent preset-outline-warning;
-}
-
-@utility preset-ringed-error {
-    @apply bg-transparent dark:bg-transparent preset-outline-error;
-}
-
-@utility preset-ringed-surface {
-    @apply bg-transparent dark:bg-transparent preset-outline-surface;
-}
-
-/* === Ghost === */
-
-@utility preset-ghost-primary {
-    @apply bg-primary-500/20 dark:bg-primary-500/20 preset-outline-primary;
-}
-
-@utility preset-ghost-secondary {
-    @apply bg-secondary-500/20 dark:bg-secondary-500/20 preset-outline-secondary;
-}
-
-@utility preset-ghost-tertiary {
-    @apply bg-tertiary-500/20 dark:bg-tertiary-500/20 preset-outline-tertiary;
-}
-
-@utility preset-ghost-success {
-    @apply bg-success-500/20 dark:bg-success-500/20 preset-outline-success;
-}
-
-@utility preset-ghost-warning {
-    @apply bg-warning-500/20 dark:bg-warning-500/20 preset-outline-warning;
-}
-
-@utility preset-ghost-error {
-    @apply bg-error-500/20 dark:bg-error-500/20 preset-outline-error;
-}
-
-@utility preset-ghost-surface {
-    @apply bg-surface-500/20 dark:bg-surface-500/20 preset-outline-surface;
-}
-
-/* === Soft === */
-
-@utility preset-soft-primary {
-    @apply bg-primary-400/20 dark:bg-primary-500/20 text-primary-700-300 !ring-0;
-}
-
-@utility preset-soft-secondary {
-    @apply bg-secondary-400/20 dark:bg-secondary-500/20 text-secondary-700-300 !ring-0;
-}
-
-@utility preset-soft-tertiary {
-    @apply bg-tertiary-400/20 dark:bg-tertiary-500/20 text-tertiary-700-300 !ring-0;
-}
-
-@utility preset-soft-success {
-    @apply bg-success-400/20 dark:bg-success-500/20 text-success-700-300 !ring-0;
-}
-
-@utility preset-soft-warning {
-    @apply bg-warning-400/20 dark:bg-warning-500/20 text-warning-700-300 !ring-0;
-}
-
-@utility preset-soft-error {
-    @apply bg-error-400/20 dark:bg-error-500/20 text-error-700-300 !ring-0;
-}
-
-@utility preset-soft-surface {
-    @apply bg-surface-400/20 dark:bg-surface-500/20 text-surface-700-300 !ring-0;
-}
-
-@utility preset-soft {
-    @apply bg-surface-400/20 dark:bg-surface-500/20 text-surface-700-300 !ring-0;
 }

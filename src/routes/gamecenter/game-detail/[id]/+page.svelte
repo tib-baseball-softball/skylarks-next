@@ -33,17 +33,17 @@
             class="tabs-list preset-tonal-surface mt-6"
     >
       <Tabs.Trigger
-              class="tabs-trigger"
+              class="tabs-trigger btn"
               value="gameData"
       >Game Data
       </Tabs.Trigger>
       <Tabs.Trigger
-              class="tabs-trigger"
+              class="tabs-trigger btn"
               value="boxscore"
       >Box Score
       </Tabs.Trigger>
       <Tabs.Trigger
-              class="tabs-trigger"
+              class="tabs-trigger btn"
               value="gameReport"
       >Game Report
       </Tabs.Trigger>

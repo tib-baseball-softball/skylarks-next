@@ -23,29 +23,32 @@
           class="tabs-list border mb-1 preset-tonal-surface justify-around!"
   >
     <Tabs.Trigger
+            class="tabs-trigger btn"
             value="graph"
-            class="tabs-trigger"
     >
-      Graph</Tabs.Trigger>
+      Graph
+    </Tabs.Trigger>
     <Tabs.Trigger
+            class="tabs-trigger btn"
             value="percentage"
-            class="tabs-trigger"
-    >Percentage</Tabs.Trigger>
+    >Percentage
+    </Tabs.Trigger>
     <Tabs.Trigger
+            class="tabs-trigger btn"
             value="series"
-            class="tabs-trigger"
-    >Series</Tabs.Trigger>
+    >Series
+    </Tabs.Trigger>
   </Tabs.List>
 
-  <Tabs.Content value="graph" class="pt-4">
+  <Tabs.Content class="pt-4" value="graph">
     <LeagueChartGraph table={dataset.table}/>
   </Tabs.Content>
 
-  <Tabs.Content value="percentage" class="pt-4">
+  <Tabs.Content class="pt-4" value="percentage">
     <WinningPercentageContainer tableRow={dataset.table_row}/>
   </Tabs.Content>
 
-  <Tabs.Content value="series" class="pt-4">
+  <Tabs.Content class="pt-4" value="series">
     <StreakContainer dataset={dataset}/>
   </Tabs.Content>
 </Tabs.Root>

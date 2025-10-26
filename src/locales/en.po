@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-10T18:43:43.220Z\n"
-"PO-Revision-Date: 2025-10-24T14:34:19.075Z\n"
+"PO-Revision-Date: 2025-10-26T14:35:12.175Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -2078,9 +2078,8 @@ msgstr ""
 "Statistics about current league leaders in various statistical categories can be found on a\n"
 "dedicated subpage."
 
-#: src/routes/ligen/[id]/+page.svelte
-msgid "Go to stats"
-msgstr "Go to stats"
+#~ msgid "Go to stats"
+#~ msgstr "Go to stats"
 
 #: src/routes/ligen/[id]/+page.svelte
 msgid "Tabelle"
@@ -2810,3 +2809,49 @@ msgstr "An error occurred while saving the event."
 #: src/lib/components/diamondplanner/stats/AttendanceTotalStatsBlock.svelte
 msgid "All possible events of this type for {0}"
 msgstr "All possible events of this type for {0}"
+
+#~ msgid "KarlTestmichel"
+#~ msgstr "KarlTestmichel"
+
+#: src/lib/components/favorite/LeagueChartGraph.svelte
+msgid "Wins"
+msgstr "Wins"
+
+#: src/lib/components/favorite/LeagueChartGraph.svelte
+msgid "BEA"
+msgstr "BEA"
+
+#: src/lib/components/favorite/LeagueChartGraph.svelte
+msgid "Total Wins"
+msgstr "Total Wins"
+
+#~ msgid "MÖP"
+#~ msgstr "MÖP"
+
+#: src/lib/auth/LoginForm.svelte
+msgid "There was an error processing your authentication request."
+msgstr "There was an error processing your authentication request."
+
+#: src/lib/components/utility/TagsInput.svelte
+msgid "Enter"
+msgstr "Enter"
+
+#: src/lib/components/utility/TagsInput.svelte
+msgid "Backspace"
+msgstr "Backspace"
+
+#: src/lib/components/utility/TagsInput.svelte
+msgid "Remove tag"
+msgstr "Remove tag"
+
+#: src/lib/components/utility/TagsInput.svelte
+msgid "You have entered a value that is not allowed here."
+msgstr "You have entered a value that is not allowed here."
+
+#: src/routes/ligen/[id]/+page.svelte
+msgid ""
+"Go to\n"
+"stats"
+msgstr ""
+"Go to\n"
+"stats"

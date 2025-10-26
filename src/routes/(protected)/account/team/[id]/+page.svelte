@@ -81,8 +81,8 @@
     Timeframe
     <Tabs.Root bind:value={showEvents}>
       <Tabs.List class="tabs-list event-segment-container p-1!">
-        <Tabs.Trigger class="tabs-trigger active:preset-filled-error-300-700" value="next">Next</Tabs.Trigger>
-        <Tabs.Trigger class="tabs-trigger active:preset-filled" value="past">Past</Tabs.Trigger>
+        <Tabs.Trigger class="tabs-trigger btn active:preset-filled-error-300-700" value="next">Next</Tabs.Trigger>
+        <Tabs.Trigger class="tabs-trigger btn active:preset-filled" value="past">Past</Tabs.Trigger>
       </Tabs.List>
     </Tabs.Root>
   </label>
@@ -91,8 +91,8 @@
     Sort
     <Tabs.Root bind:value={sorting}>
       <Tabs.List class="tabs-list flex-wrap event-segment-container p-1!">
-        <Tabs.Trigger class="tabs-trigger" value="asc">Ascending</Tabs.Trigger>
-        <Tabs.Trigger class="tabs-trigger" value="desc">Descending</Tabs.Trigger>
+        <Tabs.Trigger class="tabs-trigger btn" value="asc">Ascending</Tabs.Trigger>
+        <Tabs.Trigger class="tabs-trigger btn" value="desc">Descending</Tabs.Trigger>
       </Tabs.List>
     </Tabs.Root>
   </label>
@@ -101,10 +101,10 @@
     Type
     <Tabs.Root bind:value={showTypes}>
       <Tabs.List class="tabs-list flex-wrap event-segment-container p-1! gap-1">
-        <Tabs.Trigger class="tabs-trigger" value="any">All</Tabs.Trigger>
-        <Tabs.Trigger class="tabs-trigger" value="game">Game</Tabs.Trigger>
-        <Tabs.Trigger class="tabs-trigger" value="practice">Practice</Tabs.Trigger>
-        <Tabs.Trigger class="tabs-trigger" value="misc">Other</Tabs.Trigger>
+        <Tabs.Trigger class="tabs-trigger btn" value="any">All</Tabs.Trigger>
+        <Tabs.Trigger class="tabs-trigger btn" value="game">Game</Tabs.Trigger>
+        <Tabs.Trigger class="tabs-trigger btn" value="practice">Practice</Tabs.Trigger>
+        <Tabs.Trigger class="tabs-trigger btn" value="misc">Other</Tabs.Trigger>
       </Tabs.List>
     </Tabs.Root>
   </label>
