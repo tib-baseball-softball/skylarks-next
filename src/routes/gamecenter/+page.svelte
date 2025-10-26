@@ -1,6 +1,6 @@
 <script lang="ts">
   import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte";
-  import {Switch} from "@skeletonlabs/skeleton-svelte";
+  import Switch from "$lib/components/utility/Switch.svelte";
   // @ts-ignore
   import {Tabs} from "bits-ui";
   import {Gameday} from "bsm.js";
