@@ -1,11 +1,11 @@
 <script lang="ts">
   import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte";
-  import {Progress} from "@skeletonlabs/skeleton-svelte";
   import ReloadUponPreferenceChange from "$lib/components/navigation/ReloadUponPreferenceChange.svelte";
   import {preferences} from "$lib/globals.svelte.ts";
   import {browser} from "$app/environment";
   import {goto} from "$app/navigation";
   import type {PageProps} from "./$types";
+  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
 
   const reload = () => {
     if (browser) {
@@ -29,7 +29,7 @@
 
 {#await data.clubTeams}
   <p>Loading Teams...</p>
-  <Progress/>
+  <ProgressRing/>
 
 {:then clubTeams}
 

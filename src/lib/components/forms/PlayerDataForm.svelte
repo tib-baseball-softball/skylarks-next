@@ -137,7 +137,6 @@
                   name="positions"
                   onValueChange={(e) => (selectedPositions = e.value)}
                   placeholder="Enter positions or click buttons..."
-                  tagBackground="preset-filled-primary-500"
                   validate={validatePositionValue}
                   value={selectedPositions}
           />

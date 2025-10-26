@@ -1,12 +1,12 @@
 <script lang="ts">
   import type {ClubTeam} from "bsm.js";
-  import {Progress} from "@skeletonlabs/skeleton-svelte";
   import BaseballStatsDatatable from "$lib/components/datatable/BaseballStatsDatatable.svelte";
   import type {StatsDataset} from "$lib/types/StatsDataset";
   import TeamDetailInfoCard from "$lib/components/team/TeamDetailInfoCard.svelte";
   import StandingsTable from "$lib/components/table/StandingsTable.svelte";
   import type {PageProps} from "./$types";
   import TeamPlayerSection from "$lib/components/player/TeamPlayerSection.svelte";
+  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
 
   let {data}: PageProps = $props();
   let clubTeam = $derived(data.clubTeam as ClubTeam);
@@ -32,7 +32,7 @@
   <h2 class="h2">Standings</h2>
 
   {#await data?.table}
-    <Progress/>
+    <ProgressRing/>
   {:then table}
     {#if table}
       <div class="col-span-2 standings-container">
@@ -50,7 +50,7 @@
   <h2 class="h2">Players</h2>
 
   {#await data.players}
-    <Progress/>
+    <ProgressRing/>
   {:then players}
     {#if Array.isArray(players)}
       <TeamPlayerSection {players}/>
@@ -65,7 +65,7 @@
 <section class="my-10! mb-4!">
   <h2 class="h2">Stats</h2>
   {#await getData()}
-    <Progress/>
+    <ProgressRing/>
   {:then stats}
     {#if stats.batting && stats.pitching && stats.fielding}
       <BaseballStatsDatatable data={stats} tableType="personal"/>

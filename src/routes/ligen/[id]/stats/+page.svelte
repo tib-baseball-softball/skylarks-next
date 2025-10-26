@@ -1,10 +1,10 @@
 <script lang="ts">
-  import {Progress} from "@skeletonlabs/skeleton-svelte";
   // @ts-ignore
   import {Tabs} from "bits-ui";
   import {StatsType} from "bsm.js";
   import LeaderboardTable from "$lib/components/table/LeaderboardTable.svelte";
   import {goto} from "$app/navigation";
+  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
 
   let {data} = $props();
 
@@ -35,7 +35,7 @@
 </Tabs.Root>
 
 {#await data.leaderboardData}
-  <Progress/>
+  <ProgressRing/>
   <div class="placeholder col-span-2"></div>
 {:then leaderboardData}
   <header class="space-y-3">

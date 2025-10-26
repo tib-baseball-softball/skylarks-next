@@ -1,10 +1,10 @@
 <script lang="ts">
-  import {Progress} from "@skeletonlabs/skeleton-svelte";
   import StatsByTypePieChart from "$lib/components/diamondplanner/stats/StatsByTypePieChart.svelte";
   import AttendanceTotalStatsBlock from "$lib/components/diamondplanner/stats/AttendanceTotalStatsBlock.svelte";
   import {goto} from "$app/navigation";
   import {range} from "$lib/functions/range";
   import type {PersonalAttendanceStatsItem} from "$lib/model/PersonalAttendanceStats";
+  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
 
   let {data} = $props();
 
@@ -36,7 +36,7 @@
 >
   <label class="label flex items-center gap-2 grow justify-between md:grow-0">
     Season
-    <select class="select" bind:value={selectedSeason}>
+    <select bind:value={selectedSeason} class="select">
       {#each seasonOptions as option}
         <option value="{option}">{option}</option>
       {/each}
@@ -61,7 +61,7 @@
 {/snippet}
 
 {#await data.statsItem}
-  <Progress/>
+  <ProgressRing/>
 {:then statsItem}
 
   {#if statsItem}
@@ -73,7 +73,7 @@
 {/await}
 
 {#await Promise.all(data.teamStatsItems)}
-  <Progress/>
+  <ProgressRing/>
 {:then teamStatsItems}
 
   {#each teamStatsItems as teamStatsItem}

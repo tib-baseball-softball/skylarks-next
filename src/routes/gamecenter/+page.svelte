@@ -1,6 +1,6 @@
 <script lang="ts">
   import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte";
-  import {Progress, Switch} from "@skeletonlabs/skeleton-svelte";
+  import {Switch} from "@skeletonlabs/skeleton-svelte";
   // @ts-ignore
   import {Tabs} from "bits-ui";
   import {Gameday} from "bsm.js";
@@ -11,6 +11,7 @@
   import GamecenterMatchSection from "$lib/components/match/GamecenterMatchSection.svelte";
   import type {PageProps} from "./$types";
   import ReloadUponPreferenceChange from "$lib/components/navigation/ReloadUponPreferenceChange.svelte";
+  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
 
   const DEFAULT_LEAGUE_GROUP_ID = 0;
 
@@ -100,7 +101,7 @@
       <Tabs.Content class="pt-3" value={preferences.current.gameday}>
         {#await data.streamed.matches}
           <p>Loading matches...</p>
-          <Progress/>
+          <ProgressRing/>
         {:then matches}
           <GamecenterMatchSection {matches} {showExternal}/>
         {:catch error}

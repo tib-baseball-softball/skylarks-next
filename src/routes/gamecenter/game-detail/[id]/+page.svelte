@@ -1,5 +1,4 @@
 <script lang="ts">
-  import {Progress} from "@skeletonlabs/skeleton-svelte";
   // @ts-ignore
   import {Tabs} from "bits-ui";
   import MatchMainInfoSection from "$lib/components/match/MatchMainInfoSection.svelte";
@@ -11,6 +10,7 @@
   import ContentFilteredUnavailable from "$lib/components/match/ContentFilteredUnavailable.svelte";
   import GameReport from "$lib/components/gameReport/GameReport.svelte";
   import ShareButton from "$lib/components/match/ShareButton.svelte";
+  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
 
   let {data}: PageProps = $props();
 
@@ -59,7 +59,7 @@
 
     <Tabs.Content value="boxscore">
       {#await data.singleGameStats}
-        <Progress/>
+        <ProgressRing/>
       {:then boxscore}
         {#if boxscore}
           <MatchBoxscoreSection {boxscore}/>
@@ -73,7 +73,7 @@
 
     <Tabs.Content value="gameReport">
       {#await data.gameReport}
-        <Progress/>
+        <ProgressRing/>
       {:then gameReport}
         {#if gameReport}
           <GameReport classes="my-2! md:max-w-[80%] 2xl:max-w-[70%]" report={gameReport}/>

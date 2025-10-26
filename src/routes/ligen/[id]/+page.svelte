@@ -1,8 +1,8 @@
 <script lang="ts">
-  import {Progress} from "@skeletonlabs/skeleton-svelte";
   import StandingsTable from "$lib/components/table/StandingsTable.svelte";
   import LeagueDetailInfoCard from "$lib/components/league/LeagueDetailInfoCard.svelte";
   import type {PageProps} from "./$types";
+  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
 
   let {data}: PageProps = $props();
   let expectedTable = $derived(data.table);
@@ -30,7 +30,8 @@
         </p>
 
         <footer class="card-footer mt-2">
-          <a href="/ligen/{leagueGroup.id}/stats" class="btn preset-tonal-primary border border-primary-500">Go to stats</a>
+          <a class="btn preset-tonal-primary border border-primary-500" href="/ligen/{leagueGroup.id}/stats">Go to
+            stats</a>
         </footer>
       </div>
     </article>
@@ -42,7 +43,7 @@
 
   <h2 class="h2">Tabelle</h2>
   {#await expectedTable}
-    <Progress/>
+    <ProgressRing/>
   {:then table}
     {#if table}
       <StandingsTable {table}/>
