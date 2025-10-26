@@ -28,8 +28,3 @@
 
 @plugin '@tailwindcss/forms';
 @plugin "@tailwindcss/typography";
-
-@import '@skeletonlabs/skeleton-svelte';
-
-@layer utilities {
-}
