@@ -2,14 +2,10 @@
  * External Imports
  */
 
-@import 'tailwindcss';
-@import "tw-animate-css";
-@import './css/skeleton/index.css';
+/* TODO: make this obsolete */
+@import "./css/tailwind_merged.css";
+@import './css/index.css';
 @import './css/skylarks-theme.css';
-
-/**
- * global custom CSS
- */
 
 @import './css/partials/stats.css';
 @import './css/partials/logos.css' layer(base);
@@ -17,14 +13,4 @@
 @import './css/partials/buttons.css' layer(utilities);
 @import './css/partials/card.css';
 @import './css/partials/tabs.css' layer(utilities);
-@import './css/presets.css';
 @import './css/overrides.css';
-@import './css/global.css' layer(utilities);
-
-@source not "./locales/";
-/*
- * Tailwind config stuff
- */
-
-@plugin '@tailwindcss/forms';
-@plugin "@tailwindcss/typography";

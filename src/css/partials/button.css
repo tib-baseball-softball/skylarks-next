@@ -7,7 +7,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: --spacing(2);
+    gap: calc(var(--spacing) * 2);
 
     /* Typography */
     text-decoration-line: none;
@@ -16,8 +16,8 @@
     /* Size */
     font-size: var(--text-base);
     line-height: var(--text-base--line-height);
-    padding-block: --spacing(1);
-    padding-inline: --spacing(4);
+    padding-block: calc(var(--spacing) * 1);
+    padding-inline: calc(var(--spacing) * 4);
 
     /* Transitions */
     transition-property: color,
@@ -49,7 +49,7 @@
     &:not(:disabled) {
         &:hover {
             filter: brightness(125%);
-            @variant dark {
+            @media (prefers-color-scheme: dark) {
                 filter: brightness(75%);
             }
         }
@@ -73,12 +73,12 @@
     font-size: var(--text-base);
     width: var(--text-base);
     height: var(--text-base);
-    padding: --spacing(2);
+    padding: calc(var(--spacing) * 2);
 
     &:not(:disabled) {
         &:hover {
             filter: brightness(125%);
-            @variant dark {
+            @media (prefers-color-scheme: dark) {
                 filter: brightness(75%);
             }
         }
@@ -90,22 +90,22 @@
 .btn-sm {
     font-size: var(--text-xs);
     line-height: var(--text-xs--line-height);
-    padding-block: --spacing(1);
-    padding-inline: --spacing(3);
+    padding-block: calc(var(--spacing) * 1);
+    padding-inline: calc(var(--spacing) * 3);
 }
 
 .btn-base {
     font-size: var(--text-base);
     line-height: var(--text-base--line-height);
-    padding-block: --spacing(1);
-    padding-inline: --spacing(4);
+    padding-block: calc(var(--spacing) * 1);
+    padding-inline: calc(var(--spacing) * 4);
 }
 
 .btn-lg {
     font-size: var(--text-xl);
     line-height: var(--text-xl--line-height);
-    padding-block: --spacing(2);
-    padding-inline: --spacing(5);
+    padding-block: calc(var(--spacing) * 2);
+    padding-inline: calc(var(--spacing) * 5);
 }
 
 /* Button Icon */
@@ -113,21 +113,21 @@
     font-size: var(--text-xs);
     width: var(--text-xs);
     height: var(--text-xs);
-    padding: --spacing(1.5);
+    padding: calc(var(--spacing) * 1.5);
 }
 
 .btn-icon-base {
     font-size: var(--text-base);
     width: var(--text-base);
     height: var(--text-base);
-    padding: --spacing(2);
+    padding: calc(var(--spacing) * 2);
 }
 
 .btn-icon-lg {
     font-size: var(--text-xl);
     width: var(--text-xl);
     height: var(--text-xl);
-    padding: --spacing(3);
+    padding: calc(var(--spacing) * 3);
 }
 
 /* Group --- */
@@ -135,7 +135,7 @@
     border-radius: var(--radius-container);
     display: inline-flex;
     align-items: center;
-    gap: --spacing(2);
-    padding: --spacing(2);
+    gap: calc(var(--spacing) * 2);
+    padding: calc(var(--spacing) * 2);
     overflow: hidden;
 }

@@ -48,11 +48,11 @@
     /* Cells */
 
     & th {
-        padding: --spacing(2);
+        padding: calc(var(--spacing) * 2);
     }
 
     & td {
-        padding: --spacing(2);
+        padding: calc(var(--spacing) * 2);
     }
 
     /* Caption */

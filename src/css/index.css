@@ -1,0 +1,16 @@
+@import "./partials/badge.css";
+@import "./theme/base-globals.css";
+@import "./partials/button.css";
+@import "./partials/card.css";
+@import "./partials/chip.css";
+@import "./partials/forms.css";
+@import "./theme/presets.css";
+@import "./partials/progress.css";
+@import "./partials/prose.css";
+@import "./partials/rulers.css";
+@import "./partials/tables.css";
+@import "./theme/typography.css";
+/* TODO: make this obsolete */
+@import "./shame.css";
+@import "./theme/skeleton-theme.css";
+@import "./partials/charts.css";

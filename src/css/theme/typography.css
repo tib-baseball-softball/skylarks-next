@@ -9,13 +9,14 @@
     font-size: var(--text-4xl);
     line-height: var(--text-4xl--line-height);
 
-    @variant md {
+    @media (min-width: 48rem) {
         font-size: var(--text-5xl);
         line-height: var(--text-5xl--line-height);
     }
-    @variant dark {
+    @media (prefers-color-scheme: dark) {
         color: var(--heading-font-color-dark);
     }
+    margin-block: calc(var(--spacing) * 2);
 }
 
 .h2 {
@@ -28,11 +29,11 @@
     font-size: var(--text-3xl);
     line-height: var(--text-3xl--line-height);
 
-    @variant md {
+    @media (min-width: 48rem) {
         font-size: var(--text-4xl);
         line-height: var(--text-4xl--line-height);
     }
-    @variant dark {
+    @media (prefers-color-scheme: dark) {
         color: var(--heading-font-color-dark);
     }
 }
@@ -47,11 +48,11 @@
     font-size: var(--text-2xl);
     line-height: var(--text-2xl--line-height);
 
-    @variant md {
+    @media (min-width: 48rem) {
         font-size: var(--text-3xl);
         line-height: var(--text-3xl--line-height);
     }
-    @variant dark {
+    @media (prefers-color-scheme: dark) {
         color: var(--heading-font-color-dark);
     }
 }
@@ -66,12 +67,12 @@
     font-size: var(--text-xl);
     line-height: var(--text-xl--line-height);
 
-    @variant md {
+    @media (min-width: 48rem) {
         font-size: var(--text-2xl);
         line-height: var(--text-2xl--line-height);
     }
 
-    @variant dark {
+    @media (prefers-color-scheme: dark) {
         color: var(--heading-font-color-dark);
     }
 }
@@ -86,11 +87,11 @@
     font-size: var(--text-lg);
     line-height: var(--text-lg--line-height);
 
-    @variant md {
+    @media (min-width: 48rem) {
         font-size: var(--text-xl);
         line-height: var(--text-xl--line-height);
     }
-    @variant dark {
+    @media (prefers-color-scheme: dark) {
         color: var(--heading-font-color-dark);
     }
 }
@@ -105,11 +106,11 @@
     font-size: var(--text-base);
     line-height: var(--text-base--line-height);
 
-    @variant md {
+    @media (min-width: 48rem) {
         font-size: var(--text-lg);
         line-height: var(--text-lg--line-height);
     }
-    @variant dark {
+    @media (prefers-color-scheme: dark) {
         color: var(--heading-font-color-dark);
     }
 }
@@ -124,16 +125,19 @@
     letter-spacing: var(--anchor-letter-spacing);
     text-decoration: var(--anchor-text-decoration);
 
-    @variant hover {
+    &:hover {
         text-decoration: var(--anchor-text-decoration-hover);
     }
-    @variant active {
+
+    &:active {
         text-decoration: var(--anchor-text-decoration-active);
     }
-    @variant focus {
+
+    &:focus {
         text-decoration: var(--anchor-text-decoration-focus);
     }
-    @variant dark {
+
+    @media (prefers-color-scheme: dark) {
         color: var(--anchor-font-color-dark);
     }
 }
@@ -141,7 +145,7 @@
 .blockquote {
     border-left-width: 3px;
     border-left-color: var(--color-primary-500);
-    padding-left: --spacing(4);
+    padding-left: calc(var(--spacing) * 4);
     font-style: italic;
 }
 
@@ -155,8 +159,8 @@
     font-size: var(--text-sm);
     white-space: nowrap;
     overflow-x: auto;
-    padding-inline: --spacing(1.5);
-    padding-block: --spacing(0.25);
+    padding-inline: calc(var(--spacing) * 1.5);
+    padding-block: calc(var(--spacing) * 0.25);
 }
 
 .pre {
@@ -166,7 +170,7 @@
     color: var(--color-white);
     font-size: var(--text-xs);
     white-space: pre-wrap;
-    padding: --spacing(4);
+    padding: calc(var(--spacing) * 4);
     overflow-x: auto;
 }
 
@@ -178,8 +182,8 @@
         font-family: var(--font-mono);
         font-size: var(--text-xs);
         white-space: nowrap;
-        padding-inline: --spacing(1.5);
-        padding-block: --spacing(0.75);
+        padding-inline: calc(var(--spacing) * 1.5);
+        padding-block: calc(var(--spacing) * 0.75);
         overflow-x: auto;
     }
 }
@@ -193,13 +197,13 @@
     font-family: var(--font-mono);
     position: relative;
     display: block;
-    padding: --spacing(0.5);
-    padding-left: --spacing(5);
+    padding: calc(var(--spacing) * 0.5);
+    padding-left: calc(var(--spacing) * 5);
     text-decoration: none;
 
     &::before {
         position: absolute;
-        left: --spacing(1);
+        left: calc(var(--spacing) * 1);
         font-family: var(--font-mono);
     }
 
@@ -214,13 +218,13 @@
     font-family: var(--font-mono);
     position: relative;
     display: block;
-    padding: --spacing(0.5);
-    padding-left: --spacing(5);
+    padding: calc(var(--spacing) * 0.5);
+    padding-left: calc(var(--spacing) * 5);
     text-decoration: none;
 
     &::before {
         position: absolute;
-        left: --spacing(1);
+        left: calc(var(--spacing) * 1);
         font-family: var(--font-mono);
     }
 
@@ -233,5 +237,9 @@
     color: var(--color-tertiary-contrast-500);
     background-color: var(--color-tertiary-500);
     border-radius: var(--radius-sm);
-    padding-inline: --spacing(1);
+    padding-inline: calc(var(--spacing) * 1);
+}
+
+.text-justify {
+    text-align: justify;
 }

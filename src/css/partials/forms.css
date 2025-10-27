@@ -15,7 +15,7 @@
     width: 100%;
 
     & > * + * {
-        margin-top: --spacing(1);
+        margin-top: calc(var(--spacing) * 1);
     }
 }
 
@@ -68,7 +68,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-inline: --spacing(4);
+    padding-inline: calc(var(--spacing) * 4);
 }
 
 /* Children: Form Elements --- */
@@ -82,21 +82,23 @@
     /* Size */
     font-size: var(--text-base);
     line-height: var(--text-base--line-height);
-    padding-block: --spacing(1);
-    padding-inline: --spacing(3);
+    padding-block: calc(var(--spacing) * 1);
+    padding-inline: calc(var(--spacing) * 3);
 
     /* Edges */
     outline-color: transparent;
     border-width: 0;
     --tw-ring-inset: inset;
 
-    @variant active {
+    &:active {
         --tw-ring-color: var(--color-primary-500);
     }
-    @variant focus {
+
+    &:focus {
         --tw-ring-color: var(--color-primary-500);
     }
-    @variant focus-within {
+
+    &:focus-within {
         --tw-ring-color: var(--color-primary-500);
     }
 }
@@ -109,20 +111,22 @@
     /* Size */
     font-size: var(--text-base);
     line-height: var(--text-base--line-height);
-    padding-block: --spacing(1);
+    padding-block: calc(var(--spacing) * 1);
 
     /* Edges */
     outline-color: transparent;
     border-width: 0;
     --tw-ring-inset: inset;
 
-    @variant active {
+    &:active {
         --tw-ring-color: var(--color-primary-500);
     }
-    @variant focus {
+
+    &:focus {
         --tw-ring-color: var(--color-primary-500);
     }
-    @variant focus-within {
+
+    &:focus-within {
         --tw-ring-color: var(--color-primary-500);
     }
 
@@ -133,9 +137,9 @@
         color: var(--color-surface-950-50);
         border-radius: var(--radius-base);
         font-size: var(--text-base);
-        line-height: --spacing(9);
-        height: --spacing(9);
-        padding: --spacing(2);
+        line-height: calc(var(--spacing) * 9);
+        height: calc(var(--spacing) * 9);
+        padding: calc(var(--spacing) * 2);
     }
 }
 
@@ -145,7 +149,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: --spacing(2);
+    gap: calc(var(--spacing) * 2);
 
     /* Typography */
     text-decoration-line: none;
@@ -154,17 +158,17 @@
     /* Size */
     font-size: var(--text-base);
     line-height: var(--text-base--line-height);
-    padding-block: --spacing(1);
-    padding-inline: --spacing(4);
+    padding-block: calc(var(--spacing) * 1);
+    padding-inline: calc(var(--spacing) * 4);
 
     /* Transitions */
     transition-property: all;
     transition-timing-function: var(--default-transition-timing-function);
     transition-duration: var(--default-transition-duration);
 
-    @variant hover {
+    &:hover {
         filter: brightness(125%);
-        @variant dark {
+        @media (prefers-color-scheme: dark) {
             filter: brightness(75%);
         }
     }
@@ -180,8 +184,8 @@
     /* Size */
     font-size: var(--text-base);
     line-height: var(--text-base--line-height);
-    padding-block: --spacing(1);
-    padding-inline: --spacing(3);
+    padding-block: calc(var(--spacing) * 1);
+    padding-inline: calc(var(--spacing) * 3);
 
     /* Edges */
     outline-color: transparent;
@@ -191,13 +195,19 @@
     --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 var(--default-ring-width) var(--tw-ring-color, currentColor);
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
 
-    @variant active {
+    &::placeholder {
+        color: light-dark(var(--color-gray-500), var(--color-gray-400));
+    }
+
+    &:active {
         --tw-ring-color: var(--color-primary-500);
     }
-    @variant focus {
+
+    &:focus {
         --tw-ring-color: var(--color-primary-500);
     }
-    @variant focus-within {
+
+    &:focus-within {
         --tw-ring-color: var(--color-primary-500);
     }
 
@@ -208,15 +218,15 @@
         border-radius: var(--radius-base);
         background-color: var(--color-surface-950-50);
         color: var(--color-surface-50-950);
-        transform: translateY(--spacing(-0.5));
-        margin-right: --spacing(2);
+        transform: translateY(calc(var(--spacing) * -0.5));
+        margin-right: calc(var(--spacing) * 2);
         text-transform: capitalize;
 
         /* Size */
         font-size: var(--text-xs);
         height: var(--text-xs--line-height);
-        padding-block: --spacing(0);
-        padding-inline: --spacing(3);
+        padding-block: calc(var(--spacing) * 0);
+        padding-inline: calc(var(--spacing) * 3);
     }
 
     /* Range Input --- */
@@ -233,8 +243,8 @@
 
     &[type='color'] {
         border-radius: var(--radius-base);
-        width: --spacing(8.5);
-        height: --spacing(8.5);
+        width: calc(var(--spacing) * 8.5);
+        height: calc(var(--spacing) * 8.5);
         padding: 0;
         border: none;
         outline: none;
@@ -269,13 +279,15 @@
     outline-color: transparent;
     --tw-ring-color: transparent;
 
-    @variant active {
+    &:active {
         border-color: transparent !important;
     }
-    @variant focus {
+
+    &:focus {
         border-color: transparent !important;
     }
-    @variant focus-within {
+
+    &:focus-within {
         border-color: transparent !important;
     }
 }
@@ -287,26 +299,29 @@
     cursor: pointer;
     background-color: var(--color-surface-300-700);
     border-radius: var(--radius-sm);
-    height: --spacing(5);
-    width: --spacing(5);
+    height: calc(var(--spacing) * 5);
+    width: calc(var(--spacing) * 5);
 
-    @variant focus-within {
+    &:focus-within {
         --tw-ring-color: var(--color-primary-500);
     }
-    @variant hover {
+
+    &:hover {
         filter: brightness(105%);
     }
-    @variant focus {
+
+    &:focus {
         filter: brightness(105%);
     }
 
     &:checked {
         background-color: var(--color-primary-500);
 
-        @variant hover {
+        &:hover {
             background-color: var(--color-primary-500);
         }
-        @variant focus {
+
+        &:focus {
             background-color: var(--color-primary-500);
             border: 0;
         }
@@ -315,10 +330,11 @@
     &:indeterminate {
         background-color: var(--color-primary-500);
 
-        @variant hover {
+        &:hover {
             background-color: var(--color-primary-500);
         }
-        @variant focus {
+
+        &:focus {
             background-color: var(--color-primary-500);
             border: 0;
         }
@@ -331,31 +347,34 @@
     cursor: pointer;
     background-color: var(--color-surface-300-700);
     border-radius: var(--radius-sm);
-    height: --spacing(5);
-    width: --spacing(5);
+    height: calc(var(--spacing) * 5);
+    width: calc(var(--spacing) * 5);
 
     /* Base Size --- */
     border-radius: 100%;
-    height: --spacing(5);
-    width: --spacing(5);
+    height: calc(var(--spacing) * 5);
+    width: calc(var(--spacing) * 5);
 
-    @variant focus-within {
+    &:focus-within {
         --tw-ring-color: var(--color-primary-500);
     }
-    @variant hover {
+
+    &:hover {
         filter: brightness(105%);
     }
-    @variant focus {
+
+    &:focus {
         filter: brightness(105%);
     }
 
     &:checked {
         background-color: var(--color-primary-500);
 
-        @variant hover {
+        &:hover {
             background-color: var(--color-primary-500);
         }
-        @variant focus {
+
+        &:focus {
             background-color: var(--color-primary-500);
             border: 0;
         }
@@ -378,7 +397,7 @@
     /* Size */
     font-size: var(--text-base);
     line-height: var(--text-base--line-height);
-    padding-block: --spacing(1);
+    padding-block: calc(var(--spacing) * 1);
 
     /*
         WARNING
@@ -393,25 +412,27 @@
     --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 var(--default-ring-width) var(--tw-ring-color, currentColor);
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
 
-    @variant active {
+    &:active {
         --tw-ring-color: var(--color-primary-500);
     }
-    @variant focus {
+
+    &:focus {
         --tw-ring-color: var(--color-primary-500);
     }
-    @variant focus-within {
+
+    &:focus-within {
         --tw-ring-color: var(--color-primary-500);
     }
 
     /* Multiple & Size --- */
 
     & > * + * {
-        margin-top: --spacing(2);
+        margin-top: calc(var(--spacing) * 2);
     }
 
     &[multiple] {
         border-radius: var(--radius-container);
-        padding: --spacing(1);
+        padding: calc(var(--spacing) * 1);
 
         & optgroup,
         & option {
@@ -421,7 +442,7 @@
 
     &[size] {
         border-radius: var(--radius-container);
-        padding: --spacing(1);
+        padding: calc(var(--spacing) * 1);
 
         & optgroup,
         & option {
@@ -437,15 +458,15 @@
     }
 
     & optgroup > * + * {
-        margin-top: --spacing(2);
+        margin-top: calc(var(--spacing) * 2);
     }
 
     & optgroup option:first-of-type {
-        margin-top: --spacing(2);
+        margin-top: calc(var(--spacing) * 2);
     }
 
     & optgroup option:last-child {
-        margin-bottom: --spacing(2) !important;
+        margin-bottom: calc(var(--spacing) * 2) !important;
     }
 
     /* Option --- */
@@ -455,9 +476,9 @@
         color: var(--color-surface-950-50);
         border-radius: var(--radius-base);
         font-size: var(--text-base);
-        line-height: --spacing(9);
-        height: --spacing(9);
-        padding: --spacing(2);
+        line-height: calc(var(--spacing) * 9);
+        height: calc(var(--spacing) * 9);
+        padding: calc(var(--spacing) * 2);
     }
 }
 
@@ -471,8 +492,8 @@
     /* Size */
     font-size: var(--text-base);
     line-height: var(--text-base--line-height);
-    padding-block: --spacing(1);
-    padding-inline: --spacing(3);
+    padding-block: calc(var(--spacing) * 1);
+    padding-inline: calc(var(--spacing) * 3);
 
     /* Edges */
     outline-color: transparent;
@@ -482,13 +503,15 @@
     --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 var(--default-ring-width) var(--tw-ring-color, currentColor);
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
 
-    @variant active {
+    &:active {
         --tw-ring-color: var(--color-primary-500);
     }
-    @variant focus {
+
+    &:focus {
         --tw-ring-color: var(--color-primary-500);
     }
-    @variant focus-within {
+
+    &:focus-within {
         --tw-ring-color: var(--color-primary-500);
     }
 }

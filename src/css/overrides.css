@@ -18,15 +18,3 @@
         border-color: var(--color-surface-500)
     }
 }
-
-/**
-  * We do not want the default background colors
-  */
-.apexcharts-svg {
-    background: none !important;
-}
-
-.prose {
-    --tw-prose-body: light-dark(var(--base-font-color), var(--base-font-color-dark));
-    --tw-prose-bold: light-dark(var(--base-font-color), var(--base-font-color-dark));
-}
