@@ -1100,10 +1100,6 @@
         width: 70% !important;
     }
 
-    .w-\[93\%\] {
-        width: 93%;
-    }
-
     .w-\[100\%\], .w-full {
         width: 100%;
     }
@@ -1150,10 +1146,6 @@
 
     .min-w-8 {
         min-width: calc(var(--spacing) * 8);
-    }
-
-    .min-w-16 {
-        min-width: calc(var(--spacing) * 16);
     }
 
     .min-w-52 {
@@ -1640,10 +1632,6 @@
         padding-bottom: calc(var(--spacing) * 3);
     }
 
-    .pb-16 {
-        padding-bottom: calc(var(--spacing) * 16);
-    }
-
     .text-center {
         text-align: center;
     }
@@ -1989,10 +1977,6 @@
             display: none;
         }
 
-        .md\:w-\[90\%\] {
-            width: 90%;
-        }
-
         .md\:w-full {
             width: 100%;
         }
@@ -2092,10 +2076,6 @@
             margin-inline-end: calc(var(--spacing) * 2);
         }
 
-        .lg\:me-5 {
-            margin-inline-end: calc(var(--spacing) * 5);
-        }
-
         .lg\:mt-5 {
             margin-top: calc(var(--spacing) * 5);
         }
@@ -2116,16 +2096,8 @@
             display: inline;
         }
 
-        .lg\:w-72 {
-            width: calc(var(--spacing) * 72);
-        }
-
         .lg\:w-\[70\%\] {
             width: 70%;
-        }
-
-        .lg\:w-\[85\%\] {
-            width: 85%;
         }
 
         .lg\:max-w-\[50\%\] {
@@ -2216,10 +2188,6 @@
             width: calc(var(--spacing) * 24);
         }
 
-        .xl\:w-80 {
-            width: calc(var(--spacing) * 80);
-        }
-
         .xl\:w-\[50\%\] {
             width: 50%;
         }
@@ -2246,10 +2214,6 @@
 
         .xl\:gap-12 {
             gap: calc(var(--spacing) * 12);
-        }
-
-        .xl\:gap-16 {
-            gap: calc(var(--spacing) * 16);
         }
 
         :where(.xl\:space-y-7 > :not(:last-child)) {

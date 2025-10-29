@@ -11,10 +11,6 @@
     .bg-surface-50\/80 {
         background-color: color-mix(in oklab, var(--color-surface-50) 80%, transparent);
     }
-
-    .bg-surface-500\/5 {
-        background-color: color-mix(in oklab, var(--color-surface-500) 5%, transparent);
-    }
 }
 
 @media (hover: hover) {
@@ -102,10 +98,6 @@
 
     .dark\:bg-surface-700 {
         background-color: var(--color-surface-700);
-    }
-
-    .dark\:bg-surface-800 {
-        background-color: var(--color-surface-800);
     }
 
     .dark\:bg-surface-950\/50 {

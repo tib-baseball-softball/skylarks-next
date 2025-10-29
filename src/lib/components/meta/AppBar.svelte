@@ -10,26 +10,45 @@
   let {lead, children, trail}: Props = $props();
 </script>
 
-<header
-        class="w-full flex flex-col bg-surface-500/5 dark:bg-surface-800 space-y-4  p-3"
-        data-testid="app-bar"
->
-  <section
-          class="flex justify-between grid-cols-[auto_1fr_auto] gap-4 "
-          data-testid="app-bar-toolbar"
-  >
+<header data-testid="app-bar">
+  <section data-testid="app-bar-toolbar">
 
-    <div class="flex space-x-4 rtl:space-x-reverse  ">
+    <div class="lead">
       {@render lead?.()}
     </div>
 
-    <div class="grow place-self-center">
+    <div class="center">
       {@render children?.()}
     </div>
 
-    <div class="flex space-x-4 rtl:space-x-reverse">
+    <div class="trail">
       {@render trail?.()}
     </div>
 
   </section>
 </header>
+
+<style>
+    header {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--sidebar-color);
+        padding: calc(var(--spacing) * 3);
+    }
+
+    section {
+        display: flex;
+        justify-content: space-between;
+        gap: calc(var(--spacing) * 4);
+    }
+
+    .lead, .trail {
+        display: flex;
+    }
+
+    .center {
+        flex-grow: 1;
+        place-self: center;
+    }
+</style>

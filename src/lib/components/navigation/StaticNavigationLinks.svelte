@@ -1,6 +1,6 @@
 <script lang="ts">
   import {page} from "$app/state";
-  import {Home, Shield, Star, Table, Ticket, Users} from "lucide-svelte";
+  import {House, Shield, Star, Table, Ticket, Users} from "lucide-svelte";
   import {preferences} from "$lib/globals.svelte.ts";
 
   interface Props {
@@ -13,7 +13,7 @@
 <li>
   <a class="{classes}" class:preset-filled-primary-500={page.url.pathname === "/"}
      href="/">
-    <Home/>
+    <House/>
     <span>Start</span>
   </a>
 </li>

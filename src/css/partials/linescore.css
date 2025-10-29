@@ -12,9 +12,7 @@
 
 .linescore-hover tbody tr {
     &:hover {
-        @media (hover: hover) {
-            background-color: color-mix(in oklab, var(--color-surface-500) 20%, transparent);
-        }
+        background-color: color-mix(in oklab, var(--color-surface-500) 20%, transparent);
     }
 }
 
