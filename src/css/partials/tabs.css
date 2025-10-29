@@ -5,31 +5,34 @@
     border-radius: var(--radius-container);
     gap: calc(var(--spacing) * 1);
     padding: calc(var(--spacing) * 1);
-    @media (width >= 48rem /* 768px */
-    ) {
-        gap: calc(var(--spacing) * 3) ;
+    @media (width >= 48rem) {
+        gap: calc(var(--spacing) * 3);
+        grid-column: span 2 / span 2;
     }
     background-color: var(--color-surface-50-950);
     color: var(--color-surface-950-50);
 
-    @media (width >= 64rem /* 1024px */
-    ) {
-        padding: calc(var(--spacing) * 2) /* 0.5rem = 8px */
-    ;
+    @media (width >= 64rem) {
+        padding: calc(var(--spacing) * 2);
     }
 }
 
 .tabs-trigger {
-    @media (hover: hover) {
+    cursor: pointer;
+    display: inline-block;
+    flex-grow: 1;
+
+    &:hover {
         background-color: var(--color-primary-50-950);
         color: var(--color-primary-950-50);
     }
+
     font-size: calc(0.875rem * var(--text-scaling));
-    line-height: var(--tw-leading, calc(calc(1.25 / 0.875) * var(--text-scaling)));
+    line-height: var(--tw-leading);
 
     @media (width >= 48rem) {
         font-size: calc(1rem * var(--text-scaling));
-        line-height: var(--tw-leading, calc(calc(1.5 / 1)/* 1.5 */ * var(--text-scaling)));
+        line-height: var(--tw-leading);
     }
 }
 
