@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-12T16:35:53.634Z\n"
-"PO-Revision-Date: 2025-10-26T14:35:13.844Z\n"
+"PO-Revision-Date: 2025-10-30T23:13:54.894Z\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: \n"
@@ -17,7 +17,6 @@ msgid "Hero"
 msgstr "Главная"
 
 #: src/routes/+page.svelte
-#: src/lib/components/navigation/NavigationSheet.svelte
 msgid "Berlin Skylarks"
 msgstr "Berlin Skylarks"
 
@@ -2848,4 +2847,11 @@ msgstr ""
 msgid ""
 "Go to\n"
 "stats"
+msgstr ""
+
+#~ msgid "Home"
+#~ msgstr ""
+
+#: src/lib/components/navigation/NavigationSheet.svelte
+msgid "Home Page"
 msgstr ""

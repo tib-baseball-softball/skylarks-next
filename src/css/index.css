@@ -5,6 +5,7 @@
 @import "./partials/chip.css";
 @import "./partials/forms.css";
 @import "./partials/container.css";
+@import "./partials/drawer.css";
 @import "./theme/presets.css";
 @import "./partials/progress.css";
 @import "./partials/prose.css";
