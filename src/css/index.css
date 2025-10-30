@@ -6,6 +6,7 @@
 @import "./partials/forms.css";
 @import "./partials/container.css";
 @import "./partials/drawer.css";
+@import "./partials/dialog.css";
 @import "./theme/presets.css";
 @import "./partials/progress.css";
 @import "./partials/prose.css";

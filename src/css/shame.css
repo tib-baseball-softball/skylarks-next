@@ -100,10 +100,6 @@
         }
     }
 
-    .dark\:bg-surface-950\/80 {
-        background-color: #0a0a0acc;
-    }
-
     @supports (color: color-mix(in lab, red, red)) {
         .dark\:bg-surface-950\/80 {
             background-color: color-mix(in oklab, var(--color-surface-950) 80%, transparent);

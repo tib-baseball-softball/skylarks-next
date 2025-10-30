@@ -1168,16 +1168,6 @@
         flex-grow: 0;
     }
 
-    .translate-x-\[-50\%\] {
-        --tw-translate-x: -50%;
-        translate: var(--tw-translate-x) var(--tw-translate-y);
-    }
-
-    .translate-y-\[-50\%\] {
-        --tw-translate-y: -50%;
-        translate: var(--tw-translate-x) var(--tw-translate-y);
-    }
-
     .scale-75 {
         --tw-scale-x: 75%;
         --tw-scale-y: 75%;
