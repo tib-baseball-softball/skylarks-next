@@ -3,19 +3,31 @@
 </script>
 
 <nav
-        class="md:hidden bottom-nav bg-surface-50 dark:bg-surface-800 border-t border-b border-surface-500 dark:border-surface-100 z-2"
+        class="bottom-nav"
 >
-  <ul class="flex">
+  <ul>
     <StaticNavigationLinks classes="flex-col py-1.5 text-sm"/>
   </ul>
 </nav>
 
 <style lang="postcss">
+    ul {
+        display: flex;
+    }
+
     .bottom-nav {
         position: fixed;
         bottom: 0;
         left: 0;
         width: 100%;
         padding-bottom: env(safe-area-inset-bottom);
+        background-color: var(--sidebar-color);
+        z-index: 2;
+        border-top: 1px solid light-dark(var(--color-surface-500), var(--color-surface-100));
+        border-bottom: 1px solid light-dark(var(--color-surface-500), var(--color-surface-100));
+
+        @media (min-width: 48rem) {
+            display: none;
+        }
     }
 </style>

@@ -3,16 +3,6 @@
  * Nothing should ever get added to this file, only deleted.
  */
 
-@supports (color: color-mix(in lab, red, red)) {
-    .bg-surface-50\/50 {
-        background-color: color-mix(in oklab, var(--color-surface-50) 50%, transparent);
-    }
-
-    .bg-surface-50\/80 {
-        background-color: color-mix(in oklab, var(--color-surface-50) 80%, transparent);
-    }
-}
-
 @media (hover: hover) {
     .hover\:preset-tonal-error:hover {
         background-color: var(--color-error-50-950);
