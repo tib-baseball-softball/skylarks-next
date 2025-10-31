@@ -516,4 +516,12 @@
             --tw-ring-color: var(--color-primary-500);
         }
     }
+
+    @media (prefers-color-scheme: dark) {
+        .input,
+        .select,
+        .textarea {
+            --tw-ring-color: var(--color-surface-400);
+        }
+    }
 }

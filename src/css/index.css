@@ -20,7 +20,6 @@
 @import "./theme/typography.css";
 /* TODO: make this obsolete */
 @import "./shame.css";
-@import './overrides.css';
 @import "./theme/generic-theme.css";
 @import "./theme/animations.css";
 @import "./theme/properties.css";
