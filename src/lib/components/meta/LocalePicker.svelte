@@ -3,12 +3,17 @@
   import {goto} from "$app/navigation";
   import {page} from "$app/state";
 
-  function reload() {
-    goto(page.url, {
+  async function reload() {
+    await goto(page.url, {
       noScroll: true,
       keepFocus: true,
       invalidateAll: true,
     });
+    const htmlElement = document.querySelector("html");
+
+    if (htmlElement) {
+      htmlElement.lang = preferences.current.locale;
+    }
   }
 </script>
 
