@@ -6,23 +6,35 @@
 </script>
 
 <div class="w-full space-y-5 mt-2 mb-5">
-  <section id="Hero" class="hero w-screen h-[20em] rounded-lg">
+  <section class="hero w-screen h-[20em] rounded-lg" id="Hero">
     <div class="hero-overlay bg-opacity-60"></div>
     <div class="hero-content">
       <div class="max-w-md text-white preset-glass-neutral p-3 rounded-xl">
-        <h1 class="h1 mb-2">Berlin Skylarks</h1>
+        <h1 class="h1 mb-2">Diamond Planner</h1>
         <p>
-          Baseball & Softball in the Heart of Berlin
+          Berlin Skylarks Team App
         </p>
       </div>
     </div>
   </section>
 
+  <section class="prose">
+    <p>
+      The core functionality of this app (getting up-to-date information about games, standings and public club
+      information) is available without logging in.
+    </p>
+    <p>To access internal team information and participate in team activities, please
+      <a href="/login">
+        log in to your account.
+      </a>
+    </p>
+  </section>
+
   <section id="Scores">
     <CurrentMatchesOverviewCard
             matchesCurrent={data.streamed.matchesCurrent}
-            matchesPrevious={data.streamed.matchesPrevious}
             matchesNext={data.streamed.matchesNext}
+            matchesPrevious={data.streamed.matchesPrevious}
     />
   </section>
 
