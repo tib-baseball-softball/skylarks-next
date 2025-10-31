@@ -40,7 +40,7 @@
   </Popover.Trigger>
 
   <Popover.Content class="z-15">
-    <div class="card bg-surface-50 dark:bg-surface-800 border shadow-2xl p-4 text-sm max-w-80 space-y-1 text-black dark:text-white">
+    <div class="popover-content card shadow-2xl">
 
       <div class="item-container">
         <p class="font-light text-xs">Created:</p>
@@ -52,7 +52,7 @@
         <p>{updatedDate}</p>
       </div>
 
-      <div class="item-container mb-2!">
+      <div class="item-container">
         <p class="font-light text-xs">Comment/Reason:</p>
         <p>{participation.comment}</p>
       </div>
@@ -84,11 +84,22 @@
 </Popover.Root>
 
 <style lang="postcss">
+    .popover-content {
+        border: 1px solid;
+        color: light-dark(black, white);
+        background-color: light-dark(var(--color-surface-50), var(--color-surface-800));
+        padding: calc(var(--spacing) * 4);
+        font-size: var(--text-sm);
+        line-height: var(--tw-leading, var(--text-sm--line-height));
+        max-width: calc(var(--spacing) * 80);
+    }
+
     .item-container {
         display: flex;
         align-items: center;
         gap: 0.75rem;
         justify-content: space-between;
+        margin-block: 0.3em;
     }
 
     .badge-icon {

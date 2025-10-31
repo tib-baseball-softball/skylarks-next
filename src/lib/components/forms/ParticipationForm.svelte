@@ -60,7 +60,7 @@
     <div class="label col-span-2">
       State
 
-      <span class="flex justify-items-stretch btn-group preset-outlined-surface-200-800">
+      <span class="btn-group">
         <button
                 class={["btn hover:preset-tonal-success flex-grow", form.state === "in" && "preset-filled-success-500 text-black"]}
                 onclick={() => form.state = "in"}
@@ -92,3 +92,11 @@
     </div>
   </div>
 </form>
+
+<style>
+    .btn-group {
+        display: flex;
+        justify-items: stretch;
+        border: 1px solid;
+    }
+</style>

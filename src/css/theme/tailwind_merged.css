@@ -311,10 +311,6 @@
         margin-bottom: calc(var(--spacing) * 2);
     }
 
-    .mb-2\! {
-        margin-bottom: calc(var(--spacing) * 2) !important;
-    }
-
     .mb-3 {
         margin-bottom: calc(var(--spacing) * 3);
     }
@@ -502,10 +498,6 @@
         max-width: calc(var(--spacing) * 20);
     }
 
-    .max-w-80 {
-        max-width: calc(var(--spacing) * 80);
-    }
-
     .max-w-\[40px\] {
         max-width: 40px;
     }
@@ -671,10 +663,6 @@
 
     .justify-items-center {
         justify-items: center;
-    }
-
-    .justify-items-stretch {
-        justify-items: stretch;
     }
 
     .gap-0\! {
@@ -1529,10 +1517,6 @@
 
         .dark\:text-gray-400 {
             color: var(--color-gray-400);
-        }
-
-        .dark\:text-white {
-            color: var(--color-white);
         }
     }
 }
