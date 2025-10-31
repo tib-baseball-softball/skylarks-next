@@ -1,6 +1,5 @@
 <script lang="ts">
   import '../app.css';
-  import {AppBar} from "@skeletonlabs/skeleton-svelte";
   import SidebarNavigation from "$lib/components/meta/SidebarNavigation.svelte";
   import Footer from "$lib/components/meta/Footer.svelte";
   import type {LayoutProps} from "../../.svelte-kit/types/src/routes/$types";
@@ -10,6 +9,7 @@
   import NavigationSheet from "$lib/components/navigation/NavigationSheet.svelte";
   import ToastContainer from "$lib/components/utility/toast/ToastContainer.svelte";
   import TopAppBarTrailing from "$lib/components/meta/TopAppBarTrailing.svelte";
+  import AppBar from "$lib/components/meta/AppBar.svelte";
 
   let {data, children}: LayoutProps = $props();
 
@@ -24,37 +24,33 @@
 <!--Singletons-->
 <ToastContainer/>
 
-<div class="h-screen grid grid-rows-[auto_1fr_auto]">
+<div class="root-layout">
   <!-- Header -->
-  <header>
+  <div>
 
-    <AppBar
-            background="bg-surface-500/5 dark:bg-surface-800"
-            centerAlign="place-self-center"
-            padding="p-3"
-    >
+    <AppBar>
       {#snippet lead()}
-        <div class="flex items-center justify-content-start">
+        <div class="app-bar-lead">
           {#if isUserAuthenticated}
             <NavigationSheet clubs={data.clubs} teams={data.teams}/>
           {/if}
 
-          <a aria-label="to home page" href="/" class="hidden md:block ms-3">
-            <img class="min-w-16" src="/berlin_skylarks_logo.svg" alt="Skylarks Team Logo">
+          <a aria-label="to home page" href="/" class="logo-link">
+            <img class="team-logo" src="/berlin_skylarks_logo.svg" alt="Skylarks Team Logo">
           </a>
         </div>
       {/snippet}
 
       {#snippet children()}
-        <section class="">
-          <ul class="w-full justify-center items-center hidden md:flex py-2 gap-2 xl:gap-16">
+        <section>
+          <ul class="app-bar-link-list ">
             <StaticNavigationLinks classes="rounded-base gap-2 py-1 px-2"/>
           </ul>
         </section>
       {/snippet}
 
       {#snippet trail()}
-        <div class="lg:me-5 flex items-center gap-5 shrink-0">
+        <div class="app-bar-trail">
 
           <TopAppBarTrailing/>
 
@@ -64,25 +60,25 @@
     </AppBar>
 
     <hr>
-  </header>
+  </div>
 
   <!-- Grid Column -->
 
-  <div class="grid grid-cols-1 md:grid-cols-[auto_1fr]">
+  <div class="sidebar-grid">
 
     <!-- Sidebar (Left) -->
     {#if showSidebar}
-      <aside class="bg-surface-500/5 dark:bg-surface-800 p-2 sticky top-0 col-span-1 hidden h-screen md:block w-64 lg:w-72 xl:w-80 border-r border-surface-200 dark:border-surface-100">
+      <aside class="">
         <SidebarNavigation clubs={data.clubs} teams={data.teams}/>
       </aside>
     {:else}
       <!-- hack: render empty div to not mess up the grid -->
-      <div aria-hidden="true" class="hidden md:block"></div>
+      <div class="shame-div" aria-hidden="true"></div>
     {/if}
 
     <!-- Main -->
 
-    <main class="col-span-1 space-y-4 lg:space-y-6 w-[93%] md:w-[90%] lg:w-[85%] justify-self-center">
+    <main class="">
       {@render children?.()}
       <noscript>This website is actually a JavaScript application with lots of functionality. You need to enable
         JavaScript for it to work.
@@ -95,8 +91,128 @@
   <BottomNavigation/>
 
   <!-- Footer -->
-  <footer class="pb-16 lg:pb-0">
+  <footer class="app-footer">
     <hr>
     <Footer></Footer>
   </footer>
 </div>
+
+<style>
+    .root-layout {
+        height: 100%;
+        display: grid;
+        grid-auto-rows: auto 1fr auto;
+    }
+
+    .app-bar-lead {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+    }
+
+    .app-bar-link-list {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        display: none;
+        padding-block: calc(var(--spacing) * 2);
+        gap: calc(var(--spacing) * 2);
+
+        @media (min-width: 48rem) {
+            display: flex;
+        }
+
+        @media (min-width: 80rem) {
+            gap: calc(var(--spacing) * 16);
+        }
+    }
+
+    .app-bar-trail {
+        display: flex;
+        align-items: center;
+        gap: calc(var(--spacing) * 5);
+        flex-shrink: 0;
+
+        @media (min-width: 64rem) {
+            margin-inline-end: calc(var(--spacing) * 5);
+        }
+    }
+
+    .sidebar-grid {
+        display: grid;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+
+        @media (min-width: 48rem) {
+            grid-template-columns: auto 1fr;
+        }
+    }
+
+    aside {
+        position: sticky;
+        top: 0;
+        display: none;
+        height: 100vh;
+        width: calc(var(--spacing) * 64);
+        border-right: 1px solid light-dark(var(--color-surface-200), var(--color-surface-100));
+        padding: calc(var(--spacing) * 2);
+        background-color: var(--nav-item-background);
+        grid-column: span 1/span 1;
+
+        @media (min-width: 48rem) {
+            display: block;
+        }
+
+        @media (min-width: 64rem) {
+            width: calc(var(--spacing) * 72);
+        }
+
+        @media (min-width: 80rem) {
+            width: calc(var(--spacing) * 80);
+        }
+    }
+
+    main {
+        max-width: 1200px;
+        width: 93%;
+        justify-self: center;
+        margin-bottom: 2em;
+        grid-column: span 1/span 1;
+
+        @media (min-width: 48rem) {
+            width: 90%;
+        }
+
+        @media (min-width: 64rem) {
+            width: 85%;
+        }
+    }
+
+    .app-footer {
+        padding-bottom: calc(var(--spacing) * 16);
+
+        @media (min-width: 64rem) {
+            padding-bottom: 0;
+        }
+    }
+
+    .logo-link {
+        display: none;
+        margin-inline-start: 1.25em;
+
+        @media (min-width: 48em) {
+            display: block;
+        }
+    }
+
+    .team-logo {
+        min-width: calc(var(--spacing) * 16);
+    }
+
+    [aria-hidden="true"] {
+        display: none;
+
+        @media (min-width: 48em) {
+            display: block;
+        }
+    }
+</style>

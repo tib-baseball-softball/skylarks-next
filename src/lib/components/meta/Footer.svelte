@@ -39,7 +39,6 @@
     </div>
   {/if}
 
-  <!-- @wc-include -->
   <span class="flex justify-end items-center gap-2">
     <span>Built with</span>
     <Heart class="text-primary-500"/>

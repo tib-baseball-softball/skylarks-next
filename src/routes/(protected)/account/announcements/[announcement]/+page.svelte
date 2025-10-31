@@ -21,7 +21,7 @@
 
   const updated = $derived($announcement.updated);
   //@ts-expect-error - the multi-level expanding trips the typedef up
-  const club = $derived($announcement?.expand?.club ?? $announcement?.expand?.team?.expand?.club)
+  const club = $derived($announcement?.expand?.club ?? $announcement?.expand?.team?.expand?.club);
 </script>
 
 <div class="flex justify-between items-center gap-4 lg:gap-6">
@@ -91,10 +91,10 @@
       </header>
       <div class="mt-4 p-3 md:p-4 border border-surface-900-100 rounded-base">
         <CommentSection
+                club={club}
+                comments={$announcement?.expand?.comments_via_announcement ?? []}
                 targetID={$announcement.id}
                 targetType="announcement"
-                comments={$announcement?.expand?.comments_via_announcement ?? []}
-                club={club}
         />
       </div>
     </section>
@@ -118,6 +118,7 @@
                   action={deleteAction}
                   buttonText="Delete Announcement"
                   classes="btn preset-tonal-error border border-error-500"
+                  data-testid="delete-announcement-button"
           />
         </div>
       </section>

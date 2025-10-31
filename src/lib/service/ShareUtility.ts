@@ -16,10 +16,17 @@ export class ShareUtility {
                 background: "preset-filled-success-500"
               })
           )
-          .catch((e) =>
-              console.log('Sharing unsuccessful: Error occurred or user cancelled request')
-          );
+          .catch((e: Error) => this.handleError(e))
+      ;
     }
+  }
+
+  private handleError(error: Error) {
+    console.error(error);
+    toastController.trigger({
+      message: 'Sharing unsuccessful: Error occurred or user cancelled request.',
+      background: "preset-filled-warning-500",
+    });
   }
 
   private shareDataIsSupported(shareData: ShareData): boolean {

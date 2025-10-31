@@ -93,7 +93,7 @@ func GetCachedBSMResponse(app core.App, url *url.URL) (string, error) {
 	var ret string
 
 	if url.Host != os.Getenv("BSM_API_HOST") || !isValidBSMURL(url) {
-		return ret, &bsm.URLAllowlistError{url.String(), "Only allowlisted BSM URLs are allowed"}
+		return ret, &bsm.URLAllowlistError{URL: url.String(), Message: "Only allowlisted BSM URLs are allowed"}
 	}
 	hash := utility.GetMD5Hash(url.String())
 

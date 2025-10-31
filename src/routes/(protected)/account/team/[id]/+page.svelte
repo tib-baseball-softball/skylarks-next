@@ -70,55 +70,62 @@
   {/if}
 </section>
 
-<h2 class="h2">Team Events</h2>
+<section>
+  <header>
+    <h2 class="h2">Team Events</h2>
+  </header>
 
-<div
-        class="flex flex-wrap gap-4 preset-tonal-surface justify-between px-4 py-3 rounded-base text-sm lg:text-base"
->
-  <label
-          class="flex items-center gap-2 grow justify-between xl:justify-start md:grow-0"
+  <div
+          class="flex flex-wrap gap-4 preset-tonal-surface justify-between px-4 py-3 rounded-base text-sm lg:text-base"
   >
-    Timeframe
-    <Tabs.Root bind:value={showEvents}>
-      <Tabs.List class="tabs-list event-segment-container p-1!">
-        <Tabs.Trigger class="tabs-trigger active:preset-filled-error-300-700" value="next">Next</Tabs.Trigger>
-        <Tabs.Trigger class="tabs-trigger active:preset-filled" value="past">Past</Tabs.Trigger>
-      </Tabs.List>
-    </Tabs.Root>
-  </label>
+    <label
+            class="flex items-center gap-2 grow justify-between xl:justify-start md:grow-0"
+    >
+      Timeframe
+      <Tabs.Root bind:value={showEvents}>
+        <Tabs.List class="tabs-list event-segment-container p-1!">
+          <Tabs.Trigger class="tabs-trigger btn active:preset-filled-error-300-700" data-testid="segment-item"
+                        value="next">Next
+          </Tabs.Trigger>
+          <Tabs.Trigger class="tabs-trigger btn active:preset-filled" data-testid="segment-item" value="past">Past
+          </Tabs.Trigger>
+        </Tabs.List>
+      </Tabs.Root>
+    </label>
 
-  <label class="flex items-center gap-2 justify-between xl:justify-start grow md:grow-0">
-    Sort
-    <Tabs.Root bind:value={sorting}>
-      <Tabs.List class="tabs-list flex-wrap event-segment-container p-1!">
-        <Tabs.Trigger class="tabs-trigger" value="asc">Ascending</Tabs.Trigger>
-        <Tabs.Trigger class="tabs-trigger" value="desc">Descending</Tabs.Trigger>
-      </Tabs.List>
-    </Tabs.Root>
-  </label>
+    <label class="flex items-center gap-2 justify-between xl:justify-start grow md:grow-0">
+      Sort
+      <Tabs.Root bind:value={sorting}>
+        <Tabs.List class="tabs-list flex-wrap event-segment-container p-1!">
+          <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="asc">Ascending</Tabs.Trigger>
+          <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="desc">Descending</Tabs.Trigger>
+        </Tabs.List>
+      </Tabs.Root>
+    </label>
 
-  <label class="flex items-center gap-2 justify-between xl:justify-start grow md:grow-0">
-    Type
-    <Tabs.Root bind:value={showTypes}>
-      <Tabs.List class="tabs-list flex-wrap event-segment-container p-1! gap-1">
-        <Tabs.Trigger class="tabs-trigger" value="any">All</Tabs.Trigger>
-        <Tabs.Trigger class="tabs-trigger" value="game">Game</Tabs.Trigger>
-        <Tabs.Trigger class="tabs-trigger" value="practice">Practice</Tabs.Trigger>
-        <Tabs.Trigger class="tabs-trigger" value="misc">Other</Tabs.Trigger>
-      </Tabs.List>
-    </Tabs.Root>
-  </label>
-</div>
+    <label class="flex items-center gap-2 justify-between xl:justify-start grow md:grow-0">
+      Type
+      <Tabs.Root bind:value={showTypes}>
+        <Tabs.List class="tabs-list flex-wrap event-segment-container p-1! gap-1">
+          <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="any">All</Tabs.Trigger>
+          <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="game">Game</Tabs.Trigger>
+          <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="practice">Practice</Tabs.Trigger>
+          <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="misc">Other</Tabs.Trigger>
+        </Tabs.List>
+      </Tabs.Root>
+    </label>
+  </div>
 
-<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 lg:gap-4 2xl:gap-5">
-  {#each $events.items as event (event.id)}
-    <div>
-      <EventTeaser {event} link={true}/>
-    </div>
-  {:else}
-    <p>No events available with the current filters.</p>
-  {/each}
-</div>
+  <div class="events-grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 lg:gap-4 2xl:gap-5">
+    {#each $events.items as event (event.id)}
+      <div class="">
+        <EventTeaser {event} link={true}/>
+      </div>
+    {:else}
+      <p>No events available with the current filters.</p>
+    {/each}
+  </div>
+</section>
 
 <Paginator showIfSinglePage={false} store={events}/>
 
@@ -156,4 +163,16 @@
         }
     }
 
+    .events-grid {
+        margin-block: calc(var(--spacing) * 4);
+        display: grid;
+    }
+
+    header {
+        margin-block: calc(var(--spacing) * 3);
+    }
+
+    section {
+        margin-block: calc(var(--spacing) * 4);
+    }
 </style>

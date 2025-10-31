@@ -23,7 +23,7 @@
     value = $bindable(),
     class: klass = "",
     listClass = "md:col-span-2 tabs-list input",
-    triggerClass = "tabs-trigger cursor-pointer inline-block flex-grow"
+    triggerClass = "tabs-trigger btn"
   }: Props<string> = $props();
 
   function toOptions(arr: Option<string>[] | string[]): Option<string>[] {

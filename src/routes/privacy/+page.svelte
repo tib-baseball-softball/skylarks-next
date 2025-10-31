@@ -1,5 +1,5 @@
 <!-- @wc-ignore -->
-<article class="prose dark:prose-invert max-w-none mb-6" lang="de"><h1 class="mt-4">Datenschutzerklärung</h1>
+<article class="prose max-w-none mb-6" lang="de"><h1 class="mt-4">Datenschutzerklärung</h1>
 
   <h2>1. Datenschutz auf einen Blick</h2>
   <h3>Allgemeine Hinweise</h3>

@@ -1,7 +1,6 @@
 <script lang="ts">
   import type {ExpandedTeam} from "$lib/model/ExpandedResponse";
   import {client} from "$lib/pocketbase/index.svelte";
-  import {Progress} from "@skeletonlabs/skeleton-svelte";
   import type {LeaguegroupsResponse} from "$lib/model/pb-types";
   import type {GamesCount} from "$lib/model/GamesCount";
   import {range} from "$lib/functions/range";
@@ -9,6 +8,7 @@
   import type {Toast} from "$lib/types/Toast.ts";
   import {toastController} from "$lib/service/ToastController.svelte.ts";
   import {closeModal} from "$lib/functions/closeModal.ts";
+  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
 
   interface Props {
     team: ExpandedTeam,
@@ -89,16 +89,16 @@
   }
 </script>
 
-<form onsubmit={submitForm} class="mt-4 space-y-3">
+<form class="mt-4 space-y-3" onsubmit={submitForm}>
   <div class="grid grid-cols-2 gap-2 md:gap-3 lg:gap-4">
     <h3 class="col-span-2 font-bold">Current Values</h3>
     <input
-            name="id"
             autocomplete="off"
-            class="input col-span-2"
-            type="hidden"
-            readonly
             bind:value={form.id}
+            class="input col-span-2"
+            name="id"
+            readonly
+            type="hidden"
     />
 
     <div>Current League ID:</div>
@@ -118,9 +118,9 @@
     <label class="label col-span-2 md:col-span-1">
 
       <span class="block">Show leagues for</span>
-      <select class="select"
+      <select bind:value={season}
+              class="select"
               name="season"
-              bind:value={season}
       >
         {#each possibleSeasons as season}
           <option value={season}>{season}</option>
@@ -129,7 +129,7 @@
     </label>
 
     {#await loadClubLeagueGroups()}
-      <Progress/>
+      <ProgressRing/>
       <div class="placeholder col-span-2"></div>
     {:then result}
       <label class="label col-span-2 md:col-span-1">
@@ -157,11 +157,11 @@
     </p>
 
     <div class="flex justify-center gap-3 col-span-2">
-<!--      <button type="button" class="mt-2 btn preset-filled-surface-600-400">-->
-<!--        Help-->
-<!--      </button>-->
+      <!--      <button type="button" class="mt-2 btn preset-filled-surface-600-400">-->
+      <!--        Help-->
+      <!--      </button>-->
 
-      <button type="submit" class="mt-2 btn preset-filled-primary-500">
+      <button class="mt-2 btn preset-filled-primary-500" type="submit">
         Submit
       </button>
     </div>

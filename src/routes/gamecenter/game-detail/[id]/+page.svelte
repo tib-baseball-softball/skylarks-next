@@ -1,5 +1,4 @@
 <script lang="ts">
-  import {ProgressRing} from "@skeletonlabs/skeleton-svelte";
   // @ts-ignore
   import {Tabs} from "bits-ui";
   import MatchMainInfoSection from "$lib/components/match/MatchMainInfoSection.svelte";
@@ -11,6 +10,7 @@
   import ContentFilteredUnavailable from "$lib/components/match/ContentFilteredUnavailable.svelte";
   import GameReport from "$lib/components/gameReport/GameReport.svelte";
   import ShareButton from "$lib/components/match/ShareButton.svelte";
+  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
 
   let {data}: PageProps = $props();
 
@@ -33,17 +33,17 @@
             class="tabs-list preset-tonal-surface mt-6"
     >
       <Tabs.Trigger
-              class="tabs-trigger"
+              class="tabs-trigger btn"
               value="gameData"
       >Game Data
       </Tabs.Trigger>
       <Tabs.Trigger
-              class="tabs-trigger"
+              class="tabs-trigger btn"
               value="boxscore"
       >Box Score
       </Tabs.Trigger>
       <Tabs.Trigger
-              class="tabs-trigger"
+              class="tabs-trigger btn"
               value="gameReport"
       >Game Report
       </Tabs.Trigger>

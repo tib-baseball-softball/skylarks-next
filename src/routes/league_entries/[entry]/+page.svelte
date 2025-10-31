@@ -2,9 +2,9 @@
   import type {PageProps} from "./$types";
   import type {StatsDataset} from "$lib/types/StatsDataset.ts";
   import BaseballStatsDatatable from "$lib/components/datatable/BaseballStatsDatatable.svelte";
-  import {ProgressRing} from "@skeletonlabs/skeleton-svelte";
+  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
 
-  let {data}: PageProps = $props()
+  let {data}: PageProps = $props();
 
   async function getData(): Promise<StatsDataset> {
     return {

@@ -1,6 +1,6 @@
 <script lang="ts">
   import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte";
-  import {Progress, Switch} from "@skeletonlabs/skeleton-svelte";
+  import Switch from "$lib/components/utility/Switch.svelte";
   // @ts-ignore
   import {Tabs} from "bits-ui";
   import {Gameday} from "bsm.js";
@@ -11,6 +11,7 @@
   import GamecenterMatchSection from "$lib/components/match/GamecenterMatchSection.svelte";
   import type {PageProps} from "./$types";
   import ReloadUponPreferenceChange from "$lib/components/navigation/ReloadUponPreferenceChange.svelte";
+  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
 
   const DEFAULT_LEAGUE_GROUP_ID = 0;
 
@@ -55,7 +56,7 @@
 
     <div class="flex gap-2 my-4 justify-end">
       <Switch
-              controlActive="bg-surface-900 dark:bg-tertiary-700"
+              --switch-active-bg="light-dark(var(--color-surface-900), var(--color-tertiary-700))"
               name="slide"
               onCheckedChange={(e) => (showExternal = e.checked)}
       />
@@ -76,22 +77,26 @@
               class="tabs-list preset-tonal-surface"
       >
         <Tabs.Trigger
-                class="tabs-trigger"
+                class="tabs-trigger btn"
+                data-testid="segment-item-previous"
                 value={Gameday.previous}
         >Previous
         </Tabs.Trigger>
         <Tabs.Trigger
-                class="tabs-trigger"
+                class="tabs-trigger btn"
+                data-testid="segment-item"
                 value={Gameday.current}
         >Current
         </Tabs.Trigger>
         <Tabs.Trigger
-                class="tabs-trigger"
+                class="tabs-trigger btn"
+                data-testid="segment-item"
                 value={Gameday.next}
         >Next
         </Tabs.Trigger>
         <Tabs.Trigger
-                class="tabs-trigger"
+                class="tabs-trigger btn"
+                data-testid="segment-item"
                 value={Gameday.any}
         >All
         </Tabs.Trigger>
@@ -100,7 +105,7 @@
       <Tabs.Content class="pt-3" value={preferences.current.gameday}>
         {#await data.streamed.matches}
           <p>Loading matches...</p>
-          <Progress/>
+          <ProgressRing/>
         {:then matches}
           <GamecenterMatchSection {matches} {showExternal}/>
         {:catch error}

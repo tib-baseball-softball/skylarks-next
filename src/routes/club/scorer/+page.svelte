@@ -1,7 +1,7 @@
 <script lang="ts">
   import type {PageProps} from './$types';
-  import { Progress } from "@skeletonlabs/skeleton-svelte";
   import LicenseList from "$lib/components/club/licenses/LicenseList.svelte";
+  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
 
   let {data}: PageProps = $props();
 </script>
@@ -10,7 +10,7 @@
 
 {#await data.scorerLicenses}
   <p>Loading Licenses...</p>
-  <Progress/>
+  <ProgressRing/>
 
 {:then scorerLicenses}
   <LicenseList licenses={scorerLicenses} showSoftballSection={false}/>

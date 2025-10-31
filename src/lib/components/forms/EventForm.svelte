@@ -3,7 +3,7 @@
   import type {ExpandedEvent} from "$lib/model/ExpandedResponse";
   import {type LocationsResponse, type UniformsetsResponse} from "$lib/model/pb-types";
   import {client} from "$lib/pocketbase/index.svelte";
-  import {Switch} from "@skeletonlabs/skeleton-svelte";
+  import Switch from "$lib/components/utility/Switch.svelte";
   import Flatpickr from "../utility/Flatpickr.svelte";
   import {DateTimeUtility} from "$lib/service/DateTimeUtility.js";
   //@ts-ignore
@@ -167,7 +167,8 @@
 
         <label class="label md:col-span-2">
           Description
-          <textarea bind:value={form.desc} class="textarea" name="desc"
+          <textarea bind:value={form.desc} class="textarea" data-testid="event-form-textarea-desc"
+                    name="desc"
           ></textarea>
         </label>
 
@@ -197,7 +198,7 @@
         {#await attireOptions then options}
           <label class="label md:col-span-2">
             Uniform Set
-            <select class="select" bind:value={form.attire}>
+            <select class="select" bind:value={form.attire} data-testid="event-form-select-attire">
               {#each options as option}
                 <option value={option.id}>{option.name}</option>
               {/each}
@@ -216,7 +217,8 @@
       <hr class="my-5!"/>
 
       <div class="flex justify-center gap-3">
-        <button class="mt-2 btn preset-tonal-primary border border-primary-500" type="submit">
+        <button class="mt-2 btn preset-tonal-primary border border-primary-500" data-testid="event-form-submit-button"
+                type="submit">
           Submit
         </button>
       </div>

@@ -4,19 +4,39 @@
     flex-wrap: wrap;
     border-radius: var(--radius-container);
     gap: calc(var(--spacing) * 1);
-    @apply md:gap-3;
-    @apply p-1;
-    @apply lg:p-2;
-    @apply preset-tonal-surface;
+    padding: calc(var(--spacing) * 1);
+    @media (width >= 48rem) {
+        gap: calc(var(--spacing) * 3);
+        grid-column: span 2 / span 2;
+    }
+    background-color: var(--color-surface-50-950);
+    color: var(--color-surface-950-50);
+
+    @media (width >= 64rem) {
+        padding: calc(var(--spacing) * 2);
+    }
 }
 
 .tabs-trigger {
-    @apply btn;
-    @apply hover:preset-tonal-primary;
-    @apply text-sm;
-    @apply md:text-base;
+    cursor: pointer;
+    display: inline-block;
+    flex-grow: 1;
+
+    &:hover {
+        background-color: var(--color-primary-50-950);
+        color: var(--color-primary-950-50);
+    }
+
+    font-size: calc(0.875rem * var(--text-scaling));
+    line-height: var(--tw-leading);
+
+    @media (width >= 48rem) {
+        font-size: calc(1rem * var(--text-scaling));
+        line-height: var(--tw-leading);
+    }
 }
 
 .tabs-trigger[data-state="active"] {
-    @apply preset-filled;
+    background-color: var(--color-surface-950-50);
+    color: var(--color-surface-50-950);
 }

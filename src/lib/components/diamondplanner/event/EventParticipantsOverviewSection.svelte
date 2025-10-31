@@ -111,7 +111,7 @@
 </section>
 
 <section class="mt-6!">
-  <article class="card preset-ringed grow">
+  <article class="card preset-outlined grow">
     <header class="card-header flex items-center gap-2">
       <span><Ghost/></span>
       <h3 class="h4">No Response</h3>
@@ -125,7 +125,7 @@
                     dto={ghostResponse}
                     eventID={event.id}
                     {isAdmin}
-                    classes="chip preset-ringed dark:border dark:border-surface-200"
+                    classes="chip preset-outlined dark:border dark:border-surface-200"
             />
           </div>
         {/each}

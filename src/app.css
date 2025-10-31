@@ -1,36 +1,10 @@
-/*
- * External Imports
- */
+@layer properties;
+@layer base;
+@layer theme;
+@layer components;
+@layer utilities;
 
-@import 'tailwindcss';
-@import "tw-animate-css";
-@import "@skeletonlabs/skeleton";
-@import "@skeletonlabs/skeleton/optional/presets";
-@import "../skylarks-theme.css";
-
-/**
- * global custom CSS
- */
-
-@import './css/partials/stats.css';
-@import './css/partials/logos.css' layer(base);
-@import './css/partials/linescore.css' layer(base);
-@import './css/partials/buttons.css' layer(utilities);
-@import './css/partials/card.css';
-@import './css/partials/tabs.css' layer(utilities);
-@import './css/presets.css';
-@import './css/overrides.css';
-@import './css/global.css' layer(utilities);
-
-@source not "./locales/";
-/*
- * Tailwind config stuff
- */
-
-@plugin '@tailwindcss/forms';
-@plugin "@tailwindcss/typography";
-
-@source "../node_modules/@skeletonlabs/skeleton-svelte/dist";
-
-@layer utilities {
-}
+/* TODO: make this obsolete */
+@import "./css/theme/tailwind_merged.css";
+@import './css/index.css';
+@import './css/skylarks-theme.css';

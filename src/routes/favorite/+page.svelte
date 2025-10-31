@@ -122,3 +122,9 @@
     <p>Error: {error.message}</p>
   {/await}
 {/if}
+
+<style>
+    section {
+        margin-block: calc(var(--spacing) * 10);
+    }
+</style>

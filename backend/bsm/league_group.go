@@ -13,7 +13,7 @@ type LeagueGroup struct {
 	League  League `json:"league"`
 }
 
-// the API key used determines which club LeagueGroups are loaded for
+// FetchLeagueGroupsForSeason the API key used determines which club LeagueGroups are loaded for
 func FetchLeagueGroupsForSeason(apiKey string, season int) ([]LeagueGroup, error) {
 	params := make(map[string]string)
 	params[SeasonFilter] = strconv.Itoa(season)

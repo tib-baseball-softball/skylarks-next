@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {Switch} from "@skeletonlabs/skeleton-svelte";
+  import Switch from "$lib/components/utility/Switch.svelte";
   // @ts-ignore
   import {Tabs} from "bits-ui";
   import {client} from "../pocketbase/index.svelte";
@@ -110,7 +110,12 @@
   {/if}
 
   <div class="block md:flex gap-6 items-center justify-start my-6">
-    <Switch name="forgot password" onCheckedChange={(e) => (forgotPassword = e.checked)}>Forgot Password?</Switch>
+    <Switch
+            name="forgot password"
+            onCheckedChange={(e) => (forgotPassword = e.checked)}
+    >
+      Forgot Password?
+    </Switch>
 
     {#if forgotPassword}
       <div class="mt-2 md:mt-0" transition:fade>
@@ -129,7 +134,7 @@
 <div class="flex justify-center">
   <div class="flex justify-center mt-3! mb-10! md:max-w-[60%] lg:max-w-[55%]">
     <article>
-      <header class="mb-6!">
+      <header>
         <h1 class="h2">Sign in to Skylarks Diamond Planner</h1>
       </header>
 
@@ -145,12 +150,14 @@
               >
                 <Tabs.Trigger
                         value="login"
-                        class="tabs-trigger"
-                >Log In</Tabs.Trigger>
+                        class="tabs-trigger btn"
+                >Log In
+                </Tabs.Trigger>
                 <Tabs.Trigger
                         value="signup"
-                        class="tabs-trigger"
-                >Create Account</Tabs.Trigger>
+                        class="tabs-trigger btn"
+                >Create Account
+                </Tabs.Trigger>
               </Tabs.List>
 
               <Tabs.Content value="login" class="pt-3">
@@ -164,105 +171,105 @@
                 {@render login()}
 
                 {#if tabSet === "signup"}
+                  <label class="label">
+                    <span class="">Your email</span>
+                    <input
+                            class="input"
+                            bind:value={form.email}
+                            required
+                            type="email"
+                            placeholder="name@provider.com"
+                            autocomplete="email"
+                    />
+                  </label>
+
+                  <div class="grid sm:grid-cols-2 gap-2">
+
                     <label class="label">
-                      <span class="">Your email</span>
+                      <span class="">First Name</span>
                       <input
                               class="input"
-                              bind:value={form.email}
+                              bind:value={form.first_name}
+                              placeholder="John"
                               required
-                              type="email"
-                              placeholder="name@provider.com"
-                              autocomplete="email"
+                              type="text"
+                              autocomplete="given-name"
                       />
                     </label>
 
-                    <div class="grid sm:grid-cols-2 gap-2">
-
-                      <label class="label">
-                        <span class="">First Name</span>
-                        <input
-                                class="input"
-                                bind:value={form.first_name}
-                                placeholder="John"
-                                required
-                                type="text"
-                                autocomplete="given-name"
-                        />
-                      </label>
-
-                      <label class="label">
-                        <span class="">Last Name</span>
-                        <input
-                                class="input"
-                                bind:value={form.last_name}
-                                placeholder="Doe"
-                                required
-                                type="text"
-                                autocomplete="family-name"
-                        />
-                      </label>
-                    </div>
-
-                    <div class="grid sm:grid-cols-2 gap-2">
-
-                      <label class="label">
-                        <span class="">Your password</span>
-                        <input
-                                class="input"
-                                bind:value={form.password}
-                                required
-                                type="password"
-                                placeholder="**********"
-                                minlength="8"
-                                maxlength="72"
-                                autocomplete="new-password"
-                        />
-                      </label>
-
-                      <label class="label">
-                        <span class="">Confirm password</span>
-                        <input
-                                class="input"
-                                bind:value={form.passwordConfirm}
-                                required
-                                type="password"
-                                placeholder="confirm password"
-                                minlength="8"
-                                maxlength="72"
-                                autocomplete="new-password"
-                        />
-                      </label>
-                    </div>
-
                     <label class="label">
-                      <span class="">Signup Key</span>
+                      <span class="">Last Name</span>
                       <input
-                              bind:value={form.signup_key}
                               class="input"
-                              name="signup_key"
-                              placeholder="minimum 8 characters"
-                              minlength="8"
+                              bind:value={form.last_name}
+                              placeholder="Doe"
                               required
                               type="text"
-                              autocomplete="one-time-code"
+                              autocomplete="family-name"
                       />
-                      <span class="block text-sm font-light">
+                    </label>
+                  </div>
+
+                  <div class="grid sm:grid-cols-2 gap-2">
+
+                    <label class="label">
+                      <span class="">Your password</span>
+                      <input
+                              class="input"
+                              bind:value={form.password}
+                              required
+                              type="password"
+                              placeholder="**********"
+                              minlength="8"
+                              maxlength="72"
+                              autocomplete="new-password"
+                      />
+                    </label>
+
+                    <label class="label">
+                      <span class="">Confirm password</span>
+                      <input
+                              class="input"
+                              bind:value={form.passwordConfirm}
+                              required
+                              type="password"
+                              placeholder="confirm password"
+                              minlength="8"
+                              maxlength="72"
+                              autocomplete="new-password"
+                      />
+                    </label>
+                  </div>
+
+                  <label class="label">
+                    <span class="">Signup Key</span>
+                    <input
+                            bind:value={form.signup_key}
+                            class="input"
+                            name="signup_key"
+                            placeholder="minimum 8 characters"
+                            minlength="8"
+                            required
+                            type="text"
+                            autocomplete="one-time-code"
+                    />
+                    <span class="block text-sm font-light">
                                           A valid signup key needs to be entered upon user account creation.
                                           If you do not have a signup key, please contact your team manager.
                                       </span>
-                    </label>
+                  </label>
 
-                    <input type="hidden" name="register" value={true}/>
+                  <input type="hidden" name="register" value={true}/>
 
-                    <button
-                            class="btn preset-tonal-primary border border-primary-500 my-2"
-                            type="submit"
-                            onclick={() => (signup = true)}
-                            disabled={form.email === "" || form.password === "" || form.passwordConfirm === "" || form.signup_key === ""}
-                    >
-                      Register new account
-                    </button>
-                  {/if}
+                  <button
+                          class="btn preset-tonal-primary border border-primary-500 my-2"
+                          type="submit"
+                          onclick={() => (signup = true)}
+                          disabled={form.email === "" || form.password === "" || form.passwordConfirm === "" || form.signup_key === ""}
+                  >
+                    Register new account
+                  </button>
+                {/if}
               </Tabs.Content>
 
             </Tabs.Root>
@@ -327,5 +334,9 @@
             margin-block: calc(var(--spacing) * 2) /* 0.5rem = 8px */
         ;
         }
+    }
+
+    header {
+        margin-bottom: 2em;
     }
 </style>

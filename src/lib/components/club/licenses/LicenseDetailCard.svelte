@@ -59,3 +59,9 @@
   {/if}
 
 </article>
+
+<style>
+    article {
+        margin-bottom: 1.5em;
+    }
+</style>

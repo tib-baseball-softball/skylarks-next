@@ -7,15 +7,17 @@
   let {data}: PageProps = $props();
 </script>
 
+<h1 class="h1">Club</h1>
+
 <!-- Club Info Section -->
 <ClubInfoSection club={data.bsmClubData}/>
 
 <!-- Grid Section -->
 <div class="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-6 mb-4!">
   <ClubGridItem
+          description="More Info"
           href="/club/details"
           label="Details"
-          description="More Info"
   >
     {#snippet icon()}
       <BookText/>
@@ -23,9 +25,9 @@
   </ClubGridItem>
 
   <ClubGridItem
+          description="Adult and Youth"
           href="/teams"
           label="Teams"
-          description="Adult and Youth"
   >
     {#snippet icon()}
       <Users/>
@@ -33,9 +35,9 @@
   </ClubGridItem>
 
   <ClubGridItem
+          description="Keeping statistics"
           href="/club/scorer"
           label="Scorer"
-          description="Keeping statistics"
   >
     {#snippet icon()}
       <Pencil/>
@@ -43,9 +45,9 @@
   </ClubGridItem>
 
   <ClubGridItem
+          description="Our Referees"
           href="/club/umpire"
           label="Umpire"
-          description="Our Referees"
   >
     {#snippet icon()}
       <Users/>
@@ -53,9 +55,9 @@
   </ClubGridItem>
 
   <ClubGridItem
+          description="The Lark's Nest"
           href="/club/ballpark"
           label="Ballpark"
-          description="The Lark's Nest"
   >
     {#snippet icon()}
       <Diamond/>
@@ -63,9 +65,9 @@
   </ClubGridItem>
 
   <ClubGridItem
+          description="Club Administration"
           href="/club/officials"
           label="Officials"
-          description="Club Administration"
   >
     {#snippet icon()}
       <Users/>

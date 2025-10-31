@@ -1,24 +1,15 @@
 <script lang="ts" module>
-  import {tv, type VariantProps} from "tailwind-variants";
-
-  export const sheetVariants = tv({
-    base: "bg-surface-50 dark:bg-surface-800 data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 gap-4 p-6 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-480",
-    variants: {
-      side: {
-        top: "data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top inset-x-0 top-0 border-b",
-        bottom:
-          "data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom inset-x-0 bottom-0 border-t",
-        left: "data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left inset-y-0 left-0 h-full border-r w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%] rounded-lg overflow-y-scroll",
-        right:
-          "data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right inset-y-0 right-0 h-full w-[100%] sm:w-[80%] lg:w-[70%] xl:w-[50%] rounded-lg overflow-y-scroll",
-      },
+  export const sheetVariants = {
+    base: "drawer shadow-lg transition",
+    side: {
+      top: "drawer-top",
+      bottom: "drawer-bottom",
+      left: "drawer-horizontal drawer-left",
+      right: "drawer-horizontal drawer-right",
     },
-    defaultVariants: {
-      side: "right",
-    },
-  });
+  };
 
-  export type Side = VariantProps<typeof sheetVariants>["side"];
+  export type Side = "top" | "right" | "bottom" | "left";
 </script>
 
 <script lang="ts">
@@ -27,7 +18,7 @@
     type WithoutChildrenOrChild,
   } from "bits-ui";
   import X from "lucide-svelte/icons/x";
-  import type { Snippet } from "svelte";
+  import type {Snippet} from "svelte";
   import SheetOverlay from "./sheet-overlay.svelte";
 
   let {
@@ -45,16 +36,16 @@
 </script>
 
 <SheetPrimitive.Portal {...portalProps}>
-  <SheetOverlay />
+  <SheetOverlay/>
   <SheetPrimitive.Content
-    bind:ref
-    class={[sheetVariants({ side }), className]}
-    {...restProps}
+          {...restProps}
+          bind:ref
+          class={["drawer-content", sheetVariants.base, sheetVariants.side[side], className]}
   >
     <SheetPrimitive.Close
-      class="btn preset-tonal-surface border border-surface-500 disabled:pointer-events-none sheet-close-button"
+            class="btn preset-tonal-surface sheet-close-button"
     >
-      <X />
+      <X/>
       <span class="sr-only">Close</span>
     </SheetPrimitive.Close>
 

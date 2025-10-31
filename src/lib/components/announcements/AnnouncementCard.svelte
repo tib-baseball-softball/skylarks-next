@@ -44,6 +44,7 @@
                     modelName="Announcement"
                     action={deleteAction}
                     classes="btn btn-icon btn-sm preset-tonal-error border border-error-500"
+                    data-testid="delete-announcement-button"
             />
           </div>
         {:else }
@@ -62,8 +63,8 @@
           {/if}
 
           <a
-                  href="/account/announcements/{announcement.id}"
-                  class="btn btn-sm preset-filled-primary-500">Read more</a
+                  class="btn btn-sm preset-filled-primary-500"
+                  href="/account/announcements/{announcement.id}">Read more</a
           >
         </div>
       </footer>

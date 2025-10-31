@@ -25,7 +25,7 @@
   }
 </script>
 
-<article class="card preset-tonal-surface block shadow-lg" class:card-hover={link}>
+<article class="card preset-tonal-surface shadow-lg" class:card-hover={link}>
   <a href="/account/team/{team.id}">
     <header class="card-header">
       <h3 class="h4 font-semibold">{team.name}</h3>
@@ -35,23 +35,23 @@
 
       <div class="space-y-2">
 
-        <div class="flex items-center gap-4">
+        <div class="item-row">
           <ShieldHalf/>
           <div>
-            <p>{team?.expand?.club.name}</p>
-            <p class="text-sm font-light">Club</p>
+            <dd>{team?.expand?.club.name}</dd>
+            <dt class="text-sm font-light">Club</dt>
           </div>
         </div>
 
-        <div class="flex items-center gap-4">
+        <div class="item-row">
           <Dumbbell/>
           <div>
-            <p>{team.bsm_league_group}</p>
-            <p class="text-sm font-light">BSM-Liga (für aktuelle Saison)</p>
+            <dd>{team.bsm_league_group}</dd>
+            <dt class="text-sm font-light">BSM-Liga (für aktuelle Saison)</dt>
           </div>
         </div>
 
-        <div class="flex items-center gap-4">
+        <div class="item-row">
           <ClipboardList/>
           <dl>
             <dd class="capitalize">{team.age_group}</dd>
@@ -70,7 +70,7 @@
         <TeamForm
                 club={team.expand?.club}
                 team={team}
-                buttonClasses="btn btn-icon preset-tonal-tertiary border border-tertiary-500"
+                buttonClasses="btn btn-sm btn-icon preset-tonal-tertiary border border-tertiary-500"
                 showLabel={false}
         />
       {/if}
@@ -86,3 +86,15 @@
     </div>
   </footer>
 </article>
+
+<style>
+    .card {
+        display: block;
+    }
+
+    .item-row {
+        display: flex;
+        align-items: center;
+        gap: calc(var(--spacing) * 4);
+    }
+</style>

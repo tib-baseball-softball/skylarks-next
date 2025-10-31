@@ -16,8 +16,9 @@ import type {PageServerLoad} from './$types';
 import {TeamClient} from "$lib/service/TeamClient.ts";
 import {PlayerClient} from "$lib/service/PlayerClient.ts";
 import type {TiBTeam} from "$lib/model/TiBTeam.ts";
+import {dev} from "$app/environment";
 
-export const load: PageServerLoad = async ({parent, params, url}) => {
+export const load: PageServerLoad = async ({parent, params, url, fetch}) => {
   const data = await parent();
   let clubTeams: ClubTeam[] | undefined = await data.clubTeams;
 
@@ -52,6 +53,7 @@ export const load: PageServerLoad = async ({parent, params, url}) => {
   let leagueGroup = leagueGroups?.find((group) => group.league.id === leagueEntry.league.id);
 
   // Caution: LeagueGroups can still be unavailable even though ClubTeams are
+  // TODO: this logic is massively hacky and should be moved to backend
   if (!leagueGroup) {
     const leagueGroupRequest = new LeagueGroupAPIRequest(env.BSM_API_KEY);
     try {
@@ -67,8 +69,15 @@ export const load: PageServerLoad = async ({parent, params, url}) => {
   let team: TiBTeam | undefined = undefined;
   if (leagueGroup) {
     const teamClient = new TeamClient(fetch, env.SKYLARKS_API_AUTH_HEADER);
+
+    if (dev) {
+      console.log("Fetching team for league group", leagueGroup.id);
+    }
     const teamResponse = await teamClient.fetchTeamByFilter({league: String(leagueGroup.id)});
-    team = teamResponse?.at(0);
+
+    if (Array.isArray(teamResponse) && teamResponse.length > 0) {
+      team = teamResponse.at(0);
+    }
   }
   const playerClient = new PlayerClient(fetch, env.SKYLARKS_API_AUTH_HEADER);
 

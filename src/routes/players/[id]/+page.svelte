@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { Progress } from "@skeletonlabs/skeleton-svelte";
   import BaseballStatsDatatable from "$lib/components/datatable/BaseballStatsDatatable.svelte";
   import type {StatsDataset} from "$lib/types/StatsDataset";
   import PlayerHeaderSection from "$lib/components/player/PlayerHeaderSection.svelte";
   import PlayerDataCard from "$lib/components/player/PlayerDataCard.svelte";
   import type {PageProps} from "./$types";
+  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
 
   let {data}: PageProps = $props();
 
@@ -25,7 +25,7 @@
 {/await}
 
 {#await data.player}
-  <Progress/>
+  <ProgressRing/>
 {:then player}
   {#if player}
     <div class="my-8!">
@@ -44,7 +44,7 @@
 <h2 class="h2 my-6 lg:mt-10 mb-8">Stats</h2>
 
 {#await getData()}
-  <Progress/>
+  <ProgressRing/>
 {:then stats}
   <BaseballStatsDatatable data={stats} tableType="seasonal"/>
 {:catch error}

@@ -15,38 +15,64 @@
 </script>
 
 <Sheet.Root bind:open={open}>
-  <Sheet.Trigger aria-label="open navigation" class="md:hidden btn btn-sm mr-4">
-      <span>
-          <svg viewBox="0 0 100 80" class="fill-surface-950-50 w-4 h-4">
-              <rect width="100" height="20"/>
-              <rect y="30" width="100" height="20"/>
-              <rect y="60" width="100" height="20"/>
-          </svg>
-      </span>
+  <Sheet.Trigger aria-label="open navigation" class="nav-trigger btn btn-sm">
+    <svg viewBox="0 0 100 80">
+      <rect height="20" width="100"/>
+      <rect height="20" width="100" y="30"/>
+      <rect height="20" width="100" y="60"/>
+    </svg>
   </Sheet.Trigger>
 
-  <Sheet.Content side="left" class="w-[70%]! !sm:w-[40%] p-0! navigation-sheet-content">
+  <Sheet.Content class="navigation-sheet-content" side="left">
     <Sheet.Header></Sheet.Header>
 
-    <a href="/" aria-label="to home page" class="flex justify-around p-2" onclick={() => open = false}>
-      <img class="max-w-14" src="/berlin_skylarks_logo.svg" alt="Skylarks Team Logo">
+    <a aria-label="to home page" class="anchor" href="/" onclick={() => open = false}>
+      <img alt="Skylarks Team Logo" src="/berlin_skylarks_logo.svg">
 
-      <h2 class="p-4 antialiased">Berlin Skylarks</h2>
+      <h2>Home Page</h2>
     </a>
 
-    <hr class="mb-2"/>
+    <hr/>
 
-    <SidebarNavigation clubs={clubs} teams={teams} bind:sheetOpen={open}/>
+    <SidebarNavigation bind:sheetOpen={open} clubs={clubs} teams={teams}/>
 
   </Sheet.Content>
 </Sheet.Root>
 
 <style>
     :global {
-        .navigation-sheet-content {
-            .sheet-close-button {
+        .nav-trigger {
+            margin-inline-end: 2em;
+            @media (min-width: 48rem) {
                 display: none;
             }
         }
+    }
+
+    a {
+        display: flex;
+        justify-content: space-around;
+        padding: 0.5em;
+
+        img {
+            max-width: calc(var(--spacing) * 14);
+        }
+
+        h2 {
+            padding: 1em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    }
+
+    hr {
+        margin-block-end: 0.5em;
+    }
+
+    svg {
+        --svg-size: calc(var(--spacing) * 4);
+        width: var(--svg-size);
+        height: var(--svg-size);
+        fill: var(--color-surface-950-50);
     }
 </style>

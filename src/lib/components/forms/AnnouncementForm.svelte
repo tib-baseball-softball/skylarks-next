@@ -35,6 +35,8 @@
 
   let open = $state(false);
 
+  const isEditing = $derived(announcement !== null);
+
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
 
@@ -63,7 +65,7 @@
 </script>
 
 <Sheet.Root bind:open={open}>
-  <Sheet.Trigger class={buttonClasses}>
+  <Sheet.Trigger class={buttonClasses} data-testid="announcement-form-trigger-{isEditing ? 'edit' : 'create'}">
     {#if form.id}
       <SquarePen/>
       {#if showLabel}
@@ -203,10 +205,6 @@
       <div class="flex justify-center gap-3">
         <button class="mt-2 btn preset-filled-primary-500" type="submit">
           Submit
-        </button>
-
-        <button class="mt-2 btn preset-outlined-warning-500" type="reset">
-          Reset form
         </button>
       </div>
     </form>

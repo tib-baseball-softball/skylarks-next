@@ -16,8 +16,8 @@
   Visualization
   <Tabs.Root bind:value={visual}>
     <Tabs.List class="tabs-list input">
-      <Tabs.Trigger class="tabs-trigger flex-grow" value="number">Number</Tabs.Trigger>
-      <Tabs.Trigger class="tabs-trigger flex-grow" value="image">Image</Tabs.Trigger>
+      <Tabs.Trigger class="tabs-trigger btn flex-grow" value="number">Number</Tabs.Trigger>
+      <Tabs.Trigger class="tabs-trigger btn flex-grow" value="image">Image</Tabs.Trigger>
     </Tabs.List>
   </Tabs.Root>
 </label>

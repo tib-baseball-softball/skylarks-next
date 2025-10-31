@@ -1,10 +1,10 @@
 <script lang="ts">
-  import {Progress} from "@skeletonlabs/skeleton-svelte";
   // @ts-ignore
   import {Tabs} from "bits-ui";
   import {StatsType} from "bsm.js";
   import LeaderboardTable from "$lib/components/table/LeaderboardTable.svelte";
   import {goto} from "$app/navigation";
+  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
 
   let {data} = $props();
 
@@ -28,14 +28,14 @@
 
 <Tabs.Root bind:value={type} class="flex">
   <Tabs.List class="tabs-list border mb-1 preset-tonal-surface">
-    <Tabs.Trigger class="tabs-trigger flex-grow" value={StatsType.batting}>Batting</Tabs.Trigger>
-    <Tabs.Trigger class="tabs-trigger flex-grow" value={StatsType.pitching}>Pitching</Tabs.Trigger>
-    <Tabs.Trigger class="tabs-trigger flex-grow" value={StatsType.fielding}>Fielding</Tabs.Trigger>
+    <Tabs.Trigger class="tabs-trigger btn flex-grow" value={StatsType.batting}>Batting</Tabs.Trigger>
+    <Tabs.Trigger class="tabs-trigger btn flex-grow" value={StatsType.pitching}>Pitching</Tabs.Trigger>
+    <Tabs.Trigger class="tabs-trigger btn flex-grow" value={StatsType.fielding}>Fielding</Tabs.Trigger>
   </Tabs.List>
 </Tabs.Root>
 
 {#await data.leaderboardData}
-  <Progress/>
+  <ProgressRing/>
   <div class="placeholder col-span-2"></div>
 {:then leaderboardData}
   <header class="space-y-3">

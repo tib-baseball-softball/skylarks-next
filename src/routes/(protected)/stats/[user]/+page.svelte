@@ -1,10 +1,10 @@
 <script lang="ts">
-  import {ProgressRing} from "@skeletonlabs/skeleton-svelte";
   import StatsByTypePieChart from "$lib/components/diamondplanner/stats/StatsByTypePieChart.svelte";
   import AttendanceTotalStatsBlock from "$lib/components/diamondplanner/stats/AttendanceTotalStatsBlock.svelte";
   import {goto} from "$app/navigation";
   import {range} from "$lib/functions/range";
   import type {PersonalAttendanceStatsItem} from "$lib/model/PersonalAttendanceStats";
+  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
 
   let {data} = $props();
 
@@ -29,14 +29,14 @@
   });
 </script>
 
-<h1 class="h1 mt-4! mb-6!">Stats for {user?.first_name} {user?.last_name}</h1>
+<h1 class="h1">Stats for {user?.first_name} {user?.last_name}</h1>
 
 <div
         class="flex flex-wrap gap-4 lg:gap-8 preset-tonal-surface justify-between px-4 py-3 rounded-base"
 >
   <label class="label flex items-center gap-2 grow justify-between md:grow-0">
     Season
-    <select class="select" bind:value={selectedSeason}>
+    <select bind:value={selectedSeason} class="select">
       {#each seasonOptions as option}
         <option value="{option}">{option}</option>
       {/each}
@@ -45,7 +45,7 @@
 </div>
 
 {#snippet statsSection(statsItem: PersonalAttendanceStatsItem)}
-  <h2 class="h2 mb-2">{statsItem.teamName}</h2>
+  <h2 class="h2 my-4">{statsItem.teamName}</h2>
   <section class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
     <StatsByTypePieChart statsItem={statsItem}/>
   </section>

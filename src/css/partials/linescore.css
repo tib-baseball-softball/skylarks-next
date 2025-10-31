@@ -1,58 +1,82 @@
 /* adapted from Skeleton table style */
 
 .linescore {
-    @apply w-full overflow-hidden;
+    width: 100%;
+    overflow: hidden;
     /* background */
     /* Theme: Rounded */
-    @apply rounded-container;
+    border-radius: var(--radius-container)
 }
 
 /* === Hover Styles ==== */
 
 .linescore-hover tbody tr {
-    @apply hover:bg-surface-500/20;
-}
-
-.linescore-interactive tbody tr {
-    /*@apply hover:preset-tonal-primary even:hover:preset-tonal-primary cursor-pointer;*/
+    &:hover {
+        background-color: color-mix(in oklab, var(--color-surface-500) 20%, transparent);
+    }
 }
 
 /* === linescore Head === */
 
 .linescore thead {
-    @apply preset-tonal-primary border-b border-surface-500/20;
+    background-color: var(--color-primary-50-950) /* light-dark(var(--color-primary-50), var(--color-primary-950)) */;
+    color: var(--color-primary-950-50);
+    border-color: color-mix(in oklab, var(--color-surface-500) /* oklch(55.6% 0 0deg) = #737373 */ 20%, transparent);
 }
 
 .linescore thead tr {
-    @apply capitalize text-center;
+    text-transform: capitalize;
+    text-align: center;
 }
 
 .linescore thead th {
-    @apply border-l border-surface-500/20 font-bold p-4;
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+    border-left-style: var(--tw-border-style);
+    border-left-width: 1px;
+    padding: calc(var(--spacing) * 4);
+    border-color: color-mix(in oklab, var(--color-surface-500) 20%, transparent);
 }
 
 .linescore thead th:first-child {
-    @apply border-0;
+    border-style: var(--tw-border-style);
+    border-width: 0;
 }
 
 /* === linescore Body === */
 
 .linescore tbody tr {
-    @apply border-b border-surface-500/20 text-center;
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 1px;
+    border-color: color-mix(in oklab, var(--color-surface-500) /* oklch(55.6% 0 0deg) = #737373 */ 20%, transparent);
+    text-align: center;
 }
 
 .linescore tbody td {
-    @apply border-l border-surface-500/20 px-3 py-4 align-top whitespace-nowrap md:whitespace-normal;
+    border-left-style: var(--tw-border-style);
+    border-left-width: 1px;
+    border-color: color-mix(in oklab, var(--color-surface-500) 20%, transparent);
+    padding-inline: calc(var(--spacing) * 3);
+    padding-block: calc(var(--spacing) * 4);
+    vertical-align: top;
+    white-space: nowrap;
+
+    @media (width >= 48rem /* 768px */
+    ) {
+        white-space: normal;
+    }
 }
 
 .linescore tbody td:first-child {
-    @apply border-0 text-left;
+    border-style: var(--tw-border-style);
+    border-width: 0;
+    text-align: left;
 }
 
 .linescore-compact tbody td {
-    @apply py-3!;
+    padding-block: calc(var(--spacing) * 3) !important;
 }
 
 .linescore-comforlinescore tbody td {
-    @apply py-5!;
+    padding-block: calc(var(--spacing) * 5) !important;
 }

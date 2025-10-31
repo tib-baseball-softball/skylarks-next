@@ -1,18 +1,20 @@
 /** Applies to all logos that have different variants for dark and light mode. */
 @media (prefers-color-scheme: dark) {
     .dark-logo {
-        @apply hidden;
+        display: none;
     }
+
     .light-logo {
-        @apply block;
+        display: block;
     }
 }
 
 @media (prefers-color-scheme: light) {
     .light-logo {
-        @apply hidden;
+        display: none;
     }
+
     .dark-logo {
-        @apply block;
+        display: block;
     }
 }

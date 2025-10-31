@@ -1,7 +1,7 @@
 <script lang="ts">
   import type {Match} from "bsm.js";
-  import {ProgressRing} from "@skeletonlabs/skeleton-svelte";
   import CurrentMatchRow from "$lib/components/match/CurrentMatchRow.svelte";
+  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
 
   interface Props {
     matches: Promise<Match[]>;
