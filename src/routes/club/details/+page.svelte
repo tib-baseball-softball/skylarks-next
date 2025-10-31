@@ -6,7 +6,7 @@
   let {data}: PageProps = $props();
 </script>
 
-<h1 class="h1 mt-4! mb-6!">Club Details</h1>
+<h1 class="h1">Club Details</h1>
 
 <ClubDetailSection title="Team Basics">
   {#snippet icon()}
@@ -15,9 +15,9 @@
 
   <div class="flex justify-center">
     <img
-            src="/berlin_skylarks_logo.svg"
             alt="Skylarks Logo"
             class="w-24 h-auto mb-1"
+            src="/berlin_skylarks_logo.svg"
     />
   </div>
   <div class="space-y-2">

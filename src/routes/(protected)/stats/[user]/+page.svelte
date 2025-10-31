@@ -29,7 +29,7 @@
   });
 </script>
 
-<h1 class="h1 mt-4! mb-6!">Stats for {user?.first_name} {user?.last_name}</h1>
+<h1 class="h1">Stats for {user?.first_name} {user?.last_name}</h1>
 
 <div
         class="flex flex-wrap gap-4 lg:gap-8 preset-tonal-surface justify-between px-4 py-3 rounded-base"
@@ -45,7 +45,7 @@
 </div>
 
 {#snippet statsSection(statsItem: PersonalAttendanceStatsItem)}
-  <h2 class="h2 mb-2">{statsItem.teamName}</h2>
+  <h2 class="h2 my-4">{statsItem.teamName}</h2>
   <section class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
     <StatsByTypePieChart statsItem={statsItem}/>
   </section>

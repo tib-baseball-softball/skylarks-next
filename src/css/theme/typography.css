@@ -1,7 +1,7 @@
 /* Components: Typography */
 .h1 {
     color: var(--heading-font-color);
-    font-family: var(--heading-font-family);
+    font-family: var(--heading-font-family), system-ui;
     font-weight: var(--heading-font-weight);
     font-style: var(--heading-font-style);
     letter-spacing: var(--heading-letter-spacing);
@@ -16,12 +16,14 @@
     @media (prefers-color-scheme: dark) {
         color: var(--heading-font-color-dark);
     }
-    margin-block: calc(var(--spacing) * 2);
+
+    margin-top: calc(var(--spacing) * 4);
+    margin-bottom: calc(var(--spacing) * 6);
 }
 
 .h2 {
     color: var(--heading-font-color);
-    font-family: var(--heading-font-family);
+    font-family: var(--heading-font-family), system-ui;
     font-weight: var(--heading-font-weight);
     font-style: var(--heading-font-style);
     letter-spacing: var(--heading-letter-spacing);
@@ -40,7 +42,7 @@
 
 .h3 {
     color: var(--heading-font-color);
-    font-family: var(--heading-font-family);
+    font-family: var(--heading-font-family), system-ui;
     font-weight: var(--heading-font-weight);
     font-style: var(--heading-font-style);
     letter-spacing: var(--heading-letter-spacing);
@@ -59,7 +61,7 @@
 
 .h4 {
     color: var(--heading-font-color);
-    font-family: var(--heading-font-family);
+    font-family: var(--heading-font-family), system-ui;
     font-weight: var(--heading-font-weight);
     font-style: var(--heading-font-style);
     letter-spacing: var(--heading-letter-spacing);
@@ -79,7 +81,7 @@
 
 .h5 {
     color: var(--heading-font-color);
-    font-family: var(--heading-font-family);
+    font-family: var(--heading-font-family), system-ui;
     font-weight: var(--heading-font-weight);
     font-style: var(--heading-font-style);
     letter-spacing: var(--heading-letter-spacing);
@@ -98,7 +100,7 @@
 
 .h6 {
     color: var(--heading-font-color);
-    font-family: var(--heading-font-family);
+    font-family: var(--heading-font-family), system-ui;
     font-weight: var(--heading-font-weight);
     font-style: var(--heading-font-style);
     letter-spacing: var(--heading-letter-spacing);
@@ -117,7 +119,7 @@
 
 .anchor {
     color: var(--anchor-font-color);
-    font-family: var(--anchor-font-family);
+    font-family: var(--anchor-font-family), system-ui;
     font-size: var(--anchor-font-size);
     line-height: var(--anchor-line-height);
     font-weight: var(--anchor-font-weight);
@@ -155,7 +157,7 @@
     border-color: var(--color-surface-600-400);
     border-radius: var(--radius-base);
     color: var(--color-surface-contrast-500);
-    font-family: var(--font-mono);
+    font-family: var(--font-mono), monospace;
     font-size: var(--text-sm);
     white-space: nowrap;
     overflow-x: auto;
@@ -179,7 +181,7 @@
         background-color: var(--color-primary-100-900);
         border-radius: var(--radius-base);
         color: var(--color-primary-contrast-50-950);
-        font-family: var(--font-mono);
+        font-family: var(--font-mono), monospace;
         font-size: var(--text-xs);
         white-space: nowrap;
         padding-inline: calc(var(--spacing) * 1.5);
@@ -191,10 +193,9 @@
 /* Insertions / Deletions --- */
 /* https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ins */
 /* https://developer.mozilla.org/en-US/docs/Web/HTML/Element/del */
-.ins {
-    background-color: var(--color-success-500);
-    color: var(--color-success-contrast-500);
-    font-family: var(--font-mono);
+
+.ins, .del {
+    font-family: var(--font-mono) monospace;
     position: relative;
     display: block;
     padding: calc(var(--spacing) * 0.5);
@@ -204,8 +205,13 @@
     &::before {
         position: absolute;
         left: calc(var(--spacing) * 1);
-        font-family: var(--font-mono);
+        font-family: var(--font-mono) monospace;
     }
+}
+
+.ins {
+    background-color: var(--color-success-500);
+    color: var(--color-success-contrast-500);
 
     &::before {
         content: '+';
@@ -215,18 +221,6 @@
 .del {
     background-color: var(--color-error-500);
     color: var(--color-error-contrast-500);
-    font-family: var(--font-mono);
-    position: relative;
-    display: block;
-    padding: calc(var(--spacing) * 0.5);
-    padding-left: calc(var(--spacing) * 5);
-    text-decoration: none;
-
-    &::before {
-        position: absolute;
-        left: calc(var(--spacing) * 1);
-        font-family: var(--font-mono);
-    }
 
     &::before {
         content: '−';
