@@ -68,7 +68,7 @@
 
     <!-- Sidebar (Left) -->
     {#if showSidebar}
-      <aside class="col-span-1">
+      <aside class="">
         <SidebarNavigation clubs={data.clubs} teams={data.teams}/>
       </aside>
     {:else}
@@ -78,7 +78,7 @@
 
     <!-- Main -->
 
-    <main class="col-span-1">
+    <main class="">
       {@render children?.()}
       <noscript>This website is actually a JavaScript application with lots of functionality. You need to enable
         JavaScript for it to work.
@@ -142,7 +142,7 @@
         display: grid;
         grid-template-columns: repeat(1, minmax(0, 1fr));
 
-        @media (min-width: 64rem) {
+        @media (min-width: 48rem) {
             grid-template-columns: auto 1fr;
         }
     }
@@ -156,6 +156,7 @@
         border-right: 1px solid light-dark(var(--color-surface-200), var(--color-surface-100));
         padding: calc(var(--spacing) * 2);
         background-color: var(--sidebar-color);
+        grid-column: span 1/span 1;
 
         @media (min-width: 48rem) {
             display: block;
@@ -174,6 +175,7 @@
         width: 93%;
         justify-self: center;
         margin-bottom: 2em;
+        grid-column: span 1/span 1;
 
         @media (min-width: 48rem) {
             width: 90%;
