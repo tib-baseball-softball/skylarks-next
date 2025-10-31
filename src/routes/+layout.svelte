@@ -73,7 +73,7 @@
       </aside>
     {:else}
       <!-- hack: render empty div to not mess up the grid -->
-      <div aria-hidden="true"></div>
+      <div class="shame-div" aria-hidden="true"></div>
     {/if}
 
     <!-- Main -->
@@ -172,6 +172,7 @@
     }
 
     main {
+        max-width: 1200px;
         width: 93%;
         justify-self: center;
         margin-bottom: 2em;
