@@ -18,7 +18,7 @@
     </div>
   </section>
 
-  <section class="prose dark:prose-invert">
+  <section class="prose">
     <p>
       The core functionality of this app (getting up-to-date information about games, standings and public club
       information) is available without logging in.

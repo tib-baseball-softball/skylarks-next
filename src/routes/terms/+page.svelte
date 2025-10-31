@@ -3,7 +3,7 @@
 </script>
 
 <!-- @wc-ignore -->
-<article class="prose dark:prose-invert max-w-none mb-6"><h1 class="mt-4">Nutzungsbedingungen für die Web-App der Berlin
+<article class="prose max-w-none mb-6"><h1 class="mt-4">Nutzungsbedingungen für die Web-App der Berlin
   Skylarks</h1>
 
   {#if preferences.current.locale === "de"}

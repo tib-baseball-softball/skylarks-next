@@ -1,5 +1,5 @@
 <!-- @wc-ignore -->
-<article class="prose dark:prose-invert max-w-none" lang="de"><h1 class="mt-4">Impressum</h1>
+<article class="prose max-w-none" lang="de"><h1 class="mt-4">Impressum</h1>
 
   <p>Turngemeinde in Berlin e.V. Abteilung Baseball<br/>
     Columbiadamm 111<br/>
