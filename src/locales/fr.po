@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-12T16:34:19.018Z\n"
-"PO-Revision-Date: 2025-10-31T14:55:10.447Z\n"
+"PO-Revision-Date: 2025-10-31T18:47:07.737Z\n"
 "Last-Translator: \n"
 "Language: fr\n"
 "Language-Team: \n"
@@ -1163,10 +1163,6 @@ msgstr "Si ce n'est pas défini, le lien lui-même sera utilisé comme texte."
 msgid "Submit"
 msgstr "Soumettre"
 
-#: src/lib/components/forms/AnnouncementForm.svelte
-msgid "Reset form"
-msgstr "Réinitialiser le formulaire"
-
 #: src/lib/components/diamondplanner/club/ClubDetailCard.svelte
 #: src/lib/components/diamondplanner/team/TeamListTeaser.svelte
 #: src/lib/components/diamondplanner/team/TeamTeaserCard.svelte
@@ -1607,10 +1603,6 @@ msgstr "Longitude*"
 #: src/lib/components/forms/LocationForm.svelte
 msgid "Coordinate Map <0>Select a location on the map to set coordinates automatically</0> <1/>"
 msgstr "Carte des coordonnées <0>Sélectionnez un emplacement sur la carte pour définir les coordonnées automatiquement</0> <1/>"
-
-#: src/lib/components/forms/LocationForm.svelte
-msgid "Reset Form"
-msgstr "Réinitialiser le formulaire"
 
 #: src/lib/components/match/CurrentMatchBlock.svelte
 msgid "No games for this timeframe."

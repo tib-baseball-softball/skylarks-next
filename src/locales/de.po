@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-10T18:43:43.303Z\n"
-"PO-Revision-Date: 2025-10-31T14:55:10.440Z\n"
+"PO-Revision-Date: 2025-10-31T18:47:07.736Z\n"
 "Last-Translator: \n"
 "Language: de\n"
 "Language-Team: \n"
@@ -1182,10 +1182,6 @@ msgstr "Wenn nicht festgelegt, wird der Link selbst als Text verwendet."
 msgid "Submit"
 msgstr "Absenden"
 
-#: src/lib/components/forms/AnnouncementForm.svelte
-msgid "Reset form"
-msgstr "Formular zurücksetzen"
-
 #: src/lib/components/forms/ClubForm.svelte
 msgid "Edit Club"
 msgstr "Verein bearbeiten"
@@ -1313,10 +1309,6 @@ msgstr "Längengrad*"
 #: src/lib/components/forms/LocationForm.svelte
 msgid "Coordinate Map <0>Select a location on the map to set coordinates automatically</0> <1/>"
 msgstr "Koordinatenkarte <0>Wähle einen Ort auf der Karte aus, um Koordinaten automatisch zu setzen</0> <1/>"
-
-#: src/lib/components/forms/LocationForm.svelte
-msgid "Reset Form"
-msgstr "Formular zurücksetzen"
 
 #: src/lib/components/diamondplanner/event/EventPageAdminSection.svelte
 #: src/lib/components/forms/ParticipationForm.svelte

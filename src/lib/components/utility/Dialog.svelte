@@ -15,6 +15,7 @@
     title: Snippet;
     description?: Snippet;
     contentProps?: WithoutChild<Dialog.ContentProps>;
+    triggerProps?: WithoutChild<Dialog.TriggerProps>;
     triggerContent: Snippet;
     closeButtonClasses?: string;
     disabled?: boolean;
@@ -25,6 +26,7 @@
     children,
     triggerClasses = "",
     contentProps,
+    triggerProps,
     title,
     description,
     triggerContent,
@@ -35,7 +37,7 @@
 </script>
 
 <Dialog.Root {...restProps} bind:open>
-  <Dialog.Trigger class="{triggerClasses} flex gap-1" {disabled} type="button">
+  <Dialog.Trigger {...triggerProps} class="{triggerClasses} flex gap-1" {disabled} type="button">
     {@render triggerContent()}
   </Dialog.Trigger>
 

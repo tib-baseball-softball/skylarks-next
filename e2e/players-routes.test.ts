@@ -1,7 +1,7 @@
 import {expect, test} from '@playwright/test';
 import {checkNoConsoleErrors} from './utils';
 
-test('Players route loads correctly', async ({ page }) => {
+test('Players route loads correctly', async ({page}) => {
   let response = await page.goto('/teams');
   let consoleErrors = await checkNoConsoleErrors(page);
   expect(response?.status()).toBe(200);
@@ -14,16 +14,16 @@ test('Players route loads correctly', async ({ page }) => {
   // @ts-ignore
   response = await page.goto(href);
 
-  const playerLink = page.locator('a[href^="/players/"]').first();
-  await expect(playerLink).toBeVisible();
+  const playerSection = page.locator('[data-testid="team-players-section"]').first();
+  await expect(playerSection).toBeVisible();
 
-  if (await playerLink.count() === 0) {
+  if (await playerSection.count() === 0) {
     console.log('No player links found, skipping test');
     return;
   }
 
-  href = await playerLink.getAttribute('href');
-  expect(href).not.toBeNull();
+  href = await playerSection.getAttribute('href');
+  await expect(href).not.toBeNull();
 
   consoleErrors = await checkNoConsoleErrors(page);
   // @ts-ignore

@@ -46,7 +46,7 @@
   {/await}
 </section>
 
-<section class="my-10">
+<section class="my-10" data-testid="team-players-section">
   <h2 class="h2">Players</h2>
 
   {#await data.players}

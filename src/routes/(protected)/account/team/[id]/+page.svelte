@@ -84,8 +84,11 @@
       Timeframe
       <Tabs.Root bind:value={showEvents}>
         <Tabs.List class="tabs-list event-segment-container p-1!">
-          <Tabs.Trigger class="tabs-trigger btn active:preset-filled-error-300-700" value="next">Next</Tabs.Trigger>
-          <Tabs.Trigger class="tabs-trigger btn active:preset-filled" value="past">Past</Tabs.Trigger>
+          <Tabs.Trigger class="tabs-trigger btn active:preset-filled-error-300-700" data-testid="segment-item"
+                        value="next">Next
+          </Tabs.Trigger>
+          <Tabs.Trigger class="tabs-trigger btn active:preset-filled" data-testid="segment-item" value="past">Past
+          </Tabs.Trigger>
         </Tabs.List>
       </Tabs.Root>
     </label>
@@ -94,8 +97,8 @@
       Sort
       <Tabs.Root bind:value={sorting}>
         <Tabs.List class="tabs-list flex-wrap event-segment-container p-1!">
-          <Tabs.Trigger class="tabs-trigger btn" value="asc">Ascending</Tabs.Trigger>
-          <Tabs.Trigger class="tabs-trigger btn" value="desc">Descending</Tabs.Trigger>
+          <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="asc">Ascending</Tabs.Trigger>
+          <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="desc">Descending</Tabs.Trigger>
         </Tabs.List>
       </Tabs.Root>
     </label>
@@ -104,10 +107,10 @@
       Type
       <Tabs.Root bind:value={showTypes}>
         <Tabs.List class="tabs-list flex-wrap event-segment-container p-1! gap-1">
-          <Tabs.Trigger class="tabs-trigger btn" value="any">All</Tabs.Trigger>
-          <Tabs.Trigger class="tabs-trigger btn" value="game">Game</Tabs.Trigger>
-          <Tabs.Trigger class="tabs-trigger btn" value="practice">Practice</Tabs.Trigger>
-          <Tabs.Trigger class="tabs-trigger btn" value="misc">Other</Tabs.Trigger>
+          <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="any">All</Tabs.Trigger>
+          <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="game">Game</Tabs.Trigger>
+          <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="practice">Practice</Tabs.Trigger>
+          <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="misc">Other</Tabs.Trigger>
         </Tabs.List>
       </Tabs.Root>
     </label>

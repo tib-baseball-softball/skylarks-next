@@ -5,8 +5,9 @@
   import {toastController} from "$lib/service/ToastController.svelte.ts";
   import Dialog from "$lib/components/utility/Dialog.svelte";
   import {closeModal} from "$lib/functions/closeModal.ts";
+  import type {HTMLButtonAttributes} from "svelte/elements";
 
-  interface Props {
+  interface Props extends HTMLButtonAttributes {
     id: string;
     modelName: string;
     action: (id: string) => void;
@@ -20,6 +21,7 @@
     action,
     classes = "btn-sm btn-icon preset-tonal-error border border-error-500",
     buttonText = "",
+    ...restProps
   }: Props = $props();
 
   function deleteItem() {
@@ -45,7 +47,7 @@
   }
 </script>
 
-<Dialog triggerClasses="btn {classes}" closeButtonClasses="sr-only">
+<Dialog closeButtonClasses="sr-only" triggerClasses="btn {classes}" triggerProps={restProps}>
   {#snippet triggerContent()}
     <Trash/>
     {#if buttonText}
@@ -62,7 +64,10 @@
   {/snippet}
 
   <div class="flex justify-end gap-2 mt-1">
-    <button data-test-role="modal-cancel" class="btn preset-tonal-surface border border-surface-500" type="button" onclick={closeModal}>Cancel</button>
-    <button data-test-role="modal-confirm" class="btn preset-filled" type="button" onclick={deleteItem}>Confirm</button>
+    <button class="btn preset-tonal-surface border border-surface-500" data-test-role="modal-cancel"
+            onclick={closeModal}
+            type="button">Cancel
+    </button>
+    <button class="btn preset-filled" data-test-role="modal-confirm" onclick={deleteItem} type="button">Confirm</button>
   </div>
 </Dialog>

@@ -78,21 +78,25 @@
       >
         <Tabs.Trigger
                 class="tabs-trigger btn"
+                data-testid="segment-item-previous"
                 value={Gameday.previous}
         >Previous
         </Tabs.Trigger>
         <Tabs.Trigger
                 class="tabs-trigger btn"
+                data-testid="segment-item"
                 value={Gameday.current}
         >Current
         </Tabs.Trigger>
         <Tabs.Trigger
                 class="tabs-trigger btn"
+                data-testid="segment-item"
                 value={Gameday.next}
         >Next
         </Tabs.Trigger>
         <Tabs.Trigger
                 class="tabs-trigger btn"
+                data-testid="segment-item"
                 value={Gameday.any}
         >All
         </Tabs.Trigger>

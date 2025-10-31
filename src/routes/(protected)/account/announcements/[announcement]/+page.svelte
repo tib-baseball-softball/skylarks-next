@@ -118,6 +118,7 @@
                   action={deleteAction}
                   buttonText="Delete Announcement"
                   classes="btn preset-tonal-error border border-error-500"
+                  data-testid="delete-announcement-button"
           />
         </div>
       </section>

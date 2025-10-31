@@ -4,8 +4,8 @@
         viewBox="0 0 250 250"
         width="250"
 >
-  <circle class="bg" r=""></circle>
-  <circle class="fg" r=""></circle>
+  <circle class="bg" r="0"></circle>
+  <circle class="fg" r="0"></circle>
 </svg>
 
 <style>

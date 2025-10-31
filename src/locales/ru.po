@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-12T16:35:53.634Z\n"
-"PO-Revision-Date: 2025-10-31T14:55:10.459Z\n"
+"PO-Revision-Date: 2025-10-31T18:47:07.742Z\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: \n"
@@ -1163,10 +1163,6 @@ msgstr "Если не установлено, сама ссылка будет �
 msgid "Submit"
 msgstr "Отправить"
 
-#: src/lib/components/forms/AnnouncementForm.svelte
-msgid "Reset form"
-msgstr "Сбросить форму"
-
 #: src/lib/components/diamondplanner/club/ClubDetailCard.svelte
 #: src/lib/components/diamondplanner/team/TeamListTeaser.svelte
 #: src/lib/components/diamondplanner/team/TeamTeaserCard.svelte
@@ -1608,10 +1604,6 @@ msgstr "Долгота*"
 #: src/lib/components/forms/LocationForm.svelte
 msgid "Coordinate Map <0>Select a location on the map to set coordinates automatically</0> <1/>"
 msgstr "Карта координат <0>Выберите местоположение на карте, чтобы автоматически установить координаты</0> <1/>"
-
-#: src/lib/components/forms/LocationForm.svelte
-msgid "Reset Form"
-msgstr "Сбросить форму"
 
 #: src/lib/components/match/CurrentMatchBlock.svelte
 msgid "No games for this timeframe."
