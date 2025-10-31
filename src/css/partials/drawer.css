@@ -6,7 +6,7 @@
     position: fixed;
     z-index: 50;
     padding: calc(var(--spacing) * 6);
-    background-color: var(--sidebar-color);
+    background-color: var(--nav-item-background);
     gap: calc(var(--spacing) * 4);
     --tw-ease: var(--ease-in-out);
     transition-timing-function: var(--ease-in-out);

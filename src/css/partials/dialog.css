@@ -8,7 +8,7 @@
 
 .dialog-content {
     position: fixed;
-    background-color: var(--sidebar-color);
+    background-color: var(--nav-item-background);
     left: 50%;
     top: 50%;
     z-index: 50;

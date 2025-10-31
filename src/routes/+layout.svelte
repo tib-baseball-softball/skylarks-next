@@ -155,7 +155,7 @@
         width: calc(var(--spacing) * 64);
         border-right: 1px solid light-dark(var(--color-surface-200), var(--color-surface-100));
         padding: calc(var(--spacing) * 2);
-        background-color: var(--sidebar-color);
+        background-color: var(--nav-item-background);
         grid-column: span 1/span 1;
 
         @media (min-width: 48rem) {

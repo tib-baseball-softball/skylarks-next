@@ -203,5 +203,5 @@
     --color-surface-contrast-900: var(--color-surface-contrast-light);
     --color-surface-contrast-950: var(--color-surface-contrast-light);
 
-    --sidebar-color: light-dark(color-mix(in oklab, var(--color-surface-500) 5%, transparent), var(--color-surface-800));
+    --nav-item-background: light-dark(var(--color-surface-50), var(--color-surface-800));
 }

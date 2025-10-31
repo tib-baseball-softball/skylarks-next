@@ -33,7 +33,7 @@
         width: 100%;
         display: flex;
         flex-direction: column;
-        background-color: var(--sidebar-color);
+        background-color: var(--nav-item-background);
         padding: calc(var(--spacing) * 3);
     }
 

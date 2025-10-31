@@ -21,7 +21,7 @@
         left: 0;
         width: 100%;
         padding-bottom: env(safe-area-inset-bottom);
-        background-color: var(--sidebar-color);
+        background-color: var(--nav-item-background);
         z-index: 2;
         border-top: 1px solid light-dark(var(--color-surface-500), var(--color-surface-100));
         border-bottom: 1px solid light-dark(var(--color-surface-500), var(--color-surface-100));

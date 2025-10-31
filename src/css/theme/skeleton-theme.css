@@ -200,19 +200,6 @@
     --color-surface-800: oklch(26.9% 0 0deg);
     --color-surface-900: oklch(20.5% 0 0deg);
     --color-surface-950: oklch(14.5% 0 0deg);
-    --color-surface-contrast-dark: var(--color-surface-950);
-    --color-surface-contrast-light: var(--color-surface-50);
-    --color-surface-contrast-50: var(--color-surface-contrast-dark);
-    --color-surface-contrast-100: var(--color-surface-contrast-dark);
-    --color-surface-contrast-200: var(--color-surface-contrast-dark);
-    --color-surface-contrast-300: var(--color-surface-contrast-dark);
-    --color-surface-contrast-400: var(--color-surface-contrast-light);
-    --color-surface-contrast-500: var(--color-surface-contrast-light);
-    --color-surface-contrast-600: var(--color-surface-contrast-light);
-    --color-surface-contrast-700: var(--color-surface-contrast-light);
-    --color-surface-contrast-800: var(--color-surface-contrast-light);
-    --color-surface-contrast-900: var(--color-surface-contrast-light);
-    --color-surface-contrast-950: var(--color-surface-contrast-light);
 
     /* Backgrounds --- */
     --body-background-color: var(--color-surface-50);
