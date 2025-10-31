@@ -134,7 +134,7 @@
 <div class="flex justify-center">
   <div class="flex justify-center mt-3! mb-10! md:max-w-[60%] lg:max-w-[55%]">
     <article>
-      <header class="mb-6!">
+      <header>
         <h1 class="h2">Sign in to Skylarks Diamond Planner</h1>
       </header>
 
@@ -334,5 +334,9 @@
             margin-block: calc(var(--spacing) * 2) /* 0.5rem = 8px */
         ;
         }
+    }
+
+    header {
+        margin-bottom: 2em;
     }
 </style>

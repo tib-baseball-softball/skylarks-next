@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-12T16:35:43.595Z\n"
-"PO-Revision-Date: 2025-10-31T11:07:29.088Z\n"
+"PO-Revision-Date: 2025-10-31T14:55:10.455Z\n"
 "Last-Translator: \n"
 "Language: pl\n"
 "Language-Team: \n"
@@ -687,14 +687,6 @@ msgstr "Komentarz"
 #: src/routes/login/+page.svelte
 msgid "Login Page"
 msgstr "Jesteś zalogowany jako <0/>."
-
-#: src/routes/login/+page.svelte
-msgid "You are logged in as <0/>."
-msgstr "Możesz się wylogować, klikając swój awatar w prawym górnym rogu."
-
-#: src/routes/login/+page.svelte
-msgid "You can log out by clicking your avatar in the top right."
-msgstr "Przejdź do strony konta"
 
 #: src/routes/login/+page.svelte
 msgid "Go to Account Page"
@@ -2776,66 +2768,68 @@ msgstr "Nadchodzące"
 
 #: src/lib/components/boxscore/MatchBoxscoreSection.svelte
 msgid "Away Team"
-msgstr ""
+msgstr "Drużyna gości"
 
 #: src/lib/components/boxscore/MatchBoxscoreSection.svelte
 msgid "Home Team"
-msgstr ""
+msgstr "Drużyna gospodarzy"
 
 #: src/lib/components/match/ContentFilteredUnavailable.svelte
 msgid "There is no data to display for the selected filters."
-msgstr ""
+msgstr "Brak danych do wyświetlenia dla wybranych filtrów."
 
 #: src/lib/components/forms/TeamGamesModal.svelte
 msgid "An error occurred while saving the event."
-msgstr ""
+msgstr "Wystąpił błąd podczas zapisywania wydarzenia."
 
 #. placeholder {0}: season
 #: src/lib/components/diamondplanner/stats/AttendanceTotalStatsBlock.svelte
 msgid "All possible events of this type for {0}"
-msgstr ""
+msgstr "Wszystkie możliwe wydarzenia tego typu dla {0}"
 
 #: src/lib/components/favorite/LeagueChartGraph.svelte
 msgid "Wins"
-msgstr ""
+msgstr "Wygrane"
 
 #: src/lib/components/favorite/LeagueChartGraph.svelte
 msgid "BEA"
-msgstr ""
+msgstr "BEA"
 
 #: src/lib/components/favorite/LeagueChartGraph.svelte
 msgid "Total Wins"
-msgstr ""
+msgstr "Suma wygranych"
 
 #: src/lib/auth/LoginForm.svelte
 msgid "There was an error processing your authentication request."
-msgstr ""
+msgstr "Wystąpił błąd podczas przetwarzania twojego żądania uwierzytelnienia."
 
 #: src/lib/components/utility/TagsInput.svelte
 msgid "Enter"
-msgstr ""
+msgstr "Enter"
 
 #: src/lib/components/utility/TagsInput.svelte
 msgid "Backspace"
-msgstr ""
+msgstr "Backspace"
 
 #: src/lib/components/utility/TagsInput.svelte
 msgid "Remove tag"
-msgstr ""
+msgstr "Usuń tag"
 
 #: src/lib/components/utility/TagsInput.svelte
 msgid "You have entered a value that is not allowed here."
-msgstr ""
+msgstr "Wprowadzono niedozwoloną wartość."
 
 #: src/routes/ligen/[id]/+page.svelte
 msgid ""
 "Go to\n"
 "stats"
 msgstr ""
+"Idź do\n"
+"statystyk"
 
 #: src/lib/components/navigation/NavigationSheet.svelte
 msgid "Home Page"
-msgstr ""
+msgstr "Strona główna"
 
 #: src/routes/+page.svelte
 msgid "Diamond Planner"
@@ -2854,3 +2848,7 @@ msgstr "Podstawowa funkcjonalność tej aplikacji (aktualne informacje o meczach
 #: src/routes/+page.svelte
 msgid "To access internal team information and participate in team activities, please <0>log in to your account.</0>"
 msgstr "Aby uzyskać dostęp do wewnętrznych informacji drużyny i uczestniczyć w działaniach zespołowych, <0>zaloguj się na swoje konto.</0>"
+
+#: src/routes/login/+page.svelte
+msgid "You are logged in as: <0/> <1/> You can log out by clicking your avatar in the top right."
+msgstr "Jesteś zalogowany jako: <0/> <1/> Możesz się wylogować, klikając swój awatar w prawym górnym rogu."

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-12T16:35:16.263Z\n"
-"PO-Revision-Date: 2025-10-31T11:07:29.084Z\n"
+"PO-Revision-Date: 2025-10-31T14:55:10.452Z\n"
 "Last-Translator: \n"
 "Language: es\n"
 "Language-Team: \n"
@@ -687,14 +687,6 @@ msgstr "Aún no hay comentarios."
 #: src/routes/login/+page.svelte
 msgid "Login Page"
 msgstr "Página de inicio de sesión"
-
-#: src/routes/login/+page.svelte
-msgid "You are logged in as <0/>."
-msgstr "Ha iniciado sesión como <0/>."
-
-#: src/routes/login/+page.svelte
-msgid "You can log out by clicking your avatar in the top right."
-msgstr "Puede cerrar la sesión haciendo clic en su avatar en la parte superior derecha."
 
 #: src/routes/login/+page.svelte
 msgid "Go to Account Page"
@@ -2777,66 +2769,68 @@ msgstr "Próximo"
 
 #: src/lib/components/boxscore/MatchBoxscoreSection.svelte
 msgid "Away Team"
-msgstr ""
+msgstr "Equipo Visitante"
 
 #: src/lib/components/boxscore/MatchBoxscoreSection.svelte
 msgid "Home Team"
-msgstr ""
+msgstr "Equipo Local"
 
 #: src/lib/components/match/ContentFilteredUnavailable.svelte
 msgid "There is no data to display for the selected filters."
-msgstr ""
+msgstr "No hay datos para mostrar con los filtros seleccionados."
 
 #: src/lib/components/forms/TeamGamesModal.svelte
 msgid "An error occurred while saving the event."
-msgstr ""
+msgstr "Ocurrió un error al guardar el evento."
 
 #. placeholder {0}: season
 #: src/lib/components/diamondplanner/stats/AttendanceTotalStatsBlock.svelte
 msgid "All possible events of this type for {0}"
-msgstr ""
+msgstr "Todos los eventos posibles de este tipo para {0}```"
 
 #: src/lib/components/favorite/LeagueChartGraph.svelte
 msgid "Wins"
-msgstr ""
+msgstr "Victorias"
 
 #: src/lib/components/favorite/LeagueChartGraph.svelte
 msgid "BEA"
-msgstr ""
+msgstr "BEA"
 
 #: src/lib/components/favorite/LeagueChartGraph.svelte
 msgid "Total Wins"
-msgstr ""
+msgstr "Victorias Totales"
 
 #: src/lib/auth/LoginForm.svelte
 msgid "There was an error processing your authentication request."
-msgstr ""
+msgstr "Ha habido un error al procesar tu solicitud de autenticación."
 
 #: src/lib/components/utility/TagsInput.svelte
 msgid "Enter"
-msgstr ""
+msgstr "Entrar"
 
 #: src/lib/components/utility/TagsInput.svelte
 msgid "Backspace"
-msgstr ""
+msgstr "Retroceso"
 
 #: src/lib/components/utility/TagsInput.svelte
 msgid "Remove tag"
-msgstr ""
+msgstr "Eliminar etiqueta"
 
 #: src/lib/components/utility/TagsInput.svelte
 msgid "You have entered a value that is not allowed here."
-msgstr ""
+msgstr "Has introducido un valor que no está permitido aquí."
 
 #: src/routes/ligen/[id]/+page.svelte
 msgid ""
 "Go to\n"
 "stats"
 msgstr ""
+"Ir a\n"
+"estadísticas"
 
 #: src/lib/components/navigation/NavigationSheet.svelte
 msgid "Home Page"
-msgstr ""
+msgstr "Página de Inicio"
 
 #: src/routes/+page.svelte
 msgid "Diamond Planner"
@@ -2855,3 +2849,7 @@ msgstr "La funcionalidad principal de esta aplicación (obtener información act
 #: src/routes/+page.svelte
 msgid "To access internal team information and participate in team activities, please <0>log in to your account.</0>"
 msgstr "Para acceder a la información interna del equipo y participar en las actividades del equipo, por favor <0>inicia sesión en tu cuenta.</0>"
+
+#: src/routes/login/+page.svelte
+msgid "You are logged in as: <0/> <1/> You can log out by clicking your avatar in the top right."
+msgstr "Has iniciado sesión como: <0/> <1/> Puedes cerrar sesión haciendo clic en tu avatar en la parte superior derecha."

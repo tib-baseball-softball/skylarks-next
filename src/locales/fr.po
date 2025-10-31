@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-12T16:34:19.018Z\n"
-"PO-Revision-Date: 2025-10-31T11:07:29.080Z\n"
+"PO-Revision-Date: 2025-10-31T14:55:10.447Z\n"
 "Last-Translator: \n"
 "Language: fr\n"
 "Language-Team: \n"
@@ -687,14 +687,6 @@ msgstr "Pas encore de commentaires."
 #: src/routes/login/+page.svelte
 msgid "Login Page"
 msgstr "Page de connexion"
-
-#: src/routes/login/+page.svelte
-msgid "You are logged in as <0/>."
-msgstr "Vous êtes connecté en tant que <0/>."
-
-#: src/routes/login/+page.svelte
-msgid "You can log out by clicking your avatar in the top right."
-msgstr "Vous pouvez vous déconnecter en cliquant sur votre avatar en haut à droite."
 
 #: src/routes/login/+page.svelte
 msgid "Go to Account Page"
@@ -2854,3 +2846,7 @@ msgstr "La fonctionnalité principale de cette application (obtenir des informat
 #: src/routes/+page.svelte
 msgid "To access internal team information and participate in team activities, please <0>log in to your account.</0>"
 msgstr "Pour accéder aux informations internes de l'équipe et participer aux activités de l'équipe, veuillez <0>vous connecter à votre compte.</0>"
+
+#: src/routes/login/+page.svelte
+msgid "You are logged in as: <0/> <1/> You can log out by clicking your avatar in the top right."
+msgstr "Vous êtes connecté en tant que : <0/> <1/> Vous pouvez vous déconnecter en cliquant sur votre avatar en haut à droite."

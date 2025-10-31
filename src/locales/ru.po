@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-12T16:35:53.634Z\n"
-"PO-Revision-Date: 2025-10-31T11:07:29.091Z\n"
+"PO-Revision-Date: 2025-10-31T14:55:10.459Z\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: \n"
@@ -687,14 +687,6 @@ msgstr "Пока нет комментариев."
 #: src/routes/login/+page.svelte
 msgid "Login Page"
 msgstr "Страница входа"
-
-#: src/routes/login/+page.svelte
-msgid "You are logged in as <0/>."
-msgstr "Вы вошли как <0/>."
-
-#: src/routes/login/+page.svelte
-msgid "You can log out by clicking your avatar in the top right."
-msgstr "Вы можете выйти из системы, щелкнув свой аватар в правом верхнем углу."
 
 #: src/routes/login/+page.svelte
 msgid "Go to Account Page"
@@ -2855,3 +2847,7 @@ msgstr "Основная функциональность этого прило�
 #: src/routes/+page.svelte
 msgid "To access internal team information and participate in team activities, please <0>log in to your account.</0>"
 msgstr "Чтобы получить доступ к внутренней информации команды и участвовать в командных мероприятиях, пожалуйста, <0>войдите в свою учетную запись.</0>"
+
+#: src/routes/login/+page.svelte
+msgid "You are logged in as: <0/> <1/> You can log out by clicking your avatar in the top right."
+msgstr "Вы вошли как: <0/> <1/> Вы можете выйти, нажав на свой аватар в правом верхнем углу."

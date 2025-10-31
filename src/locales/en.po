@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-10T18:43:43.220Z\n"
-"PO-Revision-Date: 2025-10-31T11:07:29.064Z\n"
+"PO-Revision-Date: 2025-10-31T14:55:10.428Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -437,14 +437,6 @@ msgstr "Impressum"
 #: src/routes/login/+page.svelte
 msgid "Login Page"
 msgstr "Login Page"
-
-#: src/routes/login/+page.svelte
-msgid "You are logged in as <0/>."
-msgstr "You are logged in as <0/>."
-
-#: src/routes/login/+page.svelte
-msgid "You can log out by clicking your avatar in the top right."
-msgstr "You can log out by clicking your avatar in the top right."
 
 #: src/routes/login/+page.svelte
 msgid "Go to Account Page"
@@ -2861,3 +2853,7 @@ msgstr ""
 #: src/routes/+page.svelte
 msgid "To access internal team information and participate in team activities, please <0>log in to your account.</0>"
 msgstr "To access internal team information and participate in team activities, please <0>log in to your account.</0>"
+
+#: src/routes/login/+page.svelte
+msgid "You are logged in as: <0/> <1/> You can log out by clicking your avatar in the top right."
+msgstr "You are logged in as: <0/> <1/> You can log out by clicking your avatar in the top right."
