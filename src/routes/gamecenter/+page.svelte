@@ -56,7 +56,7 @@
 
     <div class="flex gap-2 my-4 justify-end">
       <Switch
-              controlActive="bg-surface-900 dark:bg-tertiary-700"
+              --switch-active-bg="light-dark(var(--color-surface-900), var(--color-tertiary-700))"
               name="slide"
               onCheckedChange={(e) => (showExternal = e.checked)}
       />

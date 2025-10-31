@@ -5,7 +5,6 @@
     name?: string;
     checked?: boolean;
     disabled?: boolean;
-    controlActive?: string;
     className?: string;
     children?: Snippet;
     onCheckedChange?: (e: { checked: boolean }) => void;
@@ -15,17 +14,10 @@
     name,
     checked = false,
     disabled = false,
-    controlActive,
     className,
     onCheckedChange,
     children
   }: Props = $props();
-
-  const trackClass = $derived(
-      checked
-          ? controlActive || "bg-primary-600"
-          : "bg-surface-300 dark:bg-surface-700"
-  );
 
   function handleChange(event: Event) {
     const target = event.currentTarget as HTMLInputElement;
@@ -47,7 +39,7 @@
 
   <span
           aria-hidden="true"
-          class="switch-control {trackClass}"
+          class="switch-control"
           data-testid="switch-control"
   >
     <span
@@ -70,6 +62,7 @@
 
     input[type="checkbox"]:checked + .switch-control {
         justify-content: end;
+        background-color: var(--switch-active-bg, var(--color-primary-600));
     }
 
     .switch-control {
@@ -80,6 +73,7 @@
         display: flex;
         align-items: center;
         cursor: pointer;
+        background-color: light-dark(var(--color-surface-300), var(--color-surface-700));
     }
 
     .switch-thumb {
