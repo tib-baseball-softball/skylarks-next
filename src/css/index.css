@@ -12,8 +12,17 @@
 @import "./partials/prose.css";
 @import "./partials/rulers.css";
 @import "./partials/tables.css";
+@import './partials/stats.css';
+@import './partials/logos.css' layer(base);
+@import './partials/linescore.css' layer(components);
+@import './partials/buttons.css' layer(utilities);
+@import './partials/tabs.css' layer(utilities);
 @import "./theme/typography.css";
 /* TODO: make this obsolete */
 @import "./shame.css";
-@import "./theme/skeleton-theme.css";
+@import './overrides.css';
+@import "./theme/generic-theme.css";
+@import "./theme/animations.css";
+@import "./theme/properties.css";
 @import "./partials/charts.css";
+@import "./utility/tw_utils.css";

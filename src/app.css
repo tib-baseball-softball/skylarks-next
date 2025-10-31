@@ -1,16 +1,10 @@
-/*
- * External Imports
- */
+@layer properties;
+@layer base;
+@layer theme;
+@layer components;
+@layer utilities;
 
 /* TODO: make this obsolete */
-@import "./css/tailwind_merged.css";
+@import "./css/theme/tailwind_merged.css";
 @import './css/index.css';
 @import './css/skylarks-theme.css';
-
-@import './css/partials/stats.css';
-@import './css/partials/logos.css' layer(base);
-@import './css/partials/linescore.css' layer(base);
-@import './css/partials/buttons.css' layer(utilities);
-@import './css/partials/card.css';
-@import './css/partials/tabs.css' layer(utilities);
-@import './css/overrides.css';
