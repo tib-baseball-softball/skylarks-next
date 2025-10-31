@@ -9,41 +9,46 @@
   let {club}: Props = $props();
 </script>
 
-<h1 class="h1 my-4!">Club</h1>
-<div class="flex justify-center">
-  <img
-          src="/berlin_skylarks_logo.svg"
-          alt="Skylarks Logo"
-          class="w-24 h-auto mb-1"
-  />
-</div>
+<section>
+  <article class="flex justify-center">
+    <img
+            alt="Skylarks Logo"
+            class="w-24 h-auto mb-1"
+            src="/berlin_skylarks_logo.svg"
+    />
+  </article>
 
-<div class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">
-  <div class="container">
-    <ClipboardList/>
-    <span>{club.short_name}</span>
-  </div>
+  <article class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">
+    <div class="container">
+      <ClipboardList/>
+      <span>{club.short_name}</span>
+    </div>
 
-  <hr class="my-2">
+    <hr class="my-2">
 
-  <div class="container">
-    <Tag/>
-    <span>
+    <div class="container">
+      <Tag/>
+      <span>
         {club.acronym} / 0{club?.organization_id} {club.number}
       </span>
-  </div>
+    </div>
 
-  <hr class="my-2">
+    <hr class="my-2">
 
-  <div class="container">
-    <Shield/>
-    <span>{club.main_club}</span>
-  </div>
-</div>
+    <div class="container">
+      <Shield/>
+      <span>{club.main_club}</span>
+    </div>
+  </article>
+</section>
 
-<style lang="postcss">
+<style>
     .container {
         display: flex;
         gap: 1rem;
+    }
+
+    article {
+        margin-block: 1.5em;
     }
 </style>

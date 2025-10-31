@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-12T16:35:43.595Z\n"
-"PO-Revision-Date: 2025-10-30T23:13:54.891Z\n"
+"PO-Revision-Date: 2025-10-31T10:50:06.353Z\n"
 "Last-Translator: \n"
 "Language: pl\n"
 "Language-Team: \n"
@@ -1183,13 +1183,13 @@ msgstr "Wyślij"
 msgid "Reset form"
 msgstr "Zresetuj formularz"
 
-#: src/lib/components/club/ClubInfoSection.svelte
-#: src/lib/components/forms/ClubForm.svelte
-#: src/lib/components/navigation/StaticNavigationLinks.svelte
 #: src/lib/components/diamondplanner/club/ClubDetailCard.svelte
-#: src/lib/components/diamondplanner/user/PlayerProfileClubsSection.svelte
 #: src/lib/components/diamondplanner/team/TeamListTeaser.svelte
 #: src/lib/components/diamondplanner/team/TeamTeaserCard.svelte
+#: src/lib/components/diamondplanner/user/PlayerProfileClubsSection.svelte
+#: src/lib/components/forms/ClubForm.svelte
+#: src/lib/components/navigation/StaticNavigationLinks.svelte
+#: src/routes/club/+page.svelte
 msgid "Club"
 msgstr "Klub"
 
