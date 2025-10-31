@@ -85,22 +85,6 @@
         background-color: var(--color-surface-700);
     }
 
-    .dark\:bg-surface-950\/50 {
-        background-color: #0a0a0a80;
-    }
-
-    @supports (color: color-mix(in lab, red, red)) {
-        .dark\:bg-surface-950\/50 {
-            background-color: color-mix(in oklab, var(--color-surface-950) 50%, transparent);
-        }
-    }
-
-    @supports (color: color-mix(in lab, red, red)) {
-        .dark\:bg-surface-950\/80 {
-            background-color: color-mix(in oklab, var(--color-surface-950) 80%, transparent);
-        }
-    }
-
     .dark\:bg-tertiary-700 {
         background-color: var(--color-tertiary-700);
     }
