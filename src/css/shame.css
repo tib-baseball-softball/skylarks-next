@@ -81,11 +81,6 @@
         color: var(--color-surface-contrast-500);
     }
 
-    .dark\:preset-tonal-primary {
-        background-color: var(--color-primary-50-950);
-        color: var(--color-primary-950-50);
-    }
-
     .dark\:bg-surface-700 {
         background-color: var(--color-surface-700);
     }
