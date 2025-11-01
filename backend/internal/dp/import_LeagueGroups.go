@@ -10,7 +10,7 @@ import (
 )
 
 // ImportLeagueGroups imports league groups concurrently, either for one given club or all clubs in the database.
-func ImportLeagueGroups(app core.App, client bsm.APIClient, clubID *string, season *int) (err error) {
+func ImportLeagueGroups(app core.App, client bsm.LeagueGroupClient, clubID *string, season *int) (err error) {
 	filter := "bsm_id != 0"
 	params := dbx.Params{}
 

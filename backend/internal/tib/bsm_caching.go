@@ -3,6 +3,7 @@ package tib
 import (
 	"encoding/json"
 	"errors"
+	"log/slog"
 	"net/url"
 	"os"
 	"regexp"
@@ -29,7 +30,15 @@ var cacheURLAllowlist = []*regexp.Regexp{
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/clubs/\d+/fields\.json(?:\?.*)?$`),
 }
 
-// isValidBSMURL checks if the given url matches any regex in cacheURLAllowlist
+type CachingApp interface {
+	FindFirstRecordByData(collectionModelOrIdentifier any, key string, value any) (*core.Record, error)
+	Logger() *slog.Logger
+	Delete(model core.Model) error
+	Save(model core.Model) error
+	FindCollectionByNameOrId(nameOrId string) (*core.Collection, error)
+}
+
+// isValidBSMURL checks if the given url matches any regex in the cacheURLAllowlist
 func isValidBSMURL(u *url.URL) bool {
 	urlStr := u.String()
 	for _, re := range cacheURLAllowlist {
@@ -40,7 +49,7 @@ func isValidBSMURL(u *url.URL) bool {
 	return false
 }
 
-func GetLeagueTop10Data(app core.App, client bsm.APIClient, leagueID string, statsType string) (bsm.LeaderboardSummary, error) {
+func GetLeagueTop10Data(app CachingApp, client bsm.BaseClient, leagueID string, statsType string) (bsm.LeaderboardSummary, error) {
 	leagueLeaderboard := bsm.LeaderboardSummary{
 		LeagueID:  leagueID,
 		StatsType: statsType,
@@ -89,7 +98,7 @@ func GetLeagueTop10Data(app core.App, client bsm.APIClient, leagueID string, sta
 	return leagueLeaderboard, nil
 }
 
-func GetCachedBSMResponse(app core.App, url *url.URL) (string, error) {
+func GetCachedBSMResponse(app CachingApp, url *url.URL) (string, error) {
 	var ret string
 
 	if url.Host != os.Getenv("BSM_API_HOST") || !isValidBSMURL(url) {
@@ -132,7 +141,7 @@ func GetCachedBSMResponse(app core.App, url *url.URL) (string, error) {
 	return ret, nil
 }
 
-func saveBSMResponseToCache(app core.App, url string) (*core.Record, error) {
+func saveBSMResponseToCache(app CachingApp, url string) (*core.Record, error) {
 	_, body, err := bsm.FetchResource[any](url)
 	if err != nil {
 		app.Logger().Error("Failed to get data from BSM", "err", err, "url", url)

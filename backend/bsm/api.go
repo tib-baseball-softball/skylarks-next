@@ -40,6 +40,10 @@ type TeamClient interface {
 	LoadSingleTeamByID(ID int, apiKey string) (Team, error)
 }
 
+type LeagueGroupClient interface {
+	FetchLeagueGroupsForSeason(apiKey string, season int) ([]LeagueGroup, error)
+}
+
 type APIClient interface {
 	GetAPIURL(resource string, params map[string]string, apiKey string) *url.URL
 	AppendAPIKey(app APILoaderApp, url url.URL, clubID string) (url.URL, error)
