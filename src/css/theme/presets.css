@@ -448,11 +448,16 @@
     }
 
     .preset-tonal-surface {
-        background-color: var(--color-surface-800);
-        color: var(--color-surface-contrast-800);
-        border-style: var(--tw-border-style);
-        border-width: 1px;
-        border-color: var(--color-surface-500)
+        background-color: var(--color-surface-50-950);
+        color: var(--color-surface-950-50);
+
+        @media (prefers-color-scheme: dark) {
+            background-color: var(--color-surface-800);
+            color: var(--color-surface-contrast-800);
+            border-style: var(--tw-border-style);
+            border-width: 1px;
+            border-color: var(--color-surface-500)
+        }
     }
 
     /* Outlined --- */
