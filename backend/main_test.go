@@ -1,12 +1,19 @@
 package main
 
 import (
+	"os"
+
 	"github.com/pocketbase/pocketbase/tests"
+	"github.com/subosito/gotenv"
 	"github.com/tib-baseball-softball/skylarks-next/bsm"
 
 	"net/http"
 	"testing"
 )
+
+func init() {
+	_ = gotenv.Load()
+}
 
 const (
 	testDataDir      = "./test_pb_data"
@@ -33,15 +40,18 @@ func generateToken(collectionNameOrId string, email string) (string, error) {
 func setupTestApp(t testing.TB) *tests.TestApp {
 	testApp, err := tests.NewTestApp(testDataDir)
 
-	// not tested here, so the real implementation is fine
-	mockClient := bsm.RealAPIClient{
-		BaseAPIURL: "https://api.example.com",
-	}
 	if err != nil {
 		t.Fatal(err)
 	}
-	// no need to clean up since scenario.Test() will do that for us
+	// real implementation used for integration tests
+	mockClient := bsm.RealAPIClient{
+		BaseAPIURL: os.Getenv("BSM_API_URL"),
+	}
+	if mockClient.BaseAPIURL == "" {
+		t.Fatal("BSM_API_URL not set, aborting")
+	}
 
+	// no need to clean up since scenario.Test() will do that for us
 	bindAppHooks(testApp, mockClient)
 
 	return testApp
