@@ -14,11 +14,11 @@ type LeagueGroup struct {
 }
 
 // FetchLeagueGroupsForSeason the API key used determines which club LeagueGroups are loaded for
-func FetchLeagueGroupsForSeason(apiKey string, season int) ([]LeagueGroup, error) {
+func (c RealAPIClient) FetchLeagueGroupsForSeason(apiKey string, season int) ([]LeagueGroup, error) {
 	params := make(map[string]string)
 	params[SeasonFilter] = strconv.Itoa(season)
 
-	url := GetAPIURL("league_groups.json", params, apiKey)
+	url := c.GetAPIURL("league_groups.json", params, apiKey)
 	leagueGroups, _, err := FetchResource[[]LeagueGroup](url.String())
 	if err != nil {
 		return nil, err

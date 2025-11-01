@@ -2,6 +2,8 @@ package main
 
 import (
 	"github.com/pocketbase/pocketbase/tests"
+	"github.com/tib-baseball-softball/skylarks-next/bsm"
+
 	"net/http"
 	"testing"
 )
@@ -30,12 +32,17 @@ func generateToken(collectionNameOrId string, email string) (string, error) {
 
 func setupTestApp(t testing.TB) *tests.TestApp {
 	testApp, err := tests.NewTestApp(testDataDir)
+
+	// not tested here, so the real implementation is fine
+	mockClient := bsm.RealAPIClient{
+		BaseAPIURL: "https://api.example.com",
+	}
 	if err != nil {
 		t.Fatal(err)
 	}
 	// no need to clean up since scenario.Test() will do that for us
 
-	bindAppHooks(testApp)
+	bindAppHooks(testApp, mockClient)
 
 	return testApp
 }

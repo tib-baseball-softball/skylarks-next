@@ -33,6 +33,10 @@ type GameImportService struct {
 	App GameImportServiceApp
 }
 
+func (s GameImportService) Client() bsm.APIClient {
+	return bsm.NewAPIClient()
+}
+
 func (s GameImportService) ImportGames() {
 	teams, err := s.App.FindRecordsByFilter("teams", "bsm_league_group != 0", "", 0, 0)
 	if err != nil {
@@ -95,7 +99,7 @@ func (s GameImportService) fetchMatchesForLeagueGroup(league string, apiKey stri
 	params[bsm.SearchFilter] = "skylarks"
 	// we cannot use compact here, since the field data is not included in the response
 
-	url := bsm.GetAPIURL("matches.json", params, apiKey)
+	url := s.Client().GetAPIURL("matches.json", params, apiKey)
 	matches, _, err := bsm.FetchResource[[]bsm.Match](url.String())
 
 	if err != nil {

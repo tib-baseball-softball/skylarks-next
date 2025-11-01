@@ -5,11 +5,12 @@ import (
 
 	"github.com/pocketbase/pocketbase/apis"
 	"github.com/pocketbase/pocketbase/core"
+	"github.com/tib-baseball-softball/skylarks-next/bsm"
 )
 
 // TriggerLeagueImport called on every league group listing if the result is empty and special query parameters `season`
 // and `club` are sent, an import is automatically triggered.
-func TriggerLeagueImport(app core.App, event *core.RecordsListRequestEvent) error {
+func TriggerLeagueImport(app core.App, client bsm.APIClient, event *core.RecordsListRequestEvent) error {
 	s := event.Request.URL.Query().Get("season")
 	club := event.Request.URL.Query().Get("club")
 
@@ -22,7 +23,7 @@ func TriggerLeagueImport(app core.App, event *core.RecordsListRequestEvent) erro
 		return err
 	}
 
-	err = ImportLeagueGroups(app, &club, &season)
+	err = ImportLeagueGroups(app, client, &club, &season)
 	if err != nil {
 		return apis.NewInternalServerError("league import failed", err)
 	}

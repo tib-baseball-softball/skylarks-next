@@ -6,11 +6,12 @@ import (
 	"strconv"
 
 	"github.com/pocketbase/pocketbase/core"
+	"github.com/tib-baseball-softball/skylarks-next/bsm"
 )
 
 // GetLeagueLeaders returns a nicely formatted response for top 10 stats in the given league to avoid making multiple
 // direct BSM requests on the frontend side.
-func GetLeagueLeaders() func(event *core.RequestEvent) error {
+func GetLeagueLeaders(client bsm.APIClient) func(event *core.RequestEvent) error {
 	return func(event *core.RequestEvent) error {
 		leagueID := event.Request.PathValue("league")
 		if leagueID == "" {
@@ -26,7 +27,7 @@ func GetLeagueLeaders() func(event *core.RequestEvent) error {
 			statsType = "batting"
 		}
 
-		leagueLeaderboard, err := GetLeagueTop10Data(event.App, leagueID, statsType)
+		leagueLeaderboard, err := GetLeagueTop10Data(event.App, client, leagueID, statsType)
 		if err != nil {
 			return errors.New("could not get league leaderboard")
 		}

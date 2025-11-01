@@ -11,9 +11,13 @@ type Team struct {
 	LeagueEntries []LeagueEntry `json:"league_entries"`
 }
 
-func LoadSingleTeamByID(ID int, apiKey string) (Team, error) {
+type TeamClient interface {
+	LoadSingleTeamByID(ID int, apiKey string) (Team, error)
+}
+
+func (c RealAPIClient) LoadSingleTeamByID(ID int, apiKey string) (Team, error) {
 	var team Team
-	url := GetAPIURL("teams/"+strconv.Itoa(ID)+".json", make(map[string]string), apiKey)
+	url := c.GetAPIURL("teams/"+strconv.Itoa(ID)+".json", make(map[string]string), apiKey)
 	team, _, err := FetchResource[Team](url.String())
 	if err != nil {
 		return team, err
