@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"strconv"
 
 	"github.com/pocketbase/pocketbase/core"
 )
@@ -25,6 +26,18 @@ type ClientAware interface {
 type BaseClient interface {
 	GetAPIURL(resource string, params map[string]string, apiKey string) *url.URL
 	AppendAPIKey(app APILoaderApp, url url.URL, clubID string) (url.URL, error)
+}
+
+type MatchAPIClient interface {
+	LoadMatchesWithFilterParams(params map[string]string, apiKey string) ([]Match, error)
+}
+
+type TableClient interface {
+	LoadSingleTable(leagueGroupID int, apiKey string) (Table, error)
+}
+
+type TeamClient interface {
+	LoadSingleTeamByID(ID int, apiKey string) (Team, error)
 }
 
 type APIClient interface {
@@ -89,6 +102,52 @@ func (c RealAPIClient) AppendAPIKey(app APILoaderApp, url url.URL, clubID string
 	url.RawQuery = query.Encode()
 
 	return url, nil
+}
+
+// LoadMatchesWithFilterParams calls the generic top-level BSM endpoint and expects all filtering to be specified in the query.
+// If no parameters are supplied, the resulting response will only be scoped to the API key, which is most likely a lot.
+func (c RealAPIClient) LoadMatchesWithFilterParams(params map[string]string, apiKey string) ([]Match, error) {
+	apiURL := c.GetAPIURL("matches.json", params, apiKey)
+	matches, _, err := FetchResource[[]Match](apiURL.String())
+	if err != nil {
+		return matches, err
+	}
+	return matches, nil
+}
+
+// LoadSingleTable loads a single Table for a LeagueGroup
+func (c RealAPIClient) LoadSingleTable(leagueGroupID int, apiKey string) (Table, error) {
+	var table Table
+	apiURL := c.GetAPIURL("leagues/"+strconv.Itoa(leagueGroupID)+"/table.json", make(map[string]string), apiKey)
+	table, _, err := FetchResource[Table](apiURL.String())
+	if err != nil {
+		return table, err
+	}
+
+	return table, nil
+}
+
+func (c RealAPIClient) LoadSingleTeamByID(ID int, apiKey string) (Team, error) {
+	var team Team
+	apiURL := c.GetAPIURL("teams/"+strconv.Itoa(ID)+".json", make(map[string]string), apiKey)
+	team, _, err := FetchResource[Team](apiURL.String())
+	if err != nil {
+		return team, err
+	}
+	return team, nil
+}
+
+// FetchLeagueGroupsForSeason the API key used determines which club LeagueGroups are loaded for
+func (c RealAPIClient) FetchLeagueGroupsForSeason(apiKey string, season int) ([]LeagueGroup, error) {
+	params := make(map[string]string)
+	params[SeasonFilter] = strconv.Itoa(season)
+
+	apiURL := c.GetAPIURL("league_groups.json", params, apiKey)
+	leagueGroups, _, err := FetchResource[[]LeagueGroup](apiURL.String())
+	if err != nil {
+		return nil, err
+	}
+	return leagueGroups, nil
 }
 
 // FetchResource thin wrapper over http + JSON functions to prevent repetition in code

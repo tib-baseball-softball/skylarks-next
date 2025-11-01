@@ -83,18 +83,3 @@ func (m *Match) GetMatchState(teamName string) MatchState {
 func (m *Match) IsPlayoffGame() bool {
 	return strings.Contains(m.MatchID, "PO")
 }
-
-type MatchAPIClient interface {
-	LoadMatchesWithFilterParams(params map[string]string, apiKey string) ([]Match, error)
-}
-
-// LoadMatchesWithFilterParams calls the generic top-level BSM endpoint and expects all filtering to be specified in the query.
-// If no parameters are supplied, the resulting response will only be scoped to the API key, which is most likely a lot.
-func (c RealAPIClient) LoadMatchesWithFilterParams(params map[string]string, apiKey string) ([]Match, error) {
-	url := c.GetAPIURL("matches.json", params, apiKey)
-	matches, _, err := FetchResource[[]Match](url.String())
-	if err != nil {
-		return matches, err
-	}
-	return matches, nil
-}
