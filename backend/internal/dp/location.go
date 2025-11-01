@@ -1,4 +1,4 @@
-package bsm
+package dp
 
 import "github.com/pocketbase/pocketbase/core"
 

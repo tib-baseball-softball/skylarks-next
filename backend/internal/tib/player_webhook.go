@@ -30,7 +30,7 @@ func HandlePlayerChangedMessage(app core.App) func(e *core.RequestEvent) error {
 
 		body, err := io.ReadAll(e.Request.Body)
 		if err != nil {
-			app.Logger().Error("Failed to read request body: %v", err)
+			app.Logger().Error("Failed to read request body", "err", err)
 			return e.JSON(http.StatusInternalServerError, "Internal Server Error")
 		}
 

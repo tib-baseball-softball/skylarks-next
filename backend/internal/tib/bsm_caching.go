@@ -40,7 +40,7 @@ func isValidBSMURL(u *url.URL) bool {
 	return false
 }
 
-func GetLeagueTop10Data(app core.App, leagueID string, statsType string) (bsm.LeaderboardSummary, error) {
+func GetLeagueTop10Data(app core.App, client bsm.APIClient, leagueID string, statsType string) (bsm.LeaderboardSummary, error) {
 	leagueLeaderboard := bsm.LeaderboardSummary{
 		LeagueID:  leagueID,
 		StatsType: statsType,
@@ -68,7 +68,7 @@ func GetLeagueTop10Data(app core.App, leagueID string, statsType string) (bsm.Le
 			defer wg.Done()
 			query := make(map[string]string)
 			resource := "league_groups/" + leagueID + "/top10/" + statsType + "/" + endpoint + ".json"
-			apiURL := bsm.GetAPIURL(resource, query, "")
+			apiURL := client.GetAPIURL(resource, query, "")
 
 			rawResponseData, err := GetCachedBSMResponse(app, apiURL)
 			if err != nil {

@@ -4,22 +4,14 @@ import (
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
-	"os"
 	"reflect"
 	"testing"
 )
 
 func TestGetAPIURL(t *testing.T) {
-	err := os.Setenv("BSM_API_URL", "https://api.example.com")
-	if err != nil {
-		t.Fatalf("failed to set BSM_API_URL")
+	client := RealAPIClient{
+		BaseAPIURL: "https://api.example.com",
 	}
-	defer func() {
-		err := os.Unsetenv("BSM_API_URL")
-		if err != nil {
-			t.Fatalf("failed to unset BSM_API_URL")
-		}
-	}()
 
 	resource := "test-resource"
 	params := map[string]string{
@@ -31,7 +23,7 @@ func TestGetAPIURL(t *testing.T) {
 	expectedURL := "https://api.example.com/test-resource?api_key=test-api-key&param1=value1&param2=value2"
 
 	// Call the function
-	result := GetAPIURL(resource, params, apiKey)
+	result := client.GetAPIURL(resource, params, apiKey)
 
 	// Verify the result
 	if result.String() != expectedURL {

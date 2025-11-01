@@ -10,7 +10,7 @@ import (
 )
 
 // ImportLeagueGroups imports league groups concurrently, either for one given club or all clubs in the database.
-func ImportLeagueGroups(app core.App, clubID *string, season *int) (err error) {
+func ImportLeagueGroups(app core.App, client bsm.APIClient, clubID *string, season *int) (err error) {
 	filter := "bsm_id != 0"
 	params := dbx.Params{}
 
@@ -37,7 +37,7 @@ func ImportLeagueGroups(app core.App, clubID *string, season *int) (err error) {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			leagueGroups, err := bsm.FetchLeagueGroupsForSeason(club.GetString("bsm_api_key"), selectedSeason)
+			leagueGroups, err := client.FetchLeagueGroupsForSeason(club.GetString("bsm_api_key"), selectedSeason)
 			if err != nil {
 				app.Logger().Error("Error fetching league groups", "error", err, "club", club.GetString("name"), "season", selectedSeason)
 				return

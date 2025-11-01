@@ -14,6 +14,7 @@ import (
 	"github.com/pocketbase/pocketbase/plugins/migratecmd"
 	"github.com/spf13/cobra"
 	"github.com/subosito/gotenv"
+	"github.com/tib-baseball-softball/skylarks-next/bsm"
 	"github.com/tib-baseball-softball/skylarks-next/internal/dp"
 	"github.com/tib-baseball-softball/skylarks-next/internal/tib"
 	_ "github.com/tib-baseball-softball/skylarks-next/migrations"
@@ -30,7 +31,7 @@ func init() {
 	}
 }
 
-func bindAppHooks(app core.App) {
+func bindAppHooks(app core.App, client bsm.APIClient) {
 
 	//------------------- Hooks -------------------------//
 
@@ -54,7 +55,7 @@ func bindAppHooks(app core.App) {
 	})
 
 	app.OnRecordsListRequest(dp.LeagueGroupsCollection).BindFunc(func(event *core.RecordsListRequestEvent) error {
-		return dp.TriggerLeagueImport(event.App, event)
+		return dp.TriggerLeagueImport(event.App, client, event)
 	})
 
 	app.OnRecordCreateRequest(dp.EventsCollection).BindFunc(func(e *core.RecordRequestEvent) error {
@@ -114,7 +115,7 @@ func bindAppHooks(app core.App) {
 	})
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
-		se.Router.POST("/api/import/{club}/leagues", dp.StartLeagueGroupsImport(app))
+		se.Router.POST("/api/import/{club}/leagues", dp.StartLeagueGroupsImport(app, client))
 
 		return se.Next()
 	})
@@ -126,18 +127,18 @@ func bindAppHooks(app core.App) {
 	})
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
-		se.Router.GET("/api/bsm/relay/top10/{league}", tib.GetLeagueLeaders())
+		se.Router.GET("/api/bsm/relay/top10/{league}", tib.GetLeagueLeaders(client))
 
 		return se.Next()
 	})
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
-		se.Router.GET("/api/bsm/relay", tib.GetRelayedBSMData())
+		se.Router.GET("/api/bsm/relay", tib.GetRelayedBSMData(client))
 		return se.Next()
 	})
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
-		se.Router.GET("/api/team/favorite", tib.GetFavoriteTeamData())
+		se.Router.GET("/api/team/favorite", tib.GetFavoriteTeamData(client))
 		return se.Next()
 	})
 
@@ -150,7 +151,7 @@ func bindAppHooks(app core.App) {
 
 	if os.Getenv("APPLICATION_CONTEXT") != "Development" {
 		app.Cron().MustAdd("LeagueGroupImport", "0 * * * *", func() {
-			err := dp.ImportLeagueGroups(app, nil, nil)
+			err := dp.ImportLeagueGroups(app, client, nil, nil)
 			if err != nil {
 				app.Logger().Error("Error while running cronjob LeagueGroupImport: " + err.Error())
 			}
@@ -162,15 +163,16 @@ func bindAppHooks(app core.App) {
 		})
 
 		app.Cron().MustAdd("TeamDatasetImport", "30 * * * *", func() {
-			tib.ImportTeamDatasets(app)
+			tib.ImportTeamDatasets(app, client)
 		})
 	}
 }
 
 func main() {
 	app := pocketbase.New()
+	client := bsm.NewAPIClient()
 
-	bindAppHooks(app)
+	bindAppHooks(app, client)
 
 	isGoRun := strings.HasPrefix(os.Args[0], os.TempDir())
 
@@ -198,7 +200,7 @@ func main() {
 	app.RootCmd.AddCommand(&cobra.Command{
 		Use: "import:leagues",
 		Run: func(cmd *cobra.Command, args []string) {
-			err := dp.ImportLeagueGroups(app, nil, nil)
+			err := dp.ImportLeagueGroups(app, client, nil, nil)
 			if err != nil {
 				log.Print("Error while running LeagueGroupImport: " + err.Error())
 			}
@@ -208,7 +210,7 @@ func main() {
 	app.RootCmd.AddCommand(&cobra.Command{
 		Use: "import:teamdatasets",
 		Run: func(cmd *cobra.Command, args []string) {
-			tib.ImportTeamDatasets(app)
+			tib.ImportTeamDatasets(app, client)
 		},
 	})
 

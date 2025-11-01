@@ -6,10 +6,11 @@ import (
 
 	"github.com/pocketbase/pocketbase/apis"
 	"github.com/pocketbase/pocketbase/core"
+	"github.com/tib-baseball-softball/skylarks-next/bsm"
 )
 
 // StartLeagueGroupsImport runs import cron for league groups exactly once for one specific club.
-func StartLeagueGroupsImport(app core.App) func(event *core.RequestEvent) error {
+func StartLeagueGroupsImport(app core.App, client bsm.APIClient) func(event *core.RequestEvent) error {
 	return func(event *core.RequestEvent) error {
 		requireAuth := apis.RequireAuth()
 		if err := requireAuth.Func(event); err != nil {
@@ -27,7 +28,7 @@ func StartLeagueGroupsImport(app core.App) func(event *core.RequestEvent) error 
 			return event.ForbiddenError("only club admins can start league imports", nil)
 		}
 
-		err = ImportLeagueGroups(app, &club.Id, nil)
+		err = ImportLeagueGroups(app, client, &club.Id, nil)
 		if err != nil {
 			return event.InternalServerError("error importing league groups", err)
 		}

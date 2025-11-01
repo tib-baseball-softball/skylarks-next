@@ -11,7 +11,7 @@ import (
 	"github.com/tib-baseball-softball/skylarks-next/bsm"
 )
 
-// MockApp implementiert GameImportServiceApp für Tests.
+// MockApp implements GameImportServiceApp for tests.
 type MockApp struct {
 	findFirstRecordByDataFunc    func(any, string, any) (*core.Record, error)
 	FindRecordsByFilterFunc      func(collectionModelOrIdentifier any, filter string, sort string, limit int, offset int, params ...dbx.Params) ([]*core.Record, error)

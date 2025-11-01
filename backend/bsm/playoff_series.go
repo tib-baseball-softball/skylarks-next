@@ -40,14 +40,12 @@ func NewPlayoffSeries(games []Match) PlayoffSeries {
 // GetSeriesStatus calculates the current status of the playoff series.
 // This function must be called with the series of games already set to receive a valid object.
 func (ps *PlayoffSeries) GetSeriesStatus() {
-	// Early return if no games
 	if len(ps.SeriesGames) == 0 {
 		return
 	}
 
 	ps.SeriesLength = len(ps.SeriesGames)
 
-	// Initialize teams if not already present
 	firstTeamName := ps.SeriesGames[0].AwayTeamName
 	secondTeamName := ps.SeriesGames[0].HomeTeamName
 
@@ -68,7 +66,6 @@ func (ps *PlayoffSeries) GetSeriesStatus() {
 	secondTeam.Wins = 0
 	ps.Teams[secondTeamName] = secondTeam
 
-	// Count wins for each team using a single loop
 	for _, match := range ps.SeriesGames {
 		winner := match.GetWinnerForMatch()
 		var winnerName string
@@ -87,16 +84,13 @@ func (ps *PlayoffSeries) GetSeriesStatus() {
 		ps.Teams[winnerName] = team
 	}
 
-	// Get updated team references
 	firstTeam = ps.Teams[firstTeamName]
 	secondTeam = ps.Teams[secondTeamName]
 
-	// Series hasn't started yet (no wins)
 	if firstTeam.Wins == 0 && secondTeam.Wins == 0 {
 		return
 	}
 
-	// Calculate series status more efficiently
 	ps.LeadingTeam = nil
 	ps.TrailingTeam = nil
 
@@ -105,7 +99,6 @@ func (ps *PlayoffSeries) GetSeriesStatus() {
 		return
 	}
 
-	// Determine the leading and trailing teams once
 	var leading, trailing PlayoffTeam
 	if firstTeam.Wins > secondTeam.Wins {
 		leading, trailing = firstTeam, secondTeam
@@ -113,14 +106,12 @@ func (ps *PlayoffSeries) GetSeriesStatus() {
 		leading, trailing = secondTeam, firstTeam
 	}
 
-	// Set status based on win count
 	if leading.Wins > ps.SeriesLength/2 {
 		ps.Status = SeriesStatusWon
 	} else {
 		ps.Status = SeriesStatusLeading
 	}
 
-	// Store pointers to the teams
 	ps.LeadingTeam = &leading
 	ps.TrailingTeam = &trailing
 }
