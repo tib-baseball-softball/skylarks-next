@@ -28,15 +28,14 @@ type PlayerReactionPayload struct {
 	ImageURL  string `json:"image_url"`
 }
 
-func SendUpdatedPlayerData(e *core.RecordEvent) error {
+func SendUpdatedPlayerData(e *core.RecordEvent, targetURL string) error {
 	player := &dp.User{}
 	player.SetProxyRecord(e.Record)
 
 	identifier := os.Getenv("PLAYER_UPDATE_REACTION_IDENTIFIER")
 	secret := os.Getenv("PLAYER_UPDATE_REACTION_SECRET")
-	typo3BaseURL := os.Getenv("PUBLIC_TYPO3_URL")
 
-	if identifier == "" || secret == "" || typo3BaseURL == "" {
+	if identifier == "" || secret == "" || targetURL == "" {
 		e.App.Logger().Error("tried to send player change reaction, but identifier, secret or base URL were not set")
 		return e.Next()
 	}
@@ -69,7 +68,7 @@ func SendUpdatedPlayerData(e *core.RecordEvent) error {
 		return e.Next()
 	}
 
-	url := typo3BaseURL + "/typo3/reaction/" + identifier
+	url := targetURL + "/typo3/reaction/" + identifier
 
 	// fire-and-forget the update call in a separate goroutine.
 	// if it fails, we don't want to block the user update request.

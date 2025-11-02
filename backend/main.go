@@ -71,11 +71,11 @@ func bindAppHooks(app core.App, client bsm.APIClient) {
 	})
 
 	app.OnRecordAfterCreateSuccess(dp.UserCollection).BindFunc(func(e *core.RecordEvent) error {
-		return tib.SendUpdatedPlayerData(e)
+		return tib.SendUpdatedPlayerData(e, os.Getenv("PUBLIC_TYPO3_URL"))
 	})
 
 	app.OnRecordAfterUpdateSuccess(dp.UserCollection).BindFunc(func(e *core.RecordEvent) error {
-		return tib.SendUpdatedPlayerData(e)
+		return tib.SendUpdatedPlayerData(e, os.Getenv("PUBLIC_TYPO3_URL"))
 	})
 
 	app.OnRecordAfterCreateSuccess(dp.EventSeriesCollection).BindFunc(func(e *core.RecordEvent) error {
