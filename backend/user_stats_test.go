@@ -5,15 +5,16 @@ import (
 	"testing"
 
 	"github.com/pocketbase/pocketbase/tests"
+	"github.com/tib-baseball-softball/skylarks-next/internal/dp"
 )
 
 func TestGetUserStatsEndpoint(t *testing.T) {
-	validToken, err := generateToken("users", "karltestmichel@example.com")
+	validToken, err := generateToken(dp.UserCollection, "karltestmichel@example.com")
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	invalidToken, err := generateToken("users", "otheruser@example.com")
+	invalidToken, err := generateToken(dp.UserCollection, "otheruser@example.com")
 	if err != nil {
 		t.Fatal(err)
 	}
