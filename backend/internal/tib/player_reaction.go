@@ -29,9 +29,6 @@ type PlayerReactionPayload struct {
 }
 
 func SendUpdatedPlayerData(e *core.RecordEvent, targetURL string) error {
-	player := &dp.User{}
-	player.SetProxyRecord(e.Record)
-
 	identifier := os.Getenv("PLAYER_UPDATE_REACTION_IDENTIFIER")
 	secret := os.Getenv("PLAYER_UPDATE_REACTION_SECRET")
 
@@ -39,6 +36,18 @@ func SendUpdatedPlayerData(e *core.RecordEvent, targetURL string) error {
 		e.App.Logger().Error("tried to send player change reaction, but identifier, secret or base URL were not set")
 		return e.Next()
 	}
+
+	err := sendUpdatedPlayerData(e.Record, e.App, targetURL, identifier, secret)
+	if err != nil {
+		return err
+	}
+
+	return e.Next()
+}
+
+func sendUpdatedPlayerData(record *core.Record, app dp.LogOnlyApp, targetURL string, identifier string, secret string) error {
+	player := &dp.User{}
+	player.SetProxyRecord(record)
 
 	positions := player.GetStringSlice("position")
 	var posInts []int
@@ -64,8 +73,8 @@ func SendUpdatedPlayerData(e *core.RecordEvent, targetURL string) error {
 
 	bodyBytes, err := json.Marshal(payload)
 	if err != nil {
-		e.App.Logger().Error("failed to marshal player change payload", "error", err)
-		return e.Next()
+		app.Logger().Error("failed to marshal player change payload", "error", err)
+		return err
 	}
 
 	url := targetURL + "/typo3/reaction/" + identifier
@@ -73,7 +82,7 @@ func SendUpdatedPlayerData(e *core.RecordEvent, targetURL string) error {
 	// fire-and-forget the update call in a separate goroutine.
 	// if it fails, we don't want to block the user update request.
 	// the database transaction is already guaranteed to be committed at this point.
-	go func(body []byte, app core.App) {
+	go func(body []byte, app dp.LogOnlyApp) {
 		ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 		defer cancel()
 
@@ -85,7 +94,8 @@ func SendUpdatedPlayerData(e *core.RecordEvent, targetURL string) error {
 
 		request, err := http.NewRequestWithContext(ctx, http.MethodPost, url, bytes.NewReader(bodyBytes))
 		if err != nil {
-			e.App.Logger().Error("failed to create request for player change reaction", "error", err)
+			app.Logger().Error("failed to create request for player change reaction", "error", err)
+			return
 		}
 		request.Header.Set("x-api-key", secret)
 		request.Header.Set("Content-Type", "application/json")
@@ -95,22 +105,22 @@ func SendUpdatedPlayerData(e *core.RecordEvent, targetURL string) error {
 
 		resp, err := http.DefaultClient.Do(request)
 		if err != nil {
-			e.App.Logger().Error("failed to send player change reaction", "error", err, "url", url, "payload", payload)
+			app.Logger().Error("failed to send player change reaction", "error", err, "url", url, "payload", payload)
 		}
 		defer func(Body io.ReadCloser) {
 			err := Body.Close()
 			if err != nil {
-				e.App.Logger().Error("failed to close response body", "error", err)
+				app.Logger().Error("failed to close response body", "error", err)
 				return
 			}
 		}(resp.Body)
 
 		if resp.StatusCode < 200 || resp.StatusCode >= 300 {
-			e.App.Logger().Warn("player change reaction returned non-2xx status", "status", resp.Status, "url", url, "payload", payload)
+			app.Logger().Warn("player change reaction returned non-2xx status", "status", resp.Status, "url", url, "payload", payload)
 		}
 
-		e.App.Logger().Info("player change reaction sent", "status", resp.Status)
-	}(bodyBytes, e.App)
+		app.Logger().Info("player change reaction sent", "status", resp.Status)
+	}(bodyBytes, app)
 
-	return e.Next()
+	return nil
 }
