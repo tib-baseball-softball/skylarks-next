@@ -106,6 +106,7 @@ func sendUpdatedPlayerData(record *core.Record, app dp.LogOnlyApp, targetURL str
 		resp, err := http.DefaultClient.Do(request)
 		if err != nil {
 			app.Logger().Error("failed to send player change reaction", "error", err, "url", url, "payload", payload)
+			return
 		}
 		defer func(Body io.ReadCloser) {
 			err := Body.Close()
@@ -115,7 +116,7 @@ func sendUpdatedPlayerData(record *core.Record, app dp.LogOnlyApp, targetURL str
 			}
 		}(resp.Body)
 
-		if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		if resp != nil && resp.StatusCode < 200 || resp.StatusCode >= 300 {
 			app.Logger().Warn("player change reaction returned non-2xx status", "status", resp.Status, "url", url, "payload", payload)
 		}
 
