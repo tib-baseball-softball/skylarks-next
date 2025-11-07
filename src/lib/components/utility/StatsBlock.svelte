@@ -1,15 +1,15 @@
 <script generics="T extends keyof RowByType" lang="ts">
-  //@ts-nocheck
-  import {StatsType} from "bsm.js";
-  import StatsBlockContent from "$lib/components/utility/StatsBlockContent.svelte";
-  import type {RowByType} from "$lib/types/StatsDataset.ts";
+//@ts-nocheck
+import { StatsType } from "bsm.js"
+import StatsBlockContent from "$lib/components/utility/StatsBlockContent.svelte"
+import type { RowByType } from "$lib/types/StatsDataset.ts"
 
-  interface Props<T extends keyof RowByType> {
-    type: StatsType,
-    row: RowByType[T]
-  }
+interface Props<T extends keyof RowByType> {
+  type: StatsType
+  row: RowByType[T]
+}
 
-  let {type, row}: Props<T> = $props();
+let { type, row }: Props<T> = $props()
 </script>
 
 {#if row}

@@ -1,52 +1,50 @@
 <script lang="ts">
-  import {closeModal} from "$lib/functions/closeModal.js";
-  import {client} from "$lib/pocketbase/index.svelte";
-  import {toastController} from "$lib/service/ToastController.svelte.ts";
-  import type {Snippet} from "svelte";
-  import Dialog from "$lib/components/utility/Dialog.svelte";
+import { closeModal } from "$lib/functions/closeModal.js"
+import { client } from "$lib/pocketbase/index.svelte"
+import { toastController } from "$lib/service/ToastController.svelte.ts"
+import type { Snippet } from "svelte"
+import Dialog from "$lib/components/utility/Dialog.svelte"
 
-  interface Props {
-    email: string
-    classes?: string,
-    disabled?: boolean,
-    additionalAction?: () => void
-    children?: Snippet
-  }
+interface Props {
+  email: string
+  classes?: string
+  disabled?: boolean
+  additionalAction?: () => void
+  children?: Snippet
+}
 
-  let {
-    email,
-    disabled = false,
-    additionalAction = () => {
-    },
-    classes = "",
-    children,
-  }: Props = $props();
+let {
+  email,
+  disabled = false,
+  additionalAction = () => {},
+  classes = "",
+  children,
+}: Props = $props()
 
-  async function triggerPasswordChange() {
-    additionalAction();
+async function triggerPasswordChange() {
+  additionalAction()
 
-    try {
-      const success = await client.collection("users").requestPasswordReset(email);
+  try {
+    const success = await client.collection("users").requestPasswordReset(email)
 
-      if (success) {
-        toastController.trigger({
-          message: `If we have your email (${email}) on file, you will receive a reset password request in your inbox.`,
-          background: "preset-filled-success-500",
-        });
-      }
-
-      if (client.authStore.isValid) {
-        client.authStore.clear();
-      }
-
-    } catch {
+    if (success) {
       toastController.trigger({
-        message: `Error sending reset password request.`,
-        background: "preset-filled-error-500",
-      });
+        message: `If we have your email (${email}) on file, you will receive a reset password request in your inbox.`,
+        background: "preset-filled-success-500",
+      })
     }
-    closeModal();
+
+    if (client.authStore.isValid) {
+      client.authStore.clear()
+    }
+  } catch {
+    toastController.trigger({
+      message: `Error sending reset password request.`,
+      background: "preset-filled-error-500",
+    })
   }
+  closeModal()
+}
 </script>
 
 <Dialog

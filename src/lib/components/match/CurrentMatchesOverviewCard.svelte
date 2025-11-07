@@ -1,18 +1,18 @@
 <script lang="ts">
-  // @ts-ignore
-  import {Tabs} from "bits-ui";
-  import type {Match} from "bsm.js";
-  import CurrentMatchBlock from "$lib/components/match/CurrentMatchBlock.svelte";
+// @ts-ignore
+import { Tabs } from "bits-ui"
+import type { Match } from "bsm.js"
+import CurrentMatchBlock from "$lib/components/match/CurrentMatchBlock.svelte"
 
-  let tabSet: "previous" | "current" | "next" | string = $state("current");
+let tabSet: "previous" | "current" | "next" | string = $state("current")
 
-  interface Props {
-    matchesCurrent: Promise<Match[]>;
-    matchesPrevious: Promise<Match[]>;
-    matchesNext: Promise<Match[]>;
-  }
+interface Props {
+  matchesCurrent: Promise<Match[]>
+  matchesPrevious: Promise<Match[]>
+  matchesNext: Promise<Match[]>
+}
 
-  let {matchesCurrent, matchesPrevious, matchesNext}: Props = $props();
+let { matchesCurrent, matchesPrevious, matchesNext }: Props = $props()
 </script>
 
 {#snippet gameDayWord()}

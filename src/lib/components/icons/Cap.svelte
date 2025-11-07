@@ -1,10 +1,10 @@
 <script lang="ts">
-  interface Props {
-    identifier: string; // Skylarks Caps get assigned a unique identifier, for all others this is just a color
-    classes: string;
-  }
+interface Props {
+  identifier: string // Skylarks Caps get assigned a unique identifier, for all others this is just a color
+  classes: string
+}
 
-  let {identifier, classes}: Props = $props();
+let { identifier, classes }: Props = $props()
 </script>
 
 {#if identifier === "B"}

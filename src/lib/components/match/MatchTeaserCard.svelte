@@ -1,28 +1,24 @@
 <script lang="ts">
-    import type { Match } from "bsm.js";
-    import { LogoUtility } from "$lib/service/LogoUtility";
-    import MatchTeaserCardRow from "$lib/components/match/MatchTeaserCardRow.svelte";
-    import { GameWinner } from "$lib/enum/GameWinner";
-    import { DateTimeUtility } from "$lib/service/DateTimeUtility";
-    import { MatchDecorator } from "$lib/service/MatchDecorator";
-    import GameResultIndicator from "$lib/components/match/GameResultIndicator.svelte";
+import type { Match } from "bsm.js"
+import { LogoUtility } from "$lib/service/LogoUtility"
+import MatchTeaserCardRow from "$lib/components/match/MatchTeaserCardRow.svelte"
+import { GameWinner } from "$lib/enum/GameWinner"
+import { DateTimeUtility } from "$lib/service/DateTimeUtility"
+import { MatchDecorator } from "$lib/service/MatchDecorator"
+import GameResultIndicator from "$lib/components/match/GameResultIndicator.svelte"
 
-    interface Props {
-        match: Match;
-    }
+interface Props {
+  match: Match
+}
 
-    let { match }: Props = $props();
+let { match }: Props = $props()
 
-    const awayLogo = LogoUtility.getLogoPathForTeamName(
-        match?.away_league_entry?.team,
-    );
-    const homeLogo = LogoUtility.getLogoPathForTeamName(
-        match?.home_league_entry?.team,
-    );
+const awayLogo = LogoUtility.getLogoPathForTeamName(match?.away_league_entry?.team)
+const homeLogo = LogoUtility.getLogoPathForTeamName(match?.home_league_entry?.team)
 
-    const matchDecorator = new MatchDecorator(match);
-    const winner = matchDecorator.getWinnerForMatch();
-    const matchDate = DateTimeUtility.parseDateFromBSMString(match.time);
+const matchDecorator = new MatchDecorator(match)
+const winner = matchDecorator.getWinnerForMatch()
+const matchDate = DateTimeUtility.parseDateFromBSMString(match.time)
 </script>
 
 <a

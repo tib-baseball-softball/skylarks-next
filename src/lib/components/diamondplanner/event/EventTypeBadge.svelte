@@ -1,20 +1,20 @@
 <script lang="ts">
-    interface props {
-        type: string
-    }
+interface props {
+  type: string
+}
 
-    const {type}: props = $props()
+const { type }: props = $props()
 
-    function getDisplayString(): string {
-        switch (type) {
-            case "game":
-                return "Game"
-            case "practice":
-                return "Practice"
-            default:
-                return "Event"
-        }
-    }
+function getDisplayString(): string {
+  switch (type) {
+    case "game":
+      return "Game"
+    case "practice":
+      return "Practice"
+    default:
+      return "Event"
+  }
+}
 </script>
 
 <span

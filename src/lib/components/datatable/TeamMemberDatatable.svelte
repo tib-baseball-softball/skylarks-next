@@ -1,26 +1,26 @@
 <script lang="ts">
-  import Search from "$lib/components/datatable/Search.svelte";
-  import RowsPerPage from "$lib/components/datatable/RowsPerPage.svelte";
-  import RowCount from "$lib/components/datatable/RowCount.svelte";
-  import Pagination from "$lib/components/datatable/Pagination.svelte";
-  import {DataHandler} from "@vincjo/datatables";
-  import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
-  import TeamMembersTableContent from "./TeamMembersTableContent.svelte";
+import Search from "$lib/components/datatable/Search.svelte"
+import RowsPerPage from "$lib/components/datatable/RowsPerPage.svelte"
+import RowCount from "$lib/components/datatable/RowCount.svelte"
+import Pagination from "$lib/components/datatable/Pagination.svelte"
+import { DataHandler } from "@vincjo/datatables"
+import type { CustomAuthModel, ExpandedTeam } from "$lib/model/ExpandedResponse"
+import TeamMembersTableContent from "./TeamMembersTableContent.svelte"
 
-  interface Props {
-    data: CustomAuthModel[];
-    team: ExpandedTeam,
-    rowsPerPage?: number;
-    showAdminSection?: boolean;
-  }
+interface Props {
+  data: CustomAuthModel[]
+  team: ExpandedTeam
+  rowsPerPage?: number
+  showAdminSection?: boolean
+}
 
-  let {data, team, rowsPerPage = 25, showAdminSection = false}: Props = $props();
+let { data, team, rowsPerPage = 25, showAdminSection = false }: Props = $props()
 
-  const handler = $derived(
-      new DataHandler<CustomAuthModel>(data, {
-        rowsPerPage: rowsPerPage,
-      }),
-  );
+const handler = $derived(
+  new DataHandler<CustomAuthModel>(data, {
+    rowsPerPage: rowsPerPage,
+  })
+)
 </script>
 
 <div class=" overflow-x-auto space-y-4 table-wrap">

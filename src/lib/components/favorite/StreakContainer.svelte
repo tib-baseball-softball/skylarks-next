@@ -1,13 +1,13 @@
 <script lang="ts">
-  import type {HomeDataset} from "$lib/types/HomeDataset.ts";
-  import StreakEmoji from "$lib/components/favorite/StreakEmoji.svelte";
-  import WinsOverSeasonChart from "$lib/components/favorite/WinsOverSeasonChart.svelte";
+import type { HomeDataset } from "$lib/types/HomeDataset.ts"
+import StreakEmoji from "$lib/components/favorite/StreakEmoji.svelte"
+import WinsOverSeasonChart from "$lib/components/favorite/WinsOverSeasonChart.svelte"
 
-  interface Props {
-    dataset: HomeDataset;
-  }
+interface Props {
+  dataset: HomeDataset
+}
 
-  let {dataset}: Props = $props();
+let { dataset }: Props = $props()
 </script>
 
 <section>

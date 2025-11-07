@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type {PageProps} from './$types';
-  import BallparkGrid from "$lib/components/club/ballpark/BallparkGrid.svelte";
-  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
+import type { PageProps } from "./$types"
+import BallparkGrid from "$lib/components/club/ballpark/BallparkGrid.svelte"
+import ProgressRing from "$lib/components/utility/ProgressRing.svelte"
 
-  let {data}: PageProps = $props();
+let { data }: PageProps = $props()
 </script>
 
 <h1 class="h1">Ballpark</h1>

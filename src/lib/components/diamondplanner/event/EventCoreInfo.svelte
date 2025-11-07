@@ -1,19 +1,19 @@
 <script lang="ts">
-  import type {ExpandedEvent} from "$lib/model/ExpandedResponse";
-  import {DateTimeUtility} from "$lib/service/DateTimeUtility";
-  import {Calendar, Clock, MapPin} from "lucide-svelte";
-  import TimeSection from "$lib/components/diamondplanner/event/TimeSection.svelte";
-  import type {Snippet} from "svelte";
+import type { ExpandedEvent } from "$lib/model/ExpandedResponse"
+import { DateTimeUtility } from "$lib/service/DateTimeUtility"
+import { Calendar, Clock, MapPin } from "lucide-svelte"
+import TimeSection from "$lib/components/diamondplanner/event/TimeSection.svelte"
+import type { Snippet } from "svelte"
 
-  interface props {
-    event: ExpandedEvent;
-    classes?: string;
-    additionalTimeSection?: Snippet | undefined;
-  }
+interface props {
+  event: ExpandedEvent
+  classes?: string
+  additionalTimeSection?: Snippet | undefined
+}
 
-  const {event, classes = "", additionalTimeSection = undefined}: props = $props();
+const { event, classes = "", additionalTimeSection = undefined }: props = $props()
 
-  const startTime = $derived(new Date(event.starttime));
+const startTime = $derived(new Date(event.starttime))
 </script>
 
 <section class={classes}>

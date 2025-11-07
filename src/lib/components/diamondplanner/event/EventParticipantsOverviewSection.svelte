@@ -1,30 +1,33 @@
 <script lang="ts">
-  import type {CustomAuthModel, ExpandedEvent} from "$lib/model/ExpandedResponse";
-  import {fade} from "svelte/transition";
-  import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  import type {EventsUpdate} from "$lib/model/pb-types";
-  import IndividualParticipationEditButton
-    from "$lib/components/diamondplanner/event/IndividualParticipationEditButton.svelte";
-  import {Check, CircleQuestionMark, Ghost, Trash, X} from "lucide-svelte";
-  import ExternalParticipationWrapper from "$lib/components/diamondplanner/event/ExternalParticipationWrapper.svelte";
+import type { CustomAuthModel, ExpandedEvent } from "$lib/model/ExpandedResponse"
+import { fade } from "svelte/transition"
+import { authSettings, client } from "$lib/pocketbase/index.svelte"
+import type { EventsUpdate } from "$lib/model/pb-types"
+import IndividualParticipationEditButton from "$lib/components/diamondplanner/event/IndividualParticipationEditButton.svelte"
+import { Check, CircleQuestionMark, Ghost, Trash, X } from "lucide-svelte"
+import ExternalParticipationWrapper from "$lib/components/diamondplanner/event/ExternalParticipationWrapper.svelte"
 
-  interface Props {
-    event: ExpandedEvent;
-  }
+interface Props {
+  event: ExpandedEvent
+}
 
-  let {event}: Props = $props();
+let { event }: Props = $props()
 
-  const authRecord = $derived(authSettings.record as CustomAuthModel);
+const authRecord = $derived(authSettings.record as CustomAuthModel)
 
-  const displayedGuestPlayers = $derived(event.guests.split(","));
-  const isAdmin = $derived((event.expand?.team?.admins.includes(authRecord.id) || event?.expand?.team?.expand?.club?.admins.includes(authRecord.id)) ?? false);
+const displayedGuestPlayers = $derived(event.guests.split(","))
+const isAdmin = $derived(
+  (event.expand?.team?.admins.includes(authRecord.id) ||
+    event?.expand?.team?.expand?.club?.admins.includes(authRecord.id)) ??
+    false
+)
 
-  async function removeGuestPlayer(playerToRemove: string) {
-    const newGuestPlayerList = displayedGuestPlayers.filter((player) => player !== playerToRemove);
-    await client.collection("events").update<EventsUpdate>(event.id, {
-      guests: newGuestPlayerList.join()
-    });
-  }
+async function removeGuestPlayer(playerToRemove: string) {
+  const newGuestPlayerList = displayedGuestPlayers.filter((player) => player !== playerToRemove)
+  await client.collection("events").update<EventsUpdate>(event.id, {
+    guests: newGuestPlayerList.join(),
+  })
+}
 </script>
 
 <h2 class="h2">Participants</h2>

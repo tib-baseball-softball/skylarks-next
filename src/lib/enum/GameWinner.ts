@@ -1,5 +1,5 @@
 export enum GameWinner {
-    home,
-    away,
-    none,
+  home,
+  away,
+  none,
 }

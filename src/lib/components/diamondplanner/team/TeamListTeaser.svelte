@@ -1,28 +1,28 @@
 <script lang="ts">
-  import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
-  import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
-  import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  import {invalidate} from "$app/navigation";
-  import {ClipboardList, Dumbbell, ShieldHalf} from "lucide-svelte";
-  import TeamForm from "$lib/components/forms/TeamForm.svelte";
+import type { CustomAuthModel, ExpandedTeam } from "$lib/model/ExpandedResponse"
+import DeleteButton from "$lib/components/utility/DeleteButton.svelte"
+import { authSettings, client } from "$lib/pocketbase/index.svelte"
+import { invalidate } from "$app/navigation"
+import { ClipboardList, Dumbbell, ShieldHalf } from "lucide-svelte"
+import TeamForm from "$lib/components/forms/TeamForm.svelte"
 
-  /**
-   * Used for Teams in List Teasers and on Club Page.
-   */
+/**
+ * Used for Teams in List Teasers and on Club Page.
+ */
 
-  interface props {
-    team: ExpandedTeam;
-    link: boolean;
-  }
+interface props {
+  team: ExpandedTeam
+  link: boolean
+}
 
-  let {team, link = false}: props = $props();
+let { team, link = false }: props = $props()
 
-  const model = $derived(authSettings.record as CustomAuthModel);
+const model = $derived(authSettings.record as CustomAuthModel)
 
-  function deleteAction(id: string) {
-    client.collection("teams").delete(id);
-    invalidate("club:single");
-  }
+function deleteAction(id: string) {
+  client.collection("teams").delete(id)
+  invalidate("club:single")
+}
 </script>
 
 <article class="card preset-tonal-surface shadow-lg" class:card-hover={link}>

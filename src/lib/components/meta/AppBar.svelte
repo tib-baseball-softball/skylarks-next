@@ -1,13 +1,13 @@
 <script lang="ts">
-  import type {Snippet} from "svelte";
+import type { Snippet } from "svelte"
 
-  interface Props {
-    lead?: Snippet;
-    children?: Snippet;
-    trail?: Snippet;
-  }
+interface Props {
+  lead?: Snippet
+  children?: Snippet
+  trail?: Snippet
+}
 
-  let {lead, children, trail}: Props = $props();
+let { lead, children, trail }: Props = $props()
 </script>
 
 <header data-testid="app-bar">

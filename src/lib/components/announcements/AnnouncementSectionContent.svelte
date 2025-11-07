@@ -1,14 +1,14 @@
 <script lang="ts">
-  import type {PageStore} from "$lib/pocketbase/PageStore.ts";
-  import type {ExpandedAnnouncement} from "$lib/model/ExpandedResponse.ts";
-  import AnnouncementCard from "$lib/components/announcements/AnnouncementCard.svelte";
-  import Paginator from "$lib/pocketbase/Paginator.svelte";
+import type { PageStore } from "$lib/pocketbase/PageStore.ts"
+import type { ExpandedAnnouncement } from "$lib/model/ExpandedResponse.ts"
+import AnnouncementCard from "$lib/components/announcements/AnnouncementCard.svelte"
+import Paginator from "$lib/pocketbase/Paginator.svelte"
 
-  interface Props {
-    store: PageStore<ExpandedAnnouncement>
-  }
+interface Props {
+  store: PageStore<ExpandedAnnouncement>
+}
 
-  let {store}: Props = $props();
+let { store }: Props = $props()
 </script>
 
 <div>

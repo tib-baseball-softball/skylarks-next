@@ -1,14 +1,14 @@
 <script lang="ts">
-  import type {ExpandedAnnouncement} from "$lib/model/ExpandedResponse";
-  import {User} from "lucide-svelte";
-  import PriorityBadge from "./PriorityBadge.svelte";
+import type { ExpandedAnnouncement } from "$lib/model/ExpandedResponse"
+import { User } from "lucide-svelte"
+import PriorityBadge from "./PriorityBadge.svelte"
 
-  interface Props {
-    announcement: ExpandedAnnouncement;
-    textClasses?: string;
-  }
+interface Props {
+  announcement: ExpandedAnnouncement
+  textClasses?: string
+}
 
-  let {announcement, textClasses = ""}: Props = $props();
+let { announcement, textClasses = "" }: Props = $props()
 </script>
 
 <header class="flex justify-between hyphens-auto">

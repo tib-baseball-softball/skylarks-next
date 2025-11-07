@@ -1,10 +1,10 @@
 <script lang="ts">
-  interface Props {
-    fillColor: string;
-    classes?: string;
-  }
+interface Props {
+  fillColor: string
+  classes?: string
+}
 
-  let {fillColor, classes = ""}: Props = $props();
+let { fillColor, classes = "" }: Props = $props()
 </script>
 
 <svg xmlns="http://www.w3.org/2000/svg" class="{classes}" viewBox="0 0 512 512" aria-label="Baseball Jersey"

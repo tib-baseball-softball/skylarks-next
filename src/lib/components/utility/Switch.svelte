@@ -1,29 +1,29 @@
 <script lang="ts">
-  import type {Snippet} from "svelte";
+import type { Snippet } from "svelte"
 
-  interface Props {
-    name?: string;
-    checked?: boolean;
-    disabled?: boolean;
-    className?: string;
-    children?: Snippet;
-    onCheckedChange?: (e: { checked: boolean }) => void;
-  }
+interface Props {
+  name?: string
+  checked?: boolean
+  disabled?: boolean
+  className?: string
+  children?: Snippet
+  onCheckedChange?: (e: { checked: boolean }) => void
+}
 
-  let {
-    name,
-    checked = false,
-    disabled = false,
-    className,
-    onCheckedChange,
-    children
-  }: Props = $props();
+let {
+  name,
+  checked = false,
+  disabled = false,
+  className,
+  onCheckedChange,
+  children,
+}: Props = $props()
 
-  function handleChange(event: Event) {
-    const target = event.currentTarget as HTMLInputElement;
-    checked = target.checked;
-    onCheckedChange?.({checked});
-  }
+function handleChange(event: Event) {
+  const target = event.currentTarget as HTMLInputElement
+  checked = target.checked
+  onCheckedChange?.({ checked })
+}
 </script>
 
 <label class={`${className}`} data-testid="switch">

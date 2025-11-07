@@ -1,14 +1,14 @@
 <script lang="ts">
-  import type {Linescore} from "bsm.js";
-  import {range} from "$lib/functions/range";
+import type { Linescore } from "bsm.js"
+import { range } from "$lib/functions/range"
 
-  interface Props {
-    linescore: Linescore;
-  }
+interface Props {
+  linescore: Linescore
+}
 
-  let {linescore}: Props = $props();
+let { linescore }: Props = $props()
 
-  const innings = range(1, linescore.played_innings);
+const innings = range(1, linescore.played_innings)
 </script>
 
 <div class="table-wrap ">

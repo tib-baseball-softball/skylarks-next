@@ -1,13 +1,13 @@
 <script lang="ts">
-  import type {ClubTeam} from "bsm.js";
-  import GenericDetailRow from "$lib/components/utility/GenericDetailRow.svelte";
-  import {Calendar, Star, TableProperties} from "lucide-svelte";
+import type { ClubTeam } from "bsm.js"
+import GenericDetailRow from "$lib/components/utility/GenericDetailRow.svelte"
+import { Calendar, Star, TableProperties } from "lucide-svelte"
 
-  interface Props {
-    clubTeam: ClubTeam;
-  }
+interface Props {
+  clubTeam: ClubTeam
+}
 
-  let {clubTeam}: Props = $props();
+let { clubTeam }: Props = $props()
 </script>
 
 <article class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">

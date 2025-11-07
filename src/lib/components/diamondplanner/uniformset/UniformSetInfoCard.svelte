@@ -1,27 +1,27 @@
 <script lang="ts">
-  import Cap from "$lib/components/icons/Cap.svelte";
-  import Shirt from "$lib/components/icons/Shirt.svelte";
-  import Pants from "$lib/components/icons/Pants.svelte";
-  import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
-  import type {CustomAuthModel, ExpandedUniformSet} from "$lib/model/ExpandedResponse";
-  import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  import {invalidate} from "$app/navigation";
-  import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
-  import {Edit} from "lucide-svelte";
-  import Dialog from "$lib/components/utility/Dialog.svelte";
+import Cap from "$lib/components/icons/Cap.svelte"
+import Shirt from "$lib/components/icons/Shirt.svelte"
+import Pants from "$lib/components/icons/Pants.svelte"
+import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte"
+import type { CustomAuthModel, ExpandedUniformSet } from "$lib/model/ExpandedResponse"
+import { authSettings, client } from "$lib/pocketbase/index.svelte"
+import { invalidate } from "$app/navigation"
+import DeleteButton from "$lib/components/utility/DeleteButton.svelte"
+import { Edit } from "lucide-svelte"
+import Dialog from "$lib/components/utility/Dialog.svelte"
 
-  interface Props {
-    uniformSet: ExpandedUniformSet;
-  }
+interface Props {
+  uniformSet: ExpandedUniformSet
+}
 
-  let {uniformSet}: Props = $props();
+let { uniformSet }: Props = $props()
 
-  const authRecord = $derived(authSettings.record as CustomAuthModel);
+const authRecord = $derived(authSettings.record as CustomAuthModel)
 
-  function deleteAction(id: string) {
-    client.collection("uniformsets").delete(id);
-    invalidate("club:single");
-  }
+function deleteAction(id: string) {
+  client.collection("uniformsets").delete(id)
+  invalidate("club:single")
+}
 </script>
 
 <article class="card preset-tonal-surface shadow-md">

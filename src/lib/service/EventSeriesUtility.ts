@@ -1,15 +1,15 @@
-import type {EventSeriesState} from "$lib/types/EventSeriesState.ts";
+import type { EventSeriesState } from "$lib/types/EventSeriesState.ts"
 
 export class EventSeriesUtility {
   public static getSeriesState(startDate: Date, endDate: Date): EventSeriesState {
-    const nowDate = new Date();
+    const nowDate = new Date()
 
     if (nowDate < startDate) {
-      return "future";
+      return "future"
     }
     if (nowDate > endDate) {
-      return "past";
+      return "past"
     }
-    return "ongoing";
+    return "ongoing"
   }
 }

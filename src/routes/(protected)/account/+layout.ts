@@ -1,9 +1,9 @@
-import {client} from "$lib/pocketbase/index.svelte";
-import type {LayoutLoad} from "../../../../.svelte-kit/types/src/routes/(protected)/account/$types";
-import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/model/ExpandedResponse";
+import { client } from "$lib/pocketbase/index.svelte"
+import type { LayoutLoad } from "../../../../.svelte-kit/types/src/routes/(protected)/account/$types"
+import type { CustomAuthModel, ExpandedClub, ExpandedTeam } from "$lib/model/ExpandedResponse"
 
-export const load = (async ({fetch, depends, parent}) => {
-  const model = client.authStore.record as CustomAuthModel;
+export const load = (async ({ fetch, depends, parent }) => {
+  const model = client.authStore.record as CustomAuthModel
   const data = await parent()
 
   if (!client.authStore.isValid) {
@@ -27,7 +27,7 @@ export const load = (async ({fetch, depends, parent}) => {
       filter: `"${model?.club}" ?~ id`,
       fetch: fetch,
       expand: "admins",
-    });
+    })
   }
 
   depends("teams:list")

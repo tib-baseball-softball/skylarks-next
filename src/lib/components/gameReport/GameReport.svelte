@@ -1,14 +1,14 @@
 <script lang="ts">
-  import type {GameReport} from "$lib/model/GameReport.ts";
-  import GameReportHeader from "$lib/components/gameReport/GameReportHeader.svelte";
-  import TypoImage from "$lib/components/media/TypoImage.svelte";
+import type { GameReport } from "$lib/model/GameReport.ts"
+import GameReportHeader from "$lib/components/gameReport/GameReportHeader.svelte"
+import TypoImage from "$lib/components/media/TypoImage.svelte"
 
-  interface Props {
-    report: GameReport;
-    classes?: string;
-  }
+interface Props {
+  report: GameReport
+  classes?: string
+}
 
-  let {report, classes = ""}: Props = $props();
+let { report, classes = "" }: Props = $props()
 </script>
 
 <div class="flex justify-center">

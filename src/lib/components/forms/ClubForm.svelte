@@ -1,82 +1,76 @@
 <script lang="ts">
-  import {invalidateAll} from "$app/navigation";
-  import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  import type {ClubsResponse, UsersResponse, UsersUpdate} from "$lib/model/pb-types";
-  import type {CustomAuthModel, ExpandedClub} from "$lib/model/ExpandedResponse";
-  import MultiSelectCombobox from "$lib/components/utility/MultiSelectCombobox.svelte";
-  import {ClipboardEdit, Plus} from "lucide-svelte";
-  //@ts-ignore
-  import * as Sheet from "$lib/components/utility/sheet/index.js";
-  import {toastController} from "$lib/service/ToastController.svelte.ts";
+import { invalidateAll } from "$app/navigation"
+import { authSettings, client } from "$lib/pocketbase/index.svelte"
+import type { ClubsResponse, UsersResponse, UsersUpdate } from "$lib/model/pb-types"
+import type { CustomAuthModel, ExpandedClub } from "$lib/model/ExpandedResponse"
+import MultiSelectCombobox from "$lib/components/utility/MultiSelectCombobox.svelte"
+import { ClipboardEdit, Plus } from "lucide-svelte"
+//@ts-ignore
+import * as Sheet from "$lib/components/utility/sheet/index.js"
+import { toastController } from "$lib/service/ToastController.svelte.ts"
 
+const authRecord = $derived(authSettings.record as CustomAuthModel)
 
-  const authRecord = $derived(authSettings.record as CustomAuthModel);
+interface Props {
+  club: ExpandedClub | null
+  buttonClasses?: string
+}
 
-  interface Props {
-    club: ExpandedClub | null;
-    buttonClasses?: string;
+let { club, buttonClasses = "" }: Props = $props()
+
+const form: Partial<ExpandedClub> = $state(
+  club ?? {
+    id: "",
+    name: "",
+    bsm_id: 0,
+    bsm_api_key: "",
+    acronym: "",
+    admins: [],
+  }
+)
+
+let open = $state(false)
+
+let selectedAdmins: UsersResponse[] = $state(form?.expand?.admins ?? [])
+
+const allUsersForClub = client.collection("users").getFullList<UsersResponse>({
+  filter: `club ?~ '${club?.id}'`,
+  requestKey: `users-for-club-${club?.id}`,
+})
+
+async function submitForm(e: SubmitEvent) {
+  e.preventDefault()
+
+  let result: ClubsResponse | null = null
+
+  try {
+    if (form.id) {
+      form.admins = selectedAdmins.map((admin) => {
+        return admin.id
+      })
+
+      result = await client.collection("clubs").update<ClubsResponse>(form.id, form)
+    } else {
+      // a user creating a club becomes its first admin
+      form?.admins?.push(authRecord.id)
+
+      result = await client.collection("clubs").create<ClubsResponse>(form)
+
+      // a user needs to become a member of the new club
+      await client.collection("users").update<UsersUpdate>(authRecord.id, {
+        "club+": result.id,
+      })
+    }
+  } catch {
+    toastController.triggerGenericFormErrorMessage("Club")
   }
 
-  let { club, buttonClasses = "" }: Props = $props();
-
-
-  const form: Partial<ExpandedClub> = $state(
-      club ?? {
-        id: "",
-        name: "",
-        bsm_id: 0,
-        bsm_api_key: "",
-        acronym: "",
-        admins: [],
-      },
-  );
-
-  let open = $state(false);
-
-  let selectedAdmins: UsersResponse[] = $state(form?.expand?.admins ?? []);
-
-  const allUsersForClub = client.collection("users").getFullList<UsersResponse>({
-    filter: `club ?~ '${club?.id}'`,
-    requestKey: `users-for-club-${club?.id}`,
-  });
-
-  async function submitForm(e: SubmitEvent) {
-    e.preventDefault();
-
-    let result: ClubsResponse | null = null;
-
-    try {
-      if (form.id) {
-        form.admins = selectedAdmins.map((admin) => {
-          return admin.id;
-        });
-
-        result = await client
-            .collection("clubs")
-            .update<ClubsResponse>(form.id, form);
-      } else {
-        // a user creating a club becomes its first admin
-        form?.admins?.push(authRecord.id);
-
-        result = await client
-            .collection("clubs")
-            .create<ClubsResponse>(form);
-
-        // a user needs to become a member of the new club
-        await client.collection("users").update<UsersUpdate>(authRecord.id, {
-          "club+": result.id
-        });
-      }
-    } catch {
-      toastController.triggerGenericFormErrorMessage("Club");
-    }
-
-    if (result) {
-      toastController.triggerGenericFormSuccessMessage("Club");
-      open = false;
-    }
-    await invalidateAll();
+  if (result) {
+    toastController.triggerGenericFormSuccessMessage("Club")
+    open = false
   }
+  await invalidateAll()
+}
 </script>
 
 <Sheet.Root bind:open={open}>

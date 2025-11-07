@@ -1,1 +1,1 @@
-export type EventParticipationState = '' | 'in' | 'out' | 'maybe'
+export type EventParticipationState = "" | "in" | "out" | "maybe"

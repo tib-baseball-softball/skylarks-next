@@ -1,12 +1,12 @@
 <script lang="ts">
-  import LicenseLevelIndicator from "$lib/components/club/licenses/LicenseLevelIndicator.svelte";
-  import type {License} from "bsm.js";
+import LicenseLevelIndicator from "$lib/components/club/licenses/LicenseLevelIndicator.svelte"
+import type { License } from "bsm.js"
 
-  interface Props {
-    license: License,
-  }
+interface Props {
+  license: License
+}
 
-  let {license}: Props = $props();
+let { license }: Props = $props()
 </script>
 
 <a href="/club/license/{license.id}" class="container">

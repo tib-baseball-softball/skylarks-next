@@ -1,19 +1,17 @@
 <script lang="ts">
-  import type {MatchBoxscore} from "bsm.js";
-  import Linescore from "$lib/components/boxscore/Linescore.svelte";
-  import MatchBoxscoreOffensiveTable from "$lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte";
-  import MatchBoxscoreAdditionalStatsSection from "$lib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte";
-  import MatchBoxscorePitchingTable from "$lib/components/boxscore/MatchBoxscorePitchingTable.svelte";
+import type { MatchBoxscore } from "bsm.js"
+import Linescore from "$lib/components/boxscore/Linescore.svelte"
+import MatchBoxscoreOffensiveTable from "$lib/components/boxscore/MatchBoxscoreOffensiveTable.svelte"
+import MatchBoxscoreAdditionalStatsSection from "$lib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte"
+import MatchBoxscorePitchingTable from "$lib/components/boxscore/MatchBoxscorePitchingTable.svelte"
 
-  interface Props {
-    boxscore: MatchBoxscore;
-  }
+interface Props {
+  boxscore: MatchBoxscore
+}
 
-  let {boxscore}: Props = $props();
-  const awayTeamName =
-      boxscore.linescore.away.league_entry.team?.name ?? "Away Team";
-  const homeTeamName =
-      boxscore.linescore.home.league_entry.team?.name ?? "Home Team";
+let { boxscore }: Props = $props()
+const awayTeamName = boxscore.linescore.away.league_entry.team?.name ?? "Away Team"
+const homeTeamName = boxscore.linescore.home.league_entry.team?.name ?? "Home Team"
 </script>
 
 <section class="mt-2 mb-6">

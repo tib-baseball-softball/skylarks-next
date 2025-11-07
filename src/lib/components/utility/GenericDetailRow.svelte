@@ -1,13 +1,13 @@
 <script lang="ts">
-  import type {Snippet} from "svelte";
+import type { Snippet } from "svelte"
 
-  interface Props {
-    icon: Snippet,
-    categoryName: string,
-    rowValue: string | number,
-  }
+interface Props {
+  icon: Snippet
+  categoryName: string
+  rowValue: string | number
+}
 
-  let {icon, categoryName, rowValue}: Props = $props();
+let { icon, categoryName, rowValue }: Props = $props()
 </script>
 
 <div class="container">

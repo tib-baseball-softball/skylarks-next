@@ -1,12 +1,12 @@
 <script lang="ts">
-  import type {ClubFunction} from "bsm.js";
-  import ClubOfficialIcon from "$lib/components/club/officials/ClubOfficialIcon.svelte";
+import type { ClubFunction } from "bsm.js"
+import ClubOfficialIcon from "$lib/components/club/officials/ClubOfficialIcon.svelte"
 
-  interface Props {
-    clubOfficial: ClubFunction;
-  }
+interface Props {
+  clubOfficial: ClubFunction
+}
 
-  let {clubOfficial}: Props = $props();
+let { clubOfficial }: Props = $props()
 </script>
 
 <div class="flex items-center gap-4">

@@ -1,11 +1,11 @@
 <script lang="ts">
-  import type {Field} from "bsm.js";
+import type { Field } from "bsm.js"
 
-  interface Props {
-    fields: Field[],
-  }
+interface Props {
+  fields: Field[]
+}
 
-  let {fields}: Props = $props();
+let { fields }: Props = $props()
 </script>
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">

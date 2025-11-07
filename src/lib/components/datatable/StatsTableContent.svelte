@@ -1,19 +1,21 @@
 <script lang="ts">
-  import type {DataHandler} from "@vincjo/datatables";
-  import type {StatisticsData} from "bsm.js";
-  import {StatsType} from "bsm.js";
-  import StatsHeaderRow from "$lib/components/datatable/StatsHeaderRow.svelte";
-  import StatsContentRow from "$lib/components/datatable/StatsContentRow.svelte";
+import type { DataHandler } from "@vincjo/datatables"
+import type { StatisticsData } from "bsm.js"
+import { StatsType } from "bsm.js"
+import StatsHeaderRow from "$lib/components/datatable/StatsHeaderRow.svelte"
+import StatsContentRow from "$lib/components/datatable/StatsContentRow.svelte"
 
-  interface Props {
-    handler: DataHandler<StatisticsData<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics">>;
-    tableType: "personal" | "seasonal";
-    type: StatsType;
-  }
+interface Props {
+  handler: DataHandler<
+    StatisticsData<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics">
+  >
+  tableType: "personal" | "seasonal"
+  type: StatsType
+}
 
-  let {handler, tableType, type}: Props = $props();
+let { handler, tableType, type }: Props = $props()
 
-  const rows = handler.getRows();
+const rows = handler.getRows()
 </script>
 
 <thead>

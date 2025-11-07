@@ -1,25 +1,30 @@
 <script lang="ts">
-  import ClubDetailCard from "$lib/components/diamondplanner/club/ClubDetailCard.svelte";
-  import TeamListTeaser from "$lib/components/diamondplanner/team/TeamListTeaser.svelte";
-  import UniformSetInfoCard from "$lib/components/diamondplanner/uniformset/UniformSetInfoCard.svelte";
-  import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
-  import type {CustomAuthModel, ExpandedClub, ExpandedTeam, ExpandedUniformSet,} from "$lib/model/ExpandedResponse";
-  import {authSettings} from "$lib/pocketbase/index.svelte";
-  import {Mail, Plus, SquareArrowOutUpRight} from "lucide-svelte";
-  import type {PageProps} from "./$types";
-  import TeamForm from "$lib/components/forms/TeamForm.svelte";
-  import Dialog from "$lib/components/utility/Dialog.svelte";
-  import AnnouncementSectionContent from "$lib/components/announcements/AnnouncementSectionContent.svelte";
-  import AnnouncementForm from "$lib/components/forms/AnnouncementForm.svelte";
+import ClubDetailCard from "$lib/components/diamondplanner/club/ClubDetailCard.svelte"
+import TeamListTeaser from "$lib/components/diamondplanner/team/TeamListTeaser.svelte"
+import UniformSetInfoCard from "$lib/components/diamondplanner/uniformset/UniformSetInfoCard.svelte"
+import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte"
+import type {
+  CustomAuthModel,
+  ExpandedClub,
+  ExpandedTeam,
+  ExpandedUniformSet,
+} from "$lib/model/ExpandedResponse"
+import { authSettings } from "$lib/pocketbase/index.svelte"
+import { Mail, Plus, SquareArrowOutUpRight } from "lucide-svelte"
+import type { PageProps } from "./$types"
+import TeamForm from "$lib/components/forms/TeamForm.svelte"
+import Dialog from "$lib/components/utility/Dialog.svelte"
+import AnnouncementSectionContent from "$lib/components/announcements/AnnouncementSectionContent.svelte"
+import AnnouncementForm from "$lib/components/forms/AnnouncementForm.svelte"
 
-  let {data}: PageProps = $props();
+let { data }: PageProps = $props()
 
-  const authRecord = $derived(authSettings.record as CustomAuthModel);
+const authRecord = $derived(authSettings.record as CustomAuthModel)
 
-  let club: ExpandedClub = $derived(data.club);
-  let teams: ExpandedTeam[] = $derived(data.teams);
-  let uniformSets: ExpandedUniformSet[] = $derived(data.uniformSets);
-  let announcementStore = $derived(data.announcementStore);
+let club: ExpandedClub = $derived(data.club)
+let teams: ExpandedTeam[] = $derived(data.teams)
+let uniformSets: ExpandedUniformSet[] = $derived(data.uniformSets)
+let announcementStore = $derived(data.announcementStore)
 </script>
 
 <svelte:head>

@@ -1,12 +1,12 @@
 <script lang="ts">
-    import type {SingleStatElement} from "$lib/types/SingleStatElement";
+import type { SingleStatElement } from "$lib/types/SingleStatElement"
 
-    interface props {
-        block: SingleStatElement
-        classes?: string
-    }
+interface props {
+  block: SingleStatElement
+  classes?: string
+}
 
-    let {block, classes = ""}: props = $props()
+let { block, classes = "" }: props = $props()
 </script>
 
 <div class="stat {classes}">

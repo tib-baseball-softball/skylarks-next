@@ -1,8 +1,8 @@
 <script lang="ts">
-    import LoginGuard from "$lib/auth/LoginGuard.svelte";
-    import {LucideLogIn} from "lucide-svelte";
+import LoginGuard from "$lib/auth/LoginGuard.svelte"
+import { LucideLogIn } from "lucide-svelte"
 
-    const {children} = $props()
+const { children } = $props()
 </script>
 
 <LoginGuard>

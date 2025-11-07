@@ -1,4 +1,4 @@
-import {browser} from "$app/environment";
+import { browser } from "$app/environment"
 
 /**
  * Hacky solution until I find a smarter way.

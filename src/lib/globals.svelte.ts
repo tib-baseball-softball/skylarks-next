@@ -1,6 +1,6 @@
-import type {AppPreferences} from "$lib/types/AppPreferences";
-import {Gameday} from "bsm.js";
-import {persistedState} from "svelte-persisted-state";
+import type { AppPreferences } from "$lib/types/AppPreferences"
+import { Gameday } from "bsm.js"
+import { persistedState } from "svelte-persisted-state"
 
 /*
  * User Preferences, kept in sync via Local Storage.
@@ -9,15 +9,17 @@ import {persistedState} from "svelte-persisted-state";
  *
  * Usage: https://github.com/oMaN-Rod/svelte-persisted-state
  */
-export const preferences = persistedState<AppPreferences>('preferences', {
-      gameday: Gameday.current,
-      selectedSeason: new Date().getFullYear(),
-      leagueGroupID: 0,
-      favoriteTeamID: 0,
-      locale: "en",
-    },
-    {
-      storage: "local",
-      syncTabs: true,
-    }
-);
+export const preferences = persistedState<AppPreferences>(
+  "preferences",
+  {
+    gameday: Gameday.current,
+    selectedSeason: new Date().getFullYear(),
+    leagueGroupID: 0,
+    favoriteTeamID: 0,
+    locale: "en",
+  },
+  {
+    storage: "local",
+    syncTabs: true,
+  }
+)

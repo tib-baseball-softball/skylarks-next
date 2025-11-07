@@ -1,12 +1,12 @@
 <script lang="ts">
-    import type {Player} from "$lib/model/Player";
-    import PlayerNumberGraphic from "$lib/components/player/PlayerNumberGraphic.svelte";
+import type { Player } from "$lib/model/Player"
+import PlayerNumberGraphic from "$lib/components/player/PlayerNumberGraphic.svelte"
 
-    interface Props {
-        player: Player;
-    }
+interface Props {
+  player: Player
+}
 
-    let { player }: Props = $props();
+let { player }: Props = $props()
 </script>
 
 <div class="card preset-tonal-surface shadow-xl p-3">

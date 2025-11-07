@@ -1,24 +1,26 @@
 <script lang="ts">
-  import type {PageProps} from "./$types";
-  import FavoriteTeamInfoCard from "$lib/components/favorite/FavoriteTeamInfoCard.svelte";
-  import {preferences} from "$lib/globals.svelte.ts";
-  import ClubTeamPicker from "$lib/components/utility/ClubTeamPicker.svelte";
-  import {goto} from "$app/navigation";
-  import MatchTeaserCard from "$lib/components/match/MatchTeaserCard.svelte";
-  import StandingsTable from "$lib/components/table/StandingsTable.svelte";
-  import LeagueInfoCard from "$lib/components/favorite/LeagueInfoCard.svelte";
-  import PlayoffSheet from "$lib/components/favorite/PlayoffSheet.svelte";
-  import StreakGraphSection from "$lib/components/favorite/StreakGraphSection.svelte";
+import type { PageProps } from "./$types"
+import FavoriteTeamInfoCard from "$lib/components/favorite/FavoriteTeamInfoCard.svelte"
+import { preferences } from "$lib/globals.svelte.ts"
+import ClubTeamPicker from "$lib/components/utility/ClubTeamPicker.svelte"
+import { goto } from "$app/navigation"
+import MatchTeaserCard from "$lib/components/match/MatchTeaserCard.svelte"
+import StandingsTable from "$lib/components/table/StandingsTable.svelte"
+import LeagueInfoCard from "$lib/components/favorite/LeagueInfoCard.svelte"
+import PlayoffSheet from "$lib/components/favorite/PlayoffSheet.svelte"
+import StreakGraphSection from "$lib/components/favorite/StreakGraphSection.svelte"
 
-  let {data}: PageProps = $props();
-  const clubTeams = $derived(data.clubTeams ?? []);
+let { data }: PageProps = $props()
+const clubTeams = $derived(data.clubTeams ?? [])
 
-  const favoriteTeam = $derived(clubTeams.find(clubTeam => clubTeam.team.id === preferences.current.favoriteTeamID));
+const favoriteTeam = $derived(
+  clubTeams.find((clubTeam) => clubTeam.team.id === preferences.current.favoriteTeamID)
+)
 
-  function reloadOnTeamChange() {
-    let queryString = `?team=${preferences.current.favoriteTeamID}&season=${preferences.current.selectedSeason}`;
-    goto(queryString);
-  }
+function reloadOnTeamChange() {
+  let queryString = `?team=${preferences.current.favoriteTeamID}&season=${preferences.current.selectedSeason}`
+  goto(queryString)
+}
 </script>
 
 <div class="lg:flex justify-between items-center">

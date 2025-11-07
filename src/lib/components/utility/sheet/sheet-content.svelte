@@ -1,15 +1,15 @@
 <script lang="ts" module>
-  export const sheetVariants = {
-    base: "drawer shadow-lg transition",
-    side: {
-      top: "drawer-top",
-      bottom: "drawer-bottom",
-      left: "drawer-horizontal drawer-left",
-      right: "drawer-horizontal drawer-right",
-    },
-  };
+export const sheetVariants = {
+  base: "drawer shadow-lg transition",
+  side: {
+    top: "drawer-top",
+    bottom: "drawer-bottom",
+    left: "drawer-horizontal drawer-left",
+    right: "drawer-horizontal drawer-right",
+  },
+}
 
-  export type Side = "top" | "right" | "bottom" | "left";
+export type Side = "top" | "right" | "bottom" | "left"
 </script>
 
 <script lang="ts">

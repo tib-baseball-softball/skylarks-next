@@ -1,37 +1,37 @@
 <script lang="ts">
-  import {authSettings} from "$lib/pocketbase/index.svelte";
-  import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/model/ExpandedResponse";
-  import {
-    ChartColumnStacked,
-    ChartLine,
-    CircleUserRound,
-    IdCard,
-    LockKeyhole,
-    Shield,
-    SquareUserRound,
-    Users,
-    UsersRound,
-  } from "lucide-svelte";
-  import AccordionItem from "$lib/components/utility/AccordionItem.svelte";
+import { authSettings } from "$lib/pocketbase/index.svelte"
+import type { CustomAuthModel, ExpandedClub, ExpandedTeam } from "$lib/model/ExpandedResponse"
+import {
+  ChartColumnStacked,
+  ChartLine,
+  CircleUserRound,
+  IdCard,
+  LockKeyhole,
+  Shield,
+  SquareUserRound,
+  Users,
+  UsersRound,
+} from "lucide-svelte"
+import AccordionItem from "$lib/components/utility/AccordionItem.svelte"
 
-  interface Props {
-    clubs: ExpandedClub[];
-    teams: ExpandedTeam[];
-    sheetOpen?: boolean;
+interface Props {
+  clubs: ExpandedClub[]
+  teams: ExpandedTeam[]
+  sheetOpen?: boolean
+}
+
+let { clubs, teams, sheetOpen = $bindable() }: Props = $props()
+
+const authRecord = $derived(authSettings.record as CustomAuthModel)
+let isUserAuthenticated = $derived(!!authSettings.record)
+
+function sheetClose(): void {
+  if (sheetOpen) {
+    sheetOpen = false
   }
+}
 
-  let {clubs, teams, sheetOpen = $bindable()}: Props = $props();
-
-  const authRecord = $derived(authSettings.record as CustomAuthModel);
-  let isUserAuthenticated = $derived(!!authSettings.record);
-
-  function sheetClose(): void {
-    if (sheetOpen) {
-      sheetOpen = false;
-    }
-  }
-
-  let value = $state(["account", "teamClub", "admin"]);
+let value = $state(["account", "teamClub", "admin"])
 </script>
 
 <nav class="list-nav py-1 px-1 lg:px-4">

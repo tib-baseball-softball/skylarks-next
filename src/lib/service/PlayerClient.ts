@@ -1,5 +1,5 @@
-import {TYPO3Client} from "$lib/service/TYPO3Client.ts";
-import type {Player} from "$lib/model/Player.ts";
+import { TYPO3Client } from "$lib/service/TYPO3Client.ts"
+import type { Player } from "$lib/model/Player.ts"
 
 export class PlayerClient extends TYPO3Client {
   /**
@@ -10,36 +10,36 @@ export class PlayerClient extends TYPO3Client {
    */
   async fetchSinglePlayer(bsmID: string): Promise<Player | undefined> {
     const url = this.buildRequestURL("/api/v2/players", {
-      bsmid: bsmID
-    });
+      bsmid: bsmID,
+    })
 
     const response: Response = await this.fetch(url, {
-      headers: this.AUTH_HEADERS
-    });
+      headers: this.AUTH_HEADERS,
+    })
 
-    let player: Player | undefined;
-    const players: Player[] = await response.json();
+    let player: Player | undefined
+    const players: Player[] = await response.json()
 
     if (players && players.length > 0) {
-      player = players.at(0);
+      player = players.at(0)
     }
 
-    return player;
+    return player
   }
 
   async fetchPlayersByFilters(query: PlayerQuery): Promise<Player[] | undefined> {
-    const url = this.buildRequestURL("/api/v2/players", query);
+    const url = this.buildRequestURL("/api/v2/players", query)
 
     const response: Response = await this.fetch(url, {
-      headers: this.AUTH_HEADERS
-    });
+      headers: this.AUTH_HEADERS,
+    })
 
-    return await response.json();
+    return await response.json()
   }
 }
 
 type PlayerQuery = {
-  id?: string,
-  bsmid?: string,
-  team?: string,
+  id?: string
+  bsmid?: string
+  team?: string
 }

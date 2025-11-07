@@ -1,12 +1,12 @@
 <script lang="ts">
-  import type {LeagueGroup} from "bsm.js";
-  import {Info, Tag, Users, Volleyball} from "lucide-svelte";
+import type { LeagueGroup } from "bsm.js"
+import { Info, Tag, Users, Volleyball } from "lucide-svelte"
 
-  interface Props {
-    leagueGroup: LeagueGroup;
-  }
+interface Props {
+  leagueGroup: LeagueGroup
+}
 
-  let {leagueGroup}: Props = $props();
+let { leagueGroup }: Props = $props()
 </script>
 
 <article class="card preset-tonal-surface p-4">

@@ -1,15 +1,15 @@
 <script lang="ts">
-    import type {DataHandler} from "@vincjo/datatables";
-    import ThSort from "$lib/components/datatable/ThSort.svelte";
-    import {StatsType} from "bsm.js";
+import type { DataHandler } from "@vincjo/datatables"
+import ThSort from "$lib/components/datatable/ThSort.svelte"
+import { StatsType } from "bsm.js"
 
-    interface Props {
-        type: StatsType;
-        handler: DataHandler<any>;
-        tableType: "personal" | "seasonal";
-    }
+interface Props {
+  type: StatsType
+  handler: DataHandler<any>
+  tableType: "personal" | "seasonal"
+}
 
-    let { type, handler, tableType }: Props = $props();
+let { type, handler, tableType }: Props = $props()
 </script>
 
 {#if type === StatsType.batting}

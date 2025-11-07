@@ -1,12 +1,12 @@
 <script lang="ts">
-    import type { AdditionalMatchStats } from "bsm.js";
-    import MatchBoxscoreAdditionalStatsSectionEntry from "$lib/components/boxscore/MatchBoxscoreAdditionalStatsSectionEntry.svelte";
+import type { AdditionalMatchStats } from "bsm.js"
+import MatchBoxscoreAdditionalStatsSectionEntry from "$lib/components/boxscore/MatchBoxscoreAdditionalStatsSectionEntry.svelte"
 
-    interface Props {
-        stats: AdditionalMatchStats;
-    }
+interface Props {
+  stats: AdditionalMatchStats
+}
 
-    let { stats }: Props = $props();
+let { stats }: Props = $props()
 </script>
 
 <section class="my-3">

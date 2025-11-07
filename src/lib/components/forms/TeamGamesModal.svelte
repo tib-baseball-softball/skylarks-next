@@ -1,92 +1,89 @@
 <script lang="ts">
-  import type {ExpandedTeam} from "$lib/model/ExpandedResponse";
-  import {client} from "$lib/pocketbase/index.svelte";
-  import type {LeaguegroupsResponse} from "$lib/model/pb-types";
-  import type {GamesCount} from "$lib/model/GamesCount";
-  import {range} from "$lib/functions/range";
-  import {invalidate} from "$app/navigation";
-  import type {Toast} from "$lib/types/Toast.ts";
-  import {toastController} from "$lib/service/ToastController.svelte.ts";
-  import {closeModal} from "$lib/functions/closeModal.ts";
-  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
+import type { ExpandedTeam } from "$lib/model/ExpandedResponse"
+import { client } from "$lib/pocketbase/index.svelte"
+import type { LeaguegroupsResponse } from "$lib/model/pb-types"
+import type { GamesCount } from "$lib/model/GamesCount"
+import { range } from "$lib/functions/range"
+import { invalidate } from "$app/navigation"
+import type { Toast } from "$lib/types/Toast.ts"
+import { toastController } from "$lib/service/ToastController.svelte.ts"
+import { closeModal } from "$lib/functions/closeModal.ts"
+import ProgressRing from "$lib/components/utility/ProgressRing.svelte"
 
-  interface Props {
-    team: ExpandedTeam,
-  }
+interface Props {
+  team: ExpandedTeam
+}
 
-  const {team}: Props = $props();
+const { team }: Props = $props()
 
-  const toastSettingsGeneralError: Toast = {
-    message: "An error occurred while saving the event.",
-    background: "preset-filled-error-500",
-  };
+const toastSettingsGeneralError: Toast = {
+  message: "An error occurred while saving the event.",
+  background: "preset-filled-error-500",
+}
 
-  const currentYear = new Date().getFullYear();
-  const cutoffYear = currentYear - 4;
-  let season = $state(currentYear);
-  const possibleSeasons = range(cutoffYear, currentYear);
-  let leagueGroups: LeaguegroupsResponse[] = $state([]);
+const currentYear = new Date().getFullYear()
+const cutoffYear = currentYear - 4
+let season = $state(currentYear)
+const possibleSeasons = range(cutoffYear, currentYear)
+let leagueGroups: LeaguegroupsResponse[] = $state([])
 
-  const form = $state(team ?? {
+const form = $state(
+  team ?? {
     id: "",
     bsm_league_group: 0,
-  });
+  }
+)
 
-  async function getCurrentGamesCount(): Promise<number> {
-    const response = await client.send<GamesCount>(`/api/gamecount/${team.id}?season=${season}`, {});
-    return response.count ?? 0;
+async function getCurrentGamesCount(): Promise<number> {
+  const response = await client.send<GamesCount>(`/api/gamecount/${team.id}?season=${season}`, {})
+  return response.count ?? 0
+}
+
+async function loadClubLeagueGroups() {
+  const RELOAD_DELAY = 15000 // 15 seconds
+  const loadLeagueGroups = client.collection("leaguegroups").getFullList<LeaguegroupsResponse>({
+    filter: `season = '${season}' && clubs ?~ '${team.club}'`,
+    query: {
+      // adding those parameters triggers a hook to load league groups from BSM if response is empty
+      season: season,
+      club: team.club,
+    },
+  })
+
+  leagueGroups = await loadLeagueGroups
+
+  // give the backend hook some time to get the requested LeagueGroups and try again
+  if (leagueGroups.length === 0) {
+    setTimeout(async () => {
+      leagueGroups = await loadLeagueGroups
+    }, RELOAD_DELAY)
+  }
+}
+
+async function submitForm(e: SubmitEvent) {
+  e.preventDefault()
+
+  let result: ExpandedTeam | null = null
+
+  try {
+    if (form.id) {
+      result = await client.collection("teams").update<ExpandedTeam>(form.id, form)
+    }
+  } catch {
+    toastController.trigger(toastSettingsGeneralError)
   }
 
-  async function loadClubLeagueGroups() {
-    const RELOAD_DELAY = 15000; // 15 seconds
-    const loadLeagueGroups = client
-        .collection("leaguegroups")
-        .getFullList<LeaguegroupsResponse>({
-          filter: `season = '${season}' && clubs ?~ '${team.club}'`,
-          query: {
-            // adding those parameters triggers a hook to load league groups from BSM if response is empty
-            season: season,
-            club: team.club
-          }
-        });
-
-    leagueGroups = await loadLeagueGroups;
-
-    // give the backend hook some time to get the requested LeagueGroups and try again
-    if (leagueGroups.length === 0) {
-      setTimeout(async () => {
-            leagueGroups = await loadLeagueGroups;
-          }, RELOAD_DELAY
-      );
-    }
+  if (result) {
+    toastController.trigger({
+      message: "League has been successfully changed.",
+      background: "preset-filled-success-500",
+    })
+    closeModal()
+    await invalidate("teams:list")
+    await invalidate("nav:load")
+    await invalidate("clubs:list")
   }
-
-  async function submitForm(e: SubmitEvent) {
-    e.preventDefault();
-
-    let result: ExpandedTeam | null = null;
-
-    try {
-      if (form.id) {
-        result = await client
-            .collection("teams")
-            .update<ExpandedTeam>(form.id, form);
-      }
-    } catch {
-      toastController.trigger(toastSettingsGeneralError);
-    }
-
-    if (result) {
-      toastController.trigger({
-        message: "League has been successfully changed.",
-        background: "preset-filled-success-500",
-      });
-      closeModal();
-      await invalidate("teams:list");
-      await invalidate("nav:load");
-      await invalidate("clubs:list");
-    }
-  }
+}
 </script>
 
 <form class="mt-4 space-y-3" onsubmit={submitForm}>

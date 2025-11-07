@@ -1,12 +1,12 @@
 <script lang="ts">
-  import {client} from "../pocketbase/index.svelte";
-  import {authSettings} from "$lib/pocketbase/index.svelte";
-  import {LucideLogIn} from "lucide-svelte";
-  import Dialog from "$lib/components/utility/Dialog.svelte";
-  import AccountModal from "$lib/auth/AccountModal.svelte";
-  import Avatar from "$lib/components/utility/Avatar.svelte";
+import { client } from "../pocketbase/index.svelte"
+import { authSettings } from "$lib/pocketbase/index.svelte"
+import { LucideLogIn } from "lucide-svelte"
+import Dialog from "$lib/components/utility/Dialog.svelte"
+import AccountModal from "$lib/auth/AccountModal.svelte"
+import Avatar from "$lib/components/utility/Avatar.svelte"
 
-  const {signupAllowed = true} = $props();
+const { signupAllowed = true } = $props()
 </script>
 
 {#if authSettings.record && client.authStore.isValid}

@@ -1,41 +1,41 @@
 <script lang="ts">
-  import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
-  import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  import {closeModal} from "$lib/functions/closeModal.ts";
+import type { CustomAuthModel } from "$lib/model/ExpandedResponse"
+import { authSettings, client } from "$lib/pocketbase/index.svelte"
+import { closeModal } from "$lib/functions/closeModal.ts"
 
-  const authRecord = authSettings.record as CustomAuthModel;
+const authRecord = authSettings.record as CustomAuthModel
 
-  let files: FileList | null = $state(null);
+let files: FileList | null = $state(null)
 
-  const form = $state({
-    id: authRecord.id,
-    firstName: authRecord.first_name,
-    lastName: authRecord.last_name,
-  });
+const form = $state({
+  id: authRecord.id,
+  firstName: authRecord.first_name,
+  lastName: authRecord.last_name,
+})
 
-  async function submitForm(e: SubmitEvent) {
-    e.preventDefault();
+async function submitForm(e: SubmitEvent) {
+  e.preventDefault()
 
-    const formData = new FormData();
+  const formData = new FormData()
 
-    formData.append("id", form.id);
+  formData.append("id", form.id)
 
-    if (form.firstName) {
-      formData.append("first_name", form.firstName);
-    }
-
-    if (form.lastName) {
-      formData.append("last_name", form.lastName);
-    }
-
-    if (files) {
-      for (let file of files) {
-        formData.append("avatar", file);
-      }
-    }
-
-    client.collection("users").update(form.id, formData, {expand: "club"}).then(closeModal);
+  if (form.firstName) {
+    formData.append("first_name", form.firstName)
   }
+
+  if (form.lastName) {
+    formData.append("last_name", form.lastName)
+  }
+
+  if (files) {
+    for (let file of files) {
+      formData.append("avatar", file)
+    }
+  }
+
+  client.collection("users").update(form.id, formData, { expand: "club" }).then(closeModal)
+}
 </script>
 
 <p class="mt-2 font-light">

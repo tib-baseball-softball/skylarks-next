@@ -1,18 +1,18 @@
 <script lang="ts">
-  import type {PlayoffSeries} from "$lib/types/PlayoffSeries.ts";
-  //@ts-ignore
-  import * as Sheet from "$lib/components/utility/sheet/index.js";
-  import {Trophy} from "lucide-svelte";
-  import MatchTeaserCard from "$lib/components/match/MatchTeaserCard.svelte";
+import type { PlayoffSeries } from "$lib/types/PlayoffSeries.ts"
+//@ts-ignore
+import * as Sheet from "$lib/components/utility/sheet/index.js"
+import { Trophy } from "lucide-svelte"
+import MatchTeaserCard from "$lib/components/match/MatchTeaserCard.svelte"
 
-  interface Props {
-    playoffSeries: PlayoffSeries;
-  }
+interface Props {
+  playoffSeries: PlayoffSeries
+}
 
-  let {playoffSeries}: Props = $props();
+let { playoffSeries }: Props = $props()
 
-  let open = $state(false);
-  const teams = $derived(Object.values(playoffSeries.teams));
+let open = $state(false)
+const teams = $derived(Object.values(playoffSeries.teams))
 </script>
 
 <Sheet.Root bind:open={open}>

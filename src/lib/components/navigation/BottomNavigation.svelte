@@ -1,5 +1,5 @@
 <script lang="ts">
-  import StaticNavigationLinks from "$lib/components/navigation/StaticNavigationLinks.svelte";
+import StaticNavigationLinks from "$lib/components/navigation/StaticNavigationLinks.svelte"
 </script>
 
 <nav

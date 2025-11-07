@@ -1,21 +1,21 @@
 <script lang="ts">
-  // @ts-ignore
-  import {Tabs} from "bits-ui";
-  import MatchMainInfoSection from "$lib/components/match/MatchMainInfoSection.svelte";
-  import MatchBoxscoreSection from "$lib/components/boxscore/MatchBoxscoreSection.svelte";
-  import MatchDetailStatsCard from "$lib/components/match/MatchDetailStatsCard.svelte";
-  import MatchDetailLocationCard from "$lib/components/match/MatchDetailLocationCard.svelte";
-  import MatchDetailOfficialsCard from "$lib/components/match/MatchDetailOfficialsCard.svelte";
-  import type {PageProps} from "./$types";
-  import ContentFilteredUnavailable from "$lib/components/match/ContentFilteredUnavailable.svelte";
-  import GameReport from "$lib/components/gameReport/GameReport.svelte";
-  import ShareButton from "$lib/components/match/ShareButton.svelte";
-  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
+// @ts-ignore
+import { Tabs } from "bits-ui"
+import MatchMainInfoSection from "$lib/components/match/MatchMainInfoSection.svelte"
+import MatchBoxscoreSection from "$lib/components/boxscore/MatchBoxscoreSection.svelte"
+import MatchDetailStatsCard from "$lib/components/match/MatchDetailStatsCard.svelte"
+import MatchDetailLocationCard from "$lib/components/match/MatchDetailLocationCard.svelte"
+import MatchDetailOfficialsCard from "$lib/components/match/MatchDetailOfficialsCard.svelte"
+import type { PageProps } from "./$types"
+import ContentFilteredUnavailable from "$lib/components/match/ContentFilteredUnavailable.svelte"
+import GameReport from "$lib/components/gameReport/GameReport.svelte"
+import ShareButton from "$lib/components/match/ShareButton.svelte"
+import ProgressRing from "$lib/components/utility/ProgressRing.svelte"
 
-  let {data}: PageProps = $props();
+let { data }: PageProps = $props()
 
-  let match = $derived(data.match);
-  let tabSet: "gameData" | "boxscore" | "gameReport" | string = $state("gameData");
+let match = $derived(data.match)
+let tabSet: "gameData" | "boxscore" | "gameReport" | string = $state("gameData")
 </script>
 
 <h1 class="h2 mt-3">Details zu Spiel {match.match_id}</h1>

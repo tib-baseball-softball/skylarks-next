@@ -1,5 +1,5 @@
-import type {PageLoad} from './$types';
+import type { PageLoad } from "./$types"
 
-export const load: PageLoad = async ({ parent}) => {
-    return await parent()
+export const load: PageLoad = async ({ parent }) => {
+  return await parent()
 }

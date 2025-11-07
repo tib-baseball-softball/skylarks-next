@@ -1,22 +1,22 @@
 <script lang="ts">
-  import EventTypeBadge from "$lib/components/diamondplanner/event/EventTypeBadge.svelte";
-  import type {CustomAuthModel, ExpandedEvent} from "$lib/model/ExpandedResponse";
-  import EventCoreInfo from "./EventCoreInfo.svelte";
-  import EventParticipationSection from "./EventParticipationSection.svelte";
-  import {authSettings} from "$lib/pocketbase/index.svelte";
-  import {Ban} from "lucide-svelte";
+import EventTypeBadge from "$lib/components/diamondplanner/event/EventTypeBadge.svelte"
+import type { CustomAuthModel, ExpandedEvent } from "$lib/model/ExpandedResponse"
+import EventCoreInfo from "./EventCoreInfo.svelte"
+import EventParticipationSection from "./EventParticipationSection.svelte"
+import { authSettings } from "$lib/pocketbase/index.svelte"
+import { Ban } from "lucide-svelte"
 
-  interface props {
-    event: ExpandedEvent;
-    link: boolean;
-  }
+interface props {
+  event: ExpandedEvent
+  link: boolean
+}
 
-  const {event, link}: props = $props();
+const { event, link }: props = $props()
 
-  const authRecord = $derived(authSettings.record as CustomAuthModel);
+const authRecord = $derived(authSettings.record as CustomAuthModel)
 
-  // club admins can see the team and change settings, but not participate
-  const canParticipate = $derived(authRecord.teams.includes(event.team));
+// club admins can see the team and change settings, but not participate
+const canParticipate = $derived(authRecord.teams.includes(event.team))
 </script>
 
 <article

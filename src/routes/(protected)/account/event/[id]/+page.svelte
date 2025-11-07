@@ -1,31 +1,30 @@
 <script lang="ts">
-  import EventAttireSection from "$lib/components/diamondplanner/event/EventAttireSection.svelte";
-  import EventCoreInfo from "$lib/components/diamondplanner/event/EventCoreInfo.svelte";
-  import EventParticipationSection from "$lib/components/diamondplanner/event/EventParticipationSection.svelte";
-  import EventTypeBadge from "$lib/components/diamondplanner/event/EventTypeBadge.svelte";
-  import MatchTeaserCard from "$lib/components/match/MatchTeaserCard.svelte";
-  import {authSettings} from "$lib/pocketbase/index.svelte";
-  import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
-  import EventPageAdminSection from "$lib/components/diamondplanner/event/EventPageAdminSection.svelte";
-  import EventParticipantsOverviewSection
-    from "$lib/components/diamondplanner/event/EventParticipantsOverviewSection.svelte";
-  import {Ban, Clock} from "lucide-svelte";
-  import MatchDetailLocationCard from "$lib/components/match/MatchDetailLocationCard.svelte";
-  import TimeSection from "$lib/components/diamondplanner/event/TimeSection.svelte";
-  import CommentSection from "$lib/components/comments/CommentSection.svelte";
-  import type {Match} from "bsm.js";
+import EventAttireSection from "$lib/components/diamondplanner/event/EventAttireSection.svelte"
+import EventCoreInfo from "$lib/components/diamondplanner/event/EventCoreInfo.svelte"
+import EventParticipationSection from "$lib/components/diamondplanner/event/EventParticipationSection.svelte"
+import EventTypeBadge from "$lib/components/diamondplanner/event/EventTypeBadge.svelte"
+import MatchTeaserCard from "$lib/components/match/MatchTeaserCard.svelte"
+import { authSettings } from "$lib/pocketbase/index.svelte"
+import type { CustomAuthModel } from "$lib/model/ExpandedResponse"
+import EventPageAdminSection from "$lib/components/diamondplanner/event/EventPageAdminSection.svelte"
+import EventParticipantsOverviewSection from "$lib/components/diamondplanner/event/EventParticipantsOverviewSection.svelte"
+import { Ban, Clock } from "lucide-svelte"
+import MatchDetailLocationCard from "$lib/components/match/MatchDetailLocationCard.svelte"
+import TimeSection from "$lib/components/diamondplanner/event/TimeSection.svelte"
+import CommentSection from "$lib/components/comments/CommentSection.svelte"
+import type { Match } from "bsm.js"
 
-  let {data} = $props();
+let { data } = $props()
 
-  const event = $derived(data.event);
+const event = $derived(data.event)
 
-  const authRecord = $derived(authSettings.record as CustomAuthModel);
-  const canParticipate = $derived(authRecord.teams.includes($event.team));
+const authRecord = $derived(authSettings.record as CustomAuthModel)
+const canParticipate = $derived(authRecord.teams.includes($event.team))
 
-  //@ts-expect-error - the multi-level expanding trips the typedef up
-  const club = $derived($event?.expand?.club);
+//@ts-expect-error - the multi-level expanding trips the typedef up
+const club = $derived($event?.expand?.club)
 
-  const matchJSON = $derived($event?.match_json) as unknown as Match;
+const matchJSON = $derived($event?.match_json) as unknown as Match
 </script>
 
 <div class="space-y-4 lg:space-y-6 xl:space-y-7">

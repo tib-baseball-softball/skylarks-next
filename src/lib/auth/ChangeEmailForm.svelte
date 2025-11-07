@@ -1,34 +1,34 @@
 <script lang="ts">
-  import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
-  import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  import {toastController} from "$lib/service/ToastController.svelte.ts";
-  import {closeModal} from "$lib/functions/closeModal.ts";
+import type { CustomAuthModel } from "$lib/model/ExpandedResponse"
+import { authSettings, client } from "$lib/pocketbase/index.svelte"
+import { toastController } from "$lib/service/ToastController.svelte.ts"
+import { closeModal } from "$lib/functions/closeModal.ts"
 
-  const authRecord = authSettings.record as CustomAuthModel;
+const authRecord = authSettings.record as CustomAuthModel
 
-  const form = $state({
-    email: authRecord.email
-  });
+const form = $state({
+  email: authRecord.email,
+})
 
-  async function submitForm(e: SubmitEvent) {
-    e.preventDefault();
+async function submitForm(e: SubmitEvent) {
+  e.preventDefault()
 
-    const sent = await client.collection("users").requestEmailChange(form.email);
+  const sent = await client.collection("users").requestEmailChange(form.email)
 
-    if (sent) {
-      closeModal()
-      toastController.trigger({
-        message: "A verification email has been sent to your new address.",
-        background: "preset-filled-success-500",
-      });
-    } else {
-      toastController.trigger({
-        message: "An error occurred while sending your email change request.",
-        background: "preset-filled-error-500",
-      });
-    }
-    client.authStore.clear();
+  if (sent) {
+    closeModal()
+    toastController.trigger({
+      message: "A verification email has been sent to your new address.",
+      background: "preset-filled-success-500",
+    })
+  } else {
+    toastController.trigger({
+      message: "An error occurred while sending your email change request.",
+      background: "preset-filled-error-500",
+    })
   }
+  client.authStore.clear()
+}
 </script>
 
 <form onsubmit={submitForm} class="mt-4 space-y-3">

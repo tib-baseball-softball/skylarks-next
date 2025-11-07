@@ -1,14 +1,14 @@
 <script lang="ts">
-    import type {DataHandler} from '@vincjo/datatables';
+import type { DataHandler } from "@vincjo/datatables"
 
-    interface Props {
-        handler: DataHandler;
-    }
+interface Props {
+  handler: DataHandler
+}
 
-    let { handler }: Props = $props();
-    const pageNumber = handler.getPageNumber();
-    const pageCount = handler.getPageCount();
-    const pages = handler.getPages({ ellipsis: true });
+let { handler }: Props = $props()
+const pageNumber = handler.getPageNumber()
+const pageCount = handler.getPageCount()
+const pages = handler.getPages({ ellipsis: true })
 </script>
 
 <!-- Desktop buttons -->

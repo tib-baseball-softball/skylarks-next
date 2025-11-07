@@ -1,65 +1,64 @@
 <script lang="ts">
-  import {invalidate} from "$app/navigation";
-  import type {ExpandedClub} from "$lib/model/ExpandedResponse";
-  import type {LocationsResponse} from "$lib/model/pb-types";
-  import {save} from "$lib/pocketbase/RecordOperations";
-  import {Edit, Plus} from "lucide-svelte";
-  //@ts-ignore
-  import * as Sheet from "$lib/components/utility/sheet/index.js";
-  import LeafletMapCoordinatePicker from "$lib/components/map/LeafletMapCoordinatePicker.svelte";
-  import {toastController} from "$lib/service/ToastController.svelte.ts";
+import { invalidate } from "$app/navigation"
+import type { ExpandedClub } from "$lib/model/ExpandedResponse"
+import type { LocationsResponse } from "$lib/model/pb-types"
+import { save } from "$lib/pocketbase/RecordOperations"
+import { Edit, Plus } from "lucide-svelte"
+//@ts-ignore
+import * as Sheet from "$lib/components/utility/sheet/index.js"
+import LeafletMapCoordinatePicker from "$lib/components/map/LeafletMapCoordinatePicker.svelte"
+import { toastController } from "$lib/service/ToastController.svelte.ts"
 
-  // Gail S. Halvorsen Park coordinates
-  const DEFAULT_LATITUDE = 52.482762;
-  const DEFAULT_LONGITUDE = 13.407932;
+// Gail S. Halvorsen Park coordinates
+const DEFAULT_LATITUDE = 52.482762
+const DEFAULT_LONGITUDE = 13.407932
 
-  interface Props {
-    club: ExpandedClub;
-    location?: LocationsResponse | null;
-    buttonClasses?: string;
+interface Props {
+  club: ExpandedClub
+  location?: LocationsResponse | null
+  buttonClasses?: string
+}
+
+let { location = null, club, buttonClasses = "" }: Props = $props()
+
+const form = $state(
+  location ?? {
+    id: "",
+    name: "",
+    street: "",
+    postal_code: "",
+    city: "",
+    address_addon: "",
+    country: "",
+    human_country: "",
+    internal_name: "",
+    bsm_id: 0,
+    latitude: DEFAULT_LATITUDE,
+    longitude: DEFAULT_LONGITUDE,
+    club: club.id,
+  }
+)
+
+let open = $state(false)
+
+async function submitForm(e: SubmitEvent) {
+  e.preventDefault()
+  form.club = club.id
+
+  let result: LocationsResponse | null = null
+
+  try {
+    result = await save<LocationsResponse>("locations", form)
+  } catch {
+    toastController.triggerGenericFormErrorMessage("Location")
   }
 
-  let {location = null, club, buttonClasses = ""}: Props = $props();
-
-
-  const form = $state(
-      location ?? {
-        id: "",
-        name: "",
-        street: "",
-        postal_code: "",
-        city: "",
-        address_addon: "",
-        country: "",
-        human_country: "",
-        internal_name: "",
-        bsm_id: 0,
-        latitude: DEFAULT_LATITUDE,
-        longitude: DEFAULT_LONGITUDE,
-        club: club.id,
-      },
-  );
-
-  let open = $state(false);
-
-  async function submitForm(e: SubmitEvent) {
-    e.preventDefault();
-    form.club = club.id;
-
-    let result: LocationsResponse | null = null;
-
-    try {
-      result = await save<LocationsResponse>("locations", form);
-    } catch {
-      toastController.triggerGenericFormErrorMessage("Location");
-    }
-
-    if (result) {
-      toastController.triggerGenericFormSuccessMessage("Location");
-      open = false;
-    }
-    await invalidate("club:locations");
+  if (result) {
+    toastController.triggerGenericFormSuccessMessage("Location")
+    open = false
   }
+  await invalidate("club:locations")
+}
 </script>
 
 <Sheet.Root bind:open={open}>

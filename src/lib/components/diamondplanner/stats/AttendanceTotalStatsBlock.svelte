@@ -1,23 +1,23 @@
 <script lang="ts">
-  import type {AttendanceTotal} from "$lib/model/PersonalAttendanceStats";
-  import StatsBlockContent from "$lib/components/utility/StatsBlockContent.svelte";
-  import type {SingleStatElement} from "$lib/types/SingleStatElement";
-  import {capitalize} from "$lib/functions/capitalize";
+import type { AttendanceTotal } from "$lib/model/PersonalAttendanceStats"
+import StatsBlockContent from "$lib/components/utility/StatsBlockContent.svelte"
+import type { SingleStatElement } from "$lib/types/SingleStatElement"
+import { capitalize } from "$lib/functions/capitalize"
 
-  interface Props {
-    season: number | "All Time"
-    attendance: AttendanceTotal
-  }
+interface Props {
+  season: number | "All Time"
+  attendance: AttendanceTotal
+}
 
-  let {attendance, season}: Props = $props()
+let { attendance, season }: Props = $props()
 
-  const title = capitalize(attendance.type)
+const title = capitalize(attendance.type)
 
-  const block: SingleStatElement = {
-    title: title,
-    value: `${attendance.attended} / ${attendance.total}`,
-    desc: `All possible events of this type for ${season}`,
-  };
+const block: SingleStatElement = {
+  title: title,
+  value: `${attendance.attended} / ${attendance.total}`,
+  desc: `All possible events of this type for ${season}`,
+}
 </script>
 
 <div class="card preset-tonal-surface shadow-lg">

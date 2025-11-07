@@ -1,14 +1,14 @@
 <script lang="ts">
-  import type {License} from "bsm.js";
-  import LicenseLevelIndicator from "$lib/components/club/licenses/LicenseLevelIndicator.svelte";
-  import {Shirt} from "lucide-svelte";
-  import GenericDetailRow from "$lib/components/utility/GenericDetailRow.svelte";
+import type { License } from "bsm.js"
+import LicenseLevelIndicator from "$lib/components/club/licenses/LicenseLevelIndicator.svelte"
+import { Shirt } from "lucide-svelte"
+import GenericDetailRow from "$lib/components/utility/GenericDetailRow.svelte"
 
-  interface Props {
-    license: License,
-  }
+interface Props {
+  license: License
+}
 
-  let {license}: Props = $props();
+let { license }: Props = $props()
 </script>
 
 <article class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">

@@ -1,12 +1,12 @@
 <script lang="ts">
-  import type {Table} from "bsm.js";
-  import {env} from "$env/dynamic/public";
+import type { Table } from "bsm.js"
+import { env } from "$env/dynamic/public"
 
-  interface Props {
-    table: Table;
-  }
+interface Props {
+  table: Table
+}
 
-  let {table}: Props = $props();
+let { table }: Props = $props()
 </script>
 
 <div class="table-wrap">
