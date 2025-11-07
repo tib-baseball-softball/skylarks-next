@@ -125,7 +125,9 @@
     },
     "passwordAuth": {
       "enabled": true,
-      "identityFields": ["email"]
+      "identityFields": [
+        "email"
+      ]
     },
     "mfa": {
       "enabled": false,
@@ -296,7 +298,13 @@
         "id": "users_avatar",
         "maxSelect": 1,
         "maxSize": 5242880,
-        "mimeTypes": ["image/jpeg", "image/png", "image/svg+xml", "image/gif", "image/webp"],
+        "mimeTypes": [
+          "image/jpeg",
+          "image/png",
+          "image/svg+xml",
+          "image/gif",
+          "image/webp"
+        ],
         "name": "avatar",
         "presentable": false,
         "protected": false,
@@ -376,7 +384,23 @@
         "required": false,
         "system": false,
         "type": "select",
-        "values": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"]
+        "values": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14"
+        ]
       },
       {
         "hidden": false,
@@ -387,7 +411,12 @@
         "required": false,
         "system": false,
         "type": "select",
-        "values": ["none", "left", "right", "switch"]
+        "values": [
+          "none",
+          "left",
+          "right",
+          "switch"
+        ]
       },
       {
         "hidden": false,
@@ -398,7 +427,12 @@
         "required": false,
         "system": false,
         "type": "select",
-        "values": ["none", "left", "right", "switch"]
+        "values": [
+          "none",
+          "left",
+          "right",
+          "switch"
+        ]
       },
       {
         "hidden": false,
@@ -423,7 +457,13 @@
         "required": false,
         "system": false,
         "type": "select",
-        "values": ["none", "A", "B", "C", "D"]
+        "values": [
+          "none",
+          "A",
+          "B",
+          "C",
+          "D"
+        ]
       },
       {
         "hidden": false,
@@ -434,7 +474,13 @@
         "required": false,
         "system": false,
         "type": "select",
-        "values": ["none", "A", "B", "C", "D"]
+        "values": [
+          "none",
+          "A",
+          "B",
+          "C",
+          "D"
+        ]
       },
       {
         "hidden": false,
@@ -464,6 +510,15 @@
       },
       {
         "hidden": false,
+        "id": "bool2893625327",
+        "name": "display_on_website",
+        "presentable": false,
+        "required": false,
+        "system": false,
+        "type": "bool"
+      },
+      {
+        "hidden": false,
         "id": "_pbf_autodate_created_",
         "name": "created",
         "onCreate": true,
@@ -488,7 +543,10 @@
       "CREATE UNIQUE INDEX `__pb_users_auth__email_idx` ON `users` (email) WHERE email != ''",
       "CREATE UNIQUE INDEX `__pb_users_auth__tokenKey_idx` ON `users` (tokenKey)",
       "CREATE INDEX `idx_zbjtgYA` ON `users` (\n  `teams`,\n  `club`\n)",
-      "CREATE INDEX `idx_LkeR6Uf` ON `users` (\n  `bsm_id`,\n  `club`,\n  `teams`\n)"
+      "CREATE INDEX `idx_LkeR6Uf` ON `users` (\n  `bsm_id`,\n  `club`,\n  `teams`\n)",
+      "CREATE INDEX `idx_Gqr1QzTOdP` ON `users` (`bsm_id`)",
+      "CREATE INDEX `idx_0ElCGfOghH` ON `users` (`club`)",
+      "CREATE INDEX `idx_4gDlHi0pKv` ON `users` (`teams`)"
     ],
     "system": false,
     "authRule": "verified=true",
@@ -511,7 +569,9 @@
     },
     "passwordAuth": {
       "enabled": true,
-      "identityFields": ["email"]
+      "identityFields": [
+        "email"
+      ]
     },
     "mfa": {
       "enabled": false,
@@ -1020,7 +1080,11 @@
         "required": true,
         "system": false,
         "type": "select",
-        "values": ["info", "warning", "danger"]
+        "values": [
+          "info",
+          "warning",
+          "danger"
+        ]
       },
       {
         "cascadeDelete": true,
@@ -1096,7 +1160,9 @@
         "type": "autodate"
       }
     ],
-    "indexes": ["CREATE INDEX `idx_yJqhZETWyh` ON `announcements` (\n  `club`,\n  `team`\n)"],
+    "indexes": [
+      "CREATE INDEX `idx_yJqhZETWyh` ON `announcements` (\n  `club`,\n  `team`\n)"
+    ],
     "system": false
   },
   {
@@ -1211,7 +1277,9 @@
         "type": "autodate"
       }
     ],
-    "indexes": ["CREATE INDEX `idx_lntUaHC` ON `clubs` (\n  `bsm_id`,\n  `name`\n)"],
+    "indexes": [
+      "CREATE INDEX `idx_lntUaHC` ON `clubs` (\n  `bsm_id`,\n  `name`\n)"
+    ],
     "system": false
   },
   {
@@ -1423,7 +1491,11 @@
         "required": true,
         "system": false,
         "type": "select",
-        "values": ["game", "practice", "misc"]
+        "values": [
+          "game",
+          "practice",
+          "misc"
+        ]
       },
       {
         "cascadeDelete": false,
@@ -2158,7 +2230,11 @@
         "required": false,
         "system": false,
         "type": "select",
-        "values": ["in", "out", "maybe"]
+        "values": [
+          "in",
+          "out",
+          "maybe"
+        ]
       },
       {
         "hidden": false,
@@ -2181,7 +2257,9 @@
         "type": "autodate"
       }
     ],
-    "indexes": ["CREATE UNIQUE INDEX `idx_YCrorbP` ON `participations` (\n  `user`,\n  `event`\n)"],
+    "indexes": [
+      "CREATE UNIQUE INDEX `idx_YCrorbP` ON `participations` (\n  `user`,\n  `event`\n)"
+    ],
     "system": false
   },
   {
@@ -2343,7 +2421,10 @@
         "required": true,
         "system": false,
         "type": "select",
-        "values": ["adults", "minors"]
+        "values": [
+          "adults",
+          "minors"
+        ]
       },
       {
         "cascadeDelete": true,
@@ -2538,7 +2619,9 @@
         "type": "autodate"
       }
     ],
-    "indexes": ["CREATE INDEX `idx_m6a1WEk` ON `uniformsets` (`club`)"],
+    "indexes": [
+      "CREATE INDEX `idx_m6a1WEk` ON `uniformsets` (`club`)"
+    ],
     "system": false
   }
 ]

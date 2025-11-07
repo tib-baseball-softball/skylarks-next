@@ -45,6 +45,14 @@ func (u *User) SetEmailVisibility(visible bool) {
 	u.Set("emailVisibility", visible)
 }
 
+func (u *User) DisplayOnWebsite() bool {
+	return u.GetBool("display_on_website")
+}
+
+func (u *User) SetDisplayOnWebsite(visible bool) {
+	u.Set("display_on_website", visible)
+}
+
 func (u *User) Verified() bool {
 	return u.GetBool("verified")
 }

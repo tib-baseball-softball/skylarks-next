@@ -27,7 +27,9 @@
       "!**/yarn.lock",
       "!**/bun.lock",
       "!**/bun.lockb",
-      "!./static/"
+      "!./static/",
+      "!**/pb_schema.json",
+      "!**/pb-types.ts"
     ]
   },
   "linter": {
