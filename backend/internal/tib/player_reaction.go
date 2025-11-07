@@ -49,6 +49,11 @@ func sendUpdatedPlayerData(record *core.Record, app dp.LogOnlyApp, targetURL str
 	player := &dp.User{}
 	player.SetProxyRecord(record)
 
+	if player.DisplayOnWebsite() == false {
+		app.Logger().Debug("player has chosen not to be displayed on website, skipping reaction")
+		return nil
+	}
+
 	positions := player.GetStringSlice("position")
 	var posInts []int
 	for _, p := range positions {

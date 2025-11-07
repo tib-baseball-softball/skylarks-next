@@ -35,6 +35,7 @@ func buildTestRecord() *core.Record {
 	player.SetScorer("C")
 	player.SetUmpire("B")
 	player.SetImage("pic.png")
+	player.SetDisplayOnWebsite(true)
 
 	return player.Record
 }
