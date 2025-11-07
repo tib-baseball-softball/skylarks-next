@@ -1,17 +1,17 @@
 <script lang="ts">
-import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte"
-import Switch from "$lib/components/utility/Switch.svelte"
-// @ts-ignore
+// @ts-expect-error
 import { Tabs } from "bits-ui"
 import { Gameday } from "bsm.js"
-import { preferences } from "$lib/globals.svelte.ts"
-import LeagueFilter from "$lib/components/utility/LeagueFilter.svelte"
-import { goto } from "$app/navigation"
 import { browser } from "$app/environment"
+import { goto } from "$app/navigation"
 import GamecenterMatchSection from "$lib/components/match/GamecenterMatchSection.svelte"
-import type { PageProps } from "./$types"
 import ReloadUponPreferenceChange from "$lib/components/navigation/ReloadUponPreferenceChange.svelte"
+import LeagueFilter from "$lib/components/utility/LeagueFilter.svelte"
 import ProgressRing from "$lib/components/utility/ProgressRing.svelte"
+import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte"
+import Switch from "$lib/components/utility/Switch.svelte"
+import { preferences } from "$lib/globals.svelte.ts"
+import type { PageProps } from "./$types"
 
 const DEFAULT_LEAGUE_GROUP_ID = 0
 
@@ -56,8 +56,8 @@ function onGamedayChange(value: string) {
     <div class="flex gap-2 my-4 justify-end">
       <Switch
               --switch-active-bg="light-dark(var(--color-surface-900), var(--color-tertiary-700))"
+              bind:checked={showExternal}
               name="slide"
-              onCheckedChange={(e) => (showExternal = e.checked)}
       />
       <p>Show external games</p>
     </div>

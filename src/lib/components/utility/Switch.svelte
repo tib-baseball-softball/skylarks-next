@@ -12,7 +12,7 @@ interface Props {
 
 let {
   name,
-  checked = false,
+  checked = $bindable(),
   disabled = false,
   className,
   onCheckedChange,
@@ -70,6 +70,7 @@ function handleChange(event: Event) {
         height: calc(var(--spacing) * 6);
         padding: calc(var(--spacing) * 0.5);
         border-radius: calc(infinity * 1px);
+        border: 1px solid var(--color-surface-700-300);
         display: flex;
         align-items: center;
         cursor: pointer;

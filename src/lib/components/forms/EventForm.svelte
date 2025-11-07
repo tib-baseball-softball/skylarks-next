@@ -1,17 +1,17 @@
 <script lang="ts">
+import type { Snippet } from "svelte"
 import { invalidate } from "$app/navigation"
+import TabsRadioGroup from "$lib/components/utility/form/TabsRadioGroup.svelte"
+import Switch from "$lib/components/utility/Switch.svelte"
+//@ts-expect-error
+import * as Sheet from "$lib/components/utility/sheet/index.js"
 import type { ExpandedEvent } from "$lib/model/ExpandedResponse"
+import type { Extension } from "$lib/model/ExpandedResponse.js"
 import { type LocationsResponse, type UniformsetsResponse } from "$lib/model/pb-types"
 import { client } from "$lib/pocketbase/index.svelte"
-import Switch from "$lib/components/utility/Switch.svelte"
-import Flatpickr from "../utility/Flatpickr.svelte"
 import { DateTimeUtility } from "$lib/service/DateTimeUtility.js"
-//@ts-ignore
-import * as Sheet from "$lib/components/utility/sheet/index.js"
-import type { Snippet } from "svelte"
-import type { Extension } from "$lib/model/ExpandedResponse.js"
 import { toastController } from "$lib/service/ToastController.svelte.ts"
-import TabsRadioGroup from "$lib/components/utility/form/TabsRadioGroup.svelte"
+import Flatpickr from "../utility/Flatpickr.svelte"
 
 interface Props {
   event: ExpandedEvent | null
@@ -206,8 +206,8 @@ async function submitForm(e: SubmitEvent) {
         {/await}
 
         <Switch
+                bind:checked={form.cancelled}
                 name="cancelled"
-                onCheckedChange={(e) => (form.cancelled = e.checked)}
         >
           Cancelled
         </Switch>
