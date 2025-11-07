@@ -331,6 +331,17 @@ func TestAPIRules(t *testing.T) {
 			ExpectedContent: []string{"The requested resource wasn't found."},
 			TestAppFactory:  setupTestApp,
 		},
+		{
+			Name:   "Nobody can delete clubs (superadmin only)",
+			Method: http.MethodDelete,
+			URL:    "/api/collections/clubs/records/" + clubA.ID,
+			Headers: map[string]string{
+				"Authorization": aClubAdminToken,
+			},
+			ExpectedStatus:  http.StatusForbidden,
+			ExpectedContent: []string{"Only superusers can perform this action."},
+			TestAppFactory:  setupTestApp,
+		},
 	}
 
 	for _, s := range scenarios {
