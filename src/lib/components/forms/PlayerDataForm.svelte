@@ -1,17 +1,18 @@
 <script lang="ts">
+import { SquarePen } from "lucide-svelte"
+import TabsRadioGroup from "$lib/components/utility/form/TabsRadioGroup.svelte"
+import Switch from "$lib/components/utility/Switch.svelte"
+//@ts-expect-error
+import * as Sheet from "$lib/components/utility/sheet/index.js"
+import TagsInput from "$lib/components/utility/TagsInput.svelte"
 import type { CustomAuthModel } from "$lib/model/ExpandedResponse"
 import { authSettings, client } from "$lib/pocketbase/index.svelte"
+import { toastController } from "$lib/service/ToastController.svelte.ts"
 import {
   getAllBaseballPositionStringValues,
   positionEnumStringValuesToKeys,
   positionKeysToEnumStringValues,
 } from "$lib/types/BaseballPosition"
-import { SquarePen } from "lucide-svelte"
-//@ts-ignore
-import * as Sheet from "$lib/components/utility/sheet/index.js"
-import { toastController } from "$lib/service/ToastController.svelte.ts"
-import TabsRadioGroup from "$lib/components/utility/form/TabsRadioGroup.svelte"
-import TagsInput from "$lib/components/utility/TagsInput.svelte"
 
 interface ValidateArgs {
   inputValue: string
@@ -36,6 +37,7 @@ const form = $state({
   umpire: authRecord.umpire ?? "0",
   scorer: authRecord.scorer ?? "0",
   bsm_id: authRecord.bsm_id ?? 0,
+  display_on_website: authRecord.display_on_website ?? false,
 })
 
 let open = $state(false)
@@ -127,7 +129,16 @@ async function submitForm(e: SubmitEvent) {
           />
         </label>
 
-        <label class="label flex flex-col gap-1 md:gap-2 md:col-span-2">
+        <span class="label-wide">
+          <Switch
+                  bind:checked={form.display_on_website}
+                  name="display_on_website"
+          >
+            Display this data publicly on team website
+          </Switch>
+        </span>
+
+        <label class="label label-wide flex flex-col gap-1 md:gap-2">
           Positions
           <TagsInput
                   name="positions"
@@ -136,7 +147,7 @@ async function submitForm(e: SubmitEvent) {
                   validate={validatePositionValue}
                   value={selectedPositions}
           />
-          <span class="flex flex-wrap gap-2 md:col-span-2">
+          <span class="flex flex-wrap gap-2 label-wide">
           {#each possiblePositionValues as value}
             <button
                     type="button"
@@ -187,3 +198,10 @@ async function submitForm(e: SubmitEvent) {
     </form>
   </Sheet.Content>
 </Sheet.Root>
+
+<style>
+    .label-wide {
+        grid-column: span 2 / span 2;
+        gap: calc(var(--spacing) * 2);
+    }
+</style>

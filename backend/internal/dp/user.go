@@ -49,8 +49,8 @@ func (u *User) DisplayOnWebsite() bool {
 	return u.GetBool("display_on_website")
 }
 
-func (u *User) SetDisplayOnWebsite(visible bool) {
-	u.Set("display_on_website", visible)
+func (u *User) SetDisplayOnWebsite(display bool) {
+	u.Set("display_on_website", display)
 }
 
 func (u *User) Verified() bool {
