@@ -165,6 +165,13 @@ func bindAppHooks(app core.App, client bsm.APIClient) {
 		app.Cron().MustAdd("TeamDatasetImport", "30 * * * *", func() {
 			tib.ImportTeamDatasets(app, client)
 		})
+
+		app.Cron().MustAdd("CacheCleanup", "0 4 * * *", func() {
+			err := tib.CleanupOutdatedCaches(app)
+			if err != nil {
+				return
+			}
+		})
 	}
 }
 
@@ -211,6 +218,16 @@ func main() {
 		Use: "import:teamdatasets",
 		Run: func(cmd *cobra.Command, args []string) {
 			tib.ImportTeamDatasets(app, client)
+		},
+	})
+
+	app.RootCmd.AddCommand(&cobra.Command{
+		Use: "cache:cleanup",
+		Run: func(cmd *cobra.Command, args []string) {
+			err := tib.CleanupOutdatedCaches(app)
+			if err != nil {
+				log.Print("Error while running CacheCleanup: " + err.Error())
+			}
 		},
 	})
 
