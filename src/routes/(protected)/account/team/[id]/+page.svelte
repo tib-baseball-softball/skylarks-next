@@ -1,42 +1,45 @@
 <script lang="ts">
-  import TeamTeaserCard from "$lib/components/diamondplanner/team/TeamTeaserCard.svelte";
-  import EventTeaser from "$lib/components/diamondplanner/event/EventTeaser.svelte";
-  import Paginator from "$lib/pocketbase/Paginator.svelte";
-  import {goto} from "$app/navigation";
-  import type {CustomAuthModel, EventType} from "$lib/model/ExpandedResponse.js";
-  // @ts-ignore
-  import {Tabs} from "bits-ui";
-  import {authSettings} from "$lib/pocketbase/index.svelte";
-  import TeamAdminSection from "$lib/components/diamondplanner/team/TeamAdminSection.svelte";
-  import {Users} from "lucide-svelte";
-  import AnnouncementSectionContent from "$lib/components/announcements/AnnouncementSectionContent.svelte";
-  import type {PageProps} from "./$types";
-  import AnnouncementForm from "$lib/components/forms/AnnouncementForm.svelte";
+import TeamTeaserCard from "$lib/components/diamondplanner/team/TeamTeaserCard.svelte"
+import EventTeaser from "$lib/components/diamondplanner/event/EventTeaser.svelte"
+import Paginator from "$lib/pocketbase/Paginator.svelte"
+import { goto } from "$app/navigation"
+import type { CustomAuthModel, EventType } from "$lib/model/ExpandedResponse.js"
+// @ts-ignore
+import { Tabs } from "bits-ui"
+import { authSettings } from "$lib/pocketbase/index.svelte"
+import TeamAdminSection from "$lib/components/diamondplanner/team/TeamAdminSection.svelte"
+import { Users } from "lucide-svelte"
+import AnnouncementSectionContent from "$lib/components/announcements/AnnouncementSectionContent.svelte"
+import type { PageProps } from "./$types"
+import AnnouncementForm from "$lib/components/forms/AnnouncementForm.svelte"
 
-  let {data}: PageProps = $props();
-  const events = $derived(data.events);
-  let currentPage = $derived($events.page);
-  let announcementStore = $derived(data.announcementStore);
+let { data }: PageProps = $props()
+const events = $derived(data.events)
+let currentPage = $derived($events.page)
+let announcementStore = $derived(data.announcementStore)
 
-  let showEvents = $state("next");
-  let sorting: "asc" | "desc" | string = $state("asc");
-  let showTypes: EventType | "any" | string = $state("any");
+let showEvents = $state("next")
+let sorting: "asc" | "desc" | string = $state("asc")
+let showTypes: EventType | "any" | string = $state("any")
 
-  const reloadWithQuery = () => {
-    let queryString = `?timeframe=${showEvents}&page=${currentPage}&sort=${sorting}&type=${showTypes}`;
+const reloadWithQuery = () => {
+  let queryString = `?timeframe=${showEvents}&page=${currentPage}&sort=${sorting}&type=${showTypes}`
 
-    goto(queryString, {
-      noScroll: true,
-    });
-  };
+  goto(queryString, {
+    noScroll: true,
+  })
+}
 
-  $effect.pre(() => {
-    console.log(showEvents);
-    reloadWithQuery();
-  });
+$effect.pre(() => {
+  console.log(showEvents)
+  reloadWithQuery()
+})
 
-  const authRecord = $derived(authSettings.record as CustomAuthModel);
-  const canEdit = $derived(data.team.admins.includes(authRecord?.id) || data.team?.expand?.club?.admins.includes(authRecord?.id));
+const authRecord = $derived(authSettings.record as CustomAuthModel)
+const canEdit = $derived(
+  data.team.admins.includes(authRecord?.id) ||
+    data.team?.expand?.club?.admins.includes(authRecord?.id)
+)
 </script>
 
 <h1 class="h1 my-3!">{data.team.name} ({data.team?.expand?.club.name})</h1>

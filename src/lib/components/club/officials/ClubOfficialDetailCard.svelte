@@ -1,16 +1,16 @@
 <script lang="ts">
-  import GenericDetailRow from "$lib/components/utility/GenericDetailRow.svelte";
-  import type {ClubFunction} from "bsm.js";
-  import ClubOfficialIcon from "$lib/components/club/officials/ClubOfficialIcon.svelte";
-  import {Calendar, Diamond, Mail, Tag} from "lucide-svelte";
+import GenericDetailRow from "$lib/components/utility/GenericDetailRow.svelte"
+import type { ClubFunction } from "bsm.js"
+import ClubOfficialIcon from "$lib/components/club/officials/ClubOfficialIcon.svelte"
+import { Calendar, Diamond, Mail, Tag } from "lucide-svelte"
 
-  interface Props {
-    clubOfficial: ClubFunction;
-  }
+interface Props {
+  clubOfficial: ClubFunction
+}
 
-  let {clubOfficial}: Props = $props();
+let { clubOfficial }: Props = $props()
 
-  const admissionDate = $derived(new Date(clubOfficial.admission_date));
+const admissionDate = $derived(new Date(clubOfficial.admission_date))
 </script>
 
 <article class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">

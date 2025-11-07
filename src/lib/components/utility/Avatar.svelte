@@ -1,12 +1,12 @@
 <script lang="ts">
-  interface Props {
-    background?: string;
-    classes?: string;
-    src?: string | undefined;
-    fallback?: string;
-  }
+interface Props {
+  background?: string
+  classes?: string
+  src?: string | undefined
+  fallback?: string
+}
 
-  let {background = "", classes = "", src, fallback = ""}: Props = $props();
+let { background = "", classes = "", src, fallback = "" }: Props = $props()
 </script>
 
 {#if src}

@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type {PageProps} from './$types';
-  import ClubDetailSection from "$lib/components/club/ClubDetailSection.svelte";
-  import {Info, MapPinHouse, Section, Trophy} from "lucide-svelte";
+import type { PageProps } from "./$types"
+import ClubDetailSection from "$lib/components/club/ClubDetailSection.svelte"
+import { Info, MapPinHouse, Section, Trophy } from "lucide-svelte"
 
-  let {data}: PageProps = $props();
+let { data }: PageProps = $props()
 </script>
 
 <h1 class="h1">Club Details</h1>

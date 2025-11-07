@@ -1,67 +1,69 @@
 <script lang="ts">
-  import {invalidateAll} from "$app/navigation";
-  import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  import type {AnnouncementsResponse, ClubsResponse, TeamsResponse} from "$lib/model/pb-types";
-  import type {CustomAuthModel, ExpandedAnnouncement} from "$lib/model/ExpandedResponse";
-  import {Plus, SquarePen} from "lucide-svelte";
-  //@ts-ignore
-  import * as Sheet from "$lib/components/utility/sheet/index.js";
-  import {toastController} from "$lib/service/ToastController.svelte.ts";
+import { invalidateAll } from "$app/navigation"
+import { authSettings, client } from "$lib/pocketbase/index.svelte"
+import type { AnnouncementsResponse, ClubsResponse, TeamsResponse } from "$lib/model/pb-types"
+import type { CustomAuthModel, ExpandedAnnouncement } from "$lib/model/ExpandedResponse"
+import { Plus, SquarePen } from "lucide-svelte"
+//@ts-ignore
+import * as Sheet from "$lib/components/utility/sheet/index.js"
+import { toastController } from "$lib/service/ToastController.svelte.ts"
 
-  const authRecord = $derived(authSettings.record as CustomAuthModel);
+const authRecord = $derived(authSettings.record as CustomAuthModel)
 
-  interface Props {
-    announcement: ExpandedAnnouncement | null;
-    club: ClubsResponse | null;
-    team: TeamsResponse | null;
-    buttonClasses?: string;
-    showLabel?: boolean,
+interface Props {
+  announcement: ExpandedAnnouncement | null
+  club: ClubsResponse | null
+  team: TeamsResponse | null
+  buttonClasses?: string
+  showLabel?: boolean
+}
+
+let {
+  announcement = null,
+  club = null,
+  team = null,
+  buttonClasses = "",
+  showLabel = true,
+}: Props = $props()
+
+// svelte-ignore state_referenced_locally - we want just the initial value here
+let form: Partial<ExpandedAnnouncement> = $state(
+  announcement ?? {
+    title: "",
+    bodytext: "",
+    link: "",
+    link_text: "",
+    author: authRecord?.id,
+    club: club?.id,
+    team: team?.id,
+  }
+)
+
+let open = $state(false)
+
+const isEditing = $derived(announcement !== null)
+
+async function submitForm(e: SubmitEvent) {
+  e.preventDefault()
+
+  let result: AnnouncementsResponse | null = null
+
+  try {
+    if (form.id) {
+      result = await client.collection("announcements").update<AnnouncementsResponse>(form.id, form)
+    } else {
+      result = await client.collection("announcements").create<AnnouncementsResponse>(form)
+    }
+  } catch {
+    toastController.triggerGenericFormErrorMessage("Announcement")
   }
 
-  let {announcement = null, club = null, team = null, buttonClasses = "", showLabel = true}: Props = $props();
-
-  // svelte-ignore state_referenced_locally - we want just the initial value here
-  let form: Partial<ExpandedAnnouncement> = $state(
-      announcement ?? {
-        title: "",
-        bodytext: "",
-        link: "",
-        link_text: "",
-        author: authRecord?.id,
-        club: club?.id,
-        team: team?.id,
-      },
-  );
-
-  let open = $state(false);
-
-  const isEditing = $derived(announcement !== null);
-
-  async function submitForm(e: SubmitEvent) {
-    e.preventDefault();
-
-    let result: AnnouncementsResponse | null = null;
-
-    try {
-      if (form.id) {
-        result = await client
-            .collection("announcements")
-            .update<AnnouncementsResponse>(form.id, form);
-      } else {
-        result = await client
-            .collection("announcements")
-            .create<AnnouncementsResponse>(form);
-      }
-    } catch {
-      toastController.triggerGenericFormErrorMessage("Announcement");
-    }
-
-    if (result) {
-      toastController.triggerGenericFormSuccessMessage("Announcement");
-      open = false;
-    }
-    await invalidateAll();
+  if (result) {
+    toastController.triggerGenericFormSuccessMessage("Announcement")
+    open = false
   }
+  await invalidateAll()
+}
 </script>
 
 <Sheet.Root bind:open={open}>

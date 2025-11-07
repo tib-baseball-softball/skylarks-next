@@ -1,69 +1,62 @@
 <script lang="ts">
-  import {invalidate} from "$app/navigation";
-  import type {EventSeriesCreationData, ExpandedTeam} from "$lib/model/ExpandedResponse.ts";
-  import {client} from "$lib/pocketbase/index.svelte.js";
-  import {DateTimeUtility} from "$lib/service/DateTimeUtility.js";
-  import Flatpickr from "$lib/components/utility/Flatpickr.svelte";
-  import type {LocationsResponse} from "$lib/model/pb-types.ts";
-  import {toastController} from "$lib/service/ToastController.svelte.ts";
+import { invalidate } from "$app/navigation"
+import type { EventSeriesCreationData, ExpandedTeam } from "$lib/model/ExpandedResponse.ts"
+import { client } from "$lib/pocketbase/index.svelte.js"
+import { DateTimeUtility } from "$lib/service/DateTimeUtility.js"
+import Flatpickr from "$lib/components/utility/Flatpickr.svelte"
+import type { LocationsResponse } from "$lib/model/pb-types.ts"
+import { toastController } from "$lib/service/ToastController.svelte.ts"
 
-  interface Props {
-    eventSeries: EventSeriesCreationData | null,
-    team: ExpandedTeam,
-    showForm: boolean
+interface Props {
+  eventSeries: EventSeriesCreationData | null
+  team: ExpandedTeam
+  showForm: boolean
+}
+
+let { eventSeries, team, showForm = $bindable() }: Props = $props()
+
+const formDefault = $state({
+  id: "",
+  title: "",
+  interval: 7,
+  duration: 0,
+  series_start: "",
+  series_end: "",
+  desc: "",
+  location: "",
+  team: team?.id,
+})
+
+const form: EventSeriesCreationData = $derived(eventSeries ?? formDefault)
+
+const isNewSeries = $derived(form.id === "")
+
+const locationOptions = client.collection("locations").getFullList<LocationsResponse>({
+  filter: `club = "${team.club}"`,
+  requestKey: `locations-for-eventSeries-${team.id}`,
+})
+
+async function submitForm(e: SubmitEvent) {
+  e.preventDefault()
+
+  let result: EventSeriesCreationData | null = null
+
+  try {
+    if (form.id) {
+      result = await client.collection("eventseries").update<EventSeriesCreationData>(form.id, form)
+    } else {
+      result = await client.collection("eventseries").create<EventSeriesCreationData>(form)
+    }
+  } catch {
+    toastController.triggerGenericFormErrorMessage("Event Series")
   }
 
-  let {eventSeries, team, showForm = $bindable()}: Props = $props();
-
-
-  const formDefault = $state({
-    id: "",
-    title: "",
-    interval: 7,
-    duration: 0,
-    series_start: "",
-    series_end: "",
-    desc: "",
-    location: "",
-    team: team?.id,
-  });
-
-  const form: EventSeriesCreationData = $derived(
-      eventSeries ?? formDefault,
-  );
-
-  const isNewSeries = $derived(form.id === "");
-
-  const locationOptions = client.collection("locations").getFullList<LocationsResponse>({
-    filter: `club = "${team.club}"`,
-    requestKey: `locations-for-eventSeries-${team.id}`,
-  });
-
-  async function submitForm(e: SubmitEvent) {
-    e.preventDefault();
-
-    let result: EventSeriesCreationData | null = null;
-
-    try {
-      if (form.id) {
-        result = await client
-            .collection("eventseries")
-            .update<EventSeriesCreationData>(form.id, form);
-      } else {
-        result = await client
-            .collection("eventseries")
-            .create<EventSeriesCreationData>(form);
-      }
-    } catch {
-      toastController.triggerGenericFormErrorMessage("Event Series");
-    }
-
-    if (result) {
-      toastController.triggerGenericFormSuccessMessage("Event Series");
-      showForm = false;
-      await invalidate("event:list");
-    }
+  if (result) {
+    toastController.triggerGenericFormSuccessMessage("Event Series")
+    showForm = false
+    await invalidate("event:list")
   }
+}
 </script>
 
 <h3 class="h3">

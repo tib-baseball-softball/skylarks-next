@@ -1,13 +1,13 @@
 <script lang="ts">
-  import type {TableRow} from "bsm.js";
-  import {Crown, Hash} from "lucide-svelte";
-  import WinningPercentageGauge from "$lib/components/favorite/WinningPercentageGauge.svelte";
+import type { TableRow } from "bsm.js"
+import { Crown, Hash } from "lucide-svelte"
+import WinningPercentageGauge from "$lib/components/favorite/WinningPercentageGauge.svelte"
 
-  interface Props {
-    tableRow: TableRow;
-  }
+interface Props {
+  tableRow: TableRow
+}
 
-  let {tableRow}: Props = $props();
+let { tableRow }: Props = $props()
 </script>
 
 <section class="@container">

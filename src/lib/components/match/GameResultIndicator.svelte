@@ -1,17 +1,17 @@
 <script lang="ts">
-    import type {Match} from "bsm.js";
-    import {MatchDecorator} from "$lib/service/MatchDecorator";
-    import {MatchState} from "$lib/enum/MatchState";
-    import {env} from "$env/dynamic/public";
+import type { Match } from "bsm.js"
+import { MatchDecorator } from "$lib/service/MatchDecorator"
+import { MatchState } from "$lib/enum/MatchState"
+import { env } from "$env/dynamic/public"
 
-    interface Props {
-        match: Match;
-    }
+interface Props {
+  match: Match
+}
 
-    let { match }: Props = $props();
+let { match }: Props = $props()
 
-    const matchDecorator = new MatchDecorator(match)
-    const matchState = matchDecorator.getMatchState(env.PUBLIC_TEAM_NAME)
+const matchDecorator = new MatchDecorator(match)
+const matchState = matchDecorator.getMatchState(env.PUBLIC_TEAM_NAME)
 </script>
 
 <div class="text-lg font-semibold">

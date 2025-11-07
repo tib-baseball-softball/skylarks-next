@@ -1,44 +1,36 @@
 <script lang="ts">
-  import type { Field } from "bsm.js";
-  import { Building2, LandPlot, Link, MapPin } from "lucide-svelte";
-  import { MapUtility } from "$lib/service/MapUtility.ts";
+import type { Field } from "bsm.js"
+import { Building2, LandPlot, Link, MapPin } from "lucide-svelte"
+import { MapUtility } from "$lib/service/MapUtility.ts"
 
-  type DisplayedLocation = Omit<
-    Field,
-    | "created_at"
-    | "updated_at"
-    | "description_html"
-    | "other_information_html"
-    | "groundrules_html"
-    | "id"
-  >;
+type DisplayedLocation = Omit<
+  Field,
+  | "created_at"
+  | "updated_at"
+  | "description_html"
+  | "other_information_html"
+  | "groundrules_html"
+  | "id"
+>
 
-  interface Props {
-    field: DisplayedLocation;
-    classes?: string;
-    showDividers?: boolean;
-  }
+interface Props {
+  field: DisplayedLocation
+  classes?: string
+  showDividers?: boolean
+}
 
-  let {
-    field,
-    classes = "card preset-tonal-surface border border-surface-500 p-3",
-    showDividers = true,
-  }: Props = $props();
+let {
+  field,
+  classes = "card preset-tonal-surface border border-surface-500 p-3",
+  showDividers = true,
+}: Props = $props()
 
-  const googleMapsLink = $derived(
-    MapUtility.buildGoogleMapsURL(
-      field.address_addon,
-      field.latitude,
-      field.longitude,
-    ),
-  );
-  const appleMapsLink = $derived(
-    MapUtility.buildAppleMapsURL(
-      field.address_addon,
-      field.latitude,
-      field.longitude,
-    ),
-  );
+const googleMapsLink = $derived(
+  MapUtility.buildGoogleMapsURL(field.address_addon, field.latitude, field.longitude)
+)
+const appleMapsLink = $derived(
+  MapUtility.buildAppleMapsURL(field.address_addon, field.latitude, field.longitude)
+)
 </script>
 
 <div class={classes}>

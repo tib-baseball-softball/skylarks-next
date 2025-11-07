@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type {PageProps} from './$types';
-  import BallparkDetailCard from "$lib/components/club/ballpark/BallparkDetailCard.svelte";
-  import BallparkTrafficCard from "$lib/components/club/ballpark/BallparkTrafficCard.svelte";
+import type { PageProps } from "./$types"
+import BallparkDetailCard from "$lib/components/club/ballpark/BallparkDetailCard.svelte"
+import BallparkTrafficCard from "$lib/components/club/ballpark/BallparkTrafficCard.svelte"
 
-  let {data}: PageProps = $props();
+let { data }: PageProps = $props()
 </script>
 
 <h1 class="h1">Ballpark Details</h1>

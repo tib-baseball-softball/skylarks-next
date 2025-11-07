@@ -1,82 +1,77 @@
 <script lang="ts">
-  import {invalidate} from "$app/navigation";
-  import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
-  import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  import {Plus, SquarePen} from "lucide-svelte";
-  import type {ClubsResponse, UsersResponse} from "$lib/model/pb-types.ts";
-  import MultiSelectCombobox from "$lib/components/utility/MultiSelectCombobox.svelte";
-  //@ts-ignore
-  import * as Sheet from "$lib/components/utility/sheet/index.js";
-  import {toastController} from "$lib/service/ToastController.svelte.ts";
-  import TabsRadioGroup from "$lib/components/utility/form/TabsRadioGroup.svelte";
+import { invalidate } from "$app/navigation"
+import type { CustomAuthModel, ExpandedTeam } from "$lib/model/ExpandedResponse"
+import { authSettings, client } from "$lib/pocketbase/index.svelte"
+import { Plus, SquarePen } from "lucide-svelte"
+import type { ClubsResponse, UsersResponse } from "$lib/model/pb-types.ts"
+import MultiSelectCombobox from "$lib/components/utility/MultiSelectCombobox.svelte"
+//@ts-ignore
+import * as Sheet from "$lib/components/utility/sheet/index.js"
+import { toastController } from "$lib/service/ToastController.svelte.ts"
+import TabsRadioGroup from "$lib/components/utility/form/TabsRadioGroup.svelte"
 
-  interface Props {
-    club: ClubsResponse,
-    team: ExpandedTeam | null,
-    buttonClasses?: string,
-    showLabel?: boolean,
+interface Props {
+  club: ClubsResponse
+  team: ExpandedTeam | null
+  buttonClasses?: string
+  showLabel?: boolean
+}
+
+let { club, team, buttonClasses = "", showLabel = true }: Props = $props()
+
+const authRecord = $derived(authSettings.record as CustomAuthModel)
+
+let open = $state(false)
+
+const form: Partial<ExpandedTeam> & { age_group: string } = $state(
+  team ?? {
+    id: "",
+    name: "",
+    age_group: "adults",
+    signup_key: "",
+    club: club.id, // no binding, cannot be changed via this form
+    description: "",
+    admins: [],
+  }
+)
+
+let selectedAdmins: UsersResponse[] = $state(form?.expand?.admins ?? [])
+
+const allTeamMembers = client.collection("users").getFullList<UsersResponse>({
+  filter: `teams ?~ '${team?.id}'`,
+  requestKey: `allTeamMembers-${team?.id}`,
+})
+
+async function submitForm(e: SubmitEvent) {
+  e.preventDefault()
+
+  let result: ExpandedTeam | null = null
+
+  form.admins = selectedAdmins.map((admin) => {
+    return admin.id
+  })
+
+  try {
+    if (form.id) {
+      result = await client.collection("teams").update<ExpandedTeam>(form.id, form)
+    } else {
+      // a user creating a team becomes its first admin
+      form.admins.push(authRecord?.id)
+
+      result = await client.collection("teams").create<ExpandedTeam>(form)
+    }
+  } catch {
+    toastController.triggerGenericFormErrorMessage("Team")
   }
 
-  let {club, team, buttonClasses = "", showLabel = true}: Props = $props();
-
-  const authRecord = $derived(authSettings.record as CustomAuthModel);
-
-  let open = $state(false);
-
-
-  const form: Partial<ExpandedTeam> & { age_group: string } = $state(
-      team ?? {
-        id: "",
-        name: "",
-        age_group: "adults",
-        signup_key: "",
-        club: club.id, // no binding, cannot be changed via this form
-        description: "",
-        admins: [],
-      },
-  );
-
-  let selectedAdmins: UsersResponse[] = $state(form?.expand?.admins ?? []);
-
-  const allTeamMembers = client.collection("users").getFullList<UsersResponse>({
-    filter: `teams ?~ '${team?.id}'`,
-    requestKey: `allTeamMembers-${team?.id}`
-  });
-
-  async function submitForm(e: SubmitEvent) {
-    e.preventDefault();
-
-    let result: ExpandedTeam | null = null;
-
-    form.admins = selectedAdmins.map((admin) => {
-      return admin.id;
-    });
-
-    try {
-      if (form.id) {
-        result = await client
-            .collection("teams")
-            .update<ExpandedTeam>(form.id, form);
-      } else {
-        // a user creating a team becomes its first admin
-        form.admins.push(authRecord?.id);
-
-        result = await client
-            .collection("teams")
-            .create<ExpandedTeam>(form);
-      }
-    } catch {
-      toastController.triggerGenericFormErrorMessage("Team");
-    }
-
-    if (result) {
-      toastController.triggerGenericFormSuccessMessage("Team");
-      open = false;
-      await invalidate("teams:list");
-      await invalidate("club:single");
-      await invalidate("nav:load");
-    }
+  if (result) {
+    toastController.triggerGenericFormSuccessMessage("Team")
+    open = false
+    await invalidate("teams:list")
+    await invalidate("club:single")
+    await invalidate("nav:load")
   }
+}
 </script>
 
 <Sheet.Root bind:open={open}>

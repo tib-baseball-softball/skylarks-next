@@ -1,16 +1,16 @@
 <script lang="ts">
-  import type {ExpandedTeam} from "$lib/model/ExpandedResponse.ts";
-  import type {ClubsResponse} from "$lib/model/pb-types.ts";
-  import Dialog from "$lib/components/utility/Dialog.svelte";
-  import TeamMembersForm from "$lib/components/forms/TeamMembersForm.svelte";
-  import {Plus} from "lucide-svelte";
+import type { ExpandedTeam } from "$lib/model/ExpandedResponse.ts"
+import type { ClubsResponse } from "$lib/model/pb-types.ts"
+import Dialog from "$lib/components/utility/Dialog.svelte"
+import TeamMembersForm from "$lib/components/forms/TeamMembersForm.svelte"
+import { Plus } from "lucide-svelte"
 
-  interface Props {
-    club: ClubsResponse,
-    team: ExpandedTeam,
-  }
+interface Props {
+  club: ClubsResponse
+  team: ExpandedTeam
+}
 
-  let {club, team}: Props = $props();
+let { club, team }: Props = $props()
 </script>
 
 <Dialog triggerClasses="btn preset-filled-primary-500">

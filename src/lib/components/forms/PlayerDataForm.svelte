@@ -1,85 +1,83 @@
 <script lang="ts">
-  import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
-  import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  import {
-    getAllBaseballPositionStringValues,
-    positionEnumStringValuesToKeys,
-    positionKeysToEnumStringValues,
-  } from "$lib/types/BaseballPosition";
-  import {SquarePen} from "lucide-svelte";
-  //@ts-ignore
-  import * as Sheet from "$lib/components/utility/sheet/index.js";
-  import {toastController} from "$lib/service/ToastController.svelte.ts";
-  import TabsRadioGroup from "$lib/components/utility/form/TabsRadioGroup.svelte";
-  import TagsInput from "$lib/components/utility/TagsInput.svelte";
+import { SquarePen } from "lucide-svelte"
+import TabsRadioGroup from "$lib/components/utility/form/TabsRadioGroup.svelte"
+import Switch from "$lib/components/utility/Switch.svelte"
+//@ts-expect-error
+import * as Sheet from "$lib/components/utility/sheet/index.js"
+import TagsInput from "$lib/components/utility/TagsInput.svelte"
+import type { CustomAuthModel } from "$lib/model/ExpandedResponse"
+import { authSettings, client } from "$lib/pocketbase/index.svelte"
+import { toastController } from "$lib/service/ToastController.svelte.ts"
+import {
+  getAllBaseballPositionStringValues,
+  positionEnumStringValuesToKeys,
+  positionKeysToEnumStringValues,
+} from "$lib/types/BaseballPosition"
 
-  interface ValidateArgs {
-    inputValue: string;
-    value: string[];
+interface ValidateArgs {
+  inputValue: string
+  value: string[]
+}
+
+interface Props {
+  buttonClasses?: string
+}
+
+let { buttonClasses = "" }: Props = $props()
+
+// Mark: here we do not need to be reactive as we're editing
+const authRecord = authSettings.record as CustomAuthModel
+const form = $state({
+  id: authRecord.id ?? "",
+  number: authRecord.number ?? "",
+  bats: authRecord.bats ?? "",
+  position: [""],
+  throws: authRecord.throws ?? "",
+  image: authRecord.image ?? "",
+  umpire: authRecord.umpire ?? "0",
+  scorer: authRecord.scorer ?? "0",
+  bsm_id: authRecord.bsm_id ?? 0,
+  display_on_website: authRecord.display_on_website ?? false,
+})
+
+let open = $state(false)
+
+const possiblePositionValues = getAllBaseballPositionStringValues()
+let selectedPositions: string[] = $state(positionKeysToEnumStringValues(authRecord.position))
+
+function validatePositionValue(details: ValidateArgs): boolean {
+  return possiblePositionValues.includes(details.inputValue)
+}
+
+function addPosition(value: string) {
+  if (!selectedPositions.includes(value)) {
+    selectedPositions.push(value)
+  } else {
+    toastController.trigger({
+      message: "Position is already selected.",
+      background: "preset-filled-error-500",
+    })
+  }
+}
+
+async function submitForm(e: SubmitEvent) {
+  e.preventDefault()
+
+  form.position = positionEnumStringValuesToKeys(selectedPositions)
+
+  let result: CustomAuthModel | null = null
+
+  try {
+    result = await client.collection("users").update<CustomAuthModel>(form.id, form)
+  } catch {
+    toastController.triggerGenericFormErrorMessage("Player data")
   }
 
-  interface Props {
-    buttonClasses?: string;
+  if (result) {
+    toastController.triggerGenericFormSuccessMessage("Player data")
+    open = false
   }
-
-  let {buttonClasses = ""}: Props = $props();
-
-  // Mark: here we do not need to be reactive as we're editing
-  const authRecord = authSettings.record as CustomAuthModel;
-  const form = $state({
-    id: authRecord.id ?? "",
-    number: authRecord.number ?? "",
-    bats: authRecord.bats ?? "",
-    position: [""],
-    throws: authRecord.throws ?? "",
-    image: authRecord.image ?? "",
-    umpire: authRecord.umpire ?? "0",
-    scorer: authRecord.scorer ?? "0",
-    bsm_id: authRecord.bsm_id ?? 0,
-  });
-
-  let open = $state(false);
-
-  const possiblePositionValues = getAllBaseballPositionStringValues();
-  let selectedPositions: string[] = $state(
-      positionKeysToEnumStringValues(authRecord.position),
-  );
-
-  function validatePositionValue(details: ValidateArgs): boolean {
-    return possiblePositionValues.includes(details.inputValue);
-  }
-
-  function addPosition(value: string) {
-    if (!selectedPositions.includes(value)) {
-      selectedPositions.push(value);
-    } else {
-      toastController.trigger({
-        message: "Position is already selected.",
-        background: "preset-filled-error-500",
-      });
-    }
-  }
-
-  async function submitForm(e: SubmitEvent) {
-    e.preventDefault();
-
-    form.position = positionEnumStringValuesToKeys(selectedPositions);
-
-    let result: CustomAuthModel | null = null;
-
-    try {
-      result = await client
-          .collection("users")
-          .update<CustomAuthModel>(form.id, form);
-    } catch {
-      toastController.triggerGenericFormErrorMessage("Player data");
-    }
-
-    if (result) {
-      toastController.triggerGenericFormSuccessMessage("Player data");
-      open = false;
-    }
-  }
+}
 </script>
 
 <Sheet.Root bind:open={open}>
@@ -131,7 +129,16 @@
           />
         </label>
 
-        <label class="label flex flex-col gap-1 md:gap-2 md:col-span-2">
+        <span class="label-wide">
+          <Switch
+                  bind:checked={form.display_on_website}
+                  name="display_on_website"
+          >
+            Display this data publicly on team website
+          </Switch>
+        </span>
+
+        <label class="label label-wide flex flex-col gap-1 md:gap-2">
           Positions
           <TagsInput
                   name="positions"
@@ -140,7 +147,7 @@
                   validate={validatePositionValue}
                   value={selectedPositions}
           />
-          <span class="flex flex-wrap gap-2 md:col-span-2">
+          <span class="flex flex-wrap gap-2 label-wide">
           {#each possiblePositionValues as value}
             <button
                     type="button"
@@ -191,3 +198,10 @@
     </form>
   </Sheet.Content>
 </Sheet.Root>
+
+<style>
+    .label-wide {
+        grid-column: span 2 / span 2;
+        gap: calc(var(--spacing) * 2);
+    }
+</style>

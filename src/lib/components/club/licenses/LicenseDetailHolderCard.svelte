@@ -1,15 +1,15 @@
 <script lang="ts">
-  import type {License} from "bsm.js";
-  import {Calendar1, CalendarClock, Hash, User} from "lucide-svelte";
-  import {DateTimeUtility} from "$lib/service/DateTimeUtility.ts";
-  import GenericDetailRow from "$lib/components/utility/GenericDetailRow.svelte";
+import type { License } from "bsm.js"
+import { Calendar1, CalendarClock, Hash, User } from "lucide-svelte"
+import { DateTimeUtility } from "$lib/service/DateTimeUtility.ts"
+import GenericDetailRow from "$lib/components/utility/GenericDetailRow.svelte"
 
-  interface Props {
-    license: License,
-  }
+interface Props {
+  license: License
+}
 
-  let {license}: Props = $props();
-  let expiryDate = $derived(new Date(license.valid_until));
+let { license }: Props = $props()
+let expiryDate = $derived(new Date(license.valid_until))
 </script>
 
 <article class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">

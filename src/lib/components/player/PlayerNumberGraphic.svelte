@@ -1,10 +1,10 @@
 <script lang="ts">
-    interface Props {
-        content: string;
-        classes?: string;
-    }
+interface Props {
+  content: string
+  classes?: string
+}
 
-    let { content, classes = "preset-filled-primary-500" }: Props = $props();
+let { content, classes = "preset-filled-primary-500" }: Props = $props()
 </script>
 
 <span class="text-4xl font-bold {classes}">

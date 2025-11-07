@@ -1,11 +1,15 @@
-import type {PageLoad} from "./$types";
-import {client} from "$lib/pocketbase/index.svelte";
-import type {ExpandedAnnouncement, ExpandedClub, ExpandedTeam, ExpandedUniformSet} from "$lib/model/ExpandedResponse";
-import {watchWithPagination} from "$lib/pocketbase/RecordOperations";
+import type { PageLoad } from "./$types"
+import { client } from "$lib/pocketbase/index.svelte"
+import type {
+  ExpandedAnnouncement,
+  ExpandedClub,
+  ExpandedTeam,
+  ExpandedUniformSet,
+} from "$lib/model/ExpandedResponse"
+import { watchWithPagination } from "$lib/pocketbase/RecordOperations"
 
 export const load = (async ({ fetch, params, depends, url }) => {
-
-  const club = await client.collection('clubs').getOne<ExpandedClub>(params.club, {
+  const club = await client.collection("clubs").getOne<ExpandedClub>(params.club, {
     expand: "admins",
     fetch: fetch,
   })
@@ -36,8 +40,8 @@ export const load = (async ({ fetch, params, depends, url }) => {
       requestKey: `club-${club.id}-announcements`,
     },
     page,
-    3,
-  );
+    3
+  )
 
   depends("club:single")
 
@@ -45,6 +49,6 @@ export const load = (async ({ fetch, params, depends, url }) => {
     club: club,
     teams: teams,
     uniformSets: uniformSets,
-    announcementStore: announcements
+    announcementStore: announcements,
   }
 }) satisfies PageLoad

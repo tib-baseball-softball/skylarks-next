@@ -1,14 +1,14 @@
 <script lang="ts">
-  import type {PageStore} from "$lib/pocketbase/PageStore";
-  import {ChevronLeft, ChevronRight} from "lucide-svelte";
+import type { PageStore } from "$lib/pocketbase/PageStore"
+import { ChevronLeft, ChevronRight } from "lucide-svelte"
 
-  const {
-    store,
-    showIfSinglePage = false,
-  }: {
-    store: PageStore;
-    showIfSinglePage?: boolean;
-  } = $props();
+const {
+  store,
+  showIfSinglePage = false,
+}: {
+  store: PageStore
+  showIfSinglePage?: boolean
+} = $props()
 </script>
 
 {#if showIfSinglePage || $store.totalPages > 1}

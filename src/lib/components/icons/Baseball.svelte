@@ -1,9 +1,9 @@
 <script lang="ts">
-  interface props {
-    strokeColor: string;
-  }
+interface props {
+  strokeColor: string
+}
 
-  let { strokeColor }: props = $props();
+let { strokeColor }: props = $props()
 </script>
 
 <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" viewBox="0 0 512 512"

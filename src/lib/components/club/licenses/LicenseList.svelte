@@ -1,15 +1,15 @@
 <script lang="ts">
-  import type {License} from "bsm.js";
-  import LicenseRow from "$lib/components/club/licenses/LicenseRow.svelte";
+import type { License } from "bsm.js"
+import LicenseRow from "$lib/components/club/licenses/LicenseRow.svelte"
 
-  interface Props {
-    licenses: License[];
-    showSoftballSection: boolean;
-  }
+interface Props {
+  licenses: License[]
+  showSoftballSection: boolean
+}
 
-  let {licenses, showSoftballSection}: Props = $props();
-  let baseballLicenses = $derived(licenses.filter(license => license.baseball === true));
-  let softballLicenses = $derived(licenses.filter(license => license.softball === true));
+let { licenses, showSoftballSection }: Props = $props()
+let baseballLicenses = $derived(licenses.filter((license) => license.baseball === true))
+let softballLicenses = $derived(licenses.filter((license) => license.softball === true))
 </script>
 
 <article class="mb-4!">

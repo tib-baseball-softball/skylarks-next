@@ -1,6 +1,6 @@
-import type {Match} from "bsm.js";
-import {GameWinner} from "$lib/enum/GameWinner";
-import {MatchState} from "$lib/enum/MatchState";
+import type { Match } from "bsm.js"
+import { GameWinner } from "$lib/enum/GameWinner"
+import { MatchState } from "$lib/enum/MatchState"
 
 /**
  * This class exists so that I can have methods on the BSM interface `Match` which is a POJO when deserialized from JSON.
@@ -13,7 +13,9 @@ export class MatchDecorator {
   }
 
   public isDerby(teamName: string): boolean {
-    return this.match.home_team_name.includes(teamName) && this.match.away_team_name.includes(teamName)
+    return (
+      this.match.home_team_name.includes(teamName) && this.match.away_team_name.includes(teamName)
+    )
   }
 
   public getWinnerForMatch(): GameWinner {
@@ -21,9 +23,9 @@ export class MatchDecorator {
       return GameWinner.none
     }
 
-    if ((this.match.home_runs) > (this.match.away_runs)) {
+    if (this.match.home_runs > this.match.away_runs) {
       return GameWinner.home
-    } else if ((this.match.away_runs) > (this.match.home_runs)) {
+    } else if (this.match.away_runs > this.match.home_runs) {
       return GameWinner.away
     } else {
       return GameWinner.none
@@ -45,13 +47,13 @@ export class MatchDecorator {
 
     const winner = this.getWinnerForMatch()
     if (
-        (winner === GameWinner.home && this.match.home_team_name.includes(teamName)) ||
-        (winner === GameWinner.away && this.match.away_team_name.includes(teamName))
+      (winner === GameWinner.home && this.match.home_team_name.includes(teamName)) ||
+      (winner === GameWinner.away && this.match.away_team_name.includes(teamName))
     ) {
       return MatchState.won
     } else if (
-        (winner === GameWinner.away && this.match.home_team_name.includes(teamName)) ||
-        (winner === GameWinner.home && this.match.away_team_name.includes(teamName))
+      (winner === GameWinner.away && this.match.home_team_name.includes(teamName)) ||
+      (winner === GameWinner.home && this.match.away_team_name.includes(teamName))
     ) {
       return MatchState.lost
     } else {

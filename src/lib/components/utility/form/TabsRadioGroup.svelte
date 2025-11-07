@@ -1,38 +1,38 @@
 <script lang="ts">
-  interface Option<T extends string> {
-    label?: string;
-    value: T;
-  }
+interface Option<T extends string> {
+  label?: string
+  value: T
+}
 
-  interface Props<T extends string> {
-    label?: string;
-    name: string;
-    options: Option<T>[] | T[];
-    value: T;
-    class?: string;
-    listClass?: string;
-    triggerClass?: string;
-  }
+interface Props<T extends string> {
+  label?: string
+  name: string
+  options: Option<T>[] | T[]
+  value: T
+  class?: string
+  listClass?: string
+  triggerClass?: string
+}
 
-  // Usage:
-  // <TabsRadioGroup name="bats" options={["left","right","switch"]} bind:value={form.bats} label="Bats" />
-  let {
-    label,
-    name,
-    options,
-    value = $bindable(),
-    class: klass = "",
-    listClass = "md:col-span-2 tabs-list input",
-    triggerClass = "tabs-trigger btn"
-  }: Props<string> = $props();
+// Usage:
+// <TabsRadioGroup name="bats" options={["left","right","switch"]} bind:value={form.bats} label="Bats" />
+let {
+  label,
+  name,
+  options,
+  value = $bindable(),
+  class: klass = "",
+  listClass = "md:col-span-2 tabs-list input",
+  triggerClass = "tabs-trigger btn",
+}: Props<string> = $props()
 
-  function toOptions(arr: Option<string>[] | string[]): Option<string>[] {
-    return (arr as any[]).map((o) =>
-        typeof o === "string" ? ({value: o, label: o.charAt(0).toUpperCase() + o.slice(1)}) : o
-    );
-  }
+function toOptions(arr: Option<string>[] | string[]): Option<string>[] {
+  return (arr as any[]).map((o) =>
+    typeof o === "string" ? { value: o, label: o.charAt(0).toUpperCase() + o.slice(1) } : o
+  )
+}
 
-  const opts: Option<string>[] = toOptions(options);
+const opts: Option<string>[] = toOptions(options)
 </script>
 
 {#if label}

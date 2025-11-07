@@ -35,9 +35,9 @@ export class LeaderboardUtility {
     saves: "Saves",
     earned_runs_average: "Earned Run Average",
     walks_and_hits_per_innings_pitched: "Walks and Hits Per Innings Pitched",
-  };
+  }
 
   public static getHumanReadableStatName(stat: string): string {
-    return (LeaderboardUtility.statNames)[stat] || "Unknown Stat";
+    return LeaderboardUtility.statNames[stat] || "Unknown Stat"
   }
 }

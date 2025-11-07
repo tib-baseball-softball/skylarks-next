@@ -1,14 +1,14 @@
 <script lang="ts">
-  import type {ExpandedClub} from "$lib/model/ExpandedResponse";
-  import ClubDetailCard from "$lib/components/diamondplanner/club/ClubDetailCard.svelte";
-  import {SquareArrowOutUpRight} from "lucide-svelte";
-  import ClubForm from "$lib/components/forms/ClubForm.svelte";
+import type { ExpandedClub } from "$lib/model/ExpandedResponse"
+import ClubDetailCard from "$lib/components/diamondplanner/club/ClubDetailCard.svelte"
+import { SquareArrowOutUpRight } from "lucide-svelte"
+import ClubForm from "$lib/components/forms/ClubForm.svelte"
 
-  interface Props {
-    clubs: ExpandedClub[];
-  }
+interface Props {
+  clubs: ExpandedClub[]
+}
 
-  let {clubs}: Props = $props();
+let { clubs }: Props = $props()
 </script>
 
 {#each clubs as club}

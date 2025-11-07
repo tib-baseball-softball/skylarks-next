@@ -1,7 +1,7 @@
 <script lang="ts">
-  import {toastController} from "$lib/service/ToastController.svelte";
-  import {fly} from 'svelte/transition';
-  import {flip} from 'svelte/animate';
+import { toastController } from "$lib/service/ToastController.svelte"
+import { fly } from "svelte/transition"
+import { flip } from "svelte/animate"
 </script>
 
 <section class="gui-toast-group">

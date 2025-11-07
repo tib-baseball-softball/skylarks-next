@@ -1,17 +1,12 @@
 <script lang="ts">
-    interface Props {
-        logo: string;
-        teamName: string;
-        score: number | undefined;
-        subduedScore: boolean;
-    }
+interface Props {
+  logo: string
+  teamName: string
+  score: number | undefined
+  subduedScore: boolean
+}
 
-    let {
-        logo,
-        teamName,
-        score,
-        subduedScore
-    }: Props = $props();
+let { logo, teamName, score, subduedScore }: Props = $props()
 </script>
 
 <div class="flex justify-between items-center">

@@ -1,14 +1,14 @@
 <script lang="ts">
-  import Pants from "$lib/components/icons/Pants.svelte";
-  import Shirt from "$lib/components/icons/Shirt.svelte";
-  import type {UniformsetsResponse} from "$lib/model/pb-types";
-  import Cap from "$lib/components/icons/Cap.svelte";
+import Pants from "$lib/components/icons/Pants.svelte"
+import Shirt from "$lib/components/icons/Shirt.svelte"
+import type { UniformsetsResponse } from "$lib/model/pb-types"
+import Cap from "$lib/components/icons/Cap.svelte"
 
-  interface Props {
-    attire: UniformsetsResponse;
-  }
+interface Props {
+  attire: UniformsetsResponse
+}
 
-  let {attire}: Props = $props();
+let { attire }: Props = $props()
 </script>
 
 <h2 class="h2">Uniform</h2>

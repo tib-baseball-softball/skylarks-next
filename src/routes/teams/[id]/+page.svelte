@@ -1,23 +1,23 @@
 <script lang="ts">
-  import type {ClubTeam} from "bsm.js";
-  import BaseballStatsDatatable from "$lib/components/datatable/BaseballStatsDatatable.svelte";
-  import type {StatsDataset} from "$lib/types/StatsDataset";
-  import TeamDetailInfoCard from "$lib/components/team/TeamDetailInfoCard.svelte";
-  import StandingsTable from "$lib/components/table/StandingsTable.svelte";
-  import type {PageProps} from "./$types";
-  import TeamPlayerSection from "$lib/components/player/TeamPlayerSection.svelte";
-  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
+import type { ClubTeam } from "bsm.js"
+import BaseballStatsDatatable from "$lib/components/datatable/BaseballStatsDatatable.svelte"
+import type { StatsDataset } from "$lib/types/StatsDataset"
+import TeamDetailInfoCard from "$lib/components/team/TeamDetailInfoCard.svelte"
+import StandingsTable from "$lib/components/table/StandingsTable.svelte"
+import type { PageProps } from "./$types"
+import TeamPlayerSection from "$lib/components/player/TeamPlayerSection.svelte"
+import ProgressRing from "$lib/components/utility/ProgressRing.svelte"
 
-  let {data}: PageProps = $props();
-  let clubTeam = $derived(data.clubTeam as ClubTeam);
+let { data }: PageProps = $props()
+let clubTeam = $derived(data.clubTeam as ClubTeam)
 
-  async function getData(): Promise<StatsDataset> {
-    return {
-      batting: await data.battingStats!,
-      pitching: await data.pitchingStats!,
-      fielding: await data.fieldingStats!,
-    };
+async function getData(): Promise<StatsDataset> {
+  return {
+    batting: await data.battingStats!,
+    pitching: await data.pitchingStats!,
+    fielding: await data.fieldingStats!,
   }
+}
 </script>
 
 <h1 class="h1 my-4">{clubTeam.team.name} (Saison {clubTeam.team.season})</h1>

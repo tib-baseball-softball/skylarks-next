@@ -1,14 +1,14 @@
 <script lang="ts">
-    import type {LeaderboardData} from "$lib/model/LeaderboardData";
-    import {LeaderboardUtility} from "$lib/service/LeaderboardUtility";
+import type { LeaderboardData } from "$lib/model/LeaderboardData"
+import { LeaderboardUtility } from "$lib/service/LeaderboardUtility"
 
-    interface Props {
-    data: LeaderboardData
-  }
+interface Props {
+  data: LeaderboardData
+}
 
-  let {data}: Props = $props();
+let { data }: Props = $props()
 
-  const statName = $derived(LeaderboardUtility.getHumanReadableStatName(data.stats_category))
+const statName = $derived(LeaderboardUtility.getHumanReadableStatName(data.stats_category))
 </script>
 
 <section>

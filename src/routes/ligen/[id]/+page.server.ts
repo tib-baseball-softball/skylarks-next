@@ -1,12 +1,14 @@
-import {type LeagueGroup, LeagueGroupAPIRequest, TablesAPIRequest} from "bsm.js";
-import {env} from "$env/dynamic/private";
-import {error} from "@sveltejs/kit";
-import type {PageServerLoad} from './$types';
+import { type LeagueGroup, LeagueGroupAPIRequest, TablesAPIRequest } from "bsm.js"
+import { env } from "$env/dynamic/private"
+import { error } from "@sveltejs/kit"
+import type { PageServerLoad } from "./$types"
 
-export const load: PageServerLoad = async ({parent, params}) => {
+export const load: PageServerLoad = async ({ parent, params }) => {
   const data = await parent()
   const leagueGroups = await data.leagueGroups
-  let leagueGroup: LeagueGroup | undefined = leagueGroups.find((leagueGroup) => leagueGroup.id === Number(params.id))
+  let leagueGroup: LeagueGroup | undefined = leagueGroups.find(
+    (leagueGroup) => leagueGroup.id === Number(params.id)
+  )
 
   if (!leagueGroup) {
     try {
@@ -26,6 +28,6 @@ export const load: PageServerLoad = async ({parent, params}) => {
 
   return {
     table: table,
-    leagueGroup: leagueGroup
+    leagueGroup: leagueGroup,
   }
 }

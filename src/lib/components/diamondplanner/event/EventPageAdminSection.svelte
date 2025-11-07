@@ -1,35 +1,36 @@
 <script lang="ts">
-  import type {ExpandedEvent} from "$lib/model/ExpandedResponse";
-  import {client} from "$lib/pocketbase/index.svelte";
-  import type {EventsUpdate} from "$lib/model/pb-types";
-  import {goto} from "$app/navigation";
-  import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
-  import {CalendarArrowDown, CalendarPlus, Edit, Info} from "lucide-svelte";
-  import EventForm from "$lib/components/forms/EventForm.svelte";
+import type { ExpandedEvent } from "$lib/model/ExpandedResponse"
+import { client } from "$lib/pocketbase/index.svelte"
+import type { EventsUpdate } from "$lib/model/pb-types"
+import { goto } from "$app/navigation"
+import DeleteButton from "$lib/components/utility/DeleteButton.svelte"
+import { CalendarArrowDown, CalendarPlus, Edit, Info } from "lucide-svelte"
+import EventForm from "$lib/components/forms/EventForm.svelte"
 
-  interface Props {
-    event: ExpandedEvent;
-  }
+interface Props {
+  event: ExpandedEvent
+}
 
-  let {event}: Props = $props();
+let { event }: Props = $props()
 
-  let guestPlayerForm = $state({
-    name: ""
-  });
+let guestPlayerForm = $state({
+  name: "",
+})
 
-  async function submitNewGuestPlayer(e: SubmitEvent) {
-    e.preventDefault();
+async function submitNewGuestPlayer(e: SubmitEvent) {
+  e.preventDefault()
 
-    await client.collection("events").update<EventsUpdate>(event.id, {
-      guests: event.guests.length === 0 ? guestPlayerForm.name : event.guests + "," + guestPlayerForm.name
-    });
-    guestPlayerForm.name = "";
-  }
+  await client.collection("events").update<EventsUpdate>(event.id, {
+    guests:
+      event.guests.length === 0 ? guestPlayerForm.name : event.guests + "," + guestPlayerForm.name,
+  })
+  guestPlayerForm.name = ""
+}
 
-  async function deleteEvent(id: string) {
-    await client.collection("events").delete(id);
-    await goto(`/account/team/${event.team}`);
-  }
+async function deleteEvent(id: string) {
+  await client.collection("events").delete(id)
+  await goto(`/account/team/${event.team}`)
+}
 </script>
 
 <hr class="mt-6"/>

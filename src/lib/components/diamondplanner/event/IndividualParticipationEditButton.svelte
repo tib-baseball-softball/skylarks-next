@@ -1,28 +1,30 @@
 <script lang="ts">
-  import type {CustomAuthModel, ExpandedParticipation} from "$lib/model/ExpandedResponse";
-  import {authSettings} from "$lib/pocketbase/index.svelte";
-  import ParticipationForm from "$lib/components/forms/ParticipationForm.svelte";
-  // for some reason this import is falsely detected as unused
-  //@ts-ignore
-  import {Popover} from "bits-ui";
-  import {MessageCircleMore} from "lucide-svelte";
-  import Dialog from "$lib/components/utility/Dialog.svelte";
+import type { CustomAuthModel, ExpandedParticipation } from "$lib/model/ExpandedResponse"
+import { authSettings } from "$lib/pocketbase/index.svelte"
+import ParticipationForm from "$lib/components/forms/ParticipationForm.svelte"
+// for some reason this import is falsely detected as unused
+//@ts-ignore
+import { Popover } from "bits-ui"
+import { MessageCircleMore } from "lucide-svelte"
+import Dialog from "$lib/components/utility/Dialog.svelte"
 
-  interface Props {
-    participation: ExpandedParticipation,
-    isAdmin: boolean,
-    classes?: string,
-  }
+interface Props {
+  participation: ExpandedParticipation
+  isAdmin: boolean
+  classes?: string
+}
 
-  let {participation, isAdmin, classes = ""}: Props = $props();
+let { participation, isAdmin, classes = "" }: Props = $props()
 
-  const authRecord = $derived(authSettings.record as CustomAuthModel);
+const authRecord = $derived(authSettings.record as CustomAuthModel)
 
-  const canEdit = $derived(participation.user === authRecord.id || isAdmin);
-  let isOpen = $state(false);
+const canEdit = $derived(participation.user === authRecord.id || isAdmin)
+let isOpen = $state(false)
 
-  const createdDate = participation.created !== "" ? new Date(participation.created).toLocaleString() : "---";
-  const updatedDate = participation.updated !== "" ? new Date(participation.updated).toLocaleString() : "---";
+const createdDate =
+  participation.created !== "" ? new Date(participation.created).toLocaleString() : "---"
+const updatedDate =
+  participation.updated !== "" ? new Date(participation.updated).toLocaleString() : "---"
 </script>
 
 <Popover.Root bind:open={isOpen}>

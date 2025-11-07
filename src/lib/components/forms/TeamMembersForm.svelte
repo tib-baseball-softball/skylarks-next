@@ -1,50 +1,49 @@
 <script lang="ts">
-  import type {ClubsResponse, UsersResponse, UsersUpdate} from "$lib/model/pb-types.ts";
-  import type {ExpandedTeam} from "$lib/model/ExpandedResponse.ts";
-  import {client, manualAuthRefresh} from "$lib/pocketbase/index.svelte.ts";
-  import MultiSelectCombobox from "$lib/components/utility/MultiSelectCombobox.svelte";
-  import {invalidateAll} from "$app/navigation";
-  import {closeModal} from "$lib/functions/closeModal.ts";
-  import {toastController} from "$lib/service/ToastController.svelte.ts";
+import type { ClubsResponse, UsersResponse, UsersUpdate } from "$lib/model/pb-types.ts"
+import type { ExpandedTeam } from "$lib/model/ExpandedResponse.ts"
+import { client, manualAuthRefresh } from "$lib/pocketbase/index.svelte.ts"
+import MultiSelectCombobox from "$lib/components/utility/MultiSelectCombobox.svelte"
+import { invalidateAll } from "$app/navigation"
+import { closeModal } from "$lib/functions/closeModal.ts"
+import { toastController } from "$lib/service/ToastController.svelte.ts"
 
-  interface Props {
-    club: ClubsResponse,
-    team: ExpandedTeam,
-  }
+interface Props {
+  club: ClubsResponse
+  team: ExpandedTeam
+}
 
-  let {club, team}: Props = $props();
+let { club, team }: Props = $props()
 
-  let form = $state({
-    id: team.id,
-  });
+let form = $state({
+  id: team.id,
+})
 
-  let selectedUsers: UsersResponse[] = $state([]);
+let selectedUsers: UsersResponse[] = $state([])
 
-  const allUsersForClub = client.collection("users").getFullList<UsersResponse>({
-    filter: `club ?~ '${club.id}' && teams !~ '${team.id}'` // all users that are club members, but not members of this team
-  });
+const allUsersForClub = client.collection("users").getFullList<UsersResponse>({
+  filter: `club ?~ '${club.id}' && teams !~ '${team.id}'`, // all users that are club members, but not members of this team
+})
 
-  async function submitForm(e: SubmitEvent) {
-    e.preventDefault();
+async function submitForm(e: SubmitEvent) {
+  e.preventDefault()
 
-    try {
-      for (const user of selectedUsers) {
-        await client.collection("users").update<UsersUpdate>(user.id, {
-          "teams+": team.id
-        });
-      }
-      toastController.triggerGenericFormSuccessMessage("Team members");
-
-      // set manually in case we have updated the currently logged-in user
-      await manualAuthRefresh();
-
-    } catch (error) {
-      console.error(error);
-      toastController.triggerGenericFormErrorMessage("Team members");
+  try {
+    for (const user of selectedUsers) {
+      await client.collection("users").update<UsersUpdate>(user.id, {
+        "teams+": team.id,
+      })
     }
-    await invalidateAll();
-    closeModal();
+    toastController.triggerGenericFormSuccessMessage("Team members")
+
+    // set manually in case we have updated the currently logged-in user
+    await manualAuthRefresh()
+  } catch (error) {
+    console.error(error)
+    toastController.triggerGenericFormErrorMessage("Team members")
   }
+  await invalidateAll()
+  closeModal()
+}
 </script>
 
 <form class="mt-4 space-y-3" onsubmit={submitForm}>

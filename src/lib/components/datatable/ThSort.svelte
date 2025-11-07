@@ -1,15 +1,15 @@
 <script lang="ts">
-    import type { DataHandler } from '@vincjo/datatables';
+import type { DataHandler } from "@vincjo/datatables"
 
-    interface Props {
-        handler: DataHandler;
-        orderBy: string;
-        children?: import('svelte').Snippet;
-    }
+interface Props {
+  handler: DataHandler
+  orderBy: string
+  children?: import("svelte").Snippet
+}
 
-    let { handler, orderBy, children }: Props = $props();
+let { handler, orderBy, children }: Props = $props()
 
-    const sorted = handler.getSort();
+const sorted = handler.getSort()
 </script>
 
 <th onclick={() => handler.sort(orderBy)} class="cursor-pointer select-none">

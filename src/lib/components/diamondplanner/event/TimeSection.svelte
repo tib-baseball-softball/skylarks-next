@@ -1,17 +1,17 @@
 <script lang="ts">
-  import {DateTimeUtility} from "$lib/service/DateTimeUtility.ts";
-  import type {Snippet} from "svelte";
+import { DateTimeUtility } from "$lib/service/DateTimeUtility.ts"
+import type { Snippet } from "svelte"
 
-  interface Props {
-    timeValue: string;
-    displayText: string;
-    icon: Snippet;
-    classes?: string;
-  }
+interface Props {
+  timeValue: string
+  displayText: string
+  icon: Snippet
+  classes?: string
+}
 
-  let {timeValue, displayText, icon, classes = ""}: Props = $props();
+let { timeValue, displayText, icon, classes = "" }: Props = $props()
 
-  const displayedTime = $derived(new Date(timeValue));
+const displayedTime = $derived(new Date(timeValue))
 </script>
 
 <div class="section-container {classes}">

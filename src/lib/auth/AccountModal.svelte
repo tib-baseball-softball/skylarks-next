@@ -1,17 +1,17 @@
 <script lang="ts">
-  import {authSettings, client} from "../pocketbase/index.svelte";
-  import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
-  import {closeModal} from "$lib/functions/closeModal.ts";
-  import {goto} from "$app/navigation";
+import { authSettings, client } from "../pocketbase/index.svelte"
+import type { CustomAuthModel } from "$lib/model/ExpandedResponse"
+import { closeModal } from "$lib/functions/closeModal.ts"
+import { goto } from "$app/navigation"
 
-  async function logout() {
-    closeModal();
-    authSettings.record = null
-    client.authStore.clear();
-    await goto("/login")
-  }
+async function logout() {
+  closeModal()
+  authSettings.record = null
+  client.authStore.clear()
+  await goto("/login")
+}
 
-  const authRecord = $derived(authSettings.record as CustomAuthModel);
+const authRecord = $derived(authSettings.record as CustomAuthModel)
 </script>
 
   <article class="py-1">

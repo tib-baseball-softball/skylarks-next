@@ -1,12 +1,12 @@
 <script lang="ts">
-    import type {PitchingMatchStats} from "bsm.js";
+import type { PitchingMatchStats } from "bsm.js"
 
-    interface Props {
-        matchStats: PitchingMatchStats;
-        teamName: string;
-    }
+interface Props {
+  matchStats: PitchingMatchStats
+  teamName: string
+}
 
-    let { matchStats, teamName }: Props = $props();
+let { matchStats, teamName }: Props = $props()
 </script>
 
 <div class="table-wrap lg:max-w-[75%] dark:border-2">

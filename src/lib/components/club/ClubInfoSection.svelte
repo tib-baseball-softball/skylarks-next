@@ -1,12 +1,12 @@
 <script lang="ts">
-  import type {Club} from "bsm.js";
-  import {ClipboardList, Shield, Tag} from "lucide-svelte";
+import type { Club } from "bsm.js"
+import { ClipboardList, Shield, Tag } from "lucide-svelte"
 
-  interface Props {
-    club: Club;
-  }
+interface Props {
+  club: Club
+}
 
-  let {club}: Props = $props();
+let { club }: Props = $props()
 </script>
 
 <section>

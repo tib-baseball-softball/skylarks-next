@@ -1,27 +1,27 @@
 <script lang="ts">
-  // @ts-ignore
-  import {Tabs} from "bits-ui";
-  import {StatsType} from "bsm.js";
-  import LeaderboardTable from "$lib/components/table/LeaderboardTable.svelte";
-  import {goto} from "$app/navigation";
-  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
+// @ts-ignore
+import { Tabs } from "bits-ui"
+import { StatsType } from "bsm.js"
+import LeaderboardTable from "$lib/components/table/LeaderboardTable.svelte"
+import { goto } from "$app/navigation"
+import ProgressRing from "$lib/components/utility/ProgressRing.svelte"
 
-  let {data} = $props();
+let { data } = $props()
 
-  let type: StatsType = $state(StatsType.batting);
+let type: StatsType = $state(StatsType.batting)
 
-  const reloadWithQuery = () => {
-    let queryString = `?statsType=${type.toString()}`;
+const reloadWithQuery = () => {
+  let queryString = `?statsType=${type.toString()}`
 
-    goto(queryString, {
-      noScroll: true,
-    });
-  };
+  goto(queryString, {
+    noScroll: true,
+  })
+}
 
-  $effect.pre(() => {
-    console.log(type);
-    reloadWithQuery();
-  });
+$effect.pre(() => {
+  console.log(type)
+  reloadWithQuery()
+})
 </script>
 
 <h1 class="h1 mb-6!">Leaderboards for {data.leagueGroup.name} ({data.leagueGroup.season})</h1>

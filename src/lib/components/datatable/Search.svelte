@@ -1,12 +1,12 @@
 <script lang="ts">
-  import type {DataHandler} from '@vincjo/datatables';
+import type { DataHandler } from "@vincjo/datatables"
 
-  interface Props {
-    handler: DataHandler;
-  }
+interface Props {
+  handler: DataHandler
+}
 
-  let {handler}: Props = $props();
-  let value: string = $state("");
+let { handler }: Props = $props()
+let value: string = $state("")
 </script>
 
 <input

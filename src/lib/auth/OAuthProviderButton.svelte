@@ -1,41 +1,42 @@
 <script lang="ts">
-  import type {AuthProviderInfo, RecordAuthResponse, RecordModel, RecordService} from "pocketbase";
-  import {providerLogin} from "$lib/pocketbase/Auth.svelte";
-  import {goto} from "$app/navigation";
-  import {toastController} from "$lib/service/ToastController.svelte.ts";
+import type { AuthProviderInfo, RecordAuthResponse, RecordModel, RecordService } from "pocketbase"
+import { providerLogin } from "$lib/pocketbase/Auth.svelte"
+import { goto } from "$app/navigation"
+import { toastController } from "$lib/service/ToastController.svelte.ts"
 
-  interface Props {
-    authProvider: AuthProviderInfo,
-    collection: RecordService<RecordModel>
-    signup_key?: string,
-    disabled: boolean,
+interface Props {
+  authProvider: AuthProviderInfo
+  collection: RecordService<RecordModel>
+  signup_key?: string
+  disabled: boolean
+}
+
+const { authProvider, collection, signup_key = "", disabled }: Props = $props()
+
+async function submitOAuthRequest(provider: AuthProviderInfo) {
+  let authResponse: RecordAuthResponse<RecordModel> | undefined
+  try {
+    authResponse = await providerLogin(provider, collection, signup_key)
+  } catch (error) {
+    console.error(error)
+    toastController.trigger({
+      message:
+        "There was an error processing your authentication request via external provider. Please double-check your signup key",
+      background: "preset-filled-error-500",
+    })
   }
 
-  const {authProvider, collection, signup_key = "", disabled}: Props = $props();
-
-  async function submitOAuthRequest(provider: AuthProviderInfo) {
-    let authResponse: RecordAuthResponse<RecordModel> | undefined;
-    try {
-      authResponse = await providerLogin(provider, collection, signup_key);
-    } catch (error) {
-      console.error(error);
-      toastController.trigger({
-        message: "There was an error processing your authentication request via external provider. Please double-check your signup key",
-        background: "preset-filled-error-500",
-      });
-    }
-
-    if (authResponse) {
-      await goto("/account", {invalidateAll: true});
-    }
+  if (authResponse) {
+    await goto("/account", { invalidateAll: true })
   }
+}
 
-  const isGenericProvider = $derived(
-      authProvider.name !== "google" &&
-      authProvider.name !== "apple" &&
-      authProvider.name !== "github" &&
-      authProvider.name !== "discord"
-  );
+const isGenericProvider = $derived(
+  authProvider.name !== "google" &&
+    authProvider.name !== "apple" &&
+    authProvider.name !== "github" &&
+    authProvider.name !== "discord"
+)
 </script>
 
 <!--

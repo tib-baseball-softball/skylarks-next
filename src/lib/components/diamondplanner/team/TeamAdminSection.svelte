@@ -1,30 +1,30 @@
 <script lang="ts">
-  import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
-  import {goto, invalidateAll} from "$app/navigation";
-  import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  import type {CustomAuthModel, ExpandedTeam} from "$lib/model/ExpandedResponse";
-  import TeamGamesModal from "$lib/components/forms/TeamGamesModal.svelte";
-  import type {EventseriesResponse} from "$lib/model/pb-types.ts";
-  import {CalendarPlus} from "lucide-svelte";
-  import EventSeriesView from "$lib/components/diamondplanner/event/EventSeriesView.svelte";
-  import TeamForm from "$lib/components/forms/TeamForm.svelte";
-  import EventForm from "$lib/components/forms/EventForm.svelte";
-  import Dialog from "$lib/components/utility/Dialog.svelte";
+import DeleteButton from "$lib/components/utility/DeleteButton.svelte"
+import { goto, invalidateAll } from "$app/navigation"
+import { authSettings, client } from "$lib/pocketbase/index.svelte"
+import type { CustomAuthModel, ExpandedTeam } from "$lib/model/ExpandedResponse"
+import TeamGamesModal from "$lib/components/forms/TeamGamesModal.svelte"
+import type { EventseriesResponse } from "$lib/model/pb-types.ts"
+import { CalendarPlus } from "lucide-svelte"
+import EventSeriesView from "$lib/components/diamondplanner/event/EventSeriesView.svelte"
+import TeamForm from "$lib/components/forms/TeamForm.svelte"
+import EventForm from "$lib/components/forms/EventForm.svelte"
+import Dialog from "$lib/components/utility/Dialog.svelte"
 
-  interface Props {
-    team: ExpandedTeam,
-    eventSeries: EventseriesResponse[],
-  }
+interface Props {
+  team: ExpandedTeam
+  eventSeries: EventseriesResponse[]
+}
 
-  let {team, eventSeries}: Props = $props();
+let { team, eventSeries }: Props = $props()
 
-  function teamDeleteAction(id: string) {
-    goto(`/account`);
-    client.collection("teams").delete(id);
-    invalidateAll();
-  }
+function teamDeleteAction(id: string) {
+  goto(`/account`)
+  client.collection("teams").delete(id)
+  invalidateAll()
+}
 
-  const model = $derived(authSettings.record as CustomAuthModel);
+const model = $derived(authSettings.record as CustomAuthModel)
 </script>
 
 <h2 class="h3">Admin Section</h2>

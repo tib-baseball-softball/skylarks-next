@@ -1,57 +1,56 @@
 <script lang="ts">
-  import {X} from "lucide-svelte";
-  import {toastController} from "$lib/service/ToastController.svelte.ts";
+import { X } from "lucide-svelte"
+import { toastController } from "$lib/service/ToastController.svelte.ts"
 
-  let {
-    name = '',
-    value = [] as string[],
-    placeholder = '',
-    validate = (args: { inputValue: string; value: string[] }) => true,
-    onValueChange = (e: { value: string[] }) => {
-    },
-  } = $props();
+let {
+  name = "",
+  value = [] as string[],
+  placeholder = "",
+  validate = (args: { inputValue: string; value: string[] }) => true,
+  onValueChange = (e: { value: string[] }) => {},
+} = $props()
 
-  let inputValue = $state('');
+let inputValue = $state("")
 
-  function addTag(raw: string) {
-    const newTag = raw.trim();
+function addTag(raw: string) {
+  const newTag = raw.trim()
 
-    if (!newTag) {
-      return;
-    }
-
-    if (!validate({inputValue: newTag, value})) {
-      toastController.trigger({
-        message: 'You have entered a value that is not allowed here.',
-        background: "preset-filled-error-500",
-      });
-      return;
-    }
-
-    if (value.includes(newTag)) {
-      return;
-    } // prevent duplicates
-
-    const newValue = [...value, newTag];
-    value = newValue;
-    onValueChange({value: newValue});
-    inputValue = '';
+  if (!newTag) {
+    return
   }
 
-  function removeTag(tag: string) {
-    const newValue = value.filter((t) => t !== tag);
-    value = newValue;
-    onValueChange({value: newValue});
+  if (!validate({ inputValue: newTag, value })) {
+    toastController.trigger({
+      message: "You have entered a value that is not allowed here.",
+      background: "preset-filled-error-500",
+    })
+    return
   }
 
-  function handleKeyDown(e: KeyboardEvent) {
-    if (e.key === 'Enter' || e.key === ',') {
-      e.preventDefault();
-      addTag(inputValue);
-    } else if (e.key === 'Backspace' && !inputValue && value.length > 0) {
-      removeTag(value[value.length - 1]);
-    }
+  if (value.includes(newTag)) {
+    return
+  } // prevent duplicates
+
+  const newValue = [...value, newTag]
+  value = newValue
+  onValueChange({ value: newValue })
+  inputValue = ""
+}
+
+function removeTag(tag: string) {
+  const newValue = value.filter((t) => t !== tag)
+  value = newValue
+  onValueChange({ value: newValue })
+}
+
+function handleKeyDown(e: KeyboardEvent) {
+  if (e.key === "Enter" || e.key === ",") {
+    e.preventDefault()
+    addTag(inputValue)
+  } else if (e.key === "Backspace" && !inputValue && value.length > 0) {
+    removeTag(value[value.length - 1])
   }
+}
 </script>
 
 <div class="tags-input input">

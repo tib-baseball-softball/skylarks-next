@@ -1,17 +1,17 @@
 <script lang="ts">
-  import type {Snippet} from "svelte";
-  import {Minus, Plus} from "lucide-svelte";
+import type { Snippet } from "svelte"
+import { Minus, Plus } from "lucide-svelte"
 
-  interface Props {
-    startOpen?: boolean;
-    panelPadding?: string;
-    control?: Snippet;
-    lead?: Snippet;
-    panel?: Snippet;
-  }
+interface Props {
+  startOpen?: boolean
+  panelPadding?: string
+  control?: Snippet
+  lead?: Snippet
+  panel?: Snippet
+}
 
-  const {startOpen = true, panelPadding = "py-0 px-4", control, lead, panel}: Props = $props();
-  let open = $state(startOpen);
+const { startOpen = true, panelPadding = "py-0 px-4", control, lead, panel }: Props = $props()
+let open = $state(startOpen)
 </script>
 
 <details bind:open={open}>

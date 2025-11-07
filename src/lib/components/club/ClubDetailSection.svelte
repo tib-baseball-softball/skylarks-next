@@ -1,13 +1,13 @@
 <script lang="ts">
-  import type {Snippet} from "svelte";
+import type { Snippet } from "svelte"
 
-  interface Props {
-    title: string
-    icon?: Snippet
-    children?: Snippet
-  }
+interface Props {
+  title: string
+  icon?: Snippet
+  children?: Snippet
+}
 
-  let {title, icon, children}: Props = $props()
+let { title, icon, children }: Props = $props()
 </script>
 
 <article class="card preset-tonal dark:border dark:border-surface-500 p-4 rounded-base shadow-xl mb-4">

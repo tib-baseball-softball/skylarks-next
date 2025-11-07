@@ -1,24 +1,24 @@
 <script lang="ts">
-  import {invalidate} from "$app/navigation";
-  import LocationForm from "$lib/components/forms/LocationForm.svelte";
-  import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
-  import type {CustomAuthModel, ExpandedClub,} from "$lib/model/ExpandedResponse";
-  import type {LocationsResponse} from "$lib/model/pb-types";
-  import {authSettings, client} from "$lib/pocketbase/index.svelte";
+import { invalidate } from "$app/navigation"
+import LocationForm from "$lib/components/forms/LocationForm.svelte"
+import DeleteButton from "$lib/components/utility/DeleteButton.svelte"
+import type { CustomAuthModel, ExpandedClub } from "$lib/model/ExpandedResponse"
+import type { LocationsResponse } from "$lib/model/pb-types"
+import { authSettings, client } from "$lib/pocketbase/index.svelte"
 
-  interface Props {
-    club: ExpandedClub;
-    locations: LocationsResponse[];
-  }
+interface Props {
+  club: ExpandedClub
+  locations: LocationsResponse[]
+}
 
-  const authRecord = $derived(authSettings.record as CustomAuthModel);
+const authRecord = $derived(authSettings.record as CustomAuthModel)
 
-  let { club, locations }: Props = $props();
+let { club, locations }: Props = $props()
 
-  function locationDeleteAction(id: string) {
-    client.collection("locations").delete(id);
-    invalidate("club:locations");
-  }
+function locationDeleteAction(id: string) {
+  client.collection("locations").delete(id)
+  invalidate("club:locations")
+}
 </script>
 
 <ul class="preset-tonal-surface rounded-base p-4 shadow-xl text-sm">

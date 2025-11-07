@@ -1,16 +1,13 @@
 <script lang="ts">
-  import {preferences} from "$lib/globals.svelte.ts";
-  import type {ClubTeam} from "bsm.js";
+import { preferences } from "$lib/globals.svelte.ts"
+import type { ClubTeam } from "bsm.js"
 
-  interface Props {
-    clubTeams?: ClubTeam[];
-    onChange?: () => void;
-  }
+interface Props {
+  clubTeams?: ClubTeam[]
+  onChange?: () => void
+}
 
-  let {
-    clubTeams = [], onChange = () => {
-    }
-  }: Props = $props();
+let { clubTeams = [], onChange = () => {} }: Props = $props()
 </script>
 
 <label class="flex items-center gap-2">

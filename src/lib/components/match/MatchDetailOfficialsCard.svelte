@@ -1,12 +1,12 @@
 <script lang="ts">
-  import type {Match} from "bsm.js";
-  import {Pencil, User} from "lucide-svelte";
+import type { Match } from "bsm.js"
+import { Pencil, User } from "lucide-svelte"
 
-  interface Props {
-    match: Match;
-  }
+interface Props {
+  match: Match
+}
 
-  let {match}: Props = $props();
+let { match }: Props = $props()
 </script>
 
 <div class="card preset-tonal-surface border border-surface-500 p-3">

@@ -1,12 +1,12 @@
 <script lang="ts">
-  import type {ClubFunction} from "bsm.js";
-  import ClubOfficialRow from "$lib/components/club/officials/ClubOfficialRow.svelte";
+import type { ClubFunction } from "bsm.js"
+import ClubOfficialRow from "$lib/components/club/officials/ClubOfficialRow.svelte"
 
-  interface Props {
-    clubOfficials: ClubFunction[];
-  }
+interface Props {
+  clubOfficials: ClubFunction[]
+}
 
-  let {clubOfficials = []}: Props = $props();
+let { clubOfficials = [] }: Props = $props()
 </script>
 
 <article class="mb-4!">

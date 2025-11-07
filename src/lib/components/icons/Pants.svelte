@@ -1,10 +1,10 @@
 <script lang="ts">
-  interface props {
-    fillColor: string;
-    classes?: string
-  }
+interface props {
+  fillColor: string
+  classes?: string
+}
 
-  let {fillColor, classes}: props = $props();
+let { fillColor, classes }: props = $props()
 </script>
 
 <svg

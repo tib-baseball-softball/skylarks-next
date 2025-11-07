@@ -1,73 +1,70 @@
 <script lang="ts">
-  import Switch from "$lib/components/utility/Switch.svelte";
-  // @ts-ignore
-  import {Tabs} from "bits-ui";
-  import {client} from "../pocketbase/index.svelte";
-  import {goto} from "$app/navigation";
-  import OAuthProviderButton from "$lib/auth/OAuthProviderButton.svelte";
-  import PasswordRequestButton from "$lib/auth/PasswordRequestButton.svelte";
-  import {fade, slide} from "svelte/transition";
-  import type {UsersUpdate} from "$lib/model/pb-types.ts";
-  import type {Extension} from "$lib/model/ExpandedResponse.js";
-  import {toastController} from "$lib/service/ToastController.svelte.ts";
-  import type {Toast} from "$lib/types/Toast.ts";
+import Switch from "$lib/components/utility/Switch.svelte"
+// @ts-ignore
+import { Tabs } from "bits-ui"
+import { client } from "../pocketbase/index.svelte"
+import { goto } from "$app/navigation"
+import OAuthProviderButton from "$lib/auth/OAuthProviderButton.svelte"
+import PasswordRequestButton from "$lib/auth/PasswordRequestButton.svelte"
+import { fade, slide } from "svelte/transition"
+import type { UsersUpdate } from "$lib/model/pb-types.ts"
+import type { Extension } from "$lib/model/ExpandedResponse.js"
+import { toastController } from "$lib/service/ToastController.svelte.ts"
+import type { Toast } from "$lib/types/Toast.ts"
 
-  const {
-    authCollection = "users",
-    passwordLogin = true,
-    signupAllowed = true,
-  } = $props();
+const { authCollection = "users", passwordLogin = true, signupAllowed = true } = $props()
 
-  const coll = $derived(client.collection(authCollection));
+const coll = $derived(client.collection(authCollection))
 
-  const failSettings: Toast = {
-    message: "There was an error processing your authentication request.",
-    background: "preset-filled-error-500"
-  };
+const failSettings: Toast = {
+  message: "There was an error processing your authentication request.",
+  background: "preset-filled-error-500",
+}
 
-  const form: Extension<Partial<UsersUpdate>, { signup_key: string }> = $state({
-    email: "",
-    password: "",
-    first_name: "",
-    last_name: "",
-    passwordConfirm: "",
-    signup_key: "",
-  });
-  let signup = false;
+const form: Extension<Partial<UsersUpdate>, { signup_key: string }> = $state({
+  email: "",
+  password: "",
+  first_name: "",
+  last_name: "",
+  passwordConfirm: "",
+  signup_key: "",
+})
+let signup = false
 
-  async function submit(e: SubmitEvent) {
-    e.preventDefault();
+async function submit(e: SubmitEvent) {
+  e.preventDefault()
 
-    if (signup) {
-      try {
-        await coll.create({...form});
-        const signupSuccessful = await coll.requestVerification(form.email ?? "");
+  if (signup) {
+    try {
+      await coll.create({ ...form })
+      const signupSuccessful = await coll.requestVerification(form.email ?? "")
 
-        if (signupSuccessful) {
-          await goto("/signupconfirm");
-        } else {
-          toastController.trigger(failSettings);
-        }
-      } catch {
-        toastController.trigger(failSettings);
+      if (signupSuccessful) {
+        await goto("/signupconfirm")
+      } else {
+        toastController.trigger(failSettings)
       }
+    } catch {
+      toastController.trigger(failSettings)
+    }
+  } else {
+    try {
+      const authResponse = await coll.authWithPassword(form.email ?? "", form.password ?? "", {
+        expand: "club",
+      })
 
-    } else {
-      try {
-        const authResponse = await coll.authWithPassword(form.email ?? "", form.password ?? "", {expand: "club"});
-
-        if (authResponse) {
-          await goto("/account", {invalidateAll: true});
-        }
-      } catch (error) {
-        console.error(error);
-        toastController.trigger(failSettings);
+      if (authResponse) {
+        await goto("/account", { invalidateAll: true })
       }
+    } catch (error) {
+      console.error(error)
+      toastController.trigger(failSettings)
     }
   }
+}
 
-  let tabSet: "login" | "signup" | string = $state("login");
-  let forgotPassword = $state(false);
+let tabSet: "login" | "signup" | string = $state("login")
+let forgotPassword = $state(false)
 </script>
 
 {#snippet login()}

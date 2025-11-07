@@ -1,26 +1,28 @@
 <script lang="ts">
-  import type {ExpandedParticipation} from "$lib/model/ExpandedResponse";
-  import {sendParticipationData} from "$lib/functions/sendParticipationData";
-  import {invalidate} from "$app/navigation";
-  import {closeModal} from "$lib/functions/closeModal.ts";
+import type { ExpandedParticipation } from "$lib/model/ExpandedResponse"
+import { sendParticipationData } from "$lib/functions/sendParticipationData"
+import { invalidate } from "$app/navigation"
+import { closeModal } from "$lib/functions/closeModal.ts"
 
-  interface Props {
-    participation: ExpandedParticipation,
-  }
+interface Props {
+  participation: ExpandedParticipation
+}
 
-  let {participation}: Props = $props();
+let { participation }: Props = $props()
 
-  const form = $state(participation);
+const form = $state(participation)
 
-  async function submitForm(e: SubmitEvent) {
-    e.preventDefault();
+async function submitForm(e: SubmitEvent) {
+  e.preventDefault()
 
-    await sendParticipationData(form).then(() => closeModal());
-    await invalidate("event:list");
-  }
+  await sendParticipationData(form).then(() => closeModal())
+  await invalidate("event:list")
+}
 
-  const createdDate = participation.created !== "" ? new Date(participation.created).toLocaleString() : "---";
-  const updatedDate = participation.updated !== "" ? new Date(participation.updated).toLocaleString() : "---";
+const createdDate =
+  participation.created !== "" ? new Date(participation.created).toLocaleString() : "---"
+const updatedDate =
+  participation.updated !== "" ? new Date(participation.updated).toLocaleString() : "---"
 </script>
 
 <form class="mt-4 space-y-3" onsubmit={submitForm}>

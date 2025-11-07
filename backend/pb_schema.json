@@ -510,6 +510,15 @@
       },
       {
         "hidden": false,
+        "id": "bool2893625327",
+        "name": "display_on_website",
+        "presentable": false,
+        "required": false,
+        "system": false,
+        "type": "bool"
+      },
+      {
+        "hidden": false,
         "id": "_pbf_autodate_created_",
         "name": "created",
         "onCreate": true,
@@ -534,7 +543,10 @@
       "CREATE UNIQUE INDEX `__pb_users_auth__email_idx` ON `users` (email) WHERE email != ''",
       "CREATE UNIQUE INDEX `__pb_users_auth__tokenKey_idx` ON `users` (tokenKey)",
       "CREATE INDEX `idx_zbjtgYA` ON `users` (\n  `teams`,\n  `club`\n)",
-      "CREATE INDEX `idx_LkeR6Uf` ON `users` (\n  `bsm_id`,\n  `club`,\n  `teams`\n)"
+      "CREATE INDEX `idx_LkeR6Uf` ON `users` (\n  `bsm_id`,\n  `club`,\n  `teams`\n)",
+      "CREATE INDEX `idx_Gqr1QzTOdP` ON `users` (`bsm_id`)",
+      "CREATE INDEX `idx_0ElCGfOghH` ON `users` (`club`)",
+      "CREATE INDEX `idx_4gDlHi0pKv` ON `users` (`teams`)"
     ],
     "system": false,
     "authRule": "verified=true",

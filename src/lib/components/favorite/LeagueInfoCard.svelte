@@ -1,14 +1,14 @@
 <script lang="ts">
-  import GenericDetailRow from "$lib/components/utility/GenericDetailRow.svelte";
-  import {Crown, Hash, Percent, Sigma, Signpost} from "lucide-svelte";
-  import type {LeagueGroup, TableRow} from "bsm.js";
+import GenericDetailRow from "$lib/components/utility/GenericDetailRow.svelte"
+import { Crown, Hash, Percent, Sigma, Signpost } from "lucide-svelte"
+import type { LeagueGroup, TableRow } from "bsm.js"
 
-  interface Props {
-    leagueGroup: LeagueGroup;
-    tableRow: TableRow;
-  }
+interface Props {
+  leagueGroup: LeagueGroup
+  tableRow: TableRow
+}
 
-  let {leagueGroup, tableRow}: Props = $props();
+let { leagueGroup, tableRow }: Props = $props()
 </script>
 
 <article class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">

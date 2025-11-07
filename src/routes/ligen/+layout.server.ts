@@ -1,8 +1,8 @@
-import {LeagueGroupAPIRequest} from "bsm.js";
-import {env} from "$env/dynamic/private";
-import type {LayoutServerLoad} from "./$types";
+import { LeagueGroupAPIRequest } from "bsm.js"
+import { env } from "$env/dynamic/private"
+import type { LayoutServerLoad } from "./$types"
 
-export const load: LayoutServerLoad = async ({parent, url}) => {
+export const load: LayoutServerLoad = async ({ parent, url }) => {
   const data = await parent()
 
   let leagueGroups = data.leagueGroups
@@ -15,6 +15,6 @@ export const load: LayoutServerLoad = async ({parent, url}) => {
   }
 
   return {
-    leagueGroups: leagueGroups
+    leagueGroups: leagueGroups,
   }
 }

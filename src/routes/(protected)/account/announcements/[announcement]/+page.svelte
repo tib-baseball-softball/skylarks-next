@@ -1,27 +1,30 @@
 <script lang="ts">
-  import type {PageProps} from "./$types";
-  import {Calendar, Clock, User} from "lucide-svelte";
-  import PriorityBadge from "$lib/components/announcements/PriorityBadge.svelte";
-  import type {CustomAuthModel} from "$lib/model/ExpandedResponse";
-  import {authSettings, client} from "$lib/pocketbase/index.svelte";
-  import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
-  import AnnouncementForm from "$lib/components/forms/AnnouncementForm.svelte";
-  import CommentSection from "$lib/components/comments/CommentSection.svelte";
+import type { PageProps } from "./$types"
+import { Calendar, Clock, User } from "lucide-svelte"
+import PriorityBadge from "$lib/components/announcements/PriorityBadge.svelte"
+import type { CustomAuthModel } from "$lib/model/ExpandedResponse"
+import { authSettings, client } from "$lib/pocketbase/index.svelte"
+import DeleteButton from "$lib/components/utility/DeleteButton.svelte"
+import AnnouncementForm from "$lib/components/forms/AnnouncementForm.svelte"
+import CommentSection from "$lib/components/comments/CommentSection.svelte"
 
-  let {data}: PageProps = $props();
-  const announcement = $derived(data.announcement);
+let { data }: PageProps = $props()
+const announcement = $derived(data.announcement)
 
-  const authRecord = $derived(authSettings.record as CustomAuthModel);
-  const canEdit = $derived($announcement.expand?.club?.admins.includes(authRecord.id) || $announcement.expand?.team?.admins.includes(authRecord.id));
+const authRecord = $derived(authSettings.record as CustomAuthModel)
+const canEdit = $derived(
+  $announcement.expand?.club?.admins.includes(authRecord.id) ||
+    $announcement.expand?.team?.admins.includes(authRecord.id)
+)
 
-  function deleteAction(id: string) {
-    client.collection("announcements").delete(id);
-    history.back();
-  }
+function deleteAction(id: string) {
+  client.collection("announcements").delete(id)
+  history.back()
+}
 
-  const updated = $derived($announcement.updated);
-  //@ts-expect-error - the multi-level expanding trips the typedef up
-  const club = $derived($announcement?.expand?.club ?? $announcement?.expand?.team?.expand?.club);
+const updated = $derived($announcement.updated)
+//@ts-expect-error - the multi-level expanding trips the typedef up
+const club = $derived($announcement?.expand?.club ?? $announcement?.expand?.team?.expand?.club)
 </script>
 
 <div class="flex justify-between items-center gap-4 lg:gap-6">

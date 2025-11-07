@@ -1,20 +1,20 @@
 <script lang="ts">
-  import BaseballStatsDatatable from "$lib/components/datatable/BaseballStatsDatatable.svelte";
-  import type {StatsDataset} from "$lib/types/StatsDataset";
-  import PlayerHeaderSection from "$lib/components/player/PlayerHeaderSection.svelte";
-  import PlayerDataCard from "$lib/components/player/PlayerDataCard.svelte";
-  import type {PageProps} from "./$types";
-  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
+import BaseballStatsDatatable from "$lib/components/datatable/BaseballStatsDatatable.svelte"
+import type { StatsDataset } from "$lib/types/StatsDataset"
+import PlayerHeaderSection from "$lib/components/player/PlayerHeaderSection.svelte"
+import PlayerDataCard from "$lib/components/player/PlayerDataCard.svelte"
+import type { PageProps } from "./$types"
+import ProgressRing from "$lib/components/utility/ProgressRing.svelte"
 
-  let {data}: PageProps = $props();
+let { data }: PageProps = $props()
 
-  async function getData(): Promise<StatsDataset> {
-    return {
-      batting: await data.battingStats!,
-      pitching: await data.pitchingStats!,
-      fielding: await data.fieldingStats!,
-    };
+async function getData(): Promise<StatsDataset> {
+  return {
+    batting: await data.battingStats!,
+    pitching: await data.pitchingStats!,
+    fielding: await data.fieldingStats!,
   }
+}
 </script>
 
 {#await data.battingStats then batting}

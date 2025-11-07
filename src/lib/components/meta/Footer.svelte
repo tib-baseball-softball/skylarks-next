@@ -1,7 +1,7 @@
 <script>
-    import Svelte from "../icons/Svelte.svelte";
-    import {Heart} from "lucide-svelte";
-    import {env} from "$env/dynamic/public";
+import Svelte from "../icons/Svelte.svelte"
+import { Heart } from "lucide-svelte"
+import { env } from "$env/dynamic/public"
 </script>
 
 <section class="flex justify-center items-center gap-8 mt-5">

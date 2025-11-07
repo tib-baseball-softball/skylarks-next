@@ -1,12 +1,12 @@
 <script lang="ts">
-  import type {ClubTeam} from "bsm.js";
-  import {Check, File, Tag, Users, Volleyball, X} from "lucide-svelte";
+import type { ClubTeam } from "bsm.js"
+import { Check, File, Tag, Users, Volleyball, X } from "lucide-svelte"
 
-  interface Props {
-    clubTeam: ClubTeam;
-  }
+interface Props {
+  clubTeam: ClubTeam
+}
 
-  let {clubTeam}: Props = $props();
+let { clubTeam }: Props = $props()
 </script>
 
 <div class="card preset-tonal dark:border dark:border-surface-500 shadow-xl p-3">

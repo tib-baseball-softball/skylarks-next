@@ -1,47 +1,46 @@
 <script lang="ts">
-  import type {UniformsetsCreate, UniformsetsResponse} from "$lib/model/pb-types";
-  import {save} from "$lib/pocketbase/RecordOperations";
-  import {invalidate} from "$app/navigation";
-  import {toastController} from "$lib/service/ToastController.svelte.ts";
-  import {closeModal} from "$lib/functions/closeModal.ts";
+import type { UniformsetsCreate, UniformsetsResponse } from "$lib/model/pb-types"
+import { save } from "$lib/pocketbase/RecordOperations"
+import { invalidate } from "$app/navigation"
+import { toastController } from "$lib/service/ToastController.svelte.ts"
+import { closeModal } from "$lib/functions/closeModal.ts"
 
-  interface Props {
-    uniformSet?: UniformsetsResponse | null;
-    clubID: string;
+interface Props {
+  uniformSet?: UniformsetsResponse | null
+  clubID: string
+}
+
+let { uniformSet, clubID }: Props = $props()
+
+const form: UniformsetsCreate = $state(
+  uniformSet ?? {
+    id: "",
+    name: "",
+    cap: "",
+    jersey: "",
+    pants: "",
+    club: "",
+  }
+)
+
+async function submitForm(e: SubmitEvent) {
+  e.preventDefault()
+  form.club = clubID
+
+  let result: UniformsetsResponse | null = null
+
+  try {
+    result = await save<UniformsetsResponse>("uniformsets", form)
+  } catch {
+    toastController.triggerGenericFormErrorMessage("Uniform Set")
   }
 
-
-  let {uniformSet, clubID}: Props = $props();
-
-  const form: UniformsetsCreate = $state(
-      uniformSet ?? {
-        id: "",
-        name: "",
-        cap: "",
-        jersey: "",
-        pants: "",
-        club: "",
-      }
-  );
-
-  async function submitForm(e: SubmitEvent) {
-    e.preventDefault();
-    form.club = clubID;
-
-    let result: UniformsetsResponse | null = null;
-
-    try {
-      result = await save<UniformsetsResponse>("uniformsets", form);
-    } catch {
-      toastController.triggerGenericFormErrorMessage("Uniform Set");
-    }
-
-    if (result) {
-      toastController.triggerGenericFormSuccessMessage("Uniform Set");
-      await invalidate("club:single");
-      closeModal();
-    }
+  if (result) {
+    toastController.triggerGenericFormSuccessMessage("Uniform Set")
+    await invalidate("club:single")
+    closeModal()
   }
+}
 </script>
 
 <form onsubmit={submitForm} class="mt-4 space-y-3">

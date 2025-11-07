@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-12T16:35:53.634Z\n"
-"PO-Revision-Date: 2025-10-31T18:47:07.742Z\n"
+"PO-Revision-Date: 2025-11-07T16:30:14.649Z\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: \n"
@@ -2843,3 +2843,7 @@ msgstr "Чтобы получить доступ к внутренней инф�
 #: src/routes/login/+page.svelte
 msgid "You are logged in as: <0/> <1/> You can log out by clicking your avatar in the top right."
 msgstr "Вы вошли как: <0/> <1/> Вы можете выйти, нажав на свой аватар в правом верхнем углу."
+
+#: src/lib/components/forms/PlayerDataForm.svelte
+msgid "Display this data publicly on team website"
+msgstr "Отображать эти данные публично на веб-сайте команды"

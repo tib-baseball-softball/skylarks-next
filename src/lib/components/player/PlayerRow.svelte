@@ -1,13 +1,13 @@
 <script lang="ts">
-  import type {Player} from "$lib/model/Player.ts";
-  import PlayerNumberGraphic from "$lib/components/player/PlayerNumberGraphic.svelte";
+import type { Player } from "$lib/model/Player.ts"
+import PlayerNumberGraphic from "$lib/components/player/PlayerNumberGraphic.svelte"
 
-  interface Props {
-    player: Player;
-    visual?: "image" | "number";
-  }
+interface Props {
+  player: Player
+  visual?: "image" | "number"
+}
 
-  let {player, visual = "number"}: Props = $props();
+let { player, visual = "number" }: Props = $props()
 </script>
 
 {#if player.bsm_id > 0}

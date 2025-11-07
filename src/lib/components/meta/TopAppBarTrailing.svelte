@@ -1,6 +1,6 @@
 <script lang="ts">
-  import LoginBadge from "$lib/auth/LoginBadge.svelte";
-  import LocalePicker from "$lib/components/meta/LocalePicker.svelte";
+import LoginBadge from "$lib/auth/LoginBadge.svelte"
+import LocalePicker from "$lib/components/meta/LocalePicker.svelte"
 </script>
 
 <LocalePicker/>

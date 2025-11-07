@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type {PageProps} from './$types';
-  import LicenseList from "$lib/components/club/licenses/LicenseList.svelte";
-  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
+import type { PageProps } from "./$types"
+import LicenseList from "$lib/components/club/licenses/LicenseList.svelte"
+import ProgressRing from "$lib/components/utility/ProgressRing.svelte"
 
-  let {data}: PageProps = $props();
+let { data }: PageProps = $props()
 </script>
 
 <h1 class="h1 my-4!">Scorer Licenses</h1>

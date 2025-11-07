@@ -1,11 +1,11 @@
 <script lang="ts">
-  import type {Media} from "$lib/model/MediaData.ts";
+import type { Media } from "$lib/model/MediaData.ts"
 
-  interface Props {
-    media: Media;
-  }
+interface Props {
+  media: Media
+}
 
-  let {media}: Props = $props();
+let { media }: Props = $props()
 </script>
 
 <img class="h-auto max-w-full rounded-lg"

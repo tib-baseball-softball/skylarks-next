@@ -9,16 +9,18 @@
     "clean": "dotenvx run -- wuchale --clean",
     "preview": "vite preview",
     "test": "dotenvx run -- vitest && pnpm test:e2e",
-    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "sv-check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "generate:types": "typed-pocketbase -d src/lib/model",
     "test:e2e": "dotenvx run -- playwright test",
     "test:ui": "dotenvx run -- playwright test --ui",
     "test:unit": "dotenvx run -- vitest",
-    "format": "prettier --write .",
-    "lint": "prettier --check ."
+    "format": "biome format --write",
+    "lint": "biome lint --write",
+    "check": "biome check --write"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.3.4",
     "@dotenvx/dotenvx": "^1.51.0",
     "@playwright/test": "^1.56.1",
     "@sveltejs/adapter-node": "^5.4.0",
@@ -53,8 +55,6 @@
     }
   },
   "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild"
-    ]
+    "onlyBuiltDependencies": ["esbuild"]
   }
 }

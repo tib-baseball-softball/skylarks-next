@@ -1,10 +1,10 @@
 <script lang="ts">
-  import ClubInfoSection from "$lib/components/club/ClubInfoSection.svelte";
-  import ClubGridItem from "$lib/components/club/ClubGridItem.svelte";
-  import type {PageProps} from './$types';
-  import {BookText, Diamond, Pencil, Users} from "lucide-svelte";
+import ClubInfoSection from "$lib/components/club/ClubInfoSection.svelte"
+import ClubGridItem from "$lib/components/club/ClubGridItem.svelte"
+import type { PageProps } from "./$types"
+import { BookText, Diamond, Pencil, Users } from "lucide-svelte"
 
-  let {data}: PageProps = $props();
+let { data }: PageProps = $props()
 </script>
 
 <h1 class="h1">Club</h1>

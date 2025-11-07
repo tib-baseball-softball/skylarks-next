@@ -1,10 +1,10 @@
 <script lang="ts">
-    interface Props {
-        header: String;
-        teaserText: String;
-    }
+interface Props {
+  header: String
+  teaserText: String
+}
 
-    let { header, teaserText }: Props = $props();
+let { header, teaserText }: Props = $props()
 </script>
 
 <div class="card">

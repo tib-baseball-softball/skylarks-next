@@ -1,13 +1,13 @@
 <script lang="ts">
-  import type {Match} from "bsm.js";
-  import CurrentMatchRow from "$lib/components/match/CurrentMatchRow.svelte";
-  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
+import type { Match } from "bsm.js"
+import CurrentMatchRow from "$lib/components/match/CurrentMatchRow.svelte"
+import ProgressRing from "$lib/components/utility/ProgressRing.svelte"
 
-  interface Props {
-    matches: Promise<Match[]>;
-  }
+interface Props {
+  matches: Promise<Match[]>
+}
 
-  let {matches}: Props = $props();
+let { matches }: Props = $props()
 </script>
 
 {#await matches}

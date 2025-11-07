@@ -1,13 +1,13 @@
-import {type Page} from '@playwright/test';
+import { type Page } from "@playwright/test"
 
 export async function checkNoConsoleErrors(page: Page) {
-  const consoleErrors: string[] = [];
+  const consoleErrors: string[] = []
 
-  page.on('console', msg => {
-    if (msg.type() === 'error') {
-      consoleErrors.push(msg.text());
+  page.on("console", (msg) => {
+    if (msg.type() === "error") {
+      consoleErrors.push(msg.text())
     }
-  });
+  })
 
-  return consoleErrors;
+  return consoleErrors
 }
