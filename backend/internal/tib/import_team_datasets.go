@@ -10,6 +10,7 @@ import (
 
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
+	"github.com/tib-baseball-softball/skylarks-next/bsm"
 	"github.com/tib-baseball-softball/skylarks-next/internal/dp"
 )
 
@@ -18,7 +19,7 @@ type teamDatasetCacheIdentifier struct {
 	Season string
 }
 
-func ImportTeamDatasets(app core.App) {
+func ImportTeamDatasets(app core.App, client bsm.APIClient) {
 	currentYear := time.Now().Year()
 	cacheRecords, err := app.FindRecordsByFilter(
 		dp.RequestCacheCollection,
@@ -53,7 +54,7 @@ func ImportTeamDatasets(app core.App) {
 					return
 				}
 
-				datasets, err := LoadHomeData(app, parsedIdentifier.TeamID, currentYear) // we have established earlier that only the current year is of interest
+				datasets, err := LoadHomeData(app, client, parsedIdentifier.TeamID, currentYear) // we have established earlier that only the current year is of interest
 				responseBody, err := json.Marshal(datasets)
 				if err != nil {
 					app.Logger().Error("ImportTeamDatasets error", "error", err, "cacheIdentifier", requestCache.Identifier())

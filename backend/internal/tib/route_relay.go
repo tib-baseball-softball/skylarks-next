@@ -11,7 +11,7 @@ import (
 
 // GetRelayedBSMData relays BSM request so the client-side does not need to know API keys.
 // Uses allowlist for URLs to make sure only public information is disclosed.
-func GetRelayedBSMData() func(e *core.RequestEvent) error {
+func GetRelayedBSMData(client bsm.APIClient) func(e *core.RequestEvent) error {
 	return func(e *core.RequestEvent) error {
 		// request checks
 		bsmURL := e.Request.URL.Query().Get("url")
@@ -28,7 +28,7 @@ func GetRelayedBSMData() func(e *core.RequestEvent) error {
 			return e.JSON(http.StatusBadRequest, "Failed to parse given URL string into a valid URL")
 		}
 
-		urlWithKey, err := bsm.AppendAPIKey(e.App, *parsedURL, clubID)
+		urlWithKey, err := client.AppendAPIKey(e.App, *parsedURL, clubID)
 		if err != nil {
 			return e.JSON(http.StatusInternalServerError, "Internal error occurred")
 		}

@@ -10,6 +10,11 @@ import (
 // ValidateSignupKey checks that a valid signup key is used on every user creation.
 // A user is assigned a team and club based on the signup key used.
 func ValidateSignupKey(e *core.RecordRequestEvent) error {
+	// superuser auth bypasses this check (creating users from PocketBase admin panel)
+	if e.HasSuperuserAuth() {
+		return e.Next()
+	}
+
 	user := &User{}
 	user.SetProxyRecord(e.Record)
 

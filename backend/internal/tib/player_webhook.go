@@ -30,11 +30,11 @@ func HandlePlayerChangedMessage(app core.App) func(e *core.RequestEvent) error {
 
 		body, err := io.ReadAll(e.Request.Body)
 		if err != nil {
-			app.Logger().Error("Failed to read request body: %v", err)
+			app.Logger().Error("Failed to read request body", "err", err)
 			return e.JSON(http.StatusInternalServerError, "Internal Server Error")
 		}
 
-		if !verifyWebhookSignature(e.Request, webhookIdentifier, webhookSecret, body) {
+		if !VerifyWebhookSignature(e.Request, webhookIdentifier, webhookSecret, body) {
 			app.Logger().Warn("Invalid webhook signature for player change", "identifier", webhookIdentifier)
 			return e.JSON(http.StatusUnauthorized, "Invalid Webhook signature")
 		}
@@ -50,11 +50,8 @@ func HandlePlayerChangedMessage(app core.App) func(e *core.RequestEvent) error {
 			"first_name = {:firstName} && last_name = {:lastName}",
 			dbx.Params{"firstName": message.FirstName, "lastName": message.LastName},
 		)
-		if err != nil {
+		if err != nil || record == nil {
 			app.Logger().Warn("Failed to find player for webhook message", "err", err, "message", message)
-			return e.JSON(http.StatusInternalServerError, "Internal Server Error")
-		}
-		if record == nil {
 			return e.JSON(http.StatusNotFound, "Player not found.")
 		}
 

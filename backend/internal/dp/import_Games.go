@@ -33,6 +33,10 @@ type GameImportService struct {
 	App GameImportServiceApp
 }
 
+func (s GameImportService) Client() bsm.APIClient {
+	return bsm.NewAPIClient()
+}
+
 func (s GameImportService) ImportGames() {
 	teams, err := s.App.FindRecordsByFilter("teams", "bsm_league_group != 0", "", 0, 0)
 	if err != nil {
@@ -95,7 +99,7 @@ func (s GameImportService) fetchMatchesForLeagueGroup(league string, apiKey stri
 	params[bsm.SearchFilter] = "skylarks"
 	// we cannot use compact here, since the field data is not included in the response
 
-	url := bsm.GetAPIURL("matches.json", params, apiKey)
+	url := s.Client().GetAPIURL("matches.json", params, apiKey)
 	matches, _, err := bsm.FetchResource[[]bsm.Match](url.String())
 
 	if err != nil {
@@ -143,7 +147,7 @@ func (s GameImportService) createOrUpdateEvents(matches []bsm.Match, team *core.
 	return
 }
 
-func (s GameImportService) setEventRecordValues(record *core.Record, match bsm.Match, teamID string, location *bsm.Location) (err error) {
+func (s GameImportService) setEventRecordValues(record *core.Record, match bsm.Match, teamID string, location *Location) (err error) {
 	starttime, err := types.ParseDateTime(match.Time)
 	if err != nil {
 		return err
@@ -180,7 +184,7 @@ func (s GameImportService) setEventRecordValues(record *core.Record, match bsm.M
 
 // createOrUpdateField Adds field/location to the database that can then be set to new events as well as selected for
 // manually created events in the frontend.
-func (s GameImportService) createOrUpdateField(team *core.Record, field bsm.Field) (*bsm.Location, error) {
+func (s GameImportService) createOrUpdateField(team *core.Record, field bsm.Field) (*Location, error) {
 	record, err := s.App.FindFirstRecordByData(LocationCollection, "bsm_id", field.BSMID)
 
 	if err != nil {
@@ -196,7 +200,7 @@ func (s GameImportService) createOrUpdateField(team *core.Record, field bsm.Fiel
 			return nil, errors.New("cannot create new record, collection is nil")
 		}
 	}
-	location := &bsm.Location{}
+	location := &Location{}
 	location.SetProxyRecord(record)
 
 	location.SetBSMID(field.BSMID)

@@ -8,12 +8,12 @@ import (
 	"sync"
 	"time"
 
-	"github.com/pocketbase/pocketbase/core"
 	"github.com/tib-baseball-softball/skylarks-next/bsm"
+	"github.com/tib-baseball-softball/skylarks-next/internal/dp"
 )
 
 // LoadHomeData loads structured data to display on a single team's home dashboard.
-func LoadHomeData(app core.App, teamID int, season int) ([]HomeDataset, error) {
+func LoadHomeData(app dp.LogOnlyApp, client bsm.APIClient, teamID int, season int) ([]HomeDataset, error) {
 	apiKey := os.Getenv("BSM_API_KEY")
 	if apiKey == "" {
 		return nil, errors.New("default API key not set, aborting")
@@ -23,7 +23,7 @@ func LoadHomeData(app core.App, teamID int, season int) ([]HomeDataset, error) {
 	leagueChannel := make(chan []bsm.LeagueGroup)
 
 	go func() {
-		team, err := bsm.LoadSingleTeamByID(teamID, apiKey)
+		team, err := client.LoadSingleTeamByID(teamID, apiKey)
 		if err != nil {
 			app.Logger().Error("Error fetching team", "error", err, "team", teamID)
 			return
@@ -32,7 +32,7 @@ func LoadHomeData(app core.App, teamID int, season int) ([]HomeDataset, error) {
 	}()
 
 	go func() {
-		leagueGroupsResponse, err := bsm.FetchLeagueGroupsForSeason(apiKey, season)
+		leagueGroupsResponse, err := client.FetchLeagueGroupsForSeason(apiKey, season)
 		if err != nil {
 			app.Logger().Error("Error fetching league groups", "error", err, "team", teamID)
 			return
@@ -89,7 +89,7 @@ func LoadHomeData(app core.App, teamID int, season int) ([]HomeDataset, error) {
 				params[bsm.GamedayFilter] = bsm.GameDayAny
 				params[bsm.CompactFilter] = "true"
 
-				matches, err := bsm.LoadMatchesWithFilterParams(params, apiKey)
+				matches, err := client.LoadMatchesWithFilterParams(params, apiKey)
 				if err != nil {
 					app.Logger().Error("Error fetching matches", "error", err, "team", teamID)
 					return
@@ -111,7 +111,7 @@ func LoadHomeData(app core.App, teamID int, season int) ([]HomeDataset, error) {
 			go func(clubTeam bsm.Team) {
 				defer wg.Done()
 
-				err := LoadHomeTeamTable(clubTeam, leagueGroup.ID, &dataset, apiKey)
+				err := LoadHomeTeamTable(client, clubTeam, leagueGroup.ID, &dataset, apiKey)
 				if err != nil {
 					app.Logger().Warn("Error fetching home team table", "error", err, "team", clubTeam.ID, "leagueGroup", leagueGroup.ID)
 					return
@@ -144,8 +144,8 @@ func createPlayoffSeriesData(dataset *HomeDataset, games []bsm.Match) {
 }
 
 // LoadHomeTeamTable loads the home team table
-func LoadHomeTeamTable(team bsm.Team, leagueGroupID int, dataset *HomeDataset, apiKey string) error {
-	table, err := bsm.LoadSingleTable(leagueGroupID, apiKey)
+func LoadHomeTeamTable(client bsm.APIClient, team bsm.Team, leagueGroupID int, dataset *HomeDataset, apiKey string) error {
+	table, err := client.LoadSingleTable(leagueGroupID, apiKey)
 	if err != nil {
 		return err
 	}

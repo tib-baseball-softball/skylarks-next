@@ -5,10 +5,11 @@ import (
 	"strconv"
 
 	"github.com/pocketbase/pocketbase/core"
+	"github.com/tib-baseball-softball/skylarks-next/bsm"
 )
 
 // GetFavoriteTeamData returns a handler function for the favorite team data endpoint
-func GetFavoriteTeamData() func(e *core.RequestEvent) error {
+func GetFavoriteTeamData(client bsm.APIClient) func(e *core.RequestEvent) error {
 	return func(e *core.RequestEvent) error {
 		teamID := e.Request.URL.Query().Get("team")
 		if teamID == "" {
@@ -30,7 +31,7 @@ func GetFavoriteTeamData() func(e *core.RequestEvent) error {
 			return e.JSON(http.StatusBadRequest, "Season must be an integer")
 		}
 
-		response, err := GetCachedDatasetResponse(e.App, convertedTeamID, convertedSeason)
+		response, err := GetCachedDatasetResponse(e.App, client, convertedTeamID, convertedSeason)
 		if err != nil {
 			return e.JSON(http.StatusInternalServerError, "Internal error occurred")
 		}

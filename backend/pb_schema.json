@@ -176,7 +176,7 @@
     "listRule": "@request.auth.id != \"\" && (\n    // the same user as the authenticated one\n    id = @request.auth.id ||\n    // or share the same club\n    club.id ?= @request.auth.club.id\n)",
     "viewRule": "@request.auth.id != \"\" && (\n    // the same user as the authenticated one\n    id = @request.auth.id ||\n    // or share the same club\n    club.id ?= @request.auth.club.id\n)",
     "createRule": "",
-    "updateRule": "@request.auth.id != \"\" && \n(id = @request.auth.id // user editing themselves\n||\nclub.admins ?~ @request.auth.id // editing user is Club admin\n||\nclub.teams_via_club.admins.id ?= @request.auth.id) // editing user is Team admin for a club team\n&& (club.id ?= @request.body.club || @request.body.club:isset = false)",
+    "updateRule": "@request.auth.id != \"\" \n\n&& \n\n((id = @request.auth.id && @request.body.club:isset = false && @request.body.teams:isset = false) // user editing themselves, no setting team and club info\n||\nclub.admins.id ?= @request.auth.id // editing user is Club admin\n||\nclub.teams_via_club.admins.id ?= @request.auth.id) // editing user is Team admin for a club team\n\n&& \n\n// club admins can only add users to their own club\n(@request.body.club.admins.id ?= @request.auth.id || @request.body.club:isset = false) \n\n&&\n\n// team admins can only add users to their own teams\n(@request.body.teams.admins.id ?= @request.auth.id || @request.body.teams:isset = false)",
     "deleteRule": "@request.auth.id != \"\" && id = @request.auth.id // users can delete themselves",
     "name": "users",
     "type": "auth",
