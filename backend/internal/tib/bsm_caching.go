@@ -14,7 +14,6 @@ import (
 	"github.com/pocketbase/pocketbase/tools/types"
 	"github.com/tib-baseball-softball/skylarks-next/bsm"
 	"github.com/tib-baseball-softball/skylarks-next/internal/dp"
-	"github.com/tib-baseball-softball/skylarks-next/internal/utility"
 )
 
 const (
@@ -104,7 +103,7 @@ func GetCachedBSMResponse(app CachingApp, url *url.URL) (string, error) {
 	if url.Host != os.Getenv("BSM_API_HOST") || !isValidBSMURL(url) {
 		return ret, &bsm.URLAllowlistError{URL: url.String(), Message: "Only allowlisted BSM URLs are allowed"}
 	}
-	hash := utility.GetMD5Hash(url.String())
+	hash := dp.GetMD5Hash(url.String())
 
 	var requestCache *dp.RequestCache
 	record, err := app.FindFirstRecordByData(dp.RequestCacheCollection, "hash", hash)
@@ -158,7 +157,7 @@ func saveBSMResponseToCache(app CachingApp, url string) (*core.Record, error) {
 	cache.SetProxyRecord(record)
 
 	cache.SetResponseBody(body)
-	cache.SetHash(utility.GetMD5Hash(url))
+	cache.SetHash(dp.GetMD5Hash(url))
 	cache.SetURL(url)
 
 	err = app.Save(record)

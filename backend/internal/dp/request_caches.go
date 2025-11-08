@@ -3,7 +3,6 @@ package dp
 import (
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
-	"github.com/tib-baseball-softball/skylarks-next/internal/utility"
 )
 
 const (
@@ -82,7 +81,7 @@ func SaveDataToCache(app core.App, identifier string, data string) error {
 	requestCache.SetProxyRecord(record)
 
 	requestCache.SetIdentifier(identifier)
-	requestCache.SetHash(utility.GetMD5Hash(identifier))
+	requestCache.SetHash(GetMD5Hash(identifier))
 	requestCache.SetResponseBody(data)
 	if err := app.Save(record); err != nil {
 		return err
