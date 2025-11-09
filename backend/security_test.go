@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/diamond-planner/diamond-planner/dp"
 	"github.com/pocketbase/pocketbase/tests"
-	"github.com/tib-baseball-softball/skylarks-next/internal/dp"
 )
 
 type userData struct {

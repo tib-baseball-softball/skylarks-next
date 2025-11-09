@@ -4,9 +4,9 @@ import (
 	"os"
 	"testing"
 
+	"github.com/diamond-planner/diamond-planner/bsm"
+	"github.com/diamond-planner/diamond-planner/dp"
 	"github.com/pocketbase/pocketbase/tests"
-	"github.com/tib-baseball-softball/skylarks-next/bsm"
-	"github.com/tib-baseball-softball/skylarks-next/internal/dp"
 )
 
 const (

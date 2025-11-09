@@ -10,8 +10,8 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/diamond-planner/diamond-planner/dp"
 	"github.com/pocketbase/pocketbase/core"
-	"github.com/tib-baseball-softball/skylarks-next/internal/dp"
 )
 
 type PlayerReactionPayload struct {

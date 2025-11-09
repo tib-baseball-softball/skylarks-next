@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"net/url"
 
+	"github.com/diamond-planner/diamond-planner/bsm"
 	"github.com/pocketbase/pocketbase/core"
-	"github.com/tib-baseball-softball/skylarks-next/bsm"
 )
 
 // GetRelayedBSMData relays BSM request so the client-side does not need to know API keys.

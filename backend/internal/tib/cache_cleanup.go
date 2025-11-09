@@ -3,9 +3,9 @@ package tib
 import (
 	"log/slog"
 
+	"github.com/diamond-planner/diamond-planner/dp"
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
-	"github.com/tib-baseball-softball/skylarks-next/internal/dp"
 )
 
 type CacheCleanupApp interface {
