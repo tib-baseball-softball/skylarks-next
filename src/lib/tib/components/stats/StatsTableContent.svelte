@@ -35,7 +35,8 @@
 {#each $rows as row}
   <tr>
     {#if tableType === "personal"}
-      <td><a class="anchor" href="/players/{row?.person?.id}">{row?.person?.first_name} {row?.person?.last_name}</a>
+      <td><a class="anchor"
+             href="/(tib)/players/{row?.person?.id}">{row?.person?.first_name} {row?.person?.last_name}</a>
       </td>
     {/if}
 

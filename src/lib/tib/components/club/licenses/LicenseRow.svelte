@@ -9,7 +9,7 @@
   let {license}: Props = $props();
 </script>
 
-<a class="container" href="/club/license/{license.id}">
+<a class="container" href="/(tib)/club/license/{license.id}">
   <LicenseLevelIndicator level={license.level}/>
   <span>{license.person.last_name}, {license.person.first_name}</span>
 </a>

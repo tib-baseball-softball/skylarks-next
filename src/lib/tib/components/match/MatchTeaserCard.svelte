@@ -26,7 +26,7 @@
     true
         ? 'preset-tonal-primary border border-primary-500'
         : 'preset-tonal-surface border border-surface-500'}"
-        href="/gamecenter/game-detail/{match.id}"
+        href="/(tib)/gamecenter/game-detail/{match.id}"
 >
   <header class="card-header">
     <div class="flex justify-between items-center">

@@ -11,7 +11,7 @@
 </script>
 
 {#if player.bsm_id > 0}
-  <a class="player-container flex items-center gap-2" href="/players/{player.bsm_id}">
+  <a class="player-container flex items-center gap-2" href="/(tib)/players/{player.bsm_id}">
     {@render rowContent()}
   </a>
 {:else }

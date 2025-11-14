@@ -1,6 +1,6 @@
 <script lang="ts">
   import CurrentMatchesOverviewCard from "$lib/tib/components/match/CurrentMatchesOverviewCard.svelte";
-  import type {PageProps} from "./$types";
+  import type {PageProps} from "../../../.svelte-kit/types/src/routes";
 
   let {data}: PageProps = $props();
 </script>

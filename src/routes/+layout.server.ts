@@ -2,7 +2,7 @@ import {ClubTeamsAPIRequest, LeagueGroupAPIRequest} from "bsm.js";
 import {env} from "$env/dynamic/private";
 import {env as publicEnv} from "$env/dynamic/public";
 import {preferences} from "$lib/tib/globals.svelte.ts";
-import type {LayoutServerLoad} from "./$types";
+import type {LayoutServerLoad} from "../../../.svelte-kit/types/src/routes";
 
 export const load: LayoutServerLoad = async () => {
   const leagueGroupRequest = new LeagueGroupAPIRequest(env.BSM_API_KEY);

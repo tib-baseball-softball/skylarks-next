@@ -37,7 +37,7 @@
             <NavigationSheet clubs={data.clubs} teams={data.teams}/>
           {/if}
 
-          <a aria-label="to home page" href="/" class="logo-link">
+          <a aria-label="to home page" href="/static" class="logo-link">
             <img class="team-logo" src="/berlin_skylarks_logo.svg" alt="Skylarks Team Logo">
           </a>
         </div>

@@ -57,7 +57,7 @@
 
       {#if authRecord.bsm_id}
         <a
-                href="/players/{authRecord?.bsm_id}"
+                href="/(tib)/players/{authRecord?.bsm_id}"
                 class="btn preset-tonal-secondary border border-secondary-500"
         >
           <Link/>
