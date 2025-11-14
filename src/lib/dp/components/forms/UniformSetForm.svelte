@@ -12,7 +12,7 @@
 
   const {uniformSet, clubID}: Props = $props();
 
-  const form: UniformsetsCreate = $state(
+  let form: UniformsetsCreate = $state(
       uniformSet ?? {
         id: "",
         name: "",

@@ -19,7 +19,7 @@
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
   const canEdit = $derived(participation.user === authRecord.id || isAdmin);
-  const isOpen = $state(false);
+  let isOpen = $state(false);
 
   const createdDate =
       participation.created !== "" ? new Date(participation.created).toLocaleString() : "---";

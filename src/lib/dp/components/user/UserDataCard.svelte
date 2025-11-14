@@ -4,7 +4,7 @@
   import Dialog from "$lib/dp/components/modal/Dialog.svelte";
   import ChangeEmailForm from "$lib/dp/auth/ChangeEmailForm.svelte";
   import PasswordRequestButton from "$lib/dp/auth/PasswordRequestButton.svelte";
-  import UserDetailsForm from "$lib/dp/auth/UserDetailsForm.svelte";
+  import UserDetailsForm from "$lib/dp/components/forms/UserDetailsForm.svelte";
   import {client} from "$lib/dp/client.svelte.js";
   import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
 

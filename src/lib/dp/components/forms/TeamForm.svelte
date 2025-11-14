@@ -23,7 +23,7 @@
 
   let open = $state(false);
 
-  const form: Partial<ExpandedTeam> & { age_group: string } = $state(
+  let form: Partial<ExpandedTeam> & { age_group: string } = $state(
       team ?? {
         id: "",
         name: "",
@@ -35,7 +35,7 @@
       }
   );
 
-  const selectedAdmins: UsersResponse[] = $state(form?.expand?.admins ?? []);
+  let selectedAdmins: UsersResponse[] = $state(form?.expand?.admins ?? []);
 
   const allTeamMembers = client.collection("users").getFullList<UsersResponse>({
     filter: `teams ?~ '${team?.id}'`,

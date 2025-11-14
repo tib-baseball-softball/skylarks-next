@@ -29,7 +29,7 @@
   const {data}: PageProps = $props();
   const leagueGroups = $derived(data.leagueGroups);
 
-  const showExternal = $state(false);
+  let showExternal = $state(false);
 
   /**
    *  enum <=> string conversion necessary

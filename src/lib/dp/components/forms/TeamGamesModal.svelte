@@ -23,11 +23,11 @@
 
   const currentYear = new Date().getFullYear();
   const cutoffYear = currentYear - 4;
-  const season = $state(currentYear);
+  let season = $state(currentYear);
   const possibleSeasons = range(cutoffYear, currentYear);
   let leagueGroups: LeaguegroupsResponse[] = $state([]);
 
-  const form = $state(
+  let form = $state(
       team ?? {
         id: "",
         bsm_league_group: 0,

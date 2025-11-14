@@ -10,7 +10,7 @@
 
   let {participation}: Props = $props();
 
-  const form = $state(participation);
+  let form = $state(participation);
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();

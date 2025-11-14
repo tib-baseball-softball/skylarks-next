@@ -36,7 +36,7 @@
   <ul class="list mt-5 flex flex-col gap-3">
     {#each leagueGroups as leagueGroup}
       <li class="preset-tonal-surface dark:preset-filled-surface-300-700 p-3 min-h-14 rounded-base">
-        <a href="/(tib)/ligen/{leagueGroup.id}">
+        <a href="/ligen/{leagueGroup.id}">
           <span class="badge preset-tonal-primary border border-primary-500 w-20">{leagueGroup.acronym}</span>
           <span class="flex-auto ms-3">{leagueGroup.name}</span>
         </a>

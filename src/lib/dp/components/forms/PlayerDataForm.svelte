@@ -27,7 +27,7 @@
 
   // Mark: here we do not need to be reactive as we're editing
   const authRecord = authSettings.record as CustomAuthModel;
-  const form = $state({
+  let form = $state({
     id: authRecord.id ?? "",
     number: authRecord.number ?? "",
     bats: authRecord.bats ?? "",

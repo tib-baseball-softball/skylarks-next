@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-10T18:43:43.303Z\n"
-"PO-Revision-Date: 2025-11-07T16:30:14.634Z\n"
+"PO-Revision-Date: 2025-11-14T16:27:07.608Z\n"
 "Last-Translator: \n"
 "Language: de\n"
 "Language-Team: \n"
@@ -408,6 +408,7 @@ msgid "Impressum"
 msgstr "Impressum"
 
 #: src/lib/components/match/CurrentMatchesOverviewCard.svelte
+#: src/lib/tib/components/match/CurrentMatchesOverviewCard.svelte
 #: src/routes/gamecenter/+page.svelte
 msgid "Gamecenter"
 msgstr "Alle Spiele"
@@ -417,14 +418,17 @@ msgid "Show external games"
 msgstr "Externe Spiele anzeigen"
 
 #: src/lib/components/match/CurrentMatchBlock.svelte
+#: src/lib/tib/components/match/CurrentMatchBlock.svelte
 msgid "Loading matches..."
 msgstr "Lade Spiele..."
 
 #. placeholder {0}: error.message
 #. placeholder {0}: error.message
 #. placeholder {0}: error.message
+#. placeholder {0}: error.message
 #: src/lib/components/forms/TeamGamesModal.svelte
 #: src/lib/components/match/CurrentMatchBlock.svelte
+#: src/lib/tib/components/match/CurrentMatchBlock.svelte
 #: src/routes/ligen/[id]/stats/+page.svelte
 msgid "error loading matches: {0}"
 msgstr "Fehler beim Laden der Spiele: {0}"
@@ -1690,26 +1694,32 @@ msgid "Admin Dashboard"
 msgstr "Admin-Dashboard"
 
 #: src/lib/components/match/CurrentMatchBlock.svelte
+#: src/lib/tib/components/match/CurrentMatchBlock.svelte
 msgid "No games for this timeframe."
 msgstr "Keine Spiele für diesen Zeitraum."
 
 #: src/lib/components/match/CurrentMatchesOverviewCard.svelte
+#: src/lib/tib/components/match/CurrentMatchesOverviewCard.svelte
 msgid "Gameday"
 msgstr "Spieltag"
 
 #: src/lib/components/match/CurrentMatchesOverviewCard.svelte
+#: src/lib/tib/components/match/CurrentMatchesOverviewCard.svelte
 msgid "Current Games"
 msgstr "Aktuelle Spiele"
 
 #: src/lib/components/match/CurrentMatchesOverviewCard.svelte
+#: src/lib/tib/components/match/CurrentMatchesOverviewCard.svelte
 msgid "Previous <0/>"
 msgstr "Vorheriger <0/>"
 
 #: src/lib/components/match/CurrentMatchesOverviewCard.svelte
+#: src/lib/tib/components/match/CurrentMatchesOverviewCard.svelte
 msgid "Current <0/>"
 msgstr "Aktueller <0/>"
 
 #: src/lib/components/match/CurrentMatchesOverviewCard.svelte
+#: src/lib/tib/components/match/CurrentMatchesOverviewCard.svelte
 msgid "Next <0/>"
 msgstr "Nächster <0/>"
 
@@ -1723,6 +1733,7 @@ msgstr "TBD"
 
 #: src/lib/components/match/CurrentMatchRow.svelte
 #: src/lib/components/match/GameResultIndicator.svelte
+#: src/lib/tib/components/match/CurrentMatchRow.svelte
 msgid "PPD"
 msgstr "PPD"
 

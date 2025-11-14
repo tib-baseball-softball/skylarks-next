@@ -15,7 +15,7 @@
 
       {#each clubOfficials as clubOfficial, index}
         <li class="p-0.5">
-          <a href="/(tib)/club/officials/{clubOfficial.id}">
+          <a href="/club/officials/{clubOfficial.id}">
             <ClubOfficialRow {clubOfficial}/>
           </a>
         </li>

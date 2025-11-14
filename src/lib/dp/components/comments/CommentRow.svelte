@@ -15,7 +15,7 @@
   }
 
   const {comment, club}: Props = $props();
-  const formText = $derived(comment.text);
+  let formText = $derived(comment.text);
   let isEditing = $state(false);
 
   const userFullName = $derived(

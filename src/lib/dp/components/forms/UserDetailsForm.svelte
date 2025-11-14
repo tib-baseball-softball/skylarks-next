@@ -5,9 +5,9 @@
 
   const authRecord = authSettings.record as CustomAuthModel;
 
-  const files: FileList | null = $state(null);
+  let files: FileList | null = $state(null);
 
-  const form = $state({
+  let form = $state({
     id: authRecord.id,
     firstName: authRecord.first_name,
     lastName: authRecord.last_name,

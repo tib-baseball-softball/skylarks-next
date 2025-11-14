@@ -25,7 +25,7 @@
 
   let open = $state(false);
 
-  const form: Extension<
+  let form: Extension<
       Partial<ExpandedEvent>,
       {
         starttime: string

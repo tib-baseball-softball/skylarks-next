@@ -12,7 +12,7 @@
 
 <li>
   <a class="{classes}" class:preset-filled-primary-500={page.url.pathname === "/"}
-     href="/static">
+     href="/">
     <House/>
     <span>Start</span>
   </a>

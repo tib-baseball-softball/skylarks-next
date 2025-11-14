@@ -11,7 +11,7 @@
 
   const {playoffSeries}: Props = $props();
 
-  const open = $state(false);
+  let open = $state(false);
   const teams = $derived(Object.values(playoffSeries.teams));
 </script>
 

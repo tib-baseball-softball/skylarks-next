@@ -18,7 +18,7 @@
 
   const {club, buttonClasses = ""}: Props = $props();
 
-  const form: Partial<ExpandedClub> = $state(
+  let form: Partial<ExpandedClub> = $state(
       club ?? {
         id: "",
         name: "",
@@ -31,7 +31,7 @@
 
   let open = $state(false);
 
-  const selectedAdmins: UsersResponse[] = $state(form?.expand?.admins ?? []);
+  let selectedAdmins: UsersResponse[] = $state(form?.expand?.admins ?? []);
 
   const allUsersForClub = client.collection("users").getFullList<UsersResponse>({
     filter: `club ?~ '${club?.id}'`,

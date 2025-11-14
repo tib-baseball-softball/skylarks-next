@@ -12,7 +12,7 @@
 
   const {dataset}: Props = $props();
 
-  const tabSet: "graph" | "percentage" | "series" | string = $state("percentage");
+  let tabSet: "graph" | "percentage" | "series" | string = $state("percentage");
 </script>
 
 <Tabs.Root

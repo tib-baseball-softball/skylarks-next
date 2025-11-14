@@ -18,9 +18,9 @@
   const currentPage = $derived($events.page);
   const announcementStore = $derived(data.announcementStore);
 
-  const showEvents = $state("next");
-  const sorting: "asc" | "desc" | string = $state("asc");
-  const showTypes: EventType | "any" | string = $state("any");
+  let showEvents = $state("next");
+  let sorting: "asc" | "desc" | string = $state("asc");
+  let showTypes: EventType | "any" | string = $state("any");
 
   const reloadWithQuery = () => {
     const queryString = `?timeframe=${showEvents}&page=${currentPage}&sort=${sorting}&type=${showTypes}`;

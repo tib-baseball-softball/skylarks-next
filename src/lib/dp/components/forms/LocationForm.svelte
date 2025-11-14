@@ -21,7 +21,7 @@
 
   const {location = null, club, buttonClasses = ""}: Props = $props();
 
-  const form = $state(
+  let form = $state(
       location ?? {
         id: "",
         name: "",

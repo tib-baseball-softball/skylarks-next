@@ -15,7 +15,7 @@
 
   let {eventSeries, team, showForm = $bindable()}: Props = $props();
 
-  const formDefault = $state({
+  let formDefault = $state({
     id: "",
     title: "",
     interval: 7,
@@ -27,7 +27,7 @@
     team: team?.id,
   });
 
-  const form: EventSeriesCreationData = $derived(eventSeries ?? formDefault);
+  let form: EventSeriesCreationData = $derived(eventSeries ?? formDefault);
 
   const isNewSeries = $derived(form.id === "");
 

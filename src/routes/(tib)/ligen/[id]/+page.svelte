@@ -30,7 +30,7 @@
         </p>
 
         <footer class="card-footer mt-2">
-          <a class="btn preset-tonal-primary border border-primary-500" href="/(tib)/ligen/{leagueGroup.id}/stats">Go to
+          <a class="btn preset-tonal-primary border border-primary-500" href="/ligen/{leagueGroup.id}/stats">Go to
             stats</a>
         </footer>
       </div>

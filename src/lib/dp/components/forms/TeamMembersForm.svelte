@@ -14,11 +14,11 @@
 
   const {club, team}: Props = $props();
 
-  const form = $state({
+  let form = $state({
     id: team.id,
   });
 
-  const selectedUsers: UsersResponse[] = $state([]);
+  let selectedUsers: UsersResponse[] = $state([]);
 
   const allUsersForClub = client.collection("users").getFullList<UsersResponse>({
     filter: `club ?~ '${club.id}' && teams !~ '${team.id}'`, // all users that are club members, but not members of this team

@@ -36,7 +36,7 @@
   <tr>
     {#if tableType === "personal"}
       <td><a class="anchor"
-             href="/(tib)/players/{row?.person?.id}">{row?.person?.first_name} {row?.person?.last_name}</a>
+             href="/players/{row?.person?.id}">{row?.person?.first_name} {row?.person?.last_name}</a>
       </td>
     {/if}
 

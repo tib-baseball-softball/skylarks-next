@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-12T16:34:19.018Z\n"
-"PO-Revision-Date: 2025-11-07T16:30:14.639Z\n"
+"PO-Revision-Date: 2025-11-14T16:27:07.610Z\n"
 "Last-Translator: \n"
 "Language: fr\n"
 "Language-Team: \n"
@@ -330,6 +330,7 @@ msgid "<0/> Login Page"
 msgstr "<0/> Page de connexion"
 
 #: src/lib/components/match/CurrentMatchesOverviewCard.svelte
+#: src/lib/tib/components/match/CurrentMatchesOverviewCard.svelte
 #: src/routes/gamecenter/+page.svelte
 msgid "Gamecenter"
 msgstr "Centre de jeu"
@@ -1445,22 +1446,27 @@ msgid "Age Group"
 msgstr "Catégorie d'âge"
 
 #: src/lib/components/match/CurrentMatchesOverviewCard.svelte
+#: src/lib/tib/components/match/CurrentMatchesOverviewCard.svelte
 msgid "Gameday"
 msgstr "Jour de match"
 
 #: src/lib/components/match/CurrentMatchesOverviewCard.svelte
+#: src/lib/tib/components/match/CurrentMatchesOverviewCard.svelte
 msgid "Current Games"
 msgstr "Matchs actuels"
 
 #: src/lib/components/match/CurrentMatchesOverviewCard.svelte
+#: src/lib/tib/components/match/CurrentMatchesOverviewCard.svelte
 msgid "Previous <0/>"
 msgstr "Précédent <0/>"
 
 #: src/lib/components/match/CurrentMatchesOverviewCard.svelte
+#: src/lib/tib/components/match/CurrentMatchesOverviewCard.svelte
 msgid "Current <0/>"
 msgstr "Actuel <0/>"
 
 #: src/lib/components/match/CurrentMatchesOverviewCard.svelte
+#: src/lib/tib/components/match/CurrentMatchesOverviewCard.svelte
 msgid "Next <0/>"
 msgstr "Suivant <0/>"
 
@@ -1474,6 +1480,7 @@ msgstr "À déterminer"
 
 #: src/lib/components/match/CurrentMatchRow.svelte
 #: src/lib/components/match/GameResultIndicator.svelte
+#: src/lib/tib/components/match/CurrentMatchRow.svelte
 msgid "PPD"
 msgstr "Reporté"
 
@@ -1504,8 +1511,10 @@ msgstr "Afficher les ligues pour"
 #. placeholder {0}: error.message
 #. placeholder {0}: error.message
 #. placeholder {0}: error.message
+#. placeholder {0}: error.message
 #: src/lib/components/forms/TeamGamesModal.svelte
 #: src/lib/components/match/CurrentMatchBlock.svelte
+#: src/lib/tib/components/match/CurrentMatchBlock.svelte
 #: src/routes/ligen/[id]/stats/+page.svelte
 msgid "error loading matches: {0}"
 msgstr "erreur lors du chargement des matchs : {0}"
@@ -1605,10 +1614,12 @@ msgid "Coordinate Map <0>Select a location on the map to set coordinates automat
 msgstr "Carte des coordonnées <0>Sélectionnez un emplacement sur la carte pour définir les coordonnées automatiquement</0> <1/>"
 
 #: src/lib/components/match/CurrentMatchBlock.svelte
+#: src/lib/tib/components/match/CurrentMatchBlock.svelte
 msgid "No games for this timeframe."
 msgstr "Aucun match pour cette période."
 
 #: src/lib/components/match/CurrentMatchBlock.svelte
+#: src/lib/tib/components/match/CurrentMatchBlock.svelte
 msgid "Loading matches..."
 msgstr "Chargement des matchs..."
 

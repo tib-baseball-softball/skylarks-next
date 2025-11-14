@@ -27,7 +27,7 @@
   }: Props = $props();
 
   // svelte-ignore state_referenced_locally - we want just the initial value here
-  const form: Partial<ExpandedAnnouncement> = $state(
+  let form: Partial<ExpandedAnnouncement> = $state(
       announcement ?? {
         title: "",
         bodytext: "",

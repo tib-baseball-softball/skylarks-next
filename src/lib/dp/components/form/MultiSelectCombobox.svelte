@@ -20,7 +20,7 @@
     allowDeletionOfLastItem = false,
   }: Props = $props();
 
-  const selectElement: HTMLSelectElement | undefined = $state();
+  let selectElement: HTMLSelectElement | undefined = $state();
 
   function addItemToSelection(users: T[]) {
     if (!selectElement || selectElement?.value === "") {
