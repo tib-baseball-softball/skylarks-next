@@ -43,7 +43,7 @@
   let open = $state(false);
 
   const possiblePositionValues = getAllBaseballPositionStringValues();
-  const selectedPositions: string[] = $state(positionKeysToEnumStringValues(authRecord.position));
+  let selectedPositions: string[] = $state(positionKeysToEnumStringValues(authRecord.position));
 
   function validatePositionValue(details: ValidateArgs): boolean {
     return possiblePositionValues.includes(details.inputValue);

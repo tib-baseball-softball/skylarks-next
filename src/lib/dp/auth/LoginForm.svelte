@@ -1,6 +1,4 @@
 <script lang="ts">
-  // @ts-expect-error
-  import {Tabs} from "bits-ui";
   import {fade, slide} from "svelte/transition";
   import {goto} from "$app/navigation";
   import Switch from "$lib/components/utility/Switch.svelte";
@@ -11,6 +9,8 @@
   import type {UsersUpdate} from "$lib/dp/types/pb-types.ts";
   import type {Toast} from "$lib/dp/types/Toast.ts";
   import {client} from "../client.svelte.js";
+  //@ts-ignore
+  import {Tabs} from "bits-ui";
 
   const {authCollection = "users", passwordLogin = true, signupAllowed = true} = $props();
 
@@ -21,7 +21,7 @@
     background: "preset-filled-error-500",
   };
 
-  const form: Extension<Partial<UsersUpdate>, { signup_key: string }> = $state({
+  let form: Extension<Partial<UsersUpdate>, { signup_key: string }> = $state({
     email: "",
     password: "",
     first_name: "",
@@ -29,7 +29,7 @@
     passwordConfirm: "",
     signup_key: "",
   });
-  const signup = false;
+  let signup = false;
 
   async function submit(e: SubmitEvent) {
     e.preventDefault();
@@ -63,8 +63,8 @@
     }
   }
 
-  const tabSet: "login" | "signup" | string = $state("login");
-  const forgotPassword = $state(false);
+  let tabSet: "login" | "signup" | string = $state("login");
+  let forgotPassword = $state(false);
 </script>
 
 {#snippet login()}

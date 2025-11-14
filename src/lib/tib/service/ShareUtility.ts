@@ -58,7 +58,7 @@ export class ShareUtility {
 
     if (rawDate) {
       const d = new Date(rawDate);
-      if (!isNaN(d.getTime())) {
+      if (!Number.isNaN(d.getTime())) {
         date = dateFormatter.format(d);
         time = timeFormatter.format(d);
       }
