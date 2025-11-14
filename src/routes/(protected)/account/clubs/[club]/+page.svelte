@@ -1,13 +1,13 @@
 <script lang="ts">
   import {Mail, Plus, SquareArrowOutUpRight} from "lucide-svelte";
-  import AnnouncementSectionContent from "$lib/components/announcements/AnnouncementSectionContent.svelte";
-  import ClubDetailCard from "$lib/components/diamondplanner/club/ClubDetailCard.svelte";
-  import TeamListTeaser from "$lib/components/diamondplanner/team/TeamListTeaser.svelte";
-  import UniformSetInfoCard from "$lib/components/diamondplanner/uniformset/UniformSetInfoCard.svelte";
-  import AnnouncementForm from "$lib/components/forms/AnnouncementForm.svelte";
-  import TeamForm from "$lib/components/forms/TeamForm.svelte";
-  import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
-  import Dialog from "$lib/components/utility/Dialog.svelte";
+  import AnnouncementSectionContent from "$lib/dp/components/announcements/AnnouncementSectionContent.svelte";
+  import ClubDetailCard from "$lib/dp/components/club/ClubDetailCard.svelte";
+  import TeamListTeaser from "$lib/dp/components/team/TeamListTeaser.svelte";
+  import UniformSetInfoCard from "$lib/dp/components/uniformset/UniformSetInfoCard.svelte";
+  import AnnouncementForm from "$lib/dp/components/forms/AnnouncementForm.svelte";
+  import TeamForm from "$lib/dp/components/forms/TeamForm.svelte";
+  import UniformSetForm from "$lib/dp/components/forms/UniformSetForm.svelte";
+  import Dialog from "$lib/dp/components/modal/Dialog.svelte";
   import {authSettings} from "$lib/dp/client.svelte.js";
   import type {
     CustomAuthModel,

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import BaseballStatsDatatable from "$lib/components/datatable/BaseballStatsDatatable.svelte";
-  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
+  import BaseballStatsDatatable from "$lib/tib/components/stats/BaseballStatsDatatable.svelte";
+  import ProgressRing from "$lib/dp/components/utils/ProgressRing.svelte";
   import type {StatsDataset} from "$lib/tib/types/StatsDataset.ts";
   import type {PageProps} from "./$types";
 

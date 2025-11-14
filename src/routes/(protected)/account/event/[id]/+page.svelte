@@ -1,17 +1,16 @@
 <script lang="ts">
   import type {Match} from "bsm.js";
   import {Ban, Clock} from "lucide-svelte";
-  import CommentSection from "$lib/components/comments/CommentSection.svelte";
-  import EventAttireSection from "$lib/components/diamondplanner/event/EventAttireSection.svelte";
-  import EventCoreInfo from "$lib/components/diamondplanner/event/EventCoreInfo.svelte";
-  import EventPageAdminSection from "$lib/components/diamondplanner/event/EventPageAdminSection.svelte";
-  import EventParticipantsOverviewSection
-    from "$lib/components/diamondplanner/event/EventParticipantsOverviewSection.svelte";
-  import EventParticipationSection from "$lib/components/diamondplanner/event/EventParticipationSection.svelte";
-  import EventTypeBadge from "$lib/components/diamondplanner/event/EventTypeBadge.svelte";
-  import TimeSection from "$lib/components/diamondplanner/event/TimeSection.svelte";
-  import MatchDetailLocationCard from "$lib/components/match/MatchDetailLocationCard.svelte";
-  import MatchTeaserCard from "$lib/components/match/MatchTeaserCard.svelte";
+  import CommentSection from "$lib/dp/components/comments/CommentSection.svelte";
+  import EventAttireSection from "$lib/dp/components/event/EventAttireSection.svelte";
+  import EventCoreInfo from "$lib/dp/components/event/EventCoreInfo.svelte";
+  import EventPageAdminSection from "$lib/dp/components/event/EventPageAdminSection.svelte";
+  import EventParticipantsOverviewSection from "$lib/dp/components/event/EventParticipantsOverviewSection.svelte";
+  import EventParticipationSection from "$lib/dp/components/event/EventParticipationSection.svelte";
+  import EventTypeBadge from "$lib/dp/components/event/EventTypeBadge.svelte";
+  import TimeSection from "$lib/dp/components/event/TimeSection.svelte";
+  import MatchDetailLocationCard from "$lib/tib/components/match/MatchDetailLocationCard.svelte";
+  import MatchTeaserCard from "$lib/tib/components/match/MatchTeaserCard.svelte";
   import {authSettings} from "$lib/dp/client.svelte.js";
   import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
 

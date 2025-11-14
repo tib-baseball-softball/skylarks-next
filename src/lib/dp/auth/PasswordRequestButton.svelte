@@ -1,6 +1,6 @@
 <script lang="ts">
   import type {Snippet} from "svelte";
-  import Dialog from "$lib/components/utility/Dialog.svelte";
+  import Dialog from "$lib/dp/components/modal/Dialog.svelte";
   import {client} from "$lib/dp/client.svelte.js";
   import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
   import {closeModal} from "$lib/dp/utility/closeModal.js";

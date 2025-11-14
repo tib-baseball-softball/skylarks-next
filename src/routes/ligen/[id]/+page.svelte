@@ -1,12 +1,12 @@
 <script lang="ts">
-import StandingsTable from "$lib/components/table/StandingsTable.svelte"
-import LeagueDetailInfoCard from "$lib/components/league/LeagueDetailInfoCard.svelte"
-import type { PageProps } from "./$types"
-import ProgressRing from "$lib/components/utility/ProgressRing.svelte"
+  import StandingsTable from "$lib/tib/components/table/StandingsTable.svelte";
+  import LeagueDetailInfoCard from "$lib/tib/components/league/LeagueDetailInfoCard.svelte";
+  import type {PageProps} from "./$types";
+  import ProgressRing from "$lib/dp/components/utils/ProgressRing.svelte";
 
-let { data }: PageProps = $props()
-let expectedTable = $derived(data.table)
-let leagueGroup = $derived(data.leagueGroup)
+  let {data}: PageProps = $props();
+  let expectedTable = $derived(data.table);
+  let leagueGroup = $derived(data.leagueGroup);
 </script>
 
 <h1 class="h1 my-4">{leagueGroup.name} ({leagueGroup.season})</h1>

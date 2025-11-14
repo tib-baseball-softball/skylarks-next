@@ -1,9 +1,9 @@
 <script lang="ts">
   import {browser} from "$app/environment";
   import {goto} from "$app/navigation";
-  import ReloadUponPreferenceChange from "$lib/components/navigation/ReloadUponPreferenceChange.svelte";
-  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
-  import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte";
+  import ReloadUponPreferenceChange from "$lib/tib/components/utils/ReloadUponPreferenceChange.svelte";
+  import ProgressRing from "$lib/dp/components/utils/ProgressRing.svelte";
+  import SeasonSelector from "$lib/tib/components/utils/SeasonSelector.svelte";
   import {preferences} from "$lib/tib/globals.svelte.ts";
   import type {PageProps} from "./$types";
 

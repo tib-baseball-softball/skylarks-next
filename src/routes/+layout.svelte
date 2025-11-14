@@ -1,13 +1,13 @@
 <script lang="ts">
   import "../app.css";
-  import AppBar from "$lib/components/meta/AppBar.svelte";
-  import Footer from "$lib/components/meta/Footer.svelte";
-  import SidebarNavigation from "$lib/components/meta/SidebarNavigation.svelte";
-  import TopAppBarTrailing from "$lib/components/meta/TopAppBarTrailing.svelte";
-  import BottomNavigation from "$lib/components/navigation/BottomNavigation.svelte";
-  import NavigationSheet from "$lib/components/navigation/NavigationSheet.svelte";
-  import StaticNavigationLinks from "$lib/components/navigation/StaticNavigationLinks.svelte";
-  import ToastContainer from "$lib/components/utility/toast/ToastContainer.svelte";
+  import AppBar from "$lib/dp/components/meta/AppBar.svelte";
+  import Footer from "$lib/dp/components/meta/Footer.svelte";
+  import SidebarNavigation from "$lib/dp/components/meta/SidebarNavigation.svelte";
+  import TopAppBarTrailing from "$lib/dp/components/meta/TopAppBarTrailing.svelte";
+  import BottomNavigation from "$lib/dp/components/navigation/BottomNavigation.svelte";
+  import NavigationSheet from "$lib/dp/components/navigation/NavigationSheet.svelte";
+  import StaticNavigationLinks from "$lib/dp/components/navigation/StaticNavigationLinks.svelte";
+  import ToastContainer from "$lib/dp/components/toast/ToastContainer.svelte";
   import {authSettings} from "$lib/dp/client.svelte.ts";
   import type {LayoutProps} from "../../.svelte-kit/types/src/routes/$types";
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-import PlayerDataProfileSection from "$lib/components/diamondplanner/user/PlayerDataProfileSection.svelte"
+  import PlayerDataProfileSection from "$lib/dp/components/user/PlayerDataProfileSection.svelte";
 </script>
 
 <h1 class="h1">My Player Data</h1>

@@ -1,10 +1,10 @@
 <script lang="ts">
   import type {ClubTeam} from "bsm.js";
-  import BaseballStatsDatatable from "$lib/components/datatable/BaseballStatsDatatable.svelte";
-  import TeamPlayerSection from "$lib/components/player/TeamPlayerSection.svelte";
-  import StandingsTable from "$lib/components/table/StandingsTable.svelte";
-  import TeamDetailInfoCard from "$lib/components/team/TeamDetailInfoCard.svelte";
-  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
+  import BaseballStatsDatatable from "$lib/tib/components/stats/BaseballStatsDatatable.svelte";
+  import TeamPlayerSection from "$lib/tib/components/player/TeamPlayerSection.svelte";
+  import StandingsTable from "$lib/tib/components/table/StandingsTable.svelte";
+  import TeamDetailInfoCard from "$lib/tib/components/team/TeamDetailInfoCard.svelte";
+  import ProgressRing from "$lib/dp/components/utils/ProgressRing.svelte";
   import type {StatsDataset} from "$lib/tib/types/StatsDataset.ts";
   import type {PageProps} from "./$types";
 

@@ -1,7 +1,7 @@
 <script lang="ts">
   import {LucideLogIn} from "lucide-svelte";
-  import Avatar from "$lib/components/utility/Avatar.svelte";
-  import Dialog from "$lib/components/utility/Dialog.svelte";
+  import Avatar from "$lib/dp/components/utils/Avatar.svelte";
+  import Dialog from "$lib/dp/components/modal/Dialog.svelte";
   import AccountModal from "$lib/dp/auth/AccountModal.svelte";
   import {authSettings} from "$lib/dp/client.svelte.js";
   import {client} from "../client.svelte.js";

@@ -1,8 +1,8 @@
 <script lang="ts">
   import {goto} from "$app/navigation";
-  import AttendanceTotalStatsBlock from "$lib/components/diamondplanner/stats/AttendanceTotalStatsBlock.svelte";
-  import StatsByTypePieChart from "$lib/components/diamondplanner/stats/StatsByTypePieChart.svelte";
-  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
+  import AttendanceTotalStatsBlock from "$lib/dp/components/stats/AttendanceTotalStatsBlock.svelte";
+  import StatsByTypePieChart from "$lib/dp/components/stats/StatsByTypePieChart.svelte";
+  import ProgressRing from "$lib/dp/components/utils/ProgressRing.svelte";
   import type {PersonalAttendanceStatsItem} from "$lib/dp/types/PersonalAttendanceStats.ts";
   import {range} from "$lib/dp/utility/range.ts";
 

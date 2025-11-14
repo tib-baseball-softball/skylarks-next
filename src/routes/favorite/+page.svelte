@@ -1,12 +1,12 @@
 <script lang="ts">
   import {goto} from "$app/navigation";
-  import FavoriteTeamInfoCard from "$lib/components/favorite/FavoriteTeamInfoCard.svelte";
-  import LeagueInfoCard from "$lib/components/favorite/LeagueInfoCard.svelte";
-  import PlayoffSheet from "$lib/components/favorite/PlayoffSheet.svelte";
-  import StreakGraphSection from "$lib/components/favorite/StreakGraphSection.svelte";
-  import MatchTeaserCard from "$lib/components/match/MatchTeaserCard.svelte";
-  import StandingsTable from "$lib/components/table/StandingsTable.svelte";
-  import ClubTeamPicker from "$lib/components/utility/ClubTeamPicker.svelte";
+  import FavoriteTeamInfoCard from "$lib/tib/components/favorite/FavoriteTeamInfoCard.svelte";
+  import LeagueInfoCard from "$lib/tib/components/favorite/LeagueInfoCard.svelte";
+  import PlayoffSheet from "$lib/tib/components/favorite/PlayoffSheet.svelte";
+  import StreakGraphSection from "$lib/tib/components/favorite/StreakGraphSection.svelte";
+  import MatchTeaserCard from "$lib/tib/components/match/MatchTeaserCard.svelte";
+  import StandingsTable from "$lib/tib/components/table/StandingsTable.svelte";
+  import ClubTeamPicker from "$lib/dp/components/form/ClubTeamPicker.svelte";
   import {preferences} from "$lib/tib/globals.svelte.ts";
   import type {PageProps} from "./$types";
 

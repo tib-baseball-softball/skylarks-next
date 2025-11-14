@@ -1,9 +1,9 @@
 <script lang="ts">
   import {Calendar, Clock, User} from "lucide-svelte";
-  import PriorityBadge from "$lib/components/announcements/PriorityBadge.svelte";
-  import CommentSection from "$lib/components/comments/CommentSection.svelte";
-  import AnnouncementForm from "$lib/components/forms/AnnouncementForm.svelte";
-  import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
+  import PriorityBadge from "$lib/dp/components/announcements/PriorityBadge.svelte";
+  import CommentSection from "$lib/dp/components/comments/CommentSection.svelte";
+  import AnnouncementForm from "$lib/dp/components/forms/AnnouncementForm.svelte";
+  import DeleteButton from "$lib/dp/components/utils/DeleteButton.svelte";
   import {authSettings, client} from "$lib/dp/client.svelte.js";
   import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
   import type {PageProps} from "./$types";

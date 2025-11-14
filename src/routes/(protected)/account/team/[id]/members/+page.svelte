@@ -1,6 +1,6 @@
 <script lang="ts">
-  import TeamMemberDatatable from "$lib/components/datatable/TeamMemberDatatable.svelte";
-  import TeamAddMemberButton from "$lib/components/team/TeamAddMemberButton.svelte";
+  import TeamMemberDatatable from "$lib/dp/components/team/TeamMemberDatatable.svelte";
+  import TeamAddMemberButton from "$lib/dp/components/team/TeamAddMemberButton.svelte";
   import {authSettings} from "$lib/dp/client.svelte.js";
 
   const {data} = $props();

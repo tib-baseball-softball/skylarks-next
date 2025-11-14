@@ -3,11 +3,11 @@
   import {Tabs} from "bits-ui";
   import {Users} from "lucide-svelte";
   import {goto} from "$app/navigation";
-  import AnnouncementSectionContent from "$lib/components/announcements/AnnouncementSectionContent.svelte";
-  import EventTeaser from "$lib/components/diamondplanner/event/EventTeaser.svelte";
-  import TeamAdminSection from "$lib/components/diamondplanner/team/TeamAdminSection.svelte";
-  import TeamTeaserCard from "$lib/components/diamondplanner/team/TeamTeaserCard.svelte";
-  import AnnouncementForm from "$lib/components/forms/AnnouncementForm.svelte";
+  import AnnouncementSectionContent from "$lib/dp/components/announcements/AnnouncementSectionContent.svelte";
+  import EventTeaser from "$lib/dp/components/event/EventTeaser.svelte";
+  import TeamAdminSection from "$lib/dp/components/team/TeamAdminSection.svelte";
+  import TeamTeaserCard from "$lib/dp/components/team/TeamTeaserCard.svelte";
+  import AnnouncementForm from "$lib/dp/components/forms/AnnouncementForm.svelte";
   import {authSettings} from "$lib/dp/client.svelte.js";
   import type {CustomAuthModel, EventType} from "$lib/dp/types/ExpandedResponse.js";
   import Paginator from "$lib/dp/utility/Paginator.svelte";

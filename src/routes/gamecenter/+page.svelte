@@ -4,12 +4,12 @@
   import {Gameday} from "bsm.js";
   import {browser} from "$app/environment";
   import {goto} from "$app/navigation";
-  import GamecenterMatchSection from "$lib/components/match/GamecenterMatchSection.svelte";
-  import ReloadUponPreferenceChange from "$lib/components/navigation/ReloadUponPreferenceChange.svelte";
-  import LeagueFilter from "$lib/components/utility/LeagueFilter.svelte";
-  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
-  import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte";
-  import Switch from "$lib/components/utility/Switch.svelte";
+  import GamecenterMatchSection from "$lib/tib/components/match/GamecenterMatchSection.svelte";
+  import ReloadUponPreferenceChange from "$lib/tib/components/utils/ReloadUponPreferenceChange.svelte";
+  import LeagueFilter from "$lib/tib/components/league/LeagueFilter.svelte";
+  import ProgressRing from "$lib/dp/components/utils/ProgressRing.svelte";
+  import SeasonSelector from "$lib/tib/components/utils/SeasonSelector.svelte";
+  import Switch from "$lib/dp/components/form/Switch.svelte";
   import {preferences} from "$lib/tib/globals.svelte.ts";
   import type {PageProps} from "./$types";
 
