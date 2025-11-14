@@ -1,15 +1,15 @@
 <script generics="T extends keyof RowByType" lang="ts">
-//@ts-nocheck - Generics trip up the type checker
-import { StatsType } from "bsm.js"
-import type { RowByType } from "$lib/types/StatsDataset.ts"
+  //@ts-nocheck - Generics trip up the type checker
+  import {StatsType} from "bsm.js";
+  import type {RowByType} from "$lib/tib/types/StatsDataset.ts";
 
-interface Props<T extends keyof RowByType> {
-  type: T
-  row: RowByType[T]
-  tableType: "personal" | "seasonal"
-}
+  interface Props<T extends keyof RowByType> {
+    type: T;
+    row: RowByType[T];
+    tableType: "personal" | "seasonal";
+  }
 
-let { type, row, tableType }: Props<T> = $props()
+  const {type, row, tableType}: Props<T> = $props();
 </script>
 
 {#if type === StatsType.batting}

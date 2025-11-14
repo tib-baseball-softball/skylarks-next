@@ -1,30 +1,30 @@
 <script lang="ts">
-import DeleteButton from "$lib/components/utility/DeleteButton.svelte"
-import { goto, invalidateAll } from "$app/navigation"
-import { authSettings, client } from "$lib/pocketbase/index.svelte"
-import type { CustomAuthModel, ExpandedTeam } from "$lib/model/ExpandedResponse"
-import TeamGamesModal from "$lib/components/forms/TeamGamesModal.svelte"
-import type { EventseriesResponse } from "$lib/model/pb-types.ts"
-import { CalendarPlus } from "lucide-svelte"
-import EventSeriesView from "$lib/components/diamondplanner/event/EventSeriesView.svelte"
-import TeamForm from "$lib/components/forms/TeamForm.svelte"
-import EventForm from "$lib/components/forms/EventForm.svelte"
-import Dialog from "$lib/components/utility/Dialog.svelte"
+  import {CalendarPlus} from "lucide-svelte";
+  import {goto, invalidateAll} from "$app/navigation";
+  import EventSeriesView from "$lib/components/diamondplanner/event/EventSeriesView.svelte";
+  import EventForm from "$lib/components/forms/EventForm.svelte";
+  import TeamForm from "$lib/components/forms/TeamForm.svelte";
+  import TeamGamesModal from "$lib/components/forms/TeamGamesModal.svelte";
+  import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
+  import Dialog from "$lib/components/utility/Dialog.svelte";
+  import {authSettings, client} from "$lib/dp/client.svelte.js";
+  import type {CustomAuthModel, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
+  import type {EventseriesResponse} from "$lib/dp/types/pb-types.ts";
 
-interface Props {
-  team: ExpandedTeam
-  eventSeries: EventseriesResponse[]
-}
+  interface Props {
+    team: ExpandedTeam;
+    eventSeries: EventseriesResponse[];
+  }
 
-let { team, eventSeries }: Props = $props()
+  const {team, eventSeries}: Props = $props();
 
-function teamDeleteAction(id: string) {
-  goto(`/account`)
-  client.collection("teams").delete(id)
-  invalidateAll()
-}
+  function teamDeleteAction(id: string) {
+    goto(`/account`);
+    client.collection("teams").delete(id);
+    invalidateAll();
+  }
 
-const model = $derived(authSettings.record as CustomAuthModel)
+  const model = $derived(authSettings.record as CustomAuthModel);
 </script>
 
 <h2 class="h3">Admin Section</h2>
@@ -84,9 +84,9 @@ const model = $derived(authSettings.record as CustomAuthModel)
     <footer class="card-footer">
       <div class="flex flex-col gap-2 lg:gap-3">
         <EventSeriesView
-                {team}
-                {eventSeries}
                 buttonClasses="btn preset-tonal-secondary border border-secondary-500 dark:preset-filled-secondary-500 dark:border dark:border-white"
+                {eventSeries}
+                {team}
         />
       </div>
     </footer>
@@ -110,10 +110,10 @@ const model = $derived(authSettings.record as CustomAuthModel)
       <div class="flex flex-col gap-2 lg:gap-3">
 
         <EventForm
-                event={null}
-                clubID={team?.club ?? ""}
-                teamID={team.id}
                 buttonClasses="btn preset-tonal-tertiary border border-tertiary-500"
+                clubID={team?.club ?? ""}
+                event={null}
+                teamID={team.id}
         >
           {#snippet triggerContent()}
             <CalendarPlus/>
@@ -132,7 +132,8 @@ const model = $derived(authSettings.record as CustomAuthModel)
 
     <section class="p-4 space-y-3">
       <div class="flex flex-col gap-2 lg:gap-3">
-        <TeamForm club={team?.expand?.club} team={team} buttonClasses="btn preset-tonal-surface border border-surface-500"/>
+        <TeamForm buttonClasses="btn preset-tonal-surface border border-surface-500" club={team?.expand?.club}
+                  team={team}/>
       </div>
     </section>
 

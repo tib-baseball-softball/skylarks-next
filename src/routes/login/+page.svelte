@@ -1,10 +1,10 @@
 <script lang="ts">
-import LoginForm from "$lib/auth/LoginForm.svelte"
-import { browser } from "$app/environment"
-import { authSettings, client } from "$lib/pocketbase/index.svelte.ts"
-import type { CustomAuthModel } from "$lib/model/ExpandedResponse.ts"
+  import {browser} from "$app/environment";
+  import LoginForm from "$lib/dp/auth/LoginForm.svelte";
+  import {authSettings, client} from "$lib/dp/client.svelte.ts";
+  import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
 
-const authRecord = $derived(authSettings.record as CustomAuthModel)
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
 </script>
 
 {#if browser}

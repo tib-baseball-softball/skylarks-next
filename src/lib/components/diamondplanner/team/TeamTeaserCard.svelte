@@ -1,17 +1,17 @@
 <script lang="ts">
-import type { ExpandedTeam } from "$lib/model/ExpandedResponse"
-import { File, IdCard, ShieldHalf, Users } from "lucide-svelte"
+  import {File, IdCard, ShieldHalf, Users} from "lucide-svelte";
+  import type {ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
 
-/**
- * Used on Team Detail page.
- */
+  /**
+   * Used on Team Detail page.
+   */
 
-interface props {
-  team: ExpandedTeam
-  link: boolean
-}
+  interface props {
+    team: ExpandedTeam;
+    link: boolean;
+  }
 
-let { team, link = false }: props = $props()
+  let {team, link = false}: props = $props();
 </script>
 
 <article class="card block preset-tonal-surface p-3" class:card-hover={link}>

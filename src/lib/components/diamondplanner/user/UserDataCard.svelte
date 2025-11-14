@@ -1,18 +1,18 @@
 <script lang="ts">
-import type { CustomAuthModel } from "$lib/model/ExpandedResponse"
-import { client } from "$lib/pocketbase/index.svelte"
-import UserDetailsForm from "$lib/auth/UserDetailsForm.svelte"
-import PasswordRequestButton from "$lib/auth/PasswordRequestButton.svelte"
-import { Lock, Mail, User } from "lucide-svelte"
-import Dialog from "$lib/components/utility/Dialog.svelte"
-import ChangeEmailForm from "$lib/auth/ChangeEmailForm.svelte"
-import Avatar from "$lib/components/utility/Avatar.svelte"
+  import {Lock, Mail, User} from "lucide-svelte";
+  import Avatar from "$lib/components/utility/Avatar.svelte";
+  import Dialog from "$lib/components/utility/Dialog.svelte";
+  import ChangeEmailForm from "$lib/dp/auth/ChangeEmailForm.svelte";
+  import PasswordRequestButton from "$lib/dp/auth/PasswordRequestButton.svelte";
+  import UserDetailsForm from "$lib/dp/auth/UserDetailsForm.svelte";
+  import {client} from "$lib/dp/client.svelte.js";
+  import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
 
-interface Props {
-  model: CustomAuthModel
-}
+  interface Props {
+    model: CustomAuthModel;
+  }
 
-let { model }: Props = $props()
+  const {model}: Props = $props();
 </script>
 
 <div class="card preset-tonal-surface lg:col-span-2 shadow-lg">

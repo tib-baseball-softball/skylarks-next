@@ -1,18 +1,18 @@
 <script lang="ts">
-import type { HomeDataset } from "$lib/types/HomeDataset.ts"
-// @ts-ignore
-import { Tabs } from "bits-ui"
-import LeagueChartGraph from "$lib/components/favorite/LeagueChartGraph.svelte"
-import WinningPercentageContainer from "$lib/components/favorite/WinningPercentageContainer.svelte"
-import StreakContainer from "$lib/components/favorite/StreakContainer.svelte"
+  // @ts-expect-error
+  import {Tabs} from "bits-ui";
+  import LeagueChartGraph from "$lib/components/favorite/LeagueChartGraph.svelte";
+  import StreakContainer from "$lib/components/favorite/StreakContainer.svelte";
+  import WinningPercentageContainer from "$lib/components/favorite/WinningPercentageContainer.svelte";
+  import type {HomeDataset} from "$lib/tib/types/HomeDataset.ts";
 
-interface Props {
-  dataset: HomeDataset
-}
+  interface Props {
+    dataset: HomeDataset;
+  }
 
-let { dataset }: Props = $props()
+  const {dataset}: Props = $props();
 
-let tabSet: "graph" | "percentage" | "series" | string = $state("percentage")
+  const tabSet: "graph" | "percentage" | "series" | string = $state("percentage");
 </script>
 
 <Tabs.Root

@@ -1,18 +1,18 @@
 <script lang="ts">
-import type { Field } from "bsm.js"
-import GenericDetailRow from "$lib/components/utility/GenericDetailRow.svelte"
-import { Diamond, Info, MapPin, Ticket, Users } from "lucide-svelte"
-import { MapUtility } from "$lib/service/MapUtility.ts"
+  import type {Field} from "bsm.js";
+  import {Diamond, Info, MapPin, Ticket, Users} from "lucide-svelte";
+  import GenericDetailRow from "$lib/components/utility/GenericDetailRow.svelte";
+  import {MapUtility} from "$lib/tib/service/MapUtility.ts";
 
-interface Props {
-  field: Field
-}
+  interface Props {
+    field: Field;
+  }
 
-let { field }: Props = $props()
+  const {field}: Props = $props();
 
-const mapsLink = $derived(
-  MapUtility.buildGoogleMapsURL(field?.name, field?.latitude, field?.longitude)
-)
+  const mapsLink = $derived(
+      MapUtility.buildGoogleMapsURL(field?.name, field?.latitude, field?.longitude)
+  );
 </script>
 
 <article class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">

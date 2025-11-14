@@ -1,23 +1,23 @@
-import type { PageLoad } from "./$types"
-import { client } from "$lib/pocketbase/index.svelte"
-import type { LocationsResponse } from "$lib/model/pb-types.js"
-import type { ExpandedClub } from "$lib/model/ExpandedResponse.ts"
+import {client} from "$lib/dp/client.svelte.js";
+import type {ExpandedClub} from "$lib/dp/types/ExpandedResponse.ts";
+import type {LocationsResponse} from "$lib/dp/types/pb-types.js";
+import type {PageLoad} from "./$types";
 
-export const load = (async ({ fetch, params, depends }) => {
+export const load = (async ({fetch, params, depends}) => {
   const club = await client.collection("clubs").getOne<ExpandedClub>(params.club, {
     expand: "admins",
     fetch: fetch,
-  })
+  });
 
   const locations = await client.collection("locations").getFullList<LocationsResponse>({
     filter: `club.id = "${params.club}"`,
     fetch: fetch,
-  })
+  });
 
-  depends("club:locations")
+  depends("club:locations");
 
   return {
     club: club,
     locations: locations,
-  }
-}) satisfies PageLoad
+  };
+}) satisfies PageLoad;

@@ -1,24 +1,24 @@
 <script lang="ts">
-import { invalidate } from "$app/navigation"
-import LocationForm from "$lib/components/forms/LocationForm.svelte"
-import DeleteButton from "$lib/components/utility/DeleteButton.svelte"
-import type { CustomAuthModel, ExpandedClub } from "$lib/model/ExpandedResponse"
-import type { LocationsResponse } from "$lib/model/pb-types"
-import { authSettings, client } from "$lib/pocketbase/index.svelte"
+  import {invalidate} from "$app/navigation";
+  import LocationForm from "$lib/components/forms/LocationForm.svelte";
+  import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
+  import {authSettings, client} from "$lib/dp/client.svelte.js";
+  import type {CustomAuthModel, ExpandedClub} from "$lib/dp/types/ExpandedResponse.ts";
+  import type {LocationsResponse} from "$lib/dp/types/pb-types.ts";
 
-interface Props {
-  club: ExpandedClub
-  locations: LocationsResponse[]
-}
+  interface Props {
+    club: ExpandedClub;
+    locations: LocationsResponse[];
+  }
 
-const authRecord = $derived(authSettings.record as CustomAuthModel)
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
 
-let { club, locations }: Props = $props()
+  const {club, locations}: Props = $props();
 
-function locationDeleteAction(id: string) {
-  client.collection("locations").delete(id)
-  invalidate("club:locations")
-}
+  function locationDeleteAction(id: string) {
+    client.collection("locations").delete(id);
+    invalidate("club:locations");
+  }
 </script>
 
 <ul class="preset-tonal-surface rounded-base p-4 shadow-xl text-sm">
@@ -26,8 +26,8 @@ function locationDeleteAction(id: string) {
     <li class="location-grid">
       <h3 class="font-bold overflow-hidden">
         {location.address_addon
-          ? location.address_addon
-          : location.internal_name} ({location.name})
+            ? location.address_addon
+            : location.internal_name} ({location.name})
       </h3>
       <p>
         {location?.street}, {location.postal_code}
@@ -37,16 +37,16 @@ function locationDeleteAction(id: string) {
       <div class="justify-self-end flex flex-col md:flex-row gap-1 items-center">
         {#if club?.admins.includes(authRecord.id)}
           <LocationForm
-            {club}
-            {location}
-            buttonClasses="btn btn-icon preset-tonal-tertiary border border-tertiary-500"
+                  {club}
+                  {location}
+                  buttonClasses="btn btn-icon preset-tonal-tertiary border border-tertiary-500"
           />
 
           <DeleteButton
-            id={location.id}
-            modelName="Location"
-            action={locationDeleteAction}
-            classes="preset-tonal-error border border-error-500 btn-icon ms-1"
+                  id={location.id}
+                  modelName="Location"
+                  action={locationDeleteAction}
+                  classes="preset-tonal-error border border-error-500 btn-icon ms-1"
           />
         {/if}
       </div>
@@ -56,24 +56,24 @@ function locationDeleteAction(id: string) {
       <hr class="my-2"/>
     {/if}
 
-    {:else }
-      <p>This club doesn't have saved locations yet.</p>
+  {:else }
+    <p>This club doesn't have saved locations yet.</p>
   {/each}
 </ul>
 
 {#if club?.admins.includes(authRecord.id)}
   <LocationForm
-    {club}
-    location={null}
-    buttonClasses="btn preset-tonal-primary border border-primary-500 my-3"
+          {club}
+          location={null}
+          buttonClasses="btn preset-tonal-primary border border-primary-500 my-3"
   />
 {/if}
 
 <style lang="postcss">
-  .location-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    align-items: center;
-    gap: 1rem;
-  }
+    .location-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        align-items: center;
+        gap: 1rem;
+    }
 </style>

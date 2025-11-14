@@ -1,22 +1,22 @@
-import type { PageLoad } from "./$types"
-import { page } from "$app/state"
-import type { License } from "bsm.js"
-import { browser } from "$app/environment"
-import { error } from "@sveltejs/kit"
-import { client } from "$lib/pocketbase/index.svelte.ts"
-import { env } from "$env/dynamic/public"
+import {error} from "@sveltejs/kit";
+import type {License} from "bsm.js";
+import {browser} from "$app/environment";
+import {page} from "$app/state";
+import {env} from "$env/dynamic/public";
+import {client} from "$lib/dp/client.svelte.ts";
+import type {PageLoad} from "./$types";
 
-export const load: PageLoad = async ({ params, fetch }) => {
-  let license: License | undefined
+export const load: PageLoad = async ({params, fetch}) => {
+  let license: License | undefined;
 
   if (browser) {
-    const umpireLicenses: License[] = await page.data.umpireLicenses
-    const scorerLicenses: License[] = await page.data.scorerLicenses
+    const umpireLicenses: License[] = await page.data.umpireLicenses;
+    const scorerLicenses: License[] = await page.data.scorerLicenses;
 
-    license = scorerLicenses?.find((license) => license.id === Number(params.id))
+    license = scorerLicenses?.find((license) => license.id === Number(params.id));
 
     if (!license) {
-      license = umpireLicenses?.find((license) => license.id === Number(params.id))
+      license = umpireLicenses?.find((license) => license.id === Number(params.id));
     }
 
     if (!license) {
@@ -27,15 +27,15 @@ export const load: PageLoad = async ({ params, fetch }) => {
           club: env.PUBLIC_CLUB_ID,
         },
         requestKey: `license-${params.id}`,
-      })
+      });
     }
 
     if (!license) {
-      error(404, "No license found.")
+      error(404, "No license found.");
     }
   }
 
   return {
     license: license,
-  }
-}
+  };
+};

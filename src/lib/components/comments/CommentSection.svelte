@@ -1,51 +1,51 @@
 <script lang="ts">
-import type { CustomAuthModel, ExpandedComment } from "$lib/model/ExpandedResponse.ts"
-import CommentRow from "$lib/components/comments/CommentRow.svelte"
-import { authSettings, client } from "$lib/pocketbase/index.svelte.ts"
-import { Send } from "lucide-svelte"
-import type { ClubsResponse, CommentsCreate, CommentsResponse } from "$lib/model/pb-types.ts"
-import { toastController } from "$lib/service/ToastController.svelte.ts"
-import { invalidate } from "$app/navigation"
+  import {Send} from "lucide-svelte";
+  import {invalidate} from "$app/navigation";
+  import CommentRow from "$lib/components/comments/CommentRow.svelte";
+  import {authSettings, client} from "$lib/dp/client.svelte.ts";
+  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
+  import type {CustomAuthModel, ExpandedComment} from "$lib/dp/types/ExpandedResponse.ts";
+  import type {ClubsResponse, CommentsCreate, CommentsResponse} from "$lib/dp/types/pb-types.ts";
 
-interface Props {
-  targetID: string
-  targetType: "announcement" | "event"
-  comments: ExpandedComment[]
-  club: ClubsResponse
-}
-
-let { targetID, targetType, comments, club }: Props = $props()
-
-let commentText = $state("")
-
-const authRecord = $derived(authSettings.record as CustomAuthModel)
-
-async function addComment(event: Event) {
-  event.preventDefault()
-
-  let formValues: CommentsCreate = {
-    text: commentText,
-    user: authRecord.id,
+  interface Props {
+    targetID: string;
+    targetType: "announcement" | "event";
+    comments: ExpandedComment[];
+    club: ClubsResponse;
   }
 
-  if (targetType === "event") {
-    formValues.event = targetID
-  } else if (targetType === "announcement") {
-    formValues.announcement = targetID
-  }
+  const {targetID, targetType, comments, club}: Props = $props();
 
-  try {
-    await client.collection("comments").create<CommentsResponse>(formValues)
-  } catch (error) {
-    toastController.trigger({
-      message: "Failed to add comment.",
-      background: "preset-filled-error-500",
-    })
-  }
+  let commentText = $state("");
 
-  commentText = ""
-  await invalidate("comments:list")
-}
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
+
+  async function addComment(event: Event) {
+    event.preventDefault();
+
+    const formValues: CommentsCreate = {
+      text: commentText,
+      user: authRecord.id,
+    };
+
+    if (targetType === "event") {
+      formValues.event = targetID;
+    } else if (targetType === "announcement") {
+      formValues.announcement = targetID;
+    }
+
+    try {
+      await client.collection("comments").create<CommentsResponse>(formValues);
+    } catch (error) {
+      toastController.trigger({
+        message: "Failed to add comment.",
+        background: "preset-filled-error-500",
+      });
+    }
+
+    commentText = "";
+    await invalidate("comments:list");
+  }
 </script>
 
 {#if comments.length > 0}
@@ -63,14 +63,14 @@ async function addComment(event: Event) {
 <form class="mt-6">
   <label class="label mb-2" for="new-comment-input">Comment</label>
   <div class="input-group grid-cols-[1fr_auto]">
-      <input
-              id="new-comment-input"
-              class="ig-input rounded-s-base"
-              type="text"
-              placeholder="Your comment..."
-              bind:value={commentText}
-      />
-    <button type="submit" class="ig-btn preset-filled" title="Add comment" onclick={addComment} disabled={!commentText}>
+    <input
+            bind:value={commentText}
+            class="ig-input rounded-s-base"
+            id="new-comment-input"
+            placeholder="Your comment..."
+            type="text"
+    />
+    <button class="ig-btn preset-filled" disabled={!commentText} onclick={addComment} title="Add comment" type="submit">
       <Send size={18}/>
     </button>
   </div>

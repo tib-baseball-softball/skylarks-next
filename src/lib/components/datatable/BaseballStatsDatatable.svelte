@@ -1,55 +1,55 @@
 <script lang="ts">
-import Search from "$lib/components/datatable/Search.svelte"
-import RowsPerPage from "$lib/components/datatable/RowsPerPage.svelte"
-import RowCount from "$lib/components/datatable/RowCount.svelte"
-import Pagination from "$lib/components/datatable/Pagination.svelte"
-import { DataHandler } from "@vincjo/datatables"
-import type { StatisticsData, StatisticsSummary } from "bsm.js"
-import { StatsType } from "bsm.js"
-import StatsTableContent from "$lib/components/datatable/StatsTableContent.svelte"
-// @ts-ignore
-import { Tabs } from "bits-ui"
-import type { StatsDataset } from "$lib/types/StatsDataset"
-import StatsContentRow from "$lib/components/datatable/StatsContentRow.svelte"
-import StatsBlock from "$lib/components/utility/StatsBlock.svelte"
+  import {DataHandler} from "@vincjo/datatables";
+  // @ts-expect-error
+  import {Tabs} from "bits-ui";
+  import type {StatisticsData, StatisticsSummary} from "bsm.js";
+  import {StatsType} from "bsm.js";
+  import Pagination from "$lib/components/datatable/Pagination.svelte";
+  import RowCount from "$lib/components/datatable/RowCount.svelte";
+  import RowsPerPage from "$lib/components/datatable/RowsPerPage.svelte";
+  import Search from "$lib/components/datatable/Search.svelte";
+  import StatsContentRow from "$lib/components/datatable/StatsContentRow.svelte";
+  import StatsTableContent from "$lib/components/datatable/StatsTableContent.svelte";
+  import StatsBlock from "$lib/components/utility/StatsBlock.svelte";
+  import type {StatsDataset} from "$lib/tib/types/StatsDataset.ts";
 
-interface Props {
-  data: StatsDataset
-  rowsPerPage?: number
-  tableType: "personal" | "seasonal"
-}
-
-let { data, rowsPerPage = 10, tableType }: Props = $props()
-
-let type: StatsType = $state(StatsType.batting)
-let summaryData:
-  | StatisticsSummary<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics">
-  | undefined = $state(data.batting.summaries.at(0))
-
-const handler = new DataHandler<
-  StatisticsData<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics">
->(data.batting.data, { rowsPerPage: rowsPerPage })
-
-function changeDataForHandler(type: StatsType) {
-  switch (type) {
-    case StatsType.batting:
-      handler.setRows(data.batting.data)
-      summaryData = data.batting.summaries.at(0)
-      break
-    case StatsType.pitching:
-      summaryData = data.pitching.summaries.at(0)
-      handler.setRows(data.pitching.data)
-      break
-    case StatsType.fielding:
-      summaryData = data.fielding.summaries.at(0)
-      handler.setRows(data.fielding.data)
-      break
+  interface Props {
+    data: StatsDataset;
+    rowsPerPage?: number;
+    tableType: "personal" | "seasonal";
   }
-}
 
-$effect.pre(() => {
-  changeDataForHandler(type)
-})
+  const {data, rowsPerPage = 10, tableType}: Props = $props();
+
+  const type: StatsType = $state(StatsType.batting);
+  let summaryData:
+      | StatisticsSummary<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics">
+      | undefined = $state(data.batting.summaries.at(0));
+
+  const handler = new DataHandler<
+      StatisticsData<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics">
+  >(data.batting.data, {rowsPerPage: rowsPerPage});
+
+  function changeDataForHandler(type: StatsType) {
+    switch (type) {
+      case StatsType.batting:
+        handler.setRows(data.batting.data);
+        summaryData = data.batting.summaries.at(0);
+        break;
+      case StatsType.pitching:
+        summaryData = data.pitching.summaries.at(0);
+        handler.setRows(data.pitching.data);
+        break;
+      case StatsType.fielding:
+        summaryData = data.fielding.summaries.at(0);
+        handler.setRows(data.fielding.data);
+        break;
+    }
+  }
+
+  $effect.pre(() => {
+    changeDataForHandler(type);
+  });
 </script>
 
 <div class="overflow-x-auto space-y-4 table-wrap">

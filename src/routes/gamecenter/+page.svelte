@@ -1,43 +1,43 @@
 <script lang="ts">
-// @ts-expect-error
-import { Tabs } from "bits-ui"
-import { Gameday } from "bsm.js"
-import { browser } from "$app/environment"
-import { goto } from "$app/navigation"
-import GamecenterMatchSection from "$lib/components/match/GamecenterMatchSection.svelte"
-import ReloadUponPreferenceChange from "$lib/components/navigation/ReloadUponPreferenceChange.svelte"
-import LeagueFilter from "$lib/components/utility/LeagueFilter.svelte"
-import ProgressRing from "$lib/components/utility/ProgressRing.svelte"
-import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte"
-import Switch from "$lib/components/utility/Switch.svelte"
-import { preferences } from "$lib/globals.svelte.ts"
-import type { PageProps } from "./$types"
+  // @ts-expect-error
+  import {Tabs} from "bits-ui";
+  import {Gameday} from "bsm.js";
+  import {browser} from "$app/environment";
+  import {goto} from "$app/navigation";
+  import GamecenterMatchSection from "$lib/components/match/GamecenterMatchSection.svelte";
+  import ReloadUponPreferenceChange from "$lib/components/navigation/ReloadUponPreferenceChange.svelte";
+  import LeagueFilter from "$lib/components/utility/LeagueFilter.svelte";
+  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
+  import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte";
+  import Switch from "$lib/components/utility/Switch.svelte";
+  import {preferences} from "$lib/tib/globals.svelte.ts";
+  import type {PageProps} from "./$types";
 
-const DEFAULT_LEAGUE_GROUP_ID = 0
+  const DEFAULT_LEAGUE_GROUP_ID = 0;
 
-const reloadGameData = () => {
-  if (browser) {
-    let queryString = `?gameday=${preferences.current.gameday}&season=${preferences.current.selectedSeason}`
+  const reloadGameData = () => {
+    if (browser) {
+      let queryString = `?gameday=${preferences.current.gameday}&season=${preferences.current.selectedSeason}`;
 
-    if (preferences.current.leagueGroupID !== DEFAULT_LEAGUE_GROUP_ID) {
-      queryString = queryString + `&leagueGroup=${preferences.current.leagueGroupID}`
+      if (preferences.current.leagueGroupID !== DEFAULT_LEAGUE_GROUP_ID) {
+        queryString = queryString + `&leagueGroup=${preferences.current.leagueGroupID}`;
+      }
+      goto(queryString);
     }
-    goto(queryString)
+  };
+
+  const {data}: PageProps = $props();
+  const leagueGroups = $derived(data.leagueGroups);
+
+  const showExternal = $state(false);
+
+  /**
+   *  enum <=> string conversion necessary
+   */
+  function onGamedayChange(value: string) {
+    //@ts-expect-error
+    preferences.current.gameday = value;
   }
-}
-
-let { data }: PageProps = $props()
-let leagueGroups = $derived(data.leagueGroups)
-
-let showExternal = $state(false)
-
-/**
- *  enum <=> string conversion necessary
- */
-function onGamedayChange(value: string) {
-  //@ts-expect-error
-  preferences.current.gameday = value
-}
 </script>
 
 <ReloadUponPreferenceChange callback={reloadGameData}/>

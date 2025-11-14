@@ -1,48 +1,48 @@
 <script lang="ts">
-import type { ParticipationsCreate } from "$lib/model/pb-types"
-import type { EventParticipationState } from "$lib/types/EventParticipationState"
-import { sendParticipationData } from "$lib/functions/sendParticipationData"
-import type { CustomAuthModel, ExpandedEvent } from "$lib/model/ExpandedResponse"
-import { invalidate } from "$app/navigation"
-import { authSettings } from "$lib/pocketbase/index.svelte"
-import { Check, CircleQuestionMark, X } from "lucide-svelte"
+  import {Check, CircleQuestionMark, X} from "lucide-svelte";
+  import {invalidate} from "$app/navigation";
+  import {authSettings} from "$lib/dp/client.svelte.js";
+  import type {EventParticipationState} from "$lib/dp/types/EventParticipationState.ts";
+  import type {CustomAuthModel, ExpandedEvent} from "$lib/dp/types/ExpandedResponse.ts";
+  import type {ParticipationsCreate} from "$lib/dp/types/pb-types.ts";
+  import {sendParticipationData} from "$lib/dp/utility/sendParticipationData.ts";
 
-interface props {
-  event: ExpandedEvent
-  chipClasses?: string
-}
-
-const authRecord = $derived(authSettings.record as CustomAuthModel)
-const { event, chipClasses = "" }: props = $props()
-
-let userParticipation: ParticipationsCreate = $derived(
-  event.userParticipation ?? {
-    id: "",
-    user: authRecord?.id,
-    event: event.id,
-    state: "",
-    comment: "",
+  interface props {
+    event: ExpandedEvent;
+    chipClasses?: string;
   }
-)
 
-// JS: splitting an empty string by comma returns length `1`
-const guestCount = $derived(event.guests === "" ? 0 : event.guests.split(",").length)
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
+  const {event, chipClasses = ""}: props = $props();
 
-let submitting = $state(false)
+  const userParticipation: ParticipationsCreate = $derived(
+      event.userParticipation ?? {
+        id: "",
+        user: authRecord?.id,
+        event: event.id,
+        state: "",
+        comment: "",
+      }
+  );
 
-async function updateParticipationStatus(state: EventParticipationState): Promise<void> {
-  if (submitting) {
-    return
+  // JS: splitting an empty string by comma returns length `1`
+  const guestCount = $derived(event.guests === "" ? 0 : event.guests.split(",").length);
+
+  let submitting = $state(false);
+
+  async function updateParticipationStatus(state: EventParticipationState): Promise<void> {
+    if (submitting) {
+      return;
+    }
+    submitting = true;
+    try {
+      userParticipation.state = state;
+      await sendParticipationData(userParticipation);
+      await invalidate("event:list");
+    } finally {
+      submitting = false;
+    }
   }
-  submitting = true
-  try {
-    userParticipation.state = state
-    await sendParticipationData(userParticipation)
-    await invalidate("event:list")
-  } finally {
-    submitting = false
-  }
-}
 </script>
 
 <section class="flex justify-end items-end gap-2 flex-wrap">

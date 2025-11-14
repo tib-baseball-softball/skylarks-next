@@ -1,31 +1,31 @@
 <script lang="ts">
-import type { AttendanceTotal } from "$lib/model/PersonalAttendanceStats"
-import StatsBlockContent from "$lib/components/utility/StatsBlockContent.svelte"
-import type { SingleStatElement } from "$lib/types/SingleStatElement"
-import { capitalize } from "$lib/functions/capitalize"
+  import StatsBlockContent from "$lib/components/utility/StatsBlockContent.svelte";
+  import type {AttendanceTotal} from "$lib/dp/types/PersonalAttendanceStats.ts";
+  import {capitalize} from "$lib/dp/utility/capitalize.ts";
+  import type {SingleStatElement} from "$lib/tib/types/SingleStatElement.ts";
 
-interface Props {
-  season: number | "All Time"
-  attendance: AttendanceTotal
-}
+  interface Props {
+    season: number | "All Time";
+    attendance: AttendanceTotal;
+  }
 
-let { attendance, season }: Props = $props()
+  const {attendance, season}: Props = $props();
 
-const title = capitalize(attendance.type)
+  const title = capitalize(attendance.type);
 
-const block: SingleStatElement = {
-  title: title,
-  value: `${attendance.attended} / ${attendance.total}`,
-  desc: `All possible events of this type for ${season}`,
-}
+  const block: SingleStatElement = {
+    title: title,
+    value: `${attendance.attended} / ${attendance.total}`,
+    desc: `All possible events of this type for ${season}`,
+  };
 </script>
 
 <div class="card preset-tonal-surface shadow-lg">
-    <header class="card-header">
-        <h2 class="h4 font-semibold">Totals - {title}</h2>
-    </header>
+  <header class="card-header">
+    <h2 class="h4 font-semibold">Totals - {title}</h2>
+  </header>
 
-    <section class="p-4 flex justify-center">
-        <StatsBlockContent {block} classes="place-items-center gap-3"/>
-    </section>
+  <section class="p-4 flex justify-center">
+    <StatsBlockContent {block} classes="place-items-center gap-3"/>
+  </section>
 </div>

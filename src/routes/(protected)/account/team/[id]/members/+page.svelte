@@ -1,21 +1,21 @@
 <script lang="ts">
-import TeamMemberDatatable from "$lib/components/datatable/TeamMemberDatatable.svelte"
-import { authSettings } from "$lib/pocketbase/index.svelte"
-import TeamAddMemberButton from "$lib/components/team/TeamAddMemberButton.svelte"
+  import TeamMemberDatatable from "$lib/components/datatable/TeamMemberDatatable.svelte";
+  import TeamAddMemberButton from "$lib/components/team/TeamAddMemberButton.svelte";
+  import {authSettings} from "$lib/dp/client.svelte.js";
 
-let { data } = $props()
+  const {data} = $props();
 
-const players = $derived(data.players)
+  const players = $derived(data.players);
 
-const showAdminSection = $derived.by(() => {
-  if (!authSettings?.record?.id) {
-    return false
-  }
-  if (data.team?.expand?.club?.admins.includes(authSettings?.record.id)) {
-    return true
-  }
-  return data.team.admins.includes(authSettings?.record?.id)
-})
+  const showAdminSection = $derived.by(() => {
+    if (!authSettings?.record?.id) {
+      return false;
+    }
+    if (data.team?.expand?.club?.admins.includes(authSettings?.record.id)) {
+      return true;
+    }
+    return data.team.admins.includes(authSettings?.record?.id);
+  });
 </script>
 
 <svelte:head>

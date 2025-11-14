@@ -1,27 +1,27 @@
 <script lang="ts">
-import Cap from "$lib/components/icons/Cap.svelte"
-import Shirt from "$lib/components/icons/Shirt.svelte"
-import Pants from "$lib/components/icons/Pants.svelte"
-import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte"
-import type { CustomAuthModel, ExpandedUniformSet } from "$lib/model/ExpandedResponse"
-import { authSettings, client } from "$lib/pocketbase/index.svelte"
-import { invalidate } from "$app/navigation"
-import DeleteButton from "$lib/components/utility/DeleteButton.svelte"
-import { Edit } from "lucide-svelte"
-import Dialog from "$lib/components/utility/Dialog.svelte"
+  import {Edit} from "lucide-svelte";
+  import {invalidate} from "$app/navigation";
+  import UniformSetForm from "$lib/components/forms/UniformSetForm.svelte";
+  import Cap from "$lib/components/icons/Cap.svelte";
+  import Pants from "$lib/components/icons/Pants.svelte";
+  import Shirt from "$lib/components/icons/Shirt.svelte";
+  import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
+  import Dialog from "$lib/components/utility/Dialog.svelte";
+  import {authSettings, client} from "$lib/dp/client.svelte.js";
+  import type {CustomAuthModel, ExpandedUniformSet} from "$lib/dp/types/ExpandedResponse.ts";
 
-interface Props {
-  uniformSet: ExpandedUniformSet
-}
+  interface Props {
+    uniformSet: ExpandedUniformSet;
+  }
 
-let { uniformSet }: Props = $props()
+  const {uniformSet}: Props = $props();
 
-const authRecord = $derived(authSettings.record as CustomAuthModel)
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
 
-function deleteAction(id: string) {
-  client.collection("uniformsets").delete(id)
-  invalidate("club:single")
-}
+  function deleteAction(id: string) {
+    client.collection("uniformsets").delete(id);
+    invalidate("club:single");
+  }
 </script>
 
 <article class="card preset-tonal-surface shadow-md">
@@ -32,15 +32,15 @@ function deleteAction(id: string) {
   <section class="p-4">
     <div class="grid grid-cols-3 place-items-center">
       <div class="max-w-20">
-        <Cap identifier={uniformSet.cap} classes="w-20"/>
+        <Cap classes="w-20" identifier={uniformSet.cap}/>
       </div>
 
       <div>
-        <Shirt fillColor={uniformSet.jersey} classes="w-16 h-16"/>
+        <Shirt classes="w-16 h-16" fillColor={uniformSet.jersey}/>
       </div>
 
       <div>
-        <Pants fillColor={uniformSet.pants} classes="w-16 h-16"/>
+        <Pants classes="w-16 h-16" fillColor={uniformSet.pants}/>
       </div>
     </div>
   </section>

@@ -1,24 +1,24 @@
 <script lang="ts">
-import { LogoUtility } from "$lib/service/LogoUtility"
-import { DateTimeUtility } from "$lib/service/DateTimeUtility"
-import type { Match } from "bsm.js"
-import { GameWinner } from "$lib/enum/GameWinner"
-import { MatchDecorator } from "$lib/service/MatchDecorator"
-import { Calendar, ClipboardList } from "lucide-svelte"
+  import type {Match} from "bsm.js";
+  import {Calendar, ClipboardList} from "lucide-svelte";
+  import {DateTimeUtility} from "$lib/dp/service/DateTimeUtility.ts";
+  import {GameWinner} from "$lib/tib/enum/GameWinner";
+  import {LogoUtility} from "$lib/tib/service/LogoUtility.ts";
+  import {MatchDecorator} from "$lib/tib/service/MatchDecorator.ts";
 
-interface Props {
-  match: Match
-}
+  interface Props {
+    match: Match;
+  }
 
-let { match }: Props = $props()
+  const {match}: Props = $props();
 
-const awayLogo = LogoUtility.getLogoPathForTeamName(match.away_league_entry.team)
-const homeLogo = LogoUtility.getLogoPathForTeamName(match.home_league_entry.team)
+  const awayLogo = LogoUtility.getLogoPathForTeamName(match.away_league_entry.team);
+  const homeLogo = LogoUtility.getLogoPathForTeamName(match.home_league_entry.team);
 
-const matchDecorator = new MatchDecorator(match)
+  const matchDecorator = new MatchDecorator(match);
 
-const winner = matchDecorator.getWinnerForMatch()
-const matchDate = DateTimeUtility.parseDateFromBSMString(match.time)
+  const winner = matchDecorator.getWinnerForMatch();
+  const matchDate = DateTimeUtility.parseDateFromBSMString(match.time);
 </script>
 
 <article class="card preset-tonal-primary border-primary px-2 md:px-5">

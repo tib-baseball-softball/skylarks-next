@@ -1,17 +1,17 @@
 <script lang="ts">
-import { DateTimeUtility } from "$lib/service/DateTimeUtility.ts"
-import type { Snippet } from "svelte"
+  import type {Snippet} from "svelte";
+  import {DateTimeUtility} from "$lib/dp/service/DateTimeUtility.ts";
 
-interface Props {
-  timeValue: string
-  displayText: string
-  icon: Snippet
-  classes?: string
-}
+  interface Props {
+    timeValue: string;
+    displayText: string;
+    icon: Snippet;
+    classes?: string;
+  }
 
-let { timeValue, displayText, icon, classes = "" }: Props = $props()
+  const {timeValue, displayText, icon, classes = ""}: Props = $props();
 
-const displayedTime = $derived(new Date(timeValue))
+  const displayedTime = $derived(new Date(timeValue));
 </script>
 
 <div class="section-container {classes}">
@@ -19,12 +19,12 @@ const displayedTime = $derived(new Date(timeValue))
   <p>
     {displayText}
     {#if timeValue}
-          <time datetime="{timeValue}" class="font-bold"
-          >{displayedTime?.toLocaleTimeString(
-              "de-DE",
-              DateTimeUtility.eventTimeFormat,
-          )}</time
-          >
+      <time datetime="{timeValue}" class="font-bold"
+      >{displayedTime?.toLocaleTimeString(
+          "de-DE",
+          DateTimeUtility.eventTimeFormat,
+      )}</time
+      >
     {:else}
       <span class="font-medium">---</span>
     {/if}

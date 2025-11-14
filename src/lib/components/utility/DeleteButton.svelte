@@ -1,50 +1,50 @@
 <script lang="ts">
-import { invalidate } from "$app/navigation"
-import { Trash } from "lucide-svelte"
-import type { Toast } from "$lib/types/Toast.ts"
-import { toastController } from "$lib/service/ToastController.svelte.ts"
-import Dialog from "$lib/components/utility/Dialog.svelte"
-import { closeModal } from "$lib/functions/closeModal.ts"
-import type { HTMLButtonAttributes } from "svelte/elements"
+  import {Trash} from "lucide-svelte";
+  import type {HTMLButtonAttributes} from "svelte/elements";
+  import {invalidate} from "$app/navigation";
+  import Dialog from "$lib/components/utility/Dialog.svelte";
+  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
+  import type {Toast} from "$lib/dp/types/Toast.ts";
+  import {closeModal} from "$lib/dp/utility/closeModal.ts";
 
-interface Props extends HTMLButtonAttributes {
-  id: string
-  modelName: string
-  action: (id: string) => void
-  classes?: string
-  buttonText?: string
-}
-
-let {
-  id,
-  modelName,
-  action,
-  classes = "btn-sm btn-icon preset-tonal-error border border-error-500",
-  buttonText = "",
-  ...restProps
-}: Props = $props()
-
-function deleteItem() {
-  try {
-    action(id)
-
-    const toastSettingsDeletions: Toast = {
-      message: `${modelName} deleted successfully.`,
-      background: "preset-filled-success-500",
-    }
-
-    toastController.trigger(toastSettingsDeletions)
-    invalidate("nav:load")
-  } catch {
-    const toastSettingsDeletions: Toast = {
-      message: `Error deleting ${modelName}.`,
-      background: "preset-filled-error-500",
-    }
-
-    toastController.trigger(toastSettingsDeletions)
+  interface Props extends HTMLButtonAttributes {
+    id: string;
+    modelName: string;
+    action: (id: string) => void;
+    classes?: string;
+    buttonText?: string;
   }
-  closeModal()
-}
+
+  const {
+    id,
+    modelName,
+    action,
+    classes = "btn-sm btn-icon preset-tonal-error border border-error-500",
+    buttonText = "",
+    ...restProps
+  }: Props = $props();
+
+  function deleteItem() {
+    try {
+      action(id);
+
+      const toastSettingsDeletions: Toast = {
+        message: `${modelName} deleted successfully.`,
+        background: "preset-filled-success-500",
+      };
+
+      toastController.trigger(toastSettingsDeletions);
+      invalidate("nav:load");
+    } catch {
+      const toastSettingsDeletions: Toast = {
+        message: `Error deleting ${modelName}.`,
+        background: "preset-filled-error-500",
+      };
+
+      toastController.trigger(toastSettingsDeletions);
+    }
+    closeModal();
+  }
 </script>
 
 <Dialog closeButtonClasses="sr-only" triggerClasses="btn {classes}" triggerProps={restProps}>

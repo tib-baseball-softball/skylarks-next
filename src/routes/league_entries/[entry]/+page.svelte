@@ -1,18 +1,18 @@
 <script lang="ts">
-import type { PageProps } from "./$types"
-import type { StatsDataset } from "$lib/types/StatsDataset.ts"
-import BaseballStatsDatatable from "$lib/components/datatable/BaseballStatsDatatable.svelte"
-import ProgressRing from "$lib/components/utility/ProgressRing.svelte"
+  import BaseballStatsDatatable from "$lib/components/datatable/BaseballStatsDatatable.svelte";
+  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
+  import type {StatsDataset} from "$lib/tib/types/StatsDataset.ts";
+  import type {PageProps} from "./$types";
 
-let { data }: PageProps = $props()
+  const {data}: PageProps = $props();
 
-async function getData(): Promise<StatsDataset> {
-  return {
-    batting: await data.battingStats!,
-    pitching: await data.pitchingStats!,
-    fielding: await data.fieldingStats!,
+  async function getData(): Promise<StatsDataset> {
+    return {
+      batting: await data.battingStats!,
+      pitching: await data.pitchingStats!,
+      fielding: await data.fieldingStats!,
+    };
   }
-}
 </script>
 
 <h1 class="h1 mb-6!">Stats for {data.teamName ?? "Team"}</h1>

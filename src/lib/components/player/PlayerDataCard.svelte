@@ -1,14 +1,14 @@
 <script lang="ts">
-import type { Player } from "$lib/model/Player"
-import { getAgeFromTimestamp } from "$lib/functions/getAgeFromTimestamp.js"
-import { Calendar, Dna, Hand, Users, UsersRound } from "lucide-svelte"
+  import {Calendar, Dna, Hand, Users, UsersRound} from "lucide-svelte";
+  import {getAgeFromTimestamp} from "$lib/dp/utility/getAgeFromTimestamp.js";
+  import type {Player} from "$lib/tib/types/Player.ts";
 
-interface Props {
-  player: Player
-  showTeams?: boolean
-}
+  interface Props {
+    player: Player;
+    showTeams?: boolean;
+  }
 
-let { player, showTeams = true }: Props = $props()
+  let {player, showTeams = true}: Props = $props();
 </script>
 
 <div class="card preset-tonal-surface shadow-xl p-3">
@@ -81,7 +81,7 @@ let { player, showTeams = true }: Props = $props()
 </div>
 
 <style>
-  .position-item:not(:last-child)::after {
-      content: ",\00a0";
-  }
+    .position-item:not(:last-child)::after {
+        content: ",\00a0";
+    }
 </style>

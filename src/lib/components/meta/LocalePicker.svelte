@@ -1,20 +1,20 @@
 <script lang="ts">
-import { preferences } from "$lib/globals.svelte.ts"
-import { goto } from "$app/navigation"
-import { page } from "$app/state"
+  import {goto} from "$app/navigation";
+  import {page} from "$app/state";
+  import {preferences} from "$lib/tib/globals.svelte.ts";
 
-async function reload() {
-  await goto(page.url, {
-    noScroll: true,
-    keepFocus: true,
-    invalidateAll: true,
-  })
-  const htmlElement = document.querySelector("html")
+  async function reload() {
+    await goto(page.url, {
+      noScroll: true,
+      keepFocus: true,
+      invalidateAll: true,
+    });
+    const htmlElement = document.querySelector("html");
 
-  if (htmlElement) {
-    htmlElement.lang = preferences.current.locale
+    if (htmlElement) {
+      htmlElement.lang = preferences.current.locale;
+    }
   }
-}
 </script>
 
 <select bind:value={preferences.current.locale} class="select" onchange={reload}>

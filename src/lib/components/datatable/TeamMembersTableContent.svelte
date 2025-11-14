@@ -1,84 +1,84 @@
 <script lang="ts">
-import type { DataHandler } from "@vincjo/datatables"
-import ThSort from "./ThSort.svelte"
-import type { CustomAuthModel, ExpandedTeam } from "$lib/model/ExpandedResponse"
-import { client } from "$lib/pocketbase/index.svelte"
-import LocalDate from "../utility/LocalDate.svelte"
-import type { TeamsUpdate, UsersUpdate } from "$lib/model/pb-types.ts"
-import { invalidateAll } from "$app/navigation"
-import { CircleCheck, Lock, LockOpen, Trash } from "lucide-svelte"
-import { toastController } from "$lib/service/ToastController.svelte.ts"
-import Dialog from "$lib/components/utility/Dialog.svelte"
-import { closeModal } from "$lib/functions/closeModal.ts"
-import Avatar from "$lib/components/utility/Avatar.svelte"
+  import type {DataHandler} from "@vincjo/datatables";
+  import {CircleCheck, Lock, LockOpen, Trash} from "lucide-svelte";
+  import {invalidateAll} from "$app/navigation";
+  import Avatar from "$lib/components/utility/Avatar.svelte";
+  import Dialog from "$lib/components/utility/Dialog.svelte";
+  import {client} from "$lib/dp/client.svelte.js";
+  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
+  import type {CustomAuthModel, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
+  import type {TeamsUpdate, UsersUpdate} from "$lib/dp/types/pb-types.ts";
+  import {closeModal} from "$lib/dp/utility/closeModal.ts";
+  import LocalDate from "../utility/LocalDate.svelte";
+  import ThSort from "./ThSort.svelte";
 
-interface Props {
-  handler: DataHandler<CustomAuthModel>
-  team: ExpandedTeam
-  showAdminSection?: boolean
-}
-
-let { handler, team, showAdminSection = false }: Props = $props()
-
-async function makeUserAdmin(model: CustomAuthModel) {
-  try {
-    await client.collection("teams").update<TeamsUpdate>(team.id, {
-      "admins+": model.id,
-    })
-    toastController.trigger({
-      message: `User "${model.first_name + " " + model.last_name}" has been added as an admin for team "${team.name}"`,
-      background: "preset-filled-success-500",
-    })
-    await invalidateAll()
-  } catch (error) {
-    console.error(error)
-    toastController.trigger({
-      message: "An error occurred while adding user as admin",
-      background: "preset-filled-error-500",
-    })
+  interface Props {
+    handler: DataHandler<CustomAuthModel>;
+    team: ExpandedTeam;
+    showAdminSection?: boolean;
   }
-}
 
-async function removeUserAsAdmin(model: CustomAuthModel) {
-  try {
-    await client.collection("teams").update<TeamsUpdate>(team.id, {
-      "admins-": model.id,
-    })
-    toastController.trigger({
-      message: `User "${model.first_name + " " + model.last_name}" has been removed as admin for team "${team.name}"`,
-      background: "preset-filled-success-500",
-    })
-    await invalidateAll()
-  } catch (error) {
-    console.error(error)
-    toastController.trigger({
-      message: "An error occurred while removing user as admin",
-      background: "preset-filled-error-500",
-    })
+  const {handler, team, showAdminSection = false}: Props = $props();
+
+  async function makeUserAdmin(model: CustomAuthModel) {
+    try {
+      await client.collection("teams").update<TeamsUpdate>(team.id, {
+        "admins+": model.id,
+      });
+      toastController.trigger({
+        message: `User "${model.first_name + " " + model.last_name}" has been added as an admin for team "${team.name}"`,
+        background: "preset-filled-success-500",
+      });
+      await invalidateAll();
+    } catch (error) {
+      console.error(error);
+      toastController.trigger({
+        message: "An error occurred while adding user as admin",
+        background: "preset-filled-error-500",
+      });
+    }
   }
-}
 
-async function deleteUserFromTeam(model: CustomAuthModel) {
-  try {
-    await client.collection("users").update<UsersUpdate>(model.id, {
-      "teams-": team.id,
-    })
-    toastController.trigger({
-      message: `User "${model.first_name + " " + model.last_name}" has been removed as member from team "${team.name}"`,
-      background: "preset-filled-success-500",
-    })
-    await invalidateAll()
-  } catch (error) {
-    console.error(error)
-    toastController.trigger({
-      message: "An error occurred while removing user as team member",
-      background: "preset-filled-error-500",
-    })
+  async function removeUserAsAdmin(model: CustomAuthModel) {
+    try {
+      await client.collection("teams").update<TeamsUpdate>(team.id, {
+        "admins-": model.id,
+      });
+      toastController.trigger({
+        message: `User "${model.first_name + " " + model.last_name}" has been removed as admin for team "${team.name}"`,
+        background: "preset-filled-success-500",
+      });
+      await invalidateAll();
+    } catch (error) {
+      console.error(error);
+      toastController.trigger({
+        message: "An error occurred while removing user as admin",
+        background: "preset-filled-error-500",
+      });
+    }
   }
-  closeModal()
-}
 
-const rows = $derived(handler.getRows())
+  async function deleteUserFromTeam(model: CustomAuthModel) {
+    try {
+      await client.collection("users").update<UsersUpdate>(model.id, {
+        "teams-": team.id,
+      });
+      toastController.trigger({
+        message: `User "${model.first_name + " " + model.last_name}" has been removed as member from team "${team.name}"`,
+        background: "preset-filled-success-500",
+      });
+      await invalidateAll();
+    } catch (error) {
+      console.error(error);
+      toastController.trigger({
+        message: "An error occurred while removing user as team member",
+        background: "preset-filled-error-500",
+      });
+    }
+    closeModal();
+  }
+
+  const rows = $derived(handler.getRows());
 </script>
 
 <thead>

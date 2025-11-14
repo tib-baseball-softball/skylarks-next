@@ -1,76 +1,76 @@
 <script lang="ts">
-import { invalidateAll } from "$app/navigation"
-import { authSettings, client } from "$lib/pocketbase/index.svelte"
-import type { ClubsResponse, UsersResponse, UsersUpdate } from "$lib/model/pb-types"
-import type { CustomAuthModel, ExpandedClub } from "$lib/model/ExpandedResponse"
-import MultiSelectCombobox from "$lib/components/utility/MultiSelectCombobox.svelte"
-import { ClipboardEdit, Plus } from "lucide-svelte"
-//@ts-ignore
-import * as Sheet from "$lib/components/utility/sheet/index.js"
-import { toastController } from "$lib/service/ToastController.svelte.ts"
+  import {ClipboardEdit, Plus} from "lucide-svelte";
+  import {invalidateAll} from "$app/navigation";
+  import MultiSelectCombobox from "$lib/components/utility/MultiSelectCombobox.svelte";
+  //@ts-expect-error
+  import * as Sheet from "$lib/components/utility/sheet/index.js";
+  import {authSettings, client} from "$lib/dp/client.svelte.js";
+  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
+  import type {CustomAuthModel, ExpandedClub} from "$lib/dp/types/ExpandedResponse.ts";
+  import type {ClubsResponse, UsersResponse, UsersUpdate} from "$lib/dp/types/pb-types.ts";
 
-const authRecord = $derived(authSettings.record as CustomAuthModel)
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
 
-interface Props {
-  club: ExpandedClub | null
-  buttonClasses?: string
-}
-
-let { club, buttonClasses = "" }: Props = $props()
-
-const form: Partial<ExpandedClub> = $state(
-  club ?? {
-    id: "",
-    name: "",
-    bsm_id: 0,
-    bsm_api_key: "",
-    acronym: "",
-    admins: [],
+  interface Props {
+    club: ExpandedClub | null;
+    buttonClasses?: string;
   }
-)
 
-let open = $state(false)
+  const {club, buttonClasses = ""}: Props = $props();
 
-let selectedAdmins: UsersResponse[] = $state(form?.expand?.admins ?? [])
+  const form: Partial<ExpandedClub> = $state(
+      club ?? {
+        id: "",
+        name: "",
+        bsm_id: 0,
+        bsm_api_key: "",
+        acronym: "",
+        admins: [],
+      }
+  );
 
-const allUsersForClub = client.collection("users").getFullList<UsersResponse>({
-  filter: `club ?~ '${club?.id}'`,
-  requestKey: `users-for-club-${club?.id}`,
-})
+  let open = $state(false);
 
-async function submitForm(e: SubmitEvent) {
-  e.preventDefault()
+  const selectedAdmins: UsersResponse[] = $state(form?.expand?.admins ?? []);
 
-  let result: ClubsResponse | null = null
+  const allUsersForClub = client.collection("users").getFullList<UsersResponse>({
+    filter: `club ?~ '${club?.id}'`,
+    requestKey: `users-for-club-${club?.id}`,
+  });
 
-  try {
-    if (form.id) {
-      form.admins = selectedAdmins.map((admin) => {
-        return admin.id
-      })
+  async function submitForm(e: SubmitEvent) {
+    e.preventDefault();
 
-      result = await client.collection("clubs").update<ClubsResponse>(form.id, form)
-    } else {
-      // a user creating a club becomes its first admin
-      form?.admins?.push(authRecord.id)
+    let result: ClubsResponse | null = null;
 
-      result = await client.collection("clubs").create<ClubsResponse>(form)
+    try {
+      if (form.id) {
+        form.admins = selectedAdmins.map((admin) => {
+          return admin.id;
+        });
 
-      // a user needs to become a member of the new club
-      await client.collection("users").update<UsersUpdate>(authRecord.id, {
-        "club+": result.id,
-      })
+        result = await client.collection("clubs").update<ClubsResponse>(form.id, form);
+      } else {
+        // a user creating a club becomes its first admin
+        form?.admins?.push(authRecord.id);
+
+        result = await client.collection("clubs").create<ClubsResponse>(form);
+
+        // a user needs to become a member of the new club
+        await client.collection("users").update<UsersUpdate>(authRecord.id, {
+          "club+": result.id,
+        });
+      }
+    } catch {
+      toastController.triggerGenericFormErrorMessage("Club");
     }
-  } catch {
-    toastController.triggerGenericFormErrorMessage("Club")
-  }
 
-  if (result) {
-    toastController.triggerGenericFormSuccessMessage("Club")
-    open = false
+    if (result) {
+      toastController.triggerGenericFormSuccessMessage("Club");
+      open = false;
+    }
+    await invalidateAll();
   }
-  await invalidateAll()
-}
 </script>
 
 <Sheet.Root bind:open={open}>
@@ -154,8 +154,8 @@ async function submitForm(e: SubmitEvent) {
                   bind:value={form.bsm_api_key}
                   class="input"
                   name="bsm_api_key"
-                  type="text"
                   placeholder="current value not shown for security"
+                  type="text"
           />
           <span class="text-sm">
                     Must be created in BSM in a user's account that has the role "Team Administration".

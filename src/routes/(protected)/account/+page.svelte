@@ -1,13 +1,13 @@
 <script lang="ts">
-import UserDataCard from "$lib/components/diamondplanner/user/UserDataCard.svelte"
-import PlayerProfileClubsSection from "$lib/components/diamondplanner/user/PlayerProfileClubsSection.svelte"
-import TeamListTeaser from "$lib/components/diamondplanner/team/TeamListTeaser.svelte"
-import { authSettings } from "$lib/pocketbase/index.svelte"
-import type { CustomAuthModel } from "$lib/model/ExpandedResponse"
+  import TeamListTeaser from "$lib/components/diamondplanner/team/TeamListTeaser.svelte";
+  import PlayerProfileClubsSection from "$lib/components/diamondplanner/user/PlayerProfileClubsSection.svelte";
+  import UserDataCard from "$lib/components/diamondplanner/user/UserDataCard.svelte";
+  import {authSettings} from "$lib/dp/client.svelte.js";
+  import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
 
-const authRecord = $derived(authSettings.record as CustomAuthModel)
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
 
-let { data } = $props()
+  const {data} = $props();
 </script>
 
 <h1 class="h1">My Dashboard</h1>

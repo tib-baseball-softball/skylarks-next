@@ -1,17 +1,17 @@
 <script lang="ts">
-import SidebarNavigation from "$lib/components/meta/SidebarNavigation.svelte"
-import type { ExpandedClub, ExpandedTeam } from "$lib/model/ExpandedResponse.ts"
-//@ts-ignore
-import * as Sheet from "$lib/components/utility/sheet/index.js"
+  import SidebarNavigation from "$lib/components/meta/SidebarNavigation.svelte";
+  //@ts-expect-error
+  import * as Sheet from "$lib/components/utility/sheet/index.js";
+  import type {ExpandedClub, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
 
-interface Props {
-  clubs: ExpandedClub[]
-  teams: ExpandedTeam[]
-}
+  interface Props {
+    clubs: ExpandedClub[];
+    teams: ExpandedTeam[];
+  }
 
-let { clubs, teams }: Props = $props()
+  let {clubs, teams}: Props = $props();
 
-let open = $state(false)
+  let open = $state(false);
 </script>
 
 <Sheet.Root bind:open={open}>

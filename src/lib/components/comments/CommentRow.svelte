@@ -1,54 +1,54 @@
 <script lang="ts">
-import type { CustomAuthModel, ExpandedComment } from "$lib/model/ExpandedResponse.ts"
-import { authSettings, client } from "$lib/pocketbase/index.svelte.ts"
-import { DateTimeUtility } from "$lib/service/DateTimeUtility.ts"
-import DeleteButton from "$lib/components/utility/DeleteButton.svelte"
-import { invalidate } from "$app/navigation"
-import { Send, SquarePen, X } from "lucide-svelte"
-import { toastController } from "$lib/service/ToastController.svelte.ts"
-import type { ClubsResponse } from "$lib/model/pb-types.ts"
-import Avatar from "$lib/components/utility/Avatar.svelte"
+  import {Send, SquarePen, X} from "lucide-svelte";
+  import {invalidate} from "$app/navigation";
+  import Avatar from "$lib/components/utility/Avatar.svelte";
+  import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
+  import {authSettings, client} from "$lib/dp/client.svelte.ts";
+  import {DateTimeUtility} from "$lib/dp/service/DateTimeUtility.ts";
+  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
+  import type {CustomAuthModel, ExpandedComment} from "$lib/dp/types/ExpandedResponse.ts";
+  import type {ClubsResponse} from "$lib/dp/types/pb-types.ts";
 
-interface Props {
-  comment: ExpandedComment
-  club: ClubsResponse
-}
-
-let { comment, club }: Props = $props()
-let formText = $derived(comment.text)
-let isEditing = $state(false)
-
-const userFullName = $derived(
-  comment?.expand?.user?.first_name + " " + comment?.expand?.user?.last_name
-)
-const authRecord = $derived(authSettings.record as CustomAuthModel)
-const isLoggedInUser = $derived(authRecord.id === comment?.expand?.user?.id)
-
-async function deleteComment(id: string) {
-  const result = await client.collection("comments").delete(id)
-
-  if (result) {
-    await invalidate("comments:list")
+  interface Props {
+    comment: ExpandedComment;
+    club: ClubsResponse;
   }
-}
 
-async function updateComment(event: Event) {
-  event.preventDefault()
+  const {comment, club}: Props = $props();
+  const formText = $derived(comment.text);
+  let isEditing = $state(false);
 
-  try {
-    const result = await client.collection("comments").update(comment.id, { text: formText })
+  const userFullName = $derived(
+      comment?.expand?.user?.first_name + " " + comment?.expand?.user?.last_name
+  );
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
+  const isLoggedInUser = $derived(authRecord.id === comment?.expand?.user?.id);
+
+  async function deleteComment(id: string) {
+    const result = await client.collection("comments").delete(id);
 
     if (result) {
-      isEditing = false
-      await invalidate("comments:list")
+      await invalidate("comments:list");
     }
-  } catch (e) {
-    toastController.trigger({
-      message: "Error updating comment",
-      background: "preset-filled-error-500",
-    })
   }
-}
+
+  async function updateComment(event: Event) {
+    event.preventDefault();
+
+    try {
+      const result = await client.collection("comments").update(comment.id, {text: formText});
+
+      if (result) {
+        isEditing = false;
+        await invalidate("comments:list");
+      }
+    } catch (e) {
+      toastController.trigger({
+        message: "Error updating comment",
+        background: "preset-filled-error-500",
+      });
+    }
+  }
 </script>
 
 {#snippet editForm()}

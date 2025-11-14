@@ -1,86 +1,86 @@
 <script lang="ts">
-import type { Snippet } from "svelte"
-import { invalidate } from "$app/navigation"
-import TabsRadioGroup from "$lib/components/utility/form/TabsRadioGroup.svelte"
-import Switch from "$lib/components/utility/Switch.svelte"
-//@ts-expect-error
-import * as Sheet from "$lib/components/utility/sheet/index.js"
-import type { ExpandedEvent } from "$lib/model/ExpandedResponse"
-import type { Extension } from "$lib/model/ExpandedResponse.js"
-import { type LocationsResponse, type UniformsetsResponse } from "$lib/model/pb-types"
-import { client } from "$lib/pocketbase/index.svelte"
-import { DateTimeUtility } from "$lib/service/DateTimeUtility.js"
-import { toastController } from "$lib/service/ToastController.svelte.ts"
-import Flatpickr from "../utility/Flatpickr.svelte"
+  import type {Snippet} from "svelte";
+  import {invalidate} from "$app/navigation";
+  import TabsRadioGroup from "$lib/components/utility/form/TabsRadioGroup.svelte";
+  import Switch from "$lib/components/utility/Switch.svelte";
+  //@ts-expect-error
+  import * as Sheet from "$lib/components/utility/sheet/index.js";
+  import {client} from "$lib/dp/client.svelte.js";
+  import {DateTimeUtility} from "$lib/dp/service/DateTimeUtility.js";
+  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
+  import type {Extension} from "$lib/dp/types/ExpandedResponse.js";
+  import type {ExpandedEvent} from "$lib/dp/types/ExpandedResponse.ts";
+  import type {LocationsResponse, UniformsetsResponse} from "$lib/dp/types/pb-types.ts";
+  import Flatpickr from "../utility/Flatpickr.svelte";
 
-interface Props {
-  event: ExpandedEvent | null
-  clubID: string
-  teamID: string
-  triggerContent: Snippet
-  buttonClasses?: string
-}
-
-let { event, clubID, teamID, triggerContent, buttonClasses = "" }: Props = $props()
-
-let open = $state(false)
-
-const form: Extension<
-  Partial<ExpandedEvent>,
-  {
-    starttime: string
-    endtime: string
-    meetingtime: string
-    type: string
+  interface Props {
+    event: ExpandedEvent | null;
+    clubID: string;
+    teamID: string;
+    triggerContent: Snippet;
+    buttonClasses?: string;
   }
-> = $state(
-  event ?? {
-    id: "",
-    title: "",
-    starttime: "",
-    meetingtime: "",
-    endtime: "",
-    desc: "",
-    location: "",
-    type: "game",
-    attire: "",
-    cancelled: false,
-    bsm_id: 0,
-    team: teamID,
-  }
-)
 
-const attireOptions = client.collection("uniformsets").getFullList<UniformsetsResponse>({
-  filter: `club = "${clubID}"`,
-  requestKey: `uniformsets-${clubID}`,
-})
+  const {event, clubID, teamID, triggerContent, buttonClasses = ""}: Props = $props();
 
-const locationOptions = client.collection("locations").getFullList<LocationsResponse>({
-  filter: `club = "${clubID}"`,
-  requestKey: `location-options-${clubID}`,
-})
+  let open = $state(false);
 
-async function submitForm(e: SubmitEvent) {
-  e.preventDefault()
+  const form: Extension<
+      Partial<ExpandedEvent>,
+      {
+        starttime: string
+        endtime: string
+        meetingtime: string
+        type: string
+      }
+  > = $state(
+      event ?? {
+        id: "",
+        title: "",
+        starttime: "",
+        meetingtime: "",
+        endtime: "",
+        desc: "",
+        location: "",
+        type: "game",
+        attire: "",
+        cancelled: false,
+        bsm_id: 0,
+        team: teamID,
+      }
+  );
 
-  let result: ExpandedEvent | null = null
+  const attireOptions = client.collection("uniformsets").getFullList<UniformsetsResponse>({
+    filter: `club = "${clubID}"`,
+    requestKey: `uniformsets-${clubID}`,
+  });
 
-  try {
-    if (form.id) {
-      result = await client.collection("events").update<ExpandedEvent>(form.id, form)
-    } else {
-      result = await client.collection("events").create<ExpandedEvent>(form)
+  const locationOptions = client.collection("locations").getFullList<LocationsResponse>({
+    filter: `club = "${clubID}"`,
+    requestKey: `location-options-${clubID}`,
+  });
+
+  async function submitForm(e: SubmitEvent) {
+    e.preventDefault();
+
+    let result: ExpandedEvent | null = null;
+
+    try {
+      if (form.id) {
+        result = await client.collection("events").update<ExpandedEvent>(form.id, form);
+      } else {
+        result = await client.collection("events").create<ExpandedEvent>(form);
+      }
+    } catch {
+      toastController.triggerGenericFormErrorMessage("Event");
     }
-  } catch {
-    toastController.triggerGenericFormErrorMessage("Event")
-  }
 
-  if (result) {
-    toastController.triggerGenericFormSuccessMessage("Event")
-    open = false
+    if (result) {
+      toastController.triggerGenericFormSuccessMessage("Event");
+      open = false;
+    }
+    await invalidate("event:list");
   }
-  await invalidate("event:list")
-}
 </script>
 
 <Sheet.Root bind:open={open}>

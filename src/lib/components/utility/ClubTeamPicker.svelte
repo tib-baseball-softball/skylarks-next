@@ -1,18 +1,21 @@
 <script lang="ts">
-import { preferences } from "$lib/globals.svelte.ts"
-import type { ClubTeam } from "bsm.js"
+  import type {ClubTeam} from "bsm.js";
+  import {preferences} from "$lib/tib/globals.svelte.ts";
 
-interface Props {
-  clubTeams?: ClubTeam[]
-  onChange?: () => void
-}
+  interface Props {
+    clubTeams?: ClubTeam[];
+    onChange?: () => void;
+  }
 
-let { clubTeams = [], onChange = () => {} }: Props = $props()
+  const {
+    clubTeams = [], onChange = () => {
+    }
+  }: Props = $props();
 </script>
 
 <label class="flex items-center gap-2">
   <span class="text-nowrap font-light">Select Team:</span>
-  <select id="team-picker" class="select my-4" bind:value={preferences.current.favoriteTeamID}
+  <select bind:value={preferences.current.favoriteTeamID} class="select my-4" id="team-picker"
           onchange={() => onChange()}>
     <option value="{0}">None</option>
     {#each clubTeams as clubTeam}

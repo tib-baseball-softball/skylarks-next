@@ -1,13 +1,13 @@
 <script lang="ts">
-import { page } from "$app/state"
-import { House, Shield, Star, Table, Ticket, Users } from "lucide-svelte"
-import { preferences } from "$lib/globals.svelte.ts"
+  import {House, Shield, Star, Table, Ticket, Users} from "lucide-svelte";
+  import {page} from "$app/state";
+  import {preferences} from "$lib/tib/globals.svelte.ts";
 
-interface Props {
-  classes?: string
-}
+  interface Props {
+    classes?: string;
+  }
 
-let { classes = "" }: Props = $props()
+  const {classes = ""}: Props = $props();
 </script>
 
 <li>

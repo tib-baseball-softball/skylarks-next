@@ -1,37 +1,37 @@
-import type { CustomAuthModel, ExpandedTeam } from "$lib/model/ExpandedResponse"
-import { client } from "$lib/pocketbase/index.svelte"
-import type { PageLoad } from "./$types"
-import { watchWithPagination } from "$lib/pocketbase/RecordOperations"
-import { error } from "@sveltejs/kit"
+import {error} from "@sveltejs/kit";
+import {client} from "$lib/dp/client.svelte.js";
+import {watchWithPagination} from "$lib/dp/records/RecordOperations.ts";
+import type {CustomAuthModel, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
+import type {PageLoad} from "./$types";
 
-export const load = (async ({ fetch, parent, params, depends }) => {
-  const data = await parent()
-  const teams: ExpandedTeam[] = data.teams
+export const load = (async ({fetch, parent, params, depends}) => {
+  const data = await parent();
+  const teams: ExpandedTeam[] = data.teams;
 
-  let team = teams.find((team) => team.id === params.id)
+  let team = teams.find((team) => team.id === params.id);
 
   if (!team) {
     team = await client.collection("teams").getOne<ExpandedTeam>(params.id, {
       expand: "club,admins",
       fetch: fetch,
-    })
+    });
   }
-  if (!team) throw error(404, "Team not found")
+  if (!team) throw error(404, "Team not found");
 
   const players = await watchWithPagination<CustomAuthModel>(
-    "users",
-    {
-      filter: `teams ?~ "${params.id}"`,
-      fetch: fetch,
-    },
-    1,
-    99
-  )
+      "users",
+      {
+        filter: `teams ?~ "${params.id}"`,
+        fetch: fetch,
+      },
+      1,
+      99
+  );
 
-  depends("members:list")
+  depends("members:list");
 
   return {
     players: players,
     team: team,
-  }
-}) satisfies PageLoad
+  };
+}) satisfies PageLoad;

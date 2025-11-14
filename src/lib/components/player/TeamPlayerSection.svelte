@@ -1,15 +1,15 @@
 <script lang="ts">
-import type { Player } from "$lib/model/Player.ts"
-import PlayerRow from "$lib/components/player/PlayerRow.svelte"
-// @ts-ignore
-import { Tabs } from "bits-ui"
+  // @ts-expect-error
+  import {Tabs} from "bits-ui";
+  import PlayerRow from "$lib/components/player/PlayerRow.svelte";
+  import type {Player} from "$lib/tib/types/Player.ts";
 
-interface Props {
-  players: Player[]
-}
+  interface Props {
+    players: Player[];
+  }
 
-let { players }: Props = $props()
-let visual: "number" | "image" = $state("number")
+  let {players}: Props = $props();
+  let visual: "number" | "image" = $state("number");
 </script>
 
 <label class="label flex flex-col gap-1 my-4 lg:max-w-[50%]">

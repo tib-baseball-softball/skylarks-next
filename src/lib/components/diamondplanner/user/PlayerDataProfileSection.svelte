@@ -1,37 +1,37 @@
 <script lang="ts">
-import PlayerDataCard from "$lib/components/player/PlayerDataCard.svelte"
-import PlayerHeaderSection from "$lib/components/player/PlayerHeaderSection.svelte"
-import type { CustomAuthModel } from "$lib/model/ExpandedResponse"
-import type { Player } from "$lib/model/Player"
-import { authSettings, client } from "$lib/pocketbase/index.svelte"
-import { Link } from "lucide-svelte"
-import { positionKeysToEnumStringValues } from "$lib/types/BaseballPosition.js"
-import PlayerDataForm from "$lib/components/forms/PlayerDataForm.svelte"
+  import {Link} from "lucide-svelte";
+  import PlayerDataForm from "$lib/components/forms/PlayerDataForm.svelte";
+  import PlayerDataCard from "$lib/components/player/PlayerDataCard.svelte";
+  import PlayerHeaderSection from "$lib/components/player/PlayerHeaderSection.svelte";
+  import {authSettings, client} from "$lib/dp/client.svelte.js";
+  import {positionKeysToEnumStringValues} from "$lib/dp/types/BaseballPosition.js";
+  import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
+  import type {Player} from "$lib/tib/types/Player.ts";
 
-const authRecord = $derived(authSettings.record as CustomAuthModel)
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
 
-// suboptimal adapter until data is properly fetched from PocketBase
-//@ts-expect-error
-let playerObject: Player = $derived({
-  firstname: authRecord.first_name,
-  lastname: authRecord.last_name,
-  fullname: authRecord.first_name + " " + authRecord.last_name,
-  birthday: 0,
-  admission: new Date(authRecord.created).toLocaleDateString(),
-  number: authRecord.number,
-  throwing: authRecord.throws,
-  batting: authRecord.bats,
-  bsm_id: authRecord.bsm_id,
-  positions: positionKeysToEnumStringValues(authRecord.position),
-  teams: [],
-  coach: "",
-  media: [
-    {
-      url: client.files.getURL(authRecord, authRecord.avatar),
-      alt: "Player Profile Avatar",
-    },
-  ],
-})
+  // suboptimal adapter until data is properly fetched from PocketBase
+  //@ts-expect-error
+  const playerObject: Player = $derived({
+    firstname: authRecord.first_name,
+    lastname: authRecord.last_name,
+    fullname: authRecord.first_name + " " + authRecord.last_name,
+    birthday: 0,
+    admission: new Date(authRecord.created).toLocaleDateString(),
+    number: authRecord.number,
+    throwing: authRecord.throws,
+    batting: authRecord.bats,
+    bsm_id: authRecord.bsm_id,
+    positions: positionKeysToEnumStringValues(authRecord.position),
+    teams: [],
+    coach: "",
+    media: [
+      {
+        url: client.files.getURL(authRecord, authRecord.avatar),
+        alt: "Player Profile Avatar",
+      },
+    ],
+  });
 </script>
 
 <div class="card preset-tonal-primary shadow-lg flex flex-col justify-between">

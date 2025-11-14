@@ -1,24 +1,25 @@
 <script lang="ts">
-import type { AnnouncementsResponse } from "$lib/model/pb-types"
-import { AlertCircle, Info } from "lucide-svelte"
-type Priority = AnnouncementsResponse["priority"]
+  import {AlertCircle, Info} from "lucide-svelte";
+  import type {AnnouncementsResponse} from "$lib/dp/types/pb-types.ts";
 
-interface Props {
-  priority: Priority
-}
+  type Priority = AnnouncementsResponse["priority"]
 
-let { priority }: Props = $props()
-
-const badgeClass = $derived.by(() => {
-  switch (priority) {
-    case "info":
-      return "preset-outlined-secondary-500 dark:border-white"
-    case "warning":
-      return "preset-outlined-warning-500"
-    case "danger":
-      return "preset-outlined-error-500"
+  interface Props {
+    priority: Priority;
   }
-})
+
+  let {priority}: Props = $props();
+
+  const badgeClass = $derived.by(() => {
+    switch (priority) {
+      case "info":
+        return "preset-outlined-secondary-500 dark:border-white";
+      case "warning":
+        return "preset-outlined-warning-500";
+      case "danger":
+        return "preset-outlined-error-500";
+    }
+  });
 </script>
 
 <div class="col-span-1 justify-self-end">

@@ -1,29 +1,29 @@
 <script lang="ts">
-import EventTypeBadge from "$lib/components/diamondplanner/event/EventTypeBadge.svelte"
-import type { CustomAuthModel, ExpandedEvent } from "$lib/model/ExpandedResponse"
-import EventCoreInfo from "./EventCoreInfo.svelte"
-import EventParticipationSection from "./EventParticipationSection.svelte"
-import { authSettings } from "$lib/pocketbase/index.svelte"
-import { Ban } from "lucide-svelte"
+  import {Ban} from "lucide-svelte";
+  import EventTypeBadge from "$lib/components/diamondplanner/event/EventTypeBadge.svelte";
+  import {authSettings} from "$lib/dp/client.svelte.js";
+  import type {CustomAuthModel, ExpandedEvent} from "$lib/dp/types/ExpandedResponse.ts";
+  import EventCoreInfo from "./EventCoreInfo.svelte";
+  import EventParticipationSection from "./EventParticipationSection.svelte";
 
-interface props {
-  event: ExpandedEvent
-  link: boolean
-}
+  interface props {
+    event: ExpandedEvent;
+    link: boolean;
+  }
 
-const { event, link }: props = $props()
+  const {event, link}: props = $props();
 
-const authRecord = $derived(authSettings.record as CustomAuthModel)
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
 
-// club admins can see the team and change settings, but not participate
-const canParticipate = $derived(authRecord.teams.includes(event.team))
+  // club admins can see the team and change settings, but not participate
+  const canParticipate = $derived(authRecord.teams.includes(event.team));
 </script>
 
 <article
         class="card preset-tonal-surface shadow-xl text-sm h-full"
         class:card-hover={link}
 >
-  <a href="/account/event/{event.id}" class:line-through={event.cancelled}>
+  <a class:line-through={event.cancelled} href="/account/event/{event.id}">
     <header class="card-header">
       <h2>
         <EventTypeBadge type={event.type}/>
@@ -31,7 +31,7 @@ const canParticipate = $derived(authRecord.teams.includes(event.team))
       </h2>
     </header>
 
-    <EventCoreInfo {event} classes={"p-4"}/>
+    <EventCoreInfo classes={"p-4"} {event}/>
   </a>
 
   <footer class="card-footer">

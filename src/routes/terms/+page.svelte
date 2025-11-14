@@ -1,5 +1,5 @@
 <script lang="ts">
-import { preferences } from "$lib/globals.svelte.js"
+  import {preferences} from "$lib/tib/globals.svelte.js";
 </script>
 
 <!-- @wc-ignore -->

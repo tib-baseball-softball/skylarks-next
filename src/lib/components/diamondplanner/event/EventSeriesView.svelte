@@ -1,53 +1,53 @@
 <script lang="ts">
-import type { EventseriesResponse } from "$lib/model/pb-types.ts"
-import type { EventSeriesCreationData, ExpandedTeam } from "$lib/model/ExpandedResponse.ts"
-import EventSeriesForm from "$lib/components/forms/EventSeriesForm.svelte"
-import { slide } from "svelte/transition"
-import EventSeriesListItem from "$lib/components/diamondplanner/eventseries/EventSeriesListItem.svelte"
-import DeleteButton from "$lib/components/utility/DeleteButton.svelte"
-import { client } from "$lib/pocketbase/index.svelte.ts"
-import { invalidateAll } from "$app/navigation"
-import { CalendarPlus } from "lucide-svelte"
-//@ts-ignore
-import * as Sheet from "$lib/components/utility/sheet/index.js"
+  import {CalendarPlus} from "lucide-svelte";
+  import {slide} from "svelte/transition";
+  import {invalidateAll} from "$app/navigation";
+  import EventSeriesListItem from "$lib/components/diamondplanner/eventseries/EventSeriesListItem.svelte";
+  import EventSeriesForm from "$lib/components/forms/EventSeriesForm.svelte";
+  import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
+  //@ts-expect-error
+  import * as Sheet from "$lib/components/utility/sheet/index.js";
+  import {client} from "$lib/dp/client.svelte.ts";
+  import type {EventSeriesCreationData, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
+  import type {EventseriesResponse} from "$lib/dp/types/pb-types.ts";
 
-interface Props {
-  team: ExpandedTeam
-  eventSeries: EventseriesResponse[]
-  buttonClasses?: string
-}
-
-let { team, eventSeries, buttonClasses = "" }: Props = $props()
-
-let open = $state(false)
-let showForm = $state(false)
-
-let selectedEventSeries: EventSeriesCreationData | null = $state(null)
-let eventSeriesFormContainer: HTMLDivElement
-
-function setupAndShowForm(eventSeries: EventSeriesCreationData | null) {
-  selectedEventSeries = eventSeries
-  showForm = true
-
-  // wait for Svelte transition to finish
-  setTimeout(() => {
-    eventSeriesFormContainer?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-      inline: "nearest",
-    })
-  }, 230)
-}
-
-async function deleteEventSeries(id: string) {
-  const success = await client.collection("eventseries").delete(id)
-
-  if (success) {
-    await invalidateAll()
-    open = false
-    showForm = false
+  interface Props {
+    team: ExpandedTeam;
+    eventSeries: EventseriesResponse[];
+    buttonClasses?: string;
   }
-}
+
+  const {team, eventSeries, buttonClasses = ""}: Props = $props();
+
+  let open = $state(false);
+  let showForm = $state(false);
+
+  let selectedEventSeries: EventSeriesCreationData | null = $state(null);
+  let eventSeriesFormContainer: HTMLDivElement;
+
+  function setupAndShowForm(eventSeries: EventSeriesCreationData | null) {
+    selectedEventSeries = eventSeries;
+    showForm = true;
+
+    // wait for Svelte transition to finish
+    setTimeout(() => {
+      eventSeriesFormContainer?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest",
+      });
+    }, 230);
+  }
+
+  async function deleteEventSeries(id: string) {
+    const success = await client.collection("eventseries").delete(id);
+
+    if (success) {
+      await invalidateAll();
+      open = false;
+      showForm = false;
+    }
+  }
 </script>
 
 <Sheet.Root bind:open={open}>

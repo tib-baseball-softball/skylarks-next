@@ -1,22 +1,22 @@
 <script lang="ts">
-import "../app.css"
-import AppBar from "$lib/components/meta/AppBar.svelte"
-import Footer from "$lib/components/meta/Footer.svelte"
-import SidebarNavigation from "$lib/components/meta/SidebarNavigation.svelte"
-import TopAppBarTrailing from "$lib/components/meta/TopAppBarTrailing.svelte"
-import BottomNavigation from "$lib/components/navigation/BottomNavigation.svelte"
-import NavigationSheet from "$lib/components/navigation/NavigationSheet.svelte"
-import StaticNavigationLinks from "$lib/components/navigation/StaticNavigationLinks.svelte"
-import ToastContainer from "$lib/components/utility/toast/ToastContainer.svelte"
-import { authSettings } from "$lib/pocketbase/index.svelte.ts"
-import type { LayoutProps } from "../../.svelte-kit/types/src/routes/$types"
+  import "../app.css";
+  import AppBar from "$lib/components/meta/AppBar.svelte";
+  import Footer from "$lib/components/meta/Footer.svelte";
+  import SidebarNavigation from "$lib/components/meta/SidebarNavigation.svelte";
+  import TopAppBarTrailing from "$lib/components/meta/TopAppBarTrailing.svelte";
+  import BottomNavigation from "$lib/components/navigation/BottomNavigation.svelte";
+  import NavigationSheet from "$lib/components/navigation/NavigationSheet.svelte";
+  import StaticNavigationLinks from "$lib/components/navigation/StaticNavigationLinks.svelte";
+  import ToastContainer from "$lib/components/utility/toast/ToastContainer.svelte";
+  import {authSettings} from "$lib/dp/client.svelte.ts";
+  import type {LayoutProps} from "../../.svelte-kit/types/src/routes/$types";
 
-const { data, children }: LayoutProps = $props()
+  const {data, children}: LayoutProps = $props();
 
-const isUserAuthenticated = $derived(!!authSettings.record)
-const showSidebar = $derived(
-  (data.clubs.length > 0 || data.teams.length > 0) && isUserAuthenticated
-)
+  const isUserAuthenticated = $derived(!!authSettings.record);
+  const showSidebar = $derived(
+      (data.clubs.length > 0 || data.teams.length > 0) && isUserAuthenticated
+  );
 </script>
 
 <svelte:head>

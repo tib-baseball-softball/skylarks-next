@@ -1,58 +1,58 @@
-<script lang="ts" generics="T extends UsersResponse">
-//@ts-ignore
-import type { UsersResponse } from "$lib/model/pb-types.ts"
-import { X } from "lucide-svelte"
-import { toastController } from "$lib/service/ToastController.svelte.ts"
+<script generics="T extends UsersResponse" lang="ts">
+  //@ts-expect-error
 
-// TODO: this should be even more generic
+  import {X} from "lucide-svelte";
+  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
 
-interface Props {
-  itemName: string
-  selectedItems: T[]
-  allItems: T[]
-  allowDeletionOfLastItem?: boolean
-}
+  // TODO: this should be even more generic
 
-let {
-  itemName,
-  selectedItems = $bindable(),
-  allItems,
-  allowDeletionOfLastItem = false,
-}: Props = $props()
-
-let selectElement: HTMLSelectElement | undefined = $state()
-
-function addItemToSelection(users: T[]) {
-  if (!selectElement || selectElement?.value === "") {
-    return
+  interface Props {
+    itemName: string;
+    selectedItems: T[];
+    allItems: T[];
+    allowDeletionOfLastItem?: boolean;
   }
-  const selectedUser = users.find((user) => user.id === selectElement?.value)
-  const adminExists = selectedItems.find((admin) => admin.id === selectedUser?.id)
 
-  if (selectedUser && selectElement && !adminExists) {
-    selectedItems.push(selectedUser)
+  const {
+    itemName,
+    selectedItems = $bindable(),
+    allItems,
+    allowDeletionOfLastItem = false,
+  }: Props = $props();
+
+  const selectElement: HTMLSelectElement | undefined = $state();
+
+  function addItemToSelection(users: T[]) {
+    if (!selectElement || selectElement?.value === "") {
+      return;
+    }
+    const selectedUser = users.find((user) => user.id === selectElement?.value);
+    const adminExists = selectedItems.find((admin) => admin.id === selectedUser?.id);
+
+    if (selectedUser && selectElement && !adminExists) {
+      selectedItems.push(selectedUser);
+    }
+    selectElement.value = "";
   }
-  selectElement.value = ""
-}
 
-function removeItemFromSelection(itemToRemove: T) {
-  if (!allowDeletionOfLastItem && selectedItems.length === 1) {
-    toastController.trigger({
-      message: `You cannot remove the last ${itemName}!`,
-      background: "preset-filled-warning-500",
-    })
-    return
-  }
-  const itemRef = selectedItems.find((entry) => entry.id === itemToRemove.id)
+  function removeItemFromSelection(itemToRemove: T) {
+    if (!allowDeletionOfLastItem && selectedItems.length === 1) {
+      toastController.trigger({
+        message: `You cannot remove the last ${itemName}!`,
+        background: "preset-filled-warning-500",
+      });
+      return;
+    }
+    const itemRef = selectedItems.find((entry) => entry.id === itemToRemove.id);
 
-  if (itemRef) {
-    const index = selectedItems.indexOf(itemRef)
+    if (itemRef) {
+      const index = selectedItems.indexOf(itemRef);
 
-    if (index !== -1) {
-      selectedItems.splice(index, 1)
+      if (index !== -1) {
+        selectedItems.splice(index, 1);
+      }
     }
   }
-}
 </script>
 
 {#each selectedItems as selectItem}
@@ -68,8 +68,8 @@ function removeItemFromSelection(itemToRemove: T) {
 
 <div>Select to add as {itemName}:</div>
 <select
-        class="select"
         bind:this={selectElement}
+        class="select"
         onchange={() => addItemToSelection(allItems)}
 >
   <option selected value="">None</option>

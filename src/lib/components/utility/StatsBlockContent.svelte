@@ -1,18 +1,18 @@
 <script lang="ts">
-import type { SingleStatElement } from "$lib/types/SingleStatElement"
+  import type {SingleStatElement} from "$lib/tib/types/SingleStatElement.ts";
 
-interface props {
-  block: SingleStatElement
-  classes?: string
-}
+  interface props {
+    block: SingleStatElement;
+    classes?: string;
+  }
 
-let { block, classes = "" }: props = $props()
+  const {block, classes = ""}: props = $props();
 </script>
 
 <div class="stat {classes}">
-    <div class="stat-title">{block.title}</div>
-    <div class="stat-value">{block.value}</div>
-    <div class="stat-desc text-wrap">{block.desc}</div>
+  <div class="stat-title">{block.title}</div>
+  <div class="stat-value">{block.value}</div>
+  <div class="stat-desc text-wrap">{block.desc}</div>
 </div>
 
 <style lang="postcss">

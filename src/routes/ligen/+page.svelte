@@ -1,21 +1,21 @@
 <script lang="ts">
-import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte"
-import ReloadUponPreferenceChange from "$lib/components/navigation/ReloadUponPreferenceChange.svelte"
-import { browser } from "$app/environment"
-import { goto } from "$app/navigation"
-import { preferences } from "$lib/globals.svelte.ts"
-import type { PageProps } from "./$types"
-import ProgressRing from "$lib/components/utility/ProgressRing.svelte"
+  import {browser} from "$app/environment";
+  import {goto} from "$app/navigation";
+  import ReloadUponPreferenceChange from "$lib/components/navigation/ReloadUponPreferenceChange.svelte";
+  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
+  import SeasonSelector from "$lib/components/utility/SeasonSelector.svelte";
+  import {preferences} from "$lib/tib/globals.svelte.ts";
+  import type {PageProps} from "./$types";
 
-const reload = () => {
-  if (browser) {
-    let queryString = `?season=${preferences.current.selectedSeason}`
+  const reload = () => {
+    if (browser) {
+      const queryString = `?season=${preferences.current.selectedSeason}`;
 
-    goto(queryString)
-  }
-}
+      goto(queryString);
+    }
+  };
 
-let { data }: PageProps = $props()
+  const {data}: PageProps = $props();
 </script>
 
 <ReloadUponPreferenceChange callback={reload}/>

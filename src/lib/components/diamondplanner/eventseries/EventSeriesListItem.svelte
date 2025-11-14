@@ -1,20 +1,20 @@
 <script lang="ts">
-import type { EventseriesResponse } from "$lib/model/pb-types.ts"
-import { DateTimeUtility } from "$lib/service/DateTimeUtility.ts"
-import { EventSeriesUtility } from "$lib/service/EventSeriesUtility.ts"
-import { preferences } from "$lib/globals.svelte.ts"
+  import {DateTimeUtility} from "$lib/dp/service/DateTimeUtility.ts";
+  import {EventSeriesUtility} from "$lib/dp/service/EventSeriesUtility.ts";
+  import type {EventseriesResponse} from "$lib/dp/types/pb-types.ts";
+  import {preferences} from "$lib/tib/globals.svelte.ts";
 
-interface Props {
-  eventSeries: EventseriesResponse
-}
+  interface Props {
+    eventSeries: EventseriesResponse;
+  }
 
-let { eventSeries }: Props = $props()
+  const {eventSeries}: Props = $props();
 
-const startDate = $derived(new Date(eventSeries.series_start))
-const endDate = $derived(new Date(eventSeries.series_end))
+  const startDate = $derived(new Date(eventSeries.series_start));
+  const endDate = $derived(new Date(eventSeries.series_end));
 
-const options: { weekday: "long" | "short" | "narrow" | undefined } = { weekday: "long" }
-const seriesState = $derived(EventSeriesUtility.getSeriesState(startDate, endDate))
+  const options: { weekday: "long" | "short" | "narrow" | undefined } = {weekday: "long"};
+  const seriesState = $derived(EventSeriesUtility.getSeriesState(startDate, endDate));
 </script>
 
 <article class="p-4 preset-outlined-surface rounded-base shadow-md">

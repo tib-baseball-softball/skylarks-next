@@ -1,27 +1,27 @@
 <script lang="ts">
-import type { CustomAuthModel, ExpandedAnnouncement } from "$lib/model/ExpandedResponse"
-import AnnouncementCoreContent from "./AnnouncementCoreContent.svelte"
-import { authSettings, client } from "$lib/pocketbase/index.svelte.ts"
-import AnnouncementForm from "$lib/components/forms/AnnouncementForm.svelte"
-import DeleteButton from "$lib/components/utility/DeleteButton.svelte"
-import { MessageCircle } from "lucide-svelte"
+  import {MessageCircle} from "lucide-svelte";
+  import AnnouncementForm from "$lib/components/forms/AnnouncementForm.svelte";
+  import DeleteButton from "$lib/components/utility/DeleteButton.svelte";
+  import {authSettings, client} from "$lib/dp/client.svelte.ts";
+  import type {CustomAuthModel, ExpandedAnnouncement} from "$lib/dp/types/ExpandedResponse.ts";
+  import AnnouncementCoreContent from "./AnnouncementCoreContent.svelte";
 
-interface Props {
-  announcement: ExpandedAnnouncement
-}
+  interface Props {
+    announcement: ExpandedAnnouncement;
+  }
 
-let { announcement }: Props = $props()
-let commentCount = announcement?.expand?.comments_via_announcement?.length ?? 0
+  const {announcement}: Props = $props();
+  const commentCount = announcement?.expand?.comments_via_announcement?.length ?? 0;
 
-function deleteAction(id: string) {
-  client.collection("announcements").delete(id)
-}
+  function deleteAction(id: string) {
+    client.collection("announcements").delete(id);
+  }
 
-const authRecord = $derived(authSettings.record as CustomAuthModel)
-const canEdit = $derived(
-  announcement.expand?.club?.admins.includes(authRecord.id) ||
-    announcement.expand?.team?.admins.includes(authRecord.id)
-)
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
+  const canEdit = $derived(
+      announcement.expand?.club?.admins.includes(authRecord.id) ||
+      announcement.expand?.team?.admins.includes(authRecord.id)
+  );
 </script>
 
 <article class="card p-4 preset-tonal-surface shadow-xl h-full">

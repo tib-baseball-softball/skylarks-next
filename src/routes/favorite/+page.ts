@@ -1,19 +1,19 @@
-import type { PageLoad } from "./$types"
-import { client } from "$lib/pocketbase/index.svelte.ts"
-import type { HomeDataset } from "$lib/types/HomeDataset.ts"
-import { browser } from "$app/environment"
-import { preferences } from "$lib/globals.svelte.ts"
+import {browser} from "$app/environment";
+import {client} from "$lib/dp/client.svelte.ts";
+import {preferences} from "$lib/tib/globals.svelte.ts";
+import type {HomeDataset} from "$lib/tib/types/HomeDataset.ts";
+import type {PageLoad} from "./$types";
 
-export const load: PageLoad = async ({ parent, url, fetch }) => {
-  let teamId = Number(url.searchParams.get("team"))
-  let season = Number(url.searchParams.get("season"))
+export const load: PageLoad = async ({parent, url, fetch}) => {
+  let teamId = Number(url.searchParams.get("team"));
+  let season = Number(url.searchParams.get("season"));
 
   if (browser) {
-    teamId = preferences.current.favoriteTeamID
-    season = preferences.current.selectedSeason
+    teamId = preferences.current.favoriteTeamID;
+    season = preferences.current.selectedSeason;
   }
 
-  let datasets: Promise<HomeDataset[]>
+  let datasets: Promise<HomeDataset[]>;
 
   if (browser && Number(teamId) > 0) {
     try {
@@ -24,15 +24,15 @@ export const load: PageLoad = async ({ parent, url, fetch }) => {
           season: season,
         },
         requestKey: `favorite-${teamId}-${season}`,
-      })
+      });
     } catch (e) {
-      datasets = new Promise(() => [])
+      datasets = new Promise(() => []);
     }
   } else {
-    datasets = new Promise(() => [])
+    datasets = new Promise(() => []);
   }
 
-  const data = await parent()
+  const data = await parent();
 
   return {
     clubTeams: await data.clubTeams,
@@ -40,5 +40,5 @@ export const load: PageLoad = async ({ parent, url, fetch }) => {
     datasets: datasets,
     clubs: data.clubs,
     teams: data.teams,
-  }
-}
+  };
+};

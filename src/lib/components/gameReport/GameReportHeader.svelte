@@ -1,15 +1,15 @@
 <script lang="ts">
-import type { GameReport } from "$lib/model/GameReport.ts"
-import { CalendarDays, ClipboardList, Pen } from "lucide-svelte"
+  import {CalendarDays, ClipboardList, Pen} from "lucide-svelte";
+  import type {GameReport} from "$lib/tib/types/GameReport.ts";
 
-interface Props {
-  report: GameReport
-  classes?: string
-}
+  interface Props {
+    report: GameReport;
+    classes?: string;
+  }
 
-let { report, classes = "" }: Props = $props()
+  let {report, classes = ""}: Props = $props();
 
-const date = $derived(new Date(report.date))
+  const date = $derived(new Date(report.date));
 </script>
 
 <section

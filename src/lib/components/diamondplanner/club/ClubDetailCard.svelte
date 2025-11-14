@@ -1,16 +1,16 @@
 <script lang="ts">
-import type { CustomAuthModel, ExpandedClub } from "$lib/model/ExpandedResponse"
-import { authSettings } from "$lib/pocketbase/index.svelte"
-import { Info, Shield, Tag } from "lucide-svelte"
-import ClubForm from "$lib/components/forms/ClubForm.svelte"
+  import {Info, Shield, Tag} from "lucide-svelte";
+  import ClubForm from "$lib/components/forms/ClubForm.svelte";
+  import {authSettings} from "$lib/dp/client.svelte.js";
+  import type {CustomAuthModel, ExpandedClub} from "$lib/dp/types/ExpandedResponse.ts";
 
-interface Props {
-  club: ExpandedClub
-}
+  interface Props {
+    club: ExpandedClub;
+  }
 
-let { club }: Props = $props()
+  const {club}: Props = $props();
 
-const authRecord = $derived(authSettings.record as CustomAuthModel)
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
 </script>
 
 <div class="card bg-primary-100 shadow-lg">

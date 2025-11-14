@@ -1,32 +1,32 @@
 <script lang="ts">
-import StatsByTypePieChart from "$lib/components/diamondplanner/stats/StatsByTypePieChart.svelte"
-import AttendanceTotalStatsBlock from "$lib/components/diamondplanner/stats/AttendanceTotalStatsBlock.svelte"
-import { goto } from "$app/navigation"
-import { range } from "$lib/functions/range"
-import type { PersonalAttendanceStatsItem } from "$lib/model/PersonalAttendanceStats"
-import ProgressRing from "$lib/components/utility/ProgressRing.svelte"
+  import {goto} from "$app/navigation";
+  import AttendanceTotalStatsBlock from "$lib/components/diamondplanner/stats/AttendanceTotalStatsBlock.svelte";
+  import StatsByTypePieChart from "$lib/components/diamondplanner/stats/StatsByTypePieChart.svelte";
+  import ProgressRing from "$lib/components/utility/ProgressRing.svelte";
+  import type {PersonalAttendanceStatsItem} from "$lib/dp/types/PersonalAttendanceStats.ts";
+  import {range} from "$lib/dp/utility/range.ts";
 
-let { data } = $props()
+  let {data} = $props();
 
-const user = $derived(data.user)
+  const user = $derived(data.user);
 
-const currentYear = new Date().getFullYear()
-const seasonOptions = range(2023, currentYear)
+  const currentYear = new Date().getFullYear();
+  const seasonOptions = range(2023, currentYear);
 
-let selectedSeason = $state(currentYear)
+  let selectedSeason = $state(currentYear);
 
-const reloadWithQuery = () => {
-  let queryString = `?season=${selectedSeason}`
+  const reloadWithQuery = () => {
+    let queryString = `?season=${selectedSeason}`;
 
-  goto(queryString, {
-    noScroll: true,
-  })
-}
+    goto(queryString, {
+      noScroll: true,
+    });
+  };
 
-$effect.pre(() => {
-  console.log(selectedSeason)
-  reloadWithQuery()
-})
+  $effect.pre(() => {
+    console.log(selectedSeason);
+    reloadWithQuery();
+  });
 </script>
 
 <h1 class="h1">Stats for {user?.first_name} {user?.last_name}</h1>

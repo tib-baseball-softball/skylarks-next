@@ -1,9 +1,9 @@
-import type { LayoutLoad } from "./$types"
-import { client } from "$lib/pocketbase/index.svelte.ts"
-import { env } from "$env/dynamic/public"
-import type { ClubFunction } from "bsm.js"
+import type {ClubFunction} from "bsm.js";
+import {env} from "$env/dynamic/public";
+import {client} from "$lib/dp/client.svelte.ts";
+import type {LayoutLoad} from "./$types";
 
-export const load: LayoutLoad = async ({ fetch }) => {
+export const load: LayoutLoad = async ({fetch}) => {
   const clubOfficials = client.send<ClubFunction[]>("/api/bsm/relay", {
     fetch: fetch,
     query: {
@@ -11,9 +11,9 @@ export const load: LayoutLoad = async ({ fetch }) => {
       club: env.PUBLIC_CLUB_ID,
     },
     requestKey: "officials",
-  })
+  });
 
   return {
     clubOfficials: clubOfficials,
-  }
-}
+  };
+};

@@ -1,11 +1,11 @@
 <script lang="ts">
-import type { PageProps } from "./$types"
-import type { ExpandedClub } from "$lib/model/ExpandedResponse.ts"
-import ClubLocationsSection from "$lib/components/diamondplanner/club/ClubLocationsSection.svelte"
+  import ClubLocationsSection from "$lib/components/diamondplanner/club/ClubLocationsSection.svelte";
+  import type {ExpandedClub} from "$lib/dp/types/ExpandedResponse.ts";
+  import type {PageProps} from "./$types";
 
-let { data }: PageProps = $props()
+  let {data}: PageProps = $props();
 
-let club: ExpandedClub = $derived(data.club)
+  let club: ExpandedClub = $derived(data.club);
 </script>
 
 <svelte:head>

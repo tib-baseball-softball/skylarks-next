@@ -1,64 +1,64 @@
 <script lang="ts">
-import type { UniformsetsCreate, UniformsetsResponse } from "$lib/model/pb-types"
-import { save } from "$lib/pocketbase/RecordOperations"
-import { invalidate } from "$app/navigation"
-import { toastController } from "$lib/service/ToastController.svelte.ts"
-import { closeModal } from "$lib/functions/closeModal.ts"
+  import {invalidate} from "$app/navigation";
+  import {save} from "$lib/dp/records/RecordOperations.ts";
+  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
+  import type {UniformsetsCreate, UniformsetsResponse} from "$lib/dp/types/pb-types.ts";
+  import {closeModal} from "$lib/dp/utility/closeModal.ts";
 
-interface Props {
-  uniformSet?: UniformsetsResponse | null
-  clubID: string
-}
-
-let { uniformSet, clubID }: Props = $props()
-
-const form: UniformsetsCreate = $state(
-  uniformSet ?? {
-    id: "",
-    name: "",
-    cap: "",
-    jersey: "",
-    pants: "",
-    club: "",
-  }
-)
-
-async function submitForm(e: SubmitEvent) {
-  e.preventDefault()
-  form.club = clubID
-
-  let result: UniformsetsResponse | null = null
-
-  try {
-    result = await save<UniformsetsResponse>("uniformsets", form)
-  } catch {
-    toastController.triggerGenericFormErrorMessage("Uniform Set")
+  interface Props {
+    uniformSet?: UniformsetsResponse | null;
+    clubID: string;
   }
 
-  if (result) {
-    toastController.triggerGenericFormSuccessMessage("Uniform Set")
-    await invalidate("club:single")
-    closeModal()
+  const {uniformSet, clubID}: Props = $props();
+
+  const form: UniformsetsCreate = $state(
+      uniformSet ?? {
+        id: "",
+        name: "",
+        cap: "",
+        jersey: "",
+        pants: "",
+        club: "",
+      }
+  );
+
+  async function submitForm(e: SubmitEvent) {
+    e.preventDefault();
+    form.club = clubID;
+
+    let result: UniformsetsResponse | null = null;
+
+    try {
+      result = await save<UniformsetsResponse>("uniformsets", form);
+    } catch {
+      toastController.triggerGenericFormErrorMessage("Uniform Set");
+    }
+
+    if (result) {
+      toastController.triggerGenericFormSuccessMessage("Uniform Set");
+      await invalidate("club:single");
+      closeModal();
+    }
   }
-}
 </script>
 
-<form onsubmit={submitForm} class="mt-4 space-y-3">
+<form class="mt-4 space-y-3" onsubmit={submitForm}>
   <input
-          name="id"
           autocomplete="off"
-          class="input"
-          type="hidden"
-          readonly
           bind:value={form.id}
+          class="input"
+          name="id"
+          readonly
+          type="hidden"
   />
 
   <label class="label">
     <span>Name</span>
     <input
-            name="name"
-            class="input"
             bind:value={form.name}
+            class="input"
+            name="name"
             required
             type="text"
     />
@@ -67,8 +67,8 @@ async function submitForm(e: SubmitEvent) {
   <label class="label">
     <span>Cap Color</span>
     <span class="grid grid-cols-[auto_1fr] gap-2">
-                <input class="input" type="color" bind:value={form.cap}/>
-                <input class="input" type="text" bind:value={form.cap} tabindex="-1" required/>
+                <input bind:value={form.cap} class="input" type="color"/>
+                <input bind:value={form.cap} class="input" required tabindex="-1" type="text"/>
             </span>
   </label>
 
@@ -81,16 +81,16 @@ async function submitForm(e: SubmitEvent) {
   <label class="label">
     <span>Jersey Color</span>
     <span class="grid grid-cols-[auto_1fr] gap-2">
-                <input class="input" type="color" bind:value={form.jersey}/>
-                <input class="input" type="text" bind:value={form.jersey} tabindex="-1" required/>
+                <input bind:value={form.jersey} class="input" type="color"/>
+                <input bind:value={form.jersey} class="input" required tabindex="-1" type="text"/>
             </span>
   </label>
 
   <label class="label">
     <span>Pants Color</span>
     <span class="grid grid-cols-[auto_1fr] gap-2">
-                <input class="input" type="color" bind:value={form.pants}/>
-                <input class="input" type="text" bind:value={form.pants} tabindex="-1" required/>
+                <input bind:value={form.pants} class="input" type="color"/>
+                <input bind:value={form.pants} class="input" required tabindex="-1" type="text"/>
             </span>
   </label>
 
@@ -103,6 +103,6 @@ async function submitForm(e: SubmitEvent) {
   </div>
 
   <div class="flex justify-end gap-3 mt-3">
-    <button type="submit" class="mt-2 btn preset-tonal-primary border border-primary-500">Submit</button>
+    <button class="mt-2 btn preset-tonal-primary border border-primary-500" type="submit">Submit</button>
   </div>
 </form>
