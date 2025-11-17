@@ -3715,7 +3715,7 @@ msgstr "Strona główna"
 
 #: src/routes/+page.svelte
 msgid "Diamond Planner"
-msgstr "Planer Diamentowy"
+msgstr "Diamond Planner"
 
 #: src/routes/+page.svelte
 msgid "Berlin Skylarks Team App"
