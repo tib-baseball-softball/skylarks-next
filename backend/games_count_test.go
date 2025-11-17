@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"testing"
 
+	"github.com/diamond-planner/diamond-planner/dp"
 	"github.com/pocketbase/pocketbase/tests"
-	"github.com/tib-baseball-softball/skylarks-next/internal/dp"
 )
 
 func TestGamesCountEndpoint(t *testing.T) {

@@ -8,11 +8,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/diamond-planner/diamond-planner/bsm"
+	"github.com/diamond-planner/diamond-planner/dp"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
-	"github.com/tib-baseball-softball/skylarks-next/bsm"
-	"github.com/tib-baseball-softball/skylarks-next/internal/dp"
-	"github.com/tib-baseball-softball/skylarks-next/internal/utility"
 )
 
 type MockApp struct {
@@ -108,7 +107,7 @@ func buildCacheRecord(t *testing.T, rawURL, body string, updatedAt time.Time) *c
 	cache.SetProxyRecord(rec)
 	cache.SetURL(rawURL)
 	cache.SetResponseBody(body)
-	cache.SetHash(utility.GetMD5Hash(rawURL))
+	cache.SetHash(dp.GetMD5Hash(rawURL))
 	cache.SetUpdated(mustParseDateTime(t, updatedAt))
 	return rec
 }

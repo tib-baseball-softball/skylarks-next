@@ -1,8 +1,8 @@
 <script lang="ts">
-import CurrentMatchesOverviewCard from "$lib/components/match/CurrentMatchesOverviewCard.svelte"
-import type { PageProps } from "./$types"
+  import CurrentMatchesOverviewCard from "$lib/tib/components/match/CurrentMatchesOverviewCard.svelte";
+  import type {PageProps} from "../../../.svelte-kit/types/src/routes";
 
-let { data }: PageProps = $props()
+  let {data}: PageProps = $props();
 </script>
 
 <div class="w-full space-y-5 mt-2 mb-5">

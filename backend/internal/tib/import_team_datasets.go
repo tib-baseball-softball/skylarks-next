@@ -8,10 +8,10 @@ import (
 	"sync"
 	"time"
 
+	"github.com/diamond-planner/diamond-planner/bsm"
+	"github.com/diamond-planner/diamond-planner/dp"
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
-	"github.com/tib-baseball-softball/skylarks-next/bsm"
-	"github.com/tib-baseball-softball/skylarks-next/internal/dp"
 )
 
 type teamDatasetCacheIdentifier struct {

@@ -4,8 +4,9 @@ import (
 	"os"
 	"testing"
 
+	"github.com/diamond-planner/diamond-planner/bsm"
+	"github.com/diamond-planner/diamond-planner/dp"
 	"github.com/pocketbase/pocketbase/tests"
-	"github.com/tib-baseball-softball/skylarks-next/bsm"
 )
 
 const (
@@ -45,7 +46,8 @@ func setupTestApp(t testing.TB) *tests.TestApp {
 	}
 
 	// no need to clean up since scenario.Test() will do that for us
-	bindAppHooks(testApp, mockClient)
+	dp.BindDPHooks(testApp, mockClient)
+	BindTiBHooks(testApp, mockClient)
 
 	return testApp
 }

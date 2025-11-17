@@ -8,8 +8,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tib-baseball-softball/skylarks-next/bsm"
-	"github.com/tib-baseball-softball/skylarks-next/internal/dp"
+	"github.com/diamond-planner/diamond-planner/bsm"
+	"github.com/diamond-planner/diamond-planner/dp"
 )
 
 // LoadHomeData loads structured data to display on a single team's home dashboard.

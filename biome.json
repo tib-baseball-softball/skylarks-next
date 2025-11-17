@@ -29,7 +29,8 @@
       "!**/bun.lockb",
       "!./static/",
       "!**/pb_schema.json",
-      "!**/pb-types.ts"
+      "!**/pb-types.ts",
+      "!**/*.svelte"
     ]
   },
   "linter": {
@@ -57,23 +58,6 @@
       "selfCloseVoidElements": "always"
     }
   },
-  "overrides": [
-    {
-      "includes": ["**/*.svelte", "**/*.astro", "**/*.vue"],
-      "linter": {
-        "rules": {
-          "style": {
-            "useConst": "off",
-            "useImportType": "off"
-          },
-          "correctness": {
-            "noUnusedVariables": "off",
-            "noUnusedImports": "off"
-          }
-        }
-      }
-    }
-  ],
   "assist": {
     "enabled": true,
     "actions": {

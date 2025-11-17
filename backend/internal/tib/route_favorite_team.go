@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/diamond-planner/diamond-planner/bsm"
 	"github.com/pocketbase/pocketbase/core"
-	"github.com/tib-baseball-softball/skylarks-next/bsm"
 )
 
 // GetFavoriteTeamData returns a handler function for the favorite team data endpoint
