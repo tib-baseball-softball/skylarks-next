@@ -23,6 +23,10 @@ func init() {
 	if os.Getenv("APPLICATION_CONTEXT") == "" {
 		log.Fatal("APPLICATION_CONTEXT not set, error loading environment variables")
 	}
+
+	if os.Getenv("BSM_API_KEY") == "" || os.Getenv("BSM_API_HOST") == "" {
+		log.Fatal("BSM API key or host not set, error loading environment variables")
+	}
 }
 
 // BindTiBHooks registers TiB-specific handlers that are a superset of core Diamond Planner functionality.
