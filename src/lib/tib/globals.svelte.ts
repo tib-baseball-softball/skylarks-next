@@ -1,6 +1,7 @@
 import {Gameday} from "bsm.js";
 import {persistedState} from "svelte-persisted-state";
 import type {AppPreferences} from "$lib/dp/types/AppPreferences.ts";
+import {env} from "$env/dynamic/public";
 
 /*
  * User Preferences, kept in sync via Local Storage.
@@ -23,3 +24,5 @@ export const preferences = persistedState<AppPreferences>(
       syncTabs: true,
     }
 );
+
+export const RELAY_URL = `${env.PUBLIC_POCKETBASE_URL}/api/bsm/relay`;
