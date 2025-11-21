@@ -8,7 +8,6 @@ import {env as publicEnv} from "$env/dynamic/public";
 export const load: LayoutLoad = async ({fetch}) => {
   const req = new ClubTeamsAPIRequest("");
   req.setAPIURL(RELAY_URL);
-  // TODO: If a dedicated APIRequest for club functions exists, replace ClubTeamsAPIRequest with it
   const url = req.buildRequestURL(`clubs/${publicEnv.PUBLIC_CLUB_ID}/club_functions.json`, []);
 
   const clubOfficials = client.send<ClubFunction[]>(url.pathname + url.search, {

@@ -1,10 +1,10 @@
-import {type LeagueGroup, LeagueGroupAPIRequest, TablesAPIRequest} from "bsm.js";
+import {type LeagueGroup, LeagueGroupAPIRequest, type Table, TablesAPIRequest} from "bsm.js";
 import {client} from "$lib/dp/client.svelte.ts";
 import {RELAY_URL} from "$lib/tib/globals.svelte.ts";
 import {error} from "@sveltejs/kit";
 import type {PageLoad} from "./$types";
 
-export const load: PageLoad = async ({ parent, params, fetch }) => {
+export const load: PageLoad = async ({parent, params, fetch}) => {
   const data = await parent();
   const leagueGroups = await data.leagueGroups as LeagueGroup[];
   let leagueGroup: LeagueGroup | undefined = leagueGroups.find(
@@ -26,11 +26,10 @@ export const load: PageLoad = async ({ parent, params, fetch }) => {
     throw error(404, "leagueGroup not found");
   }
 
-  // TODO: Verify exact tables endpoint path; assumed league_groups/{id}/table.json
   const tablesRequest = new TablesAPIRequest("");
   tablesRequest.setAPIURL(RELAY_URL);
   const tableURL = tablesRequest.buildRequestURL(`league_groups/${params.id}/table.json`, []);
-  const table = client.send<any>(tableURL.pathname + tableURL.search, {
+  const table = client.send<Table>(tableURL.pathname + tableURL.search, {
     fetch,
     requestKey: `ligen-id-table-${params.id}`,
   });

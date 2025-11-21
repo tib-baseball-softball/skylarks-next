@@ -35,7 +35,7 @@ var cacheURLAllowlist = []*regexp.Regexp{
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/league_groups/\d+/table\.json(?:\?.*)?$`),
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/(league_entries|people|clubs)/\d+/(statistics)(/.*)?\.json(?:\?.*)?$`),
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/league_entries/\d+/(stats|statistics)(/.*)?\.json(?:\?.*)?$`),
-	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/matches/\d+/boxscore\.json(?:\?.*)?$`),
+	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/matches/\d+/match_boxscore\.json(?:\?.*)?$`),
 }
 
 type CachingApp interface {

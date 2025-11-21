@@ -14,10 +14,9 @@ export const load: PageLoad = async ({params, fetch}) => {
   const statsRequest = new StatsAPIRequest("");
   statsRequest.setAPIURL(RELAY_URL);
 
-  // TODO: Verify the exact BSM endpoint paths for statistics by person
-  const battingURL = statsRequest.buildRequestURL(`persons/${params.id}/statistics/${StatsType.batting}.json`, []);
-  const pitchingURL = statsRequest.buildRequestURL(`persons/${params.id}/statistics/${StatsType.pitching}.json`, []);
-  const fieldingURL = statsRequest.buildRequestURL(`persons/${params.id}/statistics/${StatsType.fielding}.json`, []);
+  const battingURL = statsRequest.buildRequestURL(`people/${params.id}/statistics/${StatsType.batting}.json`, []);
+  const pitchingURL = statsRequest.buildRequestURL(`people/${params.id}/statistics/${StatsType.pitching}.json`, []);
+  const fieldingURL = statsRequest.buildRequestURL(`people/${params.id}/statistics/${StatsType.fielding}.json`, []);
 
   const playerBattingStats = client.send<BattingStatisticsEntry[]>(battingURL.pathname + battingURL.search, {
     fetch,

@@ -55,7 +55,6 @@ export const load: PageLoad = async ({parent, params, url, fetch}) => {
   }
 
   // Stats for the league entry
-  // TODO: Verify the exact statistics endpoints for league entries
   const battingURL = statsRequest.buildRequestURL(`league_entries/${leagueEntry.id}/statistics/${StatsType.batting}.json`, []);
   const pitchingURL = statsRequest.buildRequestURL(`league_entries/${leagueEntry.id}/statistics/${StatsType.pitching}.json`, []);
   const fieldingURL = statsRequest.buildRequestURL(`league_entries/${leagueEntry.id}/statistics/${StatsType.fielding}.json`, []);
@@ -97,7 +96,6 @@ export const load: PageLoad = async ({parent, params, url, fetch}) => {
   if (leagueGroup) {
     const tableRequest = new TablesAPIRequest("");
     tableRequest.setAPIURL(RELAY_URL);
-    // TODO: Verify exact table endpoint
     const tableURL = tableRequest.buildRequestURL(`league_groups/${leagueGroup.id}/table.json`, []);
     table = client.send<Table>(tableURL.pathname + tableURL.search, {
       fetch,

@@ -1,6 +1,6 @@
 import {error} from "@sveltejs/kit";
 import type {PageLoad} from "./$types";
-import {type Match, MatchAPIRequest} from "bsm.js";
+import {type Match, MatchAPIRequest, type MatchBoxscore} from "bsm.js";
 import {RELAY_URL} from "$lib/tib/globals.svelte.ts";
 import {client} from "$lib/dp/client.svelte.ts";
 import {GameReportClient} from "$lib/tib/service/GameReportClient.ts";
@@ -32,9 +32,8 @@ export const load: PageLoad = async ({parent, params, fetch}) => {
 
   if (!match) throw error(404, "Match couldn't be found.");
 
-  // TODO: Verify the exact endpoint for single game stats/boxscore
-  const boxURL = matchRequest.buildRequestURL(`matches/${params.id}/boxscore.json`, []);
-  const singleGameStats = client.send<any>(boxURL.pathname + boxURL.search, {
+  const boxURL = matchRequest.buildRequestURL(`matches/${params.id}/match_boxscore.json`, []);
+  const singleGameStats = client.send<MatchBoxscore>(boxURL.pathname + boxURL.search, {
     fetch,
     requestKey: `game-detail-boxscore-${params.id}`,
   });
