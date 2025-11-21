@@ -8,6 +8,8 @@ import {locales} from "virtual:wuchale/locales";
 import {loadLocale} from "wuchale/load-utils";
 import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
 
+export const ssr = false;
+
 export const load: LayoutLoad = async ({fetch, depends}) => {
   const appPreferences = preferences.current;
 
