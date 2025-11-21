@@ -1,5 +1,5 @@
-import adapter from "@sveltejs/adapter-node"
-import { vitePreprocess } from "@sveltejs/vite-plugin-svelte"
+import adapter from "@sveltejs/adapter-node";
+import {vitePreprocess} from "@sveltejs/vite-plugin-svelte";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -21,8 +21,10 @@ const config = {
         "connect-src": [
           "self",
           "https://*.baseball-softball.de",
+          "https://tib-baseball.de",
           "https://*.tib-baseball.de",
           "https://*.berlinskylarks.de",
+          "https://*.ddev.site",
           "http://127.0.0.1:8090",
         ],
         "img-src": [
@@ -41,5 +43,5 @@ const config = {
       },
     },
   },
-}
-export default config
+};
+export default config;
