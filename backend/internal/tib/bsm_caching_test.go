@@ -189,3 +189,62 @@ func TestIsOutdated(t *testing.T) {
 		t.Errorf("old cache not reported as outdated")
 	}
 }
+
+func TestRewriteURLForProxying_RewritesHostPathAndAddsAPIKey(t *testing.T) {
+	t.Setenv("BSM_API_HOST", "bsm.baseball-softball.de")
+	t.Setenv("BSM_API_KEY", "super-secret")
+
+	raw := "https://example.com/api/bsm/relay/league_groups/5732/details?season=2024"
+	u, err := url.Parse(raw)
+	if err != nil {
+		t.Fatalf("failed to parse input url: %v", err)
+	}
+
+	got := rewriteURLForProxying(*u)
+
+	if got.Scheme != "https" {
+		t.Fatalf("scheme changed: got %q want %q", got.Scheme, "https")
+	}
+	if got.Host != "bsm.baseball-softball.de" {
+		t.Fatalf("host not rewritten: got %q want %q", got.Host, "bsm.baseball-softball.de")
+	}
+	if got.Path != "/league_groups/5732/details" {
+		t.Fatalf("path not trimmed correctly: got %q want %q", got.Path, "/league_groups/5732/details")
+	}
+
+	q := got.Query()
+	if q.Get("season") != "2024" {
+		t.Fatalf("original query param missing: season=%q", q.Get("season"))
+	}
+	if q.Get("api_key") != "super-secret" {
+		t.Fatalf("api_key not added to query: got %q want %q", q.Get("api_key"), "super-secret")
+	}
+}
+
+func TestRewriteURLForProxying_NoRelayPrefix_PathUnchangedAndApiKeyAdded(t *testing.T) {
+	t.Setenv("BSM_API_HOST", "bsm.baseball-softball.de")
+	t.Setenv("BSM_API_KEY", "another-secret")
+
+	raw := "https://example.com/league_groups/5732/details?x=1"
+	u, err := url.Parse(raw)
+	if err != nil {
+		t.Fatalf("failed to parse input url: %v", err)
+	}
+
+	got := rewriteURLForProxying(*u)
+
+	if got.Host != "bsm.baseball-softball.de" {
+		t.Fatalf("host not rewritten: got %q want %q", got.Host, "bsm.baseball-softball.de")
+	}
+	if got.Path != "/league_groups/5732/details" {
+		t.Fatalf("path unexpectedly changed: got %q want %q", got.Path, "/league_groups/5732/details")
+	}
+
+	q := got.Query()
+	if q.Get("x") != "1" {
+		t.Fatalf("original query param missing: x=%q", q.Get("x"))
+	}
+	if q.Get("api_key") != "another-secret" {
+		t.Fatalf("api_key not added to query: got %q want %q", q.Get("api_key"), "another-secret")
+	}
+}
