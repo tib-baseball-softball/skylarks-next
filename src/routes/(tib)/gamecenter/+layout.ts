@@ -16,7 +16,7 @@ export const load = (async ({url, fetch}) => {
     gameday = Gameday.current;
   }
 
-  // Our Club API key has access to basically all games in Germany which takes a long time to load and is not relevant
+  // Our Club API key has access to basically all games in Germany, which takes a long time to load and is not relevant
   // most of the time. Restrict games to Club Games except when a specific league is requested.
 
   let matchTargetURL: URL;
