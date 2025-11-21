@@ -30,6 +30,14 @@ var cacheURLAllowlist = []*regexp.Regexp{
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/clubs/\d+/club_functions\.json(?:\?.*)?$`),
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/clubs/\d+/fields\.json(?:\?.*)?$`),
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/clubs/\d+/matches\.json(?:\?.*)?$`),
+	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/matches\.json(?:\?.*)?$`),
+	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/clubs/\d+/teams\.json(?:\?.*)?$`),
+	// TODO: Verify exact tables endpoint path in BSM API; we assume a subresource under league_groups
+	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/league_groups/\d+/(table|tables)\.json(?:\?.*)?$`),
+	// TODO: Verify exact statistics endpoints; patterns below aim to cover person and league entry statistics
+	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/(persons|people)/\d+/(stats|statistics)(/.*)?\.json(?:\?.*)?$`),
+	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/league_entries/\d+/(stats|statistics)(/.*)?\.json(?:\?.*)?$`),
+	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/matches/\d+/(boxscore|single_game_stats)\.json(?:\?.*)?$`),
 }
 
 type CachingApp interface {

@@ -1,19 +1,39 @@
+import {type ClubTeam, ClubTeamsAPIRequest, type LeagueGroup, LeagueGroupAPIRequest} from "bsm.js";
+import type {LayoutLoad} from "./$types";
+import {env as publicEnv} from "$env/dynamic/public";
+import {preferences, RELAY_URL} from "$lib/tib/globals.svelte.ts";
+import {authSettings, client} from "$lib/dp/client.svelte.ts";
 import {browser} from "$app/environment";
-import {authSettings, client} from "$lib/dp/client.svelte.js";
-import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
-import type {LayoutLoad} from "../../.svelte-kit/types/src/routes/$types";
-import "../locales/loader.svelte.js";
-// @ts-expect-error
 import {locales} from "virtual:wuchale/locales";
 import {loadLocale} from "wuchale/load-utils";
-import {preferences} from "$lib/tib/globals.svelte.ts";
+import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
 
-/**
- * This loads club and team data for the extended DiamondPlanner nav bar.
- *
- * Should be executed only client-side and only if logged in.
- */
-export const load = (async ({data, fetch, depends}) => {
+export const load: LayoutLoad = async ({fetch, depends}) => {
+  const appPreferences = preferences.current;
+
+  // Build URLs via bsm.js and relay them through PocketBase
+  const leagueGroupRequest = new LeagueGroupAPIRequest("");
+  leagueGroupRequest.setAPIURL(RELAY_URL);
+  const leagueGroupsURL = leagueGroupRequest.buildRequestURL("league_groups.json", [
+    [leagueGroupRequest.SEASON_FILTER, String(appPreferences.selectedSeason)],
+  ]);
+
+  const clubTeamRequest = new ClubTeamsAPIRequest("");
+  clubTeamRequest.setAPIURL(RELAY_URL);
+  const clubTeamsURL = clubTeamRequest.buildRequestURL(`clubs/${publicEnv.PUBLIC_CLUB_ID}/teams.json`, [
+    [clubTeamRequest.SEASON_FILTER, String(appPreferences.selectedSeason)],
+  ]);
+
+  const clubTeams = client.send<ClubTeam[]>(clubTeamsURL.pathname + clubTeamsURL.search, {
+    fetch,
+    requestKey: `root-clubTeams-${publicEnv.PUBLIC_CLUB_ID}-${appPreferences.selectedSeason}`,
+  });
+
+  const leagueGroups = client.send<LeagueGroup[]>(leagueGroupsURL.pathname + leagueGroupsURL.search, {
+    fetch,
+    requestKey: `root-leagueGroups-${appPreferences.selectedSeason}`,
+  });
+
   let clubs: ExpandedClub[] = [];
   let teams: ExpandedTeam[] = [];
 
@@ -57,9 +77,9 @@ export const load = (async ({data, fetch, depends}) => {
   depends("nav:load");
 
   return {
-    clubTeams: data.clubTeams,
-    leagueGroups: data.leagueGroups,
+    clubTeams,
+    leagueGroups,
     clubs: clubs,
     teams: teams,
   };
-}) satisfies LayoutLoad;
+};
