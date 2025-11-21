@@ -184,7 +184,7 @@ func rewriteURLForProxying(url url.URL) url.URL {
 	targetURL.Path = strings.TrimPrefix(url.Path, "/api/bsm/relay")
 
 	newQuery := url.Query()
-	newQuery.Add("api_key", os.Getenv("BSM_API_KEY"))
+	newQuery.Set("api_key", os.Getenv("BSM_API_KEY"))
 	targetURL.RawQuery = newQuery.Encode()
 
 	return targetURL
