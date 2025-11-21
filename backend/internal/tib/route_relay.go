@@ -3,7 +3,6 @@ package tib
 import (
 	"errors"
 	"net/http"
-	"net/url"
 
 	"github.com/diamond-planner/diamond-planner/bsm"
 	"github.com/pocketbase/pocketbase/core"
@@ -11,38 +10,23 @@ import (
 
 // GetRelayedBSMData relays BSM request so the client-side does not need to know API keys.
 // Uses allowlist for URLs to make sure only public information is disclosed.
-func GetRelayedBSMData(client bsm.APIClient) func(e *core.RequestEvent) error {
+// Makes Pocketbase take the role of the SvelteKit Node.js server for server load functions.
+func GetRelayedBSMData() func(e *core.RequestEvent) error {
 	return func(e *core.RequestEvent) error {
-		// request checks
-		bsmURL := e.Request.URL.Query().Get("url")
-		if bsmURL == "" {
-			return e.JSON(http.StatusBadRequest, "BSM URL not found in request")
-		}
-		clubID := e.Request.URL.Query().Get("club")
-		if clubID == "" {
-			return e.JSON(http.StatusBadRequest, "Club ID not found in request")
-		}
-		// actual operations
-		parsedURL, err := url.Parse(bsmURL)
-		if err != nil {
-			return e.JSON(http.StatusBadRequest, "Failed to parse given URL string into a valid URL")
-		}
+		targetURL := rewriteURLForProxying(*e.Request.URL)
 
-		urlWithKey, err := client.AppendAPIKey(e.App, *parsedURL, clubID)
-		if err != nil {
-			return e.JSON(http.StatusInternalServerError, "Internal error occurred")
-		}
-
-		cachedResponseBody, err := GetCachedBSMResponse(e.App, &urlWithKey)
+		cachedResponseBody, err := GetCachedBSMResponse(e.App, &targetURL)
 		if err != nil {
 			var bsmErr *bsm.URLAllowlistError
 			if errors.As(err, &bsmErr) {
 				return e.JSON(http.StatusForbidden, err.Error())
 			} else {
-				e.App.Logger().Error("Failed to get cached BSM response", "error", err, "url", bsmURL)
+				e.App.Logger().Error("Failed to get cached BSM response", "error", err, "url", targetURL)
 				return e.JSON(http.StatusInternalServerError, "Internal error occurred")
 			}
 		}
+
+		// TODO: strip response
 
 		return e.Blob(http.StatusOK, "application/json", []byte(cachedResponseBody))
 	}

@@ -7,6 +7,7 @@ import (
 	"net/url"
 	"os"
 	"regexp"
+	"strings"
 	"sync"
 	"time"
 
@@ -101,7 +102,7 @@ func GetCachedBSMResponse(app CachingApp, url *url.URL) (string, error) {
 	var ret string
 
 	if url.Host != os.Getenv("BSM_API_HOST") || !isValidBSMURL(url) {
-		return ret, &bsm.URLAllowlistError{URL: url.String(), Message: "Only allowlisted BSM URLs are allowed"}
+		return ret, &bsm.URLAllowlistError{URL: url.Path, Message: "Only allowlisted BSM URLs are allowed"}
 	}
 	hash := dp.GetMD5Hash(url.String())
 
@@ -173,4 +174,18 @@ func isOutdated(cacheTime types.DateTime) bool {
 	cutoff := cacheTime.Add(cacheLifetimeMinutes * time.Minute)
 
 	return currentTime.After(cutoff)
+}
+
+func rewriteURLForProxying(url url.URL) url.URL {
+	bsmHost := os.Getenv("BSM_API_HOST")
+	targetURL := url
+	targetURL.Scheme = "https"
+	targetURL.Host = bsmHost
+	targetURL.Path = strings.TrimPrefix(url.Path, "/api/bsm/relay")
+
+	newQuery := url.Query()
+	newQuery.Add("api_key", os.Getenv("BSM_API_KEY"))
+	targetURL.RawQuery = newQuery.Encode()
+
+	return targetURL
 }

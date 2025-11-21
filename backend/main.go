@@ -51,7 +51,7 @@ func BindTiBHooks(app core.App, client bsm.APIClient) {
 	})
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
-		se.Router.GET("/api/bsm/relay", tib.GetRelayedBSMData(client))
+		se.Router.GET("/api/bsm/relay/{path...}", tib.GetRelayedBSMData())
 		return se.Next()
 	})
 
