@@ -2,9 +2,8 @@ import {error} from "@sveltejs/kit";
 import type {License} from "bsm.js";
 import {browser} from "$app/environment";
 import {page} from "$app/state";
-import {env} from "$env/dynamic/public";
 import {client} from "$lib/dp/client.svelte.ts";
-import type {PageLoad} from "../../../../../../.svelte-kit/types/src/routes";
+import type {PageLoad} from "./$types";
 
 export const load: PageLoad = async ({params, fetch}) => {
   let license: License | undefined;
@@ -20,12 +19,8 @@ export const load: PageLoad = async ({params, fetch}) => {
     }
 
     if (!license) {
-      license = await client.send<License>("/api/bsm/relay", {
+      license = await client.send<License>(`/api/bsm/relay/licenses/${params.id}.json`, {
         fetch: fetch,
-        query: {
-          url: `https://bsm.baseball-softball.de/licenses/${params.id}.json`,
-          club: env.PUBLIC_CLUB_ID,
-        },
         requestKey: `license-${params.id}`,
       });
     }
