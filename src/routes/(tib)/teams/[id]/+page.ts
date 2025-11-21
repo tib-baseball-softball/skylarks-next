@@ -107,7 +107,7 @@ export const load: PageLoad = async ({parent, params, url, fetch}) => {
 
   let team: TiBTeam | undefined;
   if (leagueGroup) {
-    const teamClient = new TeamClient(fetch, "");
+    const teamClient = new TeamClient(fetch);
 
     if (dev) {
       console.log("Fetching team for league group", leagueGroup.id);
@@ -118,7 +118,7 @@ export const load: PageLoad = async ({parent, params, url, fetch}) => {
       team = teamResponse.at(0);
     }
   }
-  const playerClient = new PlayerClient(fetch, "");
+  const playerClient = new PlayerClient(fetch);
 
   return {
     clubTeam,

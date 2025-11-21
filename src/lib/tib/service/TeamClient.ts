@@ -6,7 +6,7 @@ export class TeamClient extends TYPO3Client {
     const url = this.buildRequestURL("/api/v2/teams", query);
 
     const response: Response = await this.fetch(url, {
-      headers: this.AUTH_HEADERS,
+      headers: this.HEADERS,
     });
 
     return await response.json();

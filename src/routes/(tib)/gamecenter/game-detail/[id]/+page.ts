@@ -1,11 +1,11 @@
 import {error} from "@sveltejs/kit";
 import type {PageLoad} from "./$types";
-import {MatchAPIRequest, type Match} from "bsm.js";
+import {type Match, MatchAPIRequest} from "bsm.js";
 import {RELAY_URL} from "$lib/tib/globals.svelte.ts";
 import {client} from "$lib/dp/client.svelte.ts";
 import {GameReportClient} from "$lib/tib/service/GameReportClient.ts";
 
-export const load: PageLoad = async ({ parent, params, fetch }) => {
+export const load: PageLoad = async ({parent, params, fetch}) => {
   const data = await parent();
   const matches = await data.streamed.matches as Match[];
   let match = matches.find((m: Match) => m.id === Number(params.id));
@@ -39,7 +39,7 @@ export const load: PageLoad = async ({ parent, params, fetch }) => {
     requestKey: `game-detail-boxscore-${params.id}`,
   });
 
-  const reportClient = new GameReportClient(fetch, "");
+  const reportClient = new GameReportClient(fetch);
   const gameReport = reportClient.loadSingleGameReportForBSMMatchID(match.match_id);
 
   return {

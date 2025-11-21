@@ -32,7 +32,7 @@ export const load: PageLoad = async ({params, fetch}) => {
     requestKey: `player-fielding-${params.id}`,
   });
 
-  const playerClient = new PlayerClient(fetch, "");
+  const playerClient = new PlayerClient(fetch);
   const player = playerClient.fetchSinglePlayer(params.id);
 
   return {

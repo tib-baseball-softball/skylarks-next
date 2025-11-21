@@ -14,7 +14,7 @@ export class PlayerClient extends TYPO3Client {
     });
 
     const response: Response = await this.fetch(url, {
-      headers: this.AUTH_HEADERS,
+      headers: this.HEADERS,
     });
 
     let player: Player | undefined;
@@ -31,7 +31,7 @@ export class PlayerClient extends TYPO3Client {
     const url = this.buildRequestURL("/api/v2/players", query);
 
     const response: Response = await this.fetch(url, {
-      headers: this.AUTH_HEADERS,
+      headers: this.HEADERS,
     });
 
     return await response.json();

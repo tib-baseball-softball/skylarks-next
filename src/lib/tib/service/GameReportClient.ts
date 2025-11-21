@@ -9,7 +9,7 @@ export class GameReportClient extends TYPO3Client {
    * @throws Error
    */
   public async loadSingleGameReportForBSMMatchID(
-      bsmMatchID: string
+    bsmMatchID: string
   ): Promise<GameReport | undefined> {
     const url = this.buildRequestURL("api/v2/gamereports", [["bsmMatchID", bsmMatchID]]);
 
@@ -18,7 +18,7 @@ export class GameReportClient extends TYPO3Client {
     }
 
     const response = await this.fetch(url, {
-      headers: this.AUTH_HEADERS,
+      headers: this.HEADERS,
     });
 
     let gameReport: GameReport | undefined;
