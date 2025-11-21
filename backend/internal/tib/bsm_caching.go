@@ -149,11 +149,23 @@ func GetCachedBSMResponse(app CachingApp, url *url.URL) (string, error) {
 	return ret, nil
 }
 
-func saveBSMResponseToCache(app CachingApp, url string) (*core.Record, error) {
-	_, body, err := bsm.FetchResource[any](url)
+func saveBSMResponseToCache(app CachingApp, bsmURL string) (*core.Record, error) {
+	_, body, err := bsm.FetchResource[any](bsmURL)
 	if err != nil {
-		app.Logger().Error("Failed to get data from BSM", "err", err, "url", url)
-		return nil, err
+		var fetchError *url.Error
+		var invalidUnmarshalError *json.InvalidUnmarshalError
+
+		if errors.As(err, &fetchError) {
+			app.Logger().Error("Fetch to BSM failed.", "err", err, "bsmURL", bsmURL)
+			return nil, fetchError
+		}
+		if errors.As(err, &invalidUnmarshalError) {
+			app.Logger().Error("JSON unmarshal failed.", "err", err, "bsmURL", bsmURL)
+			return nil, invalidUnmarshalError
+		}
+
+		// other errors get treated as common operations that can be handled
+		app.Logger().Warn("Empty Response from BSM", "err", err, "bsmURL", bsmURL)
 	}
 
 	collection, err := app.FindCollectionByNameOrId(dp.RequestCacheCollection)
@@ -166,8 +178,8 @@ func saveBSMResponseToCache(app CachingApp, url string) (*core.Record, error) {
 	cache.SetProxyRecord(record)
 
 	cache.SetResponseBody(body)
-	cache.SetHash(dp.GetMD5Hash(url))
-	cache.SetURL(url)
+	cache.SetHash(dp.GetMD5Hash(bsmURL))
+	cache.SetURL(bsmURL)
 
 	err = app.Save(record)
 	if err != nil {
