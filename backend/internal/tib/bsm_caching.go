@@ -24,7 +24,7 @@ const (
 var cacheURLAllowlist = []*regexp.Regexp{
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/clubs/\d+/licenses\.json(?:\?.*)?$`),
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/clubs/\d+\.json(?:\?.*)?$`),
-	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/league_groups(/\d+)?(\.json|/.*)?(?:\?.*)?$`),
+	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/league_groups(/\d+)?(\.json)?(?:\?.*)?$`),
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/licenses/\d+\.json(?:\?.*)?$`),
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/matches/\d+\.json(?:\?.*)?$`),
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/clubs/\d+/club_functions\.json(?:\?.*)?$`),
@@ -32,9 +32,8 @@ var cacheURLAllowlist = []*regexp.Regexp{
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/clubs/\d+/matches\.json(?:\?.*)?$`),
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/matches\.json(?:\?.*)?$`),
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/clubs/\d+/(teams|team_clubs)\.json(?:\?.*)?$`),
-	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/league_groups/\d+/table\.json(?:\?.*)?$`),
+	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/league_groups/\d+/(table|statistics)\.json(?:\?.*)?$`),
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/(league_entries|people|clubs)/\d+/(statistics)(/.*)?\.json(?:\?.*)?$`),
-	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/league_entries/\d+/(stats|statistics)(/.*)?\.json(?:\?.*)?$`),
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/matches/\d+/match_boxscore\.json(?:\?.*)?$`),
 }
 
