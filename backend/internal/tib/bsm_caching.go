@@ -25,6 +25,7 @@ var cacheURLAllowlist = []*regexp.Regexp{
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/clubs/\d+/licenses\.json(?:\?.*)?$`),
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/clubs/\d+\.json(?:\?.*)?$`),
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/league_groups(/\d+)?(\.json)?(?:\?.*)?$`),
+	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/league_groups/\d+/top10/(batting|pitching|fielding)/[^/]+\.json(?:\?.*)?$`),
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/licenses/\d+\.json(?:\?.*)?$`),
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/matches/\d+\.json(?:\?.*)?$`),
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/clubs/\d+/club_functions\.json(?:\?.*)?$`),
@@ -88,11 +89,13 @@ func GetLeagueTop10Data(app CachingApp, client bsm.BaseClient, leagueID string, 
 
 			rawResponseData, err := GetCachedBSMResponse(app, apiURL)
 			if err != nil {
+				app.Logger().Error("Error fetching league leaderboard", "error", err, "resource", resource)
 				return
 			}
 			var leaderboardData bsm.LeaderboardData
 			err = json.Unmarshal([]byte(rawResponseData), &leaderboardData)
 			if err != nil {
+				app.Logger().Error("Error unmarshalling league leaderboard", "error", err, "resource", resource)
 				return
 			}
 

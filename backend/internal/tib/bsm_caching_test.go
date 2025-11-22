@@ -71,6 +71,9 @@ func TestIsValidBSMURL(t *testing.T) {
 		{"https://bsm.baseball-softball.de/people/333/statistics/game_logs.json", true},
 		{"https://bsm.baseball-softball.de/clubs/485/statistics/season/2024.json?limit=10", true},
 		{"https://bsm.baseball-softball.de/matches/999/match_boxscore.json", true},
+		{"https://bsm.baseball-softball.de/league_groups/1234/top10/batting/avg.json", true},
+		{"https://bsm.baseball-softball.de/league_groups/1234/top10/pitching/era.json?min_ip=10", true},
+		{"https://bsm.baseball-softball.de/league_groups/5678/top10/fielding/fld_pct.json", true},
 
 		// Invalid URLs
 		{"https://bsm.baseball-softball.de/clubs/abc/licenses.json", false},
@@ -97,6 +100,9 @@ func TestIsValidBSMURL(t *testing.T) {
 		{"https://bsm.baseball-softball.de/league_entries/abc/stats.json", false},
 		{"https://bsm.baseball-softball.de/people/333/statistics", false},
 		{"https://bsm.baseball-softball.de/clubs/485/statistics?season=2024", false},
+		{"https://bsm.baseball-softball.de/league_groups/1234/top10/running/avg.json", false},
+		{"https://bsm.baseball-softball.de/league_groups/1234/top10/batting/avg/extra.json", false},
+		{"https://bsm.baseball-softball.de/league_groups/1234/top10/batting/avg", false},
 	}
 
 	for _, tt := range tests {
