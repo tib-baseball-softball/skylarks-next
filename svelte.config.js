@@ -33,6 +33,7 @@ const config = {
           "https://*.baseball-softball.de",
           "https://*.tib-baseball.de",
           "https://*.berlinskylarks.de",
+          "https://*.ddev.site",
           "http://127.0.0.1:8090",
           "https://*.tile.openstreetmap.de",
         ],

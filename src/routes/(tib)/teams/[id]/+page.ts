@@ -30,7 +30,7 @@ export const load: PageLoad = async ({parent, params, url, fetch}) => {
     const clubTeamRequest = new ClubTeamsAPIRequest("");
     clubTeamRequest.setAPIURL(RELAY_URL);
     const season = url.searchParams.get("season")?.toString() ?? clubTeamRequest.defaultSeason;
-    const clubTeamsURL = clubTeamRequest.buildRequestURL(`clubs/${publicEnv.PUBLIC_CLUB_ID}/teams.json`, [
+    const clubTeamsURL = clubTeamRequest.buildRequestURL(`clubs/${publicEnv.PUBLIC_CLUB_ID}/team_clubs.json`, [
       [clubTeamRequest.SEASON_FILTER, String(season)],
     ]);
     clubTeams = await client.send<ClubTeam[]>(clubTeamsURL.pathname + clubTeamsURL.search, {
