@@ -154,6 +154,7 @@ func saveBSMResponseToCache(app CachingApp, bsmURL string) (*core.Record, error)
 	if err != nil {
 		var fetchError *url.Error
 		var invalidUnmarshalError *json.InvalidUnmarshalError
+		var jsonSyntaxError *json.SyntaxError
 
 		if errors.As(err, &fetchError) {
 			app.Logger().Error("Fetch to BSM failed.", "err", err, "bsmURL", bsmURL)
@@ -165,7 +166,13 @@ func saveBSMResponseToCache(app CachingApp, bsmURL string) (*core.Record, error)
 		}
 
 		// other errors get treated as common operations that can be handled
-		app.Logger().Warn("Empty Response from BSM", "err", err, "bsmURL", bsmURL)
+		app.Logger().Warn("Empty/Invalid Response from BSM", "err", err, "bsmURL", bsmURL)
+
+		if errors.As(err, &jsonSyntaxError) {
+			if body == "" {
+				body = "null" // valid JSON
+			}
+		}
 	}
 
 	collection, err := app.FindCollectionByNameOrId(dp.RequestCacheCollection)
