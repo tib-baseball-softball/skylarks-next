@@ -80,9 +80,9 @@ func TestIsValidBSMURL(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.rawURL, func(t *testing.T) {
 			parsedURL, _ := url.Parse(tt.rawURL)
-			got := isValidBSMURL(parsedURL)
+			got := isAllowedBSMURL(parsedURL)
 			if got != tt.want {
-				t.Errorf("isValidBSMURL(%q) = %v; want %v", tt.rawURL, got, tt.want)
+				t.Errorf("isAllowedBSMURL(%q) = %v; want %v", tt.rawURL, got, tt.want)
 			}
 		})
 	}

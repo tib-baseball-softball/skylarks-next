@@ -46,8 +46,8 @@ type CachingApp interface {
 	FindCollectionByNameOrId(nameOrId string) (*core.Collection, error)
 }
 
-// isValidBSMURL checks if the given url matches any regex in the cacheURLAllowlist
-func isValidBSMURL(u *url.URL) bool {
+// isAllowedBSMURL checks if the given url matches any regex in the cacheURLAllowlist
+func isAllowedBSMURL(u *url.URL) bool {
 	urlStr := u.String()
 	for _, re := range cacheURLAllowlist {
 		if re.MatchString(urlStr) {
@@ -109,7 +109,7 @@ func GetLeagueTop10Data(app CachingApp, client bsm.BaseClient, leagueID string, 
 func GetCachedBSMResponse(app CachingApp, url *url.URL) (string, error) {
 	var ret string
 
-	if url.Host != os.Getenv("BSM_API_HOST") || !isValidBSMURL(url) {
+	if url.Host != os.Getenv("BSM_API_HOST") || !isAllowedBSMURL(url) {
 		return ret, &bsm.URLAllowlistError{URL: url.Path, Message: "Only allowlisted BSM URLs are allowed"}
 	}
 	hash := dp.GetMD5Hash(url.String())
