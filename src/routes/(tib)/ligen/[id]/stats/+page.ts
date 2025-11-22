@@ -11,13 +11,13 @@ export const load: PageLoad = async ({parent, params, url, fetch}) => {
   const data = await parent();
   const leagueGroups = await data.leagueGroups;
   let leagueGroup: LeagueGroup | undefined = leagueGroups.find(
-      (leagueGroup: LeagueGroup) => leagueGroup.id === Number(params.id)
+    (leagueGroup: LeagueGroup) => leagueGroup.id === Number(params.id)
   );
 
   if (!leagueGroup) {
     leagueGroup = await client.send<LeagueGroup>(`/api/bsm/relay/league_groups/${params.id}.json`, {
       fetch: fetch,
-      requestKey: "leagueGroupStatsRoute",
+      requestKey: `leagueGroupStatsRoute-lg-${params.id}`,
     });
   }
 
@@ -25,11 +25,14 @@ export const load: PageLoad = async ({parent, params, url, fetch}) => {
     throw error(404, "leagueGroup not found");
   }
 
+  const statsType = url.searchParams.get("statsType") ?? "";
+
   const leaderboardData = client.send<LeaderboardSummary>(`/api/bsm/relay/top10/${leagueGroup.id}`, {
     fetch: fetch,
     query: {
-      statsType: url.searchParams.get("statsType") ?? "",
+      statsType: statsType,
     },
+    requestKey: `leagueGroupStatsRoute-top10-${params.id}-${statsType}`,
   });
 
   return {
