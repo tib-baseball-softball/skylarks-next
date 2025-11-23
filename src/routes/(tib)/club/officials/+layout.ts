@@ -1,15 +1,17 @@
 import type {ClubFunction} from "bsm.js";
-import {env} from "$env/dynamic/public";
+import {ClubTeamsAPIRequest} from "bsm.js";
 import {client} from "$lib/dp/client.svelte.ts";
-import type {LayoutLoad} from "../../../../../.svelte-kit/types/src/routes";
+import type {LayoutLoad} from "./$types";
+import {RELAY_URL} from "$lib/tib/globals.svelte.ts";
+import {env as publicEnv} from "$env/dynamic/public";
 
 export const load: LayoutLoad = async ({fetch}) => {
-  const clubOfficials = client.send<ClubFunction[]>("/api/bsm/relay", {
-    fetch: fetch,
-    query: {
-      url: `https://bsm.baseball-softball.de/clubs/${env.PUBLIC_CLUB_ID}/club_functions.json`,
-      club: env.PUBLIC_CLUB_ID,
-    },
+  const req = new ClubTeamsAPIRequest("");
+  req.setAPIURL(RELAY_URL);
+  const url = req.buildRequestURL(`clubs/${publicEnv.PUBLIC_CLUB_ID}/club_functions.json`, []);
+
+  const clubOfficials = client.send<ClubFunction[]>(url.pathname + url.search, {
+    fetch,
     requestKey: "officials",
   });
 

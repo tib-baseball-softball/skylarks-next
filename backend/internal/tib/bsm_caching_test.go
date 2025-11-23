@@ -51,14 +51,29 @@ func TestIsValidBSMURL(t *testing.T) {
 		{"https://bsm.baseball-softball.de/clubs/987/licenses.json?param=value", true},
 		{"https://bsm.baseball-softball.de/clubs/485.json", true},
 		{"https://bsm.baseball-softball.de/clubs/999999.json?key=val", true},
-		{"https://bsm.baseball-softball.de/league_groups/5732/details", true},
-		{"https://bsm.baseball-softball.de/league_groups/5732/standings?season=2024", true},
-		{"https://bsm.baseball-softball.de/league_groups/8888/stats", true},
+		{"https://bsm.baseball-softball.de/league_groups/8888/statistics.json", true},
 		{"https://bsm.baseball-softball.de/league_groups/5732.json", true},
+		{"https://bsm.baseball-softball.de/league_groups", true},
+		{"https://bsm.baseball-softball.de/league_groups.json", true},
+		{"https://bsm.baseball-softball.de/league_groups?season=2024", true},
 		{"https://bsm.baseball-softball.de/licenses/999999.json", true},
 		{"https://bsm.baseball-softball.de/clubs/123456/club_functions.json?filter=active", true},
 		{"https://bsm.baseball-softball.de/clubs/485/fields.json", true},
 		{"https://bsm.baseball-softball.de/clubs/123456/fields.json?sort=desc", true},
+		{"https://bsm.baseball-softball.de/matches/12345.json", true},
+		{"https://bsm.baseball-softball.de/clubs/485/matches.json", true},
+		{"https://bsm.baseball-softball.de/matches.json", true},
+		{"https://bsm.baseball-softball.de/clubs/485/teams.json", true},
+		{"https://bsm.baseball-softball.de/clubs/485/team_clubs.json?x=1", true},
+		{"https://bsm.baseball-softball.de/league_groups/5732/table.json", true},
+		{"https://bsm.baseball-softball.de/league_entries/777/statistics.json", true},
+		{"https://bsm.baseball-softball.de/league_entries/777/statistics/splits.json", true},
+		{"https://bsm.baseball-softball.de/people/333/statistics/game_logs.json", true},
+		{"https://bsm.baseball-softball.de/clubs/485/statistics/season/2024.json?limit=10", true},
+		{"https://bsm.baseball-softball.de/matches/999/match_boxscore.json", true},
+		{"https://bsm.baseball-softball.de/league_groups/1234/top10/batting/avg.json", true},
+		{"https://bsm.baseball-softball.de/league_groups/1234/top10/pitching/era.json?min_ip=10", true},
+		{"https://bsm.baseball-softball.de/league_groups/5678/top10/fielding/fld_pct.json", true},
 
 		// Invalid URLs
 		{"https://bsm.baseball-softball.de/clubs/abc/licenses.json", false},
@@ -75,14 +90,27 @@ func TestIsValidBSMURL(t *testing.T) {
 		{"https://bsm.baseball-softball.de/clubs/abc/fields.json", false},
 		{"https://bsm.baseball-softball.de/clubs/485/fields.xml", false},
 		{"https://bsm.baseball-softball.de/clubs/485/field.json", false},
+		{"https://bsm.baseball-softball.de/matches/12345.xml", false},
+		{"https://bsm.baseball-softball.de/clubs/485/matches?season=2024", false},
+		{"https://bsm.baseball-softball.de/matches", false},
+		{"https://bsm.baseball-softball.de/clubs/485/team.json", false},
+		{"https://bsm.baseball-softball.de/clubs/485/team_club.json", false},
+		{"https://bsm.baseball-softball.de/league_groups/5732/table.csv", false},
+		{"https://bsm.baseball-softball.de/league_entries/777/stats?split=home", false},
+		{"https://bsm.baseball-softball.de/league_entries/abc/stats.json", false},
+		{"https://bsm.baseball-softball.de/people/333/statistics", false},
+		{"https://bsm.baseball-softball.de/clubs/485/statistics?season=2024", false},
+		{"https://bsm.baseball-softball.de/league_groups/1234/top10/running/avg.json", false},
+		{"https://bsm.baseball-softball.de/league_groups/1234/top10/batting/avg/extra.json", false},
+		{"https://bsm.baseball-softball.de/league_groups/1234/top10/batting/avg", false},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.rawURL, func(t *testing.T) {
 			parsedURL, _ := url.Parse(tt.rawURL)
-			got := isValidBSMURL(parsedURL)
+			got := isAllowedBSMURL(parsedURL)
 			if got != tt.want {
-				t.Errorf("isValidBSMURL(%q) = %v; want %v", tt.rawURL, got, tt.want)
+				t.Errorf("isAllowedBSMURL(%q) = %v; want %v", tt.rawURL, got, tt.want)
 			}
 		})
 	}
@@ -187,5 +215,64 @@ func TestIsOutdated(t *testing.T) {
 	old := mustParseDateTime(t, time.Now().Add(-(time.Duration(cacheLifetimeMinutes)+1)*time.Minute))
 	if !isOutdated(old) {
 		t.Errorf("old cache not reported as outdated")
+	}
+}
+
+func TestRewriteURLForProxying_RewritesHostPathAndAddsAPIKey(t *testing.T) {
+	t.Setenv("BSM_API_HOST", "bsm.baseball-softball.de")
+	t.Setenv("BSM_API_KEY", "super-secret")
+
+	raw := "https://example.com/api/bsm/relay/league_groups/5732/details?season=2024"
+	u, err := url.Parse(raw)
+	if err != nil {
+		t.Fatalf("failed to parse input url: %v", err)
+	}
+
+	got := rewriteURLForProxying(*u)
+
+	if got.Scheme != "https" {
+		t.Fatalf("scheme changed: got %q want %q", got.Scheme, "https")
+	}
+	if got.Host != "bsm.baseball-softball.de" {
+		t.Fatalf("host not rewritten: got %q want %q", got.Host, "bsm.baseball-softball.de")
+	}
+	if got.Path != "/league_groups/5732/details" {
+		t.Fatalf("path not trimmed correctly: got %q want %q", got.Path, "/league_groups/5732/details")
+	}
+
+	q := got.Query()
+	if q.Get("season") != "2024" {
+		t.Fatalf("original query param missing: season=%q", q.Get("season"))
+	}
+	if q.Get("api_key") != "super-secret" {
+		t.Fatalf("api_key not added to query: got %q want %q", q.Get("api_key"), "super-secret")
+	}
+}
+
+func TestRewriteURLForProxying_NoRelayPrefix_PathUnchangedAndApiKeyAdded(t *testing.T) {
+	t.Setenv("BSM_API_HOST", "bsm.baseball-softball.de")
+	t.Setenv("BSM_API_KEY", "another-secret")
+
+	raw := "https://example.com/league_groups/5732/details?x=1"
+	u, err := url.Parse(raw)
+	if err != nil {
+		t.Fatalf("failed to parse input url: %v", err)
+	}
+
+	got := rewriteURLForProxying(*u)
+
+	if got.Host != "bsm.baseball-softball.de" {
+		t.Fatalf("host not rewritten: got %q want %q", got.Host, "bsm.baseball-softball.de")
+	}
+	if got.Path != "/league_groups/5732/details" {
+		t.Fatalf("path unexpectedly changed: got %q want %q", got.Path, "/league_groups/5732/details")
+	}
+
+	q := got.Query()
+	if q.Get("x") != "1" {
+		t.Fatalf("original query param missing: x=%q", q.Get("x"))
+	}
+	if q.Get("api_key") != "another-secret" {
+		t.Fatalf("api_key not added to query: got %q want %q", q.Get("api_key"), "another-secret")
 	}
 }

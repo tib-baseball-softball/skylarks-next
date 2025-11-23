@@ -11,7 +11,7 @@
   import SeasonSelector from "$lib/tib/components/utils/SeasonSelector.svelte";
   import Switch from "$lib/dp/components/form/Switch.svelte";
   import {preferences} from "$lib/tib/globals.svelte.ts";
-  import type {PageProps} from "../../../../.svelte-kit/types/src/routes";
+  import type {PageProps} from "./$types";
 
   const DEFAULT_LEAGUE_GROUP_ID = 0;
 

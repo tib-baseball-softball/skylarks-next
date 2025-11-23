@@ -230,3 +230,4 @@ test-results
 /src/locales/proxy.svelte.js
 /src/locales/*.compiled.main.svelte.js
 /craft/data/*.db*
+backend/pb_public/**

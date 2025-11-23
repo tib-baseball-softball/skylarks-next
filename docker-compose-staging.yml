@@ -1,27 +1,16 @@
 services:
-  backend:
+  diamondplanner:
     extends:
       file: docker-compose-common.yml
-      service: backend
-    image: obnoxieux/skylarks-next-backend:staging
+      service: diamondplanner
+    image: obnoxieux/skylarks-diamond-planner:staging
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.skylarks-next-backend-staging.rule=Host(`staging.pb.berlinskylarks.de`)"
-      - "traefik.http.routers.skylarks-next-backend-staging.entrypoints=websecure"
-      - "traefik.http.routers.skylarks-next-backend-staging.tls.certresolver=letsEncrypt"
+      - "traefik.http.routers.skylarks-next-staging.rule=Host(`staging.app.berlinskylarks.de`)"
+      - "traefik.http.routers.skylarks-next-staging.entrypoints=websecure"
+      - "traefik.http.routers.skylarks-next-staging.tls.certresolver=letsEncrypt"
       - "traefik.docker.network=proxy"
-
-  frontend:
-    extends:
-      file: docker-compose-common.yml
-      service: frontend
-    image: obnoxieux/skylarks-next:staging
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.skylarks-next-frontend-staging.rule=Host(`staging.app.berlinskylarks.de`)"
-      - "traefik.http.routers.skylarks-next-frontend-staging.entrypoints=websecure"
-      - "traefik.http.routers.skylarks-next-frontend-staging.tls.certresolver=letsEncrypt"
-      - "traefik.http.middlewares.skylarks-next-frontend-staging.basicauth.users=skylarks:$$2y$$05$$ojFS3Hd7r17zBCKG/O0p4.4nltDVAZB1/fm4lupwJ/ow2.ErfYnKS"
+      - "traefik.http.middlewares.skylarks-next-staging.basicauth.users=skylarks:$$2y$$05$$ojFS3Hd7r17zBCKG/O0p4.4nltDVAZB1/fm4lupwJ/ow2.ErfYnKS"
 
 networks:
   proxy:

@@ -23,7 +23,7 @@
     "@biomejs/biome": "2.3.4",
     "@dotenvx/dotenvx": "^1.51.1",
     "@playwright/test": "^1.56.1",
-    "@sveltejs/adapter-node": "^5.4.0",
+    "@sveltejs/adapter-static": "^3.0.10",
     "@sveltejs/kit": "^2.48.4",
     "@sveltejs/vite-plugin-svelte": "^6.2.1",
     "@tigawanna/typed-pocketbase": "^0.1.6",
