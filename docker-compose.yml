@@ -6,9 +6,9 @@ services:
     image: obnoxieux/skylarks-diamond-planner:latest
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.skylarks-next-frontend.rule=Host(`app.berlinskylarks.de`)"
-      - "traefik.http.routers.skylarks-next-frontend.entrypoints=websecure"
-      - "traefik.http.routers.skylarks-next-frontend.tls.certresolver=letsEncrypt"
+      - "traefik.http.routers.skylarks-next.rule=Host(`app.berlinskylarks.de`)"
+      - "traefik.http.routers.skylarks-next.entrypoints=websecure"
+      - "traefik.http.routers.skylarks-next.tls.certresolver=letsEncrypt"
       - "traefik.docker.network=proxy"
 
 networks:
