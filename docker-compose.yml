@@ -1,26 +1,15 @@
 services:
-  backend:
+  diamondplanner:
     extends:
       file: docker-compose-common.yml
-      service: backend
-    image: obnoxieux/skylarks-next-backend:latest
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.skylarks-next-backend.rule=Host(`pb.berlinskylarks.de`)"
-      - "traefik.http.routers.skylarks-next-backend.entrypoints=websecure"
-      - "traefik.http.routers.skylarks-next-backend.tls.certresolver=letsEncrypt"
-      - "traefik.docker.network=proxy"
-
-  frontend:
-    extends:
-      file: docker-compose-common.yml
-      service: frontend
-    image: obnoxieux/skylarks-next:latest
+      service: diamondplanner
+    image: obnoxieux/skylarks-diamond-planner:latest
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.skylarks-next-frontend.rule=Host(`app.berlinskylarks.de`)"
       - "traefik.http.routers.skylarks-next-frontend.entrypoints=websecure"
       - "traefik.http.routers.skylarks-next-frontend.tls.certresolver=letsEncrypt"
+      - "traefik.docker.network=proxy"
 
 networks:
   proxy:
