@@ -1,10 +1,10 @@
 <script lang="ts">
-  import type {ClubTeam} from "bsm.js";
+  import type {Team} from "bsm.js";
   import GenericDetailRow from "$lib/dp/components/utils/GenericDetailRow.svelte";
   import {Calendar, Star, TableProperties} from "lucide-svelte";
 
   interface Props {
-    clubTeam: ClubTeam;
+    clubTeam: Team;
   }
 
   let {clubTeam}: Props = $props();
@@ -12,8 +12,8 @@
 
 <article class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">
   <GenericDetailRow
-          categoryName="Name"
-          rowValue={`${clubTeam.team.name} (${clubTeam.team.short_name})`}
+    categoryName="Name"
+    rowValue={`${clubTeam.name} (${clubTeam.short_name})`}
   >
     {#snippet icon()}
       <Star class="fill-primary-500"/>
@@ -23,8 +23,8 @@
   <hr class="my-2">
 
   <GenericDetailRow
-          categoryName="League"
-          rowValue={clubTeam.team.league_entries.at(0)?.league.name ?? ""}
+    categoryName="League"
+    rowValue={clubTeam.league_entries.at(0)?.league.name ?? ""}
   >
     {#snippet icon()}
       <TableProperties/>
@@ -34,8 +34,8 @@
   <hr class="my-2">
 
   <GenericDetailRow
-          categoryName="Season"
-          rowValue={clubTeam.team.league_entries.at(0)?.league.season ?? ""}
+    categoryName="Season"
+    rowValue={clubTeam.league_entries.at(0)?.league.season ?? ""}
   >
     {#snippet icon()}
       <Calendar/>

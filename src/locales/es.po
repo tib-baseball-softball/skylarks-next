@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-12T16:35:16.263Z\n"
-"PO-Revision-Date: 2025-11-22T10:28:59.590Z\n"
+"PO-Revision-Date: 2025-12-05T17:14:58.430Z\n"
 "Last-Translator: \n"
 "Language: es\n"
 "Language-Team: \n"
@@ -494,7 +494,7 @@ msgstr "Datos por Liga"
 msgid "A single team can be associated to several leagues per season in BSM."
 msgstr "Un solo equipo puede estar asociado a varias ligas por temporada en BSM."
 
-#. placeholder {0}: favoriteTeam?.team.name
+#. placeholder {0}: favoriteTeam?.name
 #. placeholder {0}: favoriteTeam?.team.name
 #: src/routes/(tib)/favorite/+page.svelte
 msgid "The team \"{0}\" does not have a league entry in this league."
@@ -2102,8 +2102,8 @@ msgstr "Se produjo un error al obtener los datos del jugador: {0}.<0/> La fuente
 msgid "Stats"
 msgstr "Estadísticas"
 
-#. placeholder {0}: clubTeam.team.name
-#. placeholder {1}: clubTeam.team.season
+#. placeholder {0}: clubTeam.name
+#. placeholder {1}: clubTeam.season
 #. placeholder {0}: clubTeam.team.name
 #. placeholder {1}: clubTeam.team.season
 #: src/routes/(tib)/teams/[id]/+page.svelte
@@ -2914,9 +2914,14 @@ msgstr "Mostrar esta información públicamente en el sitio web del equipo"
 
 #: src/routes/(tib)/gamecenter/game-detail/[id]/+page.svelte
 msgid "Box Score for this game could not be loaded or is unavailable."
-msgstr ""
+msgstr "El marcador de este partido no se pudo cargar o no está disponible."
 
 #. placeholder {0}: error.message
 #: src/routes/(tib)/gamecenter/game-detail/[id]/+page.svelte
 msgid "error loading box score: {0}"
-msgstr ""
+msgstr "error al cargar el marcador: {0}"
+
+#: src/lib/tib/components/favorite/StreakGraphSection.svelte
+#: src/lib/tib/components/favorite/StreakGraphSection.svelte
+msgid "No data available."
+msgstr "No hay datos disponibles."

@@ -8,13 +8,13 @@
   import StandingsTable from "$lib/tib/components/table/StandingsTable.svelte";
   import ClubTeamPicker from "$lib/dp/components/form/ClubTeamPicker.svelte";
   import {preferences} from "$lib/tib/globals.svelte.ts";
-  import type {PageProps} from "../../../../.svelte-kit/types/src/routes";
+  import type {PageProps} from "./$types";
 
   const {data}: PageProps = $props();
   const clubTeams = $derived(data.clubTeams ?? []);
 
   const favoriteTeam = $derived(
-      clubTeams.find((clubTeam) => clubTeam.team.id === preferences.current.favoriteTeamID)
+    clubTeams.find((clubTeam) => clubTeam.id === preferences.current.favoriteTeamID)
   );
 
   function reloadOnTeamChange() {
@@ -40,11 +40,11 @@
   {/if}
 </section>
 
-{#if favoriteTeam?.team.league_entries?.length ?? 0 > 0}
+{#if favoriteTeam?.league_entries?.length ?? 0 > 0}
   <section>
     <h2 class="h2 mt-5 mb-1">Team Stats Links</h2>
-    {#each favoriteTeam?.team.league_entries ?? [] as entry}
-      <a href="/league_entries/{entry.id}?team={favoriteTeam?.team.name}"
+    {#each favoriteTeam?.league_entries ?? [] as entry}
+      <a href="/league_entries/{entry.id}?team={favoriteTeam?.name}"
          class="btn preset-filled-primary-500 me-1 my-2"
          title="to stats page for league entry {entry.league.name}">
         {entry.league.name}
@@ -69,7 +69,7 @@
         {#if dataset.table_row}
           <LeagueInfoCard leagueGroup={dataset.league_group} tableRow={dataset.table_row}/>
         {:else}
-          <p>The team "{favoriteTeam?.team.name}" does not have a league entry in this league.</p>
+          <p>The team "{favoriteTeam?.name}" does not have a league entry in this league.</p>
         {/if}
       </section>
 
@@ -126,7 +126,7 @@
 {/if}
 
 <style>
-    section {
-        margin-block: calc(var(--spacing) * 10);
-    }
+  section {
+    margin-block: calc(var(--spacing) * 10);
+  }
 </style>
