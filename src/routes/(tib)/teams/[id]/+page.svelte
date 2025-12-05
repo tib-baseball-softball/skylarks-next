@@ -1,15 +1,15 @@
 <script lang="ts">
-  import type {ClubTeam} from "bsm.js";
+  import type {Team} from "bsm.js";
   import BaseballStatsDatatable from "$lib/tib/components/stats/BaseballStatsDatatable.svelte";
   import TeamPlayerSection from "$lib/tib/components/player/TeamPlayerSection.svelte";
   import StandingsTable from "$lib/tib/components/table/StandingsTable.svelte";
   import TeamDetailInfoCard from "$lib/tib/components/team/TeamDetailInfoCard.svelte";
   import ProgressRing from "$lib/dp/components/utils/ProgressRing.svelte";
   import type {StatsDataset} from "$lib/tib/types/StatsDataset.ts";
-  import type {PageProps} from "../../../../../.svelte-kit/types/src/routes";
+  import type {PageProps} from "./$types";
 
   const {data}: PageProps = $props();
-  const clubTeam = $derived(data.clubTeam as ClubTeam);
+  const clubTeam = $derived(data.clubTeam as Team);
 
   async function getData(): Promise<StatsDataset> {
     return {
@@ -20,7 +20,7 @@
   }
 </script>
 
-<h1 class="h1 my-4">{clubTeam.team.name} (Saison {clubTeam.team.season})</h1>
+<h1 class="h1 my-4">{clubTeam.name} (Saison {clubTeam.season})</h1>
 
 <section class="my-10 lg:max-w-[50%]">
   <h2 class="h2">Information</h2>
@@ -76,14 +76,14 @@
 </section>
 
 <style lang="postcss">
-    h2 {
-        margin-bottom: calc(var(--spacing) * 3)
-    }
+  h2 {
+    margin-bottom: calc(var(--spacing) * 3)
+  }
 
-    /* ugly hack to prevent table overflow */
-    @media (min-width: 1400px) and (max-width: 1800px) {
-        .standings-container {
-            max-width: 90%;
-        }
+  /* ugly hack to prevent table overflow */
+  @media (min-width: 1400px) and (max-width: 1800px) {
+    .standings-container {
+      max-width: 90%;
     }
+  }
 </style>

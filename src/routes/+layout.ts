@@ -1,4 +1,4 @@
-import {type ClubTeam, ClubTeamsAPIRequest, type LeagueGroup, LeagueGroupAPIRequest} from "bsm.js";
+import {ClubTeamsAPIRequest, type LeagueGroup, LeagueGroupAPIRequest, type Team} from "bsm.js";
 import type {LayoutLoad} from "./$types";
 import {env as publicEnv} from "$env/dynamic/public";
 import {preferences, RELAY_URL} from "$lib/tib/globals.svelte.ts";
@@ -26,7 +26,7 @@ export const load: LayoutLoad = async ({fetch, depends}) => {
     [clubTeamRequest.SEASON_FILTER, String(appPreferences.selectedSeason)],
   ]);
 
-  const clubTeams = client.send<ClubTeam[]>(clubTeamsURL.pathname + clubTeamsURL.search, {
+  const clubTeams = client.send<Team[]>(clubTeamsURL.pathname + clubTeamsURL.search, {
     fetch,
     requestKey: `root-clubTeams-${publicEnv.PUBLIC_CLUB_ID}-${appPreferences.selectedSeason}`,
   });

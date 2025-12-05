@@ -1,7 +1,6 @@
 import {error} from "@sveltejs/kit";
 import {
   type BattingStatisticsEntry,
-  type ClubTeam,
   ClubTeamsAPIRequest,
   type FieldingStatisticsEntry,
   type LeagueGroup,
@@ -11,6 +10,7 @@ import {
   StatsType,
   type Table,
   TablesAPIRequest,
+  type Team,
 } from "bsm.js";
 import type {PageLoad} from "./$types";
 import {client} from "$lib/dp/client.svelte.ts";
@@ -23,17 +23,17 @@ import {dev} from "$app/environment";
 
 export const load: PageLoad = async ({parent, params, url, fetch}) => {
   const data = await parent();
-  let clubTeams: ClubTeam[] | undefined = await data.clubTeams;
+  let clubTeams: Team[] | undefined = await data.clubTeams;
 
   // Fallback: if parent provided no teams, fetch from relay
   if (!clubTeams || clubTeams.length === 0) {
     const clubTeamRequest = new ClubTeamsAPIRequest("");
     clubTeamRequest.setAPIURL(RELAY_URL);
     const season = url.searchParams.get("season")?.toString() ?? clubTeamRequest.defaultSeason;
-    const clubTeamsURL = clubTeamRequest.buildRequestURL(`clubs/${publicEnv.PUBLIC_CLUB_ID}/team_clubs.json`, [
+    const clubTeamsURL = clubTeamRequest.buildRequestURL(`clubs/${publicEnv.PUBLIC_CLUB_ID}/teams.json`, [
       [clubTeamRequest.SEASON_FILTER, String(season)],
     ]);
-    clubTeams = await client.send<ClubTeam[]>(clubTeamsURL.pathname + clubTeamsURL.search, {
+    clubTeams = await client.send<Team[]>(clubTeamsURL.pathname + clubTeamsURL.search, {
       fetch,
       requestKey: `team-id-clubTeams-${publicEnv.PUBLIC_CLUB_ID}-${season}`,
     });
@@ -47,7 +47,7 @@ export const load: PageLoad = async ({parent, params, url, fetch}) => {
   const statsRequest = new StatsAPIRequest("");
   statsRequest.setAPIURL(RELAY_URL);
 
-  const leagueEntry = clubTeam.team.league_entries.at(0);
+  const leagueEntry = clubTeam.league_entries.at(0);
   if (!leagueEntry) {
     return {
       clubTeam,

@@ -16,26 +16,26 @@
 </script>
 
 <Tabs.Root
-        bind:value={tabSet}
-        class=""
+  bind:value={tabSet}
+  class=""
 >
   <Tabs.List
-          class="tabs-list border mb-1 preset-tonal-surface justify-around!"
+    class="tabs-list border mb-1 preset-tonal-surface justify-around!"
   >
     <Tabs.Trigger
-            class="tabs-trigger btn"
-            value="graph"
+      class="tabs-trigger btn"
+      value="graph"
     >
       Graph
     </Tabs.Trigger>
     <Tabs.Trigger
-            class="tabs-trigger btn"
-            value="percentage"
+      class="tabs-trigger btn"
+      value="percentage"
     >Percentage
     </Tabs.Trigger>
     <Tabs.Trigger
-            class="tabs-trigger btn"
-            value="series"
+      class="tabs-trigger btn"
+      value="series"
     >Series
     </Tabs.Trigger>
   </Tabs.List>
@@ -45,10 +45,18 @@
   </Tabs.Content>
 
   <Tabs.Content class="pt-4" value="percentage">
-    <WinningPercentageContainer tableRow={dataset.table_row}/>
+    {#if dataset.table_row}
+      <WinningPercentageContainer tableRow={dataset.table_row}/>
+    {:else}
+      <p>No data available.</p>
+    {/if}
   </Tabs.Content>
 
   <Tabs.Content class="pt-4" value="series">
-    <StreakContainer dataset={dataset}/>
+    {#if dataset.table_row}
+      <StreakContainer dataset={dataset}/>
+    {:else}
+      <p>No data available.</p>
+    {/if}
   </Tabs.Content>
 </Tabs.Root>
