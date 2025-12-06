@@ -46,6 +46,7 @@ var keysToRemoveFromBSMResponse = []string{
 	"gamechanger",
 }
 
+// stripResponseKeys removes keys from the response body that are not needed for the client.
 func stripResponseKeys(cachedResponseBody string) ([]byte, error) {
 	var arrayShapeData []map[string]any
 	var objectShapeData map[string]any
@@ -88,6 +89,7 @@ func stripResponseKeys(cachedResponseBody string) ([]byte, error) {
 	return bytes, nil
 }
 
+// rewriteURLForProxying rewrites the given URL to point to the BSM API.
 func rewriteURLForProxying(url url.URL) url.URL {
 	bsmHost := os.Getenv("BSM_API_HOST")
 	targetURL := url
