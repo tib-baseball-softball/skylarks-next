@@ -1,6 +1,9 @@
 ### GET relay for club data (public)
 GET {{pbURL}}/api/bsm/relay/clubs/485.json
 
+### GET relay for club team data (public)
+GET {{pbURL}}/api/bsm/relay/clubs/485/teams.json
+
 ### GET relay for license data (public)
 GET {{pbURL}}/api/bsm/relay/clubs/485/licenses.json
 

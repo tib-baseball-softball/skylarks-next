@@ -7,7 +7,6 @@ import (
 	"net/url"
 	"os"
 	"regexp"
-	"strings"
 	"sync"
 	"time"
 
@@ -203,18 +202,4 @@ func isOutdated(cacheTime types.DateTime) bool {
 	cutoff := cacheTime.Add(cacheLifetimeMinutes * time.Minute)
 
 	return currentTime.After(cutoff)
-}
-
-func rewriteURLForProxying(url url.URL) url.URL {
-	bsmHost := os.Getenv("BSM_API_HOST")
-	targetURL := url
-	targetURL.Scheme = "https"
-	targetURL.Host = bsmHost
-	targetURL.Path = strings.TrimPrefix(url.Path, "/api/bsm/relay")
-
-	newQuery := url.Query()
-	newQuery.Set("api_key", os.Getenv("BSM_API_KEY"))
-	targetURL.RawQuery = newQuery.Encode()
-
-	return targetURL
 }
