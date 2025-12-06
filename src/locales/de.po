@@ -1092,7 +1092,7 @@ msgstr "Stimmung im Team"
 
 #: src/lib/tib/components/favorite/StreakEmoji.svelte
 msgid "Clubhouse champagne celebration or dugout fights?"
-msgstr "Champagner-Feier im Vereinsheim oder Keilereien im Unterstand?"
+msgstr "Champagner-Feier im Vereinsheim oder Keilereien im Dugout?"
 
 #: src/lib/tib/components/favorite/StreakGraphSection.svelte
 msgid "Graph"
