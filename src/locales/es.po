@@ -340,10 +340,6 @@ msgstr "Centro de juego"
 msgid "Show external games"
 msgstr "Mostrar juegos externos"
 
-#: src/routes/(tib)/gamecenter/+page.svelte
-msgid "Gameday <0><0><0>Previous</0> <1>Current</1> <2>Next</2> <3>All</3></0> <1>Loading matches...error loading matches: {0}</1></0>"
-msgstr "Día de partido <0><0><0>Anterior</0> <1>Actual</1> <2>Siguiente</2> <3>Todos</3></0> <1>Cargando partidos...error al cargar los partidos: {0}</1></0>"
-
 #: src/routes/(dp)/signupconfirm/+page.svelte
 msgid "Complete signup process"
 msgstr "Completar el proceso de registro"
@@ -588,6 +584,7 @@ msgstr "Lanzamiento"
 
 #: src/lib/dp/components/announcements/AnnouncementCard.svelte
 #: src/lib/dp/components/forms/AnnouncementForm.svelte
+#: src/lib/dp/components/forms/AnnouncementForm.svelte
 #: src/routes/(dp)/(protected)/account/announcements/[announcement]/+page.svelte
 msgid "Announcement"
 msgstr "Anuncio"
@@ -633,14 +630,11 @@ msgid "BB"
 msgstr "BB"
 
 #: src/lib/tib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
-#: src/lib/tib/components/stats/StatsBlock.svelte
-#: src/lib/tib/components/stats/StatsBlock.svelte
 #: src/lib/tib/components/stats/StatsHeaderRow.svelte
 msgid "AVG"
 msgstr "AVG"
 
 #: src/lib/tib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
-#: src/lib/tib/components/stats/StatsBlock.svelte
 #: src/lib/tib/components/stats/StatsHeaderRow.svelte
 msgid "OPS"
 msgstr "OPS"
@@ -652,8 +646,6 @@ msgid "{0} (Pitchers)"
 msgstr "{0} (Lanzadores)"
 
 #: src/lib/tib/components/boxscore/MatchBoxscorePitchingTable.svelte
-#: src/lib/tib/components/stats/StatsBlock.svelte
-#: src/lib/tib/components/stats/StatsBlock.svelte
 #: src/lib/tib/components/stats/StatsHeaderRow.svelte
 #: src/lib/tib/components/stats/StatsHeaderRow.svelte
 msgid "IP"
@@ -670,7 +662,6 @@ msgid "ER"
 msgstr "CL"
 
 #: src/lib/tib/components/boxscore/MatchBoxscorePitchingTable.svelte
-#: src/lib/tib/components/stats/StatsBlock.svelte
 #: src/lib/tib/components/stats/StatsHeaderRow.svelte
 msgid "ERA"
 msgstr "PCL"
@@ -732,7 +723,6 @@ msgstr "Importante"
 msgid "Critical"
 msgstr "Crítico"
 
-#: src/lib/tib/components/stats/StatsBlock.svelte
 #: src/lib/tib/components/stats/StatsHeaderRow.svelte
 #: src/lib/tib/components/stats/StatsHeaderRow.svelte
 #: src/lib/tib/components/stats/StatsHeaderRow.svelte
@@ -798,12 +788,10 @@ msgstr "SF"
 msgid "I"
 msgstr "I"
 
-#: src/lib/tib/components/stats/StatsBlock.svelte
 #: src/lib/tib/components/stats/StatsHeaderRow.svelte
 msgid "OBP"
 msgstr "OBP"
 
-#: src/lib/tib/components/stats/StatsBlock.svelte
 #: src/lib/tib/components/stats/StatsHeaderRow.svelte
 msgid "SLG"
 msgstr "SLG"
@@ -824,19 +812,16 @@ msgstr "WP"
 msgid "HBP"
 msgstr "HBP"
 
-#: src/lib/tib/components/stats/StatsBlock.svelte
 #: src/lib/tib/components/stats/StatsHeaderRow.svelte
 msgid "WHIP"
 msgstr "WHIP"
 
-#: src/lib/tib/components/favorite/StreakEmoji.svelte
 #: src/lib/tib/components/match/GameResultIndicator.svelte
 #: src/lib/tib/components/stats/StatsHeaderRow.svelte
 #: src/lib/tib/components/table/StandingsTable.svelte
 msgid "W"
 msgstr "G"
 
-#: src/lib/tib/components/favorite/StreakEmoji.svelte
 #: src/lib/tib/components/match/GameResultIndicator.svelte
 #: src/lib/tib/components/stats/StatsHeaderRow.svelte
 #: src/lib/tib/components/table/StandingsTable.svelte
@@ -847,8 +832,6 @@ msgstr "P"
 msgid "SV"
 msgstr "SV"
 
-#: src/lib/dp/components/forms/PlayerDataForm.svelte
-#: src/lib/dp/components/forms/PlayerDataForm.svelte
 #: src/lib/tib/components/stats/StatsHeaderRow.svelte
 msgid "A"
 msgstr "A"
@@ -877,8 +860,6 @@ msgstr "FA"
 msgid "P"
 msgstr "P"
 
-#: src/lib/dp/components/forms/PlayerDataForm.svelte
-#: src/lib/dp/components/forms/PlayerDataForm.svelte
 #: src/lib/tib/components/stats/StatsHeaderRow.svelte
 msgid "C"
 msgstr "C"
@@ -976,11 +957,11 @@ msgstr "Verificado"
 msgid "Unverified"
 msgstr "No verificado"
 
-#: src/lib/dp/components/form/ClubTeamPicker.svelte
 #: src/lib/dp/components/form/MultiSelectCombobox.svelte
 #: src/lib/dp/components/forms/TeamGamesModal.svelte
 #: src/lib/dp/components/team/TeamMembersTableContent.svelte
 #: src/lib/dp/components/team/TeamMembersTableContent.svelte
+#: src/lib/tib/components/favorite/ClubTeamPicker.svelte
 msgid "None"
 msgstr "Ninguno"
 
@@ -1191,6 +1172,7 @@ msgstr "Enviar"
 
 #: src/lib/dp/components/club/ClubDetailCard.svelte
 #: src/lib/dp/components/forms/ClubForm.svelte
+#: src/lib/dp/components/forms/ClubForm.svelte
 #: src/lib/dp/components/navigation/StaticNavigationLinks.svelte
 #: src/lib/dp/components/team/TeamListTeaser.svelte
 #: src/lib/dp/components/team/TeamTeaserCard.svelte
@@ -1266,11 +1248,8 @@ msgstr "Creado"
 msgid "Last Updated"
 msgstr "Última actualización"
 
-#: src/lib/dp/components/forms/ParticipationForm.svelte
-msgid "State <0><0>In</0> <1>Maybe</1> <2>Out</2></0>"
-msgstr "Estado <0><0>Sí</0> <1>Quizás</1> <2>No</2></0>"
-
 #: src/lib/dp/components/event/EventSeriesView.svelte
+#: src/lib/dp/components/forms/EventSeriesForm.svelte
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 msgid "Event Series"
@@ -1334,6 +1313,7 @@ msgid "Location <0>None</0>"
 msgstr "Ubicación <0>Ninguna</0>"
 
 #: src/lib/dp/components/forms/TeamForm.svelte
+#: src/lib/dp/components/forms/TeamForm.svelte
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 #: src/lib/dp/components/team/TeamListTeaser.svelte
 #: src/lib/tib/components/table/StandingsTable.svelte
@@ -1385,6 +1365,8 @@ msgid "Member"
 msgstr "Miembro"
 
 #: src/lib/dp/components/event/EventPageAdminSection.svelte
+#: src/lib/dp/components/event/EventTypeBadge.svelte
+#: src/lib/dp/components/forms/EventForm.svelte
 #: src/lib/dp/components/forms/EventForm.svelte
 msgid "Event"
 msgstr "Evento"
@@ -1423,6 +1405,7 @@ msgstr "Conjunto de uniforme <0/>"
 msgid "Cancelled"
 msgstr "Cancelado"
 
+#: src/lib/dp/components/forms/UniformSetForm.svelte
 #: src/lib/dp/components/forms/UniformSetForm.svelte
 #: src/lib/dp/components/uniformset/UniformSetInfoCard.svelte
 msgid "Uniform Set"
@@ -1573,6 +1556,7 @@ msgstr "Abrir en Apple Maps"
 
 #: src/lib/dp/components/club/ClubLocationsSection.svelte
 #: src/lib/dp/components/forms/LocationForm.svelte
+#: src/lib/dp/components/forms/LocationForm.svelte
 #: src/routes/(tib)/club/details/+page.svelte
 msgid "Location"
 msgstr "Ubicación"
@@ -1690,12 +1674,6 @@ msgstr "Compartir datos del juego usando su navegador"
 #: src/lib/tib/components/match/ShareButton.svelte
 msgid "Share Game <0/>"
 msgstr "Compartir juego <0/>"
-
-#: src/lib/dp/components/forms/PlayerDataForm.svelte
-#: src/lib/dp/components/forms/PlayerDataForm.svelte
-#: src/lib/dp/components/icons/Cap.svelte
-msgid "B"
-msgstr "B"
 
 #: src/lib/dp/components/icons/Cap.svelte
 msgid "Berlin Skylarks Home Cap"
@@ -1881,7 +1859,7 @@ msgstr "Añadir miembros al equipo \"{0}\""
 msgid "Select all {0} members that should be added to the team."
 msgstr "Seleccione todos los {0} miembros que deben añadirse al equipo."
 
-#: src/lib/dp/components/form/ClubTeamPicker.svelte
+#: src/lib/tib/components/favorite/ClubTeamPicker.svelte
 msgid "Select Team:"
 msgstr "Seleccionar equipo:"
 
@@ -1910,10 +1888,6 @@ msgstr "Promedio de slugging"
 #: src/lib/tib/components/stats/StatsBlock.svelte
 msgid "On Base Plus Slugging"
 msgstr "En base más slugging"
-
-#: src/lib/tib/components/stats/StatsBlock.svelte
-msgid "W - L"
-msgstr "G - P"
 
 #: src/lib/tib/components/stats/StatsBlock.svelte
 msgid "Wins - Losses"
@@ -1956,6 +1930,7 @@ msgid "Position is already selected."
 msgstr "La posición ya está seleccionada."
 
 #: src/lib/dp/components/forms/PlayerDataForm.svelte
+#: src/lib/dp/components/forms/PlayerDataForm.svelte
 msgid "Player data"
 msgstr "Datos del jugador"
 
@@ -1984,11 +1959,6 @@ msgstr "Introduzca las posiciones o haga clic en los botones..."
 #: src/lib/dp/components/forms/PlayerDataForm.svelte
 msgid "Positions <0/> <1/>"
 msgstr "Posiciones <0/> <1/>"
-
-#: src/lib/dp/components/forms/PlayerDataForm.svelte
-#: src/lib/dp/components/forms/PlayerDataForm.svelte
-msgid "D"
-msgstr "D"
 
 #: src/routes/(tib)/club/officials/+page.svelte
 msgid "Club Officials"
@@ -2429,12 +2399,6 @@ msgstr "Duración del evento:"
 #. placeholder {0}: eventSeries.duration
 #. placeholder {0}: eventSeries.duration
 #: src/lib/dp/components/eventseries/EventSeriesListItem.svelte
-msgid "P{0}M"
-msgstr "P{0}M"
-
-#. placeholder {0}: eventSeries.duration
-#. placeholder {0}: eventSeries.duration
-#: src/lib/dp/components/eventseries/EventSeriesListItem.svelte
 msgid "{0} Minutes"
 msgstr "{0} Minutos"
 
@@ -2780,18 +2744,6 @@ msgstr ""
 msgid "An error occurred while saving {0} data."
 msgstr "Ocurrió un error al guardar los datos de {0}."
 
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
-msgid "Timeframe <0><0><0>Next</0> <1>Past</1></0></0>"
-msgstr "Plazo <0><0><0>Próximo</0> <1>Pasado</1></0></0>"
-
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
-msgid "Sort <0><0><0>Ascending</0> <1>Descending</1></0></0>"
-msgstr "Ordenar <0><0><0>Ascendente</0> <1>Descendente</1></0></0>"
-
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
-msgid "Type <0><0><0>All</0> <1>Game</1> <2>Practice</2> <3>Other</3></0></0>"
-msgstr "Tipo <0><0><0>Todos</0> <1>Partido</1> <2>Práctica</2> <3>Otro</3></0></0>"
-
 #: src/lib/dp/components/forms/PlayerDataForm.svelte
 msgid "Umpire License"
 msgstr "Licencia de Árbitro"
@@ -2803,10 +2755,6 @@ msgstr "Licencia de Anotador"
 #: src/lib/dp/components/forms/EventForm.svelte
 msgid "Type"
 msgstr "Tipo"
-
-#: src/lib/tib/components/player/TeamPlayerSection.svelte
-msgid "Visualization <0><0><0>Number</0> <1>Image</1></0></0>"
-msgstr "Visualización <0><0><0>Número</0> <1>Imagen</1></0></0>"
 
 #: src/lib/dp/components/eventseries/EventSeriesListItem.svelte
 msgid "Ongoing"
@@ -2845,10 +2793,6 @@ msgstr "Todos los eventos posibles de este tipo para {0}```"
 #: src/lib/tib/components/favorite/LeagueChartGraph.svelte
 msgid "Wins"
 msgstr "Victorias"
-
-#: src/lib/tib/components/favorite/LeagueChartGraph.svelte
-msgid "BEA"
-msgstr "BEA"
 
 #: src/lib/tib/components/favorite/LeagueChartGraph.svelte
 msgid "Total Wins"
@@ -2925,3 +2869,103 @@ msgstr "error al cargar el marcador: {0}"
 #: src/lib/tib/components/favorite/StreakGraphSection.svelte
 msgid "No data available."
 msgstr "No hay datos disponibles."
+
+#: src/lib/dp/components/comments/CommentRow.svelte
+msgid "Error updating comment"
+msgstr ""
+
+#: src/lib/dp/components/comments/CommentSection.svelte
+msgid "Failed to add comment."
+msgstr ""
+
+#: src/routes/(tib)/gamecenter/+page.svelte
+msgid "Gameday <0>PreviousCurrentNextAllLoading matches...error loading matches: {0}</0>"
+msgstr ""
+
+#. placeholder {0}: email
+#: src/lib/dp/auth/PasswordRequestButton.svelte
+msgid "If we have your email ({0}) on file, you will receive a reset password request in your inbox."
+msgstr ""
+
+#: src/lib/dp/auth/PasswordRequestButton.svelte
+msgid "Error sending reset password request."
+msgstr ""
+
+#: src/lib/dp/auth/OAuthProviderButton.svelte
+msgid "There was an error processing your authentication request via external provider. Please double-check your signup key"
+msgstr ""
+
+#: src/lib/dp/components/forms/TeamMembersForm.svelte
+#: src/lib/dp/components/forms/TeamMembersForm.svelte
+msgid "Team members"
+msgstr ""
+
+#: src/lib/dp/components/forms/UniformSetForm.svelte
+msgid ""
+"You can use the special identifiers <0/> and <1/> to get\n"
+"the Skylarks Home and Road Cap instead of a\n"
+"generic colored one."
+msgstr ""
+
+#. placeholder {0}: model.first_name + " " + model.last_name
+#. placeholder {1}: team.name
+#: src/lib/dp/components/team/TeamMembersTableContent.svelte
+msgid "User \"{0}\" has been added as an admin for team \"{1}\""
+msgstr ""
+
+#: src/lib/dp/components/team/TeamMembersTableContent.svelte
+msgid "An error occurred while adding user as admin"
+msgstr ""
+
+#. placeholder {0}: model.first_name + " " + model.last_name
+#. placeholder {1}: team.name
+#: src/lib/dp/components/team/TeamMembersTableContent.svelte
+msgid "User \"{0}\" has been removed as admin for team \"{1}\""
+msgstr ""
+
+#: src/lib/dp/components/team/TeamMembersTableContent.svelte
+msgid "An error occurred while removing user as admin"
+msgstr ""
+
+#. placeholder {0}: model.first_name + " " + model.last_name
+#. placeholder {1}: team.name
+#: src/lib/dp/components/team/TeamMembersTableContent.svelte
+msgid "User \"{0}\" has been removed as member from team \"{1}\""
+msgstr ""
+
+#: src/lib/dp/components/team/TeamMembersTableContent.svelte
+msgid "An error occurred while removing user as team member"
+msgstr ""
+
+#: src/lib/dp/components/forms/ParticipationForm.svelte
+msgid "State <0>InMaybeOut</0>"
+msgstr ""
+
+#: src/lib/dp/components/event/EventTypeBadge.svelte
+msgid "Game"
+msgstr ""
+
+#: src/lib/dp/components/event/EventTypeBadge.svelte
+msgid "Practice"
+msgstr ""
+
+#. placeholder {0}: modelName
+#: src/lib/dp/components/utils/DeleteButton.svelte
+msgid "Error deleting {0}."
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+msgid "Timeframe <0>NextPast</0>"
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+msgid "Sort <0>AscendingDescending</0>"
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+msgid "Type <0>AllGamePracticeOther</0>"
+msgstr ""
+
+#: src/lib/tib/components/player/TeamPlayerSection.svelte
+msgid "Visualization <0>NumberImage</0>"
+msgstr ""

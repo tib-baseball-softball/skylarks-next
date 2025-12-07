@@ -4,9 +4,9 @@ import {env as publicEnv} from "$env/dynamic/public";
 import {preferences, RELAY_URL} from "$lib/tib/globals.svelte.ts";
 import {authSettings, client} from "$lib/dp/client.svelte.ts";
 import {browser} from "$app/environment";
-import {locales} from "virtual:wuchale/locales";
 import {loadLocale} from "wuchale/load-utils";
 import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
+import {locales} from "../locales/data";
 
 export const ssr = false;
 
