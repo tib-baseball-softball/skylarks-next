@@ -1,24 +1,18 @@
-<script>
-    import Svelte from "$lib/dp/components/icons/Svelte.svelte";
-    import {Heart} from "lucide-svelte";
-    import {env} from "$env/dynamic/public";
+<script lang="ts">
+  import Svelte from "$lib/dp/components/icons/Svelte.svelte";
+  import {Heart} from "lucide-svelte";
+  import {env} from "$env/dynamic/public";
+  import type {Snippet} from "svelte";
+
+  interface Props {
+    staticLinks?: Snippet;
+  }
+
+  let {staticLinks}: Props = $props();
 </script>
 
 <section class="flex justify-center items-center gap-8 mt-5">
-  <a aria-label="to Skylarks Facebook page" href="https://www.facebook.com/TiBBaseball/" rel="noreferrer"
-     target="_blank">
-    <img alt="Facebook brand logo" src="/Facebook_Logo_Primary.svg" width="50">
-  </a>
-
-  <a aria-label="to Skylarks Instagram profile" href="https://www.instagram.com/berlinskylarks/" rel="noreferrer"
-     target="_blank">
-    <img alt="Instagram brand logo" class="m-1 max-w-[40px]" src="/Instagram_Glyph_Gradient.png">
-  </a>
-
-  <a aria-label="to Turngemeinde in Berlin main website" href="https://tib1848ev.de/" target="_blank">
-    <img alt="TiB Logo" class="min-w-8 max-w-14" src="/tib_logo.svg" width="38">
-  </a>
-
+  {@render staticLinks?.()}
 </section>
 
 <nav class="list-nav pt-1 pb-3 px-6">
@@ -50,9 +44,9 @@
 </div>
 
 <style>
-    .list-nav {
-        a:hover {
-            text-decoration: underline;
-        }
+  .list-nav {
+    a:hover {
+      text-decoration: underline;
     }
+  }
 </style>

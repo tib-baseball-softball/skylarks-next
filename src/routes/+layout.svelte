@@ -15,7 +15,7 @@
 
   const isUserAuthenticated = $derived(!!authSettings.record);
   const showSidebar = $derived(
-      (data.clubs.length > 0 || data.teams.length > 0) && isUserAuthenticated
+    (data.clubs.length > 0 || data.teams.length > 0) && isUserAuthenticated
   );
 </script>
 
@@ -95,126 +95,142 @@
   <!-- Footer -->
   <footer class="app-footer">
     <hr>
-    <Footer></Footer>
+    <Footer>
+      {#snippet staticLinks()}
+        <a aria-label="to Skylarks Facebook page" href="https://www.facebook.com/TiBBaseball/" rel="noreferrer"
+           target="_blank">
+          <img alt="Facebook brand logo" src="/Facebook_Logo_Primary.svg" width="50">
+        </a>
+
+        <a aria-label="to Skylarks Instagram profile" href="https://www.instagram.com/berlinskylarks/" rel="noreferrer"
+           target="_blank">
+          <img alt="Instagram brand logo" class="m-1 max-w-[40px]" src="/Instagram_Glyph_Gradient.png">
+        </a>
+
+        <a aria-label="to Turngemeinde in Berlin main website" href="https://tib1848ev.de/" target="_blank">
+          <img alt="TiB Logo" class="min-w-8 max-w-14" src="/tib_logo.svg" width="38">
+        </a>
+      {/snippet}
+    </Footer>
   </footer>
 </div>
 
 <style>
-    .root-layout {
-        height: 100%;
-        display: grid;
-        grid-auto-rows: auto 1fr auto;
+  .root-layout {
+    height: 100%;
+    display: grid;
+    grid-auto-rows: auto 1fr auto;
+  }
+
+  .app-bar-lead {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+
+  .app-bar-link-list {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    padding-block: calc(var(--spacing) * 2);
+    gap: calc(var(--spacing) * 2);
+
+    @media (min-width: 48rem) {
+      display: flex;
     }
 
-    .app-bar-lead {
-        display: flex;
-        justify-content: start;
-        align-items: center;
+    @media (min-width: 80rem) {
+      gap: calc(var(--spacing) * 16);
+    }
+  }
+
+  .app-bar-trail {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 5);
+    flex-shrink: 0;
+
+    @media (min-width: 64rem) {
+      margin-inline-end: calc(var(--spacing) * 5);
+    }
+  }
+
+  .sidebar-grid {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+
+    @media (min-width: 48rem) {
+      grid-template-columns: auto 1fr;
+    }
+  }
+
+  aside {
+    position: sticky;
+    top: 0;
+    display: none;
+    height: 100vh;
+    width: calc(var(--spacing) * 64);
+    border-right: 1px solid light-dark(var(--color-surface-200), var(--color-surface-100));
+    padding: calc(var(--spacing) * 2);
+    background-color: var(--nav-item-background);
+    grid-column: span 1/span 1;
+
+    @media (min-width: 48rem) {
+      display: block;
     }
 
-    .app-bar-link-list {
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-        display: none;
-        padding-block: calc(var(--spacing) * 2);
-        gap: calc(var(--spacing) * 2);
-
-        @media (min-width: 48rem) {
-            display: flex;
-        }
-
-        @media (min-width: 80rem) {
-            gap: calc(var(--spacing) * 16);
-        }
+    @media (min-width: 64rem) {
+      width: calc(var(--spacing) * 72);
     }
 
-    .app-bar-trail {
-        display: flex;
-        align-items: center;
-        gap: calc(var(--spacing) * 5);
-        flex-shrink: 0;
+    @media (min-width: 80rem) {
+      width: calc(var(--spacing) * 80);
+    }
+  }
 
-        @media (min-width: 64rem) {
-            margin-inline-end: calc(var(--spacing) * 5);
-        }
+  main {
+    max-width: 1200px;
+    width: 93%;
+    justify-self: center;
+    margin-bottom: 2em;
+    grid-column: span 1/span 1;
+
+    @media (min-width: 48rem) {
+      width: 90%;
     }
 
-    .sidebar-grid {
-        display: grid;
-        grid-template-columns: repeat(1, minmax(0, 1fr));
-
-        @media (min-width: 48rem) {
-            grid-template-columns: auto 1fr;
-        }
+    @media (min-width: 64rem) {
+      width: 85%;
     }
+  }
 
-    aside {
-        position: sticky;
-        top: 0;
-        display: none;
-        height: 100vh;
-        width: calc(var(--spacing) * 64);
-        border-right: 1px solid light-dark(var(--color-surface-200), var(--color-surface-100));
-        padding: calc(var(--spacing) * 2);
-        background-color: var(--nav-item-background);
-        grid-column: span 1/span 1;
+  .app-footer {
+    padding-bottom: calc(var(--spacing) * 16);
 
-        @media (min-width: 48rem) {
-            display: block;
-        }
-
-        @media (min-width: 64rem) {
-            width: calc(var(--spacing) * 72);
-        }
-
-        @media (min-width: 80rem) {
-            width: calc(var(--spacing) * 80);
-        }
+    @media (min-width: 64rem) {
+      padding-bottom: 0;
     }
+  }
 
-    main {
-        max-width: 1200px;
-        width: 93%;
-        justify-self: center;
-        margin-bottom: 2em;
-        grid-column: span 1/span 1;
+  .logo-link {
+    display: none;
+    margin-inline-start: 1.25em;
 
-        @media (min-width: 48rem) {
-            width: 90%;
-        }
-
-        @media (min-width: 64rem) {
-            width: 85%;
-        }
+    @media (min-width: 48em) {
+      display: block;
     }
+  }
 
-    .app-footer {
-        padding-bottom: calc(var(--spacing) * 16);
+  .team-logo {
+    min-width: calc(var(--spacing) * 16);
+  }
 
-        @media (min-width: 64rem) {
-            padding-bottom: 0;
-        }
+  [aria-hidden="true"] {
+    display: none;
+
+    @media (min-width: 48em) {
+      display: block;
     }
-
-    .logo-link {
-        display: none;
-        margin-inline-start: 1.25em;
-
-        @media (min-width: 48em) {
-            display: block;
-        }
-    }
-
-    .team-logo {
-        min-width: calc(var(--spacing) * 16);
-    }
-
-    [aria-hidden="true"] {
-        display: none;
-
-        @media (min-width: 48em) {
-            display: block;
-        }
-    }
+  }
 </style>
