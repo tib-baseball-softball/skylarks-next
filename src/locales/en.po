@@ -2739,6 +2739,7 @@ msgid "Scorer License"
 msgstr "Scorer License"
 
 #: src/lib/dp/components/forms/EventForm.svelte
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Type"
 msgstr "Type"
 
@@ -2747,6 +2748,7 @@ msgid "Ongoing"
 msgstr "Ongoing"
 
 #: src/lib/dp/components/eventseries/EventSeriesListItem.svelte
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Past"
 msgstr "Past"
 
@@ -2899,10 +2901,12 @@ msgstr ""
 "generic colored one."
 
 #: src/lib/dp/components/event/EventTypeBadge.svelte
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Game"
 msgstr "Game"
 
 #: src/lib/dp/components/event/EventTypeBadge.svelte
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Practice"
 msgstr "Practice"
 
@@ -2945,18 +2949,6 @@ msgstr "An error occurred while removing user as team member"
 msgid "Visualization <0>NumberImage</0>"
 msgstr "Visualization <0>NumberImage</0>"
 
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
-msgid "Timeframe <0>NextPast</0>"
-msgstr "Timeframe <0>NextPast</0>"
-
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
-msgid "Sort <0>AscendingDescending</0>"
-msgstr "Sort <0>AscendingDescending</0>"
-
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
-msgid "Type <0>AllGamePracticeOther</0>"
-msgstr "Type <0>AllGamePracticeOther</0>"
-
 #: src/routes/(tib)/gamecenter/+page.svelte
 msgid "Previous"
 msgstr "Previous"
@@ -2965,10 +2957,32 @@ msgstr "Previous"
 msgid "Current"
 msgstr "Current"
 
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 #: src/routes/(tib)/gamecenter/+page.svelte
 msgid "Next"
 msgstr "Next"
 
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 #: src/routes/(tib)/gamecenter/+page.svelte
 msgid "All"
 msgstr "All"
+
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+msgid "Timeframe"
+msgstr "Timeframe"
+
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+msgid "Sort"
+msgstr "Sort"
+
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+msgid "Ascending"
+msgstr "Ascending"
+
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+msgid "Descending"
+msgstr "Descending"
+
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+msgid "Other"
+msgstr "Other"

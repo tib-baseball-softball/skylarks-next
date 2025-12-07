@@ -2736,6 +2736,7 @@ msgid "Scorer License"
 msgstr "Licencja Skarbnika"
 
 #: src/lib/dp/components/forms/EventForm.svelte
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Type"
 msgstr "Typ"
 
@@ -2744,6 +2745,7 @@ msgid "Ongoing"
 msgstr "Trwa"
 
 #: src/lib/dp/components/eventseries/EventSeriesListItem.svelte
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Past"
 msgstr "Przeszłe"
 
@@ -2926,23 +2928,13 @@ msgid "Error deleting {0}."
 msgstr ""
 
 #: src/lib/dp/components/event/EventTypeBadge.svelte
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Game"
 msgstr ""
 
 #: src/lib/dp/components/event/EventTypeBadge.svelte
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Practice"
-msgstr ""
-
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
-msgid "Timeframe <0>NextPast</0>"
-msgstr ""
-
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
-msgid "Sort <0>AscendingDescending</0>"
-msgstr ""
-
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
-msgid "Type <0>AllGamePracticeOther</0>"
 msgstr ""
 
 #: src/lib/dp/components/player/TeamPlayerSection.svelte
@@ -2957,10 +2949,32 @@ msgstr ""
 msgid "Current"
 msgstr ""
 
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 #: src/routes/(tib)/gamecenter/+page.svelte
 msgid "Next"
 msgstr ""
 
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 #: src/routes/(tib)/gamecenter/+page.svelte
 msgid "All"
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+msgid "Timeframe"
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+msgid "Sort"
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+msgid "Ascending"
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+msgid "Descending"
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+msgid "Other"
 msgstr ""

@@ -11,7 +11,7 @@
   import {authSettings} from "$lib/dp/client.svelte.js";
   import type {CustomAuthModel, EventType} from "$lib/dp/types/ExpandedResponse.js";
   import Paginator from "$lib/dp/utility/Paginator.svelte";
-  import type {PageProps} from "../../../../../../../.svelte-kit/types/src/routes";
+  import type {PageProps} from "./$types";
 
   const {data}: PageProps = $props();
   const events = $derived(data.events);
@@ -37,8 +37,8 @@
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
   const canEdit = $derived(
-      data.team.admins.includes(authRecord?.id) ||
-      data.team?.expand?.club?.admins.includes(authRecord?.id)
+    data.team.admins.includes(authRecord?.id) ||
+    data.team?.expand?.club?.admins.includes(authRecord?.id)
   );
 </script>
 
@@ -64,11 +64,11 @@
 
   {#if canEdit}
     <AnnouncementForm
-            announcement={null}
-            team={data.team}
-            club={null}
-            buttonClasses="btn preset-filled-primary-500"
-            showLabel={true}
+      announcement={null}
+      team={data.team}
+      club={null}
+      buttonClasses="btn preset-filled-primary-500"
+      showLabel={true}
     />
   {/if}
 </section>
@@ -79,12 +79,12 @@
   </header>
 
   <div
-          class="flex flex-wrap gap-4 preset-tonal-surface justify-between px-4 py-3 rounded-base text-sm lg:text-base"
+    class="flex flex-wrap gap-4 preset-tonal-surface justify-between px-4 py-3 rounded-base text-sm lg:text-base"
   >
     <label
-            class="flex items-center gap-2 grow justify-between xl:justify-start md:grow-0"
+      class="flex items-center gap-2 grow justify-between xl:justify-start md:grow-0"
     >
-      Timeframe
+      <span>Timeframe</span>
       <Tabs.Root bind:value={showEvents}>
         <Tabs.List class="tabs-list event-segment-container p-1!">
           <Tabs.Trigger class="tabs-trigger btn active:preset-filled-error-300-700" data-testid="segment-item"
@@ -97,7 +97,7 @@
     </label>
 
     <label class="flex items-center gap-2 justify-between xl:justify-start grow md:grow-0">
-      Sort
+      <span>Sort</span>
       <Tabs.Root bind:value={sorting}>
         <Tabs.List class="tabs-list flex-wrap event-segment-container p-1!">
           <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="asc">Ascending</Tabs.Trigger>
@@ -107,7 +107,7 @@
     </label>
 
     <label class="flex items-center gap-2 justify-between xl:justify-start grow md:grow-0">
-      Type
+      <span>Type</span>
       <Tabs.Root bind:value={showTypes}>
         <Tabs.List class="tabs-list flex-wrap event-segment-container p-1! gap-1">
           <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="any">All</Tabs.Trigger>
@@ -140,8 +140,8 @@
 
   <div class="flex flex-wrap items-center gap-2 lg:gap-3">
     <a
-            class="btn preset-tonal-tertiary border border-tertiary-500"
-            href="/account/team/{data.team.id}/members"
+      class="btn preset-tonal-tertiary border border-tertiary-500"
+      href="/account/team/{data.team.id}/members"
     >
       <Users/>
       <span>Player List</span>
@@ -156,26 +156,26 @@
 {/if}
 
 <style>
-    :global {
-        .event-segment-container {
-            border: 1px solid var(--color-surface-600-400);
+  :global {
+    .event-segment-container {
+      border: 1px solid var(--color-surface-600-400);
 
-            .tabs-trigger {
-                padding: 0.25rem 0.6rem;
-            }
-        }
+      .tabs-trigger {
+        padding: 0.25rem 0.6rem;
+      }
     }
+  }
 
-    .events-grid {
-        margin-block: calc(var(--spacing) * 4);
-        display: grid;
-    }
+  .events-grid {
+    margin-block: calc(var(--spacing) * 4);
+    display: grid;
+  }
 
-    header {
-        margin-block: calc(var(--spacing) * 3);
-    }
+  header {
+    margin-block: calc(var(--spacing) * 3);
+  }
 
-    section {
-        margin-block: calc(var(--spacing) * 4);
-    }
+  section {
+    margin-block: calc(var(--spacing) * 4);
+  }
 </style>
