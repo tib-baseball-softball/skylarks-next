@@ -80,7 +80,7 @@
 
     <!-- Main -->
 
-    <main class="">
+    <main>
       {@render children?.()}
     </main>
   </div>
@@ -227,7 +227,7 @@
     min-width: calc(var(--spacing) * 16);
   }
 
-  [aria-hidden="true"] {
+  .shame-div {
     display: none;
 
     @media (min-width: 48em) {
