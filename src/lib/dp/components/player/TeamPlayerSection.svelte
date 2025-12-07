@@ -1,8 +1,8 @@
 <script lang="ts">
   // @ts-expect-error
   import {Tabs} from "bits-ui";
-  import PlayerRow from "$lib/tib/components/player/PlayerRow.svelte";
-  import type {Player} from "$lib/tib/types/Player.ts";
+  import PlayerRow from "$lib/dp/components/player/PlayerRow.svelte";
+  import type {Player} from "$lib/dp/types/Player.ts";
 
   interface Props {
     players: Player[];

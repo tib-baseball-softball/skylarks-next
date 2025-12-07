@@ -1,8 +1,8 @@
 <script lang="ts">
-  import StatsBlockContent from "$lib/tib/components/stats/StatsBlockContent.svelte";
+  import StatsBlockContent from "$lib/dp/components/stats/StatsBlockContent.svelte";
   import type {AttendanceTotal} from "$lib/dp/types/PersonalAttendanceStats.ts";
   import {capitalize} from "$lib/dp/utility/capitalize.ts";
-  import type {SingleStatElement} from "$lib/tib/types/SingleStatElement.ts";
+  import type {SingleStatElement} from "$lib/dp/types/SingleStatElement.ts";
 
   interface Props {
     season: number | "All Time";

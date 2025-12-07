@@ -2491,7 +2491,6 @@ msgid "Since"
 msgstr "Desde"
 
 #: src/lib/tib/components/club/officials/ClubOfficialDetailCard.svelte
-#: src/routes/(dp)/(protected)/account/clubs/[club]/+page.svelte
 msgid "Contact"
 msgstr "Contacto"
 

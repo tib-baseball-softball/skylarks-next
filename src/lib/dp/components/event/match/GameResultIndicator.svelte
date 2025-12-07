@@ -1,8 +1,8 @@
 <script lang="ts">
   import type {Match} from "bsm.js";
   import {env} from "$env/dynamic/public";
-  import {MatchState} from "$lib/tib/enum/MatchState.ts";
-  import {MatchDecorator} from "$lib/tib/service/MatchDecorator.ts";
+  import {MatchState} from "$lib/dp/enum/MatchState.ts";
+  import {MatchDecorator} from "$lib/dp/service/MatchDecorator.ts";
 
   interface Props {
     match: Match;
@@ -10,8 +10,8 @@
 
   const {match}: Props = $props();
 
-  const matchDecorator = new MatchDecorator(match);
-  const matchState = matchDecorator.getMatchState(env.PUBLIC_TEAM_NAME);
+  const matchDecorator = $derived(new MatchDecorator(match));
+  const matchState = $derived(matchDecorator.getMatchState(env.PUBLIC_TEAM_NAME));
 </script>
 
 <div class="text-lg font-semibold">

@@ -9,8 +9,8 @@
   import EventParticipationSection from "$lib/dp/components/event/EventParticipationSection.svelte";
   import EventTypeBadge from "$lib/dp/components/event/EventTypeBadge.svelte";
   import TimeSection from "$lib/dp/components/event/TimeSection.svelte";
-  import MatchDetailLocationCard from "$lib/tib/components/match/MatchDetailLocationCard.svelte";
-  import MatchTeaserCard from "$lib/tib/components/match/MatchTeaserCard.svelte";
+  import MatchDetailLocationCard from "$lib/dp/components/event/match/MatchDetailLocationCard.svelte";
+  import MatchTeaserCard from "$lib/dp/components/event/match/MatchTeaserCard.svelte";
   import {authSettings} from "$lib/dp/client.svelte.js";
   import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
 
@@ -66,9 +66,9 @@
         <h2 class="h2">Location Details</h2>
 
         <MatchDetailLocationCard
-                field={$event.expand.location}
-                classes="my-4 space-y-5"
-                showDividers={false}
+          field={$event.expand.location}
+          classes="my-4 space-y-5"
+          showDividers={false}
         />
       </section>
     {/if}
@@ -115,10 +115,10 @@
         <h2 class="h3">Comments</h2>
       </header>
       <CommentSection
-              club={club}
-              comments={$event?.expand?.comments_via_event ?? []}
-              targetID={$event.id}
-              targetType="event"
+        club={club}
+        comments={$event?.expand?.comments_via_event ?? []}
+        targetID={$event.id}
+        targetType="event"
       />
     </div>
   </section>

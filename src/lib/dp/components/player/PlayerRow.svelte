@@ -1,6 +1,6 @@
 <script lang="ts">
-  import PlayerNumberGraphic from "$lib/tib/components/player/PlayerNumberGraphic.svelte";
-  import type {Player} from "$lib/tib/types/Player.ts";
+  import PlayerNumberGraphic from "$lib/dp/components/player/PlayerNumberGraphic.svelte";
+  import type {Player} from "$lib/dp/types/Player.ts";
 
   interface Props {
     player: Player;

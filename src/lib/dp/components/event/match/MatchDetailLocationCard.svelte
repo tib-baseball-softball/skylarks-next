@@ -1,16 +1,16 @@
 <script lang="ts">
   import type {Field} from "bsm.js";
   import {Building2, LandPlot, Link, MapPin} from "lucide-svelte";
-  import {MapUtility} from "$lib/tib/service/MapUtility.ts";
+  import {MapUtility} from "$lib/dp/service/MapUtility.ts";
 
   type DisplayedLocation = Omit<
-      Field,
-      | "created_at"
-      | "updated_at"
-      | "description_html"
-      | "other_information_html"
-      | "groundrules_html"
-      | "id"
+    Field,
+    | "created_at"
+    | "updated_at"
+    | "description_html"
+    | "other_information_html"
+    | "groundrules_html"
+    | "id"
   >
 
   interface Props {
@@ -26,10 +26,10 @@
   }: Props = $props();
 
   const googleMapsLink = $derived(
-      MapUtility.buildGoogleMapsURL(field.address_addon, field.latitude, field.longitude)
+    MapUtility.buildGoogleMapsURL(field.address_addon, field.latitude, field.longitude)
   );
   const appleMapsLink = $derived(
-      MapUtility.buildAppleMapsURL(field.address_addon, field.latitude, field.longitude)
+    MapUtility.buildAppleMapsURL(field.address_addon, field.latitude, field.longitude)
   );
 </script>
 
@@ -81,7 +81,7 @@
 </div>
 
 <style>
-    hr {
-        margin: 0.5rem 0;
-    }
+  hr {
+    margin: 0.5rem 0;
+  }
 </style>

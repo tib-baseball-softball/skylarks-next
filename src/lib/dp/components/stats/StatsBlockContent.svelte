@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type {SingleStatElement} from "$lib/tib/types/SingleStatElement.ts";
+  import type {SingleStatElement} from "$lib/dp/types/SingleStatElement.ts";
 
   interface props {
     block: SingleStatElement;
@@ -16,7 +16,7 @@
 </div>
 
 <style lang="postcss">
-    .stat-desc {
-        overflow: hidden;
-    }
+  .stat-desc {
+    overflow: hidden;
+  }
 </style>

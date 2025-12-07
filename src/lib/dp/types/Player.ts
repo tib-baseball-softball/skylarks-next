@@ -1,6 +1,6 @@
 import type {BaseballPosition} from "$lib/dp/types/BaseballPosition.ts";
-import type {Handedness} from "$lib/tib/types/Handedness.ts";
-import type {Media} from "$lib/tib/types/MediaData.ts";
+import type {Handedness} from "$lib/dp/types/Handedness.ts";
+import type {Media} from "$lib/dp/types/MediaData.ts";
 
 export interface Player {
   uid?: number;

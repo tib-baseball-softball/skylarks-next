@@ -1,5 +1,5 @@
 <script lang="ts">
-  import MatchTeaserCard from "$lib/tib/components/match/MatchTeaserCard.svelte";
+  import MatchTeaserCard from "$lib/dp/components/event/match/MatchTeaserCard.svelte";
   import type {Match} from "bsm.js";
   import {env} from "$env/dynamic/public";
   import ContentFilteredUnavailable from "$lib/tib/components/match/ContentFilteredUnavailable.svelte";
@@ -11,9 +11,9 @@
 
   let {matches = [], showExternal = false}: Props = $props();
   let skylarksGames = matches.filter(
-      (match) =>
-          match.away_team_name.includes(env.PUBLIC_TEAM_NAME) ||
-          match.home_team_name.includes(env.PUBLIC_TEAM_NAME)
+    (match) =>
+      match.away_team_name.includes(env.PUBLIC_TEAM_NAME) ||
+      match.home_team_name.includes(env.PUBLIC_TEAM_NAME)
   );
 </script>
 
@@ -22,8 +22,8 @@
     <h2 class="h2 my-3">Games</h2>
   </header>
   <div
-          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mb-6"
-          data-testid="match-grid"
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mb-6"
+    data-testid="match-grid"
   >
     {#if showExternal}
       {#each matches as match}

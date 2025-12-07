@@ -1,7 +1,7 @@
 <script lang="ts">
   import {Calendar, Dna, Hand, Users, UsersRound} from "lucide-svelte";
   import {getAgeFromTimestamp} from "$lib/dp/utility/getAgeFromTimestamp.js";
-  import type {Player} from "$lib/tib/types/Player.ts";
+  import type {Player} from "$lib/dp/types/Player.ts";
 
   interface Props {
     player: Player;
@@ -81,7 +81,7 @@
 </div>
 
 <style>
-    .position-item:not(:last-child)::after {
-        content: ",\00a0";
-    }
+  .position-item:not(:last-child)::after {
+    content: ",\00a0";
+  }
 </style>

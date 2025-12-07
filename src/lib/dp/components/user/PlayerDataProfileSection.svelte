@@ -1,12 +1,12 @@
 <script lang="ts">
   import {Link} from "lucide-svelte";
   import PlayerDataForm from "$lib/dp/components/forms/PlayerDataForm.svelte";
-  import PlayerDataCard from "$lib/tib/components/player/PlayerDataCard.svelte";
-  import PlayerHeaderSection from "$lib/tib/components/player/PlayerHeaderSection.svelte";
+  import PlayerDataCard from "$lib/dp/components/player/PlayerDataCard.svelte";
+  import PlayerHeaderSection from "$lib/dp/components/player/PlayerHeaderSection.svelte";
   import {authSettings, client} from "$lib/dp/client.svelte.js";
   import {positionKeysToEnumStringValues} from "$lib/dp/types/BaseballPosition.js";
   import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
-  import type {Player} from "$lib/tib/types/Player.ts";
+  import type {Player} from "$lib/dp/types/Player.ts";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
@@ -57,8 +57,8 @@
 
       {#if authRecord.bsm_id}
         <a
-                href="/players/{authRecord?.bsm_id}"
-                class="btn preset-tonal-secondary border border-secondary-500"
+          href="/players/{authRecord?.bsm_id}"
+          class="btn preset-tonal-secondary border border-secondary-500"
         >
           <Link/>
           <span>Go to Profile Page</span>
