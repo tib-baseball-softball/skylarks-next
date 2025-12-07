@@ -1,7 +1,7 @@
 <script lang="ts">
   import {goto} from "$app/navigation";
   import {page} from "$app/state";
-  import {preferences} from "$lib/tib/globals.svelte.ts";
+  import {appLocale} from "$lib/dp/locale.svelte.ts";
 
   async function reload() {
     await goto(page.url, {
@@ -12,12 +12,12 @@
     const htmlElement = document.querySelector("html");
 
     if (htmlElement) {
-      htmlElement.lang = preferences.current.locale;
+      htmlElement.lang = appLocale.current;
     }
   }
 </script>
 
-<select bind:value={preferences.current.locale} class="select" onchange={reload}>
+<select bind:value={appLocale.current} class="select" onchange={reload}>
   <option value="en">🇺🇸</option>
   <option value="de">🇩🇪</option>
   <option value="fr">🇫🇷</option>
@@ -28,11 +28,11 @@
 
 
 <style>
-    select {
-        font-size: 1.5rem;
-    }
+  select {
+    font-size: 1.5rem;
+  }
 
-    option {
-        font-size: 2rem;
-    }
+  option {
+    font-size: 2rem;
+  }
 </style>

@@ -2,7 +2,7 @@
   import {DateTimeUtility} from "$lib/dp/service/DateTimeUtility.ts";
   import {EventSeriesUtility} from "$lib/dp/service/EventSeriesUtility.ts";
   import type {EventseriesResponse} from "$lib/dp/types/pb-types.ts";
-  import {preferences} from "$lib/tib/globals.svelte.ts";
+  import {appLocale} from "$lib/dp/locale.svelte.ts";
 
   interface Props {
     eventSeries: EventseriesResponse;
@@ -48,7 +48,7 @@
 
       <div class="justify-self-start self-center flex gap-2 flex-wrap">
         <span class="badge block preset-outlined">
-          {new Intl.DateTimeFormat(preferences.current.locale, options).format(startDate)}
+          {new Intl.DateTimeFormat(appLocale.current, options).format(startDate)}
         </span>
 
         {#if seriesState === "ongoing"}

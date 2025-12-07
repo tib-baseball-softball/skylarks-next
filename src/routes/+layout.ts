@@ -7,6 +7,7 @@ import {browser} from "$app/environment";
 import {loadLocale} from "wuchale/load-utils";
 import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
 import {locales} from "../locales/data";
+import {appLocale} from "$lib/dp/locale.svelte.ts";
 
 export const ssr = false;
 
@@ -41,9 +42,9 @@ export const load: LayoutLoad = async ({fetch, depends}) => {
 
   if (browser) {
     let locale: string;
-    if (preferences.current.locale) {
+    if (appLocale.current) {
       // locale has been set before
-      locale = preferences.current.locale;
+      locale = appLocale.current;
     } else {
       // locale is unset so far, try to read from browser settings
       const browserPreferredLocale = navigator.language.slice(0, 2); // Safari has `de-DE`, Chrome and Firefox use `de`
