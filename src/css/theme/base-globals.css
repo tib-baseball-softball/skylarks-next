@@ -19,6 +19,7 @@
     /* https://developer.chrome.com/docs/css-ui/scrollbar-styling */
     scrollbar-color: var(--color-surface-300-700) var(--color-surface-100-900); /* thumb / track */
     scrollbar-width: thin;
+    --nav-item-background: light-dark(var(--body-background-color), var(--color-surface-800));
   }
 
   html {
