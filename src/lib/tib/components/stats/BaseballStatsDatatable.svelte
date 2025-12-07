@@ -23,11 +23,11 @@
 
   let type: StatsType = $state(StatsType.batting);
   let summaryData:
-      | StatisticsSummary<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics">
-      | undefined = $state(data.batting.summaries.at(0));
+    | StatisticsSummary<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics">
+    | undefined = $state(data.batting.summaries.at(0));
 
   const handler = new DataHandler<
-      StatisticsData<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics">
+    StatisticsData<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics">
   >(data.batting.data, {rowsPerPage: rowsPerPage});
 
   function changeDataForHandler(type: StatsType) {
@@ -70,7 +70,7 @@
 
   <div class="flex flex-col">
     <div
-            class="stats stats-vertical sm:stats-horizontal preset-tonal-surface rounded-container"
+      class="stats preset-tonal-surface rounded-container"
     >
       {#if summaryData}
         <StatsBlock row={summaryData} {type}/>
@@ -79,7 +79,7 @@
   </div>
 
   <!-- Table -->
-  <table class="table  table-compact w-full">
+  <table class="table table-compact">
     <StatsTableContent {handler} {tableType} {type}/>
 
     <tfoot>
@@ -93,29 +93,38 @@
     </tfoot>
   </table>
   <!-- Footer -->
-  <footer class="flex justify-between">
+  <footer>
     <RowCount {handler}/>
     <Pagination {handler}/>
   </footer>
 </div>
 
 <style lang="postcss">
+  .stats {
+    margin-top: 1rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  @media (min-width: 1024px) {
     .stats {
-        margin-top: 1rem !important;
-        margin-bottom: 0.75rem !important;
+      margin-top: 1.5rem !important;
+      margin-bottom: 1rem !important;
     }
+  }
 
-    @media (min-width: 1024px) {
-        .stats {
-            margin-top: 1.5rem !important;
-            margin-bottom: 1rem !important;
-        }
-    }
+  .table {
+    width: 100%;
+  }
 
-    /* ugly hack to prevent table overflow */
-    @media (min-width: 1400px) and (max-width: 1800px) {
-        .table-wrap {
-            max-width: 90%;
-        }
+  /* ugly hack to prevent table overflow */
+  @media (min-width: 1400px) and (max-width: 1800px) {
+    .table-wrap {
+      max-width: 90%;
     }
+  }
+
+  footer {
+    display: flex;
+    justify-content: space-between;
+  }
 </style>

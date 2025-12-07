@@ -2,7 +2,7 @@ import {browser} from "$app/environment";
 import {client} from "$lib/dp/client.svelte.ts";
 import {preferences} from "$lib/tib/globals.svelte.ts";
 import type {HomeDataset} from "$lib/tib/types/HomeDataset.ts";
-import type {PageLoad} from "../../../../.svelte-kit/types/src/routes";
+import type {PageLoad} from "./$types";
 
 export const load: PageLoad = async ({parent, url, fetch}) => {
   let teamId = Number(url.searchParams.get("team"));

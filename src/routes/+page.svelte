@@ -1,6 +1,6 @@
 <script lang="ts">
   import CurrentMatchesOverviewCard from "$lib/tib/components/match/CurrentMatchesOverviewCard.svelte";
-  import type {PageProps} from "../../../.svelte-kit/types/src/routes";
+  import type {PageProps} from "./$types";
 
   let {data}: PageProps = $props();
 </script>
@@ -32,31 +32,31 @@
 
   <section id="Scores">
     <CurrentMatchesOverviewCard
-            matchesCurrent={data.streamed.matchesCurrent}
-            matchesNext={data.streamed.matchesNext}
-            matchesPrevious={data.streamed.matchesPrevious}
+      matchesCurrent={data.matchesCurrent}
+      matchesNext={data.matchesNext}
+      matchesPrevious={data.matchesPrevious}
     />
   </section>
 
 </div>
 
 <style>
-    .hero {
-        display: grid;
-        width: 100%;
-        place-items: start;
-        background-size: cover;
-        background-position: center;
-        background-image: url("/header_hero.jpg");
-    }
+  .hero {
+    display: grid;
+    width: 100%;
+    place-items: start;
+    background-size: cover;
+    background-position: center;
+    background-image: url("/header_hero.jpg");
+  }
 
-    .hero-content {
-        z-index: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        max-width: 80rem;
-        gap: 1rem;
-        padding: 1rem;
-    }
+  .hero-content {
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 80rem;
+    gap: 1rem;
+    padding: 1rem;
+  }
 </style>

@@ -1,9 +1,12 @@
 package tib
 
 import (
+	"encoding/json"
 	"errors"
 	"net/http"
 	"net/url"
+	"os"
+	"strings"
 
 	"github.com/diamond-planner/diamond-planner/bsm"
 	"github.com/pocketbase/pocketbase/core"
@@ -11,39 +14,92 @@ import (
 
 // GetRelayedBSMData relays BSM request so the client-side does not need to know API keys.
 // Uses allowlist for URLs to make sure only public information is disclosed.
-func GetRelayedBSMData(client bsm.APIClient) func(e *core.RequestEvent) error {
+// Makes Pocketbase take the role of the SvelteKit Node.js server for server load functions.
+func GetRelayedBSMData() func(e *core.RequestEvent) error {
 	return func(e *core.RequestEvent) error {
-		// request checks
-		bsmURL := e.Request.URL.Query().Get("url")
-		if bsmURL == "" {
-			return e.JSON(http.StatusBadRequest, "BSM URL not found in request")
-		}
-		clubID := e.Request.URL.Query().Get("club")
-		if clubID == "" {
-			return e.JSON(http.StatusBadRequest, "Club ID not found in request")
-		}
-		// actual operations
-		parsedURL, err := url.Parse(bsmURL)
-		if err != nil {
-			return e.JSON(http.StatusBadRequest, "Failed to parse given URL string into a valid URL")
-		}
+		targetURL := rewriteURLForProxying(*e.Request.URL)
 
-		urlWithKey, err := client.AppendAPIKey(e.App, *parsedURL, clubID)
-		if err != nil {
-			return e.JSON(http.StatusInternalServerError, "Internal error occurred")
-		}
-
-		cachedResponseBody, err := GetCachedBSMResponse(e.App, &urlWithKey)
+		cachedResponseBody, err := GetCachedBSMResponse(e.App, &targetURL)
 		if err != nil {
 			var bsmErr *bsm.URLAllowlistError
 			if errors.As(err, &bsmErr) {
 				return e.JSON(http.StatusForbidden, err.Error())
 			} else {
-				e.App.Logger().Error("Failed to get cached BSM response", "error", err, "url", bsmURL)
+				e.App.Logger().Error("Failed to get cached BSM response", "error", err, "url", targetURL)
 				return e.JSON(http.StatusInternalServerError, "Internal error occurred")
 			}
 		}
 
-		return e.Blob(http.StatusOK, "application/json", []byte(cachedResponseBody))
+		stripped, err := stripResponseKeys(cachedResponseBody)
+		if err != nil {
+			e.App.Logger().Error("Failed to unmarshal cached BSM response", "error", err, "url", targetURL)
+			return e.JSON(http.StatusInternalServerError, "Internal error occurred")
+		}
+
+		return e.Blob(http.StatusOK, "application/json", stripped)
 	}
+}
+
+var keysToRemoveFromBSMResponse = []string{
+	"current_player_list",
+	"current_roster",
+	"gamechanger",
+}
+
+// stripResponseKeys removes keys from the response body that are not needed for the client.
+func stripResponseKeys(cachedResponseBody string) ([]byte, error) {
+	var arrayShapeData []map[string]any
+	var objectShapeData map[string]any
+	var unmarshalTypeError *json.UnmarshalTypeError
+	var bytes []byte
+
+	err := json.Unmarshal([]byte(cachedResponseBody), &arrayShapeData)
+	if err != nil {
+		if errors.As(err, &unmarshalTypeError) {
+			// response is not JSON array, try to unmarshal as an object
+			err = json.Unmarshal([]byte(cachedResponseBody), &objectShapeData)
+			if err != nil {
+				return nil, err
+			}
+
+			for _, key := range keysToRemoveFromBSMResponse {
+				delete(objectShapeData, key)
+			}
+			bytes, err = json.Marshal(objectShapeData)
+			if err != nil {
+				return nil, err
+			}
+		} else {
+			// all other errors can bubble up
+			return nil, err
+		}
+	} else {
+		// response is JSON array
+		for _, item := range arrayShapeData {
+			for _, key := range keysToRemoveFromBSMResponse {
+				delete(item, key)
+			}
+		}
+		bytes, err = json.Marshal(arrayShapeData)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	return bytes, nil
+}
+
+// rewriteURLForProxying rewrites the given URL to point to the BSM API.
+func rewriteURLForProxying(url url.URL) url.URL {
+	bsmHost := os.Getenv("BSM_API_HOST")
+	targetURL := url
+	targetURL.Scheme = "https"
+	targetURL.Host = bsmHost
+	targetURL.Path = strings.TrimPrefix(url.Path, "/api/bsm/relay")
+
+	newQuery := url.Query()
+	newQuery.Set("api_key", os.Getenv("BSM_API_KEY"))
+	targetURL.RawQuery = newQuery.Encode()
+
+	return targetURL
 }

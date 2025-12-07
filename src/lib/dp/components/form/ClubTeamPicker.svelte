@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type {ClubTeam} from "bsm.js";
+  import type {Team} from "bsm.js";
   import {preferences} from "$lib/tib/globals.svelte.ts";
 
   interface Props {
-    clubTeams?: ClubTeam[];
+    clubTeams?: Team[];
     onChange?: () => void;
   }
 
@@ -19,8 +19,8 @@
           onchange={() => onChange()}>
     <option value="{0}">None</option>
     {#each clubTeams as clubTeam}
-      <option value="{clubTeam.team.id}">{clubTeam.team.name}
-        ({clubTeam.team.league_entries.map(entry => entry.league.acronym)})
+      <option value="{clubTeam.id}">{clubTeam.name}
+        ({clubTeam.league_entries.map(entry => entry.league.acronym)})
       </option>
     {/each}
   </select>

@@ -7,18 +7,12 @@ import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
 import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
 import type {Schema} from "$lib/dp/types/pb-types.ts";
 
-// necessary because: https://github.com/pocketbase/pocketbase/discussions/5313
-export function createPocketBaseInstance() {
-  return new TypedPocketBase<Schema>(env.PUBLIC_POCKETBASE_URL);
-}
-
-/** ######################################################
+/**
+ * baseURL is only explicitly defined in dev, use relative URLs for Prod.
  *
- * Instance of the PB client in an app-wide scope.
- *
- * _Reminder_: This absolutely has to stay out of all server-side code.
+ * No server is involved, so a single shared instance is fine.
  */
-export const client = createPocketBaseInstance();
+export const client = new TypedPocketBase<Schema>(dev ? env.PUBLIC_POCKETBASE_URL : undefined);
 
 /**
  * Global auth state object
@@ -59,7 +53,7 @@ client.authStore.onChange((_token, record) => {
 });
 
 /**
- * In addition to onChange func, also provide manual option to refresh current user.
+ * In addition to onChange func, also provide a manual option to refresh the current user.
  */
 export async function manualAuthRefresh(): Promise<RecordAuthResponse<RecordModel>> {
   const authData = await client.collection("users").authRefresh();

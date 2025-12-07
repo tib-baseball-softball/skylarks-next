@@ -1,5 +1,5 @@
-import adapter from "@sveltejs/adapter-node"
-import { vitePreprocess } from "@sveltejs/vite-plugin-svelte"
+import adapter from '@sveltejs/adapter-static';
+import {vitePreprocess} from "@sveltejs/vite-plugin-svelte";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -9,7 +9,10 @@ const config = {
   preprocess: [vitePreprocess()],
 
   kit: {
-    adapter: adapter(),
+    adapter: adapter({
+      fallback: "index.html",
+      pages: "backend/pb_public",
+    }),
     csp: {
       directives: {
         "default-src": [
@@ -21,8 +24,10 @@ const config = {
         "connect-src": [
           "self",
           "https://*.baseball-softball.de",
+          "https://tib-baseball.de",
           "https://*.tib-baseball.de",
           "https://*.berlinskylarks.de",
+          "https://*.ddev.site",
           "http://127.0.0.1:8090",
         ],
         "img-src": [
@@ -31,6 +36,7 @@ const config = {
           "https://*.baseball-softball.de",
           "https://*.tib-baseball.de",
           "https://*.berlinskylarks.de",
+          "https://*.ddev.site",
           "http://127.0.0.1:8090",
           "https://*.tile.openstreetmap.de",
         ],
@@ -41,5 +47,5 @@ const config = {
       },
     },
   },
-}
-export default config
+};
+export default config;

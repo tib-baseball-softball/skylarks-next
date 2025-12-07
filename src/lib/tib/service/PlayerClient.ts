@@ -9,12 +9,12 @@ export class PlayerClient extends TYPO3Client {
    * @return {Promise<Player | undefined>} A promise that resolves to the player object if found, or undefined if not found.
    */
   async fetchSinglePlayer(bsmID: string): Promise<Player | undefined> {
-    const url = this.buildRequestURL("/api/v2/players", {
+    const url = this.buildRequestURL("api/v2/players", {
       bsmid: bsmID,
     });
 
     const response: Response = await this.fetch(url, {
-      headers: this.AUTH_HEADERS,
+      headers: this.HEADERS,
     });
 
     let player: Player | undefined;
@@ -28,10 +28,10 @@ export class PlayerClient extends TYPO3Client {
   }
 
   async fetchPlayersByFilters(query: PlayerQuery): Promise<Player[] | undefined> {
-    const url = this.buildRequestURL("/api/v2/players", query);
+    const url = this.buildRequestURL("api/v2/players", query);
 
     const response: Response = await this.fetch(url, {
-      headers: this.AUTH_HEADERS,
+      headers: this.HEADERS,
     });
 
     return await response.json();

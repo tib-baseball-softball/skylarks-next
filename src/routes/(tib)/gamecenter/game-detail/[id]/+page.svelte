@@ -6,7 +6,7 @@
   import MatchDetailStatsCard from "$lib/tib/components/match/MatchDetailStatsCard.svelte";
   import MatchDetailLocationCard from "$lib/tib/components/match/MatchDetailLocationCard.svelte";
   import MatchDetailOfficialsCard from "$lib/tib/components/match/MatchDetailOfficialsCard.svelte";
-  import type {PageProps} from "../../../../../../.svelte-kit/types/src/routes";
+  import type {PageProps} from "./$types";
   import ContentFilteredUnavailable from "$lib/tib/components/match/ContentFilteredUnavailable.svelte";
   import GameReport from "$lib/tib/components/gameReport/GameReport.svelte";
   import ShareButton from "$lib/tib/components/match/ShareButton.svelte";
@@ -27,24 +27,24 @@
 <section class="mb-8">
 
   <Tabs.Root
-          bind:value={tabSet}
+    bind:value={tabSet}
   >
     <Tabs.List
-            class="tabs-list preset-tonal-surface mt-6"
+      class="tabs-list preset-tonal-surface mt-6"
     >
       <Tabs.Trigger
-              class="tabs-trigger btn"
-              value="gameData"
+        class="tabs-trigger btn"
+        value="gameData"
       >Game Data
       </Tabs.Trigger>
       <Tabs.Trigger
-              class="tabs-trigger btn"
-              value="boxscore"
+        class="tabs-trigger btn"
+        value="boxscore"
       >Box Score
       </Tabs.Trigger>
       <Tabs.Trigger
-              class="tabs-trigger btn"
-              value="gameReport"
+        class="tabs-trigger btn"
+        value="gameReport"
       >Game Report
       </Tabs.Trigger>
     </Tabs.List>
@@ -64,10 +64,10 @@
         {#if boxscore}
           <MatchBoxscoreSection {boxscore}/>
         {:else }
-          <ContentFilteredUnavailable text="No Box Score available."/>
+          <ContentFilteredUnavailable text="Box Score for this game could not be loaded or is unavailable."/>
         {/if}
       {:catch error}
-        <p>error loading boxscore: {error.message}</p>
+        <p>error loading box score: {error.message}</p>
       {/await}
     </Tabs.Content>
 

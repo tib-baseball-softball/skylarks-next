@@ -23,10 +23,18 @@ const (
 var cacheURLAllowlist = []*regexp.Regexp{
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/clubs/\d+/licenses\.json(?:\?.*)?$`),
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/clubs/\d+\.json(?:\?.*)?$`),
-	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/league_groups/\d+(\.json|/.*)?(?:\?.*)?$`),
+	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/league_groups(/\d+)?(\.json)?(?:\?.*)?$`),
+	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/league_groups/\d+/top10/(batting|pitching|fielding)/[^/]+\.json(?:\?.*)?$`),
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/licenses/\d+\.json(?:\?.*)?$`),
+	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/matches/\d+\.json(?:\?.*)?$`),
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/clubs/\d+/club_functions\.json(?:\?.*)?$`),
 	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/clubs/\d+/fields\.json(?:\?.*)?$`),
+	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/clubs/\d+/matches\.json(?:\?.*)?$`),
+	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/matches\.json(?:\?.*)?$`),
+	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/clubs/\d+/(teams|team_clubs)\.json(?:\?.*)?$`),
+	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/league_groups/\d+/(table|statistics)\.json(?:\?.*)?$`),
+	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/(league_entries|people|clubs)/\d+/(statistics)(/.*)?\.json(?:\?.*)?$`),
+	regexp.MustCompile(`^https://bsm\.baseball-softball\.de/matches/\d+/match_boxscore\.json(?:\?.*)?$`),
 }
 
 type CachingApp interface {
@@ -37,8 +45,8 @@ type CachingApp interface {
 	FindCollectionByNameOrId(nameOrId string) (*core.Collection, error)
 }
 
-// isValidBSMURL checks if the given url matches any regex in the cacheURLAllowlist
-func isValidBSMURL(u *url.URL) bool {
+// isAllowedBSMURL checks if the given url matches any regex in the cacheURLAllowlist
+func isAllowedBSMURL(u *url.URL) bool {
 	urlStr := u.String()
 	for _, re := range cacheURLAllowlist {
 		if re.MatchString(urlStr) {
@@ -80,11 +88,13 @@ func GetLeagueTop10Data(app CachingApp, client bsm.BaseClient, leagueID string, 
 
 			rawResponseData, err := GetCachedBSMResponse(app, apiURL)
 			if err != nil {
+				app.Logger().Error("Error fetching league leaderboard", "error", err, "resource", resource)
 				return
 			}
 			var leaderboardData bsm.LeaderboardData
 			err = json.Unmarshal([]byte(rawResponseData), &leaderboardData)
 			if err != nil {
+				app.Logger().Error("Error unmarshalling league leaderboard", "error", err, "resource", resource)
 				return
 			}
 
@@ -100,8 +110,8 @@ func GetLeagueTop10Data(app CachingApp, client bsm.BaseClient, leagueID string, 
 func GetCachedBSMResponse(app CachingApp, url *url.URL) (string, error) {
 	var ret string
 
-	if url.Host != os.Getenv("BSM_API_HOST") || !isValidBSMURL(url) {
-		return ret, &bsm.URLAllowlistError{URL: url.String(), Message: "Only allowlisted BSM URLs are allowed"}
+	if url.Host != os.Getenv("BSM_API_HOST") || !isAllowedBSMURL(url) {
+		return ret, &bsm.URLAllowlistError{URL: url.Path, Message: "Only allowlisted BSM URLs are allowed"}
 	}
 	hash := dp.GetMD5Hash(url.String())
 
@@ -140,11 +150,30 @@ func GetCachedBSMResponse(app CachingApp, url *url.URL) (string, error) {
 	return ret, nil
 }
 
-func saveBSMResponseToCache(app CachingApp, url string) (*core.Record, error) {
-	_, body, err := bsm.FetchResource[any](url)
+func saveBSMResponseToCache(app CachingApp, bsmURL string) (*core.Record, error) {
+	_, body, err := bsm.FetchResource[any](bsmURL)
 	if err != nil {
-		app.Logger().Error("Failed to get data from BSM", "err", err, "url", url)
-		return nil, err
+		var fetchError *url.Error
+		var invalidUnmarshalError *json.InvalidUnmarshalError
+		var jsonSyntaxError *json.SyntaxError
+
+		if errors.As(err, &fetchError) {
+			app.Logger().Error("Fetch to BSM failed.", "err", err, "bsmURL", bsmURL)
+			return nil, fetchError
+		}
+		if errors.As(err, &invalidUnmarshalError) {
+			app.Logger().Error("JSON unmarshal failed.", "err", err, "bsmURL", bsmURL)
+			return nil, invalidUnmarshalError
+		}
+
+		// other errors get treated as common operations that can be handled
+		app.Logger().Warn("Empty/Invalid Response from BSM", "err", err, "bsmURL", bsmURL)
+
+		if errors.As(err, &jsonSyntaxError) {
+			if body == "" {
+				body = "null" // valid JSON
+			}
+		}
 	}
 
 	collection, err := app.FindCollectionByNameOrId(dp.RequestCacheCollection)
@@ -157,8 +186,8 @@ func saveBSMResponseToCache(app CachingApp, url string) (*core.Record, error) {
 	cache.SetProxyRecord(record)
 
 	cache.SetResponseBody(body)
-	cache.SetHash(dp.GetMD5Hash(url))
-	cache.SetURL(url)
+	cache.SetHash(dp.GetMD5Hash(bsmURL))
+	cache.SetURL(bsmURL)
 
 	err = app.Save(record)
 	if err != nil {
