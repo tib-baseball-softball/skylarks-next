@@ -82,9 +82,6 @@
 
     <main class="">
       {@render children?.()}
-      <noscript>This website is actually a JavaScript application with lots of functionality. You need to enable
-        JavaScript for it to work.
-      </noscript>
     </main>
   </div>
 
