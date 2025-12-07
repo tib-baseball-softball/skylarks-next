@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {Mail, Plus, SquareArrowOutUpRight} from "lucide-svelte";
+  import {Plus, SquareArrowOutUpRight} from "lucide-svelte";
   import AnnouncementSectionContent from "$lib/dp/components/announcements/AnnouncementSectionContent.svelte";
   import ClubDetailCard from "$lib/dp/components/club/ClubDetailCard.svelte";
   import TeamListTeaser from "$lib/dp/components/team/TeamListTeaser.svelte";
@@ -15,7 +15,7 @@
     ExpandedTeam,
     ExpandedUniformSet,
   } from "$lib/dp/types/ExpandedResponse.ts";
-  import type {PageProps} from "../../../../../../../.svelte-kit/types/src/routes";
+  import type {PageProps} from "./$types";
 
   const {data}: PageProps = $props();
 
@@ -30,8 +30,8 @@
 <svelte:head>
   <title>Club Details</title>
   <meta
-          content="Club overview page for the {club.name} with info about teams and uniform sets."
-          name="description"
+    content="Club overview page for the {club.name} with info about teams and uniform sets."
+    name="description"
   />
 </svelte:head>
 
@@ -50,11 +50,11 @@
 
   {#if club?.admins.includes(authRecord.id)}
     <AnnouncementForm
-            announcement={null}
-            team={null}
-            {club}
-            buttonClasses="btn preset-filled-primary-500"
-            showLabel={true}
+      announcement={null}
+      team={null}
+      {club}
+      buttonClasses="btn preset-filled-primary-500"
+      showLabel={true}
     />
   {/if}
 </section>
@@ -76,10 +76,10 @@
 
   {#if club?.admins.includes(authRecord.id)}
     <TeamForm
-            team={null}
-            {club}
-            buttonClasses="btn preset-filled-primary-500"
-            showLabel={true}
+      team={null}
+      {club}
+      buttonClasses="btn preset-filled-primary-500"
+      showLabel={true}
     />
   {/if}
 </section>
@@ -119,8 +119,8 @@
   </header>
 
   <a
-          class="btn preset-filled-primary-500"
-          href="/account/clubs/{club.id}/locations"
+    class="btn preset-filled-primary-500"
+    href="/account/clubs/{club.id}/locations"
   >
     <span>Locations Page</span>
     <SquareArrowOutUpRight size="20"/>
@@ -136,14 +136,14 @@
     </header>
 
     <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-3"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-3"
     >
       <article class="card admin-card preset-outlined-surface-500">
         <header class="card-header">
           <h3 class="h4 font-semibold">Club deletion</h3>
         </header>
 
-        <section class="p-4 space-y-2">
+        <section class="card-section">
           <p>
             Deleting a club will delete all team, event and participation data.
             For safety reasons, a club can therefore only be deleted by a
@@ -152,16 +152,27 @@
           <p>Please contact your club's administration.</p>
         </section>
 
-        <footer class="card-footer flex">
-          <a
-                  class="btn preset-tonal-secondary border border-secondary-500 dark:preset-filled-secondary-500 dark:border grow"
-                  href="mailto:webmaster@tib-baseball.de"
-          >
-            <Mail/>
-            <span class="ms-2">Contact</span>
-          </a>
-        </footer>
+        <!--        TODO: add email link-->
+        <!--        <footer class="card-footer">-->
+        <!--          <a-->
+        <!--                  class="btn preset-tonal-secondary border border-secondary-500 dark:preset-filled-secondary-500 dark:border grow"-->
+        <!--                  href=""-->
+        <!--          >-->
+        <!--            <Mail/>-->
+        <!--            <span class="ms-2">Contact</span>-->
+        <!--          </a>-->
+        <!--        </footer>-->
       </article>
     </div>
   </section>
 {/if}
+
+<style>
+  .card-section {
+    padding: calc(var(--spacing) * 4);
+
+    p:first-child {
+      margin-block-end: calc(var(--spacing) * 2);
+    }
+  }
+</style>
