@@ -42,7 +42,7 @@
 
   <hr class="mt-2 mx-3"/>
 
-  <section class="p-4 flex flex-col gap-2">
+  <section>
     <MatchTeaserCardRow
       logo={awayLogo}
       score={match.away_runs}
@@ -57,3 +57,13 @@
     />
   </section>
 </a>
+
+<style>
+  section {
+    padding: calc(var(--spacing) * 4);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 2);
+
+  }
+</style>

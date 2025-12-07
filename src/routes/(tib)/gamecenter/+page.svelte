@@ -55,63 +55,71 @@
 
     <div class="flex gap-2 my-4 justify-end">
       <Switch
-              --switch-active-bg="light-dark(var(--color-surface-900), var(--color-tertiary-700))"
-              bind:checked={showExternal}
-              name="slide"
+        --switch-active-bg="light-dark(var(--color-surface-900), var(--color-tertiary-700))"
+        bind:checked={showExternal}
+        name="slide"
       />
       <p>Show external games</p>
     </div>
   </div>
 </div>
 
-<section class="mb-5 mt-3">
-  <label class="label" id="gameday_label">
-    Gameday
-    <Tabs.Root
-            class=""
-            onValueChange={onGamedayChange}
-            value={preferences.current.gameday}
+<section class="gameday-section">
+  <header class="h4">Gameday</header>
+  <Tabs.Root
+    onValueChange={onGamedayChange}
+    value={preferences.current.gameday}
+  >
+    <Tabs.List
+      class="tabs-list preset-tonal-surface"
     >
-      <Tabs.List
-              class="tabs-list preset-tonal-surface"
+      <Tabs.Trigger
+        class="tabs-trigger btn"
+        data-testid="segment-item-previous"
+        value={Gameday.previous}
+      >Previous
+      </Tabs.Trigger>
+      <Tabs.Trigger
+        class="tabs-trigger btn"
+        data-testid="segment-item"
+        value={Gameday.current}
       >
-        <Tabs.Trigger
-                class="tabs-trigger btn"
-                data-testid="segment-item-previous"
-                value={Gameday.previous}
-        >Previous
-        </Tabs.Trigger>
-        <Tabs.Trigger
-                class="tabs-trigger btn"
-                data-testid="segment-item"
-                value={Gameday.current}
-        >Current
-        </Tabs.Trigger>
-        <Tabs.Trigger
-                class="tabs-trigger btn"
-                data-testid="segment-item"
-                value={Gameday.next}
-        >Next
-        </Tabs.Trigger>
-        <Tabs.Trigger
-                class="tabs-trigger btn"
-                data-testid="segment-item"
-                value={Gameday.any}
-        >All
-        </Tabs.Trigger>
-      </Tabs.List>
+        Current
+      </Tabs.Trigger>
+      <Tabs.Trigger
+        class="tabs-trigger btn"
+        data-testid="segment-item"
+        value={Gameday.next}
+      >Next
+      </Tabs.Trigger>
+      <Tabs.Trigger
+        class="tabs-trigger btn"
+        data-testid="segment-item"
+        value={Gameday.any}
+      >All
+      </Tabs.Trigger>
+    </Tabs.List>
 
-      <Tabs.Content class="pt-3" value={preferences.current.gameday}>
-        {#await data.streamed.matches}
-          <p>Loading matches...</p>
-          <ProgressRing/>
-        {:then matches}
-          <GamecenterMatchSection {matches} {showExternal}/>
-        {:catch error}
-          <p>error loading matches: {error.message}</p>
-        {/await}
-      </Tabs.Content>
-    </Tabs.Root>
-
-  </label>
+    <Tabs.Content class="pt-3" value={preferences.current.gameday}>
+      {#await data.streamed.matches}
+        <p>Loading matches...</p>
+        <ProgressRing/>
+      {:then matches}
+        <GamecenterMatchSection {matches} {showExternal}/>
+      {:catch error}
+        <p>error loading matches: {error.message}</p>
+      {/await}
+    </Tabs.Content>
+  </Tabs.Root>
 </section>
+
+<style>
+  .gameday-section {
+    margin-block-end: calc(var(--spacing) * 5);
+    margin-block-start: calc(var(--spacing) * 3);
+
+    header {
+      margin-block-end: 0.5rem;
+    }
+  }
+</style>

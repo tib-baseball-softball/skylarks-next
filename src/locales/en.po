@@ -21,14 +21,6 @@ msgstr "Berlin Skylarks Web App"
 msgid "Skylarks Team Logo"
 msgstr "Skylarks Team Logo"
 
-#: src/routes/+layout.svelte
-msgid ""
-"This website is actually a JavaScript application with lots of functionality. You need to enable\n"
-"JavaScript for it to work."
-msgstr ""
-"This website is actually a JavaScript application with lots of functionality. You need to enable\n"
-"JavaScript for it to work."
-
 #: src/routes/+page.svelte
 msgid "Hero"
 msgstr "Hero"
@@ -285,7 +277,7 @@ msgid "More Info"
 msgstr "More Info"
 
 #: src/lib/dp/components/navigation/StaticNavigationLinks.svelte
-#: src/lib/tib/components/player/PlayerDataCard.svelte
+#: src/lib/dp/components/player/PlayerDataCard.svelte
 #: src/routes/(tib)/club/+page.svelte
 #: src/routes/(tib)/teams/+page.svelte
 msgid "Teams"
@@ -313,7 +305,7 @@ msgstr "Umpire"
 msgid "Our Referees"
 msgstr "Our Referees"
 
-#: src/lib/tib/components/match/MatchDetailLocationCard.svelte
+#: src/lib/dp/components/event/match/MatchDetailLocationCard.svelte
 #: src/routes/(tib)/club/+page.svelte
 #: src/routes/(tib)/club/ballpark/+page.svelte
 msgid "Ballpark"
@@ -422,6 +414,7 @@ msgid "Show external games"
 msgstr "Show external games"
 
 #: src/lib/tib/components/match/CurrentMatchBlock.svelte
+#: src/routes/(tib)/gamecenter/+page.svelte
 msgid "Loading matches..."
 msgstr "Loading matches..."
 
@@ -433,6 +426,7 @@ msgstr "Loading matches..."
 #. placeholder {0}: error.message
 #: src/lib/dp/components/forms/TeamGamesModal.svelte
 #: src/lib/tib/components/match/CurrentMatchBlock.svelte
+#: src/routes/(tib)/gamecenter/+page.svelte
 #: src/routes/(tib)/ligen/[id]/stats/+page.svelte
 msgid "error loading matches: {0}"
 msgstr "error loading matches: {0}"
@@ -866,13 +860,13 @@ msgstr "HBP"
 msgid "WHIP"
 msgstr "WHIP"
 
-#: src/lib/tib/components/match/GameResultIndicator.svelte
+#: src/lib/dp/components/event/match/GameResultIndicator.svelte
 #: src/lib/tib/components/stats/StatsHeaderRow.svelte
 #: src/lib/tib/components/table/StandingsTable.svelte
 msgid "W"
 msgstr "W"
 
-#: src/lib/tib/components/match/GameResultIndicator.svelte
+#: src/lib/dp/components/event/match/GameResultIndicator.svelte
 #: src/lib/tib/components/stats/StatsHeaderRow.svelte
 #: src/lib/tib/components/table/StandingsTable.svelte
 msgid "L"
@@ -1401,8 +1395,8 @@ msgstr "Street"
 msgid "Postal Code"
 msgstr "Postal Code"
 
+#: src/lib/dp/components/event/match/MatchDetailLocationCard.svelte
 #: src/lib/dp/components/forms/LocationForm.svelte
-#: src/lib/tib/components/match/MatchDetailLocationCard.svelte
 msgid "City"
 msgstr "City"
 
@@ -1582,16 +1576,6 @@ msgid "Cap Color"
 msgstr "Cap Color"
 
 #: src/lib/dp/components/forms/UniformSetForm.svelte
-msgid ""
-"You can use the special identifiers <0>B</0> and <1>Bird</1> to get\n"
-"the Skylarks Home and Road Cap instead of a\n"
-"generic colored one."
-msgstr ""
-"You can use the special identifiers <0>B</0> and <1>Bird</1> to get\n"
-"the Skylarks Home and Road Cap instead of a\n"
-"generic colored one."
-
-#: src/lib/dp/components/forms/UniformSetForm.svelte
 msgid "Jersey Color"
 msgstr "Jersey Color"
 
@@ -1664,15 +1648,15 @@ msgstr "Sport"
 msgid "Age Group"
 msgstr "Age Group"
 
-#: src/lib/dp/components/meta/Footer.svelte
+#: src/routes/+layout.svelte
 msgid "Facebook brand logo"
 msgstr "Facebook brand logo"
 
-#: src/lib/dp/components/meta/Footer.svelte
+#: src/routes/+layout.svelte
 msgid "Instagram brand logo"
 msgstr "Instagram brand logo"
 
-#: src/lib/dp/components/meta/Footer.svelte
+#: src/routes/+layout.svelte
 msgid "TiB Logo"
 msgstr "TiB Logo"
 
@@ -1712,12 +1696,13 @@ msgstr "Admin Dashboard"
 msgid "No games for this timeframe."
 msgstr "No games for this timeframe."
 
+#: src/lib/dp/components/event/match/GameResultIndicator.svelte
 #: src/lib/tib/components/match/CurrentMatchRow.svelte
-#: src/lib/tib/components/match/GameResultIndicator.svelte
 msgid "PPD"
 msgstr "PPD"
 
 #: src/lib/tib/components/match/CurrentMatchesOverviewCard.svelte
+#: src/routes/(tib)/gamecenter/+page.svelte
 msgid "Gameday"
 msgstr "Gameday"
 
@@ -1737,23 +1722,23 @@ msgstr "Current <0/>"
 msgid "Next <0/>"
 msgstr "Next <0/>"
 
-#: src/lib/tib/components/match/GameResultIndicator.svelte
+#: src/lib/dp/components/event/match/GameResultIndicator.svelte
 msgid "F"
 msgstr "F"
 
-#: src/lib/tib/components/match/GameResultIndicator.svelte
+#: src/lib/dp/components/event/match/GameResultIndicator.svelte
 msgid "TBD"
 msgstr "TBD"
 
-#: src/lib/tib/components/match/MatchDetailLocationCard.svelte
+#: src/lib/dp/components/event/match/MatchDetailLocationCard.svelte
 msgid "Address"
 msgstr "Address"
 
-#: src/lib/tib/components/match/MatchDetailLocationCard.svelte
+#: src/lib/dp/components/event/match/MatchDetailLocationCard.svelte
 msgid "Open in Google Maps"
 msgstr "Open in Google Maps"
 
-#: src/lib/tib/components/match/MatchDetailLocationCard.svelte
+#: src/lib/dp/components/event/match/MatchDetailLocationCard.svelte
 msgid "Open in Apple Maps"
 msgstr "Open in Apple Maps"
 
@@ -1809,34 +1794,34 @@ msgstr "Start"
 msgid "Favorite"
 msgstr "Favorite"
 
-#: src/lib/tib/components/player/PlayerDataCard.svelte
+#: src/lib/dp/components/player/PlayerDataCard.svelte
 msgid "Not specified"
 msgstr "Not specified"
 
-#: src/lib/tib/components/player/PlayerDataCard.svelte
+#: src/lib/dp/components/player/PlayerDataCard.svelte
 msgid "Age"
 msgstr "Age"
 
-#: src/lib/tib/components/player/PlayerDataCard.svelte
+#: src/lib/dp/components/player/PlayerDataCard.svelte
 msgid "Member since"
 msgstr "Member since"
 
-#: src/lib/tib/components/player/PlayerDataCard.svelte
+#: src/lib/dp/components/player/PlayerDataCard.svelte
 msgid "Positions"
 msgstr "Positions"
 
 #: src/lib/dp/components/forms/PlayerDataForm.svelte
-#: src/lib/tib/components/player/PlayerDataCard.svelte
+#: src/lib/dp/components/player/PlayerDataCard.svelte
 msgid "Bats"
 msgstr "Bats"
 
 #: src/lib/dp/components/forms/PlayerDataForm.svelte
-#: src/lib/tib/components/player/PlayerDataCard.svelte
+#: src/lib/dp/components/player/PlayerDataCard.svelte
 msgid "Throws"
 msgstr "Throws"
 
-#: src/lib/tib/components/player/PlayerHeaderSection.svelte
-#: src/lib/tib/components/player/PlayerRow.svelte
+#: src/lib/dp/components/player/PlayerHeaderSection.svelte
+#: src/lib/dp/components/player/PlayerRow.svelte
 msgid "Player fallback"
 msgstr "Player fallback"
 
@@ -2877,10 +2862,6 @@ msgstr "No data available."
 msgid "There was an error processing your authentication request via external provider. Please double-check your signup key"
 msgstr "There was an error processing your authentication request via external provider. Please double-check your signup key"
 
-#: src/routes/(tib)/gamecenter/+page.svelte
-msgid "Gameday <0>PreviousCurrentNextAllLoading matches...error loading matches: {0}</0>"
-msgstr "Gameday <0>PreviousCurrentNextAllLoading matches...error loading matches: {0}</0>"
-
 #. placeholder {0}: email
 #: src/lib/dp/auth/PasswordRequestButton.svelte
 msgid "If we have your email ({0}) on file, you will receive a reset password request in your inbox."
@@ -2960,7 +2941,7 @@ msgstr "User \"{0}\" has been removed as member from team \"{1}\""
 msgid "An error occurred while removing user as team member"
 msgstr "An error occurred while removing user as team member"
 
-#: src/lib/tib/components/player/TeamPlayerSection.svelte
+#: src/lib/dp/components/player/TeamPlayerSection.svelte
 msgid "Visualization <0>NumberImage</0>"
 msgstr "Visualization <0>NumberImage</0>"
 
@@ -2975,3 +2956,19 @@ msgstr "Sort <0>AscendingDescending</0>"
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Type <0>AllGamePracticeOther</0>"
 msgstr "Type <0>AllGamePracticeOther</0>"
+
+#: src/routes/(tib)/gamecenter/+page.svelte
+msgid "Previous"
+msgstr "Previous"
+
+#: src/routes/(tib)/gamecenter/+page.svelte
+msgid "Current"
+msgstr "Current"
+
+#: src/routes/(tib)/gamecenter/+page.svelte
+msgid "Next"
+msgstr "Next"
+
+#: src/routes/(tib)/gamecenter/+page.svelte
+msgid "All"
+msgstr "All"
