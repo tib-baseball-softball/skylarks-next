@@ -13,6 +13,7 @@
   import MatchTeaserCard from "$lib/dp/components/event/match/MatchTeaserCard.svelte";
   import {authSettings} from "$lib/dp/client.svelte.js";
   import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
+  import type {ClubsResponse} from "$lib/dp/types/pb-types.ts";
 
   const {data} = $props();
 
@@ -22,7 +23,7 @@
   const canParticipate = $derived(authRecord.teams.includes($event.team));
 
   //@ts-expect-error - the multi-level expanding trips the typedef up
-  const club = $derived($event?.expand?.club);
+  const club = $derived($event?.expand?.club) as ClubsResponse;
 
   const matchJSON = $derived($event?.match_json) as unknown as Match;
 </script>
@@ -104,7 +105,7 @@
     <section>
       <h2 class="h2 mb-3">Game Data</h2>
       <div class="grid grid-cols-1 md:grid-cols-2">
-        <MatchTeaserCard match={matchJSON}/>
+        <MatchTeaserCard match={matchJSON} teamName={$event?.expand?.team?.name}/>
       </div>
     </section>
   {/if}

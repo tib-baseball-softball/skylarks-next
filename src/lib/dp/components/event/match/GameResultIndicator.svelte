@@ -6,12 +6,13 @@
 
   interface Props {
     match: Match;
+    teamName?: string;
   }
 
-  const {match}: Props = $props();
+  const {match, teamName}: Props = $props();
 
   const matchDecorator = $derived(new MatchDecorator(match));
-  const matchState = $derived(matchDecorator.getMatchState(env.PUBLIC_TEAM_NAME));
+  const matchState = $derived(matchDecorator.getMatchState(teamName ?? env.PUBLIC_TEAM_NAME));
 </script>
 
 <div class="text-lg font-semibold">

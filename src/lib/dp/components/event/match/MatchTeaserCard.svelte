@@ -9,9 +9,10 @@
 
   interface Props {
     match: Match;
+    teamName?: string;
   }
 
-  const {match}: Props = $props();
+  const {match, teamName}: Props = $props();
 
   const awayLogo = $derived(LogoUtility.getLogoPathForTeamName(match?.away_league_entry?.team));
   const homeLogo = $derived(LogoUtility.getLogoPathForTeamName(match?.home_league_entry?.team));
@@ -36,7 +37,7 @@
           {DateTimeUtility.dateTimeFormatMedium.format(matchDate)}
         </p>
       </div>
-      <GameResultIndicator {match}/>
+      <GameResultIndicator {match} {teamName}/>
     </div>
   </header>
 
