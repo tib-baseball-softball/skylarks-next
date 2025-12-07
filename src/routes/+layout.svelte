@@ -6,7 +6,7 @@
   import TopAppBarTrailing from "$lib/dp/components/meta/TopAppBarTrailing.svelte";
   import BottomNavigation from "$lib/dp/components/navigation/BottomNavigation.svelte";
   import NavigationSheet from "$lib/dp/components/navigation/NavigationSheet.svelte";
-  import StaticNavigationLinks from "$lib/dp/components/navigation/StaticNavigationLinks.svelte";
+  import StaticNavigationLinks from "$lib/tib/components/navigation/StaticNavigationLinks.svelte";
   import ToastContainer from "$lib/dp/components/toast/ToastContainer.svelte";
   import {authSettings} from "$lib/dp/client.svelte.ts";
   import type {LayoutProps} from "../../.svelte-kit/types/src/routes/$types";
@@ -87,7 +87,11 @@
 
   <!-- Bottom Nav (Fixed to bottom of page) for mobile -->
 
-  <BottomNavigation/>
+  <BottomNavigation>
+    {#snippet navLinks()}
+      <StaticNavigationLinks classes="flex-col py-1.5 text-sm"/>
+    {/snippet}
+  </BottomNavigation>
 
   <!-- Footer -->
   <footer class="app-footer">
