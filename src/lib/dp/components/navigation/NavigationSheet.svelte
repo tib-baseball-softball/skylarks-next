@@ -26,8 +26,8 @@
   <Sheet.Content class="navigation-sheet-content" side="left">
     <Sheet.Header></Sheet.Header>
 
-    <a aria-label="to home page" class="anchor" href="/static" onclick={() => open = false}>
-      <img alt="Skylarks Team Logo" src="/berlin_skylarks_logo.svg">
+    <a aria-label="to home page" class="anchor" href="/" onclick={() => open = false}>
+      <img alt="Skylarks Team Logo" src="/icon_dp.svg">
 
       <h2>Home Page</h2>
     </a>

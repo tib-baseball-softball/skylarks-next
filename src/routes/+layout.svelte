@@ -39,7 +39,7 @@
           {/if}
 
           <a aria-label="to home page" href="/" class="logo-link">
-            <img class="team-logo" src="/berlin_skylarks_logo.svg" alt="Skylarks Team Logo">
+            <img class="team-logo" src="/icon_dp.svg" alt="Skylarks Team Logo">
           </a>
         </div>
       {/snippet}
