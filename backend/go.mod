@@ -1,13 +1,13 @@
 module github.com/tib-baseball-softball/skylarks-next
 
-go 1.25.4
+go 1.25.5
 
 require (
 	github.com/diamond-planner/diamond-planner v0.5.4
 	github.com/pocketbase/dbx v1.11.0
-	github.com/pocketbase/pocketbase v0.34.0
+	github.com/pocketbase/pocketbase v0.34.2
 	github.com/spf13/cast v1.10.0 // indirect
-	github.com/spf13/cobra v1.10.1
+	github.com/spf13/cobra v1.10.2
 	github.com/subosito/gotenv v1.6.0
 )
 
@@ -30,7 +30,7 @@ require (
 	github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec // indirect
 	github.com/spf13/pflag v1.0.10 // indirect
 	golang.org/x/crypto v0.45.0 // indirect
-	golang.org/x/exp v0.0.0-20251113190631-e25ba8c21ef6 // indirect
+	golang.org/x/exp v0.0.0-20251125195548-87e1e737ad39 // indirect
 	golang.org/x/image v0.33.0 // indirect
 	golang.org/x/net v0.47.0 // indirect
 	golang.org/x/oauth2 v0.33.0 // indirect

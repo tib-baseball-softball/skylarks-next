@@ -1,5 +1,5 @@
 import {TYPO3Client} from "$lib/tib/service/TYPO3Client.ts";
-import type {Player} from "$lib/tib/types/Player.ts";
+import type {Player} from "$lib/dp/types/Player.ts";
 
 export class PlayerClient extends TYPO3Client {
   /**

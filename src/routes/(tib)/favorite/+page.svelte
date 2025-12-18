@@ -4,11 +4,11 @@
   import LeagueInfoCard from "$lib/tib/components/favorite/LeagueInfoCard.svelte";
   import PlayoffSheet from "$lib/tib/components/favorite/PlayoffSheet.svelte";
   import StreakGraphSection from "$lib/tib/components/favorite/StreakGraphSection.svelte";
-  import MatchTeaserCard from "$lib/tib/components/match/MatchTeaserCard.svelte";
+  import MatchTeaserCard from "$lib/dp/components/event/match/MatchTeaserCard.svelte";
   import StandingsTable from "$lib/tib/components/table/StandingsTable.svelte";
-  import ClubTeamPicker from "$lib/dp/components/form/ClubTeamPicker.svelte";
   import {preferences} from "$lib/tib/globals.svelte.ts";
   import type {PageProps} from "./$types";
+  import ClubTeamPicker from "$lib/tib/components/favorite/ClubTeamPicker.svelte";
 
   const {data}: PageProps = $props();
   const clubTeams = $derived(data.clubTeams ?? []);

@@ -1,20 +1,20 @@
 <script lang="ts">
-import type { Club } from "bsm.js"
-import { ClipboardList, Shield, Tag } from "lucide-svelte"
+  import type {Club} from "bsm.js";
+  import {ClipboardList, Shield, Tag} from "lucide-svelte";
 
-interface Props {
-  club: Club
-}
+  interface Props {
+    club: Club;
+  }
 
-let { club }: Props = $props()
+  let {club}: Props = $props();
 </script>
 
 <section>
   <article class="flex justify-center">
     <img
-            alt="Skylarks Logo"
-            class="w-24 h-auto mb-1"
-            src="/berlin_skylarks_logo.svg"
+      alt="Skylarks Logo"
+      class="w-24 h-auto mb-1"
+      src="/icon_dp.svg"
     />
   </article>
 
@@ -43,12 +43,12 @@ let { club }: Props = $props()
 </section>
 
 <style>
-    .container {
-        display: flex;
-        gap: 1rem;
-    }
+  .container {
+    display: flex;
+    gap: 1rem;
+  }
 
-    article {
-        margin-block: 1.5em;
-    }
+  article {
+    margin-block: 1.5em;
+  }
 </style>

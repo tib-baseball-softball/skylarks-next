@@ -231,3 +231,4 @@ test-results
 /src/locales/*.compiled.main.svelte.js
 /craft/data/*.db*
 backend/pb_public/**
+/src/locales/.wuchale/

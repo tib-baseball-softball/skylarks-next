@@ -1,6 +1,6 @@
 import type {LeagueGroup} from "bsm.js";
 import type {Extension} from "$lib/dp/types/ExpandedResponse.ts";
-import type {Media} from "$lib/tib/types/MediaData.ts";
+import type {Media} from "$lib/dp/types/MediaData.ts";
 
 export interface GameReport {
   uid: number;
@@ -23,8 +23,8 @@ export interface GameReport {
 }
 
 type CachedLeagueGroup = Extension<
-    Pick<LeagueGroup, "acronym" | "name" | "season">,
-    {
-      league_id: number
-    }
+  Pick<LeagueGroup, "acronym" | "name" | "season">,
+  {
+    league_id: number
+  }
 >

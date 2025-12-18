@@ -15,9 +15,9 @@
 
   <div class="flex justify-center">
     <img
-            alt="Skylarks Logo"
-            class="w-24 h-auto mb-1"
-            src="/berlin_skylarks_logo.svg"
+      alt="Skylarks Logo"
+      class="w-24 h-auto mb-1"
+      src="/icon_dp.svg"
     />
   </div>
   <div class="space-y-2">

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type {Media} from "$lib/tib/types/MediaData.ts";
+  import type {Media} from "$lib/dp/types/MediaData.ts";
 
   interface Props {
     media: Media;

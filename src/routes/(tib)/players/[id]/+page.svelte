@@ -1,7 +1,7 @@
 <script lang="ts">
   import BaseballStatsDatatable from "$lib/tib/components/stats/BaseballStatsDatatable.svelte";
-  import PlayerDataCard from "$lib/tib/components/player/PlayerDataCard.svelte";
-  import PlayerHeaderSection from "$lib/tib/components/player/PlayerHeaderSection.svelte";
+  import PlayerDataCard from "$lib/dp/components/player/PlayerDataCard.svelte";
+  import PlayerHeaderSection from "$lib/dp/components/player/PlayerHeaderSection.svelte";
   import ProgressRing from "$lib/dp/components/utils/ProgressRing.svelte";
   import type {StatsDataset} from "$lib/tib/types/StatsDataset.ts";
   import type {PageProps} from "../../../../../.svelte-kit/types/src/routes";
