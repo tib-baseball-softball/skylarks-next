@@ -1,5 +1,6 @@
 <script lang="ts">
-  import "../app.css";
+  import "../../diamond-planner/ui/src/app.css"; // MARK: load diamond planner base styles
+  import "../css/skylarks-theme.css"; // ...and apply our custom theme (also requires setting the correct data attribute in app.html)
   import AppBar from "$lib/dp/components/meta/AppBar.svelte";
   import Footer from "$lib/dp/components/meta/Footer.svelte";
   import SidebarNavigation from "$lib/dp/components/meta/SidebarNavigation.svelte";
