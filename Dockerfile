@@ -9,7 +9,8 @@ WORKDIR /ui
 
 RUN npm i -g corepack && corepack enable && corepack prepare pnpm@latest --activate
 
-COPY pnpm-lock.yaml package.json pnpm-workspace.yaml* ./
+COPY pnpm-lock.yaml package.json pnpm-workspace.yaml .npmrc* ./
+COPY diamond-planner/ui/package.json ./diamond-planner/ui/
 RUN pnpm install --frozen-lockfile
 
 ARG PUBLIC_TYPO3_URL
