@@ -1,5 +1,5 @@
 <script lang="ts">
-  // @ts-expect-error
+  // @ts-ignore
   import {Tabs} from "bits-ui";
   import {Gameday} from "bsm.js";
   import {browser} from "$app/environment";
@@ -9,7 +9,7 @@
   import LeagueFilter from "$lib/tib/components/league/LeagueFilter.svelte";
   import ProgressRing from "$lib/dp/components/utils/ProgressRing.svelte";
   import SeasonSelector from "$lib/tib/components/utils/SeasonSelector.svelte";
-  import Switch from "$lib/dp/components/form/Switch.svelte";
+  import Switch from "$lib/dp/components/formElements/Switch.svelte";
   import {preferences} from "$lib/tib/globals.svelte.ts";
   import type {PageProps} from "./$types";
 
