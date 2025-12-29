@@ -1,2 +1,6 @@
+packages:
+  - "."
+  - "diamond-planner/ui"
+
 onlyBuiltDependencies:
   - esbuild
