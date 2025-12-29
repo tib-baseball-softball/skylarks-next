@@ -1,6 +1,6 @@
 <script lang="ts">
   import {Trophy} from "lucide-svelte";
-  import MatchTeaserCard from "$lib/tib/components/match/MatchTeaserCard.svelte";
+  import MatchTeaserCard from "$lib/dp/components/event/match/MatchTeaserCard.svelte";
   //@ts-expect-error
   import * as Sheet from "$lib/dp/components/modal/sheet";
   import type {PlayoffSeries} from "$lib/tib/types/PlayoffSeries.ts";
@@ -54,8 +54,8 @@
 </Sheet.Root>
 
 <style>
-    .series-score {
-        font-size: 2rem;
-        font-weight: bold;
-    }
+  .series-score {
+    font-size: 2rem;
+    font-weight: bold;
+  }
 </style>

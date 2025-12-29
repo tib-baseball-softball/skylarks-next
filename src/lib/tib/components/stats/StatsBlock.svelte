@@ -1,7 +1,7 @@
 <script generics="T extends keyof RowByType" lang="ts">
   //@ts-nocheck
   import {StatsType} from "bsm.js";
-  import StatsBlockContent from "$lib/tib/components/stats/StatsBlockContent.svelte";
+  import StatsBlockContent from "$lib/dp/components/stats/StatsBlockContent.svelte";
   import type {RowByType} from "$lib/tib/types/StatsDataset.ts";
 
   interface Props<T extends keyof RowByType> {

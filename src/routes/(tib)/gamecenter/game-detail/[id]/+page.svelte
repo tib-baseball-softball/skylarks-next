@@ -4,7 +4,7 @@
   import MatchMainInfoSection from "$lib/tib/components/match/MatchMainInfoSection.svelte";
   import MatchBoxscoreSection from "$lib/tib/components/boxscore/MatchBoxscoreSection.svelte";
   import MatchDetailStatsCard from "$lib/tib/components/match/MatchDetailStatsCard.svelte";
-  import MatchDetailLocationCard from "$lib/tib/components/match/MatchDetailLocationCard.svelte";
+  import MatchDetailLocationCard from "$lib/dp/components/event/match/MatchDetailLocationCard.svelte";
   import MatchDetailOfficialsCard from "$lib/tib/components/match/MatchDetailOfficialsCard.svelte";
   import type {PageProps} from "./$types";
   import ContentFilteredUnavailable from "$lib/tib/components/match/ContentFilteredUnavailable.svelte";
