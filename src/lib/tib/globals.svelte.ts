@@ -17,7 +17,6 @@ export const preferences = persistedState<AppPreferences>(
     selectedSeason: new Date().getFullYear(),
     leagueGroupID: 0,
     favoriteTeamID: 0,
-    locale: "en",
   },
   {
     storage: "local",

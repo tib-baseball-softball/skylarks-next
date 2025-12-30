@@ -2,9 +2,9 @@
   import type {Match} from "bsm.js";
   import {Calendar, ClipboardList} from "lucide-svelte";
   import {DateTimeUtility} from "$lib/dp/service/DateTimeUtility.ts";
-  import {GameWinner} from "$lib/tib/enum/GameWinner.ts";
-  import {LogoUtility} from "$lib/tib/service/LogoUtility.ts";
-  import {MatchDecorator} from "$lib/tib/service/MatchDecorator.ts";
+  import {GameWinner} from "$lib/dp/enum/GameWinner.ts";
+  import {LogoUtility} from "$lib/dp/utility/LogoUtility.ts";
+  import {MatchDecorator} from "$lib/dp/service/MatchDecorator.ts";
 
   interface Props {
     match: Match;
@@ -67,11 +67,11 @@
 </article>
 
 <style>
-    article {
-        border: 2px solid var(--color-primary-500)
-    }
+  article {
+    border: 2px solid var(--color-primary-500)
+  }
 
-    .sub-item {
-        border: 2px solid var(--color-primary-500)
-    }
+  .sub-item {
+    border: 2px solid var(--color-primary-500)
+  }
 </style>

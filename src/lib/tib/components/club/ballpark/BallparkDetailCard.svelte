@@ -2,7 +2,7 @@
   import type {Field} from "bsm.js";
   import {Diamond, Info, MapPin, Ticket, Users} from "lucide-svelte";
   import GenericDetailRow from "$lib/dp/components/utils/GenericDetailRow.svelte";
-  import {MapUtility} from "$lib/tib/service/MapUtility.ts";
+  import {MapUtility} from "$lib/dp/service/MapUtility.ts";
 
   interface Props {
     field: Field;
@@ -11,7 +11,7 @@
   const {field}: Props = $props();
 
   const mapsLink = $derived(
-      MapUtility.buildGoogleMapsURL(field?.name, field?.latitude, field?.longitude)
+    MapUtility.buildGoogleMapsURL(field?.name, field?.latitude, field?.longitude)
   );
 </script>
 
@@ -67,17 +67,17 @@
 </article>
 
 <style lang="postcss">
-    .primary {
-        color: rgba(var(--color-primary-500));
-    }
+  .primary {
+    color: rgba(var(--color-primary-500));
+  }
 
-    .tertiary {
-        color: light-dark(rgba(var(--color-secondary-500)), rgba(var(--color-tertiary-500)));
-    }
+  .tertiary {
+    color: light-dark(rgba(var(--color-secondary-500)), rgba(var(--color-tertiary-500)));
+  }
 
-    .container {
-        display: flex;
-        align-items: center;
-        gap: calc(var(--spacing) * 4)
-    }
+  .container {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 4)
+  }
 </style>
