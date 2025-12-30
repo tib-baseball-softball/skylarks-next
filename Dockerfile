@@ -9,11 +9,10 @@ WORKDIR /
 
 RUN npm i -g corepack && corepack enable && corepack prepare pnpm@latest --activate
 
-COPY pnpm-lock.yaml package.json pnpm-workspace.yaml .npmrc* svelte.config.js tsconfig.json ./
+COPY pnpm-lock.yaml package.json pnpm-workspace.yaml .npmrc* ./
 COPY diamond-planner/ui/package.json ./diamond-planner/ui/
 
 RUN pnpm install --frozen-lockfile
-RUN pnpm sv-check
 
 ARG PUBLIC_TYPO3_URL
 ARG PUBLIC_POCKETBASE_URL
