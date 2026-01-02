@@ -1,11 +1,11 @@
 <script lang="ts">
-  import type {DataHandler} from "@vincjo/datatables";
   import ThSort from "$lib/dp/components/datatable/ThSort.svelte";
   import {StatsType} from "bsm.js";
+  import type {TableHandler} from "@vincjo/datatables";
 
   interface Props {
     type: StatsType;
-    handler: DataHandler<any>;
+    handler: TableHandler<any>;
     tableType: "personal" | "seasonal";
   }
 
