@@ -15,6 +15,8 @@ github.com/diamond-planner/diamond-planner v0.6.0 h1:sucueu8v6gwN83qDP1Fvrf9QoRW
 github.com/diamond-planner/diamond-planner v0.6.0/go.mod h1:TIBvuAm+600RaCV4M2DFYTjIe8xOi4LwwcLVxES9qEI=
 github.com/diamond-planner/diamond-planner v0.7.0 h1:XN5jwCmWt9QNBn8HepQadWomDrSiNwbkxqCOG/L7Jxw=
 github.com/diamond-planner/diamond-planner v0.7.0/go.mod h1:TIBvuAm+600RaCV4M2DFYTjIe8xOi4LwwcLVxES9qEI=
+github.com/diamond-planner/diamond-planner v0.7.1 h1:dZBCd1ZznAIQ3ZcH8nuXw6itY0RgZtcz4N+wjUt8Ic8=
+github.com/diamond-planner/diamond-planner v0.7.1/go.mod h1:TIBvuAm+600RaCV4M2DFYTjIe8xOi4LwwcLVxES9qEI=
 github.com/disintegration/imaging v1.6.2 h1:w1LecBlG2Lnp8B3jk5zSuNqd7b4DXhcjwek1ei82L+c=
 github.com/disintegration/imaging v1.6.2/go.mod h1:44/5580QXChDfwIclfc/PCwrr44amcmDAg8hxG0Ewe4=
 github.com/domodwyer/mailyak/v3 v3.6.2 h1:x3tGMsyFhTCaxp6ycgR0FE/bu5QiNp+hetUuCOBXMn8=

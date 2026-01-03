@@ -3,7 +3,7 @@ module github.com/tib-baseball-softball/skylarks-next
 go 1.25
 
 require (
-	github.com/diamond-planner/diamond-planner v0.7.0
+	github.com/diamond-planner/diamond-planner v0.7.1
 	github.com/pocketbase/dbx v1.11.0
 	github.com/pocketbase/pocketbase v0.35.0
 	github.com/spf13/cast v1.10.0 // indirect
