@@ -3113,7 +3113,7 @@ msgid ""
 "here, as well as view your previously sent hours and compare with the target."
 msgstr ""
 "Jeder Club kann eine verpflichtende Anzahl Arbeitsstunden für seine Mitglieder festlegen. Es wird erwartet, dass die Mitglieder diesen Umfang\n"
-"an Arbeitsstunden jedes Kalenderjahr leisten. Sie können Ihre Zivildienststunden\n"
+"an Arbeitsstunden jedes Kalenderjahr leisten. Sie können Ihre Arbeitsstunden\n"
 "hier melden, sowie Ihre zuvor gesendeten Stunden einsehen und mit dem Ziel vergleichen."
 
 #: src/routes/(dp)/(protected)/account/clubs/[club]/admin/communityservice/+page.svelte
