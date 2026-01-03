@@ -3,9 +3,10 @@ import {adapter as svelte} from "@wuchale/svelte";
 import {defineConfig} from "wuchale";
 
 export default defineConfig({
-  sourceLocale: "en",
-  otherLocales: ["de", "fr", "es", "pl",],
+  locales: ["en", "de", "fr", "es", "pl",],
   adapters: {
-    main: svelte({}),
+    main: svelte({
+      loader: "svelte"
+    }),
   },
 });
