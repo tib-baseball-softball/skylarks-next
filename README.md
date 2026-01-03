@@ -1,29 +1,26 @@
-# Skylarks-Next
+# Skylarks Diamond Planner
 
 Progressive Web App for the [Berlin Skylarks Baseball & Softball Club](https://www.tib-baseball.de/).
-Built with Pocketbase, SvelteKit, Skeleton UI and Tailwind CSS.
+Built with Pocketbase and SvelteKit with the static adapter.
 
 ## Concept / Background
 
-As of now, different types of data are being processed in different backends:
+Main rationale to create this project: At project start, different types of data were being processed in different web
+services:
 
-* The main backend [Baseball & Softball Manager / BSM](https://bsm.baseball-softball.de/) of the German Baseball &
+* The main administrative platform [Baseball & Softball Manager / BSM](https://bsm.baseball-softball.de/) of the German
+  Baseball &
   Softball Federation (DBV).
     * Everything related to organised play is processed there (clubs, games, leagues, teams, player, stats)
     * Accessed via REST API
     * _External_: no club access to any internal logic
 * [The current Skylarks website](https://www.tib-baseball.de/), served as a [TYPO3 CMS](https://typo3.org/) website (
   PHP-based).
-    * Processes mostly typical CMS content (articles, info pages), but also additional team data that is distinct from
+    * Processes mostly typical CMS _content_ (articles, info pages), but also additional team data that is distinct from
       BSM data: club teams, player profiles (with more data than what is available in BSM),
       training times, game reports
-    * Mainly displayed in the TYPO3 frontend directly, but is also partly accessible via REST API
-    * _Internal_: custom-built, full club access
-* The backend in this repository
-    * Go-based (package `github.com/tib-baseball-softball/skylarks-next`)
-    * processes administrative data for club and team events (events, announcements, comments, attendance data and
-      statistics)
-    * distinct from both CMS and BSM data
+    * Mainly displayed in the TYPO3 frontend (server-side templating) directly, but is also partly accessible via REST
+      API
     * _Internal_: custom-built, full club access
 
 See also: [Project History](docs/History.md)
@@ -32,16 +29,27 @@ See also: [Project History](docs/History.md)
 
 * collect data from all relevant sources and displays it in a user-friendly way
 * Progressive Web App with mobile-first design
-* provide backend and frontend logic to carry out team organisation tasks
+* provide logic to carry out team organisation tasks
   (practice and game attendance, teams and members, stats)
-* -> replace existing external tools for those tasks
+* → replace existing external tools for those tasks
 * become _THE_ central hub for team activities
+
+### Design decisions
+
+* This tool will process administrative data for club and team events (events, announcements, comments, attendance data
+  and
+  statistics)
+* this data will be distinct from both CMS and BSM data:
+    * BSM data relates to the club's organised play ⇒ main use case is _external_
+    * CMS data is strictly presentational, the CMS does not care about administrative logic ⇒ main use case is
+      _external_
+    * ⇒ here, the main use case is _internal_
 
 ## Project requirements
 
-* basic familiarity with the concepts of SvelteKit and Svelte - there is an
+* basic familiarity with the concepts of SvelteKit and Svelte – there is an
   excellent [official tutorial](https://learn.svelte.dev/tutorial/welcome-to-svelte) available
-* basic familiarity with Go and TypeScript
+* Go `v1.25` or higher
 * Node.js `v24` or higher
 * access to Berlin Skylarks environment secrets and API keys
 
@@ -50,8 +58,9 @@ See also: [Project History](docs/History.md)
 1. Clone the repository
 
 ```bash
-git clone git@github.com:tib-baseball-softball/skylarks-fe-next.git
-cd skylarks-fe-next
+git clone git@github.com:tib-baseball-softball/skylarks-next.git
+git submodule update --init
+cd skylarks-next
 ```
 
 2. Set up environment
@@ -62,7 +71,6 @@ cp .env.dist .env
 ```
 
 * BSM API key (from BSM user account with at the club admin scope for Berlin Skylarks)
-* API Auth Header (from `.env` on TYPO3 host server)
 * `PUBLIC_TYPO3_URL` can either be set to a TYPO3 dev environment running locally or the production URL
 
 3. Get project dependencies
@@ -100,26 +108,26 @@ pnpm dev
 
 ### Local/Development
 
-- BE: http://127.0.0.1:8090/
-- FE: http://localhost:5173/
+- Go Backend: http://127.0.0.1:8090/
+- Vite Frontend: http://localhost:5173/
 
 ### Production
 
-- BE: https://pb.berlinskylarks.de/
-- FE: https://app.berlinskylarks.de/
+- unified URL: https://app.berlinskylarks.de/
 
 ## Deployment
 
-- Fully automated via GitHub Actions, deploys on every push to branch `main`, excluding documentation files and folders.
-- app is deployed via Docker-Compose in a Portainer stack
-- Traefik router (not deployed via this repository) acts a reverse proxy and forwards requests
-- => Traefik labels need to be set in compose files
+- Fully automated via GitHub Actions, deploys on every push to branch `main` or `stage`, excluding documentation files
+  and folders.
+- app is deployed via Docker-Compose in a Portainer stack on the team VPS
+- Traefik router (not deployed via this repository) acts as a reverse proxy and forwards requests
+- ⇒ Traefik labels need to be set in Compose files
 
 ### Server Setup / Manual Deployment
 
 What the GitHub Action does:
 
-1. Build the app according to the Dockerfiles
+1. Build the app according to the Dockerfile
 2. Pushes docker images to [Docker Hub](https://hub.docker.com/repositories/obnoxieux)
 3. Triggers [Portainer](https://docs.portainer.io/) deployment via Webhook
 

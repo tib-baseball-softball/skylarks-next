@@ -36,14 +36,14 @@ importers:
         specifier: 24.10.1
         version: 24.10.1
       '@vincjo/datatables':
-        specifier: ^1.14.10
-        version: 1.14.10(svelte@5.46.1)
+        specifier: ^2.8.0
+        version: 2.8.0(svelte@5.46.1)
       '@wuchale/svelte':
-        specifier: ^0.17.9
-        version: 0.17.9
+        specifier: ^0.18.0
+        version: 0.18.0
       '@wuchale/vite-plugin':
-        specifier: ^0.15.7
-        version: 0.15.7
+        specifier: ^0.16.1
+        version: 0.16.1
       apexcharts:
         specifier: ^4.7.0
         version: 4.7.0
@@ -90,8 +90,8 @@ importers:
         specifier: ^3.2.4
         version: 3.2.4(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.7.1)
       wuchale:
-        specifier: ^0.18.11
-        version: 0.18.11
+        specifier: ^0.19.0
+        version: 0.19.0
 
   diamond-planner/ui:
     dependencies:
@@ -123,8 +123,8 @@ importers:
         specifier: 24.10.1
         version: 24.10.1
       '@vincjo/datatables':
-        specifier: ^1.14.10
-        version: 1.14.10(svelte@5.46.1)
+        specifier: ^2.8.0
+        version: 2.8.0(svelte@5.46.1)
       '@wuchale/svelte':
         specifier: ^0.17.9
         version: 0.17.9
@@ -652,10 +652,10 @@ packages:
   '@types/node@24.10.1':
     resolution: {integrity: sha512-GNWcUTRBgIRJD5zj+Tq0fKOJ5XZajIiBroOF0yvj2bSU1WvNdYS/dn9UxwsujGW4JX06dnHyjV2y9rRaybH0iQ==}
 
-  '@vincjo/datatables@1.14.10':
-    resolution: {integrity: sha512-gtojSC/LKDHbh2ZGZeaAQ+lLltcmcSDDLkecgb9WpG7lHmd4b/1HUTtFWAJt43TnaK8SrciGugh9VRRZN53bpw==}
+  '@vincjo/datatables@2.8.0':
+    resolution: {integrity: sha512-+Qa9E+Xd+xAOKnYEy7Hgq246sLzwq4GjrwLyWHVi9tbvLNXh4mLMObwy962hc6DYgFP4JRd+Y9PVnDlgSpphxw==}
     peerDependencies:
-      svelte: ^3.56.0 || ^4.0.0 || ^5.0.0-next.120
+      svelte: ^5.16.0
 
   '@vitest/expect@3.2.4':
     resolution: {integrity: sha512-Io0yyORnB6sikFlt8QW5K7slY4OjqNX9jmJQ02QDda8lyM6B5oNgVWoSoKPac8/kgnCUzuHQKrSLtu/uOqqrig==}
@@ -689,8 +689,14 @@ packages:
   '@wuchale/svelte@0.17.9':
     resolution: {integrity: sha512-Tf8BWp8iiFWoHKzqJrfxL7wwjoa1cK3MZ2MD1C3Dkf4fGwgPo/mShIFISCpC0Ph3PcopzvZB3Wh8FH3JExjbJQ==}
 
+  '@wuchale/svelte@0.18.0':
+    resolution: {integrity: sha512-S2/dUkRqIUcIB/YVpO4FspBqPnMbrfhG7vZofPZYhDzdRBHWrHDS7oVnHAXTqdROHx9sNmp21pxWvnRT2BpOnw==}
+
   '@wuchale/vite-plugin@0.15.7':
     resolution: {integrity: sha512-ypbzbdUMkpFjSWcper+wbq+rhw/t6FkS9B5PtC9kcs7E5poOjU9GuhmcyNF77KV+3qq7B5C2UYGjWISWP9oulA==}
+
+  '@wuchale/vite-plugin@0.16.1':
+    resolution: {integrity: sha512-StRVHv/9jqnc4a9PTejlTckdZb//5WJtEBjAiRrKCSYE7djwtVe4WEIFcLPB/DVcKDyxVfzRz9VAee9OfcHqTw==}
 
   '@yr/monotone-cubic-spline@1.0.3':
     resolution: {integrity: sha512-FQXkOta0XBSUPHndIKON2Y9JeQz5ZeMqLYZVVK93FliNBFm7LNMIZmY6FrMEB9XPcDbE2bekMbZD6kzDkxwYjA==}
@@ -1286,6 +1292,10 @@ packages:
     resolution: {integrity: sha512-lJNnxSbEGg4vxzTOKaMnpGWdnzW2HrR93TmpmL9DPiSVXI+YS0rdsM7PnJcjzE5Rtu49HOznGRHYNpkT49A7AA==}
     hasBin: true
 
+  wuchale@0.19.0:
+    resolution: {integrity: sha512-0EfOp2Ry5elKoB+voGSv7wCg+cYGn6lppqwqUDdedZfm+4m+kLAgf8njTaNfvDZKy6WneUZeo4jSLgdBaP12Cw==}
+    hasBin: true
+
   yaml@2.7.1:
     resolution: {integrity: sha512-10ULxpnOCQXxJvBgxsn9ptjq6uviG/htZKk9veJGhlqn3w/DxQ631zFF+nlQXLwmImeS5amR2dl2U8sg6U9jsQ==}
     engines: {node: '>= 14'}
@@ -1638,7 +1648,7 @@ snapshots:
     dependencies:
       undici-types: 7.16.0
 
-  '@vincjo/datatables@1.14.10(svelte@5.46.1)':
+  '@vincjo/datatables@2.8.0(svelte@5.46.1)':
     dependencies:
       svelte: 5.46.1
 
@@ -1690,9 +1700,19 @@ snapshots:
       svelte: 5.46.1
       wuchale: 0.18.11
 
+  '@wuchale/svelte@0.18.0':
+    dependencies:
+      magic-string: 0.30.21
+      svelte: 5.46.1
+      wuchale: 0.19.0
+
   '@wuchale/vite-plugin@0.15.7':
     dependencies:
       wuchale: 0.18.11
+
+  '@wuchale/vite-plugin@0.16.1':
+    dependencies:
+      wuchale: 0.19.0
 
   '@yr/monotone-cubic-spline@1.0.3': {}
 
@@ -2238,6 +2258,17 @@ snapshots:
       stackback: 0.0.2
 
   wuchale@0.18.11:
+    dependencies:
+      '@sveltejs/acorn-typescript': 1.0.8(acorn@8.15.0)
+      acorn: 8.15.0
+      chokidar: 5.0.0
+      magic-string: 0.30.21
+      path-to-regexp: 8.3.0
+      picomatch: 4.0.3
+      pofile: 1.1.4
+      tinyglobby: 0.2.15
+
+  wuchale@0.19.0:
     dependencies:
       '@sveltejs/acorn-typescript': 1.0.8(acorn@8.15.0)
       acorn: 8.15.0
