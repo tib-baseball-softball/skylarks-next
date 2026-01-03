@@ -435,6 +435,7 @@ msgstr "Ładowanie lig..."
 #. placeholder {0}: error.message
 #. placeholder {0}: error.message
 #: src/routes/(dp)/(protected)/account/[user]/communityservice/+page.svelte
+#: src/routes/(dp)/(protected)/account/clubs/[club]/admin/communityservice/+page.svelte
 #: src/routes/(dp)/(protected)/stats/[user]/+page.svelte
 #: src/routes/(dp)/(protected)/stats/[user]/+page.svelte
 #: src/routes/(tib)/club/ballpark/+page.svelte
@@ -889,9 +890,10 @@ msgid "Total"
 msgstr "Razem"
 
 #: src/lib/dp/components/club/ClubDetailCard.svelte
+#: src/lib/dp/components/communityservice/CommunityServiceDatatable.svelte
 #: src/lib/dp/components/forms/ClubForm.svelte
 #: src/lib/dp/components/forms/UniformSetForm.svelte
-#: src/lib/dp/components/team/TeamMembersTableContent.svelte
+#: src/lib/dp/components/team/TeamMemberDatatable.svelte
 #: src/lib/dp/components/team/TeamTeaserCard.svelte
 #: src/lib/dp/components/user/UserDataCard.svelte
 #: src/lib/tib/components/club/officials/ClubOfficialDetailCard.svelte
@@ -911,31 +913,31 @@ msgstr "Sezon"
 msgid "No data available for this category."
 msgstr "Brak dostępnych danych dla tej kategorii."
 
-#: src/lib/dp/components/team/TeamMembersTableContent.svelte
+#: src/lib/dp/components/communityservice/CommunityServiceDatatable.svelte
+#: src/lib/dp/components/team/TeamMemberDatatable.svelte
 #: src/lib/tib/components/match/MatchMainInfoSection.svelte
 msgid "Status"
 msgstr "Status"
 
-#: src/lib/dp/components/team/TeamMembersTableContent.svelte
+#: src/lib/dp/components/team/TeamMemberDatatable.svelte
 #: src/lib/tib/components/club/licenses/LicenseDetailHolderCard.svelte
 msgid "Number"
 msgstr "Numer"
 
 #: src/lib/dp/components/forms/LocationForm.svelte
-#: src/lib/dp/components/team/TeamMembersTableContent.svelte
 msgid "BSM ID"
 msgstr "ID BSM"
 
-#: src/lib/dp/components/team/TeamMembersTableContent.svelte
+#: src/lib/dp/components/team/TeamMemberDatatable.svelte
 msgid "Position"
 msgstr "Pozycja"
 
-#: src/lib/dp/components/team/TeamMembersTableContent.svelte
+#: src/lib/dp/components/team/TeamMemberDatatable.svelte
 msgid "Last Login"
 msgstr "Ostatnie logowanie"
 
 #: src/lib/dp/components/event/EventPageAdminSection.svelte
-#: src/lib/dp/components/team/TeamMembersTableContent.svelte
+#: src/lib/dp/components/team/TeamMemberDatatable.svelte
 msgid "Actions"
 msgstr "Akcje"
 
@@ -955,17 +957,15 @@ msgstr "Niezweryfikowany"
 msgid "None"
 msgstr "Żaden"
 
-#: src/lib/dp/components/team/TeamMembersTableContent.svelte
-msgid "<0/> Revoke Admin Access"
-msgstr "<0/> Odwołaj dostęp administratora"
+#~ msgid "<0/> Revoke Admin Access"
+#~ msgstr "<0/> Odwołaj dostęp administratora"
 
 #: src/lib/dp/components/team/TeamMembersTableContent.svelte
 msgid "<0/> Make Admin"
 msgstr "<0/> Ustaw jako administratora"
 
-#: src/lib/dp/components/team/TeamMembersTableContent.svelte
-msgid "<0/> Remove"
-msgstr "<0/> Usuń"
+#~ msgid "<0/> Remove"
+#~ msgstr "<0/> Usuń"
 
 #. placeholder {0}: row.first_name + " " + row.last_name
 #. placeholder {1}: team.name
@@ -1745,17 +1745,14 @@ msgstr "Osobiste Statystyki"
 msgid "Player Profile"
 msgstr "Profil Gracza"
 
-#: src/lib/dp/components/meta/SidebarNavigation.svelte
-msgid "My Clubs & Teams"
-msgstr "Moje Kluby i Drużyny"
+#~ msgid "My Clubs & Teams"
+#~ msgstr "Moje Kluby i Drużyny"
 
-#: src/lib/dp/components/meta/SidebarNavigation.svelte
-msgid "Administration"
-msgstr "Administracja"
+#~ msgid "Administration"
+#~ msgstr "Administracja"
 
-#: src/lib/dp/components/meta/SidebarNavigation.svelte
-msgid "Admin Dashboard"
-msgstr "Panel Administracyjny"
+#~ msgid "Admin Dashboard"
+#~ msgstr "Panel Administracyjny"
 
 #: src/lib/dp/components/player/PlayerDataCard.svelte
 msgid "Not specified"
@@ -2520,10 +2517,12 @@ msgstr "Udostępnianie gier nie działa w Firefoksie."
 msgid "No club officials available."
 msgstr "Brak dostępnych oficjeli klubu."
 
+#: src/routes/(dp)/(protected)/account/clubs/[club]/admin/attendance/+page.svelte
 #: src/routes/(dp)/(protected)/stats/admin/+page.svelte
 msgid "Stats Admin Dashboard"
 msgstr "Panel administracyjny statystyk"
 
+#: src/routes/(dp)/(protected)/account/clubs/[club]/admin/attendance/+page.svelte
 #: src/routes/(dp)/(protected)/stats/admin/+page.svelte
 msgid "Not implemented yet."
 msgstr "Jeszcze nie zaimplementowane."
@@ -2850,16 +2849,26 @@ msgstr "Brak dostępnych danych."
 
 #: src/lib/dp/components/comments/CommentRow.svelte
 msgid "Error updating comment"
-msgstr "Błąd podczas aktualizacji komentarza"#: src/lib/dp/components/comments/CommentSection.svelte
+msgstr "Błąd podczas aktualizacji komentarza\"#: src/lib/dp/components/comments/CommentSection.svelte"
+
+#: src/lib/dp/components/comments/CommentSection.svelte
 msgid "Failed to add comment."
-msgstr "Nie udało się dodać komentarza."#: src/lib/dp/auth/OAuthProviderButton.svelte
+msgstr "Nie udało się dodać komentarza.\"#: src/lib/dp/auth/OAuthProviderButton.svelte"
+
+#: src/lib/dp/auth/OAuthProviderButton.svelte
 msgid "There was an error processing your authentication request via external provider. Please double-check your signup key"
-msgstr "Wystąpił błąd podczas przetwarzania żądania uwierzytelnienia przez zewnętrznego dostawcę. Sprawdź ponownie swój klucz rejestracji."#. placeholder {0}: email
+msgstr "Wystąpił błąd podczas przetwarzania żądania uwierzytelnienia przez zewnętrznego dostawcę. Sprawdź ponownie swój klucz rejestracji.\"#. placeholder {0}: email"
+
+#. placeholder {0}: email
 #: src/lib/dp/auth/PasswordRequestButton.svelte
 msgid "If we have your email ({0}) on file, you will receive a reset password request in your inbox."
-msgstr "Jeśli mamy Twój adres e-mail ({0}) w bazie, otrzymasz prośbę o zresetowanie hasła w swojej skrzynce odbiorczej."#: src/lib/dp/auth/PasswordRequestButton.svelte
+msgstr "Jeśli mamy Twój adres e-mail ({0}) w bazie, otrzymasz prośbę o zresetowanie hasła w swojej skrzynce odbiorczej.\"#: src/lib/dp/auth/PasswordRequestButton.svelte"
+
+#: src/lib/dp/auth/PasswordRequestButton.svelte
 msgid "Error sending reset password request."
-msgstr "Błąd podczas wysyłania prośby o zresetowanie hasła."#: src/lib/dp/components/forms/UniformSetForm.svelte
+msgstr "Błąd podczas wysyłania prośby o zresetowanie hasła.\"#: src/lib/dp/components/forms/UniformSetForm.svelte"
+
+#: src/lib/dp/components/forms/UniformSetForm.svelte
 msgid ""
 "You can use the special identifiers <0/> and <1/> to get\n"
 "the Skylarks Home and Road Cap instead of a\n"
@@ -2867,41 +2876,67 @@ msgid ""
 msgstr ""
 "Możesz użyć specjalnych identyfikatorów <0/> i <1/>, aby otrzymać\n"
 "czapkę Skylarks Home i Road zamiast\n"
-"generycznej kolorowej."#. placeholder {0}: model.first_name + " " + model.last_name
+"generycznej kolorowej.\"#. placeholder {0}: model.first_name + \" \" + model.last_name"
+
+#. placeholder {0}: model.first_name + " " + model.last_name
 #. placeholder {1}: team.name
 #: src/lib/dp/components/team/TeamMembersTableContent.svelte
 msgid "User \"{0}\" has been added as an admin for team \"{1}\""
-msgstr "Użytkownik \"{0}\" został dodany jako administrator zespołu \"{1}\""#: src/lib/dp/components/team/TeamMembersTableContent.svelte
+msgstr "Użytkownik \"{0}\" został dodany jako administrator zespołu \"{1}\"\"#: src/lib/dp/components/team/TeamMembersTableContent.svelte"
+
+#: src/lib/dp/components/team/TeamMembersTableContent.svelte
 msgid "An error occurred while adding user as admin"
-msgstr "Wystąpił błąd podczas dodawania użytkownika jako administratora"#. placeholder {0}: model.first_name + " " + model.last_name
+msgstr "Wystąpił błąd podczas dodawania użytkownika jako administratora\"#. placeholder {0}: model.first_name + \" \" + model.last_name"
+
+#. placeholder {0}: model.first_name + " " + model.last_name
 #. placeholder {1}: team.name
 #: src/lib/dp/components/team/TeamMembersTableContent.svelte
 msgid "User \"{0}\" has been removed as admin for team \"{1}\""
-msgstr "Użytkownik \"{0}\" został usunięty jako administrator zespołu \"{1}\""#: src/lib/dp/components/team/TeamMembersTableContent.svelte
+msgstr "Użytkownik \"{0}\" został usunięty jako administrator zespołu \"{1}\"\"#: src/lib/dp/components/team/TeamMembersTableContent.svelte"
+
+#: src/lib/dp/components/team/TeamMembersTableContent.svelte
 msgid "An error occurred while removing user as admin"
-msgstr "Wystąpił błąd podczas usuwania użytkownika jako administratora"#. placeholder {0}: model.first_name + " " + model.last_name
+msgstr "Wystąpił błąd podczas usuwania użytkownika jako administratora\"#. placeholder {0}: model.first_name + \" \" + model.last_name"
+
+#. placeholder {0}: model.first_name + " " + model.last_name
 #. placeholder {1}: team.name
 #: src/lib/dp/components/team/TeamMembersTableContent.svelte
 msgid "User \"{0}\" has been removed as member from team \"{1}\""
-msgstr "Użytkownik \"{0}\" został usunięty z zespołu \"{1}\""#: src/lib/dp/components/team/TeamMembersTableContent.svelte
+msgstr "Użytkownik \"{0}\" został usunięty z zespołu \"{1}\"\"#: src/lib/dp/components/team/TeamMembersTableContent.svelte"
+
+#: src/lib/dp/components/team/TeamMembersTableContent.svelte
 msgid "An error occurred while removing user as team member"
-msgstr "Wystąpił błąd podczas usuwania członka zespołu"#: src/lib/dp/components/forms/TeamMembersForm.svelte
+msgstr "Wystąpił błąd podczas usuwania członka zespołu\"#: src/lib/dp/components/forms/TeamMembersForm.svelte"
+
+#: src/lib/dp/components/forms/TeamMembersForm.svelte
 #: src/lib/dp/components/forms/TeamMembersForm.svelte
 msgid "Team members"
-msgstr "Członkowie zespołu"#: src/lib/dp/components/forms/ParticipationForm.svelte
+msgstr "Członkowie zespołu\"#: src/lib/dp/components/forms/ParticipationForm.svelte"
+
+#: src/lib/dp/components/forms/ParticipationForm.svelte
 msgid "State <0>InMaybeOut</0>"
-msgstr "Stan <0>InMaybeOut</0>"#. placeholder {0}: modelName
+msgstr "Stan <0>InMaybeOut</0>\"#. placeholder {0}: modelName"
+
+#. placeholder {0}: modelName
 #: src/lib/dp/components/utils/DeleteButton.svelte
 msgid "Error deleting {0}."
-msgstr "Błąd podczas usuwania {0}."#: src/lib/dp/components/event/EventTypeBadge.svelte
+msgstr "Błąd podczas usuwania {0}.\"#: src/lib/dp/components/event/EventTypeBadge.svelte"
+
+#: src/lib/dp/components/event/EventTypeBadge.svelte
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Game"
-msgstr "Mecz"#: src/lib/dp/components/event/EventTypeBadge.svelte
+msgstr "Mecz\"#: src/lib/dp/components/event/EventTypeBadge.svelte"
+
+#: src/lib/dp/components/event/EventTypeBadge.svelte
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Practice"
-msgstr "Trening"#: src/lib/dp/components/player/TeamPlayerSection.svelte
+msgstr "Trening\"#: src/lib/dp/components/player/TeamPlayerSection.svelte"
+
+#: src/lib/dp/components/player/TeamPlayerSection.svelte
 msgid "Visualization <0>NumberImage</0>"
-msgstr "Wizualizacja <0>NumberImage</0>"#: src/routes/(tib)/gamecenter/+page.svelte
+msgstr "Wizualizacja <0>NumberImage</0>\"#: src/routes/(tib)/gamecenter/+page.svelte"
+
+#: src/routes/(tib)/gamecenter/+page.svelte
 msgid "Previous"
 msgstr "Poprzedni"
 
@@ -2921,53 +2956,171 @@ msgstr "Wszystkie"
 
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Timeframe"
-msgstr "Zakres czasu"#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+msgstr "Zakres czasu\"#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte"
+
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Sort"
-msgstr "Sortuj"#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+msgstr "Sortuj\"#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte"
+
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Ascending"
-msgstr "Rosnąco"#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+msgstr "Rosnąco\"#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte"
+
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Descending"
-msgstr "Malejąco"#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+msgstr "Malejąco\"#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte"
+
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Other"
-msgstr "Inne"#: src/lib/dp/components/communityservice/CommunityServiceItemCard.svelte
+msgstr "Inne\"#: src/lib/dp/components/communityservice/CommunityServiceItemCard.svelte"
+
+#: src/lib/dp/components/communityservice/CommunityServiceItemCard.svelte
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Community Service Entry"
-msgstr "Wpis prac społecznych"#: src/lib/dp/components/forms/ServiceEntryForm.svelte
+msgstr "Wpis prac społecznych\"#: src/lib/dp/components/forms/ServiceEntryForm.svelte"
+
+#: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Date <0/>"
-msgstr "Data <0/>"#: src/lib/dp/components/forms/ServiceEntryForm.svelte
+msgstr "Data <0/>\"#: src/lib/dp/components/forms/ServiceEntryForm.svelte"
+
+#: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Duration"
-msgstr "Czas trwania"#: src/lib/dp/components/forms/ServiceEntryForm.svelte
+msgstr "Czas trwania\"#: src/lib/dp/components/forms/ServiceEntryForm.svelte"
+
+#: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Minutes <0/>"
-msgstr "Minuty <0/>"#: src/lib/dp/components/forms/ServiceEntryForm.svelte
+msgstr "Minuty <0/>\"#: src/lib/dp/components/forms/ServiceEntryForm.svelte"
+
+#: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Board Member <0/>"
-msgstr "Członek zarządu <0/>"#: src/lib/dp/components/forms/ServiceEntryForm.svelte
+msgstr "Członek zarządu <0/>\"#: src/lib/dp/components/forms/ServiceEntryForm.svelte"
+
+#: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Member <0/>"
-msgstr "Członek <0/>"#: src/lib/dp/components/navigation/NavigationSheet.svelte
+msgstr "Członek <0/>\"#: src/lib/dp/components/navigation/NavigationSheet.svelte"
+
+#: src/lib/dp/components/navigation/NavigationSheet.svelte
 msgid "Diamond Planner Logo"
-msgstr "Logo Diamond Planner"#: src/lib/dp/components/communityservice/CommunityServiceSection.svelte
+msgstr "Logo Diamond Planner\"#: src/lib/dp/components/communityservice/CommunityServiceSection.svelte"
+
+#: src/lib/dp/components/communityservice/CommunityServiceSection.svelte
 msgid "<0/> Create new"
-msgstr "<0/> Utwórz nowy"#: src/lib/dp/components/communityservice/CommunityServiceSection.svelte
+msgstr "<0/> Utwórz nowy\"#: src/lib/dp/components/communityservice/CommunityServiceSection.svelte"
+
+#: src/lib/dp/components/communityservice/CommunityServiceSection.svelte
 msgid "Create new Community Service Entry"
-msgstr "Utwórz nowy wpis prac społecznych"#: src/lib/dp/auth/LoginForm.svelte
+msgstr "Utwórz nowy wpis prac społecznych\"#: src/lib/dp/auth/LoginForm.svelte"
+
+#: src/lib/dp/auth/LoginForm.svelte
 msgid "Sign in to Diamond Planner"
-msgstr "Zaloguj się do Diamond Planner"#: src/lib/dp/components/meta/SidebarNavigation.svelte
+msgstr "Zaloguj się do Diamond Planner\"#: src/lib/dp/components/meta/SidebarNavigation.svelte"
+
+#: src/lib/dp/components/meta/SidebarNavigation.svelte
+#: src/lib/dp/components/meta/SidebarNavigation.svelte
 #: src/routes/(dp)/(protected)/account/[user]/communityservice/+page.svelte
 msgid "Community Service"
-msgstr "Prace społeczne"#. placeholder {0}: entry.title
+msgstr "Prace społeczne\"#. placeholder {0}: entry.title"
+
+#. placeholder {0}: entry.title
 #: src/lib/dp/components/communityservice/CommunityServiceItemCard.svelte
 msgid "Edit Community Service Entry \"{0}\""
-msgstr "Edytuj wpis prac społecznych \"{0}\""#: src/lib/dp/components/communityservice/TargetVisualizer.svelte
+msgstr "Edytuj wpis prac społecznych \"{0}\"\"#: src/lib/dp/components/communityservice/TargetVisualizer.svelte"
+
+#: src/lib/dp/components/communityservice/TargetVisualizer.svelte
 msgid "Target:"
-msgstr "Cel:"#: src/lib/dp/components/user/PlayerDataProfileSection.svelte
+msgstr "Cel:\"#: src/lib/dp/components/user/PlayerDataProfileSection.svelte"
+
+#: src/lib/dp/components/user/PlayerDataProfileSection.svelte
 msgid ""
 "You have the option to display your player data in your public\n"
 "profile on the website and apps."
 msgstr ""
 "Masz możliwość wyświetlania swoich danych zawodnika w publicznym profilu\n"
-"na stronie internetowej i w aplikacjach."#. placeholder {0}: set.user.first_name
+"na stronie internetowej i w aplikacjach.\"#. placeholder {0}: set.user.first_name"
+
+#~ msgid "for {0} {1} ({2})"
+#~ msgstr "dla {0} {1} ({2})"
+
+#: src/lib/dp/components/forms/ClubForm.svelte
+msgid ""
+"Community Service Requirement <0/> <1>Designated community service time amount (in minutes) that each\n"
+"member is expected to provide during a calendar year\n"
+"(e.g. 20h = 1200 minutes).</1>"
+msgstr ""
+
+#: src/lib/dp/components/communityservice/CommunityServiceDatatable.svelte
+msgid "E-Mail"
+msgstr ""
+
+#: src/lib/dp/components/communityservice/CommunityServiceDatatable.svelte
+msgid "Target Met"
+msgstr ""
+
+#. placeholder {0}: club.name
+#: src/lib/dp/components/communityservice/CommunityServiceDatatable.svelte
+msgid "Community Service Data for {0}"
+msgstr ""
+
+#. placeholder {0}: row.name
+#: src/lib/dp/components/communityservice/CommunityServiceTableContent.svelte
+msgid "Go to community service page for user {0}"
+msgstr ""
+
+#: src/lib/dp/components/communityservice/CommunityServiceTableContent.svelte
+msgid "Met"
+msgstr ""
+
+#: src/lib/dp/components/communityservice/CommunityServiceTableContent.svelte
+msgid "Not Met"
+msgstr ""
+
+#: src/lib/dp/components/meta/SidebarNavigation.svelte
+msgid "Club Main Page"
+msgstr ""
+
+#. placeholder {0}: club.acronym
+#: src/lib/dp/components/meta/SidebarNavigation.svelte
+msgid "Club Administration ({0})"
+msgstr ""
+
+#: src/lib/dp/components/meta/SidebarNavigation.svelte
+msgid "Attendance Dashboard"
+msgstr ""
+
+#: src/lib/dp/components/team/TeamMembersTableContent.svelte
+msgid "<0/> Revoke Admin"
+msgstr ""
+
+#: src/lib/dp/components/team/TeamMembersTableContent.svelte
+msgid "Remove User from Team"
+msgstr ""
+
+#: src/lib/dp/components/datatable/ThFilter.svelte
+msgid "Filter..."
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/+page.svelte
+msgid "My Announcements"
+msgstr ""
+
+#. placeholder {0}: set.user.first_name
 #. placeholder {1}: set.user.last_name
-#. placeholder {2}: set.season
 #: src/routes/(dp)/(protected)/account/[user]/communityservice/+page.svelte
-msgid "for {0} {1} ({2})"
-msgstr "dla {0} {1} ({2})"
+msgid "for {0} {1}"
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/[user]/communityservice/+page.svelte
+msgid ""
+"Each club can set a community service target for its members. Members are expected to provide this amount\n"
+"of voluntary working hours each calendar year. You can report your community service hours\n"
+"here, as well as view your previously sent hours and compare with the target."
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/clubs/[club]/admin/communityservice/+page.svelte
+msgid "Community Service Admin Dashboard"
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/clubs/[club]/admin/communityservice/+page.svelte
+msgid "for <0/>"
+msgstr ""
