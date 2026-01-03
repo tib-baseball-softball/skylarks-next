@@ -3048,67 +3048,70 @@ msgid ""
 "member is expected to provide during a calendar year\n"
 "(e.g. 20h = 1200 minutes).</1>"
 msgstr ""
+"Wymóg prac społecznych <0/> <1>Wyznaczony wymiar czasu prac społecznych (w minutach), który każdy\n"
+"członek powinien przepracować w ciągu roku kalendarzowego\n"
+"(np. 20h = 1200 minut).</1>"
 
 #: src/lib/dp/components/communityservice/CommunityServiceDatatable.svelte
 msgid "E-Mail"
-msgstr ""
+msgstr "E-mail"
 
 #: src/lib/dp/components/communityservice/CommunityServiceDatatable.svelte
 msgid "Target Met"
-msgstr ""
+msgstr "Cel osiągnięty"
 
 #. placeholder {0}: club.name
 #: src/lib/dp/components/communityservice/CommunityServiceDatatable.svelte
 msgid "Community Service Data for {0}"
-msgstr ""
+msgstr "Dane prac społecznych dla {0}"
 
 #. placeholder {0}: row.name
 #: src/lib/dp/components/communityservice/CommunityServiceTableContent.svelte
 msgid "Go to community service page for user {0}"
-msgstr ""
+msgstr "Przejdź do strony prac społecznych użytkownika {0}"
 
 #: src/lib/dp/components/communityservice/CommunityServiceTableContent.svelte
 msgid "Met"
-msgstr ""
+msgstr "Spełniono"
 
 #: src/lib/dp/components/communityservice/CommunityServiceTableContent.svelte
 msgid "Not Met"
-msgstr ""
+msgstr "Nie spełniono"
 
 #: src/lib/dp/components/meta/SidebarNavigation.svelte
 msgid "Club Main Page"
-msgstr ""
+msgstr "Strona główna klubu"
 
 #. placeholder {0}: club.acronym
 #: src/lib/dp/components/meta/SidebarNavigation.svelte
 msgid "Club Administration ({0})"
-msgstr ""
+msgstr "Administracja klubu ({0})"
 
 #: src/lib/dp/components/meta/SidebarNavigation.svelte
 msgid "Attendance Dashboard"
-msgstr ""
+msgstr "Panel obecności"
 
 #: src/lib/dp/components/team/TeamMembersTableContent.svelte
 msgid "<0/> Revoke Admin"
-msgstr ""
+msgstr "<0/> Odwołaj administratora"
 
 #: src/lib/dp/components/team/TeamMembersTableContent.svelte
 msgid "Remove User from Team"
-msgstr ""
+msgstr "Usuń użytkownika z zespołu"
 
 #: src/lib/dp/components/datatable/ThFilter.svelte
 msgid "Filter..."
-msgstr ""
+msgstr "Filtruj..."
 
 #: src/routes/(dp)/(protected)/account/+page.svelte
 msgid "My Announcements"
-msgstr ""
+msgstr "Moje ogłoszenia"
 
 #. placeholder {0}: set.user.first_name
 #. placeholder {1}: set.user.last_name
 #: src/routes/(dp)/(protected)/account/[user]/communityservice/+page.svelte
 msgid "for {0} {1}"
-msgstr ""
+msgstr "dla {0} {1}"
 
 #: src/routes/(dp)/(protected)/account/[user]/communityservice/+page.svelte
 msgid ""
@@ -3116,11 +3119,14 @@ msgid ""
 "of voluntary working hours each calendar year. You can report your community service hours\n"
 "here, as well as view your previously sent hours and compare with the target."
 msgstr ""
+"Każdy klub może ustalić cel prac społecznych dla swoich członków. Oczekuje się, że członkowie przepracują taką liczbę\n"
+"godzin wolontariatu w każdym roku kalendarzowym. Możesz tutaj zgłaszać swoje godziny prac społecznych,\n"
+"a także przeglądać wcześniej przesłane godziny i porównywać je z celem."
 
 #: src/routes/(dp)/(protected)/account/clubs/[club]/admin/communityservice/+page.svelte
 msgid "Community Service Admin Dashboard"
-msgstr ""
+msgstr "Panel administracyjny prac społecznych"
 
 #: src/routes/(dp)/(protected)/account/clubs/[club]/admin/communityservice/+page.svelte
 msgid "for <0/>"
-msgstr ""
+msgstr "dla <0/>"
