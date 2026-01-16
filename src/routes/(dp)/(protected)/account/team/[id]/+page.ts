@@ -5,7 +5,8 @@ import {watchWithPagination} from "$lib/dp/records/RecordOperations.ts";
 import {EventService} from "$lib/dp/service/EventService.ts";
 import type {ExpandedAnnouncement, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.js";
 import type {EventseriesResponse} from "$lib/dp/types/pb-types.ts";
-import type {PageLoad} from "../../../../../../../.svelte-kit/types/src/routes";
+import type {PageLoad} from "./$types";
+import {Collection} from "$lib/dp/enum/Collection.ts";
 
 export const load = (async ({fetch, parent, params, url, depends}) => {
   const data = await parent();
@@ -18,6 +19,7 @@ export const load = (async ({fetch, parent, params, url, depends}) => {
       team = await client.collection("teams").getOne<ExpandedTeam>(params.id, {
         expand: "club,admins",
         fetch: fetch,
+        requestKey: `team-${params.id}`,
       });
     } catch (e) {
       if (dev) {
@@ -35,9 +37,10 @@ export const load = (async ({fetch, parent, params, url, depends}) => {
   targetDate.setFullYear(targetDate.getFullYear() - 1, 0, 1);
   const eventSeriesCutoff = targetDate.toISOString();
 
-  const eventSeries = await client.collection("eventseries").getFullList<EventseriesResponse>({
+  const eventSeries = await client.collection(Collection.EventSeries).getFullList<EventseriesResponse>({
     filter: `team = "${team.id}" && series_start >= "${eventSeriesCutoff}"`,
     fetch: fetch,
+    requestKey: `team-${team.id}-eventseries`,
     sort: "+series_start",
   });
 
@@ -45,16 +48,16 @@ export const load = (async ({fetch, parent, params, url, depends}) => {
   const page = Number(pageQuery);
 
   const announcements = await watchWithPagination<ExpandedAnnouncement>(
-      "announcements",
-      {
-        filter: `team.id = "${team.id}"`,
-        sort: "-updated",
-        fetch: fetch,
-        expand: "author,club,team,comments_via_announcement.user",
-        requestKey: `team-${team.id}-announcements`,
-      },
-      page,
-      3
+    Collection.Announcements,
+    {
+      filter: `team.id = "${team.id}"`,
+      sort: "-updated",
+      fetch: fetch,
+      expand: "author,club,team,comments_via_announcement.user",
+      requestKey: `team-${team.id}-announcements`,
+    },
+    page,
+    3
   );
 
   depends("event:list", "comments:list");
