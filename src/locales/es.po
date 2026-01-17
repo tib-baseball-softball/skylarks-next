@@ -99,6 +99,7 @@ msgid "Forgot Password?"
 msgstr "¿Olvidó su contraseña?"
 
 #: src/lib/dp/auth/LoginForm.svelte
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
 msgid "Reset Password"
 msgstr "Restablecer la contraseña"
 
@@ -2282,13 +2283,13 @@ msgstr "Editar datos de usuario:"
 
 #. placeholder {0}: model.first_name
 #. placeholder {1}: model.last_name
-#: src/lib/dp/components/user/UserDataCard.svelte
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
 msgid "Change email address for {0} {1}"
 msgstr "Cambiar la dirección de correo electrónico de {0} {1}"
 
 #. placeholder {0}: model.first_name
 #. placeholder {1}: model.last_name
-#: src/lib/dp/components/user/UserDataCard.svelte
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
 msgid "Edit User Data for {0} {1}"
 msgstr "Editar datos de usuario para {0} {1}"
 
@@ -2783,39 +2784,33 @@ msgid "Error updating comment"
 msgstr "Error al actualizar el comentario"
 
 #: src/lib/dp/components/comments/CommentSection.svelte"
-
 #: src/lib/dp/components/comments/CommentSection.svelte
 msgid "Failed to add comment."
 msgstr "Error al añadir el comentario."
 
-#. placeholder {0}: email"
-
+#. placeholder {0}: email
 #. placeholder {0}: email
 #: src/lib/dp/auth/PasswordRequestButton.svelte
 msgid "If we have your email ({0}) on file, you will receive a reset password request in your inbox."
 msgstr "Si tenemos tu correo electrónico ({0}) registrado, recibirás una solicitud de restablecimiento de contraseña en tu bandeja de entrada."
 
 #: src/lib/dp/auth/PasswordRequestButton.svelte"
-
 #: src/lib/dp/auth/PasswordRequestButton.svelte
 msgid "Error sending reset password request."
 msgstr "Error al enviar la solicitud de restablecimiento de contraseña."
 
 #: src/lib/dp/auth/OAuthProviderButton.svelte"
-
 #: src/lib/dp/auth/OAuthProviderButton.svelte
 msgid "There was an error processing your authentication request via external provider. Please double-check your signup key"
 msgstr "Hubo un error al procesar tu solicitud de autenticación a través del proveedor externo. Por favor, comprueba tu clave de registro."
 
 #: src/lib/dp/components/forms/TeamMembersForm.svelte"
-
 #: src/lib/dp/components/forms/TeamMembersForm.svelte
 #: src/lib/dp/components/forms/TeamMembersForm.svelte
 msgid "Team members"
-msgstr "Miembros del equipo\"
+msgstr "Miembros del equipo\\"
 
 #: src/lib/dp/components/forms/UniformSetForm.svelte"
-
 #: src/lib/dp/components/forms/UniformSetForm.svelte
 msgid ""
 "You can use the special identifiers <0/> and <1/> to get\n"
@@ -2833,27 +2828,23 @@ msgid "User \"{0}\" has been added as an admin for team \"{1}\""
 msgstr "El usuario \"{0}\" ha sido añadido como administrador del equipo \"{1}\""
 
 #: src/lib/dp/components/team/TeamMembersTableContent.svelte"
-
 #: src/lib/dp/components/team/TeamMembersTableContent.svelte
 msgid "An error occurred while adding user as admin"
 msgstr "Ocurrió un error al añadir al usuario como administrador"
 
 #. placeholder {0}: model.first_name + \" \" + model.last_name"
-
 #. placeholder {0}: model.first_name + " " + model.last_name
 #. placeholder {1}: team.name
 #: src/lib/dp/components/team/TeamMembersTableContent.svelte
 msgid "User \"{0}\" has been removed as admin for team \"{1}\""
-msgstr "El usuario \"{0}\" ha sido eliminado como administrador del equipo \"{1}\"\"
+msgstr "El usuario \"{0}\" ha sido eliminado como administrador del equipo \"{1}\"\\"
 
 #: src/lib/dp/components/team/TeamMembersTableContent.svelte"
-
 #: src/lib/dp/components/team/TeamMembersTableContent.svelte
 msgid "An error occurred while removing user as admin"
-msgstr "Ocurrió un error al eliminar al usuario como administrador\"
+msgstr "Ocurrió un error al eliminar al usuario como administrador\\"
 
 #. placeholder {0}: model.first_name + \" \" + model.last_name"
-
 #. placeholder {0}: model.first_name + " " + model.last_name
 #. placeholder {1}: team.name
 #: src/lib/dp/components/team/TeamMembersTableContent.svelte
@@ -2861,26 +2852,22 @@ msgid "User \"{0}\" has been removed as member from team \"{1}\""
 msgstr "El usuario \"{0}\" ha sido eliminado como miembro del equipo \"{1}\""
 
 #: src/lib/dp/components/team/TeamMembersTableContent.svelte"
-
 #: src/lib/dp/components/team/TeamMembersTableContent.svelte
 msgid "An error occurred while removing user as team member"
 msgstr "Ocurrió un error al eliminar al usuario como miembro del equipo"
 
 #: src/lib/dp/components/forms/ParticipationForm.svelte"
-
 #: src/lib/dp/components/forms/ParticipationForm.svelte
 msgid "State <0>InMaybeOut</0>"
 msgstr "Estado <0>InMaybeOut</0>"
 
 #: src/lib/dp/components/event/EventTypeBadge.svelte"
-
 #: src/lib/dp/components/event/EventTypeBadge.svelte
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Game"
 msgstr "Juego"
 
 #: src/lib/dp/components/event/EventTypeBadge.svelte"
-
 #: src/lib/dp/components/event/EventTypeBadge.svelte
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Practice"
@@ -2892,13 +2879,11 @@ msgid "Error deleting {0}."
 msgstr "Error al eliminar {0}."
 
 #: src/lib/dp/components/player/TeamPlayerSection.svelte"
-
 #: src/lib/dp/components/player/TeamPlayerSection.svelte
 msgid "Visualization <0>NumberImage</0>"
 msgstr "Visualización <0>NumberImage</0>"
 
 #: src/routes/(tib)/gamecenter/+page.svelte"
-
 #: src/routes/(tib)/gamecenter/+page.svelte
 msgid "Previous"
 msgstr "Anterior"
@@ -2922,49 +2907,41 @@ msgid "Timeframe"
 msgstr "Plazo"
 
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte"
-
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Sort"
 msgstr "Ordenar"
 
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte"
-
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Ascending"
 msgstr "Ascendente"
 
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte"
-
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Descending"
 msgstr "Descendente"
 
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte"
-
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Other"
-msgstr "Otro\"
+msgstr "Otro\\"
 
 #: src/lib/dp/components/communityservice/CommunityServiceSection.svelte"
-
 #: src/lib/dp/components/communityservice/CommunityServiceSection.svelte
 msgid "<0/> Create new"
-msgstr "<0/> Crear nuevo\"
+msgstr "<0/> Crear nuevo\\"
 
 #: src/lib/dp/components/communityservice/CommunityServiceSection.svelte"
-
 #: src/lib/dp/components/communityservice/CommunityServiceSection.svelte
 msgid "Create new Community Service Entry"
 msgstr "Crear nueva entrada de servicio comunitario"
 
 #: src/lib/dp/components/navigation/NavigationSheet.svelte"
-
 #: src/lib/dp/components/navigation/NavigationSheet.svelte
 msgid "Diamond Planner Logo"
 msgstr "Logotipo de Diamond Planner"
 
 #: src/lib/dp/components/communityservice/CommunityServiceItemCard.svelte"
-
 #: src/lib/dp/components/communityservice/CommunityServiceItemCard.svelte
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
@@ -2972,25 +2949,21 @@ msgid "Community Service Entry"
 msgstr "Entrada de servicio comunitario"
 
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte"
-
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Date <0/>"
 msgstr "Fecha <0/>"
 
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte"
-
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Duration"
 msgstr "Duración"
 
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte"
-
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Minutes <0/>"
 msgstr "Minutos <0/>"
 
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte"
-
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Board Member <0/>"
 msgstr "Miembro de la junta <0/>"
@@ -3013,11 +2986,11 @@ msgstr "Editar entrada de servicio comunitario \"{0}\""
 #: src/lib/dp/components/meta/SidebarNavigation.svelte
 #: src/routes/(dp)/(protected)/account/[user]/communityservice/+page.svelte
 msgid "Community Service"
-msgstr "Servicio comunitario\"
+msgstr "Servicio comunitario\\"
 
 #: src/lib/dp/components/communityservice/TargetVisualizer.svelte
 msgid "Target:"
-msgstr "Objetivo:\"
+msgstr "Objetivo:\\"
 
 #: src/lib/dp/components/user/PlayerDataProfileSection.svelte
 msgid ""
@@ -3118,3 +3091,101 @@ msgstr "Panel de Administración de Servicio Comunitario"
 #: src/routes/(dp)/(protected)/account/clubs/[club]/admin/communityservice/+page.svelte
 msgid "for <0/>"
 msgstr "para <0/>"
+
+#: src/lib/dp/components/meta/Footer.svelte
+msgid "Built with"
+msgstr ""
+
+#: src/lib/dp/components/meta/Footer.svelte
+msgid "and"
+msgstr ""
+
+#: src/lib/dp/components/meta/Footer.svelte
+msgid "Svelte JavaScript Framework website"
+msgstr ""
+
+#: src/lib/dp/components/user/UserDataCard.svelte
+msgid "Go to User Settings"
+msgstr ""
+
+#: src/lib/dp/components/user/UserDataCard.svelte
+msgid ""
+"User\n"
+"Settings"
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+msgid "User Settings"
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+msgid "Account Data"
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+msgid "Change Email Address"
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+msgid "Edit Profile Data"
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+msgid "Go to Player profile page"
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+msgid "Your player profile data can be changed on <0>a dedicated page</0>."
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+msgid "User not found. That should not happen, if it does anyway, please log in."
+msgstr ""
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Push notifications are disabled on your browser."
+msgstr ""
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Technical error - service worker registration not found."
+msgstr ""
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "You are already subscribed to push notifications."
+msgstr ""
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Push notifications successfully registered."
+msgstr ""
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Technical error - subscription not submitted to server."
+msgstr ""
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Push notifications successfully unregistered."
+msgstr ""
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Technical error - push notification unregistration failed."
+msgstr ""
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Push Notifications"
+msgstr ""
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Send Push Notifications"
+msgstr ""
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Upon checking this box, your browser will prompt you for confirmation to enable push messages on this device."
+msgstr ""
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Test"
+msgstr ""
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Send Test Notification"
+msgstr ""

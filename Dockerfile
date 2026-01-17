@@ -4,7 +4,7 @@
 ############################################
 
 # 1) UI build stage
-FROM node:24-alpine AS ui-builder
+FROM --platform=linux/amd64 node:24-alpine AS ui-builder
 WORKDIR /
 
 RUN npm i -g corepack && corepack enable && corepack prepare pnpm@latest --activate

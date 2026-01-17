@@ -85,7 +85,9 @@ func BindTiBHooks(app core.App, client bsm.APIClient) {
 
 func main() {
 	client := bsm.NewAPIClient()
-	app := dp.NewDiamondPlanner(client)
+	pushService := dp.NewPushService()
+
+	app := dp.NewDiamondPlanner(client, pushService)
 
 	BindTiBHooks(app, client)
 

@@ -1,3 +1,3 @@
 [submodule "diamond-planner"]
 	path = diamond-planner
-	url = git@github.com:diamond-planner/diamond-planner.git
+	url = ssh://git@git.berlinskylarks.de:2222/diamond-planner/diamond-planner.git

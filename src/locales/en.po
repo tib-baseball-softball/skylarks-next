@@ -99,6 +99,7 @@ msgid "Forgot Password?"
 msgstr "Forgot Password?"
 
 #: src/lib/dp/auth/LoginForm.svelte
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
 msgid "Reset Password"
 msgstr "Reset Password"
 
@@ -2381,13 +2382,13 @@ msgstr "Edit User Data:"
 
 #. placeholder {0}: model.first_name
 #. placeholder {1}: model.last_name
-#: src/lib/dp/components/user/UserDataCard.svelte
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
 msgid "Change email address for {0} {1}"
 msgstr "Change email address for {0} {1}"
 
 #. placeholder {0}: model.first_name
 #. placeholder {1}: model.last_name
-#: src/lib/dp/components/user/UserDataCard.svelte
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
 msgid "Edit User Data for {0} {1}"
 msgstr "Edit User Data for {0} {1}"
 
@@ -3065,3 +3066,103 @@ msgstr "Community Service Admin Dashboard"
 #: src/routes/(dp)/(protected)/account/clubs/[club]/admin/communityservice/+page.svelte
 msgid "for <0/>"
 msgstr "for <0/>"
+
+#: src/lib/dp/components/meta/Footer.svelte
+msgid "Built with"
+msgstr "Built with"
+
+#: src/lib/dp/components/meta/Footer.svelte
+msgid "and"
+msgstr "and"
+
+#: src/lib/dp/components/meta/Footer.svelte
+msgid "Svelte JavaScript Framework website"
+msgstr "Svelte JavaScript Framework website"
+
+#: src/lib/dp/components/user/UserDataCard.svelte
+msgid "Go to User Settings"
+msgstr "Go to User Settings"
+
+#: src/lib/dp/components/user/UserDataCard.svelte
+msgid ""
+"User\n"
+"Settings"
+msgstr ""
+"User\n"
+"Settings"
+
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+msgid "User Settings"
+msgstr "User Settings"
+
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+msgid "Account Data"
+msgstr "Account Data"
+
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+msgid "Change Email Address"
+msgstr "Change Email Address"
+
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+msgid "Edit Profile Data"
+msgstr "Edit Profile Data"
+
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+msgid "Go to Player profile page"
+msgstr "Go to Player profile page"
+
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+msgid "Your player profile data can be changed on <0>a dedicated page</0>."
+msgstr "Your player profile data can be changed on <0>a dedicated page</0>."
+
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+msgid "User not found. That should not happen, if it does anyway, please log in."
+msgstr "User not found. That should not happen, if it does anyway, please log in."
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Push notifications are disabled on your browser."
+msgstr "Push notifications are disabled on your browser."
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Technical error - service worker registration not found."
+msgstr "Technical error - service worker registration not found."
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "You are already subscribed to push notifications."
+msgstr "You are already subscribed to push notifications."
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Push notifications successfully registered."
+msgstr "Push notifications successfully registered."
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Technical error - subscription not submitted to server."
+msgstr "Technical error - subscription not submitted to server."
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Push notifications successfully unregistered."
+msgstr "Push notifications successfully unregistered."
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Technical error - push notification unregistration failed."
+msgstr "Technical error - push notification unregistration failed."
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Push Notifications"
+msgstr "Push Notifications"
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Send Push Notifications"
+msgstr "Send Push Notifications"
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Upon checking this box, your browser will prompt you for confirmation to enable push messages on this device."
+msgstr "Upon checking this box, your browser will prompt you for confirmation to enable push messages on this device."
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Test"
+msgstr "Test"
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Send Test Notification"
+msgstr "Send Test Notification"
