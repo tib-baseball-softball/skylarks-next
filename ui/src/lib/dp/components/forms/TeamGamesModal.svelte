@@ -28,10 +28,10 @@
   let leagueGroups: LeaguegroupsResponse[] = $state([]);
 
   let form = $state(
-      team ?? {
-        id: "",
-        bsm_league_group: 0,
-      }
+    team ?? {
+      id: "",
+      bsm_league_group: 0,
+    }
   );
 
   async function getCurrentGamesCount(): Promise<number> {
@@ -90,12 +90,12 @@
   <div class="grid grid-cols-2 gap-2 md:gap-3 lg:gap-4">
     <h3 class="col-span-2 font-bold">Current Values</h3>
     <input
-            autocomplete="off"
-            bind:value={form.id}
-            class="input col-span-2"
-            name="id"
-            readonly
-            type="hidden"
+      autocomplete="off"
+      bind:value={form.id}
+      class="input col-span-2"
+      name="id"
+      readonly
+      type="hidden"
     />
 
     <div>Current League ID:</div>
@@ -135,7 +135,7 @@
         <select class="select" bind:value={form.bsm_league_group}>
           <option value="{0}">None</option>
           {#each leagueGroups as leagueGroup}
-            <option value="{leagueGroup.bsm_id}">{leagueGroup.acronym} ({leagueGroup.bsm_id})</option>
+            <option value="{leagueGroup.bsm_id}">{leagueGroup.name} ({leagueGroup.season})</option>
           {/each}
         </select>
       </label>
