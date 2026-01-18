@@ -6,10 +6,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/diamond-planner/diamond-planner/dp"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/internal/tib"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tests"
-	"github.com/tib-baseball-softball/skylarks-next/internal/tib"
 )
 
 // Full integration scenarios inferred from the webhook handler.

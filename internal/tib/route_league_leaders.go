@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/diamond-planner/diamond-planner/bsm"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/bsm"
 	"github.com/pocketbase/pocketbase/core"
 )
 

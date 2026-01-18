@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/diamond-planner/diamond-planner/dp"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp"
 	"github.com/pocketbase/pocketbase/tests"
 )
 

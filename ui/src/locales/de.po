@@ -2969,7 +2969,7 @@ msgstr ""
 #. placeholder {0}: row.name
 #: src/lib/dp/components/communityservice/CommunityServiceTableContent.svelte
 msgid "Go to community service page for user {0}"
-msgstr "Gehe zur Zivildienstseite für Benutzer {0}"
+msgstr ""
 
 #: src/lib/dp/components/communityservice/CommunityServiceTableContent.svelte
 msgid "Met"
@@ -2996,7 +2996,7 @@ msgstr "Club-Hauptseite"
 #. placeholder {0}: club.acronym
 #: src/lib/dp/components/meta/SidebarNavigation.svelte
 msgid "Club Administration ({0})"
-msgstr "Club-Administration ({0})"
+msgstr ""
 
 #: src/lib/dp/components/meta/SidebarNavigation.svelte
 msgid "Attendance Dashboard"
@@ -3069,32 +3069,6 @@ msgstr "Webseite des JavaScript-Framworks 'Svelte'"
 
 #: src/lib/dp/components/user/UserDataCard.svelte
 msgid "Go to User Settings"
-msgstr ""
-
-#: src/lib/dp/components/communityservice/CommunityServiceTableContent.svelte
-msgid "Met"
-msgstr "Erfüllt"
-
-#: src/lib/dp/components/communityservice/CommunityServiceTableContent.svelte
-msgid "Not Met"
-msgstr "Nicht erfüllt"
-
-#. placeholder {0}: club.acronym
-#: src/lib/dp/components/meta/SidebarNavigation.svelte
-msgid "Club Administration ({0})"
-msgstr ""
-
-#. placeholder {0}: row.name
-#: src/lib/dp/components/communityservice/CommunityServiceTableContent.svelte
-msgid "Go to community service page for user {0}"
-msgstr ""
-
-#: src/routes/(dp)/(protected)/account/+page.svelte
-msgid "My Announcements"
-msgstr "Meine Ankündigungen"
-
-#: src/lib/dp/components/user/UserDataCard.svelte
-msgid "Go to User Settings"
 msgstr "Gehe zu den Benutzereinstellungen"
 
 #: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
@@ -3144,3 +3118,37 @@ msgstr "Push-Nachrichten erfolgreich registriert."
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Technical error - push notification unregistration failed."
 msgstr "Technischer Fehler - Push-Nachrichten konnten nicht registriert werden."
+
+#: src/lib/dp/components/user/UserDataCard.svelte
+msgid ""
+"User\n"
+"Settings"
+msgstr ""
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Push notifications are disabled on your browser."
+msgstr ""
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Technical error - service worker registration not found."
+msgstr ""
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "You are already subscribed to push notifications."
+msgstr ""
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Push notifications successfully registered."
+msgstr ""
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Technical error - subscription not submitted to server."
+msgstr ""
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Test"
+msgstr ""
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Send Test Notification"
+msgstr ""

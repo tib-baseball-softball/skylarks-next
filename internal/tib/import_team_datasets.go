@@ -8,8 +8,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/diamond-planner/diamond-planner/bsm"
-	"github.com/diamond-planner/diamond-planner/dp"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/bsm"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp"
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
 )

@@ -5,14 +5,13 @@ import (
 	"os"
 	_ "time/tzdata"
 
-	"github.com/diamond-planner/diamond-planner/bsm"
-	"github.com/diamond-planner/diamond-planner/dp"
-	_ "github.com/diamond-planner/diamond-planner/migrations"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/bsm"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/internal/tib"
+	_ "git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/migrations"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/spf13/cobra"
 	"github.com/subosito/gotenv"
-	"github.com/tib-baseball-softball/skylarks-next/internal/tib"
-	_ "github.com/tib-baseball-softball/skylarks-next/migrations"
 )
 
 // / Loads environment.
