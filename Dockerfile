@@ -9,8 +9,7 @@ WORKDIR /
 
 RUN npm i -g corepack && corepack enable && corepack prepare pnpm@latest --activate
 
-COPY pnpm-lock.yaml package.json pnpm-workspace.yaml .npmrc* ./
-COPY diamond-planner/ui/package.json ./diamond-planner/ui/
+COPY ui/pnpm-lock.yaml ui/package.json ui/pnpm-workspace.yaml ui/.npmrc* ./
 
 RUN pnpm install --frozen-lockfile
 
@@ -25,7 +24,7 @@ RUN pnpm $BUILD_MODE
 FROM golang:1.25-alpine AS go-builder
 WORKDIR /backend
 
-COPY backend/go.mod backend/go.sum ./
+COPY go.mod go.sum ./
 RUN go mod download
 
 COPY backend .
@@ -39,8 +38,8 @@ WORKDIR /app
 
 RUN apk add --no-cache ca-certificates tzdata && update-ca-certificates
 
-COPY --from=go-builder /backend/diamondplanner ./
-COPY --from=ui-builder /backend/pb_public ./pb_public
+COPY --from=go-builder /diamondplanner ./
+COPY --from=ui-builder /pb_public ./pb_public
 
 EXPOSE 8090
 
