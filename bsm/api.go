@@ -163,6 +163,9 @@ func FetchResource[T any](url string) (T, string, error) {
 	if err != nil {
 		return apiResponse, responseBody, err
 	}
+	defer func(Body io.ReadCloser) {
+		_ = Body.Close()
+	}(resp.Body)
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
