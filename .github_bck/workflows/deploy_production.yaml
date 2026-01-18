@@ -1,14 +1,14 @@
 name: Deploy Production (Docker)
 
 on:
-  push:
-    paths-ignore:
-      - '**/README.md'
-      - 'docs/**'
-      - 'backend/pb_schema.json'
-      - 'craft/**'
-    branches:
-      - main
+  #  push:
+  #    paths-ignore:
+  #      - '**/README.md'
+  #      - 'docs/**'
+  #      - 'backend/pb_schema.json'
+  #      - 'craft/**'
+  #    branches:
+  #      - main
   workflow_dispatch:
 
 jobs:

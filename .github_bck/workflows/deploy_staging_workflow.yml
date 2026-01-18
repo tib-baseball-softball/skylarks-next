@@ -1,14 +1,14 @@
 name: Deploy Staging (Docker)
 
 on:
-  push:
-    paths-ignore:
-      - '**/README.md'
-      - 'docs/**'
-      - 'backend/pb_schema.json'
-      - 'craft/**'
-    branches:
-      - stage
+  #  push:
+  #    paths-ignore:
+  #      - '**/README.md'
+  #      - 'docs/**'
+  #      - 'backend/pb_schema.json'
+  #      - 'craft/**'
+  #    branches:
+  #      - stage
   workflow_dispatch:
 
 jobs:

@@ -99,6 +99,7 @@ msgid "Forgot Password?"
 msgstr "Passwort vergessen?"
 
 #: src/lib/dp/auth/LoginForm.svelte
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
 msgid "Reset Password"
 msgstr "Passwort zurücksetzen"
 
@@ -2373,13 +2374,13 @@ msgstr "Benutzerdaten bearbeiten:"
 
 #. placeholder {0}: model.first_name
 #. placeholder {1}: model.last_name
-#: src/lib/dp/components/user/UserDataCard.svelte
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
 msgid "Change email address for {0} {1}"
 msgstr "E-Mail-Adresse für {0} {1} ändern"
 
 #. placeholder {0}: model.first_name
 #. placeholder {1}: model.last_name
-#: src/lib/dp/components/user/UserDataCard.svelte
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
 msgid "Edit User Data for {0} {1}"
 msgstr "Benutzerdaten für {0} {1} bearbeiten"
 
@@ -3053,3 +3054,93 @@ msgstr "Arbeitsstunden-Admin-Dashboard"
 #: src/routes/(dp)/(protected)/account/clubs/[club]/admin/communityservice/+page.svelte
 msgid "for <0/>"
 msgstr "für <0/>"
+
+#: src/lib/dp/components/meta/Footer.svelte
+msgid "Built with"
+msgstr "Gebaut mit"
+
+#: src/lib/dp/components/meta/Footer.svelte
+msgid "and"
+msgstr "und"
+
+#: src/lib/dp/components/meta/Footer.svelte
+msgid "Svelte JavaScript Framework website"
+msgstr "Webseite des JavaScript-Framworks 'Svelte'"
+
+#: src/lib/dp/components/user/UserDataCard.svelte
+msgid "Go to User Settings"
+msgstr ""
+
+#: src/lib/dp/components/communityservice/CommunityServiceTableContent.svelte
+msgid "Met"
+msgstr "Erfüllt"
+
+#: src/lib/dp/components/communityservice/CommunityServiceTableContent.svelte
+msgid "Not Met"
+msgstr "Nicht erfüllt"
+
+#. placeholder {0}: club.acronym
+#: src/lib/dp/components/meta/SidebarNavigation.svelte
+msgid "Club Administration ({0})"
+msgstr ""
+
+#. placeholder {0}: row.name
+#: src/lib/dp/components/communityservice/CommunityServiceTableContent.svelte
+msgid "Go to community service page for user {0}"
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/+page.svelte
+msgid "My Announcements"
+msgstr "Meine Ankündigungen"
+
+#: src/lib/dp/components/user/UserDataCard.svelte
+msgid "Go to User Settings"
+msgstr "Gehe zu den Benutzereinstellungen"
+
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+msgid "User Settings"
+msgstr "Nutzereinstellungen"
+
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+msgid "User not found. That should not happen, if it does anyway, please log in."
+msgstr "Nutzer nicht gefunden. Das sollte nicht passieren, wenn es doch passiert, bitte einloggen."
+
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+msgid "Account Data"
+msgstr "Kontodaten"
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Push Notifications"
+msgstr "Push-Benachrichtigungen"
+
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+msgid "Change Email Address"
+msgstr "E-Mail-Adresse ändern"
+
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+msgid "Edit Profile Data"
+msgstr "Profildaten bearbeiten"
+
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+msgid "Your player profile data can be changed on <0>a dedicated page</0>."
+msgstr "Du kannst deine Profildaten auf einer <0>eigenen Seite anpassen</0>."
+
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+msgid "Go to Player profile page"
+msgstr "Gehe zur Profilseite des Spielers"
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Send Push Notifications"
+msgstr "Sende Push-Benachrichtigungen"
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Upon checking this box, your browser will prompt you for confirmation to enable push messages on this device."
+msgstr "Beim Aktivieren dieses Schalters wird dich dein Browser um Erlaubnis für Push-Benachrichtigungen auf diesem Gerät fragen."
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Push notifications successfully unregistered."
+msgstr "Push-Nachrichten erfolgreich registriert."
+
+#: src/lib/dp/components/settings/PushSettingsSection.svelte
+msgid "Technical error - push notification unregistration failed."
+msgstr "Technischer Fehler - Push-Nachrichten konnten nicht registriert werden."
