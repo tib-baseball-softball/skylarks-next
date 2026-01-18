@@ -4,7 +4,7 @@
 ############################################
 
 # 1) UI build stage
-FROM --platform=linux/amd64 node:24-alpine AS ui-builder
+FROM node:24-alpine AS ui-builder
 WORKDIR /
 
 RUN npm i -g corepack && corepack enable && corepack prepare pnpm@latest --activate
@@ -14,25 +14,11 @@ COPY diamond-planner/ui/package.json ./diamond-planner/ui/
 
 RUN pnpm install --frozen-lockfile
 
-ARG PUBLIC_TYPO3_URL
-ARG PUBLIC_POCKETBASE_URL
-ARG PUBLIC_CLUB_ID
-ARG PUBLIC_TEAM_NAME
-ARG PUBLIC_LOG_LEVEL
-ARG PUBLIC_TILE_SERVER
-ARG PUBLIC_APPLICATION_CONTEXT
-
-ENV PUBLIC_TYPO3_URL=${PUBLIC_TYPO3_URL}
-ENV PUBLIC_POCKETBASE_URL=${PUBLIC_POCKETBASE_URL}
-ENV PUBLIC_CLUB_ID=${PUBLIC_CLUB_ID}
-ENV PUBLIC_TEAM_NAME=${PUBLIC_TEAM_NAME}
-ENV PUBLIC_LOG_LEVEL=${PUBLIC_LOG_LEVEL}
-ENV PUBLIC_TILE_SERVER=${PUBLIC_TILE_SERVER}
-ENV PUBLIC_APPLICATION_CONTEXT=${PUBLIC_APPLICATION_CONTEXT}
+ARG BUILD_MODE
 
 COPY . .
 
-RUN pnpm build
+RUN pnpm $BUILD_MODE
 
 
 # 2) Go/PocketBase build stage

@@ -232,3 +232,5 @@ test-results
 /craft/data/*.db*
 backend/pb_public/**
 /src/locales/.wuchale/
+/.env.production
+/.env.staging
