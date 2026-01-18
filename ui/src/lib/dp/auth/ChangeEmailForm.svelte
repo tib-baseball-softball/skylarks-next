@@ -4,10 +4,13 @@
   import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
   import {closeModal} from "$lib/dp/utility/closeModal.ts";
 
-  const authRecord = authSettings.record as CustomAuthModel;
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
 
-  const form = $state({
-    email: authRecord.email,
+  let form = $derived.by(() => {
+    const formData = $state({
+      email: authRecord.email,
+    });
+    return formData;
   });
 
   async function submitForm(e: SubmitEvent) {
@@ -36,12 +39,12 @@
   <label class="label">
     E-Mail
     <input
-            autocomplete="email"
-            bind:value={form.email}
-            class="input"
-            name="email"
-            required
-            type="email"
+      autocomplete="email"
+      bind:value={form.email}
+      class="input"
+      name="email"
+      required
+      type="email"
     />
     <span class="mt-3 font-light text-sm">
                 You will be logged out and instructed to verify your new email address.

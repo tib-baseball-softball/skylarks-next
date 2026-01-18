@@ -12,16 +12,21 @@
 
   const {uniformSet, clubID}: Props = $props();
 
-  let form: UniformsetsCreate = $state(
-      uniformSet ?? {
-        id: "",
-        name: "",
-        cap: "",
-        jersey: "",
-        pants: "",
-        club: "",
-      }
-  );
+  function formFromProps(data: UniformsetsResponse | null): UniformsetsCreate {
+    return data ?? {
+      id: "",
+      name: "",
+      cap: "",
+      jersey: "",
+      pants: "",
+      club: "",
+    };
+  }
+
+  let form: UniformsetsCreate = $derived.by(() => {
+    const formData = $state(formFromProps(uniformSet));
+    return formData;
+  });
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
@@ -45,22 +50,22 @@
 
 <form class="mt-4 space-y-3" onsubmit={submitForm}>
   <input
-          autocomplete="off"
-          bind:value={form.id}
-          class="input"
-          name="id"
-          readonly
-          type="hidden"
+    autocomplete="off"
+    bind:value={form.id}
+    class="input"
+    name="id"
+    readonly
+    type="hidden"
   />
 
   <label class="label">
     <span>Name</span>
     <input
-            bind:value={form.name}
-            class="input"
-            name="name"
-            required
-            type="text"
+      bind:value={form.name}
+      class="input"
+      name="name"
+      required
+      type="text"
     />
   </label>
 

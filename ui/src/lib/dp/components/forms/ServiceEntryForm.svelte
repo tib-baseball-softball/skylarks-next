@@ -14,7 +14,7 @@
   import Flatpickr from "$lib/dp/components/formElements/Flatpickr.svelte";
   import {DateTimeUtility} from "$lib/dp/service/DateTimeUtility.ts";
 
-  const authRecord = authSettings.record as CustomAuthModel;
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
 
   interface Props {
     serviceEntry: ExpandedServiceEntry | null;
@@ -42,27 +42,34 @@
     form.minutes = suggestion.value;
   }
 
-  const form: ServiceentriesUpdate = $state(serviceEntry ?? {
-    id: "",
-    service_date: "",
-    minutes: 0,
-    member: authRecord.id,
-    club: club.id,
-    title: "",
-    description: "",
-    board_member: "",
+  function formFromProps(data: ExpandedServiceEntry | null): ServiceentriesUpdate {
+    return data ?? {
+      id: "",
+      service_date: "",
+      minutes: 0,
+      member: authRecord.id,
+      club: club.id,
+      title: "",
+      description: "",
+      board_member: "",
+    };
+  }
+
+  const form: ServiceentriesUpdate = $derived.by(() => {
+    const formData = $state(formFromProps(serviceEntry));
+    return formData;
   });
 
   const isAdmin = $derived(club?.admins.includes(authRecord.id));
 
-  const possibleClubs = client.collection(Collection.Clubs).getFullList<ClubsResponse>({
+  const possibleClubs = $derived(client.collection(Collection.Clubs).getFullList<ClubsResponse>({
     requestKey: null,
-  });
+  }));
 
-  const allClubMembers = client.collection(Collection.Users).getFullList<UsersResponse>({
+  const allClubMembers = $derived(client.collection(Collection.Users).getFullList<UsersResponse>({
     filter: `club ?~ '${club.id}'`,
     requestKey: null,
-  });
+  }));
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
@@ -120,8 +127,8 @@
         bind:value={form.minutes}
         class="input"
         name="number"
-        type="number"
         required
+        type="number"
       />
     </label>
 

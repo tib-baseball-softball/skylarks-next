@@ -15,26 +15,31 @@
 
   let {eventSeries, team, showForm = $bindable()}: Props = $props();
 
-  let formDefault = $state({
-    id: "",
-    title: "",
-    interval: 7,
-    duration: 0,
-    series_start: "",
-    series_end: "",
-    desc: "",
-    location: "",
-    team: team?.id,
-  });
+  function formFromProps(data: EventSeriesCreationData | null): EventSeriesCreationData {
+    return data ?? {
+      id: "",
+      title: "",
+      interval: 7,
+      duration: 0,
+      series_start: "",
+      series_end: "",
+      desc: "",
+      location: "",
+      team: team?.id,
+    };
+  }
 
-  let form: EventSeriesCreationData = $derived(eventSeries ?? formDefault);
+  let form: EventSeriesCreationData = $derived.by(() => {
+    const formData = $state(formFromProps(eventSeries));
+    return formData;
+  });
 
   const isNewSeries = $derived(form.id === "");
 
-  const locationOptions = client.collection("locations").getFullList<LocationsResponse>({
+  const locationOptions = $derived(client.collection("locations").getFullList<LocationsResponse>({
     filter: `club = "${team.club}"`,
     requestKey: `locations-for-eventSeries-${team.id}`,
-  });
+  }));
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
@@ -77,20 +82,20 @@
     {/if}
 
     <input
-            autocomplete="off"
-            bind:value={form.id}
-            class="input"
-            name="id"
-            readonly
-            type="hidden"
+      autocomplete="off"
+      bind:value={form.id}
+      class="input"
+      name="id"
+      readonly
+      type="hidden"
     />
 
     {#if isNewSeries}
       <label class="label field-wide">
         Series First Occurrence
         <Flatpickr
-                bind:value={form.series_start}
-                options={Object.assign(DateTimeUtility.datePickerOptions, {
+          bind:value={form.series_start}
+          options={Object.assign(DateTimeUtility.datePickerOptions, {
                   static: true, // render the picker as a child element to the form to work in a sheet portal context
               })}
         />
@@ -106,8 +111,8 @@
     <label class="label field-wide">
       Series End
       <Flatpickr
-              bind:value={form.series_end}
-              options={Object.assign(DateTimeUtility.datePickerOptionsNoTime, {
+        bind:value={form.series_end}
+        options={Object.assign(DateTimeUtility.datePickerOptionsNoTime, {
                   static: true,
               })}
       />
@@ -117,11 +122,11 @@
     <label class="label field-wide mt-3 md:mt-0">
       Title
       <input
-              bind:value={form.title}
-              class="input"
-              name="title"
-              required
-              type="text"
+        bind:value={form.title}
+        class="input"
+        name="title"
+        required
+        type="text"
       />
     </label>
 
@@ -129,12 +134,12 @@
       <label class="label">
         Recurring Interval
         <input
-                bind:value={form.interval}
-                class="input"
-                name="interval"
-                type="number"
-                step="7"
-                min="7"
+          bind:value={form.interval}
+          class="input"
+          name="interval"
+          type="number"
+          step="7"
+          min="7"
         >
         <span class="text-sm font-light block">Interval between each series occurrence (in days).</span>
       </label>
@@ -142,10 +147,10 @@
       <label class="label">
         Duration
         <input
-                bind:value={form.duration}
-                class="input"
-                name="duration"
-                type="number"
+          bind:value={form.duration}
+          class="input"
+          name="duration"
+          type="number"
         >
         <span class="text-sm font-light block">Duration of each event to determine end time (in minutes).</span>
       </label>
@@ -160,8 +165,8 @@
     <label class="label">
       Location
       <select
-              bind:value={form.location}
-              class="select"
+        bind:value={form.location}
+        class="select"
       >
         {#await locationOptions then options}
           <option value="">None</option>

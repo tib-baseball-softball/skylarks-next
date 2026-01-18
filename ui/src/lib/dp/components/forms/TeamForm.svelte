@@ -24,24 +24,29 @@
 
   let open = $state(false);
 
-  let form: Partial<ExpandedTeam> & { age_group: string } = $state(
-      team ?? {
-        id: "",
-        name: "",
-        age_group: "adults",
-        signup_key: "",
-        club: club.id, // no binding, cannot be changed via this form
-        description: "",
-        admins: [],
-      }
-  );
+  function formFromProps(data: ExpandedTeam | null) {
+    return data ?? {
+      id: "",
+      name: "",
+      age_group: "adults",
+      signup_key: "",
+      club: club.id, // no binding, cannot be changed via this form
+      description: "",
+      admins: [],
+    };
+  }
 
-  let selectedAdmins: UsersResponse[] = $state(form?.expand?.admins ?? []);
+  let form: Partial<ExpandedTeam> & { age_group: string } = $derived.by(() => {
+    const formData = $state(formFromProps(team));
+    return formData;
+  });
 
-  const allTeamMembers = client.collection(Collection.Users).getFullList<UsersResponse>({
+  let selectedAdmins: UsersResponse[] = $derived(form?.expand?.admins ?? []);
+
+  const allTeamMembers = $derived(client.collection(Collection.Users).getFullList<UsersResponse>({
     filter: `teams ?~ '${team?.id}'`,
     requestKey: `allTeamMembers-${team?.id}`,
-  });
+  }));
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
@@ -108,34 +113,34 @@
     <form class="mt-4 space-y-3" onsubmit={submitForm}>
       <div class="edit-form-grid">
         <input
-                autocomplete="off"
-                bind:value={form.id}
-                class="input"
-                name="id"
-                readonly
-                type="hidden"
+          autocomplete="off"
+          bind:value={form.id}
+          class="input"
+          name="id"
+          readonly
+          type="hidden"
         />
 
         <label class="label col-span-2 md:col-span-1">
           Name
           <input
-                  bind:value={form.name}
-                  class="input"
-                  name="title"
-                  required
-                  type="text"
+            bind:value={form.name}
+            class="input"
+            name="title"
+            required
+            type="text"
           />
         </label>
 
         <label class="label col-span-2 md:col-span-1">
           Club
           <input
-                  autocomplete="off"
-                  class="input"
-                  name="id"
-                  readonly
-                  type="text"
-                  value={club?.name}
+            autocomplete="off"
+            class="input"
+            name="id"
+            readonly
+            type="text"
+            value={club?.name}
           />
         </label>
 
@@ -144,13 +149,13 @@
                 Signup Key
                 </span>
           <input
-                  bind:value={form.signup_key}
-                  class="input"
-                  minlength="8"
-                  name="signup_key"
-                  placeholder="minimum 8 characters"
-                  required
-                  type="text"
+            bind:value={form.signup_key}
+            class="input"
+            minlength="8"
+            name="signup_key"
+            placeholder="minimum 8 characters"
+            required
+            type="text"
           />
           <span class="text-sm">
                     A valid signup key needs to be entered upon user account creation.
@@ -159,20 +164,20 @@
         </label>
 
         <TabsRadioGroup
-                bind:value={form.age_group}
-                label="Age Group"
-                name="age_group"
-                options={["adults", "minors"]}
-                listClass="tabs-list input col-span-2"
+          bind:value={form.age_group}
+          label="Age Group"
+          listClass="tabs-list input col-span-2"
+          name="age_group"
+          options={["adults", "minors"]}
         />
 
         <label class="label col-span-2">
           Description
           <textarea
-                  bind:value={form.description}
-                  class="textarea"
-                  name="desc"
-                  rows="8"
+            bind:value={form.description}
+            class="textarea"
+            name="desc"
+            rows="8"
           ></textarea>
         </label>
 

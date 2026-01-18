@@ -21,23 +21,28 @@
 
   const {location = null, club, buttonClasses = ""}: Props = $props();
 
-  let form = $state(
-      location ?? {
-        id: "",
-        name: "",
-        street: "",
-        postal_code: "",
-        city: "",
-        address_addon: "",
-        country: "",
-        human_country: "",
-        internal_name: "",
-        bsm_id: 0,
-        latitude: DEFAULT_LATITUDE,
-        longitude: DEFAULT_LONGITUDE,
-        club: club.id,
-      }
-  );
+  function formFromProps(data: LocationsResponse | null) {
+    return data ?? {
+      id: "",
+      name: "",
+      street: "",
+      postal_code: "",
+      city: "",
+      address_addon: "",
+      country: "",
+      human_country: "",
+      internal_name: "",
+      bsm_id: 0,
+      latitude: DEFAULT_LATITUDE,
+      longitude: DEFAULT_LONGITUDE,
+      club: club.id,
+    };
+  }
+
+  let form = $derived.by(() => {
+    const formData = $state(formFromProps(location));
+    return formData;
+  });
 
   let open = $state(false);
 
@@ -89,12 +94,12 @@
         <div>
           <label class="" for="address_addon">Address Addon*</label>
           <input
-                  bind:value={form.address_addon}
-                  class="input"
-                  id="address_addon"
-                  name="address_addon"
-                  required
-                  type="text"
+            bind:value={form.address_addon}
+            class="input"
+            id="address_addon"
+            name="address_addon"
+            required
+            type="text"
           />
           <span class="font-light text-sm"
           >Often used in BSM data for the field name.</span
@@ -104,92 +109,92 @@
         <div>
           <label class="label" for="name">Name (Sport)*</label>
           <input
-                  bind:value={form.name}
-                  class="input"
-                  id="name"
-                  name="name"
-                  required
-                  type="text"
+            bind:value={form.name}
+            class="input"
+            id="name"
+            name="name"
+            required
+            type="text"
           />
         </div>
 
         <div>
           <label class="label" for="street">Street</label>
           <input
-                  bind:value={form.street}
-                  class="input"
-                  id="street"
-                  name="street"
-                  type="text"
+            bind:value={form.street}
+            class="input"
+            id="street"
+            name="street"
+            type="text"
           />
         </div>
 
         <div>
           <label class="label" for="postal_code">Postal Code</label>
           <input
-                  bind:value={form.postal_code}
-                  class="input"
-                  id="postal_code"
-                  name="postal_code"
-                  type="text"
+            bind:value={form.postal_code}
+            class="input"
+            id="postal_code"
+            name="postal_code"
+            type="text"
           />
         </div>
 
         <div>
           <label class="label" for="city">City</label>
           <input
-                  bind:value={form.city}
-                  class="input"
-                  id="city"
-                  name="city"
-                  type="text"
+            bind:value={form.city}
+            class="input"
+            id="city"
+            name="city"
+            type="text"
           />
         </div>
 
         <div>
           <label class="label" for="bsm_id">BSM ID</label>
           <input
-                  autocomplete="off"
-                  bind:value={form.bsm_id}
-                  class="input"
-                  id="bsm_id"
-                  name="bsm_id"
-                  readonly
-                  type="number"
+            autocomplete="off"
+            bind:value={form.bsm_id}
+            class="input"
+            id="bsm_id"
+            name="bsm_id"
+            readonly
+            type="number"
           />
         </div>
 
         <div>
           <label class="label" for="country">Country Code</label>
           <input
-                  bind:value={form.country}
-                  class="input"
-                  id="country"
-                  maxlength="2"
-                  name="country"
-                  type="text"
+            bind:value={form.country}
+            class="input"
+            id="country"
+            maxlength="2"
+            name="country"
+            type="text"
           />
         </div>
 
         <div>
           <label class="label" for="human_country">Country Name</label>
           <input
-                  bind:value={form.human_country}
-                  class="input"
-                  id="human_country"
-                  name="human_country"
-                  type="text"
+            bind:value={form.human_country}
+            class="input"
+            id="human_country"
+            name="human_country"
+            type="text"
           />
         </div>
 
         <div class="field-wide">
           <label class="label" for="internal_name">Internal Name</label>
           <input
-                  bind:value={form.internal_name}
-                  class="input"
-                  id="internal_name"
-                  name="internal_name"
-                  type="text"
+            bind:value={form.internal_name}
+            class="input"
+            id="internal_name"
+            name="internal_name"
+            type="text"
           />
           <span class="font-light text-sm"
           >Custom name field that will not be overwritten by automatic
@@ -200,26 +205,26 @@
         <div>
           <label class="label" for="latitude">Latitude*</label>
           <input
-                  bind:value={form.latitude}
-                  class="input"
-                  id="latitude"
-                  name="latitude"
-                  required
-                  step="any"
-                  type="number"
+            bind:value={form.latitude}
+            class="input"
+            id="latitude"
+            name="latitude"
+            required
+            step="any"
+            type="number"
           />
         </div>
 
         <div>
           <label class="label" for="longitude">Longitude*</label>
           <input
-                  bind:value={form.longitude}
-                  class="input"
-                  id="longitude"
-                  name="longitude"
-                  required
-                  step="any"
-                  type="number"
+            bind:value={form.longitude}
+            class="input"
+            id="longitude"
+            name="longitude"
+            required
+            step="any"
+            type="number"
           />
         </div>
 

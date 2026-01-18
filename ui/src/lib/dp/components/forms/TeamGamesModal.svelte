@@ -27,12 +27,17 @@
   const possibleSeasons = range(cutoffYear, currentYear);
   let leagueGroups: LeaguegroupsResponse[] = $state([]);
 
-  let form = $state(
-    team ?? {
+  function formFromProps(data: ExpandedTeam) {
+    return data ?? {
       id: "",
       bsm_league_group: 0,
-    }
-  );
+    };
+  }
+
+  let form = $derived.by(() => {
+    const formData = $state(formFromProps(team));
+    return formData;
+  });
 
   async function getCurrentGamesCount(): Promise<number> {
     const response = await client.send<GamesCount>(`/api/gamecount/${team.id}?season=${season}`, {});

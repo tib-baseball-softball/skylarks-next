@@ -25,25 +25,33 @@
 
   const {buttonClasses = ""}: Props = $props();
 
-  // Mark: here we do not need to be reactive as we're editing
-  const authRecord = authSettings.record as CustomAuthModel;
-  let form = $state({
-    id: authRecord.id ?? "",
-    number: authRecord.number ?? "",
-    bats: authRecord.bats ?? "",
-    position: [""],
-    throws: authRecord.throws ?? "",
-    image: authRecord.image ?? "",
-    umpire: authRecord.umpire ?? "0",
-    scorer: authRecord.scorer ?? "0",
-    bsm_id: authRecord.bsm_id ?? 0,
-    display_on_website: authRecord.display_on_website ?? false,
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
+
+  function formFromProps(record: CustomAuthModel) {
+    return {
+      id: record.id ?? "",
+      number: record.number ?? "",
+      bats: record.bats ?? "",
+      position: [""],
+      throws: record.throws ?? "",
+      image: record.image ?? "",
+      umpire: record.umpire ?? "0",
+      scorer: record.scorer ?? "0",
+      bsm_id: record.bsm_id ?? 0,
+      display_on_website: record.display_on_website ?? false,
+    };
+  }
+
+  let form = $derived.by(() => {
+    return $state(formFromProps(authRecord));
   });
 
   let open = $state(false);
 
   const possiblePositionValues = getAllBaseballPositionStringValues();
-  let selectedPositions: string[] = $state(positionKeysToEnumStringValues(authRecord.position));
+  let selectedPositions: string[] = $derived.by(() => {
+    return $state(positionKeysToEnumStringValues(authRecord.position));
+  });
 
   function validatePositionValue(details: ValidateArgs): boolean {
     return possiblePositionValues.includes(details.inputValue);
@@ -98,41 +106,41 @@
     <form class="mt-4 space-y-3" onsubmit={submitForm}>
       <div class="edit-form-grid">
         <input
-                autocomplete="off"
-                bind:value={form.id}
-                class="input"
-                name="id"
-                readonly
-                type="hidden"
+          autocomplete="off"
+          bind:value={form.id}
+          class="input"
+          name="id"
+          readonly
+          type="hidden"
         />
 
         <label class="label">
           Jersey Number
           <input
-                  autocomplete="off"
-                  bind:value={form.number}
-                  class="input"
-                  name="number"
-                  type="number"
+            autocomplete="off"
+            bind:value={form.number}
+            class="input"
+            name="number"
+            type="number"
           />
         </label>
 
         <label class="label">
           BSM ID (Player Pass Number)
           <input
-                  autocomplete="off"
-                  bind:value={form.bsm_id}
-                  class="input"
-                  name="bsm_id"
-                  readonly
-                  type="text"
+            autocomplete="off"
+            bind:value={form.bsm_id}
+            class="input"
+            name="bsm_id"
+            readonly
+            type="text"
           />
         </label>
 
         <span class="label-wide">
           <Switch
-                  bind:checked={form.display_on_website}
-                  name="display_on_website"
+            bind:checked={form.display_on_website}
+            name="display_on_website"
           >
             Display this data publicly on team website
           </Switch>
@@ -141,18 +149,18 @@
         <label class="label label-wide flex flex-col gap-1 md:gap-2">
           Positions
           <TagsInput
-                  name="positions"
-                  onValueChange={(e) => (selectedPositions = e.value)}
-                  placeholder="Enter positions or click buttons..."
-                  validate={validatePositionValue}
-                  value={selectedPositions}
+            name="positions"
+            onValueChange={(e) => (selectedPositions = e.value)}
+            placeholder="Enter positions or click buttons..."
+            validate={validatePositionValue}
+            value={selectedPositions}
           />
           <span class="flex flex-wrap gap-2 label-wide">
           {#each possiblePositionValues as value}
             <button
-                    type="button"
-                    class="btn btn-sm preset-outlined-primary-500"
-                    onclick={() => addPosition(value)}
+              type="button"
+              class="btn btn-sm preset-outlined-primary-500"
+              onclick={() => addPosition(value)}
             >
               {value}
             </button>
@@ -161,31 +169,31 @@
         </label>
 
         <TabsRadioGroup
-                bind:value={form.bats}
-                label="Bats"
-                name="bats"
-                options={["left", "right", "switch"]}
+          bind:value={form.bats}
+          label="Bats"
+          name="bats"
+          options={["left", "right", "switch"]}
         />
 
         <TabsRadioGroup
-                bind:value={form.throws}
-                label="Throws"
-                name="throws"
-                options={["left", "right", "switch"]}
+          bind:value={form.throws}
+          label="Throws"
+          name="throws"
+          options={["left", "right", "switch"]}
         />
 
         <TabsRadioGroup
-                bind:value={form.umpire}
-                label="Umpire License"
-                name="umpire"
-                options={["none", "A", "B", "C", "D"]}
+          bind:value={form.umpire}
+          label="Umpire License"
+          name="umpire"
+          options={["none", "A", "B", "C", "D"]}
         />
 
         <TabsRadioGroup
-                bind:value={form.scorer}
-                label="Scorer License"
-                name="scorer"
-                options={["none", "A", "B", "C", "D"]}
+          bind:value={form.scorer}
+          label="Scorer License"
+          name="scorer"
+          options={["none", "A", "B", "C", "D"]}
         />
       </div>
       <hr class="my-5!"/>
@@ -200,8 +208,8 @@
 </Sheet.Root>
 
 <style>
-    .label-wide {
-        grid-column: span 2 / span 2;
-        gap: calc(var(--spacing) * 2);
-    }
+  .label-wide {
+    grid-column: span 2 / span 2;
+    gap: calc(var(--spacing) * 2);
+  }
 </style>

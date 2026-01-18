@@ -3,14 +3,21 @@
   import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
   import {closeModal} from "$lib/dp/utility/closeModal.ts";
 
-  const authRecord = authSettings.record as CustomAuthModel;
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
 
   let files: FileList | null = $state(null);
 
-  let form = $state({
-    id: authRecord.id,
-    firstName: authRecord.first_name,
-    lastName: authRecord.last_name,
+  function formFromProps(record: CustomAuthModel) {
+    return {
+      id: record.id,
+      firstName: record.first_name,
+      lastName: record.last_name,
+    };
+  }
+
+  let form = $derived.by(() => {
+    const formData = $state(formFromProps(authRecord));
+    return formData;
   });
 
   async function submitForm(e: SubmitEvent) {
@@ -45,12 +52,12 @@
 
 <form class="mt-4 space-y-3" onsubmit={submitForm}>
   <input
-          autocomplete="off"
-          bind:value={form.id}
-          class="input"
-          name="id"
-          readonly
-          type="hidden"
+    autocomplete="off"
+    bind:value={form.id}
+    class="input"
+    name="id"
+    readonly
+    type="hidden"
   />
 
   <label class="label">
@@ -66,11 +73,11 @@
   <label class="label">
     Profile Image
     <input
-            accept="image/*"
-            bind:files
-            class="input"
-            name="avatar"
-            type="file"
+      accept="image/*"
+      bind:files
+      class="input"
+      name="avatar"
+      type="file"
     />
   </label>
 

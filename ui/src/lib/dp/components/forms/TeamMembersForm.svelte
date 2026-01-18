@@ -14,15 +14,17 @@
 
   const {club, team}: Props = $props();
 
-  let form = $state({
-    id: team.id,
+  let form = $derived.by(() => {
+    return $state({
+      id: team.id,
+    });
   });
 
   let selectedUsers: UsersResponse[] = $state([]);
 
-  const allUsersForClub = client.collection("users").getFullList<UsersResponse>({
+  const allUsersForClub = $derived(client.collection("users").getFullList<UsersResponse>({
     filter: `club ?~ '${club.id}' && teams !~ '${team.id}'`, // all users that are club members, but not members of this team
-  });
+  }));
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
@@ -49,12 +51,12 @@
 <form class="mt-4 space-y-3" onsubmit={submitForm}>
   <div class="edit-form-grid">
     <input
-            autocomplete="off"
-            bind:value={form.id}
-            class="input"
-            name="id"
-            readonly
-            type="hidden"
+      autocomplete="off"
+      bind:value={form.id}
+      class="input"
+      name="id"
+      readonly
+      type="hidden"
     />
 
     <label class="label space-y-3 field-wide">
@@ -66,10 +68,10 @@
 
       {#await allUsersForClub then users}
         <MultiSelectCombobox
-                itemName="Member"
-                bind:selectedItems={selectedUsers}
-                allItems={users}
-                allowDeletionOfLastItem={true}
+          itemName="Member"
+          bind:selectedItems={selectedUsers}
+          allItems={users}
+          allowDeletionOfLastItem={true}
         />
       {/await}
     </label>

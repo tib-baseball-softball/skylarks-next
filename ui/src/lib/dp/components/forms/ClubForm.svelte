@@ -19,8 +19,8 @@
 
   const {club, buttonClasses = ""}: Props = $props();
 
-  let form: Partial<ExpandedClub> = $state(
-    club ?? {
+  function formFromProps(data: ExpandedClub | null) {
+    return data ?? {
       id: "",
       name: "",
       bsm_id: 0,
@@ -28,17 +28,22 @@
       acronym: "",
       service_requirement: 0,
       admins: [],
-    }
-  );
+    };
+  }
+
+  let form: Partial<ExpandedClub> = $derived.by(() => {
+    const formData = $state(formFromProps(club));
+    return formData;
+  });
 
   let open = $state(false);
 
-  let selectedAdmins: UsersResponse[] = $state(form?.expand?.admins ?? []);
+  let selectedAdmins: UsersResponse[] = $derived(form?.expand?.admins ?? []);
 
-  const allUsersForClub = client.collection(Collection.Users).getFullList<UsersResponse>({
+  const allUsersForClub = $derived(client.collection(Collection.Users).getFullList<UsersResponse>({
     filter: `club ?~ '${club?.id}'`,
     requestKey: `users-for-club-${club?.id}`,
-  });
+  }));
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();

@@ -10,7 +10,10 @@
 
   let {participation}: Props = $props();
 
-  let form = $state(participation);
+  let form = $derived.by(() => {
+    const formData = $state(participation);
+    return formData;
+  });
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
@@ -19,10 +22,12 @@
     await invalidate("event:list");
   }
 
-  const createdDate =
-      participation.created !== "" ? new Date(participation.created).toLocaleString() : "---";
-  const updatedDate =
-      participation.updated !== "" ? new Date(participation.updated).toLocaleString() : "---";
+  const createdDate = $derived(
+    participation.created !== "" ? new Date(participation.created).toLocaleString() : "---"
+  );
+  const updatedDate = $derived(
+    participation.updated !== "" ? new Date(participation.updated).toLocaleString() : "---"
+  );
 </script>
 
 <form class="mt-4 space-y-3" onsubmit={submitForm}>
@@ -39,23 +44,23 @@
     </dl>
 
     <input
-            autocomplete="off"
-            bind:value={form.id}
-            class="input"
-            name="id"
-            readonly
-            type="hidden"
+      autocomplete="off"
+      bind:value={form.id}
+      class="input"
+      name="id"
+      readonly
+      type="hidden"
     />
 
     <label class="label col-span-2">
       <span class="block">Comment</span>
       <input
-              autocomplete="off"
-              bind:value={form.comment}
-              class="input "
-              name="id"
-              placeholder="background info about your attendance"
-              type="text"
+        autocomplete="off"
+        bind:value={form.comment}
+        class="input "
+        name="id"
+        placeholder="background info about your attendance"
+        type="text"
       />
     </label>
 
@@ -64,23 +69,23 @@
 
       <span class="btn-group">
         <button
-                class={["btn hover:preset-tonal-success flex-grow", form.state === "in" && "preset-filled-success-500 text-black"]}
-                onclick={() => form.state = "in"}
-                type="button"
+          class={["btn hover:preset-tonal-success flex-grow", form.state === "in" && "preset-filled-success-500 text-black"]}
+          onclick={() => form.state = "in"}
+          type="button"
         >
           In
         </button>
         <button
-                class={["btn hover:preset-tonal-warning flex-grow", form.state === "maybe" && "preset-filled-warning-500 text-black"]}
-                onclick={() => form.state = "maybe"}
-                type="button"
+          class={["btn hover:preset-tonal-warning flex-grow", form.state === "maybe" && "preset-filled-warning-500 text-black"]}
+          onclick={() => form.state = "maybe"}
+          type="button"
         >
           Maybe
         </button>
         <button
-                class={["btn hover:preset-tonal-error flex-grow", form.state === "out" && "preset-filled-error-500 text-white"]}
-                onclick={() => form.state = "out"}
-                type="button"
+          class={["btn hover:preset-tonal-error flex-grow", form.state === "out" && "preset-filled-error-500 text-white"]}
+          onclick={() => form.state = "out"}
+          type="button"
         >
           Out
         </button>
@@ -96,9 +101,9 @@
 </form>
 
 <style>
-    .btn-group {
-        display: flex;
-        justify-items: stretch;
-        border: 1px solid;
-    }
+  .btn-group {
+    display: flex;
+    justify-items: stretch;
+    border: 1px solid;
+  }
 </style>

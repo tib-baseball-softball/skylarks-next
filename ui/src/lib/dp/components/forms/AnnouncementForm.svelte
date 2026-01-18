@@ -26,18 +26,22 @@
     showLabel = true,
   }: Props = $props();
 
-  // svelte-ignore state_referenced_locally - we want just the initial value here
-  let form: Partial<ExpandedAnnouncement> = $state(
-      announcement ?? {
-        title: "",
-        bodytext: "",
-        link: "",
-        link_text: "",
-        author: authRecord?.id,
-        club: club?.id,
-        team: team?.id,
-      }
-  );
+  function formFromProps(data: ExpandedAnnouncement | null) {
+    return data ?? {
+      title: "",
+      bodytext: "",
+      link: "",
+      link_text: "",
+      author: authRecord?.id,
+      club: club?.id,
+      team: team?.id,
+    };
+  }
+
+  let form: Partial<ExpandedAnnouncement> = $derived.by(() => {
+    const formData = $state(formFromProps(announcement));
+    return formData;
+  });
 
   let open = $state(false);
 
@@ -95,53 +99,53 @@
     <form class="mt-4 space-y-3" onsubmit={submitForm}>
       <div class="edit-form-grid">
         <input
-                autocomplete="off"
-                bind:value={form.id}
-                class="input"
-                name="id"
-                readonly
-                type="hidden"
+          autocomplete="off"
+          bind:value={form.id}
+          class="input"
+          name="id"
+          readonly
+          type="hidden"
         />
 
         <input
-                autocomplete="off"
-                class="input"
-                name="author"
-                readonly
-                type="hidden"
-                value={form.author}
+          autocomplete="off"
+          class="input"
+          name="author"
+          readonly
+          type="hidden"
+          value={form.author}
         />
 
         {#if club}
           <input
-                  autocomplete="off"
-                  value={club.id}
-                  class="input"
-                  name="club"
-                  readonly
-                  type="hidden"
+            autocomplete="off"
+            value={club.id}
+            class="input"
+            name="club"
+            readonly
+            type="hidden"
           />
         {/if}
 
         {#if team}
           <input
-                  autocomplete="off"
-                  value={team.id}
-                  class="input"
-                  name="team"
-                  readonly
-                  type="hidden"
+            autocomplete="off"
+            value={team.id}
+            class="input"
+            name="team"
+            readonly
+            type="hidden"
           />
         {/if}
 
         <label class="label field-wide">
           <span>Title</span>
           <input
-                  bind:value={form.title}
-                  class="input"
-                  name="title"
-                  required
-                  type="text"
+            bind:value={form.title}
+            class="input"
+            name="title"
+            required
+            type="text"
           />
         </label>
 
@@ -156,13 +160,13 @@
           {#each ["info", "warning", "danger"] as prio}
             <label class="label priority-radio-label flex items-center gap-2 my-1">
               <input
-                      class="radio"
-                      type="radio"
-                      name="priority"
-                      value={prio}
-                      required
-                      checked={prio === "info"}
-                      bind:group={form.priority}
+                class="radio"
+                type="radio"
+                name="priority"
+                value={prio}
+                required
+                checked={prio === "info"}
+                bind:group={form.priority}
               />
               {prio}
             </label>
@@ -176,13 +180,13 @@
             <label class="label">
               <span>Link</span>
               <input
-                      bind:value={form.link}
-                      class="input"
-                      name="link"
-                      pattern="https?://.+"
-                      placeholder="https://example.com"
-                      title="Please enter a valid URL"
-                      type="url"
+                bind:value={form.link}
+                class="input"
+                name="link"
+                pattern="https?://.+"
+                placeholder="https://example.com"
+                title="Please enter a valid URL"
+                type="url"
               />
               <span class="text-sm">Single link in case the announcement is used as a call to action.</span>
             </label>
@@ -190,11 +194,11 @@
             <label class="label">
               <span>Link Text</span>
               <input
-                      bind:value={form.link_text}
-                      class="input"
-                      name="link_text"
-                      placeholder="Click here"
-                      type="text"
+                bind:value={form.link_text}
+                class="input"
+                name="link_text"
+                placeholder="Click here"
+                type="text"
               />
               <span class="text-sm">If not set, the link itself will be used as a the text.</span>
             </label>
@@ -215,7 +219,7 @@
 </Sheet.Root>
 
 <style>
-    .priority-radio-label {
-        text-transform: capitalize;
-    }
+  .priority-radio-label {
+    text-transform: capitalize;
+  }
 </style>

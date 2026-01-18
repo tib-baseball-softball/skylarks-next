@@ -11,10 +11,13 @@
 
   const seasonParam = $derived(page.url.searchParams.get("season"));
 
-  // Svelte will complain, but reading just the initial value is intentional
-  if (seasonParam) {
-    selectedSeason = parseInt(seasonParam);
+  function parseParam() {
+    if (seasonParam) {
+      return parseInt(seasonParam);
+    }
   }
+
+  selectedSeason = parseParam() ?? 0;
 </script>
 
 <div class="container lg:gap-8 preset-tonal-surface rounded-base">

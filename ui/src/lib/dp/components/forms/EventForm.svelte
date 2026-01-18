@@ -26,40 +26,45 @@
 
   let open = $state(false);
 
-  let form: Extension<
-      Partial<ExpandedEvent>,
-      {
-        starttime: string
-        endtime: string
-        meetingtime: string
-        type: string
-      }
-  > = $state(
-      event ?? {
-        id: "",
-        title: "",
-        starttime: "",
-        meetingtime: "",
-        endtime: "",
-        desc: "",
-        location: "",
-        type: "game",
-        attire: "",
-        cancelled: false,
-        bsm_id: 0,
-        team: teamID,
-      }
-  );
+  function formFromProps(data: ExpandedEvent | null) {
+    return data ?? {
+      id: "",
+      title: "",
+      starttime: "",
+      meetingtime: "",
+      endtime: "",
+      desc: "",
+      location: "",
+      type: "game",
+      attire: "",
+      cancelled: false,
+      bsm_id: 0,
+      team: teamID,
+    };
+  }
 
-  const attireOptions = client.collection(Collection.UniformSets).getFullList<UniformsetsResponse>({
+  let form: Extension<
+    Partial<ExpandedEvent>,
+    {
+      starttime: string
+      endtime: string
+      meetingtime: string
+      type: string
+    }
+  > = $derived.by(() => {
+    const formData = $state(formFromProps(event));
+    return formData;
+  });
+
+  const attireOptions = $derived(client.collection(Collection.UniformSets).getFullList<UniformsetsResponse>({
     filter: `club = "${clubID}"`,
     requestKey: `uniformsets-${clubID}`,
-  });
+  }));
 
-  const locationOptions = client.collection(Collection.Locations).getFullList<LocationsResponse>({
+  const locationOptions = $derived(client.collection(Collection.Locations).getFullList<LocationsResponse>({
     filter: `club = "${clubID}"`,
     requestKey: `location-options-${clubID}`,
-  });
+  }));
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
@@ -103,41 +108,41 @@
     <form class="mt-4 space-y-3" onsubmit={submitForm}>
       <div class="edit-form-grid">
         <input
-                autocomplete="off"
-                bind:value={form.id}
-                class="input"
-                name="id"
-                readonly
-                type="hidden"
+          autocomplete="off"
+          bind:value={form.id}
+          class="input"
+          name="id"
+          readonly
+          type="hidden"
         />
 
         <label class="label">
           Title
           <input
-                  bind:value={form.title}
-                  class="input"
-                  name="title"
-                  required
-                  type="text"
+            bind:value={form.title}
+            class="input"
+            name="title"
+            required
+            type="text"
           />
         </label>
 
         <label class="label">
           BSM ID
           <input
-                  bind:value={form.bsm_id}
-                  class="input"
-                  name="bsm_id"
-                  readonly
-                  type="text"
+            bind:value={form.bsm_id}
+            class="input"
+            name="bsm_id"
+            readonly
+            type="text"
           />
         </label>
 
         <label class="label">
           Start
           <Flatpickr
-                  bind:value={form.starttime}
-                  options={Object.assign(DateTimeUtility.datePickerOptions, {
+            bind:value={form.starttime}
+            options={Object.assign(DateTimeUtility.datePickerOptions, {
                       static: true, // render the picker as a child element to the form to work in a sheet portal context
                   })}
           />
@@ -146,8 +151,8 @@
         <label class="label">
           Meeting
           <Flatpickr
-                  bind:value={form.meetingtime}
-                  options={Object.assign(DateTimeUtility.datePickerOptions, {
+            bind:value={form.meetingtime}
+            options={Object.assign(DateTimeUtility.datePickerOptions, {
                       static: true,
                   })}
           />
@@ -156,8 +161,8 @@
         <label class="label">
           End
           <Flatpickr
-                  bind:value={form.endtime}
-                  options={Object.assign(DateTimeUtility.datePickerOptions, {
+            bind:value={form.endtime}
+            options={Object.assign(DateTimeUtility.datePickerOptions, {
                       static: true,
                   })}
           />
@@ -175,8 +180,8 @@
         <label class="label field-wide">
           Location
           <select
-                  bind:value={form.location}
-                  class="select"
+            bind:value={form.location}
+            class="select"
           >
             {#await locationOptions then options}
               <option value="">None</option>
@@ -189,10 +194,10 @@
         </label>
 
         <TabsRadioGroup
-                bind:value={form.type}
-                label="Type"
-                name="type"
-                options={["game", "practice", "misc"]}
+          bind:value={form.type}
+          label="Type"
+          name="type"
+          options={["game", "practice", "misc"]}
         />
 
         {#await attireOptions then options}
@@ -207,8 +212,8 @@
         {/await}
 
         <Switch
-                bind:checked={form.cancelled}
-                name="cancelled"
+          bind:checked={form.cancelled}
+          name="cancelled"
         >
           Cancelled
         </Switch>
