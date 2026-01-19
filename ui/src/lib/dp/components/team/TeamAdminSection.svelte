@@ -82,7 +82,7 @@
     <footer class="card-footer">
       <div class="flex flex-col gap-2 lg:gap-3">
         <EventSeriesView
-          buttonClasses="btn preset-tonal-primary"
+          buttonClasses="btn preset-tonal-primary border"
           {eventSeries}
           {team}
         />

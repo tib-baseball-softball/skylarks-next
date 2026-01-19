@@ -5,7 +5,7 @@
   import EventSeriesListItem from "$lib/dp/components/eventseries/EventSeriesListItem.svelte";
   import EventSeriesForm from "$lib/dp/components/forms/EventSeriesForm.svelte";
   import DeleteButton from "$lib/dp/components/utils/DeleteButton.svelte";
-  //@ts-expect-error
+  //@ts-ignore
   import * as Sheet from "$lib/dp/components/modal/sheet";
   import {client} from "$lib/dp/client.svelte.ts";
   import type {EventSeriesCreationData, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
@@ -75,11 +75,11 @@
           </button>
 
           <DeleteButton
-                  id={series.id}
-                  modelName="Event Series"
-                  action={deleteEventSeries}
-                  classes="preset-tonal-error border border-error-500"
-                  buttonText="Delete"
+            id={series.id}
+            modelName="Event Series"
+            action={deleteEventSeries}
+            classes="preset-tonal-error border border-error-500"
+            buttonText="Delete"
           />
         </div>
       {/each}
