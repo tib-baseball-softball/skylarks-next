@@ -941,15 +941,9 @@ msgstr "Non vérifié"
 msgid "None"
 msgstr "Aucun"
 
-#~ msgid "<0/> Revoke Admin Access"
-#~ msgstr "<0/> Révoquer l'accès administrateur"
-
 #: src/lib/dp/components/team/TeamMembersTableContent.svelte
 msgid "<0/> Make Admin"
 msgstr "<0/> Nommer administrateur"
-
-#~ msgid "<0/> Remove"
-#~ msgstr "<0/> Supprimer"
 
 #. placeholder {0}: row.first_name + " " + row.last_name
 #. placeholder {1}: team.name
@@ -1716,15 +1710,6 @@ msgstr "Stats personnelles"
 msgid "Player Profile"
 msgstr "Profil du joueur"
 
-#~ msgid "My Clubs & Teams"
-#~ msgstr "Mes clubs et équipes"
-
-#~ msgid "Administration"
-#~ msgstr "Administration"
-
-#~ msgid "Admin Dashboard"
-#~ msgstr "Tableau de bord d'administration"
-
 #: src/lib/dp/components/player/PlayerDataCard.svelte
 msgid "Not specified"
 msgstr "Non spécifié"
@@ -2460,12 +2445,10 @@ msgid "No club officials available."
 msgstr "Aucun officiel de club disponible."
 
 #: src/routes/(dp)/(protected)/account/clubs/[club]/admin/attendance/+page.svelte
-#: src/routes/(dp)/(protected)/stats/admin/+page.svelte
 msgid "Stats Admin Dashboard"
 msgstr "Tableau de bord d'administration des stats"
 
 #: src/routes/(dp)/(protected)/account/clubs/[club]/admin/attendance/+page.svelte
-#: src/routes/(dp)/(protected)/stats/admin/+page.svelte
 msgid "Not implemented yet."
 msgstr "Pas encore implémenté."
 
@@ -2968,9 +2951,6 @@ msgstr ""
 "Vous avez la possibilité d'afficher vos données de joueur dans votre profil public\n"
 "sur le site web et les applications."
 
-#~ msgid "for {0} {1} ({2})"
-#~ msgstr "pour {0} {1} ({2})"
-
 #. placeholder {0}: row.name
 #: src/lib/dp/components/communityservice/CommunityServiceTableContent.svelte
 msgid "Go to community service page for user {0}"
@@ -3053,18 +3033,6 @@ msgstr "Tableau de bord d'administration du service communautaire"
 #: src/routes/(dp)/(protected)/account/clubs/[club]/admin/communityservice/+page.svelte
 msgid "for <0/>"
 msgstr "pour <0/>"
-
-#: src/lib/dp/components/meta/Footer.svelte
-msgid "Built with"
-msgstr ""
-
-#: src/lib/dp/components/meta/Footer.svelte
-msgid "and"
-msgstr ""
-
-#: src/lib/dp/components/meta/Footer.svelte
-msgid "Svelte JavaScript Framework website"
-msgstr ""
 
 #: src/lib/dp/components/user/UserDataCard.svelte
 msgid "Go to User Settings"
@@ -3150,4 +3118,8 @@ msgstr ""
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Send Test Notification"
+msgstr ""
+
+#: src/lib/dp/components/meta/Footer.svelte
+msgid "Built with <0/> in <1/>"
 msgstr ""

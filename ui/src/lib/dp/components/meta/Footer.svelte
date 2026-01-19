@@ -1,6 +1,4 @@
 <script lang="ts">
-  import Svelte from "$lib/dp/components/icons/Svelte.svelte";
-  import {Heart} from "lucide-svelte";
   import {env} from "$env/dynamic/public";
   import type {Snippet} from "svelte";
 
@@ -34,12 +32,7 @@
   {/if}
 
   <span class="flex justify-end items-center gap-2">
-    <span>Built with</span>
-    <Heart class="text-primary-500"/>
-    <span>and</span>
-    <a href="https://svelte.dev/" target="_blank" title="Svelte JavaScript Framework website">
-      <Svelte classes="w-6" fillColor={"#ff3e00"}/>
-    </a>
+    Built with <span class="love">❤️</span> in <span class="flag">🇪🇺</span>
   </span>
 </div>
 
@@ -48,5 +41,13 @@
     a:hover {
       text-decoration: underline;
     }
+  }
+
+  .love {
+    font-size: var(--text-lg);
+  }
+
+  .flag {
+    font-size: var(--text-3xl);
   }
 </style>

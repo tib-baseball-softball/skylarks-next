@@ -968,15 +968,9 @@ msgstr "Nicht verifiziert"
 msgid "None"
 msgstr "Keine"
 
-#~ msgid "<0/> Revoke Admin Access"
-#~ msgstr "<0/> Admin-Zugriff entziehen"
-
 #: src/lib/dp/components/team/TeamMembersTableContent.svelte
 msgid "<0/> Make Admin"
 msgstr "<0/> Zum Admin machen"
-
-#~ msgid "<0/> Remove"
-#~ msgstr "<0/> Entfernen"
 
 #. placeholder {0}: row.first_name + " " + row.last_name
 #. placeholder {1}: team.name
@@ -1644,15 +1638,6 @@ msgstr "Persönliche Statistiken"
 #: src/lib/dp/components/meta/SidebarNavigation.svelte
 msgid "Player Profile"
 msgstr "Spielerprofil"
-
-#~ msgid "My Clubs & Teams"
-#~ msgstr "Meine Vereine & Teams"
-
-#~ msgid "Administration"
-#~ msgstr "Administration"
-
-#~ msgid "Admin Dashboard"
-#~ msgstr "Admin-Dashboard"
 
 #: src/lib/tib/components/match/CurrentMatchBlock.svelte
 msgid "No games for this timeframe."
@@ -2399,12 +2384,10 @@ msgid "My Player Data"
 msgstr "Meine Spielerdaten"
 
 #: src/routes/(dp)/(protected)/account/clubs/[club]/admin/attendance/+page.svelte
-#: src/routes/(dp)/(protected)/stats/admin/+page.svelte
 msgid "Stats Admin Dashboard"
 msgstr "Statistik-Admin-Dashboard"
 
 #: src/routes/(dp)/(protected)/account/clubs/[club]/admin/attendance/+page.svelte
-#: src/routes/(dp)/(protected)/stats/admin/+page.svelte
 msgid "Not implemented yet."
 msgstr "Noch nicht implementiert."
 
@@ -2963,9 +2946,6 @@ msgstr ""
 "Sie haben die Möglichkeit, Ihre Spielerdaten in Ihrem öffentlichen\n"
 "Profil auf der Website und in den Apps anzuzeigen."
 
-#~ msgid "for {0} {1} ({2})"
-#~ msgstr "für {0} {1} ({2})"
-
 #. placeholder {0}: row.name
 #: src/lib/dp/components/communityservice/CommunityServiceTableContent.svelte
 msgid "Go to community service page for user {0}"
@@ -3055,18 +3035,6 @@ msgstr "Arbeitsstunden-Admin-Dashboard"
 msgid "for <0/>"
 msgstr "für <0/>"
 
-#: src/lib/dp/components/meta/Footer.svelte
-msgid "Built with"
-msgstr "Gebaut mit"
-
-#: src/lib/dp/components/meta/Footer.svelte
-msgid "and"
-msgstr "und"
-
-#: src/lib/dp/components/meta/Footer.svelte
-msgid "Svelte JavaScript Framework website"
-msgstr "Webseite des JavaScript-Framworks 'Svelte'"
-
 #: src/lib/dp/components/user/UserDataCard.svelte
 msgid "Go to User Settings"
 msgstr "Gehe zu den Benutzereinstellungen"
@@ -3152,3 +3120,7 @@ msgstr ""
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Send Test Notification"
 msgstr ""
+
+#: src/lib/dp/components/meta/Footer.svelte
+msgid "Built with <0/> in <1/>"
+msgstr "Gebaut mit <0/> in <1/>"
