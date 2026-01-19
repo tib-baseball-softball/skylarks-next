@@ -1,5 +1,5 @@
 <script lang="ts">
-  // @ts-expect-error
+  // @ts-ignore
   import {Tabs} from "bits-ui";
   import LeagueChartGraph from "$lib/tib/components/favorite/LeagueChartGraph.svelte";
   import StreakContainer from "$lib/tib/components/favorite/StreakContainer.svelte";

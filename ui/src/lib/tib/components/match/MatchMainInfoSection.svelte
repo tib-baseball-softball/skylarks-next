@@ -12,13 +12,13 @@
 
   const {match}: Props = $props();
 
-  const awayLogo = LogoUtility.getLogoPathForTeamName(match.away_league_entry.team);
-  const homeLogo = LogoUtility.getLogoPathForTeamName(match.home_league_entry.team);
+  const awayLogo = $derived(LogoUtility.getLogoPathForTeamName(match.away_league_entry.team));
+  const homeLogo = $derived(LogoUtility.getLogoPathForTeamName(match.home_league_entry.team));
 
-  const matchDecorator = new MatchDecorator(match);
+  const matchDecorator = $derived(new MatchDecorator(match));
 
-  const winner = matchDecorator.getWinnerForMatch();
-  const matchDate = DateTimeUtility.parseDateFromBSMString(match.time);
+  const winner = $derived(matchDecorator.getWinnerForMatch());
+  const matchDate = $derived(DateTimeUtility.parseDateFromBSMString(match.time));
 </script>
 
 <article class="card preset-tonal-primary border-primary px-2 md:px-5">

@@ -36,7 +36,6 @@
     "apexcharts": "^4.7.0",
     "bits-ui": "^2.15.4",
     "bsm.js": "^0.3.0",
-    "diamond-planner-frontend": "workspace:*",
     "flatpickr": "^4.6.13",
     "leaflet": "^1.9.4",
     "lucide-svelte": "^0.556.0",

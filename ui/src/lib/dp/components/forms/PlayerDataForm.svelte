@@ -2,7 +2,7 @@
   import {SquarePen} from "lucide-svelte";
   import TabsRadioGroup from "$lib/dp/components/formElements/TabsRadioGroup.svelte";
   import Switch from "$lib/dp/components/formElements/Switch.svelte";
-  //@ts-expect-error
+  //@ts-ignore
   import * as Sheet from "$lib/dp/components/modal/sheet";
   import TagsInput from "$lib/dp/components/formElements/TagsInput.svelte";
   import {authSettings, client} from "$lib/dp/client.svelte.js";
@@ -43,14 +43,16 @@
   }
 
   let form = $derived.by(() => {
-    return $state(formFromProps(authRecord));
+    const created = $state(formFromProps(authRecord));
+    return created;
   });
 
   let open = $state(false);
 
   const possiblePositionValues = getAllBaseballPositionStringValues();
   let selectedPositions: string[] = $derived.by(() => {
-    return $state(positionKeysToEnumStringValues(authRecord.position));
+    const sel = $state(positionKeysToEnumStringValues(authRecord.position));
+    return sel;
   });
 
   function validatePositionValue(details: ValidateArgs): boolean {

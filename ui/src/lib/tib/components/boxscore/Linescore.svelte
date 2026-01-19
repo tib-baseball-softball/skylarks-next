@@ -8,7 +8,7 @@
 
   let {linescore}: Props = $props();
 
-  const innings = range(1, linescore.played_innings);
+  const innings = $derived(range(1, linescore.played_innings));
 </script>
 
 <div class="table-wrap ">

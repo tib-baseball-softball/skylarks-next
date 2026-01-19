@@ -13,13 +13,13 @@
 
   const {match}: Props = $props();
 
-  const awayLogo = LogoUtility.getLogoPathForTeamName(match.away_league_entry.team);
-  const homeLogo = LogoUtility.getLogoPathForTeamName(match.home_league_entry.team);
+  const awayLogo = $derived(LogoUtility.getLogoPathForTeamName(match.away_league_entry.team));
+  const homeLogo = $derived(LogoUtility.getLogoPathForTeamName(match.home_league_entry.team));
 
-  const matchDecorator = new MatchDecorator(match);
-  const winner = matchDecorator.getWinnerForMatch();
-  const matchState = matchDecorator.getMatchState(env.PUBLIC_TEAM_NAME);
-  const matchDate = DateTimeUtility.parseDateFromBSMString(match.time);
+  const matchDecorator = $derived(new MatchDecorator(match));
+  const winner = $derived(matchDecorator.getWinnerForMatch());
+  const matchState = $derived(matchDecorator.getMatchState(env.PUBLIC_TEAM_NAME));
+  const matchDate = $derived(DateTimeUtility.parseDateFromBSMString(match.time));
 </script>
 
 <a class="grid grid-cols-3 px-3 py-1 gap-x-2 border-b border-surface-500 justify-around items-center"

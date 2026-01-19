@@ -2,7 +2,7 @@
   import {Edit, Plus} from "lucide-svelte";
   import {invalidate} from "$app/navigation";
   import LeafletMapCoordinatePicker from "$lib/dp/components/map/LeafletMapCoordinatePicker.svelte";
-  //@ts-expect-error
+  //@ts-ignore
   import * as Sheet from "$lib/dp/components/modal/sheet";
   import {save} from "$lib/dp/records/RecordOperations.ts";
   import {toastController} from "$lib/dp/service/ToastController.svelte.ts";

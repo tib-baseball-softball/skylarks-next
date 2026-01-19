@@ -9,7 +9,7 @@
 
   const {table}: Props = $props();
 
-  const options: ApexCharts.ApexOptions = {
+  const options: ApexCharts.ApexOptions = $derived({
     series: [
       {
         name: "Wins",
@@ -18,8 +18,8 @@
             x: row.short_team_name,
             y: row.wins_count,
             fillColor: row.short_team_name.includes("BEA")
-                ? ColorUtility.SkylarksRed
-                : ColorUtility.getDynamicColorNavySand(),
+              ? ColorUtility.SkylarksRed
+              : ColorUtility.getDynamicColorNavySand(),
           };
         }),
       },
@@ -59,7 +59,7 @@
       },
     },
     colors: [ColorUtility.getDynamicColorNavySand()],
-  };
+  });
 </script>
 
 <ApexChart {options}>

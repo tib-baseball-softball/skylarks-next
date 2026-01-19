@@ -1,6 +1,6 @@
 <script lang="ts">
   // for some reason this import is falsely detected as unused
-  //@ts-expect-error
+  //@ts-ignore
   import {Popover} from "bits-ui";
   import {MessageCircleMore} from "lucide-svelte";
   import ParticipationForm from "$lib/dp/components/forms/ParticipationForm.svelte";
@@ -22,9 +22,9 @@
   let isOpen = $state(false);
 
   const createdDate =
-      participation.created !== "" ? new Date(participation.created).toLocaleString() : "---";
+    $derived(participation.created !== "" ? new Date(participation.created).toLocaleString() : "---");
   const updatedDate =
-      participation.updated !== "" ? new Date(participation.updated).toLocaleString() : "---";
+    $derived(participation.updated !== "" ? new Date(participation.updated).toLocaleString() : "---");
 </script>
 
 <Popover.Root bind:open={isOpen}>
@@ -85,30 +85,30 @@
 
 </Popover.Root>
 
-<style lang="postcss">
-    .popover-content {
-        border: 1px solid;
-        color: light-dark(black, white);
-        background-color: light-dark(var(--color-surface-50), var(--color-surface-800));
-        padding: calc(var(--spacing) * 4);
-        font-size: var(--text-sm);
-        line-height: var(--tw-leading, var(--text-sm--line-height));
-        max-width: calc(var(--spacing) * 80);
-    }
+<style>
+  .popover-content {
+    border: 1px solid;
+    color: light-dark(black, white);
+    background-color: light-dark(var(--color-surface-50), var(--color-surface-800));
+    padding: calc(var(--spacing) * 4);
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+    max-width: calc(var(--spacing) * 80);
+  }
 
-    .item-container {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        justify-content: space-between;
-        margin-block: 0.3em;
-    }
+  .item-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    justify-content: space-between;
+    margin-block: 0.3em;
+  }
 
-    .badge-icon {
-        color: white;
-        top: -15px;
-        right: -11px;
-        z-index: 10;
-        position: absolute;
-    }
+  .badge-icon {
+    color: white;
+    top: -15px;
+    right: -11px;
+    z-index: 10;
+    position: absolute;
+  }
 </style>

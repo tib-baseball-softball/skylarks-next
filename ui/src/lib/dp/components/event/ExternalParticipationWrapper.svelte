@@ -12,7 +12,8 @@
 
   let {dto, eventID, isAdmin, classes = ""}: Props = $props();
 
-  const participation: ExpandedParticipation = {
+  //@ts-ignore
+  const participation: ExpandedParticipation = $derived({
     collectionId: "",
     collectionName: "participations",
     comment: "",
@@ -23,14 +24,13 @@
     updated: "",
     user: dto.id,
     expand: {
-      // @ts-expect-error
       user: {
         id: dto.id,
         first_name: dto.first_name,
         last_name: dto.last_name,
       },
     },
-  };
+  });
 </script>
 
 <IndividualParticipationEditButton {classes} {isAdmin} {participation}/>

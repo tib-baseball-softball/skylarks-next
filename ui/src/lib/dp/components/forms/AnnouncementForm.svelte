@@ -1,7 +1,7 @@
 <script lang="ts">
   import {Plus, SquarePen} from "lucide-svelte";
   import {invalidateAll} from "$app/navigation";
-  //@ts-expect-error
+  //@ts-ignore
   import * as Sheet from "$lib/dp/components/modal/sheet";
   import {authSettings, client} from "$lib/dp/client.svelte.js";
   import {toastController} from "$lib/dp/service/ToastController.svelte.ts";

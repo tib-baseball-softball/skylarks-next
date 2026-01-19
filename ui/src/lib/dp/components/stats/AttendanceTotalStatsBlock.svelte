@@ -11,13 +11,13 @@
 
   const {attendance, season}: Props = $props();
 
-  const title = capitalize(attendance.type);
+  const title = $derived(capitalize(attendance.type));
 
-  const block: SingleStatElement = {
+  const block: SingleStatElement = $derived({
     title: title,
     value: `${attendance.attended} / ${attendance.total}`,
     desc: `All possible events of this type for ${season}`,
-  };
+  });
 </script>
 
 <div class="card preset-tonal-surface shadow-lg">

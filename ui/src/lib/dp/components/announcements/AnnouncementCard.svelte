@@ -11,7 +11,7 @@
   }
 
   const {announcement}: Props = $props();
-  const commentCount = announcement?.expand?.comments_via_announcement?.length ?? 0;
+  const commentCount = $derived(announcement?.expand?.comments_via_announcement?.length ?? 0);
 
   function deleteAction(id: string) {
     client.collection("announcements").delete(id);
@@ -19,8 +19,8 @@
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
   const canEdit = $derived(
-      announcement.expand?.club?.admins.includes(authRecord.id) ||
-      announcement.expand?.team?.admins.includes(authRecord.id)
+    announcement.expand?.club?.admins.includes(authRecord.id) ||
+    announcement.expand?.team?.admins.includes(authRecord.id)
   );
 </script>
 
@@ -43,11 +43,11 @@
             />
 
             <DeleteButton
-                    id={announcement.id}
-                    modelName="Announcement"
-                    action={deleteAction}
-                    classes="btn btn-icon btn-sm preset-tonal-error border border-error-500"
-                    data-testid="delete-announcement-button"
+              id={announcement.id}
+              modelName="Announcement"
+              action={deleteAction}
+              classes="btn btn-icon btn-sm preset-tonal-error border border-error-500"
+              data-testid="delete-announcement-button"
             />
           </div>
         {:else }
@@ -66,8 +66,8 @@
           {/if}
 
           <a
-                  class="btn btn-sm preset-filled-primary-500"
-                  href="/account/announcements/{announcement.id}">Read more</a
+            class="btn btn-sm preset-filled-primary-500"
+            href="/account/announcements/{announcement.id}">Read more</a
           >
         </div>
       </footer>
@@ -76,9 +76,9 @@
 </article>
 
 <style>
-    .badge-icon {
-        top: -9px;
-        right: -6px;
-        padding: 0.2rem;
-    }
+  .badge-icon {
+    top: -9px;
+    right: -6px;
+    padding: 0.2rem;
+  }
 </style>

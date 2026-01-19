@@ -15,9 +15,10 @@
   const {club, team}: Props = $props();
 
   let form = $derived.by(() => {
-    return $state({
+    const ret = $state({
       id: team.id,
     });
+    return ret;
   });
 
   let selectedUsers: UsersResponse[] = $state([]);

@@ -1,9 +1,15 @@
 <script lang="ts">
   import ConicGradient from "$lib/dp/components/charts/ConicGradient.svelte";
-  import type {ConicStop} from "$lib/components/utility/ConicGradient/types.ts";
   import type {ParticipationType} from "$lib/dp/types/ExpandedResponse.ts";
   import type {ParticipationTotal, PersonalAttendanceStatsItem,} from "$lib/dp/types/PersonalAttendanceStats.ts";
   import {capitalize} from "$lib/dp/utility/capitalize.ts";
+
+  type ConicStop = {
+    label: string;
+    color: string;
+    start: number;
+    end: number;
+  }
 
   interface Props {
     statsItem: PersonalAttendanceStatsItem;
@@ -39,7 +45,7 @@
     });
   }
 
-  const conicStops = mapToConicStops(statsItem.participationTotals);
+  const conicStops = $derived(mapToConicStops(statsItem.participationTotals));
 </script>
 
 <div class="card preset-tonal-surface shadow-lg">

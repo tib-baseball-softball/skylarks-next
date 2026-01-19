@@ -1,7 +1,7 @@
 <script lang="ts">
   import {Trophy} from "lucide-svelte";
   import MatchTeaserCard from "$lib/dp/components/event/match/MatchTeaserCard.svelte";
-  //@ts-expect-error
+  //@ts-ignore
   import * as Sheet from "$lib/dp/components/modal/sheet";
   import type {PlayoffSeries} from "$lib/tib/types/PlayoffSeries.ts";
 
