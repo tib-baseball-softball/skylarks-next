@@ -129,6 +129,12 @@ func BindDPHooks(app core.App, client bsm.APIClient, pushService PushService) {
 		return DeleteEventsForSeries(e)
 	})
 
+	//------------------- Hooks - Web Push -------------------------//
+
+	app.OnRecordAfterCreateSuccess(AnnouncementsCollection).BindFunc(func(e *core.RecordEvent) error {
+		return NotifyNewAnnouncement(e, pushService)
+	})
+
 	//------------------- Serve static dir -------------------------//
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
