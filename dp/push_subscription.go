@@ -78,9 +78,9 @@ func GetSubscriptionsForTeamOrClub(id string, coll string, app core.App) ([]Push
 	var whereClause dbx.Expression
 
 	if coll == ClubsCollection {
-		whereClause = dbx.Exists(dbx.NewExp("json_each(users.club) WHERE value = {:clubID}", dbx.Params{"clubID": id}))
+		whereClause = dbx.Exists(dbx.NewExp("SELECT 1 FROM json_each(users.club) WHERE value = {:clubID}", dbx.Params{"clubID": id}))
 	} else {
-		whereClause = dbx.Exists(dbx.NewExp("json_each(users.teams) WHERE value = {:teamID}", dbx.Params{"teamID": id}))
+		whereClause = dbx.Exists(dbx.NewExp("SELECT 1 FROM json_each(users.teams) WHERE value = {:teamID}", dbx.Params{"teamID": id}))
 	}
 
 	var records []core.Record
