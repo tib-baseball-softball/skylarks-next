@@ -27,43 +27,45 @@ func NotifyNewAnnouncement(e *core.RecordEvent, ps PushService) error {
 	}
 
 	if target == TeamsCollection {
-		_ = PushTeamAnnouncement(e.App, announcement, targetID, ps)
+		PushTeamOrClubAnnouncement(e.App, TeamsCollection, announcement, targetID, ps)
 	} else {
-		//_ = PushClubAnnouncement(e.App, targetID, ps)
+		PushTeamOrClubAnnouncement(e.App, ClubsCollection, announcement, targetID, ps)
 	}
 	return e.Next()
 }
 
-func PushTeamAnnouncement(app core.App, announcement *Announcement, teamID string, ps PushService) error {
-	teamMembers, err := GetUsersOnTeam(teamID, app)
+type NamedRecordProxy interface {
+	core.RecordProxy
+	Name() string
+}
+
+func PushTeamOrClubAnnouncement(app core.App, coll string, announcement *Announcement, recordID string, ps PushService) {
+	record, err := app.FindRecordById(coll, recordID)
+	if record == nil {
+		app.Logger().Error("Error fetching club record", "error", err, "teamID", recordID)
+		return
+	}
+
+	var proxy NamedRecordProxy
+
+	if coll == TeamsCollection {
+		proxy = &Team{}
+	} else {
+		proxy = &Club{}
+	}
+	proxy.SetProxyRecord(record)
+
+	subs, err := GetSubscriptionsForTeamOrClub(recordID, coll, app)
 	if err != nil {
-		app.Logger().Error("Error fetching team members", "error", err, "team", teamID)
-		return err
+		app.Logger().Error("Error fetching subscriptions", "error", err, coll, recordID)
+		return
 	}
 
-	teamRecord, err := app.FindRecordById(TeamsCollection, teamID)
-	if teamRecord == nil {
-		app.Logger().Error("Error fetching team record", "error", err, "teamID", teamID)
-		return err
-	}
-	team := &Team{}
-	team.SetProxyRecord(teamRecord)
-
-	userIDs := make([]string, len(teamMembers))
-	for i, member := range teamMembers {
-		userIDs[i] = member.Id
-	}
-
-	subs, err := GetSubscriptionsForUserIDs(userIDs, app)
-	if err != nil {
-		app.Logger().Error("Error fetching subscriptions", "error", err, "team", teamID)
-		return err
-	}
 	for _, sub := range subs {
 		app.Logger().Debug("Sending push notification to user", "user", sub.User)
 
 		msg := &PushMessage{
-			Title: "New Announcement in " + team.Name(),
+			Title: "New Announcement in " + proxy.Name(),
 			Body:  announcement.Title(),
 			Tag:   "team_club_new_announcement",
 		}
@@ -71,9 +73,9 @@ func PushTeamAnnouncement(app core.App, announcement *Announcement, teamID strin
 
 		err := ps.SendPushMessage(msg, &ws)
 		if err != nil {
-			return err
+			return
 		}
 	}
 
-	return nil
+	return
 }

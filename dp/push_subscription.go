@@ -2,6 +2,7 @@ package dp
 
 import (
 	"github.com/SherClockHolmes/webpush-go"
+	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
 )
 
@@ -71,4 +72,51 @@ func (p *PushSubscription) ToWebPushSubscription() webpush.Subscription {
 			P256dh: p.KeyP256dh(),
 		},
 	}
+}
+
+func GetSubscriptionsForTeamOrClub(id string, coll string, app core.App) ([]PushSubscription, error) {
+	var whereClause dbx.Expression
+
+	if coll == ClubsCollection {
+		whereClause = dbx.Exists(dbx.NewExp("json_each(users.club) WHERE value = {:clubID}", dbx.Params{"clubID": id}))
+	} else {
+		whereClause = dbx.Exists(dbx.NewExp("json_each(users.teams) WHERE value = {:teamID}", dbx.Params{"teamID": id}))
+	}
+
+	var records []core.Record
+	err := app.RecordQuery(PushSubscriptionsCollection).
+		InnerJoin("users", dbx.NewExp("pushsubscriptions.user = users.id")).
+		AndWhere(whereClause).
+		All(&records)
+	if err != nil {
+		return nil, err
+	}
+
+	subs := make([]PushSubscription, len(records))
+	for _, record := range records {
+		sub := PushSubscription{}
+		sub.SetProxyRecord(&record)
+		subs = append(subs, sub)
+	}
+	return subs, nil
+}
+
+func GetSubscriptionsForUserIDs(userIDs []string, app core.App) ([]PushSubscription, error) {
+	ids := make([]interface{}, len(userIDs))
+	records := make([]*core.Record, len(ids))
+
+	err := app.RecordQuery(PushSubscriptionsCollection).
+		AndWhere(dbx.In("user", ids...)).
+		All(&records)
+	if err != nil {
+		return nil, err
+	}
+
+	subs := make([]PushSubscription, len(records))
+	for _, record := range records {
+		sub := PushSubscription{}
+		sub.SetProxyRecord(record)
+		subs = append(subs, sub)
+	}
+	return subs, nil
 }
