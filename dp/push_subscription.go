@@ -83,20 +83,13 @@ func GetSubscriptionsForTeamOrClub(id string, coll string, app core.App) ([]Push
 		whereClause = dbx.Exists(dbx.NewExp("SELECT 1 FROM json_each(users.teams) WHERE value = {:teamID}", dbx.Params{"teamID": id}))
 	}
 
-	var records []core.Record
+	var subs []PushSubscription
 	err := app.RecordQuery(PushSubscriptionsCollection).
 		InnerJoin("users", dbx.NewExp("pushsubscriptions.user = users.id")).
 		AndWhere(whereClause).
-		All(&records)
+		All(&subs)
 	if err != nil {
 		return nil, err
-	}
-
-	subs := make([]PushSubscription, len(records))
-	for _, record := range records {
-		sub := PushSubscription{}
-		sub.SetProxyRecord(&record)
-		subs = append(subs, sub)
 	}
 	return subs, nil
 }
