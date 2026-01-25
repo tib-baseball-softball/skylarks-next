@@ -10,7 +10,7 @@
   }
 
   interface Props {
-    value: string; // flatpickr accepts timestamps, date objects and ISO strings, but we work with strings exclusively
+    value?: string | Date;
     options: Options;
   }
 
@@ -33,7 +33,7 @@
   });
 </script>
 
-<input class="input" type="text" bind:this={datepicker} {value}/>
+<input bind:this={datepicker} class="input" type="text" {value}/>
 
 <!-- svelte-ignore css_unused_selector -->
 <style lang="postcss">
