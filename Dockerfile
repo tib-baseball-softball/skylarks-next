@@ -5,7 +5,7 @@
 
 # 1) UI build stage
 FROM node:24-alpine AS ui-builder
-WORKDIR /
+WORKDIR /ui
 
 RUN npm i -g corepack && corepack enable && corepack prepare pnpm@latest --activate
 
@@ -22,12 +22,12 @@ RUN pnpm $BUILD_MODE
 
 # 2) Go/PocketBase build stage
 FROM golang:1.25-alpine AS go-builder
-WORKDIR /backend
+WORKDIR /
 
 COPY go.mod go.sum ./
 RUN go mod download
 
-COPY backend .
+COPY . .
 
 RUN CGO_ENABLED=0 GOOS=linux go build -o diamondplanner
 
