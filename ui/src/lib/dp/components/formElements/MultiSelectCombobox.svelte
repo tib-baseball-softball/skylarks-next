@@ -1,6 +1,6 @@
 <script generics="T extends UsersResponse" lang="ts">
-  //@ts-expect-error
-
+  //@ts-ignore
+  import type {UsersResponse} from "$lib/dp/types/pb-types.ts";
   import {X} from "lucide-svelte";
   import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
 
@@ -57,9 +57,9 @@
 
 {#each selectedItems as selectItem}
   <button
-          type="button"
-          class="chip preset-filled-primary-500 me-1 lg:me-2"
-          onclick={() => removeItemFromSelection(selectItem)}
+    type="button"
+    class="chip preset-filled-primary-500 me-1 lg:me-2"
+    onclick={() => removeItemFromSelection(selectItem)}
   >
     <span>{selectItem.first_name} {selectItem.last_name}</span>
     <X size="12"/>
@@ -68,9 +68,9 @@
 
 <div>Select to add as {itemName}:</div>
 <select
-        bind:this={selectElement}
-        class="select"
-        onchange={() => addItemToSelection(allItems)}
+  bind:this={selectElement}
+  class="select"
+  onchange={() => addItemToSelection(allItems)}
 >
   <option selected value="">None</option>
   {#each allItems as item}
