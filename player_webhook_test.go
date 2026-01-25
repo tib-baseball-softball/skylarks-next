@@ -51,12 +51,12 @@ func TestWebhookEndpoint_IntegrationScenarios(t *testing.T) {
 			},
 		},
 		{
-			Name:            "Wrong request method",
-			Method:          http.MethodGet,
-			URL:             "/webhooks/playerChange",
-			ExpectedStatus:  http.StatusNotFound, // TODO: Request never reaches my handler
-			ExpectedContent: []string{"File not found."},
-			TestAppFactory:  setupTestApp,
+			Name:               "Wrong request method",
+			Method:             http.MethodGet,
+			URL:                "/webhooks/playerChange",
+			ExpectedStatus:     http.StatusOK, // Request never reaches my handler => fallback to index.html is in effect
+			NotExpectedContent: []string{"Updated player BSM ID"},
+			TestAppFactory:     setupTestApp,
 		},
 		{
 			Name:   "Missing signature header",
