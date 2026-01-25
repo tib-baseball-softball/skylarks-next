@@ -22,6 +22,8 @@
   const {data, rowsPerPage = 10, tableType}: Props = $props();
 
   let type: StatsType = $state(StatsType.batting);
+
+  // svelte-ignore state_referenced_locally - manual state management with $effect
   let summaryData:
     | StatisticsSummary<"BattingStatistics" | "PitchingStatistics" | "FieldingStatistics">
     | undefined = $state(data.batting.summaries.at(0));

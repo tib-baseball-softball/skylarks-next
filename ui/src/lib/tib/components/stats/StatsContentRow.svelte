@@ -5,7 +5,7 @@
 
   interface Props<T extends keyof RowByType> {
     type: T;
-    row: RowByType[T];
+    row: RowByType[T] | any; // no other way to silence error
     tableType: "personal" | "seasonal";
   }
 

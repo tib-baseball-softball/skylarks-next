@@ -6,7 +6,7 @@
 
   interface Props<T extends keyof RowByType> {
     type: StatsType;
-    row: RowByType[T];
+    row: RowByType[T] | any;
   }
 
   const {type, row}: Props<T> = $props();

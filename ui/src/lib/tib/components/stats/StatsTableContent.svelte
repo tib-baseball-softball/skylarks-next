@@ -41,7 +41,6 @@
     {#if tableType === "seasonal"}
       <td>{row?.league?.season} ({row?.league?.acronym})</td>
     {/if}
-
     <StatsContentRow {row} {type} {tableType}/>
   </tr>
 {/each}

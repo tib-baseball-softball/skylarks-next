@@ -18,15 +18,15 @@ export const load: PageLoad = async ({params, fetch}) => {
   const pitchingURL = statsRequest.buildRequestURL(`people/${params.id}/statistics/${StatsType.pitching}.json`, []);
   const fieldingURL = statsRequest.buildRequestURL(`people/${params.id}/statistics/${StatsType.fielding}.json`, []);
 
-  const playerBattingStats = client.send<BattingStatisticsEntry[]>(battingURL.pathname + battingURL.search, {
+  const playerBattingStats = client.send<BattingStatisticsEntry>(battingURL.pathname + battingURL.search, {
     fetch,
     requestKey: `player-batting-${params.id}`,
   });
-  const playerPitchingStats = client.send<PitchingStatisticsEntry[]>(pitchingURL.pathname + pitchingURL.search, {
+  const playerPitchingStats = client.send<PitchingStatisticsEntry>(pitchingURL.pathname + pitchingURL.search, {
     fetch,
     requestKey: `player-pitching-${params.id}`,
   });
-  const playerFieldingStats = client.send<FieldingStatisticsEntry[]>(fieldingURL.pathname + fieldingURL.search, {
+  const playerFieldingStats = client.send<FieldingStatisticsEntry>(fieldingURL.pathname + fieldingURL.search, {
     fetch,
     requestKey: `player-fielding-${params.id}`,
   });

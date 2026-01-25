@@ -25,7 +25,7 @@ export const load: PageLoad = async ({parent, params, url, fetch}) => {
   const data = await parent();
   let clubTeams: Team[] | undefined = await data.clubTeams;
 
-  // Fallback: if parent provided no teams, fetch from relay
+  // Fallback: if the parent provided no teams, fetch from relay
   if (!clubTeams || clubTeams.length === 0) {
     const clubTeamRequest = new ClubTeamsAPIRequest("");
     clubTeamRequest.setAPIURL(RELAY_URL);
@@ -59,15 +59,15 @@ export const load: PageLoad = async ({parent, params, url, fetch}) => {
   const pitchingURL = statsRequest.buildRequestURL(`league_entries/${leagueEntry.id}/statistics/${StatsType.pitching}.json`, []);
   const fieldingURL = statsRequest.buildRequestURL(`league_entries/${leagueEntry.id}/statistics/${StatsType.fielding}.json`, []);
 
-  const battingStats = client.send<BattingStatisticsEntry[]>(battingURL.pathname + battingURL.search, {
+  const battingStats = client.send<BattingStatisticsEntry>(battingURL.pathname + battingURL.search, {
     fetch,
     requestKey: `team-id-batting-${leagueEntry.id}`,
   });
-  const pitchingStats = client.send<PitchingStatisticsEntry[]>(pitchingURL.pathname + pitchingURL.search, {
+  const pitchingStats = client.send<PitchingStatisticsEntry>(pitchingURL.pathname + pitchingURL.search, {
     fetch,
     requestKey: `team-id-pitching-${leagueEntry.id}`,
   });
-  const fieldingStats = client.send<FieldingStatisticsEntry[]>(fieldingURL.pathname + fieldingURL.search, {
+  const fieldingStats = client.send<FieldingStatisticsEntry>(fieldingURL.pathname + fieldingURL.search, {
     fetch,
     requestKey: `team-id-fielding-${leagueEntry.id}`,
   });
