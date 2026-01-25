@@ -14,6 +14,8 @@
   <WinsOverSeasonChart streakData={dataset?.streak_data ?? []}/>
 </section>
 
-<section class="mt-6!">
-  <StreakEmoji streak={dataset.table_row.streak}/>
-</section>
+{#if dataset.table_row}
+  <section class="mt-6!">
+    <StreakEmoji streak={dataset.table_row.streak}/>
+  </section>
+{/if}
