@@ -135,6 +135,10 @@ func BindDPHooks(app core.App, client bsm.APIClient, pushService PushService) {
 		return NotifyNewAnnouncement(e, pushService)
 	})
 
+	app.OnRecordAfterCreateSuccess(EventsCollection).BindFunc(func(e *core.RecordEvent) error {
+		return NotifyNewEvent(e, pushService)
+	})
+
 	//------------------- Serve static dir -------------------------//
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
