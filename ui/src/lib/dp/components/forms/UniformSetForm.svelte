@@ -12,7 +12,7 @@
 
   const {uniformSet, clubID}: Props = $props();
 
-  function formFromProps(data: UniformsetsResponse | null): UniformsetsCreate {
+  function formFromProps(data: UniformsetsResponse | null | undefined): UniformsetsCreate {
     return data ?? {
       id: "",
       name: "",
