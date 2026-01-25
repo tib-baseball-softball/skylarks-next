@@ -1,6 +1,6 @@
 import {persistedState} from "svelte-persisted-state";
 
-export type AppLocales = "de" | "en" | "fr" | "es" | "pl" | "ru"
+export type AppLocales = "de" | "en" | "fr" | "es" | "pl"
 
 export const appLocale = persistedState<AppLocales>(
   "appLocale",

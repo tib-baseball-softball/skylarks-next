@@ -1,12 +1,12 @@
 <script lang="ts">
-  import {preferences} from "$lib/tib/globals.svelte.js";
+  import {appLocale} from "$lib/dp/locale.svelte.ts";
 </script>
 
 <!-- @wc-ignore -->
 <article class="prose max-w-none mb-6"><h1 class="mt-4">Nutzungsbedingungen für die Web-App der Berlin
   Skylarks</h1>
 
-  {#if preferences.current.locale === "de"}
+  {#if appLocale.current === "de"}
     <section lang="de">
       <p>Die Web-App wird bereitgestellt von der <strong>Turngemeinde in Berlin e.V. Abteilung Baseball</strong>.</p>
 
