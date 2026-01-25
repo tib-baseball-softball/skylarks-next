@@ -13,6 +13,7 @@
     positionKeysToEnumStringValues,
   } from "$lib/dp/types/BaseballPosition.ts";
   import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
+  import {Collection} from "$lib/dp/enum/Collection.ts";
 
   interface ValidateArgs {
     inputValue: string;
@@ -50,10 +51,8 @@
   let open = $state(false);
 
   const possiblePositionValues = getAllBaseballPositionStringValues();
-  let selectedPositions: string[] = $derived.by(() => {
-    const sel = $state(positionKeysToEnumStringValues(authRecord.position));
-    return sel;
-  });
+  // svelte-ignore state_referenced_locally - this component uses manual state management
+  let selectedPositions: string[] = $state(positionKeysToEnumStringValues(authRecord.position));
 
   function validatePositionValue(details: ValidateArgs): boolean {
     return possiblePositionValues.includes(details.inputValue);
@@ -78,7 +77,7 @@
     let result: CustomAuthModel | null = null;
 
     try {
-      result = await client.collection("users").update<CustomAuthModel>(form.id, form);
+      result = await client.collection(Collection.Users).update<CustomAuthModel>(form.id, form);
     } catch {
       toastController.triggerGenericFormErrorMessage("Player data");
     }
@@ -88,6 +87,8 @@
       open = false;
     }
   }
+
+  const onValueChange = (e: { value: string[] }) => (selectedPositions = e.value);
 </script>
 
 <Sheet.Root bind:open={open}>
@@ -152,7 +153,7 @@
           Positions
           <TagsInput
             name="positions"
-            onValueChange={(e) => (selectedPositions = e.value)}
+            onValueChange={onValueChange}
             placeholder="Enter positions or click buttons..."
             validate={validatePositionValue}
             value={selectedPositions}

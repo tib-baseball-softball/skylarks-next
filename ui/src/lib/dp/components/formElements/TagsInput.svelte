@@ -2,14 +2,22 @@
   import {X} from "lucide-svelte";
   import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
 
+  interface Props {
+    name?: string;
+    value?: string[];
+    placeholder?: string;
+    validate?: (args: { inputValue: string; value: string[] }) => boolean;
+    onValueChange?: (e: { value: string[] }) => void;
+  }
+
   let {
     name = "",
-    value = [] as string[],
+    value = [],
     placeholder = "",
     validate = (args: { inputValue: string; value: string[] }) => true,
     onValueChange = (e: { value: string[] }) => {
     },
-  } = $props();
+  }: Props = $props();
 
   let inputValue = $state("");
 
@@ -56,12 +64,12 @@
 
 <div class="tags-input input">
   <input
-          name={name}
-          oninput={(e) => (inputValue = (e.currentTarget.value))}
-          onkeydown={handleKeyDown}
-          placeholder={placeholder}
-          type="text"
-          value={inputValue}
+    name={name}
+    oninput={(e) => (inputValue = (e.currentTarget.value))}
+    onkeydown={handleKeyDown}
+    placeholder={placeholder}
+    type="text"
+    value={inputValue}
   />
 
   <div class="tags-container">
@@ -69,10 +77,10 @@
     <span class="tag chip preset-filled-primary-500">
       {tag}
       <button
-              type="button"
-              class="remove-btn"
-              aria-label="Remove tag"
-              onclick={() => removeTag(tag)}
+        type="button"
+        class="remove-btn"
+        aria-label="Remove tag"
+        onclick={() => removeTag(tag)}
       >
         <X size={14}/>
       </button>
@@ -82,35 +90,35 @@
 </div>
 
 <style>
-    .tags-input {
-        border-radius: var(--radius-container);
-    }
+  .tags-input {
+    border-radius: var(--radius-container);
+  }
 
-    .tags-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: calc(var(--spacing) * 2);
-        margin-block: 0.5em;
-    }
+  .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--spacing) * 2);
+    margin-block: 0.5em;
+  }
 
-    .tag {
-        display: flex;
-        align-items: center;
-    }
+  .tag {
+    display: flex;
+    align-items: center;
+  }
 
-    .remove-btn {
-        background: none;
-        border: none;
-        cursor: pointer;
-        line-height: 1;
-    }
+  .remove-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+  }
 
-    input {
-        flex: 1;
-        border: none;
-        outline: none;
-        width: 100%;
-        background-color: transparent;
-        padding-inline: 0;
-    }
+  input {
+    flex: 1;
+    border: none;
+    outline: none;
+    width: 100%;
+    background-color: transparent;
+    padding-inline: 0;
+  }
 </style>
