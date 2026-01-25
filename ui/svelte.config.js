@@ -15,7 +15,7 @@ const config = {
   kit: {
     adapter: adapter({
       fallback: "index.html",
-      pages: "backend/pb_public",
+      pages: "../pb_public",
     }),
     csp: {
       directives: {

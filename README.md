@@ -66,7 +66,6 @@ cd skylarks-next
 2. Set up environment
 
 ```bash
-cp backend/.env.dist backend/.env
 cp .env.dist .env
 ```
 
@@ -78,15 +77,15 @@ cp .env.dist .env
 backend
 
 ```bash
-cd backend
-go mod download`
+go mod download
 go run . serve
 ```
 
 frontend
 
 ```bash
-pnpm install`
+cd ui
+pnpm install
 # yarn/deno/bun could also work, untested
 ```
 
@@ -100,8 +99,8 @@ go run . serve
 frontend
 
 ```bash
+cd ui
 pnpm dev
-
 ```
 
 ## URLs

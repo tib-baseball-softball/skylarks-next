@@ -5,24 +5,24 @@
 
 # 1) UI build stage
 FROM node:24-alpine AS ui-builder
-WORKDIR /ui
+WORKDIR /app/ui
 
 RUN npm i -g corepack && corepack enable && corepack prepare pnpm@latest --activate
 
-COPY ui/pnpm-lock.yaml ui/package.json ui/pnpm-workspace.yaml ui/.npmrc* ./
+COPY ui/pnpm-lock.yaml ui/package.json ui/.npmrc* ./
 
 RUN pnpm install --frozen-lockfile
 
 ARG BUILD_MODE
 
-COPY . .
+COPY ui .
 
 RUN pnpm $BUILD_MODE
 
 
 # 2) Go/PocketBase build stage
 FROM golang:1.25-alpine AS go-builder
-WORKDIR /
+WORKDIR /app
 
 COPY go.mod go.sum ./
 RUN go mod download
@@ -38,8 +38,8 @@ WORKDIR /app
 
 RUN apk add --no-cache ca-certificates tzdata && update-ca-certificates
 
-COPY --from=go-builder /diamondplanner ./
-COPY --from=ui-builder /pb_public ./pb_public
+COPY --from=go-builder /app/diamondplanner ./
+COPY --from=ui-builder /app/pb_public ./pb_public
 
 EXPOSE 8090
 
