@@ -2,7 +2,6 @@ package dp
 
 import (
 	"fmt"
-	"os"
 	"time"
 
 	"github.com/pocketbase/dbx"
@@ -89,12 +88,7 @@ func generateSeriesEvents(app core.App, record *core.Record) ([]*core.Record, er
 	var events []*core.Record
 	existingEventsMap := make(map[string]*Event)
 
-	timezone := os.Getenv("TIME_ZONE")
-	if timezone == "" {
-		timezone = "Europe/Berlin"
-	}
-
-	location, err := time.LoadLocation(timezone)
+	location, err := LoadAppTimeZone()
 	if err != nil {
 		return nil, err
 	}
