@@ -207,11 +207,11 @@ Temporary Items
 
 ### Project-specific ###
 
-backend/pb_data
-backend/pb_migrations
+/pb_data
+/pb_migrations
 node_modules
 /build
-/.svelte-kit
+ui/.svelte-kit
 /package
 .env
 !.env.dist
@@ -219,18 +219,19 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .idea
 *private.env.json
-/backend/go_build_github_com_tib_baseball_softball_skylarks_next
-/backend/test_pb_data/storage/
-/backend/test_pb_data/auxiliary.db-shm
-/backend/test_pb_data/auxiliary.db-wal
-/backend/test_pb_data/data.db-shm
-/backend/test_pb_data/data.db-wal
+/go_build_github_com_tib_baseball_softball_skylarks_next
+/test_pb_data/storage/
+/test_pb_data/auxiliary.db
+/test_pb_data/auxiliary.db-shm
+/test_pb_data/auxiliary.db-wal
+/test_pb_data/data.db-shm
+/test_pb_data/data.db-wal
 test-results
-/backend/serve
-/src/locales/proxy.svelte.js
-/src/locales/*.compiled.main.svelte.js
+/serve
+ui/src/locales/proxy.svelte.js
+ui/src/locales/*.compiled.main.svelte.js
 /craft/data/*.db*
-backend/pb_public/**
-/src/locales/.wuchale/
-/.env.production
-/.env.staging
+/pb_public/**
+ui/src/locales/.wuchale/
+.env.production
+.env.staging

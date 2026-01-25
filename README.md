@@ -66,7 +66,6 @@ cd skylarks-next
 2. Set up environment
 
 ```bash
-cp backend/.env.dist backend/.env
 cp .env.dist .env
 ```
 
@@ -78,15 +77,15 @@ cp .env.dist .env
 backend
 
 ```bash
-cd backend
-go mod download`
+go mod download
 go run . serve
 ```
 
 frontend
 
 ```bash
-pnpm install`
+cd ui
+pnpm install
 # yarn/deno/bun could also work, untested
 ```
 
@@ -100,8 +99,8 @@ go run . serve
 frontend
 
 ```bash
+cd ui
 pnpm dev
-
 ```
 
 ## URLs
@@ -117,19 +116,17 @@ pnpm dev
 
 ## Deployment
 
-- Fully automated via GitHub Actions, deploys on every push to branch `main` or `stage`, excluding documentation files
-  and folders.
-- app is deployed via Docker-Compose in a Portainer stack on the team VPS
-- Traefik router (not deployed via this repository) acts as a reverse proxy and forwards requests
-- ⇒ Traefik labels need to be set in Compose files
+- changed `FIXME`
 
-### Server Setup / Manual Deployment
+### Backend-specific documentation
 
-What the GitHub Action does:
+#### Pocketbase Schema
 
-1. Build the app according to the Dockerfile
-2. Pushes docker images to [Docker Hub](https://hub.docker.com/repositories/obnoxieux)
-3. Triggers [Portainer](https://docs.portainer.io/) deployment via Webhook
+- the file `pb_schema.json` is an export of the currently configured collections access rules.
+- it acts as a source of truth for the backend schema
+- in addition, pocketbase migrations are saved in the corresponding folder
+- for type-safe access to custom models, RecordProxy structs are used
+- TS types are generated on the frontend side
 
 ## Bugs and Problems
 

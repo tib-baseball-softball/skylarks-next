@@ -1,0 +1,115 @@
+package dp
+
+import (
+	"github.com/SherClockHolmes/webpush-go"
+	"github.com/pocketbase/dbx"
+	"github.com/pocketbase/pocketbase/core"
+)
+
+const (
+	PushSubscriptionsCollection = "pushsubscriptions"
+)
+
+var _ core.RecordProxy = (*PushSubscription)(nil)
+
+// PushSubscription RecordProxy for collection `pushsubscriptions`.
+// Provides type-safe struct access to push subscription records.
+type PushSubscription struct {
+	core.BaseRecordProxy
+}
+
+func (p *PushSubscription) ID() string {
+	return p.Id
+}
+
+func (p *PushSubscription) User() string {
+	return p.GetString("user")
+}
+
+func (p *PushSubscription) SetUser(userId string) {
+	p.Set("user", userId)
+}
+
+func (p *PushSubscription) Endpoint() string {
+	return p.GetString("endpoint")
+}
+
+func (p *PushSubscription) SetEndpoint(endpoint string) {
+	p.Set("endpoint", endpoint)
+}
+
+func (p *PushSubscription) KeyP256dh() string {
+	return p.GetString("key_p256dh")
+}
+
+func (p *PushSubscription) SetKeyP256dh(key string) {
+	p.Set("key_p256dh", key)
+}
+
+func (p *PushSubscription) KeyAuth() string {
+	return p.GetString("key_auth")
+}
+
+func (p *PushSubscription) SetKeyAuth(key string) {
+	p.Set("key_auth", key)
+}
+
+func (p *PushSubscription) Encoding() string {
+	return p.GetString("encoding")
+}
+
+func (p *PushSubscription) SetEncoding(encoding string) {
+	p.Set("encoding", encoding)
+}
+
+// ToWebPushSubscription converts a Diamond Planner push subscription record from the database
+// to a webpush.Subscription to be sent via external browser-vendored Push Service.
+func (p *PushSubscription) ToWebPushSubscription() webpush.Subscription {
+	return webpush.Subscription{
+		Endpoint: p.Endpoint(),
+		Keys: webpush.Keys{
+			Auth:   p.KeyAuth(),
+			P256dh: p.KeyP256dh(),
+		},
+	}
+}
+
+func GetSubscriptionsForTeamOrClub(id string, coll string, app core.App) ([]PushSubscription, error) {
+	var whereClause dbx.Expression
+
+	if coll == ClubsCollection {
+		whereClause = dbx.Exists(dbx.NewExp("SELECT 1 FROM json_each(users.club) WHERE value = {:clubID}", dbx.Params{"clubID": id}))
+	} else {
+		whereClause = dbx.Exists(dbx.NewExp("SELECT 1 FROM json_each(users.teams) WHERE value = {:teamID}", dbx.Params{"teamID": id}))
+	}
+
+	var subs []PushSubscription
+	err := app.RecordQuery(PushSubscriptionsCollection).
+		InnerJoin("users", dbx.NewExp("pushsubscriptions.user = users.id")).
+		AndWhere(whereClause).
+		All(&subs)
+	if err != nil {
+		return nil, err
+	}
+	return subs, nil
+}
+
+func GetSubscriptionsForUserIDs(userIDs []string, app core.App) ([]PushSubscription, error) {
+	ids := make([]interface{}, len(userIDs))
+	records := make([]*core.Record, len(ids))
+
+	err := app.RecordQuery(PushSubscriptionsCollection).
+		AndWhere(dbx.In("user", ids...)).
+		All(&records)
+	if err != nil {
+		return nil, err
+	}
+
+	subs := make([]PushSubscription, len(records))
+	for _, record := range records {
+		sub := PushSubscription{}
+		sub.SetProxyRecord(record)
+		subs = append(subs, sub)
+	}
+	return subs, nil
+}

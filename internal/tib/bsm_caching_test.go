@@ -1,0 +1,278 @@
+package tib
+
+import (
+	"errors"
+	"io"
+	"log/slog"
+	"net/url"
+	"testing"
+	"time"
+
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/bsm"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp"
+	"github.com/pocketbase/pocketbase/core"
+	"github.com/pocketbase/pocketbase/tools/types"
+)
+
+type MockApp struct {
+	findFirstRecordByDataFunc    func(any, string, any) (*core.Record, error)
+	findCollectionByNameOrIdFunc func(string) (*core.Collection, error)
+	saveFunc                     func(core.Model) error
+}
+
+func (m *MockApp) Delete(model core.Model) error {
+	return nil
+}
+
+func (m *MockApp) Logger() *slog.Logger {
+	return slog.New(slog.NewTextHandler(io.Discard, nil))
+}
+
+func (m *MockApp) FindFirstRecordByData(collectionModelOrIdentifier any, field string, value any) (*core.Record, error) {
+	return m.findFirstRecordByDataFunc(collectionModelOrIdentifier, field, value)
+}
+
+func (m *MockApp) FindCollectionByNameOrId(nameOrId string) (*core.Collection, error) {
+	return m.findCollectionByNameOrIdFunc(nameOrId)
+}
+
+func (m *MockApp) Save(record core.Model) error {
+	return m.saveFunc(record)
+}
+
+func TestIsValidBSMURL(t *testing.T) {
+	tests := []struct {
+		rawURL string
+		want   bool
+	}{
+		// Valid URLs
+		{"https://bsm.baseball-softball.de/clubs/485/licenses.json", true},
+		{"https://bsm.baseball-softball.de/clubs/123456/licenses.json", true},
+		{"https://bsm.baseball-softball.de/clubs/987/licenses.json?param=value", true},
+		{"https://bsm.baseball-softball.de/clubs/485.json", true},
+		{"https://bsm.baseball-softball.de/clubs/999999.json?key=val", true},
+		{"https://bsm.baseball-softball.de/league_groups/8888/statistics.json", true},
+		{"https://bsm.baseball-softball.de/league_groups/5732.json", true},
+		{"https://bsm.baseball-softball.de/league_groups", true},
+		{"https://bsm.baseball-softball.de/league_groups.json", true},
+		{"https://bsm.baseball-softball.de/league_groups?season=2024", true},
+		{"https://bsm.baseball-softball.de/licenses/999999.json", true},
+		{"https://bsm.baseball-softball.de/clubs/123456/club_functions.json?filter=active", true},
+		{"https://bsm.baseball-softball.de/clubs/485/fields.json", true},
+		{"https://bsm.baseball-softball.de/clubs/123456/fields.json?sort=desc", true},
+		{"https://bsm.baseball-softball.de/matches/12345.json", true},
+		{"https://bsm.baseball-softball.de/clubs/485/matches.json", true},
+		{"https://bsm.baseball-softball.de/matches.json", true},
+		{"https://bsm.baseball-softball.de/clubs/485/teams.json", true},
+		{"https://bsm.baseball-softball.de/clubs/485/team_clubs.json?x=1", true},
+		{"https://bsm.baseball-softball.de/league_groups/5732/table.json", true},
+		{"https://bsm.baseball-softball.de/league_entries/777/statistics.json", true},
+		{"https://bsm.baseball-softball.de/league_entries/777/statistics/splits.json", true},
+		{"https://bsm.baseball-softball.de/people/333/statistics/game_logs.json", true},
+		{"https://bsm.baseball-softball.de/clubs/485/statistics/season/2024.json?limit=10", true},
+		{"https://bsm.baseball-softball.de/matches/999/match_boxscore.json", true},
+		{"https://bsm.baseball-softball.de/league_groups/1234/top10/batting/avg.json", true},
+		{"https://bsm.baseball-softball.de/league_groups/1234/top10/pitching/era.json?min_ip=10", true},
+		{"https://bsm.baseball-softball.de/league_groups/5678/top10/fielding/fld_pct.json", true},
+
+		// Invalid URLs
+		{"https://bsm.baseball-softball.de/clubs/abc/licenses.json", false},
+		{"https://bsm.baseball-softball.de/clubs/485/licenses.xml", false},
+		{"https://example.com/clubs/485/licenses.json", false},
+		{"https://bsm.baseball-softball.de/clubs/485", false},
+		{"https://bsm.baseball-softball.de/league_groups/abc/details", false},
+		{"https://bsm.baseball-softball.de/clubs/485/player_lists.json", false},
+		{"https://bsm.baseball-softball.de/people/123.json", false},
+		{"https://bsm.baseball-softball.de/licenses/abcd.json", false},
+		{"https://bsm.baseball-softball.de/licenses/6000.xml", false},
+		{"https://bsm.baseball-softball.de/clubs/abc/club_functions.json", false},
+		{"https://bsm.baseball-softball.de/clubs/485/club_function.json", false},
+		{"https://bsm.baseball-softball.de/clubs/abc/fields.json", false},
+		{"https://bsm.baseball-softball.de/clubs/485/fields.xml", false},
+		{"https://bsm.baseball-softball.de/clubs/485/field.json", false},
+		{"https://bsm.baseball-softball.de/matches/12345.xml", false},
+		{"https://bsm.baseball-softball.de/clubs/485/matches?season=2024", false},
+		{"https://bsm.baseball-softball.de/matches", false},
+		{"https://bsm.baseball-softball.de/clubs/485/team.json", false},
+		{"https://bsm.baseball-softball.de/clubs/485/team_club.json", false},
+		{"https://bsm.baseball-softball.de/league_groups/5732/table.csv", false},
+		{"https://bsm.baseball-softball.de/league_entries/777/stats?split=home", false},
+		{"https://bsm.baseball-softball.de/league_entries/abc/stats.json", false},
+		{"https://bsm.baseball-softball.de/people/333/statistics", false},
+		{"https://bsm.baseball-softball.de/clubs/485/statistics?season=2024", false},
+		{"https://bsm.baseball-softball.de/league_groups/1234/top10/running/avg.json", false},
+		{"https://bsm.baseball-softball.de/league_groups/1234/top10/batting/avg/extra.json", false},
+		{"https://bsm.baseball-softball.de/league_groups/1234/top10/batting/avg", false},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.rawURL, func(t *testing.T) {
+			parsedURL, _ := url.Parse(tt.rawURL)
+			got := isAllowedBSMURL(parsedURL)
+			if got != tt.want {
+				t.Errorf("isAllowedBSMURL(%q) = %v; want %v", tt.rawURL, got, tt.want)
+			}
+		})
+	}
+}
+
+// helper that must never fail inside the test body
+func mustParseDateTime(t *testing.T, tm time.Time) types.DateTime {
+	t.Helper()
+	parsed, err := types.ParseDateTime(tm)
+	if err != nil {
+		t.Fatalf("failed to parse time %v: %v", tm, err)
+	}
+	return parsed
+}
+
+// builds an in-memory RequestCache record for a given raw URL and body
+func buildCacheRecord(t *testing.T, rawURL, body string, updatedAt time.Time) *core.Record {
+	t.Helper()
+	coll := core.NewBaseCollection(dp.RequestCacheCollection)
+	rec := core.NewRecord(coll)
+	cache := &dp.RequestCache{}
+	cache.SetProxyRecord(rec)
+	cache.SetURL(rawURL)
+	cache.SetResponseBody(body)
+	cache.SetHash(dp.GetMD5Hash(rawURL))
+	cache.SetUpdated(mustParseDateTime(t, updatedAt))
+	return rec
+}
+
+func TestGetCachedBSMResponse_CacheHit_ReturnsCachedBody(t *testing.T) {
+	t.Setenv("BSM_API_HOST", "bsm.baseball-softball.de")
+
+	raw := "https://bsm.baseball-softball.de/clubs/485/licenses.json"
+	u, _ := url.Parse(raw)
+
+	// fresh record (not outdated)
+	rec := buildCacheRecord(t, raw, "cached-body", time.Now().Add(-5*time.Minute))
+
+	app := &MockApp{
+		findFirstRecordByDataFunc:    func(any, string, any) (*core.Record, error) { return rec, nil },
+		findCollectionByNameOrIdFunc: func(string) (*core.Collection, error) { return core.NewBaseCollection(dp.RequestCacheCollection), nil },
+		saveFunc:                     func(core.Model) error { return nil },
+	}
+
+	got, err := GetCachedBSMResponse(app, u)
+	if err != nil {
+		t.Fatalf("GetCachedBSMResponse returned error: %v", err)
+	}
+	if got != "cached-body" {
+		t.Fatalf("unexpected cached body: got %q want %q", got, "cached-body")
+	}
+}
+
+func TestGetCachedBSMResponse_InvalidHost_ReturnsAllowlistError(t *testing.T) {
+	t.Setenv("BSM_API_HOST", "bsm.baseball-softball.de")
+	raw := "https://example.com/clubs/485/licenses.json"
+	u, _ := url.Parse(raw)
+
+	app := &MockApp{
+		findFirstRecordByDataFunc:    func(any, string, any) (*core.Record, error) { return nil, nil },
+		findCollectionByNameOrIdFunc: func(string) (*core.Collection, error) { return core.NewBaseCollection(dp.RequestCacheCollection), nil },
+		saveFunc:                     func(core.Model) error { return nil },
+	}
+
+	_, err := GetCachedBSMResponse(app, u)
+	if err == nil {
+		t.Fatalf("expected error, got nil")
+	}
+	var URLAllowlistError *bsm.URLAllowlistError
+	if !errors.As(err, &URLAllowlistError) {
+		t.Fatalf("expected URLAllowlistError, got %T: %v", err, err)
+	}
+}
+
+func TestGetCachedBSMResponse_InvalidPath_ReturnsAllowlistError(t *testing.T) {
+	t.Setenv("BSM_API_HOST", "bsm.baseball-softball.de")
+	raw := "https://bsm.baseball-softball.de/people/123.json" // not allowlisted
+	u, _ := url.Parse(raw)
+
+	app := &MockApp{
+		findFirstRecordByDataFunc:    func(any, string, any) (*core.Record, error) { return nil, nil },
+		findCollectionByNameOrIdFunc: func(string) (*core.Collection, error) { return core.NewBaseCollection(dp.RequestCacheCollection), nil },
+		saveFunc:                     func(core.Model) error { return nil },
+	}
+
+	_, err := GetCachedBSMResponse(app, u)
+	if err == nil {
+		t.Fatalf("expected error, got nil")
+	}
+	var URLAllowlistError *bsm.URLAllowlistError
+	if !errors.As(err, &URLAllowlistError) {
+		t.Fatalf("expected URLAllowlistError, got %T: %v", err, err)
+	}
+}
+
+func TestIsOutdated(t *testing.T) {
+	fresh := mustParseDateTime(t, time.Now().Add(-30*time.Minute))
+	if isOutdated(fresh) {
+		t.Errorf("fresh cache reported as outdated")
+	}
+
+	old := mustParseDateTime(t, time.Now().Add(-(time.Duration(cacheLifetimeMinutes)+1)*time.Minute))
+	if !isOutdated(old) {
+		t.Errorf("old cache not reported as outdated")
+	}
+}
+
+func TestRewriteURLForProxying_RewritesHostPathAndAddsAPIKey(t *testing.T) {
+	t.Setenv("BSM_API_HOST", "bsm.baseball-softball.de")
+	t.Setenv("BSM_API_KEY", "super-secret")
+
+	raw := "https://example.com/api/bsm/relay/league_groups/5732/details?season=2024"
+	u, err := url.Parse(raw)
+	if err != nil {
+		t.Fatalf("failed to parse input url: %v", err)
+	}
+
+	got := rewriteURLForProxying(*u)
+
+	if got.Scheme != "https" {
+		t.Fatalf("scheme changed: got %q want %q", got.Scheme, "https")
+	}
+	if got.Host != "bsm.baseball-softball.de" {
+		t.Fatalf("host not rewritten: got %q want %q", got.Host, "bsm.baseball-softball.de")
+	}
+	if got.Path != "/league_groups/5732/details" {
+		t.Fatalf("path not trimmed correctly: got %q want %q", got.Path, "/league_groups/5732/details")
+	}
+
+	q := got.Query()
+	if q.Get("season") != "2024" {
+		t.Fatalf("original query param missing: season=%q", q.Get("season"))
+	}
+	if q.Get("api_key") != "super-secret" {
+		t.Fatalf("api_key not added to query: got %q want %q", q.Get("api_key"), "super-secret")
+	}
+}
+
+func TestRewriteURLForProxying_NoRelayPrefix_PathUnchangedAndApiKeyAdded(t *testing.T) {
+	t.Setenv("BSM_API_HOST", "bsm.baseball-softball.de")
+	t.Setenv("BSM_API_KEY", "another-secret")
+
+	raw := "https://example.com/league_groups/5732/details?x=1"
+	u, err := url.Parse(raw)
+	if err != nil {
+		t.Fatalf("failed to parse input url: %v", err)
+	}
+
+	got := rewriteURLForProxying(*u)
+
+	if got.Host != "bsm.baseball-softball.de" {
+		t.Fatalf("host not rewritten: got %q want %q", got.Host, "bsm.baseball-softball.de")
+	}
+	if got.Path != "/league_groups/5732/details" {
+		t.Fatalf("path unexpectedly changed: got %q want %q", got.Path, "/league_groups/5732/details")
+	}
+
+	q := got.Query()
+	if q.Get("x") != "1" {
+		t.Fatalf("original query param missing: x=%q", q.Get("x"))
+	}
+	if q.Get("api_key") != "another-secret" {
+		t.Fatalf("api_key not added to query: got %q want %q", q.Get("api_key"), "another-secret")
+	}
+}
