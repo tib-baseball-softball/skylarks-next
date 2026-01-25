@@ -48,6 +48,11 @@ func NotifyNewEvent(e *core.RecordEvent, ps PushService) error {
 	event := &Event{}
 	event.SetProxyRecord(e.Record)
 
+	// if an event is part of a series, don't flood users with notifications as the series will handle this
+	if event.Series() != "" {
+		return e.Next()
+	}
+
 	if errs := e.App.ExpandRecord(event.Record, []string{"location"}, nil); len(errs) > 0 {
 		e.App.Logger().Warn("failed to expand:", "errors", errs, "event", event, "file", "hooks_push.go")
 		return e.Next()
