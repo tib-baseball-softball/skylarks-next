@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type {PageProps} from "../../../../../../.svelte-kit/types/src/routes";
+  import type {PageProps} from "./$types";
   import ClubOfficialDetailCard from "$lib/tib/components/club/officials/ClubOfficialDetailCard.svelte";
 
   let {data}: PageProps = $props();

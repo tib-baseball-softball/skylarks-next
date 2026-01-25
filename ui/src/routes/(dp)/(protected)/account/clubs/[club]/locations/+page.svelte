@@ -1,7 +1,7 @@
 <script lang="ts">
   import ClubLocationsSection from "$lib/dp/components/club/ClubLocationsSection.svelte";
   import type {ExpandedClub} from "$lib/dp/types/ExpandedResponse.ts";
-  import type {PageProps} from "../../../../../../../../.svelte-kit/types/src/routes";
+  import type {PageProps} from "./$types";
 
   let {data}: PageProps = $props();
 
@@ -11,8 +11,8 @@
 <svelte:head>
   <title>Club Locations</title>
   <meta
-          content="All configured locations for {club.name}, including baseball fields and other venues."
-          name="description"
+    content="All configured locations for {club.name}, including baseball fields and other venues."
+    name="description"
   />
 </svelte:head>
 

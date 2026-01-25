@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type {PageProps} from "../../../../../.svelte-kit/types/src/routes";
+  import type {PageProps} from "./$types";
   import ClubOfficialsList from "$lib/tib/components/club/officials/ClubOfficialsList.svelte";
   import ProgressRing from "$lib/dp/components/utils/ProgressRing.svelte";
 

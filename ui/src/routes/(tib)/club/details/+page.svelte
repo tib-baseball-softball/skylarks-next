@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type {PageProps} from "../../../../../.svelte-kit/types/src/routes";
+  import type {PageProps} from "./$types";
   import ClubDetailSection from "$lib/tib/components/club/ClubDetailSection.svelte";
   import {Info, MapPinHouse, Section, Trophy} from "lucide-svelte";
 

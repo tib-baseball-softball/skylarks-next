@@ -1,7 +1,7 @@
 <script lang="ts">
   import StandingsTable from "$lib/tib/components/table/StandingsTable.svelte";
   import LeagueDetailInfoCard from "$lib/tib/components/league/LeagueDetailInfoCard.svelte";
-  import type {PageProps} from "../../../../../.svelte-kit/types/src/routes";
+  import type {PageProps} from "./$types";
   import ProgressRing from "$lib/dp/components/utils/ProgressRing.svelte";
 
   let {data}: PageProps = $props();
@@ -55,7 +55,7 @@
 </section>
 
 <style lang="postcss">
-    h2 {
-        margin-bottom: calc(var(--spacing) * 3);
-    }
+  h2 {
+    margin-bottom: calc(var(--spacing) * 3);
+  }
 </style>

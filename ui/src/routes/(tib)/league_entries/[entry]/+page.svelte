@@ -2,7 +2,7 @@
   import BaseballStatsDatatable from "$lib/tib/components/stats/BaseballStatsDatatable.svelte";
   import ProgressRing from "$lib/dp/components/utils/ProgressRing.svelte";
   import type {StatsDataset} from "$lib/tib/types/StatsDataset.ts";
-  import type {PageProps} from "../../../../../.svelte-kit/types/src/routes";
+  import type {PageProps} from "./$types";
 
   const {data}: PageProps = $props();
 

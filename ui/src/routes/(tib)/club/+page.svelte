@@ -1,7 +1,7 @@
 <script lang="ts">
   import ClubInfoSection from "$lib/tib/components/club/ClubInfoSection.svelte";
   import ClubGridItem from "$lib/tib/components/club/ClubGridItem.svelte";
-  import type {PageProps} from "../../../../.svelte-kit/types/src/routes";
+  import type {PageProps} from "./$types";
   import {BookText, Diamond, Pencil, Users} from "lucide-svelte";
 
   let {data}: PageProps = $props();
@@ -15,9 +15,9 @@
 <!-- Grid Section -->
 <div class="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-6 mb-4!">
   <ClubGridItem
-          description="More Info"
-          href="/club/details"
-          label="Details"
+    description="More Info"
+    href="/club/details"
+    label="Details"
   >
     {#snippet icon()}
       <BookText/>
@@ -25,9 +25,9 @@
   </ClubGridItem>
 
   <ClubGridItem
-          description="Adult and Youth"
-          href="/teams"
-          label="Teams"
+    description="Adult and Youth"
+    href="/teams"
+    label="Teams"
   >
     {#snippet icon()}
       <Users/>
@@ -35,9 +35,9 @@
   </ClubGridItem>
 
   <ClubGridItem
-          description="Keeping statistics"
-          href="/club/scorer"
-          label="Scorer"
+    description="Keeping statistics"
+    href="/club/scorer"
+    label="Scorer"
   >
     {#snippet icon()}
       <Pencil/>
@@ -45,9 +45,9 @@
   </ClubGridItem>
 
   <ClubGridItem
-          description="Our Referees"
-          href="/club/umpire"
-          label="Umpire"
+    description="Our Referees"
+    href="/club/umpire"
+    label="Umpire"
   >
     {#snippet icon()}
       <Users/>
@@ -55,9 +55,9 @@
   </ClubGridItem>
 
   <ClubGridItem
-          description="The Lark's Nest"
-          href="/club/ballpark"
-          label="Ballpark"
+    description="The Lark's Nest"
+    href="/club/ballpark"
+    label="Ballpark"
   >
     {#snippet icon()}
       <Diamond/>
@@ -65,9 +65,9 @@
   </ClubGridItem>
 
   <ClubGridItem
-          description="Club Administration"
-          href="/club/officials"
-          label="Officials"
+    description="Club Administration"
+    href="/club/officials"
+    label="Officials"
   >
     {#snippet icon()}
       <Users/>

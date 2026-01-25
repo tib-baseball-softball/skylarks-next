@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type {PageProps} from "../../../../../../.svelte-kit/types/src/routes";
+  import type {PageProps} from "./$types";
   import BallparkDetailCard from "$lib/tib/components/club/ballpark/BallparkDetailCard.svelte";
   import BallparkTrafficCard from "$lib/tib/components/club/ballpark/BallparkTrafficCard.svelte";
 
