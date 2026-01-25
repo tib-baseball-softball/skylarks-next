@@ -1,6 +1,6 @@
 <script lang="ts">
   import SidebarNavigation from "$lib/dp/components/meta/SidebarNavigation.svelte";
-  //@ts-expect-error
+  //@ts-ignore
   import * as Sheet from "$lib/dp/components/modal/sheet";
   import type {ExpandedClub, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
 
@@ -40,39 +40,39 @@
 </Sheet.Root>
 
 <style>
-    :global {
-        .nav-trigger {
-            margin-inline-end: 2em;
-            @media (min-width: 48rem) {
-                display: none;
-            }
-        }
+  :global {
+    .nav-trigger {
+      margin-inline-end: 2em;
+      @media (min-width: 48rem) {
+        display: none;
+      }
+    }
+  }
+
+  a {
+    display: flex;
+    justify-content: space-around;
+    padding: 0.5em;
+
+    img {
+      max-width: calc(var(--spacing) * 14);
     }
 
-    a {
-        display: flex;
-        justify-content: space-around;
-        padding: 0.5em;
-
-        img {
-            max-width: calc(var(--spacing) * 14);
-        }
-
-        h2 {
-            padding: 1em;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+    h2 {
+      padding: 1em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
+  }
 
-    hr {
-        margin-block-end: 0.5em;
-    }
+  hr {
+    margin-block-end: 0.5em;
+  }
 
-    svg {
-        --svg-size: calc(var(--spacing) * 4);
-        width: var(--svg-size);
-        height: var(--svg-size);
-        fill: var(--color-surface-950-50);
-    }
+  svg {
+    --svg-size: calc(var(--spacing) * 4);
+    width: var(--svg-size);
+    height: var(--svg-size);
+    fill: var(--color-surface-950-50);
+  }
 </style>

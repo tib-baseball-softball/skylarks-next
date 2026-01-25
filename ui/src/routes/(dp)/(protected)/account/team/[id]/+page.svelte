@@ -1,5 +1,5 @@
 <script lang="ts">
-  // @ts-expect-error
+  // @ts-ignore
   import {Tabs} from "bits-ui";
   import {Users} from "lucide-svelte";
   import {goto} from "$app/navigation";

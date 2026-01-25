@@ -1,5 +1,5 @@
 <script lang="ts">
-  // @ts-expect-error
+  // @ts-ignore
   import {Tabs} from "bits-ui";
   import PlayerRow from "$lib/dp/components/player/PlayerRow.svelte";
   import type {Player} from "$lib/dp/types/Player.ts";
