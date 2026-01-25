@@ -46,27 +46,29 @@
       <p>{entry.description}</p>
 
       <div>
-        <Dialog triggerClasses="btn btn-sm preset-tonal-secondary border">
+        {#if entry.expand?.club}
+          <Dialog triggerClasses="btn btn-sm preset-tonal-secondary border">
 
-          {#snippet triggerContent()}
-            <SquarePen size="14"/>
-          {/snippet}
+            {#snippet triggerContent()}
+              <SquarePen size="14"/>
+            {/snippet}
 
-          {#snippet title()}
-            <header>
-              <h2 class="h4">Edit Community Service Entry "{entry.title}"</h2>
-            </header>
-          {/snippet}
+            {#snippet title()}
+              <header>
+                <h2 class="h4">Edit Community Service Entry "{entry.title}"</h2>
+              </header>
+            {/snippet}
 
-          <ServiceEntryForm serviceEntry={entry} club={entry?.expand?.club}/>
-        </Dialog>
+            <ServiceEntryForm serviceEntry={entry} club={entry?.expand?.club}/>
+          </Dialog>
+        {/if}
 
         <DeleteButton
           action={deleteEntry}
           classes="btn-sm preset-tonal-error border border-error-500"
+          iconSize={14}
           id={entry.id}
           modelName="Community Service Entry"
-          iconSize={14}
         />
       </div>
     </div>
