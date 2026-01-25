@@ -1,6 +1,4 @@
-import type {LeagueGroup, Match, Table} from "bsm.js";
-//@ts-expect-error
-import type {TableRow} from "bsm.js/dist/model/Table";
+import type {LeagueGroup, Match, Table, TableRow} from "bsm.js";
 import type {PlayoffSeries} from "$lib/tib/types/PlayoffSeries.ts";
 
 export type HomeDataset = {
