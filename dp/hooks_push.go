@@ -57,13 +57,6 @@ func NotifyNewEvent(e *core.RecordEvent, ps PushService) error {
 		e.App.Logger().Warn("failed to expand:", "errors", errs, "event", event, "file", "hooks_push.go")
 		return e.Next()
 	}
-	locationRecord := event.ExpandedOne("location")
-	if locationRecord == nil {
-		e.App.Logger().Error("Could not load location data for API key")
-		return e.Next()
-	}
-	location := &Location{}
-	location.SetProxyRecord(locationRecord)
 
 	team := &Team{}
 	teamRecord, err := e.App.FindRecordById(TeamsCollection, event.Team())
@@ -91,10 +84,19 @@ func NotifyNewEvent(e *core.RecordEvent, ps PushService) error {
 		return e.Next()
 	}
 
+	messageBody := event.Title() + " (" + cases.Title(language.English, cases.Compact).String(event.Type()) + ") - starts at " + eventStartInAppTimeZone.Time().Format(time.RFC1123)
+
+	locationRecord := event.ExpandedOne("location")
+	if locationRecord != nil {
+		location := &Location{}
+		location.SetProxyRecord(locationRecord)
+		messageBody += " at " + location.Name() + " (" + location.AddressAddon() + ")"
+	}
+
 	for _, sub := range subs {
 		msg := &PushMessage{
 			Title: "New Event in " + team.Name(),
-			Body:  event.Title() + " (" + cases.Title(language.English, cases.Compact).String(event.Type()) + ") - starts at " + eventStartInAppTimeZone.Time().Format(time.RFC1123) + " at " + location.Name() + " (" + location.AddressAddon() + ")",
+			Body:  messageBody,
 			Tag:   "team_new_event",
 		}
 		ws := sub.ToWebPushSubscription()

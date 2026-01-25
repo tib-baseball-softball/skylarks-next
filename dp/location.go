@@ -9,7 +9,6 @@ const (
 var _ core.RecordProxy = (*Location)(nil)
 
 // Location RecordProxy for collection `locations`.
-// Testing type-safe struct access.
 type Location struct {
 	core.BaseRecordProxy
 }
