@@ -98,7 +98,6 @@
       </AccordionItem>
 
       {#if club.admins.includes(authRecord?.id)}
-        <hr class="hr"/>
         <AccordionItem panelPadding="py-0 px-4">
           {#snippet lead()}
             <LockKeyhole/>
