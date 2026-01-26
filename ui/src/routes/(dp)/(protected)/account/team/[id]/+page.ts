@@ -41,7 +41,7 @@ export const load = (async ({fetch, parent, params, url, depends}) => {
     filter: `team = "${team.id}" && series_start >= "${eventSeriesCutoff}"`,
     fetch: fetch,
     requestKey: `team-${team.id}-eventseries`,
-    sort: "+series_start",
+    sort: "-series_start",
   });
 
   const pageQuery = url.searchParams.get("page") ?? "1";

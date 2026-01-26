@@ -153,7 +153,7 @@
   </div>
 </div>
 
-<style lang="postcss">
+<style>
   .admin-card {
     display: flex;
     flex-direction: column;
