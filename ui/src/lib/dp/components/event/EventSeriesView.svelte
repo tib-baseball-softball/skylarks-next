@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {CalendarPlus} from "lucide-svelte";
+  import {CalendarPlus, SquarePen} from "lucide-svelte";
   import {slide} from "svelte/transition";
   import {invalidateAll} from "$app/navigation";
   import EventSeriesListItem from "$lib/dp/components/eventseries/EventSeriesListItem.svelte";
@@ -68,20 +68,26 @@
       <h3 class="h4 mt-6!">Active Event Series</h3>
 
       {#each eventSeries as series (series.id)}
-        <EventSeriesListItem eventSeries={series}/>
+        <EventSeriesListItem eventSeries={series}>
+          {#snippet buttonBlock()}
+            <div class="button-container">
+              <button class="btn btn-sm preset-tonal border border-surface-500"
+                      onclick={() => setupAndShowForm(series)}>
+                <SquarePen size="18"/>
+                <span>Edit</span>
+              </button>
 
-        <div class="flex gap-2">
-          <button class="btn preset-tonal border border-surface-500" onclick={() => setupAndShowForm(series)}>Edit
-          </button>
-
-          <DeleteButton
-            id={series.id}
-            modelName="Event Series"
-            action={deleteEventSeries}
-            classes="preset-tonal-error border border-error-500"
-            buttonText="Delete"
-          />
-        </div>
+              <DeleteButton
+                id={series.id}
+                modelName="Event Series"
+                action={deleteEventSeries}
+                classes="btn-sm preset-tonal-error border border-error-500"
+                buttonText="Delete"
+                iconSize="18"
+              />
+            </div>
+          {/snippet}
+        </EventSeriesListItem>
       {/each}
     </div>
 
@@ -105,3 +111,11 @@
     </div>
   </Sheet.Content>
 </Sheet.Root>
+
+<style>
+  .button-container {
+    display: flex;
+    gap: calc(var(--spacing) * 2);
+    margin-block-start: calc(var(--spacing) * 6);
+  }
+</style>

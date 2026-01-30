@@ -3,12 +3,14 @@
   import {EventSeriesUtility} from "$lib/dp/service/EventSeriesUtility.ts";
   import type {EventseriesResponse} from "$lib/dp/types/pb-types.ts";
   import {appLocale} from "$lib/dp/locale.svelte.ts";
+  import type {Snippet} from "svelte";
 
   interface Props {
     eventSeries: EventseriesResponse;
+    buttonBlock?: Snippet;
   }
 
-  const {eventSeries}: Props = $props();
+  const {eventSeries, buttonBlock}: Props = $props();
 
   const startDate = $derived(new Date(eventSeries.series_start));
   const endDate = $derived(new Date(eventSeries.series_end));
@@ -69,6 +71,8 @@
       </div>
     </div>
   </div>
+
+  {@render buttonBlock?.()}
 </article>
 
 <style>
