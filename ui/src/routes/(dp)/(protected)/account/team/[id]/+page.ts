@@ -3,8 +3,7 @@ import {dev} from "$app/environment";
 import {client} from "$lib/dp/client.svelte.js";
 import {watchWithPagination} from "$lib/dp/records/RecordOperations.ts";
 import {EventService} from "$lib/dp/service/EventService.ts";
-import type {ExpandedAnnouncement, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.js";
-import type {EventseriesResponse} from "$lib/dp/types/pb-types.ts";
+import type {ExpandedAnnouncement, ExpandedEventSeries, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.js";
 import type {PageLoad} from "./$types";
 import {Collection} from "$lib/dp/enum/Collection.ts";
 
@@ -37,7 +36,7 @@ export const load = (async ({fetch, parent, params, url, depends}) => {
   targetDate.setFullYear(targetDate.getFullYear() - 1, 0, 1);
   const eventSeriesCutoff = targetDate.toISOString();
 
-  const eventSeries = await client.collection(Collection.EventSeries).getFullList<EventseriesResponse>({
+  const eventSeries = await client.collection(Collection.EventSeries).getFullList<ExpandedEventSeries>({
     filter: `team = "${team.id}" && series_start >= "${eventSeriesCutoff}"`,
     fetch: fetch,
     requestKey: `team-${team.id}-eventseries`,

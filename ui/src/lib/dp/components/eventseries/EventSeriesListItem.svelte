@@ -79,7 +79,9 @@
   }
 
   [data-series-state="past"] {
-    color: var(--color-surface-300-700)
+    --subdued-color: light-dark(var(--color-surface-300), var(--color-surface-200));
+    color: var(--subdued-color);
+    border-color: var(--subdued-color);
   }
 
   .outer-grid {

@@ -8,12 +8,11 @@
   //@ts-ignore
   import * as Sheet from "$lib/dp/components/modal/sheet";
   import {client} from "$lib/dp/client.svelte.ts";
-  import type {EventSeriesCreationData, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
-  import type {EventseriesResponse} from "$lib/dp/types/pb-types.ts";
+  import type {EventSeriesCreationData, ExpandedEventSeries, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
 
   interface Props {
     team: ExpandedTeam;
-    eventSeries: EventseriesResponse[];
+    eventSeries: ExpandedEventSeries[];
     buttonClasses?: string;
   }
 
@@ -71,7 +70,7 @@
         <EventSeriesListItem eventSeries={series}>
           {#snippet buttonBlock()}
             <div class="button-container">
-              <button class="btn btn-sm preset-tonal border border-surface-500"
+              <button class="btn btn-sm preset-outlined edit-button"
                       onclick={() => setupAndShowForm(series)}>
                 <SquarePen size="18"/>
                 <span>Edit</span>
@@ -117,5 +116,9 @@
     display: flex;
     gap: calc(var(--spacing) * 2);
     margin-block-start: calc(var(--spacing) * 6);
+  }
+
+  .edit-button {
+    color: light-dark(var(--base-font-color), var(--base-font-color-dark));
   }
 </style>
