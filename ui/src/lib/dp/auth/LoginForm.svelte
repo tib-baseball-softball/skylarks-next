@@ -165,8 +165,6 @@
 
               <Tabs.Content value="signup" class="pt-3">
 
-                {@render login()}
-
                 {#if tabSet === "signup"}
                   <label class="label">
                     <span class="">Your email</span>
@@ -275,7 +273,7 @@
         {/if}
 
         {#await coll.listAuthMethods({requestKey: null}) then methods}
-          {#if methods.oauth2.providers.length > 0}
+          {#if methods.oauth2.providers.length > 0 && forgotPassword === false}
             <hr class="my-2">
 
             <div class="mx-2 mt-3 text-surface-700-300 font-light flex justify-center">
@@ -336,11 +334,11 @@
     margin-block-end: calc(var(--spacing) * 10) !important;
 
     @media (min-width: 48rem) {
-      max-width: 60%;
+      width: 60%;
     }
 
     @media (min-width: 64rem) {
-      max-width: 55%;
+      width: 55%;
     }
   }
 
