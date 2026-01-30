@@ -40,6 +40,7 @@
     data.team?.admins.includes(authRecord?.id) ||
     data.team?.expand?.club?.admins.includes(authRecord?.id)
   );
+  const isMember = $derived(authRecord?.teams.includes(data.team.id));
 </script>
 
 <h1 class="h1 my-3!">{data.team.name} ({data.team?.expand?.club.name})</h1>
@@ -55,104 +56,111 @@
   <TeamTeaserCard link={false} team={data.team}/>
 </div>
 
-<section class="my-8! space-y-4">
-  <header>
-    <h2 class="h2 mb-3">Announcements</h2>
-  </header>
+{#if isMember || canEdit}
+  <section class="my-8! space-y-4">
+    <header>
+      <h2 class="h2 mb-3">Announcements</h2>
+    </header>
 
-  <AnnouncementSectionContent store={announcementStore}/>
+    <AnnouncementSectionContent store={announcementStore}/>
+
+    {#if canEdit}
+      <AnnouncementForm
+        announcement={null}
+        team={data.team}
+        club={null}
+        buttonClasses="btn preset-filled-primary-500"
+        showLabel={true}
+      />
+    {/if}
+  </section>
+
+  <section>
+    <header>
+      <h2 class="h2">Team Events</h2>
+    </header>
+
+    <div
+      class="flex flex-wrap gap-4 preset-tonal-surface justify-between px-4 py-3 rounded-base text-sm lg:text-base"
+    >
+      <label
+        class="filter-label"
+      >
+        <span>Timeframe</span>
+        <Tabs.Root bind:value={showEvents}>
+          <Tabs.List class="tabs-list event-segment-container p-1!">
+            <Tabs.Trigger class="tabs-trigger btn active:preset-filled-error-300-700" data-testid="segment-item"
+                          value="next">Next
+            </Tabs.Trigger>
+            <Tabs.Trigger class="tabs-trigger btn active:preset-filled" data-testid="segment-item" value="past">Past
+            </Tabs.Trigger>
+          </Tabs.List>
+        </Tabs.Root>
+      </label>
+
+      <label class="filter-label">
+        <span>Sort</span>
+        <Tabs.Root bind:value={sorting}>
+          <Tabs.List class="tabs-list flex-wrap event-segment-container p-1!">
+            <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="asc">Ascending</Tabs.Trigger>
+            <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="desc">Descending</Tabs.Trigger>
+          </Tabs.List>
+        </Tabs.Root>
+      </label>
+
+      <label class=" filter-label">
+        <span>Type</span>
+        <Tabs.Root bind:value={showTypes}>
+          <Tabs.List class="tabs-list flex-wrap event-segment-container p-1! gap-1">
+            <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="any">All</Tabs.Trigger>
+            <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="game">Game</Tabs.Trigger>
+            <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="practice">Practice</Tabs.Trigger>
+            <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="misc">Other</Tabs.Trigger>
+          </Tabs.List>
+        </Tabs.Root>
+      </label>
+    </div>
+
+    <div class="events-grid">
+      {#each $events?.items as event (event.id)}
+        <div class="">
+          <EventTeaser {event} link={true}/>
+        </div>
+      {:else}
+        <p>No events available with the current filters.</p>
+      {/each}
+    </div>
+  </section>
+
+  <Paginator showIfSinglePage={false} store={events}/>
+
+  <hr class="my-8!"/>
+  <section class="space-y-2 lg:space-y-4">
+    <header>
+      <h2 class="h3">Links</h2>
+    </header>
+
+    <div class="flex flex-wrap items-center gap-2 lg:gap-3">
+      <a
+        class="btn preset-tonal-tertiary border border-tertiary-500"
+        href="/account/team/{data.team.id}/members"
+      >
+        <Users/>
+        <span>Player List</span>
+      </a>
+    </div>
+  </section>
 
   {#if canEdit}
-    <AnnouncementForm
-      announcement={null}
-      team={data.team}
-      club={null}
-      buttonClasses="btn preset-filled-primary-500"
-      showLabel={true}
-    />
+    <hr class="my-2"/>
+
+    <TeamAdminSection team={data.team} eventSeries={data.eventSeries}/>
   {/if}
-</section>
-
-<section>
-  <header>
-    <h2 class="h2">Team Events</h2>
-  </header>
-
-  <div
-    class="flex flex-wrap gap-4 preset-tonal-surface justify-between px-4 py-3 rounded-base text-sm lg:text-base"
-  >
-    <label
-      class="filter-label"
-    >
-      <span>Timeframe</span>
-      <Tabs.Root bind:value={showEvents}>
-        <Tabs.List class="tabs-list event-segment-container p-1!">
-          <Tabs.Trigger class="tabs-trigger btn active:preset-filled-error-300-700" data-testid="segment-item"
-                        value="next">Next
-          </Tabs.Trigger>
-          <Tabs.Trigger class="tabs-trigger btn active:preset-filled" data-testid="segment-item" value="past">Past
-          </Tabs.Trigger>
-        </Tabs.List>
-      </Tabs.Root>
-    </label>
-
-    <label class="filter-label">
-      <span>Sort</span>
-      <Tabs.Root bind:value={sorting}>
-        <Tabs.List class="tabs-list flex-wrap event-segment-container p-1!">
-          <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="asc">Ascending</Tabs.Trigger>
-          <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="desc">Descending</Tabs.Trigger>
-        </Tabs.List>
-      </Tabs.Root>
-    </label>
-
-    <label class=" filter-label">
-      <span>Type</span>
-      <Tabs.Root bind:value={showTypes}>
-        <Tabs.List class="tabs-list flex-wrap event-segment-container p-1! gap-1">
-          <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="any">All</Tabs.Trigger>
-          <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="game">Game</Tabs.Trigger>
-          <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="practice">Practice</Tabs.Trigger>
-          <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="misc">Other</Tabs.Trigger>
-        </Tabs.List>
-      </Tabs.Root>
-    </label>
-  </div>
-
-  <div class="events-grid">
-    {#each $events?.items as event (event.id)}
-      <div class="">
-        <EventTeaser {event} link={true}/>
-      </div>
-    {:else}
-      <p>No events available with the current filters.</p>
-    {/each}
-  </div>
-</section>
-
-<Paginator showIfSinglePage={false} store={events}/>
-
-<hr class="my-8!"/>
-<section class="space-y-2 lg:space-y-4">
-  <header>
-    <h2 class="h3">Links</h2>
-  </header>
-
-  <div class="flex flex-wrap items-center gap-2 lg:gap-3">
-    <a
-      class="btn preset-tonal-tertiary border border-tertiary-500"
-      href="/account/team/{data.team.id}/members"
-    >
-      <Users/>
-      <span>Player List</span>
-    </a>
-  </div>
-</section>
-
-{#if canEdit}
-  <hr class="my-2"/>
-
-  <TeamAdminSection team={data.team} eventSeries={data.eventSeries}/>
+{:else}
+  <p class="prose">
+    You are not a member of this team, so you can only see basic information.
+    If you think you should be a member, please contact the team admins.
+  </p>
 {/if}
 
 <style>

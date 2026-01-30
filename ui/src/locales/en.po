@@ -3141,3 +3141,11 @@ msgstr "Built with <0/> in <1/>"
 #: src/lib/dp/components/forms/ParticipationForm.svelte
 msgid "State"
 msgstr "State"
+
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+msgid ""
+"You are not a member of this team, so you can only see basic information.\n"
+"If you think you should be a member, please contact the team admins."
+msgstr ""
+"You are not a member of this team, so you can only see basic information.\n"
+"If you think you should be a member, please contact the team admins."
