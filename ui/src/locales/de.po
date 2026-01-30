@@ -3089,31 +3089,31 @@ msgstr "Technischer Fehler - Push-Nachrichten konnten nicht registriert werden."
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Push notifications are disabled on your browser."
-msgstr ""
+msgstr "Push-Nachrichten sind in deinem Browser deaktiviert."
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Technical error - service worker registration not found."
-msgstr ""
+msgstr "Technischer Fehler - Service Worker-Registrierung nicht gefunden."
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "You are already subscribed to push notifications."
-msgstr ""
+msgstr "Du bist bereits für Push-Nachrichten registriert."
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Push notifications successfully registered."
-msgstr ""
+msgstr "Push-Nachrichten erfolgreich registriert."
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Technical error - subscription not submitted to server."
-msgstr ""
+msgstr "Technischer Fehler - die Daten wurden nicht zum Server übertragen."
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Test"
-msgstr ""
+msgstr "Testen"
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Send Test Notification"
-msgstr ""
+msgstr "Testnachricht senden"
 
 #: src/lib/dp/components/meta/Footer.svelte
 msgid "Built with <0/> in <1/>"
