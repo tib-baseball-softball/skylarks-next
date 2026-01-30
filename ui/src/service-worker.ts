@@ -63,8 +63,13 @@ self.addEventListener('push', function (event) {
 });
 
 self.addEventListener('fetch', (event) => {
-  // ignore POST requests etc
-  if (event.request.method !== 'GET') return;
+  if (event.request.method !== 'GET') {
+    return;
+  }
+
+  if (event.request.url.includes("/api/")) {
+    return;
+  }
 
   async function respond() {
     const url = new URL(event.request.url);
