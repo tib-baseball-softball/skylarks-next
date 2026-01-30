@@ -113,6 +113,10 @@ func BindDPHooks(app core.App, client bsm.APIClient, pushService PushService) {
 		return AddEventParticipationData(event.App, event)
 	})
 
+	app.OnRecordEnrich(EventSeriesCollection).BindFunc(func(event *core.RecordEnrichEvent) error {
+		return AddSeriesState(event)
+	})
+
 	app.OnRecordEnrich(ServiceEntryCollection).BindFunc(func(event *core.RecordEnrichEvent) error {
 		return HideCommunityServiceAdminFields(event)
 	})

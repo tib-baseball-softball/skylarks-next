@@ -6,6 +6,7 @@ import type {
   CommentsResponse,
   EventsCreate,
   EventseriesCreate,
+  EventseriesResponse,
   EventsResponse,
   LocationsResponse,
   ParticipationsResponse,
@@ -18,109 +19,116 @@ import type {
 export type Extension<T, E> = T & E
 
 export type ExpandedEvent = Extension<
-    EventsResponse,
-    {
-      expand: {
-        participations_via_event?: Extension<
-            ParticipationsResponse,
-            {
-              expand: {
-                user: UsersResponse
-              }
-            }
-        >[]
-        attire?: UniformsetsResponse
-        team?: ExpandedTeam
-        location?: LocationsResponse
-        comments_via_event?: ExpandedComment[]
-      }
-      participations: {
-        in: ExpandedParticipation[]
-        out: ExpandedParticipation[]
-        maybe: ExpandedParticipation[]
-        unspecified: UserParticipationDTO[]
-      }
-      userParticipation?: ExpandedParticipation
+  EventsResponse,
+  {
+    expand: {
+      participations_via_event?: Extension<
+        ParticipationsResponse,
+        {
+          expand: {
+            user: UsersResponse
+          }
+        }
+      >[]
+      attire?: UniformsetsResponse
+      team?: ExpandedTeam
+      location?: LocationsResponse
+      comments_via_event?: ExpandedComment[]
     }
+    participations: {
+      in: ExpandedParticipation[]
+      out: ExpandedParticipation[]
+      maybe: ExpandedParticipation[]
+      unspecified: UserParticipationDTO[]
+    }
+    userParticipation?: ExpandedParticipation
+  }
 >
 
 export type ExpandedTeam = Extension<
-    TeamsResponse,
-    {
-      expand: {
-        club: ClubsResponse
-        admins?: UsersResponse[]
-      }
+  TeamsResponse,
+  {
+    expand: {
+      club: ClubsResponse
+      admins?: UsersResponse[]
     }
+  }
 >
 
 export type ExpandedClub = Extension<
-    ClubsResponse,
-    {
-      bsm_api_key: string
-      expand: {
-        admins: UsersResponse[]
-      }
+  ClubsResponse,
+  {
+    bsm_api_key: string
+    expand: {
+      admins: UsersResponse[]
     }
+  }
 >
 
 export type ExpandedUniformSet = Extension<
-    UniformsetsResponse,
-    {
-      expand?: {
-        club?: ClubsResponse
-      }
+  UniformsetsResponse,
+  {
+    expand?: {
+      club?: ClubsResponse
     }
+  }
 >
 
 export type ExpandedParticipation = Extension<
-    ParticipationsResponse,
-    {
-      expand?: {
-        user?: CustomAuthModel
-      }
+  ParticipationsResponse,
+  {
+    expand?: {
+      user?: CustomAuthModel
     }
+  }
 >
 
 export type CustomAuthModel = Extension<
-    RecordModel,
-    {
-      email?: string
-    } & UsersResponse
+  RecordModel,
+  {
+    email?: string
+  } & UsersResponse
 >
 
 export type EventType = EventsResponse["type"]
 export type ParticipationType = ParticipationsResponse["state"]
 
 export type EventSeriesCreationData = Extension<
-    EventseriesCreate,
-    {
-      location: EventsCreate["location"]
-      desc: EventsCreate["desc"]
-      series_start: string
-      series_end: string
-    }
+  EventseriesCreate,
+  {
+    location: EventsCreate["location"]
+    desc: EventsCreate["desc"]
+    series_start: string
+    series_end: string
+  }
+>
+
+export type ExpandedEventSeries = Extension<
+  EventseriesResponse,
+  {
+    series_state: "ongoing" | "past" | "future"
+  }
 >
 
 export type ExpandedAnnouncement = Extension<
-    AnnouncementsResponse,
-    {
-      expand?: {
-        author: CustomAuthModel
-        club?: ClubsResponse
-        team?: TeamsResponse
-        comments_via_announcement?: ExpandedComment[]
-      }
+  AnnouncementsResponse,
+  {
+    expand?: {
+      author: CustomAuthModel
+      club?: ClubsResponse
+      team?: TeamsResponse
+      comments_via_announcement?: ExpandedComment[]
     }
+  }
 >
 
 export type ExpandedComment = Extension<
-    CommentsResponse,
-    {
-      expand?: {
-        user?: CustomAuthModel
-      }
+  CommentsResponse,
+  {
+    expand?: {
+      user?: CustomAuthModel
     }
+  }
 >
 
 export type ExpandedServiceEntry = Extension<

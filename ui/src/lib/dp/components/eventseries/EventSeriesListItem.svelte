@@ -1,12 +1,11 @@
 <script lang="ts">
   import {DateTimeUtility} from "$lib/dp/service/DateTimeUtility.ts";
-  import {EventSeriesUtility} from "$lib/dp/service/EventSeriesUtility.ts";
-  import type {EventseriesResponse} from "$lib/dp/types/pb-types.ts";
   import {appLocale} from "$lib/dp/locale.svelte.ts";
   import type {Snippet} from "svelte";
+  import type {ExpandedEventSeries} from "$lib/dp/types/ExpandedResponse.ts";
 
   interface Props {
-    eventSeries: EventseriesResponse;
+    eventSeries: ExpandedEventSeries;
     buttonBlock?: Snippet;
   }
 
@@ -16,10 +15,9 @@
   const endDate = $derived(new Date(eventSeries.series_end));
 
   const options: { weekday: "long" | "short" | "narrow" | undefined } = {weekday: "long"};
-  const seriesState = $derived(EventSeriesUtility.getSeriesState(startDate, endDate));
 </script>
 
-<article class="preset-outlined-surface-800-200 rounded-base shadow-md">
+<article class="preset-outlined-surface-800-200 rounded-base shadow-md" data-series-state="{eventSeries.series_state}">
   <div class="outer-grid">
 
     <div class="title-wrapper">
@@ -55,15 +53,15 @@
           {new Intl.DateTimeFormat(appLocale.current, options).format(startDate)}
         </span>
 
-        {#if seriesState === "ongoing"}
+        {#if eventSeries.series_state === "ongoing"}
         <span class="badge preset-tonal-primary border border-primary-500">
           Ongoing
         </span>
-        {:else if seriesState === "past"}
+        {:else if eventSeries.series_state === "past"}
           <span class="badge preset-outlined">
           Past
         </span>
-        {:else if seriesState === "future"}
+        {:else if eventSeries.series_state === "future"}
           <span class="badge preset-tonal-tertiary border border-tertiary-500">
           Upcoming
         </span>
@@ -78,6 +76,10 @@
 <style>
   article {
     padding: calc(var(--spacing) * 4);
+  }
+
+  [data-series-state="past"] {
+    color: var(--color-surface-300-700)
   }
 
   .outer-grid {
