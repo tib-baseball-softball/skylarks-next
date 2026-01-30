@@ -2942,11 +2942,11 @@ msgstr "Editar entrada de servicio comunitario \"{0}\""
 #: src/lib/dp/components/meta/SidebarNavigation.svelte
 #: src/routes/(dp)/(protected)/account/[user]/communityservice/+page.svelte
 msgid "Community Service"
-msgstr "Servicio comunitario\\"
+msgstr "Servicio comunitario"
 
 #: src/lib/dp/components/communityservice/TargetVisualizer.svelte
 msgid "Target:"
-msgstr "Objetivo:\\"
+msgstr "Objetivo:"
 
 #: src/lib/dp/components/user/PlayerDataProfileSection.svelte
 msgid ""
@@ -3047,100 +3047,97 @@ msgstr "para <0/>"
 
 #: src/lib/dp/components/user/UserDataCard.svelte
 msgid "Go to User Settings"
-msgstr ""
+msgstr "Ir a la configuración de usuario"
 
 #: src/lib/dp/components/user/UserDataCard.svelte
-msgid ""
-"User\n"
-"Settings"
-msgstr ""
-
 #: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
 msgid "User Settings"
-msgstr ""
+msgstr "Configuración de usuario"
 
 #: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
 msgid "Account Data"
-msgstr ""
+msgstr "Datos de la cuenta"
 
 #: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
 msgid "Change Email Address"
-msgstr ""
+msgstr "Cambiar dirección de correo electrónico"
 
 #: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
 msgid "Edit Profile Data"
-msgstr ""
+msgstr "Editar datos del perfil"
 
 #: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
 msgid "Go to Player profile page"
-msgstr ""
+msgstr "Ir a la página del perfil del jugador"
 
 #: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
 msgid "Your player profile data can be changed on <0>a dedicated page</0>."
-msgstr ""
+msgstr "Los datos de tu perfil de jugador pueden ser cambiados en <0>una página dedicada</0>."
 
 #: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
 msgid "User not found. That should not happen, if it does anyway, please log in."
-msgstr ""
+msgstr "Usuario no encontrado. Eso no debería suceder, si ocurre de todas formas, por favor inicia sesión."
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Push notifications are disabled on your browser."
-msgstr ""
+msgstr "Las notificaciones push están desactivadas en tu navegador."
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Technical error - service worker registration not found."
-msgstr ""
+msgstr "Error técnico - no se encontró el registro del service worker."
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "You are already subscribed to push notifications."
-msgstr ""
+msgstr "Ya estás suscrito a las notificaciones push."
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Push notifications successfully registered."
-msgstr ""
+msgstr "Notificaciones push registradas con éxito."
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Technical error - subscription not submitted to server."
-msgstr ""
+msgstr "Error técnico - suscripción no enviada al servidor."
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Push notifications successfully unregistered."
-msgstr ""
+msgstr "Notificaciones push canceladas con éxito."
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Technical error - push notification unregistration failed."
-msgstr ""
+msgstr "Error técnico - falló la cancelación de notificaciones push."
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Push Notifications"
-msgstr ""
+msgstr "Notificaciones push"
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Send Push Notifications"
-msgstr ""
+msgstr "Enviar notificaciones push"
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Upon checking this box, your browser will prompt you for confirmation to enable push messages on this device."
-msgstr ""
+msgstr "Al marcar esta casilla, tu navegador te pedirá confirmación para activar los mensajes push en este dispositivo."
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Test"
-msgstr ""
+msgstr "Prueba"
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Send Test Notification"
-msgstr ""
+msgstr "Enviar notificación de prueba"
 
 #: src/lib/dp/components/meta/Footer.svelte
 msgid "Built with <0/> in <1/>"
-msgstr ""
+msgstr "Construido con <0/> en <1/>"
 
 #: src/lib/dp/components/forms/ParticipationForm.svelte
 msgid "State"
-msgstr ""
+msgstr "Estado"
 
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid ""
 "You are not a member of this team, so you can only see basic information.\n"
 "If you think you should be a member, please contact the team admins."
 msgstr ""
+"No eres miembro de este equipo, por lo que solo puedes ver información básica.\n"
+"Si crees que deberías ser miembro, por favor contacta a los administradores del equipo."

@@ -3038,6 +3038,7 @@ msgstr "für <0/>"
 msgid "Go to User Settings"
 msgstr "Gehe zu den Benutzereinstellungen"
 
+#: src/lib/dp/components/user/UserDataCard.svelte
 #: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
 msgid "User Settings"
 msgstr "Nutzereinstellungen"
@@ -3085,12 +3086,6 @@ msgstr "Push-Nachrichten erfolgreich registriert."
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Technical error - push notification unregistration failed."
 msgstr "Technischer Fehler - Push-Nachrichten konnten nicht registriert werden."
-
-#: src/lib/dp/components/user/UserDataCard.svelte
-msgid ""
-"User\n"
-"Settings"
-msgstr ""
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Push notifications are disabled on your browser."

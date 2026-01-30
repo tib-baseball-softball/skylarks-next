@@ -3051,13 +3051,6 @@ msgid "Go to User Settings"
 msgstr "Go to User Settings"
 
 #: src/lib/dp/components/user/UserDataCard.svelte
-msgid ""
-"User\n"
-"Settings"
-msgstr ""
-"User\n"
-"Settings"
-
 #: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
 msgid "User Settings"
 msgstr "User Settings"
