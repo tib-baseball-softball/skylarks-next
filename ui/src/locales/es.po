@@ -2079,14 +2079,17 @@ msgid "Participants"
 msgstr "Participantes"
 
 #: src/lib/dp/components/event/EventParticipantsOverviewSection.svelte
+#: src/lib/dp/components/forms/ParticipationForm.svelte
 msgid "In"
 msgstr "Sí"
 
 #: src/lib/dp/components/event/EventParticipantsOverviewSection.svelte
+#: src/lib/dp/components/forms/ParticipationForm.svelte
 msgid "Maybe"
 msgstr "Quizás"
 
 #: src/lib/dp/components/event/EventParticipantsOverviewSection.svelte
+#: src/lib/dp/components/forms/ParticipationForm.svelte
 msgid "Out"
 msgstr "No"
 
@@ -2831,10 +2834,6 @@ msgstr "El usuario \"{0}\" ha sido eliminado como miembro del equipo \"{1}\""
 msgid "An error occurred while removing user as team member"
 msgstr "Ocurrió un error al eliminar al usuario como miembro del equipo"
 
-#: src/lib/dp/components/forms/ParticipationForm.svelte
-msgid "State <0>InMaybeOut</0>"
-msgstr "Estado <0>InMaybeOut</0>"
-
 #: src/lib/dp/components/event/EventTypeBadge.svelte
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Game"
@@ -3134,4 +3133,8 @@ msgstr ""
 
 #: src/lib/dp/components/meta/Footer.svelte
 msgid "Built with <0/> in <1/>"
+msgstr ""
+
+#: src/lib/dp/components/forms/ParticipationForm.svelte
+msgid "State"
 msgstr ""

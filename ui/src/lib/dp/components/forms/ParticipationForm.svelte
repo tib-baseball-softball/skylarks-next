@@ -65,7 +65,7 @@
     </label>
 
     <div class="label col-span-2">
-      State
+      <span>State</span>
 
       <span class="btn-group">
         <button
@@ -73,21 +73,21 @@
           onclick={() => form.state = "in"}
           type="button"
         >
-          In
+          <span>In</span>
         </button>
         <button
           class={["btn hover:preset-tonal-warning flex-grow", form.state === "maybe" && "preset-filled-warning-500 text-black"]}
           onclick={() => form.state = "maybe"}
           type="button"
         >
-          Maybe
+          <span>Maybe</span>
         </button>
         <button
           class={["btn hover:preset-tonal-error flex-grow", form.state === "out" && "preset-filled-error-500 text-white"]}
           onclick={() => form.state = "out"}
           type="button"
         >
-          Out
+          <span>Out</span>
         </button>
       </span>
     </div>

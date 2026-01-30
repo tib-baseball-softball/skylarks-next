@@ -2148,14 +2148,17 @@ msgid "Participants"
 msgstr "Participants"
 
 #: src/lib/dp/components/event/EventParticipantsOverviewSection.svelte
+#: src/lib/dp/components/forms/ParticipationForm.svelte
 msgid "In"
 msgstr "In"
 
 #: src/lib/dp/components/event/EventParticipantsOverviewSection.svelte
+#: src/lib/dp/components/forms/ParticipationForm.svelte
 msgid "Maybe"
 msgstr "Maybe"
 
 #: src/lib/dp/components/event/EventParticipantsOverviewSection.svelte
+#: src/lib/dp/components/forms/ParticipationForm.svelte
 msgid "Out"
 msgstr "Out"
 
@@ -2787,10 +2790,6 @@ msgstr "Failed to add comment."
 msgid "Error updating comment"
 msgstr "Error updating comment"
 
-#: src/lib/dp/components/forms/ParticipationForm.svelte
-msgid "State <0>InMaybeOut</0>"
-msgstr "State <0>InMaybeOut</0>"
-
 #: src/lib/dp/components/forms/TeamMembersForm.svelte
 #: src/lib/dp/components/forms/TeamMembersForm.svelte
 msgid "Team members"
@@ -3138,3 +3137,7 @@ msgstr "Send Test Notification"
 #: src/lib/dp/components/meta/Footer.svelte
 msgid "Built with <0/> in <1/>"
 msgstr "Built with <0/> in <1/>"
+
+#: src/lib/dp/components/forms/ParticipationForm.svelte
+msgid "State"
+msgstr "State"

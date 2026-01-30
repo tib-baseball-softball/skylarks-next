@@ -2078,14 +2078,17 @@ msgid "Participants"
 msgstr "Uczestnicy"
 
 #: src/lib/dp/components/event/EventParticipantsOverviewSection.svelte
+#: src/lib/dp/components/forms/ParticipationForm.svelte
 msgid "In"
 msgstr "Obecny"
 
 #: src/lib/dp/components/event/EventParticipantsOverviewSection.svelte
+#: src/lib/dp/components/forms/ParticipationForm.svelte
 msgid "Maybe"
 msgstr "Może"
 
 #: src/lib/dp/components/event/EventParticipantsOverviewSection.svelte
+#: src/lib/dp/components/forms/ParticipationForm.svelte
 msgid "Out"
 msgstr "Nieobecny"
 
@@ -2830,10 +2833,6 @@ msgstr "Wystąpił błąd podczas usuwania członka zespołu"
 msgid "Team members"
 msgstr "Członkowie zespołu"
 
-#: src/lib/dp/components/forms/ParticipationForm.svelte
-msgid "State <0>InMaybeOut</0>"
-msgstr "Stan <0>InMaybeOut</0>"
-
 #. placeholder {0}: modelName
 #. placeholder {0}: modelName
 #: src/lib/dp/components/utils/DeleteButton.svelte
@@ -3135,4 +3134,8 @@ msgstr ""
 
 #: src/lib/dp/components/meta/Footer.svelte
 msgid "Built with <0/> in <1/>"
+msgstr ""
+
+#: src/lib/dp/components/forms/ParticipationForm.svelte
+msgid "State"
 msgstr ""

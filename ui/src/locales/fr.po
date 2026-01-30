@@ -2079,14 +2079,17 @@ msgid "Participants"
 msgstr "Participants"
 
 #: src/lib/dp/components/event/EventParticipantsOverviewSection.svelte
+#: src/lib/dp/components/forms/ParticipationForm.svelte
 msgid "In"
 msgstr "Oui"
 
 #: src/lib/dp/components/event/EventParticipantsOverviewSection.svelte
+#: src/lib/dp/components/forms/ParticipationForm.svelte
 msgid "Maybe"
 msgstr "Peut-être"
 
 #: src/lib/dp/components/event/EventParticipantsOverviewSection.svelte
+#: src/lib/dp/components/forms/ParticipationForm.svelte
 msgid "Out"
 msgstr "Non"
 
@@ -2785,10 +2788,6 @@ msgstr "Une erreur s'est produite lors du traitement de votre demande d'authenti
 msgid "Team members"
 msgstr "Membres de l'équipe\"#: src/lib/dp/components/forms/ParticipationForm.svelte"
 
-#: src/lib/dp/components/forms/ParticipationForm.svelte
-msgid "State <0>InMaybeOut</0>"
-msgstr "État <0>InMaybeOut</0>\"#: src/lib/dp/components/forms/UniformSetForm.svelte"
-
 #: src/lib/dp/components/forms/UniformSetForm.svelte
 msgid ""
 "You can use the special identifiers <0/> and <1/> to get\n"
@@ -3122,4 +3121,8 @@ msgstr ""
 
 #: src/lib/dp/components/meta/Footer.svelte
 msgid "Built with <0/> in <1/>"
+msgstr ""
+
+#: src/lib/dp/components/forms/ParticipationForm.svelte
+msgid "State"
 msgstr ""
