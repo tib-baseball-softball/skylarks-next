@@ -8,6 +8,7 @@ import {loadLocale} from "wuchale/load-utils";
 import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
 import {locales} from "../locales/data";
 import {appLocale} from "$lib/dp/locale.svelte.ts";
+import {Collection} from "$lib/dp/enum/Collection.ts";
 
 export const ssr = false;
 
@@ -58,23 +59,25 @@ export const load: LayoutLoad = async ({fetch, depends}) => {
     await loadLocale(locale);
   }
 
+  /**
+   * setting requestKey to `null` means "do not autocancel" => nav is always up to date
+   */
   if (browser && client.authStore.isValid) {
-    /**
-     * setting requestKey to `null` means "do not autocancel" => nav is always up to date
-     */
-    teams = await client.collection("teams").getFullList<ExpandedTeam>({
+    const authRecord = authSettings.record as CustomAuthModel;
+
+    // both calls are intentionally not filtered to let auth rules do the filtering
+    teams = await client.collection(Collection.Teams).getFullList<ExpandedTeam>({
       expand: "club,admins",
       fetch: fetch,
-      requestKey: null,
       sort: "+name",
+      requestKey: null,
     });
 
-    const authRecord = authSettings.record as CustomAuthModel;
-    clubs = await client.collection("clubs").getFullList<ExpandedClub>({
+    clubs = await client.collection(Collection.Clubs).getFullList<ExpandedClub>({
       filter: `"${authRecord?.club}" ?~ id`,
       fetch: fetch,
-      requestKey: null,
       expand: "admins",
+      requestKey: null,
     });
   }
   depends("nav:load");

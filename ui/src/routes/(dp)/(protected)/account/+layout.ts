@@ -1,4 +1,4 @@
-import {client} from "$lib/dp/client.svelte.js";
+import {authSettings, client} from "$lib/dp/client.svelte.js";
 import type {
   CustomAuthModel,
   ExpandedAnnouncement,
@@ -10,7 +10,7 @@ import {Collection} from "$lib/dp/enum/Collection.ts";
 import {watchWithPagination} from "$lib/dp/records/RecordOperations.ts";
 
 export const load = (async ({fetch, depends, url, parent}) => {
-  const model = client.authStore.record as CustomAuthModel;
+  const model = authSettings.record as CustomAuthModel;
   const data = await parent();
 
   if (!client.authStore.isValid) {
@@ -18,14 +18,15 @@ export const load = (async ({fetch, depends, url, parent}) => {
   }
 
   let clubs = data.clubs;
-  let teams = data.teams;
+  let teams: ExpandedTeam[] | undefined;
 
   if (!teams) {
     teams = await client.collection(Collection.Teams).getFullList<ExpandedTeam>({
-      filter: `"${model?.teams}" ?~ id`,
+      filter: `"${model?.teams}" ?~ id`, // here we only display memberships
       expand: "club,admins",
       fetch: fetch,
       sort: "+name",
+      requestKey: null,
     });
   }
 
@@ -34,6 +35,7 @@ export const load = (async ({fetch, depends, url, parent}) => {
       filter: `"${model?.club}" ?~ id`,
       fetch: fetch,
       expand: "admins",
+      requestKey: null,
     });
   }
 

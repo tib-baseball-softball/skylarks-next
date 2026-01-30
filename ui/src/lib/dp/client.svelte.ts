@@ -6,6 +6,7 @@ import {env} from "$env/dynamic/public";
 import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
 import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
 import type {Schema} from "$lib/dp/types/pb-types.ts";
+import {Collection} from "$lib/dp/enum/Collection.ts";
 
 /**
  * baseURL is only explicitly defined in dev, use relative URLs for Prod.
@@ -33,7 +34,7 @@ client.authStore.onChange((_token: string, record: AuthRecord) => {
   }
 });
 
-client.authStore.onChange((_token, record) => {
+client.authStore.onChange(async (_token, record) => {
   if (browser) {
     if (record) {
       const {email} = record;
@@ -41,13 +42,13 @@ client.authStore.onChange((_token, record) => {
         message: `Signed in as ${email}`,
         background: "preset-filled-success-500",
       });
-      invalidateAll();
+      await invalidateAll();
     } else {
       toastController.trigger({
         message: "Logout successful",
         background: "preset-filled",
       });
-      invalidateAll();
+      await invalidateAll();
     }
   }
 });
@@ -56,7 +57,7 @@ client.authStore.onChange((_token, record) => {
  * In addition to onChange func, also provide a manual option to refresh the current user.
  */
 export async function manualAuthRefresh(): Promise<RecordAuthResponse<RecordModel>> {
-  const authData = await client.collection("users").authRefresh();
+  const authData = await client.collection(Collection.Users).authRefresh();
   authSettings.record = authData.record;
   return authData;
 }
