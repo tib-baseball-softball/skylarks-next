@@ -53,7 +53,7 @@
 
       <p class="flex gap-3 items-center">
         <User size="28"/>
-        <span class="h6">{$announcement.expand?.author.first_name} {$announcement.expand?.author.last_name}</span>
+        <span class="h6">{$announcement.expand?.author?.first_name} {$announcement.expand?.author?.last_name}</span>
       </p>
 
       <p class="flex gap-3 items-center">
