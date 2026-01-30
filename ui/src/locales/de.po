@@ -2143,14 +2143,17 @@ msgid "Participants"
 msgstr "Teilnehmer"
 
 #: src/lib/dp/components/event/EventParticipantsOverviewSection.svelte
+#: src/lib/dp/components/forms/ParticipationForm.svelte
 msgid "In"
 msgstr "Dabei"
 
 #: src/lib/dp/components/event/EventParticipantsOverviewSection.svelte
+#: src/lib/dp/components/forms/ParticipationForm.svelte
 msgid "Maybe"
 msgstr "Vielleicht"
 
 #: src/lib/dp/components/event/EventParticipantsOverviewSection.svelte
+#: src/lib/dp/components/forms/ParticipationForm.svelte
 msgid "Out"
 msgstr "Nicht dabei"
 
@@ -2780,10 +2783,6 @@ msgstr "Bei der Bearbeitung Ihrer Authentifizierungsanfrage über einen externen
 msgid "Team members"
 msgstr "Teammitglieder"
 
-#: src/lib/dp/components/forms/ParticipationForm.svelte
-msgid "State <0>InMaybeOut</0>"
-msgstr "Status <0>InMaybeOut</0>"
-
 #: src/lib/dp/components/event/EventTypeBadge.svelte
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Game"
@@ -3039,6 +3038,7 @@ msgstr "für <0/>"
 msgid "Go to User Settings"
 msgstr "Gehe zu den Benutzereinstellungen"
 
+#: src/lib/dp/components/user/UserDataCard.svelte
 #: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
 msgid "User Settings"
 msgstr "Nutzereinstellungen"
@@ -3087,40 +3087,46 @@ msgstr "Push-Nachrichten erfolgreich registriert."
 msgid "Technical error - push notification unregistration failed."
 msgstr "Technischer Fehler - Push-Nachrichten konnten nicht registriert werden."
 
-#: src/lib/dp/components/user/UserDataCard.svelte
-msgid ""
-"User\n"
-"Settings"
-msgstr ""
-
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Push notifications are disabled on your browser."
-msgstr ""
+msgstr "Push-Nachrichten sind in deinem Browser deaktiviert."
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Technical error - service worker registration not found."
-msgstr ""
+msgstr "Technischer Fehler - Service Worker-Registrierung nicht gefunden."
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "You are already subscribed to push notifications."
-msgstr ""
+msgstr "Du bist bereits für Push-Nachrichten registriert."
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Push notifications successfully registered."
-msgstr ""
+msgstr "Push-Nachrichten erfolgreich registriert."
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Technical error - subscription not submitted to server."
-msgstr ""
+msgstr "Technischer Fehler - die Daten wurden nicht zum Server übertragen."
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Test"
-msgstr ""
+msgstr "Testen"
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Send Test Notification"
-msgstr ""
+msgstr "Testnachricht senden"
 
 #: src/lib/dp/components/meta/Footer.svelte
 msgid "Built with <0/> in <1/>"
 msgstr "Gebaut mit <0/> in <1/>"
+
+#: src/lib/dp/components/forms/ParticipationForm.svelte
+msgid "State"
+msgstr "Status"
+
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+msgid ""
+"You are not a member of this team, so you can only see basic information.\n"
+"If you think you should be a member, please contact the team admins."
+msgstr ""
+"Du bist kein Mitglied dieses Teams, kannst also nur die Basisdaten sehen.\n"
+"Wenn du denkst, dass du ein Mitglied sein solltest, kontaktiere bitte deine Team-Admins."

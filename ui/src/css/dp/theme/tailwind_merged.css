@@ -1275,11 +1275,6 @@
     .md\:px-5 {
       padding-inline: calc(var(--spacing) * 5);
     }
-
-    .md\:text-base {
-      font-size: var(--text-base);
-      line-height: var(--tw-leading, var(--text-base--line-height));
-    }
   }
 
   @media (min-width: 64rem) {

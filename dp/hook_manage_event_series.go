@@ -150,3 +150,25 @@ func generateSeriesEvents(app core.App, record *core.Record) ([]*core.Record, er
 
 	return events, nil
 }
+
+func AddSeriesState(e *core.RecordEnrichEvent) error {
+	addSeriesState(e.Record)
+
+	return e.Next()
+}
+
+func addSeriesState(record *core.Record) {
+	record.WithCustomData(true)
+	eventSeries := &EventSeries{}
+	eventSeries.SetProxyRecord(record)
+
+	now := types.NowDateTime()
+
+	if eventSeries.SeriesStart().After(now) {
+		eventSeries.SetState(SeriesStateFuture)
+	} else if eventSeries.SeriesEnd().Before(now) {
+		eventSeries.SetState(SeriesStatePast)
+	} else {
+		eventSeries.SetState(SeriesStateOngoing)
+	}
+}

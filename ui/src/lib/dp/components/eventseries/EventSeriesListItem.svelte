@@ -1,70 +1,149 @@
 <script lang="ts">
   import {DateTimeUtility} from "$lib/dp/service/DateTimeUtility.ts";
-  import {EventSeriesUtility} from "$lib/dp/service/EventSeriesUtility.ts";
-  import type {EventseriesResponse} from "$lib/dp/types/pb-types.ts";
   import {appLocale} from "$lib/dp/locale.svelte.ts";
+  import type {Snippet} from "svelte";
+  import type {ExpandedEventSeries} from "$lib/dp/types/ExpandedResponse.ts";
 
   interface Props {
-    eventSeries: EventseriesResponse;
+    eventSeries: ExpandedEventSeries;
+    buttonBlock?: Snippet;
   }
 
-  const {eventSeries}: Props = $props();
+  const {eventSeries, buttonBlock}: Props = $props();
 
   const startDate = $derived(new Date(eventSeries.series_start));
   const endDate = $derived(new Date(eventSeries.series_end));
 
   const options: { weekday: "long" | "short" | "narrow" | undefined } = {weekday: "long"};
-  const seriesState = $derived(EventSeriesUtility.getSeriesState(startDate, endDate));
 </script>
 
-<article class="p-4 preset-outlined-surface-800-200 rounded-base shadow-md">
-  <div class="grid grid-cols-1 md:grid-cols-3 md:gap-2 lg:gap-4">
+<article class="preset-outlined-surface-800-200 rounded-base shadow-md" data-series-state="{eventSeries.series_state}">
+  <div class="outer-grid">
 
-    <div class="flex flex-col justify-between mb-3 md:mb-0">
-      <h4 class="h5 font-bold">{eventSeries.title}</h4>
+    <div class="title-wrapper">
+      <h4 class="h5">{eventSeries.title}</h4>
       <div>every {eventSeries.interval} days</div>
     </div>
 
-    <div class="grid grid-cols-2 gap-4 md:col-span-2">
+    <div class="inner-grid">
       <!-- Start Date -->
-      <div class="flex flex-col items-start">
-        <span class="text-sm font-medium">Series First Occurrence:</span>
-        <time class="text-sm md:text-base" datetime="{eventSeries.series_start}">
+      <div class="date-wrapper">
+        <span class="date-explanation-text">Series First Occurrence:</span>
+        <time datetime="{eventSeries.series_start}">
           {startDate.toLocaleDateString("de-DE", DateTimeUtility.eventSeriesDateTimeFormat)}
         </time>
       </div>
+
       <!-- End Date -->
-      <div class="flex flex-col items-start">
-        <span class="text-sm font-medium">Series End After:</span>
-        <time class="text-sm md:text-base" datetime="{eventSeries.series_end}">
+      <div class="date-wrapper">
+        <span class="date-explanation-text">Series End After:</span>
+        <time datetime="{eventSeries.series_end}">
           {endDate.toLocaleDateString("de-DE", DateTimeUtility.eventSeriesDateFormat)}
         </time>
       </div>
+
       <!-- Start Time -->
-      <div class="flex flex-col items-start">
-        <span class="text-sm font-medium">Event Duration:</span>
-        <time class="text-sm md:text-base" datetime="P{eventSeries.duration}M">{eventSeries.duration} Minutes</time>
+      <div class="date-wrapper">
+        <span class="date-explanation-text">Event Duration:</span>
+        <time datetime="P{eventSeries.duration}M">{eventSeries.duration} Minutes</time>
       </div>
 
-      <div class="justify-self-start self-center flex gap-2 flex-wrap">
-        <span class="badge block preset-outlined">
+      <div class="badges">
+        <span class="badge preset-outlined">
           {new Intl.DateTimeFormat(appLocale.current, options).format(startDate)}
         </span>
 
-        {#if seriesState === "ongoing"}
-        <span class="badge block preset-tonal-primary border border-primary-500">
+        {#if eventSeries.series_state === "ongoing"}
+        <span class="badge preset-tonal-primary border border-primary-500">
           Ongoing
         </span>
-        {:else if seriesState === "past"}
-          <span class="badge block preset-outlined">
+        {:else if eventSeries.series_state === "past"}
+          <span class="badge preset-outlined">
           Past
         </span>
-        {:else if seriesState === "future"}
-          <span class="badge block preset-tonal-tertiary border border-tertiary-500">
+        {:else if eventSeries.series_state === "future"}
+          <span class="badge preset-tonal-tertiary border border-tertiary-500">
           Upcoming
         </span>
         {/if}
       </div>
     </div>
   </div>
+
+  {@render buttonBlock?.()}
 </article>
+
+<style>
+  article {
+    padding: calc(var(--spacing) * 4);
+  }
+
+  [data-series-state="past"] {
+    --subdued-color: light-dark(var(--color-surface-300), var(--color-surface-200));
+    color: var(--subdued-color);
+    border-color: var(--subdued-color);
+  }
+
+  .outer-grid {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+
+    @media (min-width: 40rem) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: calc(var(--spacing) * 2);
+    }
+  }
+
+  .inner-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: calc(var(--spacing) * 4);
+
+    @media (min-width: 40rem) {
+      grid-column: span 2 / span 2;
+    }
+  }
+
+  .date-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .date-explanation-text {
+    font-size: var(--text-xs);
+    line-height: var(--tw-leading, var(--text-xs--line-height));
+    --tw-font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .title-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-block-end: calc(var(--spacing) * 3);
+  }
+
+  time {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+    --tw-font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-medium);
+  }
+
+  h4 {
+    font-weight: var(--font-weight-bold);
+  }
+
+  .badge {
+    display: block;
+  }
+
+  .badges {
+    justify-self: start;
+    align-self: center;
+    display: flex;
+    gap: calc(var(--spacing) * 2);
+    flex-wrap: wrap;
+  }
+</style>

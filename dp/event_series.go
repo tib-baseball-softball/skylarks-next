@@ -5,6 +5,14 @@ import (
 	"github.com/pocketbase/pocketbase/tools/types"
 )
 
+type SeriesState string
+
+const (
+	SeriesStateFuture  SeriesState = "future"
+	SeriesStatePast    SeriesState = "past"
+	SeriesStateOngoing SeriesState = "ongoing"
+)
+
 const (
 	EventSeriesCollection = "eventseries"
 )
@@ -84,4 +92,8 @@ func (s *EventSeries) Duration() int {
 }
 func (s *EventSeries) SetDuration(duration int) {
 	s.Set("duration", duration)
+}
+
+func (s *EventSeries) SetState(state SeriesState) {
+	s.Set("series_state", string(state))
 }

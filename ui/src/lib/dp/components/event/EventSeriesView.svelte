@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {CalendarPlus} from "lucide-svelte";
+  import {CalendarPlus, SquarePen} from "lucide-svelte";
   import {slide} from "svelte/transition";
   import {invalidateAll} from "$app/navigation";
   import EventSeriesListItem from "$lib/dp/components/eventseries/EventSeriesListItem.svelte";
@@ -8,12 +8,11 @@
   //@ts-ignore
   import * as Sheet from "$lib/dp/components/modal/sheet";
   import {client} from "$lib/dp/client.svelte.ts";
-  import type {EventSeriesCreationData, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
-  import type {EventseriesResponse} from "$lib/dp/types/pb-types.ts";
+  import type {EventSeriesCreationData, ExpandedEventSeries, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
 
   interface Props {
     team: ExpandedTeam;
-    eventSeries: EventseriesResponse[];
+    eventSeries: ExpandedEventSeries[];
     buttonClasses?: string;
   }
 
@@ -68,20 +67,26 @@
       <h3 class="h4 mt-6!">Active Event Series</h3>
 
       {#each eventSeries as series (series.id)}
-        <EventSeriesListItem eventSeries={series}/>
+        <EventSeriesListItem eventSeries={series}>
+          {#snippet buttonBlock()}
+            <div class="button-container">
+              <button class="btn btn-sm preset-outlined edit-button"
+                      onclick={() => setupAndShowForm(series)}>
+                <SquarePen size="18"/>
+                <span>Edit</span>
+              </button>
 
-        <div class="flex gap-2">
-          <button class="btn preset-tonal border border-surface-500" onclick={() => setupAndShowForm(series)}>Edit
-          </button>
-
-          <DeleteButton
-            id={series.id}
-            modelName="Event Series"
-            action={deleteEventSeries}
-            classes="preset-tonal-error border border-error-500"
-            buttonText="Delete"
-          />
-        </div>
+              <DeleteButton
+                id={series.id}
+                modelName="Event Series"
+                action={deleteEventSeries}
+                classes="btn-sm preset-tonal-error border border-error-500"
+                buttonText="Delete"
+                iconSize="18"
+              />
+            </div>
+          {/snippet}
+        </EventSeriesListItem>
       {/each}
     </div>
 
@@ -105,3 +110,15 @@
     </div>
   </Sheet.Content>
 </Sheet.Root>
+
+<style>
+  .button-container {
+    display: flex;
+    gap: calc(var(--spacing) * 2);
+    margin-block-start: calc(var(--spacing) * 6);
+  }
+
+  .edit-button {
+    color: light-dark(var(--base-font-color), var(--base-font-color-dark));
+  }
+</style>

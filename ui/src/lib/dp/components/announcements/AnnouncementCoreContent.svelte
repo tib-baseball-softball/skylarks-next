@@ -21,8 +21,8 @@
   <p class="my-4 flex gap-3 {textClasses}">
     <User/>
     <span>
-    {announcement.expand?.author.first_name}
-      {announcement.expand?.author.last_name}
+    {announcement.expand?.author?.first_name}
+      {announcement.expand?.author?.last_name}
   </span>
   </p>
 
