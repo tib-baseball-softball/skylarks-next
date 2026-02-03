@@ -2098,8 +2098,8 @@ msgstr "No"
 msgid "<0/> Cancelled"
 msgstr "<0/> Cancelado"
 
-#: src/lib/dp/components/event/EventTeaser.svelte
 #: src/routes/(dp)/(protected)/account/event/[id]/+page.svelte
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Only team members can participate in events."
 msgstr "Solo los miembros del equipo pueden participar en los eventos."
 

@@ -2192,8 +2192,8 @@ msgstr "Neue Eventserie hinzufügen"
 msgid "<0/> Cancelled"
 msgstr "<0/> Abgesagt"
 
-#: src/lib/dp/components/event/EventTeaser.svelte
 #: src/routes/(dp)/(protected)/account/event/[id]/+page.svelte
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Only team members can participate in events."
 msgstr "Nur Teammitglieder können an Events teilnehmen."
 
