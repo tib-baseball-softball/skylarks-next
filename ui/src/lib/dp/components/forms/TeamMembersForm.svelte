@@ -25,6 +25,7 @@
 
   const allUsersForClub = $derived(client.collection("users").getFullList<UsersResponse>({
     filter: `club ?~ '${club.id}' && teams !~ '${team.id}'`, // all users that are club members, but not members of this team
+    sort: "+last_name",
   }));
 
   async function submitForm(e: SubmitEvent) {
