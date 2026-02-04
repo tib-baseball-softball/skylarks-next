@@ -1,7 +1,8 @@
 <script lang="ts">
   import type {Table} from "bsm.js";
-  import ApexChart from "$lib/dp/components/charts/ApexChart.svelte";
+  import Chart from "$lib/dp/components/charts/Chart.svelte";
   import {ColorUtility} from "$lib/tib/service/ColorUtility.ts";
+  import type {ChartConfiguration} from "chart.js";
 
   interface Props {
     table: Table;
@@ -9,61 +10,49 @@
 
   const {table}: Props = $props();
 
-  const options: ApexCharts.ApexOptions = $derived({
-    series: [
-      {
-        name: "Wins",
-        data: table.rows.map((row) => {
-          return {
-            x: row.short_team_name,
-            y: row.wins_count,
-            fillColor: row.short_team_name.includes("BEA")
-              ? ColorUtility.SkylarksRed
-              : ColorUtility.getDynamicColorNavySand(),
-          };
-        }),
+  const labels = $derived(table.rows.map((row) => row.short_team_name));
+  const data = $derived(table.rows.map((row) => row.wins_count));
+  const backgroundColor = $derived(
+    table.rows.map((row) =>
+      row.short_team_name.includes("BEA")
+        ? ColorUtility.SkylarksRed
+        : ColorUtility.getDynamicColorNavySand(),
+    ),
+  );
+
+  const config: ChartConfiguration = $derived({
+    type: "bar",
+    data: {
+      labels,
+      datasets: [
+        {
+          label: "Wins",
+          data,
+          backgroundColor,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          title: {
+            display: true,
+            text: "Total Wins",
+          },
+        },
       },
-    ],
-    chart: {
-      type: "bar",
-      height: 350,
-      toolbar: {
-        show: true,
-      },
-    },
-    plotOptions: {
-      bar: {
-        horizontal: false,
-        columnWidth: "55%",
-      },
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    stroke: {
-      show: true,
-      width: 2,
-      colors: ["transparent"],
-    },
-    yaxis: {
-      title: {
-        text: "Total Wins",
+      plugins: {
+        legend: {display: false},
+        tooltip: {enabled: true},
       },
     },
-    fill: {
-      opacity: 1,
-    },
-    tooltip: {
-      y: {
-        formatter: (val) => `${val}`,
-      },
-    },
-    colors: [ColorUtility.getDynamicColorNavySand()],
   });
 </script>
 
-<ApexChart {options}>
+<Chart {config} height={350}>
   {#snippet beforeContent()}
     <h5 class="h5">League Wins Visualisation</h5>
   {/snippet}
-</ApexChart>
+</Chart>
