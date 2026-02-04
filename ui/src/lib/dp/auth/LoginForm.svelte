@@ -22,13 +22,15 @@
     background: "preset-filled-error-500",
   };
 
+  const prefilledSignupKey = page.url.searchParams.get("signup_key") ?? "";
+
   let form: Extension<Partial<UsersUpdate>, { signup_key: string }> = $state({
     email: "",
     password: "",
     first_name: "",
     last_name: "",
     passwordConfirm: "",
-    signup_key: "",
+    signup_key: prefilledSignupKey,
   });
   let signup = false;
 
