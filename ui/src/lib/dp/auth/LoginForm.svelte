@@ -11,6 +11,7 @@
   import {client} from "../client.svelte.js";
   //@ts-ignore
   import {Tabs} from "bits-ui";
+  import {page} from "$app/state";
 
   const {authCollection = "users", passwordLogin = true, signupAllowed = true} = $props();
 
@@ -63,7 +64,7 @@
     }
   }
 
-  let tabSet: "login" | "signup" | string = $state("login");
+  let tabSet: "login" | "signup" | string = $state(page.url.searchParams.get("action") === "signup" ? "signup" : "login");
   let forgotPassword = $state(false);
 </script>
 
