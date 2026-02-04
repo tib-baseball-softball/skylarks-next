@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {Edit, Plus} from "lucide-svelte";
+  import {Plus, SquarePen} from "lucide-svelte";
   import {invalidate} from "$app/navigation";
   import LeafletMapCoordinatePicker from "$lib/dp/components/map/LeafletMapCoordinatePicker.svelte";
   //@ts-ignore
@@ -69,7 +69,7 @@
 <Sheet.Root bind:open={open}>
   <Sheet.Trigger class={buttonClasses}>
     {#if form.id}
-      <Edit/>
+      <SquarePen/>
     {:else}
       <Plus/>
       <span>Create new</span>
