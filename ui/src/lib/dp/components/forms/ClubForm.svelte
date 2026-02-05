@@ -42,6 +42,7 @@
 
   const allUsersForClub = $derived(client.collection(Collection.Users).getFullList<UsersResponse>({
     filter: `club ?~ '${club?.id}'`,
+    sort: "+last_name",
     requestKey: `users-for-club-${club?.id}`,
   }));
 

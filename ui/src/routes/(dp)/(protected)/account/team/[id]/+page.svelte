@@ -121,9 +121,12 @@
       </label>
     </div>
 
+    {#if !isMember}
+      <p class="hint">Only team members can participate in events.</p>
+    {/if}
     <div class="events-grid">
       {#each $events?.items as event (event.id)}
-        <div class="">
+        <div>
           <EventTeaser {event} link={true}/>
         </div>
       {:else}
@@ -172,6 +175,10 @@
         padding: 0.25rem 0.6rem;
       }
     }
+  }
+
+  .hint {
+    margin-block: calc(var(--spacing) * 4);
   }
 
   .events-grid {

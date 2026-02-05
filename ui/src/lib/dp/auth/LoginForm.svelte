@@ -11,6 +11,7 @@
   import {client} from "../client.svelte.js";
   //@ts-ignore
   import {Tabs} from "bits-ui";
+  import {page} from "$app/state";
 
   const {authCollection = "users", passwordLogin = true, signupAllowed = true} = $props();
 
@@ -21,13 +22,15 @@
     background: "preset-filled-error-500",
   };
 
+  const prefilledSignupKey = page.url.searchParams.get("signup_key") ?? "";
+
   let form: Extension<Partial<UsersUpdate>, { signup_key: string }> = $state({
     email: "",
     password: "",
     first_name: "",
     last_name: "",
     passwordConfirm: "",
-    signup_key: "",
+    signup_key: prefilledSignupKey,
   });
   let signup = false;
 
@@ -63,7 +66,7 @@
     }
   }
 
-  let tabSet: "login" | "signup" | string = $state("login");
+  let tabSet: "login" | "signup" | string = $state(page.url.searchParams.get("action") === "signup" ? "signup" : "login");
   let forgotPassword = $state(false);
 </script>
 
