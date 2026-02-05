@@ -8,12 +8,11 @@
   import DeleteButton from "$lib/dp/components/utils/DeleteButton.svelte";
   import Dialog from "$lib/dp/components/modal/Dialog.svelte";
   import {authSettings, client} from "$lib/dp/client.svelte.js";
-  import type {CustomAuthModel, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
-  import type {EventseriesResponse} from "$lib/dp/types/pb-types.ts";
+  import type {CustomAuthModel, ExpandedEventSeries, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
 
   interface Props {
     team: ExpandedTeam;
-    eventSeries: EventseriesResponse[];
+    eventSeries: ExpandedEventSeries[];
   }
 
   const {team, eventSeries}: Props = $props();

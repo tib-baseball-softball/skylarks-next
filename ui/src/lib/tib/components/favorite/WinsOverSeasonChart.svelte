@@ -1,7 +1,8 @@
 <script lang="ts">
-  import ApexChart from "$lib/dp/components/charts/ApexChart.svelte";
+  import Chart from "$lib/dp/components/charts/Chart.svelte";
   import {ColorUtility} from "$lib/tib/service/ColorUtility.ts";
   import type {StreakDataEntry} from "$lib/tib/types/HomeDataset.ts";
+  import type {ChartConfiguration} from "chart.js";
 
   interface Props {
     streakData: StreakDataEntry[];
@@ -9,83 +10,56 @@
 
   const {streakData}: Props = $props();
 
-  const options: ApexCharts.ApexOptions = $derived({
-    chart: {
-      height: 350,
-      type: "line",
-      stacked: false,
-      zoom: {
-        enabled: false,
-      },
-    },
-    markers: {
-      size: 4,
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    colors: [ColorUtility.SkylarksRed],
-    series: [
-      {
-        name: "Wins Count",
-        data: streakData.map((dataPoint) => dataPoint.wins_count),
-      },
-    ],
-    stroke: {
-      width: [3, 3],
-    },
-    plotOptions: {
-      bar: {
-        columnWidth: "20%",
-      },
-    },
-    xaxis: {
-      categories: streakData.map((dataPoint) => Number(dataPoint.game)),
-      title: {
-        text: "Gamedays",
-        style: {
-          color: ColorUtility.getDynamicColorNavySand(),
+  const labels = $derived(streakData.map((d) => Number(d.game)));
+  const seriesData = $derived(streakData.map((d) => d.wins_count));
+
+  const config: ChartConfiguration = $derived({
+    type: "line",
+    data: {
+      labels,
+      datasets: [
+        {
+          label: "Wins Count",
+          data: seriesData,
+          borderColor: ColorUtility.SkylarksRed,
+          backgroundColor: ColorUtility.SkylarksRed,
+          tension: 0.3,
+          pointRadius: 4,
+          pointHoverRadius: 5,
+          fill: false,
         },
-      },
+      ],
     },
-    yaxis: [
-      {
-        axisTicks: {
-          show: true,
-        },
-        axisBorder: {
-          show: true,
-          color: "white",
-        },
-        labels: {
-          style: {
-            colors: "white",
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: "Gamedays",
           },
         },
-        title: {
-          text: "Wins Count",
-          style: {
-            color: ColorUtility.getDynamicColorNavySand(),
+        y: {
+          title: {
+            display: true,
+            text: "Wins Count",
           },
         },
       },
-    ],
-    tooltip: {
-      shared: false,
-      intersect: true,
-      x: {
-        show: false,
+      plugins: {
+        legend: {align: "start"},
       },
-    },
-    legend: {
-      horizontalAlign: "left",
-      offsetX: 40,
+      interaction: {
+        intersect: true,
+        mode: "index",
+      },
     },
   });
 </script>
 
-<ApexChart {options}>
+<Chart {config} height={350}>
   {#snippet beforeContent()}
     <h5 class="h5">Season Progression</h5>
   {/snippet}
-</ApexChart>
+</Chart>

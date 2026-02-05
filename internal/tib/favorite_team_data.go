@@ -19,14 +19,14 @@ func LoadHomeData(app dp.LogOnlyApp, client bsm.APIClient, teamID int, season in
 		return nil, errors.New("default API key not set, aborting")
 	}
 
-	teamChannel := make(chan bsm.Team)
-	leagueChannel := make(chan []bsm.LeagueGroup)
+	teamChannel := make(chan bsm.Team, 1)
+	leagueChannel := make(chan []bsm.LeagueGroup, 1)
 
 	go func() {
 		team, err := client.LoadSingleTeamByID(teamID, apiKey)
 		if err != nil {
 			app.Logger().Error("Error fetching team", "error", err, "team", teamID)
-			return
+			teamChannel <-bsm.Team{}
 		}
 		teamChannel <- team
 	}()
@@ -35,13 +35,29 @@ func LoadHomeData(app dp.LogOnlyApp, client bsm.APIClient, teamID int, season in
 		leagueGroupsResponse, err := client.FetchLeagueGroupsForSeason(apiKey, season)
 		if err != nil {
 			app.Logger().Error("Error fetching league groups", "error", err, "team", teamID)
-			return
+			leagueChannel <- make([]bsm.LeagueGroup, 0)
 		}
 		leagueChannel <- leagueGroupsResponse
 	}()
 
-	clubTeam := <-teamChannel
-	leagueGroups := <-leagueChannel
+	var clubTeam bsm.Team
+	var leagueGroups []bsm.LeagueGroup
+
+	select {
+	    case clubTeam = <-teamChannel:
+		case <-time.After(25 * time.Second):
+            return nil ,errors.New("timeout while waiting for BSM response - team")
+	}
+
+	select {
+		case leagueGroups = <-leagueChannel:
+		case <-time.After(25 * time.Second):
+            return nil ,errors.New("timeout while waiting for BSM response - leagueGroups")
+	}
+	
+	if clubTeam.ID == 0 {
+		return nil, errors.New("unexpected zero value for team ID")
+	}
 
 	if len(clubTeam.LeagueEntries) == 0 {
 		return nil, errors.New("team does not have any league entries associated with it")

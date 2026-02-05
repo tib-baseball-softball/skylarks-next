@@ -23,5 +23,4 @@
 @import "./theme/generic-theme.css";
 @import "./theme/animations.css";
 @import "./theme/properties.css";
-@import "./partials/charts.css";
 @import "./utility/tw_utils.css";
