@@ -5,6 +5,10 @@ import (
 	"github.com/spf13/cast"
 )
 
+func NotifyAdminsUserCreation(e *core.RecordEvent) error {
+	return e.Next()
+}
+
 // OAuthUpdateUserData updates user record with information found in the OAuth2 response.
 // This could also be used to validate the signup key, but does not do that at the moment
 // (see generic record creation hook that also works for password auth)
