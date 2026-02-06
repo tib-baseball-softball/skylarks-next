@@ -1,10 +1,12 @@
 package dp
 
 import (
+	"context"
 	"encoding/json"
 	"io"
 	"log"
 	"os"
+	"time"
 
 	"github.com/SherClockHolmes/webpush-go"
 )
@@ -57,19 +59,24 @@ func (p PushServiceImpl) SendPushMessage(msg *PushMessage, sub *webpush.Subscrip
 		return err
 	}
 
-	resp, err := webpush.SendNotification(blob, sub, &webpush.Options{
-		Subscriber:      p.Subscriber,
-		VAPIDPublicKey:  p.VAPIDPublicKey,
-		VAPIDPrivateKey: p.VAPIDPrivateKey,
-		TTL:             30,
-	})
-	if err != nil {
-		// TODO: handle unsubscribe for outdated subs here
-		return err
-	}
-	defer func(Body io.ReadCloser) {
-		_ = Body.Close()
-	}(resp.Body)
+	go func() {
+		ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
+		defer cancel()
+
+		resp, err := webpush.SendNotificationWithContext(ctx, blob, sub, &webpush.Options{
+			Subscriber:      p.Subscriber,
+			VAPIDPublicKey:  p.VAPIDPublicKey,
+			VAPIDPrivateKey: p.VAPIDPrivateKey,
+			TTL:             30,
+		})
+		if err != nil {
+			// TODO: handle unsubscribe for outdated subs here
+			return
+		}
+		defer func(Body io.ReadCloser) {
+			_ = Body.Close()
+		}(resp.Body)
+	}()
 
 	return nil
 }
