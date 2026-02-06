@@ -98,7 +98,7 @@ func BindDPHooks(app core.App, client bsm.APIClient, pushService PushService) {
 	})
 
 	app.OnRecordAfterCreateSuccess(UserCollection).BindFunc(func(e *core.RecordEvent) error {
-		return NotifyAdminsUserCreation(e)
+		return NotifyAdminsUserCreation(e, pushService)
 	})
 
 	app.OnRecordsListRequest(LeagueGroupsCollection).BindFunc(func(event *core.RecordsListRequestEvent) error {
