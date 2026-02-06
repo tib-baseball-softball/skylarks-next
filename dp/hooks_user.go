@@ -13,17 +13,20 @@ import (
 	"github.com/spf13/cast"
 )
 
+// NotifyAdminsUserCreation is a hook that handles push notifications to club admins when a new user is created
+// as well as email notifications to superusers.
 func NotifyAdminsUserCreation(e *core.RecordEvent, ps PushService) error {
 	err := notifyAdminsUserCreation(e.Record, e.App, ps)
 	if err != nil {
 		e.App.Logger().Warn(err.Error())
 	}
-	sendSuperUserNotification(e.Record, e.App)
+	sendSuperUserNotificationForNewUsers(e.Record, e.App)
 
 	return e.Next()
 }
 
-func sendSuperUserNotification(record *core.Record, app core.App) {
+// sendSuperUserNotificationForNewUsers sends an email notification to superusers when a new user is created.
+func sendSuperUserNotificationForNewUsers(record *core.Record, app core.App) {
 	go func() {
 		ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 		defer cancel()
@@ -87,7 +90,7 @@ func sendSuperUserNotification(record *core.Record, app core.App) {
 	}()
 }
 
-// notifyAdminsUserCreation sends a push notification to club admins when a new user is created
+// notifyAdminsUserCreation sends a push notification to club admins when a new user is created.
 func notifyAdminsUserCreation(record *core.Record, app core.App, ps PushService) error {
 	user := &User{}
 	user.SetProxyRecord(record)
