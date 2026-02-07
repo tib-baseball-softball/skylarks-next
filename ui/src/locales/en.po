@@ -132,6 +132,7 @@ msgid "Confirm password"
 msgstr "Confirm password"
 
 #: src/lib/dp/auth/LoginForm.svelte
+#: src/lib/dp/components/forms/JoinTeamForm.svelte
 #: src/lib/dp/components/forms/TeamForm.svelte
 msgid "Signup Key"
 msgstr "Signup Key"
@@ -1154,6 +1155,7 @@ msgstr "If not set, the link itself will be used as a the text."
 #: src/lib/dp/components/forms/ClubForm.svelte
 #: src/lib/dp/components/forms/EventForm.svelte
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
+#: src/lib/dp/components/forms/JoinTeamForm.svelte
 #: src/lib/dp/components/forms/LocationForm.svelte
 #: src/lib/dp/components/forms/ParticipationForm.svelte
 #: src/lib/dp/components/forms/PlayerDataForm.svelte
@@ -3135,10 +3137,22 @@ msgstr "Built with <0/> in <1/>"
 msgid "State"
 msgstr "State"
 
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
-msgid ""
-"You are not a member of this team, so you can only see basic information.\n"
-"If you think you should be a member, please contact the team admins."
-msgstr ""
-"You are not a member of this team, so you can only see basic information.\n"
-"If you think you should be a member, please contact the team admins."
+#: src/lib/dp/components/team/JoinTeamSection.svelte
+msgid "You are not a member of this team, so you can only see basic information."
+msgstr "You are not a member of this team, so you can only see basic information."
+
+#: src/lib/dp/components/team/JoinTeamSection.svelte
+msgid "If you have the team's signup key, please enter it here to join:"
+msgstr "If you have the team's signup key, please enter it here to join:"
+
+#: src/lib/dp/components/team/JoinTeamSection.svelte
+msgid "Join Team"
+msgstr "Join Team"
+
+#: src/lib/dp/components/forms/JoinTeamForm.svelte
+msgid "Successfully joined team"
+msgstr "Successfully joined team"
+
+#: src/lib/dp/components/forms/JoinTeamForm.svelte
+msgid "An error occurred while joining the team."
+msgstr "An error occurred while joining the team."
