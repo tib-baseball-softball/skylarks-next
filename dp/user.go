@@ -17,6 +17,10 @@ type User struct {
 	core.BaseRecordProxy
 }
 
+func (u *User) CollectionName() string {
+	return UserCollection
+}
+
 func (u *User) ID() string {
 	return u.Id
 }

@@ -13,6 +13,10 @@ type Location struct {
 	core.BaseRecordProxy
 }
 
+func (a *Location) CollectionName() string {
+	return LocationCollection
+}
+
 func (a *Location) ID() string {
 	return a.Id
 }

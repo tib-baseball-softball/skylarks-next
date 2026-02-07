@@ -14,6 +14,10 @@ type Club struct {
 	core.BaseRecordProxy
 }
 
+func (c *Club) CollectionName() string {
+	return ClubsCollection
+}
+
 func (c *Club) ID() string {
 	return c.Id
 }
