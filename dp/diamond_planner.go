@@ -97,6 +97,10 @@ func BindDPHooks(app core.App, client bsm.APIClient, pushService PushService) {
 		return ValidateSignupKey(event)
 	})
 
+	app.OnRecordAfterCreateSuccess(UserCollection).BindFunc(func(e *core.RecordEvent) error {
+		return NotifyAdminsUserCreation(e, pushService)
+	})
+
 	app.OnRecordsListRequest(LeagueGroupsCollection).BindFunc(func(event *core.RecordsListRequestEvent) error {
 		return TriggerLeagueImport(event.App, client, event)
 	})
