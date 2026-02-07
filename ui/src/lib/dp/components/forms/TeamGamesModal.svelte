@@ -40,7 +40,7 @@
   });
 
   async function getCurrentGamesCount(): Promise<number> {
-    const response = await client.send<GamesCount>(`/api/gamecount/${team.id}?season=${season}`, {});
+    const response = await client.send<GamesCount>(`/api/dp/teams/${team.id}/gamecount?season=${season}`, {});
     return response.count ?? 0;
   }
 

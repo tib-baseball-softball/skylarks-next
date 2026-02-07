@@ -16,12 +16,6 @@ type SimpleCount struct {
 // Requires a valid auth record that belongs to the team queried.
 func GetGamesCount(app core.App) func(e *core.RequestEvent) error {
 	return func(e *core.RequestEvent) error {
-		// verify access status
-		requireAuth := apis.RequireAuth()
-		if err := requireAuth.Func(e); err != nil {
-			return err
-		}
-
 		teamID := e.Request.PathValue("team")
 		team, err := app.FindRecordById("teams", teamID)
 		if err != nil {

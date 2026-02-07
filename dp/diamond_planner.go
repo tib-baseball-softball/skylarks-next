@@ -166,12 +166,6 @@ func BindDPHooks(app core.App, client bsm.APIClient, pushService PushService) {
 	})
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
-		se.Router.GET("/api/gamecount/{team}", GetGamesCount(app))
-
-		return se.Next()
-	})
-
-	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
 		se.Router.POST("/api/import/{club}/leagues", StartLeagueGroupsImport(app, client))
 
 		return se.Next()
@@ -189,6 +183,15 @@ func BindDPHooks(app core.App, client bsm.APIClient, pushService PushService) {
 		se.Router.GET("/api/communityservice/{user}/{season}",
 			GetUserCommunityService()).
 			Bind(apis.RequireAuth())
+
+		return se.Next()
+	})
+
+	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
+		teamsGroup := se.Router.Group("/api/dp/teams")
+
+		teamsGroup.Bind(apis.RequireAuth())
+		teamsGroup.GET("/{team}/gamecount", GetGamesCount(app))
 
 		return se.Next()
 	})
