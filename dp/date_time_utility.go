@@ -1,6 +1,7 @@
 package dp
 
 import (
+	"os"
 	"time"
 
 	"github.com/pocketbase/pocketbase/tools/types"
@@ -20,4 +21,17 @@ func GetYearStartAndEnd(year int) (start, end types.DateTime, err error) {
 	}
 
 	return start, end, nil
+}
+
+func LoadAppTimeZone() (*time.Location, error) {
+	timezone := os.Getenv("TIME_ZONE")
+	if timezone == "" {
+		timezone = "Europe/Berlin"
+	}
+
+	location, err := time.LoadLocation(timezone)
+	if err != nil {
+		return nil, err
+	}
+	return location, nil
 }
