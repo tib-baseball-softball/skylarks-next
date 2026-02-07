@@ -191,7 +191,10 @@ func BindDPHooks(app core.App, client bsm.APIClient, pushService PushService) {
 		teamsGroup := se.Router.Group("/api/dp/teams")
 
 		teamsGroup.Bind(apis.RequireAuth())
-		teamsGroup.GET("/{team}/gamecount", GetGamesCount(app))
+		individualTeamGroup := teamsGroup.Group("/{team}")
+
+		individualTeamGroup.GET("/gamecount", GetGamesCount(app))
+		individualTeamGroup.POST("/join", JoinTeam(app))
 
 		return se.Next()
 	})

@@ -113,6 +113,10 @@ func (u *User) SetTeams(teamIDs []string) {
 	u.Set("teams", teamIDs)
 }
 
+func (u *User) AddTeam(teamID string) {
+	u.Set("teams", append(u.Teams(), teamID))
+}
+
 func (u *User) Club() []string {
 	return u.GetStringSlice("club")
 }
