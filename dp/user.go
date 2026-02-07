@@ -117,12 +117,16 @@ func (u *User) AddTeam(teamID string) {
 	u.Set("teams", append(u.Teams(), teamID))
 }
 
-func (u *User) Club() []string {
+func (u *User) Clubs() []string {
 	return u.GetStringSlice("club")
 }
 
-func (u *User) SetClub(clubIDs []string) {
+func (u *User) SetClubs(clubIDs []string) {
 	u.Set("club", clubIDs)
+}
+
+func (u *User) AddClub(clubID string) {
+	u.Set("club", append(u.Clubs(), clubID))
 }
 
 func (u *User) LastLogin() types.DateTime {

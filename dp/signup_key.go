@@ -39,7 +39,7 @@ func ValidateSignupKey(e *core.RecordRequestEvent) error {
 		if body.SignupKey != "" && team.SignupKey == body.SignupKey {
 			isValid = true
 			user.SetTeams([]string{team.Id})
-			user.SetClub([]string{team.Club})
+			user.SetClubs([]string{team.Club})
 			user.SetSignupKey(body.SignupKey)
 			break
 		}

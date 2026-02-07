@@ -117,6 +117,12 @@ func JoinTeam(app core.App) func(e *core.RequestEvent) error {
 		}
 
 		user.AddTeam(teamID)
+
+		// user is joining a team for a new club
+		if !slices.Contains(user.Clubs(), team.Club()) {
+			user.AddClub(team.Club())
+		}
+
 		err = app.Save(user)
 		if err != nil {
 			return e.InternalServerError("Failed to save user record", err)
