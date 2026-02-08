@@ -72,7 +72,6 @@ msgid "Login / Register"
 msgstr "Zaloguj się / Zarejestruj się"
 
 #: src/lib/dp/auth/LoginBadge.svelte
-#: src/lib/dp/auth/LoginForm.svelte
 msgid "Login"
 msgstr "Zaloguj się"
 
@@ -120,6 +119,7 @@ msgid "John"
 msgstr "Jan"
 
 #: src/lib/dp/auth/LoginForm.svelte
+#: src/lib/dp/components/forms/UserDetailsForm.svelte
 msgid "Last Name"
 msgstr "Nazwisko"
 
@@ -201,14 +201,6 @@ msgid ""
 msgstr ""
 "Te dane są używane tylko do celów wewnętrznych i nigdy nie są nigdzie publicznie wyświetlane.\n"
 "(Dostęp do nich mają administratorzy Twojego zespołu i klubu)."
-
-#: src/lib/dp/components/forms/UserDetailsForm.svelte
-msgid "First Name(s) <0/>"
-msgstr "Imię(ona) <0/>"
-
-#: src/lib/dp/components/forms/UserDetailsForm.svelte
-msgid "Last Name <0/>"
-msgstr "Nazwisko <0/>"
 
 #: src/lib/dp/components/forms/UserDetailsForm.svelte
 msgid "Profile Image <0/>"
@@ -877,6 +869,7 @@ msgstr "Razem"
 #: src/lib/dp/components/club/ClubDetailCard.svelte
 #: src/lib/dp/components/communityservice/CommunityServiceDatatable.svelte
 #: src/lib/dp/components/forms/ClubForm.svelte
+#: src/lib/dp/components/forms/TeamForm.svelte
 #: src/lib/dp/components/forms/UniformSetForm.svelte
 #: src/lib/dp/components/team/TeamMemberDatatable.svelte
 #: src/lib/dp/components/team/TeamTeaserCard.svelte
@@ -909,6 +902,7 @@ msgstr "Status"
 msgid "Number"
 msgstr "Numer"
 
+#: src/lib/dp/components/forms/EventForm.svelte
 #: src/lib/dp/components/forms/LocationForm.svelte
 msgid "BSM ID"
 msgstr "ID BSM"
@@ -1077,13 +1071,10 @@ msgid "Create new Announcement"
 msgstr "Utwórz nowe ogłoszenie"
 
 #: src/lib/dp/components/forms/AnnouncementForm.svelte
+#: src/lib/dp/components/forms/EventForm.svelte
 #: src/lib/tib/components/club/officials/ClubOfficialDetailCard.svelte
 msgid "Title"
 msgstr "Tytuł"
-
-#: src/lib/dp/components/forms/AnnouncementForm.svelte
-msgid "Announcement Text <0/>"
-msgstr "Tekst ogłoszenia <0/>"
 
 #: src/lib/dp/components/forms/AnnouncementForm.svelte
 msgid "Priority"
@@ -1137,6 +1128,7 @@ msgstr "Wyślij"
 #: src/lib/dp/components/club/ClubDetailCard.svelte
 #: src/lib/dp/components/forms/ClubForm.svelte
 #: src/lib/dp/components/forms/ClubForm.svelte
+#: src/lib/dp/components/forms/TeamForm.svelte
 #: src/lib/dp/components/team/TeamListTeaser.svelte
 #: src/lib/dp/components/team/TeamTeaserCard.svelte
 #: src/lib/dp/components/user/PlayerProfileClubsSection.svelte
@@ -1242,7 +1234,6 @@ msgstr "To jest pierwsze wydarzenie w Twojej nowej serii. Będzie miało dokład
 msgid "Series End <0/> <1>No events will be created after this date.</1>"
 msgstr "Koniec serii <0/> <1>Po tej dacie nie będą tworzone żadne wydarzenia.</1>"
 
-#: src/lib/dp/components/forms/EventForm.svelte
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Title <0/>"
@@ -1296,12 +1287,10 @@ msgid "Create new Team"
 msgstr "Utwórz Nową Drużynę"
 
 #: src/lib/dp/components/event/EventPageAdminSection.svelte
-#: src/lib/dp/components/forms/TeamForm.svelte
 msgid "Name <0/>"
 msgstr "Nazwa <0/>"
 
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
-#: src/lib/dp/components/forms/TeamForm.svelte
 msgid "Club <0/>"
 msgstr "Klub <0/>"
 
@@ -1340,22 +1329,6 @@ msgstr "Edytuj wydarzenie „{0}”"
 #: src/lib/dp/components/forms/EventForm.svelte
 msgid "Create new Event"
 msgstr "Utwórz nowe wydarzenie"
-
-#: src/lib/dp/components/forms/EventForm.svelte
-msgid "BSM ID <0/>"
-msgstr "ID BSM <0/>"
-
-#: src/lib/dp/components/forms/EventForm.svelte
-msgid "Start <0/>"
-msgstr "Start <0/>"
-
-#: src/lib/dp/components/forms/EventForm.svelte
-msgid "Meeting <0/>"
-msgstr "Spotkanie <0/>"
-
-#: src/lib/dp/components/forms/EventForm.svelte
-msgid "End <0/>"
-msgstr "Koniec <0/>"
 
 #: src/lib/dp/components/forms/EventForm.svelte
 msgid "Uniform Set <0/>"
@@ -1758,6 +1731,7 @@ msgstr "Seria"
 msgid "Player fallback"
 msgstr "Gracz rezerwowy"
 
+#: src/lib/dp/components/forms/EventForm.svelte
 #: src/lib/tib/components/navigation/StaticNavigationLinks.svelte
 msgid "Start"
 msgstr "Start"
@@ -3156,3 +3130,19 @@ msgstr "Pomyślnie dołączono do zespołu"
 #: src/lib/dp/service/ToastController.svelte.ts
 msgid "An unknown error occurred. Please try again later."
 msgstr "Wystąpił nieznany błąd. Spróbuj ponownie później."
+
+#: src/lib/dp/components/forms/UserDetailsForm.svelte
+msgid "First Name(s)"
+msgstr ""
+
+#: src/lib/dp/components/forms/AnnouncementForm.svelte
+msgid "Announcement Text"
+msgstr ""
+
+#: src/lib/dp/components/forms/EventForm.svelte
+msgid "Meeting"
+msgstr ""
+
+#: src/lib/dp/components/forms/EventForm.svelte
+msgid "End"
+msgstr ""

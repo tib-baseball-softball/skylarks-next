@@ -20,6 +20,12 @@
     }
   }
 
+  .label:has(.input[required], .textarea[required]) > span:first-child:after {
+    content: "*";
+    color: light-dark(var(--color-primary-500), var(--color-primary-300));
+    margin-inline-start: calc(var(--spacing) * 0.5);
+  }
+
   .label-text {
     display: block;
     font-size: var(--text-xs);

@@ -50,6 +50,10 @@
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
 
+    if (!form.priority) {
+      form.priority = "info";
+    }
+
     let result: AnnouncementsResponse | null = null;
 
     try {
@@ -150,7 +154,7 @@
         </label>
 
         <label class="label field-wide">
-          Announcement Text
+          <span>Announcement Text</span>
           <textarea bind:value={form.bodytext} class="textarea" name="desc" required rows="10"
           ></textarea>
         </label>
