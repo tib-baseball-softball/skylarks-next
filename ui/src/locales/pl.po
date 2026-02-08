@@ -132,6 +132,7 @@ msgid "Confirm password"
 msgstr "Potwierdź hasło"
 
 #: src/lib/dp/auth/LoginForm.svelte
+#: src/lib/dp/components/forms/JoinTeamForm.svelte
 #: src/lib/dp/components/forms/TeamForm.svelte
 msgid "Signup Key"
 msgstr "Klucz rejestracyjny"
@@ -1122,6 +1123,7 @@ msgstr "Jeśli nie zostanie ustawione, sam link zostanie użyty jako tekst."
 #: src/lib/dp/components/forms/ClubForm.svelte
 #: src/lib/dp/components/forms/EventForm.svelte
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
+#: src/lib/dp/components/forms/JoinTeamForm.svelte
 #: src/lib/dp/components/forms/LocationForm.svelte
 #: src/lib/dp/components/forms/ParticipationForm.svelte
 #: src/lib/dp/components/forms/PlayerDataForm.svelte
@@ -3135,10 +3137,22 @@ msgstr "Zbudowane z <0/> w <1/>"
 msgid "State"
 msgstr "Stan"
 
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
-msgid ""
-"You are not a member of this team, so you can only see basic information.\n"
-"If you think you should be a member, please contact the team admins."
-msgstr ""
-"Nie jesteś członkiem tego zespołu, więc możesz zobaczyć tylko podstawowe informacje.\n"
-"Jeśli uważasz, że powinieneś być członkiem, skontaktuj się z administratorami zespołu."
+#: src/lib/dp/components/team/JoinTeamSection.svelte
+msgid "You are not a member of this team, so you can only see basic information."
+msgstr "Nie jesteś członkiem tego zespołu, więc możesz zobaczyć tylko podstawowe informacje."
+
+#: src/lib/dp/components/team/JoinTeamSection.svelte
+msgid "If you have the team's signup key, please enter it here to join:"
+msgstr "Jeśli masz klucz rejestracyjny zespołu, wprowadź go tutaj, aby dołączyć:"
+
+#: src/lib/dp/components/team/JoinTeamSection.svelte
+msgid "Join Team"
+msgstr "Dołącz do zespołu"
+
+#: src/lib/dp/components/forms/JoinTeamForm.svelte
+msgid "Successfully joined team"
+msgstr "Pomyślnie dołączono do zespołu"
+
+#: src/lib/dp/service/ToastController.svelte.ts
+msgid "An unknown error occurred. Please try again later."
+msgstr "Wystąpił nieznany błąd. Spróbuj ponownie później."

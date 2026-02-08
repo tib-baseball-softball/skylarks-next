@@ -132,6 +132,7 @@ msgid "Confirm password"
 msgstr "Confirmar contraseña"
 
 #: src/lib/dp/auth/LoginForm.svelte
+#: src/lib/dp/components/forms/JoinTeamForm.svelte
 #: src/lib/dp/components/forms/TeamForm.svelte
 msgid "Signup Key"
 msgstr "Clave de registro"
@@ -1122,6 +1123,7 @@ msgstr "Si no se establece, el enlace en sí se utilizará como texto."
 #: src/lib/dp/components/forms/ClubForm.svelte
 #: src/lib/dp/components/forms/EventForm.svelte
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
+#: src/lib/dp/components/forms/JoinTeamForm.svelte
 #: src/lib/dp/components/forms/LocationForm.svelte
 #: src/lib/dp/components/forms/ParticipationForm.svelte
 #: src/lib/dp/components/forms/PlayerDataForm.svelte
@@ -3134,10 +3136,22 @@ msgstr "Construido con <0/> en <1/>"
 msgid "State"
 msgstr "Estado"
 
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
-msgid ""
-"You are not a member of this team, so you can only see basic information.\n"
-"If you think you should be a member, please contact the team admins."
-msgstr ""
-"No eres miembro de este equipo, por lo que solo puedes ver información básica.\n"
-"Si crees que deberías ser miembro, por favor contacta a los administradores del equipo."
+#: src/lib/dp/components/team/JoinTeamSection.svelte
+msgid "You are not a member of this team, so you can only see basic information."
+msgstr "No eres miembro de este equipo, por lo que solo puedes ver información básica."
+
+#: src/lib/dp/components/team/JoinTeamSection.svelte
+msgid "If you have the team's signup key, please enter it here to join:"
+msgstr "Si tiene la clave de registro del equipo, por favor ingrésela aquí para unirse:"
+
+#: src/lib/dp/components/team/JoinTeamSection.svelte
+msgid "Join Team"
+msgstr "Unirse al equipo"
+
+#: src/lib/dp/components/forms/JoinTeamForm.svelte
+msgid "Successfully joined team"
+msgstr "Equipo unido con éxito"
+
+#: src/lib/dp/service/ToastController.svelte.ts
+msgid "An unknown error occurred. Please try again later."
+msgstr "Ocurrió un error desconocido. Por favor, inténtelo de nuevo más tarde."

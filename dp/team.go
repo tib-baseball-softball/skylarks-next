@@ -14,6 +14,14 @@ type Team struct {
 	core.BaseRecordProxy
 }
 
+func (t *Team) CollectionName() string {
+	return TeamsCollection
+}
+
+func (t *Team) ID() string {
+	return t.Id
+}
+
 func (t *Team) Name() string {
 	return t.GetString("name")
 }

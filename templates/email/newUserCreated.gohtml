@@ -1,0 +1,68 @@
+<style>
+    body {
+        font-family: system-ui, Arial, sans-serif;
+        line-height: 1.4;
+        color: #333;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    dl {
+        margin: 0;
+        padding: 0;
+    }
+
+    dt {
+        font-weight: bold;
+        margin-top: 10px;
+        color: #555;
+    }
+
+    dd {
+        margin: 0 0 10px 0;
+        padding: 0;
+    }
+
+    a {
+        color: #ba0c2f;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="container">
+    <p>The following user has been newly created in Diamond Planner:</p>
+    <dl>
+        <dt>Username</dt>
+        <dd>{{.username }}</dd>
+        <dt>First Name</dt>
+        <dd>{{.firstName}}</dd>
+        <dt>Last Name</dt>
+        <dd>{{.lastName}}</dd>
+        <dt>Email</dt>
+        <dd>{{.email}}</dd>
+        <dt>Signup Key</dt>
+        <dd>{{.signupKey}}</dd>
+        <dt>Teams</dt>
+        <dd>{{range .teams}} {{.}} {{end}}</dd>
+        <dt>Club</dt>
+        <dd>{{range .club}} {{.}} {{end}}</dd>
+    </dl>
+    <p>
+        If that is incorrect or a security problem, go do something about it:
+        <a href="{{.url}}">Go to Site</a>
+    </p>
+</div>

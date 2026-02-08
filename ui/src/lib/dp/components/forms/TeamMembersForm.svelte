@@ -1,11 +1,12 @@
 <script lang="ts">
   import {invalidateAll} from "$app/navigation";
   import MultiSelectCombobox from "$lib/dp/components/formElements/MultiSelectCombobox.svelte";
-  import {client, manualAuthRefresh} from "$lib/dp/client.svelte.ts";
+  import {authSettings, client, manualAuthRefresh} from "$lib/dp/client.svelte.ts";
   import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
-  import type {ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
+  import type {CustomAuthModel, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
   import type {ClubsResponse, UsersResponse, UsersUpdate} from "$lib/dp/types/pb-types.ts";
   import {closeModal} from "$lib/dp/utility/closeModal.ts";
+  import {Collection} from "$lib/dp/enum/Collection.ts";
 
   interface Props {
     club: ClubsResponse;
@@ -21,9 +22,11 @@
     return ret;
   });
 
+  const authRecord = $derived(authSettings.record as CustomAuthModel);
+
   let selectedUsers: UsersResponse[] = $state([]);
 
-  const allUsersForClub = $derived(client.collection("users").getFullList<UsersResponse>({
+  const allUsersForClub = $derived(client.collection(Collection.Users).getFullList<UsersResponse>({
     filter: `club ?~ '${club.id}' && teams !~ '${team.id}'`, // all users that are club members, but not members of this team
     sort: "+last_name",
   }));
@@ -32,15 +35,20 @@
     e.preventDefault();
 
     try {
+      let changedAuthRecord = false;
       for (const user of selectedUsers) {
-        await client.collection("users").update<UsersUpdate>(user.id, {
+        if (user.id === authRecord.id) {
+          changedAuthRecord = true;
+        }
+        await client.collection(Collection.Users).update<UsersUpdate>(user.id, {
           "teams+": team.id,
         });
       }
       toastController.triggerGenericFormSuccessMessage("Team members");
 
-      // set manually in case we have updated the currently logged-in user
-      await manualAuthRefresh();
+      if (changedAuthRecord) {
+        await manualAuthRefresh();
+      }
     } catch (error) {
       console.error(error);
       toastController.triggerGenericFormErrorMessage("Team members");

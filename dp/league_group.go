@@ -16,6 +16,10 @@ type LeagueGroup struct {
 	core.BaseRecordProxy
 }
 
+func (lg *LeagueGroup) CollectionName() string {
+	return LeagueGroupsCollection
+}
+
 func (lg *LeagueGroup) ID() string {
 	return lg.Id
 }

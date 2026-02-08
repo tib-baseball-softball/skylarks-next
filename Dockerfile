@@ -39,6 +39,8 @@ WORKDIR /app
 RUN apk add --no-cache ca-certificates tzdata && update-ca-certificates
 
 COPY --from=go-builder /app/diamondplanner ./
+COPY --from=go-builder /app/templates ./templates
+
 COPY --from=ui-builder /app/pb_public ./pb_public
 
 EXPOSE 8090

@@ -12,6 +12,7 @@
   import type {CustomAuthModel, EventType} from "$lib/dp/types/ExpandedResponse.js";
   import Paginator from "$lib/dp/utility/Paginator.svelte";
   import type {PageProps} from "./$types";
+  import JoinTeamSection from "$lib/dp/components/team/JoinTeamSection.svelte";
 
   const {data}: PageProps = $props();
   const events = $derived(data.events);
@@ -160,10 +161,7 @@
     <TeamAdminSection team={data.team} eventSeries={data.eventSeries}/>
   {/if}
 {:else}
-  <p class="prose">
-    You are not a member of this team, so you can only see basic information.
-    If you think you should be a member, please contact the team admins.
-  </p>
+  <JoinTeamSection {authRecord} teamID={data.team.id}/>
 {/if}
 
 <style>

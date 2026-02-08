@@ -17,6 +17,10 @@ type RequestCache struct {
 	core.BaseRecordProxy
 }
 
+func (r *RequestCache) CollectionName() string {
+	return RequestCacheCollection
+}
+
 // ID returns the record id.
 func (r *RequestCache) ID() string {
 	return r.Id

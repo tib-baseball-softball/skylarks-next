@@ -17,6 +17,10 @@ type User struct {
 	core.BaseRecordProxy
 }
 
+func (u *User) CollectionName() string {
+	return UserCollection
+}
+
 func (u *User) ID() string {
 	return u.Id
 }
@@ -109,12 +113,20 @@ func (u *User) SetTeams(teamIDs []string) {
 	u.Set("teams", teamIDs)
 }
 
-func (u *User) Club() []string {
+func (u *User) AddTeam(teamID string) {
+	u.Set("teams", append(u.Teams(), teamID))
+}
+
+func (u *User) Clubs() []string {
 	return u.GetStringSlice("club")
 }
 
-func (u *User) SetClub(clubIDs []string) {
+func (u *User) SetClubs(clubIDs []string) {
 	u.Set("club", clubIDs)
+}
+
+func (u *User) AddClub(clubID string) {
+	u.Set("club", append(u.Clubs(), clubID))
 }
 
 func (u *User) LastLogin() types.DateTime {

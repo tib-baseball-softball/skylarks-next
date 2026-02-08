@@ -132,6 +132,7 @@ msgid "Confirm password"
 msgstr "Confirmer le mot de passe"
 
 #: src/lib/dp/auth/LoginForm.svelte
+#: src/lib/dp/components/forms/JoinTeamForm.svelte
 #: src/lib/dp/components/forms/TeamForm.svelte
 msgid "Signup Key"
 msgstr "Clé d’inscription"
@@ -1122,6 +1123,7 @@ msgstr "Si ce n'est pas défini, le lien lui-même sera utilisé comme texte."
 #: src/lib/dp/components/forms/ClubForm.svelte
 #: src/lib/dp/components/forms/EventForm.svelte
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
+#: src/lib/dp/components/forms/JoinTeamForm.svelte
 #: src/lib/dp/components/forms/LocationForm.svelte
 #: src/lib/dp/components/forms/ParticipationForm.svelte
 #: src/lib/dp/components/forms/PlayerDataForm.svelte
@@ -3122,10 +3124,22 @@ msgstr "Construit avec <0/> en <1/>"
 msgid "State"
 msgstr "État"
 
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
-msgid ""
-"You are not a member of this team, so you can only see basic information.\n"
-"If you think you should be a member, please contact the team admins."
-msgstr ""
-"Vous n'êtes pas membre de cette équipe, vous ne pouvez donc voir que les informations de base.\n"
-"Si vous pensez que vous devriez être membre, veuillez contacter les administrateurs de l'équipe."
+#: src/lib/dp/components/team/JoinTeamSection.svelte
+msgid "You are not a member of this team, so you can only see basic information."
+msgstr "Vous n'êtes pas membre de cette équipe, vous ne pouvez donc voir que les informations de base."
+
+#: src/lib/dp/components/team/JoinTeamSection.svelte
+msgid "If you have the team's signup key, please enter it here to join:"
+msgstr "Si vous avez la clé d'inscription de l'équipe, veuillez la saisir ici pour rejoindre :"
+
+#: src/lib/dp/components/team/JoinTeamSection.svelte
+msgid "Join Team"
+msgstr "Rejoindre l'équipe"
+
+#: src/lib/dp/components/forms/JoinTeamForm.svelte
+msgid "Successfully joined team"
+msgstr "Équipe rejointe avec succès"
+
+#: src/lib/dp/service/ToastController.svelte.ts
+msgid "An unknown error occurred. Please try again later."
+msgstr "Une erreur inconnue s'est produite. Veuillez réessayer plus tard."

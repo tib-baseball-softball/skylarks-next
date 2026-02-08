@@ -18,6 +18,10 @@ type PushSubscription struct {
 	core.BaseRecordProxy
 }
 
+func (p *PushSubscription) CollectionName() string {
+	return PushSubscriptionsCollection
+}
+
 func (p *PushSubscription) ID() string {
 	return p.Id
 }
@@ -96,20 +100,17 @@ func GetSubscriptionsForTeamOrClub(id string, coll string, app core.App) ([]Push
 
 func GetSubscriptionsForUserIDs(userIDs []string, app core.App) ([]PushSubscription, error) {
 	ids := make([]interface{}, len(userIDs))
-	records := make([]*core.Record, len(ids))
+	for i, id := range userIDs {
+		ids[i] = id
+	}
 
+	var subs []PushSubscription
 	err := app.RecordQuery(PushSubscriptionsCollection).
 		AndWhere(dbx.In("user", ids...)).
-		All(&records)
+		All(&subs)
 	if err != nil {
 		return nil, err
 	}
 
-	subs := make([]PushSubscription, len(records))
-	for _, record := range records {
-		sub := PushSubscription{}
-		sub.SetProxyRecord(record)
-		subs = append(subs, sub)
-	}
 	return subs, nil
 }
