@@ -3135,12 +3135,12 @@ msgstr ""
 
 #: src/lib/dp/components/team/JoinTeamSection.svelte
 msgid "Join Team"
-msgstr ""
+msgstr "Team beitreten"
 
 #: src/lib/dp/components/forms/JoinTeamForm.svelte
 msgid "Successfully joined team"
-msgstr ""
+msgstr "Team erfolgreich beigetreten"
 
-#: src/lib/dp/components/forms/JoinTeamForm.svelte
-msgid "An error occurred while joining the team."
-msgstr ""
+#: src/lib/dp/service/ToastController.svelte.ts
+msgid "An unknown error occurred. Please try again later."
+msgstr "Ein unbekannter Fehler ist aufgetreten. Bitte später erneut versuchen."

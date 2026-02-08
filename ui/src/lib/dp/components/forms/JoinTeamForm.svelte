@@ -3,6 +3,7 @@
   import {client, manualAuthRefresh} from "$lib/dp/client.svelte.ts";
   import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
   import {invalidateAll} from "$app/navigation";
+  import {ClientResponseError} from "pocketbase";
 
   type JoinTeamPayload = {
     signupKey: string;
@@ -44,11 +45,14 @@
       await manualAuthRefresh();
       await invalidateAll();
     } catch (error) {
-      console.error(error);
-      toastController.trigger({
-        message: "An error occurred while joining the team.",
-        background: "preset-filled-error-500",
-      });
+      if (error instanceof ClientResponseError) {
+        toastController.trigger({
+          message: error.message,
+          background: "preset-filled-error-500",
+        });
+      } else {
+        toastController.triggerGenericErrorMessage();
+      }
     }
   }
 </script>

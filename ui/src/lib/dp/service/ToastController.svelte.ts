@@ -38,6 +38,16 @@ class ToastController {
       background: "preset-filled-error-500",
     });
   }
+
+  /**
+   * Used for generic errors that could occur anywhere and cannot be handled with the information at the call site.
+   */
+  public triggerGenericErrorMessage() {
+    this.trigger({
+      message: "An unknown error occurred. Please try again later.",
+      background: "preset-filled-error-500"
+    });
+  }
 }
 
 export const toastController = new ToastController();
