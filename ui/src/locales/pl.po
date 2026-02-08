@@ -3133,16 +3133,20 @@ msgstr "Wystąpił nieznany błąd. Spróbuj ponownie później."
 
 #: src/lib/dp/components/forms/UserDetailsForm.svelte
 msgid "First Name(s)"
-msgstr ""
+msgstr "Imię (imiona)"
 
 #: src/lib/dp/components/forms/AnnouncementForm.svelte
 msgid "Announcement Text"
-msgstr ""
+msgstr "Treść ogłoszenia"
 
 #: src/lib/dp/components/forms/EventForm.svelte
 msgid "Meeting"
-msgstr ""
+msgstr "Spotkanie"
 
 #: src/lib/dp/components/forms/EventForm.svelte
 msgid "End"
-msgstr ""
+msgstr "Koniec"
+
+#: src/lib/dp/components/meta/SidebarNavigation.svelte
+msgid "Settings"
+msgstr "Ustawienia"

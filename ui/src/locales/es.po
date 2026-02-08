@@ -3132,16 +3132,20 @@ msgstr "Ocurrió un error desconocido. Por favor, inténtelo de nuevo más tarde
 
 #: src/lib/dp/components/forms/UserDetailsForm.svelte
 msgid "First Name(s)"
-msgstr ""
+msgstr "Nombre(s)"
 
 #: src/lib/dp/components/forms/AnnouncementForm.svelte
 msgid "Announcement Text"
-msgstr ""
+msgstr "Texto del anuncio"
 
 #: src/lib/dp/components/forms/EventForm.svelte
 msgid "Meeting"
-msgstr ""
+msgstr "Reunión"
 
 #: src/lib/dp/components/forms/EventForm.svelte
 msgid "End"
-msgstr ""
+msgstr "Fin"
+
+#: src/lib/dp/components/meta/SidebarNavigation.svelte
+msgid "Settings"
+msgstr "Configuración"

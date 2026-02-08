@@ -3120,16 +3120,20 @@ msgstr "Une erreur inconnue s'est produite. Veuillez réessayer plus tard."
 
 #: src/lib/dp/components/forms/UserDetailsForm.svelte
 msgid "First Name(s)"
-msgstr ""
+msgstr "Prénom(s)"
 
 #: src/lib/dp/components/forms/AnnouncementForm.svelte
 msgid "Announcement Text"
-msgstr ""
+msgstr "Texte de l’annonce"
 
 #: src/lib/dp/components/forms/EventForm.svelte
 msgid "Meeting"
-msgstr ""
+msgstr "Réunion"
 
 #: src/lib/dp/components/forms/EventForm.svelte
 msgid "End"
-msgstr ""
+msgstr "Fin"
+
+#: src/lib/dp/components/meta/SidebarNavigation.svelte
+msgid "Settings"
+msgstr "Paramètres"

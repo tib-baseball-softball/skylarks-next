@@ -3134,3 +3134,7 @@ msgstr "Treffen"
 #: src/lib/dp/components/forms/EventForm.svelte
 msgid "End"
 msgstr "Ende"
+
+#: src/lib/dp/components/meta/SidebarNavigation.svelte
+msgid "Settings"
+msgstr "Einstellungen"
