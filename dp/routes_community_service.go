@@ -40,7 +40,7 @@ func GetUserCommunityService() func(event *core.RequestEvent) error {
 		}
 
 		var readableClubs []Club
-		clubRecords, err := event.App.FindRecordsByIds(ClubsCollection, user.Club())
+		clubRecords, err := event.App.FindRecordsByIds(ClubsCollection, user.Clubs())
 		for _, clubRecord := range clubRecords {
 			club := Club{}
 			club.SetProxyRecord(clubRecord)

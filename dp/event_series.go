@@ -25,6 +25,10 @@ type EventSeries struct {
 	core.BaseRecordProxy
 }
 
+func (s *EventSeries) CollectionName() string {
+	return EventSeriesCollection
+}
+
 // ID returns the record id.
 func (s *EventSeries) ID() string {
 	return s.Id

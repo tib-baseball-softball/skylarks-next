@@ -55,7 +55,7 @@ func sendSuperUserNotificationForNewUsers(record *core.Record, app core.App) {
 			"email":     user.Email(),
 			"signupKey": user.SignupKey(),
 			"teams":     user.Teams(),
-			"club":      user.Club(),
+			"club":      user.Clubs(),
 			"url":       app.Settings().Meta.AppURL,
 		})
 		if err != nil {
@@ -95,8 +95,8 @@ func notifyAdminsUserCreation(record *core.Record, app core.App, ps PushService)
 	user := &User{}
 	user.SetProxyRecord(record)
 
-	ids := make([]interface{}, len(user.Club()))
-	for i, id := range user.Club() {
+	ids := make([]interface{}, len(user.Clubs()))
+	for i, id := range user.Clubs() {
 		ids[i] = id
 	}
 

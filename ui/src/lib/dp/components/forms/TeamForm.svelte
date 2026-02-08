@@ -123,7 +123,7 @@
         />
 
         <label class="label col-span-2 md:col-span-1">
-          Name
+          <span>Name</span>
           <input
             bind:value={form.name}
             class="input"
@@ -134,7 +134,7 @@
         </label>
 
         <label class="label col-span-2 md:col-span-1">
-          Club
+          <span>Club</span>
           <input
             autocomplete="off"
             class="input"
@@ -170,6 +170,7 @@
           listClass="tabs-list input col-span-2"
           name="age_group"
           options={["adults", "minors"]}
+          required={true}
         />
 
         <label class="label col-span-2">

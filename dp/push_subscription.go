@@ -18,6 +18,10 @@ type PushSubscription struct {
 	core.BaseRecordProxy
 }
 
+func (p *PushSubscription) CollectionName() string {
+	return PushSubscriptionsCollection
+}
+
 func (p *PushSubscription) ID() string {
 	return p.Id
 }

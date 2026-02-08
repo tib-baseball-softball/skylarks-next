@@ -23,7 +23,7 @@ func TestGamesCountEndpoint(t *testing.T) {
 		{
 			Name:            "Unauthenticated",
 			Method:          http.MethodGet,
-			URL:             "/api/gamecount/" + testTeamID,
+			URL:             "/api/dp/teams/" + testTeamID +  "/gamecount",
 			ExpectedStatus:  http.StatusUnauthorized,
 			ExpectedContent: []string{"data\":{},\"message\":\"The request requires valid record authorization token."},
 			TestAppFactory:  setupTestApp,
@@ -31,7 +31,7 @@ func TestGamesCountEndpoint(t *testing.T) {
 		{
 			Name:   "Invalid token",
 			Method: http.MethodGet,
-			URL:    "/api/gamecount/" + testTeamID,
+			URL:    "/api/dp/teams/" + testTeamID +  "/gamecount",
 			Headers: map[string]string{
 				"Authorization": invalidToken,
 			},
@@ -42,7 +42,7 @@ func TestGamesCountEndpoint(t *testing.T) {
 		{
 			Name:   "Bogus Team",
 			Method: http.MethodGet,
-			URL:    "/api/gamecount/doesnotexist",
+			URL:    "/api/dp/teams/doesnotexist/gamecount",
 			Headers: map[string]string{
 				"Authorization": validToken,
 			},
@@ -53,7 +53,7 @@ func TestGamesCountEndpoint(t *testing.T) {
 		{
 			Name:   "Valid user and team without query",
 			Method: http.MethodGet,
-			URL:    "/api/gamecount/" + testTeamID,
+			URL:    "/api/dp/teams/" + testTeamID +  "/gamecount",
 			Headers: map[string]string{
 				"Authorization": validToken,
 			},
@@ -64,7 +64,7 @@ func TestGamesCountEndpoint(t *testing.T) {
 		{
 			Name:   "Valid user and team with query",
 			Method: http.MethodGet,
-			URL:    "/api/gamecount/" + testTeamID + "?season=" + testSeasonQueryParam,
+			URL:    "/api/dp/teams/" + testTeamID +  "/gamecount?season=" + testSeasonQueryParam,
 			Headers: map[string]string{
 				"Authorization": validToken,
 			},

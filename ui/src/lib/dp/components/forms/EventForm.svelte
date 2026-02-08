@@ -117,7 +117,7 @@
         />
 
         <label class="label">
-          Title
+          <span>Title</span>
           <input
             bind:value={form.title}
             class="input"
@@ -128,7 +128,7 @@
         </label>
 
         <label class="label">
-          BSM ID
+          <span>BSM ID</span>
           <input
             bind:value={form.bsm_id}
             class="input"
@@ -139,17 +139,18 @@
         </label>
 
         <label class="label">
-          Start
+          <span>Start</span>
           <Flatpickr
             bind:value={form.starttime}
             options={Object.assign(DateTimeUtility.datePickerOptions, {
                       static: true, // render the picker as a child element to the form to work in a sheet portal context
                   })}
+            required={true}
           />
         </label>
 
         <label class="label">
-          Meeting
+          <span>Meeting</span>
           <Flatpickr
             bind:value={form.meetingtime}
             options={Object.assign(DateTimeUtility.datePickerOptions, {
@@ -159,7 +160,7 @@
         </label>
 
         <label class="label">
-          End
+          <span>End</span>
           <Flatpickr
             bind:value={form.endtime}
             options={Object.assign(DateTimeUtility.datePickerOptions, {
@@ -198,6 +199,7 @@
           label="Type"
           name="type"
           options={["game", "practice", "misc"]}
+          required={true}
         />
 
         {#await attireOptions then options}

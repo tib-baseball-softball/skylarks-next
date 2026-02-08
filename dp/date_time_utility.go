@@ -1,9 +1,15 @@
 package dp
 
 import (
+	"os"
 	"time"
 
 	"github.com/pocketbase/pocketbase/tools/types"
+)
+
+const (
+	TimeZoneEnvKey  = "TIME_ZONE"
+	DefaultTimezone = "Europe/Berlin"
 )
 
 func GetYearStartAndEnd(year int) (start, end types.DateTime, err error) {
@@ -20,4 +26,17 @@ func GetYearStartAndEnd(year int) (start, end types.DateTime, err error) {
 	}
 
 	return start, end, nil
+}
+
+func LoadAppTimeZone() (*time.Location, error) {
+	timezone := os.Getenv(TimeZoneEnvKey)
+	if timezone == "" {
+		timezone = DefaultTimezone
+	}
+
+	location, err := time.LoadLocation(timezone)
+	if err != nil {
+		return nil, err
+	}
+	return location, nil
 }

@@ -161,8 +161,6 @@
               </Tabs.List>
 
               <Tabs.Content value="login" class="pt-3">
-                <h2>Login</h2>
-
                 {@render login()}
               </Tabs.Content>
 

@@ -17,6 +17,10 @@ type ServiceEntry struct {
 	core.BaseRecordProxy
 }
 
+func (s *ServiceEntry) CollectionName() string {
+	return ServiceEntryCollection
+}
+
 func (s *ServiceEntry) ID() string {
 	return s.Id
 }

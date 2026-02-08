@@ -61,13 +61,25 @@
   />
 
   <label class="label">
-    First Name(s)
-    <input autocomplete="given-name" bind:value={form.firstName} class="input" name="firstname"/>
+    <span>First Name(s)</span>
+    <input
+      autocomplete="given-name"
+      bind:value={form.firstName}
+      class="input"
+      name="firstname"
+      required
+    />
   </label>
 
   <label class="label">
-    Last Name
-    <input autocomplete="family-name" bind:value={form.lastName} class="input" name="lastname"/>
+    <span>Last Name</span>
+    <input
+      autocomplete="family-name"
+      bind:value={form.lastName}
+      class="input"
+      name="lastname"
+      required
+    />
   </label>
 
   <label class="label">

@@ -17,6 +17,10 @@ type Event struct {
 	core.BaseRecordProxy
 }
 
+func (e *Event) CollectionName() string {
+	return EventsCollection
+}
+
 func (e *Event) ID() string {
 	return e.Id
 }
