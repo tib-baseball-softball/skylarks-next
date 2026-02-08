@@ -3142,16 +3142,16 @@ msgstr "No eres miembro de este equipo, por lo que solo puedes ver información 
 
 #: src/lib/dp/components/team/JoinTeamSection.svelte
 msgid "If you have the team's signup key, please enter it here to join:"
-msgstr ""
+msgstr "Si tiene la clave de registro del equipo, por favor ingrésela aquí para unirse:"
 
 #: src/lib/dp/components/team/JoinTeamSection.svelte
 msgid "Join Team"
-msgstr ""
+msgstr "Unirse al equipo"
 
 #: src/lib/dp/components/forms/JoinTeamForm.svelte
 msgid "Successfully joined team"
-msgstr ""
+msgstr "Equipo unido con éxito"
 
-#: src/lib/dp/components/forms/JoinTeamForm.svelte
-msgid "An error occurred while joining the team."
-msgstr ""
+#: src/lib/dp/service/ToastController.svelte.ts
+msgid "An unknown error occurred. Please try again later."
+msgstr "Ocurrió un error desconocido. Por favor, inténtelo de nuevo más tarde."

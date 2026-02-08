@@ -3153,6 +3153,6 @@ msgstr "Join Team"
 msgid "Successfully joined team"
 msgstr "Successfully joined team"
 
-#: src/lib/dp/components/forms/JoinTeamForm.svelte
-msgid "An error occurred while joining the team."
-msgstr "An error occurred while joining the team."
+#: src/lib/dp/service/ToastController.svelte.ts
+msgid "An unknown error occurred. Please try again later."
+msgstr "An unknown error occurred. Please try again later."
