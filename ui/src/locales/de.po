@@ -3131,7 +3131,7 @@ msgstr "Du bist kein Mitglied dieses Teams, kannst also nur die Basisdaten sehen
 
 #: src/lib/dp/components/team/JoinTeamSection.svelte
 msgid "If you have the team's signup key, please enter it here to join:"
-msgstr ""
+msgstr "Falls du den Anmeldeschlüssel für dieses Team hast, gib ihn hier ein:"
 
 #: src/lib/dp/components/team/JoinTeamSection.svelte
 msgid "Join Team"
