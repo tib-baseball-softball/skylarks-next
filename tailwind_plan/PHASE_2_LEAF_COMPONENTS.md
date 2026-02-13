@@ -1,0 +1,29 @@
+# Phase 2: Leaf Component Migration
+
+Target small, reusable components in `ui/src/lib/dp/components` that primarily use static utility classes.
+
+## 2.1 Component Identification
+
+- [ ] Identify components with zero prop-based styling logic.
+- [ ] Prioritize components used frequently (e.g., Icons, Badges, simple wrappers).
+
+## 2.2 Migration Workflow (Repeat for each component)
+
+- [ ] **Step 1: Extract Classes** - Identify all `class="..."` attributes in the template.
+- [ ] **Step 2: Define Semantic Classes** - Create meaningful class names (e.g., `.root`, `.icon-wrapper`, `.label`)
+  instead of `div class="flex items-center"`.
+- [ ] **Step 3: Create `<style>` Block** - Add a `<style>` block at the bottom of the `.svelte` file if it doesn't
+  exist.
+- [ ] **Step 4: Map Utilities to CSS** - Convert Tailwind classes to native CSS properties:
+    - [ ] `flex items-center` -> `display: flex; align-items: center;`
+    - [ ] `p-4` -> `padding: calc(var(--spacing) * 4);`
+    - [ ] `bg-surface-100` -> `background-color: var(--color-surface-100);`
+- [ ] **Step 5: Apply Modern CSS** - Use nesting and `:where()` if applicable to keep specificity low.
+- [ ] **Step 6: Update Template** - Replace utility strings with the new semantic classes.
+- [ ] **Step 7: Verification** - Verify the component looks identical in the UI.
+
+## 2.3 Progress Tracking
+
+- [ ] List specific components migrated:
+    - [ ] `ExampleComponent.svelte`
+    - [ ] ...
