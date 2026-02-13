@@ -68,14 +68,20 @@ This document provides a reference for mapping Tailwind utility classes to nativ
 | `justify-center` | `justify-content: center;` |
 | `flex-col`       | `flex-direction: column;`  |
 
-## KEEP (from `tw_utils.css`)
+## KEEP (Designated Utilities & Presets)
 
-The following should NOT be migrated to scoped CSS if they are used as global utilities:
+The following should NOT be migrated to scoped CSS and must be preserved:
 
-- `sr-only`
-- `transform`
+### From `tw_utils.css`
+
+- `sr-only`, `transform`, `ring`, `blur`, `filter`, `transition`
 - `shadow`, `shadow-md`, `shadow-lg`, `shadow-xl`, `shadow-2xl`
-- `ring`
-- `blur`
-- `filter`
-- `transition`
+
+### From `presets.css`
+
+- **ALL** `preset-*` classes (e.g., `preset-tonal-*`, `preset-filled-*`, `preset-outlined-*`).
+
+### From Other Project CSS
+
+- All classes in `ui/src/css/dp/partials/*.css` (e.g., `.btn`, `.card`, `.badge`, `.stats`).
+- All classes in `ui/src/css/dp/theme/*.css` (except `tailwind_merged.css` and `shame.css`).

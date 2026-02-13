@@ -25,5 +25,7 @@ native CSS variables.
 ## 1.3 Utility Safeguard
 
 - [x] Review `ui/src/css/dp/utility/tw_utils.css`.
+- [x] Review `ui/src/css/dp/theme/presets.css` and all files in `ui/src/css/dp/partials/`.
 - [x] Cross-reference with `tailwind_merged.css` to ensure no overlap in classes targeted for deletion.
-- [x] Explicitly mark `tw_utils.css` classes as "KEEP" in any internal documentation.
+- [x] Explicitly mark all classes found outside `tailwind_merged.css` and `shame.css` as "KEEP" (especially `preset-*`
+  classes).

@@ -13,8 +13,9 @@ Svelte components and modern CSS practices.
     * *Example*: `.p-4` -> `padding: calc(var(--spacing) * 4);`
 * **1.2. Usage Audit**: Run a global search for each extracted class in `.svelte` files within `ui/src/lib` and
   `ui/src/routes` to identify "hotspot" components with heavy Tailwind usage.
-* **1.3. Utility Safeguard**: Verify that no classes from `ui/src/css/dp/utility/tw_utils.css` are accidentally targeted
-  for migration, as these are designated to be kept.
+* **1.3. Utility Safeguard**: Ensure that classes from `ui/src/css/dp/utility/tw_utils.css` and all other
+  project-specific CSS files (e.g., `presets.css`, partials) are explicitly marked as **KEEP**. Only
+  `tailwind_merged.css` and `shame.css` are targets for deletion.
 
 #### Phase 2: Leaf Component Migration (Simple Cases)
 
@@ -80,7 +81,10 @@ Handle components that receive Tailwind classes via props (e.g., `class`, `panel
 
 #### Important Constraints Reminder
 
-* **DO NOT** touch any CSS files other than `tailwind_merged.css` and `shame.css`.
+* **DO NOT** touch or attempt to migrate any CSS files other than `tailwind_merged.css` and `shame.css`. This includes
+  files in `ui/src/css/dp/partials/`, `ui/src/css/dp/theme/` (except `tailwind_merged.css`), and
+  `ui/src/css/dp/utility/`.
+* **ALWAYS KEEP** all `preset-*` classes and any class that appears in the CSS codebase outside the two target files.
 * **DO NOT** touch backend files.
 * **DO NOT** change TypeScript files or non-styling logic in Svelte files.
 * **ALWAYS** create helper markdown, text or script files in the dedicated migration folder.

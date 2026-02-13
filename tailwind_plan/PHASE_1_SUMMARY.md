@@ -31,14 +31,24 @@
 
 ## 1.3 Utility Safeguard
 
-The following classes from `ui/src/css/dp/utility/tw_utils.css` are marked as **KEEP**:
+The following classes are explicitly marked as **KEEP**:
 
-- `sr-only`
-- `transform`
+### Designated Utilities (`ui/src/css/dp/utility/tw_utils.css`)
+
+- `sr-only`, `transform`, `ring`, `blur`, `filter`, `transition`
 - `shadow`, `shadow-md`, `shadow-lg`, `shadow-xl`, `shadow-2xl`
-- `ring`
-- `blur`
-- `filter`
-- `transition`
+
+### Theme Presets (`ui/src/css/dp/theme/presets.css`)
+
+- **ALL** `preset-*` classes (e.g., `preset-tonal-primary`, `preset-filled-secondary-500`, etc.)
+
+### Component & Global Styles
+
+- **ALL** classes defined in `ui/src/css/dp/partials/*.css` (e.g., `.btn`, `.card`, `.badge`, `.stats`, `.stat`, etc.)
+- **ALL** classes defined in `ui/src/css/dp/theme/*.css` **EXCEPT** `tailwind_merged.css` (e.g., `.h1`, `.anchor`,
+  `.base-font-*`, etc.)
+
+**Fundamental Rule**: If a class exists in any CSS file other than `tailwind_merged.css` or `shame.css`, it MUST be kept
+and NOT targeted for migration.
 
 Cross-reference check: These classes are NOT present in `tailwind_merged.css`.
