@@ -65,3 +65,5 @@ Target small, reusable components in `ui/src/lib/dp/components` that primarily u
     - [x] `event/match/MatchDetailLocationCard.svelte`
     - [x] `event/TimeSection.svelte`
     - [x] `formElements/Switch.svelte`
+    - [x] `auth/LoginBadge.svelte`
+    - [x] `meta/TopAppBarTrailing.svelte`
