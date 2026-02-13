@@ -45,12 +45,12 @@
   let cone: string = $state("");
   let generatedLegendList: any[] = $state([]);
 
-  // Styles
-  const cBase = "flex flex-col items-center space-y-4 w-";
-  const cCaption = "text-center";
-  const cCone = "block aspect-square rounded-full";
-  const cLegend = "text-sm w-full";
-  const cSwatch = "block aspect-square bg-black w-5 rounded-full mr-2";
+  // Styles - semantic class names
+  const cBase = "conic-base";
+  const cCaption = "conic-caption-text";
+  const cCone = "conic-cone-shape";
+  const cLegend = "conic-legend-list";
+  const cSwatch = "conic-swatch-indicator";
 
   // Generate Conic Gradient style
   function genConicGradient(): void {
@@ -94,14 +94,60 @@
   {/if}
   <!-- Legend -->
   {#if legend && generatedLegendList}
-    <ul class="conic-list list {classesLegend} space-y-2">
+    <ul class="conic-list list {classesLegend}">
       {#each generatedLegendList as {color, label, value}}
-        <li class="conic-item text-xs flex {hover}">
+        <li class="conic-item {hover}">
           <span class="conic-swatch {cSwatch}" style:background={color}></span>
-          <span class="conic-label flex-auto">{label}</span>
+          <span class="conic-label">{label}</span>
           <strong class="conic-value">{value}%</strong>
         </li>
       {/each}
     </ul>
   {/if}
 </figure>
+
+<style>
+  .conic-base {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(var(--spacing) * 4);
+  }
+
+  .conic-caption-text {
+    text-align: center;
+  }
+
+  .conic-cone-shape {
+    display: block;
+    aspect-ratio: 1;
+    border-radius: 9999px;
+  }
+
+  .conic-legend-list {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+    width: 100%;
+  }
+
+  .conic-item {
+    font-size: var(--text-xs);
+    line-height: var(--tw-leading, var(--text-xs--line-height));
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 2);
+    margin-block: calc(var(--spacing) * 2);
+  }
+
+  .conic-label {
+    flex: 1 1 auto;
+  }
+
+  .conic-swatch-indicator {
+    display: block;
+    aspect-ratio: 1;
+    background-color: black;
+    width: calc(var(--spacing) * 5);
+    border-radius: 9999px;
+  }
+</style>

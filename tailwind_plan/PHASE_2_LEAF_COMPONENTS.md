@@ -67,3 +67,13 @@ Target small, reusable components in `ui/src/lib/dp/components` that primarily u
     - [x] `formElements/Switch.svelte`
     - [x] `auth/LoginBadge.svelte`
     - [x] `meta/TopAppBarTrailing.svelte`
+    - [x] `charts/ConicGradient.svelte`
+    - [x] `event/IndividualParticipationEditButton.svelte`
+    - [x] `team/TeamAddMemberButton.svelte`
+    - [x] `stats/StatsBlockContent.svelte`
+    - [x] `uniformset/UniformSetInfoCard.svelte`
+    - [x] `player/PlayerRow.svelte`
+    - [x] `team/TeamListTeaser.svelte`
+    - [x] `team/TeamTeaserCard.svelte`
+    - [x] `player/PlayerDataCard.svelte`
+    - [x] `user/UserDataCard.svelte`
