@@ -14,14 +14,14 @@
 </script>
 
 <article
-  class="card preset-tonal-surface shadow-xl text-sm h-full"
+  class="card preset-tonal-surface shadow-xl teaser"
   class:card-hover={link}
 >
   <a class:line-through={event.cancelled} href="/account/event/{event.id}">
     <header class="card-header">
-      <h2>
+      <h2 class="title">
         <EventTypeBadge type={event.type}/>
-        <span class="ms-1 font-bold h5">{event?.title}</span>
+        <span class="title-text h5">{event?.title}</span>
       </h2>
     </header>
 
@@ -29,10 +29,10 @@
   </a>
 
   <footer class="card-footer">
-    <hr class="my-2"/>
+    <hr class="divider"/>
     {#if event.cancelled}
-      <div class="flex justify-end">
-                <span class="badge preset-filled-error-500 gap-1">
+      <div class="cancelled-container">
+                <span class="badge preset-filled-error-500 cancelled-badge">
                     <Ban size="18"/>
                     Cancelled
                 </span>
@@ -42,3 +42,29 @@
     {/if}
   </footer>
 </article>
+
+<style>
+  .teaser {
+    font-size: var(--text-sm);
+    height: 100%;
+  }
+
+  .title-text {
+    margin-inline-start: calc(var(--spacing) * 1);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .divider {
+    margin-top: calc(var(--spacing) * 2);
+    margin-bottom: calc(var(--spacing) * 2);
+  }
+
+  .cancelled-container {
+    display: flex;
+    justify-content: end;
+  }
+
+  .cancelled-badge {
+    gap: calc(var(--spacing) * 1);
+  }
+</style>

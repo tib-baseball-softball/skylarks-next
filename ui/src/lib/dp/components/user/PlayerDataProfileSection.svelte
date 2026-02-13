@@ -34,17 +34,17 @@
   });
 </script>
 
-<div class="card preset-tonal-primary shadow-lg flex flex-col justify-between">
+<div class="card preset-tonal-primary shadow-lg profile-card">
   <header class="card-header">
-    <h2 class="h4 font-semibold">Public Profile</h2>
+    <h2 class="h4 title">Public Profile</h2>
   </header>
 
-  <section class="p-4 font-light">
+  <section class="content">
     <p>
       You have the option to display your player data in your public
       profile on the website and apps.
     </p>
-    <p class="mt-2">
+    <p class="note">
       Please note that all statistics and basic info such as your name and
       team affiliation is considered public information when participating
       in official DBV and BSVBB competitions.
@@ -52,7 +52,7 @@
   </section>
 
   <footer class="card-footer">
-    <div class="flex flex-col gap-2 lg:gap-3">
+    <div class="actions">
       <PlayerDataForm buttonClasses="btn preset-tonal-primary border border-primary-500"></PlayerDataForm>
 
       {#if authRecord.bsm_id}
@@ -67,6 +67,37 @@
     </div>
   </footer>
 </div>
+
+<style>
+  .profile-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .title {
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .content {
+    padding: calc(var(--spacing) * 4);
+    font-weight: var(--font-weight-light);
+  }
+
+  .note {
+    margin-top: calc(var(--spacing) * 2);
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 2);
+
+    @media (min-width: 80rem) {
+      gap: calc(var(--spacing) * 3);
+    }
+  }
+</style>
 
 <PlayerHeaderSection player={playerObject}/>
 

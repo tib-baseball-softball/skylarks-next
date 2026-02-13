@@ -52,7 +52,7 @@
 </script>
 
 {#snippet editForm()}
-  <form class="mt-1">
+  <form class="edit-form">
     <label class="label mb-2 sr-only" for="edit-comment-input-{comment.id}">Comment</label>
     <div class="input-group grid-cols-[auto_1fr_auto]">
       <button type="button" class="ig-btn preset-filled" title="cancel edit" onclick="{() => isEditing = false}">
@@ -74,7 +74,7 @@
   </form>
 {/snippet}
 
-<div class="avatar-container flex flex-col justify-between gap-2">
+<div class="avatar-container">
   <Avatar
           --size="2.5rem"
           background="preset-tonal-primary"
@@ -89,8 +89,8 @@
 
 <div class={["comment-container card rounded-base", isLoggedInUser ? "preset-tonal-primary" : "preset-tonal-surface"]}
      data-testid="comment-container">
-  <div class="flex justify-between items-center">
-    <p class="font-bold text-wrap">{userFullName}</p>
+  <div class="header">
+    <p class="user-name">{userFullName}</p>
 
     <div class={["date-box", isLoggedInUser ? "" : "by-current-user"]}>
       {DateTimeUtility.dateTimeFormatShort.format(new Date(comment.created))}
@@ -100,8 +100,8 @@
   {#if isEditing}
     {@render editForm()}
   {:else}
-    <div class="flex flex-wrap items-end gap-3">
-      <p class="mt-1">
+    <div class="content">
+      <p class="text">
         {comment.text}
 
       </p>
@@ -116,9 +116,31 @@
 </div>
 
 <style>
+  .avatar-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: calc(var(--spacing) * 2);
+  }
+
+  .edit-form {
+    margin-top: calc(var(--spacing) * 1);
+  }
+
   .comment-container {
     width: 100%;
     padding: calc(var(--spacing) * 2);
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .user-name {
+      font-weight: var(--font-weight-bold);
+      text-wrap: wrap;
+    }
 
     .date-box {
       font-weight: var(--font-weight-light);
@@ -128,6 +150,17 @@
 
     .by-current-user {
       color: light-dark(var(--color-gray-600), var(--color-gray-400))
+    }
+
+    .content {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: end;
+      gap: calc(var(--spacing) * 3);
+    }
+
+    .text {
+      margin-top: calc(var(--spacing) * 1);
     }
   }
 </style>

@@ -26,7 +26,7 @@ Target small, reusable components in `ui/src/lib/dp/components` that primarily u
 
 - after finishing, always document components migrated here:
 
-- [/] List specific components migrated:
+- [x] List specific components migrated:
     - [x] `AnnouncementCard.svelte`
     - [x] `AnnouncementCoreContent.svelte`
     - [x] `Avatar.svelte`
@@ -77,3 +77,34 @@ Target small, reusable components in `ui/src/lib/dp/components` that primarily u
     - [x] `team/TeamTeaserCard.svelte`
     - [x] `player/PlayerDataCard.svelte`
     - [x] `user/UserDataCard.svelte`
+    - [x] `comments/CommentRow.svelte` (Call 8)
+    - [x] `comments/CommentSection.svelte` (Call 8)
+    - [x] `event/EventTeaser.svelte` (Call 8)
+    - [x] `modal/Dialog.svelte` (Call 8)
+    - [x] `user/PlayerProfileClubsSection.svelte` (Call 8)
+    - [x] `user/PlayerDataProfileSection.svelte` (Call 8)
+    - [x] `team/TeamMembersTableContent.svelte` (Call 8)
+
+## 2.4 Summary - Call 8 Phase 2 Continuation
+
+### Components Migrated (7 components)
+1. **CommentRow.svelte** - Migrated flex layout classes, spacing utilities (mt-1, gap-2, gap-3), and typography classes (font-bold, text-wrap) to scoped CSS
+2. **CommentSection.svelte** - Migrated list item layout classes (my-3, md:my-4, flex, gap-2, flex-row-reverse) and form spacing (mt-6)
+3. **EventTeaser.svelte** - Migrated card layout classes (text-sm, h-full, flex, justify-end, gap-1), typography (font-bold, ms-1), and divider spacing (my-2)
+4. **Dialog.svelte** - Migrated trigger and header layout classes (flex, gap-1, gap-5, items-center, mb-2) and typography (text-xl, font-semibold)
+5. **PlayerProfileClubsSection.svelte** - Migrated empty state card layout (flex, flex-col, justify-between, p-4, space-y-2, items-center, gap-3, flex-wrap) and typography (font-semibold)
+6. **PlayerDataProfileSection.svelte** - Migrated profile card layout (flex, flex-col, justify-between, p-4, font-light, mt-2) and responsive actions (gap-2, lg:gap-3)
+7. **TeamMembersTableContent.svelte** - Migrated admin actions layout (flex, gap-1, lg:gap-2, justify-end, m-0.5) and empty state spacing (py-4)
+
+### Key Patterns Used
+- Converted spacing utilities to `calc(var(--spacing) * N)`
+- Converted typography utilities to CSS variables (e.g., `var(--font-weight-bold)`, `var(--text-xl)`)
+- Used CSS nesting for better organization
+- Applied responsive breakpoints with `@media` queries
+- Created semantic class names (e.g., `.header`, `.content`, `.actions`, `.title`) instead of utility classes
+
+### Remaining Work for Phase 2
+- Most remaining components with Tailwind classes are in the `forms/` directory
+- These form components likely have more complex prop-based styling (covered in Phase 5)
+- A few section/layout components remain (TeamAdminSection, EventParticipantsOverviewSection, etc.)
+- Most simple leaf components have been successfully migrated

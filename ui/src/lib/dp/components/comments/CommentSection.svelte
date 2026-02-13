@@ -49,9 +49,9 @@
 </script>
 
 {#if comments.length > 0}
-  <ul>
+  <ul class="comments-list">
     {#each comments as comment (comment.id)}
-      <li class={["my-3 md:my-4 flex gap-2", authRecord.id === comment?.expand?.user?.id && "flex-row-reverse"]}>
+      <li class={["comment-item", authRecord.id === comment?.expand?.user?.id && "reverse"]}>
         <CommentRow {comment} {club}/>
       </li>
     {/each}
@@ -60,7 +60,7 @@
   <p>No comments yet.</p>
 {/if}
 
-<form class="mt-6">
+<form class="add-comment-form">
   <label class="label mb-2" for="new-comment-input">Comment</label>
   <div class="input-group grid-cols-[1fr_auto]">
     <input
@@ -75,3 +75,27 @@
     </button>
   </div>
 </form>
+
+<style>
+  .comments-list {
+    .comment-item {
+      margin-top: calc(var(--spacing) * 3);
+      margin-bottom: calc(var(--spacing) * 3);
+      display: flex;
+      gap: calc(var(--spacing) * 2);
+
+      @media (min-width: 64rem) {
+        margin-top: calc(var(--spacing) * 4);
+        margin-bottom: calc(var(--spacing) * 4);
+      }
+
+      &.reverse {
+        flex-direction: row-reverse;
+      }
+    }
+  }
+
+  .add-comment-form {
+    margin-top: calc(var(--spacing) * 6);
+  }
+</style>
