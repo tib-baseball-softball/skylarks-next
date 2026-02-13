@@ -49,11 +49,11 @@ Target small, reusable components in `ui/src/lib/dp/components` that primarily u
     - [x] `icons/Svelte.svelte`
     - [x] `icons/Pants.svelte`
     - [x] `icons/Cap.svelte`
-    - [ ] `utils/ProgressRing.svelte`
-    - [ ] `modal/sheet/sheet-title.svelte`
-    - [ ] `modal/sheet/sheet-description.svelte`
-    - [ ] `modal/sheet/sheet-header.svelte`
-    - [ ] `modal/sheet/sheet-footer.svelte`
+    - [x] `utils/ProgressRing.svelte`
+    - [x] `modal/sheet/sheet-title.svelte`
+    - [x] `modal/sheet/sheet-description.svelte`
+    - [x] `modal/sheet/sheet-header.svelte`
+    - [x] `modal/sheet/sheet-footer.svelte`
     - [ ] `modal/sheet/sheet-overlay.svelte`
     - [ ] `modal/sheet/sheet-content.svelte`
     - [ ] `datatable/RowsPerPage.svelte`
