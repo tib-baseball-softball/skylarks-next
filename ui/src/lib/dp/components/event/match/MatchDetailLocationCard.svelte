@@ -33,38 +33,38 @@
   );
 </script>
 
-<div class={classes}>
-  <div class="flex items-center gap-3">
+<div class="root {classes}">
+  <div class="location-row">
     <LandPlot/>
     <div>
       <p>{field.address_addon} ({field?.name})</p>
-      <p class="text-sm font-light">Ballpark</p>
+      <p class="label">Ballpark</p>
     </div>
   </div>
 
   <hr class={showDividers ? "" : "hidden!"}/>
 
-  <div class="flex items-center gap-3">
+  <div class="location-row">
     <MapPin/>
     <div>
       <p>{field.street}</p>
-      <p class="text-sm font-light">Address</p>
+      <p class="label">Address</p>
     </div>
   </div>
 
   <hr class={showDividers ? "" : "hidden!"}/>
 
-  <div class="flex items-center gap-3">
+  <div class="location-row">
     <Building2/>
     <div>
       <p>{field.postal_code} {field.city}</p>
-      <p class="text-sm font-light">City</p>
+      <p class="label">City</p>
     </div>
   </div>
 
   <hr class={showDividers ? "" : "hidden!"}/>
 
-  <div class="flex items-center gap-3 self-end">
+  <div class="location-row link">
     <Link/>
     <a class="anchor" href={googleMapsLink} target="_blank"
     >Open in Google Maps</a
@@ -73,7 +73,7 @@
 
   <hr class={showDividers ? "" : "hidden!"}/>
 
-  <div class="flex items-center gap-3 self-end">
+  <div class="location-row link">
     <Link/>
     <a class="anchor" href={appleMapsLink} target="_blank">Open in Apple Maps</a
     >
@@ -81,6 +81,26 @@
 </div>
 
 <style>
+  .root {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .location-row {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 3);
+
+    &.link {
+      align-self: flex-end;
+    }
+  }
+
+  .label {
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 300; /* font-light */
+  }
+
   hr {
     margin: 0.5rem 0;
   }

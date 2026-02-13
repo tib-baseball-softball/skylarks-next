@@ -56,10 +56,10 @@ Target small, reusable components in `ui/src/lib/dp/components` that primarily u
     - [x] `modal/sheet/sheet-footer.svelte`
     - [ ] `modal/sheet/sheet-overlay.svelte`
     - [ ] `modal/sheet/sheet-content.svelte`
-    - [ ] `datatable/RowsPerPage.svelte`
-    - [ ] `datatable/ThSort.svelte`
-    - [ ] `datatable/ThFilter.svelte`
-    - [ ] `datatable/Search.svelte`
-    - [ ] `event/match/MatchDetailLocationCard.svelte`
-    - [ ] `event/TimeSection.svelte`
-    - [ ] `formElements/Switch.svelte`
+    - [x] `datatable/RowsPerPage.svelte`
+    - [x] `datatable/ThSort.svelte`
+    - [x] `datatable/ThFilter.svelte`
+    - [x] `datatable/Search.svelte`
+    - [x] `event/match/MatchDetailLocationCard.svelte`
+    - [x] `event/TimeSection.svelte`
+    - [x] `formElements/Switch.svelte`
