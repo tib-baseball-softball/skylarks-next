@@ -23,7 +23,6 @@
   aside {
     font-size: var(--text-sm);
     margin-inline-end: calc(var(--spacing) * 6);
-    --tw-leading: calc(var(--spacing) * 8);
     line-height: calc(var(--spacing) * 8);
   }
 </style>

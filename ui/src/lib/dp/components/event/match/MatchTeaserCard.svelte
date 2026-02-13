@@ -23,17 +23,17 @@
 </script>
 
 <a
-  class=" block card card-hover text-sm {matchDecorator.isPlayoffGame() ===
+  class="root card card-hover {matchDecorator.isPlayoffGame() ===
     true
-        ? 'preset-tonal-primary border border-primary-500'
-        : 'preset-tonal-surface border border-surface-500'}"
+        ? 'preset-tonal-primary border-primary-500'
+        : 'preset-tonal-surface border-surface-500'}"
   href="/gamecenter/game-detail/{match.id}"
 >
   <header class="card-header">
-    <div class="flex justify-between items-center">
+    <div class="header-container">
       <div>
-        <h3 class="font-medium">{match.league?.name}</h3>
-        <p class="font-light">
+        <h3 class="league-name">{match.league?.name}</h3>
+        <p class="match-date">
           {DateTimeUtility.dateTimeFormatMedium.format(matchDate)}
         </p>
       </div>
@@ -41,7 +41,7 @@
     </div>
   </header>
 
-  <hr class="mt-2 mx-3"/>
+  <hr class="separator"/>
 
   <section>
     <MatchTeaserCardRow
@@ -60,11 +60,44 @@
 </a>
 
 <style>
+  .root {
+    display: block;
+    font-size: var(--text-sm);
+    border: 1px solid transparent;
+
+    &.border-primary-500 {
+      border-color: var(--color-primary-500);
+    }
+
+    &.border-surface-500 {
+      border-color: var(--color-surface-500);
+    }
+  }
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .league-name {
+    font-weight: var(--font-weight-medium);
+  }
+
+  .match-date {
+    font-weight: var(--font-weight-light);
+  }
+
+  .separator {
+    margin-top: calc(var(--spacing) * 2);
+    margin-left: calc(var(--spacing) * 3);
+    margin-right: calc(var(--spacing) * 3);
+  }
+
   section {
     padding: calc(var(--spacing) * 4);
     display: flex;
     flex-direction: column;
     gap: calc(var(--spacing) * 2);
-
   }
 </style>

@@ -1,27 +1,41 @@
 <script lang="ts">
-interface props {
-  type: string
-}
-
-const { type }: props = $props()
-
-function getDisplayString(): string {
-  switch (type) {
-    case "game":
-      return "Game"
-    case "practice":
-      return "Practice"
-    default:
-      return "Event"
+  interface props {
+    type: string;
   }
-}
+
+  const {type}: props = $props();
+
+  function getDisplayString(): string {
+    switch (type) {
+      case "game":
+        return "Game";
+      case "practice":
+        return "Practice";
+      default:
+        return "Event";
+    }
+  }
 </script>
 
-<span
-        class="badge"
-        class:preset-filled-primary-500={type === "game"}
-        class:preset-filled-secondary-500={type === "practice"}
-        class:preset-filled-tertiary-500={type === "misc"}
->
-{getDisplayString()}
+<span class="badge" data-type={type}>
+  {getDisplayString()}
 </span>
+
+<style>
+  .badge {
+    &[data-type="game"] {
+      background-color: var(--color-primary-500);
+      color: white;
+    }
+
+    &[data-type="practice"] {
+      background-color: var(--color-secondary-500);
+      color: white;
+    }
+
+    &[data-type="misc"] {
+      background-color: var(--color-tertiary-500);
+      color: white;
+    }
+  }
+</style>

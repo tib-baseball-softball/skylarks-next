@@ -24,6 +24,8 @@ Target small, reusable components in `ui/src/lib/dp/components` that primarily u
 
 ## 2.3 Progress Tracking
 
+- after finishing, always document components migrated here:
+
 - [/] List specific components migrated:
     - [x] `AnnouncementCard.svelte`
     - [x] `AnnouncementCoreContent.svelte`
@@ -33,7 +35,13 @@ Target small, reusable components in `ui/src/lib/dp/components` that primarily u
     - [x] `DeleteButton.svelte`
     - [x] `EventAttireSection.svelte`
     - [x] `EventCoreInfo.svelte`
+    - [x] `EventTypeBadge.svelte`
     - [x] `Footer.svelte`
+    - [x] `GameResultIndicator.svelte`
     - [x] `GenericDetailRow.svelte`
+    - [x] `MatchTeaserCard.svelte`
     - [x] `MatchTeaserCardRow.svelte`
+    - [x] `Pagination.svelte`
+    - [x] `PriorityBadge.svelte`
+    - [x] `RowCount.svelte`
     - [x] `SeasonSelector.svelte`
