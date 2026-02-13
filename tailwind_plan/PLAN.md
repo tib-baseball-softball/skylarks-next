@@ -83,4 +83,5 @@ Handle components that receive Tailwind classes via props (e.g., `class`, `panel
 * **DO NOT** touch any CSS files other than `tailwind_merged.css` and `shame.css`.
 * **DO NOT** touch backend files.
 * **DO NOT** change TypeScript files or non-styling logic in Svelte files.
+* **ALWAYS** create helper markdown, text or script files in the dedicated migration folder.
 * **ALWAYS** use Svelte 5 best practices (e.g., snippets for complex props) and modern CSS (e.g., nesting, `:where()`).
