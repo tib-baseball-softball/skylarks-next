@@ -1,19 +1,19 @@
 <script lang="ts">
 interface Props {
   identifier: string // Skylarks Caps get assigned a unique identifier, for all others this is just a color
-  classes: string
+  classes?: string
 }
 
-let { identifier, classes }: Props = $props()
+let { identifier, classes = "" }: Props = $props()
 </script>
 
 {#if identifier === "B"}
-  <img class="{classes}" src="/uniform/B_cap.svg" alt="Berlin Skylarks Home Cap">
+  <img class="root {classes}" src="/uniform/B_cap.svg" alt="Berlin Skylarks Home Cap">
 {:else if identifier === "Bird"}
-  <img class="{classes}" src="/uniform/Bird_cap.svg" alt="Berlin Skylarks Road Cap">
+  <img class="root {classes}" src="/uniform/Bird_cap.svg" alt="Berlin Skylarks Road Cap">
 {:else}
-  <div class="{classes}">
-    <svg width="100%" height="100%" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg"
+  <div class="root {classes}">
+    <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg"
          xml:space="preserve"
          style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
       <g id="path3056" transform="matrix(88.2013,0,0,88.2013,-242.384,4.88261)">
@@ -25,3 +25,9 @@ let { identifier, classes }: Props = $props()
     </svg>
   </div>
 {/if}
+
+<style>
+  .root {
+    width: calc(var(--spacing) * 10);
+  }
+</style>

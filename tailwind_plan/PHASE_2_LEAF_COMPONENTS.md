@@ -45,3 +45,21 @@ Target small, reusable components in `ui/src/lib/dp/components` that primarily u
     - [x] `PriorityBadge.svelte`
     - [x] `RowCount.svelte`
     - [x] `SeasonSelector.svelte`
+    - [x] `icons/Shirt.svelte`
+    - [x] `icons/Svelte.svelte`
+    - [x] `icons/Pants.svelte`
+    - [x] `icons/Cap.svelte`
+    - [ ] `utils/ProgressRing.svelte`
+    - [ ] `modal/sheet/sheet-title.svelte`
+    - [ ] `modal/sheet/sheet-description.svelte`
+    - [ ] `modal/sheet/sheet-header.svelte`
+    - [ ] `modal/sheet/sheet-footer.svelte`
+    - [ ] `modal/sheet/sheet-overlay.svelte`
+    - [ ] `modal/sheet/sheet-content.svelte`
+    - [ ] `datatable/RowsPerPage.svelte`
+    - [ ] `datatable/ThSort.svelte`
+    - [ ] `datatable/ThFilter.svelte`
+    - [ ] `datatable/Search.svelte`
+    - [ ] `event/match/MatchDetailLocationCard.svelte`
+    - [ ] `event/TimeSection.svelte`
+    - [ ] `formElements/Switch.svelte`
