@@ -4,8 +4,8 @@ Target small, reusable components in `ui/src/lib/dp/components` that primarily u
 
 ## 2.1 Component Identification
 
-- [ ] Identify components with zero prop-based styling logic.
-- [ ] Prioritize components used frequently (e.g., Icons, Badges, simple wrappers).
+- [x] Identify components with zero prop-based styling logic.
+- [x] Prioritize components used frequently (e.g., Icons, Badges, simple wrappers).
 
 ## 2.2 Migration Workflow (Repeat for each component)
 
@@ -24,6 +24,16 @@ Target small, reusable components in `ui/src/lib/dp/components` that primarily u
 
 ## 2.3 Progress Tracking
 
-- [ ] List specific components migrated:
-    - [ ] `ExampleComponent.svelte`
-    - [ ] ...
+- [/] List specific components migrated:
+    - [x] `AnnouncementCard.svelte`
+    - [x] `AnnouncementCoreContent.svelte`
+    - [x] `Avatar.svelte`
+    - [x] `Baseball.svelte`
+    - [x] `ClubDetailCard.svelte`
+    - [x] `DeleteButton.svelte`
+    - [x] `EventAttireSection.svelte`
+    - [x] `EventCoreInfo.svelte`
+    - [x] `Footer.svelte`
+    - [x] `GenericDetailRow.svelte`
+    - [x] `MatchTeaserCardRow.svelte`
+    - [x] `SeasonSelector.svelte`

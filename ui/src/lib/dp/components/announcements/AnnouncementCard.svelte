@@ -24,19 +24,19 @@
   );
 </script>
 
-<article class="card p-4 preset-tonal-surface shadow-xl h-full">
-  <div class="flex flex-col justify-between h-full">
+<article class="root card preset-tonal-surface shadow-xl">
+  <div class="inner-container">
     <div>
       <AnnouncementCoreContent {announcement} textClasses="line-clamp-5"/>
     </div>
 
     <div>
-      <hr class="mt-6 mb-2"/>
+      <hr class="separator"/>
 
-      <footer class="mt-3 flex gap-2 justify-between">
+      <footer class="actions">
 
         {#if canEdit}
-          <div class="flex gap-2">
+          <div class="admin-actions">
             <AnnouncementForm showLabel={false} announcement={announcement} club={announcement.expand?.club ?? null}
                               team={announcement.expand?.team ?? null}
                               buttonClasses="btn btn-icon btn-sm preset-tonal-tertiary border border-tertiary-500"
@@ -54,7 +54,7 @@
           <div aria-hidden="true"></div>
         {/if}
 
-        <div class="flex gap-4">
+        <div class="meta-actions">
           {#if commentCount > 0}
             <div class="relative inline-block">
               <span class="sr-only">Number of Comments:</span>
@@ -76,6 +76,40 @@
 </article>
 
 <style>
+  .root {
+    padding: calc(var(--spacing) * 4);
+    height: 100%;
+  }
+
+  .inner-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .separator {
+    margin-top: calc(var(--spacing) * 6);
+    margin-bottom: calc(var(--spacing) * 2);
+  }
+
+  .actions {
+    margin-top: calc(var(--spacing) * 3);
+    display: flex;
+    gap: calc(var(--spacing) * 2);
+    justify-content: space-between;
+  }
+
+  .admin-actions {
+    display: flex;
+    gap: calc(var(--spacing) * 2);
+  }
+
+  .meta-actions {
+    display: flex;
+    gap: calc(var(--spacing) * 4);
+  }
+
   .badge-icon {
     top: -9px;
     right: -6px;

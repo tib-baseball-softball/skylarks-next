@@ -12,8 +12,30 @@
 </script>
 
 <h2 class="h2">Uniform</h2>
-<div class="p-4 flex gap-2 md:gap-3 justify-evenly">
-  <Cap classes="w-16" identifier={attire.cap}/>
-  <Shirt classes="w-12 h-12" fillColor={attire.jersey}/>
-  <Pants classes="w-12 h-12" fillColor={attire.pants}/>
+<div class="attire-container">
+  <Cap classes="cap-icon" identifier={attire.cap}/>
+  <Shirt classes="shirt-icon" fillColor={attire.jersey}/>
+  <Pants classes="pants-icon" fillColor={attire.pants}/>
 </div>
+
+<style>
+  .attire-container {
+    padding: calc(var(--spacing) * 4);
+    display: flex;
+    gap: calc(var(--spacing) * 2);
+    justify-content: space-evenly;
+
+    @media (min-width: 48rem) {
+      gap: calc(var(--spacing) * 3);
+    }
+  }
+
+  :global(.cap-icon) {
+    width: calc(var(--spacing) * 16);
+  }
+
+  :global(.shirt-icon), :global(.pants-icon) {
+    width: calc(var(--spacing) * 12);
+    height: calc(var(--spacing) * 12);
+  }
+</style>

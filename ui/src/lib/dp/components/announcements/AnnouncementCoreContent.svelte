@@ -11,14 +11,14 @@
   let {announcement, textClasses = ""}: Props = $props();
 </script>
 
-<header class="flex justify-between hyphens-auto">
+<header class="header">
   <h3 class="h4">{announcement.title}</h3>
 
   <PriorityBadge priority={announcement.priority}/>
 </header>
 
-<div class="mt-4">
-  <p class="my-4 flex gap-3 {textClasses}">
+<div class="content">
+  <p class="author-info {textClasses}">
     <User/>
     <span>
     {announcement.expand?.author?.first_name}
@@ -30,3 +30,21 @@
     {@html announcement.bodytext}
   </p>
 </div>
+
+<style>
+  .header {
+    display: flex;
+    justify-content: space-between;
+    hyphens: auto;
+  }
+
+  .content {
+    margin-top: calc(var(--spacing) * 4);
+  }
+
+  .author-info {
+    margin-block: calc(var(--spacing) * 4);
+    display: flex;
+    gap: calc(var(--spacing) * 3);
+  }
+</style>
