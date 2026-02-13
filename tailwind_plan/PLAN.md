@@ -21,7 +21,8 @@ Svelte components and modern CSS practices.
 
 [See Detailed Checklist: PHASE_2_LEAF_COMPONENTS.md](./PHASE_2_LEAF_COMPONENTS.md)
 
-Target components in `ui/src/lib/dp/components` that use static utility classes and do not pass them as props.
+Target components in `ui/src/lib/dp/components` and `ui/src/lib/tib/components/` that use static utility classes and do
+not pass them as props.
 
 * **2.1. Spacing & Layout**: Replace `p-*`, `m-*`, `gap-*`, `flex`, `grid`, `items-*`, and `justify-*` with scoped CSS.
 * **2.2. Typography & Colors**: Replace `text-*`, `font-*`, and `bg-*` classes.
