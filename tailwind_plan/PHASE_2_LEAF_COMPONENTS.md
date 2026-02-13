@@ -54,8 +54,10 @@ Target small, reusable components in `ui/src/lib/dp/components` that primarily u
     - [x] `modal/sheet/sheet-description.svelte`
     - [x] `modal/sheet/sheet-header.svelte`
     - [x] `modal/sheet/sheet-footer.svelte`
-    - [ ] `modal/sheet/sheet-overlay.svelte`
-    - [ ] `modal/sheet/sheet-content.svelte`
+    - [x] `modal/sheet/sheet-overlay.svelte`
+    - [x] `modal/sheet/sheet-content.svelte`
+    - [x] `player/PlayerNumberGraphic.svelte`
+    - [x] `toast/ToastContainer.svelte`
     - [x] `datatable/RowsPerPage.svelte`
     - [x] `datatable/ThSort.svelte`
     - [x] `datatable/ThFilter.svelte`
