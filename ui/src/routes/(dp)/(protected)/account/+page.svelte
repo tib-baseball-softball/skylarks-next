@@ -25,7 +25,7 @@
 
 <h2 class="h2">My Teams</h2>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+<div class="teams-grid">
   {#each data.teams as team}
     <TeamListTeaser {team} link={true}/>
   {/each}
@@ -53,6 +53,17 @@
 
     @media (min-width: 80rem) {
       grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  .teams-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: calc(var(--spacing) * 3);
+    margin-block-end: calc(var(--spacing) * 6);
+
+    @media (min-width: 48rem) {
+      grid-template-columns: 1fr 1fr;
     }
   }
 </style>

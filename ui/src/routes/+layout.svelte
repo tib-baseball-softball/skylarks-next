@@ -46,8 +46,8 @@
 
       {#snippet children()}
         <section>
-          <ul class="app-bar-link-list ">
-            <StaticNavigationLinks classes="rounded-base gap-2 py-1 px-2"/>
+          <ul class="app-bar-link-list">
+            <StaticNavigationLinks classes="top-nav-link rounded-base"/>
           </ul>
         </section>
       {/snippet}
@@ -71,7 +71,7 @@
 
     <!-- Sidebar (Left) -->
     {#if showSidebar}
-      <aside class="">
+      <aside>
         <SidebarNavigation clubs={data.clubs} teams={data.teams}/>
       </aside>
     {:else}
@@ -90,8 +90,8 @@
 
   <BottomNavigation>
     {#snippet navLinks()}
-      <StaticNavigationLinks classes="flex-col py-1.5 text-sm"/>
-    {/snippet}
+      <StaticNavigationLinks classes="bottom-nav-link"/>
+    {#/snippet}
   </BottomNavigation>
 
   <!-- Footer -->
@@ -106,11 +106,11 @@
 
         <a aria-label="to Skylarks Instagram profile" href="https://www.instagram.com/berlinskylarks/" rel="noreferrer"
            target="_blank">
-          <img alt="Instagram brand logo" class="m-1 max-w-[40px]" src="/Instagram_Glyph_Gradient.png">
+          <img alt="Instagram brand logo" class="instagram-logo" src="/Instagram_Glyph_Gradient.png">
         </a>
 
         <a aria-label="to Turngemeinde in Berlin main website" href="https://tib1848ev.de/" target="_blank">
-          <img alt="TiB Logo" class="min-w-8 max-w-14" src="/tib_logo.svg" width="38">
+          <img alt="TiB Logo" class="tib-logo" src="/tib_logo.svg" width="38">
         </a>
       {/snippet}
     </Footer>
@@ -213,6 +213,28 @@
     @media (min-width: 64rem) {
       padding-bottom: 0;
     }
+  }
+
+  .instagram-logo {
+    margin: calc(var(--spacing) * 1);
+    max-width: 40px;
+  }
+
+  .tib-logo {
+    min-width: calc(var(--spacing) * 8);
+    max-width: calc(var(--spacing) * 14);
+  }
+
+  :global(.top-nav-link) {
+    gap: calc(var(--spacing) * 2);
+    padding-block: calc(var(--spacing) * 1);
+    padding-inline: calc(var(--spacing) * 2);
+  }
+
+  :global(.bottom-nav-link) {
+    flex-direction: column;
+    padding-block: calc(var(--spacing) * 1.5);
+    font-size: var(--text-sm);
   }
 
   .logo-link {

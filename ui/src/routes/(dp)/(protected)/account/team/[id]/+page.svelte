@@ -44,52 +44,50 @@
   const isMember = $derived(authRecord?.teams.includes(data.team.id));
 </script>
 
-<h1 class="h1 my-3!">{data.team.name} ({data.team?.expand?.club.name})</h1>
+<h1 class="h1 page-title">{data.team.name} ({data.team?.expand?.club.name})</h1>
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 my-6!">
-  <article class="card preset-tonal-surface lg:col-span-2">
+<div class="team-overview-grid">
+  <article class="card team-description-card preset-tonal-surface">
     <header class="card-header">
-      <h2 class="h4 font-medium">Team Description</h2>
+      <h2 class="h4 card-title">Team Description</h2>
     </header>
-    <section class="p-4">{@html data.team.description}</section>
+    <section class="card-content">{@html data.team.description}</section>
   </article>
 
   <TeamTeaserCard link={false} team={data.team}/>
 </div>
 
 {#if isMember || canEdit}
-  <section class="my-8! space-y-4">
+  <section class="announcements-section">
     <header>
-      <h2 class="h2 mb-3">Announcements</h2>
+      <h2 class="h2">Announcements</h2>
     </header>
 
     <AnnouncementSectionContent store={announcementStore}/>
 
     {#if canEdit}
-      <AnnouncementForm
-        announcement={null}
-        team={data.team}
-        club={null}
-        buttonClasses="btn preset-filled-primary-500"
-        showLabel={true}
-      />
+      <div class="announcement-actions">
+        <AnnouncementForm
+          announcement={null}
+          team={data.team}
+          club={null}
+          buttonClasses="btn preset-filled-primary-500"
+          showLabel={true}
+        />
+      </div>
     {/if}
   </section>
 
-  <section>
+  <section class="events-section">
     <header>
       <h2 class="h2">Team Events</h2>
     </header>
 
-    <div
-      class="flex flex-wrap gap-4 preset-tonal-surface justify-between px-4 py-3 rounded-base text-sm lg:text-base"
-    >
-      <label
-        class="filter-label"
-      >
+    <div class="filters-bar preset-tonal-surface">
+      <label class="filter-label">
         <span>Timeframe</span>
         <Tabs.Root bind:value={showEvents}>
-          <Tabs.List class="tabs-list event-segment-container p-1!">
+          <Tabs.List class="tabs-list event-segment-container">
             <Tabs.Trigger class="tabs-trigger btn active:preset-filled-error-300-700" data-testid="segment-item"
                           value="next">Next
             </Tabs.Trigger>
@@ -102,17 +100,17 @@
       <label class="filter-label">
         <span>Sort</span>
         <Tabs.Root bind:value={sorting}>
-          <Tabs.List class="tabs-list flex-wrap event-segment-container p-1!">
+          <Tabs.List class="tabs-list event-segment-container">
             <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="asc">Ascending</Tabs.Trigger>
             <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="desc">Descending</Tabs.Trigger>
           </Tabs.List>
         </Tabs.Root>
       </label>
 
-      <label class=" filter-label">
+      <label class="filter-label">
         <span>Type</span>
         <Tabs.Root bind:value={showTypes}>
-          <Tabs.List class="tabs-list flex-wrap event-segment-container p-1! gap-1">
+          <Tabs.List class="tabs-list event-segment-container type-tabs">
             <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="any">All</Tabs.Trigger>
             <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="game">Game</Tabs.Trigger>
             <Tabs.Trigger class="tabs-trigger btn" data-testid="segment-item" value="practice">Practice</Tabs.Trigger>
@@ -138,15 +136,15 @@
 
   <Paginator showIfSinglePage={false} store={events}/>
 
-  <hr class="my-8!"/>
-  <section class="space-y-2 lg:space-y-4">
+  <hr class="section-divider"/>
+  <section class="links-section">
     <header>
       <h2 class="h3">Links</h2>
     </header>
 
-    <div class="flex flex-wrap items-center gap-2 lg:gap-3">
+    <div class="links-container">
       <a
-        class="btn preset-tonal-tertiary border border-tertiary-500"
+        class="btn preset-tonal-tertiary border-tertiary"
         href="/account/team/{data.team.id}/members"
       >
         <Users/>
@@ -156,7 +154,7 @@
   </section>
 
   {#if canEdit}
-    <hr class="my-2"/>
+    <hr class="admin-divider"/>
 
     <TeamAdminSection team={data.team} eventSeries={data.eventSeries}/>
   {/if}
@@ -165,13 +163,110 @@
 {/if}
 
 <style>
+  .page-title {
+    margin-block: calc(var(--spacing) * 3) !important;
+  }
+
+  .team-overview-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: calc(var(--spacing) * 3);
+    margin-block: calc(var(--spacing) * 6) !important;
+
+    @media (min-width: 48rem) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (min-width: 64rem) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .team-description-card {
+    @media (min-width: 64rem) {
+      grid-column: span 2 / span 2;
+    }
+  }
+
+  .card-title {
+    font-weight: 500;
+  }
+
+  .card-content {
+    padding: calc(var(--spacing) * 4);
+  }
+
+  .announcements-section {
+    margin-block: calc(var(--spacing) * 8) !important;
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 4);
+
+    h2 {
+        margin-bottom: calc(var(--spacing) * 3);
+    }
+  }
+
+  .filters-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--spacing) * 4);
+    justify-content: space-between;
+    padding-inline: calc(var(--spacing) * 4);
+    padding-block: calc(var(--spacing) * 3);
+    border-radius: var(--radius-base);
+    font-size: var(--text-sm);
+
+    @media (min-width: 64rem) {
+      font-size: var(--text-base);
+    }
+  }
+
+  .section-divider {
+    margin-block: calc(var(--spacing) * 8) !important;
+  }
+
+  .links-section {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 2);
+
+    @media (min-width: 64rem) {
+      gap: calc(var(--spacing) * 4);
+    }
+  }
+
+  .links-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(var(--spacing) * 2);
+
+    @media (min-width: 64rem) {
+      gap: calc(var(--spacing) * 3);
+    }
+  }
+
+  .admin-divider {
+    margin-block: calc(var(--spacing) * 2);
+  }
+
   :global {
     .event-segment-container {
       border: 1px solid var(--color-surface-600-400);
+      padding: calc(var(--spacing) * 1) !important;
 
       .tabs-trigger {
         padding: 0.25rem 0.6rem;
       }
+      
+      &.type-tabs {
+          gap: calc(var(--spacing) * 1);
+      }
+    }
+
+    .border-tertiary {
+      border: 1px solid var(--color-tertiary-500) !important;
     }
   }
 
