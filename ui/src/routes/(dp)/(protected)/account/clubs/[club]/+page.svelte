@@ -56,7 +56,7 @@
         announcement={null}
         team={null}
         {club}
-        buttonClasses="btn preset-filled-primary-500"
+        triggerVariant="filled-primary"
         showLabel={true}
       />
     </div>
@@ -83,7 +83,7 @@
       <TeamForm
         team={null}
         {club}
-        buttonClasses="btn preset-filled-primary-500"
+        triggerVariant="filled-primary"
         showLabel={true}
       />
     </div>

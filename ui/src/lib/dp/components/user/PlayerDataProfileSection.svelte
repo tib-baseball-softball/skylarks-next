@@ -53,7 +53,7 @@
 
   <footer class="card-footer">
     <div class="actions">
-      <PlayerDataForm buttonClasses="btn preset-tonal-primary border border-primary-500"></PlayerDataForm>
+      <PlayerDataForm triggerVariant="tonal-primary"></PlayerDataForm>
 
       {#if authRecord.bsm_id}
         <a

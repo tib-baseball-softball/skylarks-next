@@ -100,7 +100,7 @@
       <div class="actions-container">
 
         <EventForm
-                buttonClasses="btn preset-tonal-surface border-surface"
+                triggerVariant="tonal-surface"
                 clubID={event?.expand?.team?.club ?? ""}
                 event={event}
                 teamID={event.team}

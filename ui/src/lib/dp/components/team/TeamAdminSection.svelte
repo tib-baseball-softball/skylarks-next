@@ -81,7 +81,7 @@
     <footer class="card-footer">
       <div class="card-actions">
         <EventSeriesView
-          buttonClasses="btn preset-tonal-primary border"
+          triggerVariant="tonal-primary"
           {eventSeries}
           {team}
         />
@@ -107,7 +107,7 @@
       <div class="card-actions">
 
         <EventForm
-          buttonClasses="btn preset-tonal-tertiary border-tertiary"
+          triggerVariant="tonal-tertiary"
           clubID={team?.club ?? ""}
           event={null}
           teamID={team.id}
@@ -129,7 +129,7 @@
 
     <section class="card-content">
       <div class="card-actions">
-        <TeamForm buttonClasses="btn preset-tonal-surface border-surface" club={team?.expand?.club}
+        <TeamForm triggerVariant="tonal-surface" club={team?.expand?.club}
                   team={team}/>
       </div>
     </section>

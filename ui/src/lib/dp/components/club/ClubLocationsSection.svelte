@@ -52,7 +52,8 @@
           <LocationForm
             {club}
             {location}
-            buttonClasses="btn btn-icon preset-tonal-tertiary border border-tertiary-500"
+            triggerVariant="tonal-tertiary"
+            triggerIcon={true}
           />
 
           <DeleteButton
@@ -78,7 +79,8 @@
   <LocationForm
     {club}
     location={null}
-    buttonClasses="btn preset-tonal-primary border border-primary-500 my-3"
+    triggerVariant="tonal-primary"
+    triggerSpaced={true}
   />
 {/if}
 

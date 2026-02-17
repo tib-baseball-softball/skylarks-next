@@ -113,7 +113,7 @@
         <div class="admin-actions">
           <AnnouncementForm showLabel={true} announcement={$announcement} club={$announcement.expand?.club ?? null}
                             team={$announcement.expand?.team ?? null}
-                            buttonClasses="btn preset-tonal-tertiary border-tertiary"/>
+                            triggerVariant="tonal-tertiary"/>
 
           <DeleteButton
             id={$announcement.id}

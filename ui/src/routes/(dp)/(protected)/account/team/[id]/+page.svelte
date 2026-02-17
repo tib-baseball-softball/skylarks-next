@@ -71,7 +71,7 @@
           announcement={null}
           team={data.team}
           club={null}
-          buttonClasses="btn preset-filled-primary-500"
+          triggerVariant="filled-primary"
           showLabel={true}
         />
       </div>

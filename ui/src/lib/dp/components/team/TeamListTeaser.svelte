@@ -70,7 +70,9 @@
         <TeamForm
                 club={team.expand?.club}
                 team={team}
-                buttonClasses="btn btn-sm btn-icon preset-tonal-tertiary border border-tertiary-500"
+                triggerVariant="tonal-tertiary"
+                triggerSize="sm"
+                triggerIcon={true}
                 showLabel={false}
         />
       {/if}

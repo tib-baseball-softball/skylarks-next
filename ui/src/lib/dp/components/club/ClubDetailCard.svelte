@@ -46,7 +46,7 @@
 
   {#if club.admins.includes(authRecord.id)}
     <footer class="card-footer">
-      <ClubForm club={club} buttonClasses="btn preset-tonal-secondary border border-secondary-500"/>
+      <ClubForm club={club} triggerVariant="tonal-secondary"/>
     </footer>
   {/if}
 </div>

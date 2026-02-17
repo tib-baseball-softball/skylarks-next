@@ -39,7 +39,9 @@
           <div class="admin-actions">
             <AnnouncementForm showLabel={false} announcement={announcement} club={announcement.expand?.club ?? null}
                               team={announcement.expand?.team ?? null}
-                              buttonClasses="btn btn-icon btn-sm preset-tonal-tertiary border border-tertiary-500"
+                              triggerVariant="tonal-tertiary"
+                              triggerSize="sm"
+                              triggerIcon={true}
             />
 
             <DeleteButton
