@@ -10,32 +10,33 @@
 </script>
 
 <section>
-  <article class="flex justify-center">
+<section>
+  <article class="logo-wrapper">
     <img
       alt="Skylarks Logo"
-      class="w-24 h-auto mb-1"
+      class="club-logo"
       src="/icon_dp.svg"
     />
   </article>
 
-  <article class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">
-    <div class="container">
+  <article class="card club-info-card preset-tonal shadow-xl">
+    <div class="row">
       <ClipboardList/>
       <span>{club.short_name}</span>
     </div>
 
-    <hr class="my-2">
+    <hr>
 
-    <div class="container">
+    <div class="row">
       <Tag/>
       <span>
         {club.acronym} / 0{club?.organization_id} {club.number}
       </span>
     </div>
 
-    <hr class="my-2">
+    <hr>
 
-    <div class="container">
+    <div class="row">
       <Shield/>
       <span>{club.main_club}</span>
     </div>
@@ -43,12 +44,33 @@
 </section>
 
 <style>
-  .container {
+  .logo-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-block: 1.5rem;
+  }
+
+  .club-logo {
+      width: 6rem;
+      height: auto;
+      margin-bottom: calc(var(--spacing) * 1);
+  }
+
+  .club-info-card {
+    padding: calc(var(--spacing) * 3);
+    margin-block: 1.5rem;
+    
+    :global([data-theme='dark']) & {
+        border: 1px solid var(--color-surface-500);
+    }
+  }
+
+  .row {
     display: flex;
     gap: 1rem;
   }
 
-  article {
-    margin-block: 1.5em;
+  hr {
+      margin-block: calc(var(--spacing) * 2);
   }
 </style>

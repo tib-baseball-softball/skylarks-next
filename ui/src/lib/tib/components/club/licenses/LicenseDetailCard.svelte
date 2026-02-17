@@ -11,7 +11,7 @@
   let {license}: Props = $props();
 </script>
 
-<article class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">
+<article class="card license-detail-card preset-tonal shadow-xl">
   <GenericDetailRow
           categoryName="Level"
           rowValue={license?.level ?? ""}
@@ -22,32 +22,32 @@
   </GenericDetailRow>
 
   {#if license?.baseball}
-    <hr class="my-2">
+    <hr>
     <GenericDetailRow
             categoryName="Baseball"
             rowValue={"yes"}
     >
       {#snippet icon()}
-        <div class="ms-1">⚾️</div>
+        <div class="emoji-icon">⚾️</div>
       {/snippet}
     </GenericDetailRow>
 
   {/if}
 
   {#if license?.softball}
-    <hr class="my-2">
+    <hr>
     <GenericDetailRow
             categoryName="Softball"
             rowValue={"yes"}
     >
       {#snippet icon()}
-        <div class="ms-1">🥎</div>
+        <div class="emoji-icon">🥎</div>
       {/snippet}
     </GenericDetailRow>
   {/if}
 
   {#if license?.sleeve_number}
-    <hr class="my-2">
+    <hr>
     <GenericDetailRow
             categoryName="Sleeve Number"
             rowValue={license?.sleeve_number ?? ""}
@@ -61,7 +61,20 @@
 </article>
 
 <style>
-    article {
-        margin-bottom: 1.5em;
+    .license-detail-card {
+        padding: calc(var(--spacing) * 3);
+        margin-bottom: 1.5rem;
+        
+        :global([data-theme='dark']) & {
+            border: 1px solid var(--color-surface-500);
+        }
+    }
+
+    .emoji-icon {
+        margin-left: calc(var(--spacing) * 1);
+    }
+
+    hr {
+        margin-block: calc(var(--spacing) * 2);
     }
 </style>

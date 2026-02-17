@@ -69,21 +69,21 @@
 
       <span class="btn-group state-selector">
         <button
-          class={["btn hover:preset-tonal-success", form.state === "in" && "preset-filled-success-500 text-black"]}
+          class={["btn btn-in", form.state === "in" && "preset-filled-success-500 text-black"]}
           onclick={() => form.state = "in"}
           type="button"
         >
           <span>In</span>
         </button>
         <button
-          class={["btn hover:preset-tonal-warning", form.state === "maybe" && "preset-filled-warning-500 text-black"]}
+          class={["btn btn-maybe", form.state === "maybe" && "preset-filled-warning-500 text-black"]}
           onclick={() => form.state = "maybe"}
           type="button"
         >
           <span>Maybe</span>
         </button>
         <button
-          class={["btn hover:preset-tonal-error", form.state === "out" && "preset-filled-error-500 text-white"]}
+          class={["btn btn-out", form.state === "out" && "preset-filled-error-500 text-white"]}
           onclick={() => form.state = "out"}
           type="button"
         >
@@ -148,6 +148,21 @@
 
     button {
       flex: 1 1 0%;
+      
+      &.btn-in:hover {
+          background-color: var(--color-success-50-950);
+          color: var(--color-success-950-50);
+      }
+      
+      &.btn-maybe:hover {
+          background-color: var(--color-warning-50-950);
+          color: var(--color-warning-950-50);
+      }
+      
+      &.btn-out:hover {
+          background-color: var(--color-error-50-950);
+          color: var(--color-error-950-50);
+      }
     }
   }
 

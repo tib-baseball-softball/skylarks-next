@@ -35,33 +35,37 @@
   />
 </svelte:head>
 
-<h1 class="h1">{club.name}</h1>
+<h1 class="h1 page-title">{club.name}</h1>
 
-<section class="club-page-grid">
+<section class="club-overview-section">
   <ClubDetailCard {club}/>
 </section>
 
-<section class="mt-8! space-y-4">
+<section class="announcements-section section-spacing">
   <header>
-    <h2 class="h2 mb-3">Announcements</h2>
+    <h2 class="h2 section-title">Announcements</h2>
   </header>
 
-  <AnnouncementSectionContent store={announcementStore}/>
+  <div class="announcement-content">
+    <AnnouncementSectionContent store={announcementStore}/>
+  </div>
 
   {#if club?.admins.includes(authRecord.id)}
-    <AnnouncementForm
-      announcement={null}
-      team={null}
-      {club}
-      buttonClasses="btn preset-filled-primary-500"
-      showLabel={true}
-    />
+    <div class="form-wrapper">
+      <AnnouncementForm
+        announcement={null}
+        team={null}
+        {club}
+        buttonClasses="btn preset-filled-primary-500"
+        showLabel={true}
+      />
+    </div>
   {/if}
 </section>
 
-<section class="mt-8!">
+<section class="teams-section section-spacing">
   <header>
-    <h2 class="h2 mb-3">Club Teams</h2>
+    <h2 class="h2 section-title">Club Teams</h2>
   </header>
 
   <div class="club-page-grid">
@@ -75,18 +79,20 @@
   </div>
 
   {#if club?.admins.includes(authRecord.id)}
-    <TeamForm
-      team={null}
-      {club}
-      buttonClasses="btn preset-filled-primary-500"
-      showLabel={true}
-    />
+    <div class="form-wrapper">
+      <TeamForm
+        team={null}
+        {club}
+        buttonClasses="btn preset-filled-primary-500"
+        showLabel={true}
+      />
+    </div>
   {/if}
 </section>
 
-<section class="mt-8!">
+<section class="uniform-sets-section section-spacing">
   <header>
-    <h2 class="h2 mb-3">Uniform Sets</h2>
+    <h2 class="h2 section-title">Uniform Sets</h2>
   </header>
 
   <div class="club-page-grid">
@@ -96,26 +102,28 @@
   </div>
 
   {#if club?.admins.includes(authRecord.id)}
-    <Dialog triggerClasses="btn preset-filled-primary-500">
-      {#snippet triggerContent()}
-        <Plus/>
-        <span>Create new</span>
-      {/snippet}
+    <div class="form-wrapper">
+      <Dialog triggerClasses="btn preset-filled-primary-500">
+        {#snippet triggerContent()}
+          <Plus/>
+          <span>Create new</span>
+        {/snippet}
 
-      {#snippet title()}
-        <header>
-          <h2>Create new Uniform Set</h2>
-        </header>
-      {/snippet}
+        {#snippet title()}
+          <header>
+            <h2>Create new Uniform Set</h2>
+          </header>
+        {/snippet}
 
-      <UniformSetForm uniformSet={null} clubID={club.id}/>
-    </Dialog>
+        <UniformSetForm uniformSet={null} clubID={club.id}/>
+      </Dialog>
+    </div>
   {/if}
 </section>
 
-<section class="mt-10!">
+<section class="locations-section locations-section-spacing">
   <header>
-    <h2 class="h2 mb-3">Team Locations</h2>
+    <h2 class="h2 section-title">Team Locations</h2>
   </header>
 
   <a
@@ -128,17 +136,17 @@
 </section>
 
 {#if club?.admins.includes(authRecord.id)}
-  <hr class="mt-10 mb-6"/>
+  <hr class="admin-divider"/>
 
-  <section>
+  <section class="admin-module">
     <header>
-      <h2 class="h3 mb-4">Admin Section</h2>
+      <h2 class="h3 admin-title">Admin Section</h2>
     </header>
 
     <div class="club-page-grid">
       <article class="card admin-card preset-outlined-surface-500">
         <header class="card-header">
-          <h3 class="h4 font-semibold">Club deletion</h3>
+          <h3 class="h4 admin-card-title">Club deletion</h3>
         </header>
 
         <section class="card-section">
@@ -166,6 +174,45 @@
 {/if}
 
 <style>
+  .page-title {
+    margin-bottom: calc(var(--spacing) * 4);
+  }
+
+  .section-spacing {
+    margin-top: calc(var(--spacing) * 8);
+  }
+
+  .locations-section-spacing {
+    margin-top: calc(var(--spacing) * 10);
+  }
+
+  .section-title {
+    margin-bottom: calc(var(--spacing) * 3);
+  }
+
+  .announcement-content {
+      display: flex;
+      flex-direction: column;
+      gap: calc(var(--spacing) * 4);
+  }
+
+  .form-wrapper {
+      margin-top: calc(var(--spacing) * 4);
+  }
+
+  .admin-divider {
+      margin-top: calc(var(--spacing) * 10);
+      margin-bottom: calc(var(--spacing) * 6);
+  }
+
+  .admin-title {
+      margin-bottom: calc(var(--spacing) * 4);
+  }
+
+  .admin-card-title {
+      font-weight: 600;
+  }
+
   .card-section {
     padding: calc(var(--spacing) * 4);
 

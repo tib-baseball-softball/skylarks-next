@@ -9,25 +9,47 @@
   let {clubOfficials = []}: Props = $props();
 </script>
 
-<article class="mb-4!">
+<article class="officials-list-wrapper">
   <section>
-    <ul class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">
+    <ul class="card officials-card preset-tonal shadow-xl">
 
       {#each clubOfficials as clubOfficial, index}
-        <li class="p-0.5">
+        <li class="official-item">
           <a href="/club/officials/{clubOfficial.id}">
             <ClubOfficialRow {clubOfficial}/>
           </a>
         </li>
 
         {#if index + 1 < clubOfficials.length}
-          <hr class="my-2">
+          <hr>
         {/if}
       {:else}
-        <li>
+        <li class="official-item">
           <p>No club officials available.</p>
         </li>
       {/each}
     </ul>
   </section>
 </article>
+
+<style>
+    .officials-list-wrapper {
+        margin-bottom: calc(var(--spacing) * 4) !important;
+    }
+
+    .officials-card {
+        padding: calc(var(--spacing) * 3);
+        
+        :global([data-theme='dark']) & {
+            border: 1px solid var(--color-surface-500);
+        }
+    }
+
+    .official-item {
+        padding: calc(var(--spacing) * 0.5);
+    }
+
+    hr {
+        margin-block: calc(var(--spacing) * 2);
+    }
+</style>

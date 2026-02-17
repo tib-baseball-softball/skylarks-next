@@ -12,8 +12,24 @@ function convertLineBreaksToHTML(input: string): string {
 }
 </script>
 
-<article class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">
-  <p class="space-y-3">
+<article class="card traffic-card preset-tonal shadow-xl">
+  <div class="traffic-content">
     {@html convertLineBreaksToHTML(field.description_html)}
-  </p>
+  </div>
 </article>
+
+<style>
+    .traffic-card {
+        padding: calc(var(--spacing) * 3);
+        
+        :global([data-theme='dark']) & {
+            border: 1px solid var(--color-surface-500);
+        }
+    }
+
+    .traffic-content {
+        display: flex;
+        flex-direction: column;
+        gap: calc(var(--spacing) * 3);
+    }
+</style>

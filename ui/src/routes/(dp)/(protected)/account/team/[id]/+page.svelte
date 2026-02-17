@@ -88,10 +88,10 @@
         <span>Timeframe</span>
         <Tabs.Root bind:value={showEvents}>
           <Tabs.List class="tabs-list event-segment-container">
-            <Tabs.Trigger class="tabs-trigger btn active:preset-filled-error-300-700" data-testid="segment-item"
+            <Tabs.Trigger class="tabs-trigger btn timeframe-trigger-next" data-testid="segment-item"
                           value="next">Next
             </Tabs.Trigger>
-            <Tabs.Trigger class="tabs-trigger btn active:preset-filled" data-testid="segment-item" value="past">Past
+            <Tabs.Trigger class="tabs-trigger btn timeframe-trigger-past" data-testid="segment-item" value="past">Past
             </Tabs.Trigger>
           </Tabs.List>
         </Tabs.Root>
@@ -258,6 +258,16 @@
 
       .tabs-trigger {
         padding: 0.25rem 0.6rem;
+        
+        &.timeframe-trigger-next:active {
+            background-color: var(--color-error-300-700);
+            color: var(--color-error-contrast-300-700);
+        }
+        
+        &.timeframe-trigger-past:active {
+            background-color: var(--color-surface-950-50);
+            color: var(--color-surface-50-950);
+        }
       }
       
       &.type-tabs {

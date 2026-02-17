@@ -8,14 +8,13 @@
   let {fields}: Props = $props();
 </script>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+<div class="ballpark-grid">
   {#each fields as field}
     <a href="/club/ballpark/{field.id}">
-      <article
-              class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl flex items-center gap-4">
-        <img class="rounded-base" width="80" height="80" loading="lazy" src="{field.photo_url}"
+      <article class="card ballpark-card preset-tonal shadow-xl">
+        <img class="ballpark-thumb" width="80" height="80" loading="lazy" src="{field.photo_url}"
              alt="a baseball or softball field: {field.name}">
-        <p>
+        <p class="ballpark-name">
           {field.name}
         </p>
       </article>
@@ -24,3 +23,35 @@
     <p>No ballparks found.</p>
   {/each}
 </div>
+
+<style>
+    .ballpark-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: calc(var(--spacing) * 3);
+        
+        @media (min-width: 48rem) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: calc(var(--spacing) * 4);
+        }
+    }
+
+    .ballpark-card {
+        padding: calc(var(--spacing) * 3);
+        display: flex;
+        align-items: center;
+        gap: calc(var(--spacing) * 4);
+        
+        :global([data-theme='dark']) & {
+            border: 1px solid var(--color-surface-500);
+        }
+    }
+
+    .ballpark-thumb {
+        border-radius: var(--radius-base);
+    }
+
+    .ballpark-name {
+        /* any specific styles? */
+    }
+</style>

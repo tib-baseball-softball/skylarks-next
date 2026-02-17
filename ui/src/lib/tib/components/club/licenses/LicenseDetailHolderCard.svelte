@@ -12,7 +12,7 @@
   const expiryDate = $derived(new Date(license.valid_until));
 </script>
 
-<article class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">
+<article class="card license-holder-card preset-tonal shadow-xl">
   <GenericDetailRow
           categoryName="Holder"
           rowValue={`${license?.person.first_name} ${license?.person.last_name}`}
@@ -22,7 +22,7 @@
     {/snippet}
   </GenericDetailRow>
 
-  <hr class="my-2">
+  <hr>
 
   <GenericDetailRow
           categoryName="Number"
@@ -33,7 +33,7 @@
     {/snippet}
   </GenericDetailRow>
 
-  <hr class="my-2">
+  <hr>
 
   <GenericDetailRow
           categoryName="Valid until"
@@ -44,7 +44,7 @@
     {/snippet}
   </GenericDetailRow>
 
-  <hr class="my-2">
+  <hr>
 
   <GenericDetailRow
           categoryName="Relative Time"
@@ -56,3 +56,17 @@
   </GenericDetailRow>
 
 </article>
+
+<style>
+    .license-holder-card {
+        padding: calc(var(--spacing) * 3);
+        
+        :global([data-theme='dark']) & {
+            border: 1px solid var(--color-surface-500);
+        }
+    }
+
+    hr {
+        margin-block: calc(var(--spacing) * 2);
+    }
+</style>

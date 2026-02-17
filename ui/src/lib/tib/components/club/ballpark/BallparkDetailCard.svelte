@@ -15,16 +15,16 @@
   );
 </script>
 
-<article class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">
+<article class="card ballpark-detail-card preset-tonal shadow-xl">
   <GenericDetailRow categoryName="Ballpark Name" rowValue={field.name}>
     {#snippet icon()}
-      <div class="primary">
+      <div class="primary-icon">
         <Diamond/>
       </div>
     {/snippet}
   </GenericDetailRow>
 
-  <hr class="my-2">
+  <hr>
 
   <GenericDetailRow categoryName="Address Addon" rowValue={field.address_addon}>
     {#snippet icon()}
@@ -32,7 +32,7 @@
     {/snippet}
   </GenericDetailRow>
 
-  <hr class="my-2">
+  <hr>
 
   <GenericDetailRow categoryName="Capacity" rowValue={field.spectator_total}>
     {#snippet icon()}
@@ -40,7 +40,7 @@
     {/snippet}
   </GenericDetailRow>
 
-  <hr class="my-2">
+  <hr>
 
   <GenericDetailRow categoryName="Seats" rowValue={field.spectator_seats}>
     {#snippet icon()}
@@ -48,14 +48,14 @@
     {/snippet}
   </GenericDetailRow>
 
-  <hr class="my-2">
+  <hr>
 
-  <div class="container">
-    <div class="tertiary">
+  <div class="address-container">
+    <div class="tertiary-icon">
       <MapPin/>
     </div>
-    <dl class="container">
-      <dt><strong class="">Address:</strong></dt>
+    <dl class="address-details">
+      <dt><strong class="address-label">Address:</strong></dt>
       <dd>
         <a class="anchor" href="{mapsLink}" target="_blank">
           {field.street}, {field.postal_code} {field.city}
@@ -67,17 +67,43 @@
 </article>
 
 <style lang="postcss">
-  .primary {
-    color: rgba(var(--color-primary-500));
+  .ballpark-detail-card {
+    padding: calc(var(--spacing) * 3);
+    
+    :global([data-theme='dark']) & {
+        border: 1px solid var(--color-surface-500);
+    }
   }
 
-  .tertiary {
-    color: light-dark(rgba(var(--color-secondary-500)), rgba(var(--color-tertiary-500)));
+  .primary-icon {
+    color: var(--color-primary-500);
   }
 
-  .container {
+  .tertiary-icon {
+    color: var(--color-secondary-500);
+
+    :global([data-theme='dark']) & {
+        color: var(--color-tertiary-500);
+    }
+  }
+
+  .address-container {
     display: flex;
     align-items: center;
-    gap: calc(var(--spacing) * 4)
+    gap: calc(var(--spacing) * 4);
+  }
+
+  .address-details {
+      display: flex;
+      align-items: center;
+      gap: calc(var(--spacing) * 4);
+  }
+
+  .address-label {
+      /* font-weight already handled by strong */
+  }
+
+  hr {
+      margin-block: calc(var(--spacing) * 2);
   }
 </style>

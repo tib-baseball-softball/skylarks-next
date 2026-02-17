@@ -9,10 +9,10 @@ interface Props {
 let { matchStats, teamName }: Props = $props()
 </script>
 
-<div class="table-wrap lg:max-w-[75%] dark:border-2">
+<div class="boxscore-table-wrap">
     <table class="table table-compact">
         <thead>
-            <tr class="preset-tonal-surface dark:preset-filled-surface-300-700">
+            <tr class="header-row">
                 <th data-cell-for="player">{teamName} (Pitchers)</th>
                 <th data-cell-for="ip">IP</th>
                 <th data-cell-for="bf">BF</th>
@@ -49,7 +49,7 @@ let { matchStats, teamName }: Props = $props()
         </tbody>
 
         <tfoot>
-        <tr class="preset-tonal-surface dark:preset-filled-surface-300-700" data-row-for="summary">
+        <tr class="footer-row" data-row-for="summary">
             <td data-cell-for="player">
             </td>
             <td data-cell-for="ip">{matchStats.sum.innings_pitched}
@@ -74,3 +74,25 @@ let { matchStats, teamName }: Props = $props()
         </tfoot>
     </table>
 </div>
+
+<style>
+    .boxscore-table-wrap {
+        @media (min-width: 64rem) {
+            max-width: 75%;
+        }
+        
+        :global([data-theme='dark']) & {
+            border: 2px solid var(--color-surface-500);
+        }
+    }
+
+    .header-row, .footer-row {
+        background-color: var(--color-surface-50-950);
+        color: var(--color-surface-950-50);
+        
+        :global([data-theme='dark']) & {
+            background-color: var(--color-surface-300-700);
+            color: var(--color-surface-contrast-300-700);
+        }
+    }
+</style>

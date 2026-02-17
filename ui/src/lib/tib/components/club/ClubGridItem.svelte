@@ -13,11 +13,32 @@ let { href, icon, label, description }: Props = $props()
 
 <a
         href={href}
-        class="card preset-tonal dark:border dark:border-surface-500 flex items-center p-4 shadow-xl"
+        class="card club-grid-item preset-tonal shadow-xl"
 >
   <article>
     {@render icon()}
-    <h3 class="mt-2 h4 font-semibold">{label}</h3>
-    <p class="font-light">{description}</p>
+    <h3 class="item-label h4">{label}</h3>
+    <p class="item-description">{description}</p>
   </article>
 </a>
+
+<style>
+    .club-grid-item {
+        display: flex;
+        align-items: center;
+        padding: calc(var(--spacing) * 4);
+        
+        :global([data-theme='dark']) & {
+            border: 1px solid var(--color-surface-500);
+        }
+    }
+
+    .item-label {
+        margin-top: calc(var(--spacing) * 2);
+        font-weight: 600;
+    }
+
+    .item-description {
+        font-weight: 300;
+    }
+</style>

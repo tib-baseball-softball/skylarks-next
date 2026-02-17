@@ -13,7 +13,7 @@
   const admissionDate = $derived(new Date(clubOfficial.admission_date));
 </script>
 
-<article class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">
+<article class="card official-detail-card preset-tonal shadow-xl">
   <GenericDetailRow
           categoryName="Title"
           rowValue={clubOfficial.function}
@@ -23,7 +23,7 @@
     {/snippet}
   </GenericDetailRow>
 
-  <hr class="my-2">
+  <hr>
 
   <GenericDetailRow
           categoryName="Category"
@@ -34,7 +34,7 @@
     {/snippet}
   </GenericDetailRow>
 
-  <hr class="my-2">
+  <hr>
 
   <GenericDetailRow
           categoryName="Name"
@@ -45,7 +45,7 @@
     {/snippet}
   </GenericDetailRow>
 
-  <hr class="my-2">
+  <hr>
 
   <GenericDetailRow
           categoryName="Since"
@@ -58,7 +58,7 @@
 
 </article>
 
-<article class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">
+<article class="card official-contact-card preset-tonal shadow-xl">
   <a class="anchor" href="mailto:{clubOfficial.mail}">
     <GenericDetailRow
             categoryName="Contact"
@@ -72,7 +72,16 @@
 </article>
 
 <style>
-    article {
-        margin-bottom: 1.5em;
+    .official-detail-card, .official-contact-card {
+        padding: calc(var(--spacing) * 3);
+        margin-bottom: 1.5rem;
+        
+        :global([data-theme='dark']) & {
+            border: 1px solid var(--color-surface-500);
+        }
+    }
+
+    hr {
+        margin-block: calc(var(--spacing) * 2);
     }
 </style>

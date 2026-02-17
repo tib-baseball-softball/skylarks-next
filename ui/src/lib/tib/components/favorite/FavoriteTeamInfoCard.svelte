@@ -10,7 +10,7 @@
   let {clubTeam}: Props = $props();
 </script>
 
-<article class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">
+<article class="card team-info-card preset-tonal shadow-xl">
   <GenericDetailRow
     categoryName="Name"
     rowValue={`${clubTeam.name} (${clubTeam.short_name})`}
@@ -20,7 +20,7 @@
     {/snippet}
   </GenericDetailRow>
 
-  <hr class="my-2">
+  <hr>
 
   <GenericDetailRow
     categoryName="League"
@@ -31,7 +31,7 @@
     {/snippet}
   </GenericDetailRow>
 
-  <hr class="my-2">
+  <hr>
 
   <GenericDetailRow
     categoryName="Season"
@@ -42,3 +42,17 @@
     {/snippet}
   </GenericDetailRow>
 </article>
+
+<style>
+  .team-info-card {
+    padding: calc(var(--spacing) * 3);
+    
+    :global([data-theme='dark']) & {
+        border: 1px solid var(--color-surface-500);
+    }
+  }
+  
+  hr {
+      margin-block: calc(var(--spacing) * 2);
+  }
+</style>

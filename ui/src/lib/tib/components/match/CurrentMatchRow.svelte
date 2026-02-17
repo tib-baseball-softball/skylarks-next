@@ -22,41 +22,116 @@
   const matchDate = $derived(DateTimeUtility.parseDateFromBSMString(match.time));
 </script>
 
-<a class="grid grid-cols-3 px-3 py-1 gap-x-2 border-b border-surface-500 justify-around items-center"
+<a class="match-row"
    href="gamecenter/game-detail/{match.id}">
-  <div class="flex justify-end items-center gap-2">
-    <div>{match.away_league_entry.team?.short_name}</div>
-    <img alt="team logo for {match.away_team_name}" loading="lazy" src="{awayLogo}" width="35"/>
+  <div class="team-container away-team">
+    <div class="team-name">{match.away_league_entry.team?.short_name}</div>
+    <img alt="team logo for {match.away_team_name}" class="team-logo" loading="lazy" src="{awayLogo}" width="35"/>
   </div>
 
   {#if matchState === MatchState.notYetPlayed}
 
-    <div class="flex justify-center items-center">
-            <span class="preset-tonal-surface dark:preset-filled-surface-500 py-0.5 px-2 rounded-sm">
+    <div class="state-container">
+            <span class="state-badge">
                 {DateTimeUtility.timeFormatShort.format(matchDate)}
             </span>
     </div>
 
   {:else if matchState === MatchState.cancelled}
 
-    <div class="flex justify-center items-center">
-            <span class="preset-tonal-surface dark:preset-filled-surface-500 py-0.5 px-2 rounded-sm">
+    <div class="state-container">
+            <span class="state-badge">
                 PPD
             </span>
     </div>
 
   {:else}
 
-    <div class="font-extrabold flex justify-center text-lg">
-      <span class:text-surface-700-300={winner === GameWinner.home}>{match.away_runs ?? " "}</span>
-      <span> : </span>
-      <span class:text-surface-700-300={winner === GameWinner.away}>{match.home_runs ?? " "}</span>
+    <div class="score-container">
+      <span class:subdued={winner === GameWinner.home}>{match.away_runs ?? " "}</span>
+      <span class="score-separator"> : </span>
+      <span class:subdued={winner === GameWinner.away}>{match.home_runs ?? " "}</span>
     </div>
 
   {/if}
 
-  <div class="flex justify-start items-center gap-2">
-    <img alt="team logo for {match.away_team_name}" loading="lazy" src="{homeLogo}" width="35"/>
-    <div>{match.home_league_entry.team?.short_name}</div>
+  <div class="team-container home-team">
+    <img alt="team logo for {match.away_team_name}" class="team-logo" loading="lazy" src="{homeLogo}" width="35"/>
+    <div class="team-name">{match.home_league_entry.team?.short_name}</div>
   </div>
 </a>
+
+<style>
+    .match-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        padding-inline: calc(var(--spacing) * 3);
+        padding-block: calc(var(--spacing) * 1);
+        gap: calc(var(--spacing) * 2);
+        border-bottom: 1px solid var(--color-surface-500);
+        align-items: center;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .team-container {
+        display: flex;
+        align-items: center;
+        gap: calc(var(--spacing) * 2);
+        
+        &.away-team {
+            justify-content: flex-end;
+        }
+        
+        &.home-team {
+            justify-content: flex-start;
+        }
+    }
+
+    .team-name {
+        /* any specific team name styles */
+    }
+
+    .team-logo {
+        flex-shrink: 0;
+    }
+
+    .state-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .state-badge {
+        background-color: var(--color-surface-50-950);
+        color: var(--color-surface-950-50);
+        padding-block: calc(var(--spacing) * 0.5);
+        padding-inline: calc(var(--spacing) * 2);
+        border-radius: var(--radius-sm, 2px);
+        font-size: var(--text-sm);
+        
+        :global([data-theme='dark']) & {
+            background-color: var(--color-surface-500);
+            color: var(--color-surface-contrast-500);
+        }
+    }
+
+    .score-container {
+        display: flex;
+        justify-content: center;
+        font-weight: 800;
+        font-size: var(--text-lg);
+    }
+
+    .score-separator {
+        padding-inline: calc(var(--spacing) * 1);
+    }
+
+    .subdued {
+        color: var(--color-surface-700);
+        
+        :global([data-theme='dark']) & {
+            color: var(--color-surface-300);
+        }
+    }
+</style>

@@ -11,7 +11,7 @@
   let {leagueGroup, tableRow}: Props = $props();
 </script>
 
-<article class="card p-3 preset-tonal dark:border dark:border-surface-500 shadow-xl">
+<article class="card league-card preset-tonal shadow-xl">
   <GenericDetailRow
           categoryName="Acronym"
           rowValue={leagueGroup.acronym}
@@ -21,7 +21,7 @@
     {/snippet}
   </GenericDetailRow>
 
-  <hr class="my-2">
+  <hr>
 
   <GenericDetailRow
           categoryName="Record"
@@ -32,7 +32,7 @@
     {/snippet}
   </GenericDetailRow>
 
-  <hr class="my-2">
+  <hr>
 
   <GenericDetailRow
           categoryName="Pct."
@@ -43,7 +43,7 @@
     {/snippet}
   </GenericDetailRow>
 
-  <hr class="my-2">
+  <hr>
 
   <GenericDetailRow
           categoryName="Rank"
@@ -59,3 +59,17 @@
   </GenericDetailRow>
 
 </article>
+
+<style>
+  .league-card {
+    padding: calc(var(--spacing) * 3);
+    
+    :global([data-theme='dark']) & {
+        border: 1px solid var(--color-surface-500);
+    }
+  }
+  
+  hr {
+      margin-block: calc(var(--spacing) * 2);
+  }
+</style>
