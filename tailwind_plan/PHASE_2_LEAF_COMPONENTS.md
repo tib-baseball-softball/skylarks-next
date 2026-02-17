@@ -85,6 +85,12 @@ static utility classes.
     - [x] `user/PlayerProfileClubsSection.svelte` (Call 8)
     - [x] `user/PlayerDataProfileSection.svelte` (Call 8)
     - [x] `team/TeamMembersTableContent.svelte` (Call 8)
+    - [x] `forms/ParticipationForm.svelte` (Call 9)
+    - [x] `forms/UserDetailsForm.svelte` (Call 9)
+    - [x] `forms/TeamGamesModal.svelte` (Call 9)
+    - [x] `event/EventParticipantsOverviewSection.svelte` (Call 9)
+    - [x] `event/EventPageAdminSection.svelte` (Call 9)
+    - [x] `team/TeamAdminSection.svelte` (Call 9)
 
 ## 2.4 Summary - Call 8 Phase 2 Continuation
 
@@ -105,17 +111,27 @@ static utility classes.
 7. **TeamMembersTableContent.svelte** - Migrated admin actions layout (flex, gap-1, lg:gap-2, justify-end, m-0.5) and
    empty state spacing (py-4)
 
+## 2.5 Summary - Call 9 Phase 2 Continuation
+
+### Components Migrated (6 components)
+
+1. **ParticipationForm.svelte** - Migrated grid layout (grid-cols-2, gap-2/3/4), spacing (mt-4, space-y-3/1), and typography (text-sm, font-light)
+2. **UserDetailsForm.svelte** - Migrated layout (mt-2, mt-4, space-y-3, flex, justify-end, gap-3), typography (font-light), and borders
+3. **TeamGamesModal.svelte** - Migrated complex grid layout (grid-cols-2, col-span-2, gap-2/3/4), spacing (mt-4, space-y-3), and typography (font-bold, font-light)
+4. **EventParticipantsOverviewSection.svelte** - Migrated responsive grid (grid-cols-1, md:grid-cols-3), flex layouts (flex-wrap, items-center), and various spacing/gaps
+5. **EventPageAdminSection.svelte** - Migrated responsive grid (grid-cols-1/2/3), info row layouts (flex, items-center, gap-3), and border utilities
+6. **TeamAdminSection.svelte** - Migrated complex grid (1-4 columns responsive), card layouts, and danger zone styling (rounded-base, preset-outlined-error-500)
+
 ### Key Patterns Used
 
-- Converted spacing utilities to `calc(var(--spacing) * N)`
-- Converted typography utilities to CSS variables (e.g., `var(--font-weight-bold)`, `var(--text-xl)`)
-- Used CSS nesting for better organization
-- Applied responsive breakpoints with `@media` queries
-- Created semantic class names (e.g., `.header`, `.content`, `.actions`, `.title`) instead of utility classes
+- Extensive use of CSS Grid and Flexbox in scoped blocks
+- Mapping responsive Tailwind prefixes (md:, lg:, xl:) to standard Media Queries
+- Converting spacing/padding/margin to `calc(var(--spacing) * N)`
+- Using `:global()` for styling utility-like classes passed as props (e.g., `border-primary`)
+- Semantic class names (e.g., `.form-grid`, `.info-row`, `.danger-zone`)
 
 ### Remaining Work for Phase 2
 
-- Most remaining components with Tailwind classes are in the `forms/` directory
-- These form components likely have more complex prop-based styling (covered in Phase 5)
-- A few section/layout components remain (TeamAdminSection, EventParticipantsOverviewSection, etc.)
-- Most simple leaf components have been successfully migrated
+- Remaining complex form components (EventForm, TeamForm, etc.)
+- Some section/layout components (EventParticipationSection, JoinTeamSection - already mostly clean but worth a check)
+- Phase 3 (Routes) can begin soon as many core components are now Tailwind-free

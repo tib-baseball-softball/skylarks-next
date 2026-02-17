@@ -30,22 +30,22 @@
   }
 </script>
 
-<h2 class="h2">Participants</h2>
-<section class="grid grid-cols-1 md:grid-cols-3 gap-2 lg:gap-3">
-  <article class="card preset-tonal-success grow">
-    <header class="card-header flex items-center gap-2">
+<h2 class="participants-title">Participants</h2>
+<section class="participants-grid">
+  <article class="card participant-card preset-tonal-success">
+    <header class="participation-header">
       <span><Check/></span>
       <h3 class="h4">In</h3>
     </header>
 
-    <section class="p-4 flex flex-wrap gap-2">
+    <section class="participation-content">
       {#key event.participations.in}
         {#each event.participations.in as inResponse}
           <div in:fade|global={{delay: 200}}>
             <IndividualParticipationEditButton
                     participation={inResponse}
                     {isAdmin}
-                    classes="chip preset-tonal-success border border-success-500"
+                    classes="chip preset-tonal-success border-success"
             />
           </div>
         {/each}
@@ -55,7 +55,7 @@
             <div in:fade|global={{delay: 200}}>
               <button
                       aria-label="guest player name, click removes the player from the event"
-                      class="chip guest-chip preset-tonal border border-surface-900-100 gap-1"
+                      class="chip guest-chip preset-tonal border-surface"
                       onclick={() => removeGuestPlayer(guestPlayer)}
               >
                 {guestPlayer}
@@ -70,20 +70,20 @@
     </section>
   </article>
 
-  <article class="card preset-tonal-warning grow">
-    <header class="card-header flex items-center gap-2">
+  <article class="card participant-card preset-tonal-warning">
+    <header class="participation-header">
       <span><CircleQuestionMark/></span>
       <h3 class="h4">Maybe</h3>
     </header>
 
-    <section class="p-4 flex flex-wrap gap-2">
+    <section class="participation-content">
       {#key event.participations.maybe}
         {#each event.participations.maybe as maybeResponse}
           <div in:fade|global={{delay: 200}}>
             <IndividualParticipationEditButton
                     participation={maybeResponse}
                     {isAdmin}
-                    classes="chip preset-tonal-warning border border-warning-500"
+                    classes="chip preset-tonal-warning border-warning"
             />
           </div>
         {/each}
@@ -91,20 +91,20 @@
     </section>
   </article>
 
-  <article class="card preset-tonal-error grow">
-    <header class="card-header flex items-center gap-2">
+  <article class="card participant-card preset-tonal-error">
+    <header class="participation-header">
       <span><X/></span>
       <h3 class="h4">Out</h3>
     </header>
 
-    <section class="p-4 flex flex-wrap gap-2">
+    <section class="participation-content">
       {#key event.participations.out}
         {#each event.participations.out as outResponse}
           <div in:fade|global={{delay: 200}}>
             <IndividualParticipationEditButton
                     participation={outResponse}
                     {isAdmin}
-                    classes="chip preset-tonal-error border border-error-500"
+                    classes="chip preset-tonal-error border-error"
             />
           </div>
         {/each}
@@ -113,14 +113,14 @@
   </article>
 </section>
 
-<section class="mt-6!">
-  <article class="card preset-outlined grow">
-    <header class="card-header flex items-center gap-2">
+<section class="no-response-section">
+  <article class="card participant-card preset-outlined">
+    <header class="participation-header">
       <span><Ghost/></span>
       <h3 class="h4">No Response</h3>
     </header>
 
-    <section class="p-4 flex flex-wrap gap-2">
+    <section class="participation-content">
       {#key event.participations.unspecified}
         {#each event.participations.unspecified as ghostResponse}
           <div in:fade|global={{delay: 200}}>
@@ -138,8 +138,49 @@
 </section>
 
 <style lang="postcss">
-    h2, h3 {
+    .participants-title {
         margin-block: calc(var(--spacing) * 3);
+        font-size: var(--text-2xl);
+        font-weight: bold;
+    }
+
+    h3 {
+        margin-block: calc(var(--spacing) * 3);
+    }
+
+    .participants-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: calc(var(--spacing) * 2);
+
+        @media (min-width: 48rem) {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        @media (min-width: 64rem) {
+            gap: calc(var(--spacing) * 3);
+        }
+    }
+
+    .participant-card {
+        flex-grow: 1;
+    }
+
+    .participation-header {
+        display: flex;
+        align-items: center;
+        gap: calc(var(--spacing) * 2);
+    }
+
+    .participation-content {
+        padding: calc(var(--spacing) * 4);
+        display: flex;
+        flex-wrap: wrap;
+        gap: calc(var(--spacing) * 2);
+    }
+
+    .no-response-section {
+        margin-top: calc(var(--spacing) * 6);
     }
 
     .chip {
@@ -148,5 +189,26 @@
 
     .chip.guest-chip {
         cursor: pointer;
+        gap: calc(var(--spacing) * 1);
+    }
+
+    .border-success {
+        border: 1px solid var(--color-success-500);
+    }
+
+    .border-warning {
+        border: 1px solid var(--color-warning-500);
+    }
+
+    .border-error {
+        border: 1px solid var(--color-error-500);
+    }
+
+    .border-surface {
+        border: 1px solid var(--color-surface-900);
+        
+        :global([data-theme='dark']) & {
+            border-color: var(--color-surface-100);
+        }
     }
 </style>

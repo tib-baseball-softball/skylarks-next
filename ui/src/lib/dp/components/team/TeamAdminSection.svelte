@@ -26,17 +26,17 @@
   const model = $derived(authSettings.record as CustomAuthModel);
 </script>
 
-<h2 class="h3">Admin Section</h2>
+<h2 class="section-title">Admin Section</h2>
 
 <div class="outer-grid">
   <div class="card admin-card preset-outlined-surface-500">
     <div>
       <header class="card-header">
-        <h3 class="h4 font-semibold">Games</h3>
+        <h3 class="card-title">Games</h3>
       </header>
 
-      <section class="p-4 space-y-3">
-        <p class="font-light">
+      <section class="card-content">
+        <p class="info-text">
           Events of type "Game" don't need to be created manually.
           All data can be imported from BSM and kept in sync with
           the current state.
@@ -44,20 +44,20 @@
       </section>
     </div>
     <footer class="card-footer">
-      <div class="flex flex-col gap-2 lg:gap-3">
+      <div class="card-actions">
 
-        <Dialog triggerClasses="btn preset-tonal-primary border border-primary-500">
+        <Dialog triggerClasses="btn preset-tonal-primary border-primary">
 
           {#snippet triggerContent()}
             <CalendarPlus/>
             <span>Setup Games Import</span>
-          {/snippet}
+          {#/snippet}
 
           {#snippet title()}
             <header>
-              <h2 class="h3">Games Import Setup for {team.name}</h2>
+              <h3 class="h3">Games Import Setup for {team.name}</h3>
             </header>
-          {/snippet}
+          {#/snippet}
 
           <TeamGamesModal {team}/>
         </Dialog>
@@ -68,18 +68,18 @@
   <div class="card admin-card preset-outlined-surface-500">
     <div>
       <header class="card-header">
-        <h3 class="h4 font-semibold">Event Series</h3>
+        <h3 class="card-title">Event Series</h3>
       </header>
 
-      <section class="p-4 space-y-3">
-        <p class="font-light">
+      <section class="card-content">
+        <p class="info-text">
           Manage all recurring series of events (mostly of type
           "Practice") that take place on the same day every week.
         </p>
       </section>
     </div>
     <footer class="card-footer">
-      <div class="flex flex-col gap-2 lg:gap-3">
+      <div class="card-actions">
         <EventSeriesView
           buttonClasses="btn preset-tonal-primary border"
           {eventSeries}
@@ -92,11 +92,11 @@
   <div class="card admin-card preset-outlined-surface-500">
     <div>
       <header class="card-header">
-        <h3 class="h4 font-semibold">Single Events</h3>
+        <h3 class="card-title">Single Events</h3>
       </header>
 
-      <section class="p-4 space-y-3">
-        <p class="font-light">
+      <section class="card-content">
+        <p class="info-text">
           Single Events are not connected to any other events and
           don't contain additional logic. Well suited for one-off
           occurrences.
@@ -104,10 +104,10 @@
       </section>
     </div>
     <footer class="card-footer">
-      <div class="flex flex-col gap-2 lg:gap-3">
+      <div class="card-actions">
 
         <EventForm
-          buttonClasses="btn preset-tonal-tertiary border border-tertiary-500"
+          buttonClasses="btn preset-tonal-tertiary border-tertiary"
           clubID={team?.club ?? ""}
           event={null}
           teamID={team.id}
@@ -115,7 +115,7 @@
           {#snippet triggerContent()}
             <CalendarPlus/>
             <span>Create Single Event</span>
-          {/snippet}
+          {#/snippet}
         </EventForm>
 
       </div>
@@ -124,26 +124,26 @@
 
   <div class="card admin-card preset-outlined-surface-500">
     <header class="card-header">
-      <h3 class="h4 font-semibold">Team Settings</h3>
+      <h3 class="card-title">Team Settings</h3>
     </header>
 
-    <section class="p-4 space-y-3">
-      <div class="flex flex-col gap-2 lg:gap-3">
-        <TeamForm buttonClasses="btn preset-tonal-surface border border-surface-500" club={team?.expand?.club}
+    <section class="card-content">
+      <div class="card-actions">
+        <TeamForm buttonClasses="btn preset-tonal-surface border-surface" club={team?.expand?.club}
                   team={team}/>
       </div>
     </section>
 
     {#if team?.expand?.club?.admins.includes(model.id)}
-      <footer class="card-footer mt-2">
-        <div class="flex flex-col gap-2 lg:gap-3 rounded-base preset-outlined-error-500 px-2 py-3">
-          <header class="mx-2">Danger Zone</header>
+      <footer class="card-footer danger-zone-footer">
+        <div class="danger-zone">
+          <header class="danger-header">Danger Zone</header>
 
           <DeleteButton
             id={team.id}
             modelName="Team"
             action={teamDeleteAction}
-            classes="preset-tonal-error border border-error-500 mx-1"
+            classes="preset-tonal-error border-error mx-1"
             buttonText="Delete Team"
           />
         </div>
@@ -153,10 +153,64 @@
 </div>
 
 <style>
+  .section-title {
+    font-size: var(--text-xl);
+    font-weight: bold;
+    margin-block: calc(var(--spacing) * 4);
+  }
+
   .admin-card {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+
+  .card-title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+  }
+
+  .card-content {
+    padding: calc(var(--spacing) * 4);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 3);
+  }
+
+  .info-text {
+    font-weight: 300;
+  }
+
+  .card-actions {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 2);
+
+    @media (min-width: 64rem) {
+      gap: calc(var(--spacing) * 3);
+    }
+  }
+
+  .danger-zone-footer {
+    margin-top: calc(var(--spacing) * 2);
+  }
+
+  .danger-zone {
+      display: flex;
+      flex-direction: column;
+      gap: calc(var(--spacing) * 2);
+      border-radius: var(--radius-base);
+      border: 1px solid var(--color-error-500);
+      padding-inline: calc(var(--spacing) * 2);
+      padding-block: calc(var(--spacing) * 3);
+      
+      @media (min-width: 64rem) {
+          gap: calc(var(--spacing) * 3);
+      }
+  }
+
+  .danger-header {
+      margin-inline: calc(var(--spacing) * 2);
   }
 
   .outer-grid {
@@ -177,5 +231,25 @@
     @media (min-width: 80rem) {
       grid-template-columns: 1fr 1fr 1fr 1fr;
     }
+  }
+
+  :global(.border-primary) {
+      border: 1px solid var(--color-primary-500) !important;
+  }
+
+  :global(.border-tertiary) {
+      border: 1px solid var(--color-tertiary-500) !important;
+  }
+
+  :global(.border-surface) {
+      border: 1px solid var(--color-surface-500) !important;
+  }
+
+  :global(.border-error) {
+      border: 1px solid var(--color-error-500) !important;
+  }
+
+  :global(.mx-1) {
+      margin-inline: calc(var(--spacing) * 1) !important;
   }
 </style>

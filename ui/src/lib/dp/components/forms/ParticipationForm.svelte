@@ -30,16 +30,16 @@
   );
 </script>
 
-<form class="mt-4 space-y-3" onsubmit={submitForm}>
-  <div class="grid grid-cols-2 gap-2 md:gap-3 lg:gap-4">
+<form class="participation-form" onsubmit={submitForm}>
+  <div class="form-grid">
 
-    <dl class="space-y-1">
-      <dt class="text-sm font-light">Created</dt>
+    <dl class="info-item">
+      <dt>Created</dt>
       <dd>{createdDate}</dd>
     </dl>
 
-    <dl class="space-y-1">
-      <dt class="text-sm font-light">Last Updated</dt>
+    <dl class="info-item">
+      <dt>Last Updated</dt>
       <dd>{updatedDate}</dd>
     </dl>
 
@@ -52,38 +52,38 @@
       type="hidden"
     />
 
-    <label class="label col-span-2">
-      <span class="block">Comment</span>
+    <label class="label label-full">
+      <span class="label-text">Comment</span>
       <input
         autocomplete="off"
         bind:value={form.comment}
-        class="input "
+        class="input"
         name="id"
         placeholder="background info about your attendance"
         type="text"
       />
     </label>
 
-    <div class="label col-span-2">
+    <div class="label label-full">
       <span>State</span>
 
-      <span class="btn-group">
+      <span class="btn-group state-selector">
         <button
-          class={["btn hover:preset-tonal-success flex-grow", form.state === "in" && "preset-filled-success-500 text-black"]}
+          class={["btn hover:preset-tonal-success", form.state === "in" && "preset-filled-success-500 text-black"]}
           onclick={() => form.state = "in"}
           type="button"
         >
           <span>In</span>
         </button>
         <button
-          class={["btn hover:preset-tonal-warning flex-grow", form.state === "maybe" && "preset-filled-warning-500 text-black"]}
+          class={["btn hover:preset-tonal-warning", form.state === "maybe" && "preset-filled-warning-500 text-black"]}
           onclick={() => form.state = "maybe"}
           type="button"
         >
           <span>Maybe</span>
         </button>
         <button
-          class={["btn hover:preset-tonal-error flex-grow", form.state === "out" && "preset-filled-error-500 text-white"]}
+          class={["btn hover:preset-tonal-error", form.state === "out" && "preset-filled-error-500 text-white"]}
           onclick={() => form.state = "out"}
           type="button"
         >
@@ -92,8 +92,8 @@
       </span>
     </div>
 
-    <div class="flex justify-center col-span-2">
-      <button class="mt-2 btn preset-filled-primary-500" type="submit">
+    <div class="submit-container">
+      <button class="btn preset-filled-primary-500" type="submit">
         Submit
       </button>
     </div>
@@ -101,9 +101,63 @@
 </form>
 
 <style>
-  .btn-group {
+  .participation-form {
+    margin-top: calc(var(--spacing) * 4);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 3);
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: calc(var(--spacing) * 2);
+
+    @media (min-width: 48rem) {
+      gap: calc(var(--spacing) * 3);
+    }
+
+    @media (min-width: 64rem) {
+      gap: calc(var(--spacing) * 4);
+    }
+  }
+
+  .info-item {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 1);
+
+    dt {
+      font-size: var(--text-sm);
+      font-weight: 300;
+    }
+  }
+
+  .label-full {
+    grid-column: span 2 / span 2;
+  }
+
+  .label-text {
+    display: block;
+  }
+
+  .state-selector {
     display: flex;
     justify-items: stretch;
     border: 1px solid;
+
+    button {
+      flex: 1 1 0%;
+    }
+  }
+
+  .submit-container {
+    display: flex;
+    justify-content: center;
+    grid-column: span 2 / span 2;
+
+    button {
+      margin-top: calc(var(--spacing) * 2);
+    }
   }
 </style>
