@@ -128,7 +128,7 @@
   <Sheet.Content>
     <Sheet.Header></Sheet.Header>
 
-    <header class="text-xl font-semibold">
+    <header>
       {#if form.id}
         <h2 class="h3">Edit Team "{form?.name}"</h2>
       {:else}
@@ -136,7 +136,7 @@
       {/if}
     </header>
 
-    <form class="mt-4 space-y-3" onsubmit={submitForm}>
+    <form onsubmit={submitForm}>
       <div class="edit-form-grid">
         <input
           autocomplete="off"
@@ -147,7 +147,7 @@
           type="hidden"
         />
 
-        <label class="label col-span-2 md:col-span-1">
+        <label class="label">
           <span>Name</span>
           <input
             bind:value={form.name}
@@ -158,7 +158,7 @@
           />
         </label>
 
-        <label class="label col-span-2 md:col-span-1">
+        <label class="label">
           <span>Club</span>
           <input
             autocomplete="off"
@@ -170,7 +170,7 @@
           />
         </label>
 
-        <label class="label col-span-2">
+        <label class="label">
                 <span>
                 Signup Key
                 </span>
@@ -183,20 +183,22 @@
             required
             type="text"
           />
-          <span class="text-sm">
+          <span class="hint">
                     A valid signup key needs to be entered upon user account creation.
                     New users are automatically added as members to the team corresponding to the signup key used.
                 </span>
         </label>
 
-        <TabsRadioGroup
-          bind:value={form.age_group}
-          label="Age Group"
-          listClass="tabs-list input col-span-2"
-          name="age_group"
-          options={["adults", "minors"]}
-          required={true}
-        />
+        <div>
+          <TabsRadioGroup
+            bind:value={form.age_group}
+            label="Age Group"
+            listClass="tabs-list input"
+            name="age_group"
+            options={["adults", "minors"]}
+            required={true}
+          />
+        </div>
 
         <label class="label col-span-2">
           Description
@@ -217,7 +219,7 @@
         </label>
       </div>
 
-      <hr class="my-5!"/>
+      <hr/>
 
       <div class="flex justify-center gap-3">
         <button class="mt-2 btn preset-filled-primary-500" type="submit">
@@ -256,5 +258,18 @@
 
   .trigger-spaced {
     margin-block: calc(var(--spacing) * 3);
+  }
+
+  .hint {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-light);
+  }
+
+  hr {
+    margin-block: calc(var(--spacing) * 5);
+  }
+
+  .edit-form-grid {
+    gap: calc(var(--spacing) * 4);
   }
 </style>

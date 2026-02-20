@@ -226,7 +226,7 @@
         {/if}
       </div>
 
-      <hr class="my-5!"/>
+      <hr/>
 
       <div class="flex justify-center gap-3">
         <button class="mt-2 btn preset-filled-primary-500" type="submit">
@@ -266,5 +266,9 @@
 
   .trigger-spaced {
     margin-block: calc(var(--spacing) * 3);
+  }
+
+  hr {
+    margin-block: calc(var(--spacing) * 5);
   }
 </style>

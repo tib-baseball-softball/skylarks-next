@@ -31,7 +31,7 @@
       {/each}
     </div>
 
-    <Dialog triggerClasses="btn preset-tonal-secondary border">
+    <Dialog triggerClasses="btn preset-tonal-secondary border-secondary">
 
       {#snippet triggerContent()}
         <Plus/>

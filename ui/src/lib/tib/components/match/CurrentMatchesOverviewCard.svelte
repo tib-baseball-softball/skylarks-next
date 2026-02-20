@@ -16,7 +16,7 @@
 </script>
 
 <div
-  class="card overview-card"
+  class="card overview-card current-matches"
 >
   <header class="card-header">
     <h2 class="h3">Current Games</h2>
@@ -63,7 +63,7 @@
   </section>
   <footer class="card-footer gamecenter-footer">
     <a
-      class="btn gamecenter-btn"
+      class="btn preset-filled-primary-500"
       href="/gamecenter"
     >Gamecenter</a
     >
@@ -93,8 +93,12 @@
     }
   }
 
-  .tabs-content {
-    padding-top: calc(var(--spacing) * 4);
+  :global(.current-matches .tabs-list) {
+    border: 1px var(--tw-border-style);
+  }
+
+  :global(.current-matches .tabs-content) {
+    margin-block-start: calc(var(--spacing) * 4);
   }
 
   .gamecenter-footer {

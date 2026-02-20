@@ -82,13 +82,12 @@
   <Sheet.Content>
     <Sheet.Header></Sheet.Header>
 
-    <header class="text-xl font-semibold">
+    <header>
       <h2 class="h3">Manage Event Series for {team?.name}</h2>
     </header>
 
-    <div class="space-y-4">
-
-      <h3 class="h4 mt-6!">Active Event Series</h3>
+    <div class="series-container">
+      <h3>Active Event Series</h3>
 
       {#each eventSeries as series (series.id)}
         <EventSeriesListItem eventSeries={series}>
@@ -115,15 +114,16 @@
     </div>
 
     {#if eventSeries.length === 0}
-      <section class="font-light space-y-4">
+      <section class="hint">
         <div>No event series have been set up for this team yet.</div>
       </section>
     {/if}
-    <button class="btn preset-filled-primary-500 mt-6!" onclick={() => setupAndShowForm(null)}>
+
+    <button class="btn preset-filled-primary-500" onclick={() => setupAndShowForm(null)}>
       Add new Event Series
     </button>
 
-    <hr class="my-6!">
+    <hr>
 
     <div bind:this={eventSeriesFormContainer}>
       {#if showForm}
@@ -165,6 +165,10 @@
     margin-block: calc(var(--spacing) * 3);
   }
 
+  :global(.series-container .series-card) {
+    margin-block: calc(var(--spacing) * 3);
+  }
+
   .button-container {
     display: flex;
     gap: calc(var(--spacing) * 2);
@@ -173,5 +177,13 @@
 
   .edit-button {
     color: light-dark(var(--base-font-color), var(--base-font-color-dark));
+  }
+
+  hr {
+    margin-block: calc(var(--spacing) * 6);
+  }
+
+  .hint {
+    font-weight: var(--font-weight-light);
   }
 </style>

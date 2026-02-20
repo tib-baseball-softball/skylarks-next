@@ -247,7 +247,7 @@
         </Switch>
       </div>
 
-      <hr class="my-5!"/>
+      <hr/>
 
       <div class="flex justify-center gap-3">
         <button class="mt-2 btn preset-tonal-primary border border-primary-500" data-testid="event-form-submit-button"
@@ -287,5 +287,9 @@
 
   .trigger-spaced {
     margin-block: calc(var(--spacing) * 3);
+  }
+
+  hr {
+    margin-block: calc(var(--spacing) * 5);
   }
 </style>

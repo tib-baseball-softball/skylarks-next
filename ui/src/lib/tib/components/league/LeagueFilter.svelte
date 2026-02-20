@@ -9,7 +9,7 @@
   const {leagueGroups = []}: Props = $props();
 </script>
 
-<select bind:value={preferences.current.leagueGroupID}>
+<select bind:value={preferences.current.leagueGroupID} class="select">
   <option selected value="{0}">All Leagues</option>
 
   {#each leagueGroups as leagueGroup}

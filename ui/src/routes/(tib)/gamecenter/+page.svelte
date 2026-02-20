@@ -42,18 +42,18 @@
 
 <ReloadUponPreferenceChange callback={reloadGameData}/>
 
-<div class="my-2 md:flex justify-between items-start">
+<div class="gamecenter-header">
   <h1 class="h1">Gamecenter</h1>
 
   <div>
-    <div class="flex gap-2">
+    <div class="header-container">
       {#await leagueGroups then groups}
         <LeagueFilter leagueGroups={groups}/>
       {/await}
       <SeasonSelector/>
     </div>
 
-    <div class="flex gap-2 my-4 justify-end">
+    <div class="header-container switch-container">
       <Switch
         --switch-active-bg="light-dark(var(--color-surface-900), var(--color-tertiary-700))"
         bind:checked={showExternal}
@@ -121,5 +121,25 @@
     header {
       margin-block-end: 0.5rem;
     }
+  }
+
+  .gamecenter-header {
+    margin-block: calc(var(--spacing) * 4);
+    justify-content: space-between;
+    align-items: start;
+
+    @media (min-width: 32rem) {
+      display: flex;
+    }
+  }
+
+  .header-container {
+    display: flex;
+    gap: calc(var(--spacing) * 2);
+  }
+
+  .switch-container {
+    justify-content: end;
+    margin-block: calc(var(--spacing) * 4);
   }
 </style>

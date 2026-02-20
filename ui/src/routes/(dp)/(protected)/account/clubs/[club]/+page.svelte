@@ -174,6 +174,19 @@
 {/if}
 
 <style>
+  .club-overview-section {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    @media (min-width: 32rem) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media (min-width: 64rem) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
   .page-title {
     margin-bottom: calc(var(--spacing) * 4);
   }
@@ -191,26 +204,26 @@
   }
 
   .announcement-content {
-      display: flex;
-      flex-direction: column;
-      gap: calc(var(--spacing) * 4);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 4);
   }
 
   .form-wrapper {
-      margin-top: calc(var(--spacing) * 4);
+    margin-top: calc(var(--spacing) * 4);
   }
 
   .admin-divider {
-      margin-top: calc(var(--spacing) * 10);
-      margin-bottom: calc(var(--spacing) * 6);
+    margin-top: calc(var(--spacing) * 10);
+    margin-bottom: calc(var(--spacing) * 6);
   }
 
   .admin-title {
-      margin-bottom: calc(var(--spacing) * 4);
+    margin-bottom: calc(var(--spacing) * 4);
   }
 
   .admin-card-title {
-      font-weight: 600;
+    font-weight: 600;
   }
 
   .card-section {

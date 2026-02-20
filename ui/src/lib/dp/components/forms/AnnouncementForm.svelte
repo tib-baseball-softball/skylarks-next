@@ -90,10 +90,10 @@
       triggerIcon && "btn-icon",
       triggerSpaced && "trigger-spaced",
       triggerVariant === "filled-primary" && "preset-filled-primary-500",
-      triggerVariant === "tonal-primary" && "preset-tonal-primary",
-      triggerVariant === "tonal-secondary" && "preset-tonal-secondary",
-      triggerVariant === "tonal-tertiary" && "preset-tonal-tertiary",
-      triggerVariant === "tonal-surface" && "preset-tonal-surface",
+      triggerVariant === "tonal-primary" && "preset-tonal-primary border-primary",
+      triggerVariant === "tonal-secondary" && "preset-tonal-secondary border-secondary",
+      triggerVariant === "tonal-tertiary" && "preset-tonal-tertiary border-tertiary",
+      triggerVariant === "tonal-surface" && "preset-tonal-surface border-surface",
     ]}
     data-testid="announcement-form-trigger-{isEditing ? 'edit' : 'create'}"
   >
@@ -113,7 +113,7 @@
   <Sheet.Content>
     <Sheet.Header></Sheet.Header>
 
-    <header class="text-xl font-semibold">
+    <header>
       {#if form.id}
         <h2 class="h3">Edit Announcement "{form?.title}"</h2>
       {:else}
@@ -121,7 +121,7 @@
       {/if}
     </header>
 
-    <form class="mt-4 space-y-3" onsubmit={submitForm}>
+    <form onsubmit={submitForm}>
       <div class="edit-form-grid">
         <input
           autocomplete="off"
@@ -231,9 +231,9 @@
         </fieldset>
       </div>
 
-      <hr class="my-5!"/>
+      <hr/>
 
-      <div class="flex justify-center gap-3">
+      <div class="submit-box">
         <button class="mt-2 btn preset-filled-primary-500" type="submit">
           Submit
         </button>
@@ -275,5 +275,18 @@
 
   .priority-radio-label {
     text-transform: capitalize;
+  }
+
+  hr {
+    margin-block: calc(var(--spacing) * 5);
+  }
+
+  .submit-box {
+    display: flex;
+    justify-content: center;
+  }
+
+  .edit-form-grid {
+    gap: calc(var(--spacing) * 2);
   }
 </style>

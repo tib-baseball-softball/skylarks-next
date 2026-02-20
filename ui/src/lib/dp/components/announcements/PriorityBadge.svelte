@@ -35,18 +35,17 @@
 
   .badge {
     &[data-priority="info"] {
-      border: 1px solid white;
-      color: var(--color-secondary-500);
+      border: 1px solid light-dark(var(--color-secondary-500), white);
     }
 
     &[data-priority="warning"] {
-      border: 1px solid var(--color-warning-500);
-      color: var(--color-warning-500);
+      border: 1px solid var(--color-warning-600-400);
+      color: light-dark(black, white);
     }
 
     &[data-priority="danger"] {
-      border: 1px solid var(--color-error-500);
-      color: var(--color-error-500);
+      border: 1px solid light-dark(var(--color-error-500), var(--color-error-300));
+      color: light-dark(var(--color-error-500), var(--color-error-300));
     }
   }
 </style>

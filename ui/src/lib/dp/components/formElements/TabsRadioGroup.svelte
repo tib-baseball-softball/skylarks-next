@@ -43,7 +43,7 @@
     <label class={[triggerClass, value === opt.value && "preset-filled"]}>
       <input
         type="radio"
-        class="hidden"
+        class="hidden-radio"
         name={name}
         bind:group={value}
         value={opt.value}
@@ -59,5 +59,9 @@
     content: "*";
     color: light-dark(var(--color-primary-500), var(--color-primary-300));
     margin-inline-start: calc(var(--spacing) * 0.5);
+  }
+
+  .hidden-radio {
+    display: none;
   }
 </style>
