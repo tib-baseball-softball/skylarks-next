@@ -13,9 +13,9 @@
 
 <h2 class="h2">Uniform</h2>
 <div class="attire-container">
-  <Cap classes="cap-icon" identifier={attire.cap}/>
-  <Shirt classes="shirt-icon" fillColor={attire.jersey}/>
-  <Pants classes="pants-icon" fillColor={attire.pants}/>
+  <Cap identifier={attire.cap} size={64}/>
+  <Shirt fillColor={attire.jersey} size={48}/>
+  <Pants fillColor={attire.pants} size={48}/>
 </div>
 
 <style>
@@ -28,14 +28,5 @@
     @media (min-width: 48rem) {
       gap: calc(var(--spacing) * 3);
     }
-  }
-
-  :global(.cap-icon) {
-    width: calc(var(--spacing) * 16);
-  }
-
-  :global(.shirt-icon), :global(.pants-icon) {
-    width: calc(var(--spacing) * 12);
-    height: calc(var(--spacing) * 12);
   }
 </style>

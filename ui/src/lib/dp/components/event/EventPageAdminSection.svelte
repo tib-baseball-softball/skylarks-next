@@ -22,7 +22,7 @@
 
     await client.collection("events").update<EventsUpdate>(event.id, {
       guests:
-          event.guests.length === 0 ? guestPlayerForm.name : event.guests + "," + guestPlayerForm.name,
+        event.guests.length === 0 ? guestPlayerForm.name : event.guests + "," + guestPlayerForm.name,
     });
     guestPlayerForm.name = "";
   }
@@ -80,13 +80,13 @@
         <label class="label">
           Name
           <input
-                  bind:value={guestPlayerForm.name}
-                  class="input name-input"
-                  placeholder="Enter the guest player's name"
-                  type="text"
+            bind:value={guestPlayerForm.name}
+            class="input name-input"
+            placeholder="Enter the guest player's name"
+            type="text"
           />
         </label>
-        <button class="btn submit-btn" type="submit">Submit</button>
+        <button class="btn preset-tonal-surface" type="submit">Submit</button>
       </form>
     </section>
   </div>
@@ -100,10 +100,10 @@
       <div class="actions-container">
 
         <EventForm
-                triggerVariant="tonal-surface"
-                clubID={event?.expand?.team?.club ?? ""}
-                event={event}
-                teamID={event.team}
+          clubID={event?.expand?.team?.club ?? ""}
+          event={event}
+          teamID={event.team}
+          triggerVariant="tonal-surface"
         >
           {#snippet triggerContent()}
             <Edit/>
@@ -112,11 +112,11 @@
         </EventForm>
 
         <DeleteButton
-                action={deleteEvent}
-                buttonText="Delete Event"
-                classes="preset-tonal-error border-error"
-                id={event.id}
-                modelName="Event"
+          action={deleteEvent}
+          buttonText="Delete Event"
+          classes="preset-tonal-error border-error"
+          id={event.id}
+          modelName="Event"
         />
       </div>
     </section>
@@ -124,96 +124,86 @@
 </div>
 
 <style lang="postcss">
-    .admin-divider {
-        margin-top: calc(var(--spacing) * 6);
+  .admin-divider {
+    margin-top: calc(var(--spacing) * 6);
+  }
+
+  .admin-title {
+    font-size: var(--text-2xl);
+    font-weight: bold;
+    margin-block: calc(var(--spacing) * 4);
+  }
+
+  .admin-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: calc(var(--spacing) * 2);
+
+    @media (min-width: 48rem) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .admin-title {
-        font-size: var(--text-2xl);
-        font-weight: bold;
-        margin-block: calc(var(--spacing) * 4);
+    @media (min-width: 64rem) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: calc(var(--spacing) * 3);
     }
+  }
 
-    .admin-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: calc(var(--spacing) * 2);
+  .card-title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+  }
 
-        @media (min-width: 48rem) {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
+  .card-section {
+    padding: calc(var(--spacing) * 4);
+    display: flex;
+    flex-direction: column;
+  }
 
-        @media (min-width: 64rem) {
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: calc(var(--spacing) * 3);
-        }
+  .info-section {
+    gap: calc(var(--spacing) * 2);
+  }
+
+  .info-row {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 3);
+  }
+
+  .info-label {
+    font-size: var(--text-sm);
+    font-weight: 300;
+  }
+
+  .guest-form {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 2);
+
+    .name-input {
+      margin-top: calc(var(--spacing) * 1);
     }
+  }
 
-    .card-title {
-        font-size: var(--text-lg);
-        font-weight: 600;
+  .actions-section {
+    gap: calc(var(--spacing) * 3);
+  }
+
+  .actions-container {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 2);
+
+    @media (min-width: 64rem) {
+      gap: calc(var(--spacing) * 3);
     }
+  }
 
-    .card-section {
-        padding: calc(var(--spacing) * 4);
-        display: flex;
-        flex-direction: column;
-    }
+  :global(.border-surface) {
+    border: 1px solid var(--color-surface-500) !important;
+  }
 
-    .info-section {
-        gap: calc(var(--spacing) * 2);
-    }
-
-    .info-row {
-        display: flex;
-        align-items: center;
-        gap: calc(var(--spacing) * 3);
-    }
-
-    .info-label {
-        font-size: var(--text-sm);
-        font-weight: 300;
-    }
-
-    .guest-form {
-        display: flex;
-        flex-direction: column;
-        gap: calc(var(--spacing) * 2);
-
-        .name-input {
-            margin-top: calc(var(--spacing) * 1);
-        }
-
-        .submit-btn {
-            margin-top: calc(var(--spacing) * 3);
-            border: 1px solid var(--color-surface-500);
-            background: var(--color-surface-200);
-            
-            &:hover {
-                background: var(--color-surface-300);
-            }
-        }
-    }
-
-    .actions-section {
-        gap: calc(var(--spacing) * 3);
-    }
-
-    .actions-container {
-        display: flex;
-        flex-direction: column;
-        gap: calc(var(--spacing) * 2);
-
-        @media (min-width: 64rem) {
-            gap: calc(var(--spacing) * 3);
-        }
-    }
-
-    :global(.border-surface) {
-        border: 1px solid var(--color-surface-500) !important;
-    }
-
-    :global(.border-error) {
-        border: 1px solid var(--color-error-500) !important;
-    }
+  :global(.border-error) {
+    border: 1px solid var(--color-error-500) !important;
+  }
 </style>

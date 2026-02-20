@@ -49,41 +49,50 @@
       </Tabs.Trigger>
     </Tabs.List>
 
-    <Tabs.Content class="tabs-content" value="gameData">
-      <div class="game-data-grid">
-        <MatchDetailStatsCard {match}/>
-        <MatchDetailLocationCard field={match?.field}/>
-        <MatchDetailOfficialsCard {match}/>
-      </div>
-    </Tabs.Content>
+    <div class="content-wrapper">
+      <Tabs.Content class="tabs-content" value="gameData">
+        <div class="game-data-grid">
+          <MatchDetailStatsCard {match}/>
 
-    <Tabs.Content class="tabs-content" value="boxscore">
-      {#await data.singleGameStats}
-        <ProgressRing/>
-      {:then boxscore}
-        {#if boxscore}
-          <MatchBoxscoreSection {boxscore}/>
-        {:else }
-          <ContentFilteredUnavailable text="Box Score for this game could not be loaded or is unavailable."/>
-        {/if}
-      {:catch error}
-        <p>error loading box score: {error.message}</p>
-      {/await}
-    </Tabs.Content>
+          <MatchDetailLocationCard
+            --location-padding="3"
+            --location-spacing="0"
+            classes="preset-tonal-surface"
+            field={match?.field}
+          />
 
-    <Tabs.Content class="tabs-content" value="gameReport">
-      {#await data.gameReport}
-        <ProgressRing/>
-      {:then gameReport}
-        {#if gameReport}
-          <GameReport classes="game-report-custom" report={gameReport}/>
-        {:else }
-          <ContentFilteredUnavailable text="No Game Report available."/>
-        {/if}
-      {:catch error}
-        <p>error loading Game Report: {error.message}</p>
-      {/await}
-    </Tabs.Content>
+          <MatchDetailOfficialsCard {match}/>
+        </div>
+      </Tabs.Content>
+
+      <Tabs.Content class="tabs-content" value="boxscore">
+        {#await data.singleGameStats}
+          <ProgressRing/>
+        {:then boxscore}
+          {#if boxscore}
+            <MatchBoxscoreSection {boxscore}/>
+          {:else }
+            <ContentFilteredUnavailable text="Box Score for this game could not be loaded or is unavailable."/>
+          {/if}
+        {:catch error}
+          <p>error loading box score: {error.message}</p>
+        {/await}
+      </Tabs.Content>
+
+      <Tabs.Content class="tabs-content" value="gameReport">
+        {#await data.gameReport}
+          <ProgressRing/>
+        {:then gameReport}
+          {#if gameReport}
+            <GameReport classes="game-report-custom" report={gameReport}/>
+          {:else }
+            <ContentFilteredUnavailable text="No Game Report available."/>
+          {/if}
+        {:catch error}
+          <p>error loading Game Report: {error.message}</p>
+        {/await}
+      </Tabs.Content>
+    </div>
   </Tabs.Root>
 </section>
 
@@ -156,5 +165,9 @@
   .caveat-text {
     font-size: var(--text-sm);
     font-weight: 300;
+  }
+
+  .content-wrapper {
+    margin-block: calc(var(--spacing) * 4);
   }
 </style>

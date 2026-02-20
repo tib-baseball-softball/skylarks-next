@@ -15,7 +15,7 @@
   const startTime = $derived(new Date(event.starttime));
 </script>
 
-<section class="event-core-info">
+<section>
   <div class="info-grid">
     <div class="info-row">
       <Calendar size="18"/>
@@ -72,10 +72,6 @@
     align-items: center;
     gap: calc(var(--spacing) * 2);
     grid-column: span 6 / span 6;
-  }
-
-  .event-core-info {
-    padding: calc(var(--spacing) * 4);
   }
 
   .event-time {

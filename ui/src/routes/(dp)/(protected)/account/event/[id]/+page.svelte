@@ -67,8 +67,9 @@
         <h2 class="h2 details-title">Location Details</h2>
 
         <MatchDetailLocationCard
+          --location-padding="0"
+          --location-spacing="4"
           field={$event.expand.location}
-          classes="location-card-spacing"
           showDividers={false}
         />
       </section>
@@ -82,7 +83,7 @@
   </div>
 
   {#if !$event.cancelled}
-    <hr class="divider-large">
+    <hr class="divider">
 
     <div class="participation-header">
       <h2 class="h4">My Participation</h2>
@@ -130,126 +131,112 @@
 </div>
 
 <style>
-    .event-page-container {
-        display: flex;
-        flex-direction: column;
-        gap: calc(var(--spacing) * 4);
-        
-        @media (min-width: 64rem) {
-            gap: calc(var(--spacing) * 6);
-        }
-        
-        @media (min-width: 80rem) {
-            gap: calc(var(--spacing) * 7);
-        }
+  .event-page-container {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 4);
+
+    @media (min-width: 64rem) {
+      gap: calc(var(--spacing) * 6);
     }
 
-    .header-row {
-        display: flex;
-        align-items: center;
-        gap: calc(var(--spacing) * 3);
+    @media (min-width: 80rem) {
+      gap: calc(var(--spacing) * 7);
     }
+  }
 
-    .cancelled-text {
-        text-decoration: line-through;
-    }
+  .header-row {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 3);
+  }
 
-    .cancelled-badge {
-        background-color: var(--color-error-500);
-        color: var(--color-error-contrast-500);
-        gap: calc(var(--spacing) * 1);
-        width: fit-content;
-    }
+  .cancelled-text {
+    text-decoration: line-through;
+  }
 
-    .description-section {
-        margin-bottom: calc(var(--spacing) * 8);
-    }
+  .cancelled-badge {
+    background-color: var(--color-error-500);
+    color: var(--color-error-contrast-500);
+    gap: calc(var(--spacing) * 1);
+    width: fit-content;
+  }
 
-    .details-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        
-        @media (min-width: 48rem) {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: calc(var(--spacing) * 4);
-        }
-    }
+  .description-section {
+    margin-bottom: calc(var(--spacing) * 2);
+  }
 
-    .details-section {
-        margin-top: calc(var(--spacing) * 3);
-        
-        @media (min-width: 64rem) {
-            margin-top: calc(var(--spacing) * 5);
-        }
-    }
+  .details-grid {
+    display: grid;
+    grid-template-columns: 1fr;
 
-    .details-title {
-        margin-bottom: calc(var(--spacing) * 3);
+    @media (min-width: 48rem) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: calc(var(--spacing) * 4);
     }
+  }
 
-    /* Handle the location card spacing when used as an override prop */
-    :global(.location-card-spacing) {
-        margin-block: calc(var(--spacing) * 4) !important;
-        gap: calc(var(--spacing) * 5) !important;
-    }
+  .details-section {
+    margin-top: calc(var(--spacing) * 2);
 
-    .divider-large {
-        margin-block: calc(var(--spacing) * 8);
+    @media (min-width: 64rem) {
+      margin-top: calc(var(--spacing) * 4);
     }
+  }
 
-    .divider {
-        margin-block: calc(var(--spacing) * 8);
-    }
+  .details-title {
+    margin-bottom: calc(var(--spacing) * 3);
+  }
 
-    .participation-header {
-        display: flex;
-        flex-direction: column;
-        gap: calc(var(--spacing) * 2.5);
-        
-        @media (min-width: 48rem) {
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            gap: 0;
-        }
-    }
+  .divider {
+    margin-block: calc(var(--spacing) * 4);
+  }
 
-    .participation-info {
-        display: flex;
-        justify-content: flex-end;
-    }
+  .participation-header {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 2.5);
 
-    .game-data-section {
-        /* any specific section styles */
+    @media (min-width: 48rem) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0;
     }
+  }
 
-    .game-data-title {
-        margin-bottom: calc(var(--spacing) * 3);
-    }
+  .participation-info {
+    display: flex;
+    justify-content: flex-end;
+  }
 
-    .game-data-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        
-        @media (min-width: 48rem) {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-    }
+  .game-data-title {
+    margin-bottom: calc(var(--spacing) * 3);
+  }
 
-    .comments-section {
-        margin-block: calc(var(--spacing) * 6);
-    }
+  .game-data-grid {
+    display: grid;
+    grid-template-columns: 1fr;
 
-    .comments-wrapper {
-        margin-top: calc(var(--spacing) * 4);
-        padding: calc(var(--spacing) * 3);
-        border: 1px solid var(--color-surface-900-100);
-        border-radius: var(--radius-base);
-        max-width: 65ch;
-        margin-inline: auto;
-        
-        @media (min-width: 48rem) {
-            padding: calc(var(--spacing) * 4);
-        }
+    @media (min-width: 48rem) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+  }
+
+  .comments-section {
+    margin-block: calc(var(--spacing) * 4);
+  }
+
+  .comments-wrapper {
+    margin-top: calc(var(--spacing) * 4);
+    padding: calc(var(--spacing) * 3);
+    border: 1px solid var(--color-surface-900-100);
+    border-radius: var(--radius-base);
+    max-width: 65ch;
+    margin-inline: auto;
+
+    @media (min-width: 48rem) {
+      padding: calc(var(--spacing) * 4);
+    }
+  }
 </style>

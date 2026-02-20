@@ -32,15 +32,15 @@
   <section class="uniform-content">
     <div class="uniform-grid">
       <div class="cap-container">
-        <Cap identifier={uniformSet.cap} size={20}/>
+        <Cap identifier={uniformSet.cap} size={70}/>
       </div>
 
       <div>
-        <Shirt fillColor={uniformSet.jersey} size={16}/>
+        <Shirt fillColor={uniformSet.jersey} size={64}/>
       </div>
 
       <div>
-        <Pants fillColor={uniformSet.pants} size={16}/>
+        <Pants fillColor={uniformSet.pants} size={64}/>
       </div>
     </div>
   </section>

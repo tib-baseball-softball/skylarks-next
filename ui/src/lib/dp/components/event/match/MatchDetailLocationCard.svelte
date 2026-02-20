@@ -84,21 +84,15 @@
   .location-card {
     display: flex;
     flex-direction: column;
-    padding: calc(var(--spacing) * 3);
-    background-color: var(--color-surface-50-950);
-    color: var(--color-surface-950-50);
-    border: 1px solid var(--color-surface-500);
+    padding: calc(var(--spacing) * var(--location-padding));
     border-radius: var(--radius-base);
+    gap: calc(var(--spacing) * var(--location-spacing));
   }
 
   .location-row {
     display: flex;
     align-items: center;
     gap: calc(var(--spacing) * 3);
-
-    &.link-row {
-      align-self: flex-end;
-    }
   }
 
   .location-label {
@@ -110,9 +104,9 @@
     margin-block: calc(var(--spacing) * 2);
     border: 0;
     border-top: 1px solid var(--color-surface-200);
-    
-    :global([data-theme='dark']) & {
-        border-color: var(--color-surface-700);
+
+    @media (prefers-color-scheme: dark) {
+      border-color: var(--color-surface-700);
     }
 
     &.hidden {

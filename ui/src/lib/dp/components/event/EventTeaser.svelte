@@ -25,7 +25,9 @@
       </h2>
     </header>
 
-    <EventCoreInfo {event}/>
+    <div class="core-info-wrapper">
+      <EventCoreInfo {event}/>
+    </div>
   </a>
 
   <footer class="card-footer">
@@ -66,5 +68,9 @@
 
   .cancelled-badge {
     gap: calc(var(--spacing) * 1);
+  }
+
+  .core-info-wrapper {
+    padding: calc(var(--spacing) * 4);
   }
 </style>
