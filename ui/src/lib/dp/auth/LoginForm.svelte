@@ -100,7 +100,7 @@
 
     <button
       transition:slide
-      class="btn preset-tonal-primary border border-primary-500 block mt-4"
+      class="btn preset-tonal-primary login-btn"
       type="submit"
       onclick={() => (signup = false)}
       disabled={form.email === "" || form.password === ""}
@@ -109,7 +109,7 @@
     </button>
   {/if}
 
-  <div class="block md:flex gap-6 items-center justify-start my-6">
+  <div class="support-row">
     <Switch
       name="forgot password"
       onCheckedChange={(e) => (forgotPassword = e.checked)}
@@ -118,7 +118,7 @@
     </Switch>
 
     {#if forgotPassword}
-      <div class="mt-2 md:mt-0" transition:fade>
+      <div class="forgot-cta" transition:fade>
         <PasswordRequestButton
           email={form.email ?? ""}
           disabled={form.email === ""}
@@ -143,7 +143,7 @@
           {#if signupAllowed}
             <Tabs.Root
               bind:value={tabSet}
-              class="my-2"
+              class="tabs-wrap"
             >
               <Tabs.List
                 class="tabs-list preset-tonal-surface"
@@ -160,11 +160,11 @@
                 </Tabs.Trigger>
               </Tabs.List>
 
-              <Tabs.Content value="login" class="pt-3">
+              <Tabs.Content value="login" class="tab-panel">
                 {@render login()}
               </Tabs.Content>
 
-              <Tabs.Content value="signup" class="pt-3">
+              <Tabs.Content value="signup" class="tab-panel">
 
                 {#if tabSet === "signup"}
                   <label class="label">
@@ -179,7 +179,7 @@
                     />
                   </label>
 
-                  <div class="grid sm:grid-cols-2 gap-2">
+                  <div class="form-grid">
 
                     <label class="label">
                       <span class="">First Name</span>
@@ -206,7 +206,7 @@
                     </label>
                   </div>
 
-                  <div class="grid sm:grid-cols-2 gap-2">
+                  <div class="form-grid">
 
                     <label class="label">
                       <span class="">Your password</span>
@@ -249,7 +249,7 @@
                       type="text"
                       autocomplete="one-time-code"
                     />
-                    <span class="block text-sm font-light">
+                    <span class="help-block">
                                           A valid signup key needs to be entered upon user account creation.
                                           If you do not have a signup key, please contact your team manager.
                                       </span>
@@ -258,7 +258,7 @@
                   <input type="hidden" name="register" value={true}/>
 
                   <button
-                    class="btn preset-tonal-primary border border-primary-500 my-2"
+                    class="btn preset-tonal-primary register-btn"
                     type="submit"
                     onclick={() => (signup = true)}
                     disabled={form.email === "" || form.password === "" || form.passwordConfirm === "" || form.signup_key === ""}
@@ -275,13 +275,13 @@
 
         {#await coll.listAuthMethods({requestKey: null}) then methods}
           {#if methods.oauth2.providers.length > 0 && forgotPassword === false}
-            <hr class="my-2">
+            <hr class="divider-sm">
 
-            <div class="mx-2 mt-3 text-surface-700-300 font-light flex justify-center">
+            <div class="muted-row">
               <span>or sign in with</span>
             </div>
 
-            <div class="my-3 md:my-5 flex flex-wrap gap-6 justify-center">
+            <div class="providers">
               {#each methods.oauth2.providers as provider}
 
                 {#if tabSet === "login"}
@@ -297,16 +297,16 @@
             </div>
 
             {#if tabSet === "signup" && form.signup_key === ""}
-              <div class="mx-2 mt-3 text-surface-700-300 font-light flex justify-center" transition:slide>
+              <div class="muted-row" transition:slide>
               <span>
                 Even when using an external login provider,
                 a signup key (see above) is still required for account creation.
               </span>
               </div>
             {/if}
-            <hr class="my-6">
+            <hr class="divider-lg">
 
-            <p class="font-light text-sm mt-10">
+            <p class="note">
               Note: it is possible to associate a local account with an
               external provider later by using the same email address. A single account can be associated with more
               than one external provider.
@@ -347,12 +347,115 @@
     margin-block: calc(var(--spacing) * 1);
     @media (width >= 48rem /* 768px */
     ) {
-      margin-block: calc(var(--spacing) * 2) /* 0.5rem = 8px */
-    ;
+      margin-block: calc(var(--spacing) * 2); /* 0.5rem = 8px */
     }
   }
 
   header {
     margin-bottom: 2em;
+  }
+
+  .login-btn {
+    border: 1px solid var(--color-primary-500);
+    display: block;
+    margin-top: calc(var(--spacing) * 4);
+  }
+
+  .support-row {
+    display: block;
+    margin-block: calc(var(--spacing) * 6);
+  }
+
+  @media (min-width: 48rem) {
+    .support-row {
+      display: flex;
+      gap: calc(var(--spacing) * 6);
+      align-items: center;
+      justify-content: flex-start;
+    }
+  }
+
+  .forgot-cta {
+    margin-top: calc(var(--spacing) * 2);
+  }
+
+  @media (min-width: 48rem) {
+    .forgot-cta {
+      margin-top: 0;
+    }
+  }
+
+  .tabs-wrap {
+    margin-block: calc(var(--spacing) * 2);
+  }
+
+  .tab-panel {
+    padding-top: calc(var(--spacing) * 3);
+  }
+
+  .form-grid {
+    display: grid;
+    gap: calc(var(--spacing) * 2);
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 40rem) {
+    .form-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .help-block {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-light);
+  }
+
+  .register-btn {
+    border: 1px solid var(--color-primary-500);
+    margin-block: calc(var(--spacing) * 2);
+  }
+
+  .divider-sm {
+    margin-block: calc(var(--spacing) * 2);
+  }
+
+  .divider-lg {
+    margin-block: calc(var(--spacing) * 6);
+  }
+
+  .muted-row {
+    margin-inline: calc(var(--spacing) * 2);
+    margin-top: calc(var(--spacing) * 3);
+    display: flex;
+    justify-content: center;
+    font-weight: var(--font-weight-light);
+    color: var(--color-surface-700);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .muted-row {
+      color: var(--color-surface-300);
+    }
+  }
+
+  .providers {
+    margin-block: calc(var(--spacing) * 3);
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--spacing) * 6);
+    justify-content: center;
+  }
+
+  @media (min-width: 48rem) {
+    .providers {
+      margin-block: calc(var(--spacing) * 5);
+    }
+  }
+
+  .note {
+    font-weight: var(--font-weight-light);
+    font-size: var(--text-sm);
+    margin-top: calc(var(--spacing) * 10);
   }
 </style>

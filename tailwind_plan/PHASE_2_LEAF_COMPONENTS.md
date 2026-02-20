@@ -91,18 +91,19 @@ static utility classes.
     - [x] `event/EventParticipantsOverviewSection.svelte` (Call 9)
     - [x] `event/EventPageAdminSection.svelte` (Call 9)
     - [x] `team/TeamAdminSection.svelte` (Call 9)
-    - [ ] `MatchMainInfoSection.svelte`
-    - [ ] `MatchDetailOfficialsCard.svelte`
-    - [ ] `MatchDetailStatsCard.svelte`
-    - [ ] `PlayoffSheet.svelte`
-    - [ ] `StreakEmoji.svelte`
-    - [ ] `StreakGraphSection.svelte`
-    - [ ] `WinningPercentageContainer.svelte`
-    - [ ] `MatchBoxscoreSection.svelte`
-    - [ ] `AccountModal.svelte`
-    - [ ] `ChangeEmailForm.svelte`
-    - [ ] `LoginForm.svelte`
-    - [ ] `PasswordRequestButton.svelte`
-    - [ ] `AttendanceTotalStatsBlock.svelte`
-    - [ ] `StatsByTypePieChart.svelte`
-    - [ ] `ConicGradient.svelte` (complicated refactoring necessary)
+    - [x] `MatchMainInfoSection.svelte`
+    - [x] `MatchDetailOfficialsCard.svelte`
+    - [x] `MatchDetailStatsCard.svelte`
+    - [x] `PlayoffSheet.svelte`
+    - [x] `StreakEmoji.svelte`
+    - [x] `StreakGraphSection.svelte`
+    - [x] `WinningPercentageContainer.svelte`
+    - [x] `MatchBoxscoreSection.svelte`
+    - [x] `AccountModal.svelte`
+    - [x] `ChangeEmailForm.svelte`
+    - [x] `LoginForm.svelte`
+    - [x] `PasswordRequestButton.svelte`
+    - [x] `AttendanceTotalStatsBlock.svelte`
+    - [x] `StatsByTypePieChart.svelte`
+    - [x] `ConicGradient.svelte` (Phase 5: replaced Tailwind width class with `size` prop; hover/region class
+      passthrough deferred with TODO)

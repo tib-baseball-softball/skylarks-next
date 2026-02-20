@@ -17,10 +17,9 @@
 
 <Tabs.Root
   bind:value={tabSet}
-  class=""
 >
   <Tabs.List
-    class="tabs-list border mb-1 preset-tonal-surface justify-around!"
+    class="tabs-list preset-tonal-surface list-layout"
   >
     <Tabs.Trigger
       class="tabs-trigger btn"
@@ -40,11 +39,11 @@
     </Tabs.Trigger>
   </Tabs.List>
 
-  <Tabs.Content class="pt-4" value="graph">
+  <Tabs.Content class="panel" value="graph">
     <LeagueChartGraph table={dataset.table}/>
   </Tabs.Content>
 
-  <Tabs.Content class="pt-4" value="percentage">
+  <Tabs.Content class="panel" value="percentage">
     {#if dataset.table_row}
       <WinningPercentageContainer tableRow={dataset.table_row}/>
     {:else}
@@ -52,7 +51,7 @@
     {/if}
   </Tabs.Content>
 
-  <Tabs.Content class="pt-4" value="series">
+  <Tabs.Content class="panel" value="series">
     {#if dataset.table_row}
       <StreakContainer dataset={dataset}/>
     {:else}
@@ -60,3 +59,15 @@
     {/if}
   </Tabs.Content>
 </Tabs.Root>
+
+<style>
+  .list-layout {
+    border: 1px solid var(--color-surface-500);
+    margin-bottom: calc(var(--spacing) * 1);
+    justify-content: space-around;
+  }
+
+  .panel {
+    padding-top: calc(var(--spacing) * 4);
+  }
+</style>

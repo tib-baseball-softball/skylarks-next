@@ -10,13 +10,13 @@
   let {tableRow}: Props = $props();
 </script>
 
-<section class="@container">
-  <div class="grid grid-cols-1 @lg:grid-cols-3 gap-4 justify-items-center">
+<section class="root">
+  <div class="grid-root">
     <dl>
       <dt>Rank</dt>
-      <dd class="flex gap-3 text-2xl font-extrabold justify-center text-details-element">
+      <dd class="stat-value value-flex text-details-element">
         {#if tableRow.rank === "1."}
-          <Crown class="stroke-primary-500"/>
+          <Crown class="primary-stroke"/>
         {:else }
           <Hash/>
         {/if}
@@ -27,7 +27,7 @@
 
     <dl>
       <dt>Wins/Losses</dt>
-      <dd class=" text-2xl font-extrabold text-details-element">{tableRow.wins_count} - {tableRow.losses_count}</dd>
+      <dd class="stat-value text-details-element">{tableRow.wins_count} - {tableRow.losses_count}</dd>
     </dl>
 
     <dl aria-hidden="true">
@@ -41,25 +41,59 @@
 </section>
 
 <style>
-    dt {
-        font-weight: var(--font-weight-light);
-    }
+  .root {
+    container-type: inline-size;
+  }
 
+  .grid-root {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: calc(var(--spacing) * 4);
+    justify-items: center;
+  }
+
+  dt {
+    font-weight: var(--font-weight-light);
+  }
+
+  dl {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 60%;
+  }
+
+  .stat-value {
+    font-size: var(--text-2xl);
+    font-weight: 800;
+    text-align: center;
+  }
+
+  .value-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--spacing) * 3);
+  }
+
+  .primary-stroke {
+    stroke: var(--color-primary-500);
+  }
+
+  @container (width >= 32rem) {
     dl {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 60%;
+      flex-direction: column;
+      gap: 0.5rem;
     }
 
-    @container (width >= 32rem) {
-        dl {
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .text-details-element {
-            padding: 3rem 0;
-        }
+    .text-details-element {
+      padding: 3rem 0;
     }
+  }
+
+  @container (width >= 64rem) {
+    .grid-root {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
 </style>

@@ -14,7 +14,7 @@
     stops = [{color: "neutral", start: 0, end: 100}],
     legend = false,
     spin = false,
-    width = "w-24",
+    size = "6rem",
     hover = "bg-primary-hover-token",
     digits = 0,
     regionCaption = "",
@@ -27,8 +27,8 @@
     legend?: boolean
     /** When enabled, the conic gradient will spin. */
     spin?: boolean
-    /** Style the conic gradient width. */
-    width?: string
+    /** Set the conic gradient size (CSS length), defaults to 6rem. */
+    size?: string
     /** Style the legend hover effect. */
     hover?: string
     /** Set the number of digits on the legend values. */
@@ -77,7 +77,7 @@
 
   const classesBase = $derived(`${cBase}`);
   const classesCaption = $derived(`${cCaption} ${regionCaption}`);
-  const classesCone = $derived(`${cCone} ${width} ${regionCone}`);
+  const classesCone = $derived(`${cCone} ${regionCone}`);
   const classesLegend = $derived(`${cLegend} ${regionLegend}`);
 </script>
 
@@ -90,7 +90,7 @@
   <figcaption class="conic-caption {classesCaption}"></figcaption>
   <!-- Conic Gradient -->
   {#if cone}
-    <div class="conic-cone {classesCone}" class:animate-spin={spin} style:background={cone}></div>
+    <div class="conic-cone {classesCone}" class:animate-spin={spin} style:background={cone} style:width={size}></div>
   {/if}
   <!-- Legend -->
   {#if legend && generatedLegendList}
