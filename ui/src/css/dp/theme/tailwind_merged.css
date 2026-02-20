@@ -846,26 +846,6 @@
     background-color: var(--color-black);
   }
 
-  .bg-gray-500 {
-    background-color: var(--color-gray-500);
-  }
-
-  .bg-orange-500 {
-    background-color: var(--color-orange-500);
-  }
-
-  .bg-red-500 {
-    background-color: var(--color-red-500);
-  }
-
-  .bg-teal-500 {
-    background-color: var(--color-teal-500);
-  }
-
-  .bg-yellow-500 {
-    background-color: var(--color-yellow-500);
-  }
-
   .fill-current {
     fill: currentColor;
   }

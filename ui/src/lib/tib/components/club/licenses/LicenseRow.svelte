@@ -14,10 +14,10 @@
   <span>{license.person.last_name}, {license.person.first_name}</span>
 </a>
 
-<style lang="postcss">
-    .container {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-    }
+<style>
+  .container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
 </style>

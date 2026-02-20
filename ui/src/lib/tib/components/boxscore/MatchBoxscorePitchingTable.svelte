@@ -81,7 +81,7 @@
       max-width: 75%;
     }
 
-    :global([data-theme='dark']) & {
+    @media (prefers-color-scheme: dark) {
       border: 2px solid var(--color-surface-500);
     }
   }

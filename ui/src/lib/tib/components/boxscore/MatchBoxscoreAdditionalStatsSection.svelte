@@ -10,113 +10,123 @@
   let {stats}: Props = $props();
 </script>
 
-<section class="my-3">
-  <h3 class="font-bold">BATTING</h3>
+<section>
+  <h3 class="bold-heading">BATTING</h3>
 
   {#if stats.batting.doubles.length > 0}
         <span>
-            <span class="font-bold">2B:</span>
+            <span class="bold-heading">2B:</span>
             <MatchBoxscoreAdditionalStatsSectionEntry
-                    entries={stats.batting.doubles}
+              entries={stats.batting.doubles}
             />
         </span>
   {/if}
 
   {#if stats.batting.triples.length > 0}
     <div>
-      <span class="font-bold">3B:</span>
+      <span class="bold-heading">3B:</span>
       <MatchBoxscoreAdditionalStatsSectionEntry
-              entries={stats.batting.triples}
+        entries={stats.batting.triples}
       />
     </div>
   {/if}
 
   {#if stats.batting.homeruns.length > 0}
     <div>
-      <span class="font-bold">HR:</span>
+      <span class="bold-heading">HR:</span>
       <MatchBoxscoreAdditionalStatsSectionEntry
-              entries={stats.batting.homeruns}
+        entries={stats.batting.homeruns}
       />
     </div>
   {/if}
 
   {#if stats.batting.sacrifice_hits.length > 0}
     <div>
-      <span class="font-bold">SH:</span>
+      <span class="bold-heading">SH:</span>
       <MatchBoxscoreAdditionalStatsSectionEntry
-              entries={stats.batting.sacrifice_hits}
+        entries={stats.batting.sacrifice_hits}
       />
     </div>
   {/if}
 
   {#if stats.batting.sacrifice_flys.length > 0}
     <div>
-      <span class="font-bold">SF:</span>
+      <span class="bold-heading">SF:</span>
       <MatchBoxscoreAdditionalStatsSectionEntry
-              entries={stats.batting.sacrifice_flys}
+        entries={stats.batting.sacrifice_flys}
       />
     </div>
   {/if}
 </section>
 
-<section class="my-3">
-  <h3 class="font-bold">BASERUNNING</h3>
+<section>
+  <h3 class="bold-heading">BASERUNNING</h3>
 
   {#if stats.baserunning.stolen_bases.length > 0}
     <div>
-      <span class="font-bold">SB:</span>
+      <span class="bold-heading">SB:</span>
       <MatchBoxscoreAdditionalStatsSectionEntry
-              entries={stats.baserunning.stolen_bases}
+        entries={stats.baserunning.stolen_bases}
       />
     </div>
   {/if}
 
   {#if stats.baserunning.caught_stealings.length > 0}
     <div>
-      <span class="font-bold">CS:</span>
+      <span class="bold-heading">CS:</span>
       <MatchBoxscoreAdditionalStatsSectionEntry
-              entries={stats.baserunning.caught_stealings}
+        entries={stats.baserunning.caught_stealings}
       />
     </div>
   {/if}
 </section>
 
-<section class="my-3">
-  <h3 class="font-bold">FIELDING</h3>
+<section>
+  <h3 class="bold-heading">FIELDING</h3>
 
   {#if stats.fielding.errors.length > 0}
     <div>
-      <span class="font-bold">E:</span>
+      <span class="bold-heading">E:</span>
       <MatchBoxscoreAdditionalStatsSectionEntry
-              entries={stats.fielding.errors}
+        entries={stats.fielding.errors}
       />
     </div>
   {/if}
 
   {#if stats.fielding.passed_balls.length > 0}
     <div>
-      <span class="font-bold">PB:</span>
+      <span class="bold-heading">PB:</span>
       <MatchBoxscoreAdditionalStatsSectionEntry
-              entries={stats.fielding.passed_balls}
+        entries={stats.fielding.passed_balls}
       />
     </div>
   {/if}
 
   {#if stats.fielding.double_plays.length > 0}
     <div>
-      <span class="font-bold">DP:</span>
+      <span class="bold-heading">DP:</span>
       <MatchBoxscoreAdditionalStatsSectionEntry
-              entries={stats.fielding.double_plays}
+        entries={stats.fielding.double_plays}
       />
     </div>
   {/if}
 
   {#if stats.fielding.triple_plays.length > 0}
     <div>
-      <span class="font-bold">TP:</span>
+      <span class="bold-heading">TP:</span>
       <MatchBoxscoreAdditionalStatsSectionEntry
-              entries={stats.fielding.triple_plays}
+        entries={stats.fielding.triple_plays}
       />
     </div>
   {/if}
 </section>
+
+<style>
+  .bold-heading {
+    font-weight: var(--font-weight-bold);
+  }
+
+  section {
+    margin-block: calc(var(--spacing) * 3);
+  }
+</style>

@@ -14,7 +14,7 @@
   <p>Loading matches...</p>
   <ProgressRing/>
 {:then results}
-  <section class="grid md:grid-flow-col grid-rows-5 grid-cols-1 md:grid-cols-2 gap-y-2">
+  <section>
     {#each results as match}
       <CurrentMatchRow {match}/>
     {/each}
@@ -27,3 +27,17 @@
 {:catch error}
   <p>error loading matches: {error.message}</p>
 {/await}
+
+<style>
+  section {
+    display: grid;
+    grid-template-rows: repeat(5, minmax(0, 1fr));
+    grid-template-columns: 1fr;
+    row-gap: calc(var(--spacing) * 2);
+
+    @media (min-width: 48rem) {
+      grid-template-columns: 1fr 1fr;
+      grid-auto-flow: column;
+    }
+  }
+</style>

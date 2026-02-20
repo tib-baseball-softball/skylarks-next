@@ -15,7 +15,13 @@
 </section>
 
 {#if dataset.table_row}
-  <section class="mt-6!">
+  <section>
     <StreakEmoji streak={dataset.table_row.streak}/>
   </section>
 {/if}
+
+<style>
+  section {
+    margin-block-start: calc(var(--spacing) * 6) !important;
+  }
+</style>

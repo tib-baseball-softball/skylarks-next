@@ -91,47 +91,11 @@ static utility classes.
     - [x] `event/EventParticipantsOverviewSection.svelte` (Call 9)
     - [x] `event/EventPageAdminSection.svelte` (Call 9)
     - [x] `team/TeamAdminSection.svelte` (Call 9)
-
-## 2.4 Summary - Call 8 Phase 2 Continuation
-
-### Components Migrated (7 components)
-
-1. **CommentRow.svelte** - Migrated flex layout classes, spacing utilities (mt-1, gap-2, gap-3), and typography
-   classes (font-bold, text-wrap) to scoped CSS
-2. **CommentSection.svelte** - Migrated list item layout classes (my-3, md:my-4, flex, gap-2, flex-row-reverse) and form
-   spacing (mt-6)
-3. **EventTeaser.svelte** - Migrated card layout classes (text-sm, h-full, flex, justify-end, gap-1), typography (
-   font-bold, ms-1), and divider spacing (my-2)
-4. **Dialog.svelte** - Migrated trigger and header layout classes (flex, gap-1, gap-5, items-center, mb-2) and
-   typography (text-xl, font-semibold)
-5. **PlayerProfileClubsSection.svelte** - Migrated empty state card layout (flex, flex-col, justify-between, p-4,
-   space-y-2, items-center, gap-3, flex-wrap) and typography (font-semibold)
-6. **PlayerDataProfileSection.svelte** - Migrated profile card layout (flex, flex-col, justify-between, p-4, font-light,
-   mt-2) and responsive actions (gap-2, lg:gap-3)
-7. **TeamMembersTableContent.svelte** - Migrated admin actions layout (flex, gap-1, lg:gap-2, justify-end, m-0.5) and
-   empty state spacing (py-4)
-
-## 2.5 Summary - Call 9 Phase 2 Continuation
-
-### Components Migrated (6 components)
-
-1. **ParticipationForm.svelte** - Migrated grid layout (grid-cols-2, gap-2/3/4), spacing (mt-4, space-y-3/1), and typography (text-sm, font-light)
-2. **UserDetailsForm.svelte** - Migrated layout (mt-2, mt-4, space-y-3, flex, justify-end, gap-3), typography (font-light), and borders
-3. **TeamGamesModal.svelte** - Migrated complex grid layout (grid-cols-2, col-span-2, gap-2/3/4), spacing (mt-4, space-y-3), and typography (font-bold, font-light)
-4. **EventParticipantsOverviewSection.svelte** - Migrated responsive grid (grid-cols-1, md:grid-cols-3), flex layouts (flex-wrap, items-center), and various spacing/gaps
-5. **EventPageAdminSection.svelte** - Migrated responsive grid (grid-cols-1/2/3), info row layouts (flex, items-center, gap-3), and border utilities
-6. **TeamAdminSection.svelte** - Migrated complex grid (1-4 columns responsive), card layouts, and danger zone styling (rounded-base, preset-outlined-error-500)
-
-### Key Patterns Used
-
-- Extensive use of CSS Grid and Flexbox in scoped blocks
-- Mapping responsive Tailwind prefixes (md:, lg:, xl:) to standard Media Queries
-- Converting spacing/padding/margin to `calc(var(--spacing) * N)`
-- Using `:global()` for styling utility-like classes passed as props (e.g., `border-primary`)
-- Semantic class names (e.g., `.form-grid`, `.info-row`, `.danger-zone`)
-
-### Remaining Work for Phase 2
-
-- Remaining complex form components (EventForm, TeamForm, etc.)
-- Some section/layout components (EventParticipationSection, JoinTeamSection - already mostly clean but worth a check)
-- Phase 3 (Routes) can begin soon as many core components are now Tailwind-free
+    - [ ] `MatchMainInfoSection.svelte`
+    - [ ] `MatchDetailOfficialsCard.svelte`
+    - [ ] `MatchDetailStatsCard.svelte`
+    - [ ] `PlayoffSheet.svelte`
+    - [ ] `StreakEmoji.svelte`
+    - [ ] `StreakGraphSection.svelte`
+    - [ ] `WinningPercentageContainer.svelte`
+    - [ ] `MatchBoxscoreSection.svelte`

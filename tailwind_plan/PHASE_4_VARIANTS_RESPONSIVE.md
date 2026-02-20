@@ -11,9 +11,7 @@ Address complex classes in `ui/src/css/dp/shame.css` involving media queries and
 ## ~~4.2 Dark Mode Migration~~
 
 - [x] Identify all `dark:*` usages.
-- [x] Replace with `@media (prefers-color-scheme: dark)` or `:global([data-theme='dark'])` in scoped blocks.
-- [x] *Optional*: If using a theme toggle, use the appropriate selector (e.g.,
-  `:global([data-theme='dark']) .my-class`).
+- [x] Replace with `@media (prefers-color-scheme: dark)` in scoped blocks.
 
 ## ~~4.3 Responsive Breakpoints~~
 
