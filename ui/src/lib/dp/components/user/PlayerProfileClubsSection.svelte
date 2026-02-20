@@ -30,7 +30,7 @@
     <footer class="card-footer">
       <div class="actions">
 
-        <ClubForm club={null} buttonClasses="btn preset-tonal-primary border border-primary-500"/>
+        <ClubForm club={null} triggerVariant="tonal-primary"/>
 
         <!--TODO: This doesn't do anything yet-->
         <button class="btn preset-tonal-primary border border-primary-500">

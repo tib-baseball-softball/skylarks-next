@@ -13,34 +13,52 @@
 </script>
 
 <section
-        class="{classes} card preset-tonal dark:border dark:border-surface-500 rounded-base shadow-xl p-4 my-4">
-  <div class="container">
+  class="{classes} card report-header preset-tonal shadow-xl">
+  <div class="row">
     <CalendarDays/>
-    <span class="font-bold">Veröffentlicht: </span>
+    <span class="label">Veröffentlicht: </span>
     <span>{date.toLocaleDateString()}</span>
   </div>
 
-  <hr class="my-2">
+  <hr>
 
-  <div class="container">
+  <div class="row">
     <ClipboardList/>
-    <span class="font-bold">Liga: </span>
+    <span class="label">Liga: </span>
     <span>{report.league.name} ({report.league.season})</span>
   </div>
 
-  <hr class="my-2">
+  <hr>
 
-  <div class="container">
+  <div class="row">
     <Pen/>
-    <span class="font-bold">Autor: </span>
+    <span class="label">Autor: </span>
     <span>{report.author}</span>
   </div>
 
 </section>
 
-<style lang="postcss">
-    .container {
-        display: flex;
-        gap: calc(var(--spacing) * 4);
+<style>
+  .report-header {
+    border-radius: var(--radius-base);
+    padding: calc(var(--spacing) * 4);
+    margin-block: calc(var(--spacing) * 4);
+
+    @media (prefers-color-scheme: dark) {
+      border: 1px solid var(--color-surface-500);
     }
+  }
+
+  .row {
+    display: flex;
+    gap: calc(var(--spacing) * 4);
+  }
+
+  .label {
+    font-weight: bold;
+  }
+
+  hr {
+    margin-block: calc(var(--spacing) * 2);
+  }
 </style>

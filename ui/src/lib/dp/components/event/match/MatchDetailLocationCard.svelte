@@ -21,7 +21,7 @@
 
   const {
     field,
-    classes = "card preset-tonal-surface border border-surface-500 p-3",
+    classes = "",
     showDividers = true,
   }: Props = $props();
 
@@ -33,47 +33,47 @@
   );
 </script>
 
-<div class="root {classes}">
+<div class="location-card {classes}">
   <div class="location-row">
     <LandPlot/>
     <div>
       <p>{field.address_addon} ({field?.name})</p>
-      <p class="label">Ballpark</p>
+      <p class="location-label">Ballpark</p>
     </div>
   </div>
 
-  <hr class={showDividers ? "" : "hidden!"}/>
+  <hr class="divider" class:hidden={!showDividers}/>
 
   <div class="location-row">
     <MapPin/>
     <div>
       <p>{field.street}</p>
-      <p class="label">Address</p>
+      <p class="location-label">Address</p>
     </div>
   </div>
 
-  <hr class={showDividers ? "" : "hidden!"}/>
+  <hr class="divider" class:hidden={!showDividers}/>
 
   <div class="location-row">
     <Building2/>
     <div>
       <p>{field.postal_code} {field.city}</p>
-      <p class="label">City</p>
+      <p class="location-label">City</p>
     </div>
   </div>
 
-  <hr class={showDividers ? "" : "hidden!"}/>
+  <hr class="divider" class:hidden={!showDividers}/>
 
-  <div class="location-row link">
+  <div class="location-row link-row">
     <Link/>
     <a class="anchor" href={googleMapsLink} target="_blank"
     >Open in Google Maps</a
     >
   </div>
 
-  <hr class={showDividers ? "" : "hidden!"}/>
+  <hr class="divider" class:hidden={!showDividers}/>
 
-  <div class="location-row link">
+  <div class="location-row link-row">
     <Link/>
     <a class="anchor" href={appleMapsLink} target="_blank">Open in Apple Maps</a
     >
@@ -81,9 +81,14 @@
 </div>
 
 <style>
-  .root {
+  .location-card {
     display: flex;
     flex-direction: column;
+    padding: calc(var(--spacing) * 3);
+    background-color: var(--color-surface-50-950);
+    color: var(--color-surface-950-50);
+    border: 1px solid var(--color-surface-500);
+    border-radius: var(--radius-base);
   }
 
   .location-row {
@@ -91,17 +96,27 @@
     align-items: center;
     gap: calc(var(--spacing) * 3);
 
-    &.link {
+    &.link-row {
       align-self: flex-end;
     }
   }
 
-  .label {
-    font-size: 0.875rem; /* text-sm */
-    font-weight: 300; /* font-light */
+  .location-label {
+    font-size: var(--text-sm);
+    font-weight: 300;
   }
 
-  hr {
-    margin: 0.5rem 0;
+  .divider {
+    margin-block: calc(var(--spacing) * 2);
+    border: 0;
+    border-top: 1px solid var(--color-surface-200);
+    
+    :global([data-theme='dark']) & {
+        border-color: var(--color-surface-700);
+    }
+
+    &.hidden {
+      display: none;
+    }
   }
 </style>

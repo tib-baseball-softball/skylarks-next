@@ -9,16 +9,35 @@
   let {clubOfficial}: Props = $props();
 </script>
 
-<div class="flex items-center gap-4">
+<div class="official-row">
   <ClubOfficialIcon {clubOfficial}/>
 
-  <dl class="space-y-0.5">
-    <dt class="font-light text-sm">
+  <dl class="official-details">
+    <dt class="official-function">
       {clubOfficial.function}
     </dt>
 
-    <dd>
+    <dd class="official-name">
       {clubOfficial.person.last_name}, {clubOfficial.person.first_name}
     </dd>
   </dl>
 </div>
+
+<style>
+  .official-row {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 4);
+  }
+
+  .official-details {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 0.5);
+  }
+
+  .official-function {
+    font-weight: 300;
+    font-size: var(--text-sm);
+  }
+</style>

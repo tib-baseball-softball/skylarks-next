@@ -28,28 +28,28 @@
   const matchJSON = $derived($event?.match_json) as unknown as Match;
 </script>
 
-<div class="space-y-4 lg:space-y-6 xl:space-y-7">
-  <div class="flex items-center gap-3">
-    <h1 class="h1" class:line-through={$event.cancelled}>{$event.title}</h1>
-    <div>
+<div class="event-page-container">
+  <div class="header-row">
+    <h1 class="h1" class:cancelled-text={$event.cancelled}>{$event.title}</h1>
+    <div class="type-badge-wrapper">
       <EventTypeBadge type={$event.type}/>
     </div>
   </div>
 
   {#if $event.cancelled}
-    <span class="badge preset-filled-error-500 gap-1">
+    <span class="badge cancelled-badge">
       <Ban/>
       Cancelled
     </span>
   {/if}
 
-  <article class="mb-8!" class:line-through={$event.cancelled}>
+  <article class="description-section" class:cancelled-text={$event.cancelled}>
     <section>
       <p>{$event.desc}</p>
     </section>
   </article>
 
-  <div class="space-y-6" class:line-through={$event.cancelled}>
+  <div class="core-info-section" class:cancelled-text={$event.cancelled}>
     <EventCoreInfo event={$event}>
       {#snippet additionalTimeSection()}
         <TimeSection timeValue={$event.endtime} displayText="End:" classes="col-span-2">
@@ -61,57 +61,57 @@
     </EventCoreInfo>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2">
+  <div class="details-grid">
     {#if $event.expand.location}
-      <section class="mt-3 lg:mt-5">
-        <h2 class="h2">Location Details</h2>
+      <section class="details-section">
+        <h2 class="h2 details-title">Location Details</h2>
 
         <MatchDetailLocationCard
           field={$event.expand.location}
-          classes="my-4 space-y-5"
+          classes="location-card-spacing"
           showDividers={false}
         />
       </section>
     {/if}
 
     {#if $event.expand.attire}
-      <section class="mt-3 lg:mt-5">
+      <section class="details-section">
         <EventAttireSection attire={$event.expand.attire}/>
       </section>
     {/if}
   </div>
 
   {#if !$event.cancelled}
-    <hr class="my-8!"/>
+    <hr class="divider-large">
 
-    <div class="md:flex md:justify-between md:items-center space-y-2.5 md:space-y-0">
+    <div class="participation-header">
       <h2 class="h4">My Participation</h2>
 
       {#if canParticipate}
         <EventParticipationSection event={$event} chipClasses="flex-grow"/>
       {:else}
-        <div class="flex justify-end">
+        <div class="participation-info">
           <p>Only team members can participate in events.</p>
         </div>
       {/if}
     </div>
 
-    <hr class="my-8"/>
+    <hr class="divider">
 
     <EventParticipantsOverviewSection event={$event}/>
   {/if}
 
   {#if $event.match_json}
-    <section>
-      <h2 class="h2 mb-3">Game Data</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2">
+    <section class="game-data-section">
+      <h2 class="h2 game-data-title">Game Data</h2>
+      <div class="game-data-grid">
         <MatchTeaserCard match={matchJSON} teamName={$event?.expand?.team?.name}/>
       </div>
     </section>
   {/if}
 
-  <section class="my-6">
-    <div class="mt-4 p-3 md:p-4 border border-surface-900-100 rounded-base max-w-[65ch] mx-auto">
+  <section class="comments-section">
+    <div class="comments-wrapper">
       <header>
         <h2 class="h3">Comments</h2>
       </header>
@@ -128,3 +128,128 @@
     <EventPageAdminSection event={$event}/>
   {/if}
 </div>
+
+<style>
+    .event-page-container {
+        display: flex;
+        flex-direction: column;
+        gap: calc(var(--spacing) * 4);
+        
+        @media (min-width: 64rem) {
+            gap: calc(var(--spacing) * 6);
+        }
+        
+        @media (min-width: 80rem) {
+            gap: calc(var(--spacing) * 7);
+        }
+    }
+
+    .header-row {
+        display: flex;
+        align-items: center;
+        gap: calc(var(--spacing) * 3);
+    }
+
+    .cancelled-text {
+        text-decoration: line-through;
+    }
+
+    .cancelled-badge {
+        background-color: var(--color-error-500);
+        color: var(--color-error-contrast-500);
+        gap: calc(var(--spacing) * 1);
+        width: fit-content;
+    }
+
+    .description-section {
+        margin-bottom: calc(var(--spacing) * 8);
+    }
+
+    .details-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        
+        @media (min-width: 48rem) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: calc(var(--spacing) * 4);
+        }
+    }
+
+    .details-section {
+        margin-top: calc(var(--spacing) * 3);
+        
+        @media (min-width: 64rem) {
+            margin-top: calc(var(--spacing) * 5);
+        }
+    }
+
+    .details-title {
+        margin-bottom: calc(var(--spacing) * 3);
+    }
+
+    /* Handle the location card spacing when used as an override prop */
+    :global(.location-card-spacing) {
+        margin-block: calc(var(--spacing) * 4) !important;
+        gap: calc(var(--spacing) * 5) !important;
+    }
+
+    .divider-large {
+        margin-block: calc(var(--spacing) * 8);
+    }
+
+    .divider {
+        margin-block: calc(var(--spacing) * 8);
+    }
+
+    .participation-header {
+        display: flex;
+        flex-direction: column;
+        gap: calc(var(--spacing) * 2.5);
+        
+        @media (min-width: 48rem) {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0;
+        }
+    }
+
+    .participation-info {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .game-data-section {
+        /* any specific section styles */
+    }
+
+    .game-data-title {
+        margin-bottom: calc(var(--spacing) * 3);
+    }
+
+    .game-data-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        
+        @media (min-width: 48rem) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    .comments-section {
+        margin-block: calc(var(--spacing) * 6);
+    }
+
+    .comments-wrapper {
+        margin-top: calc(var(--spacing) * 4);
+        padding: calc(var(--spacing) * 3);
+        border: 1px solid var(--color-surface-900-100);
+        border-radius: var(--radius-base);
+        max-width: 65ch;
+        margin-inline: auto;
+        
+        @media (min-width: 48rem) {
+            padding: calc(var(--spacing) * 4);
+        }
+    }
+</style>

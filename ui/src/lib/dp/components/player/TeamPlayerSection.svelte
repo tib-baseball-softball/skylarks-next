@@ -12,20 +12,45 @@
   let visual: "number" | "image" = $state("number");
 </script>
 
-<label class="label flex flex-col gap-1 my-4 lg:max-w-[50%]">
+<label class="label visual-selector-container">
   Visualization
   <Tabs.Root bind:value={visual}>
-    <Tabs.List class="tabs-list input">
-      <Tabs.Trigger class="tabs-trigger btn flex-grow" value="number">Number</Tabs.Trigger>
-      <Tabs.Trigger class="tabs-trigger btn flex-grow" value="image">Image</Tabs.Trigger>
+    <Tabs.List class="tabs-list selector-tabs">
+      <Tabs.Trigger class="tabs-trigger btn" value="number">Number</Tabs.Trigger>
+      <Tabs.Trigger class="tabs-trigger btn" value="image">Image</Tabs.Trigger>
     </Tabs.List>
   </Tabs.Root>
 </label>
 
-<div class="card p-3 preset-tonal shadow-xl">
+<div class="card players-list-card preset-tonal shadow-xl">
   {#each players as player (player.uid)}
     <PlayerRow {player} {visual}/>
 
-    <hr class="my-3">
+    <hr class="row-divider">
   {/each}
 </div>
+
+<style>
+  .visual-selector-container {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 1);
+    margin-block: calc(var(--spacing) * 4);
+
+    @media (min-width: 64rem) {
+      max-width: 50%;
+    }
+  }
+
+  .players-list-card {
+    padding: calc(var(--spacing) * 3);
+
+    @media (prefers-color-scheme: dark) {
+      border: 1px solid var(--color-surface-500);
+    }
+  }
+
+  .row-divider {
+    margin-block: calc(var(--spacing) * 3);
+  }
+</style>

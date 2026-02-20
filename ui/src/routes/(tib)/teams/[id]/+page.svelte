@@ -20,33 +20,33 @@
   }
 </script>
 
-<h1 class="h1 my-4">{clubTeam.name} (Saison {clubTeam.season})</h1>
+<h1 class="h1 page-title">{clubTeam.name} (Saison {clubTeam.season})</h1>
 
-<section class="my-10 lg:max-w-[50%]">
+<section class="info-section">
   <h2 class="h2">Information</h2>
 
   <TeamDetailInfoCard {clubTeam}/>
 </section>
 
-<section class="my-10">
+<section class="standings-section">
   <h2 class="h2">Standings</h2>
 
   {#await data?.table}
     <ProgressRing/>
   {:then table}
     {#if table}
-      <div class="col-span-2 standings-container">
+      <div class="standings-container">
         <StandingsTable {table}/>
       </div>
     {:else }
-      <p class="col-span-2">No Standings available.</p>
+      <div class="no-data">No Standings available.</div>
     {/if}
   {:catch error}
     <p>error loading: {error.message}</p>
-  {/await}
+  {#/await}
 </section>
 
-<section class="my-10" data-testid="team-players-section">
+<section class="players-section" data-testid="team-players-section">
   <h2 class="h2">Players</h2>
 
   {#await data.players}
@@ -62,7 +62,7 @@
   {/await}
 </section>
 
-<section class="my-10! mb-4!">
+<section class="stats-section">
   <h2 class="h2">Stats</h2>
   {#await getData()}
     <ProgressRing/>
@@ -76,11 +76,36 @@
 </section>
 
 <style lang="postcss">
+  .page-title {
+      margin-block: calc(var(--spacing) * 4);
+  }
+
   h2 {
     margin-bottom: calc(var(--spacing) * 3)
   }
 
-  /* ugly hack to prevent table overflow */
+  .info-section {
+      margin-block: calc(var(--spacing) * 10);
+      
+      @media (min-width: 64rem) {
+          max-width: 50%;
+      }
+  }
+
+  .standings-section, .players-section {
+      margin-block: calc(var(--spacing) * 10);
+  }
+
+  .stats-section {
+      margin-top: calc(var(--spacing) * 10);
+      margin-bottom: calc(var(--spacing) * 4);
+  }
+
+  .no-data {
+      /* could be grid-column: span 2 etc but we removed grid from section */
+  }
+
+  /* prevent table overflow */
   @media (min-width: 1400px) and (max-width: 1800px) {
     .standings-container {
       max-width: 90%;

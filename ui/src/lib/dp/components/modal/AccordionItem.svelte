@@ -4,13 +4,13 @@
 
   interface Props {
     startOpen?: boolean;
-    panelPadding?: string;
+    panelInset?: "none" | "default";
     control?: Snippet;
     lead?: Snippet;
     panel?: Snippet;
   }
 
-  const {startOpen = true, panelPadding = "py-0 px-4", control, lead, panel}: Props = $props();
+  const {startOpen = true, panelInset = "default", control, lead, panel}: Props = $props();
   let open = $derived(startOpen);
 </script>
 
@@ -29,7 +29,7 @@
     </span>
   </summary>
 
-  <div class={panelPadding}>
+  <div class={["panel", panelInset === "default" && "panel-inset-default"]}>
     {@render panel?.()}
   </div>
 </details>
@@ -55,5 +55,13 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+  }
+
+  .panel {
+    padding-block: 0;
+  }
+
+  .panel-inset-default {
+    padding-inline: calc(var(--spacing) * 4);
   }
 </style>
