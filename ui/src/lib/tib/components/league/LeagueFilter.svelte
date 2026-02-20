@@ -9,10 +9,16 @@
   const {leagueGroups = []}: Props = $props();
 </script>
 
-<select bind:value={preferences.current.leagueGroupID} class="select min-w-52">
+<select bind:value={preferences.current.leagueGroupID}>
   <option selected value="{0}">All Leagues</option>
 
   {#each leagueGroups as leagueGroup}
     <option value="{leagueGroup.id}">{leagueGroup.name} ({leagueGroup.acronym})</option>
   {/each}
 </select>
+
+<style>
+  select {
+    min-width: calc(var(--spacing) * 52);
+  }
+</style>
