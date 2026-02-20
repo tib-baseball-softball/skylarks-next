@@ -16,35 +16,35 @@
 </script>
 
 <div
-        class="card overview-card"
+  class="card overview-card"
 >
   <header class="card-header">
     <h2 class="h3">Current Games</h2>
   </header>
   <section class="card-body">
     <Tabs.Root
-            bind:value={tabSet}
-            class="tabs-container"
+      bind:value={tabSet}
+      class="tabs-container"
     >
       <Tabs.List
-              class="tabs-list"
+        class="tabs-list"
       >
         <Tabs.Trigger
-                class="tabs-trigger btn"
-                value="previous"
+          class="tabs-trigger btn"
+          value="previous"
         >
           Previous
           <span class="gameday-text">Gameday</span>
         </Tabs.Trigger>
         <Tabs.Trigger
-                class="tabs-trigger btn"
-                value="current"
+          class="tabs-trigger btn"
+          value="current"
         >Current
           <span class="gameday-text">Gameday</span>
         </Tabs.Trigger>
         <Tabs.Trigger
-                class="tabs-trigger btn"
-                value="next"
+          class="tabs-trigger btn"
+          value="next"
         >Next
           <span class="gameday-text">Gameday</span>
         </Tabs.Trigger>
@@ -63,74 +63,42 @@
   </section>
   <footer class="card-footer gamecenter-footer">
     <a
-            class="btn gamecenter-btn"
-            href="/gamecenter"
+      class="btn gamecenter-btn"
+      href="/gamecenter"
     >Gamecenter</a
     >
   </footer>
 </div>
 
 <style>
-    .overview-card {
-        background-color: var(--color-surface-50-950);
-        color: var(--color-surface-950-50);
-        border: 1px solid var(--color-surface-500);
+  .overview-card {
+    background-color: var(--color-surface-50-950);
+    color: var(--color-surface-950-50);
+    border: 1px solid var(--color-surface-500);
 
-        :global([data-theme='dark']) & {
-            border: 1px solid var(--color-tertiary-600-400);
-        }
+    @media (prefers-color-scheme: dark) {
+      border: 1px solid var(--color-tertiary-600-400);
     }
+  }
 
-    .card-body {
-        padding: calc(var(--spacing) * 4);
+  .card-body {
+    padding: calc(var(--spacing) * 4);
+  }
+
+  .gameday-text {
+    display: none;
+
+    @media (min-width: 64rem) {
+      display: inline;
     }
+  }
 
-    .tabs-list {
-        display: flex;
-        border: 1px solid var(--color-surface-200);
-        margin-bottom: calc(var(--spacing) * 1);
-        background-color: var(--color-surface-50-950);
-        color: var(--color-surface-950-50);
-        
-        :global([data-theme='dark']) & {
-            border-color: var(--color-surface-700);
-        }
-    }
+  .tabs-content {
+    padding-top: calc(var(--spacing) * 4);
+  }
 
-    .gameday-text {
-        display: none;
-
-        @media (min-width: 64rem) {
-            display: inline;
-        }
-    }
-
-    .tabs-content {
-        padding-top: calc(var(--spacing) * 4);
-    }
-
-    .gamecenter-footer {
-        display: flex;
-        justify-content: flex-end;
-    }
-
-    .gamecenter-btn {
-        background-color: var(--color-primary-500);
-        color: var(--color-primary-contrast-500);
-        border: 1px solid var(--color-primary-500);
-        padding-inline: calc(var(--spacing) * 10);
-        
-        :global([data-theme='dark']) & {
-            background-color: var(--color-primary-300-700);
-            color: var(--color-primary-contrast-300-700);
-        }
-    }
-
-    :global(.tabs-trigger[data-state='active']) {
-        background-color: var(--color-surface-100-900);
-        
-        :global([data-theme='dark']) & {
-            background-color: var(--color-surface-800);
-        }
-    }
+  .gamecenter-footer {
+    display: flex;
+    justify-content: flex-end;
+  }
 </style>
