@@ -891,4 +891,24 @@
     box-shadow: 0 0 30px color-mix(in oklab, var(--color-surface-50-950) 30%, transparent) inset;
     backdrop-filter: blur(16px);
   }
+
+  .border-primary-500, .border-primary {
+    border: 1px solid var(--color-primary-500);
+  }
+
+  .border-tertiary-500, .border-tertiary {
+    border: 1px solid var(--color-tertiary-500);
+  }
+
+  .border-success-500, .border-success {
+    border: 1px solid var(--color-success-500);
+  }
+
+  .border-warning-500, .border-warning {
+    border: 1px solid var(--color-warning-500);
+  }
+
+  .border-error-500, .border-error {
+    border: 1px solid var(--color-error-500);
+  }
 }

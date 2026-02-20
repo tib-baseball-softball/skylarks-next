@@ -170,6 +170,7 @@
     display: flex;
     align-items: center;
     gap: calc(var(--spacing) * 2);
+    padding-inline-start: calc(var(--spacing) * 4);
   }
 
   .participation-content {

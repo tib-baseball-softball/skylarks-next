@@ -7,16 +7,15 @@
 
   interface props {
     event: ExpandedEvent;
-    classes?: string;
     additionalTimeSection?: Snippet | undefined;
   }
 
-  const {event, classes = "", additionalTimeSection = undefined}: props = $props();
+  const {event, additionalTimeSection = undefined}: props = $props();
 
   const startTime = $derived(new Date(event.starttime));
 </script>
 
-<section class={classes}>
+<section class="event-core-info">
   <div class="info-grid">
     <div class="info-row">
       <Calendar size="18"/>
@@ -73,6 +72,10 @@
     align-items: center;
     gap: calc(var(--spacing) * 2);
     grid-column: span 6 / span 6;
+  }
+
+  .event-core-info {
+    padding: calc(var(--spacing) * 4);
   }
 
   .event-time {

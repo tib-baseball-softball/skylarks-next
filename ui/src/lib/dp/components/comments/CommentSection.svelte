@@ -61,14 +61,14 @@
 {/if}
 
 <form class="add-comment-form">
-  <label class="label mb-2" for="new-comment-input">Comment</label>
-  <div class="input-group grid-cols-[1fr_auto]">
+  <label class="label comment-label" for="new-comment-input">Comment</label>
+  <div class="input-group">
     <input
-            bind:value={commentText}
-            class="ig-input rounded-s-base"
-            id="new-comment-input"
-            placeholder="Your comment..."
-            type="text"
+      bind:value={commentText}
+      class="ig-input rounded-s-base"
+      id="new-comment-input"
+      placeholder="Your comment..."
+      type="text"
     />
     <button class="ig-btn preset-filled" disabled={!commentText} onclick={addComment} title="Add comment" type="submit">
       <Send size={18}/>
@@ -95,7 +95,15 @@
     }
   }
 
+  .comment-label {
+    margin-block-end: calc(var(--spacing) * 2);
+  }
+
   .add-comment-form {
     margin-top: calc(var(--spacing) * 6);
+  }
+
+  .input-group {
+    grid-template-columns: 1fr auto;
   }
 </style>

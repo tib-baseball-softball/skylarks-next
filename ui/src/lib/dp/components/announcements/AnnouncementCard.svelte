@@ -58,9 +58,9 @@
 
         <div class="meta-actions">
           {#if commentCount > 0}
-            <div class="relative inline-block">
+            <div class="badge-wrapper">
               <span class="sr-only">Number of Comments:</span>
-              <span class="badge-icon preset-filled-primary-500 absolute z-10">
+              <span class="badge-icon comment-badge preset-filled-primary-500">
                 {commentCount}
               </span>
               <MessageCircle aria-hidden="true"/>
@@ -116,5 +116,15 @@
     top: -9px;
     right: -6px;
     padding: 0.2rem;
+  }
+
+  .badge-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  .comment-badge {
+    position: absolute;
+    z-index: 10;
   }
 </style>

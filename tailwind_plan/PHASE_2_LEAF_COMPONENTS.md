@@ -63,6 +63,7 @@ static utility classes.
     - [x] `datatable/ThSort.svelte`
     - [x] `datatable/ThFilter.svelte`
     - [x] `datatable/Search.svelte`
+    - [x] `utility/Paginator.svelte`
     - [x] `event/match/MatchDetailLocationCard.svelte`
     - [x] `event/TimeSection.svelte`
     - [x] `formElements/Switch.svelte`
