@@ -84,7 +84,7 @@
   />
 {/if}
 
-<style lang="postcss">
+<style>
   .location-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));

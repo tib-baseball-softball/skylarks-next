@@ -15,7 +15,7 @@
   <div class="stat-desc">{block.desc}</div>
 </div>
 
-<style lang="postcss">
+<style>
   .stat-desc {
     overflow: hidden;
     text-wrap: wrap;

@@ -34,6 +34,7 @@
   >
     {fallback}</span>
 {/if}
+
 <style>
   .avatar {
     overflow: hidden;

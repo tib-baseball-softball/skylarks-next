@@ -1,17 +1,18 @@
 <script lang="ts">
   interface props {
     fillColor: string;
-    classes?: string;
+    size?: number;
   }
 
-  let {fillColor, classes = ""}: props = $props();
+  let {fillColor, size = 16}: props = $props();
 </script>
 
 <svg
   aria-label="Baseball Pants"
-  class="root {classes}"
+  class="root"
   style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"
   viewBox="0 0 800 800"
+  width="{size}"
   xml:space="preserve"
   xmlns="http://www.w3.org/2000/svg"
 >
@@ -27,10 +28,3 @@
     stroke="black"
   />
 </svg>
-
-<style>
-  .root {
-    width: calc(var(--spacing) * 10);
-    height: calc(var(--spacing) * 10);
-  }
-</style>

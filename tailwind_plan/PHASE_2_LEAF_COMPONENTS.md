@@ -99,3 +99,10 @@ static utility classes.
     - [ ] `StreakGraphSection.svelte`
     - [ ] `WinningPercentageContainer.svelte`
     - [ ] `MatchBoxscoreSection.svelte`
+    - [ ] `AccountModal.svelte`
+    - [ ] `ChangeEmailForm.svelte`
+    - [ ] `LoginForm.svelte`
+    - [ ] `PasswordRequestButton.svelte`
+    - [ ] `AttendanceTotalStatsBlock.svelte`
+    - [ ] `StatsByTypePieChart.svelte`
+    - [ ] `ConicGradient.svelte` (complicated refactoring necessary)
