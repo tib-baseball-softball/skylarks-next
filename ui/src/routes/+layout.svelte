@@ -10,7 +10,7 @@
   import StaticNavigationLinks from "$lib/tib/components/navigation/StaticNavigationLinks.svelte";
   import ToastContainer from "$lib/dp/components/toast/ToastContainer.svelte";
   import {authSettings} from "$lib/dp/client.svelte.ts";
-  import type {LayoutProps} from "../../.svelte-kit/types/src/routes/$types";
+  import type {LayoutProps} from "./$types";
 
   const {data, children}: LayoutProps = $props();
 
@@ -91,7 +91,7 @@
   <BottomNavigation>
     {#snippet navLinks()}
       <StaticNavigationLinks classes="bottom-nav-link"/>
-    {#/snippet}
+    {/snippet}
   </BottomNavigation>
 
   <!-- Footer -->

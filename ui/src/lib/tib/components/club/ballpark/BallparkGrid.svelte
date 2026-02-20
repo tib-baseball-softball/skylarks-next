@@ -25,33 +25,29 @@
 </div>
 
 <style>
-    .ballpark-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: calc(var(--spacing) * 3);
-        
-        @media (min-width: 48rem) {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: calc(var(--spacing) * 4);
-        }
-    }
+  .ballpark-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: calc(var(--spacing) * 3);
 
-    .ballpark-card {
-        padding: calc(var(--spacing) * 3);
-        display: flex;
-        align-items: center;
-        gap: calc(var(--spacing) * 4);
-        
-        :global([data-theme='dark']) & {
-            border: 1px solid var(--color-surface-500);
-        }
+    @media (min-width: 48rem) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: calc(var(--spacing) * 4);
     }
+  }
 
-    .ballpark-thumb {
-        border-radius: var(--radius-base);
-    }
+  .ballpark-card {
+    padding: calc(var(--spacing) * 3);
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 4);
 
-    .ballpark-name {
-        /* any specific styles? */
+    @media (prefers-color-scheme: dark) {
+      border: 1px solid var(--color-surface-500);
     }
+  }
+
+  .ballpark-thumb {
+    border-radius: var(--radius-base);
+  }
 </style>

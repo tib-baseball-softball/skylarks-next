@@ -13,8 +13,8 @@
 
 <article class="card license-detail-card preset-tonal shadow-xl">
   <GenericDetailRow
-          categoryName="Level"
-          rowValue={license?.level ?? ""}
+    categoryName="Level"
+    rowValue={license?.level ?? ""}
   >
     {#snippet icon()}
       <LicenseLevelIndicator level={license?.level ?? ""}/>
@@ -24,8 +24,8 @@
   {#if license?.baseball}
     <hr>
     <GenericDetailRow
-            categoryName="Baseball"
-            rowValue={"yes"}
+      categoryName="Baseball"
+      rowValue={"yes"}
     >
       {#snippet icon()}
         <div class="emoji-icon">⚾️</div>
@@ -37,8 +37,8 @@
   {#if license?.softball}
     <hr>
     <GenericDetailRow
-            categoryName="Softball"
-            rowValue={"yes"}
+      categoryName="Softball"
+      rowValue={"yes"}
     >
       {#snippet icon()}
         <div class="emoji-icon">🥎</div>
@@ -49,8 +49,8 @@
   {#if license?.sleeve_number}
     <hr>
     <GenericDetailRow
-            categoryName="Sleeve Number"
-            rowValue={license?.sleeve_number ?? ""}
+      categoryName="Sleeve Number"
+      rowValue={license?.sleeve_number ?? ""}
     >
       {#snippet icon()}
         <Shirt/>
@@ -61,20 +61,20 @@
 </article>
 
 <style>
-    .license-detail-card {
-        padding: calc(var(--spacing) * 3);
-        margin-bottom: 1.5rem;
-        
-        :global([data-theme='dark']) & {
-            border: 1px solid var(--color-surface-500);
-        }
-    }
+  .license-detail-card {
+    padding: calc(var(--spacing) * 3);
+    margin-bottom: 1.5rem;
 
-    .emoji-icon {
-        margin-left: calc(var(--spacing) * 1);
+    @media (prefers-color-scheme: dark) {
+      border: 1px solid var(--color-surface-500);
     }
+  }
 
-    hr {
-        margin-block: calc(var(--spacing) * 2);
-    }
+  .emoji-icon {
+    margin-left: calc(var(--spacing) * 1);
+  }
+
+  hr {
+    margin-block: calc(var(--spacing) * 2);
+  }
 </style>

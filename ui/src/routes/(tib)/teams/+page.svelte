@@ -61,10 +61,10 @@
     padding: calc(var(--spacing) * 3);
     min-height: 3.5rem;
     border-radius: var(--radius-base);
-    
-    :global([data-theme='dark']) & {
-        background-color: var(--color-surface-300-700);
-        color: var(--color-surface-contrast-300-700);
+
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--color-surface-300-700);
+      color: var(--color-surface-contrast-300-700);
     }
   }
 

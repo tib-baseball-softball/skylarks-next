@@ -46,13 +46,13 @@
 <style>
   .team-info-card {
     padding: calc(var(--spacing) * 3);
-    
-    :global([data-theme='dark']) & {
-        border: 1px solid var(--color-surface-500);
+
+    @media (prefers-color-scheme: dark) {
+      border: 1px solid var(--color-surface-500);
     }
   }
-  
+
   hr {
-      margin-block: calc(var(--spacing) * 2);
+    margin-block: calc(var(--spacing) * 2);
   }
 </style>

@@ -74,9 +74,9 @@
 <style>
   .team-info-card {
     padding: calc(var(--spacing) * 3);
-    
-    :global([data-theme='dark']) & {
-        border: 1px solid var(--color-surface-500);
+
+    @media (prefers-color-scheme: dark) {
+      border: 1px solid var(--color-surface-500);
     }
   }
 
@@ -87,7 +87,7 @@
   }
 
   .info-row {
-      margin-top: calc(var(--spacing) * 3);
+    margin-top: calc(var(--spacing) * 3);
   }
 
   .category-label {
@@ -96,6 +96,6 @@
   }
 
   hr {
-      margin-block: calc(var(--spacing) * 2);
+    margin-block: calc(var(--spacing) * 2);
   }
 </style>

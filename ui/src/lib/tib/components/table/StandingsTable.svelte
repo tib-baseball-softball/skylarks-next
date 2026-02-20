@@ -1,12 +1,12 @@
 <script lang="ts">
-import type { Table } from "bsm.js"
-import { env } from "$env/dynamic/public"
+  import type {Table} from "bsm.js";
+  import {env} from "$env/dynamic/public";
 
-interface Props {
-  table: Table
-}
+  interface Props {
+    table: Table;
+  }
 
-let { table }: Props = $props()
+  let {table}: Props = $props();
 </script>
 
 <div class="table-wrap standings-table-wrap">
@@ -40,17 +40,17 @@ let { table }: Props = $props()
 </div>
 
 <style>
-    .standings-header {
-        :global([data-theme='dark']) & {
-            color: var(--color-surface-contrast-500) !important;
-        }
+  .standings-header {
+    @media (prefers-color-scheme: dark) {
+      color: var(--color-surface-contrast-500) !important;
     }
+  }
 
-    .home-team-highlight {
-        color: var(--color-primary-600);
-        
-        :global([data-theme='dark']) & {
-            color: var(--color-primary-400);
-        }
+  .home-team-highlight {
+    color: var(--color-primary-600);
+
+    @media (prefers-color-scheme: dark) {
+      color: var(--color-primary-400);
     }
+  }
 </style>

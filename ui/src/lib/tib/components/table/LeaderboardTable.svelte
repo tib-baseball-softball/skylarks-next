@@ -41,13 +41,13 @@
 </section>
 
 <style>
-    .leaderboard-header {
-        margin-bottom: calc(var(--spacing) * 2);
-    }
+  .leaderboard-header {
+    margin-bottom: calc(var(--spacing) * 2);
+  }
 
-    .leaderboard-table-wrap {
-        :global([data-theme='dark']) & {
-            border: 2px solid var(--color-surface-500); /* Assuming a color here as border color wasn't specified in shame.css for border-2 specifically, but usually it pairs with border-surface-500 or similar */
-        }
+  .leaderboard-table-wrap {
+    @media (prefers-color-scheme: dark) {
+      border: 2px solid var(--color-surface-500);
     }
+  }
 </style>

@@ -24,24 +24,20 @@
 </div>
 
 <style>
-    .official-row {
-        display: flex;
-        align-items: center;
-        gap: calc(var(--spacing) * 4);
-    }
+  .official-row {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 4);
+  }
 
-    .official-details {
-        display: flex;
-        flex-direction: column;
-        gap: calc(var(--spacing) * 0.5);
-    }
+  .official-details {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 0.5);
+  }
 
-    .official-function {
-        font-weight: 300;
-        font-size: var(--text-sm);
-    }
-
-    .official-name {
-        /* any specific name styles */
-    }
+  .official-function {
+    font-weight: 300;
+    font-size: var(--text-sm);
+  }
 </style>

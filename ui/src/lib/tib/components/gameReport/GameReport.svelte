@@ -72,69 +72,65 @@
 </div>
 
 <style>
-    .report-outer-wrapper {
-        display: flex;
-        justify-content: center;
-    }
+  .report-outer-wrapper {
+    display: flex;
+    justify-content: center;
+  }
 
-    .report-inner-container {
-        /* max-width handled by parent or specific rules */
-    }
+  .report-title {
+    margin-bottom: calc(var(--spacing) * 3);
+  }
 
-    .report-title {
-        margin-bottom: calc(var(--spacing) * 3);
-    }
+  .introduction {
+    margin-top: calc(var(--spacing) * 3);
+  }
 
-    .introduction {
-        margin-top: calc(var(--spacing) * 3);
-    }
+  .section-separator {
+    margin-block: calc(var(--spacing) * 6) !important;
+  }
 
-    .section-separator {
-        margin-block: calc(var(--spacing) * 6) !important;
-    }
+  .game-report-section {
+    margin-top: calc(var(--spacing) * 4);
 
-    .game-report-section {
-        margin-top: calc(var(--spacing) * 4);
-        
-        &.secondary-report {
-            margin-top: calc(var(--spacing) * 3);
-        }
+    &.secondary-report {
+      margin-top: calc(var(--spacing) * 3);
     }
+  }
 
-    .preview-section {
-        border-radius: var(--radius-base);
-        padding: calc(var(--spacing) * 4);
-        margin-block: calc(var(--spacing) * 4);
-        
-        :global([data-theme='dark']) & {
-            border: 1px solid var(--color-surface-500);
-        }
+  .preview-section {
+    border-radius: var(--radius-base);
+    padding: calc(var(--spacing) * 4);
+    margin-block: calc(var(--spacing) * 4);
+
+    :global([data-theme='dark']) & {
+      border: 1px solid var(--color-surface-500);
     }
+  }
 
-    .gallery-section {
-        margin-block: calc(var(--spacing) * 5);
+  .gallery-section {
+    margin-block: calc(var(--spacing) * 5);
+  }
+
+  .gallery-title {
+    margin-bottom: calc(var(--spacing) * 3);
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: calc(var(--spacing) * 3);
+
+    @media (min-width: 48rem) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+  }
 
-    .gallery-title {
-        margin-bottom: calc(var(--spacing) * 3);
+  .prose :global {
+    max-width: unset;
+    text-align: justify;
+
+    p {
+      margin: 1rem 0;
     }
-
-    .gallery-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: calc(var(--spacing) * 3);
-        
-        @media (min-width: 48rem) {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-    }
-
-    .prose :global {
-        max-width: unset;
-        text-align: justify;
-
-        p {
-            margin: 1rem 0;
-        }
-    }
+  }
 </style>

@@ -1,19 +1,19 @@
 <script lang="ts">
-import type { Snippet } from "svelte"
+  import type {Snippet} from "svelte";
 
-interface Props {
-  href: string
-  icon: Snippet
-  label: string
-  description: string
-}
+  interface Props {
+    href: string;
+    icon: Snippet;
+    label: string;
+    description: string;
+  }
 
-let { href, icon, label, description }: Props = $props()
+  let {href, icon, label, description}: Props = $props();
 </script>
 
 <a
-        href={href}
-        class="card club-grid-item preset-tonal shadow-xl"
+  class="card club-grid-item preset-tonal shadow-xl"
+  href={href}
 >
   <article>
     {@render icon()}
@@ -23,22 +23,22 @@ let { href, icon, label, description }: Props = $props()
 </a>
 
 <style>
-    .club-grid-item {
-        display: flex;
-        align-items: center;
-        padding: calc(var(--spacing) * 4);
-        
-        :global([data-theme='dark']) & {
-            border: 1px solid var(--color-surface-500);
-        }
-    }
+  .club-grid-item {
+    display: flex;
+    align-items: center;
+    padding: calc(var(--spacing) * 4);
 
-    .item-label {
-        margin-top: calc(var(--spacing) * 2);
-        font-weight: 600;
+    @media (prefers-color-scheme: dark) {
+      border: 1px solid var(--color-surface-500);
     }
+  }
 
-    .item-description {
-        font-weight: 300;
-    }
+  .item-label {
+    margin-top: calc(var(--spacing) * 2);
+    font-weight: 600;
+  }
+
+  .item-description {
+    font-weight: 300;
+  }
 </style>

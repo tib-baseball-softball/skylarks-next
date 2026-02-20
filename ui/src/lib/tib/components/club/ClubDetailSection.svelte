@@ -1,13 +1,13 @@
 <script lang="ts">
-import type { Snippet } from "svelte"
+  import type {Snippet} from "svelte";
 
-interface Props {
-  title: string
-  icon?: Snippet
-  children?: Snippet
-}
+  interface Props {
+    title: string;
+    icon?: Snippet;
+    children?: Snippet;
+  }
 
-let { title, icon, children }: Props = $props()
+  let {title, icon, children}: Props = $props();
 </script>
 
 <article class="card detail-section preset-tonal shadow-xl">
@@ -19,25 +19,25 @@ let { title, icon, children }: Props = $props()
 </article>
 
 <style>
-    .detail-section {
-        padding: calc(var(--spacing) * 4);
-        border-radius: var(--radius-base);
-        margin-bottom: calc(var(--spacing) * 4);
-        
-        :global([data-theme='dark']) & {
-            border: 1px solid var(--color-surface-500);
-        }
-    }
+  .detail-section {
+    padding: calc(var(--spacing) * 4);
+    border-radius: var(--radius-base);
+    margin-bottom: calc(var(--spacing) * 4);
 
-    .header {
-        display: flex;
-        align-items: center;
-        gap: calc(var(--spacing) * 2);
-        margin-bottom: calc(var(--spacing) * 2);
+    @media (prefers-color-scheme: dark) {
+      border: 1px solid var(--color-surface-500);
     }
+  }
 
-    .title {
-        font-size: var(--text-lg);
-        font-weight: 600;
-    }
+  .header {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 2);
+    margin-bottom: calc(var(--spacing) * 2);
+  }
+
+  .title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+  }
 </style>

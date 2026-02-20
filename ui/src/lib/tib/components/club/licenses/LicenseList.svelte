@@ -65,31 +65,31 @@
 </article>
 
 <style>
-    .license-list-wrapper {
-        margin-bottom: calc(var(--spacing) * 4) !important;
-    }
+  .license-list-wrapper {
+    margin-bottom: calc(var(--spacing) * 4) !important;
+  }
 
-    .license-section {
-        margin-top: calc(var(--spacing) * 5);
-    }
+  .license-section {
+    margin-top: calc(var(--spacing) * 5);
+  }
 
-    .section-header {
-        margin-bottom: calc(var(--spacing) * 2);
-    }
+  .section-header {
+    margin-bottom: calc(var(--spacing) * 2);
+  }
 
-    .license-card {
-        padding: calc(var(--spacing) * 3);
-        
-        :global([data-theme='dark']) & {
-            border: 1px solid var(--color-surface-500);
-        }
-    }
+  .license-card {
+    padding: calc(var(--spacing) * 3);
 
-    .license-item {
-        padding: calc(var(--spacing) * 0.5);
+    @media (prefers-color-scheme: dark) {
+      border: 1px solid var(--color-surface-500);
     }
+  }
 
-    hr {
-        margin-block: calc(var(--spacing) * 2);
-    }
+  .license-item {
+    padding: calc(var(--spacing) * 0.5);
+  }
+
+  hr {
+    margin-block: calc(var(--spacing) * 2);
+  }
 </style>

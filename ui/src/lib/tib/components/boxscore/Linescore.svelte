@@ -52,40 +52,40 @@
 </div>
 
 <style>
-    .linescore {
-        width: 100%;
-        background-color: var(--color-surface-50);
-        
-        :global([data-theme='dark']) & {
-            background-color: var(--color-surface-800);
-        }
+  .linescore {
+    width: 100%;
+    background-color: var(--color-surface-50);
 
-        th, td {
-            padding: calc(var(--spacing) * 2);
-            text-align: center;
-            border: 1px solid var(--color-surface-200);
-            
-            :global([data-theme='dark']) & {
-                border-color: var(--color-surface-700);
-            }
-        }
-
-        th {
-            background-color: var(--color-surface-100);
-            font-weight: 600;
-
-            :global([data-theme='dark']) & {
-                background-color: var(--color-surface-900);
-            }
-        }
-
-        td:first-child {
-            text-align: left;
-            font-weight: 500;
-        }
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--color-surface-800);
     }
 
-    .runs-cell {
-        font-weight: 800;
+    th, td {
+      padding: calc(var(--spacing) * 2);
+      text-align: center;
+      border: 1px solid var(--color-surface-200);
+
+      @media (prefers-color-scheme: dark) {
+        border-color: var(--color-surface-700);
+      }
     }
+
+    th {
+      background-color: var(--color-surface-100);
+      font-weight: 600;
+
+      @media (prefers-color-scheme: dark) {
+        background-color: var(--color-surface-900);
+      }
+    }
+
+    td:first-child {
+      text-align: left;
+      font-weight: 500;
+    }
+  }
+
+  .runs-cell {
+    font-weight: var(--font-weight-extrabold);
+  }
 </style>

@@ -14,8 +14,8 @@
 
 <article class="card license-holder-card preset-tonal shadow-xl">
   <GenericDetailRow
-          categoryName="Holder"
-          rowValue={`${license?.person.first_name} ${license?.person.last_name}`}
+    categoryName="Holder"
+    rowValue={`${license?.person.first_name} ${license?.person.last_name}`}
   >
     {#snippet icon()}
       <User/>
@@ -25,8 +25,8 @@
   <hr>
 
   <GenericDetailRow
-          categoryName="Number"
-          rowValue={license.number}
+    categoryName="Number"
+    rowValue={license.number}
   >
     {#snippet icon()}
       <Hash/>
@@ -36,8 +36,8 @@
   <hr>
 
   <GenericDetailRow
-          categoryName="Valid until"
-          rowValue={expiryDate.toLocaleDateString()}
+    categoryName="Valid until"
+    rowValue={expiryDate.toLocaleDateString()}
   >
     {#snippet icon()}
       <Calendar1/>
@@ -47,8 +47,8 @@
   <hr>
 
   <GenericDetailRow
-          categoryName="Relative Time"
-          rowValue={DateTimeUtility.getRelativeTimeString(expiryDate)}
+    categoryName="Relative Time"
+    rowValue={DateTimeUtility.getRelativeTimeString(expiryDate)}
   >
     {#snippet icon()}
       <CalendarClock/>
@@ -58,15 +58,15 @@
 </article>
 
 <style>
-    .license-holder-card {
-        padding: calc(var(--spacing) * 3);
-        
-        :global([data-theme='dark']) & {
-            border: 1px solid var(--color-surface-500);
-        }
-    }
+  .license-holder-card {
+    padding: calc(var(--spacing) * 3);
 
-    hr {
-        margin-block: calc(var(--spacing) * 2);
+    @media (prefers-color-scheme: dark) {
+      border: 1px solid var(--color-surface-500);
     }
+  }
+
+  hr {
+    margin-block: calc(var(--spacing) * 2);
+  }
 </style>

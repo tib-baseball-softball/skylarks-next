@@ -17,9 +17,9 @@
 
   const displayedGuestPlayers = $derived(event.guests.split(","));
   const isAdmin = $derived(
-      (event.expand?.team?.admins.includes(authRecord.id) ||
-          event?.expand?.team?.expand?.club?.admins.includes(authRecord.id)) ??
-      false
+    (event.expand?.team?.admins.includes(authRecord.id) ||
+      event?.expand?.team?.expand?.club?.admins.includes(authRecord.id)) ??
+    false
   );
 
   async function removeGuestPlayer(playerToRemove: string) {
@@ -43,9 +43,9 @@
         {#each event.participations.in as inResponse}
           <div in:fade|global={{delay: 200}}>
             <IndividualParticipationEditButton
-                    participation={inResponse}
-                    {isAdmin}
-                    classes="chip preset-tonal-success border-success"
+              participation={inResponse}
+              {isAdmin}
+              classes="chip preset-tonal-success border-success"
             />
           </div>
         {/each}
@@ -54,9 +54,9 @@
           {#if guestPlayer /* can be an empty string */}
             <div in:fade|global={{delay: 200}}>
               <button
-                      aria-label="guest player name, click removes the player from the event"
-                      class="chip guest-chip preset-tonal border-surface"
-                      onclick={() => removeGuestPlayer(guestPlayer)}
+                aria-label="guest player name, click removes the player from the event"
+                class="chip guest-chip preset-tonal border-surface"
+                onclick={() => removeGuestPlayer(guestPlayer)}
               >
                 {guestPlayer}
                 {#if isAdmin}
@@ -81,9 +81,9 @@
         {#each event.participations.maybe as maybeResponse}
           <div in:fade|global={{delay: 200}}>
             <IndividualParticipationEditButton
-                    participation={maybeResponse}
-                    {isAdmin}
-                    classes="chip preset-tonal-warning border-warning"
+              participation={maybeResponse}
+              {isAdmin}
+              classes="chip preset-tonal-warning border-warning"
             />
           </div>
         {/each}
@@ -102,9 +102,9 @@
         {#each event.participations.out as outResponse}
           <div in:fade|global={{delay: 200}}>
             <IndividualParticipationEditButton
-                    participation={outResponse}
-                    {isAdmin}
-                    classes="chip preset-tonal-error border-error"
+              participation={outResponse}
+              {isAdmin}
+              classes="chip preset-tonal-error border-error"
             />
           </div>
         {/each}
@@ -125,10 +125,10 @@
         {#each event.participations.unspecified as ghostResponse}
           <div in:fade|global={{delay: 200}}>
             <ExternalParticipationWrapper
-                    dto={ghostResponse}
-                    eventID={event.id}
-                    {isAdmin}
-                    classes="chip preset-outlined"
+              dto={ghostResponse}
+              eventID={event.id}
+              {isAdmin}
+              classes="chip preset-outlined"
             />
           </div>
         {/each}
@@ -138,77 +138,77 @@
 </section>
 
 <style lang="postcss">
-    .participants-title {
-        margin-block: calc(var(--spacing) * 3);
-        font-size: var(--text-2xl);
-        font-weight: bold;
+  .participants-title {
+    margin-block: calc(var(--spacing) * 3);
+    font-size: var(--text-2xl);
+    font-weight: bold;
+  }
+
+  h3 {
+    margin-block: calc(var(--spacing) * 3);
+  }
+
+  .participants-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: calc(var(--spacing) * 2);
+
+    @media (min-width: 48rem) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
-    h3 {
-        margin-block: calc(var(--spacing) * 3);
+    @media (min-width: 64rem) {
+      gap: calc(var(--spacing) * 3);
     }
+  }
 
-    .participants-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: calc(var(--spacing) * 2);
+  .participant-card {
+    flex-grow: 1;
+  }
 
-        @media (min-width: 48rem) {
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-        }
+  .participation-header {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 2);
+  }
 
-        @media (min-width: 64rem) {
-            gap: calc(var(--spacing) * 3);
-        }
+  .participation-content {
+    padding: calc(var(--spacing) * 4);
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--spacing) * 2);
+  }
+
+  .no-response-section {
+    margin-top: calc(var(--spacing) * 6);
+  }
+
+  .chip {
+    cursor: default;
+  }
+
+  .chip.guest-chip {
+    cursor: pointer;
+    gap: calc(var(--spacing) * 1);
+  }
+
+  .border-success {
+    border: 1px solid var(--color-success-500);
+  }
+
+  .border-warning {
+    border: 1px solid var(--color-warning-500);
+  }
+
+  .border-error {
+    border: 1px solid var(--color-error-500);
+  }
+
+  .border-surface {
+    border: 1px solid var(--color-surface-900);
+
+    @media (prefers-color-scheme: dark) {
+      border-color: var(--color-surface-100);
     }
-
-    .participant-card {
-        flex-grow: 1;
-    }
-
-    .participation-header {
-        display: flex;
-        align-items: center;
-        gap: calc(var(--spacing) * 2);
-    }
-
-    .participation-content {
-        padding: calc(var(--spacing) * 4);
-        display: flex;
-        flex-wrap: wrap;
-        gap: calc(var(--spacing) * 2);
-    }
-
-    .no-response-section {
-        margin-top: calc(var(--spacing) * 6);
-    }
-
-    .chip {
-        cursor: default;
-    }
-
-    .chip.guest-chip {
-        cursor: pointer;
-        gap: calc(var(--spacing) * 1);
-    }
-
-    .border-success {
-        border: 1px solid var(--color-success-500);
-    }
-
-    .border-warning {
-        border: 1px solid var(--color-warning-500);
-    }
-
-    .border-error {
-        border: 1px solid var(--color-error-500);
-    }
-
-    .border-surface {
-        border: 1px solid var(--color-surface-900);
-        
-        :global([data-theme='dark']) & {
-            border-color: var(--color-surface-100);
-        }
-    }
+  }
 </style>

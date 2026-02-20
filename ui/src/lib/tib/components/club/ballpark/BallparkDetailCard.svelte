@@ -69,9 +69,9 @@
 <style lang="postcss">
   .ballpark-detail-card {
     padding: calc(var(--spacing) * 3);
-    
-    :global([data-theme='dark']) & {
-        border: 1px solid var(--color-surface-500);
+
+    @media (prefers-color-scheme: dark) {
+      border: 1px solid var(--color-surface-500);
     }
   }
 
@@ -82,8 +82,8 @@
   .tertiary-icon {
     color: var(--color-secondary-500);
 
-    :global([data-theme='dark']) & {
-        color: var(--color-tertiary-500);
+    @media (prefers-color-scheme: dark) {
+      color: var(--color-tertiary-500);
     }
   }
 
@@ -94,16 +94,16 @@
   }
 
   .address-details {
-      display: flex;
-      align-items: center;
-      gap: calc(var(--spacing) * 4);
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 4);
   }
 
   .address-label {
-      /* font-weight already handled by strong */
+    font-weight: var(--font-weight-bold);
   }
 
   hr {
-      margin-block: calc(var(--spacing) * 2);
+    margin-block: calc(var(--spacing) * 2);
   }
 </style>

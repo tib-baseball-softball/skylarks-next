@@ -71,7 +71,7 @@
       {/await}
     </Tabs.Content>
 
-    <Tabs.Content value="gameReport" class="tabs-content">
+    <Tabs.Content class="tabs-content" value="gameReport">
       {#await data.gameReport}
         <ProgressRing/>
       {:then gameReport}
@@ -96,91 +96,65 @@
 </section>
 
 <style>
-    .page-title {
-        margin-top: calc(var(--spacing) * 3);
+  .page-title {
+    margin-top: calc(var(--spacing) * 3);
+  }
+
+  .main-info-section {
+    margin-block: calc(var(--spacing) * 3);
+
+    @media (min-width: 64rem) {
+      margin-block: calc(var(--spacing) * 5);
+    }
+  }
+
+  .tabs-section {
+    margin-bottom: calc(var(--spacing) * 8);
+  }
+
+  .game-data-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    place-items: stretch;
+    gap: calc(var(--spacing) * 5);
+
+    @media (min-width: 48rem) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .main-info-section {
-        margin-block: calc(var(--spacing) * 3);
-        
-        @media (min-width: 64rem) {
-            margin-block: calc(var(--spacing) * 5);
-        }
+    @media (min-width: 64rem) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  :global(.game-report-custom) {
+    margin-block: calc(var(--spacing) * 2) !important;
+
+    @media (min-width: 48rem) {
+      max-width: 80%;
     }
 
-    .tabs-section {
-        margin-bottom: calc(var(--spacing) * 8);
+    @media (min-width: 160rem) {
+      /* 2xl */
+      max-width: 70%;
     }
+  }
 
-    .tabs-list {
-        display: flex;
-        gap: calc(var(--spacing) * 2);
-        margin-top: calc(var(--spacing) * 6);
-        background-color: var(--color-surface-50-950);
-        padding: calc(var(--spacing) * 1);
-        border-radius: var(--radius-base);
-    }
+  .share-section {
+    margin-block: calc(var(--spacing) * 5);
+  }
 
-    /* bits-ui triggers trigger common styles */
-    :global(.tabs-trigger) {
-        flex: 1;
-        padding: calc(var(--spacing) * 2);
-    }
+  .share-caveat {
+    margin-top: calc(var(--spacing) * 4);
+  }
 
-    :global(.tabs-trigger[data-state='active']) {
-        background-color: var(--color-surface-100-900);
-        
-        :global([data-theme='dark']) & {
-            background-color: var(--color-surface-800);
-        }
-    }
+  .caveat-summary {
+    font-weight: 300;
+    cursor: pointer;
+  }
 
-    .tabs-content {
-        padding-top: calc(var(--spacing) * 4);
-    }
-
-    .game-data-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        place-items: stretch;
-        gap: calc(var(--spacing) * 5);
-        
-        @media (min-width: 48rem) {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-        
-        @media (min-width: 64rem) {
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-        }
-    }
-
-    :global(.game-report-custom) {
-        margin-block: calc(var(--spacing) * 2) !important;
-        
-        @media (min-width: 48rem) {
-            max-width: 80%;
-        }
-        
-        @media (min-width: 160rem) { /* 2xl */
-            max-width: 70%;
-        }
-    }
-
-    .share-section {
-        margin-block: calc(var(--spacing) * 5);
-    }
-
-    .share-caveat {
-        margin-top: calc(var(--spacing) * 4);
-    }
-
-    .caveat-summary {
-        font-weight: 300;
-        cursor: pointer;
-    }
-
-    .caveat-text {
-        font-size: var(--text-sm);
-        font-weight: 300;
-    }
+  .caveat-text {
+    font-size: var(--text-sm);
+    font-weight: 300;
+  }
 </style>

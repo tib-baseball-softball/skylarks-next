@@ -33,23 +33,23 @@
 </article>
 
 <style>
-    .officials-list-wrapper {
-        margin-bottom: calc(var(--spacing) * 4) !important;
-    }
+  .officials-list-wrapper {
+    margin-bottom: calc(var(--spacing) * 4) !important;
+  }
 
-    .officials-card {
-        padding: calc(var(--spacing) * 3);
-        
-        :global([data-theme='dark']) & {
-            border: 1px solid var(--color-surface-500);
-        }
-    }
+  .officials-card {
+    padding: calc(var(--spacing) * 3);
 
-    .official-item {
-        padding: calc(var(--spacing) * 0.5);
+    @media (prefers-color-scheme: dark) {
+      border: 1px solid var(--color-surface-500);
     }
+  }
 
-    hr {
-        margin-block: calc(var(--spacing) * 2);
-    }
+  .official-item {
+    padding: calc(var(--spacing) * 0.5);
+  }
+
+  hr {
+    margin-block: calc(var(--spacing) * 2);
+  }
 </style>

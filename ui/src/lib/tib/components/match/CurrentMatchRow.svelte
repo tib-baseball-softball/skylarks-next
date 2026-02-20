@@ -62,76 +62,72 @@
 </a>
 
 <style>
-    .match-row {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        padding-inline: calc(var(--spacing) * 3);
-        padding-block: calc(var(--spacing) * 1);
-        gap: calc(var(--spacing) * 2);
-        border-bottom: 1px solid var(--color-surface-500);
-        align-items: center;
-        text-decoration: none;
-        color: inherit;
+  .match-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding-inline: calc(var(--spacing) * 3);
+    padding-block: calc(var(--spacing) * 1);
+    gap: calc(var(--spacing) * 2);
+    border-bottom: 1px solid var(--color-surface-500);
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .team-container {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 2);
+
+    &.away-team {
+      justify-content: flex-end;
     }
 
-    .team-container {
-        display: flex;
-        align-items: center;
-        gap: calc(var(--spacing) * 2);
-        
-        &.away-team {
-            justify-content: flex-end;
-        }
-        
-        &.home-team {
-            justify-content: flex-start;
-        }
+    &.home-team {
+      justify-content: flex-start;
     }
+  }
 
-    .team-name {
-        /* any specific team name styles */
-    }
+  .team-logo {
+    flex-shrink: 0;
+  }
 
-    .team-logo {
-        flex-shrink: 0;
-    }
+  .state-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-    .state-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+  .state-badge {
+    background-color: var(--color-surface-50-950);
+    color: var(--color-surface-950-50);
+    padding-block: calc(var(--spacing) * 0.5);
+    padding-inline: calc(var(--spacing) * 2);
+    border-radius: var(--radius-sm, 2px);
+    font-size: var(--text-sm);
 
-    .state-badge {
-        background-color: var(--color-surface-50-950);
-        color: var(--color-surface-950-50);
-        padding-block: calc(var(--spacing) * 0.5);
-        padding-inline: calc(var(--spacing) * 2);
-        border-radius: var(--radius-sm, 2px);
-        font-size: var(--text-sm);
-        
-        :global([data-theme='dark']) & {
-            background-color: var(--color-surface-500);
-            color: var(--color-surface-contrast-500);
-        }
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--color-surface-500);
+      color: var(--color-surface-contrast-500);
     }
+  }
 
-    .score-container {
-        display: flex;
-        justify-content: center;
-        font-weight: 800;
-        font-size: var(--text-lg);
-    }
+  .score-container {
+    display: flex;
+    justify-content: center;
+    font-weight: 800;
+    font-size: var(--text-lg);
+  }
 
-    .score-separator {
-        padding-inline: calc(var(--spacing) * 1);
-    }
+  .score-separator {
+    padding-inline: calc(var(--spacing) * 1);
+  }
 
-    .subdued {
-        color: var(--color-surface-700);
-        
-        :global([data-theme='dark']) & {
-            color: var(--color-surface-300);
-        }
+  .subdued {
+    color: var(--color-surface-700);
+
+    @media (prefers-color-scheme: dark) {
+      color: var(--color-surface-300);
     }
+  }
 </style>

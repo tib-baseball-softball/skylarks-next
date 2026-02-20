@@ -10,7 +10,6 @@
 </script>
 
 <section>
-<section>
   <article class="logo-wrapper">
     <img
       alt="Skylarks Logo"
@@ -51,17 +50,17 @@
   }
 
   .club-logo {
-      width: 6rem;
-      height: auto;
-      margin-bottom: calc(var(--spacing) * 1);
+    width: 6rem;
+    height: auto;
+    margin-bottom: calc(var(--spacing) * 1);
   }
 
   .club-info-card {
     padding: calc(var(--spacing) * 3);
     margin-block: 1.5rem;
-    
-    :global([data-theme='dark']) & {
-        border: 1px solid var(--color-surface-500);
+
+    @media (prefers-color-scheme: dark) {
+      border: 1px solid var(--color-surface-500);
     }
   }
 
@@ -71,6 +70,6 @@
   }
 
   hr {
-      margin-block: calc(var(--spacing) * 2);
+    margin-block: calc(var(--spacing) * 2);
   }
 </style>

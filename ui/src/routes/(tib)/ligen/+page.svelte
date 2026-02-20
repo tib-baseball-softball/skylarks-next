@@ -1,5 +1,4 @@
 <script lang="ts">
-  import {browser} from "$app/environment";
   import {goto} from "$app/navigation";
   import ReloadUponPreferenceChange from "$lib/tib/components/utils/ReloadUponPreferenceChange.svelte";
   import ProgressRing from "$lib/dp/components/utils/ProgressRing.svelte";
@@ -8,11 +7,9 @@
   import type {PageProps} from "./$types";
 
   const reload = () => {
-    if (browser) {
-      const queryString = `?season=${preferences.current.selectedSeason}`;
+    const queryString = `?season=${preferences.current.selectedSeason}`;
 
-      goto(queryString);
-    }
+    goto(queryString);
   };
 
   const {data}: PageProps = $props();
@@ -61,10 +58,10 @@
     padding: calc(var(--spacing) * 3);
     min-height: 3.5rem;
     border-radius: var(--radius-base);
-    
-    :global([data-theme='dark']) & {
-        background-color: var(--color-surface-300-700);
-        color: var(--color-surface-contrast-300-700);
+
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--color-surface-300-700);
+      color: var(--color-surface-contrast-300-700);
     }
   }
 

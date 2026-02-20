@@ -13,7 +13,7 @@
 </script>
 
 <section
-        class="{classes} card report-header preset-tonal shadow-xl">
+  class="{classes} card report-header preset-tonal shadow-xl">
   <div class="row">
     <CalendarDays/>
     <span class="label">Veröffentlicht: </span>
@@ -38,27 +38,27 @@
 
 </section>
 
-<style lang="postcss">
-    .report-header {
-        border-radius: var(--radius-base);
-        padding: calc(var(--spacing) * 4);
-        margin-block: calc(var(--spacing) * 4);
-        
-        :global([data-theme='dark']) & {
-            border: 1px solid var(--color-surface-500);
-        }
-    }
+<style>
+  .report-header {
+    border-radius: var(--radius-base);
+    padding: calc(var(--spacing) * 4);
+    margin-block: calc(var(--spacing) * 4);
 
-    .row {
-        display: flex;
-        gap: calc(var(--spacing) * 4);
+    @media (prefers-color-scheme: dark) {
+      border: 1px solid var(--color-surface-500);
     }
+  }
 
-    .label {
-        font-weight: bold;
-    }
+  .row {
+    display: flex;
+    gap: calc(var(--spacing) * 4);
+  }
 
-    hr {
-        margin-block: calc(var(--spacing) * 2);
-    }
+  .label {
+    font-weight: bold;
+  }
+
+  hr {
+    margin-block: calc(var(--spacing) * 2);
+  }
 </style>

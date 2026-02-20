@@ -51,13 +51,13 @@
           {#snippet triggerContent()}
             <CalendarPlus/>
             <span>Setup Games Import</span>
-          {#/snippet}
+          {/snippet}
 
           {#snippet title()}
             <header>
               <h3 class="h3">Games Import Setup for {team.name}</h3>
             </header>
-          {#/snippet}
+          {/snippet}
 
           <TeamGamesModal {team}/>
         </Dialog>
@@ -81,9 +81,9 @@
     <footer class="card-footer">
       <div class="card-actions">
         <EventSeriesView
-          triggerVariant="tonal-primary"
           {eventSeries}
           {team}
+          triggerVariant="tonal-primary"
         />
       </div>
     </footer>
@@ -107,15 +107,15 @@
       <div class="card-actions">
 
         <EventForm
-          triggerVariant="tonal-tertiary"
           clubID={team?.club ?? ""}
           event={null}
           teamID={team.id}
+          triggerVariant="tonal-tertiary"
         >
           {#snippet triggerContent()}
             <CalendarPlus/>
             <span>Create Single Event</span>
-          {#/snippet}
+          {/snippet}
         </EventForm>
 
       </div>
@@ -129,8 +129,8 @@
 
     <section class="card-content">
       <div class="card-actions">
-        <TeamForm triggerVariant="tonal-surface" club={team?.expand?.club}
-                  team={team}/>
+        <TeamForm club={team?.expand?.club} team={team}
+                  triggerVariant="tonal-surface"/>
       </div>
     </section>
 
@@ -196,21 +196,21 @@
   }
 
   .danger-zone {
-      display: flex;
-      flex-direction: column;
-      gap: calc(var(--spacing) * 2);
-      border-radius: var(--radius-base);
-      border: 1px solid var(--color-error-500);
-      padding-inline: calc(var(--spacing) * 2);
-      padding-block: calc(var(--spacing) * 3);
-      
-      @media (min-width: 64rem) {
-          gap: calc(var(--spacing) * 3);
-      }
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 2);
+    border-radius: var(--radius-base);
+    border: 1px solid var(--color-error-500);
+    padding-inline: calc(var(--spacing) * 2);
+    padding-block: calc(var(--spacing) * 3);
+
+    @media (min-width: 64rem) {
+      gap: calc(var(--spacing) * 3);
+    }
   }
 
   .danger-header {
-      margin-inline: calc(var(--spacing) * 2);
+    margin-inline: calc(var(--spacing) * 2);
   }
 
   .outer-grid {
@@ -231,25 +231,5 @@
     @media (min-width: 80rem) {
       grid-template-columns: 1fr 1fr 1fr 1fr;
     }
-  }
-
-  :global(.border-primary) {
-      border: 1px solid var(--color-primary-500) !important;
-  }
-
-  :global(.border-tertiary) {
-      border: 1px solid var(--color-tertiary-500) !important;
-  }
-
-  :global(.border-surface) {
-      border: 1px solid var(--color-surface-500) !important;
-  }
-
-  :global(.border-error) {
-      border: 1px solid var(--color-error-500) !important;
-  }
-
-  :global(.mx-1) {
-      margin-inline: calc(var(--spacing) * 1) !important;
   }
 </style>
