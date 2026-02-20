@@ -18,8 +18,6 @@
 @import "./partials/buttons.css" layer(utilities);
 @import "./partials/tabs.css" layer(utilities);
 @import "./theme/typography.css";
-/* TODO: make this obsolete */
-@import "./shame.css";
 @import "./theme/generic-theme.css";
 @import "./theme/animations.css";
 @import "./theme/properties.css";
