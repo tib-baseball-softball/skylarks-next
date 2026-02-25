@@ -120,6 +120,10 @@
   .tabs-section {
     margin-bottom: calc(var(--spacing) * 8);
   }
+  
+  :global(.tabs-section .tabs-list) {
+    border: 1px var(--tw-border-style);
+  }
 
   .game-data-grid {
     display: grid;

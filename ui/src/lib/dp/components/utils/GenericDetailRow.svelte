@@ -10,29 +10,22 @@
   let {icon, categoryName, rowValue}: Props = $props();
 </script>
 
-<div class="container">
+<dl class="container">
   {@render icon()}
-  <dl class="row-content">
-    <dt class="label">{categoryName}:</dt>
+    <dt class="dt-label">{categoryName}:</dt>
     <dd class="value">{rowValue}</dd>
-  </dl>
-</div>
+</dl>
 
 <style>
   .container {
     display: flex;
     align-items: center;
-    gap: calc(var(--spacing) * 4)
+    gap: calc(var(--spacing) * 4);
   }
 
-  .row-content {
-    display: flex;
-    align-items: center;
-    gap: calc(var(--spacing) * 4)
-  }
-
-  .label {
+  .dt-label {
     font-weight: 300;
+    padding: var(--spacing);
   }
 
   .value {
