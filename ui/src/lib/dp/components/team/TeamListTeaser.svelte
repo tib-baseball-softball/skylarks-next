@@ -54,7 +54,7 @@
         <div class="item-row">
           <ClipboardList/>
           <dl>
-            <dd class="capitalize">{team.age_group}</dd>
+            <dd class="team-age-group">{team.age_group}</dd>
             <dt class="detail-label">Age Group</dt>
           </dl>
         </div>
@@ -82,6 +82,7 @@
                 id={team.id}
                 modelName="Team"
                 action={deleteAction}
+                iconSize={16}
         />
       {/if}
 
@@ -124,5 +125,9 @@
         display: flex;
         justify-content: flex-end;
         gap: calc(var(--spacing) * 2);
+    }
+    
+    .team-age-group {
+      text-transform: capitalize;
     }
 </style>

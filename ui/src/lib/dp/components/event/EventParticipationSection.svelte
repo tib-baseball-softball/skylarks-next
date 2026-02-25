@@ -47,7 +47,7 @@
   }
 </script>
 
-<section class="flex justify-end items-end gap-2 flex-wrap">
+<section class="participation-section">
   <button
     aria-busy={submitting}
     class="chip {chipClasses} preset-outlined-success-500 participation-button"
@@ -81,3 +81,13 @@
     <span>{event.participations.out.length ?? 0}</span>
   </button>
 </section>
+
+<style>
+  .participation-section {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: calc(var(--spacing) * 2);
+    flex-wrap: wrap;
+  }
+</style>

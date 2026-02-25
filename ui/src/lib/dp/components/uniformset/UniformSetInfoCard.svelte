@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {Edit} from "lucide-svelte";
+  import {SquarePen} from "lucide-svelte";
   import {invalidate} from "$app/navigation";
   import UniformSetForm from "$lib/dp/components/forms/UniformSetForm.svelte";
   import Cap from "$lib/dp/components/icons/Cap.svelte";
@@ -52,7 +52,7 @@
         <Dialog triggerClasses="btn btn-sm btn-icon preset-tonal-tertiary border border-tertiary-500">
 
           {#snippet triggerContent()}
-            <Edit/>
+            <SquarePen size={16}/>
           {/snippet}
 
           {#snippet title()}
@@ -64,7 +64,7 @@
           <UniformSetForm {uniformSet} clubID={uniformSet.club}/>
         </Dialog>
 
-        <DeleteButton id={uniformSet.id} modelName="Uniform Set" action={deleteAction}/>
+        <DeleteButton id={uniformSet.id} modelName="Uniform Set" action={deleteAction} iconSize={16}/>
       </div>
     {/if}
   </footer>

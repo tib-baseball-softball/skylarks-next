@@ -1,6 +1,6 @@
 <script lang="ts">
-  import {File, IdCard, ShieldHalf, Users} from "lucide-svelte";
-  import type {ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
+  import { File, IdCard, ShieldHalf, Users } from "lucide-svelte";
+  import type { ExpandedTeam } from "$lib/dp/types/ExpandedResponse.ts";
 
   /**
    * Used on Team Detail page.
@@ -11,49 +11,47 @@
     link: boolean;
   }
 
-  let {team, link = false}: props = $props();
+  let { team, link = false }: props = $props();
 </script>
 
 <article class="card card-content preset-tonal-surface" class:card-hover={link}>
-
   <div class="detail-row">
-    <File/>
+    <File />
     <div>
       <p>{team.name}</p>
       <p class="detail-label">Name</p>
     </div>
   </div>
 
-  <hr class="divider">
+  <hr class="divider" />
 
   <div class="detail-row">
-    <IdCard/>
+    <IdCard />
     <div>
       <p>{team.bsm_league_group}</p>
       <p class="detail-label">BSM-Liga (für aktuelle Saison)</p>
     </div>
   </div>
 
-  <hr class="divider">
+  <hr class="divider" />
 
   <div class="detail-row">
-    <ShieldHalf/>
+    <ShieldHalf />
     <div>
       <p>{team?.expand?.club.name}</p>
       <p class="detail-label">Club</p>
     </div>
   </div>
 
-  <hr class="divider">
+  <hr class="divider" />
 
   <div class="detail-row">
-    <Users/>
+    <Users />
     <dl>
-      <dd class="capitalize">{team.age_group}</dd>
+      <dd class="team-age-group">{team.age_group}</dd>
       <dt class="detail-label">Age Group</dt>
     </dl>
   </div>
-
 </article>
 
 <style>
@@ -77,5 +75,9 @@
 
   .divider {
     margin-block: calc(var(--spacing) * 2);
+  }
+
+  .team-age-group {
+    text-transform: capitalize;
   }
 </style>

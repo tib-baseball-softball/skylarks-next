@@ -97,14 +97,15 @@
     class={[
       "btn",
       "trigger-button",
+      "team-form-trigger",
       `trigger-variant-${triggerVariant}`,
       triggerSize === "sm" && "btn-sm",
       triggerIcon && "btn-icon",
       triggerSpaced && "trigger-spaced",
       triggerVariant === "filled-primary" && "preset-filled-primary-500",
-      triggerVariant === "tonal-primary" && "preset-tonal-primary",
-      triggerVariant === "tonal-secondary" && "preset-tonal-secondary",
-      triggerVariant === "tonal-tertiary" && "preset-tonal-tertiary",
+      triggerVariant === "tonal-primary" && "preset-tonal-primary border-primary",
+      triggerVariant === "tonal-secondary" && "preset-tonal-secondary border-secondary",
+      triggerVariant === "tonal-tertiary" && "preset-tonal-tertiary border-tertiary",
       triggerVariant === "tonal-surface" && "preset-tonal-surface",
     ]}
   >
@@ -231,33 +232,8 @@
 </Sheet.Root>
 
 <style>
-  .trigger-button {
-    border-style: solid;
-    border-width: 1px;
-  }
-
-  .trigger-variant-filled-primary {
-    border-color: transparent;
-  }
-
-  .trigger-variant-tonal-primary {
-    border-color: var(--color-primary-500);
-  }
-
-  .trigger-variant-tonal-secondary {
-    border-color: var(--color-secondary-500);
-  }
-
-  .trigger-variant-tonal-tertiary {
-    border-color: var(--color-tertiary-500);
-  }
-
-  .trigger-variant-tonal-surface {
-    border-color: var(--color-surface-500);
-  }
-
-  .trigger-spaced {
-    margin-block: calc(var(--spacing) * 3);
+  :global(.team-form-trigger .lucide-icon) {
+    flex-shrink: 1;
   }
 
   .hint {

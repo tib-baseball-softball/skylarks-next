@@ -50,6 +50,7 @@
               action={deleteAction}
               classes="btn btn-icon btn-sm preset-tonal-error border border-error-500"
               data-testid="delete-announcement-button"
+              iconSize={16}
             />
           </div>
         {:else }
