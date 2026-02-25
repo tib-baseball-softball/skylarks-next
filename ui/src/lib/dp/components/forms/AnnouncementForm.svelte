@@ -214,7 +214,7 @@
           <legend class="legend mb-3">Priority</legend>
           {#each ["info", "warning", "danger"] as prio}
             <label
-              class="label priority-radio-label flex items-center gap-2 my-1"
+              class="label priority-radio-label"
             >
               <input
                 class="radio"
@@ -231,11 +231,11 @@
         </fieldset>
 
         <fieldset
-          class="field-wide border border-surface-200-800 p-3 rounded-base"
+          class="field-wide border border-surface-200-800 rounded-base"
         >
-          <legend class="legend mb-3">Link Settings</legend>
+          <legend class="legend h6">Link Settings</legend>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <div class=" link-grid">
             <label class="label">
               <span>Link</span>
               <input
@@ -273,7 +273,7 @@
       <hr />
 
       <div class="submit-box">
-        <button class="mt-2 btn preset-filled-primary-500" type="submit">
+        <button class="btn preset-filled-primary-500" type="submit">
           Submit
         </button>
       </div>
@@ -286,8 +286,16 @@
     flex-shrink: 1;
   }
   
+  .legend {
+    margin-block: calc(var(--spacing) * 2);
+  }
+  
   .priority-radio-label {
     text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 2);
+    margin-block: var(--spacing);
   }
 
   hr {
@@ -301,5 +309,20 @@
 
   .edit-form-grid {
     gap: calc(var(--spacing) * 2);
+  }
+  
+  .text-sm {
+    font-size: var(--text-sm);
+  }
+  
+  .link-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: calc(var(--spacing) * 2);
+    margin-block: var(--spacing);
+    
+    @media (min-width: 32rem) {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 </style>
