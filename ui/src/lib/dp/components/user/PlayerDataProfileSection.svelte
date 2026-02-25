@@ -68,6 +68,10 @@
   </footer>
 </div>
 
+<PlayerHeaderSection player={playerObject}/>
+
+<PlayerDataCard player={playerObject} showTeams={false}/>
+
 <style>
   .profile-card {
     display: flex;
@@ -96,9 +100,9 @@
     @media (min-width: 80rem) {
       gap: calc(var(--spacing) * 3);
     }
+    
+    :global(.trigger-button.preset-tonal-primary) {
+      border: 1px solid white;
+    }
   }
 </style>
-
-<PlayerHeaderSection player={playerObject}/>
-
-<PlayerDataCard player={playerObject} showTeams={false}/>
