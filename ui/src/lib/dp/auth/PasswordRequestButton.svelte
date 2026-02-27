@@ -49,9 +49,9 @@
 </script>
 
 <Dialog
-        closeButtonClasses="sr-only"
-        disabled={disabled}
-        triggerClasses={classes}
+  closeButtonClasses="sr-only"
+  disabled={disabled}
+  triggerClasses={classes}
 >
   {#snippet triggerContent()}
     {@render children?.()}
@@ -68,9 +68,22 @@
     </span>
   {/snippet}
 
-  <div class="flex justify-end gap-2 mt-1">
-    <button class="btn preset-tonal-surface border border-surface-500" onclick={closeModal} type="button">Cancel
+  <div class="actions">
+    <button class="btn preset-tonal-surface cancel" onclick={closeModal} type="button">Cancel
     </button>
     <button class="btn preset-filled" onclick={triggerPasswordChange} type="button">Confirm</button>
   </div>
 </Dialog>
+
+<style>
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: calc(var(--spacing) * 2);
+    margin-top: calc(var(--spacing) * 1);
+  }
+
+  .cancel {
+    border: 1px solid var(--color-surface-500);
+  }
+</style>

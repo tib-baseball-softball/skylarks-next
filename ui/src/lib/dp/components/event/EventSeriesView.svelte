@@ -13,10 +13,20 @@
   interface Props {
     team: ExpandedTeam;
     eventSeries: ExpandedEventSeries[];
-    buttonClasses?: string;
+    triggerVariant?: "filled-primary" | "tonal-primary" | "tonal-secondary" | "tonal-tertiary" | "tonal-surface";
+    triggerSize?: "default" | "sm";
+    triggerIcon?: boolean;
+    triggerSpaced?: boolean;
   }
 
-  const {team, eventSeries, buttonClasses = ""}: Props = $props();
+  const {
+    team,
+    eventSeries,
+    triggerVariant = "tonal-primary",
+    triggerSize = "default",
+    triggerIcon = false,
+    triggerSpaced = false,
+  }: Props = $props();
 
   let open = $state(false);
   let showForm = $state(false);
@@ -50,7 +60,21 @@
 </script>
 
 <Sheet.Root bind:open={open}>
-  <Sheet.Trigger class={buttonClasses}>
+  <Sheet.Trigger
+    class={[
+      "btn",
+      "trigger-button",
+      `trigger-variant-${triggerVariant}`,
+      triggerSize === "sm" && "btn-sm",
+      triggerIcon && "btn-icon",
+      triggerSpaced && "trigger-spaced",
+      triggerVariant === "filled-primary" && "preset-filled-primary-500",
+      triggerVariant === "tonal-primary" && "preset-tonal-primary border-primary",
+      triggerVariant === "tonal-secondary" && "preset-tonal-secondary",
+      triggerVariant === "tonal-tertiary" && "preset-tonal-tertiary border-tertiary",
+      triggerVariant === "tonal-surface" && "preset-tonal-surface",
+    ]}
+  >
     <CalendarPlus/>
     <span>Manage Event Series</span>
   </Sheet.Trigger>
@@ -58,13 +82,12 @@
   <Sheet.Content>
     <Sheet.Header></Sheet.Header>
 
-    <header class="text-xl font-semibold">
+    <header>
       <h2 class="h3">Manage Event Series for {team?.name}</h2>
     </header>
 
-    <div class="space-y-4">
-
-      <h3 class="h4 mt-6!">Active Event Series</h3>
+    <div class="series-container">
+      <h3>Active Event Series</h3>
 
       {#each eventSeries as series (series.id)}
         <EventSeriesListItem eventSeries={series}>
@@ -91,15 +114,16 @@
     </div>
 
     {#if eventSeries.length === 0}
-      <section class="font-light space-y-4">
+      <section class="hint">
         <div>No event series have been set up for this team yet.</div>
       </section>
     {/if}
-    <button class="btn preset-filled-primary-500 mt-6!" onclick={() => setupAndShowForm(null)}>
+
+    <button class="btn preset-filled-primary-500" onclick={() => setupAndShowForm(null)}>
       Add new Event Series
     </button>
 
-    <hr class="my-6!">
+    <hr>
 
     <div bind:this={eventSeriesFormContainer}>
       {#if showForm}
@@ -112,6 +136,39 @@
 </Sheet.Root>
 
 <style>
+  .trigger-button {
+    border-style: solid;
+    border-width: 1px;
+  }
+
+  .trigger-variant-filled-primary {
+    border-color: transparent;
+  }
+
+  .trigger-variant-tonal-primary {
+    border-color: var(--color-primary-500);
+  }
+
+  .trigger-variant-tonal-secondary {
+    border-color: var(--color-secondary-500);
+  }
+
+  .trigger-variant-tonal-tertiary {
+    border-color: var(--color-tertiary-500);
+  }
+
+  .trigger-variant-tonal-surface {
+    border-color: var(--color-surface-500);
+  }
+
+  .trigger-spaced {
+    margin-block: calc(var(--spacing) * 3);
+  }
+
+  :global(.series-container .series-card) {
+    margin-block: calc(var(--spacing) * 3);
+  }
+
   .button-container {
     display: flex;
     gap: calc(var(--spacing) * 2);
@@ -120,5 +177,13 @@
 
   .edit-button {
     color: light-dark(var(--base-font-color), var(--base-font-color-dark));
+  }
+
+  hr {
+    margin-block: calc(var(--spacing) * 6);
+  }
+
+  .hint {
+    font-weight: var(--font-weight-light);
   }
 </style>

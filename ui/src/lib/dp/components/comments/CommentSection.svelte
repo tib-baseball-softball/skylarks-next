@@ -49,9 +49,9 @@
 </script>
 
 {#if comments.length > 0}
-  <ul>
+  <ul class="comments-list">
     {#each comments as comment (comment.id)}
-      <li class={["my-3 md:my-4 flex gap-2", authRecord.id === comment?.expand?.user?.id && "flex-row-reverse"]}>
+      <li class={["comment-item", authRecord.id === comment?.expand?.user?.id && "reverse"]}>
         <CommentRow {comment} {club}/>
       </li>
     {/each}
@@ -60,18 +60,50 @@
   <p>No comments yet.</p>
 {/if}
 
-<form class="mt-6">
-  <label class="label mb-2" for="new-comment-input">Comment</label>
-  <div class="input-group grid-cols-[1fr_auto]">
+<form class="add-comment-form">
+  <label class="label comment-label" for="new-comment-input">Comment</label>
+  <div class="input-group">
     <input
-            bind:value={commentText}
-            class="ig-input rounded-s-base"
-            id="new-comment-input"
-            placeholder="Your comment..."
-            type="text"
+      bind:value={commentText}
+      class="ig-input rounded-s-base"
+      id="new-comment-input"
+      placeholder="Your comment..."
+      type="text"
     />
     <button class="ig-btn preset-filled" disabled={!commentText} onclick={addComment} title="Add comment" type="submit">
       <Send size={18}/>
     </button>
   </div>
 </form>
+
+<style>
+  .comments-list {
+    .comment-item {
+      margin-top: calc(var(--spacing) * 3);
+      margin-bottom: calc(var(--spacing) * 3);
+      display: flex;
+      gap: calc(var(--spacing) * 2);
+
+      @media (min-width: 64rem) {
+        margin-top: calc(var(--spacing) * 4);
+        margin-bottom: calc(var(--spacing) * 4);
+      }
+
+      &.reverse {
+        flex-direction: row-reverse;
+      }
+    }
+  }
+
+  .comment-label {
+    margin-block-end: calc(var(--spacing) * 2);
+  }
+
+  .add-comment-form {
+    margin-top: calc(var(--spacing) * 6);
+  }
+
+  .input-group {
+    grid-template-columns: 1fr auto;
+  }
+</style>

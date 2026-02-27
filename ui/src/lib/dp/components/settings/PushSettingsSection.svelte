@@ -112,7 +112,7 @@
     <label class="label push-label">
       <span>Test</span>
       <button
-        class="btn preset-tonal-primary border"
+        class="btn preset-tonal-primary border-primary"
         onclick={() => pushService.sendTestNotification(model.id)}>
         Send Test Notification
       </button>

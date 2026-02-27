@@ -3,6 +3,16 @@
   import LoginBadge from "$lib/dp/auth/LoginBadge.svelte";
 </script>
 
-<LocalePicker/>
+<div class="root">
+  <LocalePicker/>
 
-<LoginBadge signupAllowed={true}/>
+  <LoginBadge signupAllowed={true}/>
+</div>
+
+<style>
+  .root {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 2);
+  }
+</style>

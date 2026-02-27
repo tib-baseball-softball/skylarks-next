@@ -76,7 +76,7 @@
 
     {#each clubs as club (club.id)}
       <hr class="hr"/>
-      <AccordionItem panelPadding="py-0 px-4">
+      <AccordionItem panelInset="default">
         {#snippet lead()}
           <Shield/>
         {/snippet}
@@ -104,7 +104,7 @@
       </AccordionItem>
 
       {#if club.admins.includes(authRecord?.id)}
-        <AccordionItem panelPadding="py-0 px-4">
+        <AccordionItem panelInset="default">
           {#snippet lead()}
             <LockKeyhole/>
           {/snippet}

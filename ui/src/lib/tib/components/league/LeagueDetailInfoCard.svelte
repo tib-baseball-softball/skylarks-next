@@ -1,60 +1,74 @@
 <script lang="ts">
-import type { LeagueGroup } from "bsm.js"
-import { Info, Tag, Users, Volleyball } from "lucide-svelte"
+  import type {LeagueGroup} from "bsm.js";
+  import {Info, Tag, Users, Volleyball} from "lucide-svelte";
 
-interface Props {
-  leagueGroup: LeagueGroup
-}
+  interface Props {
+    leagueGroup: LeagueGroup;
+  }
 
-let { leagueGroup }: Props = $props()
+  let {leagueGroup}: Props = $props();
 </script>
 
-<article class="card preset-tonal-surface p-4">
+<article class="card preset-tonal-surface">
 
-  <div class="container self-end">
+  <div class="container">
     <Info/>
     <div>
       <p>{leagueGroup.name}</p>
-      <p class="text-sm font-light">Name</p>
+      <p class="text">Name</p>
     </div>
   </div>
 
-  <hr class="my-2">
+  <hr>
 
   <div class="container">
     <Tag/>
     <div>
       <p>{leagueGroup.acronym}</p>
-      <p class="text-sm font-light">Acronym</p>
+      <p class="text">Acronym</p>
     </div>
   </div>
 
-  <hr class="my-2">
+  <hr>
 
   <div class="container">
     <Volleyball/>
     <div>
-      <p>{leagueGroup.league.sport}</p>
-      <p class="text-sm font-light">Sport</p>
+      <p>{leagueGroup.sport}</p>
+      <p class="text">Sport</p>
     </div>
   </div>
 
-  <hr class="my-2">
+  <hr>
 
   <div class="container">
     <Users/>
     <dl>
-      <dd>{leagueGroup.league.age_group}</dd>
-      <dt class="text-sm font-light">Age Group</dt>
+      <dd>{leagueGroup.age_group}</dd>
+      <dt class="text">Age Group</dt>
     </dl>
   </div>
 
 </article>
 
 <style>
-    .container {
-        display: flex;
-        align-items: center;
-        gap: 1.2rem;
-    }
+  .card {
+    padding: calc(var(--spacing) * 4);
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  hr {
+    margin-block: calc(var(--spacing) * 2);
+  }
+
+  .text {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+    font-weight: var(--font-weight-light);
+  }
 </style>

@@ -9,51 +9,51 @@
   let {clubTeam}: Props = $props();
 </script>
 
-<div class="card preset-tonal dark:border dark:border-surface-500 shadow-xl p-3">
+<div class="card team-info-card preset-tonal shadow-xl">
 
-  <div class="flex items-center gap-3 self-end">
+  <div class="detail-row">
     <File/>
     <div>
       <p>{clubTeam.name}</p>
-      <p class="text-sm font-light">Name</p>
+      <p class="category-label">Name</p>
     </div>
   </div>
 
-  <hr class="my-2">
+  <hr>
 
-  <div class="flex items-center gap-3">
+  <div class="detail-row">
     <Tag/>
     <div>
       <p>{clubTeam.short_name}</p>
-      <p class="text-sm font-light">Acronym</p>
+      <p class="category-label">Acronym</p>
     </div>
   </div>
 
   {#if clubTeam.league_entries.at(0)}
 
-    <hr class="my-2">
+    <hr>
 
-    <div class="flex items-center gap-3">
+    <div class="detail-row">
       <Volleyball/>
       <div>
-        <p>{clubTeam.league_entries.at(0)?.league.sport}</p>
-        <p class="text-sm font-light">Sport</p>
+        <p>{clubTeam.league_entries.at(0)?.league?.sport}</p>
+        <p class="category-label">Sport</p>
       </div>
     </div>
 
-    <hr class="my-2">
+    <hr>
 
-    <div class="flex items-center gap-3">
+    <div class="detail-row">
       <Users/>
       <div>
-        <p>{clubTeam.league_entries.at(0)?.league.age_group}</p>
-        <p class="text-sm font-light">Age Group</p>
+        <p>{clubTeam.league_entries.at(0)?.league?.age_group}</p>
+        <p class="category-label">Age Group</p>
       </div>
     </div>
 
-    <hr class="my-2">
+    <hr>
 
-    <div class="flex items-center gap-3 mt-3">
+    <div class="detail-row info-row">
       <p>Antritt außer Konkurrenz (aK):</p>
 
       {#if clubTeam.league_entries.at(0)?.not_competing}
@@ -70,3 +70,32 @@
 
   {/if}
 </div>
+
+<style>
+  .team-info-card {
+    padding: calc(var(--spacing) * 3);
+
+    @media (prefers-color-scheme: dark) {
+      border: 1px solid var(--color-surface-500);
+    }
+  }
+
+  .detail-row {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 3);
+  }
+
+  .info-row {
+    margin-top: calc(var(--spacing) * 3);
+  }
+
+  .category-label {
+    font-size: var(--text-sm);
+    font-weight: 300;
+  }
+
+  hr {
+    margin-block: calc(var(--spacing) * 2);
+  }
+</style>

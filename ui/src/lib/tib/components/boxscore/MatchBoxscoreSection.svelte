@@ -15,12 +15,12 @@
   const homeTeamName = $derived(boxscore.linescore.home.league_entry.team?.name ?? "Home Team");
 </script>
 
-<section class="mt-2 mb-6">
-  <h2 class="h3 my-2">Linescore</h2>
+<section class="linescore-section">
+  <h2 class="h3 section-title">Linescore</h2>
   <Linescore linescore={boxscore.linescore}/>
 </section>
 
-<h2 class="h3 my-8">Offensive</h2>
+<h2 class="h3 title-spaced">Offensive</h2>
 
 <!--ROAD TEAM-->
 
@@ -33,7 +33,7 @@
   stats={boxscore.additional_away}
 ></MatchBoxscoreAdditionalStatsSection>
 
-<hr class="my-8"/>
+<hr class="divider"/>
 
 <!--HOME TEAM-->
 
@@ -46,20 +46,51 @@
   stats={boxscore.additional_home}
 ></MatchBoxscoreAdditionalStatsSection>
 
-<hr class="my-8"/>
+<hr class="divider"/>
 
-<section class="flex flex-col gap-4 mb-3">
-  <h2 class="h3 my-2">Pitching</h2>
+<section class="pitching-section">
+  <h2 class="h3 section-title">Pitching</h2>
 
   <MatchBoxscorePitchingTable
     matchStats={boxscore.pitching_away}
     teamName={awayTeamName}
   ></MatchBoxscorePitchingTable>
 
-  <div class="mt-4">
+  <div class="top-gap">
     <MatchBoxscorePitchingTable
       matchStats={boxscore.pitching_home}
       teamName={homeTeamName}
     ></MatchBoxscorePitchingTable>
   </div>
 </section>
+
+
+<style>
+  .linescore-section {
+    margin-top: calc(var(--spacing) * 2);
+    margin-bottom: calc(var(--spacing) * 6);
+  }
+
+  .section-title {
+    margin-block: calc(var(--spacing) * 2);
+  }
+
+  .title-spaced {
+    margin-block: calc(var(--spacing) * 8);
+  }
+
+  .divider {
+    margin-block: calc(var(--spacing) * 8);
+  }
+
+  .pitching-section {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 4);
+    margin-bottom: calc(var(--spacing) * 3);
+  }
+
+  .top-gap {
+    margin-top: calc(var(--spacing) * 4);
+  }
+</style>

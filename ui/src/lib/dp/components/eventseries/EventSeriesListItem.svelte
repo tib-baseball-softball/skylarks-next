@@ -17,7 +17,8 @@
   const options: { weekday: "long" | "short" | "narrow" | undefined } = {weekday: "long"};
 </script>
 
-<article class="preset-outlined-surface-800-200 rounded-base shadow-md" data-series-state="{eventSeries.series_state}">
+<article class="series-card preset-outlined-surface-800-200 rounded-base shadow-md"
+         data-series-state="{eventSeries.series_state}">
   <div class="outer-grid">
 
     <div class="title-wrapper">

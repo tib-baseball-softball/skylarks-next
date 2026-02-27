@@ -21,7 +21,7 @@
       console.error(error);
       toastController.trigger({
         message:
-            "There was an error processing your authentication request via external provider. Please double-check your signup key",
+          "There was an error processing your authentication request via external provider. Please double-check your signup key",
         background: "preset-filled-error-500",
       });
     }
@@ -32,10 +32,10 @@
   }
 
   const isGenericProvider = $derived(
-      authProvider.name !== "google" &&
-      authProvider.name !== "apple" &&
-      authProvider.name !== "github" &&
-      authProvider.name !== "discord"
+    authProvider.name !== "google" &&
+    authProvider.name !== "apple" &&
+    authProvider.name !== "github" &&
+    authProvider.name !== "discord"
   );
 </script>
 
@@ -45,11 +45,11 @@ falls back to simple button if not.
 -->
 
 <button
-        aria-label="sign in with {authProvider.displayName}"
-        class={['oauth-button', isGenericProvider && 'btn preset-tonal-tertiary border border-tertiary-500']}
-        disabled={disabled}
-        onclick={() => submitOAuthRequest(authProvider)}
-        type="button"
+  aria-label="sign in with {authProvider.displayName}"
+  class={['oauth-button', isGenericProvider && 'btn preset-tonal']}
+  disabled={disabled}
+  onclick={() => submitOAuthRequest(authProvider)}
+  type="button"
 >
   {#if (authProvider.name === "google")}
     <img class="light-logo" src="/providers/Google_light.svg" alt="Google logo" width="40">
@@ -73,9 +73,9 @@ falls back to simple button if not.
 
 <!-- svelte-ignore css_unused_selector -->
 <style>
-    .oauth-button[disabled] {
-        cursor: not-allowed;
-        opacity: 0.8;
-        filter: grayscale(1);
-    }
+  .oauth-button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.8;
+    filter: grayscale(1);
+  }
 </style>

@@ -14,11 +14,22 @@
   interface Props {
     club: ClubsResponse;
     team: ExpandedTeam | null;
-    buttonClasses?: string;
+    triggerVariant?: "filled-primary" | "tonal-primary" | "tonal-secondary" | "tonal-tertiary" | "tonal-surface";
+    triggerSize?: "default" | "sm";
+    triggerIcon?: boolean;
+    triggerSpaced?: boolean;
     showLabel?: boolean;
   }
 
-  const {club, team, buttonClasses = "", showLabel = true}: Props = $props();
+  const {
+    club,
+    team,
+    triggerVariant = "tonal-primary",
+    triggerSize = "default",
+    triggerIcon = false,
+    triggerSpaced = false,
+    showLabel = true,
+  }: Props = $props();
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
@@ -82,7 +93,22 @@
 </script>
 
 <Sheet.Root bind:open={open}>
-  <Sheet.Trigger class={buttonClasses}>
+  <Sheet.Trigger
+    class={[
+      "btn",
+      "trigger-button",
+      "team-form-trigger",
+      `trigger-variant-${triggerVariant}`,
+      triggerSize === "sm" && "btn-sm",
+      triggerIcon && "btn-icon",
+      triggerSpaced && "trigger-spaced",
+      triggerVariant === "filled-primary" && "preset-filled-primary-500",
+      triggerVariant === "tonal-primary" && "preset-tonal-primary border-primary",
+      triggerVariant === "tonal-secondary" && "preset-tonal-secondary border-secondary",
+      triggerVariant === "tonal-tertiary" && "preset-tonal-tertiary border-tertiary",
+      triggerVariant === "tonal-surface" && "preset-tonal-surface",
+    ]}
+  >
     {#if form.id}
 
       <SquarePen/>
@@ -103,7 +129,7 @@
   <Sheet.Content>
     <Sheet.Header></Sheet.Header>
 
-    <header class="text-xl font-semibold">
+    <header>
       {#if form.id}
         <h2 class="h3">Edit Team "{form?.name}"</h2>
       {:else}
@@ -111,7 +137,7 @@
       {/if}
     </header>
 
-    <form class="mt-4 space-y-3" onsubmit={submitForm}>
+    <form onsubmit={submitForm}>
       <div class="edit-form-grid">
         <input
           autocomplete="off"
@@ -122,7 +148,7 @@
           type="hidden"
         />
 
-        <label class="label col-span-2 md:col-span-1">
+        <label class="label">
           <span>Name</span>
           <input
             bind:value={form.name}
@@ -133,7 +159,7 @@
           />
         </label>
 
-        <label class="label col-span-2 md:col-span-1">
+        <label class="label">
           <span>Club</span>
           <input
             autocomplete="off"
@@ -145,7 +171,7 @@
           />
         </label>
 
-        <label class="label col-span-2">
+        <label class="label">
                 <span>
                 Signup Key
                 </span>
@@ -158,20 +184,22 @@
             required
             type="text"
           />
-          <span class="text-sm">
+          <span class="hint">
                     A valid signup key needs to be entered upon user account creation.
                     New users are automatically added as members to the team corresponding to the signup key used.
                 </span>
         </label>
 
-        <TabsRadioGroup
-          bind:value={form.age_group}
-          label="Age Group"
-          listClass="tabs-list input col-span-2"
-          name="age_group"
-          options={["adults", "minors"]}
-          required={true}
-        />
+        <div>
+          <TabsRadioGroup
+            bind:value={form.age_group}
+            label="Age Group"
+            listClass="tabs-list input"
+            name="age_group"
+            options={["adults", "minors"]}
+            required={true}
+          />
+        </div>
 
         <label class="label col-span-2">
           Description
@@ -192,7 +220,7 @@
         </label>
       </div>
 
-      <hr class="my-5!"/>
+      <hr/>
 
       <div class="flex justify-center gap-3">
         <button class="mt-2 btn preset-filled-primary-500" type="submit">
@@ -202,3 +230,22 @@
     </form>
   </Sheet.Content>
 </Sheet.Root>
+
+<style>
+  :global(.team-form-trigger .lucide-icon) {
+    flex-shrink: 1;
+  }
+
+  .hint {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-light);
+  }
+
+  hr {
+    margin-block: calc(var(--spacing) * 5);
+  }
+
+  .edit-form-grid {
+    gap: calc(var(--spacing) * 4);
+  }
+</style>

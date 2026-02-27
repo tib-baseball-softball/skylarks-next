@@ -21,10 +21,18 @@
   }
 
   interface Props {
-    buttonClasses?: string;
+    triggerVariant?: "filled-primary" | "tonal-primary" | "tonal-secondary" | "tonal-tertiary" | "tonal-surface";
+    triggerSize?: "default" | "sm";
+    triggerIcon?: boolean;
+    triggerSpaced?: boolean;
   }
 
-  const {buttonClasses = ""}: Props = $props();
+  const {
+    triggerVariant = "tonal-primary",
+    triggerSize = "default",
+    triggerIcon = false,
+    triggerSpaced = false,
+  }: Props = $props();
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
@@ -92,7 +100,21 @@
 </script>
 
 <Sheet.Root bind:open={open}>
-  <Sheet.Trigger class={buttonClasses}>
+  <Sheet.Trigger
+    class={[
+      "btn",
+      "trigger-button",
+      `trigger-variant-${triggerVariant}`,
+      triggerSize === "sm" && "btn-sm",
+      triggerIcon && "btn-icon",
+      triggerSpaced && "trigger-spaced",
+      triggerVariant === "filled-primary" && "preset-filled-primary-500",
+      triggerVariant === "tonal-primary" && "preset-tonal-primary",
+      triggerVariant === "tonal-secondary" && "preset-tonal-secondary",
+      triggerVariant === "tonal-tertiary" && "preset-tonal-tertiary",
+      triggerVariant === "tonal-surface" && "preset-tonal-surface",
+    ]}
+  >
     <SquarePen/>
     <span>Edit Player Data</span>
   </Sheet.Trigger>
@@ -100,13 +122,13 @@
   <Sheet.Content>
     <Sheet.Header></Sheet.Header>
 
-    <header class="text-xl font-semibold">
+    <header>
       <h2 class="h3">
         Edit Player Data for "{`${authRecord.first_name} ${authRecord.last_name}`}"
       </h2>
     </header>
 
-    <form class="mt-4 space-y-3" onsubmit={submitForm}>
+    <form onsubmit={submitForm}>
       <div class="edit-form-grid">
         <input
           autocomplete="off"
@@ -149,7 +171,7 @@
           </Switch>
         </span>
 
-        <label class="label label-wide flex flex-col gap-1 md:gap-2">
+        <label class="label label-wide">
           Positions
           <TagsInput
             name="positions"
@@ -158,7 +180,7 @@
             validate={validatePositionValue}
             value={selectedPositions}
           />
-          <span class="flex flex-wrap gap-2 label-wide">
+          <span class="label-wide position-labels">
           {#each possiblePositionValues as value}
             <button
               type="button"
@@ -199,10 +221,11 @@
           options={["none", "A", "B", "C", "D"]}
         />
       </div>
-      <hr class="my-5!"/>
+      
+      <hr>
 
-      <div class="flex justify-center gap-3">
-        <button class="mt-2 btn preset-tonal-primary border border-primary-500" type="submit">
+      <div class="submit-container">
+        <button class="btn preset-tonal-primary border border-primary-500" type="submit">
           Submit
         </button>
       </div>
@@ -211,8 +234,32 @@
 </Sheet.Root>
 
 <style>
+  form {
+    margin-block: calc(var(--spacing) * 3);
+  }
+  
   .label-wide {
     grid-column: span 2 / span 2;
     gap: calc(var(--spacing) * 2);
+  }
+  
+  .position-labels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--spacing) * 2);
+  }
+  
+  .submit-container {
+    display: flex;
+    justify-content: center;
+    gap: calc(var(--spacing) * 3);
+    
+    > button {
+      margin-block-start: calc(var(--spacing) * 2);
+    }
+  }
+  
+  hr {
+    margin-block: calc(var(--spacing) * 4);
   }
 </style>

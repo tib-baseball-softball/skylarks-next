@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {Edit} from "lucide-svelte";
+  import {SquarePen} from "lucide-svelte";
   import {invalidate} from "$app/navigation";
   import UniformSetForm from "$lib/dp/components/forms/UniformSetForm.svelte";
   import Cap from "$lib/dp/components/icons/Cap.svelte";
@@ -26,33 +26,33 @@
 
 <article class="card preset-tonal-surface shadow-md">
   <header class="card-header">
-    <h3 class="h4 font-semibold">{uniformSet.name}</h3>
+    <h3 class="h4 uniform-title">{uniformSet.name}</h3>
   </header>
 
-  <section class="p-4">
-    <div class="grid grid-cols-3 place-items-center">
-      <div class="max-w-20">
-        <Cap classes="w-20" identifier={uniformSet.cap}/>
+  <section class="uniform-content">
+    <div class="uniform-grid">
+      <div class="cap-container">
+        <Cap identifier={uniformSet.cap} size={70}/>
       </div>
 
       <div>
-        <Shirt classes="w-16 h-16" fillColor={uniformSet.jersey}/>
+        <Shirt fillColor={uniformSet.jersey} size={64}/>
       </div>
 
       <div>
-        <Pants classes="w-16 h-16" fillColor={uniformSet.pants}/>
+        <Pants fillColor={uniformSet.pants} size={64}/>
       </div>
     </div>
   </section>
 
   <footer class="card-footer">
     {#if uniformSet?.expand?.club?.admins.includes(authRecord.id)}
-      <hr class="my-2">
-      <div class="flex justify-end gap-2">
+      <hr class="divider">
+      <div class="actions-container">
         <Dialog triggerClasses="btn btn-sm btn-icon preset-tonal-tertiary border border-tertiary-500">
 
           {#snippet triggerContent()}
-            <Edit/>
+            <SquarePen size={16}/>
           {/snippet}
 
           {#snippet title()}
@@ -64,8 +64,38 @@
           <UniformSetForm {uniformSet} clubID={uniformSet.club}/>
         </Dialog>
 
-        <DeleteButton id={uniformSet.id} modelName="Uniform Set" action={deleteAction}/>
+        <DeleteButton id={uniformSet.id} modelName="Uniform Set" action={deleteAction} iconSize={16}/>
       </div>
     {/if}
   </footer>
 </article>
+
+<style>
+  .uniform-title {
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .uniform-content {
+    padding: calc(var(--spacing) * 4);
+  }
+
+  .uniform-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    place-items: center;
+  }
+
+  .cap-container {
+    max-width: calc(var(--spacing) * 20);
+  }
+
+  .divider {
+    margin-block: calc(var(--spacing) * 2);
+  }
+
+  .actions-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: calc(var(--spacing) * 2);
+  }
+</style>

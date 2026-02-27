@@ -7,13 +7,13 @@
   let {data}: PageProps = $props();
 </script>
 
-<h1 class="h1">Club</h1>
+<h1 class="h1 page-title">Club</h1>
 
 <!-- Club Info Section -->
 <ClubInfoSection club={data.bsmClubData}/>
 
 <!-- Grid Section -->
-<div class="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-6 mb-4!">
+<div class="club-grid">
   <ClubGridItem
     description="More Info"
     href="/club/details"
@@ -74,3 +74,24 @@
     {/snippet}
   </ClubGridItem>
 </div>
+
+<style>
+    .page-title {
+        margin-bottom: calc(var(--spacing) * 4);
+    }
+
+    .club-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: calc(var(--spacing) * 4);
+        margin-bottom: calc(var(--spacing) * 4);
+        
+        @media (min-width: 48rem) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        @media (min-width: 64rem) {
+            gap: calc(var(--spacing) * 6);
+        }
+    }
+</style>

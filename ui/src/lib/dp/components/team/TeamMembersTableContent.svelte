@@ -144,16 +144,16 @@
 
     {#if showAdminSection}
       <td>
-        <div class="flex gap-1 lg:gap-2 justify-end">
+        <div class="actions">
 
           {#if team.admins.includes(row.id)}
-            <button class="badge preset-tonal-warning border border-warning-500" onclick={() => removeUserAsAdmin(row)}>
-              <Lock class="m-0.5" size="18"/>
+            <button class="badge preset-tonal-warning border border-warning-500 admin-button" onclick={() => removeUserAsAdmin(row)}>
+              <Lock class="icon-spacing" size="18"/>
               Revoke Admin
             </button>
           {:else }
-            <button class="badge preset-tonal-tertiary border border-tertiary-500" onclick={() => makeUserAdmin(row)}>
-              <LockOpen class="m-0.5" size="18"/>
+            <button class="badge preset-tonal-tertiary border border-tertiary-500 admin-button" onclick={() => makeUserAdmin(row)}>
+              <LockOpen class="icon-spacing" size="18"/>
               Make Admin
             </button>
           {/if}
@@ -161,7 +161,7 @@
           <Dialog triggerClasses="btn btn-sm preset-tonal-error border border-error-500 gap-0!"
                   closeButtonClasses="sr-only">
             {#snippet triggerContent()}
-              <Trash class="m-0.5" size="18" aria-label="Remove User from Team"/>
+              <Trash class="icon-spacing" size="18" aria-label="Remove User from Team"/>
             {/snippet}
 
             {#snippet title()}
@@ -187,15 +187,34 @@
 
 {#if rows.length === 0}
   <tr>
-    <th class="py-4" colspan="8">No team members to display.</th>
+    <th class="empty-message" colspan="8">No team members to display.</th>
   </tr>
 {/if}
 
 <style>
+  .empty-message {
+    padding-top: calc(var(--spacing) * 4);
+    padding-bottom: calc(var(--spacing) * 4);
+  }
+
   .checkmark-container {
     display: flex;
     align-items: center;
     gap: var(--spacing);
+  }
+
+  .actions {
+    display: flex;
+    gap: calc(var(--spacing) * 1);
+    justify-content: end;
+
+    @media (min-width: 80rem) {
+      gap: calc(var(--spacing) * 2);
+    }
+  }
+
+  .icon-spacing {
+    margin: calc(var(--spacing) * 0.5);
   }
 
   .button-container {

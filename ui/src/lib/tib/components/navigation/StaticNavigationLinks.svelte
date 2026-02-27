@@ -58,19 +58,19 @@
   </a>
 </li>
 
-<style lang="postcss">
-    a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+<style>
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-    a:hover {
-        background-color: var(--color-primary-50-950);
-        color: var(--color-primary-950-50);
-    }
+  a:hover {
+    background-color: var(--color-primary-50-950);
+    color: var(--color-primary-950-50);
+  }
 
-    li {
-        width: 20%;
-    }
+  li {
+    width: 20%;
+  }
 </style>

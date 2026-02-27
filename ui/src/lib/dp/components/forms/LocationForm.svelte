@@ -16,10 +16,20 @@
   interface Props {
     club: ExpandedClub;
     location?: LocationsResponse | null;
-    buttonClasses?: string;
+    triggerVariant?: "filled-primary" | "tonal-primary" | "tonal-secondary" | "tonal-tertiary" | "tonal-surface";
+    triggerSize?: "default" | "sm";
+    triggerIcon?: boolean;
+    triggerSpaced?: boolean;
   }
 
-  const {location = null, club, buttonClasses = ""}: Props = $props();
+  const {
+    location = null,
+    club,
+    triggerVariant = "tonal-primary",
+    triggerSize = "default",
+    triggerIcon = false,
+    triggerSpaced = false,
+  }: Props = $props();
 
   function formFromProps(data: LocationsResponse | null) {
     return data ?? {
@@ -67,7 +77,21 @@
 </script>
 
 <Sheet.Root bind:open={open}>
-  <Sheet.Trigger class={buttonClasses}>
+  <Sheet.Trigger
+    class={[
+      "btn",
+      "trigger-button",
+      `trigger-variant-${triggerVariant}`,
+      triggerSize === "sm" && "btn-sm",
+      triggerIcon && "btn-icon",
+      triggerSpaced && "trigger-spaced",
+      triggerVariant === "filled-primary" && "preset-filled-primary-500",
+      triggerVariant === "tonal-primary" && "preset-tonal-primary",
+      triggerVariant === "tonal-secondary" && "preset-tonal-secondary",
+      triggerVariant === "tonal-tertiary" && "preset-tonal-tertiary",
+      triggerVariant === "tonal-surface" && "preset-tonal-surface",
+    ]}
+  >
     {#if form.id}
       <SquarePen/>
     {:else}
@@ -196,7 +220,7 @@
             name="internal_name"
             type="text"
           />
-          <span class="font-light text-sm"
+          <span class="subdued"
           >Custom name field that will not be overwritten by automatic
             imports.</span
           >
@@ -230,15 +254,30 @@
 
         <label class="field-wide">
           Coordinate Map
-          <span class="text-sm font-light block">Select a location on the map to set coordinates automatically</span>
+          <span class="subdued">Select a location on the map to set coordinates automatically</span>
           <LeafletMapCoordinatePicker bind:latitude={form.latitude} bind:longitude={form.longitude}/>
         </label>
 
       </div>
 
-      <div class="mt-4 flex justify-between items-center">
+      <div class="submit-container">
         <button class="btn preset-tonal-primary border border-primary-500" type="submit">Submit</button>
       </div>
     </form>
   </Sheet.Content>
 </Sheet.Root>
+
+<style>
+  .submit-container {
+    margin-block: calc(var(--spacing) * 3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .subdued {
+    font-weight: 300;
+    font-size: var(--text--sm);
+    display: block;
+  }
+</style>

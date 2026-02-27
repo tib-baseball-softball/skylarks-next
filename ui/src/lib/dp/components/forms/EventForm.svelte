@@ -19,10 +19,22 @@
     clubID: string;
     teamID: string;
     triggerContent: Snippet;
-    buttonClasses?: string;
+    triggerVariant?: "filled-primary" | "tonal-primary" | "tonal-secondary" | "tonal-tertiary" | "tonal-surface";
+    triggerSize?: "default" | "sm";
+    triggerIcon?: boolean;
+    triggerSpaced?: boolean;
   }
 
-  const {event, clubID, teamID, triggerContent, buttonClasses = ""}: Props = $props();
+  const {
+    event,
+    clubID,
+    teamID,
+    triggerContent,
+    triggerVariant = "tonal-primary",
+    triggerSize = "default",
+    triggerIcon = false,
+    triggerSpaced = false,
+  }: Props = $props();
 
   let open = $state(false);
 
@@ -90,7 +102,21 @@
 </script>
 
 <Sheet.Root bind:open={open}>
-  <Sheet.Trigger class={buttonClasses}>
+  <Sheet.Trigger
+    class={[
+      "btn",
+      "trigger-button",
+      `trigger-variant-${triggerVariant}`,
+      triggerSize === "sm" && "btn-sm",
+      triggerIcon && "btn-icon",
+      triggerSpaced && "trigger-spaced",
+      triggerVariant === "filled-primary" && "preset-filled-primary-500",
+      triggerVariant === "tonal-primary" && "preset-tonal-primary border-primary",
+      triggerVariant === "tonal-secondary" && "preset-tonal-secondary border-secondary",
+      triggerVariant === "tonal-tertiary" && "preset-tonal-tertiary border-tertiary",
+      triggerVariant === "tonal-surface" && "preset-tonal-surface",
+    ]}
+  >
     {@render triggerContent()}
   </Sheet.Trigger>
 
@@ -128,7 +154,7 @@
         </label>
 
         <label class="label">
-          <span>BSM ID</span>
+          <span>BSM ID</span> 
           <input
             bind:value={form.bsm_id}
             class="input"
@@ -221,10 +247,10 @@
         </Switch>
       </div>
 
-      <hr class="my-5!"/>
+      <hr/>
 
-      <div class="flex justify-center gap-3">
-        <button class="mt-2 btn preset-tonal-primary border border-primary-500" data-testid="event-form-submit-button"
+      <div class="submit-container">
+        <button class="btn preset-tonal-primary border border-primary-500" data-testid="event-form-submit-button"
                 type="submit">
           Submit
         </button>
@@ -232,3 +258,16 @@
     </form>
   </Sheet.Content>
 </Sheet.Root>
+
+<style>
+  .submit-container {
+    margin-block: calc(var(--spacing) * 3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  hr {
+    margin-block: calc(var(--spacing) * 5);
+  }
+</style>

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import {File, IdCard, ShieldHalf, Users} from "lucide-svelte";
-  import type {ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
+  import { File, IdCard, ShieldHalf, Users } from "lucide-svelte";
+  import type { ExpandedTeam } from "$lib/dp/types/ExpandedResponse.ts";
 
   /**
    * Used on Team Detail page.
@@ -11,47 +11,73 @@
     link: boolean;
   }
 
-  let {team, link = false}: props = $props();
+  let { team, link = false }: props = $props();
 </script>
 
-<article class="card block preset-tonal-surface p-3" class:card-hover={link}>
-
-  <div class="flex items-center gap-3 self-end">
-    <File/>
+<article class="card card-content preset-tonal-surface" class:card-hover={link}>
+  <div class="detail-row">
+    <File />
     <div>
       <p>{team.name}</p>
-      <p class="text-sm font-light">Name</p>
+      <p class="detail-label">Name</p>
     </div>
   </div>
 
-  <hr class="my-2">
+  <hr class="divider" />
 
-  <div class="flex items-center gap-3">
-    <IdCard/>
+  <div class="detail-row">
+    <IdCard />
     <div>
       <p>{team.bsm_league_group}</p>
-      <p class="text-sm font-light">BSM-Liga (für aktuelle Saison)</p>
+      <p class="detail-label">BSM-Liga (für aktuelle Saison)</p>
     </div>
   </div>
 
-  <hr class="my-2">
+  <hr class="divider" />
 
-  <div class="flex items-center gap-3">
-    <ShieldHalf/>
+  <div class="detail-row">
+    <ShieldHalf />
     <div>
       <p>{team?.expand?.club.name}</p>
-      <p class="text-sm font-light">Club</p>
+      <p class="detail-label">Club</p>
     </div>
   </div>
 
-  <hr class="my-2">
+  <hr class="divider" />
 
-  <div class="flex items-center gap-3">
-    <Users/>
+  <div class="detail-row">
+    <Users />
     <dl>
-      <dd class="capitalize">{team.age_group}</dd>
-      <dt class="text-sm font-light">Age Group</dt>
+      <dd class="team-age-group">{team.age_group}</dd>
+      <dt class="detail-label">Age Group</dt>
     </dl>
   </div>
-
 </article>
+
+<style>
+  .card-content {
+    display: block;
+    padding: calc(var(--spacing) * 3);
+  }
+
+  .detail-row {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 3);
+    align-self: flex-end;
+  }
+
+  .detail-label {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+    font-weight: var(--font-weight-light);
+  }
+
+  .divider {
+    margin-block: calc(var(--spacing) * 2);
+  }
+
+  .team-age-group {
+    text-transform: capitalize;
+  }
+</style>

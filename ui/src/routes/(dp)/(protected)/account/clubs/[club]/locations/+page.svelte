@@ -18,6 +18,12 @@
 
 <h1 class="h1">{club.name} - Locations</h1>
 
-<section class="mt-8!">
+<section>
   <ClubLocationsSection club={club} locations={data?.locations ?? []}/>
 </section>
+
+<style>
+  section {
+    margin-block: calc(var(--spacing) * 8);
+  }
+</style>

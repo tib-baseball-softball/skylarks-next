@@ -14,8 +14,8 @@
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 </script>
 
-<article class="py-1">
-  <div class="flex mt-1 mb-5 justify-between items-center">
+<article class="root">
+  <div class="row header-row">
     <p>Logged in as:</p>
 
     <a class="badge preset-filled-primary-500" href="/account" onclick={closeModal}>
@@ -23,10 +23,10 @@
     </a>
   </div>
 
-  <div class="flex mt-1 mb-5 justify-between items-start">
+  <div class="row clubs-row">
     <p>Club:</p>
 
-    <div class="flex flex-wrap gap-2 justify-end">
+    <div class="chips">
       {#each authRecord?.expand?.club as club}
         <a href="/account/clubs/{club.id}" class="badge preset-filled-tertiary-500" onclick={closeModal}>
           {club.name}
@@ -35,5 +35,38 @@
     </div>
   </div>
 
-  <button class="btn preset-tonal-primary border border-primary-500 mb-1" onclick={logout}>Log out</button>
+  <button class="btn preset-tonal-primary logout-btn" onclick={logout}>Log out</button>
 </article>
+
+<style>
+  .root {
+    padding-block: calc(var(--spacing) * 1);
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: calc(var(--spacing) * 1);
+    margin-bottom: calc(var(--spacing) * 5);
+  }
+
+  .header-row {
+    align-items: center;
+  }
+
+  .clubs-row {
+    align-items: flex-start;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--spacing) * 2);
+    justify-content: flex-end;
+  }
+
+  .logout-btn {
+    border: 1px solid var(--color-primary-500);
+    margin-bottom: calc(var(--spacing) * 1);
+  }
+</style>

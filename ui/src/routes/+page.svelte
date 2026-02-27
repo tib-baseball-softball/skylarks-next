@@ -5,12 +5,12 @@
   let {data}: PageProps = $props();
 </script>
 
-<div class="w-full space-y-5 mt-2 mb-5">
-  <section class="hero w-screen h-[20em] rounded-lg" id="Hero">
-    <div class="hero-overlay bg-opacity-60"></div>
+<div class="hero-wrapper">
+  <section class="hero" id="Hero">
+    <div class="hero-overlay"></div>
     <div class="hero-content">
-      <div class="max-w-md text-white preset-glass-neutral p-3 rounded-xl">
-        <h1 class="h1 mb-2">Diamond Planner</h1>
+      <div class="hero-text preset-glass-neutral">
+        <h1 class="h1">Diamond Planner</h1>
         <p>
           Berlin Skylarks Team App
         </p>
@@ -41,6 +41,12 @@
 </div>
 
 <style>
+  .hero-wrapper {
+    width: 100%;
+    margin-block-start: calc(var(--spacing) * 2);
+    margin-block-end: calc(var(--spacing) * 5);
+  }
+
   .hero {
     display: grid;
     width: 100%;
@@ -48,6 +54,8 @@
     background-size: cover;
     background-position: center;
     background-image: url("/header_hero.jpg");
+    border-radius: var(--radius-lg);
+    height: 20em;
   }
 
   .hero-content {
@@ -58,5 +66,15 @@
     max-width: 80rem;
     gap: 1rem;
     padding: 1rem;
+  }
+
+  .hero-text {
+    color: white;
+    padding: calc(var(--spacing) * 3);
+    border-radius: var(--radius-lg);
+  }
+
+  .prose {
+    margin-block: calc(var(--spacing) * 6);
   }
 </style>

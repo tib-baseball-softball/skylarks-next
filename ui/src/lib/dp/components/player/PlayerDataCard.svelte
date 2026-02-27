@@ -11,76 +11,101 @@
   let {player, showTeams = true}: Props = $props();
 </script>
 
-<div class="card preset-tonal-surface shadow-xl p-3">
+<div class="card preset-tonal-surface shadow-xl player-card">
   {#if showTeams}
-    <dl class="flex items-center gap-3">
+    <dl class="info-row">
       <Users aria-hidden="true"/>
       <div>
         <dd>{player.teams.map((team) => team.name)}</dd>
-        <dt class="text-sm font-light">Teams</dt>
+        <dt class="info-label">Teams</dt>
       </div>
     </dl>
 
-    <hr class="my-2"/>
+    <hr class="divider"/>
   {/if}
 
-  <div class="flex items-center gap-3">
+  <div class="info-row">
     <UsersRound aria-hidden="true"/>
     <dl>
       <!--do not calculate age for falsy values-->
       <dd>{player.birthday ? getAgeFromTimestamp(player.birthday) : "Not specified"}</dd>
-      <dt class="text-sm font-light">Age</dt>
+      <dt class="info-label">Age</dt>
     </dl>
   </div>
 
-  <hr class="my-2"/>
+  <hr class="divider"/>
 
-  <div class="flex items-center gap-3">
+  <div class="info-row">
     <Calendar aria-hidden="true"/>
     <dl>
       <dd>{player.admission}</dd>
-      <dt class="text-sm font-light">Member since</dt>
+      <dt class="info-label">Member since</dt>
     </dl>
   </div>
 
-  <hr class="my-2"/>
+  <hr class="divider"/>
 
-  <div class="flex items-center gap-3">
+  <div class="info-row">
     <Dna aria-hidden="true"/>
     <dl>
       <dd>
-        <div class="flex flex-wrap">
+        <div class="positions-list">
           {#each player.positions as position}
             <span class="position-item">{position}</span>
           {/each}
         </div>
       </dd>
-      <dt class="text-sm font-light">Positions</dt>
+      <dt class="info-label">Positions</dt>
     </dl>
   </div>
 
-  <hr class="my-2"/>
+  <hr class="divider"/>
 
-  <div class="flex items-center gap-3">
+  <div class="info-row">
     <Hand aria-hidden="true"/>
     <dl>
       <dd class="capitalize">{player.batting}</dd>
-      <dt class="text-sm font-light">Bats</dt>
+      <dt class="info-label">Bats</dt>
     </dl>
   </div>
 
-  <hr class="my-2"/>
+  <hr class="divider"/>
 
-  <div class="flex items-center gap-3">
+  <div class="info-row">
     <Hand aria-hidden="true"/>
     <dl>
       <dd class="capitalize">{player.throwing}</dd>
-      <dt class="text-sm font-light">Throws</dt>
+      <dt class="info-label">Throws</dt>
     </dl>
   </div>
 </div>
 
 <style>
+  .player-card {
+    padding: calc(var(--spacing) * 3);
+  }
+
+  .info-row {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 3);
+  }
+
+  .info-label {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+    font-weight: var(--font-weight-light);
+  }
+
+  .divider {
+    margin-block: calc(var(--spacing) * 2);
+  }
+
+  .positions-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
   .position-item:not(:last-child)::after {
     content: ",\00a0";
   }

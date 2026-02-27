@@ -4,6 +4,7 @@
 @import "./partials/card.css";
 @import "./partials/chip.css";
 @import "./partials/forms.css";
+@import "./partials/icons.css";
 @import "./partials/container.css";
 @import "./partials/drawer.css";
 @import "./partials/dialog.css";
@@ -18,8 +19,6 @@
 @import "./partials/buttons.css" layer(utilities);
 @import "./partials/tabs.css" layer(utilities);
 @import "./theme/typography.css";
-/* TODO: make this obsolete */
-@import "./shame.css";
 @import "./theme/generic-theme.css";
 @import "./theme/animations.css";
 @import "./theme/properties.css";

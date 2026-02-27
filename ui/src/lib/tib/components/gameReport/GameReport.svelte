@@ -11,10 +11,10 @@
   let {report, classes = ""}: Props = $props();
 </script>
 
-<div class="flex justify-center">
+<div class="report-outer-wrapper">
   <!-- MARK: Language Tag (as long as we do not have English content) -->
-  <div class="{classes}" lang="de">
-    <h2 class="h2 mb-3">{report.title}</h2>
+  <div class="{classes} report-inner-container" lang="de">
+    <h2 class="h2 report-title">{report.title}</h2>
     <article>
       <GameReportHeader report={report}/>
 
@@ -25,21 +25,21 @@
           {/each}
         {/if}
 
-        <div class="mt-3">
+        <div class="introduction">
           {@html report.introduction}
         </div>
       </section>
 
-      <hr class="my-6!">
+      <hr class="section-separator">
 
-      <section class="mt-4 prose">
+      <section class="prose game-report-section">
         <h3 class="h3">Bericht Spiel 1</h3>
 
         {@html report.report_first}
       </section>
 
       {#if report.report_second}
-        <section class="my-3 prose">
+        <section class="prose game-report-section secondary-report">
           <h3 class="h3">Bericht Spiel 2</h3>
 
           {@html report.report_second}
@@ -47,7 +47,7 @@
       {/if}
 
       {#if report.preview}
-        <section class="card preset-tonal dark:border dark:border-surface-500 rounded-base shadow-xl p-4 my-4">
+        <section class="card preview-section preset-tonal shadow-xl">
           <h3 class="h3">Ausblick</h3>
 
           {@html report.preview}
@@ -55,10 +55,10 @@
       {/if}
 
       {#if report.gallery}
-        <section class="my-5">
-          <h3 class="h3 mb-3">Bildergalerie</h3>
+        <section class="gallery-section">
+          <h3 class="h3 gallery-title">Bildergalerie</h3>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="gallery-grid">
 
             {#each report.gallery as image}
               <TypoImage media={image}/>
@@ -72,12 +72,65 @@
 </div>
 
 <style>
-    .prose :global {
-        max-width: unset;
-        text-align: justify;
+  .report-outer-wrapper {
+    display: flex;
+    justify-content: center;
+  }
 
-        p {
-            margin: 1rem 0;
-        }
+  .report-title {
+    margin-bottom: calc(var(--spacing) * 3);
+  }
+
+  .introduction {
+    margin-top: calc(var(--spacing) * 3);
+  }
+
+  .section-separator {
+    margin-block: calc(var(--spacing) * 6) !important;
+  }
+
+  .game-report-section {
+    margin-top: calc(var(--spacing) * 4);
+
+    &.secondary-report {
+      margin-top: calc(var(--spacing) * 3);
     }
+  }
+
+  .preview-section {
+    border-radius: var(--radius-base);
+    padding: calc(var(--spacing) * 4);
+    margin-block: calc(var(--spacing) * 4);
+
+    :global([data-theme='dark']) & {
+      border: 1px solid var(--color-surface-500);
+    }
+  }
+
+  .gallery-section {
+    margin-block: calc(var(--spacing) * 5);
+  }
+
+  .gallery-title {
+    margin-bottom: calc(var(--spacing) * 3);
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: calc(var(--spacing) * 3);
+
+    @media (min-width: 48rem) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .prose :global {
+    max-width: unset;
+    text-align: justify;
+
+    p {
+      margin: 1rem 0;
+    }
+  }
 </style>

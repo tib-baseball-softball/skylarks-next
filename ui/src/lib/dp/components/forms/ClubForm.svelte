@@ -14,10 +14,19 @@
 
   interface Props {
     club: ExpandedClub | null;
-    buttonClasses?: string;
+    triggerVariant?: "filled-primary" | "tonal-primary" | "tonal-secondary" | "tonal-tertiary" | "tonal-surface";
+    triggerSize?: "default" | "sm";
+    triggerIcon?: boolean;
+    triggerSpaced?: boolean;
   }
 
-  const {club, buttonClasses = ""}: Props = $props();
+  const {
+    club,
+    triggerVariant = "filled-primary",
+    triggerSize = "default",
+    triggerIcon = false,
+    triggerSpaced = false,
+  }: Props = $props();
 
   function formFromProps(data: ExpandedClub | null) {
     return data ?? {
@@ -82,7 +91,21 @@
 </script>
 
 <Sheet.Root bind:open={open}>
-  <Sheet.Trigger class={buttonClasses}>
+  <Sheet.Trigger
+    class={[
+      "btn",
+      "trigger-button",
+      `trigger-variant-${triggerVariant}`,
+      triggerSize === "sm" && "btn-sm",
+      triggerIcon && "btn-icon",
+      triggerSpaced && "trigger-spaced",
+      triggerVariant === "filled-primary" && "preset-filled-primary-500",
+      triggerVariant === "tonal-primary" && "preset-tonal-primary",
+      triggerVariant === "tonal-secondary" && "preset-tonal-secondary",
+      triggerVariant === "tonal-tertiary" && "preset-tonal-tertiary",
+      triggerVariant === "tonal-surface" && "preset-tonal-surface",
+    ]}
+  >
     {#if form.id}
       <ClipboardPen/>
       <span>Edit Club</span>
@@ -203,10 +226,10 @@
         {/if}
       </div>
 
-      <hr class="my-5!"/>
+      <hr/>
 
-      <div class="flex justify-center gap-3">
-        <button class="mt-2 btn preset-filled-primary-500" type="submit">
+      <div class="submit-container">
+        <button class="btn preset-filled-primary-500" type="submit">
           Submit
         </button>
       </div>
@@ -214,3 +237,16 @@
 
   </Sheet.Content>
 </Sheet.Root>
+
+<style>
+  hr {
+    margin-block: calc(var(--spacing) * 5);
+  }
+  
+  .submit-container {
+    margin-block: calc(var(--spacing) * 3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>

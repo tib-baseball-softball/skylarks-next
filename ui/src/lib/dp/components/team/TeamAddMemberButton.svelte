@@ -25,10 +25,17 @@
   {/snippet}
 
   {#snippet description()}
-    <div class="text-sm">
+    <div class="description-text">
       Select all {club.name} members that should be added to the team.
     </div>
   {/snippet}
 
   <TeamMembersForm {club} {team}/>
 </Dialog>
+
+<style>
+  .description-text {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+  }
+</style>

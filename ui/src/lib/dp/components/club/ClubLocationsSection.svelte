@@ -1,13 +1,16 @@
 <script lang="ts">
-  import {invalidate} from "$app/navigation";
+  import { invalidate } from "$app/navigation";
   import LocationForm from "$lib/dp/components/forms/LocationForm.svelte";
   import DeleteButton from "$lib/dp/components/utils/DeleteButton.svelte";
-  import {authSettings, client} from "$lib/dp/client.svelte.js";
-  import type {CustomAuthModel, ExpandedClub} from "$lib/dp/types/ExpandedResponse.ts";
-  import type {LocationsResponse} from "$lib/dp/types/pb-types.ts";
-  import {MapUtility} from "$lib/dp/service/MapUtility.ts";
-  import {Map} from "lucide-svelte";
-  import {Collection} from "$lib/dp/enum/Collection.ts";
+  import { authSettings, client } from "$lib/dp/client.svelte.js";
+  import type {
+    CustomAuthModel,
+    ExpandedClub,
+  } from "$lib/dp/types/ExpandedResponse.ts";
+  import type { LocationsResponse } from "$lib/dp/types/pb-types.ts";
+  import { MapUtility } from "$lib/dp/service/MapUtility.ts";
+  import { Map } from "lucide-svelte";
+  import { Collection } from "$lib/dp/enum/Collection.ts";
 
   interface Props {
     club: ExpandedClub;
@@ -16,7 +19,7 @@
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
-  const {club, locations}: Props = $props();
+  const { club, locations }: Props = $props();
 
   function locationDeleteAction(id: string) {
     client.collection(Collection.Locations).delete(id);
@@ -40,19 +43,24 @@
 
       <div class="actions">
         <a
-          href="{MapUtility.buildGoogleMapsURL(location.address_addon, location.latitude, location.longitude)}"
+          href={MapUtility.buildGoogleMapsURL(
+            location.address_addon,
+            location.latitude,
+            location.longitude,
+          )}
           class="btn btn-icon preset-tonal-primary border border-primary-500"
           title="open location in Google Maps"
           target="_blank"
         >
-          <Map/>
+          <Map />
         </a>
 
         {#if club?.admins.includes(authRecord.id)}
           <LocationForm
             {club}
             {location}
-            buttonClasses="btn btn-icon preset-tonal-tertiary border border-tertiary-500"
+            triggerVariant="tonal-tertiary"
+            triggerIcon={true}
           />
 
           <DeleteButton
@@ -66,23 +74,25 @@
     </li>
 
     {#if index < locations.length - 1}
-      <hr/>
+      <hr />
     {/if}
-
-  {:else }
+  {:else}
     <p>This club doesn't have saved locations yet.</p>
   {/each}
 </ul>
 
 {#if club?.admins.includes(authRecord.id)}
-  <LocationForm
-    {club}
-    location={null}
-    buttonClasses="btn preset-tonal-primary border border-primary-500 my-3"
-  />
+  <div class="add-button-wrapper">
+    <LocationForm
+      {club}
+      location={null}
+      triggerVariant="tonal-primary"
+      triggerSpaced={true}
+    />
+  </div>
 {/if}
 
-<style lang="postcss">
+<style>
   .location-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -114,5 +124,9 @@
 
   hr {
     margin-block: calc(var(--spacing) * 2);
+  }
+  
+  .add-button-wrapper {
+    margin-block: calc(var(--spacing) * 4);
   }
 </style>

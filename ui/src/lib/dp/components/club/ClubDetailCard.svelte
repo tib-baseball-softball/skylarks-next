@@ -13,12 +13,12 @@
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 </script>
 
-<div class="card bg-primary-100 shadow-lg">
+<div class="card shadow-lg">
   <header class="card-header">
-    <h2 class="h4 font-semibold">Club</h2>
+    <h2 class="title h4">Club</h2>
   </header>
 
-  <section class="p-4 space-y-2">
+  <section class="content">
     <div class="item">
       <Shield/>
       <div>
@@ -46,30 +46,42 @@
 
   {#if club.admins.includes(authRecord.id)}
     <footer class="card-footer">
-      <ClubForm club={club} buttonClasses="btn preset-tonal-secondary border border-secondary-500"/>
+      <ClubForm club={club} triggerVariant="tonal-secondary"/>
     </footer>
   {/if}
 </div>
 
 <style>
-    .card {
-        background-color: light-dark(var(--color-primary-100), var(--color-primary-950));
-    }
+  .card {
+    background-color: light-dark(var(--color-primary-100), var(--color-primary-950));
+  }
 
-    .item {
-        display: flex;
-        align-items: center;
-        gap: calc(var(--spacing) * 3);
-    }
+  .title {
+    font-weight: 600;
+  }
 
-    .light-text {
-        font-weight: var(--font-weight-light);
-        font-size: var(--text-sm);
-        line-height: var(--tw-leading, var(--text-sm--line-height));
-    }
+  .content {
+    padding: calc(var(--spacing) * 4);
 
-    .card-footer {
-        display: flex;
-        justify-content: end;
+    & > * + * {
+      margin-top: calc(var(--spacing) * 2);
     }
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 3);
+  }
+
+  .light-text {
+    font-weight: var(--font-weight-light);
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: end;
+  }
 </style>
