@@ -171,7 +171,7 @@
           </Switch>
         </span>
 
-        <label class="label label-wide flex flex-col gap-1 md:gap-2">
+        <label class="label label-wide">
           Positions
           <TagsInput
             name="positions"

@@ -119,7 +119,7 @@
       <span class=" hint">No events will be created after this date.</span>
     </label>
 
-    <label class="label field-wide mt-3 md:mt-0">
+    <label class="label field-wide">
       Title
       <input
         bind:value={form.title}

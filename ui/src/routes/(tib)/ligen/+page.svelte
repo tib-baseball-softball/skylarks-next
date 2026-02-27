@@ -17,8 +17,8 @@
 
 <ReloadUponPreferenceChange callback={reload}/>
 
-<div class="my-2 md:flex justify-between items-center">
-  <h1 class="h1 mb-3">Leagues</h1>
+<div class="header-container">
+  <h1 class="h1">Leagues</h1>
   <div>
     <SeasonSelector/>
   </div>
@@ -75,5 +75,14 @@
   .league-name {
     flex: 1 1 auto;
     margin-inline-start: calc(var(--spacing) * 3);
+  }
+  
+  .header-container {
+    justify-content: space-between;
+    align-items: center;
+    
+    @media (min-width: 32rem) {
+      display: flex;
+    }
   }
 </style>
