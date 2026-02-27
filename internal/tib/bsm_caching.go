@@ -115,18 +115,19 @@ func GetCachedBSMResponse(app CachingApp, url *url.URL) (string, error) {
 	}
 	hash := dp.GetMD5Hash(url.String())
 
-	var requestCache *dp.RequestCache
+	requestCache := &dp.RequestCache{}
 	record, err := app.FindFirstRecordByData(dp.RequestCacheCollection, "hash", hash)
 	if err != nil {
 		// no data - request has never been cached before
-		record, err = saveBSMResponseToCache(app, url.String())
+		requestCache, err = saveBSMResponseToCache(app, url.String())
 		if err != nil {
 			return ret, err
 		}
+		
+		return requestCache.ResponseBody(), nil
 	}
 
 	if record != nil {
-		requestCache = &dp.RequestCache{}
 		requestCache.SetProxyRecord(record)
 
 		if isOutdated(requestCache.Updated()) {
@@ -135,14 +136,10 @@ func GetCachedBSMResponse(app CachingApp, url *url.URL) (string, error) {
 				return ret, err
 			}
 
-			record, err = saveBSMResponseToCache(app, url.String())
+			requestCache, err = saveBSMResponseToCache(app, url.String())
 			if err != nil {
 				return ret, err
 			}
-
-			// Update requestCache with the new record
-			requestCache = &dp.RequestCache{}
-			requestCache.SetProxyRecord(record)
 		}
 		ret = requestCache.ResponseBody()
 	}
@@ -150,7 +147,7 @@ func GetCachedBSMResponse(app CachingApp, url *url.URL) (string, error) {
 	return ret, nil
 }
 
-func saveBSMResponseToCache(app CachingApp, bsmURL string) (*core.Record, error) {
+func saveBSMResponseToCache(app CachingApp, bsmURL string) (*dp.RequestCache, error) {
 	_, body, err := bsm.FetchResource[any](bsmURL)
 	if err != nil {
 		var fetchError *url.Error
@@ -189,12 +186,12 @@ func saveBSMResponseToCache(app CachingApp, bsmURL string) (*core.Record, error)
 	cache.SetHash(dp.GetMD5Hash(bsmURL))
 	cache.SetURL(bsmURL)
 
-	err = app.Save(record)
+	err = app.Save(cache)
 	if err != nil {
-		return record, err
+		return cache, err
 	}
 
-	return record, nil
+	return cache, nil
 }
 
 func isOutdated(cacheTime types.DateTime) bool {
