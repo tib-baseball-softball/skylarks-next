@@ -220,7 +220,7 @@
             name="internal_name"
             type="text"
           />
-          <span class="font-light text-sm"
+          <span class="subdued"
           >Custom name field that will not be overwritten by automatic
             imports.</span
           >
@@ -254,13 +254,13 @@
 
         <label class="field-wide">
           Coordinate Map
-          <span class="text-sm font-light block">Select a location on the map to set coordinates automatically</span>
+          <span class="subdued">Select a location on the map to set coordinates automatically</span>
           <LeafletMapCoordinatePicker bind:latitude={form.latitude} bind:longitude={form.longitude}/>
         </label>
 
       </div>
 
-      <div class="mt-4 flex justify-between items-center">
+      <div class="submit-container">
         <button class="btn preset-tonal-primary border border-primary-500" type="submit">Submit</button>
       </div>
     </form>
@@ -268,32 +268,16 @@
 </Sheet.Root>
 
 <style>
-  .trigger-button {
-    border-style: solid;
-    border-width: 1px;
-  }
-
-  .trigger-variant-filled-primary {
-    border-color: transparent;
-  }
-
-  .trigger-variant-tonal-primary {
-    border-color: var(--color-primary-500);
-  }
-
-  .trigger-variant-tonal-secondary {
-    border-color: var(--color-secondary-500);
-  }
-
-  .trigger-variant-tonal-tertiary {
-    border-color: var(--color-tertiary-500);
-  }
-
-  .trigger-variant-tonal-surface {
-    border-color: var(--color-surface-500);
-  }
-
-  .trigger-spaced {
+  .submit-container {
     margin-block: calc(var(--spacing) * 3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .subdued {
+    font-weight: 300;
+    font-size: var(--text--sm);
+    display: block;
   }
 </style>

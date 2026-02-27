@@ -37,7 +37,7 @@
       <li class="team-item">
         <a href="/teams/{clubTeam.id}?season={preferences.current.selectedSeason}">
           <span
-            class="badge team-badge">{clubTeam?.league_entries.at(0)?.league.acronym}</span>
+            class="badge team-badge">{clubTeam?.league_entries.at(0)?.league?.acronym}</span>
           <span class="team-name">{clubTeam?.name}</span>
         </a>
       </li>

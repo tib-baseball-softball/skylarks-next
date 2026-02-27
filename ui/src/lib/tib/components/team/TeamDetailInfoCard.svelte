@@ -36,7 +36,7 @@
     <div class="detail-row">
       <Volleyball/>
       <div>
-        <p>{clubTeam.league_entries.at(0)?.league.sport}</p>
+        <p>{clubTeam.league_entries.at(0)?.league?.sport}</p>
         <p class="category-label">Sport</p>
       </div>
     </div>
@@ -46,7 +46,7 @@
     <div class="detail-row">
       <Users/>
       <div>
-        <p>{clubTeam.league_entries.at(0)?.league.age_group}</p>
+        <p>{clubTeam.league_entries.at(0)?.league?.age_group}</p>
         <p class="category-label">Age Group</p>
       </div>
     </div>

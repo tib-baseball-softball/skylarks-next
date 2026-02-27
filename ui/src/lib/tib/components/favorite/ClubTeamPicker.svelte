@@ -20,7 +20,7 @@
     <option value="{0}">None</option>
     {#each clubTeams as clubTeam}
       <option value="{clubTeam.id}">{clubTeam.name}
-        ({clubTeam.league_entries.map(entry => entry.league.acronym)})
+        ({clubTeam.league_entries.map(entry => entry.league?.acronym)})
       </option>
     {/each}
   </select>
