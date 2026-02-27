@@ -4,8 +4,6 @@
   width: 100%;
   overflow: hidden;
   /* background */
-  /* Theme: Rounded */
-  border-radius: var(--radius-container);
 }
 
 /* === Hover Styles ==== */

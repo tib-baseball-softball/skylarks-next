@@ -66,7 +66,7 @@
       border: 1px solid var(--color-surface-200);
 
       @media (prefers-color-scheme: dark) {
-        border-color: var(--color-surface-700);
+        border-color: var(--color-surface-400);
       }
     }
 

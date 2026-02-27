@@ -24,19 +24,21 @@
 }
 
 .table {
+  --table-border-color: light-dark(var(--color-surface-200), var(--color-surface-400));
+  
   /* Table --- */
   font-size: var(--text-sm);
   line-height: var(--text-sm--line-height);
   position: relative;
   width: 100%;
-  border: 1px solid var(--color-surface-200-800);
+  border: 1px solid var(--table-border-color);
   border-radius: var(--radius-container);
 
   /* Head --- */
 
   & thead {
     color: var(--color-surface-700-300);
-    border: 1px solid var(--color-surface-200-800);
+    border: 1px solid var(--table-border-color);
     border-radius: var(--radius-container);
   }
 
@@ -49,7 +51,7 @@
 
   & tbody {
     & > :not(:last-child) {
-      border-color: var(--color-surface-200-800);
+      border-color: var(--table-border-color);
     }
 
     & > :not(:last-child) {
@@ -62,7 +64,7 @@
 
   & tfoot {
     border-top-width: 1px;
-    border-color: var(--color-surface-200-800);
+    border-color: var(--table-border-color);
     background-color: var(--color-surface-100-900);
   }
 
