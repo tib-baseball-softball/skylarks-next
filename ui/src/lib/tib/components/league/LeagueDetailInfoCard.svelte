@@ -34,7 +34,7 @@
   <div class="container">
     <Volleyball/>
     <div>
-      <p>{leagueGroup.league.sport}</p>
+      <p>{leagueGroup.sport}</p>
       <p class="text">Sport</p>
     </div>
   </div>
@@ -44,7 +44,7 @@
   <div class="container">
     <Users/>
     <dl>
-      <dd>{leagueGroup.league.age_group}</dd>
+      <dd>{leagueGroup.age_group}</dd>
       <dt class="text">Age Group</dt>
     </dl>
   </div>
