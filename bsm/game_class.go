@@ -1,0 +1,8 @@
+package bsm
+
+type GameClass struct {
+	ID      int    `json:"id"`
+	Season  int    `json:"season"`
+	Name    string `json:"name"`
+	Acronym string `json:"acronym"`
+}

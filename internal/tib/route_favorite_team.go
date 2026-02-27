@@ -30,8 +30,18 @@ func GetFavoriteTeamData(client bsm.APIClient) func(e *core.RequestEvent) error 
 		if err != nil {
 			return e.JSON(http.StatusBadRequest, "Season must be an integer")
 		}
-
-		response, err := GetCachedDatasetResponse(e.App, client, convertedTeamID, convertedSeason)
+		
+		gameClass := e.Request.URL.Query().Get("gameClass")
+		if gameClass == "" {
+			return e.JSON(http.StatusBadRequest, "Game class not found in request")
+		}
+		
+		convertedGameClass, err := strconv.Atoi(gameClass)
+		if err != nil {
+			return e.JSON(http.StatusBadRequest, "Game class must be an integer")
+		}
+		
+		response, err := GetCachedDatasetResponse(e.App, client, convertedTeamID, convertedGameClass, convertedSeason)
 		if err != nil {
 			return e.JSON(http.StatusInternalServerError, "Internal error occurred")
 		}

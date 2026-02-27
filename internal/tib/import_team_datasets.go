@@ -15,8 +15,9 @@ import (
 )
 
 type teamDatasetCacheIdentifier struct {
-	TeamID int
-	Season string
+	TeamID   int
+	LeagueID int
+	Season   string
 }
 
 func ImportTeamDatasets(app core.App, client bsm.APIClient) {
@@ -54,7 +55,7 @@ func ImportTeamDatasets(app core.App, client bsm.APIClient) {
 					return
 				}
 
-				datasets, err := LoadHomeData(app, client, parsedIdentifier.TeamID, currentYear) // we have established earlier that only the current year is of interest
+				datasets, err := LoadHomeData(app, client, parsedIdentifier.TeamID, parsedIdentifier.LeagueID, currentYear) // we have established earlier that only the current year is of interest
 				responseBody, err := json.Marshal(datasets)
 				if err != nil {
 					app.Logger().Error("ImportTeamDatasets error", "error", err, "cacheIdentifier", requestCache.Identifier())
@@ -74,7 +75,7 @@ func ImportTeamDatasets(app core.App, client bsm.APIClient) {
 	app.Logger().Info("TeamDatasets Import successfully imported new team datasets.", "Number of records processed", processedRecords)
 }
 
-const teamDatasetCacheIdentifierLength = 3
+const teamDatasetCacheIdentifierLength = 4
 
 func parseTeamDatasetCacheIdentifier(identifier string) (teamDatasetCacheIdentifier, error) {
 	var ret teamDatasetCacheIdentifier
@@ -91,9 +92,15 @@ func parseTeamDatasetCacheIdentifier(identifier string) (teamDatasetCacheIdentif
 	if err != nil {
 		return ret, errors.New("invalid cache identifier, could not convert team ID to integer")
 	}
+	
+	convertedLeagueID, err := strconv.Atoi(slice[2])
+	if err != nil {
+		return ret, errors.New("invalid cache identifier, could not convert league ID to integer")
+	}
 
 	ret.Season = slice[0]
 	ret.TeamID = convertedTeamID
+	ret.LeagueID = convertedLeagueID
 
 	return ret, nil
 }
