@@ -18,7 +18,10 @@
     width: 4rem;
     line-height: 4rem;
     border-radius: 50%;
+    font-size: 2rem;
     text-align: center;
+    color: white;
     font-weight: bold;
+    scale: 75%;
   }
 </style>

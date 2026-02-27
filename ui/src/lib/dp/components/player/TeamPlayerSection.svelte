@@ -13,7 +13,7 @@
 </script>
 
 <label class="label visual-selector-container">
-  Visualization
+  <span>Visualization</span>
   <Tabs.Root bind:value={visual}>
     <Tabs.List class="tabs-list selector-tabs">
       <Tabs.Trigger class="tabs-trigger btn" value="number">Number</Tabs.Trigger>
@@ -36,10 +36,6 @@
     flex-direction: column;
     gap: calc(var(--spacing) * 1);
     margin-block: calc(var(--spacing) * 4);
-
-    @media (min-width: 64rem) {
-      max-width: 50%;
-    }
   }
 
   .players-list-card {

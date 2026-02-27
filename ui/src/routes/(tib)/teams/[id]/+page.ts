@@ -74,7 +74,7 @@ export const load: PageLoad = async ({parent, params, url, fetch}) => {
 
   // Resolve leagueGroup
   let leagueGroups: LeagueGroup[] | undefined = await data.leagueGroups;
-  let leagueGroup = leagueGroups?.find((g) => g.league.id === leagueEntry.league.id);
+  let leagueGroup = leagueGroups?.find((g) => g.game_class?.id === leagueEntry.league?.id);
 
   if (!leagueGroup) {
     // Fallback: fetch league groups for the season
@@ -88,7 +88,7 @@ export const load: PageLoad = async ({parent, params, url, fetch}) => {
       fetch,
       requestKey: `team-id-leagueGroups-${season}`,
     });
-    leagueGroup = leagueGroups?.find((g) => g.league.id === leagueEntry.league.id);
+    leagueGroup = leagueGroups?.find((g) => g.game_class?.id === leagueEntry.league?.id);
   }
 
   // Table for the league group if available

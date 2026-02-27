@@ -22,7 +22,7 @@
 
 {#snippet rowContent()}
   {#if visual === "number"}
-    <PlayerNumberGraphic content={player.number} classes="preset-filled-primary-500 scale-75"/>
+    <PlayerNumberGraphic content={player.number} classes="preset-filled-primary-500"/>
   {:else }
 
     {#if player.media?.length > 0}
