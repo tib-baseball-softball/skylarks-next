@@ -122,13 +122,13 @@
   <Sheet.Content>
     <Sheet.Header></Sheet.Header>
 
-    <header class="text-xl font-semibold">
+    <header>
       <h2 class="h3">
         Edit Player Data for "{`${authRecord.first_name} ${authRecord.last_name}`}"
       </h2>
     </header>
 
-    <form class="mt-4 space-y-3" onsubmit={submitForm}>
+    <form onsubmit={submitForm}>
       <div class="edit-form-grid">
         <input
           autocomplete="off"
@@ -180,7 +180,7 @@
             validate={validatePositionValue}
             value={selectedPositions}
           />
-          <span class="flex flex-wrap gap-2 label-wide">
+          <span class="label-wide position-labels">
           {#each possiblePositionValues as value}
             <button
               type="button"
@@ -221,10 +221,11 @@
           options={["none", "A", "B", "C", "D"]}
         />
       </div>
-      <hr class="my-5!"/>
+      
+      <hr>
 
-      <div class="flex justify-center gap-3">
-        <button class="mt-2 btn preset-tonal-primary border border-primary-500" type="submit">
+      <div class="submit-container">
+        <button class="btn preset-tonal-primary border border-primary-500" type="submit">
           Submit
         </button>
       </div>
@@ -233,37 +234,32 @@
 </Sheet.Root>
 
 <style>
-  .trigger-button {
-    border-style: solid;
-    border-width: 1px;
-  }
-
-  .trigger-variant-filled-primary {
-    border-color: transparent;
-  }
-
-  .trigger-variant-tonal-primary {
-    border-color: var(--color-primary-500);
-  }
-
-  .trigger-variant-tonal-secondary {
-    border-color: var(--color-secondary-500);
-  }
-
-  .trigger-variant-tonal-tertiary {
-    border-color: var(--color-tertiary-500);
-  }
-
-  .trigger-variant-tonal-surface {
-    border-color: var(--color-surface-500);
-  }
-
-  .trigger-spaced {
+  form {
     margin-block: calc(var(--spacing) * 3);
   }
-
+  
   .label-wide {
     grid-column: span 2 / span 2;
     gap: calc(var(--spacing) * 2);
+  }
+  
+  .position-labels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--spacing) * 2);
+  }
+  
+  .submit-container {
+    display: flex;
+    justify-content: center;
+    gap: calc(var(--spacing) * 3);
+    
+    > button {
+      margin-block-start: calc(var(--spacing) * 2);
+    }
+  }
+  
+  hr {
+    margin-block: calc(var(--spacing) * 4);
   }
 </style>
