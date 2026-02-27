@@ -22,10 +22,29 @@
 
 <div class="card preset-tonal-surface shadow-lg">
   <header class="card-header">
-    <h2 class="h4 font-semibold">Totals - {title}</h2>
+    <h2 class="h4 title">Totals - {title}</h2>
   </header>
 
-  <section class="p-4 flex justify-center">
-    <StatsBlockContent {block} classes="place-items-center gap-3"/>
+  <section class="content">
+    <div class="block-wrapper">
+      <StatsBlockContent {block}/>
+    </div>
   </section>
 </div>
+
+<style>
+  .title {
+    font-weight: 600;
+  }
+
+  .content {
+    padding: calc(var(--spacing) * 4);
+    display: flex;
+    justify-content: center;
+  }
+
+  .block-wrapper {
+    place-items: center;
+    gap: calc(var(--spacing) * 3);
+  }
+</style>

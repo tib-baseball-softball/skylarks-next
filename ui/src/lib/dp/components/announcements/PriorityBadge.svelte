@@ -9,41 +9,43 @@
 
   let {priority}: Props = $props();
 
-  const badgeClass = $derived.by(() => {
+  const displayString = $derived.by(() => {
     switch (priority) {
       case "info":
-        return "preset-outlined-secondary-500 badge-info";
+        return "Info";
       case "warning":
-        return "preset-outlined-warning-500";
+        return "Important";
       case "danger":
-        return "preset-outlined-error-500";
+        return "Critical";
     }
   });
 </script>
 
-<div class="priority-badge-container">
-  <span class="badge {badgeClass}">
-    {#if priority === "info"}
-      Info
-    {:else if priority === "warning"}
-      Important
-    {:else if priority === "danger"}
-      Critical
-    {/if}
+<div class="root">
+  <span class="badge" data-priority={priority}>
+    {displayString}
   </span>
 </div>
 
 <style>
-  .priority-badge-container {
+  .root {
     justify-self: flex-end;
     grid-column: span 1 / span 1;
   }
 
-  :global {
-    .priority-badge-container {
-      .badge.badge-info {
-        border-color: white;
-      }
+  .badge {
+    &[data-priority="info"] {
+      border: 1px solid light-dark(var(--color-secondary-500), white);
+    }
+
+    &[data-priority="warning"] {
+      border: 1px solid var(--color-warning-600-400);
+      color: light-dark(black, white);
+    }
+
+    &[data-priority="danger"] {
+      border: 1px solid light-dark(var(--color-error-500), var(--color-error-300));
+      color: light-dark(var(--color-error-500), var(--color-error-300));
     }
   }
 </style>

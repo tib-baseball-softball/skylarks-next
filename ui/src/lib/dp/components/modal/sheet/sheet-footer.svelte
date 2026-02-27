@@ -1,19 +1,34 @@
 <script lang="ts">
-import type { WithElementRef } from "bits-ui"
-import type { HTMLAttributes } from "svelte/elements"
+  import type {WithElementRef} from "bits-ui";
+  import type {HTMLAttributes} from "svelte/elements";
 
-let {
-  ref = $bindable(null),
-  class: className,
-  children,
-  ...restProps
-}: WithElementRef<HTMLAttributes<HTMLDivElement>> = $props()
+  let {
+    ref = $bindable(null),
+    class: className,
+    children,
+    ...restProps
+  }: WithElementRef<HTMLAttributes<HTMLDivElement>> = $props();
 </script>
 
 <div
-	bind:this={ref}
-	class={["flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2", className]}
-	{...restProps}
+  {...restProps}
+  bind:this={ref}
+  class={["root", className]}
 >
-	{@render children?.()}
+  {@render children?.()}
 </div>
+
+<style>
+  .root {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  @media (min-width: 40rem) {
+    .root {
+      flex-direction: row;
+      justify-content: end;
+      column-gap: calc(var(--spacing) * 2);
+    }
+  }
+</style>

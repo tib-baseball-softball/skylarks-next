@@ -21,7 +21,7 @@
 
   const {
     field,
-    classes = "card preset-tonal-surface border border-surface-500 p-3",
+    classes = "",
     showDividers = true,
   }: Props = $props();
 
@@ -33,47 +33,47 @@
   );
 </script>
 
-<div class={classes}>
-  <div class="flex items-center gap-3">
+<div class="location-card {classes}">
+  <div class="location-row">
     <LandPlot/>
     <div>
       <p>{field.address_addon} ({field?.name})</p>
-      <p class="text-sm font-light">Ballpark</p>
+      <p class="location-label">Ballpark</p>
     </div>
   </div>
 
-  <hr class={showDividers ? "" : "hidden!"}/>
+  <hr class="divider" class:hidden={!showDividers}/>
 
-  <div class="flex items-center gap-3">
+  <div class="location-row">
     <MapPin/>
     <div>
       <p>{field.street}</p>
-      <p class="text-sm font-light">Address</p>
+      <p class="location-label">Address</p>
     </div>
   </div>
 
-  <hr class={showDividers ? "" : "hidden!"}/>
+  <hr class="divider" class:hidden={!showDividers}/>
 
-  <div class="flex items-center gap-3">
+  <div class="location-row">
     <Building2/>
     <div>
       <p>{field.postal_code} {field.city}</p>
-      <p class="text-sm font-light">City</p>
+      <p class="location-label">City</p>
     </div>
   </div>
 
-  <hr class={showDividers ? "" : "hidden!"}/>
+  <hr class="divider" class:hidden={!showDividers}/>
 
-  <div class="flex items-center gap-3 self-end">
+  <div class="location-row link-row">
     <Link/>
     <a class="anchor" href={googleMapsLink} target="_blank"
     >Open in Google Maps</a
     >
   </div>
 
-  <hr class={showDividers ? "" : "hidden!"}/>
+  <hr class="divider" class:hidden={!showDividers}/>
 
-  <div class="flex items-center gap-3 self-end">
+  <div class="location-row link-row">
     <Link/>
     <a class="anchor" href={appleMapsLink} target="_blank">Open in Apple Maps</a
     >
@@ -81,7 +81,36 @@
 </div>
 
 <style>
-  hr {
-    margin: 0.5rem 0;
+  .location-card {
+    display: flex;
+    flex-direction: column;
+    padding: calc(var(--spacing) * var(--location-padding));
+    border-radius: var(--radius-base);
+    gap: calc(var(--spacing) * var(--location-spacing));
+  }
+
+  .location-row {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 3);
+  }
+
+  .location-label {
+    font-size: var(--text-sm);
+    font-weight: 300;
+  }
+
+  .divider {
+    margin-block: calc(var(--spacing) * 2);
+    border: 0;
+    border-top: 1px solid var(--color-surface-200);
+
+    @media (prefers-color-scheme: dark) {
+      border-color: var(--color-surface-700);
+    }
+
+    &.hidden {
+      display: none;
+    }
   }
 </style>

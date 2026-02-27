@@ -18,19 +18,19 @@
 {#if !clubs}
   <div class="card preset-tonal-primary shadow-lg">
     <header class="card-header">
-      <h2 class="h4 font-semibold">Club</h2>
+      <h2 class="h4 title">Club</h2>
     </header>
 
-    <section class="p-4 space-y-2">
-      <div class="flex items-center gap-3">
+    <section class="content">
+      <div class="message">
         <p>You are not a member of any clubs yet.</p>
       </div>
     </section>
 
     <footer class="card-footer">
-      <div class="flex flex-wrap items-center gap-3">
+      <div class="actions">
 
-        <ClubForm club={null} buttonClasses="btn preset-tonal-primary border border-primary-500"/>
+        <ClubForm club={null} triggerVariant="tonal-primary"/>
 
         <!--TODO: This doesn't do anything yet-->
         <button class="btn preset-tonal-primary border border-primary-500">
@@ -42,3 +42,26 @@
     </footer>
   </div>
 {/if}
+
+<style>
+  .title {
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .content {
+    padding: calc(var(--spacing) * 4);
+  }
+
+  .message {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 3);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(var(--spacing) * 3);
+  }
+</style>

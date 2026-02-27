@@ -9,10 +9,10 @@ interface Props {
 let { matchStats, teamName }: Props = $props()
 </script>
 
-<div class="table-wrap lg:max-w-[75%] dark:border-2">
+<div class="boxscore-table-wrap">
   <table class="table table-compact">
     <thead>
-    <tr class="preset-tonal-surface dark:preset-filled-surface-300-700">
+    <tr class="header-row">
       <th data-cell-for="player">
         {teamName} (Batters)
       </th>
@@ -29,13 +29,13 @@ let { matchStats, teamName }: Props = $props()
     <tbody>
     {#each matchStats.lineup as player}
       <tr>
-        <td class="flex" data-cell-for="player">
+        <td class="player-cell" data-cell-for="player">
           <!-- svelte-ignore block_empty -->
           {#if !player.starter}
                
           {/if}
           {player.person.last_name}, {player.person.first_name.charAt(0)}.
-          <div class="positions ms-2">
+          <div class="positions">
             {#each player.human_positions_short as position}
               <em>{position}</em>
             {/each}
@@ -53,7 +53,7 @@ let { matchStats, teamName }: Props = $props()
     {/each}
     </tbody>
     <tfoot>
-    <tr class="preset-tonal-surface dark:preset-filled-surface-300-700" data-row-for="summary">
+    <tr class="footer-row" data-row-for="summary">
       <td data-cell-for="player">
       </td>
       <td data-cell-for="ab">{matchStats.sum.at_bats}
@@ -78,15 +78,44 @@ let { matchStats, teamName }: Props = $props()
 </div>
 
 <style>
-    .positions em::before {
-        content: "-";
+    .boxscore-table-wrap {
+        @media (min-width: 64rem) {
+            max-width: 75%;
+        }
+        
+        :global([data-theme='dark']) & {
+            border: 2px solid var(--color-surface-500);
+        }
     }
 
-    .positions em:first-child::before {
-        content: "";
+    .header-row, .footer-row {
+        background-color: var(--color-surface-50-950);
+        color: var(--color-surface-950-50);
+        
+        :global([data-theme='dark']) & {
+            background-color: var(--color-surface-300-700);
+            color: var(--color-surface-contrast-300-700);
+        }
     }
 
-    em {
-        text-transform: lowercase;
+    .player-cell {
+        display: flex;
+        align-items: center;
+    }
+
+    .positions {
+        margin-left: calc(var(--spacing) * 2);
+
+        em::before {
+            content: "-";
+        }
+
+        em:first-child::before {
+            content: "";
+        }
+        
+        em {
+            text-transform: lowercase;
+        }
     }
 </style>

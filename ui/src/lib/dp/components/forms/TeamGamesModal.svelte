@@ -91,35 +91,35 @@
   }
 </script>
 
-<form class="mt-4 space-y-3" onsubmit={submitForm}>
-  <div class="grid grid-cols-2 gap-2 md:gap-3 lg:gap-4">
-    <h3 class="col-span-2 font-bold">Current Values</h3>
+<form class="team-games-form" onsubmit={submitForm}>
+  <div class="form-grid">
+    <h3 class="section-title">Current Values</h3>
     <input
       autocomplete="off"
       bind:value={form.id}
-      class="input col-span-2"
+      class="input col-full"
       name="id"
       readonly
       type="hidden"
     />
 
     <div>Current League ID:</div>
-    <div class="badge preset-tonal-primary border border-primary-500 text-lg">
+    <div class="badge preset-tonal-primary info-badge">
       {team.bsm_league_group !== 0 ? team.bsm_league_group : "None selected"}
     </div>
 
     {#await getCurrentGamesCount() then count}
       <div>BSM-imported games in database:</div>
-      <div class="badge preset-tonal-primary border border-primary-500 text-lg">
+      <div class="badge preset-tonal-primary info-badge">
         {count}
       </div>
     {/await}
 
-    <hr class="my-2 col-span-2">
+    <hr class="divider">
 
-    <label class="label col-span-2 md:col-span-1">
+    <label class="label form-label">
 
-      <span class="block">Show leagues for</span>
+      <span class="label-text">Show leagues for</span>
       <select bind:value={season}
               class="select"
               name="season"
@@ -132,10 +132,10 @@
 
     {#await loadClubLeagueGroups()}
       <ProgressRing/>
-      <div class="placeholder col-span-2"></div>
+      <div class="placeholder col-full"></div>
     {:then result}
-      <label class="label col-span-2 md:col-span-1">
-        <span class="block">League</span>
+      <label class="label form-label">
+        <span class="label-text">League</span>
 
         <select class="select" bind:value={form.bsm_league_group}>
           <option value="{0}">None</option>
@@ -146,26 +146,91 @@
       </label>
 
     {:catch error}
-      <p class="col-span-2">error loading matches: {error.message}</p>
+      <p class="col-full">error loading matches: {error.message}</p>
     {/await}
 
-    <hr class="my-2 col-span-2">
+    <hr class="divider">
 
-    <p class="font-light col-span-2 text-sm">
+    <p class="footer-info col-full">
       To import games automatically, Diamond Planner needs to know the league this team is currently
       playing in.
       The league is imported from BSM and changes every season (even if the actual league name is still
       the same).
     </p>
 
-    <div class="flex justify-center gap-3 col-span-2">
-      <!--      <button type="button" class="mt-2 btn preset-filled-surface-600-400">-->
-      <!--        Help-->
-      <!--      </button>-->
-
-      <button class="mt-2 btn preset-filled-primary-500" type="submit">
+    <div class="actions col-full">
+      <button class="btn preset-filled-primary-500" type="submit">
         Submit
       </button>
     </div>
   </div>
 </form>
+
+<style>
+  .team-games-form {
+    margin-top: calc(var(--spacing) * 4);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 3);
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: calc(var(--spacing) * 2);
+
+    @media (min-width: 48rem) {
+      gap: calc(var(--spacing) * 3);
+    }
+
+    @media (min-width: 64rem) {
+      gap: calc(var(--spacing) * 4);
+    }
+  }
+
+  .col-full {
+    grid-column: span 2 / span 2;
+  }
+
+  .section-title {
+    grid-column: span 2 / span 2;
+    font-weight: bold;
+  }
+
+  .info-badge {
+    border: 1px solid var(--color-primary-500);
+    font-size: var(--text-lg);
+  }
+
+  .divider {
+    grid-column: span 2 / span 2;
+    margin-block: calc(var(--spacing) * 2);
+  }
+
+  .form-label {
+    grid-column: span 2 / span 2;
+
+    @media (min-width: 48rem) {
+      grid-column: span 1 / span 1;
+    }
+
+    .label-text {
+      display: block;
+    }
+  }
+
+  .footer-info {
+    font-weight: 300;
+    font-size: var(--text-sm);
+  }
+
+  .actions {
+    display: flex;
+    justify-content: center;
+    gap: calc(var(--spacing) * 3);
+
+    button {
+      margin-top: calc(var(--spacing) * 2);
+    }
+  }
+</style>

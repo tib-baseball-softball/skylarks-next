@@ -9,11 +9,11 @@
   let leagueGroup = $derived(data.leagueGroup);
 </script>
 
-<h1 class="h1 my-4">{leagueGroup.name} ({leagueGroup.season})</h1>
+<h1 class="h1">{leagueGroup.name} ({leagueGroup.season})</h1>
 
-<section class="my-5">
+<section>
   <h2 class="h2">Information</h2>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+  <div class="page-grid">
 
     <LeagueDetailInfoCard {leagueGroup}/>
 
@@ -22,14 +22,14 @@
         <h3 class="h3">League Stats</h3>
       </header>
 
-      <div class="flex flex-col justify-between items-end">
+      <div class="card-content">
 
-        <p class="p-4">
+        <p>
           Statistics about current league leaders in various statistical categories can be found on a
           dedicated subpage.
         </p>
 
-        <footer class="card-footer mt-2">
+        <footer class="card-footer">
           <a class="btn preset-tonal-primary border border-primary-500" href="/ligen/{leagueGroup.id}/stats">Go to
             stats</a>
         </footer>
@@ -39,7 +39,7 @@
   </div>
 </section>
 
-<section class="my-3">
+<section>
 
   <h2 class="h2">Tabelle</h2>
   {#await expectedTable}
@@ -54,8 +54,33 @@
 
 </section>
 
-<style lang="postcss">
+<style>
   h2 {
     margin-bottom: calc(var(--spacing) * 3);
+  }
+  
+  .page-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: calc(var(--spacing) * 5);
+    
+    @media (min-width: 32rem) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
+    
+    > p {
+      padding: calc(var(--spacing) * 4);
+    }
+  }
+  
+  section {
+    margin-block: calc(var(--spacing) * 6);
   }
 </style>

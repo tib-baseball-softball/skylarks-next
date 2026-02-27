@@ -30,7 +30,7 @@
 <SeasonSelector bind:selectedSeason={selectedSeason} onChangeCallback={reloadWithQuery} seasonOptions={seasonOptions}/>
 
 {#snippet statsSection(statsItem: PersonalAttendanceStatsItem)}
-  <h2 class="h2 my-4">{statsItem.teamName}</h2>
+  <h2 class="h2">{statsItem.teamName}</h2>
   <section>
     <StatsByTypePieChart statsItem={statsItem}/>
   </section>
@@ -38,8 +38,8 @@
   <section>
     {#each statsItem.attendanceTotals as attendance}
       <AttendanceTotalStatsBlock
-              season={statsItem.season}
-              attendance={attendance}
+        season={statsItem.season}
+        attendance={attendance}
       />
     {/each}
   </section>
@@ -72,6 +72,10 @@
 {/await}
 
 <style>
+  .h2 {
+    margin-block: calc(var(--spacing) * 4);
+  }
+
   section {
     display: grid;
     grid-template-columns: 1fr;

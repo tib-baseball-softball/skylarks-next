@@ -37,7 +37,7 @@ let {
 </script>
 
 <Dialog.Root {...restProps} bind:open>
-  <Dialog.Trigger {...triggerProps} class="{triggerClasses} flex gap-1" {disabled} type="button">
+  <Dialog.Trigger {...triggerProps} class="{triggerClasses} trigger" {disabled} type="button">
     {@render triggerContent()}
   </Dialog.Trigger>
 
@@ -54,14 +54,14 @@ let {
                   {...props}
                   transition:fly={{ y: 150, duration: 100, easing: cubicInOut }}
           >
-            <div class="flex gap-5 items-center mb-2">
+            <div class="header">
               <Dialog.Close
                       class="close-button btn preset-tonal-surface {closeButtonClasses}"
               >
                 <X/>
               </Dialog.Close>
 
-              <Dialog.Title class="text-xl font-semibold">
+              <Dialog.Title class="title">
                 {@render title()}
               </Dialog.Title>
             </div>
@@ -81,6 +81,23 @@ let {
 </Dialog.Root>
 
 <style>
+    .trigger {
+        display: flex;
+        gap: calc(var(--spacing) * 1);
+    }
+
+    .header {
+        display: flex;
+        gap: calc(var(--spacing) * 5);
+        align-items: center;
+        margin-bottom: calc(var(--spacing) * 2);
+    }
+
+    .title {
+        font-size: var(--text-xl);
+        font-weight: var(--font-weight-semibold);
+    }
+
     .close-button {
         border: 1px solid;
     }

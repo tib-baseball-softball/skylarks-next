@@ -31,15 +31,15 @@
       <h3 class="h4 font-semibold">{team.name}</h3>
     </header>
 
-    <section class="p-4">
+    <section class="team-content">
 
-      <div class="space-y-2">
+      <div class="team-details">
 
         <div class="item-row">
           <ShieldHalf/>
           <div>
             <dd>{team?.expand?.club?.name}</dd>
-            <dt class="text-sm font-light">Club</dt>
+            <dt class="detail-label">Club</dt>
           </div>
         </div>
 
@@ -47,15 +47,15 @@
           <Dumbbell/>
           <div>
             <dd>{team.bsm_league_group}</dd>
-            <dt class="text-sm font-light">BSM-Liga (für aktuelle Saison)</dt>
+            <dt class="detail-label">BSM-Liga (für aktuelle Saison)</dt>
           </div>
         </div>
 
         <div class="item-row">
           <ClipboardList/>
           <dl>
-            <dd class="capitalize">{team.age_group}</dd>
-            <dt class="text-sm font-light">Age Group</dt>
+            <dd class="team-age-group">{team.age_group}</dd>
+            <dt class="detail-label">Age Group</dt>
           </dl>
         </div>
       </div>
@@ -63,14 +63,16 @@
   </a>
 
   <footer class="card-footer">
-    <hr class="my-2">
-    <div class="flex justify-end gap-2">
+    <hr class="footer-divider">
+    <div class="footer-actions">
 
       {#if team?.expand?.club?.admins.includes(model.id) || team?.admins.includes(model.id)}
         <TeamForm
                 club={team.expand?.club}
                 team={team}
-                buttonClasses="btn btn-sm btn-icon preset-tonal-tertiary border border-tertiary-500"
+                triggerVariant="tonal-tertiary"
+                triggerSize="sm"
+                triggerIcon={true}
                 showLabel={false}
         />
       {/if}
@@ -80,6 +82,7 @@
                 id={team.id}
                 modelName="Team"
                 action={deleteAction}
+                iconSize={16}
         />
       {/if}
 
@@ -92,9 +95,39 @@
         display: block;
     }
 
+    .team-content {
+        padding: calc(var(--spacing) * 4);
+    }
+
+    .team-details {
+        display: flex;
+        flex-direction: column;
+        gap: calc(var(--spacing) * 2);
+    }
+
     .item-row {
         display: flex;
         align-items: center;
         gap: calc(var(--spacing) * 4);
+    }
+
+    .detail-label {
+        font-size: var(--text-sm);
+        line-height: var(--tw-leading, var(--text-sm--line-height));
+        font-weight: var(--font-weight-light);
+    }
+
+    .footer-divider {
+        margin-block: calc(var(--spacing) * 2);
+    }
+
+    .footer-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: calc(var(--spacing) * 2);
+    }
+    
+    .team-age-group {
+      text-transform: capitalize;
     }
 </style>

@@ -45,12 +45,12 @@
   }
 </script>
 
-<p class="mt-2 font-light">
+<p class="info-text">
   This data is only used for internal purposes and never shown anywhere publicly.
   (Your team and club administrators have access).
 </p>
 
-<form class="mt-4 space-y-3" onsubmit={submitForm}>
+<form class="user-details-form" onsubmit={submitForm}>
   <input
     autocomplete="off"
     bind:value={form.id}
@@ -61,13 +61,25 @@
   />
 
   <label class="label">
-    First Name(s)
-    <input autocomplete="given-name" bind:value={form.firstName} class="input" name="firstname"/>
+    <span>First Name(s)</span>
+    <input
+      autocomplete="given-name"
+      bind:value={form.firstName}
+      class="input"
+      name="firstname"
+      required
+    />
   </label>
 
   <label class="label">
-    Last Name
-    <input autocomplete="family-name" bind:value={form.lastName} class="input" name="lastname"/>
+    <span>Last Name</span>
+    <input
+      autocomplete="family-name"
+      bind:value={form.lastName}
+      class="input"
+      name="lastname"
+      required
+    />
   </label>
 
   <label class="label">
@@ -88,11 +100,37 @@
     {/each}
   {/if}
 
-  <p class="font-light">
+  <p class="info-text">
     This is your app profile picture. It will not be used for your player profile image.
   </p>
 
-  <div class="flex justify-end gap-3 mt-3">
-    <button class="mt-2 btn preset-tonal-primary border border-primary-500" type="submit">Confirm</button>
+  <div class="actions">
+    <button class="btn preset-tonal-primary" type="submit">Confirm</button>
   </div>
 </form>
+
+<style>
+  .info-text {
+    margin-top: calc(var(--spacing) * 2);
+    font-weight: 300;
+  }
+
+  .user-details-form {
+    margin-top: calc(var(--spacing) * 4);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 3);
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: calc(var(--spacing) * 3);
+    margin-top: calc(var(--spacing) * 3);
+
+    button {
+      margin-top: calc(var(--spacing) * 2);
+      border: 1px solid var(--color-primary-500);
+    }
+  }
+</style>

@@ -7,28 +7,27 @@
 
   interface props {
     event: ExpandedEvent;
-    classes?: string;
     additionalTimeSection?: Snippet | undefined;
   }
 
-  const {event, classes = "", additionalTimeSection = undefined}: props = $props();
+  const {event, additionalTimeSection = undefined}: props = $props();
 
   const startTime = $derived(new Date(event.starttime));
 </script>
 
-<section class={classes}>
-  <div class="grid grid-cols-6 gap-4">
-    <div class="flex items-center gap-2 col-span-6">
+<section>
+  <div class="info-grid">
+    <div class="info-row">
       <Calendar size="18"/>
-      <time class="font-bold" datetime="{event.starttime}">
+      <time class="event-time" datetime="{event.starttime}">
         {startTime.toLocaleDateString("de-DE", DateTimeUtility.eventDateFormat)}
       </time>
     </div>
 
     <TimeSection
-            classes={additionalTimeSection ? "col-span-2" : "col-span-3"}
-            displayText="Meet:"
-            timeValue={event.meetingtime ? event.meetingtime : event.starttime}
+      classes={additionalTimeSection ? "time-section-narrow" : "time-section-wide"}
+      displayText="Meet:"
+      timeValue={event.meetingtime ? event.meetingtime : event.starttime}
     >
       {#snippet icon()}
         <Clock size="18"/>
@@ -36,9 +35,9 @@
     </TimeSection>
 
     <TimeSection
-            classes={additionalTimeSection ? "col-span-2" : "col-span-3"}
-            displayText="Start:"
-            timeValue={event.starttime}
+      classes={additionalTimeSection ? "time-section-narrow" : "time-section-wide"}
+      displayText="Start:"
+      timeValue={event.starttime}
     >
       {#snippet icon()}
         <Clock size="18"/>
@@ -47,12 +46,12 @@
 
     {@render additionalTimeSection?.()}
 
-    <div class="flex items-center gap-2 col-span-6">
+    <div class="info-row">
       <MapPin size="18"/>
       {#if event?.expand?.location}
         <p>
           {event?.expand?.location.address_addon}, {event?.expand?.location
-            .city}
+          .city}
         </p>
       {:else}
         <p>No location provided.</p>
@@ -60,3 +59,30 @@
     </div>
   </div>
 </section>
+
+<style>
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: calc(var(--spacing) * 4);
+  }
+
+  .info-row {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 2);
+    grid-column: span 6 / span 6;
+  }
+
+  .event-time {
+    font-weight: var(--font-weight-bold);
+  }
+
+  :global(.time-section-narrow) {
+    grid-column: span 2 / span 2;
+  }
+
+  :global(.time-section-wide) {
+    grid-column: span 3 / span 3;
+  }
+</style>

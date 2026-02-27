@@ -52,7 +52,8 @@
           <LocationForm
             {club}
             {location}
-            buttonClasses="btn btn-icon preset-tonal-tertiary border border-tertiary-500"
+            triggerVariant="tonal-tertiary"
+            triggerIcon={true}
           />
 
           <DeleteButton
@@ -78,11 +79,12 @@
   <LocationForm
     {club}
     location={null}
-    buttonClasses="btn preset-tonal-primary border border-primary-500 my-3"
+    triggerVariant="tonal-primary"
+    triggerSpaced={true}
   />
 {/if}
 
-<style lang="postcss">
+<style>
   .location-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));

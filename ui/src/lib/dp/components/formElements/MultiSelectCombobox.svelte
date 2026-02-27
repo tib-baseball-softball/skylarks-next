@@ -58,7 +58,7 @@
 {#each selectedItems as selectItem}
   <button
     type="button"
-    class="chip preset-filled-primary-500 me-1 lg:me-2"
+    class="box-button chip preset-filled-primary-500"
     onclick={() => removeItemFromSelection(selectItem)}
   >
     <span>{selectItem.first_name} {selectItem.last_name}</span>
@@ -77,3 +77,13 @@
     <option value={item.id}>{item.first_name} {item.last_name}</option>
   {/each}
 </select>
+
+<style>
+  .box-button {
+    margin-inline-end: calc(var(--spacing) * 1);
+
+    @media (min-width: 48rem) {
+      margin-inline-end: calc(var(--spacing) * 2);
+    }
+  }
+</style>

@@ -9,21 +9,21 @@
     name: string;
     options: Option<T>[] | T[];
     value: T;
-    class?: string;
+    classes?: string;
     listClass?: string;
     triggerClass?: string;
+    required?: boolean;
   }
 
-  // Usage:
-  // <TabsRadioGroup name="bats" options={["left","right","switch"]} bind:value={form.bats} label="Bats" />
   let {
     label,
     name,
     options,
     value = $bindable(),
-    class: klass = "",
+    classes = "",
     listClass = "tabs-list input",
     triggerClass = "tabs-trigger btn",
+    required = false,
   }: Props<string> = $props();
 
   function toOptions(arr: Option<string>[] | string[]): Option<string>[] {
@@ -36,14 +36,14 @@
 </script>
 
 {#if label}
-  <span class="block">{label}</span>
+  <span class="block" data-required="{required}">{label}</span>
 {/if}
-<span class={listClass + (klass ? ` ${klass}` : "")}>
+<fieldset class={listClass + (classes)}>
   {#each opts as opt}
     <label class={[triggerClass, value === opt.value && "preset-filled"]}>
       <input
         type="radio"
-        class="hidden"
+        class="hidden-radio"
         name={name}
         bind:group={value}
         value={opt.value}
@@ -51,4 +51,17 @@
       {opt.label}
     </label>
   {/each}
-</span>
+</fieldset>
+
+<style>
+  /** Caution - this should be a mixin, see forms.css */
+  [data-required="true"]:after {
+    content: "*";
+    color: light-dark(var(--color-primary-500), var(--color-primary-300));
+    margin-inline-start: calc(var(--spacing) * 0.5);
+  }
+
+  .hidden-radio {
+    display: none;
+  }
+</style>

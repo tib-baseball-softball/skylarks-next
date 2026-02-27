@@ -71,7 +71,7 @@
     Create new Event Series for {team.name}
   {/if}
 </h3>
-<form class="mt-4 space-y-3" onsubmit={submitForm}>
+<form onsubmit={submitForm}>
   <div class="edit-form-grid">
     {#if !isNewSeries}
       <span class="field-wide text-sm font-light block">
@@ -101,7 +101,7 @@
         />
       </label>
 
-      <span class="field-wide text-sm font-light block preset-outlined-primary-500 p-2 my-1 rounded-container">
+      <span class="field-wide hint hint-prominent">
       This is the first event in your new series. It will have the exact start time you enter here.<br>
       The next events are then created <em>RECURRING INTERVAL</em> days after the previous one and all will have
       the end time set to <em>DURATION</em> minutes after their start time.
@@ -116,10 +116,10 @@
                   static: true,
               })}
       />
-      <span class="text-sm font-light block">No events will be created after this date.</span>
+      <span class=" hint">No events will be created after this date.</span>
     </label>
 
-    <label class="label field-wide mt-3 md:mt-0">
+    <label class="label field-wide">
       Title
       <input
         bind:value={form.title}
@@ -141,7 +141,7 @@
           step="7"
           min="7"
         >
-        <span class="text-sm font-light block">Interval between each series occurrence (in days).</span>
+        <span class="hint">Interval between each series occurrence (in days).</span>
       </label>
 
       <label class="label">
@@ -152,7 +152,7 @@
           name="duration"
           type="number"
         >
-        <span class="text-sm font-light block">Duration of each event to determine end time (in minutes).</span>
+        <span class="hint">Duration of each event to determine end time (in minutes).</span>
       </label>
     {/if}
 
@@ -180,10 +180,10 @@
 
   </div>
 
-  <hr class="my-5!"/>
+  <hr/>
 
-  <div class="flex justify-center gap-3">
-    <button class="btn preset-tonal border border-surface-500" onclick={() => {if (showForm) showForm = false}}
+  <div class="submit-container">
+    <button class="btn preset-tonal border-surface-500" onclick={() => {if (showForm) showForm = false}}
             type="button">
       Cancel
     </button>
@@ -193,3 +193,32 @@
     </button>
   </div>
 </form>
+
+<style>
+  hr {
+    margin-block: calc(var(--spacing) * 5);
+  }
+
+  .submit-container {
+    display: flex;
+    justify-content: center;
+    gap: calc(var(--spacing) * 3);
+  }
+
+  .hint {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-light);
+    display: block;
+  }
+
+  .hint-prominent {
+    padding: calc(var(--spacing) * 2);
+    margin-block: calc(var(--spacing) * 1);
+    border: 1px solid var(--color-primary-500);
+    border-radius: var(--radius-container);
+  }
+
+  .edit-form-grid {
+    gap: calc(var(--spacing) * 4);
+  }
+</style>

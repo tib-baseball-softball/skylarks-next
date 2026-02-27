@@ -17,7 +17,7 @@
 </script>
 
 <thead>
-<tr class="sticky preset-filled-surface-200-800">
+<tr class="sticky-row preset-filled-surface-200-800">
   {#if tableType === "personal"}
     <th>Name</th>
   {/if}
@@ -47,8 +47,18 @@
 
 {#if rows.length === 0}
   <tr>
-    <th class="py-4" colspan="8">No data available for this category.</th>
+    <th class="no-data-heading" colspan="8">No data available for this category.</th>
   </tr>
 {/if}
 
 </tbody>
+
+<style>
+  .sticky-row {
+    position: sticky;
+  }
+
+  .no-data-heading {
+    padding: calc(var(--spacing) * 4);
+  }
+</style>

@@ -18,7 +18,7 @@
 </script>
 
 {#await data.battingStats then batting}
-  <h1 class="h1 my-4">
+  <h1 class="h1 page-title">
     Player Profile for {batting.person?.first_name}
     {batting.person?.last_name}
   </h1>
@@ -28,9 +28,9 @@
   <ProgressRing/>
 {:then player}
   {#if player}
-    <div class="my-8!">
-      <h2 class="h2 my-4">Profile Data</h2>
-      <section class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+    <div class="profile-section">
+      <h2 class="h2 profile-title">Profile Data</h2>
+      <section class="profile-grid">
         <PlayerHeaderSection {player}/>
         <PlayerDataCard {player}/>
       </section>
@@ -41,7 +41,7 @@
     The data source might be temporarily unavailable, please try again later.</p>
 {/await}
 
-<h2 class="h2 my-6 lg:mt-10 mb-8">Stats</h2>
+<h2 class="h2 stats-title">Stats</h2>
 
 {#await getData()}
   <ProgressRing/>
@@ -50,3 +50,37 @@
 {:catch error}
   <p>error loading: {error.message}</p>
 {/await}
+
+<style>
+    .page-title {
+        margin-block: calc(var(--spacing) * 4);
+    }
+
+    .profile-section {
+        margin-block: calc(var(--spacing) * 8);
+    }
+
+    .profile-title {
+        margin-block: calc(var(--spacing) * 4);
+    }
+
+    .profile-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: calc(var(--spacing) * 3);
+        
+        @media (min-width: 48rem) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: calc(var(--spacing) * 4);
+        }
+    }
+
+    .stats-title {
+        margin-top: calc(var(--spacing) * 6);
+        margin-bottom: calc(var(--spacing) * 8);
+        
+        @media (min-width: 64rem) {
+            margin-top: calc(var(--spacing) * 10);
+        }
+    }
+</style>

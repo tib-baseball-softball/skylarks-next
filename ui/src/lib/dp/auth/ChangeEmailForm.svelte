@@ -34,7 +34,7 @@
   }
 </script>
 
-<form class="mt-4 space-y-3" onsubmit={submitForm}>
+<form class="form-root" onsubmit={submitForm}>
 
   <label class="label">
     E-Mail
@@ -46,15 +46,43 @@
       required
       type="email"
     />
-    <span class="mt-3 font-light text-sm">
+    <span class="help-text">
                 You will be logged out and instructed to verify your new email address.
             </span>
   </label>
 
-  <div class="flex justify-end gap-3 mt-3">
-    <button class="mt-2 btn preset-tonal-primary border border-primary-500" disabled={form.email === authRecord.email}
+  <div class="actions">
+    <button class="btn preset-tonal-primary submit-btn" disabled={form.email === authRecord.email}
             type="submit">
       Confirm
     </button>
   </div>
 </form>
+
+<style>
+  .form-root {
+    margin-top: calc(var(--spacing) * 4);
+  }
+
+  .form-root > * + * {
+    margin-top: calc(var(--spacing) * 3);
+  }
+
+  .help-text {
+    margin-top: calc(var(--spacing) * 3);
+    font-weight: var(--font-weight-light);
+    font-size: var(--text-sm);
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: calc(var(--spacing) * 3);
+    margin-top: calc(var(--spacing) * 3);
+  }
+
+  .submit-btn {
+    margin-top: calc(var(--spacing) * 2);
+    border: 1px solid var(--color-primary-500);
+  }
+</style>

@@ -11,29 +11,54 @@
 </script>
 
 {#if player.bsm_id > 0}
-  <a class="player-container flex items-center gap-2" href="/players/{player.bsm_id}">
+  <a class="player-container" href="/players/{player.bsm_id}">
     {@render rowContent()}
   </a>
 {:else }
-  <div class="player-container flex items-center gap-2">
+  <div class="player-container">
     {@render rowContent()}
   </div>
 {/if}
 
 {#snippet rowContent()}
   {#if visual === "number"}
-    <PlayerNumberGraphic content={player.number} classes="preset-filled-primary-500 scale-75"/>
+    <PlayerNumberGraphic content={player.number} classes="preset-filled-primary-500"/>
   {:else }
 
     {#if player.media?.length > 0}
-      <img class="rounded-lg max-h-20" src="{player.media.at(0)?.url}" alt="{player.media.at(0)?.alt}" loading="lazy">
+      <img class="player-image" src="{player.media.at(0)?.url}" alt="{player.media.at(0)?.alt}" loading="lazy">
     {:else}
-      <img class="rounded-lg max-h-20" src="/team-placeholder-white.jpg" alt="Player fallback" loading="lazy">
+      <img class="player-image" src="/team-placeholder-white.jpg" alt="Player fallback" loading="lazy">
     {/if}
   {/if}
 
-  <div class="flex flex-col gap-0.5">
+  <div class="player-info">
     <p>{player.fullname}</p>
-    <p class="text-sm font-light">{player.positions.join(", ")}</p>
+    <p class="player-positions">{player.positions.join(", ")}</p>
   </div>
 {/snippet}
+
+<style>
+  .player-container {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 2);
+  }
+
+  .player-image {
+    border-radius: var(--radius-lg);
+    max-height: calc(var(--spacing) * 20);
+  }
+
+  .player-info {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 0.5);
+  }
+
+  .player-positions {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+    font-weight: var(--font-weight-light);
+  }
+</style>

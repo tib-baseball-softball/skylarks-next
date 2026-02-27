@@ -23,16 +23,16 @@
   }
 </script>
 
-<div class="lg:flex justify-between items-center">
-  <h1 class="h1 shrink-0">Favorite Team</h1>
+<div class="favorite-header">
+  <h1 class="h1">Favorite Team</h1>
 
-  <div class="grow-0">
+  <div class="picker-container">
     <ClubTeamPicker clubTeams={clubTeams} onChange={reloadOnTeamChange}/>
   </div>
 </div>
 
-<section class="max-w-md">
-  <h2 class="h2 my-3">Quick Details</h2>
+<section class="details-section">
+  <h2 class="h2 section-subtitle">Quick Details</h2>
   {#if preferences.current.favoriteTeamID !== 0 && favoriteTeam}
     <FavoriteTeamInfoCard clubTeam={favoriteTeam}/>
   {:else }
@@ -42,29 +42,31 @@
 
 {#if favoriteTeam?.league_entries?.length ?? 0 > 0}
   <section>
-    <h2 class="h2 mt-5 mb-1">Team Stats Links</h2>
-    {#each favoriteTeam?.league_entries ?? [] as entry}
-      <a href="/league_entries/{entry.id}?team={favoriteTeam?.name}"
-         class="btn preset-filled-primary-500 me-1 my-2"
-         title="to stats page for league entry {entry.league.name}">
-        {entry.league.name}
-      </a>
-    {/each}
+    <h2 class="h2 links-title">Team Stats Links</h2>
+    <div class="links-container">
+      {#each favoriteTeam?.league_entries ?? [] as entry}
+        <a href="/league_entries/{entry.id}?team={favoriteTeam?.name}"
+           class="btn preset-filled-primary-500 stats-link"
+           title="to stats page for league entry {entry.league.name}">
+          {entry.league.name}
+        </a>
+      {/each}
+    </div>
   </section>
 {/if}
 
 {#if favoriteTeam}
   <section>
-    <h2 class="h2 mt-5 mb-1">Data per League</h2>
-    <p class="text-sm font-light">A single team can be associated to several leagues per season in BSM.</p>
+    <h2 class="h2 data-title">Data per League</h2>
+    <p class="data-info">A single team can be associated to several leagues per season in BSM.</p>
   </section>
 
   {#await data.datasets}
     <p>Loading...</p>
   {:then datasets}
     {#each datasets as dataset}
-      <section class="max-w-md">
-        <h3 class="h3 mb-3">{dataset.league_group.name}</h3>
+      <section class="details-section">
+        <h3 class="h3 section-subtitle">{dataset.league_group.name}</h3>
 
         {#if dataset.table_row}
           <LeagueInfoCard leagueGroup={dataset.league_group} tableRow={dataset.table_row}/>
@@ -74,44 +76,44 @@
       </section>
 
       <section>
-        <h4 class="h4 mb-3">Standings</h4>
+        <h4 class="h4 section-subtitle">Standings</h4>
 
         <StandingsTable table={dataset.table}/>
       </section>
 
       {#if dataset.playoff_series && (dataset.playoff_series?.series_games?.length ?? 0) > 0}
         <section>
-          <h4 class="h4 mt-5 mb-1">Playoffs</h4>
+          <h4 class="h4 playoff-title">Playoffs</h4>
           <PlayoffSheet playoffSeries={dataset.playoff_series}></PlayoffSheet>
         </section>
       {/if}
 
       {#if dataset.streak_data?.length ?? 0 > 0}
         <section>
-          <h4 class="h4 mb-3">Graphs and Mood</h4>
+          <h4 class="h4 section-subtitle">Graphs and Mood</h4>
           <StreakGraphSection {dataset}/>
         </section>
       {/if}
 
       <section>
-        <h4 class="h4 mb-3">Games</h4>
+        <h4 class="h4 section-subtitle">Games</h4>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-6 xl:gap-12">
-          <div>
-            <h5 class="h5 my-3">Previous Game</h5>
+        <div class="games-grid">
+          <div class="game-column">
+            <h5 class="h5 game-title">Previous Game</h5>
             {#if dataset.last_game}
               <MatchTeaserCard match={dataset.last_game}/>
             {:else}
-              <p class="my-3">No previous game found.</p>
+              <p class="game-empty">No previous game found.</p>
             {/if}
           </div>
 
-          <div>
-            <h5 class="h5 my-3">Next Game</h5>
+          <div class="game-column">
+            <h5 class="h5 game-title">Next Game</h5>
             {#if dataset.next_game}
               <MatchTeaserCard match={dataset.next_game}/>
             {:else}
-              <p class="my-3">No next game found.</p>
+              <p class="game-empty">No next game found.</p>
             {/if}
           </div>
         </div>
@@ -128,5 +130,87 @@
 <style>
   section {
     margin-block: calc(var(--spacing) * 10);
+  }
+
+  .favorite-header {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 4);
+    
+    @media (min-width: 64rem) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    h1 {
+      flex-shrink: 0;
+    }
+  }
+
+  .picker-container {
+      flex-grow: 0;
+  }
+
+  .details-section {
+      max-width: 28rem;
+  }
+
+  .section-subtitle {
+      margin-block: calc(var(--spacing) * 3);
+  }
+
+  .links-title {
+      margin-top: calc(var(--spacing) * 5);
+      margin-bottom: calc(var(--spacing) * 1);
+  }
+
+  .links-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: calc(var(--spacing) * 2);
+  }
+
+  .stats-link {
+      margin-inline-end: calc(var(--spacing) * 1);
+      margin-block: calc(var(--spacing) * 2);
+  }
+
+  .data-title {
+      margin-top: calc(var(--spacing) * 5);
+      margin-bottom: calc(var(--spacing) * 1);
+  }
+
+  .data-info {
+      font-size: var(--text-sm);
+      font-weight: 300;
+  }
+
+  .playoff-title {
+      margin-top: calc(var(--spacing) * 5);
+      margin-bottom: calc(var(--spacing) * 1);
+  }
+
+  .games-grid {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: calc(var(--spacing) * 3);
+
+      @media (min-width: 64rem) {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: calc(var(--spacing) * 6);
+      }
+
+      @media (min-width: 80rem) {
+          gap: calc(var(--spacing) * 12);
+      }
+  }
+
+  .game-title {
+      margin-block: calc(var(--spacing) * 3);
+  }
+
+  .game-empty {
+      margin-block: calc(var(--spacing) * 3);
   }
 </style>

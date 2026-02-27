@@ -45,22 +45,22 @@
     <div class="popover-content card shadow-2xl">
 
       <div class="item-container">
-        <p class="font-light text-xs">Created:</p>
+        <p class="label-text">Created:</p>
         <p>{createdDate}</p>
       </div>
 
       <div class="item-container">
-        <p class="font-light text-xs">Last Updated:</p>
+        <p class="label-text">Last Updated:</p>
         <p>{updatedDate}</p>
       </div>
 
       <div class="item-container">
-        <p class="font-light text-xs">Comment/Reason:</p>
+        <p class="label-text">Comment/Reason:</p>
         <p>{participation.comment}</p>
       </div>
 
       {#if canEdit}
-        <Dialog triggerClasses="btn btn-sm preset-tonal-primary border border-primary-500 mt-2">
+        <Dialog triggerClasses="btn btn-sm preset-tonal-primary border border-primary-500 edit-btn">
 
           {#snippet triggerContent()}
             Edit
@@ -102,6 +102,16 @@
     gap: 0.75rem;
     justify-content: space-between;
     margin-block: 0.3em;
+  }
+
+  .label-text {
+    font-weight: var(--font-weight-light);
+    font-size: var(--text-xs);
+    line-height: var(--tw-leading, var(--text-xs--line-height));
+  }
+
+  .edit-btn {
+    margin-top: calc(var(--spacing) * 2);
   }
 
   .badge-icon {

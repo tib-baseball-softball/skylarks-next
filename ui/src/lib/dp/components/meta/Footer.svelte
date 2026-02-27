@@ -9,13 +9,13 @@
   let {staticLinks}: Props = $props();
 </script>
 
-<section class="flex justify-center items-center gap-8 mt-5">
+<section class="links-wrapper">
   {@render staticLinks?.()}
 </section>
 
-<nav class="list-nav pt-1 pb-3 px-6">
+<nav class="list-nav">
 
-  <ul class="flex mb-3 flex-col md:flex-row items-center justify-center md:gap-4">
+  <ul class="nav-list">
     <li><a href="/terms">Terms & Conditions</a></li>
     <li><a href="/legalnotice">Impressum</a></li>
     <li><a href="/privacy">Datenschutzerklärung</a></li>
@@ -23,24 +23,71 @@
 
 </nav>
 
-<div class="flex justify-end items-center gap-4 pb-3 mx-4">
+<div class="footer-bottom">
   <!-- @wc-ignore -->
   {#if env.PUBLIC_APPLICATION_CONTEXT !== "Production"}
-    <div class="preset-tonal-warning p-1.5 rounded-container border border-warning-500 text-sm">
+    <div class="context-badge preset-tonal-warning rounded-container">
       {env.PUBLIC_APPLICATION_CONTEXT}
     </div>
   {/if}
 
-  <span class="flex justify-end items-center gap-2">
+  <span class="attribution">
     Built with <span class="love">❤️</span> in <span class="flag">🇪🇺</span>
   </span>
 </div>
 
 <style>
+  .links-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: calc(var(--spacing) * 8);
+    margin-top: calc(var(--spacing) * 5);
+  }
+
   .list-nav {
+    padding-top: var(--spacing);
+    padding-bottom: calc(var(--spacing) * 3);
+    padding-inline: calc(var(--spacing) * 6);
+
     a:hover {
       text-decoration: underline;
     }
+  }
+
+  .nav-list {
+    display: flex;
+    margin-bottom: calc(var(--spacing) * 3);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    @media (min-width: 64rem) {
+      flex-direction: row;
+      gap: calc(var(--spacing) * 4);
+    }
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: calc(var(--spacing) * 4);
+    padding-bottom: calc(var(--spacing) * 3);
+    margin-inline: calc(var(--spacing) * 4);
+  }
+
+  .context-badge {
+    padding: calc(var(--spacing) * 1.5);
+    border: 1px solid var(--color-warning-500);
+    font-size: var(--text-sm);
+  }
+
+  .attribution {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: calc(var(--spacing) * 2);
   }
 
   .love {

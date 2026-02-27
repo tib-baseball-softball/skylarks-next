@@ -13,10 +13,10 @@
   <Dialog triggerClasses="badge">
     {#snippet triggerContent()}
       <Avatar
-              fallback={authSettings.record?.first_name.charAt(0).toUpperCase() +
+        fallback={authSettings.record?.first_name.charAt(0).toUpperCase() +
           authSettings.record?.last_name.charAt(0).toUpperCase()}
-              --size="3.5rem"
-              src={client.files.getURL(authSettings.record ?? {}, authSettings.record?.avatar)}
+        --size="3.5rem"
+        src={client.files.getURL(authSettings.record ?? {}, authSettings.record?.avatar)}
       />
     {/snippet}
 
@@ -28,11 +28,22 @@
   </Dialog>
 {:else}
   <a
-          class="btn preset-tonal-primary border border-primary-500 flex items-center gap-2"
-          href="/login"
-          title={signupAllowed ? "Login / Register" : "Login"}
+    class="login-link btn preset-tonal-primary"
+    href="/login"
+    title={signupAllowed ? "Login / Register" : "Login"}
   >
     <LucideLogIn/>
     Login
   </a>
 {/if}
+
+<style>
+  .login-link {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 2);
+    padding: calc(var(--spacing) * 2) calc(var(--spacing) * 4);
+    border: 1px solid var(--color-primary-500);
+    border-radius: var(--radius-container);
+  }
+</style>

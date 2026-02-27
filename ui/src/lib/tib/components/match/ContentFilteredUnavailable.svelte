@@ -8,7 +8,16 @@
   let {text = "There is no data to display for the selected filters."}: Props = $props();
 </script>
 
-<div class="flex items-center gap-4 my-3">
+<div class="wrapper">
   <BookX size="35"/>
   <p>{text}</p>
 </div>
+
+<style>
+  .wrapper {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 4);
+    margin-block: calc(var(--spacing) * 3);
+  }
+</style>

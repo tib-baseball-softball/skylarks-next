@@ -50,14 +50,30 @@
 
 <div class="card preset-tonal-surface shadow-lg">
   <header class="card-header">
-    <h2 class="h4 font-semibold">Attendance Stats</h2>
+    <h2 class="h4 title">Attendance Stats</h2>
   </header>
 
-  <section class="p-4">
+  <section class="content">
     <ConicGradient legend stops={conicStops}></ConicGradient>
   </section>
 
-  <footer class="mt-1 card-footer font-light text-sm">
+  <footer class="card-footer footnote">
     Events where you did not select anything are counted as "out".
   </footer>
 </div>
+
+<style>
+  .title {
+    font-weight: 600;
+  }
+
+  .content {
+    padding: calc(var(--spacing) * 4);
+  }
+
+  .footnote {
+    margin-top: calc(var(--spacing) * 1);
+    font-weight: var(--font-weight-light);
+    font-size: var(--text-sm);
+  }
+</style>

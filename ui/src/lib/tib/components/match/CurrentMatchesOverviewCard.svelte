@@ -15,61 +15,94 @@
   let {matchesCurrent, matchesPrevious, matchesNext}: Props = $props();
 </script>
 
-{#snippet gameDayWord()}
-  <span class="hidden lg:inline">Gameday</span>
-{/snippet}
-
 <div
-        class="card overview-card preset-tonal-surface dark:border dark:border-tertiary-600-400"
+  class="card overview-card current-matches"
 >
   <header class="card-header">
     <h2 class="h3">Current Games</h2>
   </header>
-  <section class="p-4">
+  <section class="card-body">
     <Tabs.Root
-            bind:value={tabSet}
-            class=""
+      bind:value={tabSet}
+      class="tabs-container"
     >
       <Tabs.List
-              class="tabs-list border mb-1 preset-tonal-surface"
+        class="tabs-list"
       >
         <Tabs.Trigger
-                class="tabs-trigger btn"
-                value="previous"
+          class="tabs-trigger btn"
+          value="previous"
         >
           Previous
-          {@render gameDayWord()}
+          <span class="gameday-text">Gameday</span>
         </Tabs.Trigger>
         <Tabs.Trigger
-                class="tabs-trigger btn"
-                value="current"
+          class="tabs-trigger btn"
+          value="current"
         >Current
-          {@render gameDayWord()}
+          <span class="gameday-text">Gameday</span>
         </Tabs.Trigger>
         <Tabs.Trigger
-                class="tabs-trigger btn"
-                value="next"
+          class="tabs-trigger btn"
+          value="next"
         >Next
-          {@render gameDayWord()}
+          <span class="gameday-text">Gameday</span>
         </Tabs.Trigger>
       </Tabs.List>
 
-      <Tabs.Content class="pt-4" value="previous">
+      <Tabs.Content class="tabs-content" value="previous">
         <CurrentMatchBlock matches={matchesPrevious}/>
       </Tabs.Content>
-      <Tabs.Content class="pt-4" value="current">
+      <Tabs.Content class="tabs-content" value="current">
         <CurrentMatchBlock matches={matchesCurrent}/>
       </Tabs.Content>
-      <Tabs.Content class="pt-4" value="next">
+      <Tabs.Content class="tabs-content" value="next">
         <CurrentMatchBlock matches={matchesNext}/>
       </Tabs.Content>
     </Tabs.Root>
   </section>
-  <footer class="card-footer flex justify-end">
+  <footer class="card-footer gamecenter-footer">
     <a
-            class="btn preset-filled-primary-500 dark:preset-tonal-primary border border-primary-500 px-10"
-            href="/gamecenter"
+      class="btn preset-filled-primary-500"
+      href="/gamecenter"
     >Gamecenter</a
     >
   </footer>
 </div>
+
+<style>
+  .overview-card {
+    background-color: var(--color-surface-50-950);
+    color: var(--color-surface-950-50);
+    border: 1px solid var(--color-surface-500);
+
+    @media (prefers-color-scheme: dark) {
+      border: 1px solid var(--color-tertiary-600-400);
+    }
+  }
+
+  .card-body {
+    padding: calc(var(--spacing) * 4);
+  }
+
+  .gameday-text {
+    display: none;
+
+    @media (min-width: 64rem) {
+      display: inline;
+    }
+  }
+
+  :global(.current-matches .tabs-list) {
+    border: 1px var(--tw-border-style);
+  }
+
+  :global(.current-matches .tabs-content) {
+    margin-block-start: calc(var(--spacing) * 4);
+  }
+
+  .gamecenter-footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+</style>

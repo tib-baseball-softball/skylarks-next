@@ -13,9 +13,9 @@
   }: Props = $props();
 </script>
 
-<label class="flex items-center gap-2">
-  <span class="text-nowrap font-light">Select Team:</span>
-  <select bind:value={preferences.current.favoriteTeamID} class="select my-4" id="team-picker"
+<label>
+  <span class=" label-text">Select Team:</span>
+  <select bind:value={preferences.current.favoriteTeamID} class="select" data-testid="club-team-picker"
           onchange={() => onChange()}>
     <option value="{0}">None</option>
     {#each clubTeams as clubTeam}
@@ -25,3 +25,20 @@
     {/each}
   </select>
 </label>
+
+<style>
+  label {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 2);
+  }
+
+  .label-text {
+    font-weight: var(--font-weight-light);
+    text-wrap: nowrap;
+  }
+
+  .select {
+    margin: calc(var(--spacing) * 4);
+  }
+</style>

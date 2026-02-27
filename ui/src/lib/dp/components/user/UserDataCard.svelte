@@ -11,32 +11,32 @@
   const {model}: Props = $props();
 </script>
 
-<div class="card preset-tonal-surface lg:col-span-2 shadow-lg">
+<div class="card preset-tonal-surface user-card shadow-lg">
   <header class="card-header">
-    <h2 class="h4 font-semibold">User Data</h2>
+    <h2 class="h4 card-title">User Data</h2>
   </header>
 
-  <section class="p-4 flex flex-col sm:flex-row gap-4 lg:gap-12 sm:items-center">
+  <section class="user-content">
     <Avatar
       --size="4rem"
       fallback={`${model.first_name.charAt(0)?.toUpperCase()}${model.last_name.charAt(0)?.toUpperCase()}`}
       src={client.files.getURL(model, model?.avatar)}
     />
 
-    <div class="grid grid-cols-1 gap-2 col-span-4">
-      <div class="flex items-center gap-3">
+    <div class="user-details">
+      <div class="info-row">
         <User/>
         <div>
           <p>{`${model?.first_name ?? ""} ${model?.last_name ?? ""}`}</p>
-          <p class="text-sm font-light">Name</p>
+          <p class="info-label">Name</p>
         </div>
       </div>
 
-      <div class="flex items-center gap-3">
+      <div class="info-row">
         <Mail/>
         <div>
           <p>{model?.email}</p>
-          <p class="text-sm font-light">email address</p>
+          <p class="info-label">email address</p>
         </div>
       </div>
     </div>
@@ -50,6 +50,48 @@
 </div>
 
 <style>
+  .user-card {
+    @media (min-width: 64rem) {
+      grid-column: span 2 / span 2;
+    }
+  }
+
+  .card-title {
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .user-content {
+    padding: calc(var(--spacing) * 4);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 4);
+
+    @media (min-width: 40rem) {
+      flex-direction: row;
+      align-items: center;
+      gap: calc(var(--spacing) * 12);
+    }
+  }
+
+  .user-details {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: calc(var(--spacing) * 2);
+    grid-column: span 4 / span 4;
+  }
+
+  .info-row {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 3);
+  }
+
+  .info-label {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+    font-weight: var(--font-weight-light);
+  }
+
   .card-footer {
     display: flex;
     justify-content: flex-end;

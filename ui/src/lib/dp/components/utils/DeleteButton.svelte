@@ -65,7 +65,7 @@
     <span>Are you sure you wish to delete this {modelName}? In most cases, data cannot be recovered after deletion. Please be certain.</span>
   {/snippet}
 
-  <div class="flex justify-end gap-2 mt-1">
+  <div class="actions">
     <button class="btn preset-tonal-surface border border-surface-500" data-test-role="modal-cancel"
             onclick={closeModal}
             type="button">Cancel
@@ -73,3 +73,12 @@
     <button class="btn preset-filled" data-test-role="modal-confirm" onclick={deleteItem} type="button">Confirm</button>
   </div>
 </Dialog>
+
+<style>
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: calc(var(--spacing) * 2);
+    margin-top: var(--spacing);
+  }
+</style>

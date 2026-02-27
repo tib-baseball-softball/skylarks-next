@@ -9,8 +9,15 @@
 </script>
 
 <img alt="{media?.alt}"
-     class="h-auto max-w-full rounded-lg"
      loading="lazy"
      src="{media.url}"
      title="{media?.title}"
 >
+
+<style>
+  img {
+    height: auto;
+    max-width: 100%;
+    border-radius: var(--radius-lg);
+  }
+</style>

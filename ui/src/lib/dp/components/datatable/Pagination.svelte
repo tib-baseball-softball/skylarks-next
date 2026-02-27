@@ -14,17 +14,17 @@
 <!-- Desktop buttons -->
 <section class="desktop-section preset-outlined-primary-500 rounded-container">
   <button
-    type="button"
-    class="hover:preset-tonal-primary"
+    class="nav-button"
     class:disabled={pageNumber === 1}
     onclick={() => handler.setPage('previous')}
+    type="button"
   >
     ←
   </button>
   {#each pages as page}
     <button
       type="button"
-      class="hover:preset-tonal-primary"
+      class="nav-button"
       class:active={pageNumber === page}
       class:ellipse={page === null}
       onclick={() => handler.setPage(page)}
@@ -33,10 +33,10 @@
     </button>
   {/each}
   <button
-    type="button"
-    class="hover:preset-tonal-primary"
+    class="nav-button"
     class:disabled={pageNumber === pageCount}
     onclick={() => handler.setPage('next')}
+    type="button"
   >
     →
   </button>
@@ -45,18 +45,18 @@
 <!-- Mobile buttons -->
 <section class="mobile-section">
   <button
-    type="button"
-    class="btn preset-outlined-primary-500 mr-2"
+    class="btn preset-outlined-primary-500"
     class:disabled={pageNumber === 1}
     onclick={() => handler.setPage('previous')}
+    type="button"
   >
     ←
   </button>
   <button
-    type="button"
     class="btn preset-outlined-primary-500"
     class:disabled={pageNumber === pageCount}
     onclick={() => handler.setPage('next')}
+    type="button"
   >
     →
   </button>
@@ -71,19 +71,28 @@
     @media (min-width: 64rem) {
       display: flex;
     }
+  }
 
-    button {
-      padding: calc(var(--spacing) * 2);
+  .nav-button {
+    padding: calc(var(--spacing) * 2);
+
+    &:hover:not(.disabled) {
+      background-color: color-mix(in srgb, var(--color-primary-500), transparent 80%);
+    }
+
+    &.active {
+      background-color: var(--color-primary-500);
+      color: white;
     }
   }
 
-  @media (min-width: 64rem) {
-    .mobile-section {
-      display: none;
+  .mobile-section {
+    display: flex;
+    gap: calc(var(--spacing) * 2);
+    margin-block-end: calc(var(--spacing) * 2);
 
-      button {
-        margin-block-end: calc(var(--spacing) * 2);
-      }
+    @media (min-width: 64rem) {
+      display: none;
     }
   }
 </style>

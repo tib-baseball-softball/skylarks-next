@@ -24,25 +24,25 @@
   });
 </script>
 
-<h1 class="h1 mb-6!">Leaderboards for {data.leagueGroup.name} ({data.leagueGroup.season})</h1>
+<h1 class="h1">Leaderboards for {data.leagueGroup.name} ({data.leagueGroup.season})</h1>
 
-<Tabs.Root bind:value={type} class="flex">
-  <Tabs.List class="tabs-list border mb-1 preset-tonal-surface">
-    <Tabs.Trigger class="tabs-trigger btn flex-grow" value={StatsType.batting}>Batting</Tabs.Trigger>
-    <Tabs.Trigger class="tabs-trigger btn flex-grow" value={StatsType.pitching}>Pitching</Tabs.Trigger>
-    <Tabs.Trigger class="tabs-trigger btn flex-grow" value={StatsType.fielding}>Fielding</Tabs.Trigger>
+<Tabs.Root bind:value={type}>
+  <Tabs.List class="tabs-list preset-tonal-surface">
+    <Tabs.Trigger class="tabs-trigger btn" value={StatsType.batting}>Batting</Tabs.Trigger>
+    <Tabs.Trigger class="tabs-trigger btn" value={StatsType.pitching}>Pitching</Tabs.Trigger>
+    <Tabs.Trigger class="tabs-trigger btn" value={StatsType.fielding}>Fielding</Tabs.Trigger>
   </Tabs.List>
 </Tabs.Root>
 
 {#await data.leaderboardData}
   <ProgressRing/>
-  <div class="placeholder col-span-2"></div>
+  <div class="placeholder"></div>
 {:then leaderboardData}
-  <header class="space-y-3">
+  <header>
     <h2 class="h2">{leaderboardData.stats_type}</h2>
   </header>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-8 2xl:gap-10">
+  <div class="leaderboard-grid">
     {#each leaderboardData.data as data}
       <LeaderboardTable {data}/>
     {/each}
@@ -50,3 +50,28 @@
 {:catch error}
   <p class="col-span-2">error loading matches: {error.message}</p>
 {/await}
+
+<style>
+  header {
+    margin-block: calc(var(--spacing) * 4);
+  }
+  
+  .leaderboard-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: calc(var(--spacing) * 6);
+    
+    @media (min-width: 32rem) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @media (min-width: 48rem) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: calc(var(--spacing) * 8);
+    }
+    
+    @media (min-width: 64rem) {
+      gap: calc(var(--spacing) * 10);
+    }
+  }
+</style>

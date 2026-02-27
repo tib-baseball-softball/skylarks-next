@@ -13,14 +13,14 @@
     <Info/>
   {/snippet}
 
-  <div class="flex justify-center">
+  <div class="logo-box">
     <img
       alt="Skylarks Logo"
-      class="w-24 h-auto mb-1"
       src="/icon_dp.svg"
     />
   </div>
-  <div class="space-y-2">
+
+  <div>
     <p><strong>Name:</strong> {data.bsmClubData?.name}</p>
     <p><strong>Acronym:</strong> {data.bsmClubData?.acronym} /
       0{data.bsmClubData?.organization_id} {data.bsmClubData?.number}</p>
@@ -55,3 +55,14 @@
   <p><strong>Street:</strong> {data.bsmClubData?.street}, {data.bsmClubData?.postal_code} {data.bsmClubData?.city}
     , {data.bsmClubData?.country}</p>
 </ClubDetailSection>
+
+<style>
+  .logo-box {
+    display: flex;
+    justify-content: center;
+  }
+
+  img {
+    width: 6rem;
+  }
+</style>

@@ -19,22 +19,30 @@
   <p>
     {displayText}
     {#if timeValue}
-      <time datetime="{timeValue}" class="font-bold"
+      <time datetime="{timeValue}" class="time"
       >{displayedTime?.toLocaleTimeString(
-          "de-DE",
-          DateTimeUtility.eventTimeFormat,
+        "de-DE",
+        DateTimeUtility.eventTimeFormat,
       )}</time
       >
     {:else}
-      <span class="font-medium">---</span>
+      <span class="fallback">---</span>
     {/if}
   </p>
 </div>
 
 <style>
-    .section-container {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
+  .section-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .time {
+    font-weight: 700; /* font-bold */
+  }
+
+  .fallback {
+    font-weight: 500; /* font-medium */
+  }
 </style>

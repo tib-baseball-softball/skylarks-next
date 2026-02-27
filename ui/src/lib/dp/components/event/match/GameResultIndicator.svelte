@@ -15,18 +15,45 @@
   const matchState = $derived(matchDecorator.getMatchState(teamName ?? env.PUBLIC_TEAM_NAME));
 </script>
 
-<div class="text-lg font-semibold">
+<div class="root">
   {#if matchState === MatchState.won}
-    <span class="text-success-700">W</span>
+    <span class="result won">W</span>
   {:else if matchState === MatchState.lost}
-    <span class="text-error-600">L</span>
+    <span class="result lost">L</span>
   {:else if matchState === MatchState.derby}
-    <span class="text-primary-600-400 text-2xl">♥</span>
+    <span class="result derby">♥</span>
   {:else if matchState === MatchState.final}
-    <span>F</span>
+    <span class="result">F</span>
   {:else if matchState === MatchState.notYetPlayed}
-    <span class="text-md">TBD</span>
+    <span class="result tbd">TBD</span>
   {:else if matchState === MatchState.cancelled}
-    <span class="text-md">PPD</span>
+    <span class="result ppd">PPD</span>
   {/if}
 </div>
+
+<style>
+  .root {
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .result {
+    &.won {
+      color: var(--color-success-700);
+    }
+
+    &.lost {
+      color: var(--color-error-600);
+    }
+
+    &.derby {
+      color: light-dark(var(--color-primary-600), var(--color-primary-400));
+      font-size: var(--text-2xl);
+    }
+
+    &.tbd,
+    &.ppd {
+      font-size: var(--text-md);
+    }
+  }
+</style>

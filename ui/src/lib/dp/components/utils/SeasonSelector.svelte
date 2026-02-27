@@ -20,8 +20,8 @@
   selectedSeason = parseParam() ?? 0;
 </script>
 
-<div class="container lg:gap-8 preset-tonal-surface rounded-base">
-  <label class="label md:grow-0">
+<div class="container preset-tonal-surface rounded-base">
+  <label class="season-label">
     Season
     <select bind:value={selectedSeason} class="select" onchange={onChangeCallback}>
       {#each seasonOptions as option}
@@ -39,13 +39,21 @@
     gap: calc(var(--spacing) * 4);
     padding-inline: calc(var(--spacing) * 4);
     padding-block: calc(var(--spacing) * 3);
+
+    @media (min-width: 64rem) {
+      gap: calc(var(--spacing) * 8);
+    }
   }
 
-  label {
+  .season-label {
     display: flex;
     align-items: center;
     flex-grow: 1;
     justify-content: space-between;
     gap: calc(var(--spacing) * 2);
+
+    @media (min-width: 64rem) {
+      flex-grow: 0;
+    }
   }
 </style>
