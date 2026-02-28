@@ -13,38 +13,38 @@ import (
 )
 
 // LoadHomeData loads structured data to display on a single team's home dashboard.
-func LoadHomeData(app dp.LogOnlyApp, client bsm.APIClient, teamID int, season int) ([]HomeDataset, error) {
+func LoadHomeData(app dp.LogOnlyApp, client bsm.APIClient, entryID int, leagueID int, season int) ([]HomeDataset, error) {
 	apiKey := os.Getenv("BSM_API_KEY")
 	if apiKey == "" {
 		return nil, errors.New("default API key not set, aborting")
 	}
 
-	teamChannel := make(chan bsm.Team, 1)
+	entryChannel := make(chan bsm.LeagueEntry, 1)
 	leagueChannel := make(chan []bsm.LeagueGroup, 1)
 
 	go func() {
-		team, err := client.LoadSingleTeamByID(teamID, apiKey)
+		team, err := client.LoadLeagueEntryByID(entryID, apiKey)
 		if err != nil {
-			app.Logger().Error("Error fetching team", "error", err, "team", teamID)
-			teamChannel <-bsm.Team{}
+			app.Logger().Error("Error fetching team", "error", err, "team", entryID)
+			entryChannel <-bsm.LeagueEntry{}
 		}
-		teamChannel <- team
+		entryChannel <- team
 	}()
 
 	go func() {
-		leagueGroupsResponse, err := client.FetchLeagueGroupsForSeason(apiKey, season)
+		leagueGroupsResponse, err := client.FetchLeagueGroupsForLeague(leagueID, apiKey)
 		if err != nil {
-			app.Logger().Error("Error fetching league groups", "error", err, "team", teamID)
+			app.Logger().Error("Error fetching league groups", "error", err, "team", entryID)
 			leagueChannel <- make([]bsm.LeagueGroup, 0)
 		}
 		leagueChannel <- leagueGroupsResponse
 	}()
 
-	var clubTeam bsm.Team
+	var leagueEntry bsm.LeagueEntry
 	var leagueGroups []bsm.LeagueGroup
 
 	select {
-	    case clubTeam = <-teamChannel:
+	    case leagueEntry = <-entryChannel:
 		case <-time.After(25 * time.Second):
             return nil ,errors.New("timeout while waiting for BSM response - team")
 	}
@@ -54,24 +54,10 @@ func LoadHomeData(app dp.LogOnlyApp, client bsm.APIClient, teamID int, season in
 		case <-time.After(25 * time.Second):
             return nil ,errors.New("timeout while waiting for BSM response - leagueGroups")
 	}
-	
-	if clubTeam.ID == 0 {
+
+	if leagueEntry.ID == 0 {
 		return nil, errors.New("unexpected zero value for team ID")
 	}
-
-	if len(clubTeam.LeagueEntries) == 0 {
-		return nil, errors.New("team does not have any league entries associated with it")
-	}
-
-	filteredLeagueGroups := slices.Collect(func(yield func(bsm.LeagueGroup) bool) {
-		for _, leagueGroup := range leagueGroups {
-			if leagueGroup.League.ID == clubTeam.LeagueEntries[0].League.ID {
-				if !yield(leagueGroup) {
-					return
-				}
-			}
-		}
-	})
 
 	datasetContainer := DatasetContainer{
 		datasets: make([]HomeDataset, 0),
@@ -79,14 +65,14 @@ func LoadHomeData(app dp.LogOnlyApp, client bsm.APIClient, teamID int, season in
 
 	var wg sync.WaitGroup
 
-	for _, leagueGroup := range filteredLeagueGroups {
+	for _, leagueGroup := range leagueGroups {
 		wg.Add(1)
-		go func(clubTeam bsm.Team) {
+		go func(leagueEntry bsm.LeagueEntry) {
 			defer wg.Done()
 
 			var dataset HomeDataset
 			dataset.LeagueGroup = leagueGroup
-			dataset.TeamID = teamID
+			dataset.TeamID = entryID
 			dataset.Season = season
 			dataset.LeagueGroupID = leagueGroup.ID
 
@@ -107,7 +93,7 @@ func LoadHomeData(app dp.LogOnlyApp, client bsm.APIClient, teamID int, season in
 
 				matches, err := client.LoadMatchesWithFilterParams(params, apiKey)
 				if err != nil {
-					app.Logger().Error("Error fetching matches", "error", err, "team", teamID)
+					app.Logger().Error("Error fetching matches", "error", err, "team", entryID)
 					return
 				}
 				displayGames := findNextAndPreviousGame(matches, time.Now())
@@ -120,23 +106,29 @@ func LoadHomeData(app dp.LogOnlyApp, client bsm.APIClient, teamID int, season in
 					dataset.LastGame = displayGames.Last
 				}
 				createPlayoffSeriesData(&dataset, matches)
-				dataset.StreakData = createStreakDataEntries(matches, clubTeam.Name)
+				if leagueEntry.Team != nil {
+				    dataset.StreakData = createStreakDataEntries(matches, leagueEntry.Team.Name)
+				}
 			}()
 
 			wg.Add(1)
-			go func(clubTeam bsm.Team) {
+			go func(leagueEntry bsm.LeagueEntry) {
 				defer wg.Done()
 
-				err := LoadHomeTeamTable(client, clubTeam, leagueGroup.ID, &dataset, apiKey)
+				if leagueEntry.Team == nil {
+                    return
+				}
+
+				err := LoadHomeTeamTable(client, *leagueEntry.Team, leagueGroup.ID, &dataset, apiKey)
 				if err != nil {
-					app.Logger().Warn("Error fetching home team table", "error", err, "team", clubTeam.ID, "leagueGroup", leagueGroup.ID)
+					app.Logger().Warn("Error fetching home team table", "error", err, "entry", leagueEntry.ID, "leagueGroup", leagueGroup.ID)
 					return
 				}
-			}(clubTeam)
+			}(leagueEntry)
 			wg.Wait()
 
 			datasetContainer.Add(dataset)
-		}(clubTeam)
+		}(leagueEntry)
 	}
 	wg.Wait()
 

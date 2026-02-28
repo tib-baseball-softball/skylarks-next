@@ -16,7 +16,7 @@ func TestRealAPIClient_HTTPMethods(t *testing.T) {
 	matches := []Match{{MatchID: "M1", HomeTeamName: "H", AwayTeamName: "A"}}
 	table := Table{LeagueID: 42, LeagueName: "Test League", Season: 2025}
 	team := Team{ID: 7, Name: "Skylarks", Season: 2025, ShortName: "SKY"}
-	leagues := []LeagueGroup{{ID: 5, Season: 2025, Name: "LL", Acronym: "LL", League: League{ID: 9, Name: "L", Acronym: "L", Season: 2025}}}
+	leagues := []LeagueGroup{{ID: 5, Season: 2025, Name: "LL", Acronym: "LL", GameClass: GameClass{ID: 9, Name: "L", Acronym: "L", Season: 2025}}}
 
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
