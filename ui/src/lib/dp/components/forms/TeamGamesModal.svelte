@@ -9,6 +9,7 @@
   import type {Toast} from "$lib/dp/types/Toast.ts";
   import {closeModal} from "$lib/dp/utility/closeModal.ts";
   import {range} from "$lib/dp/utility/range.ts";
+  import { Collection } from "$lib/dp/enum/Collection";
 
   interface Props {
     team: ExpandedTeam;
@@ -46,7 +47,7 @@
 
   async function loadClubLeagueGroups() {
     const RELOAD_DELAY = 15000; // 15 seconds
-    const loadLeagueGroups = client.collection("leaguegroups").getFullList<LeaguegroupsResponse>({
+    const loadLeagueGroups = client.collection(Collection.LeagueGroups).getFullList<LeaguegroupsResponse>({
       filter: `season = '${season}' && clubs ?~ '${team.club}'`,
       query: {
         // adding those parameters triggers a hook to load league groups from BSM if response is empty
@@ -140,7 +141,7 @@
         <select class="select" bind:value={form.bsm_league_group}>
           <option value="{0}">None</option>
           {#each leagueGroups as leagueGroup}
-            <option value="{leagueGroup.bsm_id}">{leagueGroup.name} ({leagueGroup.season})</option>
+            <option value="{leagueGroup.bsm_id}">{leagueGroup.name} ({leagueGroup.acronym}, {leagueGroup.season})</option>
           {/each}
         </select>
       </label>
