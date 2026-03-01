@@ -172,3 +172,16 @@ func OAuthUpdateUserData(e *core.RecordAuthWithOAuth2RequestEvent) error {
 	}
 	return e.Next()
 }
+
+// SetDisplayName sets the display name for the user if it is not already set.
+// Default display name format: first name + first letter of last name + dot
+func SetDisplayName(e *core.RecordEvent) error {
+	user := &User{}
+	user.SetProxyRecord(e.Record)
+
+	if user.DisplayName() == "" {
+		user.SetDisplayName(user.FirstName() + " " + fmt.Sprintf("%.*s", 1, user.LastName()) + ".")
+	}
+
+	return e.Next()
+}

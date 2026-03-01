@@ -101,6 +101,10 @@ func BindDPHooks(app core.App, client bsm.APIClient, pushService PushService) {
 		return NotifyAdminsUserCreation(e, pushService)
 	})
 
+	app.OnRecordUpdateExecute(UserCollection).BindFunc(func(event *core.RecordEvent) error {
+		return SetDisplayName(event)
+	})
+
 	app.OnRecordsListRequest(LeagueGroupsCollection).BindFunc(func(event *core.RecordsListRequestEvent) error {
 		return TriggerLeagueImport(event.App, client, event)
 	})
