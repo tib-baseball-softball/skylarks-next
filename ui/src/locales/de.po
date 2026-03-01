@@ -284,7 +284,7 @@ msgstr "{0} ({1} Bytes)"
 
 #: src/lib/dp/components/forms/UserDetailsForm.svelte
 msgid "This is your app profile picture. It will not be used for your player profile image."
-msgstr "Dies ist Ihr App-Profilbild. Es wird nicht für Ihr Spielerprofilbild verwendet."
+msgstr "Dies ist dein App-Profilbild. Es wird nicht für dein Spielerprofilbild verwendet."
 
 #: src/routes/(dp)/(protected)/+layout.svelte
 msgid "Internal Area"
@@ -3092,3 +3092,15 @@ msgstr "Profilbild"
 #: src/lib/dp/components/player/TeamPlayerSection.svelte
 msgid "Visualization"
 msgstr "Visualisierung"
+
+#: src/lib/dp/components/forms/UserDetailsForm.svelte
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#: src/lib/dp/components/forms/UserDetailsForm.svelte
+msgid "Will be set automatically if left blank."
+msgstr "Wird automatisch ausgefüllt, wenn leer."
+
+#: src/lib/dp/components/forms/UserDetailsForm.svelte
+msgid "Profile Image"
+msgstr "Profilbild"

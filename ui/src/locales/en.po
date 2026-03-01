@@ -3106,3 +3106,15 @@ msgstr "All configured locations for {0}, including baseball fields and other ve
 #: src/routes/(dp)/(protected)/account/clubs/[club]/locations/+page.svelte
 msgid "{0} - Locations"
 msgstr "{0} - Locations"
+
+#: src/lib/dp/components/forms/UserDetailsForm.svelte
+msgid "Display Name"
+msgstr "Display Name"
+
+#: src/lib/dp/components/forms/UserDetailsForm.svelte
+msgid "Will be set automatically if left blank."
+msgstr "Will be set automatically if left blank."
+
+#: src/lib/dp/components/forms/UserDetailsForm.svelte
+msgid "Profile Image"
+msgstr "Profile Image"

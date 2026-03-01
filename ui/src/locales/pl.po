@@ -3094,8 +3094,20 @@ msgstr ""
 
 #: src/lib/dp/components/player/TeamPlayerSection.svelte
 msgid "Image"
-msgstr ""
+msgstr "Obraz"
 
 #: src/lib/dp/components/player/TeamPlayerSection.svelte
 msgid "Visualization"
+msgstr "Wizualizacja"
+
+#: src/lib/dp/components/forms/UserDetailsForm.svelte
+msgid "Display Name"
+msgstr ""
+
+#: src/lib/dp/components/forms/UserDetailsForm.svelte
+msgid "Will be set automatically if left blank."
+msgstr ""
+
+#: src/lib/dp/components/forms/UserDetailsForm.svelte
+msgid "Profile Image"
 msgstr ""
