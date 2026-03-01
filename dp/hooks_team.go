@@ -6,6 +6,7 @@ import (
 	"github.com/pocketbase/pocketbase/core"
 )
 
+// HideTeamSignupKey hides the signup key for a team record if the current user is not an admin.
 func HideTeamSignupKey(e *core.RecordEnrichEvent) error {
 	team := &Team{}
 	team.SetProxyRecord(e.Record)
