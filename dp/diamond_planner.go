@@ -137,6 +137,10 @@ func BindDPHooks(app core.App, client bsm.APIClient, pushService PushService) {
 		return DeleteEventsForSeries(e)
 	})
 
+	app.OnRecordEnrich(TeamsCollection).BindFunc(func(event *core.RecordEnrichEvent) error {
+		return HideTeamSignupKey(event)
+	})
+
 	//------------------- Hooks - Web Push -------------------------//
 
 	app.OnRecordAfterCreateSuccess(AnnouncementsCollection).BindFunc(func(e *core.RecordEvent) error {
