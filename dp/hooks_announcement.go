@@ -72,9 +72,7 @@ func PushTeamOrClubAnnouncement(app core.App, coll string, announcement *Announc
 			Body:  announcement.Title(),
 			Tag:   "team_club_new_announcement",
 		}
-		ws := sub.ToWebPushSubscription()
-
-		err := ps.SendPushMessage(msg, &ws)
+		err := ps.SendPushMessage(msg, new(sub.ToWebPushSubscription()))
 		if err != nil {
 			return
 		}

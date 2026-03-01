@@ -30,9 +30,7 @@ func notifyWithTestPushMessage(ps PushService, app core.App) func(e *core.Reques
 		for _, subRecord := range subRecords {
 			sub := &PushSubscription{}
 			sub.SetProxyRecord(subRecord)
-			ws := sub.ToWebPushSubscription()
-
-			err := ps.handleTestPush(&ws)
+			err := ps.handleTestPush(new(sub.ToWebPushSubscription()))
 			if err != nil {
 				app.Logger().Warn("failed to send push message", "error", err, "sub", sub)
 				continue

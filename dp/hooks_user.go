@@ -136,8 +136,7 @@ func notifyAdminsUserCreation(record *core.Record, app core.App, ps PushService)
 	for _, sub := range subs {
 		app.Logger().Debug("Sending notification to admin", "admin", sub.User())
 
-		ws := sub.ToWebPushSubscription()
-		err := ps.SendPushMessage(msg, &ws)
+		err := ps.SendPushMessage(msg, new(sub.ToWebPushSubscription()))
 		if err != nil {
 			return err
 		}
