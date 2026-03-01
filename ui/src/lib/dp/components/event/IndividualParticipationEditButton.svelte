@@ -30,13 +30,13 @@
 <Popover.Root bind:open={isOpen}>
   <Popover.Trigger>
     {#snippet child({props})}
-      <button {...props} class="{classes} relative inline-block">
+      <button {...props} class="{classes}">
         {#if participation.comment}
           <span class="badge-icon preset-filled-surface-400-600">
             <MessageCircleMore size="13"/>
           </span>
         {/if}
-        {participation?.expand?.user?.first_name}
+        {participation?.expand?.user?.display_name}
       </button>
     {/snippet}
   </Popover.Trigger>

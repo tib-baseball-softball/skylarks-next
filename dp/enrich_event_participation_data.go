@@ -109,7 +109,7 @@ func getUserDTOsWithoutParticipations(app core.App, eventID string, teamID strin
 
 	err := app.DB().
 		NewQuery(`
-			SELECT id, first_name, last_name
+			SELECT id, first_name, last_name, display_name
 			FROM users
 			WHERE EXISTS (SELECT 1 FROM json_each(users.teams) WHERE value = {:teamID})
 			AND (SELECT id FROM participations WHERE event = {:eventID} AND user = users.id) IS NULL`).
