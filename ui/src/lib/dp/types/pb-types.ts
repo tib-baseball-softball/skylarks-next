@@ -172,6 +172,7 @@ export interface UsersResponse extends AuthCollectionResponse {
 	scorer: '' | 'none' | 'A' | 'B' | 'C' | 'D';
 	bsm_id: number;
 	display_on_website: boolean;
+	display_name: string;
 	created: string;
 	updated: string;
 }
@@ -198,6 +199,7 @@ export interface UsersCreate extends AuthCollectionCreate {
 	scorer?: '' | 'none' | 'A' | 'B' | 'C' | 'D';
 	bsm_id?: number;
 	display_on_website?: boolean;
+	display_name?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -232,6 +234,7 @@ export interface UsersUpdate extends AuthCollectionUpdate {
 	'bsm_id+'?: number;
 	'bsm_id-'?: number;
 	display_on_website?: boolean;
+	display_name?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -348,9 +351,9 @@ export interface ClubsResponse extends BaseCollectionResponse {
 	bsm_id: number;
 	acronym: string;
 	admins: Array<string>;
+	service_requirement: number;
 	created: string;
 	updated: string;
-	service_requirement: number;
 }
 
 export interface ClubsCreate extends BaseCollectionCreate {
@@ -359,9 +362,9 @@ export interface ClubsCreate extends BaseCollectionCreate {
 	bsm_id?: number;
 	acronym?: string;
 	admins: MaybeArray<string>;
+	service_requirement?: number;
 	created?: string | Date;
 	updated?: string | Date;
-	service_requirement?: number;
 }
 
 export interface ClubsUpdate extends BaseCollectionUpdate {
@@ -374,11 +377,11 @@ export interface ClubsUpdate extends BaseCollectionUpdate {
 	admins?: MaybeArray<string>;
 	'admins+'?: MaybeArray<string>;
 	'admins-'?: MaybeArray<string>;
-	created?: string | Date;
-	updated?: string | Date;
 	service_requirement?: number;
 	'service_requirement+'?: number;
 	'service_requirement-'?: number;
+	created?: string | Date;
+	updated?: string | Date;
 }
 
 export interface ClubsCollection {

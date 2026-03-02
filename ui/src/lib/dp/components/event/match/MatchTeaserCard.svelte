@@ -6,6 +6,7 @@
   import {GameWinner} from "$lib/dp/enum/GameWinner.ts";
   import {LogoUtility} from "$lib/dp/utility/LogoUtility.ts";
   import {MatchDecorator} from "$lib/dp/service/MatchDecorator.ts";
+  import {appLocale} from "$lib/dp/locale.svelte.ts";
 
   interface Props {
     match: Match;
@@ -34,7 +35,7 @@
       <div>
         <h3 class="league-name">{match.league?.name}</h3>
         <p class="match-date">
-          {DateTimeUtility.dateTimeFormatMedium.format(matchDate)}
+          {DateTimeUtility.dateTimeFormatMedium(appLocale.current).format(matchDate)}
         </p>
       </div>
       <GameResultIndicator {match} {teamName}/>

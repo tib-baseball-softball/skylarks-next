@@ -179,8 +179,7 @@ func TestGetCachedBSMResponse_InvalidHost_ReturnsAllowlistError(t *testing.T) {
 	if err == nil {
 		t.Fatalf("expected error, got nil")
 	}
-	var URLAllowlistError *bsm.URLAllowlistError
-	if !errors.As(err, &URLAllowlistError) {
+	if _, ok := errors.AsType[*bsm.URLAllowlistError](err); !ok {
 		t.Fatalf("expected URLAllowlistError, got %T: %v", err, err)
 	}
 }
@@ -200,8 +199,7 @@ func TestGetCachedBSMResponse_InvalidPath_ReturnsAllowlistError(t *testing.T) {
 	if err == nil {
 		t.Fatalf("expected error, got nil")
 	}
-	var URLAllowlistError *bsm.URLAllowlistError
-	if !errors.As(err, &URLAllowlistError) {
+	if _, ok := errors.AsType[*bsm.URLAllowlistError](err); !ok {
 		t.Fatalf("expected URLAllowlistError, got %T: %v", err, err)
 	}
 }

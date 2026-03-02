@@ -8,4 +8,6 @@ export enum Collection {
   Announcements = "announcements",
   PushSubscriptions = "pushsubscriptions",
   EventSeries = "eventseries",
+  LeagueGroups = "leaguegroups",
+  Participations = "participations",
 }

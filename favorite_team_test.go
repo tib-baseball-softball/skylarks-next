@@ -52,7 +52,7 @@ func TestFavoriteTeamEndpoint(t *testing.T) {
 		{
 			Name:            "valid request",
 			Method:          http.MethodGet,
-			URL:             "/api/team/favorite?team=23219&season=2025",
+			URL:             "/api/team/favorite?team=44054&season=2025&gameClass=5969",
 			ExpectedStatus:  http.StatusOK,
 			ExpectedContent: []string{"league_group", "playoff_series", "table", "table_row"},
 			TestAppFactory:  setupTestApp,

@@ -52,9 +52,9 @@ type DisplayGames struct {
 	Last *bsm.Match
 }
 
-func GetCachedDatasetResponse(app core.App, client bsm.APIClient, teamID int, season int) ([]byte, error) {
+func GetCachedDatasetResponse(app core.App, client bsm.APIClient, teamID int, leagueID int, season int) ([]byte, error) {
 	var ret []byte
-	cacheIdentifier := strconv.Itoa(season) + "_" + strconv.Itoa(teamID) + "_" + homeDatasetCacheTag
+	cacheIdentifier := strconv.Itoa(season) + "_" + strconv.Itoa(teamID) + "_" + strconv.Itoa(leagueID) + "_" + homeDatasetCacheTag
 
 	requestCache := &dp.RequestCache{}
 	cacheRecord, err := dp.GetCacheEntryByIdentifier(app, cacheIdentifier)
@@ -71,7 +71,7 @@ func GetCachedDatasetResponse(app core.App, client bsm.APIClient, teamID int, se
 			}
 		}
 
-		homeDatasets, err := LoadHomeData(app, client, teamID, season)
+		homeDatasets, err := LoadHomeData(app, client, teamID, leagueID, season)
 		if err != nil {
 			app.Logger().Error("Failed to load home data", "error", err, "team", teamID, "season", season)
 			return ret, err

@@ -48,6 +48,7 @@ export type ExpandedEvent = Extension<
 export type ExpandedTeam = Extension<
   TeamsResponse,
   {
+    signup_key?: string;
     expand: {
       club: ClubsResponse
       admins?: UsersResponse[]

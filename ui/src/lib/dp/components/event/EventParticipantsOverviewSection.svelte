@@ -137,7 +137,7 @@
   </article>
 </section>
 
-<style lang="postcss">
+<style>
   .participants-title {
     margin-block: calc(var(--spacing) * 3);
     font-size: var(--text-2xl);
@@ -191,18 +191,6 @@
   .chip.guest-chip {
     cursor: pointer;
     gap: calc(var(--spacing) * 1);
-  }
-
-  .border-success {
-    border: 1px solid var(--color-success-500);
-  }
-
-  .border-warning {
-    border: 1px solid var(--color-warning-500);
-  }
-
-  .border-error {
-    border: 1px solid var(--color-error-500);
   }
 
   .border-surface {

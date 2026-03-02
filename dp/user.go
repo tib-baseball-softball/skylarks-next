@@ -200,3 +200,11 @@ func (u *User) SignupKey() string {
 func (u *User) SetSignupKey(key string) {
 	u.Set("signup_key", key)
 }
+
+func (u *User) DisplayName() string {
+	return u.GetString("display_name")
+}
+
+func (u *User) SetDisplayName(name string) {
+	u.Set("display_name", name)
+}

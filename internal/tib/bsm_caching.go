@@ -115,18 +115,19 @@ func GetCachedBSMResponse(app CachingApp, url *url.URL) (string, error) {
 	}
 	hash := dp.GetMD5Hash(url.String())
 
-	var requestCache *dp.RequestCache
+	requestCache := &dp.RequestCache{}
 	record, err := app.FindFirstRecordByData(dp.RequestCacheCollection, "hash", hash)
 	if err != nil {
 		// no data - request has never been cached before
-		record, err = saveBSMResponseToCache(app, url.String())
+		requestCache, err = saveBSMResponseToCache(app, url.String())
 		if err != nil {
 			return ret, err
 		}
+
+		return requestCache.ResponseBody(), nil
 	}
 
 	if record != nil {
-		requestCache = &dp.RequestCache{}
 		requestCache.SetProxyRecord(record)
 
 		if isOutdated(requestCache.Updated()) {
@@ -135,14 +136,10 @@ func GetCachedBSMResponse(app CachingApp, url *url.URL) (string, error) {
 				return ret, err
 			}
 
-			record, err = saveBSMResponseToCache(app, url.String())
+			requestCache, err = saveBSMResponseToCache(app, url.String())
 			if err != nil {
 				return ret, err
 			}
-
-			// Update requestCache with the new record
-			requestCache = &dp.RequestCache{}
-			requestCache.SetProxyRecord(record)
 		}
 		ret = requestCache.ResponseBody()
 	}
@@ -150,18 +147,15 @@ func GetCachedBSMResponse(app CachingApp, url *url.URL) (string, error) {
 	return ret, nil
 }
 
-func saveBSMResponseToCache(app CachingApp, bsmURL string) (*core.Record, error) {
+func saveBSMResponseToCache(app CachingApp, bsmURL string) (*dp.RequestCache, error) {
 	_, body, err := bsm.FetchResource[any](bsmURL)
 	if err != nil {
-		var fetchError *url.Error
-		var invalidUnmarshalError *json.InvalidUnmarshalError
-		var jsonSyntaxError *json.SyntaxError
 
-		if errors.As(err, &fetchError) {
+		if fetchError, ok := errors.AsType[*url.Error](err); ok {
 			app.Logger().Error("Fetch to BSM failed.", "err", err, "bsmURL", bsmURL)
 			return nil, fetchError
 		}
-		if errors.As(err, &invalidUnmarshalError) {
+		if invalidUnmarshalError, ok := errors.AsType[*json.InvalidUnmarshalError](err); ok {
 			app.Logger().Error("JSON unmarshal failed.", "err", err, "bsmURL", bsmURL)
 			return nil, invalidUnmarshalError
 		}
@@ -169,7 +163,7 @@ func saveBSMResponseToCache(app CachingApp, bsmURL string) (*core.Record, error)
 		// other errors get treated as common operations that can be handled
 		app.Logger().Warn("Empty/Invalid Response from BSM", "err", err, "bsmURL", bsmURL)
 
-		if errors.As(err, &jsonSyntaxError) {
+		if _, ok := errors.AsType[*json.SyntaxError](err); ok {
 			if body == "" {
 				body = "null" // valid JSON
 			}
@@ -189,12 +183,12 @@ func saveBSMResponseToCache(app CachingApp, bsmURL string) (*core.Record, error)
 	cache.SetHash(dp.GetMD5Hash(bsmURL))
 	cache.SetURL(bsmURL)
 
-	err = app.Save(record)
+	err = app.Save(cache)
 	if err != nil {
-		return record, err
+		return cache, err
 	}
 
-	return record, nil
+	return cache, nil
 }
 
 func isOutdated(cacheTime types.DateTime) bool {

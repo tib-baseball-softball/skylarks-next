@@ -154,7 +154,7 @@
         </label>
 
         <label class="label">
-          <span>BSM ID</span>
+          <span>BSM ID</span> 
           <input
             bind:value={form.bsm_id}
             class="input"
@@ -249,8 +249,8 @@
 
       <hr/>
 
-      <div class="flex justify-center gap-3">
-        <button class="mt-2 btn preset-tonal-primary border border-primary-500" data-testid="event-form-submit-button"
+      <div class="submit-container">
+        <button class="btn preset-tonal-primary border border-primary-500" data-testid="event-form-submit-button"
                 type="submit">
           Submit
         </button>
@@ -260,35 +260,13 @@
 </Sheet.Root>
 
 <style>
-  .trigger-button {
-    border-style: solid;
-    border-width: 1px;
-  }
-
-  .trigger-variant-filled-primary {
-    border-color: transparent;
-  }
-
-  .trigger-variant-tonal-primary {
-    border-color: var(--color-primary-500);
-  }
-
-  .trigger-variant-tonal-secondary {
-    border-color: var(--color-secondary-500);
-  }
-
-  .trigger-variant-tonal-tertiary {
-    border-color: var(--color-tertiary-500);
-  }
-
-  .trigger-variant-tonal-surface {
-    border-color: var(--color-surface-500);
-  }
-
-  .trigger-spaced {
+  .submit-container {
     margin-block: calc(var(--spacing) * 3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-
+  
   hr {
     margin-block: calc(var(--spacing) * 5);
   }

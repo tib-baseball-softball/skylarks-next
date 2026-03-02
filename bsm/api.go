@@ -49,9 +49,11 @@ type APIClient interface {
 	AppendAPIKey(app APILoaderApp, url url.URL, clubID string) (url.URL, error)
 
 	LoadSingleTeamByID(ID int, apiKey string) (Team, error)
+	LoadLeagueEntryByID(ID int, apiKey string) (LeagueEntry, error)
 	LoadSingleTable(leagueGroupID int, apiKey string) (Table, error)
 	LoadMatchesWithFilterParams(params map[string]string, apiKey string) ([]Match, error)
 	FetchLeagueGroupsForSeason(apiKey string, season int) ([]LeagueGroup, error)
+	FetchLeagueGroupsForLeague(leagueID int, apiKey string) ([]LeagueGroup, error)
 }
 
 type RealAPIClient struct {
@@ -141,12 +143,33 @@ func (c RealAPIClient) LoadSingleTeamByID(ID int, apiKey string) (Team, error) {
 	return team, nil
 }
 
+func (c RealAPIClient) LoadLeagueEntryByID(ID int, apiKey string) (LeagueEntry, error) {
+	var leagueEntry LeagueEntry
+	apiURL := c.GetAPIURL("league_entries/"+strconv.Itoa(ID)+".json", make(map[string]string), apiKey)
+	leagueEntry, _, err := FetchResource[LeagueEntry](apiURL.String())
+	if err != nil {
+		return leagueEntry, err
+	}
+	return leagueEntry, nil
+}
+
 // FetchLeagueGroupsForSeason the API key used determines which club LeagueGroups are loaded for
 func (c RealAPIClient) FetchLeagueGroupsForSeason(apiKey string, season int) ([]LeagueGroup, error) {
 	params := make(map[string]string)
 	params[SeasonFilter] = strconv.Itoa(season)
 
 	apiURL := c.GetAPIURL("league_groups.json", params, apiKey)
+	leagueGroups, _, err := FetchResource[[]LeagueGroup](apiURL.String())
+	if err != nil {
+		return nil, err
+	}
+	return leagueGroups, nil
+}
+
+func (c RealAPIClient) FetchLeagueGroupsForLeague(leagueID int, apiKey string) ([]LeagueGroup, error) {
+	params := make(map[string]string)
+
+	apiURL := c.GetAPIURL("leagues/" + strconv.Itoa(leagueID) + "/league_groups.json", params, apiKey)
 	leagueGroups, _, err := FetchResource[[]LeagueGroup](apiURL.String())
 	if err != nil {
 		return nil, err
