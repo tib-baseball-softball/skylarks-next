@@ -6,6 +6,7 @@
   import {MatchState} from "$lib/dp/enum/MatchState.ts";
   import {LogoUtility} from "$lib/dp/utility/LogoUtility.ts";
   import {MatchDecorator} from "$lib/dp/service/MatchDecorator.ts";
+  import {appLocale} from "$lib/dp/locale.svelte.ts";
 
   interface Props {
     match: Match;
@@ -20,6 +21,7 @@
   const winner = $derived(matchDecorator.getWinnerForMatch());
   const matchState = $derived(matchDecorator.getMatchState(env.PUBLIC_TEAM_NAME));
   const matchDate = $derived(DateTimeUtility.parseDateFromBSMString(match.time));
+  const formattedMatchDate = $derived(DateTimeUtility.timeFormatShort(appLocale.current).format(matchDate));
 </script>
 
 <a class="match-row"
@@ -33,7 +35,7 @@
 
     <div class="state-container">
             <span class="state-badge">
-                {DateTimeUtility.timeFormatShort.format(matchDate)}
+                {formattedMatchDate}
             </span>
     </div>
 

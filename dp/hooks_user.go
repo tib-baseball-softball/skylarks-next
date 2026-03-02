@@ -136,8 +136,7 @@ func notifyAdminsUserCreation(record *core.Record, app core.App, ps PushService)
 	for _, sub := range subs {
 		app.Logger().Debug("Sending notification to admin", "admin", sub.User())
 
-		ws := sub.ToWebPushSubscription()
-		err := ps.SendPushMessage(msg, &ws)
+		err := ps.SendPushMessage(msg, new(sub.ToWebPushSubscription()))
 		if err != nil {
 			return err
 		}
@@ -171,5 +170,18 @@ func OAuthUpdateUserData(e *core.RecordAuthWithOAuth2RequestEvent) error {
 		e.App.Logger().Warn("Could not persist new OAuth2 user data", "rawUser", rawUser, "record", user.ID())
 		return e.Next()
 	}
+	return e.Next()
+}
+
+// SetDisplayName sets the display name for the user if it is not already set.
+// Default display name format: first name + first letter of last name + dot
+func SetDisplayName(e *core.RecordEvent) error {
+	user := &User{}
+	user.SetProxyRecord(e.Record)
+
+	if user.DisplayName() == "" {
+		user.SetDisplayName(user.FirstName() + " " + fmt.Sprintf("%.*s", 1, user.LastName()) + ".")
+	}
+
 	return e.Next()
 }

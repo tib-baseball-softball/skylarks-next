@@ -2,6 +2,7 @@
   import {authSettings, client} from "$lib/dp/client.svelte.js";
   import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
   import {closeModal} from "$lib/dp/utility/closeModal.ts";
+  import {Collection} from "$lib/dp/enum/Collection.ts";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
@@ -12,6 +13,7 @@
       id: record.id,
       firstName: record.first_name,
       lastName: record.last_name,
+      displayName: record.display_name ?? "",
     };
   }
 
@@ -35,13 +37,17 @@
       formData.append("last_name", form.lastName);
     }
 
+    if (form.displayName) {
+      formData.append("display_name", form.displayName);
+    }
+
     if (files) {
       for (const file of files) {
         formData.append("avatar", file);
       }
     }
 
-    client.collection("users").update(form.id, formData, {expand: "club"}).then(closeModal);
+    client.collection(Collection.Users).update(form.id, formData, {expand: "club"}).then(closeModal);
   }
 </script>
 
@@ -83,7 +89,27 @@
   </label>
 
   <label class="label">
-    Profile Image
+    <span>Display Name</span>
+
+    <span class="info-text">
+      Will be set automatically if left blank.
+    </span>
+
+    <input
+      bind:value={form.displayName}
+      class="input"
+      name="display_name"
+    />
+  </label>
+
+
+  <label class="label">
+    <span>Profile Image</span>
+
+    <span class="info-text">
+      This is your app profile picture. It will not be used for your player profile image.
+    </span>
+
     <input
       accept="image/*"
       bind:files
@@ -100,10 +126,6 @@
     {/each}
   {/if}
 
-  <p class="info-text">
-    This is your app profile picture. It will not be used for your player profile image.
-  </p>
-
   <div class="actions">
     <button class="btn preset-tonal-primary" type="submit">Confirm</button>
   </div>
@@ -111,8 +133,10 @@
 
 <style>
   .info-text {
-    margin-top: calc(var(--spacing) * 2);
-    font-weight: 300;
+    margin-block: calc(var(--spacing) * 2);
+    font-weight: var(--font-weight-light);
+    font-size: var(--text-sm);
+    display: block;
   }
 
   .user-details-form {

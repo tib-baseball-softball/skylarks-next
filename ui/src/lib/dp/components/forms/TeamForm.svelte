@@ -49,6 +49,9 @@
 
   let form: Partial<ExpandedTeam> & { age_group: string } = $derived.by(() => {
     const formData = $state(formFromProps(team));
+    if (formData.signup_key === undefined) {
+      formData.signup_key = "";
+    }
     return formData;
   });
 

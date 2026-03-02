@@ -30,18 +30,18 @@
 <Popover.Root bind:open={isOpen}>
   <Popover.Trigger>
     {#snippet child({props})}
-      <button {...props} class="{classes} relative inline-block">
+      <button {...props} class="{classes}">
         {#if participation.comment}
           <span class="badge-icon preset-filled-surface-400-600">
             <MessageCircleMore size="13"/>
           </span>
         {/if}
-        {participation?.expand?.user?.first_name}
+        {participation?.expand?.user?.display_name || participation?.expand?.user?.first_name}
       </button>
     {/snippet}
   </Popover.Trigger>
 
-  <Popover.Content class="z-15">
+  <Popover.Content>
     <div class="popover-content card shadow-2xl">
 
       <div class="item-container">
@@ -94,6 +94,10 @@
     font-size: var(--text-sm);
     line-height: var(--tw-leading, var(--text-sm--line-height));
     max-width: calc(var(--spacing) * 80);
+
+    :global(.edit-btn) {
+      margin-top: calc(var(--spacing) * 2);
+    }
   }
 
   .item-container {
@@ -108,10 +112,6 @@
     font-weight: var(--font-weight-light);
     font-size: var(--text-xs);
     line-height: var(--tw-leading, var(--text-xs--line-height));
-  }
-
-  .edit-btn {
-    margin-top: calc(var(--spacing) * 2);
   }
 
   .badge-icon {

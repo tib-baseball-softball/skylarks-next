@@ -21,8 +21,7 @@ func GetRelayedBSMData() func(e *core.RequestEvent) error {
 
 		cachedResponseBody, err := GetCachedBSMResponse(e.App, &targetURL)
 		if err != nil {
-			var bsmErr *bsm.URLAllowlistError
-			if errors.As(err, &bsmErr) {
+			if _, ok := errors.AsType[*bsm.URLAllowlistError](err); ok {
 				return e.JSON(http.StatusForbidden, err.Error())
 			} else {
 				e.App.Logger().Error("Failed to get cached BSM response", "error", err, "url", targetURL)
@@ -50,12 +49,11 @@ var keysToRemoveFromBSMResponse = []string{
 func stripResponseKeys(cachedResponseBody string) ([]byte, error) {
 	var arrayShapeData []map[string]any
 	var objectShapeData map[string]any
-	var unmarshalTypeError *json.UnmarshalTypeError
 	var bytes []byte
 
 	err := json.Unmarshal([]byte(cachedResponseBody), &arrayShapeData)
 	if err != nil {
-		if errors.As(err, &unmarshalTypeError) {
+		if _, ok := errors.AsType[*json.UnmarshalTypeError](err); ok {
 			// response is not JSON array, try to unmarshal as an object
 			err = json.Unmarshal([]byte(cachedResponseBody), &objectShapeData)
 			if err != nil {

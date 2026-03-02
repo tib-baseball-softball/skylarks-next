@@ -77,3 +77,11 @@ func (t *Team) SignupKey() string {
 func (t *Team) SetSignupKey(key string) {
 	t.Set("signup_key", key)
 }
+
+func (t *Team) HideSignupKey() {
+	t.Hide("signup_key")
+}
+
+func (t *Team) UnhideSignupKey() {
+	t.Unhide("signup_key")
+}

@@ -82,9 +82,7 @@ func NotifyNewEvent(e *core.RecordEvent, ps PushService) error {
 			Body:  messageBody,
 			Tag:   "team_new_event",
 		}
-		ws := sub.ToWebPushSubscription()
-
-		err := ps.SendPushMessage(msg, &ws)
+		err := ps.SendPushMessage(msg, new(sub.ToWebPushSubscription()))
 		if err != nil {
 			e.App.Logger().Warn("Error sending push notification", "error", err, "sub", sub, "teamID", team.Id)
 			return e.Next()
