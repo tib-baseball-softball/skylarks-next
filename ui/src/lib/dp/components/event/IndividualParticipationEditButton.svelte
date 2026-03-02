@@ -36,7 +36,7 @@
             <MessageCircleMore size="13"/>
           </span>
         {/if}
-        {participation?.expand?.user?.display_name}
+        {participation?.expand?.user?.display_name || participation?.expand?.user?.first_name}
       </button>
     {/snippet}
   </Popover.Trigger>
