@@ -5,6 +5,7 @@
   import {GameWinner} from "$lib/dp/enum/GameWinner.ts";
   import {LogoUtility} from "$lib/dp/utility/LogoUtility.ts";
   import {MatchDecorator} from "$lib/dp/service/MatchDecorator.ts";
+  import {appLocale} from "$lib/dp/locale.svelte.ts";
 
   interface Props {
     match: Match;
@@ -53,7 +54,7 @@
         <p class="label">Date</p>
       </div>
 
-      <p>{DateTimeUtility.dateTimeFormatMedium.format(matchDate)}</p>
+      <p>{DateTimeUtility.dateTimeFormatMedium(appLocale.current).format(matchDate)}</p>
     </div>
     <div class="card sub-item item preset-tonal-primary">
       <div class="item-header">

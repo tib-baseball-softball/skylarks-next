@@ -8,6 +8,7 @@
   import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
   import type {CustomAuthModel, ExpandedComment} from "$lib/dp/types/ExpandedResponse.ts";
   import type {ClubsResponse} from "$lib/dp/types/pb-types.ts";
+  import {appLocale} from "$lib/dp/locale.svelte.ts";
 
   interface Props {
     comment: ExpandedComment;
@@ -19,7 +20,7 @@
   let isEditing = $state(false);
 
   const userFullName = $derived(
-      comment?.expand?.user?.first_name + " " + comment?.expand?.user?.last_name
+    comment?.expand?.user?.first_name + " " + comment?.expand?.user?.last_name
   );
   const authRecord = $derived(authSettings.record as CustomAuthModel);
   const isLoggedInUser = $derived(authRecord.id === comment?.expand?.user?.id);
@@ -59,12 +60,12 @@
         <X/>
       </button>
       <input
-              id="edit-comment-input-{comment.id}"
-              data-testid="edit-comment-input"
-              class="ig-input"
-              type="text"
-              placeholder="Your comment..."
-              bind:value={formText}
+        id="edit-comment-input-{comment.id}"
+        data-testid="edit-comment-input"
+        class="ig-input"
+        type="text"
+        placeholder="Your comment..."
+        bind:value={formText}
       />
       <button type="submit" class="ig-btn preset-filled" title="Add comment" onclick={updateComment}
               disabled={!formText}>
@@ -76,10 +77,10 @@
 
 <div class="avatar-container">
   <Avatar
-          --size="2.5rem"
-          background="preset-tonal-primary"
-          fallback={`${comment?.expand?.user?.first_name.charAt(0)?.toUpperCase()}${comment?.expand?.user?.last_name.charAt(0)?.toUpperCase()}`}
-          src={client.files.getURL(comment?.expand?.user ?? {}, comment?.expand?.user?.avatar ?? "")}
+    --size="2.5rem"
+    background="preset-tonal-primary"
+    fallback={`${comment?.expand?.user?.first_name.charAt(0)?.toUpperCase()}${comment?.expand?.user?.last_name.charAt(0)?.toUpperCase()}`}
+    src={client.files.getURL(comment?.expand?.user ?? {}, comment?.expand?.user?.avatar ?? "")}
   />
 
   {#if isLoggedInUser || club?.admins.includes(authRecord.id)}
@@ -93,7 +94,7 @@
     <p class="user-name">{userFullName}</p>
 
     <div class={["date-box", isLoggedInUser ? "" : "by-current-user"]}>
-      {DateTimeUtility.dateTimeFormatShort.format(new Date(comment.created))}
+      {DateTimeUtility.dateTimeFormatShort(appLocale.current).format(new Date(comment.created))}
     </div>
   </div>
 
