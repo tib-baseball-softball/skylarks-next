@@ -3077,38 +3077,40 @@ msgstr "Configuración"
 
 #: src/lib/tib/components/match/CurrentMatchesOverviewCard.svelte
 msgid "Previous <0>Gameday</0>"
-msgstr ""
+msgstr "Anterior <0>Día de partido</0>"
 
 #: src/lib/tib/components/match/CurrentMatchesOverviewCard.svelte
 msgid "Current <0>Gameday</0>"
-msgstr ""
+msgstr "Actual <0>Día de partido</0>"
 
 #: src/lib/tib/components/match/CurrentMatchesOverviewCard.svelte
 msgid "Next <0>Gameday</0>"
-msgstr ""
+msgstr "Siguiente <0>Día de partido</0>"
 
 #: src/lib/dp/components/forms/AnnouncementForm.svelte
 msgid ""
 "Single link in case the announcement is used as a call to\n"
 "action."
 msgstr ""
+"Un único enlace en caso de que el anuncio se use como una llamada a la\n"
+"acción."
 
 #: src/lib/dp/components/player/TeamPlayerSection.svelte
 msgid "Image"
-msgstr ""
+msgstr "Imagen"
 
 #: src/lib/dp/components/player/TeamPlayerSection.svelte
 msgid "Visualization"
-msgstr ""
+msgstr "Visualización"
 
 #: src/lib/dp/components/forms/UserDetailsForm.svelte
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre para mostrar"
 
 #: src/lib/dp/components/forms/UserDetailsForm.svelte
 msgid "Will be set automatically if left blank."
-msgstr ""
+msgstr "Se establecerá automáticamente si se deja en blanco."
 
 #: src/lib/dp/components/forms/UserDetailsForm.svelte
 msgid "Profile Image"
-msgstr ""
+msgstr "Imagen de perfil"
