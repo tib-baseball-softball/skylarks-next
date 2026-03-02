@@ -41,7 +41,7 @@
     {/snippet}
   </Popover.Trigger>
 
-  <Popover.Content class="z-15">
+  <Popover.Content>
     <div class="popover-content card shadow-2xl">
 
       <div class="item-container">
@@ -94,6 +94,10 @@
     font-size: var(--text-sm);
     line-height: var(--tw-leading, var(--text-sm--line-height));
     max-width: calc(var(--spacing) * 80);
+
+    :global(.edit-btn) {
+      margin-top: calc(var(--spacing) * 2);
+    }
   }
 
   .item-container {
@@ -108,10 +112,6 @@
     font-weight: var(--font-weight-light);
     font-size: var(--text-xs);
     line-height: var(--tw-leading, var(--text-xs--line-height));
-  }
-
-  .edit-btn {
-    margin-top: calc(var(--spacing) * 2);
   }
 
   .badge-icon {
