@@ -199,7 +199,7 @@ func AddUserICalLink(e *core.RecordEnrichEvent) error {
 					
 	    appSecret := os.Getenv("APPLICATION_SECRET")
 		hash := GetSHA3Hash(user.Id + appSecret)
-		user.SetICalLink(e.App.Settings().Meta.AppURL + "/api/dp/ical/" + user.Id + "/" + hash)
+		user.SetICalLink(e.App.Settings().Meta.AppURL + "/api/dp/ical/" + user.Id + "/" + hash + "/calendar.ics")
 	}
 
 	return e.Next()

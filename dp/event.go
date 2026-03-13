@@ -25,6 +25,14 @@ func (e *Event) ID() string {
 	return e.Id
 }
 
+func (e *Event) Created() types.DateTime {
+	return e.GetDateTime("created")
+}
+
+func (e *Event) Updated() types.DateTime {
+	return e.GetDateTime("updated")
+}
+
 func (e *Event) BSMID() int {
 	return e.GetInt("bsm_id")
 }

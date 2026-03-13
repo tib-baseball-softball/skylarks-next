@@ -24,7 +24,7 @@ func NewDiamondPlanner(client bsm.APIClient, pushService PushService) *DiamondPl
 	dp := &DiamondPlanner{
 		pocketbase.New(),
 	}
-	
+
 	if os.Getenv("APPLICATION_SECRET") == "" {
 		log.Fatal("APPLICATION_SECRET not set, error loading environment variables")
 	}
@@ -104,7 +104,7 @@ func BindDPHooks(app core.App, client bsm.APIClient, pushService PushService) {
 	app.OnRecordAfterCreateSuccess(UserCollection).BindFunc(func(e *core.RecordEvent) error {
 		return NotifyAdminsUserCreation(e, pushService)
 	})
-	
+
 	app.OnRecordEnrich(UserCollection).BindFunc(func(e *core.RecordEnrichEvent) error {
 		return AddUserICalLink(e)
 	})
@@ -199,6 +199,14 @@ func BindDPHooks(app core.App, client bsm.APIClient, pushService PushService) {
 		se.Router.GET("/api/communityservice/{user}/{season}",
 			GetUserCommunityService()).
 			Bind(apis.RequireAuth())
+
+		return se.Next()
+	})
+
+	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
+		icalGroup := se.Router.Group("/api/dp/ical")
+		
+		icalGroup.GET("/{user}/{hash}/calendar.ics", getUserCalendar(se.App))
 
 		return se.Next()
 	})
