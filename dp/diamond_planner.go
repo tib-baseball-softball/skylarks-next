@@ -24,6 +24,10 @@ func NewDiamondPlanner(client bsm.APIClient, pushService PushService) *DiamondPl
 	dp := &DiamondPlanner{
 		pocketbase.New(),
 	}
+	
+	if os.Getenv("APPLICATION_SECRET") == "" {
+		log.Fatal("APPLICATION_SECRET not set, error loading environment variables")
+	}
 
 	isGoRun := strings.HasPrefix(os.Args[0], os.TempDir())
 
@@ -99,6 +103,10 @@ func BindDPHooks(app core.App, client bsm.APIClient, pushService PushService) {
 
 	app.OnRecordAfterCreateSuccess(UserCollection).BindFunc(func(e *core.RecordEvent) error {
 		return NotifyAdminsUserCreation(e, pushService)
+	})
+	
+	app.OnRecordEnrich(UserCollection).BindFunc(func(e *core.RecordEnrichEvent) error {
+		return AddUserICalLink(e)
 	})
 
 	app.OnRecordUpdateExecute(UserCollection).BindFunc(func(event *core.RecordEvent) error {
