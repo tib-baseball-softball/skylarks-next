@@ -1,17 +1,11 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-20T11:17:51.039Z\n"
-"PO-Revision-Date: 2026-02-20T11:17:51.039Z\n"
-"Last-Translator: \n"
-"Language: en\n"
-"Language-Team: \n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
 "Source-Language: en\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: src/routes/+page.svelte
 msgid "Hero"
@@ -25,13 +19,12 @@ msgstr "Diamond Planner"
 msgid "Berlin Skylarks Team App"
 msgstr "Berlin Skylarks Team App"
 
-#: src/routes/+page.svelte
-msgid ""
-"The core functionality of this app (getting up-to-date information about games, standings and public club\n"
-"information) is available without logging in."
-msgstr ""
-"The core functionality of this app (getting up-to-date information about games, standings and public club\n"
-"information) is available without logging in."
+#~ msgid ""
+#~ "The core functionality of this app (getting up-to-date information about games, standings and public club\n"
+#~ "information) is available without logging in."
+#~ msgstr ""
+#~ "The core functionality of this app (getting up-to-date information about games, standings and public club\n"
+#~ "information) is available without logging in."
 
 #: src/routes/+page.svelte
 msgid "To access internal team information and participate in team activities, please <0>log in to your account.</0>"
@@ -162,6 +155,7 @@ msgstr "Personal Stats"
 msgid "Player Profile"
 msgstr "Player Profile"
 
+#: src/lib/dp/components/meta/SidebarNavigation.svelte
 #: src/lib/dp/components/meta/SidebarNavigation.svelte
 #: src/routes/(dp)/(protected)/account/[user]/communityservice/+page.svelte
 msgid "Community Service"
@@ -335,6 +329,7 @@ msgid "Age Group"
 msgstr "Age Group"
 
 #: src/lib/dp/components/forms/TeamForm.svelte
+#: src/lib/dp/components/forms/TeamForm.svelte
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 #: src/lib/dp/components/team/TeamListTeaser.svelte
 #: src/lib/tib/components/table/StandingsTable.svelte
@@ -380,13 +375,12 @@ msgstr "Create new Team"
 msgid "Signup Key"
 msgstr "Signup Key"
 
-#: src/lib/dp/components/forms/TeamForm.svelte
-msgid ""
-"A valid signup key needs to be entered upon user account creation.\n"
-"New users are automatically added as members to the team corresponding to the signup key used."
-msgstr ""
-"A valid signup key needs to be entered upon user account creation.\n"
-"New users are automatically added as members to the team corresponding to the signup key used."
+#~ msgid ""
+#~ "A valid signup key needs to be entered upon user account creation.\n"
+#~ "New users are automatically added as members to the team corresponding to the signup key used."
+#~ msgstr ""
+#~ "A valid signup key needs to be entered upon user account creation.\n"
+#~ "New users are automatically added as members to the team corresponding to the signup key used."
 
 #: src/lib/dp/components/forms/EventForm.svelte
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
@@ -526,6 +520,7 @@ msgid "It is not possible to remove the last admin from a club. <0/> Caution: Yo
 msgstr "It is not possible to remove the last admin from a club. <0/> Caution: You can remove yourself as admin, losing all access rights!"
 
 #: src/lib/dp/components/announcements/AnnouncementCard.svelte
+#: src/lib/dp/components/forms/AnnouncementForm.svelte
 #: src/lib/dp/components/forms/AnnouncementForm.svelte
 #: src/routes/(dp)/(protected)/account/announcements/[announcement]/+page.svelte
 msgid "Announcement"
@@ -723,15 +718,14 @@ msgstr "Join Team"
 msgid "Admin Section"
 msgstr "Admin Section"
 
-#: src/lib/dp/components/team/TeamAdminSection.svelte
-msgid ""
-"Events of type \"Game\" don't need to be created manually.\n"
-"All data can be imported from BSM and kept in sync with\n"
-"the current state."
-msgstr ""
-"Events of type \"Game\" don't need to be created manually.\n"
-"All data can be imported from BSM and kept in sync with\n"
-"the current state."
+#~ msgid ""
+#~ "Events of type \"Game\" don't need to be created manually.\n"
+#~ "All data can be imported from BSM and kept in sync with\n"
+#~ "the current state."
+#~ msgstr ""
+#~ "Events of type \"Game\" don't need to be created manually.\n"
+#~ "All data can be imported from BSM and kept in sync with\n"
+#~ "the current state."
 
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 msgid "Setup Games Import"
@@ -744,31 +738,30 @@ msgstr "Games Import Setup for {0}"
 
 #: src/lib/dp/components/event/EventSeriesView.svelte
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
+#: src/lib/dp/components/forms/EventSeriesForm.svelte
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 msgid "Event Series"
 msgstr "Event Series"
 
-#: src/lib/dp/components/team/TeamAdminSection.svelte
-msgid ""
-"Manage all recurring series of events (mostly of type\n"
-"\"Practice\") that take place on the same day every week."
-msgstr ""
-"Manage all recurring series of events (mostly of type\n"
-"\"Practice\") that take place on the same day every week."
+#~ msgid ""
+#~ "Manage all recurring series of events (mostly of type\n"
+#~ "\"Practice\") that take place on the same day every week."
+#~ msgstr ""
+#~ "Manage all recurring series of events (mostly of type\n"
+#~ "\"Practice\") that take place on the same day every week."
 
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 msgid "Single Events"
 msgstr "Single Events"
 
-#: src/lib/dp/components/team/TeamAdminSection.svelte
-msgid ""
-"Single Events are not connected to any other events and\n"
-"don't contain additional logic. Well suited for one-off\n"
-"occurrences."
-msgstr ""
-"Single Events are not connected to any other events and\n"
-"don't contain additional logic. Well suited for one-off\n"
-"occurrences."
+#~ msgid ""
+#~ "Single Events are not connected to any other events and\n"
+#~ "don't contain additional logic. Well suited for one-off\n"
+#~ "occurrences."
+#~ msgstr ""
+#~ "Single Events are not connected to any other events and\n"
+#~ "don't contain additional logic. Well suited for one-off\n"
+#~ "occurrences."
 
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 msgid "Create Single Event"
@@ -804,6 +797,7 @@ msgstr "No location provided."
 
 #: src/lib/dp/components/event/EventPageAdminSection.svelte
 #: src/lib/dp/components/event/EventTypeBadge.svelte
+#: src/lib/dp/components/forms/EventForm.svelte
 #: src/lib/dp/components/forms/EventForm.svelte
 msgid "Event"
 msgstr "Event"
@@ -871,17 +865,16 @@ msgstr "Show leagues for"
 msgid "League"
 msgstr "League"
 
-#: src/lib/dp/components/forms/TeamGamesModal.svelte
-msgid ""
-"To import games automatically, Diamond Planner needs to know the league this team is currently\n"
-"playing in.\n"
-"The league is imported from BSM and changes every season (even if the actual league name is still\n"
-"the same)."
-msgstr ""
-"To import games automatically, Diamond Planner needs to know the league this team is currently\n"
-"playing in.\n"
-"The league is imported from BSM and changes every season (even if the actual league name is still\n"
-"the same)."
+#~ msgid ""
+#~ "To import games automatically, Diamond Planner needs to know the league this team is currently\n"
+#~ "playing in.\n"
+#~ "The league is imported from BSM and changes every season (even if the actual league name is still\n"
+#~ "the same)."
+#~ msgstr ""
+#~ "To import games automatically, Diamond Planner needs to know the league this team is currently\n"
+#~ "playing in.\n"
+#~ "The league is imported from BSM and changes every season (even if the actual league name is still\n"
+#~ "the same)."
 
 #. 0: form?.title
 #: src/lib/dp/components/forms/EventForm.svelte
@@ -933,27 +926,25 @@ msgstr "Edit Event Series \"{0}\""
 msgid "Create new Event Series for {0}"
 msgstr "Create new Event Series for {0}"
 
-#: src/lib/dp/components/forms/EventSeriesForm.svelte
-msgid ""
-"When editing an event series, only select fields can be changed because editing past events would affect\n"
-"participation statistics. If you want to change a long-running practice series, end the previous one by\n"
-"setting the end date accordingly and create a new series."
-msgstr ""
-"When editing an event series, only select fields can be changed because editing past events would affect\n"
-"participation statistics. If you want to change a long-running practice series, end the previous one by\n"
-"setting the end date accordingly and create a new series."
+#~ msgid ""
+#~ "When editing an event series, only select fields can be changed because editing past events would affect\n"
+#~ "participation statistics. If you want to change a long-running practice series, end the previous one by\n"
+#~ "setting the end date accordingly and create a new series."
+#~ msgstr ""
+#~ "When editing an event series, only select fields can be changed because editing past events would affect\n"
+#~ "participation statistics. If you want to change a long-running practice series, end the previous one by\n"
+#~ "setting the end date accordingly and create a new series."
 
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
 msgid "Series First Occurrence <0/>"
 msgstr "Series First Occurrence <0/>"
 
-#: src/lib/dp/components/forms/EventSeriesForm.svelte
-msgid ""
-"This is the first event in your new series. It will have the exact start time you enter here.<0/> The next events are then created <1>RECURRING INTERVAL</1> days after the previous one and all will have\n"
-"the end time set to <2>DURATION</2> minutes after their start time."
-msgstr ""
-"This is the first event in your new series. It will have the exact start time you enter here.<0/> The next events are then created <1>RECURRING INTERVAL</1> days after the previous one and all will have\n"
-"the end time set to <2>DURATION</2> minutes after their start time."
+#~ msgid ""
+#~ "This is the first event in your new series. It will have the exact start time you enter here.<0/> The next events are then created <1>RECURRING INTERVAL</1> days after the previous one and all will have\n"
+#~ "the end time set to <2>DURATION</2> minutes after their start time."
+#~ msgstr ""
+#~ "This is the first event in your new series. It will have the exact start time you enter here.<0/> The next events are then created <1>RECURRING INTERVAL</1> days after the previous one and all will have\n"
+#~ "the end time set to <2>DURATION</2> minutes after their start time."
 
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
 msgid "Series End <0/> <1>No events will be created after this date.</1>"
@@ -2965,13 +2956,12 @@ msgstr "CF"
 msgid "RF"
 msgstr "RF"
 
-#: src/lib/dp/components/forms/AnnouncementForm.svelte
-msgid ""
-"Single link in case the announcement is used as a call to\n"
-"action."
-msgstr ""
-"Single link in case the announcement is used as a call to\n"
-"action."
+#~ msgid ""
+#~ "Single link in case the announcement is used as a call to\n"
+#~ "action."
+#~ msgstr ""
+#~ "Single link in case the announcement is used as a call to\n"
+#~ "action."
 
 #. 0: clubTeam.name; 1: clubTeam.season
 #: src/routes/(tib)/teams/[id]/+page.svelte
@@ -3118,3 +3108,48 @@ msgstr "Will be set automatically if left blank."
 #: src/lib/dp/components/forms/UserDetailsForm.svelte
 msgid "Profile Image"
 msgstr "Profile Image"
+
+#: src/routes/+page.svelte
+msgid "The core functionality of this app (getting up-to-date information about games, standings and public club information) is available without logging in."
+msgstr "The core functionality of this app (getting up-to-date information about games, standings and public club information) is available without logging in."
+
+#. 0: email
+#: src/lib/dp/client.svelte.ts
+msgid "Signed in as {0}"
+msgstr "Signed in as {0}"
+
+#: src/lib/dp/client.svelte.ts
+msgid "Logout successful"
+msgstr "Logout successful"
+
+#: src/lib/dp/components/team/TeamAdminSection.svelte
+msgid "Events of type \"Game\" don't need to be created manually. All data can be imported from BSM and kept in sync with the current state."
+msgstr "Events of type \"Game\" don't need to be created manually. All data can be imported from BSM and kept in sync with the current state."
+
+#: src/lib/dp/components/team/TeamAdminSection.svelte
+msgid "Manage all recurring series of events (mostly of type \"Practice\") that take place on the same day every week."
+msgstr "Manage all recurring series of events (mostly of type \"Practice\") that take place on the same day every week."
+
+#: src/lib/dp/components/team/TeamAdminSection.svelte
+msgid "Single Events are not connected to any other events and don't contain additional logic. Well suited for one-off occurrences."
+msgstr "Single Events are not connected to any other events and don't contain additional logic. Well suited for one-off occurrences."
+
+#: src/lib/dp/components/forms/AnnouncementForm.svelte
+msgid "Single link in case the announcement is used as a call to action."
+msgstr "Single link in case the announcement is used as a call to action."
+
+#: src/lib/dp/components/forms/TeamGamesModal.svelte
+msgid "To import games automatically, Diamond Planner needs to know the league this team is currently playing in. The league is imported from BSM and changes every season (even if the actual league name is still the same)."
+msgstr "To import games automatically, Diamond Planner needs to know the league this team is currently playing in. The league is imported from BSM and changes every season (even if the actual league name is still the same)."
+
+#: src/lib/dp/components/forms/TeamForm.svelte
+msgid "A valid signup key needs to be entered upon user account creation. New users are automatically added as members to the team corresponding to the signup key used."
+msgstr "A valid signup key needs to be entered upon user account creation. New users are automatically added as members to the team corresponding to the signup key used."
+
+#: src/lib/dp/components/forms/EventSeriesForm.svelte
+msgid "When editing an event series, only select fields can be changed because editing past events would affect participation statistics. If you want to change a long-running practice series, end the previous one by setting the end date accordingly and create a new series."
+msgstr "When editing an event series, only select fields can be changed because editing past events would affect participation statistics. If you want to change a long-running practice series, end the previous one by setting the end date accordingly and create a new series."
+
+#: src/lib/dp/components/forms/EventSeriesForm.svelte
+msgid "This is the first event in your new series. It will have the exact start time you enter here.<0/> The next events are then created <1>RECURRING INTERVAL</1> days after the previous one and all will have the end time set to <2>DURATION</2> minutes after their start time."
+msgstr "This is the first event in your new series. It will have the exact start time you enter here.<0/> The next events are then created <1>RECURRING INTERVAL</1> days after the previous one and all will have the end time set to <2>DURATION</2> minutes after their start time."
