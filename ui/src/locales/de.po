@@ -1551,23 +1551,23 @@ msgstr "Status"
 
 #: src/lib/dp/components/settings/ICalSection.svelte
 msgid "Copied to clipboard!"
-msgstr "Copied to clipboard!"
+msgstr "In Zwischenablage kopiert!"
 
 #: src/lib/dp/components/settings/ICalSection.svelte
 msgid "Calendar Import"
-msgstr "Calendar Import"
+msgstr "Kalender-Import"
 
 #: src/lib/dp/components/settings/ICalSection.svelte
 msgid "Your personal calendar link"
-msgstr "Your personal calendar link"
+msgstr "Dein persönlicher Kalender-Link"
 
 #: src/lib/dp/components/settings/ICalSection.svelte
 msgid "Copy to clipboard"
-msgstr "Copy to clipboard"
+msgstr "In Zwischenablage kopieren"
 
 #: src/lib/dp/components/settings/ICalSection.svelte
 msgid "Download .ics file"
-msgstr "Download .ics file"
+msgstr ".ics-Datei herunterladen"
 
 #: src/lib/dp/components/settings/PushSettingsSection.svelte
 msgid "Push notifications are disabled on your browser."
