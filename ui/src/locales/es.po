@@ -3048,3 +3048,7 @@ msgstr "Enlaces"
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Player List"
 msgstr "Lista de jugadores"
+
+#: src/lib/dp/components/settings/ICalSection.svelte
+msgid "This link includes all events for all teams that you are a member of, going back one year."
+msgstr ""

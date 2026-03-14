@@ -20,7 +20,13 @@
   </header>
 
   <div class="card-body">
-    <h3 class="h4">Your personal calendar link</h3>
+    <div>
+      <h3 class="h4">Your personal calendar link</h3>
+      <p class="cal-hint">
+        This link includes all events for all teams that you are a member of,
+        going back one year.
+      </p>
+    </div>
     <pre class="">{model?.ical_link}</pre>
     <div class="button-container">
       <button
@@ -47,9 +53,14 @@
   .button-container {
     display: flex;
     gap: calc(var(--spacing) * 3);
+    flex-wrap: wrap;
   }
 
   pre {
     overflow-x: auto;
+  }
+  
+  .cal-hint {
+    margin-block-start: var(--spacing);
   }
 </style>
