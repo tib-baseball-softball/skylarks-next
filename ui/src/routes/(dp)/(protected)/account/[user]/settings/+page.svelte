@@ -7,6 +7,7 @@
   import ChangeEmailForm from "$lib/dp/auth/ChangeEmailForm.svelte";
   import UserDetailsForm from "$lib/dp/components/forms/UserDetailsForm.svelte";
   import PushSettingsSection from "$lib/dp/components/settings/PushSettingsSection.svelte";
+  import ICalSection from "$lib/dp/components/settings/ICalSection.svelte";
 
   let {params}: PageProps = $props();
 
@@ -91,6 +92,10 @@
 
   <section class="card preset-tonal-surface">
     <PushSettingsSection userID={params.user}/>
+  </section>
+  
+  <section class="card preset-tonal-surface">
+    <ICalSection/>
   </section>
 
 {:else}
