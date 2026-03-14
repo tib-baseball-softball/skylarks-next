@@ -670,7 +670,8 @@ msgstr "Juego"
 #: src/lib/dp/components/event/EventTypeBadge.svelte
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Practice"
-msgstr "Práctica\"#. placeholder {0}: modelName"
+msgstr "Práctica"
+#. placeholder {0}: modelName
 
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Other"
@@ -1146,7 +1147,8 @@ msgstr "Miembro de la junta <0/>"
 
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Member <0/>"
-msgstr "Miembro <0/>\"#: src/lib/dp/auth/LoginForm.svelte"
+msgstr "Miembro <0/>"
+#: src/lib/dp/auth/LoginForm.svelte
 
 #: src/lib/dp/components/communityservice/CommunityServiceItemCard.svelte
 #: src/routes/(tib)/club/+page.svelte
@@ -1176,7 +1178,8 @@ msgid ""
 "profile on the website and apps."
 msgstr ""
 "Tienes la opción de mostrar tus datos de jugador en tu perfil público\n"
-"en el sitio web y las aplicaciones.\"#. placeholder {0}: set.user.first_name"
+"en el sitio web y las aplicaciones."
+#. placeholder {0}: set.user.first_name
 
 #: src/lib/dp/components/user/PlayerDataProfileSection.svelte
 msgid ""
@@ -2041,7 +2044,8 @@ msgid ""
 msgstr ""
 "Puedes usar los identificadores especiales <0/> y <1/> para obtener\n"
 "la gorra de local y visitante de los Skylarks en lugar de una\n"
-"genérica de color.\"#. placeholder {0}: model.first_name + \" \" + model.last_name"
+"genérica de color."
+#. placeholder {0}: model.first_name + \" \" + model.last_name
 
 #: src/lib/dp/components/forms/UniformSetForm.svelte
 msgid "Jersey Color"
@@ -2294,7 +2298,8 @@ msgstr "¿Olvidó su contraseña?"
 
 #: src/lib/dp/auth/LoginForm.svelte
 msgid "Sign in to Diamond Planner"
-msgstr "Iniciar sesión en Diamond Planner\"#. placeholder {0}: entry.title"
+msgstr "Iniciar sesión en Diamond Planner"
+#. placeholder {0}: entry.title
 
 #: src/lib/dp/auth/LoginForm.svelte
 msgid "Log In"
@@ -3107,7 +3112,7 @@ msgstr "Imagen de perfil"
 
 #: src/routes/+page.svelte
 msgid "The core functionality of this app (getting up-to-date information about games, standings and public club information) is available without logging in."
-msgstr ""
+msgstr "La funcionalidad principal de esta aplicación (obtener información actualizada sobre juegos, clasificaciones e información pública del club) está disponible sin iniciar sesión."
 
 #. 0: email
 #: src/lib/dp/client.svelte.ts
@@ -3120,32 +3125,32 @@ msgstr ""
 
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 msgid "Events of type \"Game\" don't need to be created manually. All data can be imported from BSM and kept in sync with the current state."
-msgstr ""
+msgstr "Los eventos de tipo \"Partido\" no necesitan crearse manualmente. Todos los datos pueden importarse desde BSM y mantenerse sincronizados con el estado actual."
 
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 msgid "Manage all recurring series of events (mostly of type \"Practice\") that take place on the same day every week."
-msgstr ""
+msgstr "Gestiona todas las series recurrentes de eventos (principalmente de tipo \"Práctica\") que tienen lugar el mismo día cada semana."
 
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 msgid "Single Events are not connected to any other events and don't contain additional logic. Well suited for one-off occurrences."
-msgstr ""
+msgstr "Los eventos únicos no están conectados a ningún otro evento y no contienen lógica adicional. Muy adecuados para ocurrencias únicas."
 
 #: src/lib/dp/components/forms/AnnouncementForm.svelte
 msgid "Single link in case the announcement is used as a call to action."
-msgstr ""
+msgstr "Un único enlace en caso de que el anuncio se use como una llamada a la acción."
 
 #: src/lib/dp/components/forms/TeamGamesModal.svelte
 msgid "To import games automatically, Diamond Planner needs to know the league this team is currently playing in. The league is imported from BSM and changes every season (even if the actual league name is still the same)."
-msgstr ""
+msgstr "Para importar los partidos automáticamente, Diamond Planner necesita saber la liga en la que está jugando actualmente este equipo. La liga se importa desde BSM y cambia cada temporada (incluso si el nombre real de la liga sigue siendo el mismo)."
 
 #: src/lib/dp/components/forms/TeamForm.svelte
 msgid "A valid signup key needs to be entered upon user account creation. New users are automatically added as members to the team corresponding to the signup key used."
-msgstr ""
+msgstr "Se debe introducir una clave de registro válida al crear la cuenta de usuario. Los nuevos usuarios se añaden automáticamente como miembros al equipo correspondiente a la clave de registro utilizada."
 
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
 msgid "When editing an event series, only select fields can be changed because editing past events would affect participation statistics. If you want to change a long-running practice series, end the previous one by setting the end date accordingly and create a new series."
-msgstr ""
+msgstr "Al editar una serie de eventos, solo se pueden cambiar algunos campos porque la edición de eventos pasados afectaría las estadísticas de participación. Si quieres cambiar una serie de prácticas de larga duración, finaliza la anterior estableciendo la fecha de finalización de acuerdo con ello y crea una nueva serie."
 
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
 msgid "This is the first event in your new series. It will have the exact start time you enter here.<0/> The next events are then created <1>RECURRING INTERVAL</1> days after the previous one and all will have the end time set to <2>DURATION</2> minutes after their start time."
-msgstr ""
+msgstr "Este es el primer evento en su nueva serie. Tendrá la hora de inicio exacta que ingrese aquí.<0/> Los próximos eventos se crean <1>INTERVALO RECURRENTE</1> días después del anterior y todos tendrán la hora de finalización establecida en <2>DURACIÓN</2> minutos después de su hora de inicio."

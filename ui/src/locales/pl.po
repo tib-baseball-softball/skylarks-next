@@ -1175,7 +1175,8 @@ msgid ""
 "profile on the website and apps."
 msgstr ""
 "Masz możliwość wyświetlania swoich danych zawodnika w publicznym profilu\n"
-"na stronie internetowej i w aplikacjach.\"#. placeholder {0}: set.user.first_name"
+"na stronie internetowej i w aplikacjach."
+#. placeholder {0}: set.user.first_name
 
 #: src/lib/dp/components/user/PlayerDataProfileSection.svelte
 msgid ""
@@ -2040,7 +2041,8 @@ msgid ""
 msgstr ""
 "Możesz użyć specjalnych identyfikatorów <0/> i <1/>, aby otrzymać\n"
 "czapkę Skylarks Home i Road zamiast\n"
-"generycznej kolorowej.\"#. placeholder {0}: model.first_name + \" \" + model.last_name"
+"generycznej kolorowej."
+#. placeholder {0}: model.first_name + \" \" + model.last_name
 
 #: src/lib/dp/components/forms/UniformSetForm.svelte
 msgid "Jersey Color"
@@ -3106,7 +3108,7 @@ msgstr "Zdjęcie profilowe"
 
 #: src/routes/+page.svelte
 msgid "The core functionality of this app (getting up-to-date information about games, standings and public club information) is available without logging in."
-msgstr ""
+msgstr "Podstawowa funkcjonalność tej aplikacji (aktualne informacje o meczach, tabele wyników i publiczne informacje o klubie) jest dostępna bez logowania."
 
 #. 0: email
 #: src/lib/dp/client.svelte.ts
@@ -3119,32 +3121,32 @@ msgstr ""
 
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 msgid "Events of type \"Game\" don't need to be created manually. All data can be imported from BSM and kept in sync with the current state."
-msgstr ""
+msgstr "Wydarzenia typu \"Mecz\" nie muszą być tworzone ręcznie. Wszystkie dane można zaimportować z BSM i synchronizować z aktualnym stanem."
 
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 msgid "Manage all recurring series of events (mostly of type \"Practice\") that take place on the same day every week."
-msgstr ""
+msgstr "Zarządzaj wszystkimi cyklicznymi seriami wydarzeń (głównie typu \"Trening\"), które odbywają się tego samego dnia każdego tygodnia."
 
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 msgid "Single Events are not connected to any other events and don't contain additional logic. Well suited for one-off occurrences."
-msgstr ""
+msgstr "Pojedyncze wydarzenia nie są powiązane z żadnymi innymi wydarzeniami i nie zawierają dodatkowej logiki. Dobrze nadają się do jednorazowych okazji."
 
 #: src/lib/dp/components/forms/AnnouncementForm.svelte
 msgid "Single link in case the announcement is used as a call to action."
-msgstr ""
+msgstr "Jeden link na wypadek, gdy ogłoszenie jest używane jako wezwanie do działania."
 
 #: src/lib/dp/components/forms/TeamGamesModal.svelte
 msgid "To import games automatically, Diamond Planner needs to know the league this team is currently playing in. The league is imported from BSM and changes every season (even if the actual league name is still the same)."
-msgstr ""
+msgstr "Aby automatycznie importować gry, Diamond Planner musi znać ligę, w której obecnie gra ta drużyna. Liga jest importowana z BSM i zmienia się co sezon (nawet jeśli rzeczywista nazwa ligi jest nadal taka sama)."
 
 #: src/lib/dp/components/forms/TeamForm.svelte
 msgid "A valid signup key needs to be entered upon user account creation. New users are automatically added as members to the team corresponding to the signup key used."
-msgstr ""
+msgstr "Podczas tworzenia konta użytkownika należy wprowadzić prawidłowy klucz rejestracyjny. Nowi użytkownicy są automatycznie dodawani jako członkowie do drużyny odpowiadającej używanemu kluczowi rejestracyjnemu."
 
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
 msgid "When editing an event series, only select fields can be changed because editing past events would affect participation statistics. If you want to change a long-running practice series, end the previous one by setting the end date accordingly and create a new series."
-msgstr ""
+msgstr "Podczas edycji serii wydarzeń można zmienić tylko wybrane pola, ponieważ edycja minionych wydarzeń wpłynęłaby na statystyki uczestnictwa. Jeśli chcesz zmienić długotrwałą serię treningów, zakończ poprzednią, ustawiając odpowiednio datę zakończenia i utwórz nową serię."
 
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
 msgid "This is the first event in your new series. It will have the exact start time you enter here.<0/> The next events are then created <1>RECURRING INTERVAL</1> days after the previous one and all will have the end time set to <2>DURATION</2> minutes after their start time."
-msgstr ""
+msgstr "To jest pierwsze wydarzenie w Twojej nowej serii. Będzie miało dokładny czas rozpoczęcia, który tutaj wprowadzisz. <0/> Następne wydarzenia są tworzone <"

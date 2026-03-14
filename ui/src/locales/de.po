@@ -3097,7 +3097,7 @@ msgstr "Profilbild"
 
 #: src/routes/+page.svelte
 msgid "The core functionality of this app (getting up-to-date information about games, standings and public club information) is available without logging in."
-msgstr ""
+msgstr "Die Kernfunktionen dieser App (aktuelle Informationen zu Spielen, Tabellen und öffentlichen Vereinsinformationen) sind ohne Anmeldung verfügbar."
 
 #. 0: email
 #: src/lib/dp/client.svelte.ts
@@ -3110,32 +3110,32 @@ msgstr ""
 
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 msgid "Events of type \"Game\" don't need to be created manually. All data can be imported from BSM and kept in sync with the current state."
-msgstr ""
+msgstr "Veranstaltungen vom Typ \"Spiel\" müssen nicht manuell erstellt werden. Alle Daten können von BSM importiert und mit dem aktuellen Stand synchronisiert werden."
 
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 msgid "Manage all recurring series of events (mostly of type \"Practice\") that take place on the same day every week."
-msgstr ""
+msgstr "Verwalte alle wiederkehrenden Eventserien (meist vom Typ \"Training\"), die jede Woche am selben Tag stattfinden."
 
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 msgid "Single Events are not connected to any other events and don't contain additional logic. Well suited for one-off occurrences."
-msgstr ""
+msgstr "Einzelne Events sind nicht mit anderen Events verbunden und enthalten keine zusätzliche Logik. Gut geeignet für einmalige Ereignisse."
 
 #: src/lib/dp/components/forms/AnnouncementForm.svelte
 msgid "Single link in case the announcement is used as a call to action."
-msgstr ""
+msgstr "Einzelner Link für den Fall, dass die Ankündigung als Call To Action verwendet wird."
 
 #: src/lib/dp/components/forms/TeamGamesModal.svelte
 msgid "To import games automatically, Diamond Planner needs to know the league this team is currently playing in. The league is imported from BSM and changes every season (even if the actual league name is still the same)."
-msgstr ""
+msgstr "Um Spiele automatisch zu importieren, muss Diamond Planner wissen, in welcher Liga dieses Team derzeit spielt. Die Liga wird von BSM importiert und ändert sich jede Saison (auch wenn der tatsächliche Liganame gleich bleibt)."
 
 #: src/lib/dp/components/forms/TeamForm.svelte
 msgid "A valid signup key needs to be entered upon user account creation. New users are automatically added as members to the team corresponding to the signup key used."
-msgstr ""
+msgstr "Bei der Erstellung eines Benutzerkontos muss ein gültiger Anmeldeschlüssel eingegeben werden. Neue Benutzer werden automatisch als Mitglieder dem Team hinzugefügt, das dem verwendeten Anmeldeschlüssel entspricht."
 
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
 msgid "When editing an event series, only select fields can be changed because editing past events would affect participation statistics. If you want to change a long-running practice series, end the previous one by setting the end date accordingly and create a new series."
-msgstr ""
+msgstr "Beim Bearbeiten einer Veranstaltungsreihe können nur bestimmte Felder geändert werden, da die Bearbeitung vergangener Veranstaltungen die Teilnehmerstatistiken beeinflussen würde. Wenn du eine längere Serie ändern möchtest, beende die vorherige, indem du das Enddatum entsprechend festlegst und erstelle eine neue Serie."
 
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
 msgid "This is the first event in your new series. It will have the exact start time you enter here.<0/> The next events are then created <1>RECURRING INTERVAL</1> days after the previous one and all will have the end time set to <2>DURATION</2> minutes after their start time."
-msgstr ""
+msgstr "Dies ist das erste Ereignis in deiner neuen Serie. Es hat die genaue Startzeit, die du hier eingibst.<0/> Die nächsten Ereignisse werden dann <1>WIEDERHOLUNGSINTERVALL</1> Tage nach dem vorherigen erstellt und alle haben die Endzeit auf <2>DAUER</2> Minuten nach ihrer Startzeit gesetzt."

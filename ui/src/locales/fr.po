@@ -662,12 +662,14 @@ msgstr "Tous"
 #: src/lib/dp/components/event/EventTypeBadge.svelte
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Game"
-msgstr "Match\"#: src/lib/dp/components/event/EventTypeBadge.svelte"
+msgstr "Match"
+#: src/lib/dp/components/event/EventTypeBadge.svelte
 
 #: src/lib/dp/components/event/EventTypeBadge.svelte
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Practice"
-msgstr "Entraînement\"#. placeholder {0}: model.first_name + \" \" + model.last_name"
+msgstr "Entraînement"
+#. placeholder {0}: model.first_name + \" \" + model.last_name
 
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Other"
@@ -1137,7 +1139,8 @@ msgstr "Membre du conseil <0/>"
 
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Member <0/>"
-msgstr "Membre <0/>\"#: src/lib/dp/auth/LoginForm.svelte"
+msgstr "Membre <0/>"
+#: src/lib/dp/auth/LoginForm.svelte
 
 #: src/lib/dp/components/communityservice/CommunityServiceItemCard.svelte
 #: src/routes/(tib)/club/+page.svelte
@@ -2032,7 +2035,8 @@ msgid ""
 msgstr ""
 "Vous pouvez utiliser les identifiants spéciaux <0/> et <1/> pour obtenir\n"
 "la casquette domicile et extérieur des Skylarks au lieu d'une\n"
-"casquette de couleur générique.\"#: src/lib/dp/components/event/EventTypeBadge.svelte"
+"casquette de couleur générique."
+#: src/lib/dp/components/event/EventTypeBadge.svelte
 
 #: src/lib/dp/components/forms/UniformSetForm.svelte
 msgid "Jersey Color"
@@ -2660,7 +2664,8 @@ msgstr "Sélectionnez tous les {0} membres qui doivent être ajoutés à l'équi
 
 #: src/lib/dp/components/forms/TeamMembersForm.svelte
 msgid "Team members"
-msgstr "Membres de l'équipe\"#: src/lib/dp/components/forms/ParticipationForm.svelte"
+msgstr "Membres de l'équipe"
+#: src/lib/dp/components/forms/ParticipationForm.svelte
 
 #: src/lib/dp/components/forms/TeamMembersForm.svelte
 msgid "Selected Users:"
@@ -3098,7 +3103,7 @@ msgstr "Image de profil"
 
 #: src/routes/+page.svelte
 msgid "The core functionality of this app (getting up-to-date information about games, standings and public club information) is available without logging in."
-msgstr ""
+msgstr "La fonctionnalité principale de cette application (obtenir des informations à jour sur les jeux, les classements et les informations publiques du club) est disponible sans se connecter."
 
 #. 0: email
 #: src/lib/dp/client.svelte.ts
@@ -3111,32 +3116,32 @@ msgstr ""
 
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 msgid "Events of type \"Game\" don't need to be created manually. All data can be imported from BSM and kept in sync with the current state."
-msgstr ""
+msgstr "Les événements de type \"Match\" n'ont pas besoin d'être créés manuellement. Toutes les données peuvent être importées depuis BSM et maintenues synchronisées avec l'état actuel."
 
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 msgid "Manage all recurring series of events (mostly of type \"Practice\") that take place on the same day every week."
-msgstr ""
+msgstr "Gérer toutes les séries d'événements récurrents (principalement de type \"Entraînement\") qui ont lieu le même jour chaque semaine."
 
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 msgid "Single Events are not connected to any other events and don't contain additional logic. Well suited for one-off occurrences."
-msgstr ""
+msgstr "Les événements uniques ne sont pas connectés à d'autres événements et ne contiennent pas de logique supplémentaire. Convient parfaitement aux occurrences ponctuelles."
 
 #: src/lib/dp/components/forms/AnnouncementForm.svelte
 msgid "Single link in case the announcement is used as a call to action."
-msgstr ""
+msgstr "Lien unique au cas où l’annonce est utilisée comme appel à l’action."
 
 #: src/lib/dp/components/forms/TeamGamesModal.svelte
 msgid "To import games automatically, Diamond Planner needs to know the league this team is currently playing in. The league is imported from BSM and changes every season (even if the actual league name is still the same)."
-msgstr ""
+msgstr "Pour importer des matchs automatiquement, Diamond Planner doit connaître la ligue dans laquelle cette équipe joue actuellement. La ligue est importée de BSM et change à chaque saison (même si le nom de la ligue est toujours le même)."
 
 #: src/lib/dp/components/forms/TeamForm.svelte
 msgid "A valid signup key needs to be entered upon user account creation. New users are automatically added as members to the team corresponding to the signup key used."
-msgstr ""
+msgstr "Une clé d'inscription valide doit être saisie lors de la création d'un compte utilisateur. Les nouveaux utilisateurs sont automatiquement ajoutés en tant que membres à l'équipe correspondant à la clé d'inscription utilisée."
 
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
 msgid "When editing an event series, only select fields can be changed because editing past events would affect participation statistics. If you want to change a long-running practice series, end the previous one by setting the end date accordingly and create a new series."
-msgstr ""
+msgstr "Lors de la modification d'une série d'événements, seuls certains champs peuvent être modifiés car la modification d'événements passés affecterait les statistiques de participation. Si vous souhaitez modifier une longue série de pratiques, mettez fin à la série précédente en définissant la date de fin en conséquence et créez une nouvelle série."
 
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
 msgid "This is the first event in your new series. It will have the exact start time you enter here.<0/> The next events are then created <1>RECURRING INTERVAL</1> days after the previous one and all will have the end time set to <2>DURATION</2> minutes after their start time."
-msgstr ""
+msgstr "Il s'agit du premier événement de votre nouvelle série. Il aura l'heure de début exacte que vous entrez ici. <0/> Les événements suivants sont ensuite créés <1>INTERVALLE RÉCURRENT</1> jours après le précédent et tous auront l'heure de fin réglée à <2>DURÉE</2> minutes après leur heure de début."

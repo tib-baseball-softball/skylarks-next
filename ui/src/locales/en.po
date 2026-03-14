@@ -130,6 +130,7 @@ msgstr "Teams"
 
 #: src/lib/dp/components/club/ClubDetailCard.svelte
 #: src/lib/dp/components/forms/ClubForm.svelte
+#: src/lib/dp/components/forms/ClubForm.svelte
 #: src/lib/dp/components/forms/TeamForm.svelte
 #: src/lib/dp/components/team/TeamListTeaser.svelte
 #: src/lib/dp/components/team/TeamTeaserCard.svelte
@@ -479,37 +480,34 @@ msgstr "Create new Club"
 msgid "BSM Club ID"
 msgstr "BSM Club ID"
 
-#: src/lib/dp/components/forms/ClubForm.svelte
-msgid ""
-"Can be found in the BSM address bar while editing\n"
-"(e.g. <0>https://bsm.baseball-softball.de/clubs/xxx/edit</0>).\n"
-"Needs to be set for the app to function properly."
-msgstr ""
-"Can be found in the BSM address bar while editing\n"
-"(e.g. <0>https://bsm.baseball-softball.de/clubs/xxx/edit</0>).\n"
-"Needs to be set for the app to function properly."
+#~ msgid ""
+#~ "Can be found in the BSM address bar while editing\n"
+#~ "(e.g. <0>https://bsm.baseball-softball.de/clubs/xxx/edit</0>).\n"
+#~ "Needs to be set for the app to function properly."
+#~ msgstr ""
+#~ "Can be found in the BSM address bar while editing\n"
+#~ "(e.g. <0>https://bsm.baseball-softball.de/clubs/xxx/edit</0>).\n"
+#~ "Needs to be set for the app to function properly."
 
 #: src/lib/dp/components/forms/ClubForm.svelte
 msgid "BSM API Key"
 msgstr "BSM API Key"
 
-#: src/lib/dp/components/forms/ClubForm.svelte
-msgid ""
-"Must be created in BSM in a user's account that has the role \"Team Administration\".\n"
-"If set, all game events for the club can be automatically imported."
-msgstr ""
-"Must be created in BSM in a user's account that has the role \"Team Administration\".\n"
-"If set, all game events for the club can be automatically imported."
+#~ msgid ""
+#~ "Must be created in BSM in a user's account that has the role \"Team Administration\".\n"
+#~ "If set, all game events for the club can be automatically imported."
+#~ msgstr ""
+#~ "Must be created in BSM in a user's account that has the role \"Team Administration\".\n"
+#~ "If set, all game events for the club can be automatically imported."
 
-#: src/lib/dp/components/forms/ClubForm.svelte
-msgid ""
-"Community Service Requirement <0/> <1>Designated community service time amount (in minutes) that each\n"
-"member is expected to provide during a calendar year\n"
-"(e.g. 20h = 1200 minutes).</1>"
-msgstr ""
-"Community Service Requirement <0/> <1>Designated community service time amount (in minutes) that each\n"
-"member is expected to provide during a calendar year\n"
-"(e.g. 20h = 1200 minutes).</1>"
+#~ msgid ""
+#~ "Community Service Requirement <0/> <1>Designated community service time amount (in minutes) that each\n"
+#~ "member is expected to provide during a calendar year\n"
+#~ "(e.g. 20h = 1200 minutes).</1>"
+#~ msgstr ""
+#~ "Community Service Requirement <0/> <1>Designated community service time amount (in minutes) that each\n"
+#~ "member is expected to provide during a calendar year\n"
+#~ "(e.g. 20h = 1200 minutes).</1>"
 
 #: src/lib/dp/components/forms/ClubForm.svelte
 msgid "Club Admins"
@@ -546,6 +544,7 @@ msgstr "Select to add as {0}:"
 
 #: src/lib/dp/components/formElements/MultiSelectCombobox.svelte
 #: src/lib/dp/components/forms/TeamGamesModal.svelte
+#: src/lib/dp/components/team/TeamMembersTableContent.svelte
 #: src/lib/dp/components/team/TeamMembersTableContent.svelte
 #: src/lib/tib/components/favorite/ClubTeamPicker.svelte
 msgid "None"
@@ -1105,15 +1104,14 @@ msgstr "Target:"
 msgid "for {0} {1}"
 msgstr "for {0} {1}"
 
-#: src/routes/(dp)/(protected)/account/[user]/communityservice/+page.svelte
-msgid ""
-"Each club can set a community service target for its members. Members are expected to provide this amount\n"
-"of voluntary working hours each calendar year. You can report your community service hours\n"
-"here, as well as view your previously sent hours and compare with the target."
-msgstr ""
-"Each club can set a community service target for its members. Members are expected to provide this amount\n"
-"of voluntary working hours each calendar year. You can report your community service hours\n"
-"here, as well as view your previously sent hours and compare with the target."
+#~ msgid ""
+#~ "Each club can set a community service target for its members. Members are expected to provide this amount\n"
+#~ "of voluntary working hours each calendar year. You can report your community service hours\n"
+#~ "here, as well as view your previously sent hours and compare with the target."
+#~ msgstr ""
+#~ "Each club can set a community service target for its members. Members are expected to provide this amount\n"
+#~ "of voluntary working hours each calendar year. You can report your community service hours\n"
+#~ "here, as well as view your previously sent hours and compare with the target."
 
 #: src/lib/dp/components/communityservice/CommunityServiceSection.svelte
 msgid "<0/> Create new"
@@ -1124,6 +1122,7 @@ msgid "Create new Community Service Entry"
 msgstr "Create new Community Service Entry"
 
 #: src/lib/dp/components/communityservice/CommunityServiceItemCard.svelte
+#: src/lib/dp/components/forms/ServiceEntryForm.svelte
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Community Service Entry"
 msgstr "Community Service Entry"
@@ -1174,23 +1173,21 @@ msgstr "Player Profile Avatar"
 msgid "Public Profile"
 msgstr "Public Profile"
 
-#: src/lib/dp/components/user/PlayerDataProfileSection.svelte
-msgid ""
-"You have the option to display your player data in your public\n"
-"profile on the website and apps."
-msgstr ""
-"You have the option to display your player data in your public\n"
-"profile on the website and apps."
+#~ msgid ""
+#~ "You have the option to display your player data in your public\n"
+#~ "profile on the website and apps."
+#~ msgstr ""
+#~ "You have the option to display your player data in your public\n"
+#~ "profile on the website and apps."
 
-#: src/lib/dp/components/user/PlayerDataProfileSection.svelte
-msgid ""
-"Please note that all statistics and basic info such as your name and\n"
-"team affiliation is considered public information when participating\n"
-"in official DBV and BSVBB competitions."
-msgstr ""
-"Please note that all statistics and basic info such as your name and\n"
-"team affiliation is considered public information when participating\n"
-"in official DBV and BSVBB competitions."
+#~ msgid ""
+#~ "Please note that all statistics and basic info such as your name and\n"
+#~ "team affiliation is considered public information when participating\n"
+#~ "in official DBV and BSVBB competitions."
+#~ msgstr ""
+#~ "Please note that all statistics and basic info such as your name and\n"
+#~ "team affiliation is considered public information when participating\n"
+#~ "in official DBV and BSVBB competitions."
 
 #: src/lib/dp/components/user/PlayerDataProfileSection.svelte
 msgid "Go to Profile Page"
@@ -1200,6 +1197,7 @@ msgstr "Go to Profile Page"
 msgid "Position is already selected."
 msgstr "Position is already selected."
 
+#: src/lib/dp/components/forms/PlayerDataForm.svelte
 #: src/lib/dp/components/forms/PlayerDataForm.svelte
 msgid "Player data"
 msgstr "Player data"
@@ -1336,13 +1334,12 @@ msgstr "If we have your email ({0}) on file, you will receive a reset password r
 msgid "Error sending reset password request."
 msgstr "Error sending reset password request."
 
-#: src/lib/dp/auth/PasswordRequestButton.svelte
-msgid ""
-"Send change password request for <0/>?\n"
-"You will be logged out and an email with instructions will be sent to your address."
-msgstr ""
-"Send change password request for <0/>?\n"
-"You will be logged out and an email with instructions will be sent to your address."
+#~ msgid ""
+#~ "Send change password request for <0/>?\n"
+#~ "You will be logged out and an email with instructions will be sent to your address."
+#~ msgstr ""
+#~ "Send change password request for <0/>?\n"
+#~ "You will be logged out and an email with instructions will be sent to your address."
 
 #: src/lib/dp/auth/ChangeEmailForm.svelte
 msgid "A verification email has been sent to your new address."
@@ -1356,13 +1353,12 @@ msgstr "An error occurred while sending your email change request."
 msgid "E-Mail <0/> <1>You will be logged out and instructed to verify your new email address.</1>"
 msgstr "E-Mail <0/> <1>You will be logged out and instructed to verify your new email address.</1>"
 
-#: src/lib/dp/components/forms/UserDetailsForm.svelte
-msgid ""
-"This data is only used for internal purposes and never shown anywhere publicly.\n"
-"(Your team and club administrators have access)."
-msgstr ""
-"This data is only used for internal purposes and never shown anywhere publicly.\n"
-"(Your team and club administrators have access)."
+#~ msgid ""
+#~ "This data is only used for internal purposes and never shown anywhere publicly.\n"
+#~ "(Your team and club administrators have access)."
+#~ msgstr ""
+#~ "This data is only used for internal purposes and never shown anywhere publicly.\n"
+#~ "(Your team and club administrators have access)."
 
 #: src/lib/dp/components/forms/UserDetailsForm.svelte
 msgid "First Name(s)"
@@ -1373,9 +1369,8 @@ msgstr "First Name(s)"
 msgid "Last Name"
 msgstr "Last Name"
 
-#: src/lib/dp/components/forms/UserDetailsForm.svelte
-msgid "Profile Image <0/>"
-msgstr "Profile Image <0/>"
+#~ msgid "Profile Image <0/>"
+#~ msgstr "Profile Image <0/>"
 
 #: src/lib/dp/components/forms/UserDetailsForm.svelte
 msgid "Selected file:"
@@ -1539,6 +1534,7 @@ msgid "No comments yet."
 msgstr "No comments yet."
 
 #: src/lib/dp/components/comments/CommentRow.svelte
+#: src/lib/dp/components/comments/CommentRow.svelte
 #: src/lib/dp/components/comments/CommentSection.svelte
 #: src/lib/dp/components/forms/ParticipationForm.svelte
 msgid "Comment"
@@ -1656,14 +1652,12 @@ msgstr "Last Updated:"
 msgid "Comment/Reason:"
 msgstr "Comment/Reason:"
 
-#. 0: participation?.expand?.user?.first_name; 1: participation?.expand?.user?.last_name
-#: src/lib/dp/components/event/IndividualParticipationEditButton.svelte
-msgid ""
-"Edit participation data\n"
-"for {0} {1}"
-msgstr ""
-"Edit participation data\n"
-"for {0} {1}"
+#~ msgid ""
+#~ "Edit participation data\n"
+#~ "for {0} {1}"
+#~ msgstr ""
+#~ "Edit participation data\n"
+#~ "for {0} {1}"
 
 #: src/lib/dp/components/forms/ParticipationForm.svelte
 msgid "State"
@@ -2009,15 +2003,14 @@ msgstr "Locations Page"
 msgid "Club deletion"
 msgstr "Club deletion"
 
-#: src/routes/(dp)/(protected)/account/clubs/[club]/+page.svelte
-msgid ""
-"Deleting a club will delete all team, event and participation data.\n"
-"For safety reasons, a club can therefore only be deleted by a\n"
-"superadmin."
-msgstr ""
-"Deleting a club will delete all team, event and participation data.\n"
-"For safety reasons, a club can therefore only be deleted by a\n"
-"superadmin."
+#~ msgid ""
+#~ "Deleting a club will delete all team, event and participation data.\n"
+#~ "For safety reasons, a club can therefore only be deleted by a\n"
+#~ "superadmin."
+#~ msgstr ""
+#~ "Deleting a club will delete all team, event and participation data.\n"
+#~ "For safety reasons, a club can therefore only be deleted by a\n"
+#~ "superadmin."
 
 #: src/routes/(dp)/(protected)/account/clubs/[club]/+page.svelte
 msgid "Please contact your club's administration."
@@ -2029,6 +2022,7 @@ msgid "Edit Uniform Set \"{0}\""
 msgstr "Edit Uniform Set \"{0}\""
 
 #: src/lib/dp/components/forms/UniformSetForm.svelte
+#: src/lib/dp/components/forms/UniformSetForm.svelte
 #: src/lib/dp/components/uniformset/UniformSetInfoCard.svelte
 msgid "Uniform Set"
 msgstr "Uniform Set"
@@ -2037,15 +2031,14 @@ msgstr "Uniform Set"
 msgid "Cap Color"
 msgstr "Cap Color"
 
-#: src/lib/dp/components/forms/UniformSetForm.svelte
-msgid ""
-"You can use the special identifiers <0/> and <1/> to get\n"
-"the Skylarks Home and Road Cap instead of a\n"
-"generic colored one."
-msgstr ""
-"You can use the special identifiers <0/> and <1/> to get\n"
-"the Skylarks Home and Road Cap instead of a\n"
-"generic colored one."
+#~ msgid ""
+#~ "You can use the special identifiers <0/> and <1/> to get\n"
+#~ "the Skylarks Home and Road Cap instead of a\n"
+#~ "generic colored one."
+#~ msgstr ""
+#~ "You can use the special identifiers <0/> and <1/> to get\n"
+#~ "the Skylarks Home and Road Cap instead of a\n"
+#~ "generic colored one."
 
 #: src/lib/dp/components/forms/UniformSetForm.svelte
 msgid "Jersey Color"
@@ -2281,9 +2274,11 @@ msgid "There was an error processing your authentication request."
 msgstr "There was an error processing your authentication request."
 
 #: src/lib/dp/auth/LoginForm.svelte
+#: src/lib/dp/auth/LoginForm.svelte
 msgid "Your email"
 msgstr "Your email"
 
+#: src/lib/dp/auth/LoginForm.svelte
 #: src/lib/dp/auth/LoginForm.svelte
 msgid "Your password"
 msgstr "Your password"
@@ -2324,13 +2319,12 @@ msgstr "Doe"
 msgid "Confirm password"
 msgstr "Confirm password"
 
-#: src/lib/dp/auth/LoginForm.svelte
-msgid ""
-"A valid signup key needs to be entered upon user account creation.\n"
-"If you do not have a signup key, please contact your team manager."
-msgstr ""
-"A valid signup key needs to be entered upon user account creation.\n"
-"If you do not have a signup key, please contact your team manager."
+#~ msgid ""
+#~ "A valid signup key needs to be entered upon user account creation.\n"
+#~ "If you do not have a signup key, please contact your team manager."
+#~ msgstr ""
+#~ "A valid signup key needs to be entered upon user account creation.\n"
+#~ "If you do not have a signup key, please contact your team manager."
 
 #: src/lib/dp/auth/LoginForm.svelte
 msgid "Register new account"
@@ -2340,23 +2334,21 @@ msgstr "Register new account"
 msgid "or sign in with"
 msgstr "or sign in with"
 
-#: src/lib/dp/auth/LoginForm.svelte
-msgid ""
-"Even when using an external login provider,\n"
-"a signup key (see above) is still required for account creation."
-msgstr ""
-"Even when using an external login provider,\n"
-"a signup key (see above) is still required for account creation."
+#~ msgid ""
+#~ "Even when using an external login provider,\n"
+#~ "a signup key (see above) is still required for account creation."
+#~ msgstr ""
+#~ "Even when using an external login provider,\n"
+#~ "a signup key (see above) is still required for account creation."
 
-#: src/lib/dp/auth/LoginForm.svelte
-msgid ""
-"Note: it is possible to associate a local account with an\n"
-"external provider later by using the same email address. A single account can be associated with more\n"
-"than one external provider."
-msgstr ""
-"Note: it is possible to associate a local account with an\n"
-"external provider later by using the same email address. A single account can be associated with more\n"
-"than one external provider."
+#~ msgid ""
+#~ "Note: it is possible to associate a local account with an\n"
+#~ "external provider later by using the same email address. A single account can be associated with more\n"
+#~ "than one external provider."
+#~ msgstr ""
+#~ "Note: it is possible to associate a local account with an\n"
+#~ "external provider later by using the same email address. A single account can be associated with more\n"
+#~ "than one external provider."
 
 #: src/lib/dp/auth/LoginForm.svelte
 msgid "There seems to be an error while contacting the backend. Please try again later."
@@ -2367,13 +2359,16 @@ msgid "There was an error processing your authentication request via external pr
 msgstr "There was an error processing your authentication request via external provider. Please double-check your signup key"
 
 #: src/lib/dp/auth/OAuthProviderButton.svelte
+#: src/lib/dp/auth/OAuthProviderButton.svelte
 msgid "Google logo"
 msgstr "Google logo"
 
 #: src/lib/dp/auth/OAuthProviderButton.svelte
+#: src/lib/dp/auth/OAuthProviderButton.svelte
 msgid "Apple logo"
 msgstr "Apple logo"
 
+#: src/lib/dp/auth/OAuthProviderButton.svelte
 #: src/lib/dp/auth/OAuthProviderButton.svelte
 msgid "GitHub logo"
 msgstr "GitHub logo"
@@ -2671,6 +2666,7 @@ msgstr "Add Members to team \"{0}\""
 msgid "Select all {0} members that should be added to the team."
 msgstr "Select all {0} members that should be added to the team."
 
+#: src/lib/dp/components/forms/TeamMembersForm.svelte
 #: src/lib/dp/components/forms/TeamMembersForm.svelte
 msgid "Team members"
 msgstr "Team members"
@@ -3153,3 +3149,89 @@ msgstr "When editing an event series, only select fields can be changed because 
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
 msgid "This is the first event in your new series. It will have the exact start time you enter here.<0/> The next events are then created <1>RECURRING INTERVAL</1> days after the previous one and all will have the end time set to <2>DURATION</2> minutes after their start time."
 msgstr "This is the first event in your new series. It will have the exact start time you enter here.<0/> The next events are then created <1>RECURRING INTERVAL</1> days after the previous one and all will have the end time set to <2>DURATION</2> minutes after their start time."
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "A valid signup key needs to be entered upon user account creation. If you do not have a signup key, please contact your team manager."
+msgstr "A valid signup key needs to be entered upon user account creation. If you do not have a signup key, please contact your team manager."
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Even when using an external login provider, a signup key (see above) is still required for account creation."
+msgstr "Even when using an external login provider, a signup key (see above) is still required for account creation."
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Note: it is possible to associate a local account with an external provider later by using the same email address. A single account can be associated with more than one external provider."
+msgstr "Note: it is possible to associate a local account with an external provider later by using the same email address. A single account can be associated with more than one external provider."
+
+#: src/lib/dp/auth/PasswordRequestButton.svelte
+msgid "Send change password request for <0/>? You will be logged out and an email with instructions will be sent to your address."
+msgstr "Send change password request for <0/>? You will be logged out and an email with instructions will be sent to your address."
+
+#: src/lib/dp/components/forms/ClubForm.svelte
+msgid "Can be found in the BSM address bar while editing (e.g. <0>https://bsm.baseball-softball.de/clubs/xxx/edit</0>). Needs to be set for the app to function properly."
+msgstr "Can be found in the BSM address bar while editing (e.g. <0>https://bsm.baseball-softball.de/clubs/xxx/edit</0>). Needs to be set for the app to function properly."
+
+#: src/lib/dp/components/forms/ClubForm.svelte
+msgid "Must be created in BSM in a user's account that has the role \"Team Administration\". If set, all game events for the club can be automatically imported."
+msgstr "Must be created in BSM in a user's account that has the role \"Team Administration\". If set, all game events for the club can be automatically imported."
+
+#: src/lib/dp/components/forms/ClubForm.svelte
+msgid "Community Service Requirement <0/> <1>Designated community service time amount (in minutes) that each member is expected to provide during a calendar year (e.g. 20h = 1200 minutes).</1>"
+msgstr "Community Service Requirement <0/> <1>Designated community service time amount (in minutes) that each member is expected to provide during a calendar year (e.g. 20h = 1200 minutes).</1>"
+
+#. 0: participation?.expand?.user?.first_name; 1: participation?.expand?.user?.last_name
+#: src/lib/dp/components/event/IndividualParticipationEditButton.svelte
+msgid "Edit participation data for {0} {1}"
+msgstr "Edit participation data for {0} {1}"
+
+#: src/routes/(dp)/(protected)/account/clubs/[club]/+page.svelte
+msgid "Deleting a club will delete all team, event and participation data. For safety reasons, a club can therefore only be deleted by a superadmin."
+msgstr "Deleting a club will delete all team, event and participation data. For safety reasons, a club can therefore only be deleted by a superadmin."
+
+#: src/lib/dp/components/forms/UniformSetForm.svelte
+msgid "You can use the special identifiers <0/> and <1/> to get the Skylarks Home and Road Cap instead of a generic colored one."
+msgstr "You can use the special identifiers <0/> and <1/> to get the Skylarks Home and Road Cap instead of a generic colored one."
+
+#: src/routes/(dp)/(protected)/account/[user]/communityservice/+page.svelte
+msgid "Each club can set a community service target for its members. Members are expected to provide this amount of voluntary working hours each calendar year. You can report your community service hours here, as well as view your previously sent hours and compare with the target."
+msgstr "Each club can set a community service target for its members. Members are expected to provide this amount of voluntary working hours each calendar year. You can report your community service hours here, as well as view your previously sent hours and compare with the target."
+
+#: src/lib/dp/components/forms/UserDetailsForm.svelte
+msgid "This data is only used for internal purposes and never shown anywhere publicly. (Your team and club administrators have access)."
+msgstr "This data is only used for internal purposes and never shown anywhere publicly. (Your team and club administrators have access)."
+
+#: src/lib/dp/components/user/PlayerDataProfileSection.svelte
+msgid "You have the option to display your player data in your public profile on the website and apps."
+msgstr "You have the option to display your player data in your public profile on the website and apps."
+
+#: src/lib/dp/components/user/PlayerDataProfileSection.svelte
+msgid "Please note that all statistics and basic info such as your name and team affiliation is considered public information when participating in official DBV and BSVBB competitions."
+msgstr "Please note that all statistics and basic info such as your name and team affiliation is considered public information when participating in official DBV and BSVBB competitions."
+
+#: src/lib/dp/components/settings/ICalSection.svelte
+msgid "Calendar Import"
+msgstr "Calendar Import"
+
+#: src/lib/dp/components/settings/ICalSection.svelte
+msgid "Your personal calendar link"
+msgstr "Your personal calendar link"
+
+#: src/lib/dp/components/settings/ICalSection.svelte
+msgid "Copy to clipboard"
+msgstr "Copy to clipboard"
+
+#~ msgid "Copied to clipboard"
+#~ msgstr "Copied to clipboard"
+
+#: src/lib/dp/components/settings/ICalSection.svelte
+msgid "Copied to clipboard!"
+msgstr "Copied to clipboard!"
+
+#~ msgid "Download"
+#~ msgstr "Download"
+
+#~ msgid "Download .ics"
+#~ msgstr "Download .ics"
+
+#: src/lib/dp/components/settings/ICalSection.svelte
+msgid "Download .ics file"
+msgstr "Download .ics file"
