@@ -47,6 +47,12 @@ export class DateTimeUtility {
       timeStyle: "short",
     });
   }
+  
+  public static dateFormatMedium(locale: string) {
+    return new Intl.DateTimeFormat(locale, {
+      dateStyle: "medium",
+    });
+  }
 
   public static dateTimeFormatShort(locale: string) {
     return new Intl.DateTimeFormat(locale, {

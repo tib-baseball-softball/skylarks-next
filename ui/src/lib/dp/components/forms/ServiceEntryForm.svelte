@@ -36,6 +36,8 @@
     {value: 180, label: "3h"},
     {value: 210, label: "3.5h"},
     {value: 240, label: "4h"},
+    {value: 270, label: "4.5h"},
+    {value: 300, label: "5h"},
   ];
 
   function setSuggestion(suggestion: MinuteSuggestion) {
@@ -90,6 +92,7 @@
       toastController.triggerGenericFormSuccessMessage("Community Service Entry");
       closeModal();
       await invalidate("communityservice:list");
+      await invalidate("communityservice:admin");
     }
   }
 </script>
