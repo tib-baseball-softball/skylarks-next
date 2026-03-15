@@ -27,16 +27,18 @@
     margin-inline-start: calc(var(--spacing) * 0.5);
   }
 
-  .input:user-invalid,
-  .textarea:user-invalid,
-  .select:user-invalid {
-    --tw-ring-color: var(--color-error-500);
-  }
+  form {
+    .input:user-invalid,
+    .textarea:user-invalid,
+    .select:user-invalid {
+      --tw-ring-color: var(--color-error-500);
+    }
 
-  .input:user-valid,
-  .textarea:user-valid,
-  .select:user-valid {
-    --tw-ring-color: var(--color-success-500);
+    .input:user-valid,
+    .textarea:user-valid,
+    .select:user-valid {
+      --tw-ring-color: var(--color-success-500);
+    }
   }
 
   .label-text {
