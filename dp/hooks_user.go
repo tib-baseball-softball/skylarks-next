@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/mail"
+	"os"
 	"time"
 
 	"github.com/pocketbase/dbx"
@@ -181,6 +182,24 @@ func SetDisplayName(e *core.RecordEvent) error {
 
 	if user.DisplayName() == "" {
 		user.SetDisplayName(user.FirstName() + " " + fmt.Sprintf("%.*s", 1, user.LastName()) + ".")
+	}
+
+	return e.Next()
+}
+
+// AddUserICalLink adds the user's custom iCal link to the JSON response.
+func AddUserICalLink(e *core.RecordEnrichEvent) error {
+	user := &User{}
+	user.SetProxyRecord(e.Record)
+
+	auth := e.RequestInfo.Auth
+
+	if auth.Id == user.Id {
+	    user.WithCustomData(true)
+					
+	    appSecret := os.Getenv("APPLICATION_SECRET")
+		hash := GetSHA3Hash(user.Id + appSecret)
+		user.SetICalLink(e.App.Settings().Meta.AppURL + "/api/dp/ical/" + user.Id + "/" + hash + "/calendar.ics")
 	}
 
 	return e.Next()

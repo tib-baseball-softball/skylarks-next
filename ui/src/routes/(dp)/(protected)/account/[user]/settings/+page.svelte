@@ -7,10 +7,12 @@
   import ChangeEmailForm from "$lib/dp/auth/ChangeEmailForm.svelte";
   import UserDetailsForm from "$lib/dp/components/forms/UserDetailsForm.svelte";
   import PushSettingsSection from "$lib/dp/components/settings/PushSettingsSection.svelte";
+  import ICalSection from "$lib/dp/components/settings/ICalSection.svelte";
+  import type { CustomAuthModel } from "$lib/dp/types/ExpandedResponse";
 
   let {params}: PageProps = $props();
 
-  const model = $derived(authSettings.record);
+  const model = $derived(authSettings.record) as CustomAuthModel;
 </script>
 
 <h1 class="h1">User Settings</h1>
@@ -92,6 +94,22 @@
   <section class="card preset-tonal-surface">
     <PushSettingsSection userID={params.user}/>
   </section>
+  
+  <section class="card preset-tonal-surface">
+    <ICalSection link={model?.ical_link ?? ""}>
+      {#snippet header()}
+        <span>Calendar Import</span>
+      {/snippet}
+      
+      {#snippet subheader()}
+        <h3 class="h4">Your personal calendar link</h3>
+        <p class="cal-hint">
+          This link includes all events for all teams that you are a member of,
+          going back one year.
+        </p>
+      {/snippet}
+    </ICalSection>
+  </section>
 
 {:else}
   <p>User not found. That should not happen, if it does anyway, please log in.</p>
@@ -109,5 +127,9 @@
     gap: calc(var(--spacing) * 2);
     margin-block-end: calc(var(--spacing) * 2);
     grid-template-columns: 200px 1fr;
+  }
+  
+  .cal-hint {
+    margin-block-start: var(--spacing);
   }
 </style>

@@ -88,6 +88,7 @@ export type CustomAuthModel = Extension<
   RecordModel,
   {
     email?: string
+    ical_link?: string
   } & UsersResponse
 >
 

@@ -4,8 +4,9 @@ go 1.26
 
 require (
 	github.com/SherClockHolmes/webpush-go v1.4.0
+	github.com/arran4/golang-ical v0.3.4
 	github.com/pocketbase/dbx v1.12.0
-	github.com/pocketbase/pocketbase v0.36.5
+	github.com/pocketbase/pocketbase v0.36.6
 	github.com/spf13/cast v1.10.0
 	github.com/spf13/cobra v1.10.2
 	github.com/subosito/gotenv v1.6.0

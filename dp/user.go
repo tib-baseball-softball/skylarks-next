@@ -208,3 +208,10 @@ func (u *User) DisplayName() string {
 func (u *User) SetDisplayName(name string) {
 	u.Set("display_name", name)
 }
+
+// SetICalLink sets the user's custom iCal link.
+// Requires `WithCustomData` to be set.
+func (u *User) SetICalLink(link string) {
+	u.Set("ical_link", link)
+}
+
