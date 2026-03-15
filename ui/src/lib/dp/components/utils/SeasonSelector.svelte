@@ -11,13 +11,14 @@
 
   const seasonParam = $derived(page.url.searchParams.get("season"));
 
-  function parseParam() {
+  function parseParam(): number {
     if (seasonParam) {
       return parseInt(seasonParam);
     }
+    return selectedSeason
   }
 
-  selectedSeason = parseParam() ?? 0;
+  selectedSeason = parseParam();
 </script>
 
 <div class="container preset-tonal-surface rounded-base">

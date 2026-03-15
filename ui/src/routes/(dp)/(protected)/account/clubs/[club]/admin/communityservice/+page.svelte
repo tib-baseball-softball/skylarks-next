@@ -36,7 +36,7 @@
       onChangeCallback={reloadWithQuery}
       seasonOptions={seasonOptions}
     />
-    <ClubCommunityServiceSection {rows} club={data.club}/>
+    <ClubCommunityServiceSection {rows} club={data.club} rawEntries={data.entries}/>
   </section>
 {:catch error}
   <p>error loading: {error.message}</p>

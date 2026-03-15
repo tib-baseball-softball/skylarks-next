@@ -1,5 +1,5 @@
-import type {RecordModel} from "pocketbase";
-import type {UserParticipationDTO} from "$lib/dp/types/UserParticipationDTO.ts";
+import type { RecordModel } from "pocketbase";
+import type { UserParticipationDTO } from "$lib/dp/types/UserParticipationDTO.ts";
 import type {
   AnnouncementsResponse,
   ClubsResponse,
@@ -16,7 +16,7 @@ import type {
   UsersResponse,
 } from "./pb-types.ts";
 
-export type Extension<T, E> = T & E
+export type Extension<T, E> = T & E;
 
 export type ExpandedEvent = Extension<
   EventsResponse,
@@ -26,116 +26,120 @@ export type ExpandedEvent = Extension<
         ParticipationsResponse,
         {
           expand: {
-            user: UsersResponse
-          }
+            user: UsersResponse;
+          };
         }
-      >[]
-      attire?: UniformsetsResponse
-      team?: ExpandedTeam
-      location?: LocationsResponse
-      comments_via_event?: ExpandedComment[]
-    }
+      >[];
+      attire?: UniformsetsResponse;
+      team?: ExpandedTeam;
+      location?: LocationsResponse;
+      comments_via_event?: ExpandedComment[];
+    };
     participations: {
-      in: ExpandedParticipation[]
-      out: ExpandedParticipation[]
-      maybe: ExpandedParticipation[]
-      unspecified: UserParticipationDTO[]
-    }
-    userParticipation?: ExpandedParticipation
+      in: ExpandedParticipation[];
+      out: ExpandedParticipation[];
+      maybe: ExpandedParticipation[];
+      unspecified: UserParticipationDTO[];
+    };
+    userParticipation?: ExpandedParticipation;
   }
->
+>;
 
 export type ExpandedTeam = Extension<
   TeamsResponse,
   {
     signup_key?: string;
     expand: {
-      club: ClubsResponse
-      admins?: UsersResponse[]
-    }
+      club: ClubsResponse;
+      admins?: UsersResponse[];
+    };
   }
->
+>;
 
 export type ExpandedClub = Extension<
   ClubsResponse,
   {
-    bsm_api_key: string
+    bsm_api_key: string;
     expand: {
-      admins: UsersResponse[]
-    }
+      admins: UsersResponse[];
+    };
   }
->
+>;
 
 export type ExpandedUniformSet = Extension<
   UniformsetsResponse,
   {
     expand?: {
-      club?: ClubsResponse
-    }
+      club?: ClubsResponse;
+    };
   }
->
+>;
 
 export type ExpandedParticipation = Extension<
   ParticipationsResponse,
   {
     expand?: {
-      user?: CustomAuthModel
-    }
+      user?: CustomAuthModel;
+    };
   }
->
+>;
 
 export type CustomAuthModel = Extension<
   RecordModel,
   {
-    email?: string
-    ical_link?: string
+    email?: string;
+    ical_link?: string;
   } & UsersResponse
->
+>;
 
-export type EventType = EventsResponse["type"]
-export type ParticipationType = ParticipationsResponse["state"]
+export type EventType = EventsResponse["type"];
+export type ParticipationType = ParticipationsResponse["state"];
 
 export type EventSeriesCreationData = Extension<
   EventseriesCreate,
   {
-    location: EventsCreate["location"]
-    desc: EventsCreate["desc"]
-    series_start: string
-    series_end: string
+    location: EventsCreate["location"];
+    desc: EventsCreate["desc"];
+    series_start: string;
+    series_end: string;
   }
->
+>;
 
 export type ExpandedEventSeries = Extension<
   EventseriesResponse,
   {
-    series_state: "ongoing" | "past" | "future"
+    series_state: "ongoing" | "past" | "future";
   }
->
+>;
 
 export type ExpandedAnnouncement = Extension<
   AnnouncementsResponse,
   {
     expand?: {
-      author: CustomAuthModel
-      club?: ClubsResponse
-      team?: TeamsResponse
-      comments_via_announcement?: ExpandedComment[]
-    }
+      author: CustomAuthModel;
+      club?: ClubsResponse;
+      team?: TeamsResponse;
+      comments_via_announcement?: ExpandedComment[];
+    };
   }
->
+>;
 
 export type ExpandedComment = Extension<
   CommentsResponse,
   {
     expand?: {
-      user?: CustomAuthModel
-    }
+      user?: CustomAuthModel;
+    };
   }
->
+>;
 
 export type ExpandedServiceEntry = Extension<
-  ServiceentriesResponse, {
-  expand?: {
-    club?: ClubsResponse
+  ServiceentriesResponse,
+  {
+    expand?: {
+      club?: ClubsResponse;
+      member?: CustomAuthModel;
+      board_member?: CustomAuthModel;
+    };
   }
-}>
+>;

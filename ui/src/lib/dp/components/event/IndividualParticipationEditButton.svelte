@@ -30,7 +30,7 @@
 <Popover.Root bind:open={isOpen}>
   <Popover.Trigger>
     {#snippet child({props})}
-      <button {...props} class="{classes}">
+      <button {...props} class="{classes} trigger-button">
         {#if participation.comment}
           <span class="badge-icon preset-filled-surface-400-600">
             <MessageCircleMore size="13"/>
@@ -112,6 +112,10 @@
     font-weight: var(--font-weight-light);
     font-size: var(--text-xs);
     line-height: var(--tw-leading, var(--text-xs--line-height));
+  }
+  
+  .trigger-button {
+    position: relative;
   }
 
   .badge-icon {

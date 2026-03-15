@@ -601,11 +601,14 @@ msgid "Critical"
 msgstr "Critique"
 
 #. 0: entry.title
+#. 0: row.title
 #: src/lib/dp/components/communityservice/CommunityServiceItemCard.svelte
+#: src/lib/dp/components/communityservice/CommunityServiceTableContentRaw.svelte
 msgid "Edit Community Service Entry \"{0}\""
 msgstr "Modifier l'entrée de service communautaire \"{0}\""
 
 #: src/lib/dp/components/communityservice/CommunityServiceItemCard.svelte
+#: src/lib/dp/components/communityservice/CommunityServiceTableContentRaw.svelte
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Community Service Entry"
@@ -640,6 +643,7 @@ msgstr "E-mail"
 
 #: src/lib/dp/components/club/ClubDetailCard.svelte
 #: src/lib/dp/components/communityservice/CommunityServiceDatatable.svelte
+#: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
 #: src/lib/dp/components/forms/ClubForm.svelte
 #: src/lib/dp/components/forms/TeamForm.svelte
 #: src/lib/dp/components/forms/UniformSetForm.svelte
@@ -666,12 +670,16 @@ msgid "Target Met"
 msgstr "Objectif atteint"
 
 #. 0: club.name
+#. 0: club.name
 #: src/lib/dp/components/communityservice/CommunityServiceDatatable.svelte
+#: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
 msgid "Community Service Data for {0}"
 msgstr "Données de service communautaire pour {0}"
 
 #. 0: row.name
+#. 0: row?.expand?.member ?.last_name
 #: src/lib/dp/components/communityservice/CommunityServiceTableContent.svelte
+#: src/lib/dp/components/communityservice/CommunityServiceTableContentRaw.svelte
 msgid "Go to community service page for user {0}"
 msgstr "Aller à la page de service communautaire de l'utilisateur {0}"
 
@@ -893,6 +901,7 @@ msgstr "Nom <0/>"
 msgid "Submit"
 msgstr "Soumettre"
 
+#: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
 #: src/lib/dp/components/event/EventPageAdminSection.svelte
 #: src/lib/dp/components/team/TeamMemberDatatable.svelte
 msgid "Actions"
@@ -1000,6 +1009,7 @@ msgstr "Modifier l'annonce « {0} »"
 msgid "Create new Announcement"
 msgstr "Créer une annonce"
 
+#: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
 #: src/lib/dp/components/forms/AnnouncementForm.svelte
 #: src/lib/dp/components/forms/EventForm.svelte
 #: src/lib/tib/components/club/officials/ClubOfficialDetailCard.svelte
@@ -2247,6 +2257,7 @@ msgstr "Aucun marqueur n'a encore été affecté."
 msgid "Main Info"
 msgstr "Informations principales"
 
+#: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
 #: src/lib/tib/components/match/MatchMainInfoSection.svelte
 msgid "Date"
 msgstr "Date"
@@ -3056,4 +3067,28 @@ msgstr ""
 
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "This link includes all events for this team, going back one year."
+msgstr ""
+
+#: src/lib/dp/components/communityservice/ClubCommunityServiceSection.svelte
+msgid "Aggregated Data (per user)"
+msgstr ""
+
+#: src/lib/dp/components/communityservice/ClubCommunityServiceSection.svelte
+msgid "Raw data (single entries)"
+msgstr ""
+
+#: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
+msgid "Amount"
+msgstr ""
+
+#: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
+msgid "Description"
+msgstr ""
+
+#: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
+msgid "Board Member"
+msgstr ""
+
+#: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
+msgid "Admin Comment"
 msgstr ""
