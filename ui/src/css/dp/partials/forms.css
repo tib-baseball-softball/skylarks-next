@@ -188,6 +188,7 @@
     border-radius: var(--radius-base);
     display: block;
     width: 100%;
+    
 
     /* Size */
     font-size: var(--text-base);
@@ -257,7 +258,7 @@
       padding: 0;
       border: none;
       outline: none;
-      -webkit-appearance: none;
+      appearance: none;
     }
 
     &[type="color"]::-webkit-color-swatch-wrapper {
@@ -278,38 +279,15 @@
     }
   }
 
-  /* Ghost Input*/
-  /* Used for the <TagsInput> component. */
-  .input-ghost {
-    padding: 0;
-    background-color: transparent;
-
-    border-color: transparent;
-    outline-color: transparent;
-    --tw-ring-color: transparent;
-
-    &:active {
-      border-color: transparent !important;
-    }
-
-    &:focus {
-      border-color: transparent !important;
-    }
-
-    &:focus-within {
-      border-color: transparent !important;
-    }
-  }
-
   /* Components: Forms > Radio / Checkbox */
   .checkbox {
     --tw-ring-color: var(--color-surface-200-800);
 
     cursor: pointer;
-    background-color: var(--color-surface-300-700);
     border-radius: var(--radius-sm);
     height: calc(var(--spacing) * 5);
     width: calc(var(--spacing) * 5);
+    accent-color: var(--color-primary-500);
 
     &:focus-within {
       --tw-ring-color: var(--color-primary-500);
@@ -322,32 +300,6 @@
     &:focus {
       filter: brightness(105%);
     }
-
-    &:checked {
-      background-color: var(--color-primary-500);
-
-      &:hover {
-        background-color: var(--color-primary-500);
-      }
-
-      &:focus {
-        background-color: var(--color-primary-500);
-        border: 0;
-      }
-    }
-
-    &:indeterminate {
-      background-color: var(--color-primary-500);
-
-      &:hover {
-        background-color: var(--color-primary-500);
-      }
-
-      &:focus {
-        background-color: var(--color-primary-500);
-        border: 0;
-      }
-    }
   }
 
   .radio {
@@ -358,6 +310,7 @@
     border-radius: var(--radius-sm);
     height: calc(var(--spacing) * 5);
     width: calc(var(--spacing) * 5);
+    accent-color: var(--color-primary-500);
 
     /* Base Size --- */
     border-radius: 100%;
@@ -374,19 +327,6 @@
 
     &:focus {
       filter: brightness(105%);
-    }
-
-    &:checked {
-      background-color: var(--color-primary-500);
-
-      &:hover {
-        background-color: var(--color-primary-500);
-      }
-
-      &:focus {
-        background-color: var(--color-primary-500);
-        border: 0;
-      }
     }
   }
 
