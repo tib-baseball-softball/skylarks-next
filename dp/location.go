@@ -1,6 +1,10 @@
 package dp
 
-import "github.com/pocketbase/pocketbase/core"
+import (
+	"fmt"
+
+	"github.com/pocketbase/pocketbase/core"
+)
 
 const (
 	LocationCollection = "locations"
@@ -158,4 +162,8 @@ func (a *Location) Club() string {
 
 func (a *Location) SetClub(club string) {
 	a.Set("club", club)
+}
+
+func (a *Location) GetCalendarFormatted() string {
+	return fmt.Sprintf("%s (%s), %s %s, %s, %s, Lat: %f, Lng: %f", a.Name(), a.AddressAddon(), a.Street(), a.PostalCode(), a.City(), a.HumanCountry(), a.Latitude(), a.Longitude())
 }
