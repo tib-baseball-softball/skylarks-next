@@ -1553,11 +1553,12 @@ msgstr "Stan"
 msgid "Copied to clipboard!"
 msgstr "Copied to clipboard!"
 
-#: src/lib/dp/components/settings/ICalSection.svelte
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Calendar Import"
 msgstr "Calendar Import"
 
-#: src/lib/dp/components/settings/ICalSection.svelte
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
 msgid "Your personal calendar link"
 msgstr "Your personal calendar link"
 
@@ -3049,6 +3050,10 @@ msgstr "Linki"
 msgid "Player List"
 msgstr "Lista graczy"
 
-#: src/lib/dp/components/settings/ICalSection.svelte
+#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
 msgid "This link includes all events for all teams that you are a member of, going back one year."
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+msgid "This link includes all events for this team, going back one year."
 msgstr ""
