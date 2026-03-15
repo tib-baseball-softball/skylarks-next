@@ -49,7 +49,7 @@ See also: [Project History](docs/History.md)
 
 * basic familiarity with the concepts of SvelteKit and Svelte – there is an
   excellent [official tutorial](https://learn.svelte.dev/tutorial/welcome-to-svelte) available
-* Go `v1.25` or higher
+* Go `v1.26` or higher
 * Node.js `v24` or higher
 * access to Berlin Skylarks environment secrets and API keys
 
@@ -116,7 +116,11 @@ pnpm dev
 
 ## Deployment
 
-- changed `FIXME`
+- as this project is hosted on a self-hosted Forgejo instance, there is no automatic CI/CD workflow implemented at the moment.
+- images are built on the local development machine with the provided bash scripts in the project root
+- there are scripts for staging and production environment with slightly different build arguments
+- the images are pulled on the target server according to the specification that is connected to this git repository.
+- environment variables are supplied directly to the containers
 
 ### Backend-specific documentation
 

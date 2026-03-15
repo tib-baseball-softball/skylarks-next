@@ -2509,7 +2509,7 @@
     "listRule": "@request.auth.id != \"\" \n&& (club.admins.id ?= @request.auth.id // club admins may view\n  || member.id = @request.auth.id) // or you can view your own",
     "viewRule": "@request.auth.id != \"\" \n&& (club.admins.id ?= @request.auth.id // club admins may view\n  || member.id = @request.auth.id) // or you can view your own",
     "createRule": "@request.auth.id != \"\" \n&& (club.admins.id ?= board_member.id || @request.body.board_member:isset = false)\n&& member.club.id ?= club.id // you can only do services for your own club\n&& (club.admins.id ?= @request.auth.id // club admins may create entries for their club\n  || member.id = @request.auth.id) // or you can create for yourself",
-    "updateRule": "@request.auth.id != \"\"\n&& (club.admins.id ?= board_member.id || @request.body.board_member:isset = false)\n&& (club.admins.id ?= @request.auth.id // club admins may edit\n  || member.id = @request.auth.id) // or you can edit your own",
+    "updateRule": "@request.auth.id != \"\"\n&& @request.body.club:changed = false\n&& (@request.body.club.admins.id ?= @request.body.board_member.id || @request.body.board_member:changed = false)\n&& (club.admins.id ?= @request.auth.id // club admins may edit\n  || member.id = @request.auth.id) // or you can edit your own",
     "deleteRule": "@request.auth.id != \"\" \n&& (club.admins.id ?= @request.auth.id // club admins may delete\n  || member.id = @request.auth.id) // or you can delete your own",
     "name": "serviceentries",
     "type": "base",
