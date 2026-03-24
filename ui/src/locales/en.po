@@ -1560,6 +1560,7 @@ msgid "State"
 msgstr "State"
 
 #: src/lib/dp/components/settings/ICalSection.svelte
+#: src/lib/dp/components/team/TeamAdminSection.svelte
 msgid "Copied to clipboard!"
 msgstr "Copied to clipboard!"
 
@@ -3092,3 +3093,7 @@ msgstr "Board Member"
 #: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
 msgid "Admin Comment"
 msgstr "Admin Comment"
+
+#: src/lib/dp/components/team/TeamAdminSection.svelte
+msgid "Copy invitation link"
+msgstr "Copy invitation link"
