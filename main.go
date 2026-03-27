@@ -69,9 +69,11 @@ func BindTiBHooks(app core.App, client bsm.APIClient) {
 
 	if os.Getenv("APPLICATION_CONTEXT") != "Development" {
 
-		app.Cron().MustAdd("TeamDatasetImport", "30 * * * *", func() {
-			tib.ImportTeamDatasets(app, client)
-		})
+	    // datasets do not work properly atm
+
+		// app.Cron().MustAdd("TeamDatasetImport", "30 * * * *", func() {
+		// 	tib.ImportTeamDatasets(app, client)
+		// })
 
 		app.Cron().MustAdd("CacheCleanup", "0 4 * * *", func() {
 			err := tib.CleanupOutdatedCaches(app)
