@@ -50,6 +50,7 @@ export const load: LayoutLoad = async ({fetch, depends}) => {
       // locale is unset so far, try to read from browser settings
       const browserPreferredLocale = navigator.language.slice(0, 2); // Safari has `de-DE`, Chrome and Firefox use `de`
 
+      // @ts-ignore - locales is wrongly inferred to be Intl.Locale instead of simple Wuchale union type
       if (locales.includes(browserPreferredLocale)) {
         locale = browserPreferredLocale;
       } else {
