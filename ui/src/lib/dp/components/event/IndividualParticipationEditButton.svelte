@@ -1,7 +1,4 @@
 <script lang="ts">
-  // for some reason this import is falsely detected as unused
-  //@ts-ignore
-  import {Popover} from "bits-ui";
   import {MessageCircleMore} from "lucide-svelte";
   import ParticipationForm from "$lib/dp/components/forms/ParticipationForm.svelte";
   import Dialog from "$lib/dp/components/modal/Dialog.svelte";
@@ -19,7 +16,8 @@
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
   const canEdit = $derived(participation.user === authRecord.id || isAdmin);
-  let isOpen = $state(false);
+
+  const id = Math.random().toString(36).substring(3, 9);
 
   const createdDate =
     $derived(participation.created !== "" ? new Date(participation.created).toLocaleString() : "---");
@@ -27,66 +25,62 @@
     $derived(participation.updated !== "" ? new Date(participation.updated).toLocaleString() : "---");
 </script>
 
-<Popover.Root bind:open={isOpen}>
-  <Popover.Trigger>
-    {#snippet child({props})}
-      <button {...props} class="{classes} trigger-button">
-        {#if participation.comment}
+<button class="{classes} trigger-button" popovertarget={id}>
+  {#if participation.comment}
           <span class="badge-icon preset-filled-surface-400-600">
             <MessageCircleMore size="13"/>
           </span>
-        {/if}
-        {participation?.expand?.user?.display_name || participation?.expand?.user?.first_name}
-      </button>
-    {/snippet}
-  </Popover.Trigger>
+  {/if}
+  {participation?.expand?.user?.display_name || participation?.expand?.user?.first_name}
+</button>
 
-  <Popover.Content>
-    <div class="popover-content card shadow-2xl">
+<div class="popover-content card shadow-2xl" popover="auto" {id}>
 
-      <div class="item-container">
-        <p class="label-text">Created:</p>
-        <p>{createdDate}</p>
-      </div>
+  <div class="item-container">
+    <p class="label-text">Created:</p>
+    <p>{createdDate}</p>
+  </div>
 
-      <div class="item-container">
-        <p class="label-text">Last Updated:</p>
-        <p>{updatedDate}</p>
-      </div>
+  <div class="item-container">
+    <p class="label-text">Last Updated:</p>
+    <p>{updatedDate}</p>
+  </div>
 
-      <div class="item-container">
-        <p class="label-text">Comment/Reason:</p>
-        <p>{participation.comment}</p>
-      </div>
+  <div class="item-container">
+    <p class="label-text">Comment/Reason:</p>
+    <p>{participation.comment}</p>
+  </div>
 
-      {#if canEdit}
-        <Dialog triggerClasses="btn btn-sm preset-tonal-primary border border-primary-500 edit-btn">
+  {#if canEdit}
+    <Dialog triggerClasses="btn btn-sm preset-tonal-primary border border-primary-500 edit-btn">
 
-          {#snippet triggerContent()}
-            Edit
-          {/snippet}
+      {#snippet triggerContent()}
+        Edit
+      {/snippet}
 
-          {#snippet title()}
-            <header>
-              <h2 class="h3">
-                Edit participation data
-                for {participation?.expand?.user?.first_name} {participation?.expand?.user?.last_name}
-              </h2>
-            </header>
-          {/snippet}
+      {#snippet title()}
+        <header>
+          <h2 class="h3">
+            Edit participation data
+            for {participation?.expand?.user?.first_name} {participation?.expand?.user?.last_name}
+          </h2>
+        </header>
+      {/snippet}
 
-          <ParticipationForm {participation}/>
-        </Dialog>
-      {/if}
-    </div>
-    <Popover.Close/>
-    <Popover.Arrow/>
-  </Popover.Content>
-
-</Popover.Root>
+      <ParticipationForm {participation}/>
+    </Dialog>
+  {/if}
+</div>
 
 <style>
+  .trigger-button {
+    position: relative;
+  }
+
   .popover-content {
+    position: absolute;
+    position-area: bottom;
+    top: anchor(right, var(--spacing));
     border: 1px solid;
     color: light-dark(black, white);
     background-color: light-dark(var(--color-surface-50), var(--color-surface-800));
@@ -94,6 +88,26 @@
     font-size: var(--text-sm);
     line-height: var(--tw-leading, var(--text-sm--line-height));
     max-width: calc(var(--spacing) * 80);
+
+    &:popover-open {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+
+      @starting-style {
+        transform: translateY(30px) scale(0);
+        opacity: 0;
+      }
+    }
+
+    transform: translateY(-50px);
+    opacity: 0;
+
+    transition: transform, opacity, display allow-discrete, overlay allow-discrete;
+    transition-duration: 0.2s;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
 
     :global(.edit-btn) {
       margin-top: calc(var(--spacing) * 2);
@@ -112,10 +126,6 @@
     font-weight: var(--font-weight-light);
     font-size: var(--text-xs);
     line-height: var(--tw-leading, var(--text-xs--line-height));
-  }
-  
-  .trigger-button {
-    position: relative;
   }
 
   .badge-icon {
