@@ -385,14 +385,6 @@
     }
   }
 
-  .tabs-wrap {
-    margin-block: calc(var(--spacing) * 2);
-  }
-
-  .tab-panel {
-    padding-top: calc(var(--spacing) * 3);
-  }
-
   .form-grid {
     display: grid;
     gap: calc(var(--spacing) * 2);
