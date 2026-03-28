@@ -229,7 +229,7 @@
                         bind:value={form.passwordConfirm}
                         required
                         type="password"
-                        placeholder="confirm password"
+                        placeholder="**********"
                         minlength="8"
                         maxlength="72"
                         autocomplete="new-password"
@@ -243,7 +243,7 @@
                       bind:value={form.signup_key}
                       class="input"
                       name="signup_key"
-                      placeholder="minimum 8 characters"
+                      placeholder="**********"
                       minlength="8"
                       required
                       type="text"
@@ -383,14 +383,6 @@
     .forgot-cta {
       margin-top: 0;
     }
-  }
-
-  .tabs-wrap {
-    margin-block: calc(var(--spacing) * 2);
-  }
-
-  .tab-panel {
-    padding-top: calc(var(--spacing) * 3);
   }
 
   .form-grid {

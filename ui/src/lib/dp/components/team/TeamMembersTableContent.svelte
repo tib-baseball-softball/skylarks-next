@@ -148,12 +148,12 @@
 
           {#if team.admins.includes(row.id)}
             <button class="badge preset-tonal-warning border border-warning-500 admin-button" onclick={() => removeUserAsAdmin(row)}>
-              <Lock class="icon-spacing" size="18"/>
+              <Lock size="18"/>
               Revoke Admin
             </button>
           {:else }
             <button class="badge preset-tonal-tertiary border border-tertiary-500 admin-button" onclick={() => makeUserAdmin(row)}>
-              <LockOpen class="icon-spacing" size="18"/>
+              <LockOpen size="18"/>
               Make Admin
             </button>
           {/if}
@@ -161,7 +161,7 @@
           <Dialog triggerClasses="btn btn-sm preset-tonal-error border border-error-500 gap-0!"
                   closeButtonClasses="sr-only">
             {#snippet triggerContent()}
-              <Trash class="icon-spacing" size="18" aria-label="Remove User from Team"/>
+              <Trash size="18" aria-label="Remove User from Team"/>
             {/snippet}
 
             {#snippet title()}
@@ -211,10 +211,6 @@
     @media (min-width: 80rem) {
       gap: calc(var(--spacing) * 2);
     }
-  }
-
-  .icon-spacing {
-    margin: calc(var(--spacing) * 0.5);
   }
 
   .button-container {

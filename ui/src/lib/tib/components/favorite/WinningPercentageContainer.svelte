@@ -1,13 +1,13 @@
 <script lang="ts">
-  import type {TableRow} from "bsm.js";
-  import {Crown, Hash} from "lucide-svelte";
+  import type { TableRow } from "bsm.js";
+  import { Crown, Hash } from "lucide-svelte";
   import WinningPercentageGauge from "$lib/tib/components/favorite/WinningPercentageGauge.svelte";
 
   interface Props {
     tableRow: TableRow;
   }
 
-  let {tableRow}: Props = $props();
+  let { tableRow }: Props = $props();
 </script>
 
 <section class="root">
@@ -16,9 +16,11 @@
       <dt>Rank</dt>
       <dd class="stat-value value-flex text-details-element">
         {#if tableRow.rank === "1."}
-          <Crown class="primary-stroke"/>
-        {:else }
-          <Hash/>
+          <div class="crown-wrapper">
+            <Crown color="var(--color-primary-500)" />
+          </div>
+        {:else}
+          <Hash />
         {/if}
 
         {tableRow.rank}
@@ -27,16 +29,17 @@
 
     <dl>
       <dt>Wins/Losses</dt>
-      <dd class="stat-value text-details-element">{tableRow.wins_count} - {tableRow.losses_count}</dd>
+      <dd class="stat-value text-details-element">
+        {tableRow.wins_count} - {tableRow.losses_count}
+      </dd>
     </dl>
 
     <dl aria-hidden="true">
       <dt>Percentage</dt>
       <dd>
-        <WinningPercentageGauge {tableRow}/>
+        <WinningPercentageGauge {tableRow} />
       </dd>
     </dl>
-
   </div>
 </section>
 
@@ -74,10 +77,6 @@
     align-items: center;
     justify-content: center;
     gap: calc(var(--spacing) * 3);
-  }
-
-  .primary-stroke {
-    stroke: var(--color-primary-500);
   }
 
   @container (width >= 32rem) {

@@ -7,12 +7,5 @@
 <SheetPrimitive.Title
   {...restProps}
   bind:ref
-  class={["text-foreground", "root", className]}
+  class={["text-foreground", className]}
 />
-
-<style>
-  .root {
-    font-size: 1.125rem; /* text-lg */
-    font-weight: var(--font-weight-semibold, 600);
-  }
-</style>
