@@ -229,7 +229,7 @@
                         bind:value={form.passwordConfirm}
                         required
                         type="password"
-                        placeholder="confirm password"
+                        placeholder="**********"
                         minlength="8"
                         maxlength="72"
                         autocomplete="new-password"
@@ -243,7 +243,7 @@
                       bind:value={form.signup_key}
                       class="input"
                       name="signup_key"
-                      placeholder="minimum 8 characters"
+                      placeholder="**********"
                       minlength="8"
                       required
                       type="text"
