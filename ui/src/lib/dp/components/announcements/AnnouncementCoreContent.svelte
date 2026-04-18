@@ -2,6 +2,7 @@
   import {User} from "lucide-svelte";
   import type {ExpandedAnnouncement} from "$lib/dp/types/ExpandedResponse.ts";
   import PriorityBadge from "./PriorityBadge.svelte";
+  import LocalDate from "$lib/dp/components/utils/LocalDate.svelte";
 
   interface Props {
     announcement: ExpandedAnnouncement;
@@ -17,6 +18,10 @@
 </header>
 
 <div class="content">
+  <time datetime={announcement.updated}>
+    <LocalDate date={announcement.updated}/>
+  </time>
+
   <p class="author-info">
     <User/>
     <span>
@@ -31,6 +36,10 @@
 </div>
 
 <style>
+  time {
+    font-weight: var(--font-weight-light);
+  }
+
   .header {
     display: flex;
     justify-content: space-between;

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import {appLocale} from "$lib/dp/locale.svelte.ts";
+
   // formats a date in PocketBase string format to local date for display
 
   interface Props {
@@ -10,4 +12,4 @@
   const formattedDate = $derived(new Date(date));
 </script>
 
-{formattedDate.toLocaleString()}
+{formattedDate.toLocaleString(appLocale.current)}
