@@ -5,20 +5,19 @@
 
   interface Props {
     announcement: ExpandedAnnouncement;
-    textClasses?: string;
   }
 
-  let {announcement, textClasses = ""}: Props = $props();
+  let {announcement}: Props = $props();
 </script>
 
 <header class="header">
-  <h3 class="h4">{announcement.title}</h3>
+  <h3 class="h4 clamped title">{announcement.title}</h3>
 
   <PriorityBadge priority={announcement.priority}/>
 </header>
 
 <div class="content">
-  <p class="author-info {textClasses}">
+  <p class="author-info">
     <User/>
     <span>
     {announcement.expand?.author?.first_name}
@@ -26,7 +25,7 @@
   </span>
   </p>
 
-  <p class={textClasses}>
+  <p class="body-text clamped">
     {@html announcement.bodytext}
   </p>
 </div>
@@ -46,5 +45,15 @@
     margin-block: calc(var(--spacing) * 4);
     display: flex;
     gap: calc(var(--spacing) * 3);
+  }
+
+  .body-text {
+    line-clamp: 5;
+    -webkit-line-clamp: 5;
+  }
+
+  .title {
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
   }
 </style>

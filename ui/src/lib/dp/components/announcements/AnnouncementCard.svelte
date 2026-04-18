@@ -27,7 +27,7 @@
 <article class="root card preset-tonal-surface shadow-xl">
   <div class="inner-container">
     <div>
-      <AnnouncementCoreContent {announcement} textClasses="line-clamp-5"/>
+      <AnnouncementCoreContent {announcement}/>
     </div>
 
     <div>
