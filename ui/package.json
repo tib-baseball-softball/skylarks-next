@@ -43,7 +43,7 @@
     "svelte-check": "^4.4.6",
     "svelte-persisted-state": "^1.4.0",
     "tslib": "^2.8.1",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.3",
     "vite": "^8.0.8",
     "vitest": "^4.1.4",
     "wuchale": "^0.22.11"
