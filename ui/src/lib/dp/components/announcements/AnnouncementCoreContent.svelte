@@ -12,28 +12,26 @@
 </script>
 
 <header class="header">
-  <h3 class="h4 clamped title">{announcement.title}</h3>
+  <h3 class="h5 clamped title">{announcement.title}</h3>
 
   <PriorityBadge priority={announcement.priority}/>
 </header>
 
-<div class="content">
-  <time datetime={announcement.updated}>
-    <LocalDate date={announcement.updated}/>
-  </time>
+<time datetime={announcement.updated}>
+  <LocalDate date={announcement.updated}/>
+</time>
 
-  <p class="author-info">
-    <User/>
-    <span>
+<p class="author-info">
+  <User/>
+  <span>
     {announcement.expand?.author?.first_name}
-      {announcement.expand?.author?.last_name}
+    {announcement.expand?.author?.last_name}
   </span>
-  </p>
+</p>
 
-  <p class="body-text clamped">
-    {@html announcement.bodytext}
-  </p>
-</div>
+<p class="body-text clamped">
+  {@html announcement.bodytext}
+</p>
 
 <style>
   time {
@@ -46,12 +44,7 @@
     hyphens: auto;
   }
 
-  .content {
-    margin-top: calc(var(--spacing) * 4);
-  }
-
   .author-info {
-    margin-block: calc(var(--spacing) * 4);
     display: flex;
     gap: calc(var(--spacing) * 3);
   }

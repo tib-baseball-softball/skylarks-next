@@ -25,56 +25,52 @@
 </script>
 
 <article class="root card preset-tonal-surface shadow-xl">
-  <div class="inner-container">
-    <div>
-      <AnnouncementCoreContent {announcement}/>
-    </div>
+  <AnnouncementCoreContent {announcement}/>
 
-    <div>
-      <hr class="separator"/>
+  <div>
+    <hr class="separator"/>
 
-      <footer class="actions">
+    <footer class="actions">
 
-        {#if canEdit}
-          <div class="admin-actions">
-            <AnnouncementForm showLabel={false} announcement={announcement} club={announcement.expand?.club ?? null}
-                              team={announcement.expand?.team ?? null}
-                              triggerVariant="tonal-tertiary"
-                              triggerSize="sm"
-                              triggerIcon={true}
-            />
+      {#if canEdit}
+        <div class="admin-actions">
+          <AnnouncementForm showLabel={false} announcement={announcement} club={announcement.expand?.club ?? null}
+                            team={announcement.expand?.team ?? null}
+                            triggerVariant="tonal-tertiary"
+                            triggerSize="sm"
+                            triggerIcon={true}
+          />
 
-            <DeleteButton
-              id={announcement.id}
-              modelName="Announcement"
-              action={deleteAction}
-              classes="btn btn-icon btn-sm preset-tonal-error border border-error-500"
-              data-testid="delete-announcement-button"
-              iconSize={16}
-            />
-          </div>
-        {:else }
-          <div aria-hidden="true"></div>
-        {/if}
+          <DeleteButton
+            id={announcement.id}
+            modelName="Announcement"
+            action={deleteAction}
+            classes="btn btn-icon btn-sm preset-tonal-error border border-error-500"
+            data-testid="delete-announcement-button"
+            iconSize={16}
+          />
+        </div>
+      {:else }
+        <div aria-hidden="true"></div>
+      {/if}
 
-        <div class="meta-actions">
-          {#if commentCount > 0}
-            <div class="badge-wrapper">
-              <span class="sr-only">Number of Comments:</span>
-              <span class="badge-icon comment-badge preset-filled-primary-500">
+      <div class="meta-actions">
+        {#if commentCount > 0}
+          <div class="badge-wrapper">
+            <span class="sr-only">Number of Comments:</span>
+            <span class="badge-icon comment-badge preset-filled-primary-500">
                 {commentCount}
               </span>
-              <MessageCircle aria-hidden="true"/>
-            </div>
-          {/if}
+            <MessageCircle aria-hidden="true"/>
+          </div>
+        {/if}
 
-          <a
-            class="btn btn-sm preset-filled-primary-500"
-            href="/account/announcements/{announcement.id}">Read more</a
-          >
-        </div>
-      </footer>
-    </div>
+        <a
+          class="btn btn-sm preset-filled-primary-500"
+          href="/account/announcements/{announcement.id}">Read more</a
+        >
+      </div>
+    </footer>
   </div>
 </article>
 
@@ -84,11 +80,11 @@
     height: 100%;
   }
 
-  .inner-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+  .card {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 5;
+    gap: calc(var(--spacing) * 3);
   }
 
   .separator {
