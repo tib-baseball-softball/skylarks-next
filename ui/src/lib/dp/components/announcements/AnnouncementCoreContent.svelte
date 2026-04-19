@@ -17,8 +17,8 @@
   <PriorityBadge priority={announcement.priority}/>
 </header>
 
-<time datetime={announcement.updated}>
-  <LocalDate date={announcement.updated}/>
+<time datetime={announcement.created}>
+  <LocalDate date={announcement.created}/>
 </time>
 
 <p class="author-info">
