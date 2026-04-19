@@ -55,7 +55,7 @@
 {#snippet editForm()}
   <form class="edit-form">
     <label class="label mb-2 sr-only" for="edit-comment-input-{comment.id}">Comment</label>
-    <div class="input-group grid-cols-[auto_1fr_auto]">
+    <div class="input-group">
       <button type="button" class="ig-btn preset-filled" title="cancel edit" onclick="{() => isEditing = false}">
         <X/>
       </button>
@@ -84,7 +84,7 @@
   />
 
   {#if isLoggedInUser || club?.admins.includes(authRecord.id)}
-    <DeleteButton modelName="Comment" id={comment.id} action={deleteComment}/>
+    <DeleteButton modelName="Comment" id={comment.id} action={deleteComment} iconSize="16"/>
   {/if}
 </div>
 
@@ -93,9 +93,9 @@
   <div class="header">
     <p class="user-name">{userFullName}</p>
 
-    <div class={["date-box", isLoggedInUser ? "" : "by-current-user"]}>
+    <time class={["date-box", isLoggedInUser ? "" : "by-current-user"]} datetime={comment.updated}>
       {DateTimeUtility.dateTimeFormatShort(appLocale.current).format(new Date(comment.created))}
-    </div>
+    </time>
   </div>
 
   {#if isEditing}
@@ -107,9 +107,9 @@
 
       </p>
       {#if isLoggedInUser}
-        <button type="button" class="btn btn-icon btn-sm border" title="edit comment text"
+        <button type="button" class="btn btn-icon btn-sm edit-button" title="edit comment text"
                 onclick="{() => isEditing = true}">
-          <SquarePen/>
+          <SquarePen size="16"/>
         </button>
       {/if}
     </div>
@@ -153,6 +153,10 @@
       color: light-dark(var(--color-gray-600), var(--color-gray-400))
     }
 
+    .edit-button {
+      border: 1px solid currentColor;
+    }
+
     .content {
       display: flex;
       flex-wrap: wrap;
@@ -162,6 +166,10 @@
 
     .text {
       margin-top: calc(var(--spacing) * 1);
+    }
+
+    .input-group {
+      grid-template-columns: auto 1fr auto;
     }
   }
 </style>
