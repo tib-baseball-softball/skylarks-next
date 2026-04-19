@@ -30,11 +30,11 @@ msgstr "Logo TiB"
 #. 0: email
 #: src/lib/dp/client.svelte.ts
 msgid "Signed in as {0}"
-msgstr ""
+msgstr "Zalogowano jako {0}"
 
 #: src/lib/dp/client.svelte.ts
 msgid "Logout successful"
-msgstr ""
+msgstr "Wylogowanie pomyślne"
 
 #: src/lib/dp/auth/ChangeEmailForm.svelte
 msgid "A verification email has been sent to your new address."
@@ -151,7 +151,7 @@ msgstr "Proszę potwierdzić"
 
 #: src/lib/dp/auth/PasswordRequestButton.svelte
 msgid "Send change password request for <0/>? You will be logged out and an email with instructions will be sent to your address."
-msgstr ""
+msgstr "Wysłać prośbę o zmianę hasła dla <0/>? Zostaniesz wylogowany, a na Twój adres e-mail zostanie wysłana wiadomość z instrukcjami."
 
 #: src/lib/dp/auth/PasswordRequestButton.svelte
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
@@ -228,7 +228,7 @@ msgstr "Klucz rejestracyjny"
 
 #: src/lib/dp/auth/LoginForm.svelte
 msgid "A valid signup key needs to be entered upon user account creation. If you do not have a signup key, please contact your team manager."
-msgstr ""
+msgstr "Podczas tworzenia konta użytkownika należy wprowadzić ważny klucz rejestracji. Jeśli nie masz klucza rejestracji, skontaktuj się z kierownikiem zespołu."
 
 #: src/lib/dp/auth/LoginForm.svelte
 msgid "Register new account"
@@ -240,11 +240,11 @@ msgstr "lub zaloguj się za pomocą"
 
 #: src/lib/dp/auth/LoginForm.svelte
 msgid "Even when using an external login provider, a signup key (see above) is still required for account creation."
-msgstr ""
+msgstr "Nawet w przypadku korzystania z zewnętrznego dostawcy logowania, klucz rejestracji (patrz wyżej) jest nadal wymagany do utworzenia konta."
 
 #: src/lib/dp/auth/LoginForm.svelte
 msgid "Note: it is possible to associate a local account with an external provider later by using the same email address. A single account can be associated with more than one external provider."
-msgstr ""
+msgstr "Uwaga: możliwe jest późniejsze powiązanie konta lokalnego z zewnętrznym dostawcą przy użyciu tego samego adresu e-mail. Pojedyncze konto może być powiązane z więcej niż jednym zewnętrznym dostawcą."
 
 #: src/lib/dp/auth/LoginForm.svelte
 msgid "There seems to be an error while contacting the backend. Please try again later."
@@ -955,7 +955,7 @@ msgstr "Edytuj"
 #. 0: participation?.expand?.user ?.first_name; 1: participation?.expand?.user?.last_name
 #: src/lib/dp/components/event/IndividualParticipationEditButton.svelte
 msgid "Edit participation data for {0} {1}"
-msgstr ""
+msgstr "Edytuj dane uczestnictwa dla {0} {1}"
 
 #: src/lib/dp/components/event/EventSeriesView.svelte
 msgid "Manage Event Series"
@@ -1189,7 +1189,7 @@ msgstr "ID klubu BSM"
 
 #: src/lib/dp/components/forms/ClubForm.svelte
 msgid "Can be found in the BSM address bar while editing (e.g. <0>https://bsm.baseball-softball.de/clubs/xxx/edit</0>). Needs to be set for the app to function properly."
-msgstr ""
+msgstr "Można go znaleźć w pasku adresu BSM podczas edycji (np. <0>https://bsm.baseball-softball.de/clubs/xxx/edit</0>). Musi być ustawiony, aby aplikacja działała poprawnie."
 
 #: src/lib/dp/components/forms/ClubForm.svelte
 msgid "BSM API Key"
@@ -1197,11 +1197,11 @@ msgstr "Klucz API BSM"
 
 #: src/lib/dp/components/forms/ClubForm.svelte
 msgid "Must be created in BSM in a user's account that has the role \"Team Administration\". If set, all game events for the club can be automatically imported."
-msgstr ""
+msgstr "Musi zostać utworzony w BSM na koncie użytkownika, który posiada rolę „Administracja Zespołu”. Jeśli zostanie ustawiony, wszystkie wydarzenia meczowe dla klubu mogą być automatycznie importowane."
 
 #: src/lib/dp/components/forms/ClubForm.svelte
 msgid "Community Service Requirement <0/> <1>Designated community service time amount (in minutes) that each member is expected to provide during a calendar year (e.g. 20h = 1200 minutes).</1>"
-msgstr ""
+msgstr "Wymóg prac społecznych <0/> <1>Wyznaczony wymiar czasu prac społecznych (w minutach), który każdy członek powinien przepracować w roku kalendarzowym (np. 20h = 1200 minut).</1>"
 
 #: src/lib/dp/components/forms/ClubForm.svelte
 msgid "Club Admins"
@@ -1303,7 +1303,7 @@ msgstr "Nazwa Wewnętrzna"
 
 #: src/lib/dp/components/forms/LocationForm.svelte
 msgid "Custom name field that will not be overwritten by automatic imports."
-msgstr ""
+msgstr "Niestandardowe pole nazwy, które nie zostanie nadpisane przez automatyczny import."
 
 #: src/lib/dp/components/forms/LocationForm.svelte
 msgid "Latitude*"
@@ -1370,7 +1370,7 @@ msgstr "Kolor Czapki"
 
 #: src/lib/dp/components/forms/UniformSetForm.svelte
 msgid "You can use the special identifiers <0/> and <1/> to get the Skylarks Home and Road Cap instead of a generic colored one."
-msgstr ""
+msgstr "Możesz użyć specjalnych identyfikatorów <0/> i <1/>, aby otrzymać czapkę domową i wyjazdową Skylarks zamiast zwykłej kolorowej."
 
 #: src/lib/dp/components/forms/UniformSetForm.svelte
 msgid "Jersey Color"
@@ -1386,7 +1386,7 @@ msgstr "Można użyć zarówno heksadecymalnych wartości kolorów (6 znaków z 
 
 #: src/lib/dp/components/forms/UserDetailsForm.svelte
 msgid "This data is only used for internal purposes and never shown anywhere publicly. (Your team and club administrators have access)."
-msgstr ""
+msgstr "Dane te są wykorzystywane wyłącznie do celów wewnętrznych i nigdy nie są wyświetlane publicznie. (Administratorzy Twojego zespołu i klubu mają do nich dostęp)."
 
 #: src/lib/dp/components/forms/UserDetailsForm.svelte
 msgid "First Name(s)"
@@ -1764,11 +1764,11 @@ msgstr "Profil publiczny"
 
 #: src/lib/dp/components/user/PlayerDataProfileSection.svelte
 msgid "You have the option to display your player data in your public profile on the website and apps."
-msgstr ""
+msgstr "Masz możliwość wyświetlania swoich danych zawodnika w profilu publicznym na stronie internetowej i w aplikacjach."
 
 #: src/lib/dp/components/user/PlayerDataProfileSection.svelte
 msgid "Please note that all statistics and basic info such as your name and team affiliation is considered public information when participating in official DBV and BSVBB competitions."
-msgstr ""
+msgstr "Należy pamiętać, że wszystkie statystyki i podstawowe informacje, takie jak imię i nazwisko oraz przynależność do zespołu, są uważane za informacje publiczne w przypadku udziału w oficjalnych zawodach DBV i BSVBB."
 
 #: src/lib/dp/components/user/PlayerDataProfileSection.svelte
 msgid "Go to Profile Page"
@@ -2618,11 +2618,11 @@ msgstr "Statystyki Ligi"
 
 #: src/routes/(tib)/ligen/[id]/+page.svelte
 msgid "Statistics about current league leaders in various statistical categories can be found on a dedicated subpage."
-msgstr ""
+msgstr "Statystyki dotyczące aktualnych liderów ligi w różnych kategoriach statystycznych można znaleźć na dedykowanej podstronie."
 
 #: src/routes/(tib)/ligen/[id]/+page.svelte
 msgid "Go to stats"
-msgstr ""
+msgstr "Przejdź do statystyk"
 
 #: src/routes/(tib)/ligen/[id]/+page.svelte
 msgid "Tabelle"
@@ -2808,7 +2808,7 @@ msgstr "dla {0} {1}"
 
 #: src/routes/(dp)/(protected)/account/[user]/communityservice/+page.svelte
 msgid "Each club can set a community service target for its members. Members are expected to provide this amount of voluntary working hours each calendar year. You can report your community service hours here, as well as view your previously sent hours and compare with the target."
-msgstr ""
+msgstr "Każdy klub może wyznaczyć swoim członkom cel w zakresie prac społecznych. Oczekuje się, że członkowie przepracują taką liczbę godzin dobrowolnej pracy w każdym roku kalendarzowym. Możesz tutaj zgłaszać swoje godziny prac społecznych, a także przeglądać wcześniej przesłane godziny i porównywać je z celem."
 
 #: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
 msgid "Account Data"
@@ -2933,7 +2933,7 @@ msgstr "Usuwanie klubu"
 
 #: src/routes/(dp)/(protected)/account/clubs/[club]/+page.svelte
 msgid "Deleting a club will delete all team, event and participation data. For safety reasons, a club can therefore only be deleted by a superadmin."
-msgstr ""
+msgstr "Usunięcie klubu spowoduje usunięcie wszystkich danych o zespołach, wydarzeniach i uczestnictwie. Ze względów bezpieczeństwa klub może zostać usunięty wyłącznie przez superadministratora."
 
 #: src/routes/(dp)/(protected)/account/clubs/[club]/+page.svelte
 msgid "Please contact your club's administration."
@@ -3064,31 +3064,31 @@ msgstr "Lista graczy"
 
 #: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
 msgid "This link includes all events for all teams that you are a member of, going back one year."
-msgstr ""
+msgstr "Ten link zawiera wszystkie wydarzenia dla wszystkich zespołów, których jesteś członkiem, z ostatniego roku."
 
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "This link includes all events for this team, going back one year."
-msgstr ""
+msgstr "Ten link zawiera wszystkie wydarzenia dla tego zespołu z ostatniego roku."
 
 #: src/lib/dp/components/communityservice/ClubCommunityServiceSection.svelte
 msgid "Aggregated Data (per user)"
-msgstr ""
+msgstr "Dane zagregowane (na użytkownika)"
 
 #: src/lib/dp/components/communityservice/ClubCommunityServiceSection.svelte
 msgid "Raw data (single entries)"
-msgstr ""
+msgstr "Dane surowe (pojedyncze wpisy)"
 
 #: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
 msgid "Amount"
-msgstr ""
+msgstr "Ilość"
 
 #: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
 msgid "Description"
-msgstr ""
+msgstr "Opis"
 
 #: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
 msgid "Board Member"
-msgstr ""
+msgstr "Członek zarządu"
 
 #: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
 msgid "Admin Comment"
@@ -3097,3 +3097,7 @@ msgstr "Komentarz administratora"
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 msgid "Copy invitation link"
 msgstr "Kopiiwanie linku do zaproszenia"
+
+#: src/routes/(dp)/(protected)/account/+page.svelte
+msgid "My Next Events"
+msgstr "Moje następne wydarzenia"

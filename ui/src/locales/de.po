@@ -3097,3 +3097,7 @@ msgstr "Admin-Kommentar"
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 msgid "Copy invitation link"
 msgstr "Einladungslink kopieren"
+
+#: src/routes/(dp)/(protected)/account/+page.svelte
+msgid "My Next Events"
+msgstr "Meine nächsten Events"
