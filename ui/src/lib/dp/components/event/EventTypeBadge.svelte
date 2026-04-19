@@ -35,7 +35,7 @@
 
     &[data-type="misc"] {
       background-color: var(--color-tertiary-500);
-      color: white;
+      color: var(--color-secondary-500)
     }
   }
 </style>

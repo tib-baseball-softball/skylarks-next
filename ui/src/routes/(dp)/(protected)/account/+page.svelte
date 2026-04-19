@@ -5,10 +5,12 @@
   import {authSettings} from "$lib/dp/client.svelte.js";
   import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
   import AnnouncementSectionContent from "$lib/dp/components/announcements/AnnouncementSectionContent.svelte";
+  import type {PageProps} from "./$types";
+  import EventGrid from "$lib/dp/components/event/EventGrid.svelte";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
-  const {data} = $props();
+  const {data}: PageProps = $props();
 </script>
 
 <h1 class="h1">My Dashboard</h1>
@@ -22,6 +24,12 @@
 <h2 class="h2">My Announcements</h2>
 
 <AnnouncementSectionContent store={data.announcementStore}/>
+
+<h2 class="h2">My Next Events</h2>
+
+{#await data.events then events}
+  <EventGrid events={events.items}/>
+{/await}
 
 <h2 class="h2">My Teams</h2>
 
@@ -37,8 +45,8 @@
 
 <style>
   h2 {
-    margin-block-start: calc(var(--spacing) * 6);
-    margin-block-end: calc(var(--spacing) * 4);
+    margin-block-start: calc(var(--spacing) * 10);
+    margin-block-end: calc(var(--spacing) * 5);
   }
 
   .top-grid {

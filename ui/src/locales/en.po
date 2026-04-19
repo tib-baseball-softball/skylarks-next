@@ -3050,7 +3050,7 @@ msgstr "Descending"
 msgid "Other"
 msgstr "Other"
 
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+#: src/lib/dp/components/event/EventGrid.svelte
 msgid "No events available with the current filters."
 msgstr "No events available with the current filters."
 
@@ -3097,3 +3097,7 @@ msgstr "Admin Comment"
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 msgid "Copy invitation link"
 msgstr "Copy invitation link"
+
+#: src/routes/(dp)/(protected)/account/+page.svelte
+msgid "My Next Events"
+msgstr "My Next Events"
