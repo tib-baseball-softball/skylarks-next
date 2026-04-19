@@ -2,6 +2,7 @@ import type {PageStore} from "$lib/dp/records/PageStore.ts";
 import {watchWithPagination} from "$lib/dp/records/RecordOperations.ts";
 import type {ExpandedEvent} from "$lib/dp/types/ExpandedResponse.ts";
 import type {Fetch} from "$lib/dp/utility/Fetch.ts";
+import {Collection} from "$lib/dp/enum/Collection.ts";
 
 export class EventService {
   /**
@@ -9,9 +10,9 @@ export class EventService {
    * and loads events with realtime.
    */
   public async loadEventStore(
-      teamID: string,
-      url: URL,
-      fetch: Fetch
+    teamID: string,
+    url: URL,
+    fetch: Fetch
   ): Promise<PageStore<ExpandedEvent>> {
     let filter = `team = "${teamID}"`;
 
@@ -42,15 +43,16 @@ export class EventService {
     const pageNumber = Number(url.searchParams.get("page")) ?? 1;
 
     return await watchWithPagination<ExpandedEvent>(
-        "events",
-        {
-          filter: filter,
-          sort: sort,
-          expand: "participations_via_event.user, attire, location",
-          fetch: fetch,
-        },
-        pageNumber,
-        6
+      Collection.Events,
+      {
+        filter: filter,
+        sort: sort,
+        expand: "participations_via_event.user, attire, location",
+        fetch: fetch,
+        requestKey: `${teamID}-events`
+      },
+      pageNumber,
+      6
     );
   }
 }

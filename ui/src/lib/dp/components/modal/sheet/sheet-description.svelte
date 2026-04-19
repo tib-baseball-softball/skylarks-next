@@ -11,11 +11,5 @@
 <SheetPrimitive.Description
   {...restProps}
   bind:ref
-  class={["text-muted-foreground", "root", className]}
+  class={["text-muted-foreground", className]}
 />
-
-<style>
-  .root {
-    font-size: 0.875rem; /* text-sm */
-  }
-</style>

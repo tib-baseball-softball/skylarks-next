@@ -31,6 +31,7 @@
   ul {
     display: grid;
     grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, auto);
     gap: calc(var(--spacing) * 5);
     margin-block-end: calc(var(--spacing) * 6);
 
@@ -41,5 +42,11 @@
     @media (min-width: 80rem) {
       grid-template-columns: 1fr 1fr 1fr;
     }
+  }
+
+  li {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 5;
   }
 </style>

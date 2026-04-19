@@ -601,11 +601,14 @@ msgid "Critical"
 msgstr "Critical"
 
 #. 0: entry.title
+#. 0: row.title
 #: src/lib/dp/components/communityservice/CommunityServiceItemCard.svelte
+#: src/lib/dp/components/communityservice/CommunityServiceTableContentRaw.svelte
 msgid "Edit Community Service Entry \"{0}\""
 msgstr "Edit Community Service Entry \"{0}\""
 
 #: src/lib/dp/components/communityservice/CommunityServiceItemCard.svelte
+#: src/lib/dp/components/communityservice/CommunityServiceTableContentRaw.svelte
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Community Service Entry"
@@ -640,6 +643,7 @@ msgstr "E-Mail"
 
 #: src/lib/dp/components/club/ClubDetailCard.svelte
 #: src/lib/dp/components/communityservice/CommunityServiceDatatable.svelte
+#: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
 #: src/lib/dp/components/forms/ClubForm.svelte
 #: src/lib/dp/components/forms/TeamForm.svelte
 #: src/lib/dp/components/forms/UniformSetForm.svelte
@@ -666,12 +670,16 @@ msgid "Target Met"
 msgstr "Target Met"
 
 #. 0: club.name
+#. 0: club.name
 #: src/lib/dp/components/communityservice/CommunityServiceDatatable.svelte
+#: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
 msgid "Community Service Data for {0}"
 msgstr "Community Service Data for {0}"
 
 #. 0: row.name
+#. 0: row?.expand?.member ?.last_name
 #: src/lib/dp/components/communityservice/CommunityServiceTableContent.svelte
+#: src/lib/dp/components/communityservice/CommunityServiceTableContentRaw.svelte
 msgid "Go to community service page for user {0}"
 msgstr "Go to community service page for user {0}"
 
@@ -893,6 +901,7 @@ msgstr "Name <0/>"
 msgid "Submit"
 msgstr "Submit"
 
+#: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
 #: src/lib/dp/components/event/EventPageAdminSection.svelte
 #: src/lib/dp/components/team/TeamMemberDatatable.svelte
 msgid "Actions"
@@ -943,7 +952,7 @@ msgstr "Comment/Reason:"
 msgid "Edit"
 msgstr "Edit"
 
-#. 0: participation?.expand?.user?.first_name; 1: participation?.expand?.user?.last_name
+#. 0: participation?.expand?.user ?.first_name; 1: participation?.expand?.user?.last_name
 #: src/lib/dp/components/event/IndividualParticipationEditButton.svelte
 msgid "Edit participation data for {0} {1}"
 msgstr "Edit participation data for {0} {1}"
@@ -1000,6 +1009,7 @@ msgstr "Edit Announcement \"{0}\""
 msgid "Create new Announcement"
 msgstr "Create new Announcement"
 
+#: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
 #: src/lib/dp/components/forms/AnnouncementForm.svelte
 #: src/lib/dp/components/forms/EventForm.svelte
 #: src/lib/tib/components/club/officials/ClubOfficialDetailCard.svelte
@@ -1550,6 +1560,7 @@ msgid "State"
 msgstr "State"
 
 #: src/lib/dp/components/settings/ICalSection.svelte
+#: src/lib/dp/components/team/TeamAdminSection.svelte
 msgid "Copied to clipboard!"
 msgstr "Copied to clipboard!"
 
@@ -2247,6 +2258,7 @@ msgstr "No scorers assigned yet."
 msgid "Main Info"
 msgstr "Main Info"
 
+#: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
 #: src/lib/tib/components/match/MatchMainInfoSection.svelte
 msgid "Date"
 msgstr "Date"
@@ -3038,7 +3050,7 @@ msgstr "Descending"
 msgid "Other"
 msgstr "Other"
 
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+#: src/lib/dp/components/event/EventGrid.svelte
 msgid "No events available with the current filters."
 msgstr "No events available with the current filters."
 
@@ -3057,3 +3069,35 @@ msgstr "This link includes all events for all teams that you are a member of, go
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "This link includes all events for this team, going back one year."
 msgstr "This link includes all events for this team, going back one year."
+
+#: src/lib/dp/components/communityservice/ClubCommunityServiceSection.svelte
+msgid "Aggregated Data (per user)"
+msgstr "Aggregated Data (per user)"
+
+#: src/lib/dp/components/communityservice/ClubCommunityServiceSection.svelte
+msgid "Raw data (single entries)"
+msgstr "Raw data (single entries)"
+
+#: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
+msgid "Amount"
+msgstr "Amount"
+
+#: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
+msgid "Description"
+msgstr "Description"
+
+#: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
+msgid "Board Member"
+msgstr "Board Member"
+
+#: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
+msgid "Admin Comment"
+msgstr "Admin Comment"
+
+#: src/lib/dp/components/team/TeamAdminSection.svelte
+msgid "Copy invitation link"
+msgstr "Copy invitation link"
+
+#: src/routes/(dp)/(protected)/account/+page.svelte
+msgid "My Next Events"
+msgstr "My Next Events"

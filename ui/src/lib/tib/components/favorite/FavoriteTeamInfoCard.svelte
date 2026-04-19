@@ -24,7 +24,7 @@
 
   <GenericDetailRow
     categoryName="League"
-    rowValue={clubTeam.league_entries.at(0)?.league.name ?? ""}
+    rowValue={clubTeam.league_entries.at(0)?.league?.name ?? ""}
   >
     {#snippet icon()}
       <TableProperties/>
@@ -35,7 +35,7 @@
 
   <GenericDetailRow
     categoryName="Season"
-    rowValue={clubTeam.league_entries.at(0)?.league.season ?? ""}
+    rowValue={clubTeam.league_entries.at(0)?.league?.season ?? ""}
   >
     {#snippet icon()}
       <Calendar/>

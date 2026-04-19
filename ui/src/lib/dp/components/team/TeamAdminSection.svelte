@@ -9,6 +9,8 @@
   import Dialog from "$lib/dp/components/modal/Dialog.svelte";
   import {authSettings, client} from "$lib/dp/client.svelte.js";
   import type {CustomAuthModel, ExpandedEventSeries, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
+  import { page } from "$app/state";
+  import { toastController } from "$lib/dp/service/ToastController.svelte";
 
   interface Props {
     team: ExpandedTeam;
@@ -21,6 +23,21 @@
     goto(`/account`);
     client.collection("teams").delete(id);
     invalidateAll();
+  }
+  
+  async function copyTeamInvitationLink() {
+    const baseURL = page.url.protocol + "//" + page.url.host;
+    
+    const params = new URLSearchParams({
+      action: "signup",
+      signup_key: team.signup_key
+    });
+    await navigator.clipboard.writeText(`${baseURL}/login?${params.toString()}`);
+    
+    toastController.trigger({
+      message: "Copied to clipboard!",
+      background: "preset-filled-success-500",
+    });
   }
 
   const model = $derived(authSettings.record as CustomAuthModel);
@@ -131,6 +148,10 @@
       <div class="card-actions">
         <TeamForm club={team?.expand?.club} team={team}
                   triggerVariant="tonal-surface"/>
+
+        {#if team.signup_key}
+          <button class="btn preset-outlined-primary-500" onclick={copyTeamInvitationLink}>Copy invitation link</button>
+        {/if}
       </div>
     </section>
 

@@ -13,7 +13,7 @@
 
   let {dto, eventID, isAdmin, classes = ""}: Props = $props();
 
-  //@ts-ignore
+  //@ts-expect-error - casting DTO to proper type
   const participation: ExpandedParticipation = $derived({
     collectionId: "",
     collectionName: Collection.Participations,

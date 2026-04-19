@@ -7,6 +7,7 @@
   import {authSettings, client} from "$lib/dp/client.svelte.js";
   import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
   import type {PageProps} from "./$types";
+  import {appLocale} from "$lib/dp/locale.svelte.ts";
 
   const {data}: PageProps = $props();
   const announcement = $derived(data.announcement);
@@ -22,7 +23,7 @@
     history.back();
   }
 
-  const updated = $derived($announcement.updated);
+  const created = $derived($announcement.created);
   //@ts-expect-error - the multi-level expanding trips the typedef up
   const club = $derived($announcement?.expand?.club ?? $announcement?.expand?.team?.expand?.club);
 </script>
@@ -58,12 +59,12 @@
 
       <p class="date-info">
         <Calendar size="28"/>
-        <time class="h6" datetime="{updated}">{new Date(updated).toLocaleDateString()}</time>
+        <time class="h6" datetime="{created}">{new Date(created).toLocaleDateString(appLocale.current)}</time>
       </p>
 
       <p class="time-info">
         <Clock size="28"/>
-        <time class="h6" datetime="{updated}">{new Date(updated).toLocaleTimeString()}</time>
+        <time class="h6" datetime="{created}">{new Date(created).toLocaleTimeString(appLocale.current)}</time>
       </p>
     </section>
 

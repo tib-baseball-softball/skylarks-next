@@ -32,16 +32,16 @@ export const load = (async ({fetch, params, depends, url}) => {
   const page = Number(pageQuery);
 
   const announcements = await watchWithPagination<ExpandedAnnouncement>(
-      Collection.Announcements,
-      {
-        filter: `club.id = "${club.id}"`,
-        sort: "-updated",
-        fetch: fetch,
-        expand: "author,club,team,comments_via_announcement.user",
-        requestKey: `club-${club.id}-announcements`,
-      },
-      page,
-      3
+    Collection.Announcements,
+    {
+      filter: `club.id = "${club.id}"`,
+      sort: "-created",
+      fetch: fetch,
+      expand: "author,club,team,comments_via_announcement.user",
+      requestKey: `club-${club.id}-announcements`,
+    },
+    page,
+    3
   );
 
   depends("club:single");

@@ -193,6 +193,10 @@ func AddUserICalLink(e *core.RecordEnrichEvent) error {
 	user.SetProxyRecord(e.Record)
 
 	auth := e.RequestInfo.Auth
+	
+	if auth == nil || user == nil || e.Record == nil {
+		return e.Next()
+	}
 
 	if auth.Id == user.Id {
 	    user.WithCustomData(true)

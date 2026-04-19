@@ -1,19 +1,13 @@
 <script lang="ts">
-  import { Plus, SquarePen } from "lucide-svelte";
-  import { invalidateAll } from "$app/navigation";
+  import {Plus, SquarePen} from "lucide-svelte";
+  import {invalidateAll} from "$app/navigation";
   //@ts-ignore
+  // noinspection ES6UnusedImports
   import * as Sheet from "$lib/dp/components/modal/sheet";
-  import { authSettings, client } from "$lib/dp/client.svelte.js";
-  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
-  import type {
-    CustomAuthModel,
-    ExpandedAnnouncement,
-  } from "$lib/dp/types/ExpandedResponse.ts";
-  import type {
-    AnnouncementsResponse,
-    ClubsResponse,
-    TeamsResponse,
-  } from "$lib/dp/types/pb-types.ts";
+  import {authSettings, client} from "$lib/dp/client.svelte.js";
+  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
+  import type {CustomAuthModel, ExpandedAnnouncement,} from "$lib/dp/types/ExpandedResponse.ts";
+  import type {AnnouncementsResponse, ClubsResponse, TeamsResponse,} from "$lib/dp/types/pb-types.ts";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
@@ -121,12 +115,12 @@
     data-testid="announcement-form-trigger-{isEditing ? 'edit' : 'create'}"
   >
     {#if form.id}
-      <SquarePen />
+      <SquarePen/>
       {#if showLabel}
         <span>Edit Announcement</span>
       {/if}
     {:else}
-      <Plus />
+      <Plus/>
       {#if showLabel}
         <span>Create new</span>
       {/if}
@@ -208,9 +202,7 @@
           ></textarea>
         </label>
 
-        <fieldset
-          class="field-wide border border-surface-200-800 p-3 rounded-base"
-        >
+        <fieldset class="field-wide rounded-base">
           <legend class="legend mb-3">Priority</legend>
           {#each ["info", "warning", "danger"] as prio}
             <label
@@ -230,9 +222,7 @@
           {/each}
         </fieldset>
 
-        <fieldset
-          class="field-wide border border-surface-200-800 rounded-base"
-        >
+        <fieldset class="field-wide rounded-base">
           <legend class="legend h6">Link Settings</legend>
 
           <div class=" link-grid">
@@ -248,7 +238,7 @@
                 type="url"
               />
               <span class="text-sm"
-                >Single link in case the announcement is used as a call to
+              >Single link in case the announcement is used as a call to
                 action.</span
               >
             </label>
@@ -263,14 +253,14 @@
                 type="text"
               />
               <span class="text-sm"
-                >If not set, the link itself will be used as a the text.</span
+              >If not set, the link itself will be used as a the text.</span
               >
             </label>
           </div>
         </fieldset>
       </div>
 
-      <hr />
+      <hr/>
 
       <div class="submit-box">
         <button class="btn preset-filled-primary-500" type="submit">
@@ -285,11 +275,11 @@
   :global(.announcement-form-trigger .lucide-icon) {
     flex-shrink: 1;
   }
-  
+
   .legend {
     margin-block: calc(var(--spacing) * 2);
   }
-  
+
   .priority-radio-label {
     text-transform: capitalize;
     display: flex;
@@ -310,17 +300,17 @@
   .edit-form-grid {
     gap: calc(var(--spacing) * 2);
   }
-  
+
   .text-sm {
     font-size: var(--text-sm);
   }
-  
+
   .link-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: calc(var(--spacing) * 2);
     margin-block: var(--spacing);
-    
+
     @media (min-width: 32rem) {
       grid-template-columns: repeat(2, 1fr);
     }

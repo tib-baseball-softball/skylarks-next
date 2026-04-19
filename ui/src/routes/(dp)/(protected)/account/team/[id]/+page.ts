@@ -50,7 +50,7 @@ export const load = (async ({fetch, parent, params, url, depends}) => {
     Collection.Announcements,
     {
       filter: `team.id = "${team.id}"`,
-      sort: "-updated",
+      sort: "-created",
       fetch: fetch,
       expand: "author,club,team,comments_via_announcement.user",
       requestKey: `team-${team.id}-announcements`,

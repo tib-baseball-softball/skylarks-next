@@ -1,24 +1,22 @@
 <script lang="ts">
   // @ts-ignore
-  import { Tabs } from "bits-ui";
-  import { Users } from "lucide-svelte";
-  import { goto } from "$app/navigation";
+  // noinspection ES6UnusedImports
+  import {Tabs} from "bits-ui";
+  import {Users} from "lucide-svelte";
+  import {goto} from "$app/navigation";
   import AnnouncementSectionContent from "$lib/dp/components/announcements/AnnouncementSectionContent.svelte";
-  import EventTeaser from "$lib/dp/components/event/EventTeaser.svelte";
   import TeamAdminSection from "$lib/dp/components/team/TeamAdminSection.svelte";
   import TeamTeaserCard from "$lib/dp/components/team/TeamTeaserCard.svelte";
   import AnnouncementForm from "$lib/dp/components/forms/AnnouncementForm.svelte";
-  import { authSettings } from "$lib/dp/client.svelte.js";
-  import type {
-    CustomAuthModel,
-    EventType,
-  } from "$lib/dp/types/ExpandedResponse.js";
+  import {authSettings} from "$lib/dp/client.svelte.js";
+  import type {CustomAuthModel, EventType,} from "$lib/dp/types/ExpandedResponse.js";
   import Paginator from "$lib/dp/utility/Paginator.svelte";
-  import type { PageProps } from "./$types";
+  import type {PageProps} from "./$types";
   import JoinTeamSection from "$lib/dp/components/team/JoinTeamSection.svelte";
   import ICalSection from "$lib/dp/components/settings/ICalSection.svelte";
+  import EventGrid from "$lib/dp/components/event/EventGrid.svelte";
 
-  const { data }: PageProps = $props();
+  const {data}: PageProps = $props();
   const events = $derived(data.events);
   const currentPage = $derived($events.page);
   const announcementStore = $derived(data.announcementStore);
@@ -44,7 +42,7 @@
   const authRecord = $derived(authSettings.record as CustomAuthModel);
   const canEdit = $derived(
     data.team?.admins.includes(authRecord?.id) ||
-      data.team?.expand?.club?.admins.includes(authRecord?.id),
+    data.team?.expand?.club?.admins.includes(authRecord?.id),
   );
   const isMember = $derived(authRecord?.teams.includes(data.team.id));
 </script>
@@ -59,7 +57,7 @@
     <section class="card-content">{@html data.team.description}</section>
   </article>
 
-  <TeamTeaserCard link={false} team={data.team} />
+  <TeamTeaserCard link={false} team={data.team}/>
 </div>
 
 {#if isMember || canEdit}
@@ -68,7 +66,7 @@
       <h2 class="h2">Announcements</h2>
     </header>
 
-    <AnnouncementSectionContent store={announcementStore} />
+    <AnnouncementSectionContent store={announcementStore}/>
 
     {#if canEdit}
       <div class="announcement-actions">
@@ -97,13 +95,13 @@
               class="tabs-trigger btn timeframe-trigger-next"
               data-testid="segment-item"
               value="next"
-              >Next
+            >Next
             </Tabs.Trigger>
             <Tabs.Trigger
               class="tabs-trigger btn timeframe-trigger-past"
               data-testid="segment-item"
               value="past"
-              >Past
+            >Past
             </Tabs.Trigger>
           </Tabs.List>
         </Tabs.Root>
@@ -116,12 +114,14 @@
             <Tabs.Trigger
               class="tabs-trigger btn"
               data-testid="segment-item"
-              value="asc">Ascending</Tabs.Trigger
+              value="asc">Ascending
+            </Tabs.Trigger
             >
             <Tabs.Trigger
               class="tabs-trigger btn"
               data-testid="segment-item"
-              value="desc">Descending</Tabs.Trigger
+              value="desc">Descending
+            </Tabs.Trigger
             >
           </Tabs.List>
         </Tabs.Root>
@@ -134,22 +134,26 @@
             <Tabs.Trigger
               class="tabs-trigger btn"
               data-testid="segment-item"
-              value="any">All</Tabs.Trigger
+              value="any">All
+            </Tabs.Trigger
             >
             <Tabs.Trigger
               class="tabs-trigger btn"
               data-testid="segment-item"
-              value="game">Game</Tabs.Trigger
+              value="game">Game
+            </Tabs.Trigger
             >
             <Tabs.Trigger
               class="tabs-trigger btn"
               data-testid="segment-item"
-              value="practice">Practice</Tabs.Trigger
+              value="practice">Practice
+            </Tabs.Trigger
             >
             <Tabs.Trigger
               class="tabs-trigger btn"
               data-testid="segment-item"
-              value="misc">Other</Tabs.Trigger
+              value="misc">Other
+            </Tabs.Trigger
             >
           </Tabs.List>
         </Tabs.Root>
@@ -159,20 +163,14 @@
     {#if !isMember}
       <p class="hint">Only team members can participate in events.</p>
     {/if}
-    <div class="events-grid">
-      {#each $events?.items as event (event.id)}
-        <div>
-          <EventTeaser {event} link={true} />
-        </div>
-      {:else}
-        <p>No events available with the current filters.</p>
-      {/each}
-    </div>
+
+    <EventGrid events={$events?.items}/>
+
   </section>
 
-  <Paginator showIfSinglePage={false} store={events} />
+  <Paginator showIfSinglePage={false} store={events}/>
 
-  <hr class="section-divider" />
+  <hr class="section-divider"/>
 
   <section class="links-section">
     <header>
@@ -184,13 +182,13 @@
         class="btn preset-tonal-tertiary border-tertiary"
         href="/account/team/{data.team.id}/members"
       >
-        <Users />
+        <Users/>
         <span>Player List</span>
       </a>
     </div>
   </section>
 
-  <hr class="section-divider" />
+  <hr class="section-divider"/>
 
   <article class="cal-card card preset-outlined-surface-500">
     <ICalSection link={`${model?.ical_link}?team=${data.team.id}`}>
@@ -208,12 +206,12 @@
   </article>
 
   {#if canEdit}
-    <hr class="admin-divider" />
+    <hr class="admin-divider"/>
 
-    <TeamAdminSection team={data.team} eventSeries={data.eventSeries} />
+    <TeamAdminSection team={data.team} eventSeries={data.eventSeries}/>
   {/if}
 {:else}
-  <JoinTeamSection {authRecord} teamID={data.team.id} />
+  <JoinTeamSection {authRecord} teamID={data.team.id}/>
 {/if}
 
 <style>
@@ -277,7 +275,7 @@
   }
 
   .cal-card {
-    margin-block-end: calc(var(--spacing)* 6);
+    margin-block-end: calc(var(--spacing) * 6);
   }
 
   .section-divider {
@@ -340,21 +338,6 @@
 
   .hint {
     margin-block: calc(var(--spacing) * 4);
-  }
-
-  .events-grid {
-    margin-block: calc(var(--spacing) * 4);
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: calc(var(--spacing) * 4);
-
-    @media (min-width: 48rem) {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    @media (min-width: 80rem) {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
   }
 
   .filter-label {
