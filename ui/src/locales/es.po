@@ -3050,7 +3050,7 @@ msgstr "Descendente"
 msgid "Other"
 msgstr "Otro\\"
 
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+#: src/lib/dp/components/event/EventGrid.svelte
 msgid "No events available with the current filters."
 msgstr "No hay eventos disponibles con los filtros actuales."
 
