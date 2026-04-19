@@ -25,7 +25,7 @@
       ...options,
       defaultDate: value ?? "",
       onChange: (selectedDates) => {
-        value = selectedDates[0].toISOString();
+        value = selectedDates[0]?.toISOString();
       },
     });
 
