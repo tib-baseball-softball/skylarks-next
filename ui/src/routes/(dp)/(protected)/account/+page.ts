@@ -9,12 +9,26 @@ export const load = (async ({depends, url, fetch}) => {
   const pageQuery = url.searchParams.get("page") ?? "1";
   const page = Number(pageQuery);
 
+  let filterString = "starttime >= @todayStart";
+
+  if (model?.teams) {
+    filterString += " && (";
+    model.teams?.forEach((team, index) => {
+      filterString += `(team = "${team}")`;
+      if (index < model.teams.length - 1) {
+        filterString += " || ";
+      }
+    });
+    filterString += ")";
+  }
+
+
   const events = client.collection(Collection.Events).getList<ExpandedEvent>(
     1,
     6,
     {
       sort: "+starttime",
-      filter: "starttime >= @todayStart",
+      filter: filterString,
       expand: "participations_via_event.user, attire, location",
       fetch: fetch,
       requestKey: `${model?.id}-events`,
