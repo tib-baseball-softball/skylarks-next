@@ -1,6 +1,5 @@
 <script lang="ts">
-  import type {PageProps} from "./$types";
-  import {authSettings} from "$lib/dp/client.svelte.ts";
+  import {authSettings} from "$lib/dp/client.svelte.js";
   import PasswordRequestButton from "$lib/dp/auth/PasswordRequestButton.svelte";
   import Dialog from "$lib/dp/components/modal/Dialog.svelte";
   import {Lock, Mail, User} from "lucide-svelte";
@@ -8,9 +7,7 @@
   import UserDetailsForm from "$lib/dp/components/forms/UserDetailsForm.svelte";
   import PushSettingsSection from "$lib/dp/components/settings/PushSettingsSection.svelte";
   import ICalSection from "$lib/dp/components/settings/ICalSection.svelte";
-  import type { CustomAuthModel } from "$lib/dp/types/ExpandedResponse";
-
-  let {params}: PageProps = $props();
+  import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse";
 
   const model = $derived(authSettings.record) as CustomAuthModel;
 </script>
@@ -92,15 +89,15 @@
   </section>
 
   <section class="card preset-tonal-surface">
-    <PushSettingsSection userID={params.user}/>
+    <PushSettingsSection userID={model.id}/>
   </section>
-  
+
   <section class="card preset-tonal-surface">
     <ICalSection link={model?.ical_link ?? ""}>
       {#snippet header()}
         <span>Calendar Import</span>
       {/snippet}
-      
+
       {#snippet subheader()}
         <h3 class="h4">Your personal calendar link</h3>
         <p class="cal-hint">
@@ -128,7 +125,7 @@
     margin-block-end: calc(var(--spacing) * 2);
     grid-template-columns: 200px 1fr;
   }
-  
+
   .cal-hint {
     margin-block-start: var(--spacing);
   }

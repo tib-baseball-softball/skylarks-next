@@ -67,7 +67,7 @@
           <span>Community Service</span>
         </a>
 
-        <a href="/account/{authRecord?.id}/settings" onclick={sheetClose}>
+        <a href="/account/settings" onclick={sheetClose}>
           <Settings/>
           <span>Settings</span>
         </a>

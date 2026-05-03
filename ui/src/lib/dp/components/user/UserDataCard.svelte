@@ -44,7 +44,7 @@
 
   <footer class="card-footer">
     <p>Edit User Data:</p>
-    <a class="btn preset-tonal-primary border border-primary-500" href="/account/{model.id}/settings"
+    <a class="btn preset-tonal-primary border border-primary-500" href="/account/settings"
        title="Go to User Settings">User Settings</a>
   </footer>
 </div>
