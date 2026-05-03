@@ -97,23 +97,7 @@
   <!-- Footer -->
   <footer class="app-footer">
     <hr>
-    <Footer>
-      {#snippet staticLinks()}
-        <a aria-label="to Skylarks Facebook page" href="https://www.facebook.com/TiBBaseball/" rel="noreferrer"
-           target="_blank">
-          <img alt="Facebook brand logo" src="/Facebook_Logo_Primary.svg" width="50">
-        </a>
-
-        <a aria-label="to Skylarks Instagram profile" href="https://www.instagram.com/berlinskylarks/" rel="noreferrer"
-           target="_blank">
-          <img alt="Instagram brand logo" class="instagram-logo" src="/Instagram_Glyph_Gradient.png">
-        </a>
-
-        <a aria-label="to Turngemeinde in Berlin main website" href="https://tib1848ev.de/" target="_blank">
-          <img alt="TiB Logo" class="tib-logo" src="/tib_logo.svg" width="38">
-        </a>
-      {/snippet}
-    </Footer>
+    <Footer></Footer>
   </footer>
 </div>
 
