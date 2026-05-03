@@ -110,23 +110,6 @@
     align-items: center;
   }
 
-  .app-bar-link-list {
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    display: none;
-    padding-block: calc(var(--spacing) * 2);
-    gap: calc(var(--spacing) * 2);
-
-    @media (min-width: 48rem) {
-      display: flex;
-    }
-
-    @media (min-width: 80rem) {
-      gap: calc(var(--spacing) * 16);
-    }
-  }
-
   .app-bar-trail {
     display: flex;
     align-items: center;
@@ -193,16 +176,6 @@
     @media (min-width: 64rem) {
       padding-bottom: 0;
     }
-  }
-
-  .instagram-logo {
-    margin: calc(var(--spacing) * 1);
-    max-width: 40px;
-  }
-
-  .tib-logo {
-    min-width: calc(var(--spacing) * 8);
-    max-width: calc(var(--spacing) * 14);
   }
 
   :global(.top-nav-link) {

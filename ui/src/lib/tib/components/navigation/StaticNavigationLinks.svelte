@@ -1,7 +1,6 @@
 <script lang="ts">
-  import {House, Shield, Star, Table, Ticket, Users} from "lucide-svelte";
+  import {House, Settings, Shield, User, Users} from "lucide-svelte";
   import {page} from "$app/state";
-  import {preferences} from "$lib/tib/globals.svelte.ts";
 
   interface Props {
     classes?: string;
@@ -19,42 +18,34 @@
 </li>
 
 <li>
-  <a class="{classes}" class:preset-filled-primary-500={page.url.pathname === "/favorite"}
-     href="/favorite?season={preferences.current.selectedSeason}">
-    <Star/>
-    <span>Favorite</span>
+  <a class="{classes}" class:preset-filled-primary-500={page.url.pathname === "/account"}
+     href="/account">
+    <User/>
+    <span>Account</span>
   </a>
 </li>
 
 <li>
-  <a class="{classes}" class:preset-filled-primary-500={page.url.pathname.startsWith("/gamecenter")}
-     href="/gamecenter">
-    <Ticket/>
-    <span>Games</span>
+  <a class="{classes}" class:preset-filled-primary-500={page.url.pathname === "/account/clubs"}
+     href="/account/clubs">
+    <Shield/>
+    <span>Clubs</span>
   </a>
 </li>
 
 <li>
-  <a class="{classes}" class:preset-filled-primary-500={page.url.pathname.startsWith("/ligen")}
-     href="/ligen">
-    <Table/>
-    <span>Leagues</span>
-  </a>
-</li>
-
-<li>
-  <a class="{classes}" class:preset-filled-primary-500={page.url.pathname.startsWith("/teams")}
-     href="/teams">
+  <a class="{classes}" class:preset-filled-primary-500={page.url.pathname === "/account/team"}
+     href="/account/team">
     <Users/>
     <span>Teams</span>
   </a>
 </li>
 
 <li>
-  <a class="{classes}" class:preset-filled-primary-500={page.url.pathname.startsWith("/club")}
-     href="/club">
-    <Shield/>
-    <span>Club</span>
+  <a class="{classes}" class:preset-filled-primary-500={page.url.pathname === "/account/settings"}
+     href="/account/settings">
+    <Settings/>
+    <span>Settings</span>
   </a>
 </li>
 
