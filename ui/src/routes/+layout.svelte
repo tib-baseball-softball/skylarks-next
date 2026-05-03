@@ -45,11 +45,7 @@
       {/snippet}
 
       {#snippet children()}
-        <section>
-          <ul class="app-bar-link-list">
-            <StaticNavigationLinks classes="top-nav-link rounded-base"/>
-          </ul>
-        </section>
+        <a class="btn preset-filled-primary-500" href="/bsm" title="BSM Data">BSM</a>
       {/snippet}
 
       {#snippet trail()}
