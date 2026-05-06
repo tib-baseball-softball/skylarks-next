@@ -11,7 +11,7 @@
   let {player, showTeams = true}: Props = $props();
 </script>
 
-<div class="card preset-tonal-surface shadow-xl player-card">
+<div class="card preset-outlined-secondary-600-400 shadow-xl player-card">
   {#if showTeams}
     <dl class="info-row">
       <Users aria-hidden="true"/>

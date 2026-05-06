@@ -146,7 +146,7 @@
               class="tabs-wrap"
             >
               <Tabs.List
-                class="tabs-list preset-tonal-surface"
+                class="tabs-list preset-outlined-secondary-600-400"
               >
                 <Tabs.Trigger
                   value="login"

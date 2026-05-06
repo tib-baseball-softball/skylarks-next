@@ -12,7 +12,7 @@
 <div class="table-wrap standings-table-wrap">
   <table class="table border">
     <thead class="standings-header">
-    <tr class="preset-tonal-surface">
+    <tr class="preset-outlined-secondary-600-400">
       <th>#</th>
       <th>Team</th>
       <th>W</th>

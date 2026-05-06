@@ -15,7 +15,7 @@
   <div
     class="paginator root"
   >
-    <div class="controls-wrapper rounded-container preset-tonal-surface">
+    <div class="controls-wrapper rounded-container preset-outlined-secondary-600-400">
       <button
         class="nav-button rounded-container"
         type="button"

@@ -114,7 +114,7 @@
       triggerVariant === "tonal-primary" && "preset-tonal-primary border-primary",
       triggerVariant === "tonal-secondary" && "preset-tonal-secondary border-secondary",
       triggerVariant === "tonal-tertiary" && "preset-tonal-tertiary border-tertiary",
-      triggerVariant === "tonal-surface" && "preset-tonal-surface",
+      triggerVariant === "tonal-surface" && "preset-outlined-secondary-600-400",
     ]}
   >
     {@render triggerContent()}
@@ -154,7 +154,7 @@
         </label>
 
         <label class="label">
-          <span>BSM ID</span> 
+          <span>BSM ID</span>
           <input
             bind:value={form.bsm_id}
             class="input"
@@ -266,7 +266,7 @@
     justify-content: center;
     align-items: center;
   }
-  
+
   hr {
     margin-block: calc(var(--spacing) * 5);
   }

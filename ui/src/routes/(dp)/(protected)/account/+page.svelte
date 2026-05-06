@@ -72,6 +72,7 @@
 
     @media (min-width: 48rem) {
       grid-template-columns: 1fr 1fr;
+      gap: calc(var(--spacing) * 6);
     }
   }
 </style>

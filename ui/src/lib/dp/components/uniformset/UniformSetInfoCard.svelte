@@ -24,7 +24,7 @@
   }
 </script>
 
-<article class="card preset-tonal-surface shadow-md">
+<article class="card preset-outlined-secondary-600-400 shadow-md">
   <header class="card-header">
     <h3 class="h4 uniform-title">{uniformSet.name}</h3>
   </header>

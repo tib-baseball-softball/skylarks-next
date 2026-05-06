@@ -112,7 +112,7 @@
       triggerVariant === "tonal-primary" && "preset-tonal-primary",
       triggerVariant === "tonal-secondary" && "preset-tonal-secondary",
       triggerVariant === "tonal-tertiary" && "preset-tonal-tertiary",
-      triggerVariant === "tonal-surface" && "preset-tonal-surface",
+      triggerVariant === "tonal-surface" && "preset-outlined-secondary-600-400",
     ]}
   >
     <SquarePen/>
@@ -221,7 +221,7 @@
           options={["none", "A", "B", "C", "D"]}
         />
       </div>
-      
+
       <hr>
 
       <div class="submit-container">
@@ -237,28 +237,28 @@
   form {
     margin-block: calc(var(--spacing) * 3);
   }
-  
+
   .label-wide {
     grid-column: span 2 / span 2;
     gap: calc(var(--spacing) * 2);
   }
-  
+
   .position-labels {
     display: flex;
     flex-wrap: wrap;
     gap: calc(var(--spacing) * 2);
   }
-  
+
   .submit-container {
     display: flex;
     justify-content: center;
     gap: calc(var(--spacing) * 3);
-    
+
     > button {
       margin-block-start: calc(var(--spacing) * 2);
     }
   }
-  
+
   hr {
     margin-block: calc(var(--spacing) * 4);
   }

@@ -14,7 +14,7 @@
 
 <h1 class="h1">User Settings</h1>
 {#if model}
-  <section class="card preset-tonal-surface">
+  <section class="card preset-outlined-secondary-600-400">
     <header class="card-header">
       <h2 class="h3">
         Account Data
@@ -88,11 +88,11 @@
     </footer>
   </section>
 
-  <section class="card preset-tonal-surface">
+  <section class="card preset-outlined-secondary-600-400">
     <PushSettingsSection userID={model.id}/>
   </section>
 
-  <section class="card preset-tonal-surface">
+  <section class="card preset-outlined-secondary-600-400">
     <ICalSection link={model?.ical_link ?? ""}>
       {#snippet header()}
         <span>Calendar Import</span>

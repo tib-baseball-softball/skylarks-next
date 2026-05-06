@@ -50,7 +50,7 @@
 <h1 class="h1 page-title">{data.team.name} ({data.team?.expand?.club.name})</h1>
 
 <div class="team-overview-grid">
-  <article class="card team-description-card preset-tonal-surface">
+  <article class="card team-description-card preset-outlined-secondary-600-400">
     <header class="card-header">
       <h2 class="h4 card-title">Team Description</h2>
     </header>
@@ -86,7 +86,7 @@
       <h2 class="h2">Team Events</h2>
     </header>
 
-    <div class="filters-bar preset-tonal-surface">
+    <div class="filters-bar preset-outlined-secondary-600-400">
       <label class="filter-label">
         <span>Timeframe</span>
         <Tabs.Root bind:value={showEvents}>

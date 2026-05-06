@@ -17,7 +17,7 @@
   If you have the team's signup key, please enter it here to join:
 </p>
 <div class="join-grid">
-  <article class="card join-container preset-tonal-surface">
+  <article class="card join-container preset-outlined-secondary-600-400">
     <h3 class="h4">
       Join Team
     </h3>

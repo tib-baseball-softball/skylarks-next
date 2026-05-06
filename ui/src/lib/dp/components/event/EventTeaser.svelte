@@ -14,7 +14,7 @@
 </script>
 
 <article
-  class="card preset-tonal-surface shadow-xl teaser"
+  class="card preset-outlined-secondary-600-400 shadow-xl teaser"
   class:card-hover={link}
 >
   <a class:line-through={event.cancelled} href="/account/event/{event.id}">

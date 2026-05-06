@@ -72,7 +72,7 @@
       triggerVariant === "tonal-primary" && "preset-tonal-primary border-primary",
       triggerVariant === "tonal-secondary" && "preset-tonal-secondary",
       triggerVariant === "tonal-tertiary" && "preset-tonal-tertiary border-tertiary",
-      triggerVariant === "tonal-surface" && "preset-tonal-surface",
+      triggerVariant === "tonal-surface" && "preset-outlined-secondary-600-400",
     ]}
   >
     <CalendarPlus/>

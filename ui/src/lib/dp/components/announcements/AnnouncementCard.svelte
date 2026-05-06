@@ -24,7 +24,7 @@
   );
 </script>
 
-<article class="root card preset-tonal-surface shadow-xl">
+<article class="root card preset-outlined-secondary-600-400 shadow-xl">
   <AnnouncementCoreContent {announcement}/>
 
   <div>

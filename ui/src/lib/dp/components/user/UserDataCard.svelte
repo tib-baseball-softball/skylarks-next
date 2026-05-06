@@ -11,7 +11,7 @@
   const {model}: Props = $props();
 </script>
 
-<div class="card preset-tonal-surface user-card shadow-lg">
+<div class="card preset-outlined-secondary-600-400 user-card shadow-lg">
   <header class="card-header">
     <h2 class="h4 card-title">User Data</h2>
   </header>

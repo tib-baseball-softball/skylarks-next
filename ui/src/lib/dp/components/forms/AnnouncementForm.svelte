@@ -110,7 +110,7 @@
       triggerVariant === "tonal-tertiary" &&
         "preset-tonal-tertiary border-tertiary",
       triggerVariant === "tonal-surface" &&
-        "preset-tonal-surface border-surface",
+        "preset-outlined-secondary-600-400 border-surface",
     ]}
     data-testid="announcement-form-trigger-{isEditing ? 'edit' : 'create'}"
   >

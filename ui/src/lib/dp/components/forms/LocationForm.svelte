@@ -89,7 +89,7 @@
       triggerVariant === "tonal-primary" && "preset-tonal-primary",
       triggerVariant === "tonal-secondary" && "preset-tonal-secondary",
       triggerVariant === "tonal-tertiary" && "preset-tonal-tertiary",
-      triggerVariant === "tonal-surface" && "preset-tonal-surface",
+      triggerVariant === "tonal-surface" && "preset-outlined-secondary-600-400",
     ]}
   >
     {#if form.id}
@@ -274,7 +274,7 @@
     justify-content: center;
     align-items: center;
   }
-  
+
   .subdued {
     font-weight: 300;
     font-size: var(--text--sm);

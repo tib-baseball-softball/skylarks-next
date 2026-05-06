@@ -86,7 +86,7 @@
             type="text"
           />
         </label>
-        <button class="btn preset-tonal-surface" type="submit">Submit</button>
+        <button class="btn preset-outlined-secondary-600-400" type="submit">Submit</button>
       </form>
     </section>
   </div>

@@ -103,7 +103,7 @@
       triggerVariant === "tonal-primary" && "preset-tonal-primary",
       triggerVariant === "tonal-secondary" && "preset-tonal-secondary",
       triggerVariant === "tonal-tertiary" && "preset-tonal-tertiary",
-      triggerVariant === "tonal-surface" && "preset-tonal-surface",
+      triggerVariant === "tonal-surface" && "preset-outlined-secondary-600-400",
     ]}
   >
     {#if form.id}
@@ -242,7 +242,7 @@
   hr {
     margin-block: calc(var(--spacing) * 5);
   }
-  
+
   .submit-container {
     margin-block: calc(var(--spacing) * 3);
     display: flex;

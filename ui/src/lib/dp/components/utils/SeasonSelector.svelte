@@ -15,13 +15,13 @@
     if (seasonParam) {
       return parseInt(seasonParam);
     }
-    return selectedSeason
+    return selectedSeason;
   }
 
   selectedSeason = parseParam();
 </script>
 
-<div class="container preset-tonal-surface rounded-base">
+<div class="container preset-outlined-secondary-600-400 rounded-base">
   <label class="season-label">
     Season
     <select bind:value={selectedSeason} class="select" onchange={onChangeCallback}>

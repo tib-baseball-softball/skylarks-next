@@ -69,7 +69,7 @@
   {/snippet}
 
   <div class="actions">
-    <button class="btn preset-tonal-surface cancel" onclick={closeModal} type="button">Cancel
+    <button class="btn preset-outlined-secondary-600-400 cancel" onclick={closeModal} type="button">Cancel
     </button>
     <button class="btn preset-filled" onclick={triggerPasswordChange} type="button">Confirm</button>
   </div>
