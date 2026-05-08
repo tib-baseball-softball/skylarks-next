@@ -1,7 +1,7 @@
 @import "overrides/base-globals.css";
 @import "overrides/presets.css";
 
-[data-theme="skylarks"] {
+:root {
   --text-scaling: 1;
   --base-font-color: var(--color-surface-950);
   --base-font-color-dark: var(--color-surface-50);
@@ -205,4 +205,6 @@
   --color-surface-contrast-800: var(--color-surface-contrast-light);
   --color-surface-contrast-900: var(--color-surface-contrast-light);
   --color-surface-contrast-950: var(--color-surface-contrast-light);
+
+  --color-border: light-dark(var(--color-surface-50), #334155);
 }
