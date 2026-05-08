@@ -61,7 +61,7 @@
           >
             <div class="header">
               <Dialog.Close
-                class="close-button btn preset-outlined-secondary-600-400 {closeButtonClasses}"
+                class="close-button btn preset-outlined-card {closeButtonClasses}"
               >
                 <X/>
               </Dialog.Close>

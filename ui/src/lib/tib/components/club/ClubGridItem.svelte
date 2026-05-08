@@ -12,7 +12,7 @@
 </script>
 
 <a
-  class="card club-grid-item preset-tonal shadow-xl"
+  class="card club-grid-item preset-tonal shadow"
   href={href}
 >
   <article>

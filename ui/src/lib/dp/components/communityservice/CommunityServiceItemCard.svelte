@@ -27,7 +27,7 @@
   let serviceDate = $derived(new Date(entry.service_date));
 </script>
 
-<article class="card preset-outlined-secondary-600-400 shadow-lg">
+<article class="card preset-outlined-card shadow">
   <div class="entry-card-header">
     <h3 class="h5">{entry.title}</h3>
     <p class="entry-minutes chip preset-tonal-primary">{toHours(entry.minutes).toFixed(1)}</p>

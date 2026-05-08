@@ -17,7 +17,7 @@
 
 <div class="streak-graph-section">
   <Tabs.Root bind:value={tabSet}>
-    <Tabs.List class="tabs-list preset-outlined-secondary-600-400">
+    <Tabs.List class="tabs-list preset-outlined-card">
       <Tabs.Trigger class="tabs-trigger btn" value="graph">Graph</Tabs.Trigger>
       <Tabs.Trigger class="tabs-trigger btn" value="percentage"
       >Percentage

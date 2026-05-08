@@ -11,7 +11,7 @@
 
 <article class="officials-list-wrapper">
   <section>
-    <ul class="card officials-card preset-tonal shadow-xl">
+    <ul class="card officials-card preset-tonal shadow">
 
       {#each clubOfficials as clubOfficial, index}
         <li class="official-item">

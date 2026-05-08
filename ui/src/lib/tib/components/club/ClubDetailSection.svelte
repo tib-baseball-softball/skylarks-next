@@ -10,7 +10,7 @@
   let {title, icon, children}: Props = $props();
 </script>
 
-<article class="card detail-section preset-tonal shadow-xl">
+<article class="card detail-section preset-tonal shadow">
   <div class="header">
     {@render icon?.()}
     <h2 class="h2 title">{title}</h2>

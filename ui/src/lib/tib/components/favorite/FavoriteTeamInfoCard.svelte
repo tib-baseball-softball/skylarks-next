@@ -10,7 +10,7 @@
   let {clubTeam}: Props = $props();
 </script>
 
-<article class="card team-info-card preset-tonal shadow-xl">
+<article class="card team-info-card preset-tonal shadow">
   <GenericDetailRow
     categoryName="Name"
     rowValue={`${clubTeam.name} (${clubTeam.short_name})`}

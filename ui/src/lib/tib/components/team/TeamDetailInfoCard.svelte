@@ -9,7 +9,7 @@
   let {clubTeam}: Props = $props();
 </script>
 
-<div class="card team-info-card preset-tonal shadow-xl">
+<div class="card team-info-card preset-tonal shadow">
 
   <div class="detail-row">
     <File/>

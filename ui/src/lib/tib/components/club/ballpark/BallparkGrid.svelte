@@ -11,7 +11,7 @@
 <div class="ballpark-grid">
   {#each fields as field}
     <a href="/club/ballpark/{field.id}">
-      <article class="card ballpark-card preset-tonal shadow-xl">
+      <article class="card ballpark-card preset-tonal shadow">
         <img class="ballpark-thumb" width="80" height="80" loading="lazy" src="{field.photo_url}"
              alt="a baseball or softball field: {field.name}">
         <p class="ballpark-name">

@@ -20,7 +20,7 @@
   });
 </script>
 
-<div class="card preset-outlined-secondary-600-400 shadow-lg">
+<div class="card preset-outlined-card shadow">
   <header class="card-header">
     <h2 class="h4 title">Totals - {title}</h2>
   </header>

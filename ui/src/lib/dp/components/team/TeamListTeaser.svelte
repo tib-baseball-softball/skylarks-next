@@ -25,7 +25,7 @@
   }
 </script>
 
-<article class="card preset-outlined-secondary-600-400 shadow-lg" class:card-hover={link}>
+<article class="card preset-outlined-card shadow" class:card-hover={link}>
   <a href="/account/team/{team.id}">
     <header class="card-header">
       <h3 class="h4 font-semibold">{team.name}</h3>

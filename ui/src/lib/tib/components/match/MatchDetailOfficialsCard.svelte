@@ -9,7 +9,7 @@
   let {match}: Props = $props();
 </script>
 
-<div class="card preset-outlined-secondary-600-400 root">
+<div class="card preset-outlined-card root">
   <h4 class="h6">Umpire</h4>
 
   <div class="list">

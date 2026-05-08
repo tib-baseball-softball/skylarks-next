@@ -20,7 +20,7 @@
       </header>
     {/if}
 
-    <ul class="card license-card preset-tonal shadow-xl">
+    <ul class="card license-card preset-tonal shadow">
 
       {#each baseballLicenses as license, index}
         <li class="license-item">
@@ -44,7 +44,7 @@
         <h2 class="h2">Softball</h2>
       </header>
 
-      <ul class="card license-card preset-tonal shadow-xl">
+      <ul class="card license-card preset-tonal shadow">
 
         {#each softballLicenses as license, index}
           <li class="license-item">

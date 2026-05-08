@@ -16,7 +16,7 @@
 {/each}
 
 {#if !clubs}
-  <div class="card preset-tonal-primary shadow-lg">
+  <div class="card preset-outlined-primary shadow">
     <header class="card-header">
       <h2 class="h4 title">Club</h2>
     </header>

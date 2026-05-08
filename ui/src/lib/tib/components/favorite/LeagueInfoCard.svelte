@@ -11,7 +11,7 @@
   let {leagueGroup, tableRow}: Props = $props();
 </script>
 
-<article class="card league-card preset-tonal shadow-xl">
+<article class="card league-card preset-tonal shadow">
   <GenericDetailRow
     categoryName="Acronym"
     rowValue={leagueGroup.acronym}

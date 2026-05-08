@@ -175,7 +175,7 @@
             {/snippet}
 
             <div class="button-container">
-              <button class="btn preset-outlined-secondary-600-400 border border-surface-500" type="button"
+              <button class="btn preset-outlined-card border border-surface-500" type="button"
                       onclick={closeModal}>
                 Cancel
               </button>

@@ -9,7 +9,7 @@
   let {leagueGroup}: Props = $props();
 </script>
 
-<article class="card preset-outlined-secondary-600-400">
+<article class="card preset-outlined-card">
 
   <div class="container">
     <Info/>

@@ -12,7 +12,7 @@
   }
 </script>
 
-<article class="card traffic-card preset-tonal shadow-xl">
+<article class="card traffic-card preset-tonal shadow">
   <div class="traffic-content">
     {@html convertLineBreaksToHTML(field.description_html)}
   </div>

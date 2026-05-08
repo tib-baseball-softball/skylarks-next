@@ -9,7 +9,7 @@
   let {player}: Props = $props();
 </script>
 
-<div class="card preset-outlined-secondary-600-400 shadow-xl">
+<div class="card preset-outlined-card shadow">
   <div class="wrapper">
     {#if player.media?.length > 0}
       <img src="{player.media.at(0)?.url}" alt="{player.media.at(0)?.alt}" loading="lazy">

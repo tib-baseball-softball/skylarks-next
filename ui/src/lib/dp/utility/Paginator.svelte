@@ -15,7 +15,7 @@
   <div
     class="paginator root"
   >
-    <div class="controls-wrapper rounded-container preset-outlined-secondary-600-400">
+    <div class="controls-wrapper rounded-container preset-outlined-card">
       <button
         class="nav-button rounded-container"
         type="button"

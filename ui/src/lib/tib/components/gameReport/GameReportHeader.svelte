@@ -13,7 +13,7 @@
 </script>
 
 <section
-  class="{classes} card report-header preset-tonal shadow-xl">
+  class="{classes} card report-header preset-tonal shadow">
   <div class="row">
     <CalendarDays/>
     <span class="label">Veröffentlicht: </span>

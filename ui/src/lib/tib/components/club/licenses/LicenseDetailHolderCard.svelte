@@ -12,7 +12,7 @@
   const expiryDate = $derived(new Date(license.valid_until));
 </script>
 
-<article class="card license-holder-card preset-tonal shadow-xl">
+<article class="card license-holder-card preset-tonal shadow">
   <GenericDetailRow
     categoryName="Holder"
     rowValue={`${license?.person.first_name} ${license?.person.last_name}`}

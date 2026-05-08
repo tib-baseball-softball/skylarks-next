@@ -18,7 +18,7 @@
     />
   </article>
 
-  <article class="card club-info-card preset-tonal shadow-xl">
+  <article class="card club-info-card preset-tonal shadow">
     <div class="row">
       <ClipboardList/>
       <span>{club.short_name}</span>

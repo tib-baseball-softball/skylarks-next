@@ -74,7 +74,7 @@
   </header>
 
   <div class="flex flex-col">
-    <div class="stats preset-outlined-secondary-600-400 rounded-container">
+    <div class="stats preset-outlined-card rounded-container">
       {#if summaryData}
         <StatsBlock row={summaryData} {type}/>
       {/if}

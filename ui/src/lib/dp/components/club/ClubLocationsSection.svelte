@@ -24,7 +24,7 @@
   }
 </script>
 
-<ul class="preset-outlined-secondary-600-400 rounded-base shadow-xl">
+<ul class="preset-outlined-card rounded-base shadow">
   {#each locations as location, index (location.id)}
     <li class="location-grid">
       <h3>

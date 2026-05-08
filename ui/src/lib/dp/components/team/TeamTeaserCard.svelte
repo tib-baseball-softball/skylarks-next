@@ -14,7 +14,7 @@
   let {team, link = false}: props = $props();
 </script>
 
-<article class="card card-content preset-outlined-secondary-600-400" class:card-hover={link}>
+<article class="card card-content preset-outlined-card" class:card-hover={link}>
   <div class="detail-row">
     <File/>
     <div>

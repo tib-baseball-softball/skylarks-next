@@ -50,7 +50,7 @@
 <h1 class="h1 page-title">{data.team.name} ({data.team?.expand?.club.name})</h1>
 
 <div class="team-overview-grid">
-  <article class="card team-description-card preset-outlined-secondary-600-400">
+  <article class="card team-description-card preset-outlined-card">
     <header class="card-header">
       <h2 class="h4 card-title">Team Description</h2>
     </header>
@@ -86,7 +86,7 @@
       <h2 class="h2">Team Events</h2>
     </header>
 
-    <div class="filters-bar preset-outlined-secondary-600-400">
+    <div class="filters-bar preset-outlined-card">
       <label class="filter-label">
         <span>Timeframe</span>
         <Tabs.Root bind:value={showEvents}>
@@ -190,7 +190,7 @@
 
   <hr class="section-divider"/>
 
-  <article class="cal-card card preset-outlined-surface-500">
+  <article class="cal-card card preset-outlined-card">
     <ICalSection link={`${model?.ical_link}?team=${data.team.id}`}>
       {#snippet header()}
         <span>Calendar Import</span>

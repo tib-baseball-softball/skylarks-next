@@ -66,7 +66,7 @@
   {/snippet}
 
   <div class="actions">
-    <button class="btn preset-outlined-secondary-600-400 border border-surface-500" data-test-role="modal-cancel"
+    <button class="btn preset-outlined-card border border-surface-500" data-test-role="modal-cancel"
             onclick={closeModal}
             type="button">Cancel
     </button>

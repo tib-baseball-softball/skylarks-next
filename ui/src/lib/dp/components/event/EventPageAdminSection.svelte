@@ -38,7 +38,7 @@
 <h2 class="admin-title">Admin Section</h2>
 
 <div class="admin-grid">
-  <div class="card admin-card preset-outlined-surface-500">
+  <div class="card admin-card preset-outlined-card">
     <header class="card-header">
       <h3 class="card-title">Event Details</h3>
     </header>
@@ -70,7 +70,7 @@
     </section>
   </div>
 
-  <div class="card admin-card preset-outlined-surface-500">
+  <div class="card admin-card preset-outlined-card">
     <header class="card-header">
       <h3 class="card-title">Add Guest player</h3>
     </header>
@@ -86,12 +86,12 @@
             type="text"
           />
         </label>
-        <button class="btn preset-outlined-secondary-600-400" type="submit">Submit</button>
+        <button class="btn preset-outlined-card" type="submit">Submit</button>
       </form>
     </section>
   </div>
 
-  <div class="card admin-card preset-outlined-surface-500">
+  <div class="card admin-card preset-outlined-card">
     <header class="card-header">
       <h3 class="card-title">Actions</h3>
     </header>

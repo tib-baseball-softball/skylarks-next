@@ -15,7 +15,7 @@
   );
 </script>
 
-<article class="card ballpark-detail-card preset-tonal shadow-xl">
+<article class="card ballpark-detail-card preset-tonal shadow">
   <GenericDetailRow categoryName="Ballpark Name" rowValue={field.name}>
     {#snippet icon()}
       <div class="primary-icon">

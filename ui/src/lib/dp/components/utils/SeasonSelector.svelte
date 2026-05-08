@@ -21,7 +21,7 @@
   selectedSeason = parseParam();
 </script>
 
-<div class="container preset-outlined-secondary-600-400 rounded-base">
+<div class="container preset-outlined-card rounded-base">
   <label class="season-label">
     Season
     <select bind:value={selectedSeason} class="select" onchange={onChangeCallback}>

@@ -47,7 +47,7 @@
       {/if}
 
       {#if report.preview}
-        <section class="card preview-section preset-tonal shadow-xl">
+        <section class="card preview-section preset-tonal shadow">
           <h3 class="h3">Ausblick</h3>
 
           {@html report.preview}

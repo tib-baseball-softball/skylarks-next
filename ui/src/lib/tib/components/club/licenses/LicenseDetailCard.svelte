@@ -11,7 +11,7 @@
   let {license}: Props = $props();
 </script>
 
-<article class="card license-detail-card preset-tonal shadow-xl">
+<article class="card license-detail-card preset-tonal shadow">
   <GenericDetailRow
     categoryName="Level"
     rowValue={license?.level ?? ""}

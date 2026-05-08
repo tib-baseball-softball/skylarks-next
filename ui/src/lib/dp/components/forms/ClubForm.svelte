@@ -103,7 +103,7 @@
       triggerVariant === "tonal-primary" && "preset-tonal-primary",
       triggerVariant === "tonal-secondary" && "preset-tonal-secondary",
       triggerVariant === "tonal-tertiary" && "preset-tonal-tertiary",
-      triggerVariant === "tonal-surface" && "preset-outlined-secondary-600-400",
+      triggerVariant === "tonal-surface" && "preset-outlined-card",
     ]}
   >
     {#if form.id}

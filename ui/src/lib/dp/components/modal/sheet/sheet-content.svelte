@@ -1,6 +1,6 @@
 <script lang="ts" module>
   export const sheetVariants = {
-    base: "drawer shadow-lg transition",
+    base: "drawer shadow transition",
     side: {
       top: "drawer-top",
       bottom: "drawer-bottom",
@@ -43,7 +43,7 @@
     class={["drawer-content", sheetVariants.base, sheetVariants.side[side], className]}
   >
     <SheetPrimitive.Close
-      class="btn preset-outlined-secondary-600-400 sheet-close-button"
+      class="btn preset-outlined-card sheet-close-button"
     >
       <X/>
       <span class="sr-only">Close</span>

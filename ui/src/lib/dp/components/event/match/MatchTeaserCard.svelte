@@ -27,7 +27,7 @@
   class="root card card-hover {matchDecorator.isPlayoffGame() ===
     true
         ? 'preset-tonal-primary border-primary-500'
-        : 'preset-outlined-secondary-600-400 border-surface-500'}"
+        : 'preset-outlined-card border-surface-500'}"
   href="/gamecenter/game-detail/{match.id}"
 >
   <header class="card-header">

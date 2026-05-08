@@ -12,7 +12,7 @@
 <div class="table-wrap standings-table-wrap">
   <table class="table border">
     <thead class="standings-header">
-    <tr class="preset-outlined-secondary-600-400">
+    <tr class="preset-outlined-card">
       <th>#</th>
       <th>Team</th>
       <th>W</th>
