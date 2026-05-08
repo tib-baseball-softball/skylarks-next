@@ -11,6 +11,7 @@
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
   const {data}: PageProps = $props();
+  const userTeams = $derived(data.teams.filter((team) => authRecord.teams.includes(team.id)));
 </script>
 
 <h1 class="h1">My Dashboard</h1>
@@ -34,7 +35,7 @@
 <h2 class="h2">My Teams</h2>
 
 <div class="teams-grid">
-  {#each data.teams as team}
+  {#each userTeams as team (team.id)}
     <TeamListTeaser {team} link={true}/>
   {/each}
 
