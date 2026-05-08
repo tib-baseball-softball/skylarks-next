@@ -56,6 +56,7 @@
     margin-block-end: calc(var(--spacing) * 6);
 
     @media (min-width: 64rem) {
+      gap: calc(var(--spacing) * 6);
       grid-template-columns: 1fr 1fr;
     }
 

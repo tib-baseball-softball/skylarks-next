@@ -24,7 +24,7 @@
   );
 </script>
 
-<article class="root card preset-outlined-card shadow-md">
+<article class="root card preset-outlined-card">
   <AnnouncementCoreContent {announcement}/>
 
   <div>

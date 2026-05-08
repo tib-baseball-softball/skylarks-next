@@ -57,8 +57,6 @@
       {/snippet}
 
     </AppBar>
-
-    <hr>
   </div>
 
   <!-- Grid Column -->
@@ -92,7 +90,6 @@
 
   <!-- Footer -->
   <footer class="app-footer">
-    <hr>
     <Footer></Footer>
   </footer>
 </div>
@@ -136,7 +133,7 @@
     display: none;
     height: 100vh;
     width: calc(var(--spacing) * 64);
-    border-right: 1px solid light-dark(var(--color-surface-200), var(--color-surface-100));
+    border-right: 1px solid light-dark(var(--color-surface-100), var(--color-surface-200));
     padding: calc(var(--spacing) * 2);
     background-color: var(--nav-item-background);
     grid-column: span 1/span 1;
@@ -172,6 +169,7 @@
 
   .app-footer {
     padding-bottom: calc(var(--spacing) * 16);
+    border-top: 1px solid light-dark(var(--color-surface-100), var(--color-surface-200));
 
     @media (min-width: 64rem) {
       padding-bottom: 0;
