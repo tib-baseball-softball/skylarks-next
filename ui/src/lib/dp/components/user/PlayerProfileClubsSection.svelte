@@ -12,7 +12,9 @@
 </script>
 
 {#each clubs as club}
-  <ClubDetailCard {club}/>
+  <a href="/account/clubs/{club.id}">
+    <ClubDetailCard {club}/>
+  </a>
 {/each}
 
 {#if !clubs}
