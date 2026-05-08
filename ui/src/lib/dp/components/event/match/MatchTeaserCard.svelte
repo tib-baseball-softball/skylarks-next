@@ -65,14 +65,6 @@
     display: block;
     font-size: var(--text-sm);
     border: 1px solid transparent;
-
-    &.border-primary-500 {
-      border-color: var(--color-primary-500);
-    }
-
-    &.border-surface-500 {
-      border-color: var(--color-surface-500);
-    }
   }
 
   .header-container {

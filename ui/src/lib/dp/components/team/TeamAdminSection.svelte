@@ -147,7 +147,7 @@
     <section class="card-content">
       <div class="card-actions">
         <TeamForm club={team?.expand?.club} team={team}
-                  triggerVariant="tonal-surface"/>
+                  triggerVariant="filled-secondary"/>
 
         {#if team.signup_key}
           <button class="btn preset-outlined-primary-500" onclick={copyTeamInvitationLink}>Copy invitation link</button>

@@ -14,7 +14,7 @@
   interface Props {
     club: ClubsResponse;
     team: ExpandedTeam | null;
-    triggerVariant?: "filled-primary" | "tonal-primary" | "tonal-secondary" | "tonal-tertiary" | "tonal-surface";
+    triggerVariant?: "filled-primary" | "filled-secondary" | "tonal-primary" | "tonal-secondary" | "tonal-tertiary";
     triggerSize?: "default" | "sm";
     triggerIcon?: boolean;
     triggerSpaced?: boolean;
@@ -106,10 +106,10 @@
       triggerIcon && "btn-icon",
       triggerSpaced && "trigger-spaced",
       triggerVariant === "filled-primary" && "preset-filled-primary-500",
+      triggerVariant === "filled-secondary" && "preset-filled-secondary-500",
       triggerVariant === "tonal-primary" && "preset-tonal-primary border-primary",
       triggerVariant === "tonal-secondary" && "preset-tonal-secondary border-secondary",
       triggerVariant === "tonal-tertiary" && "preset-tonal-tertiary border-tertiary",
-      triggerVariant === "tonal-surface" && "preset-outlined-card",
     ]}
   >
     {#if form.id}

@@ -309,7 +309,7 @@
 
   :global {
     .event-segment-container {
-      border: 1px solid var(--color-surface-600-400);
+      border: 1px solid var(--color-secondary-600-400);
       padding: calc(var(--spacing) * 1) !important;
 
       .tabs-trigger {
