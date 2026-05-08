@@ -285,25 +285,13 @@ msgid "Details"
 msgstr "Detalles"
 
 #: src/lib/dp/components/player/PlayerDataCard.svelte
-#: src/lib/tib/components/navigation/StaticNavigationLinks.svelte
+#: src/lib/dp/navigation/StaticNavigationLinks.svelte
 msgid "Teams"
 msgstr "Equipos"
-
-#: src/lib/tib/components/match/MatchDetailOfficialsCard.svelte
-msgid "Scorer"
-msgstr "Anotador"
-
-#: src/lib/tib/components/match/MatchDetailOfficialsCard.svelte
-msgid "Umpire"
-msgstr "Árbitro"
 
 #: src/lib/dp/components/event/match/MatchDetailLocationCard.svelte
 msgid "Ballpark"
 msgstr "Estadio de béisbol"
-
-#: src/lib/tib/components/match/CurrentMatchesOverviewCard.svelte
-msgid "Gamecenter"
-msgstr "Centro de juego"
 
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Next"
@@ -313,20 +301,12 @@ msgstr "Siguiente"
 msgid "All"
 msgstr "Todos"
 
-#: src/lib/tib/components/match/CurrentMatchBlock.svelte
-msgid "Loading matches..."
-msgstr "Cargando partidos..."
-
-#. 0: error.message
 #. 0: error.message
 #: src/lib/dp/components/forms/TeamGamesModal.svelte
-#: src/lib/tib/components/match/CurrentMatchBlock.svelte
 msgid "error loading matches: {0}"
 msgstr "error al cargar los partidos: {0}"
 
 #: src/lib/dp/components/team/TeamAdminSection.svelte
-#: src/lib/tib/components/match/GamecenterMatchSection.svelte
-#: src/lib/tib/components/stats/StatsBlock.svelte
 msgid "Games"
 msgstr "Partidos"
 
@@ -462,18 +442,11 @@ msgstr "Correo electrónico"
 #: src/lib/dp/components/team/TeamMemberDatatable.svelte
 #: src/lib/dp/components/team/TeamTeaserCard.svelte
 #: src/lib/dp/components/user/UserDataCard.svelte
-#: src/lib/tib/components/club/officials/ClubOfficialDetailCard.svelte
-#: src/lib/tib/components/favorite/FavoriteTeamInfoCard.svelte
-#: src/lib/tib/components/league/LeagueDetailInfoCard.svelte
-#: src/lib/tib/components/stats/StatsTableContent.svelte
-#: src/lib/tib/components/table/LeaderboardTable.svelte
-#: src/lib/tib/components/team/TeamDetailInfoCard.svelte
 msgid "Name"
 msgstr "Nombre"
 
 #: src/lib/dp/components/communityservice/CommunityServiceDatatable.svelte
 #: src/lib/dp/components/team/TeamMemberDatatable.svelte
-#: src/lib/tib/components/match/MatchMainInfoSection.svelte
 msgid "Status"
 msgstr "Estado"
 
@@ -513,9 +486,6 @@ msgstr "Mostrar <0/>"
 
 #: src/lib/dp/components/club/ClubDetailCard.svelte
 #: src/lib/dp/components/forms/ClubForm.svelte
-#: src/lib/tib/components/favorite/LeagueInfoCard.svelte
-#: src/lib/tib/components/league/LeagueDetailInfoCard.svelte
-#: src/lib/tib/components/team/TeamDetailInfoCard.svelte
 msgid "Acronym"
 msgstr "Acrónimo"
 
@@ -580,7 +550,6 @@ msgstr "Seleccionar para añadir como {0}:"
 #: src/lib/dp/components/forms/TeamGamesModal.svelte
 #: src/lib/dp/components/team/TeamMembersTableContent.svelte
 #: src/lib/dp/components/team/TeamMembersTableContent.svelte
-#: src/lib/tib/components/favorite/ClubTeamPicker.svelte
 msgid "None"
 msgstr "Ninguno"
 
@@ -824,7 +793,6 @@ msgstr "Crear nuevo anuncio"
 #: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
 #: src/lib/dp/components/forms/AnnouncementForm.svelte
 #: src/lib/dp/components/forms/EventForm.svelte
-#: src/lib/tib/components/club/officials/ClubOfficialDetailCard.svelte
 msgid "Title"
 msgstr "Título"
 
@@ -880,7 +848,7 @@ msgid "BSM ID"
 msgstr "ID BSM"
 
 #: src/lib/dp/components/forms/EventForm.svelte
-#: src/lib/tib/components/navigation/StaticNavigationLinks.svelte
+#: src/lib/dp/navigation/StaticNavigationLinks.svelte
 msgid "Start"
 msgstr "Inicio"
 
@@ -1158,7 +1126,6 @@ msgid "Show leagues for"
 msgstr "Mostrar ligas para"
 
 #: src/lib/dp/components/forms/TeamGamesModal.svelte
-#: src/lib/tib/components/favorite/FavoriteTeamInfoCard.svelte
 msgid "League"
 msgstr "Liga"
 
@@ -1233,7 +1200,6 @@ msgstr "{0} ({1} bytes)"
 #: src/lib/dp/components/forms/TeamForm.svelte
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 #: src/lib/dp/components/team/TeamListTeaser.svelte
-#: src/lib/tib/components/table/StandingsTable.svelte
 msgid "Team"
 msgstr "Equipo"
 
@@ -1257,8 +1223,6 @@ msgstr "Se debe introducir una clave de registro válida al crear la cuenta de u
 #: src/lib/dp/components/forms/TeamForm.svelte
 #: src/lib/dp/components/team/TeamListTeaser.svelte
 #: src/lib/dp/components/team/TeamTeaserCard.svelte
-#: src/lib/tib/components/league/LeagueDetailInfoCard.svelte
-#: src/lib/tib/components/team/TeamDetailInfoCard.svelte
 msgid "Age Group"
 msgstr "Grupo de edad"
 
@@ -1305,7 +1269,7 @@ msgid "Community Service"
 msgstr "Servicio comunitario"
 
 #: src/lib/dp/components/meta/SidebarNavigation.svelte
-#: src/lib/tib/components/navigation/StaticNavigationLinks.svelte
+#: src/lib/dp/navigation/StaticNavigationLinks.svelte
 msgid "Settings"
 msgstr "Configuración"
 
@@ -1460,7 +1424,6 @@ msgstr "Visualización"
 
 #: src/lib/dp/components/player/TeamPlayerSection.svelte
 #: src/lib/dp/components/team/TeamMemberDatatable.svelte
-#: src/lib/tib/components/club/licenses/LicenseDetailHolderCard.svelte
 msgid "Number"
 msgstr "Número"
 
@@ -1698,630 +1661,21 @@ msgstr "Posición"
 msgid "Last Login"
 msgstr "Último acceso"
 
-#: src/lib/tib/components/boxscore/Linescore.svelte
-#: src/lib/tib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
-#: src/lib/tib/components/boxscore/MatchBoxscorePitchingTable.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "R"
-msgstr "C"
-
-#: src/lib/tib/components/boxscore/Linescore.svelte
-#: src/lib/tib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
-#: src/lib/tib/components/boxscore/MatchBoxscorePitchingTable.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "H"
-msgstr "H"
-
-#: src/lib/tib/components/boxscore/Linescore.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "E"
-msgstr "E"
-
-#: src/lib/tib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
-msgid "BATTING"
-msgstr "BATEO"
-
-#: src/lib/tib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
-msgid "2B:"
-msgstr "2B:"
-
-#: src/lib/tib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
-msgid "3B:"
-msgstr "3B:"
-
-#: src/lib/tib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
-msgid "HR:"
-msgstr "HR:"
-
-#: src/lib/tib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
-msgid "SH:"
-msgstr "SH:"
-
-#: src/lib/tib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
-msgid "SF:"
-msgstr "SF:"
-
-#: src/lib/tib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
-msgid "BASERUNNING"
-msgstr "CARRERA DE BASES"
-
-#: src/lib/tib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
-msgid "SB:"
-msgstr "SB:"
-
-#: src/lib/tib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
-msgid "CS:"
-msgstr "CS:"
-
-#: src/lib/tib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
-msgid "FIELDING"
-msgstr "FILDEO"
-
-#: src/lib/tib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
-msgid "E:"
-msgstr "E:"
-
-#: src/lib/tib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
-msgid "PB:"
-msgstr "PB:"
-
-#: src/lib/tib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
-msgid "DP:"
-msgstr "DP:"
-
-#: src/lib/tib/components/boxscore/MatchBoxscoreAdditionalStatsSection.svelte
-msgid "TP:"
-msgstr "TP:"
-
-#. 0: teamName
-#: src/lib/tib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
-msgid "{0} (Batters)"
-msgstr "{0} (Bateadores)"
-
-#: src/lib/tib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
-#: src/lib/tib/components/boxscore/MatchBoxscorePitchingTable.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "AB"
-msgstr "VB"
-
-#: src/lib/tib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "RBI"
-msgstr "RBI"
-
-#: src/lib/tib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
-#: src/lib/tib/components/boxscore/MatchBoxscorePitchingTable.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "K"
-msgstr "SO"
-
-#: src/lib/tib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
-#: src/lib/tib/components/boxscore/MatchBoxscorePitchingTable.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "BB"
-msgstr "BB"
-
-#: src/lib/tib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "AVG"
-msgstr "AVG"
-
-#: src/lib/tib/components/boxscore/MatchBoxscoreOffensiveTable.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "OPS"
-msgstr "OPS"
-
-#: src/lib/tib/components/boxscore/MatchBoxscoreSection.svelte
-msgid "Away Team"
-msgstr "Equipo Visitante"
-
-#: src/lib/tib/components/boxscore/MatchBoxscoreSection.svelte
-msgid "Home Team"
-msgstr "Equipo Local"
-
-#: src/lib/tib/components/boxscore/MatchBoxscoreSection.svelte
-msgid "Linescore"
-msgstr "Resultado por entrada"
-
-#: src/lib/tib/components/boxscore/MatchBoxscoreSection.svelte
-msgid "Offensive"
-msgstr "Ofensiva"
-
-#: src/lib/tib/components/boxscore/MatchBoxscoreSection.svelte
-#: src/lib/tib/components/stats/BaseballStatsDatatable.svelte
-msgid "Pitching"
-msgstr "Lanzamiento"
-
-#. 0: teamName
-#: src/lib/tib/components/boxscore/MatchBoxscorePitchingTable.svelte
-msgid "{0} (Pitchers)"
-msgstr "{0} (Lanzadores)"
-
-#: src/lib/tib/components/boxscore/MatchBoxscorePitchingTable.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "IP"
-msgstr "JI"
-
-#: src/lib/tib/components/boxscore/MatchBoxscorePitchingTable.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "BF"
-msgstr "BF"
-
-#: src/lib/tib/components/boxscore/MatchBoxscorePitchingTable.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "ER"
-msgstr "CL"
-
-#: src/lib/tib/components/boxscore/MatchBoxscorePitchingTable.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "ERA"
-msgstr "PCL"
-
-#: src/lib/tib/components/club/ClubInfoSection.svelte
-msgid "Skylarks Logo"
-msgstr "Logotipo de Skylarks"
-
-#: src/lib/tib/components/favorite/FavoriteTeamInfoCard.svelte
-msgid "Season"
-msgstr "Temporada"
-
-#: src/lib/tib/components/favorite/LeagueInfoCard.svelte
-msgid "Record"
-msgstr "Récord"
-
-#: src/lib/tib/components/favorite/LeagueInfoCard.svelte
-#: src/lib/tib/components/favorite/WinningPercentageGauge.svelte
-msgid "Pct."
-msgstr "Pct."
-
-#: src/lib/tib/components/favorite/LeagueInfoCard.svelte
-#: src/lib/tib/components/favorite/WinningPercentageContainer.svelte
-msgid "Rank"
-msgstr "Clasificación"
-
-#: src/lib/tib/components/favorite/PlayoffSheet.svelte
-msgid "Show Playoff Series"
-msgstr "Mostrar series de playoffs"
-
-#: src/lib/tib/components/favorite/PlayoffSheet.svelte
-msgid "Playoff Series"
-msgstr "Series de playoffs"
-
-#. 0: playoffSeries.leading_team.name
-#: src/lib/tib/components/favorite/PlayoffSheet.svelte
-msgid "{0} lead series"
-msgstr "{0} lidera la serie"
-
-#. 0: playoffSeries.leading_team.name
-#: src/lib/tib/components/favorite/PlayoffSheet.svelte
-msgid "{0} win series"
-msgstr "{0} gana la serie"
-
-#: src/lib/tib/components/favorite/PlayoffSheet.svelte
-msgid "Series tied"
-msgstr "Series empatadas"
-
-#. 0: playoffSeries.series_length
-#: src/lib/tib/components/favorite/PlayoffSheet.svelte
-msgid "Length of series: Best of {0}"
-msgstr "Duración de la serie: Lo mejor de {0}"
-
-#: src/lib/tib/components/favorite/StreakEmoji.svelte
-msgid "Team Mood"
-msgstr "Estado de ánimo del equipo"
-
-#: src/lib/tib/components/favorite/StreakEmoji.svelte
-msgid "Clubhouse champagne celebration or dugout fights?"
-msgstr "¿Celebración con champán en el club o peleas en el dugout?"
-
-#: src/lib/tib/components/favorite/StreakGraphSection.svelte
-msgid "Graph"
-msgstr "Gráfico"
-
-#: src/lib/tib/components/favorite/StreakGraphSection.svelte
-#: src/lib/tib/components/favorite/WinningPercentageContainer.svelte
-msgid "Percentage"
-msgstr "Porcentaje"
-
-#: src/lib/tib/components/favorite/StreakGraphSection.svelte
-msgid "Series"
-msgstr "Series"
-
-#: src/lib/tib/components/favorite/StreakGraphSection.svelte
-#: src/lib/tib/components/favorite/StreakGraphSection.svelte
-msgid "No data available."
-msgstr "No hay datos disponibles."
-
-#: src/lib/tib/components/favorite/WinningPercentageContainer.svelte
-msgid "Wins/Losses"
-msgstr "Victorias/Derrotas"
-
-#: src/lib/tib/components/favorite/ClubTeamPicker.svelte
-msgid "Select Team:"
-msgstr "Seleccionar equipo:"
-
-#: src/lib/tib/components/favorite/LeagueChartGraph.svelte
-msgid "Wins"
-msgstr "Victorias"
-
-#: src/lib/tib/components/favorite/LeagueChartGraph.svelte
-msgid "Total Wins"
-msgstr "Victorias Totales"
-
-#: src/lib/tib/components/favorite/LeagueChartGraph.svelte
-msgid "League Wins Visualisation"
-msgstr "Visualización de victorias de la liga"
-
-#: src/lib/tib/components/league/LeagueFilter.svelte
-msgid "All Leagues"
-msgstr "Todas las ligas"
-
-#: src/lib/tib/components/gameReport/GameReportHeader.svelte
-msgid "Veröffentlicht:"
-msgstr "Publicado:"
-
-#: src/lib/tib/components/gameReport/GameReportHeader.svelte
-msgid "Liga:"
-msgstr "Liga:"
-
-#: src/lib/tib/components/gameReport/GameReportHeader.svelte
-msgid "Autor:"
-msgstr "Autor:"
-
-#: src/lib/tib/components/gameReport/GameReport.svelte
-msgid "Bericht Spiel 1"
-msgstr "Informe partido 1"
-
-#: src/lib/tib/components/gameReport/GameReport.svelte
-msgid "Bericht Spiel 2"
-msgstr "Informe partido 2"
-
-#: src/lib/tib/components/gameReport/GameReport.svelte
-msgid "Ausblick"
-msgstr "Perspectiva"
-
-#: src/lib/tib/components/gameReport/GameReport.svelte
-msgid "Bildergalerie"
-msgstr "Galería de imágenes"
-
-#: src/lib/tib/components/favorite/WinsOverSeasonChart.svelte
-#: src/lib/tib/components/favorite/WinsOverSeasonChart.svelte
-msgid "Wins Count"
-msgstr "Conteo de victorias"
-
-#: src/lib/tib/components/favorite/WinsOverSeasonChart.svelte
-msgid "Gamedays"
-msgstr "Días de juego"
-
-#: src/lib/tib/components/favorite/WinsOverSeasonChart.svelte
-msgid "Season Progression"
-msgstr "Progresión de la temporada"
-
-#: src/lib/tib/components/league/LeagueDetailInfoCard.svelte
-#: src/lib/tib/components/team/TeamDetailInfoCard.svelte
-msgid "Sport"
-msgstr "Deporte"
-
-#: src/lib/tib/components/match/CurrentMatchBlock.svelte
-msgid "No games for this timeframe."
-msgstr "No hay partidos para este período de tiempo."
-
-#: src/lib/tib/components/match/ContentFilteredUnavailable.svelte
-msgid "There is no data to display for the selected filters."
-msgstr "No hay datos para mostrar con los filtros seleccionados."
-
-#: src/lib/tib/components/match/CurrentMatchesOverviewCard.svelte
-msgid "Current Games"
-msgstr "Partidos actuales"
-
-#: src/lib/tib/components/match/CurrentMatchesOverviewCard.svelte
-msgid "Previous <0>Gameday</0>"
-msgstr "Anterior <0>Día de partido</0>"
-
-#: src/lib/tib/components/match/CurrentMatchesOverviewCard.svelte
-msgid "Current <0>Gameday</0>"
-msgstr "Actual <0>Día de partido</0>"
-
-#: src/lib/tib/components/match/CurrentMatchesOverviewCard.svelte
-msgid "Next <0>Gameday</0>"
-msgstr "Siguiente <0>Día de partido</0>"
-
-#: src/lib/tib/components/match/MatchDetailStatsCard.svelte
-msgid "Liga"
-msgstr "Liga"
-
-#: src/lib/tib/components/match/MatchDetailStatsCard.svelte
-msgid "Spiel-ID"
-msgstr "ID del partido"
-
-#: src/lib/tib/components/match/MatchDetailStatsCard.svelte
-msgid "geplante Innings"
-msgstr "entradas planificadas"
-
-#: src/lib/tib/components/match/MatchDetailStatsCard.svelte
-msgid "Link zum Scoresheet"
-msgstr "Enlace a la hoja de anotación"
-
-#: src/lib/tib/components/match/MatchDetailStatsCard.svelte
-msgid "Kein Scoresheet vorhanden."
-msgstr "No hay hoja de anotación disponible."
-
-#: src/lib/tib/components/match/MatchDetailOfficialsCard.svelte
-msgid "No umpires assigned yet."
-msgstr "Aún no se han asignado árbitros."
-
-#: src/lib/tib/components/match/MatchDetailOfficialsCard.svelte
-msgid "No scorers assigned yet."
-msgstr "Aún no se han asignado anotadores."
-
-#: src/lib/tib/components/match/MatchMainInfoSection.svelte
-msgid "Main Info"
-msgstr "Información principal"
-
 #: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
-#: src/lib/tib/components/match/MatchMainInfoSection.svelte
 msgid "Date"
 msgstr "Fecha"
 
 #: src/lib/dp/components/event/match/GameResultIndicator.svelte
-#: src/lib/tib/components/match/CurrentMatchRow.svelte
 msgid "PPD"
 msgstr "APL"
 
-#: src/lib/tib/components/match/ShareButton.svelte
-msgid "Share game data using your browser"
-msgstr "Compartir datos del juego usando su navegador"
-
-#: src/lib/tib/components/match/ShareButton.svelte
-msgid "Share Game <0/>"
-msgstr "Compartir juego <0/>"
-
-#: src/lib/tib/components/stats/BaseballStatsDatatable.svelte
-msgid "Batting"
-msgstr "Bateo"
-
-#: src/lib/tib/components/stats/BaseballStatsDatatable.svelte
-msgid "Fielding"
-msgstr "Fildeo"
-
-#: src/lib/tib/components/stats/BaseballStatsDatatable.svelte
-msgid "Total"
-msgstr "Total"
-
-#: src/lib/tib/components/stats/StatsBlock.svelte
-msgid "Batting Average"
-msgstr "Promedio de bateo"
-
-#: src/lib/tib/components/stats/StatsBlock.svelte
-msgid "On Base Percentage"
-msgstr "Porcentaje de embasado"
-
-#: src/lib/tib/components/stats/StatsBlock.svelte
-msgid "Slugging Average"
-msgstr "Promedio de slugging"
-
-#: src/lib/tib/components/stats/StatsBlock.svelte
-msgid "On Base Plus Slugging"
-msgstr "En base más slugging"
-
-#: src/lib/tib/components/stats/StatsBlock.svelte
-msgid "Wins - Losses"
-msgstr "Victorias - Derrotas"
-
-#: src/lib/tib/components/stats/StatsBlock.svelte
-msgid "Innings Pitched"
-msgstr "Entradas lanzadas"
-
-#: src/lib/tib/components/stats/StatsBlock.svelte
-msgid "Earned Run Average"
-msgstr "Promedio de carreras limpias"
-
-#: src/lib/tib/components/stats/StatsBlock.svelte
-msgid "Walks & Hits per Innings Pitched"
-msgstr "Bases por bolas y hits por entradas lanzadas"
-
-#: src/lib/tib/components/stats/StatsBlock.svelte
-msgid "Innings Played"
-msgstr "Entradas jugadas"
-
-#: src/lib/tib/components/stats/StatsBlock.svelte
-msgid "Fielding Average"
-msgstr "Promedio de fildeo"
-
-#: src/lib/tib/components/table/LeaderboardTable.svelte
-msgid "Value"
-msgstr "Valor"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "G"
-msgstr "J"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "GS"
-msgstr "JJ"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "PA"
-msgstr "AP"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "2B"
-msgstr "2B"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "3B"
-msgstr "3B"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "HR"
-msgstr "HR"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "IBB"
-msgstr "IBB"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "HP"
-msgstr "HP"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "SB"
-msgstr "SB"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "CS"
-msgstr "CS"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "SH"
-msgstr "SH"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "SF"
-msgstr "SF"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "I"
-msgstr "I"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "OBP"
-msgstr "OBP"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "SLG"
-msgstr "SLG"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "CG"
-msgstr "CG"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "BK"
-msgstr "BK"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "WP"
-msgstr "WP"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "HBP"
-msgstr "HBP"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "WHIP"
-msgstr "WHIP"
-
 #: src/lib/dp/components/event/match/GameResultIndicator.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-#: src/lib/tib/components/table/StandingsTable.svelte
 msgid "W"
 msgstr "G"
 
 #: src/lib/dp/components/event/match/GameResultIndicator.svelte
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-#: src/lib/tib/components/table/StandingsTable.svelte
 msgid "L"
 msgstr "P"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "SV"
-msgstr "SV"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "A"
-msgstr "A"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "PO"
-msgstr "PO"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "DP"
-msgstr "DP"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "TP"
-msgstr "TP"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "PB"
-msgstr "PB"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "FA"
-msgstr "FA"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "P"
-msgstr "P"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "C"
-msgstr "C"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "1B"
-msgstr "1B"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "SS"
-msgstr "SS"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "LF"
-msgstr "LF"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "CF"
-msgstr "CF"
-
-#: src/lib/tib/components/stats/StatsHeaderRow.svelte
-msgid "RF"
-msgstr "RF"
-
-#: src/lib/tib/components/team/TeamDetailInfoCard.svelte
-msgid "Antritt außer Konkurrenz (aK):"
-msgstr "Participación fuera de competición (aK):"
-
-#: src/lib/tib/components/table/StandingsTable.svelte
-msgid "Win %"
-msgstr "% de victorias"
-
-#: src/lib/tib/components/table/StandingsTable.svelte
-msgid "GB"
-msgstr "PD"
-
-#: src/lib/tib/components/table/StandingsTable.svelte
-msgid "Serie"
-msgstr "Serie"
-
-#: src/lib/tib/components/stats/StatsTableContent.svelte
-msgid "Saison"
-msgstr "Temporada"
-
-#: src/lib/tib/components/stats/StatsTableContent.svelte
-msgid "No data available for this category."
-msgstr "No hay datos disponibles para esta categoría."
 
 #: src/routes/(dp)/(protected)/account/+page.svelte
 msgid "My Dashboard"
@@ -2344,10 +1698,6 @@ msgstr "Aún no eres miembro de ningún equipo."
 msgid "Club Details"
 msgstr "Detalles del club"
 
-#: src/lib/tib/components/club/ballpark/BallparkDetailCard.svelte
-msgid "Address:"
-msgstr "Dirección:"
-
 #: src/lib/dp/components/event/match/GameResultIndicator.svelte
 msgid "F"
 msgstr "F"
@@ -2355,22 +1705,6 @@ msgstr "F"
 #: src/lib/dp/components/event/match/GameResultIndicator.svelte
 msgid "TBD"
 msgstr "TBD"
-
-#: src/lib/tib/components/club/ballpark/BallparkDetailCard.svelte
-msgid "Ballpark Name"
-msgstr "Nombre del campo de béisbol"
-
-#: src/lib/tib/components/club/ballpark/BallparkDetailCard.svelte
-msgid "Address Addon"
-msgstr "Complemento de dirección"
-
-#: src/lib/tib/components/club/ballpark/BallparkDetailCard.svelte
-msgid "Capacity"
-msgstr "Capacidad"
-
-#: src/lib/tib/components/club/ballpark/BallparkDetailCard.svelte
-msgid "Seats"
-msgstr "Asientos"
 
 #: src/lib/dp/components/modal/sheet/sheet-content.svelte
 msgid "Close"
@@ -2388,72 +1722,9 @@ msgstr "Abrir en Google Maps"
 msgid "Open in Apple Maps"
 msgstr "Abrir en Apple Maps"
 
-#: src/lib/tib/components/club/ballpark/BallparkGrid.svelte
-msgid "No ballparks found."
-msgstr "No se encontraron campos de béisbol."
-
-#: src/lib/tib/components/club/licenses/LicenseDetailCard.svelte
-msgid "Level"
-msgstr "Nivel"
-
-#: src/lib/tib/components/club/licenses/LicenseDetailCard.svelte
-#: src/lib/tib/components/club/licenses/LicenseList.svelte
-msgid "Baseball"
-msgstr "Béisbol"
-
-#: src/lib/tib/components/club/licenses/LicenseDetailCard.svelte
-#: src/lib/tib/components/club/licenses/LicenseList.svelte
-msgid "Softball"
-msgstr "Sóftbol"
-
-#: src/lib/tib/components/club/licenses/LicenseDetailCard.svelte
-msgid "Sleeve Number"
-msgstr "Número de manga"
-
-#: src/lib/tib/components/club/licenses/LicenseDetailHolderCard.svelte
-msgid "Holder"
-msgstr "Titular"
-
-#: src/lib/tib/components/club/licenses/LicenseDetailHolderCard.svelte
-msgid "Valid until"
-msgstr "Válido hasta"
-
-#: src/lib/tib/components/club/licenses/LicenseDetailHolderCard.svelte
-msgid "Relative Time"
-msgstr "Tiempo relativo"
-
-#. 0: level
-#: src/lib/tib/components/club/licenses/LicenseLevelIndicator.svelte
-msgid "License level {0}:"
-msgstr "Nivel de licencia {0}:"
-
-#: src/lib/tib/components/club/licenses/LicenseList.svelte
-msgid "No baseball licenses available."
-msgstr "No hay licencias de béisbol disponibles."
-
-#: src/lib/tib/components/club/licenses/LicenseList.svelte
-msgid "No softball licenses available."
-msgstr "No hay licencias de sóftbol disponibles."
-
 #: src/routes/(dp)/(protected)/account/playerprofile/+page.svelte
 msgid "My Player Data"
 msgstr "Mis datos de jugador"
-
-#: src/lib/tib/components/club/officials/ClubOfficialDetailCard.svelte
-msgid "Category"
-msgstr "Categoría"
-
-#: src/lib/tib/components/club/officials/ClubOfficialDetailCard.svelte
-msgid "Since"
-msgstr "Desde"
-
-#: src/lib/tib/components/club/officials/ClubOfficialDetailCard.svelte
-msgid "Contact"
-msgstr "Contacto"
-
-#: src/lib/tib/components/club/officials/ClubOfficialsList.svelte
-msgid "No club officials available."
-msgstr "No hay funcionarios del club disponibles."
 
 #. 0: user?.first_name; 1: user?.last_name
 #: src/routes/(dp)/(protected)/stats/[user]/+page.svelte
@@ -2729,11 +2000,11 @@ msgstr ""
 msgid "Skylarks BSM Data"
 msgstr ""
 
-#: src/lib/tib/components/navigation/StaticNavigationLinks.svelte
+#: src/lib/dp/navigation/StaticNavigationLinks.svelte
 msgid "Account"
 msgstr ""
 
-#: src/lib/tib/components/navigation/StaticNavigationLinks.svelte
+#: src/lib/dp/navigation/StaticNavigationLinks.svelte
 msgid "Clubs"
 msgstr ""
 

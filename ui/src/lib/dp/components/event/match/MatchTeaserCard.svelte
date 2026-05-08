@@ -27,8 +27,8 @@
   class="root card card-hover {matchDecorator.isPlayoffGame() ===
     true
         ? 'preset-tonal-primary border-primary-500'
-        : 'preset-outlined-card border-surface-500'}"
-  href="/gamecenter/game-detail/{match.id}"
+        : 'preset-outlined-card'}"
+  href="/bsm"
 >
   <header class="card-header">
     <div class="header-container">
@@ -64,7 +64,6 @@
   .root {
     display: block;
     font-size: var(--text-sm);
-    border: 1px solid transparent;
   }
 
   .header-container {
