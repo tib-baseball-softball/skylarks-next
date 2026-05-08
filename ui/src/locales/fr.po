@@ -15,18 +15,6 @@ msgstr "Application Web des Berlin Skylarks"
 msgid "Skylarks Team Logo"
 msgstr "Logo de l’équipe Skylarks"
 
-#: src/routes/+layout.svelte
-msgid "Facebook brand logo"
-msgstr "Logo de la marque Facebook"
-
-#: src/routes/+layout.svelte
-msgid "Instagram brand logo"
-msgstr "Logo de la marque Instagram"
-
-#: src/routes/+layout.svelte
-msgid "TiB Logo"
-msgstr "Logo TiB"
-
 #. 0: email
 #: src/lib/dp/client.svelte.ts
 msgid "Signed in as {0}"
@@ -183,7 +171,7 @@ msgid "Forgot Password?"
 msgstr "Mot de passe oublié?"
 
 #: src/lib/dp/auth/LoginForm.svelte
-#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+#: src/routes/(dp)/(protected)/account/settings/+page.svelte
 msgid "Reset Password"
 msgstr "Réinitialiser le mot de passe"
 
@@ -270,10 +258,6 @@ msgstr "La fonctionnalité principale de cette application (obtenir des informat
 msgid "To access internal team information and participate in team activities, please <0>log in to your account.</0>"
 msgstr "Pour accéder aux informations internes de l'équipe et participer aux activités de l'équipe, veuillez <0>vous connecter à votre compte.</0>"
 
-#: src/routes/+page.svelte
-msgid "Scores"
-msgstr "Résultats"
-
 #: src/routes/(dp)/login/+page.svelte
 msgid "Login Page"
 msgstr "Page de connexion"
@@ -293,192 +277,58 @@ msgstr "Aller à la page du compte"
 #: src/lib/dp/components/team/TeamListTeaser.svelte
 #: src/lib/dp/components/team/TeamTeaserCard.svelte
 #: src/lib/dp/components/user/PlayerProfileClubsSection.svelte
-#: src/lib/tib/components/navigation/StaticNavigationLinks.svelte
-#: src/routes/(tib)/club/+page.svelte
 msgid "Club"
 msgstr "Club"
 
-#: src/routes/(tib)/club/+page.svelte
-msgid "More Info"
-msgstr "Plus d’infos"
-
 #: src/lib/dp/components/communityservice/CommunityServiceItemCard.svelte
-#: src/routes/(tib)/club/+page.svelte
 msgid "Details"
 msgstr "Détails"
 
-#: src/routes/(tib)/club/+page.svelte
-msgid "Adult and Youth"
-msgstr "Adultes et jeunes"
-
 #: src/lib/dp/components/player/PlayerDataCard.svelte
 #: src/lib/tib/components/navigation/StaticNavigationLinks.svelte
-#: src/routes/(tib)/club/+page.svelte
-#: src/routes/(tib)/teams/+page.svelte
 msgid "Teams"
 msgstr "Équipes"
 
-#: src/routes/(tib)/club/+page.svelte
-msgid "Keeping statistics"
-msgstr "Tenue des statistiques"
-
 #: src/lib/tib/components/match/MatchDetailOfficialsCard.svelte
-#: src/routes/(tib)/club/+page.svelte
 msgid "Scorer"
 msgstr "Marqueur"
 
-#: src/routes/(tib)/club/+page.svelte
-msgid "Our Referees"
-msgstr "Nos arbitres"
-
 #: src/lib/tib/components/match/MatchDetailOfficialsCard.svelte
-#: src/routes/(tib)/club/+page.svelte
 msgid "Umpire"
 msgstr "Arbitre"
 
-#: src/routes/(tib)/club/+page.svelte
-msgid "The Lark's Nest"
-msgstr "Le Nid de l’Alouette"
-
 #: src/lib/dp/components/event/match/MatchDetailLocationCard.svelte
-#: src/routes/(tib)/club/+page.svelte
-#: src/routes/(tib)/club/ballpark/+page.svelte
 msgid "Ballpark"
 msgstr "Stade"
 
-#: src/routes/(tib)/club/+page.svelte
-msgid "Club Administration"
-msgstr "Administration du club"
-
-#: src/routes/(tib)/club/+page.svelte
-msgid "Officials"
-msgstr "Officiels"
-
 #: src/lib/tib/components/match/CurrentMatchesOverviewCard.svelte
-#: src/routes/(tib)/gamecenter/+page.svelte
 msgid "Gamecenter"
 msgstr "Centre de jeu"
 
-#: src/routes/(tib)/gamecenter/+page.svelte
-msgid "Show external games"
-msgstr "Afficher les jeux externes"
-
-#: src/routes/(tib)/gamecenter/+page.svelte
-msgid "Gameday"
-msgstr "Jour de match"
-
-#: src/routes/(tib)/gamecenter/+page.svelte
-msgid "Previous"
-msgstr "Précédent"
-
-#: src/routes/(tib)/gamecenter/+page.svelte
-msgid "Current"
-msgstr "Actuel"
-
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
-#: src/routes/(tib)/gamecenter/+page.svelte
 msgid "Next"
 msgstr "Suivant"
 
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
-#: src/routes/(tib)/gamecenter/+page.svelte
 msgid "All"
 msgstr "Tous"
 
 #: src/lib/tib/components/match/CurrentMatchBlock.svelte
-#: src/routes/(tib)/gamecenter/+page.svelte
 msgid "Loading matches..."
 msgstr "Chargement des matchs..."
 
 #. 0: error.message
 #. 0: error.message
-#. 0: error.message
-#. 0: error.message
 #: src/lib/dp/components/forms/TeamGamesModal.svelte
 #: src/lib/tib/components/match/CurrentMatchBlock.svelte
-#: src/routes/(tib)/gamecenter/+page.svelte
-#: src/routes/(tib)/ligen/[id]/stats/+page.svelte
 msgid "error loading matches: {0}"
 msgstr "erreur lors du chargement des matchs : {0}"
 
-#: src/routes/(tib)/favorite/+page.svelte
-msgid "Favorite Team"
-msgstr "Équipe préférée"
-
-#: src/routes/(tib)/favorite/+page.svelte
-msgid "Quick Details"
-msgstr "Détails rapides"
-
-#: src/routes/(tib)/favorite/+page.svelte
-msgid "You have not selected a favorite team yet."
-msgstr "Vous n’avez pas encore sélectionné d’équipe préférée."
-
-#: src/routes/(tib)/favorite/+page.svelte
-msgid "Team Stats Links"
-msgstr "Liens vers les statistiques de l’équipe"
-
-#: src/routes/(tib)/favorite/+page.svelte
-msgid "Data per League"
-msgstr "Données par ligue"
-
-#: src/routes/(tib)/favorite/+page.svelte
-msgid "A single team can be associated to several leagues per season in BSM."
-msgstr "Une seule équipe peut être associée à plusieurs ligues par saison dans BSM."
-
-#. 0: favoriteTeam?.name
-#: src/routes/(tib)/favorite/+page.svelte
-msgid "The team \"{0}\" does not have a league entry in this league."
-msgstr "L’équipe « {0} » n’a pas d’inscription à la ligue dans cette ligue."
-
-#: src/routes/(tib)/favorite/+page.svelte
-#: src/routes/(tib)/teams/[id]/+page.svelte
-msgid "Standings"
-msgstr "Classement"
-
-#: src/routes/(tib)/favorite/+page.svelte
-msgid "Playoffs"
-msgstr "Séries éliminatoires"
-
-#: src/routes/(tib)/favorite/+page.svelte
-msgid "Graphs and Mood"
-msgstr "Graphiques et humeur"
-
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 #: src/lib/tib/components/match/GamecenterMatchSection.svelte
-#: src/lib/tib/components/navigation/StaticNavigationLinks.svelte
 #: src/lib/tib/components/stats/StatsBlock.svelte
-#: src/routes/(tib)/favorite/+page.svelte
 msgid "Games"
 msgstr "Matchs"
-
-#: src/routes/(tib)/favorite/+page.svelte
-msgid "Previous Game"
-msgstr "Match précédent"
-
-#: src/routes/(tib)/favorite/+page.svelte
-msgid "No previous game found."
-msgstr "Aucun match précédent trouvé."
-
-#: src/routes/(tib)/favorite/+page.svelte
-msgid "Next Game"
-msgstr "Match suivant"
-
-#: src/routes/(tib)/favorite/+page.svelte
-msgid "No next game found."
-msgstr "Aucun match suivant trouvé."
-
-#: src/routes/(tib)/favorite/+page.svelte
-msgid "No data found."
-msgstr "Aucune donnée trouvée."
-
-#: src/routes/(tib)/favorite/+page.svelte
-msgid "Loading..."
-msgstr "Chargement..."
-
-#. 0: error.message
-#: src/routes/(tib)/favorite/+page.svelte
-msgid "Error: {0}"
-msgstr "Erreur : {0}"
 
 #: src/routes/(dp)/signupconfirm/+page.svelte
 msgid "Complete signup process"
@@ -492,27 +342,6 @@ msgstr "Votre compte a été créé avec succès."
 msgid "Please check your email to follow the required steps to confirm your account."
 msgstr "Veuillez consulter votre courriel pour suivre les étapes nécessaires à la confirmation de votre compte."
 
-#: src/lib/tib/components/navigation/StaticNavigationLinks.svelte
-#: src/routes/(tib)/ligen/+page.svelte
-msgid "Leagues"
-msgstr "Ligues"
-
-#: src/routes/(tib)/ligen/+page.svelte
-msgid "Loading Leagues..."
-msgstr "Chargement des ligues..."
-
-#. 0: error.message
-#. 0: error.message
-#. 0: error.message
-#. 0: error.message
-#. 0: error.message
-#. 0: error.message
-#. 0: error.message
-#. 0: error.message
-#. 0: error.message
-#. 0: error.message
-#. 0: error.message
-#. 0: error.message
 #. 0: error.message
 #. 0: error.message
 #. 0: error.message
@@ -521,18 +350,6 @@ msgstr "Chargement des ligues..."
 #: src/routes/(dp)/(protected)/account/clubs/[club]/admin/communityservice/+page.svelte
 #: src/routes/(dp)/(protected)/stats/[user]/+page.svelte
 #: src/routes/(dp)/(protected)/stats/[user]/+page.svelte
-#: src/routes/(tib)/club/ballpark/+page.svelte
-#: src/routes/(tib)/club/officials/+page.svelte
-#: src/routes/(tib)/club/scorer/+page.svelte
-#: src/routes/(tib)/club/umpire/+page.svelte
-#: src/routes/(tib)/league_entries/[entry]/+page.svelte
-#: src/routes/(tib)/ligen/+page.svelte
-#: src/routes/(tib)/ligen/[id]/+page.svelte
-#: src/routes/(tib)/players/[id]/+page.svelte
-#: src/routes/(tib)/teams/+page.svelte
-#: src/routes/(tib)/teams/[id]/+page.svelte
-#: src/routes/(tib)/teams/[id]/+page.svelte
-#: src/routes/(tib)/teams/[id]/+page.svelte
 msgid "error loading: {0}"
 msgstr "erreur de chargement : {0}"
 
@@ -584,10 +401,6 @@ msgstr "Échec de l'ajout du commentaire.\\"
 msgid "No comments yet."
 msgstr "Pas encore de commentaires."
 
-#: src/routes/(tib)/teams/+page.svelte
-msgid "Loading Teams..."
-msgstr "Chargement des équipes..."
-
 #: src/lib/dp/components/announcements/PriorityBadge.svelte
 msgid "Info"
 msgstr "Info"
@@ -625,7 +438,6 @@ msgstr "Créer une nouvelle entrée de service communautaire"
 #: src/lib/dp/components/club/ClubLocationsSection.svelte
 #: src/lib/dp/components/forms/LocationForm.svelte
 #: src/lib/dp/components/forms/LocationForm.svelte
-#: src/routes/(tib)/club/details/+page.svelte
 msgid "Location"
 msgstr "Emplacement"
 
@@ -1422,7 +1234,6 @@ msgstr "{0} ({1} octets)"
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 #: src/lib/dp/components/team/TeamListTeaser.svelte
 #: src/lib/tib/components/table/StandingsTable.svelte
-#: src/routes/(tib)/league_entries/[entry]/+page.svelte
 msgid "Team"
 msgstr "Équipe"
 
@@ -1494,6 +1305,7 @@ msgid "Community Service"
 msgstr "Service communautaire"
 
 #: src/lib/dp/components/meta/SidebarNavigation.svelte
+#: src/lib/tib/components/navigation/StaticNavigationLinks.svelte
 msgid "Settings"
 msgstr "Paramètres"
 
@@ -1564,12 +1376,12 @@ msgstr "État"
 msgid "Copied to clipboard!"
 msgstr "Copied to clipboard!"
 
-#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+#: src/routes/(dp)/(protected)/account/settings/+page.svelte
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Calendar Import"
 msgstr "Calendar Import"
 
-#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+#: src/routes/(dp)/(protected)/account/settings/+page.svelte
 msgid "Your personal calendar link"
 msgstr "Your personal calendar link"
 
@@ -1870,7 +1682,7 @@ msgid "Go to User Settings"
 msgstr "Aller aux paramètres utilisateur"
 
 #: src/lib/dp/components/user/UserDataCard.svelte
-#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+#: src/routes/(dp)/(protected)/account/settings/+page.svelte
 msgid "User Settings"
 msgstr "Paramètres utilisateur"
 
@@ -2022,7 +1834,6 @@ msgstr "Offensive"
 
 #: src/lib/tib/components/boxscore/MatchBoxscoreSection.svelte
 #: src/lib/tib/components/stats/BaseballStatsDatatable.svelte
-#: src/routes/(tib)/ligen/[id]/stats/+page.svelte
 msgid "Pitching"
 msgstr "Lancers"
 
@@ -2053,7 +1864,6 @@ msgid "ERA"
 msgstr "Moyenne de points mérités"
 
 #: src/lib/tib/components/club/ClubInfoSection.svelte
-#: src/routes/(tib)/club/details/+page.svelte
 msgid "Skylarks Logo"
 msgstr "Logo des Skylarks"
 
@@ -2242,10 +2052,6 @@ msgstr "Lien vers la feuille de pointage"
 msgid "Kein Scoresheet vorhanden."
 msgstr "Aucune feuille de pointage disponible."
 
-#: src/lib/tib/components/navigation/StaticNavigationLinks.svelte
-msgid "Favorite"
-msgstr "Favoris"
-
 #: src/lib/tib/components/match/MatchDetailOfficialsCard.svelte
 msgid "No umpires assigned yet."
 msgstr "Aucun arbitre n'a encore été affecté."
@@ -2277,12 +2083,10 @@ msgid "Share Game <0/>"
 msgstr "Partager le match <0/>"
 
 #: src/lib/tib/components/stats/BaseballStatsDatatable.svelte
-#: src/routes/(tib)/ligen/[id]/stats/+page.svelte
 msgid "Batting"
 msgstr "Frappe"
 
 #: src/lib/tib/components/stats/BaseballStatsDatatable.svelte
-#: src/routes/(tib)/ligen/[id]/stats/+page.svelte
 msgid "Fielding"
 msgstr "Défense"
 
@@ -2528,6 +2332,7 @@ msgid "My Announcements"
 msgstr "Mes annonces"
 
 #: src/routes/(dp)/(protected)/account/+page.svelte
+#: src/routes/(dp)/(protected)/account/team/+page.svelte
 msgid "My Teams"
 msgstr "Mes Équipes"
 
@@ -2536,138 +2341,12 @@ msgid "You are not a member of any teams yet."
 msgstr "Vous n'êtes membre d'aucune équipe pour le moment."
 
 #: src/routes/(dp)/(protected)/account/clubs/[club]/+page.svelte
-#: src/routes/(tib)/club/details/+page.svelte
 msgid "Club Details"
 msgstr "Détails du club"
 
-#: src/routes/(tib)/club/details/+page.svelte
-msgid "Team Basics"
-msgstr "Informations de base sur l'équipe"
-
-#: src/routes/(tib)/club/details/+page.svelte
-msgid "Name:"
-msgstr "Nom :"
-
-#: src/routes/(tib)/club/details/+page.svelte
-msgid "Acronym:"
-msgstr "Acronyme :"
-
-#: src/routes/(tib)/club/details/+page.svelte
-msgid "Main Club:"
-msgstr "Club principal :"
-
-#: src/routes/(tib)/club/details/+page.svelte
-msgid "Achievements"
-msgstr "Réalisations"
-
-#: src/routes/(tib)/club/details/+page.svelte
-msgid "Legal Info"
-msgstr "Informations légales"
-
-#: src/routes/(tib)/club/details/+page.svelte
-msgid "Chairman:"
-msgstr "Président :"
-
-#: src/routes/(tib)/club/details/+page.svelte
-msgid "Registered Association:"
-msgstr "Association enregistrée :"
-
-#: src/routes/(tib)/club/details/+page.svelte
-msgid "Court:"
-msgstr "Tribunal :"
-
 #: src/lib/tib/components/club/ballpark/BallparkDetailCard.svelte
-#: src/routes/(tib)/club/details/+page.svelte
 msgid "Address:"
 msgstr "Adresse :"
-
-#: src/routes/(tib)/club/details/+page.svelte
-msgid "Street:"
-msgstr "Rue :"
-
-#: src/routes/(tib)/club/scorer/+page.svelte
-msgid "Scorer Licenses"
-msgstr "Licences de marqueur"
-
-#: src/routes/(tib)/club/scorer/+page.svelte
-#: src/routes/(tib)/club/umpire/+page.svelte
-msgid "Loading Licenses..."
-msgstr "Chargement des licences..."
-
-#: src/routes/(tib)/club/officials/+page.svelte
-msgid "Club Officials"
-msgstr "Officiels du club"
-
-#: src/routes/(tib)/club/ballpark/+page.svelte
-#: src/routes/(tib)/club/officials/+page.svelte
-msgid "Loading Club Officials..."
-msgstr "Chargement des officiels du club..."
-
-#: src/routes/(tib)/club/umpire/+page.svelte
-msgid "Umpire Licenses"
-msgstr "Licences d'arbitre"
-
-#: src/routes/(tib)/ligen/[id]/+page.svelte
-#: src/routes/(tib)/teams/[id]/+page.svelte
-msgid "Information"
-msgstr "Information"
-
-#: src/routes/(tib)/ligen/[id]/+page.svelte
-msgid "League Stats"
-msgstr "Stats de la ligue"
-
-#: src/routes/(tib)/ligen/[id]/+page.svelte
-msgid "Statistics about current league leaders in various statistical categories can be found on a dedicated subpage."
-msgstr "Les statistiques sur les leaders actuels de la ligue dans diverses catégories statistiques se trouvent sur une sous-page dédiée."
-
-#: src/routes/(tib)/ligen/[id]/+page.svelte
-msgid "Go to stats"
-msgstr "Aller aux statistiques"
-
-#: src/routes/(tib)/ligen/[id]/+page.svelte
-msgid "Tabelle"
-msgstr "Tableau"
-
-#. 0: data.teamName ?? "Team"
-#: src/routes/(tib)/league_entries/[entry]/+page.svelte
-msgid "Stats for {0}"
-msgstr "Stats pour {0}"
-
-#. 0: clubTeam.name; 1: clubTeam.season
-#: src/routes/(tib)/teams/[id]/+page.svelte
-msgid "{0} (Saison {1})"
-msgstr "{0} (Saison {1})"
-
-#: src/routes/(tib)/teams/[id]/+page.svelte
-msgid "No Standings available."
-msgstr "Pas de classement disponible."
-
-#: src/routes/(tib)/teams/[id]/+page.svelte
-msgid "Players"
-msgstr "Joueurs"
-
-#: src/routes/(tib)/teams/[id]/+page.svelte
-msgid "No Players found for this team."
-msgstr "Aucun joueur trouvé pour cette équipe."
-
-#: src/routes/(tib)/players/[id]/+page.svelte
-#: src/routes/(tib)/teams/[id]/+page.svelte
-msgid "Stats"
-msgstr "Stats"
-
-#. 0: batting.person?.first_name; 1: batting.person?.last_name
-#: src/routes/(tib)/players/[id]/+page.svelte
-msgid "Player Profile for {0} {1}"
-msgstr "Profil du joueur pour {0} {1}"
-
-#: src/routes/(tib)/players/[id]/+page.svelte
-msgid "Profile Data"
-msgstr "Données du profil"
-
-#. 0: error.message
-#: src/routes/(tib)/players/[id]/+page.svelte
-msgid "An error occurred fetching player data: {0}.<0/> The data source might be temporarily unavailable, please try again later."
-msgstr "Une erreur s'est produite lors de la récupération des données du joueur : {0}.<0/> La source de données est peut-être temporairement indisponible, veuillez réessayer plus tard."
 
 #: src/lib/dp/components/event/match/GameResultIndicator.svelte
 msgid "F"
@@ -2781,26 +2460,6 @@ msgstr "Aucun officiel de club disponible."
 msgid "Stats for {0} {1}"
 msgstr "Stats pour {0} {1}"
 
-#: src/routes/(tib)/club/ballpark/[id]/+page.svelte
-msgid "Ballpark Details"
-msgstr "Détails du terrain de baseball"
-
-#: src/routes/(tib)/club/ballpark/[id]/+page.svelte
-msgid "How to get there"
-msgstr "Comment s'y rendre"
-
-#: src/routes/(tib)/club/license/[id]/+page.svelte
-msgid "License Details"
-msgstr "Détails de la licence"
-
-#: src/routes/(tib)/club/license/[id]/+page.svelte
-msgid "No license data due to error."
-msgstr "Aucune donnée de licence en raison d'une erreur."
-
-#: src/routes/(tib)/club/officials/[id]/+page.svelte
-msgid "Official Details"
-msgstr "Détails de l'officiel"
-
 #. 0: set.user.first_name; 1: set.user.last_name
 #: src/routes/(dp)/(protected)/account/[user]/communityservice/+page.svelte
 msgid "for {0} {1}"
@@ -2810,88 +2469,43 @@ msgstr "pour {0} {1}"
 msgid "Each club can set a community service target for its members. Members are expected to provide this amount of voluntary working hours each calendar year. You can report your community service hours here, as well as view your previously sent hours and compare with the target."
 msgstr "Chaque club peut fixer un objectif de service communautaire pour ses membres. Les membres sont censés fournir ce nombre d'heures de travail volontaire chaque année civile. Vous pouvez déclarer vos heures de service communautaire ici, ainsi que consulter vos heures précédemment envoyées et les comparer à l'objectif."
 
-#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+#: src/routes/(dp)/(protected)/account/settings/+page.svelte
 msgid "Account Data"
 msgstr "Données du compte"
 
-#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+#: src/routes/(dp)/(protected)/account/settings/+page.svelte
 msgid "Change Email Address"
 msgstr "Changer l'adresse e-mail"
 
 #. 0: model.first_name; 1: model.last_name
-#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+#: src/routes/(dp)/(protected)/account/settings/+page.svelte
 msgid "Change email address for {0} {1}"
 msgstr "Modifier l'adresse e-mail pour {0} {1}"
 
-#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+#: src/routes/(dp)/(protected)/account/settings/+page.svelte
 msgid "Edit Profile Data"
 msgstr "Modifier les données du profil"
 
 #. 0: model.first_name; 1: model.last_name
-#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+#: src/routes/(dp)/(protected)/account/settings/+page.svelte
 msgid "Edit User Data for {0} {1}"
 msgstr "Modifier les données utilisateur pour {0} {1}"
 
-#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+#: src/routes/(dp)/(protected)/account/settings/+page.svelte
 msgid "Go to Player profile page"
 msgstr "Aller à la page du profil du joueur"
 
-#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+#: src/routes/(dp)/(protected)/account/settings/+page.svelte
 msgid "Your player profile data can be changed on <0>a dedicated page</0>."
 msgstr "Les données de votre profil de joueur peuvent être modifiées sur <0>une page dédiée</0>."
 
-#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+#: src/routes/(dp)/(protected)/account/settings/+page.svelte
 msgid "User not found. That should not happen, if it does anyway, please log in."
 msgstr "Utilisateur non trouvé. Cela ne devrait pas arriver, si c'est le cas, veuillez vous connecter."
 
-#. 0: data.leagueGroup.name; 1: data.leagueGroup.season
-#: src/routes/(tib)/ligen/[id]/stats/+page.svelte
-msgid "Leaderboards for {0} ({1})"
-msgstr "Classements pour {0} ({1})"
-
-#. 0: match.match_id
-#: src/routes/(tib)/gamecenter/game-detail/[id]/+page.svelte
-msgid "Details zu Spiel {0}"
-msgstr "Détails sur le match {0}"
-
 #: src/routes/(dp)/(protected)/account/event/[id]/+page.svelte
-#: src/routes/(tib)/gamecenter/game-detail/[id]/+page.svelte
 msgid "Game Data"
 msgstr "Données du match"
-
-#: src/routes/(tib)/gamecenter/game-detail/[id]/+page.svelte
-msgid "Box Score"
-msgstr "Tableau de bord"
-
-#: src/routes/(tib)/gamecenter/game-detail/[id]/+page.svelte
-msgid "Game Report"
-msgstr "Rapport de match"
-
-#: src/routes/(tib)/gamecenter/game-detail/[id]/+page.svelte
-msgid "Box Score for this game could not be loaded or is unavailable."
-msgstr "La feuille de match pour ce match n'a pas pu être chargée ou n'est pas disponible."
-
-#. 0: error.message
-#: src/routes/(tib)/gamecenter/game-detail/[id]/+page.svelte
-msgid "error loading box score: {0}"
-msgstr "erreur lors du chargement de la feuille de match : {0}"
-
-#: src/routes/(tib)/gamecenter/game-detail/[id]/+page.svelte
-msgid "No Game Report available."
-msgstr "Aucun rapport de match disponible."
-
-#. 0: error.message
-#: src/routes/(tib)/gamecenter/game-detail/[id]/+page.svelte
-msgid "error loading Game Report: {0}"
-msgstr "Erreur lors du chargement du rapport de match : {0}"
-
-#: src/routes/(tib)/gamecenter/game-detail/[id]/+page.svelte
-msgid "Caveat"
-msgstr "Avertissement"
-
-#: src/routes/(tib)/gamecenter/game-detail/[id]/+page.svelte
-msgid "Sharing games does not work on Firefox."
-msgstr "Le partage de parties ne fonctionne pas sur Firefox."
 
 #. 0: club.name
 #: src/routes/(dp)/(protected)/account/clubs/[club]/+page.svelte
@@ -3062,7 +2676,7 @@ msgstr "Liens"
 msgid "Player List"
 msgstr "Liste des joueurs"
 
-#: src/routes/(dp)/(protected)/account/[user]/settings/+page.svelte
+#: src/routes/(dp)/(protected)/account/settings/+page.svelte
 msgid "This link includes all events for all teams that you are a member of, going back one year."
 msgstr "Ce lien inclut tous les événements pour toutes les équipes dont vous êtes membre, remontant sur un an."
 
@@ -3098,9 +2712,35 @@ msgstr "Commentaire de l'administrateur"
 msgid "Copy invitation link"
 msgstr "Copier le lien d'invitation"
 
-#~ msgid "My Events"
-#~ msgstr ""
-
 #: src/routes/(dp)/(protected)/account/+page.svelte
 msgid "My Next Events"
 msgstr "Mes prochains événements"
+
+#: src/routes/+layout.svelte
+#: src/routes/+page.svelte
+msgid "BSM Data"
+msgstr ""
+
+#: src/routes/+layout.svelte
+msgid "BSM"
+msgstr ""
+
+#: src/routes/(tib)/bsm/+page.svelte
+msgid "Skylarks BSM Data"
+msgstr ""
+
+#: src/lib/tib/components/navigation/StaticNavigationLinks.svelte
+msgid "Account"
+msgstr ""
+
+#: src/lib/tib/components/navigation/StaticNavigationLinks.svelte
+msgid "Clubs"
+msgstr ""
+
+#: src/routes/+page.svelte
+msgid "Go to game data"
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/clubs/+page.svelte
+msgid "My Clubs"
+msgstr ""
