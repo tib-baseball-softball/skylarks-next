@@ -1,8 +1,9 @@
 module git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner
 
-go 1.26
+go 1.26.2
 
 require (
+	git.berlinskylarks.de/tib-baseball/bsm-go v1.0.1
 	github.com/SherClockHolmes/webpush-go v1.4.0
 	github.com/arran4/golang-ical v0.3.5
 	github.com/pocketbase/dbx v1.12.0

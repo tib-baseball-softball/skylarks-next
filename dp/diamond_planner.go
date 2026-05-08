@@ -7,7 +7,7 @@ import (
 	"os"
 	"strings"
 
-	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/bsm"
+	"git.berlinskylarks.de/tib-baseball/bsm-go"
 	"github.com/SherClockHolmes/webpush-go"
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/apis"
@@ -205,7 +205,7 @@ func BindDPHooks(app core.App, client bsm.APIClient, pushService PushService) {
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
 		icalGroup := se.Router.Group("/api/dp/ical")
-		
+
 		icalGroup.GET("/{user}/{hash}/calendar.ics", getUserCalendar(se.App))
 
 		return se.Next()

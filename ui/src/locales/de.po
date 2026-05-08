@@ -1576,7 +1576,7 @@ msgstr "Öffentliches Profil"
 
 #: src/lib/dp/components/user/PlayerDataProfileSection.svelte
 msgid "You have the option to display your player data in your public profile on the website and apps."
-msgstr "Du kannst deine Spielerdaten in deinem öffentlichen Profil auf der Website und in Apps anzuzeigen."
+msgstr "Du kannst deine Spielerdaten in deinem öffentlichen Profil auf der Website und in Apps anzeigen lassen."
 
 #: src/lib/dp/components/user/PlayerDataProfileSection.svelte
 msgid "Please note that all statistics and basic info such as your name and team affiliation is considered public information when participating in official DBV and BSVBB competitions."
