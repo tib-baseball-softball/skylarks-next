@@ -73,7 +73,7 @@
   --color-secondary-900: oklch(18.05% 0.05 252.59deg);
   --color-secondary-950: oklch(16.55% 0.04 250.88deg);
   --color-secondary-contrast-dark: var(--color-secondary-950);
-  --color-secondary-contrast-light: var(--color-secondary-50);
+  --color-secondary-contrast-light: white;
   --color-secondary-contrast-50: var(--color-secondary-contrast-dark);
   --color-secondary-contrast-100: var(--color-secondary-contrast-dark);
   --color-secondary-contrast-200: var(--color-secondary-contrast-dark);

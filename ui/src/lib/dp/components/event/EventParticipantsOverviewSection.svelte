@@ -114,7 +114,7 @@
 </section>
 
 <section class="no-response-section">
-  <article class="card participant-card preset-outlined">
+  <article class="card participant-card preset-outlined-card">
     <header class="participation-header">
       <span><Ghost/></span>
       <h3 class="h4">No Response</h3>
