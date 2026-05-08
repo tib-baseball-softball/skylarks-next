@@ -84,8 +84,8 @@ importers:
         specifier: ^4.1.5
         version: 4.1.5(@types/node@24.10.1)(vite@8.0.11(@types/node@24.10.1)(esbuild@0.27.4)(jiti@2.6.1)(yaml@2.7.1))
       wuchale:
-        specifier: ^0.22.11
-        version: 0.22.11
+        specifier: ^0.23.3
+        version: 0.23.3
 
 packages:
 
@@ -1162,10 +1162,6 @@ packages:
     engines: {node: '>=8'}
     hasBin: true
 
-  wuchale@0.22.11:
-    resolution: {integrity: sha512-qlqYUXhy1Q9UoDyXshCktVczvC033vCqcikXpCL4iDHfXKJLgf4IiAiTbFgXja/2OIxrbxKHqWC05kdVdZdNkQ==}
-    hasBin: true
-
   wuchale@0.23.3:
     resolution: {integrity: sha512-MWcsV8i0BwEz8dUSsvR7PwULb4nFNzLrC3+uVZUY0Bj4f9Mke6r2ei9hSnaNU8vdCxLa7tI9nw3NnjAJjoueXA==}
     hasBin: true
@@ -2044,17 +2040,6 @@ snapshots:
     dependencies:
       siginfo: 2.0.0
       stackback: 0.0.2
-
-  wuchale@0.22.11:
-    dependencies:
-      '@sveltejs/acorn-typescript': 1.0.9(acorn@8.16.0)
-      acorn: 8.16.0
-      chokidar: 5.0.0
-      magic-string: 0.30.21
-      path-to-regexp: 8.4.2
-      picomatch: 4.0.4
-      pofile: 1.1.4
-      tinyglobby: 0.2.16
 
   wuchale@0.23.3:
     dependencies:
