@@ -7,12 +7,12 @@
 <style>
   iframe {
     width: 100%;
-    height: 100%;
+    height: 100vh;
   }
 
   :global {
     .root-layout[data-page="/(tib)/bsm"] {
-      main {
+      .main-wrapper {
         width: 98%;
       }
     }

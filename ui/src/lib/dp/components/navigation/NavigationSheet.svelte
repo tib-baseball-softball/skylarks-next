@@ -28,8 +28,6 @@
 
     <a aria-label="to home page" class="anchor" href="/" onclick={() => open = false}>
       <img alt="Diamond Planner Logo" src="/icon_dp.svg">
-
-      <h2>Home Page</h2>
     </a>
 
     <hr/>
@@ -51,17 +49,11 @@
 
   a {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     padding: 0.5em;
 
     img {
       max-width: calc(var(--spacing) * 14);
-    }
-
-    h2 {
-      padding: 1em;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
   }
 
