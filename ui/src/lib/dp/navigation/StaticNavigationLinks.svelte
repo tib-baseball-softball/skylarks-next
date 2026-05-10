@@ -13,7 +13,7 @@
   <a class="{classes}" class:preset-filled-primary-500={page.url.pathname === "/"}
      href="/">
     <House/>
-    <span>Start</span>
+    <span class="link-label">Start</span>
   </a>
 </li>
 
@@ -21,7 +21,7 @@
   <a class="{classes}" class:preset-filled-primary-500={page.url.pathname === "/account"}
      href="/account">
     <User/>
-    <span>Account</span>
+    <span class="link-label">Account</span>
   </a>
 </li>
 
@@ -29,7 +29,7 @@
   <a class="{classes}" class:preset-filled-primary-500={page.url.pathname === "/account/clubs"}
      href="/account/clubs">
     <Shield/>
-    <span>Clubs</span>
+    <span class="link-label">Clubs</span>
   </a>
 </li>
 
@@ -37,7 +37,7 @@
   <a class="{classes}" class:preset-filled-primary-500={page.url.pathname === "/account/team"}
      href="/account/team">
     <Users/>
-    <span>Teams</span>
+    <span class="link-label">Teams</span>
   </a>
 </li>
 
@@ -45,7 +45,7 @@
   <a class="{classes}" class:preset-filled-primary-500={page.url.pathname === "/account/settings"}
      href="/account/settings">
     <Settings/>
-    <span>Settings</span>
+    <span class="link-label">Settings</span>
   </a>
 </li>
 
@@ -63,5 +63,12 @@
 
   li {
     width: 20%;
+  }
+
+  .link-label {
+    max-width: calc(var(--spacing) * 16);
+    overflow: clip;
+    text-overflow: ellipsis;
+    font-size: var(--text-sm);
   }
 </style>

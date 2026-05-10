@@ -50,7 +50,7 @@
 
       {#snippet children()}
         <a class="btn preset-tonal-primary" href="/bsm" title="BSM Data"
-          >BSM Data</a
+          >BSM</a
         >
       {/snippet}
 

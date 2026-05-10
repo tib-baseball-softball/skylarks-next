@@ -1984,7 +1984,6 @@ msgid "My Next Events"
 msgstr "My Next Events"
 
 #: src/routes/+layout.svelte
-#: src/routes/+layout.svelte
 #: src/routes/+page.svelte
 msgid "BSM Data"
 msgstr "BSM Data"
@@ -2008,3 +2007,7 @@ msgstr "Go to game data"
 #: src/routes/(dp)/(protected)/account/clubs/+page.svelte
 msgid "My Clubs"
 msgstr "My Clubs"
+
+#: src/routes/+layout.svelte
+msgid "BSM"
+msgstr "BSM"

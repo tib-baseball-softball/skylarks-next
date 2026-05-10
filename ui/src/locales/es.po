@@ -1434,7 +1434,7 @@ msgstr "Imagen"
 #. 0: season
 #: src/lib/dp/components/stats/AttendanceTotalStatsBlock.svelte
 msgid "All possible events of this type for {0}"
-msgstr "Todos los eventos posibles de este tipo para {0}```"
+msgstr "Todos los eventos posibles de este tipo para {0}"
 
 #. 0: title
 #: src/lib/dp/components/stats/AttendanceTotalStatsBlock.svelte
@@ -1984,7 +1984,6 @@ msgid "My Next Events"
 msgstr "Mis próximos eventos"
 
 #: src/routes/+layout.svelte
-#: src/routes/+layout.svelte
 #: src/routes/+page.svelte
 msgid "BSM Data"
 msgstr "Datos BSM"
@@ -2008,3 +2007,7 @@ msgstr "Ir a los datos del juego"
 #: src/routes/(dp)/(protected)/account/clubs/+page.svelte
 msgid "My Clubs"
 msgstr "Mis Clubes"
+
+#: src/routes/+layout.svelte
+msgid "BSM"
+msgstr "BSM"
