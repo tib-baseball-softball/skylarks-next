@@ -1624,10 +1624,6 @@ msgstr "Dołącz do zespołu"
 msgid "Diamond Planner Logo"
 msgstr "Logo Diamond Planner\\"
 
-#: src/lib/dp/components/navigation/NavigationSheet.svelte
-msgid "Home Page"
-msgstr "Strona główna"
-
 #: src/lib/dp/components/user/UserDataCard.svelte
 msgid "User Data"
 msgstr "Dane użytkownika"
@@ -1988,30 +1984,27 @@ msgid "My Next Events"
 msgstr "Moje następne wydarzenia"
 
 #: src/routes/+layout.svelte
+#: src/routes/+layout.svelte
 #: src/routes/+page.svelte
 msgid "BSM Data"
-msgstr ""
-
-#: src/routes/+layout.svelte
-msgid "BSM"
-msgstr ""
+msgstr "Dane BSM"
 
 #: src/routes/(tib)/bsm/+page.svelte
 msgid "Skylarks BSM Data"
-msgstr ""
+msgstr "Dane BSM Skylarks"
 
 #: src/lib/dp/navigation/StaticNavigationLinks.svelte
 msgid "Account"
-msgstr ""
+msgstr "Konto"
 
 #: src/lib/dp/navigation/StaticNavigationLinks.svelte
 msgid "Clubs"
-msgstr ""
+msgstr "Kluby"
 
 #: src/routes/+page.svelte
 msgid "Go to game data"
-msgstr ""
+msgstr "Przejdź do danych gry"
 
 #: src/routes/(dp)/(protected)/account/clubs/+page.svelte
 msgid "My Clubs"
-msgstr ""
+msgstr "Moje kluby"

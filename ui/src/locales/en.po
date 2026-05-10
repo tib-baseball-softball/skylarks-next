@@ -1624,10 +1624,6 @@ msgstr "Join Team"
 msgid "Diamond Planner Logo"
 msgstr "Diamond Planner Logo"
 
-#: src/lib/dp/components/navigation/NavigationSheet.svelte
-msgid "Home Page"
-msgstr "Home Page"
-
 #: src/lib/dp/components/user/UserDataCard.svelte
 msgid "User Data"
 msgstr "User Data"
@@ -1988,13 +1984,10 @@ msgid "My Next Events"
 msgstr "My Next Events"
 
 #: src/routes/+layout.svelte
+#: src/routes/+layout.svelte
 #: src/routes/+page.svelte
 msgid "BSM Data"
 msgstr "BSM Data"
-
-#: src/routes/+layout.svelte
-msgid "BSM"
-msgstr "BSM"
 
 #: src/routes/(tib)/bsm/+page.svelte
 msgid "Skylarks BSM Data"

@@ -125,7 +125,7 @@ msgstr "<0/> Anmeldeseite"
 #. 0: email
 #: src/lib/dp/auth/PasswordRequestButton.svelte
 msgid "If we have your email ({0}) on file, you will receive a reset password request in your inbox."
-msgstr "Wenn wir Ihre E-Mail-Adresse ({0}) gespeichert haben, erhalten Sie eine Anfrage zur Passwortrücksetzung in Ihrem Posteingang."
+msgstr "Wenn wir Ihre E-Mail-Adresse ({0}) gespeichert haben, erhältst du eine Anfrage zur Passwortrücksetzung in deinem Posteingang."
 
 #: src/lib/dp/auth/PasswordRequestButton.svelte
 msgid "Error sending reset password request."
@@ -256,7 +256,7 @@ msgstr "Die Kernfunktionen dieser App (aktuelle Informationen zu Spielen, Tabell
 
 #: src/routes/+page.svelte
 msgid "To access internal team information and participate in team activities, please <0>log in to your account.</0>"
-msgstr "Um auf interne Team-Informationen zuzugreifen und an Teamaktivitäten teilzunehmen, <0>loggen Sie sich bitte in Ihr Konto ein.</0>"
+msgstr "Um auf interne Team-Informationen zuzugreifen und an Teamaktivitäten teilzunehmen, <0>logge dich bitte in dein Benutzerkonto ein.</0>"
 
 #: src/routes/(dp)/login/+page.svelte
 msgid "Login Page"
@@ -264,7 +264,7 @@ msgstr "Anmeldeseite"
 
 #: src/routes/(dp)/login/+page.svelte
 msgid "You are logged in as: <0/> <1/> You can log out by clicking your avatar in the top right."
-msgstr "Sie sind angemeldet als: <0/> <1/> Sie können sich abmelden, indem Sie auf Ihr Avatar-Bild oben rechts klicken."
+msgstr "Sie sind angemeldet als: <0/> <1/> Du kannst dich abmelden, indem du auf das Avatar-Bild oben rechts klickst."
 
 #: src/routes/(dp)/login/+page.svelte
 msgid "Go to Account Page"
@@ -1624,10 +1624,6 @@ msgstr "Team beitreten"
 msgid "Diamond Planner Logo"
 msgstr "Diamond Planner Logo"
 
-#: src/lib/dp/components/navigation/NavigationSheet.svelte
-msgid "Home Page"
-msgstr "Startseite"
-
 #: src/lib/dp/components/user/UserDataCard.svelte
 msgid "User Data"
 msgstr "Benutzerdaten"
@@ -1988,30 +1984,27 @@ msgid "My Next Events"
 msgstr "Meine nächsten Events"
 
 #: src/routes/+layout.svelte
+#: src/routes/+layout.svelte
 #: src/routes/+page.svelte
 msgid "BSM Data"
-msgstr ""
-
-#: src/routes/+layout.svelte
-msgid "BSM"
-msgstr ""
+msgstr "BSM-Daten"
 
 #: src/routes/(tib)/bsm/+page.svelte
 msgid "Skylarks BSM Data"
-msgstr ""
+msgstr "Skylarks-BSM-Daten"
 
 #: src/lib/dp/navigation/StaticNavigationLinks.svelte
 msgid "Account"
-msgstr ""
+msgstr "Konto"
 
 #: src/lib/dp/navigation/StaticNavigationLinks.svelte
 msgid "Clubs"
-msgstr ""
+msgstr "Clubs"
 
 #: src/routes/+page.svelte
 msgid "Go to game data"
-msgstr ""
+msgstr "Gehe zu Spieldaten"
 
 #: src/routes/(dp)/(protected)/account/clubs/+page.svelte
 msgid "My Clubs"
-msgstr ""
+msgstr "Meine Clubs"
