@@ -11,6 +11,7 @@
   import ToastContainer from "$lib/dp/components/toast/ToastContainer.svelte";
   import {authSettings} from "$lib/dp/client.svelte.ts";
   import type {LayoutProps} from "./$types";
+  import { page } from "$app/state";
 
   const {data, children}: LayoutProps = $props();
 
@@ -27,7 +28,7 @@
 <!--Singletons-->
 <ToastContainer/>
 
-<div class="root-layout">
+<div class="root-layout" data-page="{page.route.id}">
   <!-- Header -->
   <div>
 

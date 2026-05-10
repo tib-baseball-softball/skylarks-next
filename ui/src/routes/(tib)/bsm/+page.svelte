@@ -9,4 +9,12 @@
     width: 100%;
     height: 100%;
   }
+
+  :global {
+    .root-layout[data-page="/(tib)/bsm"] {
+      main {
+        width: 98%;
+      }
+    }
+  }
 </style>
