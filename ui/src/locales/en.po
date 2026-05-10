@@ -2011,3 +2011,7 @@ msgstr "My Clubs"
 #: src/routes/+layout.svelte
 msgid "BSM"
 msgstr "BSM"
+
+#: src/lib/dp/components/event/EventCoreInfo.svelte
+msgid "No field name provided"
+msgstr "No field name provided"
