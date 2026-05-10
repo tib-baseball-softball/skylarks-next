@@ -48,7 +48,7 @@
   const conicStops = $derived(mapToConicStops(statsItem.participationTotals));
 </script>
 
-<div class="card preset-tonal-surface shadow-lg">
+<div class="card preset-outlined-card shadow">
   <header class="card-header">
     <h2 class="h4 title">Attendance Stats</h2>
   </header>

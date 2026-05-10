@@ -7,7 +7,7 @@ import (
 	"sync"
 	"time"
 
-	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/bsm"
+	"git.berlinskylarks.de/tib-baseball/bsm-go"
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"

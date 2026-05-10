@@ -88,8 +88,9 @@
   {/if}
 </div>
 
-<div class={["comment-container card rounded-base", isLoggedInUser ? "preset-tonal-primary" : "preset-tonal-surface"]}
-     data-testid="comment-container">
+<div
+  class={["comment-container card rounded-base", isLoggedInUser ? "preset-tonal-primary" : "preset-outlined-card"]}
+  data-testid="comment-container">
   <div class="header">
     <p class="user-name">{userFullName}</p>
 

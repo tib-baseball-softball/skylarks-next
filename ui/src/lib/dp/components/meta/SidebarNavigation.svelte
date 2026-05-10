@@ -67,7 +67,7 @@
           <span>Community Service</span>
         </a>
 
-        <a href="/account/{authRecord?.id}/settings" onclick={sheetClose}>
+        <a href="/account/settings" onclick={sheetClose}>
           <Settings/>
           <span>Settings</span>
         </a>
@@ -76,6 +76,7 @@
 
     {#each clubs as club (club.id)}
       <hr class="hr"/>
+      
       <AccordionItem panelInset="default">
         {#snippet lead()}
           <Shield/>
@@ -104,7 +105,7 @@
       </AccordionItem>
 
       {#if club.admins.includes(authRecord?.id)}
-        <AccordionItem panelInset="default">
+        <AccordionItem panelInset="default" startOpen={false}>
           {#snippet lead()}
             <LockKeyhole/>
           {/snippet}
@@ -164,5 +165,9 @@
         min-width: 24px;
       }
     }
+  }
+
+  hr {
+    margin-block: calc(var(--spacing) * 4);
   }
 </style>

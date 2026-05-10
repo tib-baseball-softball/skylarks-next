@@ -25,7 +25,7 @@
   }
 </script>
 
-<article class="card preset-tonal-surface shadow-lg" class:card-hover={link}>
+<article class="card preset-outlined-card shadow" class:card-hover={link}>
   <a href="/account/team/{team.id}">
     <header class="card-header">
       <h3 class="h4 font-semibold">{team.name}</h3>
@@ -68,21 +68,21 @@
 
       {#if team?.expand?.club?.admins.includes(model.id) || team?.admins.includes(model.id)}
         <TeamForm
-                club={team.expand?.club}
-                team={team}
-                triggerVariant="tonal-tertiary"
-                triggerSize="sm"
-                triggerIcon={true}
-                showLabel={false}
+          club={team.expand?.club}
+          team={team}
+          triggerVariant="tonal-tertiary"
+          triggerSize="sm"
+          triggerIcon={true}
+          showLabel={false}
         />
       {/if}
 
       {#if team?.expand?.club?.admins.includes(model.id)}
         <DeleteButton
-                id={team.id}
-                modelName="Team"
-                action={deleteAction}
-                iconSize={16}
+          id={team.id}
+          modelName="Team"
+          action={deleteAction}
+          iconSize={16}
         />
       {/if}
 
@@ -91,43 +91,43 @@
 </article>
 
 <style>
-    .card {
-        display: block;
-    }
+  .card {
+    display: block;
+  }
 
-    .team-content {
-        padding: calc(var(--spacing) * 4);
-    }
+  .team-content {
+    padding: calc(var(--spacing) * 4);
+  }
 
-    .team-details {
-        display: flex;
-        flex-direction: column;
-        gap: calc(var(--spacing) * 2);
-    }
+  .team-details {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 2);
+  }
 
-    .item-row {
-        display: flex;
-        align-items: center;
-        gap: calc(var(--spacing) * 4);
-    }
+  .item-row {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 4);
+  }
 
-    .detail-label {
-        font-size: var(--text-sm);
-        line-height: var(--tw-leading, var(--text-sm--line-height));
-        font-weight: var(--font-weight-light);
-    }
+  .detail-label {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+    font-weight: var(--font-weight-light);
+  }
 
-    .footer-divider {
-        margin-block: calc(var(--spacing) * 2);
-    }
+  .footer-divider {
+    margin-block: calc(var(--spacing) * 2);
+  }
 
-    .footer-actions {
-        display: flex;
-        justify-content: flex-end;
-        gap: calc(var(--spacing) * 2);
-    }
-    
-    .team-age-group {
-      text-transform: capitalize;
-    }
+  .footer-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: calc(var(--spacing) * 2);
+  }
+
+  .team-age-group {
+    text-transform: capitalize;
+  }
 </style>

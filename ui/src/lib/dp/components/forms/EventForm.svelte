@@ -19,7 +19,7 @@
     clubID: string;
     teamID: string;
     triggerContent: Snippet;
-    triggerVariant?: "filled-primary" | "tonal-primary" | "tonal-secondary" | "tonal-tertiary" | "tonal-surface";
+    triggerVariant?: "filled-primary" | "filled-secondary" | "tonal-primary" | "tonal-secondary" | "tonal-tertiary" | "tonal-surface";
     triggerSize?: "default" | "sm";
     triggerIcon?: boolean;
     triggerSpaced?: boolean;
@@ -111,10 +111,10 @@
       triggerIcon && "btn-icon",
       triggerSpaced && "trigger-spaced",
       triggerVariant === "filled-primary" && "preset-filled-primary-500",
+      triggerVariant === "filled-secondary" && "preset-filled-secondary-500",
       triggerVariant === "tonal-primary" && "preset-tonal-primary border-primary",
       triggerVariant === "tonal-secondary" && "preset-tonal-secondary border-secondary",
       triggerVariant === "tonal-tertiary" && "preset-tonal-tertiary border-tertiary",
-      triggerVariant === "tonal-surface" && "preset-tonal-surface",
     ]}
   >
     {@render triggerContent()}
@@ -154,7 +154,7 @@
         </label>
 
         <label class="label">
-          <span>BSM ID</span> 
+          <span>BSM ID</span>
           <input
             bind:value={form.bsm_id}
             class="input"
@@ -266,7 +266,7 @@
     justify-content: center;
     align-items: center;
   }
-  
+
   hr {
     margin-block: calc(var(--spacing) * 5);
   }

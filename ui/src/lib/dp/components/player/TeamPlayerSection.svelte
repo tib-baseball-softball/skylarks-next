@@ -22,7 +22,7 @@
   </Tabs.Root>
 </label>
 
-<div class="card players-list-card preset-tonal shadow-xl">
+<div class="card players-list-card preset-tonal shadow">
   {#each players as player (player.uid)}
     <PlayerRow {player} {visual}/>
 

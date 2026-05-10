@@ -1,7 +1,7 @@
 @import "overrides/base-globals.css";
 @import "overrides/presets.css";
 
-[data-theme="skylarks"] {
+:root {
   --text-scaling: 1;
   --base-font-color: var(--color-surface-950);
   --base-font-color-dark: var(--color-surface-50);
@@ -36,7 +36,7 @@
   --default-divide-width: 1px;
   --default-ring-width: 1px;
   --body-background-color: oklch(1 0 0 / 1);
-  --body-background-color-dark: var(--color-surface-950);
+  --body-background-color-dark: oklch(from var(--color-secondary-500) calc(l - .15) c h);
   --color-primary-50: oklch(91.41% 0.03 4.62deg);
   --color-primary-100: oklch(81.28% 0.07 4.73deg);
   --color-primary-200: oklch(71.62% 0.11 5.77deg);
@@ -49,7 +49,7 @@
   --color-primary-900: oklch(34.44% 0.13 19.09deg);
   --color-primary-950: oklch(30.25% 0.11 18.22deg);
   --color-primary-contrast-dark: var(--color-primary-950);
-  --color-primary-contrast-light: var(--color-primary-50);
+  --color-primary-contrast-light: oklch(1 0 0 / 1);
   --color-primary-contrast-50: var(--color-primary-contrast-dark);
   --color-primary-contrast-100: var(--color-primary-contrast-dark);
   --color-primary-contrast-200: var(--color-primary-contrast-dark);
@@ -73,7 +73,7 @@
   --color-secondary-900: oklch(18.05% 0.05 252.59deg);
   --color-secondary-950: oklch(16.55% 0.04 250.88deg);
   --color-secondary-contrast-dark: var(--color-secondary-950);
-  --color-secondary-contrast-light: var(--color-secondary-50);
+  --color-secondary-contrast-light: white;
   --color-secondary-contrast-50: var(--color-secondary-contrast-dark);
   --color-secondary-contrast-100: var(--color-secondary-contrast-dark);
   --color-secondary-contrast-200: var(--color-secondary-contrast-dark);
@@ -140,10 +140,10 @@
   --color-warning-400: oklch(82.66% 0.15 88.89deg);
   --color-warning-500: oklch(79.54% 0.16 85.76deg);
   --color-warning-600: oklch(73.56% 0.15 85.74deg);
-  --color-warning-700: oklch(67.35% 0.14 86.19deg);
+  --color-warning-700: oklch(67.46% 0.14 85.67deg);
   --color-warning-800: oklch(60.9% 0.12 85.47deg);
-  --color-warning-900: oklch(54.36% 0.11 86.07deg);
-  --color-warning-950: oklch(47.74% 0.1 86.28deg);
+  --color-warning-900: oklch(54.48% 0.11 85.4deg);
+  --color-warning-950: oklch(47.86% 0.1 85.5deg);
   --color-warning-contrast-dark: var(--color-warning-950);
   --color-warning-contrast-light: var(--color-warning-50);
   --color-warning-contrast-50: var(--color-warning-contrast-dark);
@@ -205,4 +205,6 @@
   --color-surface-contrast-800: var(--color-surface-contrast-light);
   --color-surface-contrast-900: var(--color-surface-contrast-light);
   --color-surface-contrast-950: var(--color-surface-contrast-light);
+
+  --color-border: light-dark(var(--color-surface-50), #334155);
 }

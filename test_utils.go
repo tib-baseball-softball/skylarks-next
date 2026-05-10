@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/bsm"
+	"git.berlinskylarks.de/tib-baseball/bsm-go"
 	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp"
 	"github.com/pocketbase/pocketbase/tests"
 )
@@ -48,7 +48,7 @@ func setupTestApp(t testing.TB) *tests.TestApp {
 
 	// no need to clean up since scenario.Test() will do that for us
 	dp.BindDPHooks(testApp, mockClient, pushService)
-	BindTiBHooks(testApp, mockClient)
+	BindTiBHooks(testApp)
 
 	return testApp
 }

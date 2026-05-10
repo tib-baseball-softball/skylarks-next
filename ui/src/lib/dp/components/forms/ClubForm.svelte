@@ -14,7 +14,7 @@
 
   interface Props {
     club: ExpandedClub | null;
-    triggerVariant?: "filled-primary" | "tonal-primary" | "tonal-secondary" | "tonal-tertiary" | "tonal-surface";
+    triggerVariant?: "filled-primary" | "tonal-primary" | "tonal-secondary" | "filled-secondary" | "tonal-tertiary";
     triggerSize?: "default" | "sm";
     triggerIcon?: boolean;
     triggerSpaced?: boolean;
@@ -100,10 +100,10 @@
       triggerIcon && "btn-icon",
       triggerSpaced && "trigger-spaced",
       triggerVariant === "filled-primary" && "preset-filled-primary-500",
-      triggerVariant === "tonal-primary" && "preset-tonal-primary",
-      triggerVariant === "tonal-secondary" && "preset-tonal-secondary",
+      triggerVariant === "filled-secondary" && "preset-filled-secondary-500",
+      triggerVariant === "tonal-primary" && "preset-tonal-primary border-primary",
+      triggerVariant === "tonal-secondary" && "preset-tonal-secondary border-secondary",
       triggerVariant === "tonal-tertiary" && "preset-tonal-tertiary",
-      triggerVariant === "tonal-surface" && "preset-tonal-surface",
     ]}
   >
     {#if form.id}
@@ -172,7 +172,7 @@
             type="number"
           >
           <span class="text-sm">Can be found in the BSM address bar while editing
-                    (e.g. <span class="italic">https://bsm.baseball-softball.de/clubs/xxx/edit</span>).
+                    (e.g. <i>https://bsm.baseball-softball.de/clubs/xxx/edit</i>).
                     Needs to be set for the app to function properly.
                 </span>
         </label>
@@ -242,7 +242,12 @@
   hr {
     margin-block: calc(var(--spacing) * 5);
   }
-  
+
+  .text-sm {
+    font-weight: var(--font-weight-light);
+    font-size: var(--text-sm);
+  }
+
   .submit-container {
     margin-block: calc(var(--spacing) * 3);
     display: flex;

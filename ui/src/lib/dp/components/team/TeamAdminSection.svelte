@@ -9,8 +9,8 @@
   import Dialog from "$lib/dp/components/modal/Dialog.svelte";
   import {authSettings, client} from "$lib/dp/client.svelte.js";
   import type {CustomAuthModel, ExpandedEventSeries, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
-  import { page } from "$app/state";
-  import { toastController } from "$lib/dp/service/ToastController.svelte";
+  import {page} from "$app/state";
+  import {toastController} from "$lib/dp/service/ToastController.svelte";
 
   interface Props {
     team: ExpandedTeam;
@@ -24,16 +24,16 @@
     client.collection("teams").delete(id);
     invalidateAll();
   }
-  
+
   async function copyTeamInvitationLink() {
     const baseURL = page.url.protocol + "//" + page.url.host;
-    
+
     const params = new URLSearchParams({
       action: "signup",
       signup_key: team.signup_key
     });
     await navigator.clipboard.writeText(`${baseURL}/login?${params.toString()}`);
-    
+
     toastController.trigger({
       message: "Copied to clipboard!",
       background: "preset-filled-success-500",
@@ -46,7 +46,7 @@
 <h2 class="section-title">Admin Section</h2>
 
 <div class="outer-grid">
-  <div class="card admin-card preset-outlined-surface-500">
+  <div class="card admin-card preset-outlined-card">
     <div>
       <header class="card-header">
         <h3 class="card-title">Games</h3>
@@ -82,7 +82,7 @@
     </footer>
   </div>
 
-  <div class="card admin-card preset-outlined-surface-500">
+  <div class="card admin-card preset-outlined-card">
     <div>
       <header class="card-header">
         <h3 class="card-title">Event Series</h3>
@@ -106,7 +106,7 @@
     </footer>
   </div>
 
-  <div class="card admin-card preset-outlined-surface-500">
+  <div class="card admin-card preset-outlined-card">
     <div>
       <header class="card-header">
         <h3 class="card-title">Single Events</h3>
@@ -139,7 +139,7 @@
     </footer>
   </div>
 
-  <div class="card admin-card preset-outlined-surface-500">
+  <div class="card admin-card preset-outlined-card">
     <header class="card-header">
       <h3 class="card-title">Team Settings</h3>
     </header>
@@ -147,7 +147,7 @@
     <section class="card-content">
       <div class="card-actions">
         <TeamForm club={team?.expand?.club} team={team}
-                  triggerVariant="tonal-surface"/>
+                  triggerVariant="filled-secondary"/>
 
         {#if team.signup_key}
           <button class="btn preset-outlined-primary-500" onclick={copyTeamInvitationLink}>Copy invitation link</button>

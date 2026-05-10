@@ -5,12 +5,11 @@ import (
 	"os"
 	_ "time/tzdata"
 
-	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/bsm"
+	"git.berlinskylarks.de/tib-baseball/bsm-go"
 	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp"
 	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/internal/tib"
 	_ "git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/migrations"
 	"github.com/pocketbase/pocketbase/core"
-	"github.com/spf13/cobra"
 	"github.com/subosito/gotenv"
 )
 
@@ -30,7 +29,7 @@ func init() {
 }
 
 // BindTiBHooks registers TiB-specific handlers that are a superset of core Diamond Planner functionality.
-func BindTiBHooks(app core.App, client bsm.APIClient) {
+func BindTiBHooks(app core.App) {
 
 	//------------------- Hooks -------------------------//
 
@@ -45,43 +44,9 @@ func BindTiBHooks(app core.App, client bsm.APIClient) {
 	//------------------- Custom Routes -------------------------//
 
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
-		se.Router.GET("/api/bsm/relay/top10/{league}", tib.GetLeagueLeaders(client))
-
-		return se.Next()
-	})
-
-	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
-		se.Router.GET("/api/bsm/relay/{path...}", tib.GetRelayedBSMData())
-		return se.Next()
-	})
-
-	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
-		se.Router.GET("/api/team/favorite", tib.GetFavoriteTeamData(client))
-		return se.Next()
-	})
-
-	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
 		se.Router.POST("/webhooks/playerChange", tib.HandlePlayerChangedMessage(app))
 		return se.Next()
 	})
-
-	//------------------- Cronjobs -------------------------//
-
-	if os.Getenv("APPLICATION_CONTEXT") != "Development" {
-
-	    // datasets do not work properly atm
-
-		// app.Cron().MustAdd("TeamDatasetImport", "30 * * * *", func() {
-		// 	tib.ImportTeamDatasets(app, client)
-		// })
-
-		app.Cron().MustAdd("CacheCleanup", "0 4 * * *", func() {
-			err := tib.CleanupOutdatedCaches(app)
-			if err != nil {
-				return
-			}
-		})
-	}
 }
 
 func main() {
@@ -90,24 +55,7 @@ func main() {
 
 	app := dp.NewDiamondPlanner(client, pushService)
 
-	BindTiBHooks(app, client)
-
-	app.RootCmd.AddCommand(&cobra.Command{
-		Use: "import:teamdatasets",
-		Run: func(cmd *cobra.Command, args []string) {
-			tib.ImportTeamDatasets(app, client)
-		},
-	})
-
-	app.RootCmd.AddCommand(&cobra.Command{
-		Use: "cache:cleanup",
-		Run: func(cmd *cobra.Command, args []string) {
-			err := tib.CleanupOutdatedCaches(app)
-			if err != nil {
-				log.Print("Error while running CacheCleanup: " + err.Error())
-			}
-		},
-	})
+	BindTiBHooks(app)
 
 	if err := app.Start(); err != nil {
 		log.Fatal(err)

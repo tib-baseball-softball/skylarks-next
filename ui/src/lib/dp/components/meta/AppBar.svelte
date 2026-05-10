@@ -1,13 +1,13 @@
 <script lang="ts">
-import type { Snippet } from "svelte"
+  import type {Snippet} from "svelte";
 
-interface Props {
-  lead?: Snippet
-  children?: Snippet
-  trail?: Snippet
-}
+  interface Props {
+    lead?: Snippet;
+    children?: Snippet;
+    trail?: Snippet;
+  }
 
-let { lead, children, trail }: Props = $props()
+  let {lead, children, trail}: Props = $props();
 </script>
 
 <header data-testid="app-bar">
@@ -29,26 +29,27 @@ let { lead, children, trail }: Props = $props()
 </header>
 
 <style>
-    header {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        background-color: var(--nav-item-background);
-        padding: calc(var(--spacing) * 3);
-    }
+  header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--nav-item-background);
+    padding: calc(var(--spacing) * 3);
+    border-bottom: 1px solid light-dark(var(--color-surface-100), var(--color-surface-200));
+  }
 
-    section {
-        display: flex;
-        justify-content: space-between;
-        gap: calc(var(--spacing) * 4);
-    }
+  section {
+    display: flex;
+    justify-content: space-between;
+    gap: calc(var(--spacing) * 4);
+  }
 
-    .lead, .trail {
-        display: flex;
-    }
+  .lead, .trail {
+    display: flex;
+  }
 
-    .center {
-        flex-grow: 1;
-        place-self: center;
-    }
+  .center {
+    flex-grow: 1;
+    place-self: center;
+  }
 </style>

@@ -93,7 +93,7 @@
       <header>
         <h2 class="h4">Comments</h2>
       </header>
-      <div class="comments-wrapper">
+      <div class="comments-wrapper preset-outlined-card card">
         <CommentSection
           club={club}
           comments={$announcement?.expand?.comments_via_announcement ?? []}
@@ -191,8 +191,6 @@
   .comments-wrapper {
     margin-top: calc(var(--spacing) * 4);
     padding: calc(var(--spacing) * 3);
-    border: 1px solid var(--color-surface-200);
-    border-radius: var(--radius-base);
 
     @media (min-width: 48rem) {
       padding: calc(var(--spacing) * 4);

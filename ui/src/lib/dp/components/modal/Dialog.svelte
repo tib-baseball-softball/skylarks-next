@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type { Snippet } from "svelte";
-  import { Dialog, type WithoutChild } from "bits-ui";
-  import { fly } from "svelte/transition";
-  import { cubicInOut } from "svelte/easing";
-  import { X } from "lucide-svelte";
+  import type {Snippet} from "svelte";
+  import {Dialog, type WithoutChild} from "bits-ui";
+  import {fly} from "svelte/transition";
+  import {cubicInOut} from "svelte/easing";
+  import {X} from "lucide-svelte";
 
   /**
    * Modal dialog based on headless bits-ui building blocks.
@@ -47,13 +47,13 @@
   </Dialog.Trigger>
 
   <Dialog.Portal>
-    <Dialog.Overlay class="dialog-overlay" />
+    <Dialog.Overlay class="dialog-overlay"/>
     <Dialog.Content
       {...contentProps}
       class="card dialog-content shadow-2xl"
       forceMount
     >
-      {#snippet child({ props, open })}
+      {#snippet child({props, open})}
         {#if open}
           <div
             {...props}
@@ -61,9 +61,9 @@
           >
             <div class="header">
               <Dialog.Close
-                class="close-button btn preset-tonal-surface {closeButtonClasses}"
+                class="close-button btn preset-outlined-card {closeButtonClasses}"
               >
-                <X />
+                <X/>
               </Dialog.Close>
 
               <div class="title">

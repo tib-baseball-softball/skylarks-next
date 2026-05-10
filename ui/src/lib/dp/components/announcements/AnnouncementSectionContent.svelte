@@ -32,10 +32,11 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(5, auto);
-    gap: calc(var(--spacing) * 5);
+    gap: calc(var(--spacing) * 3);
     margin-block-end: calc(var(--spacing) * 6);
 
     @media (min-width: 64rem) {
+      gap: calc(var(--spacing) * 6);
       grid-template-columns: 1fr 1fr;
     }
 

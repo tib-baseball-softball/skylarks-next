@@ -147,12 +147,14 @@
         <div class="actions">
 
           {#if team.admins.includes(row.id)}
-            <button class="badge preset-tonal-warning border border-warning-500 admin-button" onclick={() => removeUserAsAdmin(row)}>
+            <button class="badge preset-tonal-warning border border-warning-500 admin-button"
+                    onclick={() => removeUserAsAdmin(row)}>
               <Lock size="18"/>
               Revoke Admin
             </button>
           {:else }
-            <button class="badge preset-tonal-tertiary border border-tertiary-500 admin-button" onclick={() => makeUserAdmin(row)}>
+            <button class="badge preset-tonal-tertiary border border-tertiary-500 admin-button"
+                    onclick={() => makeUserAdmin(row)}>
               <LockOpen size="18"/>
               Make Admin
             </button>
@@ -173,7 +175,8 @@
             {/snippet}
 
             <div class="button-container">
-              <button class="btn preset-tonal-surface border border-surface-500" type="button" onclick={closeModal}>
+              <button class="btn preset-outlined-card border border-surface-500" type="button"
+                      onclick={closeModal}>
                 Cancel
               </button>
               <button class="btn preset-filled" type="button" onclick={() => deleteUserFromTeam(row)}>Confirm</button>

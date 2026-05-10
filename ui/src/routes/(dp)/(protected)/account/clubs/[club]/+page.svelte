@@ -144,7 +144,7 @@
     </header>
 
     <div class="club-page-grid">
-      <article class="card admin-card preset-outlined-surface-500">
+      <article class="card admin-card preset-outlined-card">
         <header class="card-header">
           <h3 class="h4 admin-card-title">Club deletion</h3>
         </header>
@@ -242,6 +242,7 @@
 
     @media (min-width: 64rem) {
       grid-template-columns: 1fr 1fr;
+      gap: calc(var(--spacing) * 6);
     }
 
     @media (min-width: 80rem) {

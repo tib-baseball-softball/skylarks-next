@@ -49,9 +49,11 @@
     padding-top: var(--spacing);
     padding-bottom: calc(var(--spacing) * 3);
     padding-inline: calc(var(--spacing) * 6);
+    text-decoration: underline;
 
     a:hover {
-      text-decoration: underline;
+      color: var(--color-primary-500);
+      text-decoration-color: var(--color-primary-500);
     }
   }
 

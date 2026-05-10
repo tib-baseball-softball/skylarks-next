@@ -7,16 +7,17 @@
   import TopAppBarTrailing from "$lib/dp/components/meta/TopAppBarTrailing.svelte";
   import BottomNavigation from "$lib/dp/components/navigation/BottomNavigation.svelte";
   import NavigationSheet from "$lib/dp/components/navigation/NavigationSheet.svelte";
-  import StaticNavigationLinks from "$lib/tib/components/navigation/StaticNavigationLinks.svelte";
+  import StaticNavigationLinks from "$lib/dp/navigation/StaticNavigationLinks.svelte";
   import ToastContainer from "$lib/dp/components/toast/ToastContainer.svelte";
-  import {authSettings} from "$lib/dp/client.svelte.ts";
-  import type {LayoutProps} from "./$types";
+  import { authSettings } from "$lib/dp/client.svelte.ts";
+  import type { LayoutProps } from "./$types";
+  import { page } from "$app/state";
 
-  const {data, children}: LayoutProps = $props();
+  const { data, children }: LayoutProps = $props();
 
   const isUserAuthenticated = $derived(!!authSettings.record);
   const showSidebar = $derived(
-    (data.clubs.length > 0 || data.teams.length > 0) && isUserAuthenticated
+    (data.clubs.length > 0 || data.teams.length > 0) && isUserAuthenticated,
   );
 </script>
 
@@ -25,54 +26,49 @@
 </svelte:head>
 
 <!--Singletons-->
-<ToastContainer/>
+<ToastContainer />
 
-<div class="root-layout">
+<div class="root-layout" data-page={page.route.id}>
   <!-- Header -->
   <div>
-
     <AppBar>
       {#snippet lead()}
         <div class="app-bar-lead">
           {#if isUserAuthenticated}
-            <NavigationSheet clubs={data.clubs} teams={data.teams}/>
+            <NavigationSheet clubs={data.clubs} teams={data.teams} />
           {/if}
 
           <a aria-label="to home page" href="/" class="logo-link">
-            <img class="team-logo" src="/icon_dp.svg" alt="Skylarks Team Logo">
+            <img
+              class="team-logo"
+              src="/icon_dp.svg"
+              alt="Skylarks Team Logo"
+            />
           </a>
         </div>
       {/snippet}
 
       {#snippet children()}
-        <section>
-          <ul class="app-bar-link-list">
-            <StaticNavigationLinks classes="top-nav-link rounded-base"/>
-          </ul>
-        </section>
+        <a class="btn preset-tonal-primary" href="/bsm" title="BSM Data"
+          >BSM</a
+        >
       {/snippet}
 
       {#snippet trail()}
         <div class="app-bar-trail">
-
-          <TopAppBarTrailing/>
-
+          <TopAppBarTrailing />
         </div>
       {/snippet}
-
     </AppBar>
-
-    <hr>
   </div>
 
   <!-- Grid Column -->
 
   <div class="sidebar-grid">
-
     <!-- Sidebar (Left) -->
     {#if showSidebar}
       <aside>
-        <SidebarNavigation clubs={data.clubs} teams={data.teams}/>
+        <SidebarNavigation clubs={data.clubs} teams={data.teams} />
       </aside>
     {:else}
       <!-- hack: render empty div to not mess up the grid -->
@@ -81,40 +77,27 @@
 
     <!-- Main -->
 
-    <main>
-      {@render children?.()}
-    </main>
+    <div class="main-wrapper">
+      <main>
+        {@render children?.()}
+      </main>
+
+      <hr>
+
+      <!-- Footer -->
+      <footer class="app-footer">
+        <Footer></Footer>
+      </footer>
+    </div>
   </div>
 
   <!-- Bottom Nav (Fixed to bottom of page) for mobile -->
 
   <BottomNavigation>
     {#snippet navLinks()}
-      <StaticNavigationLinks classes="bottom-nav-link"/>
+      <StaticNavigationLinks classes="bottom-nav-link" />
     {/snippet}
   </BottomNavigation>
-
-  <!-- Footer -->
-  <footer class="app-footer">
-    <hr>
-    <Footer>
-      {#snippet staticLinks()}
-        <a aria-label="to Skylarks Facebook page" href="https://www.facebook.com/TiBBaseball/" rel="noreferrer"
-           target="_blank">
-          <img alt="Facebook brand logo" src="/Facebook_Logo_Primary.svg" width="50">
-        </a>
-
-        <a aria-label="to Skylarks Instagram profile" href="https://www.instagram.com/berlinskylarks/" rel="noreferrer"
-           target="_blank">
-          <img alt="Instagram brand logo" class="instagram-logo" src="/Instagram_Glyph_Gradient.png">
-        </a>
-
-        <a aria-label="to Turngemeinde in Berlin main website" href="https://tib1848ev.de/" target="_blank">
-          <img alt="TiB Logo" class="tib-logo" src="/tib_logo.svg" width="38">
-        </a>
-      {/snippet}
-    </Footer>
-  </footer>
 </div>
 
 <style>
@@ -128,23 +111,6 @@
     display: flex;
     justify-content: start;
     align-items: center;
-  }
-
-  .app-bar-link-list {
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    display: none;
-    padding-block: calc(var(--spacing) * 2);
-    gap: calc(var(--spacing) * 2);
-
-    @media (min-width: 48rem) {
-      display: flex;
-    }
-
-    @media (min-width: 80rem) {
-      gap: calc(var(--spacing) * 16);
-    }
   }
 
   .app-bar-trail {
@@ -173,10 +139,11 @@
     display: none;
     height: 100vh;
     width: calc(var(--spacing) * 64);
-    border-right: 1px solid light-dark(var(--color-surface-200), var(--color-surface-100));
+    border-right: 1px solid
+      light-dark(var(--color-surface-100), var(--color-surface-200));
     padding: calc(var(--spacing) * 2);
     background-color: var(--nav-item-background);
-    grid-column: span 1/span 1;
+    grid-column: span 1 / span 1;
 
     @media (min-width: 48rem) {
       display: block;
@@ -191,12 +158,12 @@
     }
   }
 
-  main {
+  .main-wrapper {
     max-width: 1200px;
     width: 93%;
     justify-self: center;
     margin-bottom: 2em;
-    grid-column: span 1/span 1;
+    grid-column: span 1 / span 1;
 
     @media (min-width: 48rem) {
       width: 90%;
@@ -213,16 +180,6 @@
     @media (min-width: 64rem) {
       padding-bottom: 0;
     }
-  }
-
-  .instagram-logo {
-    margin: calc(var(--spacing) * 1);
-    max-width: 40px;
-  }
-
-  .tib-logo {
-    min-width: calc(var(--spacing) * 8);
-    max-width: calc(var(--spacing) * 14);
   }
 
   :global(.top-nav-link) {
@@ -256,5 +213,9 @@
     @media (min-width: 48em) {
       display: block;
     }
+  }
+
+  hr {
+    margin-block: calc(var(--spacing) * 12);
   }
 </style>

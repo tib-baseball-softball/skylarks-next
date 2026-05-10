@@ -48,7 +48,7 @@
   });
 </script>
 
-<div bind:this={mapContainer} class="shadow-xl" id="picker-map"></div>
+<div bind:this={mapContainer} class="shadow" id="picker-map"></div>
 
 <style>
   #picker-map {

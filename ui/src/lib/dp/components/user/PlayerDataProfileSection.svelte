@@ -34,7 +34,7 @@
   });
 </script>
 
-<div class="card preset-tonal-primary shadow-lg profile-card">
+<div class="card preset-tonal-primary shadow profile-card">
   <header class="card-header">
     <h2 class="h4 title">Public Profile</h2>
   </header>
@@ -100,7 +100,7 @@
     @media (min-width: 80rem) {
       gap: calc(var(--spacing) * 3);
     }
-    
+
     :global(.trigger-button.preset-tonal-primary) {
       border: 1px solid white;
     }

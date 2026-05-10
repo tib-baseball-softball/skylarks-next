@@ -61,6 +61,25 @@
     </EventCoreInfo>
   </div>
 
+  {#if !$event.cancelled}
+    <div class="participation-header">
+      <h2 class="h4">My Participation</h2>
+
+      {#if canParticipate}
+        <EventParticipationSection event={$event} chipClasses="flex-grow"/>
+      {:else}
+        <div class="participation-info">
+          <p>Only team members can participate in events.</p>
+        </div>
+      {/if}
+    </div>
+
+    <hr class="divider">
+
+    <EventParticipantsOverviewSection event={$event}/>
+  {/if}
+
+  <hr class="divider">
   <div class="details-grid">
     {#if $event.expand.location}
       <section class="details-section">
@@ -82,25 +101,7 @@
     {/if}
   </div>
 
-  {#if !$event.cancelled}
-    <hr class="divider">
-
-    <div class="participation-header">
-      <h2 class="h4">My Participation</h2>
-
-      {#if canParticipate}
-        <EventParticipationSection event={$event} chipClasses="flex-grow"/>
-      {:else}
-        <div class="participation-info">
-          <p>Only team members can participate in events.</p>
-        </div>
-      {/if}
-    </div>
-
-    <hr class="divider">
-
-    <EventParticipantsOverviewSection event={$event}/>
-  {/if}
+  <hr class="divider">
 
   {#if $event.match_json}
     <section class="game-data-section">
@@ -112,7 +113,7 @@
   {/if}
 
   <section class="comments-section">
-    <div class="comments-wrapper">
+    <div class="comments-wrapper preset-outlined-card card">
       <header>
         <h2 class="h3">Comments</h2>
       </header>
@@ -169,10 +170,10 @@
   .details-grid {
     display: grid;
     grid-template-columns: 1fr;
+    gap: calc(var(--spacing) * 6);
 
     @media (min-width: 48rem) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: calc(var(--spacing) * 4);
     }
   }
 
@@ -230,8 +231,6 @@
   .comments-wrapper {
     margin-top: calc(var(--spacing) * 4);
     padding: calc(var(--spacing) * 3);
-    border: 1px solid var(--color-surface-900-100);
-    border-radius: var(--radius-base);
     max-width: 65ch;
     margin-inline: auto;
 
