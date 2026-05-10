@@ -1,8 +1,11 @@
 services:
   diamondplanner:
-    extends:
-      file: docker-compose-common.yml
-      service: diamondplanner
+    restart: unless-stopped
+    env_file: .env
+    networks:
+      - proxy
+    volumes:
+      - pb_data:/app/pb_data
     image: obnoxieux/skylarks-diamond-planner:staging
     labels:
       - "traefik.enable=true"
