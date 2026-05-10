@@ -1,52 +1,57 @@
 <script lang="ts">
-  import {Info, Shield, Tag} from "lucide-svelte";
+  import { Info, Shield, Tag } from "lucide-svelte";
   import ClubForm from "$lib/dp/components/forms/ClubForm.svelte";
-  import {authSettings} from "$lib/dp/client.svelte.js";
-  import type {CustomAuthModel, ExpandedClub} from "$lib/dp/types/ExpandedResponse.ts";
+  import { authSettings } from "$lib/dp/client.svelte.js";
+  import type {
+    CustomAuthModel,
+    ExpandedClub,
+  } from "$lib/dp/types/ExpandedResponse.ts";
 
   interface Props {
     club: ExpandedClub;
   }
 
-  const {club}: Props = $props();
+  const { club }: Props = $props();
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 </script>
 
-<div class="card preset-tonal-primary border-primary shadow">
-  <header class="card-header">
-    <h2 class="title h4">Club</h2>
-  </header>
+<div class="card preset-outlined-card shadow">
+  <a href="/account/clubs/{club.id}">
+    <header class="card-header">
+      <h2 class="title h4">Club</h2>
+    </header>
 
-  <section class="content">
-    <div class="item">
-      <Shield/>
-      <div>
-        <p>{club.name}</p>
-        <p class="light-text">Name</p>
+    <section class="content">
+      <div class="item">
+        <Shield />
+        <div>
+          <p>{club.name}</p>
+          <p class="light-text">Name</p>
+        </div>
       </div>
-    </div>
 
-    <div class="item">
-      <Tag/>
-      <div>
-        <p>{club.acronym}</p>
-        <p class="light-text">Acronym</p>
+      <div class="item">
+        <Tag />
+        <div>
+          <p>{club.acronym}</p>
+          <p class="light-text">Acronym</p>
+        </div>
       </div>
-    </div>
 
-    <div class="item">
-      <Info/>
-      <div>
-        <p>{club.bsm_id}</p>
-        <p class="light-text">BSM-ID</p>
+      <div class="item">
+        <Info />
+        <div>
+          <p>{club.bsm_id}</p>
+          <p class="light-text">BSM-ID</p>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </a>
 
   {#if club.admins.includes(authRecord.id)}
     <footer class="card-footer">
-      <ClubForm club={club} triggerVariant="tonal-secondary"/>
+      <ClubForm {club} triggerVariant="tonal-secondary" />
     </footer>
   {/if}
 </div>

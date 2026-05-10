@@ -1,20 +1,18 @@
 <script lang="ts">
-  import {SquareArrowOutUpRight} from "lucide-svelte";
+  import { SquareArrowOutUpRight } from "lucide-svelte";
   import ClubDetailCard from "$lib/dp/components/club/ClubDetailCard.svelte";
   import ClubForm from "$lib/dp/components/forms/ClubForm.svelte";
-  import type {ExpandedClub} from "$lib/dp/types/ExpandedResponse.ts";
+  import type { ExpandedClub } from "$lib/dp/types/ExpandedResponse.ts";
 
   interface Props {
     clubs: ExpandedClub[];
   }
 
-  let {clubs}: Props = $props();
+  let { clubs }: Props = $props();
 </script>
 
 {#each clubs as club}
-  <a href="/account/clubs/{club.id}">
-    <ClubDetailCard {club}/>
-  </a>
+  <ClubDetailCard {club} />
 {/each}
 
 {#if !clubs}
@@ -31,15 +29,13 @@
 
     <footer class="card-footer">
       <div class="actions">
-
-        <ClubForm club={null} triggerVariant="tonal-primary"/>
+        <ClubForm club={null} triggerVariant="tonal-primary" />
 
         <!--TODO: This doesn't do anything yet-->
         <button class="btn preset-tonal-primary border border-primary-500">
-          <SquareArrowOutUpRight/>
+          <SquareArrowOutUpRight />
           <span>Join a Club</span>
         </button>
-
       </div>
     </footer>
   </div>
