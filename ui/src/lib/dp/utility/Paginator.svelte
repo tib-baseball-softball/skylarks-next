@@ -1,28 +1,40 @@
 <script lang="ts">
-  import {ChevronLeft, ChevronRight} from "lucide-svelte";
-  import type {PageStore} from "$lib/dp/records/PageStore.ts";
+  import { ChevronLeft, ChevronRight } from "lucide-svelte";
+  import type { PageStore } from "$lib/dp/records/PageStore.ts";
+
+  interface Props {
+    store: PageStore;
+    showIfSinglePage?: boolean;
+    pagingFunc?: () => void;
+  }
 
   const {
     store,
     showIfSinglePage = false,
-  }: {
-    store: PageStore
-    showIfSinglePage?: boolean
-  } = $props();
+    pagingFunc = undefined,
+  }: Props = $props();
+
+  function prev() {
+    store.prev();
+    pagingFunc?.()
+  }
+
+  function next() {
+    store.next();
+    pagingFunc?.()
+  }
 </script>
 
 {#if showIfSinglePage || $store.totalPages > 1}
-  <div
-    class="paginator root"
-  >
+  <div class="paginator root">
     <div class="controls-wrapper rounded-container preset-outlined-card">
       <button
         class="nav-button rounded-container"
         type="button"
-        onclick={() => store.prev()}
+        onclick={prev}
         disabled={$store.page <= 1}
       >
-        <ChevronLeft/>
+        <ChevronLeft />
       </button>
 
       <span class="page-indicator">{$store.page}/{$store.totalPages}</span>
@@ -30,10 +42,10 @@
       <button
         class="nav-button rounded-container"
         type="button"
-        onclick={() => store.next()}
+        onclick={next}
         disabled={$store.page >= $store.totalPages}
       >
-        <ChevronRight/>
+        <ChevronRight />
       </button>
     </div>
   </div>
@@ -69,7 +81,8 @@
     padding: calc(var(--spacing) * 2);
   }
 
-  button:hover:not(:disabled), button:focus:not(:disabled) {
+  button:hover:not(:disabled),
+  button:focus:not(:disabled) {
     background-color: var(--color-primary-50-950);
     color: var(--color-primary-950-50);
   }

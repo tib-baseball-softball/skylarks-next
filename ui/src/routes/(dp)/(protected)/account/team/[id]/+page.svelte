@@ -25,7 +25,7 @@
 
   const { data }: PageProps = $props();
   const events = $derived(data.events);
-  const currentPage = $derived($events.page);
+  const currentPage = $derived($events?.page ?? 1);
   const announcementStore = $derived(data.announcementStore);
   const model = $derived(authSettings.record) as CustomAuthModel;
 
@@ -37,13 +37,17 @@
     page.url.searchParams.get("type") ?? "any",
   );
 
-  const reloadWithQuery = () => {
-    const queryString = `?timeframe=${showEvents}&page=${currentPage}&sort=${sorting}&type=${showTypes}`;
+  const queryString = $derived(`?timeframe=${showEvents}&page=${currentPage}&sort=${sorting}&type=${showTypes}`)
 
+  const reloadWithQuery = () => {
     goto(queryString, {
       noScroll: true,
     });
   };
+
+  function pushNavState() {
+    history.replaceState(null, "", queryString)
+  }
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
   const canEdit = $derived(
@@ -170,10 +174,14 @@
       <p class="hint">Only team members can participate in events.</p>
     {/if}
 
-    <EventGrid events={$events?.items} />
+    <EventGrid events={$events?.items ?? []} />
   </section>
 
-  <Paginator showIfSinglePage={false} store={events} />
+  <Paginator
+    showIfSinglePage={false}
+    store={events}
+    pagingFunc={pushNavState}
+  />
 
   <hr class="section-divider" />
 
