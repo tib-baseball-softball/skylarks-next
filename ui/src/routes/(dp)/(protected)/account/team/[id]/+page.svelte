@@ -1,30 +1,41 @@
 <script lang="ts">
   // @ts-ignore
   // noinspection ES6UnusedImports
-  import {Tabs} from "bits-ui";
-  import {Users} from "lucide-svelte";
-  import {goto} from "$app/navigation";
+  import { Tabs } from "bits-ui";
+  import { Users } from "lucide-svelte";
+  import { goto } from "$app/navigation";
   import AnnouncementSectionContent from "$lib/dp/components/announcements/AnnouncementSectionContent.svelte";
   import TeamAdminSection from "$lib/dp/components/team/TeamAdminSection.svelte";
   import TeamTeaserCard from "$lib/dp/components/team/TeamTeaserCard.svelte";
   import AnnouncementForm from "$lib/dp/components/forms/AnnouncementForm.svelte";
-  import {authSettings} from "$lib/dp/client.svelte.js";
-  import type {CustomAuthModel, EventType,} from "$lib/dp/types/ExpandedResponse.js";
+  import { authSettings } from "$lib/dp/client.svelte.js";
+  import type {
+    CustomAuthModel,
+    EventType,
+  } from "$lib/dp/types/ExpandedResponse.js";
   import Paginator from "$lib/dp/utility/Paginator.svelte";
-  import type {PageProps} from "./$types";
+  import type { PageProps } from "./$types";
   import JoinTeamSection from "$lib/dp/components/team/JoinTeamSection.svelte";
   import ICalSection from "$lib/dp/components/settings/ICalSection.svelte";
   import EventGrid from "$lib/dp/components/event/EventGrid.svelte";
+  import { page } from "$app/state";
 
-  const {data}: PageProps = $props();
+  type SortingValues = "asc" | "desc" | string;
+  type TypeValues = EventType | "any" | string;
+
+  const { data }: PageProps = $props();
   const events = $derived(data.events);
   const currentPage = $derived($events.page);
   const announcementStore = $derived(data.announcementStore);
   const model = $derived(authSettings.record) as CustomAuthModel;
 
-  let showEvents = $state("next");
-  let sorting: "asc" | "desc" | string = $state("asc");
-  let showTypes: EventType | "any" | string = $state("any");
+  let showEvents = $state(page.url.searchParams.get("timeframe") ?? "next");
+  let sorting: SortingValues = $state(
+    page.url.searchParams.get("sort") ?? "asc",
+  );
+  let showTypes: TypeValues = $state(
+    page.url.searchParams.get("type") ?? "any",
+  );
 
   const reloadWithQuery = () => {
     const queryString = `?timeframe=${showEvents}&page=${currentPage}&sort=${sorting}&type=${showTypes}`;
@@ -34,15 +45,10 @@
     });
   };
 
-  $effect.pre(() => {
-    console.log(showEvents);
-    reloadWithQuery();
-  });
-
   const authRecord = $derived(authSettings.record as CustomAuthModel);
   const canEdit = $derived(
     data.team?.admins.includes(authRecord?.id) ||
-    data.team?.expand?.club?.admins.includes(authRecord?.id),
+      data.team?.expand?.club?.admins.includes(authRecord?.id),
   );
   const isMember = $derived(authRecord?.teams.includes(data.team.id));
 </script>
@@ -57,7 +63,7 @@
     <section class="card-content">{@html data.team.description}</section>
   </article>
 
-  <TeamTeaserCard link={false} team={data.team}/>
+  <TeamTeaserCard link={false} team={data.team} />
 </div>
 
 {#if isMember || canEdit}
@@ -66,7 +72,7 @@
       <h2 class="h2">Announcements</h2>
     </header>
 
-    <AnnouncementSectionContent store={announcementStore}/>
+    <AnnouncementSectionContent store={announcementStore} />
 
     {#if canEdit}
       <div class="announcement-actions">
@@ -89,19 +95,19 @@
     <div class="filters-bar preset-outlined-card">
       <label class="filter-label">
         <span>Timeframe</span>
-        <Tabs.Root bind:value={showEvents}>
+        <Tabs.Root bind:value={showEvents} onValueChange={reloadWithQuery}>
           <Tabs.List class="tabs-list event-segment-container">
             <Tabs.Trigger
               class="tabs-trigger btn timeframe-trigger-next"
               data-testid="segment-item"
               value="next"
-            >Next
+              >Next
             </Tabs.Trigger>
             <Tabs.Trigger
               class="tabs-trigger btn timeframe-trigger-past"
               data-testid="segment-item"
               value="past"
-            >Past
+              >Past
             </Tabs.Trigger>
           </Tabs.List>
         </Tabs.Root>
@@ -109,52 +115,52 @@
 
       <label class="filter-label">
         <span>Sort</span>
-        <Tabs.Root bind:value={sorting}>
+        <Tabs.Root bind:value={sorting} onValueChange={reloadWithQuery}>
           <Tabs.List class="tabs-list event-segment-container">
             <Tabs.Trigger
               class="tabs-trigger btn"
               data-testid="segment-item"
-              value="asc">Ascending
-            </Tabs.Trigger
-            >
+              value="asc"
+              >Ascending
+            </Tabs.Trigger>
             <Tabs.Trigger
               class="tabs-trigger btn"
               data-testid="segment-item"
-              value="desc">Descending
-            </Tabs.Trigger
-            >
+              value="desc"
+              >Descending
+            </Tabs.Trigger>
           </Tabs.List>
         </Tabs.Root>
       </label>
 
       <label class="filter-label">
         <span>Type</span>
-        <Tabs.Root bind:value={showTypes}>
+        <Tabs.Root bind:value={showTypes} onValueChange={reloadWithQuery}>
           <Tabs.List class="tabs-list event-segment-container type-tabs">
             <Tabs.Trigger
               class="tabs-trigger btn"
               data-testid="segment-item"
-              value="any">All
-            </Tabs.Trigger
-            >
+              value="any"
+              >All
+            </Tabs.Trigger>
             <Tabs.Trigger
               class="tabs-trigger btn"
               data-testid="segment-item"
-              value="game">Game
-            </Tabs.Trigger
-            >
+              value="game"
+              >Game
+            </Tabs.Trigger>
             <Tabs.Trigger
               class="tabs-trigger btn"
               data-testid="segment-item"
-              value="practice">Practice
-            </Tabs.Trigger
-            >
+              value="practice"
+              >Practice
+            </Tabs.Trigger>
             <Tabs.Trigger
               class="tabs-trigger btn"
               data-testid="segment-item"
-              value="misc">Other
-            </Tabs.Trigger
-            >
+              value="misc"
+              >Other
+            </Tabs.Trigger>
           </Tabs.List>
         </Tabs.Root>
       </label>
@@ -164,13 +170,12 @@
       <p class="hint">Only team members can participate in events.</p>
     {/if}
 
-    <EventGrid events={$events?.items}/>
-
+    <EventGrid events={$events?.items} />
   </section>
 
-  <Paginator showIfSinglePage={false} store={events}/>
+  <Paginator showIfSinglePage={false} store={events} />
 
-  <hr class="section-divider"/>
+  <hr class="section-divider" />
 
   <section class="links-section">
     <header>
@@ -182,13 +187,13 @@
         class="btn preset-tonal-tertiary border-tertiary"
         href="/account/team/{data.team.id}/members"
       >
-        <Users/>
+        <Users />
         <span>Player List</span>
       </a>
     </div>
   </section>
 
-  <hr class="section-divider"/>
+  <hr class="section-divider" />
 
   <article class="cal-card card preset-outlined-card">
     <ICalSection link={`${model?.ical_link}?team=${data.team.id}`}>
@@ -197,21 +202,18 @@
       {/snippet}
 
       {#snippet subheader()}
-        <p>
-          This link includes all events for this team,
-          going back one year.
-        </p>
+        <p>This link includes all events for this team, going back one year.</p>
       {/snippet}
     </ICalSection>
   </article>
 
   {#if canEdit}
-    <hr class="admin-divider"/>
+    <hr class="admin-divider" />
 
-    <TeamAdminSection team={data.team} eventSeries={data.eventSeries}/>
+    <TeamAdminSection team={data.team} eventSeries={data.eventSeries} />
   {/if}
 {:else}
-  <JoinTeamSection {authRecord} teamID={data.team.id}/>
+  <JoinTeamSection {authRecord} teamID={data.team.id} />
 {/if}
 
 <style>
