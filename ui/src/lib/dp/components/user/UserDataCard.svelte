@@ -11,7 +11,7 @@
   const {model}: Props = $props();
 </script>
 
-<div class="card preset-tonal-surface user-card shadow-lg">
+<div class="card preset-outlined-card user-card shadow">
   <header class="card-header">
     <h2 class="h4 card-title">User Data</h2>
   </header>
@@ -44,7 +44,7 @@
 
   <footer class="card-footer">
     <p>Edit User Data:</p>
-    <a class="btn preset-tonal-primary border border-primary-500" href="/account/{model.id}/settings"
+    <a class="btn preset-tonal-primary border border-primary-500" href="/account/settings"
        title="Go to User Settings">User Settings</a>
   </footer>
 </div>

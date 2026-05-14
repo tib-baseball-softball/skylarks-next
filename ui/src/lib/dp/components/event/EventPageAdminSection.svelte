@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {CalendarArrowDown, CalendarPlus, Edit, Info} from "lucide-svelte";
+  import {CalendarArrowDown, CalendarPlus, Info, SquarePen} from "lucide-svelte";
   import {goto} from "$app/navigation";
   import EventForm from "$lib/dp/components/forms/EventForm.svelte";
   import DeleteButton from "$lib/dp/components/utils/DeleteButton.svelte";
@@ -38,7 +38,7 @@
 <h2 class="admin-title">Admin Section</h2>
 
 <div class="admin-grid">
-  <div class="card admin-card preset-outlined-surface-500">
+  <div class="card admin-card preset-outlined-card">
     <header class="card-header">
       <h3 class="card-title">Event Details</h3>
     </header>
@@ -70,7 +70,7 @@
     </section>
   </div>
 
-  <div class="card admin-card preset-outlined-surface-500">
+  <div class="card admin-card preset-outlined-card">
     <header class="card-header">
       <h3 class="card-title">Add Guest player</h3>
     </header>
@@ -86,12 +86,12 @@
             type="text"
           />
         </label>
-        <button class="btn preset-tonal-surface" type="submit">Submit</button>
+        <button class="btn preset-filled-secondary-500 submit-guest" type="submit">Submit</button>
       </form>
     </section>
   </div>
 
-  <div class="card admin-card preset-outlined-surface-500">
+  <div class="card admin-card preset-outlined-card">
     <header class="card-header">
       <h3 class="card-title">Actions</h3>
     </header>
@@ -103,10 +103,10 @@
           clubID={event?.expand?.team?.club ?? ""}
           event={event}
           teamID={event.team}
-          triggerVariant="tonal-surface"
+          triggerVariant="filled-secondary"
         >
           {#snippet triggerContent()}
-            <Edit/>
+            <SquarePen/>
             <span>Edit Event</span>
           {/snippet}
         </EventForm>
@@ -123,7 +123,7 @@
   </div>
 </div>
 
-<style lang="postcss">
+<style>
   .admin-divider {
     margin-top: calc(var(--spacing) * 6);
   }
@@ -137,15 +137,15 @@
   .admin-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: calc(var(--spacing) * 2);
+    gap: calc(var(--spacing) * 4);
 
     @media (min-width: 48rem) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: calc(var(--spacing) * 6);
     }
 
     @media (min-width: 64rem) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: calc(var(--spacing) * 3);
     }
   }
 
@@ -199,11 +199,9 @@
     }
   }
 
-  :global(.border-surface) {
-    border: 1px solid var(--color-surface-500) !important;
-  }
-
-  :global(.border-error) {
-    border: 1px solid var(--color-error-500) !important;
+  @media (prefers-color-scheme: dark) {
+    .submit-guest {
+      border: 1px solid white
+    }
   }
 </style>

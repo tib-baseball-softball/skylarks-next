@@ -2,14 +2,19 @@
 /* Horizontal Rule */
 hr,
 .hr {
-  border-color: light-dark(var(--color-surface-200), var(--color-surface-100));
-  border-top-width: 1px;
-  display: block;
+  border: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-border),
+    transparent
+  );
 }
 
 /* Vertical Rule */
 .vr {
-  border-color: light-dark(var(--color-surface-200), var(--color-surface-100));
+  border-color: var(--color-border);
   border-left-width: 1px;
   display: inline-block;
 }

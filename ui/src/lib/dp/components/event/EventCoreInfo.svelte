@@ -50,7 +50,7 @@
       <MapPin size="18"/>
       {#if event?.expand?.location}
         <p>
-          {event?.expand?.location.address_addon}, {event?.expand?.location
+          {event?.expand?.location.address_addon || event?.expand?.location.name || "No field name provided"}, {event?.expand?.location
           .city}
         </p>
       {:else}

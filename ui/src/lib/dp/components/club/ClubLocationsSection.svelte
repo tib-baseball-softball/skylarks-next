@@ -1,16 +1,13 @@
 <script lang="ts">
-  import { invalidate } from "$app/navigation";
+  import {invalidate} from "$app/navigation";
   import LocationForm from "$lib/dp/components/forms/LocationForm.svelte";
   import DeleteButton from "$lib/dp/components/utils/DeleteButton.svelte";
-  import { authSettings, client } from "$lib/dp/client.svelte.js";
-  import type {
-    CustomAuthModel,
-    ExpandedClub,
-  } from "$lib/dp/types/ExpandedResponse.ts";
-  import type { LocationsResponse } from "$lib/dp/types/pb-types.ts";
-  import { MapUtility } from "$lib/dp/service/MapUtility.ts";
-  import { Map } from "lucide-svelte";
-  import { Collection } from "$lib/dp/enum/Collection.ts";
+  import {authSettings, client} from "$lib/dp/client.svelte.js";
+  import type {CustomAuthModel, ExpandedClub,} from "$lib/dp/types/ExpandedResponse.ts";
+  import type {LocationsResponse} from "$lib/dp/types/pb-types.ts";
+  import {MapUtility} from "$lib/dp/service/MapUtility.ts";
+  import {Map} from "lucide-svelte";
+  import {Collection} from "$lib/dp/enum/Collection.ts";
 
   interface Props {
     club: ExpandedClub;
@@ -19,7 +16,7 @@
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
-  const { club, locations }: Props = $props();
+  const {club, locations}: Props = $props();
 
   function locationDeleteAction(id: string) {
     client.collection(Collection.Locations).delete(id);
@@ -27,7 +24,7 @@
   }
 </script>
 
-<ul class="preset-tonal-surface rounded-base shadow-xl">
+<ul class="preset-outlined-card rounded-base shadow">
   {#each locations as location, index (location.id)}
     <li class="location-grid">
       <h3>
@@ -52,7 +49,7 @@
           title="open location in Google Maps"
           target="_blank"
         >
-          <Map />
+          <Map/>
         </a>
 
         {#if club?.admins.includes(authRecord.id)}
@@ -74,7 +71,7 @@
     </li>
 
     {#if index < locations.length - 1}
-      <hr />
+      <hr/>
     {/if}
   {:else}
     <p>This club doesn't have saved locations yet.</p>
@@ -125,7 +122,7 @@
   hr {
     margin-block: calc(var(--spacing) * 2);
   }
-  
+
   .add-button-wrapper {
     margin-block: calc(var(--spacing) * 4);
   }

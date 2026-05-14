@@ -1,8 +1,4 @@
 <script lang="ts">
-  import CurrentMatchesOverviewCard from "$lib/tib/components/match/CurrentMatchesOverviewCard.svelte";
-  import type {PageProps} from "./$types";
-
-  let {data}: PageProps = $props();
 </script>
 
 <div class="hero-wrapper">
@@ -23,19 +19,14 @@
       The core functionality of this app (getting up-to-date information about games, standings and public club
       information) is available without logging in.
     </p>
+    <p class="not-prose">
+      <a class="btn preset-tonal-primary border-primary" href="/bsm" title="BSM Data">Go to game data</a>
+    </p>
     <p>To access internal team information and participate in team activities, please
       <a href="/login">
         log in to your account.
       </a>
     </p>
-  </section>
-
-  <section id="Scores">
-    <CurrentMatchesOverviewCard
-      matchesCurrent={data.matchesCurrent}
-      matchesNext={data.matchesNext}
-      matchesPrevious={data.matchesPrevious}
-    />
   </section>
 
 </div>
