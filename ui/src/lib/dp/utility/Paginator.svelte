@@ -2,6 +2,7 @@
   import { ChevronLeft, ChevronRight } from "lucide-svelte";
   import type { PageStore } from "$lib/dp/records/PageStore.ts";
   import { page } from "$app/state";
+  import { goto } from "$app/navigation";
 
   interface Props {
     store: PageStore;
@@ -26,7 +27,11 @@
         newURL.searchParams.set("page", String(currentPage - 1));
         break;
     }
-    history.pushState(null, "", newURL);
+    goto(newURL, {
+      noScroll: true,
+      keepFocus: true,
+      invalidateAll: false
+    })
   }
 
   function prev() {
