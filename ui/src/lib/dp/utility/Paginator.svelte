@@ -1,27 +1,42 @@
 <script lang="ts">
   import { ChevronLeft, ChevronRight } from "lucide-svelte";
   import type { PageStore } from "$lib/dp/records/PageStore.ts";
+  import { page } from "$app/state";
 
   interface Props {
     store: PageStore;
     showIfSinglePage?: boolean;
-    pagingFunc?: () => void;
   }
 
   const {
     store,
     showIfSinglePage = false,
-    pagingFunc = undefined,
   }: Props = $props();
+
+  type PagingAction = "increment" | "decrement";
+
+  function pushNavState(action: PagingAction) {
+    const newURL = page.url;
+    const currentPage = $store.page
+    switch (action) {
+      case "increment":
+        newURL.searchParams.set("page", String(currentPage + 1));
+        break;
+      case "decrement":
+        newURL.searchParams.set("page", String(currentPage - 1));
+        break;
+    }
+    history.pushState(null, "", newURL);
+  }
 
   function prev() {
     store.prev();
-    pagingFunc?.()
+    pushNavState("decrement")
   }
 
   function next() {
     store.next();
-    pagingFunc?.()
+    pushNavState("increment")
   }
 </script>
 
