@@ -17,11 +17,20 @@ const (
 	VAPIDPrivateKeyEnvName = "VAPID_PRIVATE_KEY"
 )
 
-// PushMessage represents the raw data for a push notification message that is encoded into the JSON payload.
+type PushAction struct {
+	Action   string `json:"action"`
+	Title    string `json:"title"`
+	Navigate string `json:"navigate"`
+}
+
+// PushMessage represents the raw data for a push notification message that is encoded into the JSON payload. Closely
+// follows the DOM type `NotificationOptions`.
 type PushMessage struct {
-	Title string `json:"title"`
-	Body  string `json:"body"`
-	Tag   string `json:"tag"`
+	Title   string         `json:"title"`
+	Body    string         `json:"body"`
+	Data    map[string]any `json:"data"`
+	Tag     string         `json:"tag"`
+	Actions []PushAction   `json:"actions"`
 }
 
 // PushService defines the app-wide interface for sending push notifications.
@@ -87,6 +96,12 @@ func (p PushServiceImpl) handleTestPush(sub *webpush.Subscription) error {
 		Title: "Hello there",
 		Body:  "Real men test in production",
 		Tag:   "Test Tag",
+		Actions: []PushAction{
+			{Action: "test", Title: "Example Action", Navigate: "/account"},
+		},
+		Data: map[string]any{
+			"navigate": "/account",
+		},
 	}
 
 	return p.SendPushMessage(&msg, sub)

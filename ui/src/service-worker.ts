@@ -48,18 +48,36 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(deleteOldCaches());
 });
 
-type PushData = Extension<NotificationOptions, { title: string }>
+type NotificationAction = {
+  action: string;
+  title: string;
+  navigate?: string;
+}
+
+type PushOptions = Extension<NotificationOptions, {
+  title: string,
+  actions?: NotificationAction[]
+}>
 
 self.addEventListener('push', function (event) {
-  const data = event.data?.json() as PushData;
-  console.log('Received a push message', data);
+  const options = event.data?.json() as PushOptions;
+  console.log('Received a push message', options);
 
   event.waitUntil(
-    self.registration.showNotification(data.title, {
-      body: data.body,
-      tag: data.tag,
+    self.registration.showNotification(options.title, {
+      body: options.body,
+      tag: options.tag,
+      actions: options.actions,
     })
   );
+});
+
+self.addEventListener("notificationclick", async (event) => {
+  console.log('Notification clicked', event.action, event.notification);
+
+  if (event.action === "test") {
+    await self.clients.openWindow(event.notification.data.navigate);
+  }
 });
 
 self.addEventListener('fetch', (event) => {
