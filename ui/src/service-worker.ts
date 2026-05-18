@@ -12,6 +12,7 @@
 
 import {build, files, version} from '$service-worker';
 import type {Extension} from "./lib/dp/types/ExpandedResponse";
+import {dev} from "$app/environment";
 
 // This gives `self` the correct types
 const self = globalThis.self as unknown as ServiceWorkerGlobalScope;
@@ -60,22 +61,32 @@ type PushOptions = Extension<NotificationOptions, {
 }>
 
 self.addEventListener('push', function (event) {
-  const options = event.data?.json() as PushOptions;
-  console.log('Received a push message', options);
+  const payload = event.data?.json() as PushOptions;
+  if (dev) {
+    console.log('Received a push message', payload);
+  }
+
+  const options: NotificationOptions = {
+    body: payload.body,
+    tag: payload.tag,
+    data: payload.data,
+    // @ts-expect-error - the property is not present on NotificationOptions but is definitely used in Chromium
+    actions: payload.actions,
+  };
 
   event.waitUntil(
-    self.registration.showNotification(options.title, {
-      body: options.body,
-      tag: options.tag,
-      actions: options.actions,
-    })
+    self.registration.showNotification(payload.title, options)
   );
 });
 
 self.addEventListener("notificationclick", async (event) => {
-  console.log('Notification clicked', event.action, event.notification);
+  if (dev) {
+    console.log('Notification clicked, action:', event.action);
+    console.log('Notification clicked, notification:', event.notification);
+  }
 
-  if (event.action === "test") {
+  if (event.action === "link") {
+    event.notification.close();
     await self.clients.openWindow(event.notification.data.navigate);
   }
 });
