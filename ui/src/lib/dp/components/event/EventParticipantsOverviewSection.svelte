@@ -4,9 +4,10 @@
   import ExternalParticipationWrapper from "$lib/dp/components/event/ExternalParticipationWrapper.svelte";
   import IndividualParticipationEditButton from "$lib/dp/components/event/IndividualParticipationEditButton.svelte";
   import {authSettings, client} from "$lib/dp/client.svelte.js";
-  import type {CustomAuthModel, ExpandedEvent} from "$lib/dp/types/ExpandedResponse.ts";
+  import type {CustomAuthModel, ExpandedEvent, ExpandedParticipation} from "$lib/dp/types/ExpandedResponse.ts";
   import type {EventsUpdate} from "$lib/dp/types/pb-types.ts";
   import {Collection} from "$lib/dp/enum/Collection.ts";
+  import {dev} from "$app/environment";
 
   interface Props {
     event: ExpandedEvent;
@@ -29,6 +30,25 @@
       guests: newGuestPlayerList.join(),
     });
   }
+
+  let currentDraggedParticipation: ExpandedParticipation | null = $state(null);
+
+  function ondragover(event: DragEvent) {
+    if (event.dataTransfer?.types?.includes("participation")) {
+      event.preventDefault();
+    }
+  }
+
+  function ondragstart(event: DragEvent, participation: ExpandedParticipation) {
+    if (!event.dataTransfer) return;
+
+    event.dataTransfer.effectAllowed = "move";
+    currentDraggedParticipation = participation;
+
+    if (dev) {
+      console.log('Drag started for participation:', participation);
+    }
+  }
 </script>
 
 <h2 class="participants-title">Participants</h2>
@@ -40,10 +60,10 @@
     </header>
 
     <section>
-      <ul class="participation-content">
+      <ul class="participation-content" {ondragover}>
         {#key event.participations.in}
-          {#each event.participations.in as inResponse}
-            <li draggable="true" in:fade|global={{delay: 200}}>
+          {#each event.participations.in as inResponse (inResponse.id)}
+            <li draggable="true" in:fade|global={{delay: 200}} ondragstart={(event) => ondragstart(event, inResponse)}>
               <IndividualParticipationEditButton
                 participation={inResponse}
                 {isAdmin}
@@ -80,9 +100,9 @@
     </header>
 
     <section>
-      <ul class="participation-content">
+      <ul class="participation-content" {ondragover}>
         {#key event.participations.maybe}
-          {#each event.participations.maybe as maybeResponse}
+          {#each event.participations.maybe as maybeResponse (maybeResponse.id)}
             <li draggable="true" in:fade|global={{delay: 200}}>
               <IndividualParticipationEditButton
                 participation={maybeResponse}
@@ -103,9 +123,9 @@
     </header>
 
     <section>
-      <ul class="participation-content">
+      <ul class="participation-content" {ondragover}>
         {#key event.participations.out}
-          {#each event.participations.out as outResponse}
+          {#each event.participations.out as outResponse (outResponse.id)}
             <li draggable="true" in:fade|global={{delay: 200}}>
               <IndividualParticipationEditButton
                 participation={outResponse}
