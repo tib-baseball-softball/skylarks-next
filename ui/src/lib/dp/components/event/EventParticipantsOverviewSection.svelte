@@ -6,6 +6,7 @@
   import {authSettings, client} from "$lib/dp/client.svelte.js";
   import type {CustomAuthModel, ExpandedEvent} from "$lib/dp/types/ExpandedResponse.ts";
   import type {EventsUpdate} from "$lib/dp/types/pb-types.ts";
+  import {Collection} from "$lib/dp/enum/Collection.ts";
 
   interface Props {
     event: ExpandedEvent;
@@ -24,7 +25,7 @@
 
   async function removeGuestPlayer(playerToRemove: string) {
     const newGuestPlayerList = displayedGuestPlayers.filter((player) => player !== playerToRemove);
-    await client.collection("events").update<EventsUpdate>(event.id, {
+    await client.collection(Collection.Events).update<EventsUpdate>(event.id, {
       guests: newGuestPlayerList.join(),
     });
   }
@@ -38,35 +39,37 @@
       <h3 class="h4">In</h3>
     </header>
 
-    <section class="participation-content">
-      {#key event.participations.in}
-        {#each event.participations.in as inResponse}
-          <div in:fade|global={{delay: 200}}>
-            <IndividualParticipationEditButton
-              participation={inResponse}
-              {isAdmin}
-              classes="chip preset-tonal-success border-success"
-            />
-          </div>
-        {/each}
+    <section>
+      <ul class="participation-content">
+        {#key event.participations.in}
+          {#each event.participations.in as inResponse}
+            <li draggable="true" in:fade|global={{delay: 200}}>
+              <IndividualParticipationEditButton
+                participation={inResponse}
+                {isAdmin}
+                classes="chip preset-tonal-success border-success"
+              />
+            </li>
+          {/each}
 
-        {#each displayedGuestPlayers as guestPlayer}
-          {#if guestPlayer /* can be an empty string */}
-            <div in:fade|global={{delay: 200}}>
-              <button
-                aria-label="guest player name, click removes the player from the event"
-                class="chip guest-chip preset-tonal border-surface"
-                onclick={() => removeGuestPlayer(guestPlayer)}
-              >
-                {guestPlayer}
-                {#if isAdmin}
-                  <Trash size="10"/>
-                {/if}
-              </button>
-            </div>
-          {/if}
-        {/each}
-      {/key}
+          {#each displayedGuestPlayers as guestPlayer}
+            {#if guestPlayer /* can be an empty string */}
+              <li in:fade|global={{delay: 200}}>
+                <button
+                  aria-label="guest player name, click removes the player from the event"
+                  class="chip guest-chip preset-tonal border-surface"
+                  onclick={() => removeGuestPlayer(guestPlayer)}
+                >
+                  {guestPlayer}
+                  {#if isAdmin}
+                    <Trash size="10"/>
+                  {/if}
+                </button>
+              </li>
+            {/if}
+          {/each}
+        {/key}
+      </ul>
     </section>
   </article>
 
@@ -76,18 +79,20 @@
       <h3 class="h4">Maybe</h3>
     </header>
 
-    <section class="participation-content">
-      {#key event.participations.maybe}
-        {#each event.participations.maybe as maybeResponse}
-          <div in:fade|global={{delay: 200}}>
-            <IndividualParticipationEditButton
-              participation={maybeResponse}
-              {isAdmin}
-              classes="chip preset-tonal-warning border-warning"
-            />
-          </div>
-        {/each}
-      {/key}
+    <section>
+      <ul class="participation-content">
+        {#key event.participations.maybe}
+          {#each event.participations.maybe as maybeResponse}
+            <li draggable="true" in:fade|global={{delay: 200}}>
+              <IndividualParticipationEditButton
+                participation={maybeResponse}
+                {isAdmin}
+                classes="chip preset-tonal-warning border-warning"
+              />
+            </li>
+          {/each}
+        {/key}
+      </ul>
     </section>
   </article>
 
@@ -97,18 +102,20 @@
       <h3 class="h4">Out</h3>
     </header>
 
-    <section class="participation-content">
-      {#key event.participations.out}
-        {#each event.participations.out as outResponse}
-          <div in:fade|global={{delay: 200}}>
-            <IndividualParticipationEditButton
-              participation={outResponse}
-              {isAdmin}
-              classes="chip preset-tonal-error border-error"
-            />
-          </div>
-        {/each}
-      {/key}
+    <section>
+      <ul class="participation-content">
+        {#key event.participations.out}
+          {#each event.participations.out as outResponse}
+            <li draggable="true" in:fade|global={{delay: 200}}>
+              <IndividualParticipationEditButton
+                participation={outResponse}
+                {isAdmin}
+                classes="chip preset-tonal-error border-error"
+              />
+            </li>
+          {/each}
+        {/key}
+      </ul>
     </section>
   </article>
 </section>
@@ -120,19 +127,21 @@
       <h3 class="h4">No Response</h3>
     </header>
 
-    <section class="participation-content">
-      {#key event.participations.unspecified}
-        {#each event.participations.unspecified as ghostResponse}
-          <div in:fade|global={{delay: 200}}>
-            <ExternalParticipationWrapper
-              dto={ghostResponse}
-              eventID={event.id}
-              {isAdmin}
-              classes="chip preset-outlined"
-            />
-          </div>
-        {/each}
-      {/key}
+    <section>
+      <ul class="participation-content">
+        {#key event.participations.unspecified}
+          {#each event.participations.unspecified as ghostResponse}
+            <li draggable="true" in:fade|global={{delay: 200}}>
+              <ExternalParticipationWrapper
+                dto={ghostResponse}
+                eventID={event.id}
+                {isAdmin}
+                classes="chip preset-outlined"
+              />
+            </li>
+          {/each}
+        {/key}
+      </ul>
     </section>
   </article>
 </section>
