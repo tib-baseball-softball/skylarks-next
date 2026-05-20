@@ -4,10 +4,17 @@
   import ExternalParticipationWrapper from "$lib/dp/components/event/ExternalParticipationWrapper.svelte";
   import IndividualParticipationEditButton from "$lib/dp/components/event/IndividualParticipationEditButton.svelte";
   import {authSettings, client} from "$lib/dp/client.svelte.js";
-  import type {CustomAuthModel, ExpandedEvent, ExpandedParticipation} from "$lib/dp/types/ExpandedResponse.ts";
+  import type {
+    CustomAuthModel,
+    ExpandedEvent,
+    ExpandedParticipation,
+    ParticipationType
+  } from "$lib/dp/types/ExpandedResponse.ts";
   import type {EventsUpdate} from "$lib/dp/types/pb-types.ts";
   import {Collection} from "$lib/dp/enum/Collection.ts";
-  import {dev} from "$app/environment";
+  import {sendParticipationData} from "$lib/dp/utility/sendParticipationData.ts";
+  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
+  import {invalidate} from "$app/navigation";
 
   interface Props {
     event: ExpandedEvent;
@@ -43,24 +50,43 @@
     if (!event.dataTransfer) return;
 
     event.dataTransfer.effectAllowed = "move";
+    event.dataTransfer.setData("participation", participation.id);
     currentDraggedParticipation = participation;
+  }
 
-    if (dev) {
-      console.log('Drag started for participation:', participation);
+  async function ondrop(event: DragEvent, type: ParticipationType) {
+    event.preventDefault();
+    console.log('Drop event triggered');
+
+    if (currentDraggedParticipation === null) {
+      return;
     }
+
+    currentDraggedParticipation.state = type;
+
+    try {
+      await sendParticipationData(currentDraggedParticipation);
+    } catch (e) {
+      toastController.trigger({
+        message: 'Failed to send participation data',
+        background: 'preset-filled-error-500',
+      });
+    }
+    currentDraggedParticipation = null;
+    await invalidate("event:single");
   }
 </script>
 
 <h2 class="participants-title">Participants</h2>
 <section class="participants-grid">
-  <article class="card participant-card preset-tonal-success">
+  <article class="card participant-card preset-tonal-success" ondrop={(e) => ondrop(e, "in")} {ondragover}>
     <header class="participation-header">
       <span><Check/></span>
       <h3 class="h4">In</h3>
     </header>
 
     <section>
-      <ul class="participation-content" {ondragover}>
+      <ul class="participation-content">
         {#key event.participations.in}
           {#each event.participations.in as inResponse (inResponse.id)}
             <li draggable="true" in:fade|global={{delay: 200}} ondragstart={(event) => ondragstart(event, inResponse)}>
@@ -93,17 +119,18 @@
     </section>
   </article>
 
-  <article class="card participant-card preset-tonal-warning">
+  <article class="card participant-card preset-tonal-warning" ondrop={(e) => ondrop(e, "maybe")} {ondragover}>
     <header class="participation-header">
       <span><CircleQuestionMark/></span>
       <h3 class="h4">Maybe</h3>
     </header>
 
     <section>
-      <ul class="participation-content" {ondragover}>
+      <ul class="participation-content">
         {#key event.participations.maybe}
           {#each event.participations.maybe as maybeResponse (maybeResponse.id)}
-            <li draggable="true" in:fade|global={{delay: 200}}>
+            <li draggable="true" in:fade|global={{delay: 200}}
+                ondragstart={(event) => ondragstart(event, maybeResponse)}>
               <IndividualParticipationEditButton
                 participation={maybeResponse}
                 {isAdmin}
@@ -116,17 +143,17 @@
     </section>
   </article>
 
-  <article class="card participant-card preset-tonal-error">
+  <article class="card participant-card preset-tonal-error" ondrop={(e) => ondrop(e, "out")} {ondragover}>
     <header class="participation-header">
       <span><X/></span>
       <h3 class="h4">Out</h3>
     </header>
 
     <section>
-      <ul class="participation-content" {ondragover}>
+      <ul class="participation-content">
         {#key event.participations.out}
           {#each event.participations.out as outResponse (outResponse.id)}
-            <li draggable="true" in:fade|global={{delay: 200}}>
+            <li draggable="true" in:fade|global={{delay: 200}} ondragstart={(event) => ondragstart(event, outResponse)}>
               <IndividualParticipationEditButton
                 participation={outResponse}
                 {isAdmin}
