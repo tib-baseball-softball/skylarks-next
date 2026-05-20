@@ -15,6 +15,7 @@
   import {sendParticipationData} from "$lib/dp/utility/sendParticipationData.ts";
   import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
   import {invalidate} from "$app/navigation";
+  import {participationDTOToExpandedParticipation} from "$lib/dp/types/UserParticipationDTO.ts";
 
   interface Props {
     event: ExpandedEvent;
@@ -47,7 +48,9 @@
   }
 
   function ondragstart(event: DragEvent, participation: ExpandedParticipation) {
-    if (!event.dataTransfer) return;
+    if (!event.dataTransfer) {
+      return;
+    }
 
     event.dataTransfer.effectAllowed = "move";
     event.dataTransfer.setData("participation", participation.id);
@@ -178,7 +181,8 @@
       <ul class="participation-content">
         {#key event.participations.unspecified}
           {#each event.participations.unspecified as ghostResponse}
-            <li draggable="true" in:fade|global={{delay: 200}}>
+            <li draggable="true" in:fade|global={{delay: 200}}
+                ondragstart={(e) => ondragstart(e, participationDTOToExpandedParticipation(ghostResponse, event.id))}>
               <ExternalParticipationWrapper
                 dto={ghostResponse}
                 eventID={event.id}
