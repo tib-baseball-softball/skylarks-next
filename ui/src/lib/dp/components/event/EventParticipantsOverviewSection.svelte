@@ -61,7 +61,7 @@
     event.preventDefault();
     console.log('Drop event triggered');
 
-    if (currentDraggedParticipation === null) {
+    if (currentDraggedParticipation === null || currentDraggedParticipation.state === type) {
       return;
     }
 
