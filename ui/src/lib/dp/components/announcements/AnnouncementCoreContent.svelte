@@ -50,8 +50,8 @@
   }
 
   .body-text {
-    line-clamp: 5;
-    -webkit-line-clamp: 5;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
   }
 
   .title {

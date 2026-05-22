@@ -8,6 +8,9 @@
   import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
   import type {CustomAuthModel, ExpandedAnnouncement,} from "$lib/dp/types/ExpandedResponse.ts";
   import type {AnnouncementsResponse, ClubsResponse, TeamsResponse,} from "$lib/dp/types/pb-types.ts";
+  import RichTextEditor from "$lib/dp/components/rte/RichTextEditor.svelte";
+  import {Collection} from "$lib/dp/enum/Collection.ts";
+  import {parseMarkdown} from "$lib/dp/utility/parseMarkdown.ts";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
@@ -70,14 +73,16 @@
 
     let result: AnnouncementsResponse | null = null;
 
+    form.bodytext = parseMarkdown(form.bodytext ?? "");
+
     try {
       if (form.id) {
         result = await client
-          .collection("announcements")
+          .collection(Collection.Announcements)
           .update<AnnouncementsResponse>(form.id, form);
       } else {
         result = await client
-          .collection("announcements")
+          .collection(Collection.Announcements)
           .create<AnnouncementsResponse>(form);
       }
     } catch {
@@ -193,13 +198,13 @@
 
         <label class="label field-wide">
           <span>Announcement Text</span>
-          <textarea
-            bind:value={form.bodytext}
-            class="textarea"
-            name="desc"
-            required
-            rows="10"
-          ></textarea>
+
+          {#if form.bodytext !== undefined}
+            <RichTextEditor
+              bind:value={form.bodytext}
+            />
+          {/if}
+
         </label>
 
         <fieldset class="field-wide rounded-base">

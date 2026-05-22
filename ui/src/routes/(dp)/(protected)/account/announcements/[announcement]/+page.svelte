@@ -8,6 +8,7 @@
   import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
   import type {PageProps} from "./$types";
   import {appLocale} from "$lib/dp/locale.svelte.ts";
+  import {Collection} from "$lib/dp/enum/Collection.ts";
 
   const {data}: PageProps = $props();
   const announcement = $derived(data.announcement);
@@ -19,7 +20,7 @@
   );
 
   function deleteAction(id: string) {
-    client.collection("announcements").delete(id);
+    client.collection(Collection.Announcements).delete(id);
     history.back();
   }
 
