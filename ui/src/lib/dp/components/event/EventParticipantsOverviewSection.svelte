@@ -16,6 +16,8 @@
   import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
   import {invalidate} from "$app/navigation";
   import {participationDTOToExpandedParticipation} from "$lib/dp/types/UserParticipationDTO.ts";
+  //@ts-ignore - library does not provide types
+  import {enableDragDropTouch} from "@dragdroptouch/drag-drop-touch";
 
   interface Props {
     event: ExpandedEvent;
@@ -40,6 +42,8 @@
   }
 
   let currentDraggedParticipation: ExpandedParticipation | null = $state(null);
+
+  enableDragDropTouch();
 
   function ondragover(event: DragEvent) {
     if (event.dataTransfer?.types?.includes("participation")) {

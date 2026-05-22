@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@dragdroptouch/drag-drop-touch':
+        specifier: ^2.0.3
+        version: 2.0.3
     devDependencies:
       '@biomejs/biome':
         specifier: 2.4.12
@@ -149,6 +153,9 @@ packages:
   '@dotenvx/dotenvx@1.66.0':
     resolution: {integrity: sha512-qlQFhHUjhRDybrinqLAD0MClVZDOrsq80O8eD5iSjz3Qa/4f3Jg7SQrOaSobrRyP1QaWIYLGtGpj2c7H0D8NUw==}
     hasBin: true
+
+  '@dragdroptouch/drag-drop-touch@2.0.3':
+    resolution: {integrity: sha512-4Yv1+S2Yxs/5iYLZyZYobAlCvIJPN6TYBjvJDyI9kH30GfBxA+ffHgKK2l00EyyBlUpB10j8BWAbRsgXRtBbPw==}
 
   '@ecies/ciphers@0.2.6':
     resolution: {integrity: sha512-patgsRPKGkhhoBjETV4XxD0En4ui5fbX0hzayqI3M8tvNMGUoUvmyYAIWwlxBc1KX5cturfqByYdj5bYGRpN9g==}
@@ -1232,6 +1239,8 @@ snapshots:
       picomatch: 4.0.4
       which: 4.0.0
       yocto-spinner: 1.2.0
+
+  '@dragdroptouch/drag-drop-touch@2.0.3': {}
 
   '@ecies/ciphers@0.2.6(@noble/ciphers@1.3.0)':
     dependencies:

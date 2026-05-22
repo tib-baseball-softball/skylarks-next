@@ -53,5 +53,8 @@
     "typed-pocketbase": {
       "pocketbase": "$pocketbase"
     }
+  },
+  "dependencies": {
+    "@dragdroptouch/drag-drop-touch": "^2.0.3"
   }
 }
