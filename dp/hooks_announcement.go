@@ -71,6 +71,16 @@ func PushTeamOrClubAnnouncement(app core.App, coll string, announcement *Announc
 			Title: "New Announcement in " + proxy.Name(),
 			Body:  announcement.Title(),
 			Tag:   "team_club_new_announcement",
+			Actions: []PushActionData{
+				{
+					Action: PushActionLink,
+					Title:  "Read Announcement",
+					Type:   "button",
+				},
+			},
+			Data: map[string]any{
+				"navigate": "/account/announcements/" + announcement.Id, // TODO: centralized place for frontend routes in backend context
+			},
 		}
 		err := ps.SendPushMessage(msg, new(sub.ToWebPushSubscription()))
 		if err != nil {

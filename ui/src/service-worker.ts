@@ -12,6 +12,8 @@
 
 import {build, files, version} from '$service-worker';
 import type {Extension} from "./lib/dp/types/ExpandedResponse";
+import {PUBLIC_APPLICATION_CONTEXT} from "$env/static/public";
+import {ApplicationContext} from "./lib/dp/types/ApplicationContext";
 
 // This gives `self` the correct types
 const self = globalThis.self as unknown as ServiceWorkerGlobalScope;
@@ -48,18 +50,46 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(deleteOldCaches());
 });
 
-type PushData = Extension<NotificationOptions, { title: string }>
+type NotificationAction = {
+  action: string;
+  title: string;
+  navigate?: string;
+}
+
+type PushOptions = Extension<NotificationOptions, {
+  title: string,
+  actions?: NotificationAction[]
+}>
 
 self.addEventListener('push', function (event) {
-  const data = event.data?.json() as PushData;
-  console.log('Received a push message', data);
+  const payload = event.data?.json() as PushOptions;
+  if (PUBLIC_APPLICATION_CONTEXT !== ApplicationContext.Production) {
+    console.log('Received a push message', payload);
+  }
+
+  const options: NotificationOptions = {
+    body: payload.body,
+    tag: payload.tag,
+    data: payload.data,
+    // @ts-expect-error - the property is not present on NotificationOptions but is definitely used in Chromium
+    actions: payload.actions,
+  };
 
   event.waitUntil(
-    self.registration.showNotification(data.title, {
-      body: data.body,
-      tag: data.tag,
-    })
+    self.registration.showNotification(payload.title, options)
   );
+});
+
+self.addEventListener("notificationclick", async (event) => {
+  if (PUBLIC_APPLICATION_CONTEXT !== ApplicationContext.Production) {
+    console.log('Notification clicked, action:', event.action);
+    console.log('Notification clicked, notification:', event.notification);
+  }
+
+  if (event.action === "link") {
+    event.notification.close();
+    await self.clients.openWindow(event.notification.data.navigate);
+  }
 });
 
 self.addEventListener('fetch', (event) => {

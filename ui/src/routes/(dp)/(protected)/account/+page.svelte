@@ -12,6 +12,7 @@
 
   const {data}: PageProps = $props();
   const userTeams = $derived(data.teams.filter((team) => authRecord.teams.includes(team.id)));
+  const eventStore = $derived(data.eventStore);
 </script>
 
 <h1 class="h1">My Dashboard</h1>
@@ -24,13 +25,13 @@
 
 <h2 class="h2">My Announcements</h2>
 
-<AnnouncementSectionContent store={data.announcementStore}/>
+{#await data.announcementStore then store}
+  <AnnouncementSectionContent store={store}/>
+{/await}
 
 <h2 class="h2">My Next Events</h2>
 
-{#await data.events then events}
-  <EventGrid events={events.items}/>
-{/await}
+<EventGrid events={$eventStore.items}/>
 
 <h2 class="h2">My Teams</h2>
 

@@ -1,6 +1,6 @@
 import type {CustomAuthModel, ExpandedAnnouncement, ExpandedEvent} from "$lib/dp/types/ExpandedResponse.ts";
 import {Collection} from "$lib/dp/enum/Collection.ts";
-import {authSettings, client} from "$lib/dp/client.svelte.ts";
+import {authSettings} from "$lib/dp/client.svelte.ts";
 import {watchWithPagination} from "$lib/dp/records/RecordOperations.ts";
 
 export const load = (async ({depends, url, fetch}) => {
@@ -23,9 +23,8 @@ export const load = (async ({depends, url, fetch}) => {
   }
 
 
-  const events = client.collection(Collection.Events).getList<ExpandedEvent>(
-    1,
-    6,
+  const eventStore = await watchWithPagination<ExpandedEvent>(
+    Collection.Events,
     {
       sort: "+starttime",
       filter: filterString,
@@ -33,9 +32,11 @@ export const load = (async ({depends, url, fetch}) => {
       fetch: fetch,
       requestKey: `${model?.id}-events`,
     },
+    1,
+    6,
   );
 
-  const announcements = await watchWithPagination<ExpandedAnnouncement>(
+  const announcements = watchWithPagination<ExpandedAnnouncement>(
     Collection.Announcements,
     {
       sort: "-updated",
@@ -50,7 +51,7 @@ export const load = (async ({depends, url, fetch}) => {
   depends("event:list");
 
   return {
-    events: events,
+    eventStore: eventStore,
     announcementStore: announcements,
   };
 });

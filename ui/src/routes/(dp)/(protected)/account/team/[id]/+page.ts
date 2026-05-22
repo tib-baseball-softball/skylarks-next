@@ -15,7 +15,7 @@ export const load = (async ({fetch, parent, params, url, depends}) => {
 
   if (!team) {
     try {
-      team = await client.collection("teams").getOne<ExpandedTeam>(params.id, {
+      team = await client.collection(Collection.Teams).getOne<ExpandedTeam>(params.id, {
         expand: "club,admins",
         fetch: fetch,
         requestKey: `team-${params.id}`,

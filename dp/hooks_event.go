@@ -81,6 +81,16 @@ func NotifyNewEvent(e *core.RecordEvent, ps PushService) error {
 			Title: "New Event in " + team.Name(),
 			Body:  messageBody,
 			Tag:   "team_new_event",
+			Actions: []PushActionData{
+				{
+					Action: PushActionLink,
+					Title:  "Go to Event",
+					Type:   "button",
+				},
+			},
+			Data: map[string]any{
+				"navigate": "/account/event/" + event.Id, // TODO: centralized place for frontend routes in backend context
+			},
 		}
 		err := ps.SendPushMessage(msg, new(sub.ToWebPushSubscription()))
 		if err != nil {
