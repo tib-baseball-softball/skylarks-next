@@ -23,8 +23,8 @@ func init() {
 		log.Fatal("APPLICATION_CONTEXT not set, error loading environment variables")
 	}
 
-	if os.Getenv("BSM_API_KEY") == "" || os.Getenv("BSM_API_HOST") == "" {
-		log.Fatal("BSM API key or host not set, error loading environment variables")
+	if os.Getenv("BSM_API_URL") == "" || os.Getenv("BSM_API_HOST") == "" {
+		log.Fatal("BSM API URL or host not set, error loading environment variables")
 	}
 }
 

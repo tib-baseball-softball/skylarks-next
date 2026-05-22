@@ -4,8 +4,20 @@
   import ExternalParticipationWrapper from "$lib/dp/components/event/ExternalParticipationWrapper.svelte";
   import IndividualParticipationEditButton from "$lib/dp/components/event/IndividualParticipationEditButton.svelte";
   import {authSettings, client} from "$lib/dp/client.svelte.js";
-  import type {CustomAuthModel, ExpandedEvent} from "$lib/dp/types/ExpandedResponse.ts";
+  import type {
+    CustomAuthModel,
+    ExpandedEvent,
+    ExpandedParticipation,
+    ParticipationType
+  } from "$lib/dp/types/ExpandedResponse.ts";
   import type {EventsUpdate} from "$lib/dp/types/pb-types.ts";
+  import {Collection} from "$lib/dp/enum/Collection.ts";
+  import {sendParticipationData} from "$lib/dp/utility/sendParticipationData.ts";
+  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
+  import {invalidate} from "$app/navigation";
+  import {participationDTOToExpandedParticipation} from "$lib/dp/types/UserParticipationDTO.ts";
+  //@ts-ignore - library does not provide types
+  import {enableDragDropTouch} from "@dragdroptouch/drag-drop-touch";
 
   interface Props {
     event: ExpandedEvent;
@@ -24,91 +36,152 @@
 
   async function removeGuestPlayer(playerToRemove: string) {
     const newGuestPlayerList = displayedGuestPlayers.filter((player) => player !== playerToRemove);
-    await client.collection("events").update<EventsUpdate>(event.id, {
+    await client.collection(Collection.Events).update<EventsUpdate>(event.id, {
       guests: newGuestPlayerList.join(),
     });
+  }
+
+  let currentDraggedParticipation: ExpandedParticipation | null = $state(null);
+
+  enableDragDropTouch();
+
+  function ondragover(event: DragEvent) {
+    if (event.dataTransfer?.types?.includes("participation")) {
+      event.preventDefault();
+    }
+  }
+
+  function ondragstart(event: DragEvent, participation: ExpandedParticipation) {
+    if (!event.dataTransfer) {
+      return;
+    }
+
+    event.dataTransfer.effectAllowed = "move";
+    event.dataTransfer.setData("participation", participation.id);
+    currentDraggedParticipation = participation;
+  }
+
+  async function ondrop(event: DragEvent, type: ParticipationType) {
+    event.preventDefault();
+    console.log('Drop event triggered for participation:', event.dataTransfer?.getData("participation"));
+
+    if (currentDraggedParticipation === null || currentDraggedParticipation.state === type) {
+      return;
+    }
+
+    currentDraggedParticipation.state = type;
+
+    try {
+      await sendParticipationData(currentDraggedParticipation);
+    } catch (e) {
+      toastController.trigger({
+        message: 'Failed to send participation data',
+        background: 'preset-filled-error-500',
+      });
+    }
+    currentDraggedParticipation = null;
+    await invalidate("event:single");
   }
 </script>
 
 <h2 class="participants-title">Participants</h2>
-<section class="participants-grid">
-  <article class="card participant-card preset-tonal-success">
+<section class="event-drag-drop-section participants-grid">
+  <article
+    class="drop-target card participant-card preset-tonal-success"
+    ondrop={(e) => ondrop(e, "in")}
+    {ondragover}
+  >
     <header class="participation-header">
       <span><Check/></span>
       <h3 class="h4">In</h3>
     </header>
 
-    <section class="participation-content">
-      {#key event.participations.in}
-        {#each event.participations.in as inResponse}
-          <div in:fade|global={{delay: 200}}>
-            <IndividualParticipationEditButton
-              participation={inResponse}
-              {isAdmin}
-              classes="chip preset-tonal-success border-success"
-            />
-          </div>
-        {/each}
+    <section>
+      <ul class="participation-content">
+        {#key event.participations.in}
+          {#each event.participations.in as inResponse (inResponse.id)}
+            <li draggable="true" in:fade|global={{delay: 200}} ondragstart={(event) => ondragstart(event, inResponse)}>
+              <IndividualParticipationEditButton
+                participation={inResponse}
+                {isAdmin}
+                classes="chip preset-tonal-success border-success"
+              />
+            </li>
+          {/each}
 
-        {#each displayedGuestPlayers as guestPlayer}
-          {#if guestPlayer /* can be an empty string */}
-            <div in:fade|global={{delay: 200}}>
-              <button
-                aria-label="guest player name, click removes the player from the event"
-                class="chip guest-chip preset-tonal border-surface"
-                onclick={() => removeGuestPlayer(guestPlayer)}
-              >
-                {guestPlayer}
-                {#if isAdmin}
-                  <Trash size="10"/>
-                {/if}
-              </button>
-            </div>
-          {/if}
-        {/each}
-      {/key}
+          {#each displayedGuestPlayers as guestPlayer}
+            {#if guestPlayer /* can be an empty string */}
+              <li in:fade|global={{delay: 200}}>
+                <button
+                  aria-label="guest player name, click removes the player from the event"
+                  class="chip guest-chip preset-tonal border-surface"
+                  onclick={() => removeGuestPlayer(guestPlayer)}
+                >
+                  {guestPlayer}
+                  {#if isAdmin}
+                    <Trash size="10"/>
+                  {/if}
+                </button>
+              </li>
+            {/if}
+          {/each}
+        {/key}
+      </ul>
     </section>
   </article>
 
-  <article class="card participant-card preset-tonal-warning">
+  <article
+    class="drop-target card participant-card preset-tonal-warning"
+    ondrop={(e) => ondrop(e, "maybe")}
+    {ondragover}
+  >
     <header class="participation-header">
       <span><CircleQuestionMark/></span>
       <h3 class="h4">Maybe</h3>
     </header>
 
-    <section class="participation-content">
-      {#key event.participations.maybe}
-        {#each event.participations.maybe as maybeResponse}
-          <div in:fade|global={{delay: 200}}>
-            <IndividualParticipationEditButton
-              participation={maybeResponse}
-              {isAdmin}
-              classes="chip preset-tonal-warning border-warning"
-            />
-          </div>
-        {/each}
-      {/key}
+    <section>
+      <ul class="participation-content">
+        {#key event.participations.maybe}
+          {#each event.participations.maybe as maybeResponse (maybeResponse.id)}
+            <li draggable="true" in:fade|global={{delay: 200}}
+                ondragstart={(event) => ondragstart(event, maybeResponse)}>
+              <IndividualParticipationEditButton
+                participation={maybeResponse}
+                {isAdmin}
+                classes="chip preset-tonal-warning border-warning"
+              />
+            </li>
+          {/each}
+        {/key}
+      </ul>
     </section>
   </article>
 
-  <article class="card participant-card preset-tonal-error">
+  <article
+    class="drop-target card participant-card preset-tonal-error"
+    ondrop={(e) => ondrop(e, "out")}
+    {ondragover}
+  >
     <header class="participation-header">
       <span><X/></span>
       <h3 class="h4">Out</h3>
     </header>
 
-    <section class="participation-content">
-      {#key event.participations.out}
-        {#each event.participations.out as outResponse}
-          <div in:fade|global={{delay: 200}}>
-            <IndividualParticipationEditButton
-              participation={outResponse}
-              {isAdmin}
-              classes="chip preset-tonal-error border-error"
-            />
-          </div>
-        {/each}
-      {/key}
+    <section>
+      <ul class="participation-content">
+        {#key event.participations.out}
+          {#each event.participations.out as outResponse (outResponse.id)}
+            <li draggable="true" in:fade|global={{delay: 200}} ondragstart={(event) => ondragstart(event, outResponse)}>
+              <IndividualParticipationEditButton
+                participation={outResponse}
+                {isAdmin}
+                classes="chip preset-tonal-error border-error"
+              />
+            </li>
+          {/each}
+        {/key}
+      </ul>
     </section>
   </article>
 </section>
@@ -120,19 +193,22 @@
       <h3 class="h4">No Response</h3>
     </header>
 
-    <section class="participation-content">
-      {#key event.participations.unspecified}
-        {#each event.participations.unspecified as ghostResponse}
-          <div in:fade|global={{delay: 200}}>
-            <ExternalParticipationWrapper
-              dto={ghostResponse}
-              eventID={event.id}
-              {isAdmin}
-              classes="chip preset-outlined"
-            />
-          </div>
-        {/each}
-      {/key}
+    <section>
+      <ul class="participation-content">
+        {#key event.participations.unspecified}
+          {#each event.participations.unspecified as ghostResponse}
+            <li draggable="true" in:fade|global={{delay: 200}}
+                ondragstart={(e) => ondragstart(e, participationDTOToExpandedParticipation(ghostResponse, event.id))}>
+              <ExternalParticipationWrapper
+                dto={ghostResponse}
+                eventID={event.id}
+                {isAdmin}
+                classes="chip preset-outlined"
+              />
+            </li>
+          {/each}
+        {/key}
+      </ul>
     </section>
   </article>
 </section>

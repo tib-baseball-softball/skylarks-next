@@ -11,17 +11,30 @@ import (
 	"github.com/SherClockHolmes/webpush-go"
 )
 
+type PushActionType string
+
 const (
 	VAPIDSubscriberEnvName = "VAPID_SUBSCRIBER"
 	VAPIDPublicKeyEnvName  = "VAPID_PUBLIC_KEY"
 	VAPIDPrivateKeyEnvName = "VAPID_PRIVATE_KEY"
+
+	PushActionLink PushActionType = "link"
 )
 
-// PushMessage represents the raw data for a push notification message that is encoded into the JSON payload.
+type PushActionData struct {
+	Action PushActionType `json:"action"`
+	Title  string         `json:"title"`
+	Type   string         `json:"type"`
+}
+
+// PushMessage represents the raw data for a push notification message that is encoded into the JSON payload. Closely
+// follows the DOM type `NotificationOptions`.
 type PushMessage struct {
-	Title string `json:"title"`
-	Body  string `json:"body"`
-	Tag   string `json:"tag"`
+	Title   string           `json:"title"`
+	Body    string           `json:"body"`
+	Data    map[string]any   `json:"data"`
+	Tag     string           `json:"tag"`
+	Actions []PushActionData `json:"actions"`
 }
 
 // PushService defines the app-wide interface for sending push notifications.
@@ -87,6 +100,16 @@ func (p PushServiceImpl) handleTestPush(sub *webpush.Subscription) error {
 		Title: "Hello there",
 		Body:  "Real men test in production",
 		Tag:   "Test Tag",
+		Actions: []PushActionData{
+			{
+				Action: PushActionLink,
+				Title:  "Example Action",
+				Type:   "button",
+			},
+		},
+		Data: map[string]any{
+			"navigate": "/account",
+		},
 	}
 
 	return p.SendPushMessage(&msg, sub)

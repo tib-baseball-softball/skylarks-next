@@ -10,7 +10,7 @@ export const load = (async ({fetch, params, depends}) => {
     requestKey: `event-single-${params.id}`,
   });
 
-  depends("event:list", "comments:list");
+  depends("event:list", "comments:list", "event:single");
 
   return {
     event: event,
