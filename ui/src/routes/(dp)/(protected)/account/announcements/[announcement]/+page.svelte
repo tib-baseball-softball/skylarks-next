@@ -9,6 +9,7 @@
   import type {PageProps} from "./$types";
   import {appLocale} from "$lib/dp/locale.svelte.ts";
   import {Collection} from "$lib/dp/enum/Collection.ts";
+  import {markdownToHTML} from "$lib/dp/utility/DOMFunctions.ts";
 
   const {data}: PageProps = $props();
   const announcement = $derived(data.announcement);
@@ -70,7 +71,7 @@
     </section>
 
     <section class="prose announcement-body">
-      {@html $announcement.bodytext}
+      {@html markdownToHTML($announcement.bodytext)}
     </section>
 
     {#if $announcement.link}

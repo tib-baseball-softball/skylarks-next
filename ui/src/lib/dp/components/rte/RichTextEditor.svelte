@@ -10,7 +10,7 @@
   let {value = $bindable()}: Props = $props();
 
   const carta = new Carta({
-    sanitizer: DOMPurify.sanitize
+    sanitizer: DOMPurify.sanitize,
   });
 </script>
 

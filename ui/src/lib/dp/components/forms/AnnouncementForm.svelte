@@ -10,7 +10,6 @@
   import type {AnnouncementsResponse, ClubsResponse, TeamsResponse,} from "$lib/dp/types/pb-types.ts";
   import RichTextEditor from "$lib/dp/components/rte/RichTextEditor.svelte";
   import {Collection} from "$lib/dp/enum/Collection.ts";
-  import {parseMarkdown} from "$lib/dp/utility/parseMarkdown.ts";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
@@ -42,17 +41,16 @@
   }: Props = $props();
 
   function formFromProps(data: ExpandedAnnouncement | null) {
-    return (
-      data ?? {
-        title: "",
-        bodytext: "",
-        link: "",
-        link_text: "",
-        author: authRecord?.id,
-        club: club?.id,
-        team: team?.id,
-      }
-    );
+    const ret = data ?? {
+      title: "",
+      bodytext: "",
+      link: "",
+      link_text: "",
+      author: authRecord?.id,
+      club: club?.id,
+      team: team?.id,
+    };
+    return ret;
   }
 
   let form: Partial<ExpandedAnnouncement> = $derived.by(() => {
@@ -72,8 +70,6 @@
     }
 
     let result: AnnouncementsResponse | null = null;
-
-    form.bodytext = parseMarkdown(form.bodytext ?? "");
 
     try {
       if (form.id) {
