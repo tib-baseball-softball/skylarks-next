@@ -12,7 +12,8 @@
 
 import {build, files, version} from '$service-worker';
 import type {Extension} from "./lib/dp/types/ExpandedResponse";
-import {dev} from "$app/environment";
+import {PUBLIC_APPLICATION_CONTEXT} from "$env/static/public";
+import {ApplicationContext} from "./lib/dp/types/ApplicationContext";
 
 // This gives `self` the correct types
 const self = globalThis.self as unknown as ServiceWorkerGlobalScope;
@@ -62,7 +63,7 @@ type PushOptions = Extension<NotificationOptions, {
 
 self.addEventListener('push', function (event) {
   const payload = event.data?.json() as PushOptions;
-  if (dev) {
+  if (PUBLIC_APPLICATION_CONTEXT !== ApplicationContext.Production) {
     console.log('Received a push message', payload);
   }
 
@@ -80,7 +81,7 @@ self.addEventListener('push', function (event) {
 });
 
 self.addEventListener("notificationclick", async (event) => {
-  if (dev) {
+  if (PUBLIC_APPLICATION_CONTEXT !== ApplicationContext.Production) {
     console.log('Notification clicked, action:', event.action);
     console.log('Notification clicked, notification:', event.notification);
   }
