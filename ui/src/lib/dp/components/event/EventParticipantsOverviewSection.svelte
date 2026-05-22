@@ -59,7 +59,7 @@
 
   async function ondrop(event: DragEvent, type: ParticipationType) {
     event.preventDefault();
-    console.log('Drop event triggered');
+    console.log('Drop event triggered for participation:', event.dataTransfer?.getData("participation"));
 
     if (currentDraggedParticipation === null || currentDraggedParticipation.state === type) {
       return;
@@ -81,8 +81,12 @@
 </script>
 
 <h2 class="participants-title">Participants</h2>
-<section class="participants-grid">
-  <article class="card participant-card preset-tonal-success" ondrop={(e) => ondrop(e, "in")} {ondragover}>
+<section class="event-drag-drop-section participants-grid">
+  <article
+    class="drop-target card participant-card preset-tonal-success"
+    ondrop={(e) => ondrop(e, "in")}
+    {ondragover}
+  >
     <header class="participation-header">
       <span><Check/></span>
       <h3 class="h4">In</h3>
@@ -122,7 +126,11 @@
     </section>
   </article>
 
-  <article class="card participant-card preset-tonal-warning" ondrop={(e) => ondrop(e, "maybe")} {ondragover}>
+  <article
+    class="drop-target card participant-card preset-tonal-warning"
+    ondrop={(e) => ondrop(e, "maybe")}
+    {ondragover}
+  >
     <header class="participation-header">
       <span><CircleQuestionMark/></span>
       <h3 class="h4">Maybe</h3>
@@ -146,7 +154,11 @@
     </section>
   </article>
 
-  <article class="card participant-card preset-tonal-error" ondrop={(e) => ondrop(e, "out")} {ondragover}>
+  <article
+    class="drop-target card participant-card preset-tonal-error"
+    ondrop={(e) => ondrop(e, "out")}
+    {ondragover}
+  >
     <header class="participation-header">
       <span><X/></span>
       <h3 class="h4">Out</h3>
