@@ -3,9 +3,9 @@ package dp
 import (
 	"fmt"
 	"log"
+	"log/slog"
 	"net/http"
 	"os"
-	"strings"
 
 	"git.berlinskylarks.de/tib-baseball/bsm-go"
 	"github.com/SherClockHolmes/webpush-go"
@@ -13,6 +13,7 @@ import (
 	"github.com/pocketbase/pocketbase/apis"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/plugins/migratecmd"
+	"github.com/pocketbase/pocketbase/tools/osutils"
 	"github.com/spf13/cobra"
 )
 
@@ -29,16 +30,14 @@ func NewDiamondPlanner(client bsm.APIClient, pushService PushService) *DiamondPl
 		log.Fatal("APPLICATION_SECRET not set, error loading environment variables")
 	}
 
-	isGoRun := strings.HasPrefix(os.Args[0], os.TempDir())
-
-	if isGoRun {
-		log.Print("App was started with `go run`, automigrations are active.")
+	if osutils.IsProbablyGoRun() {
+		slog.Info("App was started with `go run`, automigrations are active.")
 	}
 
 	migratecmd.MustRegister(dp, dp.RootCmd, migratecmd.Config{
 		// enable auto creation of migration files when making collection changes in the Dashboard
 		// (the isGoRun check is to enable it only during development)
-		Automigrate: isGoRun,
+		Automigrate: osutils.IsProbablyGoRun(),
 	})
 
 	BindDPHooks(dp, client, pushService)

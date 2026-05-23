@@ -1,18 +1,17 @@
 <script lang="ts">
-  import {onMount} from "svelte";
+  import {Carta, MarkdownEditor} from 'carta-md';
+  import 'carta-md/default.css';
+  import DOMPurify from 'dompurify';
 
   interface Props {
-    content: string;
+    value: string;
   }
 
-  let {content = $bindable()}: Props = $props();
+  let {value = $bindable()}: Props = $props();
 
-  let editorElement: HTMLElement;
-
-  onMount(() => {
-
+  const carta = new Carta({
+    sanitizer: DOMPurify.sanitize,
   });
-
 </script>
 
-<div bind:this={editorElement}></div>
+<MarkdownEditor bind:value mode="tabs" {carta}/>

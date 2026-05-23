@@ -1,1 +1,16 @@
+.carta-font-code {
+  font-family: '...', monospace;
+  font-size: 1.1rem;
+  line-height: 1.1rem;
+  letter-spacing: normal;
+}
 
+.carta-theme__default {
+  --text-color: inherit !important;
+}
+
+.carta-toolbar {
+  height: unset !important;
+  flex-wrap: wrap !important;
+  gap: calc(var(--spacing) * 2);
+}

@@ -8,6 +8,8 @@
   import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
   import type {CustomAuthModel, ExpandedAnnouncement,} from "$lib/dp/types/ExpandedResponse.ts";
   import type {AnnouncementsResponse, ClubsResponse, TeamsResponse,} from "$lib/dp/types/pb-types.ts";
+  import RichTextEditor from "$lib/dp/components/rte/RichTextEditor.svelte";
+  import {Collection} from "$lib/dp/enum/Collection.ts";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
@@ -39,17 +41,16 @@
   }: Props = $props();
 
   function formFromProps(data: ExpandedAnnouncement | null) {
-    return (
-      data ?? {
-        title: "",
-        bodytext: "",
-        link: "",
-        link_text: "",
-        author: authRecord?.id,
-        club: club?.id,
-        team: team?.id,
-      }
-    );
+    const ret = data ?? {
+      title: "",
+      bodytext: "",
+      link: "",
+      link_text: "",
+      author: authRecord?.id,
+      club: club?.id,
+      team: team?.id,
+    };
+    return ret;
   }
 
   let form: Partial<ExpandedAnnouncement> = $derived.by(() => {
@@ -73,11 +74,11 @@
     try {
       if (form.id) {
         result = await client
-          .collection("announcements")
+          .collection(Collection.Announcements)
           .update<AnnouncementsResponse>(form.id, form);
       } else {
         result = await client
-          .collection("announcements")
+          .collection(Collection.Announcements)
           .create<AnnouncementsResponse>(form);
       }
     } catch {
@@ -193,13 +194,13 @@
 
         <label class="label field-wide">
           <span>Announcement Text</span>
-          <textarea
-            bind:value={form.bodytext}
-            class="textarea"
-            name="desc"
-            required
-            rows="10"
-          ></textarea>
+
+          {#if form.bodytext !== undefined}
+            <RichTextEditor
+              bind:value={form.bodytext}
+            />
+          {/if}
+
         </label>
 
         <fieldset class="field-wide rounded-base">

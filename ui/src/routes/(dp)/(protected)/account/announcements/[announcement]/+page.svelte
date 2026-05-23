@@ -8,6 +8,8 @@
   import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
   import type {PageProps} from "./$types";
   import {appLocale} from "$lib/dp/locale.svelte.ts";
+  import {Collection} from "$lib/dp/enum/Collection.ts";
+  import {markdownToHTML} from "$lib/dp/utility/DOMFunctions.ts";
 
   const {data}: PageProps = $props();
   const announcement = $derived(data.announcement);
@@ -19,7 +21,7 @@
   );
 
   function deleteAction(id: string) {
-    client.collection("announcements").delete(id);
+    client.collection(Collection.Announcements).delete(id);
     history.back();
   }
 
@@ -69,7 +71,7 @@
     </section>
 
     <section class="prose announcement-body">
-      {@html $announcement.bodytext}
+      {@html markdownToHTML($announcement.bodytext)}
     </section>
 
     {#if $announcement.link}

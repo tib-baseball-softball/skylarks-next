@@ -3,6 +3,7 @@
   import type {ExpandedAnnouncement} from "$lib/dp/types/ExpandedResponse.ts";
   import PriorityBadge from "./PriorityBadge.svelte";
   import LocalDate from "$lib/dp/components/utils/LocalDate.svelte";
+  import {markdownToHTML} from "$lib/dp/utility/DOMFunctions.ts";
 
   interface Props {
     announcement: ExpandedAnnouncement;
@@ -30,7 +31,7 @@
 </p>
 
 <p class="body-text clamped">
-  {@html announcement.bodytext}
+  {@html markdownToHTML(announcement.bodytext)}
 </p>
 
 <style>
@@ -50,8 +51,8 @@
   }
 
   .body-text {
-    line-clamp: 5;
-    -webkit-line-clamp: 5;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
   }
 
   .title {
