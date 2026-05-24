@@ -41,7 +41,6 @@
     "flatpickr": "^4.6.13",
     "leaflet": "^1.9.4",
     "lucide-svelte": "^1.0.1",
-    "micromark": "^4.0.2",
     "pocketbase": "^0.26.9",
     "svelte": "^5.55.9",
     "svelte-check": "^4.4.8",
