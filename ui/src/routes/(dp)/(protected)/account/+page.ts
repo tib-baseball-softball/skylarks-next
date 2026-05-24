@@ -39,7 +39,7 @@ export const load = (async ({depends, url, fetch}) => {
   const announcements = watchWithPagination<ExpandedAnnouncement>(
     Collection.Announcements,
     {
-      sort: "-updated",
+      sort: "-created",
       fetch: fetch,
       expand: "author,club,team,comments_via_announcement.user",
       requestKey: `${model?.id}-announcements`,
