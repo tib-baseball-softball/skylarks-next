@@ -29,4 +29,4 @@
   });
 </script>
 
-<MarkdownEditor bind:value mode="tabs" {carta} textarea={{required: required}}/>
+<MarkdownEditor bind:value mode="auto" {carta} textarea={{required: required}}/>
