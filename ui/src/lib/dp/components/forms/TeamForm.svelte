@@ -10,6 +10,7 @@
   import type {CustomAuthModel, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
   import type {ClubsResponse, UsersResponse} from "$lib/dp/types/pb-types.ts";
   import {Collection} from "$lib/dp/enum/Collection.ts";
+  import RichTextEditor from "$lib/dp/components/rte/RichTextEditor.svelte";
 
   interface Props {
     club: ClubsResponse;
@@ -204,14 +205,15 @@
           />
         </div>
 
-        <label class="label col-span-2">
+        <label class="label field-wide">
           Description
-          <textarea
-            bind:value={form.description}
-            class="textarea"
-            name="desc"
-            rows="8"
-          ></textarea>
+
+          {#if form.description !== undefined}
+            <RichTextEditor
+              bind:value={form.description}
+            />
+          {/if}
+
         </label>
 
         <label class="label space-y-3 field-wide">

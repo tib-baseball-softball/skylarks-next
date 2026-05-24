@@ -196,7 +196,7 @@
     <section>
       <ul class="participation-content">
         {#key event.participations.unspecified}
-          {#each event.participations.unspecified as ghostResponse}
+          {#each event.participations.unspecified as ghostResponse (ghostResponse.id)}
             <li draggable="true" in:fade|global={{delay: 200}}
                 ondragstart={(e) => ondragstart(e, participationDTOToExpandedParticipation(ghostResponse, event.id))}>
               <ExternalParticipationWrapper

@@ -1,18 +1,32 @@
 <script lang="ts">
+  import {Carta, MarkdownEditor} from 'carta-md';
+  import 'carta-md/default.css';
+  import DOMPurify from 'dompurify';
   import {onMount} from "svelte";
 
   interface Props {
-    content: string;
+    value: string;
+    required?: boolean;
   }
 
-  let {content = $bindable()}: Props = $props();
+  let {value = $bindable(), required = false}: Props = $props();
 
-  let editorElement: HTMLElement;
-
-  onMount(() => {
-
+  const carta = new Carta({
+    sanitizer: DOMPurify.sanitize,
   });
 
+  onMount(() => {
+    // this is a hack, for some reason no classes can be added via the component
+    const cartaRenderers = document.querySelectorAll('.carta-renderer.markdown-body');
+    if (cartaRenderers.length === 0) {
+      console.warn('Carta renderer elements not found');
+      return;
+    }
+
+    cartaRenderers.forEach((renderer) => {
+      renderer.classList.add("prose");
+    });
+  });
 </script>
 
-<div bind:this={editorElement}></div>
+<MarkdownEditor bind:value mode="auto" {carta} textarea={{required: required}}/>

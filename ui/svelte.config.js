@@ -44,7 +44,10 @@ const config = {
           "http://127.0.0.1:8090",
           "https://*.tile.openstreetmap.de",
         ],
-        "script-src": ["self"],
+        "script-src": [
+          "self",
+          "wasm-unsafe-eval"
+        ],
         "script-src-elem": ["self"],
         "style-src": ["self", "unsafe-inline"],
         "frame-ancestors": ["none"],
