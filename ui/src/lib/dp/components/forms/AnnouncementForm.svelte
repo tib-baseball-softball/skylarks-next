@@ -198,6 +198,7 @@
           {#if form.bodytext !== undefined}
             <RichTextEditor
               bind:value={form.bodytext}
+              required={true}
             />
           {/if}
 

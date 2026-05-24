@@ -1,14 +1,18 @@
-import {micromark} from "micromark";
+import {Carta} from "carta-md";
+import DOMPurify from "dompurify";
 
 /**
- * Converts Markdown to HTML using the micromark library.
+ * Converts Markdown to HTML using a library.
  *
  * Single utility function to be able to easily switch out the library later.
  *
  * @param markdown the input value, usually output of an RTE component
  */
-export function markdownToHTML(markdown: string | Uint8Array<ArrayBufferLike>): string {
-  return micromark(markdown);
+export function markdownToHTML(markdown: string): string {
+  const carta = new Carta({
+    sanitizer: DOMPurify.sanitize,
+  });
+  return carta.renderSSR(markdown);
 }
 
 export function stripTags(html: string) {
