@@ -3,14 +3,24 @@ package main
 import (
 	"log"
 	"os"
+	"time"
 	_ "time/tzdata"
 
 	"git.berlinskylarks.de/tib-baseball/bsm-go"
 	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp"
 	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/internal/tib"
 	_ "git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/migrations"
+	"github.com/getsentry/sentry-go"
+	sentryhttp "github.com/getsentry/sentry-go/http"
+	"github.com/pocketbase/pocketbase/apis"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/subosito/gotenv"
+)
+
+const (
+	ContextDevelopment = "Development"
+	ContextStaging     = "Staging"
+	ContextProduction  = "Production"
 )
 
 // / Loads environment.
@@ -54,6 +64,33 @@ func main() {
 	pushService := dp.NewPushService()
 
 	app := dp.NewDiamondPlanner(client, pushService)
+
+	applicationContext := os.Getenv("APPLICATION_CONTEXT")
+	isDevelopment := applicationContext == ContextDevelopment
+
+	err := sentry.Init(sentry.ClientOptions{
+		Dsn:                  os.Getenv("SENTRY_DSN"),
+		Debug:                isDevelopment,
+		SendDefaultPII:       true,
+		DisableClientReports: true,
+		Environment:          applicationContext,
+		TracesSampleRate:     0.0,
+	})
+	if err != nil {
+		log.Fatalf("sentry.Init: %s", err)
+	}
+	defer sentry.Flush(2 * time.Second)
+
+	sentryMiddleware := sentryhttp.New(sentryhttp.Options{
+		Repanic: true,
+	})
+
+	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
+		se.Router.BindFunc(apis.WrapStdMiddleware(sentryMiddleware.Handle))
+
+		return se.Next()
+	})
+	app.Logger().Info("Sentry Middleware set up", "DSN", os.Getenv("SENTRY_DSN"))
 
 	BindTiBHooks(app)
 

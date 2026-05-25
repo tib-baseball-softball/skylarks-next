@@ -6,6 +6,7 @@ require (
 	git.berlinskylarks.de/tib-baseball/bsm-go v1.0.1
 	github.com/SherClockHolmes/webpush-go v1.4.0
 	github.com/arran4/golang-ical v0.3.5
+	github.com/getsentry/sentry-go v0.46.2
 	github.com/pocketbase/dbx v1.12.0
 	github.com/pocketbase/pocketbase v0.38.2
 	github.com/spf13/cast v1.10.0
