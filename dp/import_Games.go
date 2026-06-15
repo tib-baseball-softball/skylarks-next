@@ -50,9 +50,7 @@ func (s GameImportService) ImportGames() {
 	var wg sync.WaitGroup
 
 	for _, team := range teams {
-		wg.Add(1)
-		go func() {
-			defer wg.Done()
+		wg.Go(func() {
 			// only run this job for events this season (refreshing games past years should rarely ever be relevant)
 			leagueGroup, err := s.App.FindFirstRecordByData(bsm.LeagueGroupsCollection, "bsm_id", team.GetInt("bsm_league_group"))
 			if err != nil {
@@ -86,7 +84,7 @@ func (s GameImportService) ImportGames() {
 			}
 			processedTeams++
 			processedMatches += len(matches)
-		}()
+		})
 	}
 
 	wg.Wait()

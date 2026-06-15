@@ -34,9 +34,7 @@ func ImportLeagueGroups(app core.App, client bsm.LeagueGroupClient, clubID *stri
 	var wg sync.WaitGroup
 
 	for _, club := range clubs {
-		wg.Add(1)
-		go func() {
-			defer wg.Done()
+		wg.Go(func() {
 			leagueGroups, err := client.FetchLeagueGroupsForSeason(club.GetString("bsm_api_key"), selectedSeason)
 			if err != nil {
 				app.Logger().Error("Error fetching league groups", "error", err, "club", club.GetString("name"), "season", selectedSeason)
@@ -49,7 +47,7 @@ func ImportLeagueGroups(app core.App, client bsm.LeagueGroupClient, clubID *stri
 			}
 			processedClubs++
 			processedLeagueGroups += len(leagueGroups)
-		}()
+		})
 	}
 
 	wg.Wait()
@@ -92,6 +90,4 @@ func setLeagueGroupRecordValues(record *core.Record, leagueGroup bsm.LeagueGroup
 	lg.SetAcronym(leagueGroup.Acronym)
 	// Use the raw record API for array append operations
 	record.Set("clubs+", club.Id)
-
-	return
 }
