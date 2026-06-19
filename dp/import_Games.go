@@ -11,6 +11,7 @@ import (
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
+	"github.com/spf13/cast"
 )
 
 type GameImportServiceApp interface {
@@ -38,7 +39,7 @@ func (s GameImportService) Client() bsm.APIClient {
 }
 
 func (s GameImportService) ImportGames() {
-	teams, err := s.App.FindRecordsByFilter("teams", "bsm_league_group != 0", "", 0, 0)
+	teams, err := s.App.FindRecordsByFilter(TeamsCollection, "bsm_league_group != 0", "", 0, 0)
 	if err != nil {
 		s.App.Logger().Error("Error fetching existing team records: ", "error", err)
 		return
@@ -49,31 +50,41 @@ func (s GameImportService) ImportGames() {
 	currentYear := types.NowDateTime().Time().Year()
 	var wg sync.WaitGroup
 
-	for _, team := range teams {
+	for _, teamRecord := range teams {
 		wg.Go(func() {
-			// only run this job for events this season (refreshing games past years should rarely ever be relevant)
-			leagueGroup, err := s.App.FindFirstRecordByData(bsm.LeagueGroupsCollection, "bsm_id", team.GetInt("bsm_league_group"))
+		    team := &Team{}
+			team.SetProxyRecord(teamRecord)
+		
+			// only run this job for events of the current season (refreshing games for past years should rarely ever be relevant)
+			leagueGroupRecord, err := s.App.FindFirstRecordByData(bsm.LeagueGroupsCollection, "bsm_id", team.BSMLeagueGroup())
 			if err != nil {
 				s.App.Logger().Error("Error fetching League Group record: ", "error", err)
 				return
 			}
-			if leagueGroup.GetInt("season") != currentYear {
+			leagueGroup := &LeagueGroup{}
+			leagueGroup.SetProxyRecord(leagueGroupRecord)
+			
+			if leagueGroup.Season() != currentYear {
 				return
 			}
 
-			if errs := s.App.ExpandRecord(team, []string{"club"}, nil); len(errs) > 0 {
+			expandField := "club"
+
+			if errs := s.App.ExpandRecord(team.Record, []string{expandField}, nil); len(errs) > 0 {
 				s.App.Logger().Error("failed to expand:", "errors", errs)
 				return
 			}
-			club := team.ExpandedOne("club")
-			if club == nil {
+			clubRecord := team.ExpandedOne(expandField)
+			if clubRecord == nil {
 				s.App.Logger().Error("Could not load club data for API key")
 				return
 			}
+			club := &Club{}
+			club.SetProxyRecord(clubRecord)
 
-			matches, err := s.fetchMatchesForLeagueGroup(team.GetString("bsm_league_group"), club.GetString("bsm_api_key"))
+			matches, err := s.fetchMatchesForLeagueGroup(cast.ToString(team.BSMLeagueGroup()), club.BSMAPIKey())
 			if err != nil {
-				s.App.Logger().Error("Could not fetch Matches for leagueGroup", "error", err, "team", team, "apiKey", club.GetString("bsm_api_key"))
+				s.App.Logger().Error("Could not fetch Matches for leagueGroup", "error", err, "team", team, "apiKey", club.BSMAPIKey())
 				return
 			}
 
@@ -106,7 +117,7 @@ func (s GameImportService) fetchMatchesForLeagueGroup(league string, apiKey stri
 	return matches, nil
 }
 
-func (s GameImportService) createOrUpdateEvents(matches []bsm.Match, team *core.Record) (err error) {
+func (s GameImportService) createOrUpdateEvents(matches []bsm.Match, team *Team) (err error) {
 	for _, match := range matches {
 		record, foundErr := s.App.FindFirstRecordByData(EventsCollection, "bsm_id", match.ID)
 
@@ -182,7 +193,7 @@ func (s GameImportService) setEventRecordValues(record *core.Record, match bsm.M
 
 // createOrUpdateField Adds field/location to the database that can then be set to new events as well as selected for
 // manually created events in the frontend.
-func (s GameImportService) createOrUpdateField(team *core.Record, field bsm.Field) (*Location, error) {
+func (s GameImportService) createOrUpdateField(team *Team, field bsm.Field) (*Location, error) {
 	record, err := s.App.FindFirstRecordByData(LocationCollection, "bsm_id", field.BSMID)
 
 	if err != nil {
@@ -218,7 +229,7 @@ func (s GameImportService) createOrUpdateField(team *core.Record, field bsm.Fiel
 	location.SetHumanCountry(field.HumanCountry)
 	location.SetPhotoURL(field.PhotoURL)
 
-	location.SetClub(team.GetString("club"))
+	location.SetClub(team.Club())
 
 	if err := s.App.Save(location); err != nil {
 		s.App.Logger().Error("Persisting location failed", "error", err, "location", location)
