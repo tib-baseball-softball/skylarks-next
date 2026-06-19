@@ -7,6 +7,7 @@ import (
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
+	"github.com/spf13/cast"
 )
 
 // ImportLeagueGroups imports league groups concurrently, either for one given club or all clubs in the database.
@@ -38,12 +39,21 @@ func ImportLeagueGroups(app core.App, client bsm.LeagueGroupClient, clubID *stri
 			club := &Club{}
 			club.SetProxyRecord(clubRecord)
 
+			errorContext := &ErrorContext{
+				Key: "local",
+				Values: map[string]any{
+					"club":   club.Name(),
+					"season": cast.ToString(selectedSeason),
+				},
+			}
+
 			leagueGroups, err := client.FetchLeagueGroupsForSeason(club.BSMAPIKey(), selectedSeason)
 			if err != nil {
-				app.Logger().Error("Error fetching league groups", "error", err, "club", club.GetString("name"), "season", selectedSeason)
+				app.Logger().Error("Error fetching league groups", "error", err, "club", club.Name(), "season", selectedSeason)
+				ForwardErrorToExternalSystem(err, errorContext, nil)
 				return
 			}
-			err = createOrUpdateLeagueGroups(app, leagueGroups, club.Record)
+			err = createOrUpdateLeagueGroups(app, leagueGroups, club)
 			if err != nil {
 				// Logging happens in the called method where more detailed data is available.
 				return
@@ -58,7 +68,7 @@ func ImportLeagueGroups(app core.App, client bsm.LeagueGroupClient, clubID *stri
 	return nil
 }
 
-func createOrUpdateLeagueGroups(app core.App, leagueGroups []bsm.LeagueGroup, club *core.Record) (err error) {
+func createOrUpdateLeagueGroups(app core.App, leagueGroups []bsm.LeagueGroup, club *Club) (err error) {
 	for _, leagueGroup := range leagueGroups {
 		record, err := app.FindFirstRecordByData(LeagueGroupsCollection, "bsm_id", leagueGroup.ID)
 
@@ -76,14 +86,22 @@ func createOrUpdateLeagueGroups(app core.App, leagueGroups []bsm.LeagueGroup, cl
 		setLeagueGroupRecordValues(record, leagueGroup, club)
 
 		if err := app.Save(record); err != nil {
+			errorContext := &ErrorContext{
+				Key: "local",
+				Values: map[string]any{
+					"leagueGroup": leagueGroup,
+					"club":        club.Name(),
+				},
+			}
 			app.Logger().Error("Persisting LeagueGroup record failed: ", "error", err, "leagueGroup", leagueGroup, "record", record)
+			ForwardErrorToExternalSystem(err, errorContext, nil)
 			return err
 		}
 	}
 	return
 }
 
-func setLeagueGroupRecordValues(record *core.Record, leagueGroup bsm.LeagueGroup, club *core.Record) {
+func setLeagueGroupRecordValues(record *core.Record, leagueGroup bsm.LeagueGroup, club *Club) {
 	lg := &LeagueGroup{}
 	lg.SetProxyRecord(record)
 
