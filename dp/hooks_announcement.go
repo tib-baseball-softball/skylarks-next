@@ -87,6 +87,4 @@ func PushTeamOrClubAnnouncement(app core.App, coll string, announcement *Announc
 			return
 		}
 	}
-
-	return
 }
