@@ -33,14 +33,17 @@ func ImportLeagueGroups(app core.App, client bsm.LeagueGroupClient, clubID *stri
 	processedLeagueGroups := 0
 	var wg sync.WaitGroup
 
-	for _, club := range clubs {
+	for _, clubRecord := range clubs {
 		wg.Go(func() {
-			leagueGroups, err := client.FetchLeagueGroupsForSeason(club.GetString("bsm_api_key"), selectedSeason)
+			club := &Club{}
+			club.SetProxyRecord(clubRecord)
+
+			leagueGroups, err := client.FetchLeagueGroupsForSeason(club.BSMAPIKey(), selectedSeason)
 			if err != nil {
 				app.Logger().Error("Error fetching league groups", "error", err, "club", club.GetString("name"), "season", selectedSeason)
 				return
 			}
-			err = createOrUpdateLeagueGroups(app, leagueGroups, club)
+			err = createOrUpdateLeagueGroups(app, leagueGroups, club.Record)
 			if err != nil {
 				// Logging happens in the called method where more detailed data is available.
 				return
