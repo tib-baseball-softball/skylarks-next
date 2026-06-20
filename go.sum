@@ -1,5 +1,5 @@
-git.berlinskylarks.de/tib-baseball/bsm-go v1.0.1 h1:V0h9Ibrov2aM0k7cK4lFcHbA9N8mME6klL6w6YszYJ8=
-git.berlinskylarks.de/tib-baseball/bsm-go v1.0.1/go.mod h1:UBKIv6UezzjnbczK8y67PojHeqgNj+rVUvnwOwBKetA=
+git.berlinskylarks.de/tib-baseball/bsm-go v1.0.3 h1:AStYHtdZhv0QxTM/vszrsH6lqTMFQDt3wBaV8PmiuZk=
+git.berlinskylarks.de/tib-baseball/bsm-go v1.0.3/go.mod h1:Cf+8CL0iYep+fHxzzAjbuo/6F9K/oc9pkoCJFQW3kZM=
 github.com/SherClockHolmes/webpush-go v1.4.0 h1:ocnzNKWN23T9nvHi6IfyrQjkIc0oJWv1B1pULsf9i3s=
 github.com/SherClockHolmes/webpush-go v1.4.0/go.mod h1:XSq8pKX11vNV8MJEMwjrlTkxhAj1zKfxmyhdV7Pd6UA=
 github.com/arran4/golang-ical v0.3.5 h1:bbz6ld4dC+MmCKiFfOd6SkmIGnhNMBACZ485ULh7p9A=
