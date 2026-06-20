@@ -99,7 +99,7 @@ func GetSubscriptionsForTeamOrClub(id string, coll string, app core.App) ([]Push
 }
 
 func GetSubscriptionsForUserIDs(userIDs []string, app core.App) ([]PushSubscription, error) {
-	ids := make([]interface{}, len(userIDs))
+	ids := make([]any, len(userIDs))
 	for i, id := range userIDs {
 		ids[i] = id
 	}

@@ -96,7 +96,7 @@ func notifyAdminsUserCreation(record *core.Record, app core.App, ps PushService)
 	user := &User{}
 	user.SetProxyRecord(record)
 
-	ids := make([]interface{}, len(user.Clubs()))
+	ids := make([]any, len(user.Clubs()))
 	for i, id := range user.Clubs() {
 		ids[i] = id
 	}
@@ -193,15 +193,15 @@ func AddUserICalLink(e *core.RecordEnrichEvent) error {
 	user.SetProxyRecord(e.Record)
 
 	auth := e.RequestInfo.Auth
-	
-	if auth == nil || user == nil || e.Record == nil {
+
+	if auth == nil || e.Record == nil {
 		return e.Next()
 	}
 
 	if auth.Id == user.Id {
-	    user.WithCustomData(true)
-					
-	    appSecret := os.Getenv("APPLICATION_SECRET")
+		user.WithCustomData(true)
+
+		appSecret := os.Getenv("APPLICATION_SECRET")
 		hash := GetSHA3Hash(user.Id + appSecret)
 		user.SetICalLink(e.App.Settings().Meta.AppURL + "/api/dp/ical/" + user.Id + "/" + hash + "/calendar.ics")
 	}

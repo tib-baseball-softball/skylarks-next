@@ -61,7 +61,10 @@ func TestCreateOrUpdateField_NewLocation(t *testing.T) {
 	testTeamCollection := core.NewCollection("möp", "teams")
 	service := GameImportService{App: mockApp}
 	testField := bsm.Field{BSMID: 123, Name: "Test Field"}
-	testTeam := core.NewRecord(testTeamCollection)
+	testTeamRecord := core.NewRecord(testTeamCollection)
+	testTeam := &Team{}
+	testTeam.SetProxyRecord(testTeamRecord)
+	
 
 	location, err := service.createOrUpdateField(testTeam, testField)
 
@@ -98,7 +101,9 @@ func TestCreateOrUpdateField_UpdateExistingLocation(t *testing.T) {
 	testTeamCollection := core.NewCollection("möp", "teams")
 	service := GameImportService{App: mockApp}
 	testField := bsm.Field{BSMID: 123, Name: "UpdatedLocationName"}
-	testTeam := core.NewRecord(testTeamCollection)
+	testTeamRecord := core.NewRecord(testTeamCollection)
+	testTeam := &Team{}
+	testTeam.SetProxyRecord(testTeamRecord)
 
 	location, err := service.createOrUpdateField(testTeam, testField)
 
@@ -132,7 +137,9 @@ func TestCreateOrUpdateField_SaveError(t *testing.T) {
 	testTeamCollection := core.NewCollection("möp", "teams")
 	service := GameImportService{App: mockApp}
 	testField := bsm.Field{BSMID: 123, Name: "Failing Field"}
-	testTeam := core.NewRecord(testTeamCollection)
+	testTeamRecord := core.NewRecord(testTeamCollection)
+	testTeam := &Team{}
+	testTeam.SetProxyRecord(testTeamRecord)
 
 	location, err := service.createOrUpdateField(testTeam, testField)
 
