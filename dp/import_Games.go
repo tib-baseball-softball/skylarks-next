@@ -11,6 +11,7 @@ import (
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
+	"github.com/spf13/cast"
 )
 
 type GameImportServiceApp interface {
@@ -38,7 +39,7 @@ func (s GameImportService) Client() bsm.APIClient {
 }
 
 func (s GameImportService) ImportGames() {
-	teams, err := s.App.FindRecordsByFilter("teams", "bsm_league_group != 0", "", 0, 0)
+	teams, err := s.App.FindRecordsByFilter(TeamsCollection, "bsm_league_group != 0", "", 0, 0)
 	if err != nil {
 		s.App.Logger().Error("Error fetching existing team records: ", "error", err)
 		return
@@ -49,44 +50,61 @@ func (s GameImportService) ImportGames() {
 	currentYear := types.NowDateTime().Time().Year()
 	var wg sync.WaitGroup
 
-	for _, team := range teams {
-		wg.Add(1)
-		go func() {
-			defer wg.Done()
-			// only run this job for events this season (refreshing games past years should rarely ever be relevant)
-			leagueGroup, err := s.App.FindFirstRecordByData(bsm.LeagueGroupsCollection, "bsm_id", team.GetInt("bsm_league_group"))
+	for _, teamRecord := range teams {
+		wg.Go(func() {
+			team := &Team{}
+			team.SetProxyRecord(teamRecord)
+
+			errorContext := &ErrorContext{
+				Key: "local",
+				Values: map[string]any{
+					"teamID": team.Id,
+					"team":   team.Name(),
+					"clubID": team.Club(),
+				},
+			}
+
+			// only run this job for events of the current season (refreshing games for past years should rarely ever be relevant)
+			leagueGroupRecord, err := s.App.FindFirstRecordByData(bsm.LeagueGroupsCollection, "bsm_id", team.BSMLeagueGroup())
 			if err != nil {
 				s.App.Logger().Error("Error fetching League Group record: ", "error", err)
+				ForwardErrorToExternalSystem(err, errorContext, nil)
 				return
 			}
-			if leagueGroup.GetInt("season") != currentYear {
+			leagueGroup := &LeagueGroup{}
+			leagueGroup.SetProxyRecord(leagueGroupRecord)
+
+			if leagueGroup.Season() != currentYear {
 				return
 			}
 
-			if errs := s.App.ExpandRecord(team, []string{"club"}, nil); len(errs) > 0 {
+			expandField := "club"
+
+			if errs := s.App.ExpandRecord(team.Record, []string{expandField}, nil); len(errs) > 0 {
 				s.App.Logger().Error("failed to expand:", "errors", errs)
 				return
 			}
-			club := team.ExpandedOne("club")
-			if club == nil {
+			clubRecord := team.ExpandedOne(expandField)
+			if clubRecord == nil {
 				s.App.Logger().Error("Could not load club data for API key")
+				ForwardErrorToExternalSystem(err, errorContext, nil)
+				return
+			}
+			club := &Club{}
+			club.SetProxyRecord(clubRecord)
+
+			matches, err := s.fetchMatchesForLeagueGroup(cast.ToString(team.BSMLeagueGroup()), club.BSMAPIKey())
+			if err != nil {
+				s.App.Logger().Error("Could not fetch Matches for leagueGroup", "error", err, "team", team)
+				ForwardErrorToExternalSystem(err, errorContext, nil)
 				return
 			}
 
-			matches, err := s.fetchMatchesForLeagueGroup(team.GetString("bsm_league_group"), club.GetString("bsm_api_key"))
-			if err != nil {
-				s.App.Logger().Error("Could not fetch Matches for leagueGroup", "error", err, "team", team, "apiKey", club.GetString("bsm_api_key"))
-				return
-			}
+			s.createOrUpdateEvents(matches, team)
 
-			err = s.createOrUpdateEvents(matches, team)
-			if err != nil {
-				s.App.Logger().Error("Error creating or updating events", "error", err, "team", team.Id)
-				return
-			}
 			processedTeams++
 			processedMatches += len(matches)
-		}()
+		})
 	}
 
 	wg.Wait()
@@ -108,13 +126,25 @@ func (s GameImportService) fetchMatchesForLeagueGroup(league string, apiKey stri
 	return matches, nil
 }
 
-func (s GameImportService) createOrUpdateEvents(matches []bsm.Match, team *core.Record) (err error) {
+func (s GameImportService) createOrUpdateEvents(matches []bsm.Match, team *Team) {
 	for _, match := range matches {
+		errorContext := &ErrorContext{
+			Key: "local",
+			Values: map[string]any{
+				"match":       match.ID,
+				"human_match": match.MatchID,
+				"home":        match.HomeTeamName,
+				"away":        match.AwayTeamName,
+				"team":        team.Name(),
+			},
+		}
+
 		record, foundErr := s.App.FindFirstRecordByData(EventsCollection, "bsm_id", match.ID)
 
 		location, err := s.createOrUpdateField(team, match.Field)
 		if err != nil {
-			s.App.Logger().Error("Error creating or updating event: ", "error", err)
+			s.App.Logger().Error("Error creating or updating location: ", "error", err)
+			ForwardErrorToExternalSystem(err, errorContext, nil)
 		}
 
 		// if not found, it throws an error, so create new record
@@ -122,6 +152,7 @@ func (s GameImportService) createOrUpdateEvents(matches []bsm.Match, team *core.
 			collection, err := s.App.FindCollectionByNameOrId(EventsCollection)
 			if err != nil {
 				s.App.Logger().Error("Error fetching event collection: ", "error", err)
+				ForwardErrorToExternalSystem(err, errorContext, nil)
 				continue
 			}
 
@@ -129,22 +160,24 @@ func (s GameImportService) createOrUpdateEvents(matches []bsm.Match, team *core.
 		}
 		if record == nil {
 			s.App.Logger().Error("event record was unexpectedly nil: ", "error", err, "match", match)
+			ForwardErrorToExternalSystem(err, errorContext, nil)
 			continue
 		}
 		// no error - update existing record
 		err = s.setEventRecordValues(record, match, team.Id, location)
 		if err != nil {
 			s.App.Logger().Error("Error setting event record: ", "error", err)
+			ForwardErrorToExternalSystem(err, errorContext, nil)
 			continue
 		}
 
 		s.App.Logger().Debug("Record data immediately before persist call", "record", record)
 		if err := s.App.Save(record); err != nil {
 			s.App.Logger().Error("Persisting event record failed", "error", err, "record", record, "teamID", team.Id, "match", match)
+			ForwardErrorToExternalSystem(err, errorContext, nil)
 			continue
 		}
 	}
-	return
 }
 
 func (s GameImportService) setEventRecordValues(record *core.Record, match bsm.Match, teamID string, location *Location) (err error) {
@@ -184,7 +217,7 @@ func (s GameImportService) setEventRecordValues(record *core.Record, match bsm.M
 
 // createOrUpdateField Adds field/location to the database that can then be set to new events as well as selected for
 // manually created events in the frontend.
-func (s GameImportService) createOrUpdateField(team *core.Record, field bsm.Field) (*Location, error) {
+func (s GameImportService) createOrUpdateField(team *Team, field bsm.Field) (*Location, error) {
 	record, err := s.App.FindFirstRecordByData(LocationCollection, "bsm_id", field.BSMID)
 
 	if err != nil {
@@ -220,7 +253,7 @@ func (s GameImportService) createOrUpdateField(team *core.Record, field bsm.Fiel
 	location.SetHumanCountry(field.HumanCountry)
 	location.SetPhotoURL(field.PhotoURL)
 
-	location.SetClub(team.GetString("club"))
+	location.SetClub(team.Club())
 
 	if err := s.App.Save(location); err != nil {
 		s.App.Logger().Error("Persisting location failed", "error", err, "location", location)

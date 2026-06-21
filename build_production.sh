@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 docker login
 docker build \
     --build-arg BUILD_MODE="build:prod" \

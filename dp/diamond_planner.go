@@ -13,6 +13,7 @@ import (
 	"github.com/pocketbase/pocketbase/apis"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/plugins/migratecmd"
+	"github.com/pocketbase/pocketbase/tools/hook"
 	"github.com/pocketbase/pocketbase/tools/osutils"
 	"github.com/spf13/cobra"
 )
@@ -167,6 +168,18 @@ func BindDPHooks(app core.App, client bsm.APIClient, pushService PushService) {
 	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
 		// serves static files from the provided public dir (if it exists)
 		se.Router.GET("/{path...}", apis.Static(os.DirFS("./pb_public"), true))
+
+		return se.Next()
+	})
+
+	//------------------- Middlewares -------------------------//
+
+	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
+		se.Router.Bind(&hook.Handler[*core.RequestEvent]{
+			Id:       "block_noise",
+			Func:     BlockKnownPaths,
+			Priority: 100,
+		})
 
 		return se.Next()
 	})
