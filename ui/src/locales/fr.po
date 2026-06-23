@@ -1545,9 +1545,8 @@ msgstr "Vous avez la possibilité d'afficher vos données de joueur dans votre p
 msgid "Please note that all statistics and basic info such as your name and team affiliation is considered public information when participating in official DBV and BSVBB competitions."
 msgstr "Veuillez noter que toutes les statistiques et informations de base telles que votre nom et votre affiliation à l'équipe sont considérées comme des informations publiques lors de la participation aux compétitions officielles de la DBV et de la BSVBB."
 
-#: src/lib/dp/components/user/PlayerDataProfileSection.svelte
-msgid "Go to Profile Page"
-msgstr "Aller à la page de profil"
+#~ msgid "Go to Profile Page"
+#~ msgstr "Aller à la page de profil"
 
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 msgid "Events of type \"Game\" don't need to be created manually. All data can be imported from BSM and kept in sync with the current state."

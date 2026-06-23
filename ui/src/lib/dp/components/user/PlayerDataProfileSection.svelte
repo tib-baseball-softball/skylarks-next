@@ -1,12 +1,11 @@
 <script lang="ts">
-  import {Link} from "lucide-svelte";
   import PlayerDataForm from "$lib/dp/components/forms/PlayerDataForm.svelte";
   import PlayerDataCard from "$lib/dp/components/player/PlayerDataCard.svelte";
   import PlayerHeaderSection from "$lib/dp/components/player/PlayerHeaderSection.svelte";
-  import {authSettings, client} from "$lib/dp/client.svelte.js";
-  import {positionKeysToEnumStringValues} from "$lib/dp/types/BaseballPosition.js";
-  import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
-  import type {Player} from "$lib/dp/types/Player.ts";
+  import { authSettings, client } from "$lib/dp/client.svelte.js";
+  import { positionKeysToEnumStringValues } from "$lib/dp/types/BaseballPosition.js";
+  import type { CustomAuthModel } from "$lib/dp/types/ExpandedResponse.ts";
+  import type { Player } from "$lib/dp/types/Player.ts";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
@@ -41,36 +40,26 @@
 
   <section class="content">
     <p>
-      You have the option to display your player data in your public
-      profile on the website and apps.
+      You have the option to display your player data in your public profile on
+      the website and apps.
     </p>
     <p class="note">
-      Please note that all statistics and basic info such as your name and
-      team affiliation is considered public information when participating
-      in official DBV and BSVBB competitions.
+      Please note that all statistics and basic info such as your name and team
+      affiliation is considered public information when participating in
+      official DBV and BSVBB competitions.
     </p>
   </section>
 
   <footer class="card-footer">
     <div class="actions">
-      <PlayerDataForm triggerVariant="tonal-primary"></PlayerDataForm>
-
-      {#if authRecord.bsm_id}
-        <a
-          href="/players/{authRecord?.bsm_id}"
-          class="btn preset-tonal-secondary border border-secondary-500"
-        >
-          <Link/>
-          <span>Go to Profile Page</span>
-        </a>
-      {/if}
+      <PlayerDataForm triggerVariant="tonal-secondary"></PlayerDataForm>
     </div>
   </footer>
 </div>
 
-<PlayerHeaderSection player={playerObject}/>
+<PlayerHeaderSection player={playerObject} />
 
-<PlayerDataCard player={playerObject} showTeams={false}/>
+<PlayerDataCard player={playerObject} showTeams={false} />
 
 <style>
   .profile-card {

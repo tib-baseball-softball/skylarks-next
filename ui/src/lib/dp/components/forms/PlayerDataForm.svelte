@@ -110,7 +110,7 @@
       triggerSpaced && "trigger-spaced",
       triggerVariant === "filled-primary" && "preset-filled-primary-500",
       triggerVariant === "tonal-primary" && "preset-tonal-primary",
-      triggerVariant === "tonal-secondary" && "preset-tonal-secondary",
+      triggerVariant === "tonal-secondary" && "preset-filled-secondary-100-900",
       triggerVariant === "tonal-tertiary" && "preset-tonal-tertiary",
       triggerVariant === "tonal-surface" && "preset-outlined-card",
     ]}
