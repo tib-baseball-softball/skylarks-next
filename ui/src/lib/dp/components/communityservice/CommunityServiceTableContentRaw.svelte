@@ -56,7 +56,7 @@
 
     <td>
       <code class="code">
-        {toHours(row.minutes)}h
+        {toHours(row.minutes).toFixed(2)}h
       </code>
     </td>
 
