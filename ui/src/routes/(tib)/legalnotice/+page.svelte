@@ -1,3 +1,7 @@
+<svelte:head>
+	<title>Legal Notice</title>
+</svelte:head>
+
 <!-- @wc-ignore -->
 <article class="prose" lang="de">
   <h1 class="h1">Impressum</h1>

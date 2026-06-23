@@ -22,6 +22,10 @@
   };
 </script>
 
+<svelte:head>
+	<title>Community Service</title>
+</svelte:head>
+
 <h1 class="h1">Community Service</h1>
 
 {#await data.set}

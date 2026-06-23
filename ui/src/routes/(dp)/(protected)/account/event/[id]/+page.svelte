@@ -28,6 +28,15 @@
   const matchJSON = $derived($event?.match_json) as unknown as Match;
 </script>
 
+<svelte:head>
+  <title>{$event.title}</title>
+  <meta
+    content="Event details for {$event.title}, including time, type, and location."
+    name="description"
+  />
+</svelte:head>
+
+
 <div class="event-page-container">
   <div class="header-row">
     <h1 class="h1" class:cancelled-text={$event.cancelled}>{$event.title}</h1>

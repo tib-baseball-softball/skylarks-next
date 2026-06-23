@@ -1,3 +1,7 @@
+<svelte:head>
+	<title>Privacy Statement</title>
+</svelte:head>
+
 <!-- @wc-ignore -->
 <article class="prose" lang="de">
   <h1 class="h1">Datenschutzerklärung</h1>

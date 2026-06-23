@@ -15,6 +15,10 @@
   const eventStore = $derived(data.eventStore);
 </script>
 
+<svelte:head>
+	<title>My Dashboard</title>
+</svelte:head>
+
 <h1 class="h1">My Dashboard</h1>
 
 <div class="top-grid">

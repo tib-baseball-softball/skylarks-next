@@ -67,6 +67,7 @@ msgid "Login / Register"
 msgstr "Login / Register"
 
 #: src/lib/dp/auth/LoginBadge.svelte
+#: src/routes/(dp)/login/+page.svelte
 msgid "Login"
 msgstr "Login"
 
@@ -242,6 +243,7 @@ msgstr "There seems to be an error while contacting the backend. Please try agai
 msgid "Hero"
 msgstr "Hero"
 
+#: src/routes/+page.svelte
 #: src/routes/+page.svelte
 msgid "Diamond Planner"
 msgstr "Diamond Planner"
@@ -1265,6 +1267,7 @@ msgstr "Player Profile"
 #: src/lib/dp/components/meta/SidebarNavigation.svelte
 #: src/lib/dp/components/meta/SidebarNavigation.svelte
 #: src/routes/(dp)/(protected)/account/[user]/communityservice/+page.svelte
+#: src/routes/(dp)/(protected)/account/[user]/communityservice/+page.svelte
 msgid "Community Service"
 msgstr "Community Service"
 
@@ -1545,9 +1548,6 @@ msgstr "You have the option to display your player data in your public profile o
 msgid "Please note that all statistics and basic info such as your name and team affiliation is considered public information when participating in official DBV and BSVBB competitions."
 msgstr "Please note that all statistics and basic info such as your name and team affiliation is considered public information when participating in official DBV and BSVBB competitions."
 
-#~ msgid "Go to Profile Page"
-#~ msgstr "Go to Profile Page"
-
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 msgid "Events of type \"Game\" don't need to be created manually. All data can be imported from BSM and kept in sync with the current state."
 msgstr "Events of type \"Game\" don't need to be created manually. All data can be imported from BSM and kept in sync with the current state."
@@ -1641,6 +1641,7 @@ msgstr "Go to User Settings"
 
 #: src/lib/dp/components/user/UserDataCard.svelte
 #: src/routes/(dp)/(protected)/account/settings/+page.svelte
+#: src/routes/(dp)/(protected)/account/settings/+page.svelte
 msgid "User Settings"
 msgstr "User Settings"
 
@@ -1673,6 +1674,7 @@ msgid "L"
 msgstr "L"
 
 #: src/routes/(dp)/(protected)/account/+page.svelte
+#: src/routes/(dp)/(protected)/account/+page.svelte
 msgid "My Dashboard"
 msgstr "My Dashboard"
 
@@ -1682,16 +1684,13 @@ msgstr "My Announcements"
 
 #: src/routes/(dp)/(protected)/account/+page.svelte
 #: src/routes/(dp)/(protected)/account/team/+page.svelte
+#: src/routes/(dp)/(protected)/account/team/+page.svelte
 msgid "My Teams"
 msgstr "My Teams"
 
 #: src/routes/(dp)/(protected)/account/+page.svelte
 msgid "You are not a member of any teams yet."
 msgstr "You are not a member of any teams yet."
-
-#: src/routes/(dp)/(protected)/account/clubs/[club]/+page.svelte
-msgid "Club Details"
-msgstr "Club Details"
 
 #: src/lib/dp/components/event/match/GameResultIndicator.svelte
 msgid "F"
@@ -1718,10 +1717,13 @@ msgid "Open in Apple Maps"
 msgstr "Open in Apple Maps"
 
 #: src/routes/(dp)/(protected)/account/playerprofile/+page.svelte
+#: src/routes/(dp)/(protected)/account/playerprofile/+page.svelte
 msgid "My Player Data"
 msgstr "My Player Data"
 
 #. 0: user?.first_name; 1: user?.last_name
+#. 0: user?.first_name; 1: user?.last_name
+#: src/routes/(dp)/(protected)/stats/[user]/+page.svelte
 #: src/routes/(dp)/(protected)/stats/[user]/+page.svelte
 msgid "Stats for {0} {1}"
 msgstr "Stats for {0} {1}"
@@ -1982,6 +1984,7 @@ msgstr "Copy invitation link"
 msgid "My Next Events"
 msgstr "My Next Events"
 
+#: src/routes/(tib)/bsm/+page.svelte
 #: src/routes/+layout.svelte
 #: src/routes/+page.svelte
 msgid "BSM Data"
@@ -2004,6 +2007,7 @@ msgid "Go to game data"
 msgstr "Go to game data"
 
 #: src/routes/(dp)/(protected)/account/clubs/+page.svelte
+#: src/routes/(dp)/(protected)/account/clubs/+page.svelte
 msgid "My Clubs"
 msgstr "My Clubs"
 
@@ -2018,3 +2022,53 @@ msgstr "No field name provided"
 #: src/lib/dp/components/event/EventParticipantsOverviewSection.svelte
 msgid "Failed to send participation data"
 msgstr "Failed to send participation data"
+
+#: src/routes/(tib)/legalnotice/+page.svelte
+msgid "Legal Notice"
+msgstr "Legal Notice"
+
+#: src/routes/(tib)/privacy/+page.svelte
+msgid "Privacy Statement"
+msgstr "Privacy Statement"
+
+#: src/routes/(dp)/(protected)/account/playerprofile/+page.svelte
+msgid "Player profile page, displaying player data and stats."
+msgstr "Player profile page, displaying player data and stats."
+
+#: src/routes/(dp)/(protected)/account/settings/+page.svelte
+msgid "User settings page, allowing the user to update their account data and preferences."
+msgstr "User settings page, allowing the user to update their account data and preferences."
+
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+msgid "Team details page, displaying information about the team and allowing the user to manage it."
+msgstr "Team details page, displaying information about the team and allowing the user to manage it."
+
+#: src/routes/(tib)/bsm/+page.svelte
+msgid "BSM data page, displaying the BSM data for the club."
+msgstr "BSM data page, displaying the BSM data for the club."
+
+#: src/routes/(dp)/(protected)/account/clubs/[club]/admin/communityservice/+page.svelte
+msgid "Community Service Admin"
+msgstr "Community Service Admin"
+
+#. 0: data.club.name
+#: src/routes/(dp)/(protected)/account/clubs/[club]/admin/communityservice/+page.svelte
+msgid "Community Service admin dashboard for {0}, allowing the user to manage community service entries."
+msgstr "Community Service admin dashboard for {0}, allowing the user to manage community service entries."
+
+#. 0: $event.title
+#: src/routes/(dp)/(protected)/account/event/[id]/+page.svelte
+msgid "Event details for {0}, including time, type, and location."
+msgstr "Event details for {0}, including time, type, and location."
+
+#: src/routes/(dp)/signupconfirm/+page.svelte
+msgid "Complete signup"
+msgstr "Complete signup"
+
+#: src/routes/(tib)/terms/+page.svelte
+msgid "Terms of Use"
+msgstr "Terms of Use"
+
+#: src/routes/(dp)/(protected)/account/team/+page.svelte
+msgid "Team list page, displaying the user's teams and allowing them to manage them."
+msgstr "Team list page, displaying the user's teams and allowing them to manage them."

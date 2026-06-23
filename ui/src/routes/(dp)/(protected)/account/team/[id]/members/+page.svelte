@@ -1,9 +1,9 @@
 <script lang="ts">
   import TeamMemberDatatable from "$lib/dp/components/team/TeamMemberDatatable.svelte";
   import TeamAddMemberButton from "$lib/dp/components/team/TeamAddMemberButton.svelte";
-  import {authSettings} from "$lib/dp/client.svelte.js";
+  import { authSettings } from "$lib/dp/client.svelte.js";
 
-  const {data} = $props();
+  const { data } = $props();
 
   const players = $derived(data.players);
 
@@ -20,15 +20,19 @@
 
 <svelte:head>
   <title>Team Members</title>
-  <meta content="Team member list for {data.team.name}." name="description"/>
+  <meta content="Team member list for {data.team.name}." name="description" />
 </svelte:head>
 
 <h1 class="h1">Team members for Team "{data.team.name}"</h1>
 
 <div class="mt-8!">
-  <TeamMemberDatatable data={$players.items} {showAdminSection} team={data.team}/>
+  <TeamMemberDatatable
+    data={$players.items}
+    {showAdminSection}
+    team={data.team}
+  />
 </div>
 
 {#if showAdminSection}
-  <TeamAddMemberButton team={data.team} club={data.team?.expand?.club}/>
+  <TeamAddMemberButton team={data.team} club={data.team?.expand?.club} />
 {/if}

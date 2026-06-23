@@ -2,6 +2,15 @@
 
 </script>
 
+<svelte:head>
+  <title>BSM Data</title>
+  <meta
+    content="BSM data page, displaying the BSM data for the club."
+    name="description"
+  />
+</svelte:head>
+
+
 <iframe title="Skylarks BSM Data" src="https://bsm.berlinskylarks.de/"></iframe>
 
 <style>
