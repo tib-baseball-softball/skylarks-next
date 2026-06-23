@@ -118,8 +118,9 @@ noreferrer"
     10965 Berlin
   </p>
   <p>
-    Telefon: + 49 30 61 10 10 -13 (-0)<br />
-    E-Mail: vorstand@tib-baseball.de
+    Telefon: <a href="tel:+4930611010-13-0">+ 49 30 61 10 10 -13 (-0)</a>
+    <br />
+    E-Mail: <a href="mailto:vorstand@tib-baseball.de">vorstand@tib-baseball.de</a>
   </p>
   <p>
     Verantwortliche Stelle ist die natürliche oder juristische Person, die
