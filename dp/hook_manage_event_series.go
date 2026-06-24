@@ -30,6 +30,7 @@ func CreateOrUpdateEventsForSeries(e *core.RecordEvent) error {
 	return e.Next()
 }
 
+// DeleteEventsForSeries deletes all events associated with a given event series record.
 func DeleteEventsForSeries(e *core.RecordEvent) error {
 	eventSeries := e.Record
 
@@ -59,6 +60,7 @@ func DeleteEventsForSeries(e *core.RecordEvent) error {
 	return e.Next()
 }
 
+// generateSeriesEvents contains the main logic to handle single events belonging to a series.
 func generateSeriesEvents(app core.App, record *core.Record) ([]*core.Record, error) {
 	eventSeries := &EventSeries{}
 	eventSeries.SetProxyRecord(record)
@@ -73,14 +75,7 @@ func generateSeriesEvents(app core.App, record *core.Record) ([]*core.Record, er
 		return nil, err
 	}
 
-	existingEvents, err := app.FindRecordsByFilter(
-		EventsCollection,
-		"series = {:seriesID}",
-		"",
-		0,
-		0,
-		dbx.Params{"seriesID": eventSeries.Id},
-	)
+	existingEvents, err := findEventRecordsForSeries(app, eventSeries)
 	if err != nil {
 		return nil, err
 	}
@@ -151,12 +146,14 @@ func generateSeriesEvents(app core.App, record *core.Record) ([]*core.Record, er
 	return events, nil
 }
 
+// AddSeriesState is a hook that sets the state of the event series based on the current date
 func AddSeriesState(e *core.RecordEnrichEvent) error {
 	addSeriesState(e.Record)
 
 	return e.Next()
 }
 
+// addSeriesState sets the state of the event series based on the current date
 func addSeriesState(record *core.Record) {
 	record.WithCustomData(true)
 	eventSeries := &EventSeries{}
