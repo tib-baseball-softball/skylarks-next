@@ -12,6 +12,14 @@
   const model = $derived(authSettings.record) as CustomAuthModel;
 </script>
 
+<svelte:head>
+  <title>User Settings</title>
+  <meta
+    content="User settings page, allowing the user to update their account data and preferences."
+    name="description"
+  />
+</svelte:head>
+
 <h1 class="h1">User Settings</h1>
 {#if model}
   <section class="card preset-outlined-card">

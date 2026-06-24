@@ -25,6 +25,10 @@
   };
 </script>
 
+<svelte:head>
+	<title>Stats for {user?.first_name} {user?.last_name}</title>
+</svelte:head>
+
 <h1 class="h1">Stats for {user?.first_name} {user?.last_name}</h1>
 
 <SeasonSelector bind:selectedSeason={selectedSeason} onChangeCallback={reloadWithQuery} seasonOptions={seasonOptions}/>

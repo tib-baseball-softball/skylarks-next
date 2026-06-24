@@ -10,6 +10,14 @@
   const userTeams = $derived(data.teams.filter((team) => authRecord.teams.includes(team.id)));
 </script>
 
+<svelte:head>
+  <title>My Teams</title>
+  <meta
+    content="Team list page, displaying the user's teams and allowing them to manage them."
+    name="description"
+  />
+</svelte:head>
+
 <h1 class="h1">My Teams</h1>
 <div class="teams-grid">
   {#each userTeams as team (team.id)}

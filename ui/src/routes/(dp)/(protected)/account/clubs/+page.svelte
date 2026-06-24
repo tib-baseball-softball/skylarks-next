@@ -5,6 +5,10 @@
   const {data}: PageProps = $props();
 </script>
 
+<svelte:head>
+	<title>My Clubs</title>
+</svelte:head>
+
 <h1 class="h1">My Clubs</h1>
 
 <div class="grid">

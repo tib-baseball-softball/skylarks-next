@@ -28,7 +28,7 @@
 </script>
 
 <svelte:head>
-  <title>Club Details</title>
+  <title>{club.name}</title>
   <meta
     content="Club overview page for the {club.name} with info about teams and uniform sets."
     name="description"

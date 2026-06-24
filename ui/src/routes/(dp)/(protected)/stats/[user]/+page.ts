@@ -1,23 +1,29 @@
-import {authSettings, client} from "$lib/dp/client.svelte.js";
-import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
-import type {PersonalAttendanceStatsItem} from "$lib/dp/types/PersonalAttendanceStats.ts";
-import type {UserStatsQuery} from "$lib/dp/types/UserStatsQuery.ts";
-import type {PageLoad} from "./$types";
+import { authSettings, client } from "$lib/dp/client.svelte.js";
+import { Collection } from "$lib/dp/enum/Collection";
+import type { CustomAuthModel } from "$lib/dp/types/ExpandedResponse.ts";
+import type { PersonalAttendanceStatsItem } from "$lib/dp/types/PersonalAttendanceStats.ts";
+import type { UserStatsQuery } from "$lib/dp/types/UserStatsQuery.ts";
+import type { PageLoad } from "./$types";
 
-export const load = (async ({fetch, params, url}) => {
+export const load = (async ({ fetch, params, url }) => {
   const user = params.user;
 
   const queryParams: UserStatsQuery = {};
 
   const season = url.searchParams.get("season");
-  if (season) {
+  if (season === null) {
+    queryParams.season = new Date().getFullYear().toString();
+  } else {
     queryParams.season = season;
   }
 
-  const statsItem = client.send<PersonalAttendanceStatsItem>(`/api/stats/${user}`, {
-    fetch: fetch,
-    query: queryParams,
-  });
+  const statsItem = client.send<PersonalAttendanceStatsItem>(
+    `/api/stats/${user}`,
+    {
+      fetch: fetch,
+      query: queryParams,
+    },
+  );
 
   let userRecord: CustomAuthModel;
 
@@ -25,20 +31,22 @@ export const load = (async ({fetch, params, url}) => {
   if (authSettings?.record?.id === user) {
     userRecord = authSettings.record as CustomAuthModel;
   } else {
-    userRecord = await client.collection("users").getOne<CustomAuthModel>(user, {
-      fetch: fetch,
-    });
+    userRecord = await client
+      .collection(Collection.Users)
+      .getOne<CustomAuthModel>(user, {
+        fetch: fetch,
+      });
   }
 
   const teamStatsItems: Promise<PersonalAttendanceStatsItem>[] = [];
   for (const team of userRecord.teams) {
     queryParams.team = team;
     teamStatsItems.push(
-        client.send<PersonalAttendanceStatsItem>(`/api/stats/${user}`, {
-          fetch: fetch,
-          query: queryParams,
-          requestKey: team,
-        })
+      client.send<PersonalAttendanceStatsItem>(`/api/stats/${user}`, {
+        fetch: fetch,
+        query: queryParams,
+        requestKey: team,
+      }),
     );
   }
 

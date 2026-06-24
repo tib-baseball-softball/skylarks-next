@@ -1,6 +1,10 @@
 <script lang="ts">
 </script>
 
+<svelte:head>
+	<title>Diamond Planner</title>
+</svelte:head>
+
 <div class="hero-wrapper">
   <section class="hero" id="Hero">
     <div class="hero-overlay"></div>

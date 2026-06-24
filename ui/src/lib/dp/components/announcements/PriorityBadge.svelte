@@ -1,13 +1,13 @@
 <script lang="ts">
-  import type {AnnouncementsResponse} from "$lib/dp/types/pb-types.ts";
+  import type { AnnouncementsResponse } from "$lib/dp/types/pb-types.ts";
 
-  type Priority = AnnouncementsResponse["priority"]
+  type Priority = AnnouncementsResponse["priority"];
 
   interface Props {
     priority: Priority;
   }
 
-  let {priority}: Props = $props();
+  let { priority }: Props = $props();
 
   const displayString = $derived.by(() => {
     switch (priority) {
@@ -34,18 +34,22 @@
   }
 
   .badge {
+    background: var(--badge-bg);
+    color: contrast-color(var(--badge-bg));
+
     &[data-priority="info"] {
-      border: 1px solid light-dark(var(--color-secondary-500), white);
+      --badge-bg: light-dark(
+        var(--color-secondary-50),
+        var(--color-secondary-400)
+      );
     }
 
     &[data-priority="warning"] {
-      border: 1px solid var(--color-warning-600-400);
-      color: light-dark(black, white);
+      --badge-bg: var(--color-warning-50-950);
     }
 
     &[data-priority="danger"] {
-      border: 1px solid light-dark(var(--color-error-500), var(--color-error-300));
-      color: light-dark(var(--color-error-500), var(--color-error-300));
+      --badge-bg: var(--color-error-50-950);
     }
   }
 </style>

@@ -7,6 +7,10 @@
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 </script>
 
+<svelte:head>
+	<title>Login</title>
+</svelte:head>
+
 {#if browser}
   {#if client.authStore.isValid}
     <h1 class="h1">Login Page</h1>
