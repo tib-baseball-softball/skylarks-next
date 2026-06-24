@@ -67,6 +67,7 @@ msgid "Login / Register"
 msgstr "Zaloguj się / Zarejestruj się"
 
 #: src/lib/dp/auth/LoginBadge.svelte
+#: src/routes/(dp)/login/+page.svelte
 msgid "Login"
 msgstr "Zaloguj się"
 
@@ -242,6 +243,7 @@ msgstr "Wygląda na to, że wystąpił błąd podczas kontaktu z backendem. Spr�
 msgid "Hero"
 msgstr "Hero"
 
+#: src/routes/+page.svelte
 #: src/routes/+page.svelte
 msgid "Diamond Planner"
 msgstr "Diamond Planner"
@@ -1265,6 +1267,7 @@ msgstr "Profil Gracza"
 #: src/lib/dp/components/meta/SidebarNavigation.svelte
 #: src/lib/dp/components/meta/SidebarNavigation.svelte
 #: src/routes/(dp)/(protected)/account/[user]/communityservice/+page.svelte
+#: src/routes/(dp)/(protected)/account/[user]/communityservice/+page.svelte
 msgid "Community Service"
 msgstr "Prace społeczne"
 
@@ -1545,10 +1548,6 @@ msgstr "Masz możliwość wyświetlania swoich danych zawodnika w profilu public
 msgid "Please note that all statistics and basic info such as your name and team affiliation is considered public information when participating in official DBV and BSVBB competitions."
 msgstr "Należy pamiętać, że wszystkie statystyki i podstawowe informacje, takie jak imię i nazwisko oraz przynależność do zespołu, są uważane za informacje publiczne w przypadku udziału w oficjalnych zawodach DBV i BSVBB."
 
-#: src/lib/dp/components/user/PlayerDataProfileSection.svelte
-msgid "Go to Profile Page"
-msgstr "Przejdź do strony profilu"
-
 #: src/lib/dp/components/team/TeamAdminSection.svelte
 msgid "Events of type \"Game\" don't need to be created manually. All data can be imported from BSM and kept in sync with the current state."
 msgstr "Wydarzenia typu \"Mecz\" nie muszą być tworzone ręcznie. Wszystkie dane można zaimportować z BSM i synchronizować z aktualnym stanem."
@@ -1642,6 +1641,7 @@ msgstr "Przejdź do ustawień użytkownika"
 
 #: src/lib/dp/components/user/UserDataCard.svelte
 #: src/routes/(dp)/(protected)/account/settings/+page.svelte
+#: src/routes/(dp)/(protected)/account/settings/+page.svelte
 msgid "User Settings"
 msgstr "Ustawienia użytkownika"
 
@@ -1674,6 +1674,7 @@ msgid "L"
 msgstr "P"
 
 #: src/routes/(dp)/(protected)/account/+page.svelte
+#: src/routes/(dp)/(protected)/account/+page.svelte
 msgid "My Dashboard"
 msgstr "Mój Panel"
 
@@ -1683,16 +1684,13 @@ msgstr "Moje ogłoszenia"
 
 #: src/routes/(dp)/(protected)/account/+page.svelte
 #: src/routes/(dp)/(protected)/account/team/+page.svelte
+#: src/routes/(dp)/(protected)/account/team/+page.svelte
 msgid "My Teams"
 msgstr "Moje Zespoły"
 
 #: src/routes/(dp)/(protected)/account/+page.svelte
 msgid "You are not a member of any teams yet."
 msgstr "Nie jesteś jeszcze członkiem żadnego zespołu."
-
-#: src/routes/(dp)/(protected)/account/clubs/[club]/+page.svelte
-msgid "Club Details"
-msgstr "Szczegóły Klubu"
 
 #: src/lib/dp/components/event/match/GameResultIndicator.svelte
 msgid "F"
@@ -1719,10 +1717,13 @@ msgid "Open in Apple Maps"
 msgstr "Otwórz w Mapach Apple"
 
 #: src/routes/(dp)/(protected)/account/playerprofile/+page.svelte
+#: src/routes/(dp)/(protected)/account/playerprofile/+page.svelte
 msgid "My Player Data"
 msgstr "Moje Dane Gracza"
 
 #. 0: user?.first_name; 1: user?.last_name
+#. 0: user?.first_name; 1: user?.last_name
+#: src/routes/(dp)/(protected)/stats/[user]/+page.svelte
 #: src/routes/(dp)/(protected)/stats/[user]/+page.svelte
 msgid "Stats for {0} {1}"
 msgstr "Statystyki dla {0} {1}"
@@ -1983,6 +1984,7 @@ msgstr "Kopiiwanie linku do zaproszenia"
 msgid "My Next Events"
 msgstr "Moje następne wydarzenia"
 
+#: src/routes/(tib)/bsm/+page.svelte
 #: src/routes/+layout.svelte
 #: src/routes/+page.svelte
 msgid "BSM Data"
@@ -2005,6 +2007,7 @@ msgid "Go to game data"
 msgstr "Przejdź do danych gry"
 
 #: src/routes/(dp)/(protected)/account/clubs/+page.svelte
+#: src/routes/(dp)/(protected)/account/clubs/+page.svelte
 msgid "My Clubs"
 msgstr "Moje kluby"
 
@@ -2018,4 +2021,54 @@ msgstr ""
 
 #: src/lib/dp/components/event/EventParticipantsOverviewSection.svelte
 msgid "Failed to send participation data"
+msgstr ""
+
+#: src/routes/(tib)/legalnotice/+page.svelte
+msgid "Legal Notice"
+msgstr ""
+
+#: src/routes/(tib)/privacy/+page.svelte
+msgid "Privacy Statement"
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/playerprofile/+page.svelte
+msgid "Player profile page, displaying player data and stats."
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/settings/+page.svelte
+msgid "User settings page, allowing the user to update their account data and preferences."
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+msgid "Team details page, displaying information about the team and allowing the user to manage it."
+msgstr ""
+
+#: src/routes/(tib)/bsm/+page.svelte
+msgid "BSM data page, displaying the BSM data for the club."
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/clubs/[club]/admin/communityservice/+page.svelte
+msgid "Community Service Admin"
+msgstr ""
+
+#. 0: data.club.name
+#: src/routes/(dp)/(protected)/account/clubs/[club]/admin/communityservice/+page.svelte
+msgid "Community Service admin dashboard for {0}, allowing the user to manage community service entries."
+msgstr ""
+
+#. 0: $event.title
+#: src/routes/(dp)/(protected)/account/event/[id]/+page.svelte
+msgid "Event details for {0}, including time, type, and location."
+msgstr ""
+
+#: src/routes/(dp)/signupconfirm/+page.svelte
+msgid "Complete signup"
+msgstr ""
+
+#: src/routes/(tib)/terms/+page.svelte
+msgid "Terms of Use"
+msgstr ""
+
+#: src/routes/(dp)/(protected)/account/team/+page.svelte
+msgid "Team list page, displaying the user's teams and allowing them to manage them."
 msgstr ""

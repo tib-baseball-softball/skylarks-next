@@ -50,6 +50,14 @@
   const isMember = $derived(authRecord?.teams.includes(data.team.id));
 </script>
 
+<svelte:head>
+  <title>{data.team.name} ({data.team?.expand?.club.name})</title>
+  <meta
+    content="Team details page, displaying information about the team and allowing the user to manage it."
+    name="description"
+  />
+</svelte:head>
+
 <h1 class="h1 page-title">{data.team.name} ({data.team?.expand?.club.name})</h1>
 
 <div class="team-overview-grid">

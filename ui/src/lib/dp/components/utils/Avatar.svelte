@@ -6,7 +6,7 @@
     fallback?: string;
   }
 
-  let {background = "", classes = "", src, fallback = ""}: Props = $props();
+  let { background = "", classes = "", src, fallback = "" }: Props = $props();
 </script>
 
 {#if src}
@@ -17,7 +17,7 @@
     data-testid="avatar"
   >
     <img
-      alt="profile "
+      alt="profile avatar"
       class="avatar-image"
       data-part="image"
       data-scope="avatar"
@@ -32,7 +32,8 @@
     data-scope="avatar"
     data-testid="avatar-fallback"
   >
-    {fallback}</span>
+    {fallback}</span
+  >
 {/if}
 
 <style>
@@ -40,11 +41,13 @@
     overflow: hidden;
     isolation: isolate;
     width: var(--size);
+    height: var(--size);
     border-radius: 100%;
     background-color: var(--color-surface-400-600);
 
     .avatar-image {
       width: 100%;
+      height: 100%;
       object-fit: cover;
     }
   }

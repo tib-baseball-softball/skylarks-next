@@ -2,6 +2,15 @@
   import PlayerDataProfileSection from "$lib/dp/components/user/PlayerDataProfileSection.svelte";
 </script>
 
+<svelte:head>
+  <title>My Player Data</title>
+  <meta
+    content="Player profile page, displaying player data and stats."
+    name="description"
+  />
+</svelte:head>
+
+
 <h1 class="h1">My Player Data</h1>
 
 <div class="wrapper">

@@ -2,6 +2,10 @@
   import {appLocale} from "$lib/dp/locale.svelte.ts";
 </script>
 
+<svelte:head>
+	<title>Terms of Use</title>
+</svelte:head>
+
 <!-- @wc-ignore -->
 <article class="prose max-w-none mb-6"><h1 class="mt-4">Nutzungsbedingungen für die Web-App der Berlin
   Skylarks</h1>

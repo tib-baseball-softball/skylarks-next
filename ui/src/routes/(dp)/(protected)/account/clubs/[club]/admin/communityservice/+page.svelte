@@ -22,6 +22,15 @@
   };
 </script>
 
+<svelte:head>
+  <title>Community Service Admin</title>
+  <meta
+    content="Community Service admin dashboard for {data.club.name}, allowing the user to manage community service entries."
+    name="description"
+  />
+</svelte:head>
+
+
 <h1 class="h1">
   Community Service Admin Dashboard
 </h1>

@@ -30,6 +30,10 @@
   const club = $derived($announcement?.expand?.club ?? $announcement?.expand?.team?.expand?.club);
 </script>
 
+<svelte:head>
+	<title>{$announcement.title}</title>
+</svelte:head>
+
 <div class="announcement-header">
   <h1 class="h1 announcement-title">{$announcement.title}</h1>
   <PriorityBadge priority={$announcement.priority}/>
