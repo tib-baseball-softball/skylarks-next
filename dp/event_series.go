@@ -1,6 +1,7 @@
 package dp
 
 import (
+	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
 )
@@ -21,6 +22,8 @@ var _ core.RecordProxy = (*EventSeries)(nil)
 
 // EventSeries is a RecordProxy for the `eventseries` collection.
 // It offers type-safe getters and setters for every field.
+//
+// Pure database model, relations are not resolved automatically.
 type EventSeries struct {
 	core.BaseRecordProxy
 }
@@ -82,7 +85,7 @@ func (s *EventSeries) SetSeriesEnd(end types.DateTime) {
 	s.Set("series_end", end)
 }
 
-// Interval returns the number of days between occurrences.
+// Interval returns the number of days between occurrences of events in the series.
 func (s *EventSeries) Interval() int {
 	return s.GetInt("interval")
 }
@@ -90,7 +93,7 @@ func (s *EventSeries) SetInterval(interval int) {
 	s.Set("interval", interval)
 }
 
-// Duration returns the number of days between occurrences.
+// Duration returns the duration of an avent in the series (in minutes).
 func (s *EventSeries) Duration() int {
 	return s.GetInt("duration")
 }
@@ -100,4 +103,21 @@ func (s *EventSeries) SetDuration(duration int) {
 
 func (s *EventSeries) SetState(state SeriesState) {
 	s.Set("series_state", string(state))
+}
+
+// findEventRecordsForSeries fetches all events associated with a given series.
+// Simple Wrapper around PocketBase find function.
+func findEventRecordsForSeries(app core.App, eventSeries *EventSeries) ([]*core.Record, error) {
+	existingEvents, err := app.FindRecordsByFilter(
+		EventsCollection,
+		"series = {:seriesID}",
+		"",
+		0,
+		0,
+		dbx.Params{"seriesID": eventSeries.Id},
+	)
+	if err != nil {
+		return nil, err
+	}
+	return existingEvents, nil
 }
