@@ -36,7 +36,7 @@ func DeleteEventsForSeries(e *core.RecordEvent) error {
 	eventSeries := &EventSeries{}
 	eventSeries.SetProxyRecord(e.Record)
 
-	eventsToBeDeleted, err := findEventRecordsForSeries(e.App, eventSeries)
+	eventsToBeDeleted, _, err := findEventRecordsForSeries(e.App, eventSeries)
 	if err != nil {
 		return err
 	}
@@ -70,10 +70,26 @@ func generateSeriesEvents(app core.App, record *core.Record) ([]*core.Record, er
 		return nil, err
 	}
 
-	existingEvents, err := findEventRecordsForSeries(app, eventSeries)
+	errorContext := &ErrorContext{
+		Key: "local",
+		Values: map[string]any{
+			"seriesID":   eventSeries.Id,
+			"seriesName": eventSeries.Title(),
+		},
+	}
+
+	existingEvents, first, err := findEventRecordsForSeries(app, eventSeries)
 	if err != nil {
+		LogErrorInternalExternal(app, err, errorContext, nil)
 		return nil, err
 	}
+	list, err := createEventSeriesLinkedList(existingEvents, first)
+	if err != nil {
+		LogErrorInternalExternal(app, err, errorContext, nil)
+		return nil, err
+	}
+	// TODO: do something with the list
+	list.Back()
 
 	var events []*core.Record
 	existingEventsMap := make(map[string]*Event)
@@ -85,11 +101,8 @@ func generateSeriesEvents(app core.App, record *core.Record) ([]*core.Record, er
 
 	// Create a map of existing events for easy lookup
 	for _, event := range existingEvents {
-		eventProxy := &Event{}
-		eventProxy.SetProxyRecord(event)
-
-		key := fmt.Sprintf("%s---%s", eventProxy.StartTime().Time().In(location).Format(time.RFC3339), eventProxy.EndTime().Time().In(location).Format(time.RFC3339))
-		existingEventsMap[key] = eventProxy
+		key := fmt.Sprintf("%s---%s", event.StartTime().Time().In(location).Format(time.RFC3339), event.EndTime().Time().In(location).Format(time.RFC3339))
+		existingEventsMap[key] = event
 	}
 
 	// reads timezone information to ensure that the later call to `AddDate()` accounts for daylight savings time traversal

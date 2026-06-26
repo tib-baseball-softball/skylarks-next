@@ -1,6 +1,9 @@
 package dp
 
 import (
+	"container/list"
+	"fmt"
+
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
@@ -105,19 +108,65 @@ func (s *EventSeries) SetState(state SeriesState) {
 	s.Set("series_state", string(state))
 }
 
-// findEventRecordsForSeries fetches all events associated with a given series.
-// Simple Wrapper around PocketBase find function.
-func findEventRecordsForSeries(app core.App, eventSeries *EventSeries) ([]*core.Record, error) {
-	existingEvents, err := app.FindRecordsByFilter(
-		EventsCollection,
-		"series = {:seriesID}",
-		"",
-		0,
-		0,
-		dbx.Params{"seriesID": eventSeries.Id},
-	)
+// findEventRecordsForSeries fetches all events associated with a given eventSeries.
+func findEventRecordsForSeries(app core.App, eventSeries *EventSeries) (events []*Event, firstEvent *Event, err error) {
+	err = app.RecordQuery(EventsCollection).
+		AndWhere(dbx.NewExp("series = {:seriesID}", dbx.Params{"seriesID": eventSeries.Id})).
+		All(&events)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	return existingEvents, nil
+
+	verifyCount := 0
+	for _, event := range events {
+		if event.Prev() == "" {
+			verifyCount++
+			firstEvent = event
+		}
+	}
+
+	if verifyCount != 1 {
+		return nil, nil, fmt.Errorf("logic: expected 1 first event, got %d", verifyCount)
+	}
+
+	return events, firstEvent, nil
+}
+
+// createEventSeriesLinkedList creates a linked list of events for given event records.
+// 
+// If an empty slice is given, the returned list will be empty as well.
+// firstEvent will be set as first element of the list.
+func createEventSeriesLinkedList(records []*Event, firstEvent *Event) (list list.List, err error) {
+	list.Init()
+
+	if len(records) == 0 {
+		return list, nil
+	}
+
+	eventsMap := make(map[string]*Event)
+
+	for _, event := range records {
+		eventsMap[event.Id] = event
+	}
+
+	currentListElement := list.PushFront(firstEvent)
+	for {
+		currentEvent, ok := currentListElement.Value.(*Event)
+		if !ok {
+			return list, fmt.Errorf("data corrupted: event %v is not an Event", currentListElement.Value)
+		}
+
+		if currentEvent.Next() == "" {
+			break
+		}
+
+		toInsert := eventsMap[currentEvent.Next()]
+		if toInsert == nil {
+			return list, fmt.Errorf("data corrupted: next event ID %s not found in map when creating linked list", currentEvent.Next())
+		}
+
+		currentListElement = list.InsertAfter(toInsert, currentListElement)
+	}
+
+	return list, nil
 }
