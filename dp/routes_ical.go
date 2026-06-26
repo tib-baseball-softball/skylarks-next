@@ -53,7 +53,7 @@ func getUserCalendar(app core.App) func(e *core.RequestEvent) error {
 
 		calendar, err := createICalendarFromEventRecords(events, e.App)
 		if err != nil {
-		    app.Logger().Error("Failed to create calendar", "err", err)
+			app.Logger().Error("Failed to create calendar", "err", err)
 			return e.InternalServerError("Failed to create calendar.", "")
 		}
 
@@ -72,11 +72,15 @@ func getUserCalendarEvents(app core.App, user *User, teamID string) ([]*core.Rec
 		if !slices.Contains(user.Teams(), teamID) {
 			return events, &NotAuthorizedError{"Attempting to filter by team not in user teams"}
 		}
-		expressions = append(expressions, dbx.HashExp{"team": teamID})
+		expressions = append(expressions, dbx.NewExp("team = {:team}", dbx.Params{"team": teamID}))
 	} else {
 		// filter by all user teams
-		for _, userTeam := range user.Teams() {
-			expressions = append(expressions, dbx.HashExp{"team": userTeam})
+		for i, userTeam := range user.Teams() {
+			expressions = append(expressions,
+				dbx.NewExp(
+					fmt.Sprintf("team = {:team%d}", i),
+					dbx.Params{fmt.Sprintf("team%d", i): userTeam}),
+			)
 		}
 	}
 
