@@ -4,11 +4,12 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
 )
 
+// CreateOrUpdateEventsForSeries is the main entry point for event series logic.
+// Triggered on all DB operations AFTER successful PocketBase validation of the series record.
 func CreateOrUpdateEventsForSeries(e *core.RecordEvent) error {
 	events, err := generateSeriesEvents(e.App, e.Record)
 	if err != nil {
@@ -32,16 +33,10 @@ func CreateOrUpdateEventsForSeries(e *core.RecordEvent) error {
 
 // DeleteEventsForSeries deletes all events associated with a given event series record.
 func DeleteEventsForSeries(e *core.RecordEvent) error {
-	eventSeries := e.Record
+	eventSeries := &EventSeries{}
+	eventSeries.SetProxyRecord(e.Record)
 
-	eventsToBeDeleted, err := e.App.FindRecordsByFilter(
-		EventsCollection,
-		"series = {:seriesID}",
-		"",
-		0,
-		0,
-		dbx.Params{"seriesID": eventSeries.Id},
-	)
+	eventsToBeDeleted, err := findEventRecordsForSeries(e.App, eventSeries)
 	if err != nil {
 		return err
 	}
