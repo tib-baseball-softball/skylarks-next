@@ -96,7 +96,7 @@ func (s *EventSeries) SetInterval(interval int) {
 	s.Set("interval", interval)
 }
 
-// Duration returns the duration of an avent in the series (in minutes).
+// Duration returns the duration of an event in the series (in minutes).
 func (s *EventSeries) Duration() int {
 	return s.GetInt("duration")
 }

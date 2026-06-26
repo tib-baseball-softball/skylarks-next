@@ -137,12 +137,12 @@ func BindDPHooks(app core.App, client bsm.APIClient, pushService PushService) {
 		return HideCommunityServiceAdminFields(event)
 	})
 
-	app.OnRecordAfterCreateSuccess(EventSeriesCollection).BindFunc(func(e *core.RecordEvent) error {
-		return CreateOrUpdateEventsForSeries(e)
+	app.OnRecordCreateExecute(EventSeriesCollection).BindFunc(func(e *core.RecordEvent) error {
+		return CreateOrUpdateEventsForSeries(e, Create)
 	})
 
-	app.OnRecordAfterUpdateSuccess(EventSeriesCollection).BindFunc(func(e *core.RecordEvent) error {
-		return CreateOrUpdateEventsForSeries(e)
+	app.OnRecordUpdateExecute(EventSeriesCollection).BindFunc(func(e *core.RecordEvent) error {
+		return CreateOrUpdateEventsForSeries(e, Update)
 	})
 
 	app.OnRecordDelete(EventSeriesCollection).BindFunc(func(e *core.RecordEvent) error {
