@@ -117,6 +117,10 @@ func findEventRecordsForSeries(app core.App, eventSeries *EventSeries) (events [
 		return nil, nil, err
 	}
 
+	if len(events) == 0 {
+		return events, nil, nil
+	}
+
 	verifyCount := 0
 	for _, event := range events {
 		if event.Prev() == "" {
@@ -133,7 +137,7 @@ func findEventRecordsForSeries(app core.App, eventSeries *EventSeries) (events [
 }
 
 // createEventSeriesLinkedList creates a linked list of events for given event records.
-// 
+//
 // If an empty slice is given, the returned list will be empty as well.
 // firstEvent will be set as first element of the list.
 func createEventSeriesLinkedList(records []*Event, firstEvent *Event) (list list.List, err error) {
