@@ -171,7 +171,7 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 			element.Value = event
 
 			// series has been extended over the original end, append new event to handle in next loop
-			if eventStart.Before(endDateSeries) {
+			if element.Next() == nil && eventStart.Before(endDateSeries) {
 				event := &Event{}
 				event.SetProxyRecord(core.NewRecord(eventCollection))
 
