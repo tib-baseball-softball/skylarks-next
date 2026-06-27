@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/pocketbase/pocketbase/core"
+	"github.com/pocketbase/pocketbase/tools/security"
 	"github.com/pocketbase/pocketbase/tools/types"
 )
 
@@ -195,6 +196,9 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 }
 
 func setValuesForSeriesEvent(event *Event, eventStart types.DateTime, eventEnd types.DateTime, eventSeries *EventSeries) {
+    if event.Id == "" {
+        event.Id = security.PseudorandomString(15)
+    }
 	event.SetStartTime(eventStart)
 	event.SetEndTime(eventEnd)
 	event.SetTitle(eventSeries.Title())
