@@ -27,7 +27,9 @@ func CreateOrUpdateEventsForSeries(e *core.RecordEvent, mode EventSeriesMode) er
 
 	err = e.App.RunInTransaction(func(txApp core.App) error {
 		for _, record := range events {
-			if err := txApp.Save(record); err != nil {
+			// validations are skipped: other events in the same series might not be persisted yet,
+			// so relation validation fails
+			if err := txApp.SaveNoValidate(record); err != nil {
 				return err
 			}
 		}
@@ -196,9 +198,9 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 }
 
 func setValuesForSeriesEvent(event *Event, eventStart types.DateTime, eventEnd types.DateTime, eventSeries *EventSeries) {
-    if event.Id == "" {
-        event.Id = security.PseudorandomString(15)
-    }
+	if event.Id == "" {
+		event.Id = security.PseudorandomString(15)
+	}
 	event.SetStartTime(eventStart)
 	event.SetEndTime(eventEnd)
 	event.SetTitle(eventSeries.Title())
