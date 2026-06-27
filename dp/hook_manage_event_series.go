@@ -64,7 +64,7 @@ func DeleteEventsForSeries(e *core.RecordEvent) error {
 }
 
 // generateSeriesEvents contains the main logic to handle single events belonging to a series.
-func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMode) ([]*core.Record, error) {
+func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMode) ([]*Event, error) {
 	eventSeries := &EventSeries{}
 	eventSeries.SetProxyRecord(record)
 
@@ -148,7 +148,14 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 			// MARK: no extra check for type assertion => delegated to list creation func
 			event := element.Value.(*Event)
 
-			eventStart := event.StartTime().Add(timeDiff)
+			var eventStart types.DateTime
+			if event.StartTime().IsZero() {
+				// just created from the previous loop, new event
+				eventStart = currentDate
+			} else {
+				// has an existing DB value
+				eventStart = event.StartTime().Add(timeDiff)
+			}
 			eventEnd := eventStart.Add(time.Duration(seriesEventDuration) * time.Minute)
 
 			if eventStart.After(endDateSeries) {
@@ -156,10 +163,19 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 				eventLinkedList.Remove(element)
 				continue
 			}
-
 			setValuesForSeriesEvent(event, eventStart, eventEnd, eventSeries)
 
 			element.Value = event
+
+			// series has been extended over the original end, append new event to handle in next loop
+			if eventStart.Before(endDateSeries) {
+				event := &Event{}
+				event.SetProxyRecord(core.NewRecord(eventCollection))
+
+				eventLinkedList.InsertAfter(event, element)
+			}
+
+			currentDate = currentDate.AddDate(0, 0, seriesInterval)
 		}
 
 		// Delete any leftover events that are no longer part of the updated series
@@ -170,8 +186,10 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 			}
 		}
 	}
-
-	// TODO: persistence
+	events, err := eventSeriesLinkedListToSlice(eventLinkedList)
+	if err != nil {
+		LogErrorInternalExternal(app, err, errorContext, nil)
+	}
 
 	return events, nil
 }

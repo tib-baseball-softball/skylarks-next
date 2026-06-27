@@ -157,7 +157,7 @@ func createEventSeriesLinkedList(records []*Event, firstEvent *Event) (list list
 	for {
 		currentEvent, ok := currentListElement.Value.(*Event)
 		if !ok {
-			return list, fmt.Errorf("data corrupted: event %v is not an Event", currentListElement.Value)
+			return list, fmt.Errorf("data corrupted: event %v is not an Event pointer", currentListElement.Value)
 		}
 
 		if currentEvent.Next() == "" {
@@ -173,4 +173,26 @@ func createEventSeriesLinkedList(records []*Event, firstEvent *Event) (list list
 	}
 
 	return list, nil
+}
+
+// eventSeriesLinkedListToSlice adds persistence info to an event series and returns a slice of events.
+// 
+// Will panic if a list element is not nil and not an Event pointer.
+func eventSeriesLinkedListToSlice(list list.List) (events []*Event, err error) {
+	for element := list.Front(); element != nil; element = element.Next() {
+		event, ok := element.Value.(*Event)
+		if !ok {
+			return nil, fmt.Errorf("data corrupted: event %v is not an Event pointer", element.Value)
+		}
+
+		if element.Prev() != nil {
+			event.SetPrev(element.Prev().Value.(*Event).Id)
+		}
+
+		if element.Next() != nil {
+			event.SetNext(element.Next().Value.(*Event).Id)
+		}
+		events = append(events, event)
+	}
+	return events, nil
 }
