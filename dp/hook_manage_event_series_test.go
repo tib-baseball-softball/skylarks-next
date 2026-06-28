@@ -37,6 +37,8 @@ func prepareEventsCollection(t *testing.T, app *tests.TestApp) {
 	coll.Fields.Add(&core.TextField{Name: "team"})
 	coll.Fields.Add(&core.TextField{Name: "location"})
 	coll.Fields.Add(&core.TextField{Name: "series"})
+	coll.Fields.Add(&core.TextField{Name: "next"})
+	coll.Fields.Add(&core.TextField{Name: "prev"})
 
 	if err := app.Save(coll); err != nil {
 		t.Fatalf("failed to register events collection: %v", err)
@@ -90,7 +92,7 @@ func TestGenerateSeriesEvents_WeeklyAcrossSpringDST(t *testing.T) {
 
 	series := buildSeriesRecord(t, "Spring practice", start, end, 7, 90)
 
-	events, genErr := generateSeriesEvents(app, series.Record)
+	events, genErr := generateSeriesEvents(app, series.Record, Create)
 	if genErr != nil {
 		t.Fatalf("generateSeriesEvents failed: %v", genErr)
 	}
@@ -125,7 +127,7 @@ func TestGenerateSeriesEvents_WeeklyAcrossAutumnDST(t *testing.T) {
 
 	series := buildSeriesRecord(t, "Autumn practice", start, end, 7, 60)
 
-	events, genErr := generateSeriesEvents(app, series.Record)
+	events, genErr := generateSeriesEvents(app, series.Record, Create)
 	if genErr != nil {
 		t.Fatalf("generateSeriesEvents failed: %v", genErr)
 	}
@@ -159,7 +161,7 @@ func TestGenerateSeriesEvents_DailyShortInterval(t *testing.T) {
 
 	series := buildSeriesRecord(t, "Intensive camp", start, end, 1, 120)
 
-	events, genErr := generateSeriesEvents(app, series.Record)
+	events, genErr := generateSeriesEvents(app, series.Record, Create)
 	if genErr != nil {
 		t.Fatalf("generateSeriesEvents failed: %v", genErr)
 	}
