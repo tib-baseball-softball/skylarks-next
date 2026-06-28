@@ -9,6 +9,8 @@
     ExpandedTeam,
   } from "$lib/dp/types/ExpandedResponse.ts";
   import type { LocationsResponse } from "$lib/dp/types/pb-types.ts";
+  import { Collection } from "$lib/dp/enum/Collection";
+  import { dev } from "$app/environment";
 
   interface Props {
     eventSeries: EventSeriesCreationData | null;
@@ -52,17 +54,25 @@
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
+    const action = e.submitter?.dataset.action;
+    if (dev) {
+      console.debug("submitting data with action", action);
+    }
 
     let result: EventSeriesCreationData | null = null;
 
     try {
       if (form.id) {
         result = await client
-          .collection("eventseries")
-          .update<EventSeriesCreationData>(form.id, form);
+          .collection(Collection.EventSeries)
+          .update<EventSeriesCreationData>(form.id, form, {
+            query: {
+              action: action,
+            },
+          });
       } else {
         result = await client
-          .collection("eventseries")
+          .collection(Collection.EventSeries)
           .create<EventSeriesCreationData>(form);
       }
     } catch {
@@ -210,15 +220,27 @@
     </button>
 
     {#if isNewSeries}
-      <button class="btn preset-filled-primary-500" type="submit">
+      <button
+        data-action="create"
+        class="btn preset-filled-primary-500"
+        type="submit"
+      >
         Submit
       </button>
     {:else}
-      <button class="btn preset-outlined-primary-500" type="submit">
+      <button
+        data-action="update-all"
+        class="btn preset-outlined-primary-500"
+        type="submit"
+      >
         Update all events
       </button>
 
-      <button class="btn preset-filled-primary-500" type="submit">
+      <button
+        data-action="update-future"
+        class="btn preset-filled-primary-500"
+        type="submit"
+      >
         Update future events
       </button>
     {/if}
