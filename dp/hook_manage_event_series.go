@@ -5,22 +5,35 @@ import (
 	"fmt"
 	"time"
 
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/utils"
 	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/tools/security"
 	"github.com/pocketbase/pocketbase/tools/types"
 )
 
 type EventSeriesMode string
 
 const (
-	Create EventSeriesMode = "create"
-	Update EventSeriesMode = "update"
+	CreateEventSeriesMode EventSeriesMode = "create"
+	UpdateEventSeriesMode EventSeriesMode = "update"
+)
+
+type EventSeriesAction string
+
+const (
+	CreateEventsAction       EventSeriesAction = "create"
+	UpdateFutureEventsAction EventSeriesAction = "update-future"
+	UpdateAllEventsAction    EventSeriesAction = "update-all"
 )
 
 // CreateOrUpdateEventsForSeries is the main entry point for event series logic.
-// Triggered on all DB operations AFTER successful PocketBase validation of the series record, but before persistence.
-func CreateOrUpdateEventsForSeries(e *core.RecordEvent, mode EventSeriesMode) error {
-	events, err := generateSeriesEvents(e.App, e.Record, mode)
+// Triggered on all Create and Update requests (regular API endpoints)
+func CreateOrUpdateEventsForSeries(e *core.RecordRequestEvent, mode EventSeriesMode) error {
+	action := EventSeriesAction(e.Request.URL.Query().Get("action"))
+	if action == "" {
+		action = UpdateAllEventsAction
+	}
+
+	events, err := generateSeriesEvents(e.App, e.Record, mode, action)
 	if err != nil {
 		return err
 	}
@@ -67,8 +80,8 @@ func DeleteEventsForSeries(e *core.RecordEvent) error {
 }
 
 // generateSeriesEvents contains the main logic to handle single events belonging to a series.
-func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMode) ([]*Event, error) {
-    var events []*Event 
+func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMode, action EventSeriesAction) ([]*Event, error) {
+	var events []*Event
 	eventSeries := &EventSeries{}
 	eventSeries.SetProxyRecord(record)
 
@@ -94,10 +107,15 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 		},
 	}
 
-	existingEvents, first, err := findEventRecordsForSeries(app, eventSeries)
-	if err != nil {
-		LogErrorInternalExternal(app, err, errorContext, nil)
-		return nil, err
+	existingEvents := []*Event{}
+	first := (*Event)(nil)
+
+	if mode == UpdateEventSeriesMode {
+		existingEvents, first, err = findEventRecordsForSeries(app, eventSeries)
+		if err != nil {
+			LogErrorInternalExternal(app, err, errorContext, nil)
+			return nil, err
+		}
 	}
 
 	eventLinkedList, err := createEventSeriesLinkedList(existingEvents, first)
@@ -112,13 +130,12 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 	}
 
 	// reads timezone information to ensure that the later call to `AddDate()` accounts for daylight savings time traversal
-	currentDate, err := types.ParseDateTime(startDateSeries.Time().In(location))
-	if err != nil {
-		return nil, err
-	}
+	// both calls ignore error: underlying method can only error on string casting, not when using time.Time arguments
+	currentDate, _ := types.ParseDateTime(startDateSeries.Time().In(location))
+	today, _ := types.ParseDateTime(time.Now().In(location))
 
 	switch mode {
-	case Create:
+	case CreateEventSeriesMode:
 		eventLinkedList.Init()
 		var currentElement *list.Element
 
@@ -139,7 +156,7 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 
 			currentDate = currentDate.AddDate(0, 0, seriesInterval)
 		}
-	case Update:
+	case UpdateEventSeriesMode:
 		// available because the hook runs before record persistence
 		existingSeries := &EventSeries{}
 		err = FindRecordProxyByID(app, existingSeries, eventSeries.Id)
@@ -155,6 +172,7 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 		for element := eventLinkedList.Front(); element != nil; element = element.Next() {
 			app.Logger().Debug("processing event", "element", element)
 
+			// process the event for this loop
 			event, ok := element.Value.(*Event)
 			if !ok {
 				// this really should not happen, but better be safe than sorry
@@ -180,9 +198,12 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 				app.Logger().Debug("end of update loop", "list length", eventLinkedList.Len())
 				continue
 			}
-			setValuesForSeriesEvent(event, eventStart, eventEnd, eventSeries)
 
-			element.Value = event
+			if action == UpdateAllEventsAction || eventStart.After(today) {
+				// only update future events if set
+				setValuesForSeriesEvent(event, eventStart, eventEnd, eventSeries)
+				element.Value = event
+			}
 
 			currentDate = currentDate.AddDate(0, 0, seriesInterval)
 			// series has been extended over the original end, append new event to handle in next loop
@@ -215,7 +236,10 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 
 func setValuesForSeriesEvent(event *Event, eventStart types.DateTime, eventEnd types.DateTime, eventSeries *EventSeries) {
 	if event.Id == "" {
-		event.Id = security.PseudorandomString(15)
+		event.Id = utils.CreatePocketBaseIDString()
+	}
+	if eventSeries.Id == "" {
+		eventSeries.Id = utils.CreatePocketBaseIDString()
 	}
 	event.SetStartTime(eventStart)
 	event.SetEndTime(eventEnd)

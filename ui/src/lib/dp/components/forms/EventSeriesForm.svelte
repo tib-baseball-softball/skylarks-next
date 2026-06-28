@@ -11,6 +11,7 @@
   import type { LocationsResponse } from "$lib/dp/types/pb-types.ts";
   import { Collection } from "$lib/dp/enum/Collection";
   import { dev } from "$app/environment";
+  import type { EventSeriesAction } from "$lib/dp/types/EventSeriesState";
 
   interface Props {
     eventSeries: EventSeriesCreationData | null;
@@ -54,7 +55,7 @@
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
-    const action = e.submitter?.dataset.action;
+    const action = e.submitter?.dataset.action as EventSeriesAction | undefined;
     if (dev) {
       console.debug("submitting data with action", action);
     }
