@@ -68,6 +68,7 @@ func DeleteEventsForSeries(e *core.RecordEvent) error {
 
 // generateSeriesEvents contains the main logic to handle single events belonging to a series.
 func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMode) ([]*Event, error) {
+    var events []*Event 
 	eventSeries := &EventSeries{}
 	eventSeries.SetProxyRecord(record)
 
@@ -75,6 +76,10 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 	endDateSeries := eventSeries.SeriesEnd()
 	seriesInterval := eventSeries.Interval()
 	seriesEventDuration := eventSeries.Duration()
+
+	if startDateSeries.After(endDateSeries) {
+		return nil, fmt.Errorf("series start date is after series end date")
+	}
 
 	eventCollection, err := app.FindCollectionByNameOrId(EventsCollection)
 	if err != nil {
@@ -142,14 +147,21 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 			return nil, fmt.Errorf("failed to find existing series: %w", err)
 		}
 
-		// TODO: does that capture all use cases?
+		// MARK: does that capture all use cases?
 		timeDiff := currentDate.Sub(existingSeries.SeriesStart())
 
 		eventsToDelete := make(map[string]*Event)
 
 		for element := eventLinkedList.Front(); element != nil; element = element.Next() {
-			// MARK: no extra check for type assertion => delegated to list creation func
-			event := element.Value.(*Event)
+			app.Logger().Debug("processing event", "element", element)
+
+			event, ok := element.Value.(*Event)
+			if !ok {
+				// this really should not happen, but better be safe than sorry
+				err = fmt.Errorf("data corrupted: event %v is not an Event pointer", element.Value)
+				LogErrorInternalExternal(app, err, errorContext, nil)
+				return nil, err
+			}
 
 			var eventStart types.DateTime
 			if event.StartTime().IsZero() {
@@ -163,22 +175,25 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 
 			if eventStart.After(endDateSeries) {
 				eventsToDelete[event.Id] = event
-				eventLinkedList.Remove(element)
+				deleting := eventLinkedList.Remove(element)
+				app.Logger().Debug("deleting event", "event", deleting)
+				app.Logger().Debug("end of update loop", "list length", eventLinkedList.Len())
 				continue
 			}
 			setValuesForSeriesEvent(event, eventStart, eventEnd, eventSeries)
 
 			element.Value = event
 
+			currentDate = currentDate.AddDate(0, 0, seriesInterval)
 			// series has been extended over the original end, append new event to handle in next loop
-			if element.Next() == nil && eventStart.Before(endDateSeries) {
+			if element.Next() == nil && currentDate.Before(endDateSeries) {
+				app.Logger().Debug("appending new event to extend series", "currentDate", currentDate, "endDateSeries", endDateSeries)
+
 				event := &Event{}
 				event.SetProxyRecord(core.NewRecord(eventCollection))
-
 				eventLinkedList.InsertAfter(event, element)
 			}
-
-			currentDate = currentDate.AddDate(0, 0, seriesInterval)
+			app.Logger().Debug("end of update loop", "list length", eventLinkedList.Len())
 		}
 
 		// Delete any leftover events that are no longer part of the updated series
@@ -189,10 +204,11 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 			}
 		}
 	}
-	events, err := eventSeriesLinkedListToSlice(eventLinkedList)
+	events, err = eventSeriesLinkedListToSlice(eventLinkedList)
 	if err != nil {
 		LogErrorInternalExternal(app, err, errorContext, nil)
 	}
+	eventLinkedList = nil // explicit pointer reset after use
 
 	return events, nil
 }
@@ -209,6 +225,10 @@ func setValuesForSeriesEvent(event *Event, eventStart types.DateTime, eventEnd t
 	event.SetLocation(eventSeries.Location())
 	event.SetSeries(eventSeries.Id)
 	event.SetType(Practice.String())
+
+	// reset DB relations - set correctly later by persistence layer
+	event.SetNext("")
+	event.SetPrev("")
 }
 
 // AddSeriesState is a hook that sets the state of the event series based on the current date
