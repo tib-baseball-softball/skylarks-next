@@ -31,7 +31,7 @@
 </p>
 
 <p class="body-text clamped">
-  {@html markdownToHTML(announcement.bodytext)}
+  {@html await markdownToHTML(announcement.bodytext)}
 </p>
 
 <style>

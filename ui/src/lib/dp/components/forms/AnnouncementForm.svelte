@@ -1,15 +1,22 @@
 <script lang="ts">
-  import {Plus, SquarePen} from "lucide-svelte";
-  import {invalidateAll} from "$app/navigation";
+  import { Plus, SquarePen } from "lucide-svelte";
+  import { invalidateAll } from "$app/navigation";
   //@ts-ignore
   // noinspection ES6UnusedImports
   import * as Sheet from "$lib/dp/components/modal/sheet";
-  import {authSettings, client} from "$lib/dp/client.svelte.js";
-  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
-  import type {CustomAuthModel, ExpandedAnnouncement,} from "$lib/dp/types/ExpandedResponse.ts";
-  import type {AnnouncementsResponse, ClubsResponse, TeamsResponse,} from "$lib/dp/types/pb-types.ts";
+  import { authSettings, client } from "$lib/dp/client.svelte.js";
+  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  import type {
+    CustomAuthModel,
+    ExpandedAnnouncement,
+  } from "$lib/dp/types/ExpandedResponse.ts";
+  import type {
+    AnnouncementsResponse,
+    ClubsResponse,
+    TeamsResponse,
+  } from "$lib/dp/types/pb-types.ts";
   import RichTextEditor from "$lib/dp/components/rte/RichTextEditor.svelte";
-  import {Collection} from "$lib/dp/enum/Collection.ts";
+  import { Collection } from "$lib/dp/enum/Collection.ts";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
@@ -116,12 +123,12 @@
     data-testid="announcement-form-trigger-{isEditing ? 'edit' : 'create'}"
   >
     {#if form.id}
-      <SquarePen/>
+      <SquarePen />
       {#if showLabel}
         <span>Edit Announcement</span>
       {/if}
     {:else}
-      <Plus/>
+      <Plus />
       {#if showLabel}
         <span>Create new</span>
       {/if}
@@ -192,24 +199,21 @@
           />
         </label>
 
-        <label class="label field-wide">
-          <span>Announcement Text</span>
-
+        <div class="field-wide">
           {#if form.bodytext !== undefined}
             <RichTextEditor
               bind:value={form.bodytext}
+              label="Announcement Text"
+              formElementName="bodytext"
               required={true}
             />
           {/if}
-
-        </label>
+        </div>
 
         <fieldset class="field-wide rounded-base">
           <legend class="legend mb-3">Priority</legend>
           {#each ["info", "warning", "danger"] as prio}
-            <label
-              class="label priority-radio-label"
-            >
+            <label class="label priority-radio-label">
               <input
                 class="radio"
                 type="radio"
@@ -240,7 +244,7 @@
                 type="url"
               />
               <span class="text-sm"
-              >Single link in case the announcement is used as a call to
+                >Single link in case the announcement is used as a call to
                 action.</span
               >
             </label>
@@ -255,14 +259,14 @@
                 type="text"
               />
               <span class="text-sm"
-              >If not set, the link itself will be used as a the text.</span
+                >If not set, the link itself will be used as a the text.</span
               >
             </label>
           </div>
         </fieldset>
       </div>
 
-      <hr/>
+      <hr />
 
       <div class="submit-box">
         <button class="btn preset-filled-primary-500" type="submit">

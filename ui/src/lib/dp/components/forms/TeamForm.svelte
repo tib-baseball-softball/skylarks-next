@@ -1,21 +1,29 @@
 <script lang="ts">
-  import {Plus, SquarePen} from "lucide-svelte";
-  import {invalidate} from "$app/navigation";
+  import { Plus, SquarePen } from "lucide-svelte";
+  import { invalidate } from "$app/navigation";
   import TabsRadioGroup from "$lib/dp/components/formElements/TabsRadioGroup.svelte";
   import MultiSelectCombobox from "$lib/dp/components/formElements/MultiSelectCombobox.svelte";
   //@ts-ignore
   import * as Sheet from "$lib/dp/components/modal/sheet";
-  import {authSettings, client} from "$lib/dp/client.svelte.js";
-  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
-  import type {CustomAuthModel, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
-  import type {ClubsResponse, UsersResponse} from "$lib/dp/types/pb-types.ts";
-  import {Collection} from "$lib/dp/enum/Collection.ts";
+  import { authSettings, client } from "$lib/dp/client.svelte.js";
+  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  import type {
+    CustomAuthModel,
+    ExpandedTeam,
+  } from "$lib/dp/types/ExpandedResponse.ts";
+  import type { ClubsResponse, UsersResponse } from "$lib/dp/types/pb-types.ts";
+  import { Collection } from "$lib/dp/enum/Collection.ts";
   import RichTextEditor from "$lib/dp/components/rte/RichTextEditor.svelte";
 
   interface Props {
     club: ClubsResponse;
     team: ExpandedTeam | null;
-    triggerVariant?: "filled-primary" | "filled-secondary" | "tonal-primary" | "tonal-secondary" | "tonal-tertiary";
+    triggerVariant?:
+      | "filled-primary"
+      | "filled-secondary"
+      | "tonal-primary"
+      | "tonal-secondary"
+      | "tonal-tertiary";
     triggerSize?: "default" | "sm";
     triggerIcon?: boolean;
     triggerSpaced?: boolean;
@@ -37,15 +45,17 @@
   let open = $state(false);
 
   function formFromProps(data: ExpandedTeam | null) {
-    return data ?? {
-      id: "",
-      name: "",
-      age_group: "adults",
-      signup_key: "",
-      club: club.id, // no binding, cannot be changed via this form
-      description: "",
-      admins: [],
-    };
+    return (
+      data ?? {
+        id: "",
+        name: "",
+        age_group: "adults",
+        signup_key: "",
+        club: club.id, // no binding, cannot be changed via this form
+        description: "",
+        admins: [],
+      }
+    );
   }
 
   let form: Partial<ExpandedTeam> & { age_group: string } = $derived.by(() => {
@@ -58,11 +68,13 @@
 
   let selectedAdmins: UsersResponse[] = $derived(form?.expand?.admins ?? []);
 
-  const allTeamMembers = $derived(client.collection(Collection.Users).getFullList<UsersResponse>({
-    filter: `teams ?~ '${team?.id}'`,
-    sort: "+last_name",
-    requestKey: `allTeamMembers-${team?.id}`,
-  }));
+  const allTeamMembers = $derived(
+    client.collection(Collection.Users).getFullList<UsersResponse>({
+      filter: `teams ?~ '${team?.id}'`,
+      sort: "+last_name",
+      requestKey: `allTeamMembers-${team?.id}`,
+    }),
+  );
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
@@ -75,12 +87,16 @@
 
     try {
       if (form.id) {
-        result = await client.collection(Collection.Teams).update<ExpandedTeam>(form.id, form);
+        result = await client
+          .collection(Collection.Teams)
+          .update<ExpandedTeam>(form.id, form);
       } else {
         // a user creating a team becomes its first admin
         form.admins.push(authRecord?.id);
 
-        result = await client.collection(Collection.Teams).create<ExpandedTeam>(form);
+        result = await client
+          .collection(Collection.Teams)
+          .create<ExpandedTeam>(form);
       }
     } catch {
       toastController.triggerGenericFormErrorMessage("Team");
@@ -96,7 +112,7 @@
   }
 </script>
 
-<Sheet.Root bind:open={open}>
+<Sheet.Root bind:open>
   <Sheet.Trigger
     class={[
       "btn",
@@ -108,25 +124,24 @@
       triggerSpaced && "trigger-spaced",
       triggerVariant === "filled-primary" && "preset-filled-primary-500",
       triggerVariant === "filled-secondary" && "preset-filled-secondary-500",
-      triggerVariant === "tonal-primary" && "preset-tonal-primary border-primary",
-      triggerVariant === "tonal-secondary" && "preset-tonal-secondary border-secondary",
-      triggerVariant === "tonal-tertiary" && "preset-tonal-tertiary border-tertiary",
+      triggerVariant === "tonal-primary" &&
+        "preset-tonal-primary border-primary",
+      triggerVariant === "tonal-secondary" &&
+        "preset-tonal-secondary border-secondary",
+      triggerVariant === "tonal-tertiary" &&
+        "preset-tonal-tertiary border-tertiary",
     ]}
   >
     {#if form.id}
-
-      <SquarePen/>
+      <SquarePen />
       {#if showLabel}
         <span>Edit Team</span>
       {/if}
-
     {:else}
-
-      <Plus/>
+      <Plus />
       {#if showLabel}
         <span>Create new</span>
       {/if}
-
     {/if}
   </Sheet.Trigger>
 
@@ -176,9 +191,7 @@
         </label>
 
         <label class="label">
-                <span>
-                Signup Key
-                </span>
+          <span> Signup Key </span>
           <input
             bind:value={form.signup_key}
             class="input"
@@ -189,9 +202,10 @@
             type="text"
           />
           <span class="hint">
-                    A valid signup key needs to be entered upon user account creation.
-                    New users are automatically added as members to the team corresponding to the signup key used.
-                </span>
+            A valid signup key needs to be entered upon user account creation.
+            New users are automatically added as members to the team
+            corresponding to the signup key used.
+          </span>
         </label>
 
         <div>
@@ -205,27 +219,30 @@
           />
         </div>
 
-        <label class="label field-wide">
-          Description
-
+        <div class="field-wide">
           {#if form.description !== undefined}
             <RichTextEditor
+              label="Description"
+              formElementName="description"
               bind:value={form.description}
             />
           {/if}
-
-        </label>
+        </div>
 
         <label class="label space-y-3 field-wide">
-          <span>Team Admins</span><br>
+          <span>Team Admins</span><br />
 
           {#await allTeamMembers then users}
-            <MultiSelectCombobox itemName="Admin" bind:selectedItems={selectedAdmins} allItems={users}/>
+            <MultiSelectCombobox
+              itemName="Admin"
+              bind:selectedItems={selectedAdmins}
+              allItems={users}
+            />
           {/await}
         </label>
       </div>
 
-      <hr/>
+      <hr />
 
       <div class="flex justify-center gap-3">
         <button class="mt-2 btn preset-filled-primary-500" type="submit">

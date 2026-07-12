@@ -65,7 +65,7 @@
     <header class="card-header">
       <h2 class="h4 card-title">Team Description</h2>
     </header>
-    <section class="card-content prose">{@html markdownToHTML(data.team.description)}</section>
+    <section class="card-content prose">{@html await markdownToHTML(data.team.description)}</section>
   </article>
 
   <TeamTeaserCard link={false} team={data.team}/>

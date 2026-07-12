@@ -75,7 +75,7 @@
     </section>
 
     <section class="prose announcement-body">
-      {@html markdownToHTML($announcement.bodytext)}
+      {@html await markdownToHTML($announcement.bodytext)}
     </section>
 
     {#if $announcement.link}
