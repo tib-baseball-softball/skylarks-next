@@ -1,21 +1,18 @@
 <script lang="ts">
-  import type {Snippet} from "svelte";
-  import {Dialog, type WithoutChild} from "bits-ui";
-  import {fly} from "svelte/transition";
-  import {cubicInOut} from "svelte/easing";
-  import {X} from "lucide-svelte";
+  import type { Snippet } from "svelte";
+  import { X } from "lucide-svelte";
+  import type { HTMLAttributes, HTMLButtonAttributes } from "svelte/elements";
 
-  /**
-   * Modal dialog based on headless bits-ui building blocks.
-   * Replacement for Skeleton modal.
-   */
+  let dialog: HTMLDialogElement;
 
-  type Props = Dialog.RootProps & {
+  type Props = {
+    open: boolean;
+    children?: Snippet;
     triggerClasses?: string;
     title: Snippet;
     description?: Snippet;
-    contentProps?: WithoutChild<Dialog.ContentProps>;
-    triggerProps?: WithoutChild<Dialog.TriggerProps>;
+    contentProps?: HTMLAttributes<HTMLDivElement>;
+    triggerProps?: HTMLButtonAttributes;
     triggerContent: Snippet;
     closeButtonClasses?: string;
     disabled?: boolean;
@@ -32,65 +29,48 @@
     triggerContent,
     closeButtonClasses = "",
     disabled = false,
-    ...restProps
   }: Props = $props();
 </script>
 
-<Dialog.Root {...restProps} bind:open>
-  <Dialog.Trigger
-    {...triggerProps}
-    class="{triggerClasses} trigger"
-    {disabled}
-    type="button"
-  >
-    {@render triggerContent()}
-  </Dialog.Trigger>
+<button
+  onclick={() => {
+    dialog.showModal();
+  }}
+  {...triggerProps}
+  class="{triggerClasses} trigger"
+  {disabled}
+  type="button"
+>
+  {@render triggerContent()}
+</button>
 
-  <Dialog.Portal>
-    <Dialog.Overlay class="dialog-overlay"/>
-    <Dialog.Content
-      {...contentProps}
-      class="card dialog-content shadow-2xl"
-      forceMount
-    >
-      {#snippet child({props, open})}
-        {#if open}
-          <div
-            {...props}
-            transition:fly={{ y: 150, duration: 100, easing: cubicInOut }}
-          >
-            <div class="header">
-              <Dialog.Close
-                class="close-button btn preset-outlined-card {closeButtonClasses}"
-              >
-                <X/>
-              </Dialog.Close>
+<dialog class="modal-dialog" bind:this={dialog} closedby="any">
+  <div {...contentProps} class="card dialog-content shadow-2xl">
+    <div class="header">
+      <button
+        onclick={() => dialog.close()}
+        class="close-button btn preset-outlined-card {closeButtonClasses}"
+      >
+        <X />
+      </button>
 
-              <div class="title">
-                <Dialog.Title>
-                  {@render title()}
-                </Dialog.Title>
-              </div>
-            </div>
+      <div class="title">
+        {@render title?.()}
+      </div>
+    </div>
 
-            {#if description}
-              <Dialog.Description>
-                {@render description?.()}
-              </Dialog.Description>
-            {/if}
+    {#if description}
+      {@render description?.()}
+    {/if}
 
-            {@render children?.()}
-          </div>
-        {/if}
-      {/snippet}
-    </Dialog.Content>
-  </Dialog.Portal>
-</Dialog.Root>
+    {@render children?.()}
+  </div>
+</dialog>
 
 <style>
   .trigger {
     display: flex;
-    gap: calc(var(--spacing) * 1);
+    gap: var(--spacing);
   }
 
   .header {

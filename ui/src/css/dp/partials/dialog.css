@@ -1,7 +1,4 @@
-.dialog-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 50;
+dialog::backdrop {
   background-color: light-dark(var(--color-surface-50), #0a0a0acc);
   opacity: 80%;
 }
@@ -11,7 +8,6 @@
   background-color: var(--nav-item-background);
   left: 50%;
   top: 50%;
-  z-index: 50;
   width: 100%;
   border: 1px solid;
   max-width: 94%;
