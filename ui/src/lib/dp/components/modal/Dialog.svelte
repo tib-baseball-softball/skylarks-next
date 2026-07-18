@@ -79,26 +79,3 @@
     </article>
   </div>
 </dialog>
-
-<style>
-  .trigger {
-    display: flex;
-    gap: var(--spacing);
-  }
-
-  .header {
-    display: flex;
-    gap: calc(var(--spacing) * 5);
-    align-items: center;
-    margin-bottom: calc(var(--spacing) * 2);
-  }
-
-  .title {
-    font-size: var(--text-xl);
-    font-weight: var(--font-weight-semibold);
-  }
-
-  .close-button {
-    border: 1px solid;
-  }
-</style>
