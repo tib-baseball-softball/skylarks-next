@@ -30,6 +30,8 @@
     closeButtonClasses = "",
     disabled = false,
   }: Props = $props();
+
+  const uid = $props.id();
 </script>
 
 <button
@@ -44,26 +46,37 @@
   {@render triggerContent()}
 </button>
 
-<dialog class="modal-dialog" bind:this={dialog} closedby="any">
+<dialog
+  class="modal-dialog"
+  bind:this={dialog}
+  closedby="any"
+  aria-labelledby="dialog-title-{uid}"
+>
   <div {...contentProps} class="card dialog-content shadow-2xl">
-    <div class="header">
-      <button
-        onclick={() => dialog.close()}
-        class="close-button btn preset-outlined-card {closeButtonClasses}"
-      >
-        <X />
-      </button>
+    <header class="header">
+      <menu>
+        <button
+          onclick={() => dialog.close()}
+          class="close-button btn preset-outlined-card {closeButtonClasses}"
+        >
+          <X />
+        </button>
+      </menu>
 
-      <div class="title">
-        {@render title?.()}
-      </div>
-    </div>
+      {#if title}
+        <div id="dialog-title-{uid}" class="title">
+          {@render title?.()}
+        </div>
+      {/if}
+    </header>
 
-    {#if description}
-      {@render description?.()}
-    {/if}
+    <article>
+      {#if description}
+        {@render description?.()}
+      {/if}
 
-    {@render children?.()}
+      {@render children?.()}
+    </article>
   </div>
 </dialog>
 
