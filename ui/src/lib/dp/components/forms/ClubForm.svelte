@@ -1,20 +1,32 @@
 <script lang="ts">
-  import {ClipboardPen, Plus} from "lucide-svelte";
-  import {invalidateAll} from "$app/navigation";
+  import { ClipboardPen, Plus } from "lucide-svelte";
+  import { invalidateAll } from "$app/navigation";
   import MultiSelectCombobox from "$lib/dp/components/formElements/MultiSelectCombobox.svelte";
-  //@ts-ignore
-  import * as Sheet from "$lib/dp/components/modal/sheet";
-  import {authSettings, client} from "$lib/dp/client.svelte.js";
-  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
-  import type {CustomAuthModel, ExpandedClub} from "$lib/dp/types/ExpandedResponse.ts";
-  import type {ClubsResponse, UsersResponse, UsersUpdate} from "$lib/dp/types/pb-types.ts";
-  import {Collection} from "$lib/dp/enum/Collection.ts";
+  import { authSettings, client } from "$lib/dp/client.svelte.js";
+  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  import type {
+    CustomAuthModel,
+    ExpandedClub,
+  } from "$lib/dp/types/ExpandedResponse.ts";
+  import type {
+    ClubsResponse,
+    UsersResponse,
+    UsersUpdate,
+  } from "$lib/dp/types/pb-types.ts";
+  import { Collection } from "$lib/dp/enum/Collection.ts";
+  import Sheet from "$lib/dp/components/modal/Sheet.svelte";
+  import { clsx } from "clsx";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
   interface Props {
     club: ExpandedClub | null;
-    triggerVariant?: "filled-primary" | "tonal-primary" | "tonal-secondary" | "filled-secondary" | "tonal-tertiary";
+    triggerVariant?:
+      | "filled-primary"
+      | "tonal-primary"
+      | "tonal-secondary"
+      | "filled-secondary"
+      | "tonal-tertiary";
     triggerSize?: "default" | "sm";
     triggerIcon?: boolean;
     triggerSpaced?: boolean;
@@ -29,15 +41,17 @@
   }: Props = $props();
 
   function formFromProps(data: ExpandedClub | null) {
-    return data ?? {
-      id: "",
-      name: "",
-      bsm_id: 0,
-      bsm_api_key: "",
-      acronym: "",
-      service_requirement: 0,
-      admins: [],
-    };
+    return (
+      data ?? {
+        id: "",
+        name: "",
+        bsm_id: 0,
+        bsm_api_key: "",
+        acronym: "",
+        service_requirement: 0,
+        admins: [],
+      }
+    );
   }
 
   let form: Partial<ExpandedClub> = $derived.by(() => {
@@ -49,11 +63,13 @@
 
   let selectedAdmins: UsersResponse[] = $derived(form?.expand?.admins ?? []);
 
-  const allUsersForClub = $derived(client.collection(Collection.Users).getFullList<UsersResponse>({
-    filter: `club ?~ '${club?.id}'`,
-    sort: "+last_name",
-    requestKey: `users-for-club-${club?.id}`,
-  }));
+  const allUsersForClub = $derived(
+    client.collection(Collection.Users).getFullList<UsersResponse>({
+      filter: `club ?~ '${club?.id}'`,
+      sort: "+last_name",
+      requestKey: `users-for-club-${club?.id}`,
+    }),
+  );
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
@@ -66,17 +82,23 @@
           return admin.id;
         });
 
-        result = await client.collection(Collection.Clubs).update<ClubsResponse>(form.id, form);
+        result = await client
+          .collection(Collection.Clubs)
+          .update<ClubsResponse>(form.id, form);
       } else {
         // a user creating a club becomes its first admin
         form?.admins?.push(authRecord.id);
 
-        result = await client.collection(Collection.Clubs).create<ClubsResponse>(form);
+        result = await client
+          .collection(Collection.Clubs)
+          .create<ClubsResponse>(form);
 
         // a user needs to become a member of the new club
-        await client.collection(Collection.Users).update<UsersUpdate>(authRecord.id, {
-          "club+": result.id,
-        });
+        await client
+          .collection(Collection.Users)
+          .update<UsersUpdate>(authRecord.id, {
+            "club+": result.id,
+          });
       }
     } catch {
       toastController.triggerGenericFormErrorMessage("Club");
@@ -90,34 +112,35 @@
   }
 </script>
 
-<Sheet.Root bind:open={open}>
-  <Sheet.Trigger
-    class={[
-      "btn",
-      "trigger-button",
-      `trigger-variant-${triggerVariant}`,
-      triggerSize === "sm" && "btn-sm",
-      triggerIcon && "btn-icon",
-      triggerSpaced && "trigger-spaced",
-      triggerVariant === "filled-primary" && "preset-filled-primary-500",
-      triggerVariant === "filled-secondary" && "preset-filled-secondary-500",
-      triggerVariant === "tonal-primary" && "preset-tonal-primary border-primary",
-      triggerVariant === "tonal-secondary" && "preset-tonal-secondary border-secondary",
-      triggerVariant === "tonal-tertiary" && "preset-tonal-tertiary",
-    ]}
-  >
+<Sheet
+  bind:open
+  side="right"
+  triggerClasses={clsx([
+    "btn",
+    "trigger-button",
+    `trigger-variant-${triggerVariant}`,
+    triggerSize === "sm" && "btn-sm",
+    triggerIcon && "btn-icon",
+    triggerSpaced && "trigger-spaced",
+    triggerVariant === "filled-primary" && "preset-filled-primary-500",
+    triggerVariant === "filled-secondary" && "preset-filled-secondary-500",
+    triggerVariant === "tonal-primary" && "preset-tonal-primary border-primary",
+    triggerVariant === "tonal-secondary" &&
+      "preset-tonal-secondary border-secondary",
+    triggerVariant === "tonal-tertiary" && "preset-tonal-tertiary",
+  ])}
+>
+  {#snippet triggerContent()}
     {#if form.id}
-      <ClipboardPen/>
+      <ClipboardPen />
       <span>Edit Club</span>
     {:else}
-      <Plus/>
+      <Plus />
       <span>Create a Club</span>
     {/if}
-  </Sheet.Trigger>
+  {/snippet}
 
-  <Sheet.Content>
-    <Sheet.Header></Sheet.Header>
-
+  {#snippet title()}
     <header class="text-xl font-semibold">
       {#if form.id}
         <h2 class="h3">Edit Club "{form?.name}"</h2>
@@ -125,118 +148,117 @@
         <h2 class="h3">Create new Club</h2>
       {/if}
     </header>
+  {/snippet}
 
-    <form class="mt-4 space-y-3" onsubmit={submitForm}>
-      <div class="edit-form-grid">
+  <form class="sheet-form" onsubmit={submitForm}>
+    <div class="edit-form-grid">
+      <input
+        autocomplete="off"
+        bind:value={form.id}
+        class="input"
+        name="id"
+        readonly
+        type="hidden"
+      />
+
+      <label class="label">
+        <span>Name</span>
         <input
-          autocomplete="off"
-          bind:value={form.id}
+          bind:value={form.name}
           class="input"
-          name="id"
-          readonly
-          type="hidden"
+          name="name"
+          required
+          type="text"
         />
+      </label>
 
-        <label class="label">
-          <span>Name</span>
-          <input
-            bind:value={form.name}
-            class="input"
-            name="name"
-            required
-            type="text"
-          />
-        </label>
+      <label class="label">
+        <span> Acronym </span>
+        <input
+          bind:value={form.acronym}
+          class="input"
+          name="acronym"
+          type="text"
+        />
+      </label>
 
-        <label class="label">
-                <span>
-                Acronym
-                </span>
-          <input
-            bind:value={form.acronym}
-            class="input"
-            name="acronym"
-            type="text"
-          />
-        </label>
+      <label class="label">
+        <span> BSM Club ID </span>
+        <input
+          bind:value={form.bsm_id}
+          class="input"
+          name="bsm_id"
+          required
+          type="number"
+        />
+        <span class="text-sm"
+          >Can be found in the BSM address bar while editing (e.g. <i
+            >https://bsm.baseball-softball.de/clubs/xxx/edit</i
+          >). Needs to be set for the app to function properly.
+        </span>
+      </label>
 
-        <label class="label">
-                <span>
-                BSM Club ID
-                </span>
-          <input
-            bind:value={form.bsm_id}
-            class="input"
-            name="bsm_id"
-            required
-            type="number"
-          >
-          <span class="text-sm">Can be found in the BSM address bar while editing
-                    (e.g. <i>https://bsm.baseball-softball.de/clubs/xxx/edit</i>).
-                    Needs to be set for the app to function properly.
-                </span>
-        </label>
+      <label class="label">
+        <span> BSM API Key </span>
+        <input
+          bind:value={form.bsm_api_key}
+          class="input"
+          name="bsm_api_key"
+          placeholder="current value not shown for security"
+          type="text"
+        />
+        <span class="text-sm">
+          Must be created in BSM in a user's account that has the role "Team
+          Administration". If set, all game events for the club can be
+          automatically imported.
+        </span>
+      </label>
 
-        <label class="label">
-                <span>
-                BSM API Key
-                </span>
-          <input
-            bind:value={form.bsm_api_key}
-            class="input"
-            name="bsm_api_key"
-            placeholder="current value not shown for security"
-            type="text"
-          />
+      <label class="label">
+        Community Service Requirement
+        <input
+          bind:value={form.service_requirement}
+          class="input"
+          name="service_requirement"
+          type="number"
+        />
+        <span class="text-sm">
+          Designated community service time amount (in minutes) that each member
+          is expected to provide during a calendar year (e.g. 20h = 1200
+          minutes).
+        </span>
+      </label>
+
+      {#if form.id}
+        <label class="label space-y-3 field-wide">
+          <span>Club Admins</span><br />
+
+          {#await allUsersForClub then users}
+            <MultiSelectCombobox
+              itemName="Admin"
+              bind:selectedItems={selectedAdmins}
+              allItems={users}
+            />
+          {/await}
+
           <span class="text-sm">
-                    Must be created in BSM in a user's account that has the role "Team Administration".
-                    If set, all game events for the club can be automatically imported.
-                </span>
-        </label>
-
-        <label class="label">
-          Community Service Requirement
-          <input
-            bind:value={form.service_requirement}
-            class="input"
-            name="service_requirement"
-            type="number"
-          >
-          <span class="text-sm">
-            Designated community service time amount (in minutes) that each
-            member is expected to provide during a calendar year
-            (e.g. 20h = 1200 minutes).
+            It is not possible to remove the last admin from a club.
+            <br />
+            Caution: You can remove yourself as admin, losing all access rights!
           </span>
         </label>
+      {/if}
+    </div>
 
-        {#if form.id /* we are editing and might want to change admins */}
-          <label class="label space-y-3 field-wide">
-            <span>Club Admins</span><br>
+    <hr />
 
-            {#await allUsersForClub then users}
-              <MultiSelectCombobox itemName="Admin" bind:selectedItems={selectedAdmins} allItems={users}/>
-            {/await}
-
-            <span class="text-sm">
-                        It is not possible to remove the last admin from a club.
-                        <br>
-                        Caution: You can remove yourself as admin, losing all access rights!
-                    </span>
-          </label>
-        {/if}
-      </div>
-
-      <hr/>
-
-      <div class="submit-container">
-        <button class="btn preset-filled-primary-500" type="submit">
-          Submit
-        </button>
-      </div>
-    </form>
-
-  </Sheet.Content>
-</Sheet.Root>
+    <div class="submit-container">
+      <button class="btn preset-filled-primary-500" type="submit">
+        Submit
+      </button>
+    </div>
+  </form>
+</Sheet>
 
 <style>
   hr {

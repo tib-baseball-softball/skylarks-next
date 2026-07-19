@@ -36,6 +36,7 @@
     "bits-ui": "^2.18.1",
     "bsm.js": "^0.4.0",
     "chart.js": "^4.5.1",
+    "clsx": "^2.1.1",
     "dompurify": "^3.4.5",
     "flatpickr": "^4.6.13",
     "leaflet": "^1.9.4",

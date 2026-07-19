@@ -1,6 +1,7 @@
 <script lang="ts">
+  import { dev } from "$app/environment";
   import { X } from "lucide-svelte";
-  import type { Snippet } from "svelte";
+  import { onMount, type Snippet } from "svelte";
 
   interface Props {
     open?: Boolean;
@@ -24,28 +25,53 @@
 
   let sheet: HTMLDialogElement;
 
-  export type Side = "bottom" | "left";
+  export type Side = "right" | "left";
 
   const uid = $props.id();
+
+  function show() {
+    open = true;
+  }
+
+  function close() {
+    open = false;
+  }
+
+  // manual data sync between dialog element and component props
+  // enables closing dialog from parent elements by setting `open`
+  $effect(() => {
+    if (dev) {
+      console.log("modal sheet prop 'open' changed, run dialog method:", open);
+    }
+    if (open === true) {
+      sheet.showModal();
+    } else {
+      sheet.close();
+    }
+  });
+
+  onMount(() => {
+    sheet.addEventListener("close", () => {
+      open = false;
+    });
+  });
 </script>
 
-<button
-  class="sheet-trigger btn {triggerClasses}"
-  onclick={() => sheet.showModal()}
->
+<button class="sheet-trigger btn {triggerClasses}" onclick={show}>
   {@render triggerContent()}
 </button>
 
 <dialog
   class="modal-sheet"
   data-side={side}
+  data-open={String(open)}
   aria-labelledby="sheet-title-{uid}"
   bind:this={sheet}
   closedby="any"
 >
   <button
     class="btn preset-outlined-card sheet-close-button {closeButtonClasses}"
-    onclick={() => sheet.close()}
+    onclick={close}
   >
     <X aria-hidden="true" />
     <span class="sr-only">Close</span>

@@ -8,6 +8,7 @@
   left: 0;
   height: 100%;
   overflow-y: scroll;
+  padding: calc(var(--spacing) * 4);
 
   max-width: 100%;
   @media (min-width: 48rem) {
@@ -16,6 +17,7 @@
 
   @media (min-width: 64rem) {
     max-width: 70%;
+    padding: calc(var(--spacing) * 6);
   }
 
   @media (min-width: 80rem) {
@@ -29,6 +31,8 @@
       pointer-events: none;
     }
   }
+
+  /* TODO: exit transition */
 
   transform: translateX(-100%);
   transition: var(
