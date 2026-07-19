@@ -6,12 +6,12 @@
   let dialog: HTMLDialogElement;
 
   type Props = {
-    open: boolean;
+    open?: boolean;
     children?: Snippet;
     triggerClasses?: string;
     title: Snippet;
     description?: Snippet;
-    contentProps?: HTMLAttributes<HTMLDivElement>;
+    contentProps?: HTMLAttributes<HTMLDialogElement>;
     triggerProps?: HTMLButtonAttributes;
     triggerContent: Snippet;
     closeButtonClasses?: string;
@@ -47,35 +47,35 @@
 </button>
 
 <dialog
-  class="modal-dialog"
+  {...contentProps}
+  class="modal-dialog card dialog-content shadow-2xl"
   bind:this={dialog}
   closedby="any"
   aria-labelledby="dialog-title-{uid}"
 >
-  <div {...contentProps} class="card dialog-content shadow-2xl">
-    <header class="header">
-      <menu>
-        <button
-          onclick={() => dialog.close()}
-          class="close-button btn preset-outlined-card {closeButtonClasses}"
-        >
-          <X />
-        </button>
-      </menu>
+  <header class="header">
+    <menu>
+      <button
+        onclick={() => dialog.close()}
+        class="close-button btn preset-outlined-card {closeButtonClasses}"
+        data-dialog-close
+      >
+        <X />
+      </button>
+    </menu>
 
-      {#if title}
-        <div id="dialog-title-{uid}" class="title">
-          {@render title?.()}
-        </div>
-      {/if}
-    </header>
+    {#if title}
+      <div id="dialog-title-{uid}" class="title">
+        {@render title?.()}
+      </div>
+    {/if}
+  </header>
 
-    <article>
-      {#if description}
-        {@render description?.()}
-      {/if}
+  <article>
+    {#if description}
+      {@render description?.()}
+    {/if}
 
-      {@render children?.()}
-    </article>
-  </div>
+    {@render children?.()}
+  </article>
 </dialog>

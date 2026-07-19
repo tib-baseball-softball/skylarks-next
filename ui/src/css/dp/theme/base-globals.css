@@ -7,12 +7,7 @@
   }
 
   :root {
-    /* Color Scheme --- */
-    /* https://tailwindcss.com/docs/color-scheme */
-    color-scheme: light;
-    @media (prefers-color-scheme: dark) {
-      color-scheme: dark;
-    }
+    color-scheme: light dark;
 
     /* Scrollbars --- */
     /* https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-color */
@@ -50,7 +45,6 @@
   }
 
   /* Elements --- */
-  /* https://tailwindcss.com/docs/upgrade-guide#buttons-use-the-default-cursor */
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;

@@ -3,27 +3,44 @@ dialog::backdrop {
   opacity: 80%;
 }
 
-.dialog-content {
-  position: fixed;
+.modal-dialog {
+  margin: auto; /* center both directions */
   background-color: var(--nav-item-background);
-  left: 50%;
-  top: 50%;
   width: 100%;
   border: 1px solid;
   max-width: 94%;
-  translate: -50% -50%;
   padding: calc(var(--spacing) * 5);
 
   @media (min-width: 40rem) {
     max-width: 640px;
   }
 
-  @media (min-width: 48rem) {
-    width: 100%;
-  }
-}
+  /* default closed state */
+  opacity: 0;
+  transform: translateY(24px);
+  transition: all 0.25s allow-discrete;
+  transition-behavior: allow-discrete;
 
-.modal-dialog {
+  /* open state */
+  &:open {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Initial values on enter, needed for transition */
+  @starting-style {
+    &:open {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+  }
+
+  /* exit transition */
+  &:not(:open) {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
   .trigger {
     display: flex;
     gap: var(--spacing);
@@ -43,5 +60,12 @@ dialog::backdrop {
 
   .close-button {
     border: 1px solid;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-dialog {
+    transition: none;
+    transform: none;
   }
 }
