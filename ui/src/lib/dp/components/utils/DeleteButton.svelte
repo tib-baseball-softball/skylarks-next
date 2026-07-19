@@ -1,11 +1,10 @@
 <script lang="ts">
-  import {Trash} from "lucide-svelte";
-  import type {HTMLButtonAttributes} from "svelte/elements";
-  import {invalidate} from "$app/navigation";
+  import { Trash } from "lucide-svelte";
+  import type { HTMLButtonAttributes } from "svelte/elements";
+  import { invalidate } from "$app/navigation";
   import Dialog from "$lib/dp/components/modal/Dialog.svelte";
-  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
-  import type {Toast} from "$lib/dp/types/Toast.ts";
-  import {closeModal} from "$lib/dp/utility/closeModal.ts";
+  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  import type { Toast } from "$lib/dp/types/Toast.ts";
 
   interface Props extends HTMLButtonAttributes {
     id: string;
@@ -45,13 +44,16 @@
 
       toastController.trigger(toastSettingsDeletions);
     }
-    closeModal();
   }
 </script>
 
-<Dialog closeButtonClasses="sr-only" triggerClasses="btn {classes}" triggerProps={restProps}>
+<Dialog
+  closeButtonClasses="sr-only"
+  triggerClasses="btn {classes}"
+  triggerProps={restProps}
+>
   {#snippet triggerContent()}
-    <Trash size={iconSize}/>
+    <Trash size={iconSize} />
     {#if buttonText}
       <span>{buttonText}</span>
     {/if}
@@ -62,15 +64,27 @@
   {/snippet}
 
   {#snippet description()}
-    <span>Are you sure you wish to delete this {modelName}? In most cases, data cannot be recovered after deletion. Please be certain.</span>
+    <span
+      >Are you sure you wish to delete this {modelName}? In most cases, data
+      cannot be recovered after deletion. Please be certain.</span
+    >
   {/snippet}
 
   <div class="actions">
-    <button class="btn preset-outlined-card border border-surface-500" data-test-role="modal-cancel"
-            onclick={closeModal}
-            type="button">Cancel
+    <button
+      class="btn preset-outlined-card border border-surface-500"
+      data-test-role="modal-cancel"
+      data-dialog-close
+      type="button"
+      >Cancel
     </button>
-    <button class="btn preset-filled" data-test-role="modal-confirm" onclick={deleteItem} type="button">Confirm</button>
+    <button
+      class="btn preset-filled"
+      data-test-role="modal-confirm"
+      data-dialog-close
+      onclick={deleteItem}
+      type="button">Confirm</button
+    >
   </div>
 </Dialog>
 

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import {authSettings, client} from "$lib/dp/client.svelte.js";
-  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
-  import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
-  import {closeModal} from "$lib/dp/utility/closeModal.ts";
+  import { authSettings, client } from "$lib/dp/client.svelte.js";
+  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  import type { CustomAuthModel } from "$lib/dp/types/ExpandedResponse.ts";
+  import { Collection } from "../enum/Collection";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
@@ -16,10 +16,11 @@
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
 
-    const sent = await client.collection("users").requestEmailChange(form.email);
+    const sent = await client
+      .collection(Collection.Users)
+      .requestEmailChange(form.email);
 
     if (sent) {
-      closeModal();
       toastController.trigger({
         message: "A verification email has been sent to your new address.",
         background: "preset-filled-success-500",
@@ -35,7 +36,6 @@
 </script>
 
 <form class="form-root" onsubmit={submitForm}>
-
   <label class="label">
     E-Mail
     <input
@@ -47,13 +47,17 @@
       type="email"
     />
     <span class="help-text">
-                You will be logged out and instructed to verify your new email address.
-            </span>
+      You will be logged out and instructed to verify your new email address.
+    </span>
   </label>
 
   <div class="actions">
-    <button class="btn preset-tonal-primary submit-btn" disabled={form.email === authRecord.email}
-            type="submit">
+    <button
+      class="btn preset-tonal-primary submit-btn"
+      disabled={form.email === authRecord.email}
+      type="submit"
+      data-dialog-close
+    >
       Confirm
     </button>
   </div>

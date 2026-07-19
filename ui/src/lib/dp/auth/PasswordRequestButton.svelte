@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type {Snippet} from "svelte";
+  import type { Snippet } from "svelte";
   import Dialog from "$lib/dp/components/modal/Dialog.svelte";
-  import {client} from "$lib/dp/client.svelte.js";
-  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
-  import {closeModal} from "$lib/dp/utility/closeModal.js";
+  import { client } from "$lib/dp/client.svelte.js";
+  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  import { Collection } from "../enum/Collection";
 
   interface Props {
     email: string;
@@ -16,8 +16,7 @@
   const {
     email,
     disabled = false,
-    additionalAction = () => {
-    },
+    additionalAction = () => {},
     classes = "",
     children,
   }: Props = $props();
@@ -26,7 +25,9 @@
     additionalAction();
 
     try {
-      const success = await client.collection("users").requestPasswordReset(email);
+      const success = await client
+        .collection(Collection.Users)
+        .requestPasswordReset(email);
 
       if (success) {
         toastController.trigger({
@@ -44,15 +45,10 @@
         background: "preset-filled-error-500",
       });
     }
-    closeModal();
   }
 </script>
 
-<Dialog
-  closeButtonClasses="sr-only"
-  disabled={disabled}
-  triggerClasses={classes}
->
+<Dialog closeButtonClasses="sr-only" {disabled} triggerClasses={classes}>
   {#snippet triggerContent()}
     {@render children?.()}
   {/snippet}
@@ -63,15 +59,26 @@
 
   {#snippet description()}
     <span>
-      Send change password request for <code class="code">{email ? email : "---"}</code>?
-      You will be logged out and an email with instructions will be sent to your address.
+      Send change password request for <code class="code"
+        >{email ? email : "---"}</code
+      >? You will be logged out and an email with instructions will be sent to
+      your address.
     </span>
   {/snippet}
 
   <div class="actions">
-    <button class="btn preset-outlined-card cancel" onclick={closeModal} type="button">Cancel
+    <button
+      class="btn preset-outlined-card cancel"
+      data-dialog-close
+      type="button"
+      >Cancel
     </button>
-    <button class="btn preset-filled" onclick={triggerPasswordChange} type="button">Confirm</button>
+    <button
+      class="btn preset-filled"
+      data-dialog-close
+      onclick={triggerPasswordChange}
+      type="button">Confirm</button
+    >
   </div>
 </Dialog>
 

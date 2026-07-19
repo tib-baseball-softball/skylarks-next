@@ -1,12 +1,12 @@
 <script lang="ts">
-  import type { Snippet } from "svelte";
+  import { onMount, type Snippet } from "svelte";
   import { X } from "lucide-svelte";
   import type { HTMLAttributes, HTMLButtonAttributes } from "svelte/elements";
+  import { dev } from "$app/environment";
 
   let dialog: HTMLDialogElement;
 
   type Props = {
-    open?: boolean;
     children?: Snippet;
     triggerClasses?: string;
     title: Snippet;
@@ -19,7 +19,6 @@
   };
 
   let {
-    open = $bindable(false),
     children,
     triggerClasses = "",
     contentProps,
@@ -32,6 +31,20 @@
   }: Props = $props();
 
   const uid = $props.id();
+
+  onMount(() => {
+    const closeButtons: NodeListOf<HTMLElement> = dialog.querySelectorAll(
+      "[data-dialog-close]",
+    );
+    closeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        if (dev) {
+          console.debug("dismissing dialog via button event");
+        }
+        dialog.close();
+      });
+    });
+  });
 </script>
 
 <button

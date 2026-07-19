@@ -1,17 +1,25 @@
 <script lang="ts">
-  import type {TableHandler} from "@vincjo/datatables";
-  import {CircleCheck, CircleMinus, Lock, LockOpen, Trash} from "lucide-svelte";
-  import {invalidateAll} from "$app/navigation";
+  import type { TableHandler } from "@vincjo/datatables";
+  import {
+    CircleCheck,
+    CircleMinus,
+    Lock,
+    LockOpen,
+    Trash,
+  } from "lucide-svelte";
+  import { invalidateAll } from "$app/navigation";
   import Avatar from "$lib/dp/components/utils/Avatar.svelte";
   import Dialog from "$lib/dp/components/modal/Dialog.svelte";
-  import {client} from "$lib/dp/client.svelte.js";
-  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
-  import type {CustomAuthModel, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
-  import type {TeamsUpdate, UsersUpdate} from "$lib/dp/types/pb-types.ts";
-  import {closeModal} from "$lib/dp/utility/closeModal.ts";
+  import { client } from "$lib/dp/client.svelte.js";
+  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  import type {
+    CustomAuthModel,
+    ExpandedTeam,
+  } from "$lib/dp/types/ExpandedResponse.ts";
+  import type { TeamsUpdate, UsersUpdate } from "$lib/dp/types/pb-types.ts";
   import LocalDate from "../utils/LocalDate.svelte";
-  import {positionKeysToEnumStringValues} from "$lib/dp/types/BaseballPosition.ts";
-  import {Collection} from "$lib/dp/enum/Collection.ts";
+  import { positionKeysToEnumStringValues } from "$lib/dp/types/BaseballPosition.ts";
+  import { Collection } from "$lib/dp/enum/Collection.ts";
 
   interface Props {
     handler: TableHandler<CustomAuthModel>;
@@ -19,7 +27,7 @@
     showAdminSection?: boolean;
   }
 
-  const {handler, team, showAdminSection = false}: Props = $props();
+  const { handler, team, showAdminSection = false }: Props = $props();
 
   async function makeUserAdmin(model: CustomAuthModel) {
     try {
@@ -76,7 +84,6 @@
         background: "preset-filled-error-500",
       });
     }
-    closeModal();
   }
 
   const rows = $derived(handler.rows);
@@ -94,9 +101,7 @@
         <div>
           <span>{row.first_name} {row.last_name}</span>
           <div>
-            <a class="font-extralight" href="mailto:{row.email}"
-            >{row.email}</a
-            >
+            <a class="font-extralight" href="mailto:{row.email}">{row.email}</a>
           </div>
         </div>
       </div>
@@ -106,12 +111,12 @@
       <div class="checkmark-container">
         {#if row.verified}
           <div>
-            <CircleCheck color="var(--color-success-500)"/>
+            <CircleCheck color="var(--color-success-500)" />
           </div>
           <div>Verified</div>
         {:else}
           <div>
-            <CircleMinus size="22" color="var(--color-error-500)"/>
+            <CircleMinus size="22" color="var(--color-error-500)" />
           </div>
           <div>Unverified</div>
         {/if}
@@ -139,31 +144,36 @@
     <td>{positionKeysToEnumStringValues(row.position)}</td>
 
     <td>
-      <LocalDate date={row.last_login}/>
+      <LocalDate date={row.last_login} />
     </td>
 
     {#if showAdminSection}
       <td>
         <div class="actions">
-
           {#if team.admins.includes(row.id)}
-            <button class="badge preset-tonal-warning border border-warning-500 admin-button"
-                    onclick={() => removeUserAsAdmin(row)}>
-              <Lock size="18"/>
+            <button
+              class="badge preset-tonal-warning border border-warning-500 admin-button"
+              onclick={() => removeUserAsAdmin(row)}
+            >
+              <Lock size="18" />
               Revoke Admin
             </button>
-          {:else }
-            <button class="badge preset-tonal-tertiary border border-tertiary-500 admin-button"
-                    onclick={() => makeUserAdmin(row)}>
-              <LockOpen size="18"/>
+          {:else}
+            <button
+              class="badge preset-tonal-tertiary border border-tertiary-500 admin-button"
+              onclick={() => makeUserAdmin(row)}
+            >
+              <LockOpen size="18" />
               Make Admin
             </button>
           {/if}
 
-          <Dialog triggerClasses="btn btn-sm preset-tonal-error border border-error-500 gap-0!"
-                  closeButtonClasses="sr-only">
+          <Dialog
+            triggerClasses="btn btn-sm preset-tonal-error border border-error-500 gap-0!"
+            closeButtonClasses="sr-only"
+          >
             {#snippet triggerContent()}
-              <Trash size="18" aria-label="Remove User from Team"/>
+              <Trash size="18" aria-label="Remove User from Team" />
             {/snippet}
 
             {#snippet title()}
@@ -171,15 +181,27 @@
             {/snippet}
 
             {#snippet description()}
-              <span>Are you sure you wish to remove "{row.first_name + " " + row.last_name}" from "{team.name}"?</span>
+              <span
+                >Are you sure you wish to remove "{row.first_name +
+                  " " +
+                  row.last_name}" from "{team.name}"?</span
+              >
             {/snippet}
 
             <div class="button-container">
-              <button class="btn preset-outlined-card border border-surface-500" type="button"
-                      onclick={closeModal}>
+              <button
+                class="btn preset-outlined-card border border-surface-500"
+                type="button"
+                data-dialog-close
+              >
                 Cancel
               </button>
-              <button class="btn preset-filled" type="button" onclick={() => deleteUserFromTeam(row)}>Confirm</button>
+              <button
+                data-dialog-close
+                class="btn preset-filled"
+                type="button"
+                onclick={() => deleteUserFromTeam(row)}>Confirm</button
+              >
             </div>
           </Dialog>
         </div>

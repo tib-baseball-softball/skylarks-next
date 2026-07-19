@@ -33,14 +33,6 @@
       ? new Date(participation.updated).toLocaleString()
       : "---",
   );
-
-  const triggerProps: {
-    popovertarget: HTMLButtonAttributes["popovertarget"];
-    popovertargetaction: HTMLButtonAttributes["popovertargetaction"];
-  } = {
-    popovertarget: id,
-    popovertargetaction: "hide",
-  };
 </script>
 
 <button class="{classes} trigger-button" popovertarget={id}>
@@ -72,7 +64,6 @@
   {#if canEdit}
     <Dialog
       triggerClasses="btn btn-sm preset-tonal-primary border border-primary-500 edit-btn"
-      {triggerProps}
     >
       {#snippet triggerContent()}
         Edit
