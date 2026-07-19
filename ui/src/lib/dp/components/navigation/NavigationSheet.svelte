@@ -1,41 +1,54 @@
 <script lang="ts">
   import SidebarNavigation from "$lib/dp/components/meta/SidebarNavigation.svelte";
-  //@ts-ignore
-  import * as Sheet from "$lib/dp/components/modal/sheet";
-  import type {ExpandedClub, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
+  import type {
+    ExpandedClub,
+    ExpandedTeam,
+  } from "$lib/dp/types/ExpandedResponse.ts";
+  import Sheet from "../modal/Sheet.svelte";
 
   interface Props {
     clubs: ExpandedClub[];
     teams: ExpandedTeam[];
   }
 
-  let {clubs, teams}: Props = $props();
+  let { clubs, teams }: Props = $props();
 
   let open = $state(false);
 </script>
 
-<Sheet.Root bind:open={open}>
-  <Sheet.Trigger aria-label="open navigation" class="nav-trigger btn btn-sm">
-    <svg viewBox="0 0 100 80">
-      <rect height="20" width="100"/>
-      <rect height="20" width="100" y="30"/>
-      <rect height="20" width="100" y="60"/>
+<Sheet
+  bind:open
+  triggerClasses="nav-trigger btn-sm"
+  side="left"
+  closeButtonClasses="sr-only"
+>
+  {#snippet triggerContent()}
+    <svg viewBox="0 0 100 80" aria-hidden="true">
+      <rect height="20" width="100" />
+      <rect height="20" width="100" y="30" />
+      <rect height="20" width="100" y="60" />
     </svg>
-  </Sheet.Trigger>
+  {/snippet}
 
-  <Sheet.Content class="navigation-sheet-content" side="left">
-    <Sheet.Header></Sheet.Header>
+  {#snippet title()}
+    <h2 class="sr-only">Navigation</h2>
+  {/snippet}
 
-    <a aria-label="to home page" class="anchor" href="/" onclick={() => open = false}>
-      <img alt="Diamond Planner Logo" src="/icon_dp.svg">
+  <div class="navigation-sheet-content">
+    <a
+      aria-label="to home page"
+      class="anchor"
+      href="/"
+      onclick={() => (open = false)}
+    >
+      <img alt="Diamond Planner Logo" src="/icon_dp.svg" />
     </a>
 
-    <hr/>
+    <hr />
 
-    <SidebarNavigation bind:sheetOpen={open} clubs={clubs} teams={teams}/>
-
-  </Sheet.Content>
-</Sheet.Root>
+    <SidebarNavigation bind:sheetOpen={open} {clubs} {teams} />
+  </div>
+</Sheet>
 
 <style>
   :global {

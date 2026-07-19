@@ -7,7 +7,6 @@
     CustomAuthModel,
     ExpandedParticipation,
   } from "$lib/dp/types/ExpandedResponse.ts";
-  import type { HTMLButtonAttributes } from "svelte/elements";
 
   interface Props {
     participation: ExpandedParticipation;
