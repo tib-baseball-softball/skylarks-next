@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { dev } from "$app/environment";
   import { X } from "lucide-svelte";
   import { onMount, type Snippet } from "svelte";
 
