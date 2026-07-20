@@ -60,7 +60,6 @@
 <dialog
   class="modal-sheet"
   data-side={side}
-  data-open={String(open)}
   aria-labelledby="sheet-title-{uid}"
   bind:this={sheet}
   closedby="any"
