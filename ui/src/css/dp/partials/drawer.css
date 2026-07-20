@@ -32,13 +32,9 @@
     }
   }
 
-  /* TODO: exit transition */
-
   transform: translateX(-100%);
-  transition: var(
-    --side-drawer-transition,
-    transform 0.25s ease-out
-  );
+  transition: all 0.25s ease-out;
+  transition-behavior: allow-discrete;
   visibility: hidden;
 }
 
