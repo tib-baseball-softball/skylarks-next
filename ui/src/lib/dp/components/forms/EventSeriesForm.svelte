@@ -95,7 +95,7 @@
     Create new Event Series for {team.name}
   {/if}
 </h3>
-<form onsubmit={submitForm}>
+<form class="edit-form" onsubmit={submitForm}>
   <div class="edit-form-grid">
     <input
       autocomplete="off"

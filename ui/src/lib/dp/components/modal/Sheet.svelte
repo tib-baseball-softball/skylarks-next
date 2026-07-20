@@ -40,9 +40,6 @@
   // manual data sync between dialog element and component props
   // enables closing dialog from parent elements by setting `open`
   $effect(() => {
-    if (dev) {
-      console.log("modal sheet prop 'open' changed, run dialog method:", open);
-    }
     if (open === true) {
       sheet.showModal();
     } else {

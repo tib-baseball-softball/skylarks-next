@@ -3,8 +3,6 @@
   import { invalidate } from "$app/navigation";
   import TabsRadioGroup from "$lib/dp/components/formElements/TabsRadioGroup.svelte";
   import MultiSelectCombobox from "$lib/dp/components/formElements/MultiSelectCombobox.svelte";
-  //@ts-ignore
-  import * as Sheet from "$lib/dp/components/modal/sheet";
   import { authSettings, client } from "$lib/dp/client.svelte.js";
   import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
   import type {
@@ -14,6 +12,8 @@
   import type { ClubsResponse, UsersResponse } from "$lib/dp/types/pb-types.ts";
   import { Collection } from "$lib/dp/enum/Collection.ts";
   import RichTextEditor from "$lib/dp/components/rte/RichTextEditor.svelte";
+  import clsx from "clsx";
+  import Sheet from "$lib/dp/components/modal/Sheet.svelte";
 
   interface Props {
     club: ClubsResponse;
@@ -112,26 +112,27 @@
   }
 </script>
 
-<Sheet.Root bind:open>
-  <Sheet.Trigger
-    class={[
-      "btn",
-      "trigger-button",
-      "team-form-trigger",
-      `trigger-variant-${triggerVariant}`,
-      triggerSize === "sm" && "btn-sm",
-      triggerIcon && "btn-icon",
-      triggerSpaced && "trigger-spaced",
-      triggerVariant === "filled-primary" && "preset-filled-primary-500",
-      triggerVariant === "filled-secondary" && "preset-filled-secondary-500",
-      triggerVariant === "tonal-primary" &&
-        "preset-tonal-primary border-primary",
-      triggerVariant === "tonal-secondary" &&
-        "preset-tonal-secondary border-secondary",
-      triggerVariant === "tonal-tertiary" &&
-        "preset-tonal-tertiary border-tertiary",
-    ]}
-  >
+<Sheet
+  side="right"
+  bind:open
+  triggerClasses={clsx([
+    "btn",
+    "trigger-button",
+    "team-form-trigger",
+    `trigger-variant-${triggerVariant}`,
+    triggerSize === "sm" && "btn-sm",
+    triggerIcon && "btn-icon",
+    triggerSpaced && "trigger-spaced",
+    triggerVariant === "filled-primary" && "preset-filled-primary-500",
+    triggerVariant === "filled-secondary" && "preset-filled-secondary-500",
+    triggerVariant === "tonal-primary" && "preset-tonal-primary border-primary",
+    triggerVariant === "tonal-secondary" &&
+      "preset-tonal-secondary border-secondary",
+    triggerVariant === "tonal-tertiary" &&
+      "preset-tonal-tertiary border-tertiary",
+  ])}
+>
+  {#snippet triggerContent()}
     {#if form.id}
       <SquarePen />
       {#if showLabel}
@@ -143,11 +144,9 @@
         <span>Create new</span>
       {/if}
     {/if}
-  </Sheet.Trigger>
+  {/snippet}
 
-  <Sheet.Content>
-    <Sheet.Header></Sheet.Header>
-
+  {#snippet title()}
     <header>
       {#if form.id}
         <h2 class="h3">Edit Team "{form?.name}"</h2>
@@ -156,7 +155,7 @@
       {/if}
     </header>
 
-    <form onsubmit={submitForm}>
+    <form class="edit-form" onsubmit={submitForm}>
       <div class="edit-form-grid">
         <input
           autocomplete="off"
@@ -250,8 +249,8 @@
         </button>
       </div>
     </form>
-  </Sheet.Content>
-</Sheet.Root>
+  {/snippet}
+</Sheet>
 
 <style>
   :global(.team-form-trigger .lucide-icon) {

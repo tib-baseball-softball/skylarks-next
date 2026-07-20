@@ -69,7 +69,7 @@
   }
 </script>
 
-<form onsubmit={submitForm}>
+<form class="edit-form" onsubmit={submitForm}>
   <div class="edit-form-grid">
     <input
       autocomplete="off"

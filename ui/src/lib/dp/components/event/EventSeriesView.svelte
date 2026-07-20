@@ -1,19 +1,28 @@
 <script lang="ts">
-  import {CalendarPlus, SquarePen} from "lucide-svelte";
-  import {slide} from "svelte/transition";
-  import {invalidateAll} from "$app/navigation";
+  import { CalendarPlus, SquarePen } from "lucide-svelte";
+  import { slide } from "svelte/transition";
+  import { invalidateAll } from "$app/navigation";
   import EventSeriesListItem from "$lib/dp/components/eventseries/EventSeriesListItem.svelte";
   import EventSeriesForm from "$lib/dp/components/forms/EventSeriesForm.svelte";
   import DeleteButton from "$lib/dp/components/utils/DeleteButton.svelte";
-  //@ts-ignore
-  import * as Sheet from "$lib/dp/components/modal/sheet";
-  import {client} from "$lib/dp/client.svelte.ts";
-  import type {EventSeriesCreationData, ExpandedEventSeries, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
+  import { client } from "$lib/dp/client.svelte.ts";
+  import Sheet from "$lib/dp/components/modal/Sheet.svelte";
+  import type {
+    EventSeriesCreationData,
+    ExpandedEventSeries,
+    ExpandedTeam,
+  } from "$lib/dp/types/ExpandedResponse.ts";
+  import clsx from "clsx";
 
   interface Props {
     team: ExpandedTeam;
     eventSeries: ExpandedEventSeries[];
-    triggerVariant?: "filled-primary" | "tonal-primary" | "tonal-secondary" | "tonal-tertiary" | "tonal-surface";
+    triggerVariant?:
+      | "filled-primary"
+      | "tonal-primary"
+      | "tonal-secondary"
+      | "tonal-tertiary"
+      | "tonal-surface";
     triggerSize?: "default" | "sm";
     triggerIcon?: boolean;
     triggerSpaced?: boolean;
@@ -59,81 +68,91 @@
   }
 </script>
 
-<Sheet.Root bind:open={open}>
-  <Sheet.Trigger
-    class={[
-      "btn",
-      "trigger-button",
-      `trigger-variant-${triggerVariant}`,
-      triggerSize === "sm" && "btn-sm",
-      triggerIcon && "btn-icon",
-      triggerSpaced && "trigger-spaced",
-      triggerVariant === "filled-primary" && "preset-filled-primary-500",
-      triggerVariant === "tonal-primary" && "preset-tonal-primary border-primary",
-      triggerVariant === "tonal-secondary" && "preset-tonal-secondary",
-      triggerVariant === "tonal-tertiary" && "preset-tonal-tertiary border-tertiary",
-      triggerVariant === "tonal-surface" && "preset-outlined-card",
-    ]}
-  >
-    <CalendarPlus/>
+<Sheet
+  side="right"
+  bind:open
+  triggerClasses={clsx([
+    "btn",
+    "trigger-button",
+    `trigger-variant-${triggerVariant}`,
+    triggerSize === "sm" && "btn-sm",
+    triggerIcon && "btn-icon",
+    triggerSpaced && "trigger-spaced",
+    triggerVariant === "filled-primary" && "preset-filled-primary-500",
+    triggerVariant === "tonal-primary" && "preset-tonal-primary border-primary",
+    triggerVariant === "tonal-secondary" && "preset-tonal-secondary",
+    triggerVariant === "tonal-tertiary" &&
+      "preset-tonal-tertiary border-tertiary",
+    triggerVariant === "tonal-surface" && "preset-outlined-card",
+  ])}
+>
+  {#snippet triggerContent()}
+    <CalendarPlus />
     <span>Manage Event Series</span>
-  </Sheet.Trigger>
+  {/snippet}
 
-  <Sheet.Content>
-    <Sheet.Header></Sheet.Header>
-
+  {#snippet title()}
     <header>
       <h2 class="h3">Manage Event Series for {team?.name}</h2>
     </header>
+  {/snippet}
 
-    <div class="series-container">
-      <h3>Active Event Series</h3>
+  <div class="series-container">
+    <h3>Active Event Series</h3>
 
-      {#each eventSeries as series (series.id)}
-        <EventSeriesListItem eventSeries={series}>
-          {#snippet buttonBlock()}
-            <div class="button-container">
-              <button class="btn btn-sm preset-outlined edit-button"
-                      onclick={() => setupAndShowForm(series)}>
-                <SquarePen size="18"/>
-                <span>Edit</span>
-              </button>
+    {#each eventSeries as series (series.id)}
+      <EventSeriesListItem eventSeries={series}>
+        {#snippet buttonBlock()}
+          <div class="button-container">
+            <button
+              class="btn btn-sm preset-outlined edit-button"
+              onclick={() => setupAndShowForm(series)}
+            >
+              <SquarePen size="18" />
+              <span>Edit</span>
+            </button>
 
-              <DeleteButton
-                id={series.id}
-                modelName="Event Series"
-                action={deleteEventSeries}
-                classes="btn-sm preset-tonal-error border border-error-500"
-                buttonText="Delete"
-                iconSize="18"
-              />
-            </div>
-          {/snippet}
-        </EventSeriesListItem>
-      {/each}
-    </div>
+            <DeleteButton
+              id={series.id}
+              modelName="Event Series"
+              action={deleteEventSeries}
+              classes="btn-sm preset-tonal-error border border-error-500"
+              buttonText="Delete"
+              iconSize="18"
+            />
+          </div>
+        {/snippet}
+      </EventSeriesListItem>
+    {/each}
+  </div>
 
-    {#if eventSeries.length === 0}
-      <section class="hint">
-        <div>No event series have been set up for this team yet.</div>
-      </section>
+  {#if eventSeries.length === 0}
+    <section class="hint">
+      <div>No event series have been set up for this team yet.</div>
+    </section>
+  {/if}
+
+  <button
+    class="btn preset-filled-primary-500"
+    onclick={() => setupAndShowForm(null)}
+  >
+    Add new Event Series
+  </button>
+
+  <hr />
+
+  <div bind:this={eventSeriesFormContainer}>
+    {#if showForm}
+      <div transition:slide={{ duration: 230 }}>
+        <EventSeriesForm
+          {team}
+          eventSeries={selectedEventSeries}
+          bind:showForm
+        />
+      </div>
     {/if}
-
-    <button class="btn preset-filled-primary-500" onclick={() => setupAndShowForm(null)}>
-      Add new Event Series
-    </button>
-
-    <hr>
-
-    <div bind:this={eventSeriesFormContainer}>
-      {#if showForm}
-        <div transition:slide={{duration: 230}}>
-          <EventSeriesForm team={team} eventSeries={selectedEventSeries} bind:showForm={showForm}/>
-        </div>
-      {/if}
-    </div>
-  </Sheet.Content>
-</Sheet.Root>
+  </div>
+</Sheet>
 
 <style>
   :global(.series-container .series-card) {

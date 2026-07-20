@@ -150,7 +150,7 @@
     </header>
   {/snippet}
 
-  <form class="sheet-form" onsubmit={submitForm}>
+  <form class="edit-form sheet-form" onsubmit={submitForm}>
     <div class="edit-form-grid">
       <input
         autocomplete="off"

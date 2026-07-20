@@ -4,7 +4,7 @@
     ExpandedClub,
     ExpandedTeam,
   } from "$lib/dp/types/ExpandedResponse.ts";
-  import Sheet from "../modal/Sheet.svelte";
+  import Sheet from "$lib/dp/components/modal/Sheet.svelte";
 
   interface Props {
     clubs: ExpandedClub[];

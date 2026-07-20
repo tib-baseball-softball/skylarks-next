@@ -1,9 +1,6 @@
 <script lang="ts">
   import { Plus, SquarePen } from "lucide-svelte";
   import { invalidateAll } from "$app/navigation";
-  //@ts-ignore
-  // noinspection ES6UnusedImports
-  import * as Sheet from "$lib/dp/components/modal/sheet";
   import { authSettings, client } from "$lib/dp/client.svelte.js";
   import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
   import type {
@@ -17,6 +14,8 @@
   } from "$lib/dp/types/pb-types.ts";
   import RichTextEditor from "$lib/dp/components/rte/RichTextEditor.svelte";
   import { Collection } from "$lib/dp/enum/Collection.ts";
+  import Sheet from "$lib/dp/components/modal/Sheet.svelte";
+  import clsx from "clsx";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
@@ -67,8 +66,6 @@
 
   let open = $state(false);
 
-  const isEditing = $derived(announcement !== null);
-
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
 
@@ -100,28 +97,27 @@
   }
 </script>
 
-<Sheet.Root bind:open>
-  <Sheet.Trigger
-    class={[
-      "btn",
-      "announcement-form-trigger",
-      "trigger-button",
-      `trigger-variant-${triggerVariant}`,
-      triggerSize === "sm" && "btn-sm",
-      triggerIcon && "btn-icon",
-      triggerSpaced && "trigger-spaced",
-      triggerVariant === "filled-primary" && "preset-filled-primary-500",
-      triggerVariant === "tonal-primary" &&
-        "preset-tonal-primary border-primary",
-      triggerVariant === "tonal-secondary" &&
-        "preset-tonal-secondary border-secondary",
-      triggerVariant === "tonal-tertiary" &&
-        "preset-tonal-tertiary border-tertiary",
-      triggerVariant === "tonal-surface" &&
-        "preset-outlined-card border-surface",
-    ]}
-    data-testid="announcement-form-trigger-{isEditing ? 'edit' : 'create'}"
-  >
+<Sheet
+  bind:open
+  side="right"
+  triggerClasses={clsx([
+    "btn",
+    "announcement-form-trigger",
+    "trigger-button",
+    `trigger-variant-${triggerVariant}`,
+    triggerSize === "sm" && "btn-sm",
+    triggerIcon && "btn-icon",
+    triggerSpaced && "trigger-spaced",
+    triggerVariant === "filled-primary" && "preset-filled-primary-500",
+    triggerVariant === "tonal-primary" && "preset-tonal-primary border-primary",
+    triggerVariant === "tonal-secondary" &&
+      "preset-tonal-secondary border-secondary",
+    triggerVariant === "tonal-tertiary" &&
+      "preset-tonal-tertiary border-tertiary",
+    triggerVariant === "tonal-surface" && "preset-outlined-card border-surface",
+  ])}
+>
+  {#snippet triggerContent()}
     {#if form.id}
       <SquarePen />
       {#if showLabel}
@@ -133,11 +129,9 @@
         <span>Create new</span>
       {/if}
     {/if}
-  </Sheet.Trigger>
+  {/snippet}
 
-  <Sheet.Content>
-    <Sheet.Header></Sheet.Header>
-
+  {#snippet title()}
     <header>
       {#if form.id}
         <h2 class="h3">Edit Announcement "{form?.title}"</h2>
@@ -145,137 +139,136 @@
         <h2 class="h3">Create new Announcement</h2>
       {/if}
     </header>
+  {/snippet}
 
-    <form onsubmit={submitForm}>
-      <div class="edit-form-grid">
+  <form class="edit-form" onsubmit={submitForm}>
+    <div class="edit-form-grid">
+      <input
+        autocomplete="off"
+        bind:value={form.id}
+        class="input"
+        name="id"
+        readonly
+        type="hidden"
+      />
+
+      <input
+        autocomplete="off"
+        class="input"
+        name="author"
+        readonly
+        type="hidden"
+        value={form.author}
+      />
+
+      {#if club}
         <input
           autocomplete="off"
-          bind:value={form.id}
+          value={club.id}
           class="input"
-          name="id"
+          name="club"
           readonly
           type="hidden"
         />
+      {/if}
 
+      {#if team}
         <input
           autocomplete="off"
+          value={team.id}
           class="input"
-          name="author"
+          name="team"
           readonly
           type="hidden"
-          value={form.author}
         />
+      {/if}
 
-        {#if club}
-          <input
-            autocomplete="off"
-            value={club.id}
-            class="input"
-            name="club"
-            readonly
-            type="hidden"
+      <label class="label field-wide">
+        <span>Title</span>
+        <input
+          bind:value={form.title}
+          class="input"
+          name="title"
+          required
+          type="text"
+        />
+      </label>
+
+      <div class="field-wide">
+        {#if form.bodytext !== undefined}
+          <RichTextEditor
+            bind:value={form.bodytext}
+            label="Announcement Text"
+            formElementName="bodytext"
+            required={true}
           />
         {/if}
+      </div>
 
-        {#if team}
-          <input
-            autocomplete="off"
-            value={team.id}
-            class="input"
-            name="team"
-            readonly
-            type="hidden"
-          />
-        {/if}
-
-        <label class="label field-wide">
-          <span>Title</span>
-          <input
-            bind:value={form.title}
-            class="input"
-            name="title"
-            required
-            type="text"
-          />
-        </label>
-
-        <div class="field-wide">
-          {#if form.bodytext !== undefined}
-            <RichTextEditor
-              bind:value={form.bodytext}
-              label="Announcement Text"
-              formElementName="bodytext"
-              required={true}
+      <fieldset class="field-wide rounded-base">
+        <legend class="legend mb-3">Priority</legend>
+        {#each ["info", "warning", "danger"] as prio}
+          <label class="label priority-radio-label">
+            <input
+              class="radio"
+              type="radio"
+              name="priority"
+              value={prio}
+              required
+              checked={prio === "info"}
+              bind:group={form.priority}
             />
-          {/if}
+            {prio}
+          </label>
+        {/each}
+      </fieldset>
+
+      <fieldset class="field-wide rounded-base">
+        <legend class="legend h6">Link Settings</legend>
+
+        <div class=" link-grid">
+          <label class="label">
+            <span>Link</span>
+            <input
+              bind:value={form.link}
+              class="input"
+              name="link"
+              pattern="https?://.+"
+              placeholder="https://example.com"
+              title="Please enter a valid URL"
+              type="url"
+            />
+            <span class="text-sm"
+              >Single link in case the announcement is used as a call to action.</span
+            >
+          </label>
+
+          <label class="label">
+            <span>Link Text</span>
+            <input
+              bind:value={form.link_text}
+              class="input"
+              name="link_text"
+              placeholder="Click here"
+              type="text"
+            />
+            <span class="text-sm"
+              >If not set, the link itself will be used as a the text.</span
+            >
+          </label>
         </div>
+      </fieldset>
+    </div>
 
-        <fieldset class="field-wide rounded-base">
-          <legend class="legend mb-3">Priority</legend>
-          {#each ["info", "warning", "danger"] as prio}
-            <label class="label priority-radio-label">
-              <input
-                class="radio"
-                type="radio"
-                name="priority"
-                value={prio}
-                required
-                checked={prio === "info"}
-                bind:group={form.priority}
-              />
-              {prio}
-            </label>
-          {/each}
-        </fieldset>
+    <hr />
 
-        <fieldset class="field-wide rounded-base">
-          <legend class="legend h6">Link Settings</legend>
-
-          <div class=" link-grid">
-            <label class="label">
-              <span>Link</span>
-              <input
-                bind:value={form.link}
-                class="input"
-                name="link"
-                pattern="https?://.+"
-                placeholder="https://example.com"
-                title="Please enter a valid URL"
-                type="url"
-              />
-              <span class="text-sm"
-                >Single link in case the announcement is used as a call to
-                action.</span
-              >
-            </label>
-
-            <label class="label">
-              <span>Link Text</span>
-              <input
-                bind:value={form.link_text}
-                class="input"
-                name="link_text"
-                placeholder="Click here"
-                type="text"
-              />
-              <span class="text-sm"
-                >If not set, the link itself will be used as a the text.</span
-              >
-            </label>
-          </div>
-        </fieldset>
-      </div>
-
-      <hr />
-
-      <div class="submit-box">
-        <button class="btn preset-filled-primary-500" type="submit">
-          Submit
-        </button>
-      </div>
-    </form>
-  </Sheet.Content>
-</Sheet.Root>
+    <div class="submit-box">
+      <button class="btn preset-filled-primary-500" type="submit">
+        Submit
+      </button>
+    </div>
+  </form>
+</Sheet>
 
 <style>
   :global(.announcement-form-trigger .lucide-icon) {
