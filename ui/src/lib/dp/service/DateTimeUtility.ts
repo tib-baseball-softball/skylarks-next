@@ -1,5 +1,3 @@
-import type { Options } from "flatpickr/dist/types/options";
-
 export class DateTimeUtility {
   //@ts-ignore
   public static readonly eventDateFormat: DateTimeFormatOptions = {
@@ -26,19 +24,6 @@ export class DateTimeUtility {
   public static readonly eventTimeFormat: DateTimeFormatOptions = {
     hour: "numeric",
     minute: "numeric",
-  };
-  public static readonly datePickerOptions: Options = {
-    enableTime: true,
-    dateFormat: "c", // ISO 8601
-    altInput: true,
-    altFormat: "j F Y - H:i",
-    time_24hr: true,
-  };
-  public static readonly datePickerOptionsNoTime: Options = {
-    enableTime: false,
-    dateFormat: "c", // ISO 8601
-    altInput: true,
-    altFormat: "j F Y",
   };
 
   public static dateTimeFormatMedium(locale: string) {
