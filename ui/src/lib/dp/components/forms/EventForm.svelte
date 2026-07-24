@@ -4,7 +4,6 @@
   import TabsRadioGroup from "$lib/dp/components/formElements/TabsRadioGroup.svelte";
   import Switch from "$lib/dp/components/formElements/Switch.svelte";
   import { client } from "$lib/dp/client.svelte.js";
-  import { DateTimeUtility } from "$lib/dp/service/DateTimeUtility.js";
   import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
   import type { Extension } from "$lib/dp/types/ExpandedResponse.js";
   import type { ExpandedEvent } from "$lib/dp/types/ExpandedResponse.ts";
@@ -12,10 +11,10 @@
     LocationsResponse,
     UniformsetsResponse,
   } from "$lib/dp/types/pb-types.ts";
-  import Flatpickr from "$lib/dp/components/formElements/Flatpickr.svelte";
   import { Collection } from "$lib/dp/enum/Collection.ts";
   import Sheet from "$lib/dp/components/modal/Sheet.svelte";
   import clsx from "clsx";
+  import ISODatePicker from "../formElements/ISODatePicker.svelte";
 
   interface Props {
     event: ExpandedEvent | null;
@@ -188,33 +187,17 @@
 
       <label class="label">
         <span>Start</span>
-        <Flatpickr
-          bind:value={form.starttime}
-          options={Object.assign(DateTimeUtility.datePickerOptions, {
-            static: true, // render the picker as a child element to the form to work in a sheet portal context
-          })}
-          required={true}
-        />
+        <ISODatePicker bind:value={form.starttime} required={true} />
       </label>
 
       <label class="label">
         <span>Meeting</span>
-        <Flatpickr
-          bind:value={form.meetingtime}
-          options={Object.assign(DateTimeUtility.datePickerOptions, {
-            static: true,
-          })}
-        />
+        <ISODatePicker bind:value={form.meetingtime} />
       </label>
 
       <label class="label">
         <span>End</span>
-        <Flatpickr
-          bind:value={form.endtime}
-          options={Object.assign(DateTimeUtility.datePickerOptions, {
-            static: true,
-          })}
-        />
+        <ISODatePicker bind:value={form.endtime} />
       </label>
 
       <span></span>

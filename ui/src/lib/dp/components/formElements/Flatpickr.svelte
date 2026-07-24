@@ -3,10 +3,9 @@
   import flatpickr from "flatpickr";
   import "flatpickr/dist/flatpickr.css";
   import type {Options} from "flatpickr/dist/types/options";
-  import {browser} from "$app/environment";
   import type {HTMLInputAttributes} from "svelte/elements";
 
-  if (browser && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
     import("flatpickr/dist/themes/dark.css");
   }
 
@@ -38,7 +37,7 @@
 <input {...restProps} bind:this={datepicker} class="input" type="text" {value}/>
 
 <!-- svelte-ignore css_unused_selector -->
-<style lang="postcss">
+<style>
   input {
     color: unset;
   }
