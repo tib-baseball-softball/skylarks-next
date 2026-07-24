@@ -14,6 +14,7 @@
     triggerClass?: string;
     required?: boolean;
     hideLabel?: boolean;
+    onValueChange?: () => void
   }
 
   let {
@@ -26,6 +27,7 @@
     triggerClass = "tabs-trigger btn",
     required = false,
     hideLabel = false,
+    onValueChange
   }: Props<string> = $props();
 
   function toOptions(
@@ -50,6 +52,7 @@
   {#each opts as opt}
     <label class={[triggerClass, value === opt.value && "preset-filled"]}>
       <input
+        onchange={onValueChange}
         type="radio"
         class="sr-only"
         {name}

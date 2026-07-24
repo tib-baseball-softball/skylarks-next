@@ -9,16 +9,13 @@
     showIfSinglePage?: boolean;
   }
 
-  const {
-    store,
-    showIfSinglePage = false,
-  }: Props = $props();
+  const { store, showIfSinglePage = false }: Props = $props();
 
   type PagingAction = "increment" | "decrement";
 
   function pushNavState(action: PagingAction) {
     const newURL = page.url;
-    const currentPage = $store.page
+    const currentPage = $store.page;
     switch (action) {
       case "increment":
         newURL.searchParams.set("page", String(currentPage + 1));
@@ -30,18 +27,18 @@
     goto(newURL, {
       noScroll: true,
       keepFocus: true,
-      invalidateAll: false
-    })
+      invalidateAll: false,
+    });
   }
 
   function prev() {
     store.prev();
-    pushNavState("decrement")
+    pushNavState("decrement");
   }
 
   function next() {
     store.next();
-    pushNavState("increment")
+    pushNavState("increment");
   }
 </script>
 
@@ -53,17 +50,23 @@
         type="button"
         onclick={prev}
         disabled={$store.page <= 1}
+        aria-label="previous page"
       >
         <ChevronLeft />
       </button>
 
-      <span class="page-indicator">{$store.page}/{$store.totalPages}</span>
+      <span class="page-indicator"
+        ><span class="sr-only"
+          >Page
+        </span>{$store.page}/{$store.totalPages}</span
+      >
 
       <button
         class="nav-button rounded-container"
         type="button"
         onclick={next}
         disabled={$store.page >= $store.totalPages}
+        aria-label="next page"
       >
         <ChevronRight />
       </button>
