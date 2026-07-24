@@ -1,16 +1,17 @@
 <script lang="ts">
-  import {Calendar, Clock, MapPin} from "@lucide/svelte";
-  import type {Snippet} from "svelte";
+  import { Calendar, Clock, MapPin } from "@lucide/svelte";
+  import type { Snippet } from "svelte";
   import TimeSection from "$lib/dp/components/event/TimeSection.svelte";
-  import {DateTimeUtility} from "$lib/dp/service/DateTimeUtility.ts";
-  import type {ExpandedEvent} from "$lib/dp/types/ExpandedResponse.ts";
+  import { DateTimeUtility } from "$lib/dp/service/DateTimeUtility.ts";
+  import type { ExpandedEvent } from "$lib/dp/types/ExpandedResponse.ts";
+  import { appLocale } from "$lib/dp/locale.svelte.ts";
 
   interface props {
     event: ExpandedEvent;
     additionalTimeSection?: Snippet | undefined;
   }
 
-  const {event, additionalTimeSection = undefined}: props = $props();
+  const { event, additionalTimeSection = undefined }: props = $props();
 
   const startTime = $derived(new Date(event.starttime));
 </script>
@@ -18,40 +19,48 @@
 <section>
   <div class="info-grid">
     <div class="info-row">
-      <Calendar size="18"/>
-      <time class="event-time" datetime="{event.starttime}">
-        {startTime.toLocaleDateString("de-DE", DateTimeUtility.eventDateFormat)}
+      <Calendar size="18" />
+      <time class="event-time" datetime={event.starttime}>
+        {startTime.toLocaleDateString(
+          appLocale.current,
+          DateTimeUtility.eventDateFormat,
+        )}
       </time>
     </div>
 
     <TimeSection
-      classes={additionalTimeSection ? "time-section-narrow" : "time-section-wide"}
+      classes={additionalTimeSection
+        ? "time-section-narrow"
+        : "time-section-wide"}
       displayText="Meet:"
       timeValue={event.meetingtime ? event.meetingtime : event.starttime}
     >
       {#snippet icon()}
-        <Clock size="18"/>
+        <Clock size="18" />
       {/snippet}
     </TimeSection>
 
     <TimeSection
-      classes={additionalTimeSection ? "time-section-narrow" : "time-section-wide"}
+      classes={additionalTimeSection
+        ? "time-section-narrow"
+        : "time-section-wide"}
       displayText="Start:"
       timeValue={event.starttime}
     >
       {#snippet icon()}
-        <Clock size="18"/>
+        <Clock size="18" />
       {/snippet}
     </TimeSection>
 
     {@render additionalTimeSection?.()}
 
     <div class="info-row">
-      <MapPin size="18"/>
+      <MapPin size="18" />
       {#if event?.expand?.location}
         <p>
-          {event?.expand?.location.address_addon || event?.expand?.location.name || "No field name provided"}, {event?.expand?.location
-          .city}
+          {event?.expand?.location.address_addon ||
+            event?.expand?.location.name ||
+            "No field name provided"}, {event?.expand?.location.city}
         </p>
       {:else}
         <p>No location provided.</p>
