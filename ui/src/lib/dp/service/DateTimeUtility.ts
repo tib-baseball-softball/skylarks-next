@@ -124,13 +124,22 @@ export class DateTimeUtility {
     return localDate.toISOString().slice(0, 16);
   }
 
+  public static formatForDate(dateString: string): string {
+    if (!dateString) {
+      return "";
+    }
+    const newVal = new Date(dateString).toISOString();
+
+    return newVal.slice(0, 10);
+  }
+
   /**
    * Slightly overcomplicated method to parse the BSM "time" string into something usable.
    * BSM does not use ISO 8601 format.
    *
    * TODO: get rid of this monster. Most BSM date handling happens on the backend anyway.
    * Chrome can parse the date string unmodified directly in `new Date()`, but Safari can't.
-   * 
+   *
    * TODO: use Temporal when baseline
    *
    * @param {string} formattedString - e.g. "2024-04-07 12:05:00 +0200"
