@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {Check, CircleQuestionMark, Ghost, Trash, X} from "lucide-svelte";
+  import {Check, CircleQuestionMark, Ghost, Trash, X} from "@lucide/svelte";
   import {fade} from "svelte/transition";
   import ExternalParticipationWrapper from "$lib/dp/components/event/ExternalParticipationWrapper.svelte";
   import IndividualParticipationEditButton from "$lib/dp/components/event/IndividualParticipationEditButton.svelte";

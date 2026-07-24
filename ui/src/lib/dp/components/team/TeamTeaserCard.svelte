@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {File, IdCard, ShieldHalf, Users} from "lucide-svelte";
+  import {File, IdCard, ShieldHalf, Users} from "@lucide/svelte";
   import type {ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
 
   /**

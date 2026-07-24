@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {CalendarPlus} from "lucide-svelte";
+  import {CalendarPlus} from "@lucide/svelte";
   import {goto, invalidateAll} from "$app/navigation";
   import EventSeriesView from "$lib/dp/components/event/EventSeriesView.svelte";
   import EventForm from "$lib/dp/components/forms/EventForm.svelte";

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {Calendar, Clock, MapPin} from "lucide-svelte";
+  import {Calendar, Clock, MapPin} from "@lucide/svelte";
   import type {Snippet} from "svelte";
   import TimeSection from "$lib/dp/components/event/TimeSection.svelte";
   import {DateTimeUtility} from "$lib/dp/service/DateTimeUtility.ts";

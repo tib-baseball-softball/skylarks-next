@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ChevronLeft, ChevronRight } from "lucide-svelte";
+  import { ChevronLeft, ChevronRight } from "@lucide/svelte";
   import type { PageStore } from "$lib/dp/records/PageStore.ts";
   import { page } from "$app/state";
   import { goto } from "$app/navigation";

@@ -6,7 +6,7 @@
   import { toHours } from "$lib/dp/utility/toHours";
   import type { TableHandler } from "@vincjo/datatables";
   import Dialog from "../modal/Dialog.svelte";
-  import { SquarePen } from "lucide-svelte";
+  import { SquarePen } from "@lucide/svelte";
   import ServiceEntryForm from "../forms/ServiceEntryForm.svelte";
   import DeleteButton from "../utils/DeleteButton.svelte";
   import { client } from "$lib/dp/client.svelte";

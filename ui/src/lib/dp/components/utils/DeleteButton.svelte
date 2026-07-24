@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Trash } from "lucide-svelte";
+  import { Trash } from "@lucide/svelte";
   import type { HTMLButtonAttributes } from "svelte/elements";
   import { invalidate } from "$app/navigation";
   import Dialog from "$lib/dp/components/modal/Dialog.svelte";

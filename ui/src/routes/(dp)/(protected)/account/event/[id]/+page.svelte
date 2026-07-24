@@ -1,6 +1,6 @@
 <script lang="ts">
   import type {Match} from "bsm.js";
-  import {Ban, Clock} from "lucide-svelte";
+  import {Ban, Clock} from "@lucide/svelte";
   import CommentSection from "$lib/dp/components/comments/CommentSection.svelte";
   import EventAttireSection from "$lib/dp/components/event/EventAttireSection.svelte";
   import EventCoreInfo from "$lib/dp/components/event/EventCoreInfo.svelte";

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Plus, SquarePen } from "lucide-svelte";
+  import { Plus, SquarePen } from "@lucide/svelte";
   import { invalidate } from "$app/navigation";
   import TabsRadioGroup from "$lib/dp/components/formElements/TabsRadioGroup.svelte";
   import MultiSelectCombobox from "$lib/dp/components/formElements/MultiSelectCombobox.svelte";

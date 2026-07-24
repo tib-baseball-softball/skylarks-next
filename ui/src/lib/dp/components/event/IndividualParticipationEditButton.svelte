@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { MessageCircleMore } from "lucide-svelte";
+  import { MessageCircleMore } from "@lucide/svelte";
   import ParticipationForm from "$lib/dp/components/forms/ParticipationForm.svelte";
   import Dialog from "$lib/dp/components/modal/Dialog.svelte";
   import { authSettings } from "$lib/dp/client.svelte.js";

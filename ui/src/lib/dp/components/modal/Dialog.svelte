@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount, type Snippet } from "svelte";
-  import { X } from "lucide-svelte";
+  import { X } from "@lucide/svelte";
   import type { HTMLAttributes, HTMLButtonAttributes } from "svelte/elements";
   import { dev } from "$app/environment";
 

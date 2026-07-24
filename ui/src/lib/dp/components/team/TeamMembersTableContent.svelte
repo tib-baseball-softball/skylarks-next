@@ -6,7 +6,7 @@
     Lock,
     LockOpen,
     Trash,
-  } from "lucide-svelte";
+  } from "@lucide/svelte";
   import { invalidateAll } from "$app/navigation";
   import Avatar from "$lib/dp/components/utils/Avatar.svelte";
   import Dialog from "$lib/dp/components/modal/Dialog.svelte";

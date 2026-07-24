@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {Ban} from "lucide-svelte";
+  import {Ban} from "@lucide/svelte";
   import EventTypeBadge from "$lib/dp/components/event/EventTypeBadge.svelte";
   import type {ExpandedEvent} from "$lib/dp/types/ExpandedResponse.ts";
   import EventCoreInfo from "./EventCoreInfo.svelte";

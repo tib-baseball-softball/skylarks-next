@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { CalendarPlus, SquarePen } from "lucide-svelte";
+  import { CalendarPlus, SquarePen } from "@lucide/svelte";
   import { slide } from "svelte/transition";
   import { invalidateAll } from "$app/navigation";
   import EventSeriesListItem from "$lib/dp/components/eventseries/EventSeriesListItem.svelte";

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Plus, SquarePen } from "lucide-svelte";
+  import { Plus, SquarePen } from "@lucide/svelte";
   import { invalidate } from "$app/navigation";
   import LeafletMapCoordinatePicker from "$lib/dp/components/map/LeafletMapCoordinatePicker.svelte";
   import { save } from "$lib/dp/records/RecordOperations.ts";

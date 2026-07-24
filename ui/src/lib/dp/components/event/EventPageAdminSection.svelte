@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {CalendarArrowDown, CalendarPlus, Info, SquarePen} from "lucide-svelte";
+  import {CalendarArrowDown, CalendarPlus, Info, SquarePen} from "@lucide/svelte";
   import {goto} from "$app/navigation";
   import EventForm from "$lib/dp/components/forms/EventForm.svelte";
   import DeleteButton from "$lib/dp/components/utils/DeleteButton.svelte";

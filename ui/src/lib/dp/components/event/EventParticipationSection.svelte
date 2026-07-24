@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {Check, CircleQuestionMark, X} from "lucide-svelte";
+  import {Check, CircleQuestionMark, X} from "@lucide/svelte";
   import {invalidate} from "$app/navigation";
   import {authSettings} from "$lib/dp/client.svelte.js";
   import type {EventParticipationState} from "$lib/dp/types/EventParticipationState.ts";

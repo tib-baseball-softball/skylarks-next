@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
-  import { Minus, Plus } from "lucide-svelte";
+  import { Minus, Plus } from "@lucide/svelte";
 
   interface Props {
     startOpen?: boolean;

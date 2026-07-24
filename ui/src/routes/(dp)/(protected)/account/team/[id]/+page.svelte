@@ -2,7 +2,7 @@
   // @ts-ignore
   // noinspection ES6UnusedImports
   import {Tabs} from "bits-ui";
-  import {Users} from "lucide-svelte";
+  import {Users} from "@lucide/svelte";
   import {goto} from "$app/navigation";
   import AnnouncementSectionContent from "$lib/dp/components/announcements/AnnouncementSectionContent.svelte";
   import TeamAdminSection from "$lib/dp/components/team/TeamAdminSection.svelte";

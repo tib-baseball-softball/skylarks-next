@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {Plus, SquareArrowOutUpRight} from "lucide-svelte";
+  import {Plus, SquareArrowOutUpRight} from "@lucide/svelte";
   import AnnouncementSectionContent from "$lib/dp/components/announcements/AnnouncementSectionContent.svelte";
   import ClubDetailCard from "$lib/dp/components/club/ClubDetailCard.svelte";
   import TeamListTeaser from "$lib/dp/components/team/TeamListTeaser.svelte";

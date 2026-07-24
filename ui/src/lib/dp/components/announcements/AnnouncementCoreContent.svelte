@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {User} from "lucide-svelte";
+  import {User} from "@lucide/svelte";
   import type {ExpandedAnnouncement} from "$lib/dp/types/ExpandedResponse.ts";
   import PriorityBadge from "./PriorityBadge.svelte";
   import LocalDate from "$lib/dp/components/utils/LocalDate.svelte";

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ClipboardPen, Plus } from "lucide-svelte";
+  import { ClipboardPen, Plus } from "@lucide/svelte";
   import { invalidateAll } from "$app/navigation";
   import MultiSelectCombobox from "$lib/dp/components/formElements/MultiSelectCombobox.svelte";
   import { authSettings, client } from "$lib/dp/client.svelte.js";

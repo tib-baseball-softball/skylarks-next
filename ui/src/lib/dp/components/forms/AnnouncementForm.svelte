@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Plus, SquarePen } from "lucide-svelte";
+  import { Plus, SquarePen } from "@lucide/svelte";
   import { invalidateAll } from "$app/navigation";
   import { authSettings, client } from "$lib/dp/client.svelte.js";
   import { toastController } from "$lib/dp/service/ToastController.svelte.ts";

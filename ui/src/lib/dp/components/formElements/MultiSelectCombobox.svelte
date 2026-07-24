@@ -1,7 +1,7 @@
 <script generics="T extends UsersResponse" lang="ts">
   //@ts-ignore
   import type {UsersResponse} from "$lib/dp/types/pb-types.ts";
-  import {X} from "lucide-svelte";
+  import {X} from "@lucide/svelte";
   import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
 
   // TODO: this should be even more generic

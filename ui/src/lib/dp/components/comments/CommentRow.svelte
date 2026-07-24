@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Send, SquarePen, X } from "lucide-svelte";
+  import { Send, SquarePen, X } from "@lucide/svelte";
   import { invalidate } from "$app/navigation";
   import Avatar from "$lib/dp/components/utils/Avatar.svelte";
   import DeleteButton from "$lib/dp/components/utils/DeleteButton.svelte";

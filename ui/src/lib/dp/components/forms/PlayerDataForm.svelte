@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { SquarePen } from "lucide-svelte";
+  import { SquarePen } from "@lucide/svelte";
   import TabsRadioGroup from "$lib/dp/components/formElements/TabsRadioGroup.svelte";
   import Switch from "$lib/dp/components/formElements/Switch.svelte";
   import TagsInput from "$lib/dp/components/formElements/TagsInput.svelte";
