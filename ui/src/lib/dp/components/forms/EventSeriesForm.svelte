@@ -1,8 +1,6 @@
 <script lang="ts">
   import { invalidate } from "$app/navigation";
-  import Flatpickr from "$lib/dp/components/formElements/Flatpickr.svelte";
   import { client } from "$lib/dp/client.svelte.js";
-  import { DateTimeUtility } from "$lib/dp/service/DateTimeUtility.js";
   import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
   import type {
     EventSeriesCreationData,
@@ -12,6 +10,7 @@
   import { Collection } from "$lib/dp/enum/Collection";
   import { dev } from "$app/environment";
   import type { EventSeriesAction } from "$lib/dp/types/EventSeriesState";
+  import ISODatePicker from "../formElements/ISODatePicker.svelte";
 
   interface Props {
     eventSeries: EventSeriesCreationData | null;
@@ -106,14 +105,9 @@
       type="hidden"
     />
 
-    <label class="label field-wide">
+    <label class="label">
       Series First Occurrence
-      <Flatpickr
-        bind:value={form.series_start}
-        options={Object.assign(DateTimeUtility.datePickerOptions, {
-          static: true, // render the picker as a child element to the form to work in a sheet portal context
-        })}
-      />
+      <ISODatePicker bind:value={form.series_start} required={true} />
     </label>
 
     <span class="field-wide hint hint-prominent">
@@ -124,14 +118,9 @@
       after their start time.
     </span>
 
-    <label class="label field-wide">
+    <label class="label">
       Series End
-      <Flatpickr
-        bind:value={form.series_end}
-        options={Object.assign(DateTimeUtility.datePickerOptionsNoTime, {
-          static: true,
-        })}
-      />
+      <ISODatePicker bind:value={form.series_end} type="date" required={true} />
       <span class=" hint">No events will be created after this date.</span>
     </label>
 
@@ -198,7 +187,7 @@
     </label>
 
     {#if !isNewSeries}
-      <span class="field-wide text-sm font-light block">
+      <span class="field-wide hint">
         Choose whether to change all existing events in the series or just
         future ones. For more severe changes (change from winter to summer), it
         is advisable to end the previous series instead by setting the end date
@@ -213,7 +202,9 @@
     <button
       class="btn preset-tonal border-surface-500"
       onclick={() => {
-        if (showForm) showForm = false;
+        if (showForm) {
+          showForm = false;
+        }
       }}
       type="button"
     >
@@ -274,6 +265,7 @@
   }
 
   .edit-form-grid {
+    margin-block-start: calc(var(--spacing) * 5);
     gap: calc(var(--spacing) * 4);
   }
 </style>
