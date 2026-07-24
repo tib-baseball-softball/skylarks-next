@@ -13,8 +13,7 @@
   import { Collection } from "$lib/dp/enum/Collection.ts";
   import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
   import { invalidate } from "$app/navigation";
-  import Flatpickr from "$lib/dp/components/formElements/Flatpickr.svelte";
-  import { DateTimeUtility } from "$lib/dp/service/DateTimeUtility.ts";
+  import ISODatePicker from "$lib/dp/components/formElements/ISODatePicker.svelte";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
@@ -126,12 +125,14 @@
 
   <label class="label">
     Date
-    <Flatpickr
-      bind:value={form.service_date}
-      options={Object.assign(DateTimeUtility.datePickerOptionsNoTime, {
-        static: true, // render the picker as a child element to the form to work in a sheet portal context
-      })}
-    />
+
+    {#if typeof form.service_date === "string"}
+      <ISODatePicker
+        bind:value={form.service_date}
+        type="date"
+        required={true}
+      />
+    {/if}
   </label>
 
   <fieldset class="rounded-base">
