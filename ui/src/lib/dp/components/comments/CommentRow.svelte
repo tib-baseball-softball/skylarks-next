@@ -58,7 +58,7 @@
 </script>
 
 {#snippet editForm()}
-  <form>
+  <form class="comment-edit-form">
     <label class="label mb-2 sr-only" for="edit-comment-input-{comment.id}"
       >Comment</label
     >
@@ -162,7 +162,7 @@
     gap: calc(var(--spacing) * 2);
   }
 
-  .edit-form {
+  .comment-edit-form {
     margin-top: calc(var(--spacing) * 1);
   }
 
