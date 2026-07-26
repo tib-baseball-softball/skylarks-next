@@ -274,11 +274,15 @@ export interface EventsResponse extends BaseCollectionResponse {
 	type: 'game' | 'practice' | 'misc';
 	attire: string;
 	team: string;
+	club: string;
+	additional_teams: Array<string>;
 	cancelled: boolean;
 	match_json?: EventsMatch_json
 	guests: string;
 	series: string;
 	location: string;
+	prev: string;
+	next: string;
 	created: string;
 	updated: string;
 }
@@ -293,12 +297,16 @@ export interface EventsCreate extends BaseCollectionCreate {
 	endtime?: string | Date;
 	type: 'game' | 'practice' | 'misc';
 	attire?: string;
-	team: string;
+	team?: string;
+	club?: string;
+	additional_teams?: MaybeArray<string>;
 	cancelled?: boolean;
 	match_json?: EventsMatch_json
 	guests?: string;
 	series?: string;
 	location?: string;
+	prev?: string;
+	next?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -316,11 +324,17 @@ export interface EventsUpdate extends BaseCollectionUpdate {
 	type?: 'game' | 'practice' | 'misc';
 	attire?: string;
 	team?: string;
+	club?: string;
+	additional_teams?: MaybeArray<string>;
+	'additional_teams+'?: MaybeArray<string>;
+	'additional_teams-'?: MaybeArray<string>;
 	cancelled?: boolean;
 	match_json?: EventsMatch_json
 	guests?: string;
 	series?: string;
 	location?: string;
+	prev?: string;
+	next?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -335,8 +349,14 @@ export interface EventsCollection {
 	relations: {
 		attire: UniformsetsCollection;
 		team: TeamsCollection;
+		club: ClubsCollection;
+		additional_teams: TeamsCollection[];
 		series: EventseriesCollection;
 		location: LocationsCollection;
+		prev: EventsCollection;
+		events_via_prev: EventsCollection[];
+		next: EventsCollection;
+		events_via_next: EventsCollection[];
 		participations_via_event: ParticipationsCollection[];
 		comments_via_event: CommentsCollection[];
 	};
@@ -393,6 +413,7 @@ export interface ClubsCollection {
 	update: ClubsUpdate;
 	relations: {
 		users_via_club: UsersCollection[];
+		events_via_club: EventsCollection[];
 		admins: UsersCollection[];
 		teams_via_club: TeamsCollection[];
 		leaguegroups_via_clubs: LeaguegroupsCollection[];
@@ -459,54 +480,12 @@ export interface TeamsCollection {
 	relations: {
 		users_via_teams: UsersCollection[];
 		events_via_team: EventsCollection[];
+		events_via_additional_teams: EventsCollection[];
 		club: ClubsCollection;
 		admins: UsersCollection[];
 		eventseries_via_team: EventseriesCollection[];
 		announcements_via_team: AnnouncementsCollection[];
 	};
-}
-
-// ===== requestcaches =====
-
-export interface RequestcachesResponse extends BaseCollectionResponse {
-	collectionName: 'requestcaches';
-	id: string;
-	hash: string;
-	responseBody?: RequestcachesResponseBody
-	url: string;
-	identifier: string;
-	created: string;
-	updated: string;
-}
-
-export interface RequestcachesCreate extends BaseCollectionCreate {
-	id?: string;
-	hash: string;
-	responseBody?: RequestcachesResponseBody
-	url?: string | URL;
-	identifier?: string;
-	created?: string | Date;
-	updated?: string | Date;
-}
-
-export interface RequestcachesUpdate extends BaseCollectionUpdate {
-	id?: string;
-	hash?: string;
-	responseBody?: RequestcachesResponseBody
-	url?: string | URL;
-	identifier?: string;
-	created?: string | Date;
-	updated?: string | Date;
-}
-
-export interface RequestcachesCollection {
-	type: 'base';
-	collectionId: string;
-	collectionName: 'requestcaches';
-	response: RequestcachesResponse;
-	create: RequestcachesCreate;
-	update: RequestcachesUpdate;
-	relations: Record<string, never>;
 }
 
 // ===== leaguegroups =====
@@ -1244,7 +1223,6 @@ export type Schema = {
 	events: EventsCollection;
 	clubs: ClubsCollection;
 	teams: TeamsCollection;
-	requestcaches: RequestcachesCollection;
 	leaguegroups: LeaguegroupsCollection;
 	participations: ParticipationsCollection;
 	uniformsets: UniformsetsCollection;
