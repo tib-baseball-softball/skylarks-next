@@ -100,6 +100,7 @@
       <div class="actions-container">
 
         <EventForm
+          mode="teamEvent"
           clubID={event?.expand?.team?.club ?? ""}
           event={event}
           teamID={event.team}

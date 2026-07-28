@@ -124,6 +124,7 @@
       <div class="card-actions">
 
         <EventForm
+          mode="teamEvent"
           clubID={team?.club ?? ""}
           event={null}
           teamID={team.id}

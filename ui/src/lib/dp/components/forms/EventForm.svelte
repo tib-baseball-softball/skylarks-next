@@ -6,20 +6,26 @@
   import { client } from "$lib/dp/client.svelte.js";
   import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
   import type { Extension } from "$lib/dp/types/ExpandedResponse.js";
-  import type { ExpandedEvent } from "$lib/dp/types/ExpandedResponse.ts";
+  import type {
+    ExpandedEvent,
+    ExpandedTeam,
+  } from "$lib/dp/types/ExpandedResponse.ts";
   import type {
     LocationsResponse,
+    TeamsResponse,
     UniformsetsResponse,
   } from "$lib/dp/types/pb-types.ts";
   import { Collection } from "$lib/dp/enum/Collection.ts";
   import Sheet from "$lib/dp/components/modal/Sheet.svelte";
   import clsx from "clsx";
-  import ISODatePicker from "../formElements/ISODatePicker.svelte";
+  import ISODatePicker from "$lib/dp/components/formElements/ISODatePicker.svelte";
+  import MultiSelectCombobox from "$lib/dp/components/formElements/MultiSelectCombobox.svelte";
 
   interface Props {
     event: ExpandedEvent | null;
     clubID: string;
     teamID: string;
+    mode: "teamEvent" | "clubEvent";
     triggerContent: Snippet;
     triggerVariant?:
       | "filled-primary"
@@ -37,6 +43,7 @@
     event,
     clubID,
     teamID,
+    mode,
     triggerContent,
     triggerVariant = "tonal-primary",
     triggerSize = "default",
@@ -60,7 +67,9 @@
         attire: "",
         cancelled: false,
         bsm_id: 0,
-        team: teamID,
+        team: mode === "teamEvent" ? teamID : "",
+        club: mode === "clubEvent" ? clubID : "",
+        additional_teams: [],
       }
     );
   }
@@ -78,6 +87,8 @@
     return formData;
   });
 
+  let additionalTeams = $derived(form?.expand?.additional_teams ?? []);
+
   const attireOptions = $derived(
     client.collection(Collection.UniformSets).getFullList<UniformsetsResponse>({
       filter: `club = "${clubID}"`,
@@ -92,10 +103,19 @@
     }),
   );
 
+  const additionalTeamOptions = $derived(
+    client.collection(Collection.Teams).getFullList<TeamsResponse>({
+      filter: `club = "${clubID}" && id != "${teamID}"`,
+      requestKey: `team-options-${clubID}`,
+    }),
+  );
+
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
 
     let result: ExpandedEvent | null = null;
+
+    form.additional_teams = additionalTeams.map((team) => team.id);
 
     try {
       if (form.id) {
@@ -183,6 +203,20 @@
           readonly
           type="text"
         />
+      </label>
+
+      <label class="label field-wide">
+        <span>Additional Teams</span><br />
+
+        {#await additionalTeamOptions then options}
+          <MultiSelectCombobox
+            itemName="Team"
+            bind:selectedItems={additionalTeams}
+            allItems={options}
+            labelFunc={(item) => item.name}
+            allowDeletionOfLastItem={true}
+          />
+        {/await}
       </label>
 
       <label class="label">

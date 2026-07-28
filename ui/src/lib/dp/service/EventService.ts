@@ -47,7 +47,7 @@ export class EventService {
       {
         filter: filter,
         sort: sort,
-        expand: "participations_via_event.user, attire, location",
+        expand: "participations_via_event.user, attire, location, club, additional_teams",
         fetch: fetch,
         requestKey: `${teamID}-events`
       },

@@ -32,6 +32,8 @@ export type ExpandedEvent = Extension<
       >[];
       attire?: UniformsetsResponse;
       team?: ExpandedTeam;
+      club?: ClubsResponse;
+      additional_teams?: TeamsResponse[]
       location?: LocationsResponse;
       comments_via_event?: ExpandedComment[];
     };
