@@ -1,41 +1,45 @@
-<script generics="T extends UsersResponse" lang="ts">
-  //@ts-ignore
-  import type {UsersResponse} from "$lib/dp/types/pb-types.ts";
-  import {X} from "@lucide/svelte";
-  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
-
-  // TODO: this should be even more generic
+<script lang="ts">
+  import { X } from "@lucide/svelte";
+  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  import type { BaseCollectionResponse } from "$lib/dp/types/pb-types";
 
   interface Props {
     itemName: string;
-    selectedItems: T[];
-    allItems: T[];
+    selectedItems: BaseCollectionResponse[];
+    allItems: BaseCollectionResponse[];
+    labelFunc: (item: BaseCollectionResponse) => string; // TODO: type magic to please compiler
     allowDeletionOfLastItem?: boolean;
   }
 
-  const {
+  let {
     itemName,
     selectedItems = $bindable(),
     allItems,
+    labelFunc,
     allowDeletionOfLastItem = false,
   }: Props = $props();
 
-  let selectElement: HTMLSelectElement | undefined = $state();
+  let selectElement: HTMLSelectElement;
 
-  function addItemToSelection(users: T[]) {
-    if (!selectElement || selectElement?.value === "") {
+  function addItemToSelection(allItems: BaseCollectionResponse[]) {
+    if (!selectElement || selectElement.value === "") {
       return;
     }
-    const selectedUser = users.find((user) => user.id === selectElement?.value);
-    const adminExists = selectedItems.find((admin) => admin.id === selectedUser?.id);
+    const selectedItem = allItems.find(
+      (item) => item.id === selectElement?.value,
+    );
+    const itemExists = selectedItems.find(
+      (item) => item.id === selectedItem?.id,
+    );
 
-    if (selectedUser && selectElement && !adminExists) {
-      selectedItems.push(selectedUser);
+    if (selectedItem && !itemExists) {
+      // TODO: weird state issues, but only with team objects
+      selectedItems.push(selectedItem);
     }
     selectElement.value = "";
   }
 
-  function removeItemFromSelection(itemToRemove: T) {
+  function removeItemFromSelection(itemToRemove: BaseCollectionResponse) {
     if (!allowDeletionOfLastItem && selectedItems.length === 1) {
       toastController.trigger({
         message: `You cannot remove the last ${itemName}!`,
@@ -61,8 +65,8 @@
     class="box-button chip preset-filled-primary-500"
     onclick={() => removeItemFromSelection(selectItem)}
   >
-    <span>{selectItem.first_name} {selectItem.last_name}</span>
-    <X size="12"/>
+    <span>{labelFunc(selectItem)}</span>
+    <X size="12" />
   </button>
 {/each}
 
@@ -73,14 +77,14 @@
   onchange={() => addItemToSelection(allItems)}
 >
   <option selected value="">None</option>
-  {#each allItems as item}
-    <option value={item.id}>{item.first_name} {item.last_name}</option>
+  {#each allItems as item (item.id)}
+    <option value={item.id}>{labelFunc(item)}</option>
   {/each}
 </select>
 
 <style>
   .box-button {
-    margin-inline-end: calc(var(--spacing) * 1);
+    margin-inline-end: var(--spacing);
 
     @media (min-width: 48rem) {
       margin-inline-end: calc(var(--spacing) * 2);

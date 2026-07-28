@@ -235,6 +235,7 @@
 
           {#await allUsersForClub then users}
             <MultiSelectCombobox
+              labelFunc={(item) => `${item.first_name} ${item.last_name}`}
               itemName="Admin"
               bind:selectedItems={selectedAdmins}
               allItems={users}

@@ -228,11 +228,12 @@
           {/if}
         </div>
 
-        <label class="label space-y-3 field-wide">
+        <label class="label field-wide">
           <span>Team Admins</span><br />
 
           {#await allTeamMembers then users}
             <MultiSelectCombobox
+              labelFunc={(item) => `${item.first_name} ${item.last_name}`}
               itemName="Admin"
               bind:selectedItems={selectedAdmins}
               allItems={users}
@@ -243,8 +244,8 @@
 
       <hr />
 
-      <div class="flex justify-center gap-3">
-        <button class="mt-2 btn preset-filled-primary-500" type="submit">
+      <div>
+        <button class="btn preset-filled-primary-500" type="submit">
           Submit
         </button>
       </div>
