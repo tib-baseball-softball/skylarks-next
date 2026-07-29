@@ -1,13 +1,13 @@
-<script lang="ts">
+<script lang="ts" generics="T extends BaseCollectionResponse">
   import { X } from "@lucide/svelte";
   import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
   import type { BaseCollectionResponse } from "$lib/dp/types/pb-types";
 
   interface Props {
     itemName: string;
-    selectedItems: BaseCollectionResponse[];
-    allItems: BaseCollectionResponse[];
-    labelFunc: (item: BaseCollectionResponse) => string; // TODO: type magic to please compiler
+    selectedItems: T[];
+    allItems: T[];
+    labelFunc: (item: T) => string;
     allowDeletionOfLastItem?: boolean;
   }
 
@@ -21,7 +21,7 @@
 
   let selectElement: HTMLSelectElement;
 
-  function addItemToSelection(allItems: BaseCollectionResponse[]) {
+  function addItemToSelection(allItems: T[]) {
     if (!selectElement || selectElement.value === "") {
       return;
     }
@@ -38,7 +38,7 @@
     selectElement.value = "";
   }
 
-  function removeItemFromSelection(itemToRemove: BaseCollectionResponse) {
+  function removeItemFromSelection(itemToRemove: T) {
     if (!allowDeletionOfLastItem && selectedItems.length === 1) {
       toastController.trigger({
         message: `You cannot remove the last ${itemName}!`,
