@@ -1,14 +1,19 @@
+import { Collection } from "$lib/dp/enum/Collection";
 import { watchSingleRecord } from "$lib/dp/records/RecordOperations.ts";
 import type { ExpandedEvent } from "$lib/dp/types/ExpandedResponse.js";
 import type { PageLoad } from "./$types";
 
 export const load = (async ({ fetch, params, depends }) => {
-  const event = await watchSingleRecord<ExpandedEvent>("events", params.id, {
-    expand:
-      "participations_via_event.user, attire, location, team.admins, team.club, comments_via_event.user, club, additional_teams",
-    fetch: fetch,
-    requestKey: `event-single-${params.id}`,
-  });
+  const event = await watchSingleRecord<ExpandedEvent>(
+    Collection.Events,
+    params.id,
+    {
+      expand:
+        "participations_via_event.user, attire, location, team.admins, team.club, comments_via_event.user, club, additional_teams",
+      fetch: fetch,
+      requestKey: `event-single-${params.id}`,
+    },
+  );
 
   depends("event:list", "comments:list", "event:single");
 

@@ -1,25 +1,22 @@
 <script lang="ts">
-  import type { Snippet } from "svelte";
   import { invalidate } from "$app/navigation";
-  import TabsRadioGroup from "$lib/dp/components/formElements/TabsRadioGroup.svelte";
-  import Switch from "$lib/dp/components/formElements/Switch.svelte";
   import { client } from "$lib/dp/client.svelte.js";
+  import ISODatePicker from "$lib/dp/components/formElements/ISODatePicker.svelte";
+  import MultiSelectCombobox from "$lib/dp/components/formElements/MultiSelectCombobox.svelte";
+  import Switch from "$lib/dp/components/formElements/Switch.svelte";
+  import TabsRadioGroup from "$lib/dp/components/formElements/TabsRadioGroup.svelte";
+  import Sheet from "$lib/dp/components/modal/Sheet.svelte";
+  import { Collection } from "$lib/dp/enum/Collection.ts";
   import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
   import type { Extension } from "$lib/dp/types/ExpandedResponse.js";
-  import type {
-    ExpandedEvent,
-    ExpandedTeam,
-  } from "$lib/dp/types/ExpandedResponse.ts";
+  import type { ExpandedEvent } from "$lib/dp/types/ExpandedResponse.ts";
   import type {
     LocationsResponse,
     TeamsResponse,
     UniformsetsResponse,
   } from "$lib/dp/types/pb-types.ts";
-  import { Collection } from "$lib/dp/enum/Collection.ts";
-  import Sheet from "$lib/dp/components/modal/Sheet.svelte";
   import clsx from "clsx";
-  import ISODatePicker from "$lib/dp/components/formElements/ISODatePicker.svelte";
-  import MultiSelectCombobox from "$lib/dp/components/formElements/MultiSelectCombobox.svelte";
+  import type { Snippet } from "svelte";
 
   interface Props {
     event: ExpandedEvent | null;
@@ -54,24 +51,33 @@
   let open = $state(false);
 
   function formFromProps(data: ExpandedEvent | null) {
-    return (
-      data ?? {
-        id: "",
-        title: "",
-        starttime: "",
-        meetingtime: "",
-        endtime: "",
-        desc: "",
-        location: "",
-        type: "game",
-        attire: "",
-        cancelled: false,
-        bsm_id: 0,
-        team: mode === "teamEvent" ? teamID : "",
-        club: mode === "clubEvent" ? clubID : "",
-        additional_teams: [],
+    const ret = data ?? {
+      id: "",
+      title: "",
+      starttime: "",
+      meetingtime: "",
+      endtime: "",
+      desc: "",
+      location: "",
+      type: "game",
+      attire: "",
+      cancelled: false,
+      bsm_id: 0,
+      team: mode === "teamEvent" ? teamID : "",
+      club: mode === "clubEvent" ? clubID : "",
+      additional_teams: [],
+      expand: {},
+    };
+    //@ts-expect-error - ugliest of workarounds: to bind the MultiSelectCombobox to the array,
+    // it needs to have a value even if no expand is sent from the backend
+    if (ret.expand?.additional_teams === undefined) {
+      if (!ret.expand) {
+        ret.expand = {};
       }
-    );
+      // @ts-expect-error
+      ret.expand.additional_teams = [];
+    }
+    return ret;
   }
 
   let form: Extension<

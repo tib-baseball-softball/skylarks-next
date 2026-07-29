@@ -13,7 +13,7 @@
 
   let {
     itemName,
-    selectedItems = $bindable(),
+    selectedItems = $bindable(), // MARK: be careful when binding to derived state here that might be undefined
     allItems,
     labelFunc,
     allowDeletionOfLastItem = false,
@@ -33,7 +33,6 @@
     );
 
     if (selectedItem && !itemExists) {
-      // TODO: weird state issues, but only with team objects
       selectedItems.push(selectedItem);
     }
     selectElement.value = "";
