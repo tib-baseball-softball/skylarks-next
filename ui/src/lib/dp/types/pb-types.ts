@@ -372,6 +372,7 @@ export interface ClubsResponse extends BaseCollectionResponse {
 	acronym: string;
 	admins: Array<string>;
 	service_requirement: number;
+	admin_email: string;
 	created: string;
 	updated: string;
 }
@@ -383,6 +384,7 @@ export interface ClubsCreate extends BaseCollectionCreate {
 	acronym?: string;
 	admins: MaybeArray<string>;
 	service_requirement?: number;
+	admin_email?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -400,6 +402,7 @@ export interface ClubsUpdate extends BaseCollectionUpdate {
 	service_requirement?: number;
 	'service_requirement+'?: number;
 	'service_requirement-'?: number;
+	admin_email?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }

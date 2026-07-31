@@ -69,3 +69,11 @@ func (c *Club) ServiceRequirement() int {
 func (c *Club) SetServiceRequirement(req int) {
 	c.Set("service_requirement", req)
 }
+
+func (c *Club) AdminEmail() string {
+    return c.GetString("admin_email")
+}
+
+func (c *Club) SetAdminEmail(email string) {
+    c.Set("admin_email", email)
+}
