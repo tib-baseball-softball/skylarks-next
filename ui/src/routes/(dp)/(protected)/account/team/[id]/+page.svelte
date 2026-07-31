@@ -157,7 +157,7 @@
           label="Timeframe"
           hideLabel={true}
           name="timeframe"
-          listClass="tabs-list event-segment-container input"
+          listClass="event-segment-container"
         ></TabsRadioGroup>
       </label>
 
@@ -171,7 +171,7 @@
           label="Sort"
           hideLabel={true}
           name="sort"
-          listClass="tabs-list event-segment-container input"
+          listClass="event-segment-container"
         ></TabsRadioGroup>
       </label>
 
@@ -185,7 +185,7 @@
           label="Type"
           hideLabel={true}
           name="type"
-          listClass="tabs-list event-segment-container input type-tabs"
+          listClass="event-segment-container type-tabs"
         ></TabsRadioGroup>
       </label>
     </div>
@@ -335,12 +335,7 @@
 
   :global {
     .event-segment-container {
-      border: 1px solid var(--color-secondary-600-400);
-      padding: calc(var(--spacing) * 1) !important;
-
       .tabs-trigger {
-        padding: 0.25rem 0.6rem;
-
         &.timeframe-trigger-next:active {
           background-color: var(--color-error-300-700);
           color: var(--color-error-contrast-300-700);

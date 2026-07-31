@@ -14,7 +14,7 @@
     triggerClass?: string;
     required?: boolean;
     hideLabel?: boolean;
-    onValueChange?: () => void
+    onValueChange?: () => void;
   }
 
   let {
@@ -23,11 +23,11 @@
     options,
     value = $bindable(),
     classes = "",
-    listClass = "tabs-list input",
+    listClass = "",
     triggerClass = "tabs-trigger btn",
     required = false,
     hideLabel = false,
-    onValueChange
+    onValueChange,
   }: Props<string> = $props();
 
   function toOptions(
@@ -43,25 +43,27 @@
   const opts: TabSetOption<string>[] = $derived(toOptions(options));
 </script>
 
-<fieldset class={listClass + classes}>
+<fieldset class={["fieldset", listClass, classes]}>
   {#if label}
-    <legend class={["block", hideLabel && "sr-only"]} data-required={required}>
+    <legend class={[hideLabel && "sr-only", "legend"]} data-required={required}>
       {label}
     </legend>
   {/if}
-  {#each opts as opt}
-    <label class={[triggerClass, value === opt.value && "preset-filled"]}>
-      <input
-        onchange={onValueChange}
-        type="radio"
-        class="sr-only"
-        {name}
-        bind:group={value}
-        value={opt.value}
-      />
-      {opt.label}
-    </label>
-  {/each}
+  <div class="input tabs-list">
+    {#each opts as opt}
+      <label class={[triggerClass, value === opt.value && "preset-filled"]}>
+        <input
+          onchange={onValueChange}
+          type="radio"
+          class="sr-only"
+          {name}
+          bind:group={value}
+          value={opt.value}
+        />
+        {opt.label}
+      </label>
+    {/each}
+  </div>
 </fieldset>
 
 <style>
@@ -70,5 +72,9 @@
     content: "*";
     color: light-dark(var(--color-primary-500), var(--color-primary-300));
     margin-inline-start: calc(var(--spacing) * 0.5);
+  }
+
+  .tabs-list {
+    margin-block-start: var(--spacing);
   }
 </style>

@@ -211,7 +211,6 @@
           <TabsRadioGroup
             bind:value={form.age_group}
             label="Age Group"
-            listClass="tabs-list input"
             name="age_group"
             options={["adults", "minors"]}
             required={true}
