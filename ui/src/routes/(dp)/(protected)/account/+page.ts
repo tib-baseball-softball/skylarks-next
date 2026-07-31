@@ -14,7 +14,7 @@ export const load = (async ({depends, url, fetch}) => {
   if (model?.teams) {
     filterString += " && (";
     model.teams?.forEach((team, index) => {
-      filterString += `(team = "${team}")`;
+      filterString += `(team = "${team}" || additional_teams.id ?= "${team}")`;
       if (index < model.teams.length - 1) {
         filterString += " || ";
       }
@@ -28,7 +28,7 @@ export const load = (async ({depends, url, fetch}) => {
     {
       sort: "+starttime",
       filter: filterString,
-      expand: "participations_via_event.user, attire, location",
+      expand: "participations_via_event.user, attire, team, additional_teams, location",
       fetch: fetch,
       requestKey: `${model?.id}-events`,
     },

@@ -14,7 +14,7 @@ export class EventService {
     url: URL,
     fetch: Fetch
   ): Promise<PageStore<ExpandedEvent>> {
-    let filter = `team = "${teamID}"`;
+    let filter = `(team = "${teamID}" || additional_teams.id ?= "${teamID}")`;
 
     const timeframe = url.searchParams.get("timeframe");
 
@@ -47,7 +47,7 @@ export class EventService {
       {
         filter: filter,
         sort: sort,
-        expand: "participations_via_event.user, attire, location, club, additional_teams",
+        expand: "participations_via_event.user, attire, location, club, team, additional_teams",
         fetch: fetch,
         requestKey: `${teamID}-events`
       },

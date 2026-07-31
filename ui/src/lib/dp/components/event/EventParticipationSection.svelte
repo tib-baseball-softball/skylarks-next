@@ -12,11 +12,12 @@
 
   interface props {
     event: ExpandedEvent;
-    chipClasses?: string;
+    canParticipate: boolean;
+    growChips?: boolean;
   }
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
-  const { event, chipClasses = "" }: props = $props();
+  const { event, canParticipate, growChips = false }: props = $props();
 
   const userParticipation: ParticipationsCreate = $derived(
     event.userParticipation ?? {
@@ -27,8 +28,6 @@
       comment: "",
     },
   );
-
-  const canParticipate = $derived(authRecord.teams.includes(event.team));
 
   // JS: splitting an empty string by comma returns length `1`
   const guestCount = $derived(
@@ -54,17 +53,18 @@
   }
 </script>
 
-<section class="participation-section">
+<section class="participation-section" data-grow={growChips}>
   <button
     aria-busy={submitting}
-    class="chip {chipClasses} preset-outlined-success-500 participation-button"
+    class="chip preset-outlined-success-500 participation-button"
     class:preset-filled-success-500={userParticipation.state === "in"}
     disabled={submitting || !canParticipate}
     onclick={() => updateParticipationStatus("in")}
     title="set your participation to 'in' for this event"
   >
     <span aria-hidden="true"><Check size="14" /></span>
-    <span class="sr-only">set your participation to "in" for "{event.title}"</span
+    <span class="sr-only"
+      >set your participation to "in" for "{event.title}"</span
     >
     <span aria-hidden="true"
       >{(event.participations.in.length ?? 0) + guestCount}</span
@@ -73,7 +73,7 @@
 
   <button
     aria-busy={submitting}
-    class="chip {chipClasses} preset-outlined-warning-500 participation-button"
+    class="chip preset-outlined-warning-500 participation-button"
     class:preset-filled-warning-500={userParticipation.state === "maybe"}
     disabled={submitting || !canParticipate}
     onclick={() => updateParticipationStatus("maybe")}
@@ -88,7 +88,7 @@
 
   <button
     aria-busy={submitting}
-    class="chip {chipClasses} preset-outlined-error-500 participation-button"
+    class="chip preset-outlined-error-500 participation-button"
     class:preset-filled-error-500={userParticipation.state === "out"}
     disabled={submitting || !canParticipate}
     onclick={() => updateParticipationStatus("out")}
@@ -109,5 +109,11 @@
     align-items: flex-end;
     gap: calc(var(--spacing) * 2);
     flex-wrap: wrap;
+  }
+
+  [data-grow="true"] {
+    .chip {
+      flex-grow: 1;
+    }
   }
 </style>

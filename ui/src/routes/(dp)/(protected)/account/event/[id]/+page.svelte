@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type {Match} from "bsm.js";
-  import {Ban, Clock} from "@lucide/svelte";
+  import type { Match } from "bsm.js";
+  import { Ban, Clock } from "@lucide/svelte";
   import CommentSection from "$lib/dp/components/comments/CommentSection.svelte";
   import EventAttireSection from "$lib/dp/components/event/EventAttireSection.svelte";
   import EventCoreInfo from "$lib/dp/components/event/EventCoreInfo.svelte";
@@ -11,16 +11,23 @@
   import TimeSection from "$lib/dp/components/event/TimeSection.svelte";
   import MatchDetailLocationCard from "$lib/dp/components/event/match/MatchDetailLocationCard.svelte";
   import MatchTeaserCard from "$lib/dp/components/event/match/MatchTeaserCard.svelte";
-  import {authSettings} from "$lib/dp/client.svelte.js";
-  import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
-  import type {ClubsResponse} from "$lib/dp/types/pb-types.ts";
+  import { authSettings } from "$lib/dp/client.svelte.js";
+  import type { CustomAuthModel } from "$lib/dp/types/ExpandedResponse.ts";
+  import type { ClubsResponse } from "$lib/dp/types/pb-types.ts";
+  import EventTeamBadges from "$lib/dp/components/event/EventTeamBadges.svelte";
+  import type { PageProps } from "./$types";
 
-  const {data} = $props();
+  const { data }: PageProps = $props();
 
   const event = $derived(data.event);
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
-  const canParticipate = $derived(authRecord.teams.includes($event.team));
+  const canParticipate = $derived.by(() => {
+    const allApplicableTeams = new Set<string>($event.additional_teams);
+    allApplicableTeams.add($event.team);
+
+    return authRecord.teams.some((team) => allApplicableTeams.has(team));
+  });
 
   //@ts-expect-error - the multi-level expanding trips the typedef up
   const club = $derived($event?.expand?.club) as ClubsResponse;
@@ -36,18 +43,21 @@
   />
 </svelte:head>
 
-
 <div class="event-page-container">
-  <div class="header-row">
-    <h1 class="h1" class:cancelled-text={$event.cancelled}>{$event.title}</h1>
-    <div class="type-badge-wrapper">
-      <EventTypeBadge type={$event.type}/>
+  <div>
+    <div class="header-row">
+      <h1 class="h1" class:cancelled-text={$event.cancelled}>{$event.title}</h1>
+      <div class="type-badge-wrapper">
+        <EventTypeBadge type={$event.type} />
+      </div>
     </div>
+
+    <EventTeamBadges event={$event} />
   </div>
 
   {#if $event.cancelled}
     <span class="badge cancelled-badge">
-      <Ban/>
+      <Ban />
       Cancelled
     </span>
   {/if}
@@ -61,9 +71,13 @@
   <div class="core-info-section" class:cancelled-text={$event.cancelled}>
     <EventCoreInfo event={$event}>
       {#snippet additionalTimeSection()}
-        <TimeSection timeValue={$event.endtime} displayText="End:" classes="col-span-2">
+        <TimeSection
+          timeValue={$event.endtime}
+          displayText="End:"
+          classes="col-span-2"
+        >
           {#snippet icon()}
-            <Clock size="18"/>
+            <Clock size="18" />
           {/snippet}
         </TimeSection>
       {/snippet}
@@ -75,7 +89,11 @@
       <h2 class="h4">My Participation</h2>
 
       {#if canParticipate}
-        <EventParticipationSection event={$event} chipClasses="flex-grow"/>
+        <EventParticipationSection
+          event={$event}
+          growChips={true}
+          {canParticipate}
+        />
       {:else}
         <div class="participation-info">
           <p>Only team members can participate in events.</p>
@@ -83,12 +101,12 @@
       {/if}
     </div>
 
-    <hr class="divider">
+    <hr class="divider" />
 
-    <EventParticipantsOverviewSection event={$event}/>
+    <EventParticipantsOverviewSection event={$event} />
   {/if}
 
-  <hr class="divider">
+  <hr class="divider" />
   <div class="details-grid">
     {#if $event.expand.location}
       <section class="details-section">
@@ -105,18 +123,21 @@
 
     {#if $event.expand.attire}
       <section class="details-section">
-        <EventAttireSection attire={$event.expand.attire}/>
+        <EventAttireSection attire={$event.expand.attire} />
       </section>
     {/if}
   </div>
 
-  <hr class="divider">
+  <hr class="divider" />
 
   {#if $event.match_json}
     <section class="game-data-section">
       <h2 class="h2 game-data-title">Game Data</h2>
       <div class="game-data-grid">
-        <MatchTeaserCard match={matchJSON} teamName={$event?.expand?.team?.name}/>
+        <MatchTeaserCard
+          match={matchJSON}
+          teamName={$event?.expand?.team?.name}
+        />
       </div>
     </section>
   {/if}
@@ -127,7 +148,7 @@
         <h2 class="h3">Comments</h2>
       </header>
       <CommentSection
-        club={club}
+        {club}
         comments={$event?.expand?.comments_via_event ?? []}
         targetID={$event.id}
         targetType="event"
@@ -136,7 +157,7 @@
   </section>
 
   {#if $event.expand?.team?.admins.includes(authRecord.id) || $event?.expand?.team?.expand?.club?.admins.includes(authRecord.id)}
-    <EventPageAdminSection event={$event}/>
+    <EventPageAdminSection event={$event} />
   {/if}
 </div>
 
