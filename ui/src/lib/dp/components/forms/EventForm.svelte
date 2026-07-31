@@ -211,19 +211,21 @@
         />
       </label>
 
-      <label class="label field-wide">
-        <span>Additional Teams</span><br />
+      {#if mode === "teamEvent"}
+        <label class="label field-wide">
+          <span>Additional Teams</span><br />
 
-        {#await additionalTeamOptions then options}
-          <MultiSelectCombobox
-            itemName="Team"
-            bind:selectedItems={additionalTeams}
-            allItems={options}
-            labelFunc={(item) => item.name}
-            allowDeletionOfLastItem={true}
-          />
-        {/await}
-      </label>
+          {#await additionalTeamOptions then options}
+            <MultiSelectCombobox
+              itemName="Team"
+              bind:selectedItems={additionalTeams}
+              allItems={options}
+              labelFunc={(item) => item.name}
+              allowDeletionOfLastItem={true}
+            />
+          {/await}
+        </label>
+      {/if}
 
       <label class="label">
         <span>Start</span>

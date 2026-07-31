@@ -3,15 +3,20 @@
 
   interface Props {
     event: ExpandedEvent;
+    isClubWide: boolean;
   }
 
-  let { event }: Props = $props();
+  let { event, isClubWide }: Props = $props();
 </script>
 
 <ul class="badges-container">
   <li>
     <span class="badge preset-outlined-primary-500">
-      {event.expand?.team?.name}
+      {#if isClubWide}
+        {event.expand?.club?.name}
+      {:else}
+        {event.expand?.team?.name}
+      {/if}
     </span>
   </li>
   {#each event?.expand?.additional_teams as addTeam}

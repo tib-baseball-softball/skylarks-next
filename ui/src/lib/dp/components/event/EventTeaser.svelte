@@ -17,8 +17,15 @@
 
   const { event, link }: props = $props();
 
+  const isClubWide = $derived(
+    typeof event.club === "string" && event.club !== "",
+  );
+
   const authRecord = $derived(authSettings.record as CustomAuthModel);
   const canParticipate = $derived.by(() => {
+    if (isClubWide) {
+      return authRecord.club.includes(event.club);
+    }
     const allApplicableTeams = new Set<string>(event.additional_teams);
     allApplicableTeams.add(event.team);
 
@@ -34,7 +41,7 @@
         <span class="title-text h5">{event?.title}</span>
       </h2>
 
-      <EventTeamBadges {event} />
+      <EventTeamBadges {event} {isClubWide} />
     </header>
 
     <div class="core-info-wrapper">

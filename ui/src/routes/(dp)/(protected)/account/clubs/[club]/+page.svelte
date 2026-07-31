@@ -1,5 +1,10 @@
 <script lang="ts">
-  import { Mail, Plus, SquareArrowOutUpRight } from "@lucide/svelte";
+  import {
+    CalendarPlus,
+    Mail,
+    Plus,
+    SquareArrowOutUpRight,
+  } from "@lucide/svelte";
   import AnnouncementSectionContent from "$lib/dp/components/announcements/AnnouncementSectionContent.svelte";
   import ClubDetailCard from "$lib/dp/components/club/ClubDetailCard.svelte";
   import TeamListTeaser from "$lib/dp/components/team/TeamListTeaser.svelte";
@@ -16,6 +21,8 @@
     ExpandedUniformSet,
   } from "$lib/dp/types/ExpandedResponse.ts";
   import type { PageProps } from "./$types";
+  import EventForm from "$lib/dp/components/forms/EventForm.svelte";
+  import EventTeaser from "$lib/dp/components/event/EventTeaser.svelte";
 
   const { data }: PageProps = $props();
 
@@ -61,6 +68,33 @@
       />
     </div>
   {/if}
+</section>
+
+<section class="section-spacing">
+  <header>
+    <h2 class="h2 section-title">Next Club Events</h2>
+  </header>
+
+  <div class="club-page-grid">
+    {#each data.clubEvents.items as event (event.id)}
+      <EventTeaser {event} link={true} />
+    {/each}
+  </div>
+
+  <div class="form-wrapper">
+    <EventForm
+      mode="clubEvent"
+      clubID={club.id}
+      event={null}
+      teamID=""
+      triggerVariant="tonal-tertiary"
+    >
+      {#snippet triggerContent()}
+        <CalendarPlus />
+        <span>Create Club Event</span>
+      {/snippet}
+    </EventForm>
+  </div>
 </section>
 
 <section class="teams-section section-spacing">
@@ -193,11 +227,11 @@
   }
 
   .section-spacing {
-    margin-top: calc(var(--spacing) * 8);
+    margin-top: calc(var(--spacing) * 10);
   }
 
   .locations-section-spacing {
-    margin-top: calc(var(--spacing) * 10);
+    margin-top: calc(var(--spacing) * 12);
   }
 
   .section-title {

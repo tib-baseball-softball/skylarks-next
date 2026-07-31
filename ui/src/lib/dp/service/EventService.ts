@@ -1,10 +1,11 @@
-import type {PageStore} from "$lib/dp/records/PageStore.ts";
-import {watchWithPagination} from "$lib/dp/records/RecordOperations.ts";
-import type {ExpandedEvent} from "$lib/dp/types/ExpandedResponse.ts";
-import type {Fetch} from "$lib/dp/utility/Fetch.ts";
-import {Collection} from "$lib/dp/enum/Collection.ts";
+import type { PageStore } from "$lib/dp/records/PageStore.ts";
+import { watchWithPagination } from "$lib/dp/records/RecordOperations.ts";
+import type { ExpandedEvent } from "$lib/dp/types/ExpandedResponse.ts";
+import type { Fetch } from "$lib/dp/utility/Fetch.ts";
+import { Collection } from "$lib/dp/enum/Collection.ts";
 
 export class EventService {
+  private DEFAULT_PER_PAGE = 6;
   /**
    * Takes a team ID and an URL, construct PocketBase filter string from query parameters
    * and loads events with realtime.
@@ -12,7 +13,7 @@ export class EventService {
   public async loadEventStore(
     teamID: string,
     url: URL,
-    fetch: Fetch
+    fetch: Fetch,
   ): Promise<PageStore<ExpandedEvent>> {
     let filter = `(team = "${teamID}" || additional_teams.id ?= "${teamID}")`;
 
@@ -47,12 +48,13 @@ export class EventService {
       {
         filter: filter,
         sort: sort,
-        expand: "participations_via_event.user, attire, location, club, team, additional_teams",
+        expand:
+          "participations_via_event.user, attire, location, club, team, additional_teams",
         fetch: fetch,
-        requestKey: `${teamID}-events`
+        requestKey: `${teamID}-events`,
       },
       pageNumber,
-      6
+      this.DEFAULT_PER_PAGE,
     );
   }
 }
