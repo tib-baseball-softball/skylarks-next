@@ -49,6 +49,7 @@
         bsm_api_key: "",
         acronym: "",
         service_requirement: 0,
+        admin_email: "",
         admins: [],
       }
     );
@@ -229,8 +230,20 @@
         </span>
       </label>
 
+      <label class="label">
+        Admin Email
+        <input
+          class="input"
+          bind:value={form.admin_email}
+          type="email"
+          autocomplete="email"
+          name="admin_email"
+          placeholder="admin@example.com"
+        />
+      </label>
+
       {#if form.id}
-        <label class="label space-y-3 field-wide">
+        <label class="label field-wide">
           <span>Club Admins</span><br />
 
           {#await allUsersForClub then users}

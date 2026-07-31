@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {Plus, SquareArrowOutUpRight} from "@lucide/svelte";
+  import { Mail, Plus, SquareArrowOutUpRight } from "@lucide/svelte";
   import AnnouncementSectionContent from "$lib/dp/components/announcements/AnnouncementSectionContent.svelte";
   import ClubDetailCard from "$lib/dp/components/club/ClubDetailCard.svelte";
   import TeamListTeaser from "$lib/dp/components/team/TeamListTeaser.svelte";
@@ -8,16 +8,16 @@
   import TeamForm from "$lib/dp/components/forms/TeamForm.svelte";
   import UniformSetForm from "$lib/dp/components/forms/UniformSetForm.svelte";
   import Dialog from "$lib/dp/components/modal/Dialog.svelte";
-  import {authSettings} from "$lib/dp/client.svelte.js";
+  import { authSettings } from "$lib/dp/client.svelte.js";
   import type {
     CustomAuthModel,
     ExpandedClub,
     ExpandedTeam,
     ExpandedUniformSet,
   } from "$lib/dp/types/ExpandedResponse.ts";
-  import type {PageProps} from "./$types";
+  import type { PageProps } from "./$types";
 
-  const {data}: PageProps = $props();
+  const { data }: PageProps = $props();
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
@@ -38,7 +38,7 @@
 <h1 class="h1 page-title">{club.name}</h1>
 
 <section class="club-overview-section">
-  <ClubDetailCard {club}/>
+  <ClubDetailCard {club} />
 </section>
 
 <section class="announcements-section section-spacing">
@@ -47,7 +47,7 @@
   </header>
 
   <div class="announcement-content">
-    <AnnouncementSectionContent store={announcementStore}/>
+    <AnnouncementSectionContent store={announcementStore} />
   </div>
 
   {#if club?.admins.includes(authRecord.id)}
@@ -70,7 +70,7 @@
 
   <div class="club-page-grid">
     {#each teams as team (team.id)}
-      <TeamListTeaser {team} link={true}/>
+      <TeamListTeaser {team} link={true} />
     {/each}
 
     {#if teams.length === 0}
@@ -97,7 +97,7 @@
 
   <div class="club-page-grid">
     {#each uniformSets as uniformSet}
-      <UniformSetInfoCard {uniformSet}/>
+      <UniformSetInfoCard {uniformSet} />
     {/each}
   </div>
 
@@ -105,7 +105,7 @@
     <div class="form-wrapper">
       <Dialog triggerClasses="btn preset-filled-primary-500">
         {#snippet triggerContent()}
-          <Plus/>
+          <Plus />
           <span>Create new</span>
         {/snippet}
 
@@ -115,7 +115,7 @@
           </header>
         {/snippet}
 
-        <UniformSetForm uniformSet={null} clubID={club.id}/>
+        <UniformSetForm uniformSet={null} clubID={club.id} />
       </Dialog>
     </div>
   {/if}
@@ -131,12 +131,12 @@
     href="/account/clubs/{club.id}/locations"
   >
     <span>Locations Page</span>
-    <SquareArrowOutUpRight size="20"/>
+    <SquareArrowOutUpRight size="20" />
   </a>
 </section>
 
 {#if club?.admins.includes(authRecord.id)}
-  <hr class="admin-divider"/>
+  <hr class="admin-divider" />
 
   <section class="admin-module">
     <header>
@@ -158,16 +158,17 @@
           <p>Please contact your club's administration.</p>
         </section>
 
-        <!--        TODO: add email link-->
-        <!--        <footer class="card-footer">-->
-        <!--          <a-->
-        <!--                  class="btn preset-tonal-secondary border border-secondary-500 dark:preset-filled-secondary-500 dark:border grow"-->
-        <!--                  href=""-->
-        <!--          >-->
-        <!--            <Mail/>-->
-        <!--            <span class="ms-2">Contact</span>-->
-        <!--          </a>-->
-        <!--        </footer>-->
+        {#if club.admin_email}
+          <footer class="card-footer">
+            <a
+              class="btn preset-tonal-secondary border-secondary-500"
+              href="mailto:{club.admin_email}"
+            >
+              <Mail />
+              <span>Contact</span>
+            </a>
+          </footer>
+        {/if}
       </article>
     </div>
   </section>
