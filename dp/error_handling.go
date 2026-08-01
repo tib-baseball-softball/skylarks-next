@@ -5,6 +5,14 @@ import (
 	"github.com/pocketbase/pocketbase/core"
 )
 
+type LogicError struct{
+    Message string
+}
+
+func (e LogicError) Error() string {
+	return e.Message
+}
+
 type ErrorContext struct {
 	Key    string
 	Values map[string]any

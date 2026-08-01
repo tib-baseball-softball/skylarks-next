@@ -117,13 +117,11 @@ func BindDPHooks(app core.App, client bsm.APIClient, pushService PushService) {
 		return TriggerLeagueImport(event.App, client, event)
 	})
 
-	app.OnRecordCreateRequest(EventsCollection).BindFunc(func(e *core.RecordRequestEvent) error {
-		return ValidateEventTimes(e)
-	})
+	app.OnRecordCreateRequest(EventsCollection).BindFunc(ValidateEventTimes)
 
-	app.OnRecordUpdateRequest(EventsCollection).BindFunc(func(e *core.RecordRequestEvent) error {
-		return ValidateEventTimes(e)
-	})
+	app.OnRecordUpdateRequest(EventsCollection).BindFunc(ValidateEventTimes)
+
+	app.OnRecordValidate(EventsCollection).BindFunc(ValidateEvent)
 
 	app.OnRecordEnrich(EventsCollection).BindFunc(func(event *core.RecordEnrichEvent) error {
 		return AddEventParticipationData(event.App, event)
