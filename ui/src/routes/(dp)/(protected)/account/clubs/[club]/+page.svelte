@@ -78,25 +78,27 @@
   <div class="club-page-grid">
     {#each data.clubEvents.items as event (event.id)}
       <EventTeaser {event} link={true} />
-      {:else}
+    {:else}
       <p class="no-data">No club-wide events yet.</p>
     {/each}
   </div>
 
-  <div class="form-wrapper">
-    <EventForm
-      mode="clubEvent"
-      clubID={club.id}
-      event={null}
-      teamID=""
-      triggerVariant="tonal-tertiary"
-    >
-      {#snippet triggerContent()}
-        <CalendarPlus />
-        <span>Create Club Event</span>
-      {/snippet}
-    </EventForm>
-  </div>
+  {#if club?.admins.includes(authRecord.id)}
+    <div class="form-wrapper">
+      <EventForm
+        mode="clubEvent"
+        clubID={club.id}
+        event={null}
+        teamID=""
+        triggerVariant="tonal-tertiary"
+      >
+        {#snippet triggerContent()}
+          <CalendarPlus />
+          <span>Create Club Event</span>
+        {/snippet}
+      </EventForm>
+    </div>
+  {/if}
 </section>
 
 <section class="teams-section section-spacing">
