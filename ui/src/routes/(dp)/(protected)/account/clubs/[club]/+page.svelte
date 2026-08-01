@@ -78,6 +78,8 @@
   <div class="club-page-grid">
     {#each data.clubEvents.items as event (event.id)}
       <EventTeaser {event} link={true} />
+      {:else}
+      <p class="no-data">No club-wide events yet.</p>
     {/each}
   </div>
 
@@ -108,7 +110,7 @@
     {/each}
 
     {#if teams.length === 0}
-      <span>This club does not have any teams yet.</span>
+      <p class="no-data">This club does not have any teams yet.</p>
     {/if}
   </div>
 
@@ -283,5 +285,9 @@
     @media (min-width: 80rem) {
       grid-template-columns: 1fr 1fr 1fr;
     }
+  }
+
+  .no-data {
+    margin-block: calc(var(--spacing) * 2);
   }
 </style>
