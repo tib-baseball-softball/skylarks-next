@@ -21,8 +21,15 @@
 
   const event = $derived(data.event);
 
+  const isClubWide = $derived(
+    typeof $event.club === "string" && event.club !== "",
+  );
+
   const authRecord = $derived(authSettings.record as CustomAuthModel);
   const canParticipate = $derived.by(() => {
+    if (isClubWide) {
+      return authRecord.club.includes($event.club);
+    }
     const allApplicableTeams = new Set<string>($event.additional_teams);
     allApplicableTeams.add($event.team);
 
@@ -46,13 +53,15 @@
 <div class="event-page-container">
   <div>
     <div class="header-row">
-      <h1 class="h1" class:cancelled-text={$event.cancelled}>{$event.title}</h1>
+      <h1 class={["h1", $event.cancelled && "cancelled-text"]}>
+        {$event.title}
+      </h1>
       <div class="type-badge-wrapper">
         <EventTypeBadge type={$event.type} />
       </div>
     </div>
 
-    <EventTeamBadges event={$event} />
+    <EventTeamBadges event={$event} {isClubWide} />
   </div>
 
   {#if $event.cancelled}
