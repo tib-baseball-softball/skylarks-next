@@ -2007,170 +2007,170 @@ msgstr "BSM"
 
 #: src/lib/dp/components/event/EventCoreInfo.svelte
 msgid "No field name provided"
-msgstr ""
+msgstr "No se proporcionó nombre de campo"
 
 #: src/lib/dp/components/event/EventParticipantsOverviewSection.svelte
 msgid "Failed to send participation data"
-msgstr ""
+msgstr "Error al enviar datos de participación"
 
 #: src/routes/(tib)/legalnotice/+page.svelte
 msgid "Legal Notice"
-msgstr ""
+msgstr "Aviso Legal"
 
 #: src/routes/(tib)/privacy/+page.svelte
 msgid "Privacy Statement"
-msgstr ""
+msgstr "Declaración de Privacidad"
 
 #: src/routes/(dp)/(protected)/account/playerprofile/+page.svelte
 msgid "Player profile page, displaying player data and stats."
-msgstr ""
+msgstr "Página de perfil del jugador, muestra los datos y estadísticas del jugador."
 
 #: src/routes/(dp)/(protected)/account/settings/+page.svelte
 msgid "User settings page, allowing the user to update their account data and preferences."
-msgstr ""
+msgstr "Página de configuración de usuario, permite al usuario actualizar sus datos de cuenta y preferencias."
 
 #: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Team details page, displaying information about the team and allowing the user to manage it."
-msgstr ""
+msgstr "Página de detalles del equipo, muestra información sobre el equipo y permite al usuario gestionarlo."
 
 #: src/routes/(tib)/bsm/+page.svelte
 msgid "BSM data page, displaying the BSM data for the club."
-msgstr ""
+msgstr "Página de datos BSM, muestra los datos BSM para el club."
 
 #: src/routes/(dp)/(protected)/account/clubs/[club]/admin/communityservice/+page.svelte
 msgid "Community Service Admin"
-msgstr ""
+msgstr "Administración de Servicio Comunitario"
 
 #. 0: data.club.name
 #: src/routes/(dp)/(protected)/account/clubs/[club]/admin/communityservice/+page.svelte
 msgid "Community Service admin dashboard for {0}, allowing the user to manage community service entries."
-msgstr ""
+msgstr "Panel de administración de servicio comunitario para {0}, permitiendo al usuario gestionar las entradas de servicio comunitario."
 
 #. 0: $event.title
 #: src/routes/(dp)/(protected)/account/event/[id]/+page.svelte
 msgid "Event details for {0}, including time, type, and location."
-msgstr ""
+msgstr "Detalles del evento para {0}, incluyendo hora, tipo y ubicación."
 
 #: src/routes/(dp)/signupconfirm/+page.svelte
 msgid "Complete signup"
-msgstr ""
+msgstr "Completar registro"
 
 #: src/routes/(tib)/terms/+page.svelte
 msgid "Terms of Use"
-msgstr ""
+msgstr "Términos de Uso"
 
 #: src/routes/(dp)/(protected)/account/team/+page.svelte
 msgid "Team list page, displaying the user's teams and allowing them to manage them."
-msgstr ""
+msgstr "Página de lista de equipos, muestra los equipos del usuario y permite gestionarlos."
 
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
 msgid "Update all events"
-msgstr ""
+msgstr "Actualizar todos los eventos"
 
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
 msgid "Choose whether to change all existing events in the series or just future ones. For more severe changes (change from winter to summer), it is advisable to end the previous series instead by setting the end date accordingly, then create a new series."
-msgstr ""
+msgstr "Elige si quieres cambiar todos los eventos existentes en la serie o solo los futuros. Para cambios más importantes (como pasar de invierno a verano), se recomienda finalizar la serie anterior ajustando su fecha de finalización y crear una nueva."
 
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
 msgid "Update future events"
-msgstr ""
+msgstr "Actualizar eventos futuros"
 
 #: src/lib/dp/components/navigation/NavigationSheet.svelte
 msgid "Navigation"
-msgstr ""
+msgstr "Navegación"
 
 #: src/lib/dp/components/meta/LocalePicker.svelte
 msgid "App Language:"
-msgstr ""
+msgstr "Idioma de la aplicación:"
 
 #: src/lib/dp/components/meta/LocalePicker.svelte
 msgid "English"
-msgstr ""
+msgstr "Inglés"
 
 #: src/lib/dp/components/meta/LocalePicker.svelte
 msgid "German"
-msgstr ""
+msgstr "Alemán"
 
 #: src/lib/dp/components/meta/LocalePicker.svelte
 msgid "French"
-msgstr ""
+msgstr "Francés"
 
 #: src/lib/dp/components/meta/LocalePicker.svelte
 msgid "Spanish"
-msgstr ""
+msgstr "Español"
 
 #: src/lib/dp/components/meta/LocalePicker.svelte
 msgid "Polish"
-msgstr ""
+msgstr "Polaco"
 
 #: src/routes/(tib)/easteregg/+page.svelte
 msgid "Surprise"
-msgstr ""
+msgstr "Sorpresa"
 
 #: src/routes/(tib)/easteregg/+page.svelte
 msgid "None yet."
-msgstr ""
+msgstr "Aún no hay."
 
 #: src/lib/dp/auth/LoginForm.svelte
 msgid "Select login form mode"
-msgstr ""
+msgstr "Seleccionar modo del formulario de inicio de sesión"
 
 #. 0: event.title
 #: src/lib/dp/components/event/EventParticipationSection.svelte
 msgid "set your participation to \"out\" for \"{0}\""
-msgstr ""
+msgstr "establecer tu participación como \"fuera\" para \"{0}\""
 
 #. 0: event.title
 #: src/lib/dp/components/event/EventParticipationSection.svelte
 msgid "set your participation to \"in\" for \"{0}\""
-msgstr ""
+msgstr "establecer tu participación como \"dentro\" para \"{0}\""
 
 #. 0: event.title
 #: src/lib/dp/components/event/EventParticipationSection.svelte
 msgid "set your participation to \"maybe\" for \"{0}\""
-msgstr ""
+msgstr "establecer tu participación como \"quizás\" para \"{0}\""
 
 #: src/lib/dp/utility/Paginator.svelte
 msgid "Page"
-msgstr ""
+msgstr "Página"
 
 #: src/lib/dp/components/forms/EventForm.svelte
 msgid "Additional Teams"
-msgstr ""
+msgstr "Equipos adicionales"
 
 #: src/routes/(dp)/(protected)/account/clubs/[club]/+page.svelte
 msgid "Next Club Events"
-msgstr ""
+msgstr "Próximos eventos del club"
 
 #: src/routes/(dp)/(protected)/account/clubs/[club]/+page.svelte
 #: src/routes/(dp)/(protected)/account/clubs/[club]/events/+page.svelte
 msgid "Create Club Event"
-msgstr ""
+msgstr "Crear evento de club"
 
 #: src/routes/(dp)/(protected)/account/clubs/[club]/+page.svelte
 msgid "Contact"
-msgstr ""
+msgstr "Contacto"
 
 #: src/lib/dp/components/forms/ClubForm.svelte
 msgid "Admin Email <0/>"
-msgstr ""
+msgstr "Correo electrónico del administrador <0/>"
 
 #: src/routes/(dp)/(protected)/account/clubs/[club]/+page.svelte
 msgid "No club-wide events yet."
-msgstr ""
+msgstr "Aún no hay eventos para todo el club."
 
 #: src/routes/(dp)/(protected)/account/clubs/[club]/+page.svelte
 msgid "View All Events"
-msgstr ""
+msgstr "Ver todos los eventos"
 
 #. 0: data.club.name
 #. 0: data.club.name
 #: src/routes/(dp)/(protected)/account/clubs/[club]/events/+page.svelte
 #: src/routes/(dp)/(protected)/account/clubs/[club]/events/+page.svelte
 msgid "Events for {0}"
-msgstr ""
+msgstr "Eventos para {0}"
 
 #. 0: data.club.name
 #: src/routes/(dp)/(protected)/account/clubs/[club]/events/+page.svelte
 msgid "Club-wide events for {0} with participation status."
-msgstr ""
+msgstr "Eventos para todo el club para {0} con estado de participación."
