@@ -40,6 +40,16 @@
   const club = $derived($event?.expand?.club) as ClubsResponse;
 
   const matchJSON = $derived($event?.match_json) as unknown as Match;
+
+  const canEdit = $derived.by(() => {
+    if ($event.team) {
+      return (
+        $event.expand?.team?.admins.includes(authRecord.id) ||
+        $event?.expand?.team?.expand?.club?.admins.includes(authRecord.id)
+      );
+    }
+    return $event?.expand?.club?.admins.includes(authRecord.id);
+  });
 </script>
 
 <svelte:head>
@@ -165,7 +175,7 @@
     </div>
   </section>
 
-  {#if $event.expand?.team?.admins.includes(authRecord.id) || $event?.expand?.team?.expand?.club?.admins.includes(authRecord.id)}
+  {#if canEdit}
     <EventPageAdminSection event={$event} />
   {/if}
 </div>
