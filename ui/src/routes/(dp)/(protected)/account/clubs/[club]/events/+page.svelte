@@ -5,6 +5,7 @@
   import { CalendarPlus } from "@lucide/svelte";
   import type { PageProps } from "./$types";
   import { authSettings } from "$lib/dp/client.svelte";
+  import Paginator from "$lib/dp/utility/Paginator.svelte";
 
   const { data }: PageProps = $props();
   const eventStore = $derived(data.eventStore);
@@ -28,6 +29,8 @@
   <div class="space">
     <EventGrid events={$eventStore?.items ?? []} />
   </div>
+
+  <Paginator showIfSinglePage={true} store={eventStore} />
 
   {#if data.club?.admins.includes(authSettings.record?.id)}
     <div class="space">
