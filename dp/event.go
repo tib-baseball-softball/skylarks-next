@@ -184,3 +184,17 @@ func (e *Event) Next() string {
 func (e *Event) SetNext(next string) {
 	e.Set("next", next)
 }
+
+// SetParticipations sets a virtual (non-DB) field
+// to include participation data (back-relation).
+func (e *Event) SetParticipations(participations ParticipationsByType) {
+	e.WithCustomData(true)
+	e.Set("participations", participations)
+}
+
+// SetUserParticipation sets a virtual (non-DB) field to include
+// participation data for the currently-logged-in user.
+func (e *Event) SetUserParticipation(participation *core.Record) {
+	e.WithCustomData(true)
+	e.Set("userParticipation", participation)
+}

@@ -11,7 +11,11 @@ import (
 
 func AddEventParticipationData(app core.App, event *core.RecordEnrichEvent) error {
 	event.Record.WithCustomData(true)
-	err := enrichParticipationData(app, event.RequestInfo.Auth, event.Record)
+
+	eventItem := &Event{}
+	eventItem.SetProxyRecord(event.Record)
+
+	err := enrichParticipationData(app, event.RequestInfo.Auth, eventItem)
 	if err != nil {
 		app.Logger().Error("EnrichParticipationData error", "error", err)
 		return err
@@ -20,13 +24,13 @@ func AddEventParticipationData(app core.App, event *core.RecordEnrichEvent) erro
 	return event.Next()
 }
 
-func enrichParticipationData(app core.App, user *core.Record, record *core.Record) error {
-	err := addUserParticipation(app, user, record)
+func enrichParticipationData(app core.App, user *core.Record, event *Event) error {
+	err := addUserParticipation(app, user, event)
 	if err != nil {
 		return err
 	}
 
-	err = addParticipationsByType(app, record)
+	err = addParticipationsByType(app, event)
 	if err != nil {
 		return err
 	}
@@ -34,10 +38,7 @@ func enrichParticipationData(app core.App, user *core.Record, record *core.Recor
 	return nil
 }
 
-func addParticipationsByType(app core.App, record *core.Record) error {
-	event := &Event{}
-	event.SetProxyRecord(record)
-
+func addParticipationsByType(app core.App, event *Event) error {
 	participations, err := app.FindRecordsByFilter(
 		ParticipationsCollection,
 		"event = {:eventID}",
@@ -80,27 +81,28 @@ func addParticipationsByType(app core.App, record *core.Record) error {
 			participationsByType.Maybe = append(participationsByType.Maybe, participation)
 		}
 	}
-	record.Set("participations", participationsByType)
+	event.SetParticipations(participationsByType)
 
 	return nil
 }
 
-func addUserParticipation(app core.App, user *core.Record, record *core.Record) error {
+func addUserParticipation(app core.App, user *core.Record, event *Event) error {
 	userParticipation, err := app.FindFirstRecordByFilter(
 		"participations",
 		"user = {:userID} && event = {:eventID}",
-		dbx.Params{"userID": user.Id, "eventID": record.Id},
+		dbx.Params{"userID": user.Id, "eventID": event.Id},
 	)
 	if err != nil && errors.Is(err, sql.ErrNoRows) {
-		// not found - that is perfectly valid, user has not participated in this event yet, so set to null in JSON
-		record.Set("userParticipation", nil)
+		// not found - that is perfectly valid, user has not 
+		// participated in this event yet, so set to null in JSON
+		event.SetUserParticipation(nil)
 		return nil
 	}
 	if errs := app.ExpandRecord(userParticipation, []string{"user"}, nil); len(errs) > 0 {
 		return fmt.Errorf("failed to expand: %v", errs)
 	}
 
-	record.Set("userParticipation", userParticipation)
+	event.SetUserParticipation(userParticipation)
 	return nil
 }
 
