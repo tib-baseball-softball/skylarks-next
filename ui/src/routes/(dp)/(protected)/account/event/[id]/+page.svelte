@@ -13,7 +13,7 @@
   import MatchTeaserCard from "$lib/dp/components/event/match/MatchTeaserCard.svelte";
   import { authSettings } from "$lib/dp/client.svelte.js";
   import type { CustomAuthModel } from "$lib/dp/types/ExpandedResponse.ts";
-  import type { ClubsResponse } from "$lib/dp/types/pb-types.ts";
+  import type { ClubsResponse, TeamsResponse } from "$lib/dp/types/pb-types.ts";
   import EventTeamBadges from "$lib/dp/components/event/EventTeamBadges.svelte";
   import type { PageProps } from "./$types";
 
@@ -41,12 +41,23 @@
 
   const matchJSON = $derived($event?.match_json) as unknown as Match;
 
+  /**
+   * @TODO consider moving this expensive logic to backend
+   */
   const canEdit = $derived.by(() => {
     if ($event.team) {
-      return (
-        $event.expand?.team?.admins.includes(authRecord.id) ||
-        $event?.expand?.team?.expand?.club?.admins.includes(authRecord.id)
-      );
+      let allPossibleAdminIDs = new Set<string>($event.expand?.team?.admins);
+
+      for (const admin of $event?.expand?.team?.expand?.club?.admins) {
+        allPossibleAdminIDs.add(admin);
+      }
+
+      for (const admin of $event?.expand?.additional_teams?.flatMap(
+        (team: TeamsResponse) => team.admins,
+      )) {
+        allPossibleAdminIDs.add(admin);
+      }
+      return allPossibleAdminIDs.has(authRecord.id);
     }
     return $event?.expand?.club?.admins.includes(authRecord.id);
   });
