@@ -1,52 +1,23 @@
 <script lang="ts">
-  import { Users } from "@lucide/svelte";
-  import { goto } from "$app/navigation";
+  import { authSettings } from "$lib/dp/client.svelte.js";
   import AnnouncementSectionContent from "$lib/dp/components/announcements/AnnouncementSectionContent.svelte";
+  import EventGrid from "$lib/dp/components/event/EventGrid.svelte";
+  import AnnouncementForm from "$lib/dp/components/forms/AnnouncementForm.svelte";
+  import ICalSection from "$lib/dp/components/settings/ICalSection.svelte";
+  import JoinTeamSection from "$lib/dp/components/team/JoinTeamSection.svelte";
   import TeamAdminSection from "$lib/dp/components/team/TeamAdminSection.svelte";
   import TeamTeaserCard from "$lib/dp/components/team/TeamTeaserCard.svelte";
-  import AnnouncementForm from "$lib/dp/components/forms/AnnouncementForm.svelte";
-  import { authSettings } from "$lib/dp/client.svelte.js";
-  import type {
-    CustomAuthModel,
-    EventType,
-  } from "$lib/dp/types/ExpandedResponse.js";
-  import Paginator from "$lib/dp/utility/Paginator.svelte";
-  import type { PageProps } from "./$types";
-  import JoinTeamSection from "$lib/dp/components/team/JoinTeamSection.svelte";
-  import ICalSection from "$lib/dp/components/settings/ICalSection.svelte";
-  import EventGrid from "$lib/dp/components/event/EventGrid.svelte";
-  import { page } from "$app/state";
+  import type { CustomAuthModel } from "$lib/dp/types/ExpandedResponse.js";
   import { markdownToHTML } from "$lib/dp/utility/DOMFunctions.ts";
-  import TabsRadioGroup, {
-    type TabSetOption,
-  } from "$lib/dp/components/formElements/TabsRadioGroup.svelte";
-
-  type SortingValues = "asc" | "desc" | string;
-  type TypeValues = EventType | "any" | string;
+  import Paginator from "$lib/dp/utility/Paginator.svelte";
+  import { Users } from "@lucide/svelte";
+  import type { PageProps } from "./$types";
+  import EventFilters from "$lib/dp/components/event/EventFilters.svelte";
 
   const { data }: PageProps = $props();
   const events = $derived(data.events);
   const announcementStore = $derived(data.announcementStore);
   const model = $derived(authSettings.record) as CustomAuthModel;
-
-  let showEvents = $state(page.url.searchParams.get("timeframe") ?? "next");
-  let sorting: SortingValues = $state(
-    page.url.searchParams.get("sort") ?? "asc",
-  );
-  let showTypes: TypeValues = $state(
-    page.url.searchParams.get("type") ?? "any",
-  );
-
-  const queryString = $derived(
-    `?timeframe=${showEvents}&sort=${sorting}&type=${showTypes}`,
-  );
-
-  const reloadWithQuery = () => {
-    goto(queryString, {
-      noScroll: true,
-      keepFocus: true,
-    });
-  };
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
   const canEdit = $derived(
@@ -54,47 +25,6 @@
       data.team?.expand?.club?.admins.includes(authRecord?.id),
   );
   const isMember = $derived(authRecord?.teams.includes(data.team.id));
-
-  const timeframeOptions: TabSetOption<string>[] = [
-    {
-      label: "Next",
-      value: "next",
-    },
-    {
-      label: "Past",
-      value: "past",
-    },
-  ];
-
-  const sortOptions: TabSetOption<string>[] = [
-    {
-      label: "Ascending",
-      value: "asc",
-    },
-    {
-      label: "Descending",
-      value: "desc",
-    },
-  ];
-
-  const typeOptions: TabSetOption<string>[] = [
-    {
-      label: "Any",
-      value: "any",
-    },
-    {
-      label: "Game",
-      value: "game",
-    },
-    {
-      label: "Practice",
-      value: "practice",
-    },
-    {
-      label: "Other",
-      value: "misc",
-    },
-  ];
 </script>
 
 <svelte:head>
@@ -146,49 +76,7 @@
       <h2 class="h2">Team Events</h2>
     </header>
 
-    <div class="filters-bar preset-outlined-card">
-      <label class="filter-label">
-        <span>Timeframe</span>
-
-        <TabsRadioGroup
-          bind:value={showEvents}
-          onValueChange={reloadWithQuery}
-          options={timeframeOptions}
-          label="Timeframe"
-          hideLabel={true}
-          name="timeframe"
-          listClass="event-segment-container"
-        ></TabsRadioGroup>
-      </label>
-
-      <label class="filter-label">
-        <span>Sort</span>
-
-        <TabsRadioGroup
-          bind:value={sorting}
-          onValueChange={reloadWithQuery}
-          options={sortOptions}
-          label="Sort"
-          hideLabel={true}
-          name="sort"
-          listClass="event-segment-container"
-        ></TabsRadioGroup>
-      </label>
-
-      <label class="filter-label">
-        <span>Type</span>
-
-        <TabsRadioGroup
-          bind:value={showTypes}
-          onValueChange={reloadWithQuery}
-          options={typeOptions}
-          label="Type"
-          hideLabel={true}
-          name="type"
-          listClass="event-segment-container type-tabs"
-        ></TabsRadioGroup>
-      </label>
-    </div>
+    <EventFilters />
 
     {#if !isMember}
       <p class="hint">Only team members can participate in events.</p>
@@ -285,21 +173,6 @@
     }
   }
 
-  .filters-bar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: calc(var(--spacing) * 4);
-    justify-content: space-between;
-    padding-inline: calc(var(--spacing) * 4);
-    padding-block: calc(var(--spacing) * 3);
-    border-radius: var(--radius-base);
-    font-size: var(--text-sm);
-
-    @media (min-width: 64rem) {
-      font-size: var(--text-base);
-    }
-  }
-
   .cal-card {
     margin-block-end: calc(var(--spacing) * 6);
   }
@@ -359,22 +232,6 @@
 
   .hint {
     margin-block: calc(var(--spacing) * 4);
-  }
-
-  .filter-label {
-    display: flex;
-    align-items: center;
-    gap: calc(var(--spacing) * 2);
-    justify-content: space-between;
-    flex-grow: 1;
-
-    @media (min-width: 48rem) {
-      flex-grow: 0;
-    }
-
-    @media (min-width: 80rem) {
-      justify-content: flex-start;
-    }
   }
 
   header {

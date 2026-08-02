@@ -17,6 +17,9 @@ export type EventStoreOptions =
       teamID: string;
     });
 
+/**
+ * Provides reusable methods for events loading, using the current page query as state.
+ */
 export class EventService {
   private DEFAULT_PER_PAGE = 6;
   /**
