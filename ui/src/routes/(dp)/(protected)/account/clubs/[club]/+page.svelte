@@ -1,5 +1,6 @@
 <script lang="ts">
   import {
+    CalendarDays,
     CalendarPlus,
     Mail,
     Plus,
@@ -97,6 +98,15 @@
           <span>Create Club Event</span>
         {/snippet}
       </EventForm>
+
+      <a
+        class="btn preset-tonal-primary border-primary-500"
+        href={`/account/clubs/${club.id}/events`}
+        title={`to event page for club ${club.name}`}
+      >
+        <CalendarDays aria-hidden="true" />
+        <span>View All Events</span>
+      </a>
     </div>
   {/if}
 </section>
