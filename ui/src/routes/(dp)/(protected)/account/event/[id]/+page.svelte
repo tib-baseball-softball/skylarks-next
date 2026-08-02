@@ -22,7 +22,7 @@
   const event = $derived(data.event);
 
   const isClubWide = $derived(
-    typeof $event.club === "string" && event.club !== "",
+    typeof $event.club === "string" && $event.club !== "",
   );
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
