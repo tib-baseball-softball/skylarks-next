@@ -53,7 +53,7 @@
 
   const typeOptions: TabSetOption<string>[] = [
     {
-      label: "Any",
+      label: "All",
       value: "any",
     },
     {
