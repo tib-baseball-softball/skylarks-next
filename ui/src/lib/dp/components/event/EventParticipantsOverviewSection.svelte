@@ -199,41 +199,43 @@
   </article>
 </section>
 
-<section class="no-response-section">
-  <article class="card participant-card preset-outlined-card">
-    <header class="participation-header">
-      <span><Ghost /></span>
-      <h3 class="h4">No Response</h3>
-    </header>
+{#if event.team}
+  <section class="no-response-section">
+    <article class="card participant-card preset-outlined-card">
+      <header class="participation-header">
+        <span><Ghost /></span>
+        <h3 class="h4">No Response</h3>
+      </header>
 
-    <section>
-      <ul class="participation-content">
-        {#key event.participations.unspecified}
-          {#each event.participations.unspecified as ghostResponse (ghostResponse.id)}
-            <li
-              draggable="true"
-              ondragstart={(e) =>
-                ondragstart(
-                  e,
-                  participationDTOToExpandedParticipation(
-                    ghostResponse,
-                    event.id,
-                  ),
-                )}
-            >
-              <ExternalParticipationWrapper
-                dto={ghostResponse}
-                eventID={event.id}
-                {isAdmin}
-                classes="chip preset-outlined"
-              />
-            </li>
-          {/each}
-        {/key}
-      </ul>
-    </section>
-  </article>
-</section>
+      <section>
+        <ul class="participation-content">
+          {#key event.participations.unspecified}
+            {#each event.participations.unspecified as ghostResponse (ghostResponse.id)}
+              <li
+                draggable="true"
+                ondragstart={(e) =>
+                  ondragstart(
+                    e,
+                    participationDTOToExpandedParticipation(
+                      ghostResponse,
+                      event.id,
+                    ),
+                  )}
+              >
+                <ExternalParticipationWrapper
+                  dto={ghostResponse}
+                  eventID={event.id}
+                  {isAdmin}
+                  classes="chip preset-outlined"
+                />
+              </li>
+            {/each}
+          {/key}
+        </ul>
+      </section>
+    </article>
+  </section>
+{/if}
 
 <style>
   .participants-title {
