@@ -72,8 +72,14 @@ func getUserCalendarEvents(app core.App, user *User, teamID string) ([]*core.Rec
 		if !slices.Contains(user.Teams(), teamID) {
 			return events, &NotAuthorizedError{"Attempting to filter by team not in user teams"}
 		}
-		expressions = append(expressions, dbx.NewExp("team = {:team}", dbx.Params{"team": teamID}))
-		// @TODO: also add additional teams here
+		expressions = append(expressions, dbx.NewExp("team = {:teamID}", dbx.Params{"teamID": teamID}))
+
+		expressions = append(expressions,
+			dbx.NewExp(
+				"SELECT 1 FROM json_each(events.additional_teams) WHERE value = {:teamID}",
+				dbx.Params{"teamID": teamID},
+			),
+		)
 	} else {
 		// filter by all user teams
 		for i, userTeam := range user.Teams() {
@@ -84,12 +90,12 @@ func getUserCalendarEvents(app core.App, user *User, teamID string) ([]*core.Rec
 					dbx.Params{fmt.Sprintf("team%d", i): userTeam}),
 			)
 			// get all events where this team is a secondary team
-			// @TODO: unproven
 			expressions = append(expressions,
-				dbx.Exists(dbx.NewExp(
+				dbx.NewExp(
 					fmt.Sprintf("SELECT 1 FROM json_each(events.additional_teams) WHERE value = {:team%d}", i),
-					dbx.Params{fmt.Sprintf("team%d", i): userTeam}),
-				))
+					dbx.Params{fmt.Sprintf("team%d", i): userTeam},
+				),
+			)
 		}
 		// also allow all club-wide events
 		for i, userClub := range user.Clubs() {
