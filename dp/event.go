@@ -101,8 +101,8 @@ func (e *Event) AdditionalTeams() []string {
 	return e.GetStringSlice("additional_teams")
 }
 
-func (e *Event) SetAdditionalTeams(additionalTeam []string) {
-	e.Set("additional_teams", additionalTeam)
+func (e *Event) SetAdditionalTeams(additionalTeams []string) {
+	e.Set("additional_teams", additionalTeams)
 }
 
 func (e *Event) AddAdditionalTeam(team string) {

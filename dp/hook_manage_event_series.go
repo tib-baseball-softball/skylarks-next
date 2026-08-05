@@ -245,6 +245,7 @@ func setValuesForSeriesEvent(event *Event, eventStart types.DateTime, eventEnd t
 	event.SetEndTime(eventEnd)
 	event.SetTitle(eventSeries.Title())
 	event.SetTeam(eventSeries.Team())
+	event.SetAdditionalTeams(eventSeries.AdditionalTeams())
 	event.SetDesc(eventSeries.Desc())
 	event.SetLocation(eventSeries.Location())
 	event.SetSeries(eventSeries.Id)
