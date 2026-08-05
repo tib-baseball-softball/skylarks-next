@@ -56,6 +56,20 @@ func (s *EventSeries) SetTeam(team string) {
 	s.Set("team", team)
 }
 
+// AdditionalTeams returns the additional teams associated with the series.
+func (s *EventSeries) AdditionalTeams() []string {
+	return s.GetStringSlice("additional_teams")
+}
+
+func (s *EventSeries) SetAdditionalTeams(teams []string) {
+	s.Set("additional_teams", teams)
+}
+
+func (s *EventSeries) AddAdditionalTeam(team string) {
+	teams := append(s.AdditionalTeams(), team)
+	s.SetAdditionalTeams(teams)
+}
+
 // Desc returns the optional description.
 func (s *EventSeries) Desc() string {
 	return s.GetString("desc")

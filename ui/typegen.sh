@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# use `pnpm generate:types` instead, kept for reference
 
 source ./.env
 

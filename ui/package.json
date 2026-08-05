@@ -12,7 +12,7 @@
     "test": "dotenvx run -- vitest && pnpm test:e2e",
     "sv-check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "generate:types": "typed-pocketbase -d src/lib/model",
+    "generate:types": "dotenvx run -- typed-pocketbase -d src/lib/dp/types",
     "test:e2e": "dotenvx run -- playwright test",
     "test:ui": "dotenvx run -- playwright test --ui",
     "test:unit": "dotenvx run -- vitest",

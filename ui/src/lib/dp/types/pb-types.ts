@@ -487,6 +487,7 @@ export interface TeamsCollection {
 		club: ClubsCollection;
 		admins: UsersCollection[];
 		eventseries_via_team: EventseriesCollection[];
+		eventseries_via_additional_teams: EventseriesCollection[];
 		announcements_via_team: AnnouncementsCollection[];
 	};
 }
@@ -851,6 +852,7 @@ export interface EventseriesResponse extends BaseCollectionResponse {
 	series_start: string;
 	series_end: string;
 	team: string;
+	additional_teams: Array<string>;
 	desc: string;
 	location: string;
 	duration: number;
@@ -865,6 +867,7 @@ export interface EventseriesCreate extends BaseCollectionCreate {
 	series_start: string | Date;
 	series_end: string | Date;
 	team: string;
+	additional_teams?: MaybeArray<string>;
 	desc?: string;
 	location?: string;
 	duration?: number;
@@ -881,6 +884,9 @@ export interface EventseriesUpdate extends BaseCollectionUpdate {
 	series_start?: string | Date;
 	series_end?: string | Date;
 	team?: string;
+	additional_teams?: MaybeArray<string>;
+	'additional_teams+'?: MaybeArray<string>;
+	'additional_teams-'?: MaybeArray<string>;
 	desc?: string;
 	location?: string;
 	duration?: number;
@@ -900,6 +906,7 @@ export interface EventseriesCollection {
 	relations: {
 		events_via_series: EventsCollection[];
 		team: TeamsCollection;
+		additional_teams: TeamsCollection[];
 		location: LocationsCollection;
 	};
 }
