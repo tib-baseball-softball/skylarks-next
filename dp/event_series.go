@@ -123,40 +123,29 @@ func (s *EventSeries) SetState(state SeriesState) {
 }
 
 // findEventRecordsForSeries fetches all events associated with a given eventSeries.
-func findEventRecordsForSeries(app core.App, eventSeries *EventSeries) (events []*Event, firstEvent *Event, err error) {
+func findEventRecordsForSeries(app core.App, eventSeries *EventSeries) (events []*Event, err error) {
 	err = app.RecordQuery(EventsCollection).
 		AndWhere(dbx.NewExp("series = {:seriesID}", dbx.Params{"seriesID": eventSeries.Id})).
+		OrderBy("starttime ASC").
 		All(&events)
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
 
 	if len(events) == 0 {
-		return events, nil, nil
+		return events, nil
 	}
 
-	verifyCount := 0
-	for _, event := range events {
-		if event.Prev() == "" {
-			verifyCount++
-			firstEvent = event
-		}
-	}
-
-	if verifyCount != 1 {
-		return nil, nil, fmt.Errorf("logic: expected 1 first event, got %d", verifyCount)
-	}
-
-	return events, firstEvent, nil
+	return events, nil
 }
 
-// createEventSeriesLinkedList creates a linked list of events for given event records.
+// createEventSeriesLinkedListFromDatabase creates a linked list of events for given event records.
 //
 // If an empty slice is given, the returned list will be empty as well.
-// firstEvent will be set as first element of the list.
-// 
+// records needs to be already ordered.
+//
 // list will always point to a non-nil value unless an error occurs.
-func createEventSeriesLinkedList(records []*Event, firstEvent *Event) (*list.List, error) {
+func createEventSeriesLinkedListFromSlice(records []*Event) (*list.List, error) {
 	list := &list.List{}
 	list.Init()
 
@@ -164,58 +153,22 @@ func createEventSeriesLinkedList(records []*Event, firstEvent *Event) (*list.Lis
 		return list, nil
 	}
 
-	eventsMap := make(map[string]*Event)
-
-	for _, event := range records {
-		eventsMap[event.Id] = event
+	currentListElement := list.PushFront(records[0])
+	for i, event := range records {
+		if i == 0 {
+			continue
+		}
+		currentListElement = list.InsertAfter(event, currentListElement)
 	}
-
-	currentListElement := list.PushFront(firstEvent)
-	for {
-		currentEvent, ok := currentListElement.Value.(*Event)
-		if !ok {
-			return list, fmt.Errorf("data corrupted: event %v is not an Event pointer", currentListElement.Value)
-		}
-
-		if currentEvent.Next() == "" {
-			break
-		}
-
-		toInsert := eventsMap[currentEvent.Next()]
-		if toInsert == nil {
-			return list, fmt.Errorf("data corrupted: next event ID %s not found in map when creating linked list", currentEvent.Next())
-		}
-
-		currentListElement = list.InsertAfter(toInsert, currentListElement)
-	}
-
 	return list, nil
 }
 
-// eventSeriesLinkedListToSlice adds persistence info to an event series and returns a slice of events.
-func eventSeriesLinkedListToSlice(list *list.List) (events []*Event, err error) {
+// EventSeriesLinkedListToSlice adds persistence info to an event series and returns a slice of events.
+func EventSeriesLinkedListToSlice(list *list.List) (events []*Event, err error) {
 	for element := list.Front(); element != nil; element = element.Next() {
 		event, ok := element.Value.(*Event)
 		if !ok {
 			return nil, fmt.Errorf("data corrupted: event %v is not an Event pointer", element.Value)
-		}
-
-		if element.Prev() != nil {
-			prevValue, ok := element.Prev().Value.(*Event)
-			if ok {
-				event.SetPrev(prevValue.Id)
-			} else {
-				event.SetPrev("")
-			}
-		}
-
-		if element.Next() != nil {
-			nextValue, ok := element.Next().Value.(*Event)
-			if ok {
-				event.SetNext(nextValue.Id)
-			} else {
-				event.SetNext("")
-			}
 		}
 
 		events = append(events, event)

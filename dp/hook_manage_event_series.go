@@ -60,7 +60,7 @@ func DeleteEventsForSeries(e *core.RecordEvent) error {
 	eventSeries := &EventSeries{}
 	eventSeries.SetProxyRecord(e.Record)
 
-	eventsToBeDeleted, _, err := findEventRecordsForSeries(e.App, eventSeries)
+	eventsToBeDeleted, err := findEventRecordsForSeries(e.App, eventSeries)
 	if err != nil {
 		return err
 	}
@@ -108,17 +108,16 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 	}
 
 	existingEvents := []*Event{}
-	first := (*Event)(nil)
 
 	if mode == UpdateEventSeriesMode {
-		existingEvents, first, err = findEventRecordsForSeries(app, eventSeries)
+		existingEvents, err = findEventRecordsForSeries(app, eventSeries)
 		if err != nil {
 			LogErrorInternalExternal(app, err, errorContext, nil)
 			return nil, err
 		}
 	}
 
-	eventLinkedList, err := createEventSeriesLinkedList(existingEvents, first)
+	eventLinkedList, err := createEventSeriesLinkedListFromSlice(existingEvents)
 	if err != nil {
 		LogErrorInternalExternal(app, err, errorContext, nil)
 		return nil, err
@@ -225,7 +224,7 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 			}
 		}
 	}
-	events, err = eventSeriesLinkedListToSlice(eventLinkedList)
+	events, err = EventSeriesLinkedListToSlice(eventLinkedList)
 	if err != nil {
 		LogErrorInternalExternal(app, err, errorContext, nil)
 	}
