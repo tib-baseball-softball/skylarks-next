@@ -54,6 +54,7 @@ export const load = (async ({ fetch, parent, params, url, depends }) => {
       fetch: fetch,
       requestKey: `team-${team.id}-eventseries`,
       sort: "-series_start",
+      expand: "additional_teams",
     });
 
   const pageQuery = url.searchParams.get("page") ?? "1";

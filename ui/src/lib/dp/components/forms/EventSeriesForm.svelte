@@ -6,11 +6,15 @@
     EventSeriesCreationData,
     ExpandedTeam,
   } from "$lib/dp/types/ExpandedResponse.ts";
-  import type { LocationsResponse } from "$lib/dp/types/pb-types.ts";
+  import type {
+    LocationsResponse,
+    TeamsResponse,
+  } from "$lib/dp/types/pb-types.ts";
   import { Collection } from "$lib/dp/enum/Collection";
   import { dev } from "$app/environment";
   import type { EventSeriesAction } from "$lib/dp/types/EventSeriesState";
   import ISODatePicker from "../formElements/ISODatePicker.svelte";
+  import MultiSelectCombobox from "../formElements/MultiSelectCombobox.svelte";
 
   interface Props {
     eventSeries: EventSeriesCreationData | null;
@@ -23,32 +27,52 @@
   function formFromProps(
     data: EventSeriesCreationData | null,
   ): EventSeriesCreationData {
-    return (
-      data ?? {
-        id: "",
-        title: "",
-        interval: 7,
-        duration: 0,
-        series_start: "",
-        series_end: "",
-        desc: "",
-        location: "",
-        team: team?.id,
-      }
-    );
+    const ret = data ?? {
+      id: "",
+      title: "",
+      interval: 7,
+      duration: 0,
+      series_start: "",
+      series_end: "",
+      desc: "",
+      location: "",
+      team: team?.id,
+      additional_teams: [],
+      expand: {
+        additional_teams: [],
+      },
+    };
+    // additional_teams needs to have a value even if no expand is sent from the backend (= none exist yet)
+    if (ret.additional_teams?.length === 0) {
+      ret.expand = {};
+      ret.expand.additional_teams = [];
+    }
+    return ret;
   }
 
   let form: EventSeriesCreationData = $derived.by(() => {
-    const formData = $state(formFromProps(eventSeries));
+    // we don't want to pass the reactive proxy here, we just need its data
+    const data = $state.snapshot(eventSeries);
+    
+    const formData = $state(formFromProps(data));
     return formData;
   });
+
+  let additionalTeams = $derived(form?.expand?.additional_teams ?? []);
 
   const isNewSeries = $derived(form.id === "");
 
   const locationOptions = $derived(
-    client.collection("locations").getFullList<LocationsResponse>({
+    client.collection(Collection.Locations).getFullList<LocationsResponse>({
       filter: `club = "${team.club}"`,
       requestKey: `locations-for-eventSeries-${team.id}`,
+    }),
+  );
+
+  const additionalTeamOptions = $derived(
+    client.collection(Collection.Teams).getFullList<TeamsResponse>({
+      filter: `club = "${team.club}" && id != "${team.id}"`,
+      requestKey: `team-options-${team.club}`,
     }),
   );
 
@@ -60,6 +84,8 @@
     }
 
     let result: EventSeriesCreationData | null = null;
+
+    form.additional_teams = additionalTeams.map((team) => team.id);
 
     try {
       if (form.id) {
@@ -133,6 +159,20 @@
         required
         type="text"
       />
+    </label>
+
+    <label class="label field-wide">
+      <span>Additional Teams</span><br />
+
+      {#await additionalTeamOptions then options}
+        <MultiSelectCombobox
+          itemName="Team"
+          bind:selectedItems={additionalTeams}
+          allItems={options}
+          labelFunc={(item) => item.name}
+          allowDeletionOfLastItem={true}
+        />
+      {/await}
     </label>
 
     <label class="label">

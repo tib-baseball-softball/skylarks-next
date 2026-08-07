@@ -104,6 +104,9 @@ export type EventSeriesCreationData = Extension<
     desc: EventsCreate["desc"];
     series_start: string;
     series_end: string;
+    expand?: {
+      additional_teams?: TeamsResponse[]
+    }
   }
 >;
 
@@ -111,6 +114,9 @@ export type ExpandedEventSeries = Extension<
   EventseriesResponse,
   {
     series_state: "ongoing" | "past" | "future";
+    expand?: {
+      additional_teams?: TeamsResponse[]
+    }
   }
 >;
 

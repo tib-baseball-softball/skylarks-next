@@ -13,6 +13,7 @@
     ExpandedTeam,
   } from "$lib/dp/types/ExpandedResponse.ts";
   import clsx from "clsx";
+  import { Collection } from "$lib/dp/enum/Collection";
 
   interface Props {
     team: ExpandedTeam;
@@ -43,6 +44,8 @@
   let selectedEventSeries: EventSeriesCreationData | null = $state(null);
   let eventSeriesFormContainer: HTMLDivElement;
 
+  const transitionDelay = 230;
+
   function setupAndShowForm(eventSeries: EventSeriesCreationData | null) {
     selectedEventSeries = eventSeries;
     showForm = true;
@@ -54,17 +57,22 @@
         block: "start",
         inline: "nearest",
       });
-    }, 230);
+    }, transitionDelay);
   }
 
   async function deleteEventSeries(id: string) {
-    const success = await client.collection("eventseries").delete(id);
+    const success = await client.collection(Collection.EventSeries).delete(id);
 
     if (success) {
       await invalidateAll();
       open = false;
       showForm = false;
     }
+  }
+
+  function onSheetClose() {
+    selectedEventSeries = null;
+    showForm = false;
   }
 </script>
 
@@ -85,6 +93,7 @@
       "preset-tonal-tertiary border-tertiary",
     triggerVariant === "tonal-surface" && "preset-outlined-card",
   ])}
+  onClose={onSheetClose}
 >
   {#snippet triggerContent()}
     <CalendarPlus />
@@ -143,7 +152,7 @@
 
   <div bind:this={eventSeriesFormContainer}>
     {#if showForm}
-      <div transition:slide={{ duration: 230 }}>
+      <div transition:slide={{ duration: transitionDelay }}>
         <EventSeriesForm
           {team}
           eventSeries={selectedEventSeries}

@@ -10,6 +10,7 @@
     triggerContent: Snippet;
     closeButtonClasses?: String;
     children?: Snippet;
+    onClose?: () => void
   }
 
   let {
@@ -20,6 +21,7 @@
     triggerContent,
     closeButtonClasses = "",
     children,
+    onClose = () => {},
   }: Props = $props();
 
   let sheet: HTMLDialogElement;
@@ -49,6 +51,7 @@
   onMount(() => {
     sheet.addEventListener("close", () => {
       open = false;
+      onClose?.()
     });
   });
 </script>

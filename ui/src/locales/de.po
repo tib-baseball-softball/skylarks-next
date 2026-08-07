@@ -1195,6 +1195,7 @@ msgid "{0} ({1} bytes)"
 msgstr "{0} ({1} Bytes)"
 
 #: src/lib/dp/components/forms/EventForm.svelte
+#: src/lib/dp/components/forms/EventSeriesForm.svelte
 #: src/lib/dp/components/forms/TeamForm.svelte
 #: src/lib/dp/components/forms/TeamForm.svelte
 #: src/lib/dp/components/team/TeamAdminSection.svelte
@@ -2135,6 +2136,7 @@ msgid "Page"
 msgstr "Seite"
 
 #: src/lib/dp/components/forms/EventForm.svelte
+#: src/lib/dp/components/forms/EventSeriesForm.svelte
 msgid "Additional Teams"
 msgstr "Weitere Teams"
 
