@@ -85,10 +85,15 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 	eventSeries := &EventSeries{}
 	eventSeries.SetProxyRecord(record)
 
-	startDateSeries := eventSeries.SeriesStart()
-	endDateSeries := eventSeries.SeriesEnd()
-	seriesInterval := eventSeries.Interval()
-	seriesEventDuration := eventSeries.Duration()
+	location, err := LoadAppTimeZone()
+	if err != nil {
+		return nil, err
+	}
+
+	// reads timezone information to ensure that the later call to `AddDate()` accounts for daylight savings time traversal
+	// both calls ignore error: underlying method can only error on string casting, not when using time.Time arguments
+	startDateSeries, _ := types.ParseDateTime(eventSeries.SeriesStart().Time().In(location))
+	endDateSeries, _ := types.ParseDateTime(eventSeries.SeriesEnd().Time().In(location))
 
 	if startDateSeries.After(endDateSeries) {
 		return nil, fmt.Errorf("series start date is after series end date")
@@ -123,14 +128,7 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 		return nil, err
 	}
 
-	location, err := LoadAppTimeZone()
-	if err != nil {
-		return nil, err
-	}
-
-	// reads timezone information to ensure that the later call to `AddDate()` accounts for daylight savings time traversal
-	// both calls ignore error: underlying method can only error on string casting, not when using time.Time arguments
-	currentDate, _ := types.ParseDateTime(startDateSeries.Time().In(location))
+	currentDate := startDateSeries
 	today, _ := types.ParseDateTime(time.Now().In(location))
 
 	switch mode {
@@ -140,7 +138,7 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 
 		for currentDate.Before(endDateSeries) {
 			eventStart := currentDate
-			eventEnd := currentDate.Add(time.Duration(seriesEventDuration) * time.Minute)
+			eventEnd := currentDate.Add(time.Duration(eventSeries.Duration()) * time.Minute)
 
 			event := &Event{}
 			event.SetProxyRecord(core.NewRecord(eventCollection))
@@ -153,7 +151,7 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 				currentElement = eventLinkedList.InsertAfter(event, currentElement)
 			}
 
-			currentDate = currentDate.AddDate(0, 0, seriesInterval)
+			currentDate = currentDate.AddDate(0, 0, eventSeries.Interval())
 		}
 	case UpdateEventSeriesMode:
 		// available because the hook runs before record persistence
@@ -162,9 +160,6 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 		if err != nil {
 			return nil, fmt.Errorf("failed to find existing series: %w", err)
 		}
-
-		// MARK: does that capture all use cases?
-		timeDiff := currentDate.Sub(existingSeries.SeriesStart())
 
 		eventsToDelete := make(map[string]*Event)
 
@@ -186,9 +181,10 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 				eventStart = currentDate
 			} else {
 				// has an existing DB value
+				timeDiff := currentDate.Sub(event.StartTime())
 				eventStart = event.StartTime().Add(timeDiff)
 			}
-			eventEnd := eventStart.Add(time.Duration(seriesEventDuration) * time.Minute)
+			eventEnd := eventStart.Add(time.Duration(eventSeries.Duration()) * time.Minute)
 
 			if eventStart.After(endDateSeries) {
 				eventsToDelete[event.Id] = event
@@ -204,7 +200,8 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 				element.Value = event
 			}
 
-			currentDate = currentDate.AddDate(0, 0, seriesInterval)
+			currentDate = currentDate.AddDate(0, 0, eventSeries.Interval())
+			
 			// series has been extended over the original end, append new event to handle in next loop
 			if element.Next() == nil && currentDate.Before(endDateSeries) {
 				app.Logger().Debug("appending new event to extend series", "currentDate", currentDate, "endDateSeries", endDateSeries)
