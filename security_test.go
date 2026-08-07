@@ -19,41 +19,73 @@ type userData struct {
 	ClubsPlus string `json:"clubs+"`
 }
 
-type teamData struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
-}
-
-type clubData struct {
+type recordData struct {
 	ID   string `json:"id"`
 	Name string `json:"name"`
 }
 
 // These datasets need to exist in the testing database
-var clubA = clubData{
+var clubA = recordData{
 	ID:   "vogf6j5vwmwrl6g",
 	Name: "Club AAA",
 }
-var clubB = clubData{
+var clubB = recordData{
 	ID:   "zw96qr1u3fnz8kv",
 	Name: "Club BBB",
 }
-var teamAlligators = teamData{
+var teamAlligators = recordData{
 	ID:   "mydnx3d2bunjup2",
 	Name: "Team Alligators",
 }
-var teamAntelopes = teamData{
+var teamAntelopes = recordData{
 	ID:   "ud80ykstikukfmo",
 	Name: "Team Antelopes",
 }
-var teamBeavers = teamData{
+var teamBeavers = recordData{
 	ID:   "3i7532nj13msbjg",
 	Name: "Team Beavers",
 }
-var teamBees = teamData{
+var teamBees = recordData{
 	ID:   "66prup8tpz8zekn",
 	Name: "Team Bees",
 }
+
+var antelopeInternalEvent = recordData{
+	ID:   "3h963ldke46yx7q",
+	Name: "Antelope Internal",
+}
+
+var antelopeEventWithAdditional = recordData{
+	ID:   "h8uai6gsbm951vk",
+	Name: "Antelope External",
+}
+
+var alligatorEventForAntelopes = recordData{
+	ID:   "8yxcf45qf1kzfbl",
+	Name: "Alligator external",
+}
+
+var clubAEvent = recordData{
+	ID:   "dvqfwl12270ol5l",
+	Name: "Club A Event",
+}
+
+var beeInternalEvent = recordData{
+	ID:   "i0kpukfmchkcyno",
+	Name: "Bee Internal",
+}
+
+var beeEventWithAdditional = recordData{
+	ID:   "pv5xv8jatjjq01k",
+	Name: "Bee External",
+}
+
+var clubBEvent = recordData{
+	ID:   "idwgcxk68p99o2s",
+	Name: "Club B Event",
+}
+
+// Antelopes member
 var alice = userData{
 	ID:        "wvizeo6lht334n9",
 	Email:     "alice_anderson@example.com",
@@ -61,6 +93,8 @@ var alice = userData{
 	FirstName: "Alice",
 	LastName:  "Anderson",
 }
+
+// Bees member
 var bob = userData{
 	ID:        "t63c8isheazpytq",
 	Email:     "bob_brown@example.com",
@@ -104,6 +138,11 @@ var andreaAntelopeAdmin = userData{
 
 func TestAPIRules(t *testing.T) {
 	aliceToken, err := generateToken(dp.UserCollection, alice.Email)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	bobToken, err := generateToken(dp.UserCollection, bob.Email)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -340,6 +379,105 @@ func TestAPIRules(t *testing.T) {
 			},
 			ExpectedStatus:  http.StatusForbidden,
 			ExpectedContent: []string{"Only superusers can perform this action."},
+			TestAppFactory:  setupTestApp,
+		},
+		{
+			Name:   "Member can see their own team event (Antelopes)",
+			Method: http.MethodGet,
+			URL:    "/api/collections/events/records/" + antelopeInternalEvent.ID,
+			Headers: map[string]string{
+				"Authorization": aliceToken,
+			},
+			ExpectedStatus:  http.StatusOK,
+			ExpectedContent: []string{`"collectionName":"events"`, `"id":"` + antelopeInternalEvent.ID + `"`},
+			TestAppFactory:  setupTestApp,
+		},
+		{
+			Name:   "Member can see an event with additional teams (Antelopes)",
+			Method: http.MethodGet,
+			URL:    "/api/collections/events/records/" + antelopeEventWithAdditional.ID,
+			Headers: map[string]string{
+				"Authorization": aliceToken,
+			},
+			ExpectedStatus:  http.StatusOK,
+			ExpectedContent: []string{`"collectionName":"events"`, `"id":"` + antelopeEventWithAdditional.ID + `"`},
+			TestAppFactory:  setupTestApp,
+		},
+		{
+			Name:   "Member can see another team's event that has additional_teams set",
+			Method: http.MethodGet,
+			URL:    "/api/collections/events/records/" + alligatorEventForAntelopes.ID,
+			Headers: map[string]string{
+				"Authorization": aliceToken,
+			},
+			ExpectedStatus:  http.StatusOK,
+			ExpectedContent: []string{`"collectionName":"events"`, `"id":"` + alligatorEventForAntelopes.ID + `"`},
+			TestAppFactory:  setupTestApp,
+		},
+		{
+			Name:   "Team admin can see their own team's event (Antelopes)",
+			Method: http.MethodGet,
+			URL:    "/api/collections/events/records/" + antelopeInternalEvent.ID,
+			Headers: map[string]string{
+				"Authorization": andreaToken,
+			},
+			ExpectedStatus:  http.StatusOK,
+			ExpectedContent: []string{`"collectionName":"events"`, `"id":"` + antelopeInternalEvent.ID + `"`},
+			TestAppFactory:  setupTestApp,
+		},
+		{
+			Name:   "Club admin can see a club event (Club A)",
+			Method: http.MethodGet,
+			URL:    "/api/collections/events/records/" + clubAEvent.ID,
+			Headers: map[string]string{
+				"Authorization": aClubAdminToken,
+			},
+			ExpectedStatus:  http.StatusOK,
+			ExpectedContent: []string{`"collectionName":"events"`, `"id":"` + clubAEvent.ID + `"`},
+			TestAppFactory:  setupTestApp,
+		},
+		{
+			Name:   "Member cannot see another team's event (Bob seeing Antelopes)",
+			Method: http.MethodGet,
+			URL:    "/api/collections/events/records/" + antelopeInternalEvent.ID,
+			Headers: map[string]string{
+				"Authorization": bobToken,
+			},
+			ExpectedStatus:  http.StatusNotFound,
+			ExpectedContent: []string{"The requested resource wasn't found."},
+			TestAppFactory:  setupTestApp,
+		},
+		{
+			Name:   "Club admin cannot see another club's event (Bernie seeing Club A)",
+			Method: http.MethodGet,
+			URL:    "/api/collections/events/records/" + clubAEvent.ID,
+			Headers: map[string]string{
+				"Authorization": bClubAdminToken,
+			},
+			ExpectedStatus:  http.StatusNotFound,
+			ExpectedContent: []string{"The requested resource wasn't found."},
+			TestAppFactory:  setupTestApp,
+		},
+		{
+			Name:   "Member cannot see an event from a different club",
+			Method: http.MethodGet,
+			URL:    "/api/collections/events/records/" + beeEventWithAdditional.ID,
+			Headers: map[string]string{
+				"Authorization": aliceToken,
+			},
+			ExpectedStatus:  http.StatusNotFound,
+			ExpectedContent: []string{"The requested resource wasn't found."},
+			TestAppFactory:  setupTestApp,
+		},
+		{
+			Name:   "Team Admin cannot see an event from a different club",
+			Method: http.MethodGet,
+			URL:    "/api/collections/events/records/" + beeEventWithAdditional.ID,
+			Headers: map[string]string{
+				"Authorization": andreaToken,
+			},
+			ExpectedStatus:  http.StatusNotFound,
+			ExpectedContent: []string{"The requested resource wasn't found."},
 			TestAppFactory:  setupTestApp,
 		},
 	}
