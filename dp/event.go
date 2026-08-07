@@ -169,22 +169,6 @@ func (e *Event) SetSeries(series string) {
 	e.Set("series", series)
 }
 
-// Prev returns the ID for the previous event in the series.
-func (e *Event) Prev() string {
-	return e.GetString("prev")
-}
-func (e *Event) SetPrev(prev string) {
-	e.Set("prev", prev)
-}
-
-// Next returns the ID for the next event in the series.
-func (e *Event) Next() string {
-	return e.GetString("next")
-}
-func (e *Event) SetNext(next string) {
-	e.Set("next", next)
-}
-
 // SetParticipations sets a virtual (non-DB) field
 // to include participation data (back-relation).
 func (e *Event) SetParticipations(participations ParticipationsByType) {

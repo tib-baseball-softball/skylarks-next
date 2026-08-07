@@ -37,8 +37,6 @@ func prepareEventsCollection(t *testing.T, app *tests.TestApp) {
 	coll.Fields.Add(&core.TextField{Name: "team"})
 	coll.Fields.Add(&core.TextField{Name: "location"})
 	coll.Fields.Add(&core.TextField{Name: "series"})
-	coll.Fields.Add(&core.TextField{Name: "next"})
-	coll.Fields.Add(&core.TextField{Name: "prev"})
 
 	if err := app.Save(coll); err != nil {
 		t.Fatalf("failed to register events collection: %v", err)

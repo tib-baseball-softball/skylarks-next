@@ -247,9 +247,6 @@ func setValuesForSeriesEvent(event *Event, eventStart types.DateTime, eventEnd t
 	event.SetSeries(eventSeries.Id)
 	event.SetType(Practice.String())
 
-	// reset DB relations - set correctly later by persistence layer
-	event.SetNext("")
-	event.SetPrev("")
 }
 
 // AddSeriesState is a hook that sets the state of the event series based on the current date

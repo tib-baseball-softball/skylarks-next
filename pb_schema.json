@@ -1323,34 +1323,6 @@
         "type": "relation"
       },
       {
-        "cascadeDelete": false,
-        "collectionId": "zyst8ardf4onbwz",
-        "help": "previous event in a series",
-        "hidden": false,
-        "id": "relation3168962645",
-        "maxSelect": 0,
-        "minSelect": 0,
-        "name": "prev",
-        "presentable": false,
-        "required": false,
-        "system": false,
-        "type": "relation"
-      },
-      {
-        "cascadeDelete": false,
-        "collectionId": "zyst8ardf4onbwz",
-        "help": "",
-        "hidden": false,
-        "id": "relation70193212",
-        "maxSelect": 0,
-        "minSelect": 0,
-        "name": "next",
-        "presentable": false,
-        "required": false,
-        "system": false,
-        "type": "relation"
-      },
-      {
         "hidden": false,
         "id": "_pbf_autodate_created_",
         "name": "created",
@@ -1377,8 +1349,6 @@
       "CREATE INDEX `idx_miocwua0bp` ON `events` (`team`)",
       "CREATE INDEX `idx_snxc3kufmb` ON `events` (`series`)",
       "CREATE INDEX `idx_0c501exuc1` ON `events` (`location`)",
-      "CREATE INDEX `idx_kji3y3rlcp` ON `events` (`prev`)",
-      "CREATE INDEX `idx_ytoiuzjffa` ON `events` (`next`)",
       "CREATE INDEX `idx_38rk28bmkd` ON `events` (\n  `type`,\n  `team`\n)",
       "CREATE INDEX `idx_vizqfueccq` ON `events` (`club`)",
       "CREATE INDEX `idx_nfoliwl5a7` ON `events` (`additional_teams`)",

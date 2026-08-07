@@ -22,8 +22,6 @@ func init() {
 				"CREATE INDEX ` + "`" + `idx_miocwua0bp` + "`" + ` ON ` + "`" + `events` + "`" + ` (` + "`" + `team` + "`" + `)",
 				"CREATE INDEX ` + "`" + `idx_snxc3kufmb` + "`" + ` ON ` + "`" + `events` + "`" + ` (` + "`" + `series` + "`" + `)",
 				"CREATE INDEX ` + "`" + `idx_0c501exuc1` + "`" + ` ON ` + "`" + `events` + "`" + ` (` + "`" + `location` + "`" + `)",
-				"CREATE INDEX ` + "`" + `idx_kji3y3rlcp` + "`" + ` ON ` + "`" + `events` + "`" + ` (` + "`" + `prev` + "`" + `)",
-				"CREATE INDEX ` + "`" + `idx_ytoiuzjffa` + "`" + ` ON ` + "`" + `events` + "`" + ` (` + "`" + `next` + "`" + `)",
 				"CREATE INDEX ` + "`" + `idx_38rk28bmkd` + "`" + ` ON ` + "`" + `events` + "`" + ` (\n  ` + "`" + `type` + "`" + `,\n  ` + "`" + `team` + "`" + `\n)",
 				"CREATE INDEX ` + "`" + `idx_vizqfueccq` + "`" + ` ON ` + "`" + `events` + "`" + ` (` + "`" + `club` + "`" + `)",
 				"CREATE INDEX ` + "`" + `idx_nfoliwl5a7` + "`" + ` ON ` + "`" + `events` + "`" + ` (` + "`" + `additional_teams` + "`" + `)",
@@ -49,8 +47,6 @@ func init() {
 				"CREATE INDEX ` + "`" + `idx_miocwua0bp` + "`" + ` ON ` + "`" + `events` + "`" + ` (` + "`" + `team` + "`" + `)",
 				"CREATE INDEX ` + "`" + `idx_snxc3kufmb` + "`" + ` ON ` + "`" + `events` + "`" + ` (` + "`" + `series` + "`" + `)",
 				"CREATE INDEX ` + "`" + `idx_0c501exuc1` + "`" + ` ON ` + "`" + `events` + "`" + ` (` + "`" + `location` + "`" + `)",
-				"CREATE INDEX ` + "`" + `idx_kji3y3rlcp` + "`" + ` ON ` + "`" + `events` + "`" + ` (` + "`" + `prev` + "`" + `)",
-				"CREATE INDEX ` + "`" + `idx_ytoiuzjffa` + "`" + ` ON ` + "`" + `events` + "`" + ` (` + "`" + `next` + "`" + `)",
 				"CREATE INDEX ` + "`" + `idx_38rk28bmkd` + "`" + ` ON ` + "`" + `events` + "`" + ` (\n  ` + "`" + `type` + "`" + `,\n  ` + "`" + `team` + "`" + `\n)"
 			]
 		}`), &collection); err != nil {
