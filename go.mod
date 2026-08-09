@@ -8,7 +8,7 @@ require (
 	github.com/arran4/golang-ical v0.3.5
 	github.com/getsentry/sentry-go v0.48.0
 	github.com/pocketbase/dbx v1.12.0
-	github.com/pocketbase/pocketbase v0.39.9
+	github.com/pocketbase/pocketbase v0.39.10
 	github.com/spf13/cast v1.10.0
 	github.com/spf13/cobra v1.10.2
 	github.com/subosito/gotenv v1.6.0
@@ -42,5 +42,5 @@ require (
 	modernc.org/libc v1.74.1 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.11.0 // indirect
-	modernc.org/sqlite v1.54.0 // indirect
+	modernc.org/sqlite v1.55.0 // indirect
 )
