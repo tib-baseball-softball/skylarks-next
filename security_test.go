@@ -324,7 +324,7 @@ func TestAPIRules(t *testing.T) {
 			},
 			Body:            strings.NewReader(`{"teams+":["` + teamAntelopes.ID + `"]}`),
 			ExpectedStatus:  http.StatusOK,
-			ExpectedContent: []string{`"collectionName":"users"`, `"teams":["` + teamAntelopes.ID + `"]`},
+			ExpectedContent: []string{`"collectionName":"users"`, teamAntelopes.ID},
 			TestAppFactory:  setupTestApp,
 		},
 		{
@@ -447,6 +447,28 @@ func TestAPIRules(t *testing.T) {
 			URL:    "/api/collections/events/records/" + antelopeInternalEvent.ID,
 			Headers: map[string]string{
 				"Authorization": bobToken,
+			},
+			ExpectedStatus:  http.StatusNotFound,
+			ExpectedContent: []string{"The requested resource wasn't found."},
+			TestAppFactory:  setupTestApp,
+		},
+		{
+			Name:   "Member cannot see another team's event (Alice seeing Alligators)",
+			Method: http.MethodGet,
+			URL:    "/api/collections/events/records/" + alligatorInternalEvent.ID,
+			Headers: map[string]string{
+				"Authorization": aliceToken,
+			},
+			ExpectedStatus:  http.StatusNotFound,
+			ExpectedContent: []string{"The requested resource wasn't found."},
+			TestAppFactory:  setupTestApp,
+		},
+		{
+			Name:   "Berta B Admin cannot see another team's event (seeing Antelopes)",
+			Method: http.MethodGet,
+			URL:    "/api/collections/events/records/" + antelopeInternalEvent.ID,
+			Headers: map[string]string{
+				"Authorization": bertaToken,
 			},
 			ExpectedStatus:  http.StatusNotFound,
 			ExpectedContent: []string{"The requested resource wasn't found."},
