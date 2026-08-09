@@ -48,13 +48,13 @@
     if ($event.team) {
       let allPossibleAdminIDs = new Set<string>($event.expand?.team?.admins);
 
-      for (const admin of $event?.expand?.team?.expand?.club?.admins) {
+      for (const admin of $event?.expand?.team?.expand?.club?.admins ?? []) {
         allPossibleAdminIDs.add(admin);
       }
 
       for (const admin of $event?.expand?.additional_teams?.flatMap(
         (team: TeamsResponse) => team.admins,
-      )) {
+      ) ?? []) {
         allPossibleAdminIDs.add(admin);
       }
       return allPossibleAdminIDs.has(authRecord.id);
