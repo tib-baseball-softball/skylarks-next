@@ -576,8 +576,8 @@ func TestAPIRules(t *testing.T) {
 			Headers: map[string]string{
 				"Authorization": aliceToken,
 			},
-			ExpectedStatus:  http.StatusNotFound,
-			ExpectedContent: []string{"The requested resource wasn't found."},
+			ExpectedStatus:  http.StatusBadRequest,
+			ExpectedContent: []string{"Failed to create record."},
 			TestAppFactory:  setupTestApp,
 		},
 		{
@@ -614,8 +614,8 @@ func TestAPIRules(t *testing.T) {
 					  "team":"` + teamBees.ID + `"
 					}`,
 			),
-			ExpectedStatus:  http.StatusNotFound,
-			ExpectedContent: []string{"The requested resource wasn't found."},
+			ExpectedStatus:  http.StatusBadRequest,
+			ExpectedContent: []string{"Failed to create record."},
 			TestAppFactory:  setupTestApp,
 		},
 		{
@@ -648,8 +648,8 @@ func TestAPIRules(t *testing.T) {
 			"starttime":"2024-04-14 11:00:00.000Z",
 			"team":"` + teamBees.ID + `"
 			}`),
-			ExpectedStatus:  http.StatusNotFound,
-			ExpectedContent: []string{"The requested resource wasn't found."},
+			ExpectedStatus:  http.StatusBadRequest,
+			ExpectedContent: []string{"Failed to create record."},
 			TestAppFactory:  setupTestApp,
 		},
 		{
@@ -682,8 +682,8 @@ func TestAPIRules(t *testing.T) {
 			"starttime":"2024-04-14 11:00:00.000Z", 
 			"club":"` + clubB.ID + `"
 			}`),
-			ExpectedStatus:  http.StatusNotFound,
-			ExpectedContent: []string{"The requested resource wasn't found."},
+			ExpectedStatus:  http.StatusBadRequest,
+			ExpectedContent: []string{"Failed to create record."},
 			TestAppFactory:  setupTestApp,
 		},
 		{
