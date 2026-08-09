@@ -572,7 +572,7 @@ func TestAPIRules(t *testing.T) {
 		{
 			Name:   "Team member cannot create events",
 			Method: http.MethodPost,
-			URL:    "/api/collections/events/records/",
+			URL:    "/api/collections/events/records",
 			Headers: map[string]string{
 				"Authorization": aliceToken,
 			},
@@ -583,11 +583,18 @@ func TestAPIRules(t *testing.T) {
 		{
 			Name:   "Team admin can create events for own team",
 			Method: http.MethodPost,
-			URL:    "/api/collections/events/records/",
+			URL:    "/api/collections/events/records",
 			Headers: map[string]string{
 				"Authorization": andreaToken,
 			},
-			Body:            strings.NewReader(`{"title":"New Event", "type":"misc", "starttime":"2024-04-14 11:00:00.000Z", "team":"` + teamAntelopes.ID + `"}`),
+			Body: strings.NewReader(
+				`{
+				"title":"New Event",
+				"type":"misc",
+				"starttime":"2024-04-14 11:00:00.000Z",
+				"team":"` + teamAntelopes.ID + `"
+				}`,
+			),
 			ExpectedStatus:  http.StatusOK,
 			ExpectedContent: []string{`"collectionName":"events"`, `"title":"New Event"`},
 			TestAppFactory:  setupTestApp,
@@ -595,11 +602,18 @@ func TestAPIRules(t *testing.T) {
 		{
 			Name:   "Team admin cannot create events for another team",
 			Method: http.MethodPost,
-			URL:    "/api/collections/events/records/",
+			URL:    "/api/collections/events/records",
 			Headers: map[string]string{
 				"Authorization": andreaToken,
 			},
-			Body:            strings.NewReader(`{"title":"Other Team Event", "type":"misc", "starttime":"2024-04-14 11:00:00.000Z", "team":"` + teamBees.ID + `"}`),
+			Body: strings.NewReader(
+				`{
+				      "title":"Other Team Event",
+					  "type":"misc",
+				      "starttime":"2024-04-14 11:00:00.000Z",
+					  "team":"` + teamBees.ID + `"
+					}`,
+			),
 			ExpectedStatus:  http.StatusNotFound,
 			ExpectedContent: []string{"The requested resource wasn't found."},
 			TestAppFactory:  setupTestApp,
@@ -607,11 +621,16 @@ func TestAPIRules(t *testing.T) {
 		{
 			Name:   "Club admin can create events for team in own club",
 			Method: http.MethodPost,
-			URL:    "/api/collections/events/records/",
+			URL:    "/api/collections/events/records",
 			Headers: map[string]string{
 				"Authorization": aClubAdminToken,
 			},
-			Body:            strings.NewReader(`{"title":"Club A Event", "type":"misc", "starttime":"2024-04-14 11:00:00.000Z", "team":"` + teamAntelopes.ID + `"}`),
+			Body: strings.NewReader(`{
+			"title":"Club A Event",
+			"type":"misc",
+			"starttime":"2024-04-14 11:00:00.000Z",
+			"team":"` + teamAntelopes.ID + `"
+			}`),
 			ExpectedStatus:  http.StatusOK,
 			ExpectedContent: []string{`"collectionName":"events"`, `"title":"Club A Event"`},
 			TestAppFactory:  setupTestApp,
@@ -619,11 +638,16 @@ func TestAPIRules(t *testing.T) {
 		{
 			Name:   "Club admin cannot create events for team in another club",
 			Method: http.MethodPost,
-			URL:    "/api/collections/events/records/",
+			URL:    "/api/collections/events/records",
 			Headers: map[string]string{
 				"Authorization": aClubAdminToken,
 			},
-			Body:            strings.NewReader(`{"title":"Other Club Event", "type":"misc", "starttime":"2024-04-14 11:00:00.000Z", "team":"` + teamBees.ID + `"}`),
+			Body: strings.NewReader(`{
+			"title":"Other Club Event",
+			"type":"misc",
+			"starttime":"2024-04-14 11:00:00.000Z",
+			"team":"` + teamBees.ID + `"
+			}`),
 			ExpectedStatus:  http.StatusNotFound,
 			ExpectedContent: []string{"The requested resource wasn't found."},
 			TestAppFactory:  setupTestApp,
@@ -631,11 +655,16 @@ func TestAPIRules(t *testing.T) {
 		{
 			Name:   "Club admin can create club-wide events for own club",
 			Method: http.MethodPost,
-			URL:    "/api/collections/events/records/",
+			URL:    "/api/collections/events/records",
 			Headers: map[string]string{
 				"Authorization": aClubAdminToken,
 			},
-			Body:            strings.NewReader(`{"title":"Global Club A Event", "type":"misc", "starttime":"2024-04-14 11:00:00.000Z", "club":"` + clubA.ID + `"}`),
+			Body: strings.NewReader(`{
+			"title":"Global Club A Event",
+			"type":"misc",
+			"starttime":"2024-04-14 11:00:00.000Z",
+			"club":"` + clubA.ID + `"
+			}`),
 			ExpectedStatus:  http.StatusOK,
 			ExpectedContent: []string{`"collectionName":"events"`, `"title":"Global Club A Event"`},
 			TestAppFactory:  setupTestApp,
@@ -643,11 +672,16 @@ func TestAPIRules(t *testing.T) {
 		{
 			Name:   "Club admin cannot create club-wide events for own club",
 			Method: http.MethodPost,
-			URL:    "/api/collections/events/records/",
+			URL:    "/api/collections/events/records",
 			Headers: map[string]string{
 				"Authorization": aClubAdminToken,
 			},
-			Body:            strings.NewReader(`{"title":"Global Club B Event", "type":"misc", "starttime":"2024-04-14 11:00:00.000Z", "club":"` + clubB.ID + `"}`),
+			Body:            strings.NewReader(`{
+			"title":"Global Club B Event", 
+			"type":"misc", 
+			"starttime":"2024-04-14 11:00:00.000Z", 
+			"club":"` + clubB.ID + `"
+			}`),
 			ExpectedStatus:  http.StatusNotFound,
 			ExpectedContent: []string{"The requested resource wasn't found."},
 			TestAppFactory:  setupTestApp,
@@ -670,8 +704,8 @@ func TestAPIRules(t *testing.T) {
 			Headers: map[string]string{
 				"Authorization": andreaToken,
 			},
-			ExpectedStatus:  http.StatusNoContent,
-			TestAppFactory:  setupTestApp,
+			ExpectedStatus: http.StatusNoContent,
+			TestAppFactory: setupTestApp,
 		},
 		{
 			Name:   "Team admin cannot delete events for another team",
@@ -702,8 +736,8 @@ func TestAPIRules(t *testing.T) {
 			Headers: map[string]string{
 				"Authorization": aClubAdminToken,
 			},
-			ExpectedStatus:  http.StatusNoContent,
-			TestAppFactory:  setupTestApp,
+			ExpectedStatus: http.StatusNoContent,
+			TestAppFactory: setupTestApp,
 		},
 		{
 			Name:   "Club admin cannot delete events for team another club",
@@ -723,8 +757,8 @@ func TestAPIRules(t *testing.T) {
 			Headers: map[string]string{
 				"Authorization": aClubAdminToken,
 			},
-			ExpectedStatus:  http.StatusNoContent,
-			TestAppFactory:  setupTestApp,
+			ExpectedStatus: http.StatusNoContent,
+			TestAppFactory: setupTestApp,
 		},
 		{
 			Name:   "Club admin cannot delete club-wide events for own club",
