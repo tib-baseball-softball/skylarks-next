@@ -72,7 +72,7 @@ export class EventService {
         sort: sort,
         expand:
           "participations_via_event.user, attire, location, club, team, additional_teams",
-        fetch: fetch,
+        fetch: options.fetch,
         requestKey: `${options.mode === "club" ? options.clubID : options.teamID}-events`,
       },
       pageNumber,
