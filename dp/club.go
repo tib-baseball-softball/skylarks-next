@@ -46,6 +46,22 @@ func (c *Club) SetBSMAPIKey(key string) {
 	c.Set("bsm_api_key", key)
 }
 
+func (c *Club) BSMSearchString() string {
+    return c.GetString("bsm_search_string")
+}
+
+func (c *Club) SetBSMSearchString(searchString string) {
+    c.Set("bsm_search_string", searchString)
+}
+
+func (c *Club) TeamName() string {
+    return c.GetString("team_name")
+}
+
+func (c *Club) SetTeamName(teamName string) {
+    c.Set("team_name", teamName)
+}
+
 func (c *Club) Acronym() string {
 	return c.GetString("acronym")
 }

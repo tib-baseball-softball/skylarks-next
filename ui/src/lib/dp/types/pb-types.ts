@@ -281,8 +281,6 @@ export interface EventsResponse extends BaseCollectionResponse {
 	guests: string;
 	series: string;
 	location: string;
-	prev: string;
-	next: string;
 	created: string;
 	updated: string;
 }
@@ -305,8 +303,6 @@ export interface EventsCreate extends BaseCollectionCreate {
 	guests?: string;
 	series?: string;
 	location?: string;
-	prev?: string;
-	next?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -333,8 +329,6 @@ export interface EventsUpdate extends BaseCollectionUpdate {
 	guests?: string;
 	series?: string;
 	location?: string;
-	prev?: string;
-	next?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -353,10 +347,6 @@ export interface EventsCollection {
 		additional_teams: TeamsCollection[];
 		series: EventseriesCollection;
 		location: LocationsCollection;
-		prev: EventsCollection;
-		events_via_prev: EventsCollection[];
-		next: EventsCollection;
-		events_via_next: EventsCollection[];
 		participations_via_event: ParticipationsCollection[];
 		comments_via_event: CommentsCollection[];
 	};
@@ -373,6 +363,8 @@ export interface ClubsResponse extends BaseCollectionResponse {
 	admins: Array<string>;
 	service_requirement: number;
 	admin_email: string;
+	bsm_search_string: string;
+	team_name: string;
 	created: string;
 	updated: string;
 }
@@ -385,6 +377,8 @@ export interface ClubsCreate extends BaseCollectionCreate {
 	admins: MaybeArray<string>;
 	service_requirement?: number;
 	admin_email?: string;
+	bsm_search_string?: string;
+	team_name?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -403,6 +397,8 @@ export interface ClubsUpdate extends BaseCollectionUpdate {
 	'service_requirement+'?: number;
 	'service_requirement-'?: number;
 	admin_email?: string;
+	bsm_search_string?: string;
+	team_name?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
