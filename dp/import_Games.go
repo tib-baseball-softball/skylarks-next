@@ -93,7 +93,7 @@ func (s GameImportService) ImportGames() {
 			club := &Club{}
 			club.SetProxyRecord(clubRecord)
 
-			matches, err := s.fetchMatchesForLeagueGroup(cast.ToString(team.BSMLeagueGroup()), club.BSMAPIKey())
+			matches, err := s.fetchMatchesForLeagueGroup(cast.ToString(team.BSMLeagueGroup()), club.BSMAPIKey(), club.BSMSearchString())
 			if err != nil {
 				s.App.Logger().Error("Could not fetch Matches for leagueGroup", "error", err, "team", team)
 				ForwardErrorToExternalSystem(err, errorContext, nil)
@@ -111,10 +111,10 @@ func (s GameImportService) ImportGames() {
 	s.App.Logger().Info("Game Import successfully imported new game events", "Number of teams processed", processedTeams, "Number of matches processed", processedMatches)
 }
 
-func (s GameImportService) fetchMatchesForLeagueGroup(league string, apiKey string) ([]bsm.Match, error) {
+func (s GameImportService) fetchMatchesForLeagueGroup(league string, apiKey string, search string) ([]bsm.Match, error) {
 	params := make(map[string]string)
 	params[bsm.LeagueFilter] = league
-	params[bsm.SearchFilter] = "skylarks" // TODO: do not hardcode this!
+	params[bsm.SearchFilter] = search
 	// we cannot use compact here, since the field data is not included in the response
 
 	url := s.Client().GetAPIURL("matches.json", params, apiKey)
