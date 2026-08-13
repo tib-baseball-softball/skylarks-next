@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"log/slog"
+	"strings"
 	"sync"
 	"time"
 
@@ -93,7 +94,18 @@ func (s GameImportService) ImportGames() {
 			club := &Club{}
 			club.SetProxyRecord(clubRecord)
 
-			matches, err := s.fetchMatchesForLeagueGroup(cast.ToString(team.BSMLeagueGroup()), club.BSMAPIKey(), club.BSMSearchString())
+			searchString := club.BSMSearchString()
+			if searchString == "" {
+				searchString = club.Name()
+			}
+			searchString = strings.ToLower(searchString)
+			searchString = strings.TrimSpace(searchString)
+
+			matches, err := s.fetchMatchesForLeagueGroup(
+				cast.ToString(team.BSMLeagueGroup()),
+				club.BSMAPIKey(),
+				searchString,
+			)
 			if err != nil {
 				s.App.Logger().Error("Could not fetch Matches for leagueGroup", "error", err, "team", team)
 				ForwardErrorToExternalSystem(err, errorContext, nil)
