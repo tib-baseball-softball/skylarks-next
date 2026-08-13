@@ -166,7 +166,9 @@
       <div class="game-data-grid">
         <MatchTeaserCard
           match={matchJSON}
-          teamName={$event?.expand?.team?.name}
+          teamName={$event?.expand?.team?.expand?.club?.team_name ||
+            $event?.expand?.club?.team_name ||
+            ""}
         />
       </div>
     </section>
