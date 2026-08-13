@@ -50,6 +50,8 @@
         acronym: "",
         service_requirement: 0,
         admin_email: "",
+        bsm_search_string: "",
+        team_name: "",
         admins: [],
       }
     );
@@ -95,6 +97,7 @@
           .create<ClubsResponse>(form);
 
         // a user needs to become a member of the new club
+        // TODO: unclear if this works with auth rules, move to backend hook
         await client
           .collection(Collection.Users)
           .update<UsersUpdate>(authRecord.id, {
@@ -174,7 +177,7 @@
       </label>
 
       <label class="label">
-        <span> Acronym </span>
+        <span>Acronym</span>
         <input
           bind:value={form.acronym}
           class="input"
@@ -184,7 +187,7 @@
       </label>
 
       <label class="label">
-        <span> BSM Club ID </span>
+        <span>BSM Club ID</span>
         <input
           bind:value={form.bsm_id}
           class="input"
@@ -200,7 +203,7 @@
       </label>
 
       <label class="label">
-        <span> BSM API Key </span>
+        <span>BSM API Key</span>
         <input
           bind:value={form.bsm_api_key}
           class="input"
@@ -212,6 +215,36 @@
           Must be created in BSM in a user's account that has the role "Team
           Administration". If set, all game events for the club can be
           automatically imported.
+        </span>
+      </label>
+
+      <label class="label">
+        <span>BSM Search Term</span>
+        <input
+          bind:value={form.bsm_search_string}
+          class="input"
+          name="bsm_search_string"
+          placeholder={club?.name}
+          type="text"
+        />
+        <span class="text-sm">
+          Used to filter games when importing event data. Use something you
+          would enter into the BSM search bar to find your club's games (most
+          likely the full club name, case-insensitive.)
+        </span>
+      </label>
+
+      <label class="label">
+        <span>Team Name</span>
+        <input
+          bind:value={form.team_name}
+          class="input"
+          name="team_name"
+          placeholder="---"
+          type="text"
+        />
+        <span class="text-sm">
+          Your club name without the city. Mainly used for decoration.
         </span>
       </label>
 

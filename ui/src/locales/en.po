@@ -2176,3 +2176,19 @@ msgstr "Events for {0}"
 #: src/routes/(dp)/(protected)/account/clubs/[club]/events/+page.svelte
 msgid "Club-wide events for {0} with participation status."
 msgstr "Club-wide events for {0} with participation status."
+
+#: src/lib/dp/components/forms/ClubForm.svelte
+msgid "BSM Search Term"
+msgstr "BSM Search Term"
+
+#: src/lib/dp/components/forms/ClubForm.svelte
+msgid "Team Name"
+msgstr "Team Name"
+
+#: src/lib/dp/components/forms/ClubForm.svelte
+msgid "Your club name without the city. Mainly used for decoration."
+msgstr "Your club name without the city. Mainly used for decoration."
+
+#: src/lib/dp/components/forms/ClubForm.svelte
+msgid "Used to filter games when importing event data. Use something you would enter into the BSM search bar to find your club's games (most likely the full club name, case-insensitive.)"
+msgstr "Used to filter games when importing event data. Use something you would enter into the BSM search bar to find your club's games (most likely the full club name, case-insensitive.)"

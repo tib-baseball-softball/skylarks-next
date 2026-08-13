@@ -2155,7 +2155,7 @@ msgstr "Kontakt"
 
 #: src/lib/dp/components/forms/ClubForm.svelte
 msgid "Admin Email <0/>"
-msgstr "Administraive Mailadresse <0/>"
+msgstr "Administrative Mailadresse <0/>"
 
 #: src/routes/(dp)/(protected)/account/clubs/[club]/+page.svelte
 msgid "No club-wide events yet."
@@ -2176,3 +2176,19 @@ msgstr "Events für {0}"
 #: src/routes/(dp)/(protected)/account/clubs/[club]/events/+page.svelte
 msgid "Club-wide events for {0} with participation status."
 msgstr "Vereinsevents für {0} mit Teilnahme-Status."
+
+#: src/lib/dp/components/forms/ClubForm.svelte
+msgid "BSM Search Term"
+msgstr "BSM-Suchbegriff"
+
+#: src/lib/dp/components/forms/ClubForm.svelte
+msgid "Team Name"
+msgstr "Teamname"
+
+#: src/lib/dp/components/forms/ClubForm.svelte
+msgid "Your club name without the city. Mainly used for decoration."
+msgstr "Teamname ohne Angabe der Stadt. Wird hauptsächlich für Dekoration verwendet."
+
+#: src/lib/dp/components/forms/ClubForm.svelte
+msgid "Used to filter games when importing event data. Use something you would enter into the BSM search bar to find your club's games (most likely the full club name, case-insensitive.)"
+msgstr "Wird für die Filterung von Spielen beim Importieren von Events verwendet. Verwende etwas, was du in das BSM-Suchfeld eingeben würdest, um deine Vereinsspiele zu finden (meistens der vollständige Vereinsname, ohne Berücksichtigung der Groß-/Kleinschreibung.)"
