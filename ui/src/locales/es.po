@@ -2163,20 +2163,20 @@ msgstr "Eventos para todo el club para {0} con estado de participación."
 
 #: src/lib/dp/components/forms/ClubForm.svelte
 msgid "BSM Search Term"
-msgstr ""
+msgstr "Término de búsqueda de BSM"
 
 #: src/lib/dp/components/forms/ClubForm.svelte
 msgid "Team Name"
-msgstr ""
+msgstr "Nombre del equipo"
 
 #: src/lib/dp/components/forms/ClubForm.svelte
 msgid "Your club name without the city. Mainly used for decoration."
-msgstr ""
+msgstr "El nombre de tu club sin la ciudad. Se utiliza principalmente con fines decorativos."
 
 #: src/lib/dp/components/forms/ClubForm.svelte
 msgid "Used to filter games when importing event data. Use something you would enter into the BSM search bar to find your club's games (most likely the full club name, case-insensitive.)"
-msgstr ""
+msgstr "Se utiliza para filtrar partidos al importar datos de eventos. Utiliza un término que introducirías en la barra de búsqueda de BSM para encontrar los partidos de tu club (lo más probable es que sea el nombre completo del club, sin distinguir entre mayúsculas y minúsculas)."
 
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Minutes"
-msgstr ""
+msgstr "Minutos"
