@@ -113,7 +113,7 @@
 
 <form class="edit-form" onsubmit={submitForm}>
   <label class="label">
-    Title
+    <span>Title</span>
     <input
       bind:value={form.title}
       class="input"
@@ -124,7 +124,7 @@
   </label>
 
   <label class="label">
-    Date
+    <span>Date</span>
 
     {#if typeof form.service_date === "string"}
       <ISODatePicker
@@ -139,7 +139,7 @@
     <legend class="legend">Duration</legend>
 
     <label class="label">
-      Minutes
+      <span>Minutes</span>
       <input
         autocomplete="off"
         bind:value={form.minutes}
@@ -164,7 +164,7 @@
   </fieldset>
 
   <label class="label">
-    Description
+    <span>Description</span>
     <textarea
       bind:value={form.description}
       class="textarea"
@@ -174,7 +174,7 @@
 
   {#if !form.id && isAdmin}
     <label class="label">
-      Club
+      <span>Club</span>
       <select bind:value={form.club} class="select" name="club" required>
         {#await possibleClubs then clubs}
           {#each clubs as club}
@@ -186,7 +186,7 @@
   {/if}
 
   <label class="label">
-    Board Member
+    <span>Board Member</span>
     <select
       bind:value={form.board_member}
       class="select"
@@ -205,7 +205,7 @@
 
   {#if isAdmin}
     <label class="label">
-      Member
+      <span>Member</span>
       <select bind:value={form.member} class="select" name="member" required>
         {#await allClubMembers then members}
           {#each members as member}

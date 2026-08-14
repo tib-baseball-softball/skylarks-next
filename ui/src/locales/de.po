@@ -275,6 +275,7 @@ msgstr "Zur Kontoseite gehen"
 #: src/lib/dp/components/club/ClubDetailCard.svelte
 #: src/lib/dp/components/forms/ClubForm.svelte
 #: src/lib/dp/components/forms/ClubForm.svelte
+#: src/lib/dp/components/forms/ServiceEntryForm.svelte
 #: src/lib/dp/components/forms/TeamForm.svelte
 #: src/lib/dp/components/team/TeamListTeaser.svelte
 #: src/lib/dp/components/team/TeamTeaserCard.svelte
@@ -795,6 +796,7 @@ msgstr "Neue Ankündigung erstellen"
 #: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
 #: src/lib/dp/components/forms/AnnouncementForm.svelte
 #: src/lib/dp/components/forms/EventForm.svelte
+#: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Title"
 msgstr "Titel"
 
@@ -864,7 +866,6 @@ msgstr "Ende"
 
 #: src/lib/dp/components/forms/EventForm.svelte
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
-#: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Description <0/>"
 msgstr "Beschreibung <0/>"
 
@@ -1021,7 +1022,6 @@ msgid "Series End <0/> <1>No events will be created after this date.</1>"
 msgstr "Serienende <0/> <1>Nach diesem Datum werden keine Ereignisse mehr erstellt.</1>"
 
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
-#: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Title <0/>"
 msgstr "Titel <0/>"
 
@@ -1288,28 +1288,8 @@ msgid "Attendance Dashboard"
 msgstr "Anwesenheits-Dashboard"
 
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
-msgid "Date <0/>"
-msgstr "Datum <0/>"
-
-#: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Duration"
 msgstr "Dauer"
-
-#: src/lib/dp/components/forms/ServiceEntryForm.svelte
-msgid "Minutes <0/>"
-msgstr "Minuten <0/>"
-
-#: src/lib/dp/components/forms/ServiceEntryForm.svelte
-msgid "Club <0/>"
-msgstr "Verein <0/>"
-
-#: src/lib/dp/components/forms/ServiceEntryForm.svelte
-msgid "Board Member <0/>"
-msgstr "Vorstandsmitglied <0/>"
-
-#: src/lib/dp/components/forms/ServiceEntryForm.svelte
-msgid "Member <0/>"
-msgstr "Mitglied <0/>"
 
 #: src/lib/dp/components/player/PlayerDataCard.svelte
 msgid "Not specified"
@@ -1414,6 +1394,7 @@ msgstr "Teammitglieder"
 msgid "Selected Users:"
 msgstr "Ausgewählte Benutzer:"
 
+#: src/lib/dp/components/forms/ServiceEntryForm.svelte
 #: src/lib/dp/components/forms/TeamMembersForm.svelte
 msgid "Member"
 msgstr "Mitglied"
@@ -1646,6 +1627,7 @@ msgid "Last Login"
 msgstr "Letzter Login"
 
 #: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
+#: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Date"
 msgstr "Datum"
 
@@ -1955,11 +1937,13 @@ msgid "Amount"
 msgstr "Anzahl"
 
 #: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
+#: src/lib/dp/components/forms/ServiceEntryForm.svelte
 #: src/lib/dp/components/forms/TeamForm.svelte
 msgid "Description"
 msgstr "Beschreibung"
 
 #: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
+#: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Board Member"
 msgstr "Vorstandsmitglied"
 
@@ -2192,3 +2176,7 @@ msgstr "Teamname ohne Angabe der Stadt. Wird hauptsächlich für Dekoration verw
 #: src/lib/dp/components/forms/ClubForm.svelte
 msgid "Used to filter games when importing event data. Use something you would enter into the BSM search bar to find your club's games (most likely the full club name, case-insensitive.)"
 msgstr "Wird für die Filterung von Spielen beim Importieren von Events verwendet. Verwende etwas, was du in das BSM-Suchfeld eingeben würdest, um deine Vereinsspiele zu finden (meistens der vollständige Vereinsname, ohne Berücksichtigung der Groß-/Kleinschreibung.)"
+
+#: src/lib/dp/components/forms/ServiceEntryForm.svelte
+msgid "Minutes"
+msgstr "Minuten"

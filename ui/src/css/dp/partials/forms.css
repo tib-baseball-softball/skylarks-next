@@ -21,7 +21,8 @@
   }
 
   /* Validation */
-  .label:has(.input[required], .textarea[required]) > span:first-child:after {
+  .label:has(.input[required], .textarea[required], .select[required])
+    > span:first-child:after {
     content: "*";
     color: light-dark(var(--color-primary-500), var(--color-primary-300));
     margin-inline-start: calc(var(--spacing) * 0.5);
