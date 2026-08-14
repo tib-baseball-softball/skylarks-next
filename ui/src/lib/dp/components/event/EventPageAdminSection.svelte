@@ -5,12 +5,13 @@
     Info,
     SquarePen,
   } from "@lucide/svelte";
-  import { goto } from "$app/navigation";
+  import { goto, invalidate } from "$app/navigation";
   import EventForm from "$lib/dp/components/forms/EventForm.svelte";
   import DeleteButton from "$lib/dp/components/utils/DeleteButton.svelte";
   import { client } from "$lib/dp/client.svelte.js";
   import type { ExpandedEvent } from "$lib/dp/types/ExpandedResponse.ts";
   import type { EventsUpdate } from "$lib/dp/types/pb-types.ts";
+  import { Collection } from "$lib/dp/enum/Collection";
 
   interface Props {
     event: ExpandedEvent;
@@ -25,17 +26,18 @@
   async function submitNewGuestPlayer(e: SubmitEvent) {
     e.preventDefault();
 
-    await client.collection("events").update<EventsUpdate>(event.id, {
+    await client.collection(Collection.Events).update<EventsUpdate>(event.id, {
       guests:
         event.guests.length === 0
           ? guestPlayerForm.name
           : event.guests + "," + guestPlayerForm.name,
     });
     guestPlayerForm.name = "";
+    await invalidate("event:single");
   }
 
   async function deleteEvent(id: string) {
-    await client.collection("events").delete(id);
+    await client.collection(Collection.Events).delete(id);
     await goto(`/account/team/${event.team}`);
   }
 </script>
@@ -85,12 +87,13 @@
     <section class="card-section">
       <form class="guest-form" onsubmit={submitNewGuestPlayer}>
         <label class="label">
-          Name
+          <span>Name</span>
           <input
             bind:value={guestPlayerForm.name}
             class="input name-input"
             placeholder="Enter the guest player's name"
             type="text"
+            required
           />
         </label>
         <button

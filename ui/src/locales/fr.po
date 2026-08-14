@@ -439,6 +439,7 @@ msgstr "E-mail"
 #: src/lib/dp/components/club/ClubDetailCard.svelte
 #: src/lib/dp/components/communityservice/CommunityServiceDatatable.svelte
 #: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
+#: src/lib/dp/components/event/EventPageAdminSection.svelte
 #: src/lib/dp/components/forms/ClubForm.svelte
 #: src/lib/dp/components/forms/TeamForm.svelte
 #: src/lib/dp/components/forms/UniformSetForm.svelte
@@ -664,10 +665,6 @@ msgstr "Ajouter un joueur invité"
 #: src/lib/dp/components/event/EventPageAdminSection.svelte
 msgid "Enter the guest player's name"
 msgstr "Entrez le nom du joueur invité"
-
-#: src/lib/dp/components/event/EventPageAdminSection.svelte
-msgid "Name <0/>"
-msgstr "Nom <0/>"
 
 #: src/lib/dp/components/event/EventPageAdminSection.svelte
 #: src/lib/dp/components/forms/AnnouncementForm.svelte

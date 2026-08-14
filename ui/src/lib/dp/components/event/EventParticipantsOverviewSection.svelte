@@ -39,6 +39,7 @@
     await client.collection(Collection.Events).update<EventsUpdate>(event.id, {
       guests: newGuestPlayerList.join(),
     });
+    await invalidate("event:single")
   }
 
   let currentDraggedParticipation: ExpandedParticipation | null = $state(null);
@@ -64,6 +65,7 @@
   async function ondrop(event: DragEvent, type: ParticipationType) {
     event.preventDefault();
 
+    //@wc-ignore
     if (PUBLIC_APPLICATION_CONTEXT !== "Production") {
       console.log(
         "Drop event triggered for participation:",
