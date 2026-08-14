@@ -15,6 +15,7 @@
   import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
   import { invalidate } from "$app/navigation";
   import { participationDTOToExpandedParticipation } from "$lib/dp/types/UserParticipationDTO.ts";
+  import { PUBLIC_APPLICATION_CONTEXT } from "$env/static/public";
 
   interface Props {
     event: ExpandedEvent;
@@ -62,10 +63,13 @@
 
   async function ondrop(event: DragEvent, type: ParticipationType) {
     event.preventDefault();
-    console.log(
-      "Drop event triggered for participation:",
-      event.dataTransfer?.getData("participation"),
-    );
+
+    if (PUBLIC_APPLICATION_CONTEXT !== "Production") {
+      console.log(
+        "Drop event triggered for participation:",
+        event.dataTransfer?.getData("participation"),
+      );
+    }
 
     if (
       currentDraggedParticipation === null ||
