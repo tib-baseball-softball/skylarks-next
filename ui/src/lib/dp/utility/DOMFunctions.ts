@@ -1,5 +1,4 @@
-import {Carta} from "carta-md";
-import DOMPurify from "dompurify";
+import { parse_markdown, init } from "maerkchen";
 
 /**
  * Converts Markdown to HTML using a library.
@@ -8,14 +7,12 @@ import DOMPurify from "dompurify";
  *
  * @param markdown the input value, usually output of an RTE component
  */
-export function markdownToHTML(markdown: string): string {
-  const carta = new Carta({
-    sanitizer: DOMPurify.sanitize,
-  });
-  return carta.renderSSR(markdown);
+export async function markdownToHTML(markdown: string): Promise<string> {
+  await init();
+  return parse_markdown(markdown);
 }
 
 export function stripTags(html: string) {
-  let doc = new DOMParser().parseFromString(html, 'text/html');
+  let doc = new DOMParser().parseFromString(html, "text/html");
   return doc.body.textContent || "";
 }

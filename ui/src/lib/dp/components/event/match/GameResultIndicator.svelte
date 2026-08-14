@@ -1,19 +1,26 @@
 <script lang="ts">
-  import type {Match} from "bsm.js";
-  import {env} from "$env/dynamic/public";
-  import {MatchState} from "$lib/dp/enum/MatchState.ts";
-  import {MatchDecorator} from "$lib/dp/service/MatchDecorator.ts";
+  import type { Match } from "bsm.js";
+  import { MatchState } from "$lib/dp/enum/MatchState.ts";
+  import { MatchDecorator } from "$lib/dp/service/MatchDecorator.ts";
 
   interface Props {
     match: Match;
-    teamName?: string;
+    teamName: string;
   }
 
-  const {match, teamName}: Props = $props();
+  const { match, teamName }: Props = $props();
 
   const matchDecorator = $derived(new MatchDecorator(match));
-  const matchState = $derived(matchDecorator.getMatchState(teamName ?? env.PUBLIC_TEAM_NAME));
+  const matchState = $derived(
+    matchDecorator.getMatchState(teamName),
+  );
 </script>
+
+<!--
+@component shows match outcome from the perspective of a single team
+
+does not really belong in this project anymore, consider soft-deprecated
+-->
 
 <div class="root">
   {#if matchState === MatchState.won}

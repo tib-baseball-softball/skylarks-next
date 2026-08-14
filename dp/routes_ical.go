@@ -53,7 +53,7 @@ func getUserCalendar(app core.App) func(e *core.RequestEvent) error {
 
 		calendar, err := createICalendarFromEventRecords(events, e.App)
 		if err != nil {
-		    app.Logger().Error("Failed to create calendar", "err", err)
+			app.Logger().Error("Failed to create calendar", "err", err)
 			return e.InternalServerError("Failed to create calendar.", "")
 		}
 
@@ -72,11 +72,38 @@ func getUserCalendarEvents(app core.App, user *User, teamID string) ([]*core.Rec
 		if !slices.Contains(user.Teams(), teamID) {
 			return events, &NotAuthorizedError{"Attempting to filter by team not in user teams"}
 		}
-		expressions = append(expressions, dbx.HashExp{"team": teamID})
+		expressions = append(expressions, dbx.NewExp("team = {:teamID}", dbx.Params{"teamID": teamID}))
+
+		expressions = append(expressions,
+			dbx.NewExp(
+				"SELECT 1 FROM json_each(events.additional_teams) WHERE value = {:teamID}",
+				dbx.Params{"teamID": teamID},
+			),
+		)
 	} else {
 		// filter by all user teams
-		for _, userTeam := range user.Teams() {
-			expressions = append(expressions, dbx.HashExp{"team": userTeam})
+		for i, userTeam := range user.Teams() {
+			// get all events where this team is the primary team
+			expressions = append(expressions,
+				dbx.NewExp(
+					fmt.Sprintf("team = {:team%d}", i),
+					dbx.Params{fmt.Sprintf("team%d", i): userTeam}),
+			)
+			// get all events where this team is a secondary team
+			expressions = append(expressions,
+				dbx.NewExp(
+					fmt.Sprintf("SELECT 1 FROM json_each(events.additional_teams) WHERE value = {:team%d}", i),
+					dbx.Params{fmt.Sprintf("team%d", i): userTeam},
+				),
+			)
+		}
+		// also allow all club-wide events
+		for i, userClub := range user.Clubs() {
+			expressions = append(expressions,
+				dbx.NewExp(
+					fmt.Sprintf("club = {:club%d}", i),
+					dbx.Params{fmt.Sprintf("club%d", i): userClub}),
+			)
 		}
 	}
 
@@ -125,7 +152,7 @@ func createICalendarFromEventRecords(events []*core.Record, app core.App) (strin
 		if locationRecord != nil {
 			location := &Location{}
 			location.SetProxyRecord(locationRecord)
-			
+
 			calEvent.SetLocation(location.GetCalendarFormatted())
 		}
 	}

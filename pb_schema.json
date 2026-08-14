@@ -701,16 +701,19 @@
         "type": "text"
       },
       {
-        "convertURLs": false,
+        "autogeneratePattern": "",
         "help": "",
         "hidden": false,
-        "id": "editor4152030090",
-        "maxSize": 0,
+        "id": "text4152030090",
+        "max": 8000,
+        "min": 0,
         "name": "bodytext",
+        "pattern": "",
         "presentable": true,
+        "primaryKey": false,
         "required": true,
         "system": false,
-        "type": "editor"
+        "type": "text"
       },
       {
         "exceptDomains": [],
@@ -934,6 +937,18 @@
         "type": "number"
       },
       {
+        "exceptDomains": null,
+        "help": "",
+        "hidden": false,
+        "id": "email1203275662",
+        "name": "admin_email",
+        "onlyDomains": null,
+        "presentable": false,
+        "required": false,
+        "system": false,
+        "type": "email"
+      },
+      {
         "hidden": false,
         "id": "_pbf_autodate_created_",
         "name": "created",
@@ -961,11 +976,11 @@
   },
   {
     "id": "pbc_533777971",
-    "listRule": "@request.auth.id != \"\" && (@request.auth.club.id ?= event.team.club.id  || @request.auth.club.id ?= announcement.club.id || @request.auth.club.id ?= announcement.team.club.id || @request.auth.teams.id ?= announcement.team.id || announcement.club.admins.id ?= @request.auth.id || announcement.team.admins.id ?= @request.auth.id || event.team.admins.id ?= @request.auth.id || event.team.club.admins.id ?= @request.auth.id)",
-    "viewRule": "@request.auth.id != \"\" && (@request.auth.club.id ?= event.team.club.id  || @request.auth.club.id ?= announcement.club.id || @request.auth.club.id ?= announcement.team.club.id || @request.auth.teams.id ?= announcement.team.id || announcement.club.admins.id ?= @request.auth.id || announcement.team.admins.id ?= @request.auth.id || event.team.admins.id ?= @request.auth.id || event.team.club.admins.id ?= @request.auth.id)",
-    "createRule": "@request.auth.id != \"\" && (@request.auth.club.id ?= event.team.club.id  || @request.auth.club.id ?= announcement.club.id || event.team.club.admins.id ?= @request.auth.id  || event.team.admins.id ?= @request.auth.id || announcement.club.admins.id ?= @request.auth.id || announcement.team.admins.id ?= @request.auth.id)",
-    "updateRule": "@request.auth.id != \"\" && ((@request.body.event:isset = false &&  @request.body.announcement:isset = false && user.id = @request.auth.id) || @request.auth.club.id ?= @request.body.event.team.club.id  || @request.auth.club.id ?= @request.body.announcement.club.id || @request.body.event.team.club.admins.id ?= @request.auth.id  || @request.body.event.team.admins.id ?= @request.auth.id || @request.body.announcement.club.admins.id ?= @request.auth.id || @request.body.announcement.team.admins.id ?= @request.auth.id)",
-    "deleteRule": "@request.auth.id != \"\" && (user.id = @request.auth.id || event.team.admins.id ?= @request.auth.id || event.team.club.admins ?= @request.auth.id || announcement.club.admins.id ?= @request.auth.id || announcement.team.admins.id ?= @request.auth.id)",
+    "listRule": "@request.auth.id != \"\" \n&& \n(\n@request.auth.club.id ?= event.team.club.id\n|| @request.auth.club.id ?= event.club.id\n|| @request.auth.club.id ?= announcement.club.id \n|| @request.auth.club.id ?= announcement.team.club.id \n|| @request.auth.teams.id ?= announcement.team.id \n|| announcement.club.admins.id ?= @request.auth.id \n|| announcement.team.admins.id ?= @request.auth.id \n|| event.team.admins.id ?= @request.auth.id \n|| event.team.club.admins.id ?= @request.auth.id\n)",
+    "viewRule": "@request.auth.id != \"\" \n&& \n(\n@request.auth.club.id ?= event.team.club.id \n|| @request.auth.club.id ?= event.club.id\n|| @request.auth.club.id ?= announcement.club.id \n|| @request.auth.club.id ?= announcement.team.club.id \n|| @request.auth.teams.id ?= announcement.team.id \n|| announcement.club.admins.id ?= @request.auth.id \n|| announcement.team.admins.id ?= @request.auth.id \n|| event.team.admins.id ?= @request.auth.id \n|| event.team.club.admins.id ?= @request.auth.id\n)",
+    "createRule": "@request.auth.id != \"\" \n&& \nuser.id = @request.auth.id // admins can edit, but not create comments for others\n&&\n(\n@request.auth.club.id ?= event.team.club.id\n|| @request.auth.club.id ?= event.club.id\n|| @request.auth.club.id ?= event.additional_teams.club.id\n|| @request.auth.club.id ?= announcement.club.id \n|| event.team.club.admins.id ?= @request.auth.id  \n|| event.team.admins.id ?= @request.auth.id \n|| event.club.admins.id ?= @request.auth.id\n|| event.additional_teams.admins.id ?= @request.auth.id\n|| announcement.club.admins.id ?= @request.auth.id \n|| announcement.team.admins.id ?= @request.auth.id\n)",
+    "updateRule": "@request.auth.id != \"\" \n&& \n(\n(@request.body.event:isset = false && @request.body.announcement:isset = false && user.id = @request.auth.id) \n|| @request.auth.club.id ?= @request.body.event.team.club.id\n|| @request.auth.club.id ?= @request.body.event.club.id\n|| @request.auth.teams.id ?= @request.body.event.team.id\n|| @request.auth.teams.id ?= @request.body.event.additional_teams.id  \n|| @request.auth.club.id ?= @request.body.announcement.club.id \n|| @request.body.event.team.club.admins.id ?= @request.auth.id  \n|| @request.body.event.team.admins.id ?= @request.auth.id \n|| @request.body.announcement.club.admins.id ?= @request.auth.id \n|| @request.body.announcement.team.admins.id ?= @request.auth.id\n)",
+    "deleteRule": "@request.auth.id != \"\" \n&& \n(\nuser.id = @request.auth.id \n|| event.club.admins.id ?= @request.auth.id\n|| event.team.admins.id ?= @request.auth.id \n|| event.team.club.admins ?= @request.auth.id \n|| event.additional_teams.admins.id ?= @request.auth.id\n|| announcement.club.admins.id ?= @request.auth.id \n|| announcement.team.admins.id ?= @request.auth.id\n)",
     "name": "comments",
     "type": "base",
     "fields": [
@@ -1069,11 +1084,11 @@
   },
   {
     "id": "zyst8ardf4onbwz",
-    "listRule": "@request.auth.id != \"\" && \n(team.id ?~ @request.auth.teams.id || team.admins ?~ @request.auth.id || team.club.admins ?~ @request.auth.id)",
-    "viewRule": "@request.auth.id != \"\" && \n(team.id ?~ @request.auth.teams.id || team.admins ?~ @request.auth.id || team.club.admins ?~ @request.auth.id)",
-    "createRule": "@request.auth.id != \"\" && \n(team.admins ?~ @request.auth.id || team.club.admins ?~ @request.auth.id)",
-    "updateRule": "@request.auth.id != \"\" && \n(team.admins ?~ @request.auth.id || team.club.admins ?~ @request.auth.id)",
-    "deleteRule": "@request.auth.id != \"\" && \n(team.admins ?~ @request.auth.id || team.club.admins ?~ @request.auth.id)",
+    "listRule": "@request.auth.id != \"\"\n&&\n(\nteam.id ?= @request.auth.teams.id\n|| club.id ?= @request.auth.club.id\n|| additional_teams.id ?= @request.auth.teams.id\n|| team.admins.id ?= @request.auth.id \n|| team.club.admins.id ?= @request.auth.id\n|| club.admins.id ?= @request.auth.id\n|| additional_teams.admins.id ?= @request.auth.id\n|| additional_teams.club.admins.id ?= @request.auth.id\n)",
+    "viewRule": "@request.auth.id != \"\"\n&&\n(\nteam.id ?= @request.auth.teams.id\n|| club.id ?= @request.auth.club.id\n|| additional_teams.id ?= @request.auth.teams.id\n|| team.admins.id ?= @request.auth.id \n|| team.club.admins.id ?= @request.auth.id\n|| club.admins.id ?= @request.auth.id\n|| additional_teams.admins.id ?= @request.auth.id\n|| additional_teams.club.admins.id ?= @request.auth.id\n)",
+    "createRule": "@request.auth.id != \"\"\n&&\n(\nteam.admins.id ?= @request.auth.id \n|| team.club.admins.id ?= @request.auth.id\n|| club.admins.id ?= @request.auth.id\n|| additional_teams.admins.id ?= @request.auth.id\n|| additional_teams.club.admins.id ?= @request.auth.id\n)",
+    "updateRule": "@request.auth.id != \"\"\n&&\n(\nteam.admins.id ?= @request.auth.id \n|| team.club.admins.id ?= @request.auth.id\n|| club.admins.id ?= @request.auth.id\n|| additional_teams.admins.id ?= @request.auth.id\n|| additional_teams.club.admins.id ?= @request.auth.id\n)",
+    "deleteRule": "@request.auth.id != \"\"\n&&\n(\nteam.admins.id ?= @request.auth.id \n|| team.club.admins.id ?= @request.auth.id\n|| club.admins.id ?= @request.auth.id\n|| additional_teams.admins.id ?= @request.auth.id\n|| additional_teams.club.admins.id ?= @request.auth.id\n)",
     "name": "events",
     "type": "base",
     "fields": [
@@ -1211,7 +1226,35 @@
         "minSelect": 0,
         "name": "team",
         "presentable": false,
-        "required": true,
+        "required": false,
+        "system": false,
+        "type": "relation"
+      },
+      {
+        "cascadeDelete": false,
+        "collectionId": "z806hmy5um3qy5x",
+        "help": "event is valid for a whole club, not just a single team",
+        "hidden": false,
+        "id": "relation3102619762",
+        "maxSelect": 0,
+        "minSelect": 0,
+        "name": "club",
+        "presentable": false,
+        "required": false,
+        "system": false,
+        "type": "relation"
+      },
+      {
+        "cascadeDelete": false,
+        "collectionId": "fltkvrsbbvzf9cf",
+        "help": "additional teams that this event is valid for beyond the main team",
+        "hidden": false,
+        "id": "relation3929037161",
+        "maxSelect": 999,
+        "minSelect": 0,
+        "name": "additional_teams",
+        "presentable": false,
+        "required": false,
         "system": false,
         "type": "relation"
       },
@@ -1301,17 +1344,26 @@
       }
     ],
     "indexes": [
-      "CREATE INDEX `idx_zuKuzAF` ON `events` (\n  `starttime`,\n  `type`,\n  `title`,\n  `bsm_id`,\n  `meetingtime`,\n  `team`\n)"
+      "CREATE INDEX `idx_zuKuzAF` ON `events` (`bsm_id`)",
+      "CREATE INDEX `idx_8ixkwcxr4q` ON `events` (`type`)",
+      "CREATE INDEX `idx_miocwua0bp` ON `events` (`team`)",
+      "CREATE INDEX `idx_snxc3kufmb` ON `events` (`series`)",
+      "CREATE INDEX `idx_0c501exuc1` ON `events` (`location`)",
+      "CREATE INDEX `idx_38rk28bmkd` ON `events` (\n  `type`,\n  `team`\n)",
+      "CREATE INDEX `idx_vizqfueccq` ON `events` (`club`)",
+      "CREATE INDEX `idx_nfoliwl5a7` ON `events` (`additional_teams`)",
+      "CREATE INDEX `idx_nrf9dfdobe` ON `events` (\n  `type`,\n  `club`\n)",
+      "CREATE INDEX `idx_sffndaod6n` ON `events` (\n  `type`,\n  `additional_teams`\n)"
     ],
     "system": false
   },
   {
     "id": "pbc_29523945",
-    "listRule": "@request.auth.id != \"\" && \n(team.id ?~ @request.auth.teams.id || team.admins ?~ @request.auth.id || team.club.admins ?~ @request.auth.id)",
-    "viewRule": "@request.auth.id != \"\" && \n(team.id ?~ @request.auth.teams.id || team.admins ?~ @request.auth.id || team.club.admins ?~ @request.auth.id)",
-    "createRule": "@request.auth.id != \"\" && \n(team.admins ?~ @request.auth.id || team.club.admins ?~ @request.auth.id)",
-    "updateRule": "@request.auth.id != \"\" && \n(team.admins ?~ @request.auth.id || team.club.admins ?~ @request.auth.id)",
-    "deleteRule": "@request.auth.id != \"\" && \n(team.admins ?~ @request.auth.id || team.club.admins ?~ @request.auth.id)",
+    "listRule": "@request.auth.id != \"\" &&\n(\n@request.auth.teams.id ?= team.id\n|| @request.auth.teams.id ?= additional_teams.id\n|| team.admins.id ?= @request.auth.id \n|| team.club.admins.id ?= @request.auth.id\n|| additional_teams.admins.id ?= @request.auth.id\n|| additional_teams.club.admins.id ?= @request.auth.id\n)",
+    "viewRule": "@request.auth.id != \"\" &&\n(\n@request.auth.teams.id ?= team.id\n|| @request.auth.teams.id ?= additional_teams.id\n|| team.admins.id ?= @request.auth.id \n|| team.club.admins.id ?= @request.auth.id\n|| additional_teams.admins.id ?= @request.auth.id\n|| additional_teams.club.admins.id ?= @request.auth.id\n)",
+    "createRule": "@request.auth.id != \"\" && \n(\nteam.admins.id ?= @request.auth.id\n|| team.club.admins.id ?= @request.auth.id\n|| additional_teams.admins.id ?= @request.auth.id\n|| additional_teams.club.admins.id ?= @request.auth.id\n)",
+    "updateRule": "@request.auth.id != \"\" && \n(\nteam.admins.id ?= @request.auth.id \n|| team.club.admins.id ?= @request.auth.id\n|| additional_teams.admins.id ?= @request.auth.id\n|| additional_teams.club.admins.id ?= @request.auth.id\n)",
+    "deleteRule": "@request.auth.id != \"\" && \n(\nteam.admins.id ?= @request.auth.id \n|| team.club.admins.id ?= @request.auth.id\n|| additional_teams.admins.id ?= @request.auth.id\n|| additional_teams.club.admins.id ?= @request.auth.id\n)",
     "name": "eventseries",
     "type": "base",
     "fields": [
@@ -1397,6 +1449,20 @@
         "type": "relation"
       },
       {
+        "cascadeDelete": false,
+        "collectionId": "fltkvrsbbvzf9cf",
+        "help": "",
+        "hidden": false,
+        "id": "relation3929037161",
+        "maxSelect": 10,
+        "minSelect": 0,
+        "name": "additional_teams",
+        "presentable": false,
+        "required": false,
+        "system": false,
+        "type": "relation"
+      },
+      {
         "convertURLs": false,
         "help": "",
         "hidden": false,
@@ -1458,7 +1524,8 @@
     ],
     "indexes": [
       "CREATE INDEX `idx_QVU4dUhywn` ON `eventseries` (`team`)",
-      "CREATE INDEX `idx_JwbMaKE47A` ON `eventseries` (`series_end`)"
+      "CREATE INDEX `idx_JwbMaKE47A` ON `eventseries` (`series_end`)",
+      "CREATE INDEX `idx_w2tzr4um8d` ON `eventseries` (`additional_teams`)"
     ],
     "system": false
   },
@@ -1890,11 +1957,11 @@
   },
   {
     "id": "ngighvrbraklj58",
-    "listRule": "@request.auth.id != \"\" && event.team.id ?= @request.auth.teams.id",
-    "viewRule": "@request.auth.id != \"\" && event.team.id ?= @request.auth.teams.id",
-    "createRule": "@request.auth.id != \"\" && user.teams.id ?= event.team.id && (user.id = @request.auth.id || event.team.admins.id ?= @request.auth.id || event.team.club.admins.id ?= @request.auth.id) ",
-    "updateRule": "@request.auth.id != \"\" && (user.id = @request.auth.id || event.team.admins.id ?= @request.auth.id || event.team.club.admins.id ?= @request.auth.id)",
-    "deleteRule": "@request.auth.id != \"\" && (event.team.admins.id ?= @request.auth.id || event.team.club.admins.id ?= @request.auth.id)",
+    "listRule": "@request.auth.id != \"\" \n&&\n(\nevent.team.id ?= @request.auth.teams.id\n|| event.club.id ?= @request.auth.club.id\n|| event.additional_teams.id ?= @request.auth.teams.id\n)",
+    "viewRule": "@request.auth.id != \"\" \n&&\n(\nevent.team.id ?= @request.auth.teams.id\n|| event.club.id ?= @request.auth.club.id\n|| event.additional_teams.id ?= @request.auth.teams.id\n)",
+    "createRule": "@request.auth.id != \"\" \n&& \n(\nuser.teams.id ?= event.team.id\n|| user.teams.id ?= event.additional_teams.id\n|| user.club.id ?= event.club.id\n)\n&& \n(\nuser.id = @request.auth.id \n|| event.team.admins.id ?= @request.auth.id \n|| event.team.club.admins.id ?= @request.auth.id\n|| event.club.admins.id ?= @request.auth.id\n|| event.additional_teams.admins.id ?= @request.auth.id\n) ",
+    "updateRule": "@request.auth.id != \"\" \n&& \n(\nuser.teams.id ?= event.team.id\n|| user.teams.id ?= event.additional_teams.id\n|| user.club.id ?= event.club.id\n)\n&& \n(\nuser.id = @request.auth.id \n|| event.team.admins.id ?= @request.auth.id \n|| event.team.club.admins.id ?= @request.auth.id\n|| event.club.admins.id ?= @request.auth.id\n|| event.additional_teams.admins.id ?= @request.auth.id\n) ",
+    "deleteRule": "@request.auth.id != \"\" \n&& \n(\nevent.team.admins.id ?= @request.auth.id \n|| event.club.admins.id ?= @request.auth.id\n|| event.additional_teams.admins.id ?= @request.auth.id\n|| event.team.club.admins.id ?= @request.auth.id\n)",
     "name": "participations",
     "type": "base",
     "fields": [
@@ -2368,16 +2435,19 @@
         "type": "relation"
       },
       {
-        "convertURLs": false,
+        "autogeneratePattern": "",
         "help": "",
         "hidden": false,
-        "id": "vfsytols",
-        "maxSize": 0,
+        "id": "text1843675174",
+        "max": 0,
+        "min": 0,
         "name": "description",
+        "pattern": "",
         "presentable": false,
+        "primaryKey": false,
         "required": false,
         "system": false,
-        "type": "editor"
+        "type": "text"
       },
       {
         "cascadeDelete": false,

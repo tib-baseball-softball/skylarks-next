@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {House, Settings, Shield, User, Users} from "lucide-svelte";
+  import {House, Settings, Shield, User, Users} from "@lucide/svelte";
   import {page} from "$app/state";
 
   interface Props {

@@ -90,7 +90,7 @@ func TestGenerateSeriesEvents_WeeklyAcrossSpringDST(t *testing.T) {
 
 	series := buildSeriesRecord(t, "Spring practice", start, end, 7, 90)
 
-	events, genErr := generateSeriesEvents(app, series.Record)
+	events, genErr := generateSeriesEvents(app, series.Record, CreateEventSeriesMode, CreateEventsAction)
 	if genErr != nil {
 		t.Fatalf("generateSeriesEvents failed: %v", genErr)
 	}
@@ -125,7 +125,7 @@ func TestGenerateSeriesEvents_WeeklyAcrossAutumnDST(t *testing.T) {
 
 	series := buildSeriesRecord(t, "Autumn practice", start, end, 7, 60)
 
-	events, genErr := generateSeriesEvents(app, series.Record)
+	events, genErr := generateSeriesEvents(app, series.Record, CreateEventSeriesMode, CreateEventsAction)
 	if genErr != nil {
 		t.Fatalf("generateSeriesEvents failed: %v", genErr)
 	}
@@ -159,7 +159,7 @@ func TestGenerateSeriesEvents_DailyShortInterval(t *testing.T) {
 
 	series := buildSeriesRecord(t, "Intensive camp", start, end, 1, 120)
 
-	events, genErr := generateSeriesEvents(app, series.Record)
+	events, genErr := generateSeriesEvents(app, series.Record, CreateEventSeriesMode, CreateEventsAction)
 	if genErr != nil {
 		t.Fatalf("generateSeriesEvents failed: %v", genErr)
 	}

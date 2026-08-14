@@ -1,11 +1,9 @@
 <script lang="ts">
-  import {goto} from "$app/navigation";
-  import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
-  import {closeModal} from "$lib/dp/utility/closeModal.ts";
-  import {authSettings, client} from "../client.svelte.js";
+  import { goto } from "$app/navigation";
+  import type { CustomAuthModel } from "$lib/dp/types/ExpandedResponse.ts";
+  import { authSettings, client } from "../client.svelte.js";
 
   async function logout() {
-    closeModal();
     authSettings.record = null;
     client.authStore.clear();
     await goto("/login");
@@ -18,8 +16,14 @@
   <div class="row header-row">
     <p>Logged in as:</p>
 
-    <a class="badge preset-filled-primary-500" href="/account" onclick={closeModal}>
-      <samp>{`${authRecord?.first_name ?? ""} ${authRecord?.last_name ?? ""}`}</samp>
+    <a
+      class="badge preset-filled-primary-500"
+      href="/account"
+      data-dialog-close
+    >
+      <samp
+        >{`${authRecord?.first_name ?? ""} ${authRecord?.last_name ?? ""}`}</samp
+      >
     </a>
   </div>
 
@@ -28,14 +32,20 @@
 
     <div class="chips">
       {#each authRecord?.expand?.club as club}
-        <a href="/account/clubs/{club.id}" class="badge preset-filled-tertiary-500" onclick={closeModal}>
+        <a
+          href="/account/clubs/{club.id}"
+          class="badge preset-filled-tertiary-500"
+          data-dialog-close
+        >
           {club.name}
         </a>
       {/each}
     </div>
   </div>
 
-  <button class="btn preset-tonal-primary logout-btn" onclick={logout}>Log out</button>
+  <button class="btn preset-tonal-primary logout-btn" onclick={logout}
+    >Log out</button
+  >
 </article>
 
 <style>

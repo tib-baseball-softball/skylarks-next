@@ -1,11 +1,11 @@
 @import "overrides/presets.css";
 
 :root {
-  --text-scaling: 1;
+  --text-scaling: 0.92;
   --base-font-color: var(--color-surface-950);
   --base-font-color-dark: var(--color-surface-50);
   --base-font-family: system-ui, sans-serif;
-  --base-font-size: inherit;
+  --base-font-size: var(--text-base);
   --base-line-height: inherit;
   --base-font-weight: normal;
   --base-font-style: normal;

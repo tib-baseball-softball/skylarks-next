@@ -1,5 +1,5 @@
 <script lang="ts">
-  interface Option<T extends string> {
+  export interface TabSetOption<T extends string> {
     label?: string;
     value: T;
   }
@@ -7,12 +7,14 @@
   interface Props<T extends string> {
     label?: string;
     name: string;
-    options: Option<T>[] | T[];
+    options: TabSetOption<T>[] | T[];
     value: T;
     classes?: string;
     listClass?: string;
     triggerClass?: string;
     required?: boolean;
+    hideLabel?: boolean;
+    onValueChange?: () => void;
   }
 
   let {
@@ -21,36 +23,47 @@
     options,
     value = $bindable(),
     classes = "",
-    listClass = "tabs-list input",
+    listClass = "",
     triggerClass = "tabs-trigger btn",
     required = false,
+    hideLabel = false,
+    onValueChange,
   }: Props<string> = $props();
 
-  function toOptions(arr: Option<string>[] | string[]): Option<string>[] {
+  function toOptions(
+    arr: TabSetOption<string>[] | string[],
+  ): TabSetOption<string>[] {
     return (arr as any[]).map((o) =>
-      typeof o === "string" ? {value: o, label: o.charAt(0).toUpperCase() + o.slice(1)} : o
+      typeof o === "string"
+        ? { value: o, label: o.charAt(0).toUpperCase() + o.slice(1) }
+        : o,
     );
   }
 
-  const opts: Option<string>[] = $derived(toOptions(options));
+  const opts: TabSetOption<string>[] = $derived(toOptions(options));
 </script>
 
-{#if label}
-  <span class="block" data-required="{required}">{label}</span>
-{/if}
-<fieldset class={listClass + (classes)}>
-  {#each opts as opt}
-    <label class={[triggerClass, value === opt.value && "preset-filled"]}>
-      <input
-        type="radio"
-        class="hidden-radio"
-        name={name}
-        bind:group={value}
-        value={opt.value}
-      />
-      {opt.label}
-    </label>
-  {/each}
+<fieldset class={["fieldset", listClass, classes]}>
+  {#if label}
+    <legend class={[hideLabel && "sr-only", "legend"]} data-required={required}>
+      {label}
+    </legend>
+  {/if}
+  <div class="input tabs-list">
+    {#each opts as opt}
+      <label class={[triggerClass, value === opt.value && "preset-filled"]}>
+        <input
+          onchange={onValueChange}
+          type="radio"
+          class="sr-only"
+          {name}
+          bind:group={value}
+          value={opt.value}
+        />
+        {opt.label}
+      </label>
+    {/each}
+  </div>
 </fieldset>
 
 <style>
@@ -61,7 +74,7 @@
     margin-inline-start: calc(var(--spacing) * 0.5);
   }
 
-  .hidden-radio {
-    display: none;
+  .tabs-list {
+    margin-block-start: var(--spacing);
   }
 </style>

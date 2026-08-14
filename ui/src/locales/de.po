@@ -275,6 +275,7 @@ msgstr "Zur Kontoseite gehen"
 #: src/lib/dp/components/club/ClubDetailCard.svelte
 #: src/lib/dp/components/forms/ClubForm.svelte
 #: src/lib/dp/components/forms/ClubForm.svelte
+#: src/lib/dp/components/forms/ServiceEntryForm.svelte
 #: src/lib/dp/components/forms/TeamForm.svelte
 #: src/lib/dp/components/team/TeamListTeaser.svelte
 #: src/lib/dp/components/team/TeamTeaserCard.svelte
@@ -295,11 +296,11 @@ msgstr "Teams"
 msgid "Ballpark"
 msgstr "Ballpark"
 
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+#: src/lib/dp/components/event/EventFilters.svelte
 msgid "Next"
 msgstr "Nächster"
 
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+#: src/lib/dp/components/event/EventFilters.svelte
 msgid "All"
 msgstr "Alle"
 
@@ -438,6 +439,7 @@ msgstr "E-Mail"
 #: src/lib/dp/components/club/ClubDetailCard.svelte
 #: src/lib/dp/components/communityservice/CommunityServiceDatatable.svelte
 #: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
+#: src/lib/dp/components/event/EventPageAdminSection.svelte
 #: src/lib/dp/components/forms/ClubForm.svelte
 #: src/lib/dp/components/forms/TeamForm.svelte
 #: src/lib/dp/components/forms/UniformSetForm.svelte
@@ -525,8 +527,8 @@ msgstr "{0} Minuten"
 msgid "Ongoing"
 msgstr "Laufend"
 
+#: src/lib/dp/components/event/EventFilters.svelte
 #: src/lib/dp/components/eventseries/EventSeriesListItem.svelte
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Past"
 msgstr "Vergangen"
 
@@ -592,13 +594,13 @@ msgstr "Kein Standort angegeben."
 msgid "<0/> Cancelled"
 msgstr "<0/> Abgesagt"
 
+#: src/lib/dp/components/event/EventFilters.svelte
 #: src/lib/dp/components/event/EventTypeBadge.svelte
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Game"
 msgstr "Spiel"
 
+#: src/lib/dp/components/event/EventFilters.svelte
 #: src/lib/dp/components/event/EventTypeBadge.svelte
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Practice"
 msgstr "Training"
 
@@ -663,10 +665,6 @@ msgstr "Gastspieler hinzufügen"
 #: src/lib/dp/components/event/EventPageAdminSection.svelte
 msgid "Enter the guest player's name"
 msgstr "Namen des Gastspielers eingeben"
-
-#: src/lib/dp/components/event/EventPageAdminSection.svelte
-msgid "Name <0/>"
-msgstr "Name <0/>"
 
 #: src/lib/dp/components/event/EventPageAdminSection.svelte
 #: src/lib/dp/components/forms/AnnouncementForm.svelte
@@ -795,6 +793,7 @@ msgstr "Neue Ankündigung erstellen"
 #: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
 #: src/lib/dp/components/forms/AnnouncementForm.svelte
 #: src/lib/dp/components/forms/EventForm.svelte
+#: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Title"
 msgstr "Titel"
 
@@ -864,8 +863,6 @@ msgstr "Ende"
 
 #: src/lib/dp/components/forms/EventForm.svelte
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
-#: src/lib/dp/components/forms/ServiceEntryForm.svelte
-#: src/lib/dp/components/forms/TeamForm.svelte
 msgid "Description <0/>"
 msgstr "Beschreibung <0/>"
 
@@ -879,8 +876,9 @@ msgstr "Kein zusätzlicher Name"
 msgid "Location <0>None</0>"
 msgstr "Ort <0>Kein</0>"
 
+#: src/lib/dp/components/event/EventFilters.svelte
+#: src/lib/dp/components/event/EventFilters.svelte
 #: src/lib/dp/components/forms/EventForm.svelte
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
 msgid "Type"
 msgstr "Typ"
 
@@ -1009,10 +1007,6 @@ msgid "Create new Event Series for {0}"
 msgstr "Neue Ereignisserie für {0} erstellen"
 
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
-msgid "When editing an event series, only select fields can be changed because editing past events would affect participation statistics. If you want to change a long-running practice series, end the previous one by setting the end date accordingly and create a new series."
-msgstr "Beim Bearbeiten einer Veranstaltungsreihe können nur bestimmte Felder geändert werden, da die Bearbeitung vergangener Veranstaltungen die Teilnehmerstatistiken beeinflussen würde. Wenn du eine längere Serie ändern möchtest, beende die vorherige, indem du das Enddatum entsprechend festlegst und erstelle eine neue Serie."
-
-#: src/lib/dp/components/forms/EventSeriesForm.svelte
 msgid "Series First Occurrence <0/>"
 msgstr "Erstes Auftreten der Serie <0/>"
 
@@ -1025,7 +1019,6 @@ msgid "Series End <0/> <1>No events will be created after this date.</1>"
 msgstr "Serienende <0/> <1>Nach diesem Datum werden keine Ereignisse mehr erstellt.</1>"
 
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
-#: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Title <0/>"
 msgstr "Titel <0/>"
 
@@ -1198,6 +1191,8 @@ msgstr "Ausgewählte Datei:"
 msgid "{0} ({1} bytes)"
 msgstr "{0} ({1} Bytes)"
 
+#: src/lib/dp/components/forms/EventForm.svelte
+#: src/lib/dp/components/forms/EventSeriesForm.svelte
 #: src/lib/dp/components/forms/TeamForm.svelte
 #: src/lib/dp/components/forms/TeamForm.svelte
 #: src/lib/dp/components/team/TeamAdminSection.svelte
@@ -1290,28 +1285,8 @@ msgid "Attendance Dashboard"
 msgstr "Anwesenheits-Dashboard"
 
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
-msgid "Date <0/>"
-msgstr "Datum <0/>"
-
-#: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Duration"
 msgstr "Dauer"
-
-#: src/lib/dp/components/forms/ServiceEntryForm.svelte
-msgid "Minutes <0/>"
-msgstr "Minuten <0/>"
-
-#: src/lib/dp/components/forms/ServiceEntryForm.svelte
-msgid "Club <0/>"
-msgstr "Verein <0/>"
-
-#: src/lib/dp/components/forms/ServiceEntryForm.svelte
-msgid "Board Member <0/>"
-msgstr "Vorstandsmitglied <0/>"
-
-#: src/lib/dp/components/forms/ServiceEntryForm.svelte
-msgid "Member <0/>"
-msgstr "Mitglied <0/>"
 
 #: src/lib/dp/components/player/PlayerDataCard.svelte
 msgid "Not specified"
@@ -1330,7 +1305,6 @@ msgid "Positions"
 msgstr "Positionen"
 
 #: src/lib/dp/components/player/PlayerHeaderSection.svelte
-#: src/lib/dp/components/player/PlayerRow.svelte
 msgid "Player fallback"
 msgstr "Spieler-Fallback"
 
@@ -1417,22 +1391,14 @@ msgstr "Teammitglieder"
 msgid "Selected Users:"
 msgstr "Ausgewählte Benutzer:"
 
+#: src/lib/dp/components/forms/ServiceEntryForm.svelte
 #: src/lib/dp/components/forms/TeamMembersForm.svelte
 msgid "Member"
 msgstr "Mitglied"
 
-#: src/lib/dp/components/player/TeamPlayerSection.svelte
-msgid "Visualization"
-msgstr "Visualisierung"
-
-#: src/lib/dp/components/player/TeamPlayerSection.svelte
 #: src/lib/dp/components/team/TeamMemberDatatable.svelte
 msgid "Number"
 msgstr "Trikotnummer"
-
-#: src/lib/dp/components/player/TeamPlayerSection.svelte
-msgid "Image"
-msgstr "Profilbild"
 
 #. 0: season
 #: src/lib/dp/components/stats/AttendanceTotalStatsBlock.svelte
@@ -1658,6 +1624,7 @@ msgid "Last Login"
 msgstr "Letzter Login"
 
 #: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
+#: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Date"
 msgstr "Datum"
 
@@ -1700,7 +1667,7 @@ msgstr "F"
 msgid "TBD"
 msgstr "TBD"
 
-#: src/lib/dp/components/modal/sheet/sheet-content.svelte
+#: src/lib/dp/components/modal/Sheet.svelte
 msgid "Close"
 msgstr "Schließen"
 
@@ -1912,23 +1879,25 @@ msgstr "Teambeschreibung"
 msgid "Team Events"
 msgstr "Team-Events"
 
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+#: src/lib/dp/components/event/EventFilters.svelte
+#: src/lib/dp/components/event/EventFilters.svelte
 msgid "Timeframe"
 msgstr "Zeitraum"
 
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+#: src/lib/dp/components/event/EventFilters.svelte
+#: src/lib/dp/components/event/EventFilters.svelte
 msgid "Sort"
 msgstr "Sortieren"
 
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+#: src/lib/dp/components/event/EventFilters.svelte
 msgid "Ascending"
 msgstr "Aufsteigend"
 
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+#: src/lib/dp/components/event/EventFilters.svelte
 msgid "Descending"
 msgstr "Absteigend"
 
-#: src/routes/(dp)/(protected)/account/team/[id]/+page.svelte
+#: src/lib/dp/components/event/EventFilters.svelte
 msgid "Other"
 msgstr "Sonstiges"
 
@@ -1965,10 +1934,13 @@ msgid "Amount"
 msgstr "Anzahl"
 
 #: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
+#: src/lib/dp/components/forms/ServiceEntryForm.svelte
+#: src/lib/dp/components/forms/TeamForm.svelte
 msgid "Description"
 msgstr "Beschreibung"
 
 #: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
+#: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Board Member"
 msgstr "Vorstandsmitglied"
 
@@ -2072,3 +2044,136 @@ msgstr "Nutzungsbedingungen"
 #: src/routes/(dp)/(protected)/account/team/+page.svelte
 msgid "Team list page, displaying the user's teams and allowing them to manage them."
 msgstr "Teamliste, die die Benutzer-Teams anzeigt und es ihnen ermöglicht, sie zu verwalten."
+
+#: src/lib/dp/components/forms/EventSeriesForm.svelte
+msgid "Update all events"
+msgstr "Alle Events aktualisieren"
+
+#: src/lib/dp/components/forms/EventSeriesForm.svelte
+msgid "Choose whether to change all existing events in the series or just future ones. For more severe changes (change from winter to summer), it is advisable to end the previous series instead by setting the end date accordingly, then create a new series."
+msgstr "Alle vorhandenen Events in der Serie ändern oder nur die zukünftigen. Für umfassendere Änderungen (z.B. Sommer zu Wintertraining) ist es ratsam, die vorherige Serie zu beenden, indem ein Enddatum eingetragen wird, und dann eine neue Serie zu erstellen."
+
+#: src/lib/dp/components/forms/EventSeriesForm.svelte
+msgid "Update future events"
+msgstr "Zukünftige Events aktualisieren"
+
+#: src/lib/dp/components/navigation/NavigationSheet.svelte
+msgid "Navigation"
+msgstr "Navigation"
+
+#: src/lib/dp/components/meta/LocalePicker.svelte
+msgid "App Language:"
+msgstr "Sprache der App"
+
+#: src/lib/dp/components/meta/LocalePicker.svelte
+msgid "English"
+msgstr "Englisch"
+
+#: src/lib/dp/components/meta/LocalePicker.svelte
+msgid "German"
+msgstr "Deutsch"
+
+#: src/lib/dp/components/meta/LocalePicker.svelte
+msgid "French"
+msgstr "Französisch"
+
+#: src/lib/dp/components/meta/LocalePicker.svelte
+msgid "Spanish"
+msgstr "Spanisch"
+
+#: src/lib/dp/components/meta/LocalePicker.svelte
+msgid "Polish"
+msgstr "Polnisch"
+
+#: src/routes/(tib)/easteregg/+page.svelte
+msgid "Surprise"
+msgstr "Überraschung"
+
+#: src/routes/(tib)/easteregg/+page.svelte
+msgid "None yet."
+msgstr "Bisher noch keine."
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Select login form mode"
+msgstr "Wähle den Modus des Anmeldeformulars"
+
+#. 0: event.title
+#: src/lib/dp/components/event/EventParticipationSection.svelte
+msgid "set your participation to \"out\" for \"{0}\""
+msgstr "Setze deine Teilnahme für \"{0}\" auf \"nicht dabei\""
+
+#. 0: event.title
+#: src/lib/dp/components/event/EventParticipationSection.svelte
+msgid "set your participation to \"in\" for \"{0}\""
+msgstr "Setze deine Teilnahme für \"{0}\" auf \"dabei\""
+
+#. 0: event.title
+#: src/lib/dp/components/event/EventParticipationSection.svelte
+msgid "set your participation to \"maybe\" for \"{0}\""
+msgstr "Setze deine Teilnahme für \"{0}\" auf \"vielleicht\""
+
+#: src/lib/dp/utility/Paginator.svelte
+msgid "Page"
+msgstr "Seite"
+
+#: src/lib/dp/components/forms/EventForm.svelte
+#: src/lib/dp/components/forms/EventSeriesForm.svelte
+msgid "Additional Teams"
+msgstr "Weitere Teams"
+
+#: src/routes/(dp)/(protected)/account/clubs/[club]/+page.svelte
+msgid "Next Club Events"
+msgstr "Nächste Vereinsevents"
+
+#: src/routes/(dp)/(protected)/account/clubs/[club]/+page.svelte
+#: src/routes/(dp)/(protected)/account/clubs/[club]/events/+page.svelte
+msgid "Create Club Event"
+msgstr "Vereinsevent erstellen"
+
+#: src/routes/(dp)/(protected)/account/clubs/[club]/+page.svelte
+msgid "Contact"
+msgstr "Kontakt"
+
+#: src/lib/dp/components/forms/ClubForm.svelte
+msgid "Admin Email <0/>"
+msgstr "Administrative Mailadresse <0/>"
+
+#: src/routes/(dp)/(protected)/account/clubs/[club]/+page.svelte
+msgid "No club-wide events yet."
+msgstr "Keine Vereinsevents vorhanden."
+
+#: src/routes/(dp)/(protected)/account/clubs/[club]/+page.svelte
+msgid "View All Events"
+msgstr "Alle Events anzeigen"
+
+#. 0: data.club.name
+#. 0: data.club.name
+#: src/routes/(dp)/(protected)/account/clubs/[club]/events/+page.svelte
+#: src/routes/(dp)/(protected)/account/clubs/[club]/events/+page.svelte
+msgid "Events for {0}"
+msgstr "Events für {0}"
+
+#. 0: data.club.name
+#: src/routes/(dp)/(protected)/account/clubs/[club]/events/+page.svelte
+msgid "Club-wide events for {0} with participation status."
+msgstr "Vereinsevents für {0} mit Teilnahme-Status."
+
+#: src/lib/dp/components/forms/ClubForm.svelte
+msgid "BSM Search Term"
+msgstr "BSM-Suchbegriff"
+
+#: src/lib/dp/components/forms/ClubForm.svelte
+msgid "Team Name"
+msgstr "Teamname"
+
+#: src/lib/dp/components/forms/ClubForm.svelte
+msgid "Your club name without the city. Mainly used for decoration."
+msgstr "Teamname ohne Angabe der Stadt. Wird hauptsächlich für Dekoration verwendet."
+
+#: src/lib/dp/components/forms/ClubForm.svelte
+msgid "Used to filter games when importing event data. Use something you would enter into the BSM search bar to find your club's games (most likely the full club name, case-insensitive.)"
+msgstr "Wird für die Filterung von Spielen beim Importieren von Events verwendet. Verwende etwas, was du in das BSM-Suchfeld eingeben würdest, um deine Vereinsspiele zu finden (meistens der vollständige Vereinsname, ohne Berücksichtigung der Groß-/Kleinschreibung.)"
+
+#: src/lib/dp/components/forms/ServiceEntryForm.svelte
+msgid "Minutes"
+msgstr "Minuten"

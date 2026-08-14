@@ -12,7 +12,7 @@
     SquareUserRound,
     ToolCase,
     Users,
-  } from "lucide-svelte";
+  } from "@lucide/svelte";
   import AccordionItem from "$lib/dp/components/modal/AccordionItem.svelte";
   import {authSettings} from "$lib/dp/client.svelte.js";
   import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";

@@ -1,6 +1,7 @@
 <script lang="ts">
-  import type {Snippet} from "svelte";
-  import {DateTimeUtility} from "$lib/dp/service/DateTimeUtility.ts";
+  import type { Snippet } from "svelte";
+  import { DateTimeUtility } from "$lib/dp/service/DateTimeUtility.ts";
+  import { appLocale } from "$lib/dp/locale.svelte";
 
   interface Props {
     timeValue: string;
@@ -9,7 +10,7 @@
     classes?: string;
   }
 
-  const {timeValue, displayText, icon, classes = ""}: Props = $props();
+  const { timeValue, displayText, icon, classes = "" }: Props = $props();
 
   const displayedTime = $derived(new Date(timeValue));
 </script>
@@ -19,11 +20,11 @@
   <p>
     {displayText}
     {#if timeValue}
-      <time datetime="{timeValue}" class="time"
-      >{displayedTime?.toLocaleTimeString(
-        "de-DE",
-        DateTimeUtility.eventTimeFormat,
-      )}</time
+      <time datetime={timeValue} class="time"
+        >{displayedTime?.toLocaleTimeString(
+          appLocale.current,
+          DateTimeUtility.eventTimeFormat,
+        )}</time
       >
     {:else}
       <span class="fallback">---</span>

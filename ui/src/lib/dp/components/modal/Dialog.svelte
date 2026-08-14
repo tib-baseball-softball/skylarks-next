@@ -1,28 +1,24 @@
 <script lang="ts">
-  import type {Snippet} from "svelte";
-  import {Dialog, type WithoutChild} from "bits-ui";
-  import {fly} from "svelte/transition";
-  import {cubicInOut} from "svelte/easing";
-  import {X} from "lucide-svelte";
+  import { onMount, type Snippet } from "svelte";
+  import { X } from "@lucide/svelte";
+  import type { HTMLAttributes, HTMLButtonAttributes } from "svelte/elements";
+  import { dev } from "$app/environment";
 
-  /**
-   * Modal dialog based on headless bits-ui building blocks.
-   * Replacement for Skeleton modal.
-   */
+  let dialog: HTMLDialogElement;
 
-  type Props = Dialog.RootProps & {
+  type Props = {
+    children?: Snippet;
     triggerClasses?: string;
     title: Snippet;
     description?: Snippet;
-    contentProps?: WithoutChild<Dialog.ContentProps>;
-    triggerProps?: WithoutChild<Dialog.TriggerProps>;
+    contentProps?: HTMLAttributes<HTMLDialogElement>;
+    triggerProps?: HTMLButtonAttributes;
     triggerContent: Snippet;
     closeButtonClasses?: string;
     disabled?: boolean;
   };
 
   let {
-    open = $bindable(false),
     children,
     triggerClasses = "",
     contentProps,
@@ -32,80 +28,67 @@
     triggerContent,
     closeButtonClasses = "",
     disabled = false,
-    ...restProps
   }: Props = $props();
+
+  const uid = $props.id();
+
+  onMount(() => {
+    const closeButtons: NodeListOf<HTMLElement> = dialog.querySelectorAll(
+      "[data-dialog-close]",
+    );
+    closeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        if (dev) {
+          console.debug("dismissing dialog via button event");
+        }
+        dialog.close();
+      });
+    });
+  });
 </script>
 
-<Dialog.Root {...restProps} bind:open>
-  <Dialog.Trigger
-    {...triggerProps}
-    class="{triggerClasses} trigger"
-    {disabled}
-    type="button"
-  >
-    {@render triggerContent()}
-  </Dialog.Trigger>
+<button
+  onclick={() => {
+    dialog.showModal();
+  }}
+  {...triggerProps}
+  class="{triggerClasses} trigger"
+  {disabled}
+  type="button"
+>
+  {@render triggerContent()}
+</button>
 
-  <Dialog.Portal>
-    <Dialog.Overlay class="dialog-overlay"/>
-    <Dialog.Content
-      {...contentProps}
-      class="card dialog-content shadow-2xl"
-      forceMount
-    >
-      {#snippet child({props, open})}
-        {#if open}
-          <div
-            {...props}
-            transition:fly={{ y: 150, duration: 100, easing: cubicInOut }}
-          >
-            <div class="header">
-              <Dialog.Close
-                class="close-button btn preset-outlined-card {closeButtonClasses}"
-              >
-                <X/>
-              </Dialog.Close>
+<dialog
+  {...contentProps}
+  class="modal-dialog card dialog-content shadow-2xl"
+  bind:this={dialog}
+  closedby="any"
+  aria-labelledby="dialog-title-{uid}"
+>
+  <header class="header">
+    <menu>
+      <button
+        onclick={() => dialog.close()}
+        class="close-button btn preset-outlined-card {closeButtonClasses}"
+        data-dialog-close
+      >
+        <X />
+      </button>
+    </menu>
 
-              <div class="title">
-                <Dialog.Title>
-                  {@render title()}
-                </Dialog.Title>
-              </div>
-            </div>
+    {#if title}
+      <div id="dialog-title-{uid}" class="title">
+        {@render title?.()}
+      </div>
+    {/if}
+  </header>
 
-            {#if description}
-              <Dialog.Description>
-                {@render description?.()}
-              </Dialog.Description>
-            {/if}
+  <article>
+    {#if description}
+      {@render description?.()}
+    {/if}
 
-            {@render children?.()}
-          </div>
-        {/if}
-      {/snippet}
-    </Dialog.Content>
-  </Dialog.Portal>
-</Dialog.Root>
-
-<style>
-  .trigger {
-    display: flex;
-    gap: calc(var(--spacing) * 1);
-  }
-
-  .header {
-    display: flex;
-    gap: calc(var(--spacing) * 5);
-    align-items: center;
-    margin-bottom: calc(var(--spacing) * 2);
-  }
-
-  .title {
-    font-size: var(--text-xl);
-    font-weight: var(--font-weight-semibold);
-  }
-
-  .close-button {
-    border: 1px solid;
-  }
-</style>
+    {@render children?.()}
+  </article>
+</dialog>

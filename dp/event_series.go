@@ -1,6 +1,10 @@
 package dp
 
 import (
+	"container/list"
+	"fmt"
+
+	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
 )
@@ -21,6 +25,8 @@ var _ core.RecordProxy = (*EventSeries)(nil)
 
 // EventSeries is a RecordProxy for the `eventseries` collection.
 // It offers type-safe getters and setters for every field.
+//
+// Pure database model, relations are not resolved automatically.
 type EventSeries struct {
 	core.BaseRecordProxy
 }
@@ -48,6 +54,20 @@ func (s *EventSeries) Team() string {
 }
 func (s *EventSeries) SetTeam(team string) {
 	s.Set("team", team)
+}
+
+// AdditionalTeams returns the additional teams associated with the series.
+func (s *EventSeries) AdditionalTeams() []string {
+	return s.GetStringSlice("additional_teams")
+}
+
+func (s *EventSeries) SetAdditionalTeams(teams []string) {
+	s.Set("additional_teams", teams)
+}
+
+func (s *EventSeries) AddAdditionalTeam(team string) {
+	teams := append(s.AdditionalTeams(), team)
+	s.SetAdditionalTeams(teams)
 }
 
 // Desc returns the optional description.
@@ -82,7 +102,7 @@ func (s *EventSeries) SetSeriesEnd(end types.DateTime) {
 	s.Set("series_end", end)
 }
 
-// Interval returns the number of days between occurrences.
+// Interval returns the number of days between occurrences of events in the series.
 func (s *EventSeries) Interval() int {
 	return s.GetInt("interval")
 }
@@ -90,7 +110,7 @@ func (s *EventSeries) SetInterval(interval int) {
 	s.Set("interval", interval)
 }
 
-// Duration returns the number of days between occurrences.
+// Duration returns the duration of an event in the series (in minutes).
 func (s *EventSeries) Duration() int {
 	return s.GetInt("duration")
 }
@@ -100,4 +120,58 @@ func (s *EventSeries) SetDuration(duration int) {
 
 func (s *EventSeries) SetState(state SeriesState) {
 	s.Set("series_state", string(state))
+}
+
+// findEventRecordsForSeries fetches all events associated with a given eventSeries.
+func findEventRecordsForSeries(app core.App, eventSeries *EventSeries) (events []*Event, err error) {
+	err = app.RecordQuery(EventsCollection).
+		AndWhere(dbx.NewExp("series = {:seriesID}", dbx.Params{"seriesID": eventSeries.Id})).
+		OrderBy("starttime ASC").
+		All(&events)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(events) == 0 {
+		return events, nil
+	}
+
+	return events, nil
+}
+
+// createEventSeriesLinkedListFromDatabase creates a linked list of events for given event records.
+//
+// If an empty slice is given, the returned list will be empty as well.
+// records needs to be already ordered.
+//
+// list will always point to a non-nil value unless an error occurs.
+func createEventSeriesLinkedListFromSlice(records []*Event) (*list.List, error) {
+	list := &list.List{}
+	list.Init()
+
+	if len(records) == 0 {
+		return list, nil
+	}
+
+	currentListElement := list.PushFront(records[0])
+	for i, event := range records {
+		if i == 0 {
+			continue
+		}
+		currentListElement = list.InsertAfter(event, currentListElement)
+	}
+	return list, nil
+}
+
+// EventSeriesLinkedListToSlice adds persistence info to an event series and returns a slice of events.
+func EventSeriesLinkedListToSlice(list *list.List) (events []*Event, err error) {
+	for element := list.Front(); element != nil; element = element.Next() {
+		event, ok := element.Value.(*Event)
+		if !ok {
+			return nil, fmt.Errorf("data corrupted: event %v is not an Event pointer", element.Value)
+		}
+
+		events = append(events, event)
+	}
+	return events, nil
 }

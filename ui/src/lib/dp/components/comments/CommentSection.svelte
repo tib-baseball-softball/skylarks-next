@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {Send} from "lucide-svelte";
+  import {Send} from "@lucide/svelte";
   import {invalidate} from "$app/navigation";
   import CommentRow from "$lib/dp/components/comments/CommentRow.svelte";
   import {authSettings, client} from "$lib/dp/client.svelte.ts";

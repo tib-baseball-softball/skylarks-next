@@ -1,28 +1,71 @@
-.dialog-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 50;
+dialog::backdrop {
   background-color: light-dark(var(--color-surface-50), #0a0a0acc);
   opacity: 80%;
 }
 
-.dialog-content {
-  position: fixed;
+.modal-dialog {
+  margin: auto; /* center both directions */
   background-color: var(--nav-item-background);
-  left: 50%;
-  top: 50%;
-  z-index: 50;
   width: 100%;
   border: 1px solid;
   max-width: 94%;
-  translate: -50% -50%;
   padding: calc(var(--spacing) * 5);
 
   @media (min-width: 40rem) {
     max-width: 640px;
   }
 
-  @media (min-width: 48rem) {
-    width: 100%;
+  /* default closed state */
+  opacity: 0;
+  transform: translateY(24px);
+  transition: all 0.25s allow-discrete;
+  transition-behavior: allow-discrete;
+
+  /* open state */
+  &:open {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Initial values on enter, needed for transition */
+  @starting-style {
+    &:open {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+  }
+
+  /* exit transition */
+  &:not(:open) {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  .trigger {
+    display: flex;
+    gap: var(--spacing);
+  }
+
+  .header {
+    display: flex;
+    gap: calc(var(--spacing) * 5);
+    align-items: center;
+    margin-bottom: calc(var(--spacing) * 2);
+  }
+
+  .title {
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .close-button {
+    border: 1px solid;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-dialog {
+    transition: none;
+    transform: none;
   }
 }

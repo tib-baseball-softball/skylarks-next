@@ -46,6 +46,22 @@ func (c *Club) SetBSMAPIKey(key string) {
 	c.Set("bsm_api_key", key)
 }
 
+func (c *Club) BSMSearchString() string {
+    return c.GetString("bsm_search_string")
+}
+
+func (c *Club) SetBSMSearchString(searchString string) {
+    c.Set("bsm_search_string", searchString)
+}
+
+func (c *Club) TeamName() string {
+    return c.GetString("team_name")
+}
+
+func (c *Club) SetTeamName(teamName string) {
+    c.Set("team_name", teamName)
+}
+
 func (c *Club) Acronym() string {
 	return c.GetString("acronym")
 }
@@ -68,4 +84,12 @@ func (c *Club) ServiceRequirement() int {
 
 func (c *Club) SetServiceRequirement(req int) {
 	c.Set("service_requirement", req)
+}
+
+func (c *Club) AdminEmail() string {
+    return c.GetString("admin_email")
+}
+
+func (c *Club) SetAdminEmail(email string) {
+    c.Set("admin_email", email)
 }

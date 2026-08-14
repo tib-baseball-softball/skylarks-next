@@ -1,23 +1,48 @@
 package dp
 
 import (
+	"container/list"
 	"fmt"
 	"time"
 
-	"github.com/pocketbase/dbx"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/utils"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
 )
 
-func CreateOrUpdateEventsForSeries(e *core.RecordEvent) error {
-	events, err := generateSeriesEvents(e.App, e.Record)
+type EventSeriesMode string
+
+const (
+	CreateEventSeriesMode EventSeriesMode = "create"
+	UpdateEventSeriesMode EventSeriesMode = "update"
+)
+
+type EventSeriesAction string
+
+const (
+	CreateEventsAction       EventSeriesAction = "create"
+	UpdateFutureEventsAction EventSeriesAction = "update-future"
+	UpdateAllEventsAction    EventSeriesAction = "update-all"
+)
+
+// CreateOrUpdateEventsForSeries is the main entry point for event series logic.
+// Triggered on all Create and Update requests (regular API endpoints)
+func CreateOrUpdateEventsForSeries(e *core.RecordRequestEvent, mode EventSeriesMode) error {
+	action := EventSeriesAction(e.Request.URL.Query().Get("action"))
+	if action == "" {
+		action = UpdateAllEventsAction
+	}
+
+	events, err := generateSeriesEvents(e.App, e.Record, mode, action)
 	if err != nil {
 		return err
 	}
 
 	err = e.App.RunInTransaction(func(txApp core.App) error {
 		for _, record := range events {
-			if err := txApp.Save(record); err != nil {
+			// validations are skipped: other events in the same series might not be persisted yet,
+			// so relation validation fails
+			if err := txApp.SaveNoValidate(record); err != nil {
 				return err
 			}
 		}
@@ -30,17 +55,12 @@ func CreateOrUpdateEventsForSeries(e *core.RecordEvent) error {
 	return e.Next()
 }
 
+// DeleteEventsForSeries deletes all events associated with a given event series record.
 func DeleteEventsForSeries(e *core.RecordEvent) error {
-	eventSeries := e.Record
+	eventSeries := &EventSeries{}
+	eventSeries.SetProxyRecord(e.Record)
 
-	eventsToBeDeleted, err := e.App.FindRecordsByFilter(
-		EventsCollection,
-		"series = {:seriesID}",
-		"",
-		0,
-		0,
-		dbx.Params{"seriesID": eventSeries.Id},
-	)
+	eventsToBeDeleted, err := findEventRecordsForSeries(e.App, eventSeries)
 	if err != nil {
 		return err
 	}
@@ -59,104 +79,184 @@ func DeleteEventsForSeries(e *core.RecordEvent) error {
 	return e.Next()
 }
 
-func generateSeriesEvents(app core.App, record *core.Record) ([]*core.Record, error) {
+// generateSeriesEvents contains the main logic to handle single events belonging to a series.
+func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMode, action EventSeriesAction) ([]*Event, error) {
+	var events []*Event
 	eventSeries := &EventSeries{}
 	eventSeries.SetProxyRecord(record)
-
-	startDate := eventSeries.SeriesStart()
-	endDate := eventSeries.SeriesEnd()
-	interval := eventSeries.Interval()
-	duration := eventSeries.Duration()
-
-	eventCollection, err := app.FindCollectionByNameOrId(EventsCollection)
-	if err != nil {
-		return nil, err
-	}
-
-	existingEvents, err := app.FindRecordsByFilter(
-		EventsCollection,
-		"series = {:seriesID}",
-		"",
-		0,
-		0,
-		dbx.Params{"seriesID": eventSeries.Id},
-	)
-	if err != nil {
-		return nil, err
-	}
-
-	var events []*core.Record
-	existingEventsMap := make(map[string]*Event)
 
 	location, err := LoadAppTimeZone()
 	if err != nil {
 		return nil, err
 	}
 
-	// Create a map of existing events for easy lookup
-	for _, event := range existingEvents {
-		eventProxy := &Event{}
-		eventProxy.SetProxyRecord(event)
+	// reads timezone information to ensure that the later call to `AddDate()` accounts for daylight savings time traversal
+	// both calls ignore error: underlying method can only error on string casting, not when using time.Time arguments
+	startDateSeries, _ := types.ParseDateTime(eventSeries.SeriesStart().Time().In(location))
+	endDateSeries, _ := types.ParseDateTime(eventSeries.SeriesEnd().Time().In(location))
 
-		key := fmt.Sprintf("%s---%s", eventProxy.StartTime().Time().In(location).Format(time.RFC3339), eventProxy.EndTime().Time().In(location).Format(time.RFC3339))
-		existingEventsMap[key] = eventProxy
+	if startDateSeries.After(endDateSeries) {
+		return nil, fmt.Errorf("series start date is after series end date")
 	}
 
-	// reads timezone information to ensure that the later call to `AddDate()` accounts for daylight savings time traversal
-	currentDate, err := types.ParseDateTime(startDate.Time().In(location))
+	eventCollection, err := app.FindCollectionByNameOrId(EventsCollection)
 	if err != nil {
 		return nil, err
 	}
 
-	for currentDate.Before(endDate) {
-		// Create start and end times for this specific event
-		eventStart := currentDate
-		eventEnd := currentDate.Add(time.Duration(duration) * time.Minute)
-
-		// Check if an event already exists for this time slot
-		key := fmt.Sprintf("%s---%s", eventStart.Time().Format(time.RFC3339), eventEnd.Time().Format(time.RFC3339))
-		event, exists := existingEventsMap[key]
-
-		if !exists {
-			// Not found - create a new event
-			event = &Event{}
-			event.SetProxyRecord(core.NewRecord(eventCollection))
-		}
-
-		event.SetStartTime(eventStart)
-		event.SetEndTime(eventEnd)
-		event.SetTitle(eventSeries.Title())
-		event.SetTeam(eventSeries.Team())
-		event.SetDesc(eventSeries.Desc())
-		event.SetLocation(eventSeries.Location())
-		event.SetSeries(eventSeries.Id)
-		event.SetType(Practice.String())
-
-		events = append(events, event.Record)
-
-		// Mark this event as processed
-		delete(existingEventsMap, key)
-
-		currentDate = currentDate.AddDate(0, 0, interval)
+	errorContext := &ErrorContext{
+		Key: "local",
+		Values: map[string]any{
+			"seriesID":   eventSeries.Id,
+			"seriesName": eventSeries.Title(),
+		},
 	}
 
-	// Delete any leftover events that are no longer part of the updated series
-	for _, staleEvent := range existingEventsMap {
-		err := app.Delete(staleEvent)
+	existingEvents := []*Event{}
+
+	if mode == UpdateEventSeriesMode {
+		existingEvents, err = findEventRecordsForSeries(app, eventSeries)
 		if err != nil {
-			return nil, fmt.Errorf("failed to delete stale event: %w", err)
+			LogErrorInternalExternal(app, err, errorContext, nil)
+			return nil, err
 		}
 	}
+
+	eventLinkedList, err := createEventSeriesLinkedListFromSlice(existingEvents)
+	if err != nil {
+		LogErrorInternalExternal(app, err, errorContext, nil)
+		return nil, err
+	}
+
+	currentDate := startDateSeries
+	today, _ := types.ParseDateTime(time.Now().In(location))
+
+	switch mode {
+	case CreateEventSeriesMode:
+		eventLinkedList.Init()
+		var currentElement *list.Element
+
+		for currentDate.Before(endDateSeries) {
+			eventStart := currentDate
+			eventEnd := currentDate.Add(time.Duration(eventSeries.Duration()) * time.Minute)
+
+			event := &Event{}
+			event.SetProxyRecord(core.NewRecord(eventCollection))
+
+			setValuesForSeriesEvent(event, eventStart, eventEnd, eventSeries)
+
+			if eventLinkedList.Len() == 0 {
+				currentElement = eventLinkedList.PushFront(event)
+			} else {
+				currentElement = eventLinkedList.InsertAfter(event, currentElement)
+			}
+
+			currentDate = currentDate.AddDate(0, 0, eventSeries.Interval())
+		}
+	case UpdateEventSeriesMode:
+		// available because the hook runs before record persistence
+		existingSeries := &EventSeries{}
+		err = FindRecordProxyByID(app, existingSeries, eventSeries.Id)
+		if err != nil {
+			return nil, fmt.Errorf("failed to find existing series: %w", err)
+		}
+
+		eventsToDelete := make(map[string]*Event)
+
+		for element := eventLinkedList.Front(); element != nil; element = element.Next() {
+			app.Logger().Debug("processing event", "element", element)
+
+			// process the event for this loop
+			event, ok := element.Value.(*Event)
+			if !ok {
+				// this really should not happen, but better be safe than sorry
+				err = fmt.Errorf("data corrupted: event %v is not an Event pointer", element.Value)
+				LogErrorInternalExternal(app, err, errorContext, nil)
+				return nil, err
+			}
+
+			var eventStart types.DateTime
+			if event.StartTime().IsZero() {
+				// just created from the previous loop, new event
+				eventStart = currentDate
+			} else {
+				// has an existing DB value
+				timeDiff := currentDate.Sub(event.StartTime())
+				eventStart = event.StartTime().Add(timeDiff)
+			}
+			eventEnd := eventStart.Add(time.Duration(eventSeries.Duration()) * time.Minute)
+
+			if eventStart.After(endDateSeries) {
+				eventsToDelete[event.Id] = event
+				deleting := eventLinkedList.Remove(element)
+				app.Logger().Debug("deleting event", "event", deleting)
+				app.Logger().Debug("end of update loop", "list length", eventLinkedList.Len())
+				continue
+			}
+
+			if action == UpdateAllEventsAction || eventStart.After(today) {
+				// only update future events if set
+				setValuesForSeriesEvent(event, eventStart, eventEnd, eventSeries)
+				element.Value = event
+			}
+
+			currentDate = currentDate.AddDate(0, 0, eventSeries.Interval())
+			
+			// series has been extended over the original end, append new event to handle in next loop
+			if element.Next() == nil && currentDate.Before(endDateSeries) {
+				app.Logger().Debug("appending new event to extend series", "currentDate", currentDate, "endDateSeries", endDateSeries)
+
+				event := &Event{}
+				event.SetProxyRecord(core.NewRecord(eventCollection))
+				eventLinkedList.InsertAfter(event, element)
+			}
+			app.Logger().Debug("end of update loop", "list length", eventLinkedList.Len())
+		}
+
+		// Delete any leftover events that are no longer part of the updated series
+		for _, staleEvent := range eventsToDelete {
+			err := app.Delete(staleEvent)
+			if err != nil {
+				return nil, fmt.Errorf("failed to delete stale event: %w", err)
+			}
+		}
+	}
+	events, err = EventSeriesLinkedListToSlice(eventLinkedList)
+	if err != nil {
+		LogErrorInternalExternal(app, err, errorContext, nil)
+	}
+	eventLinkedList = nil // explicit pointer reset after use
 
 	return events, nil
 }
 
+func setValuesForSeriesEvent(event *Event, eventStart types.DateTime, eventEnd types.DateTime, eventSeries *EventSeries) {
+	if event.Id == "" {
+		event.Id = utils.CreatePocketBaseIDString()
+	}
+	if eventSeries.Id == "" {
+		eventSeries.Id = utils.CreatePocketBaseIDString()
+	}
+	event.SetStartTime(eventStart)
+	event.SetEndTime(eventEnd)
+	event.SetTitle(eventSeries.Title())
+	event.SetTeam(eventSeries.Team())
+	event.SetAdditionalTeams(eventSeries.AdditionalTeams())
+	event.SetDesc(eventSeries.Desc())
+	event.SetLocation(eventSeries.Location())
+	event.SetSeries(eventSeries.Id)
+	event.SetType(Practice.String())
+
+}
+
+// AddSeriesState is a hook that sets the state of the event series based on the current date
 func AddSeriesState(e *core.RecordEnrichEvent) error {
 	addSeriesState(e.Record)
 
 	return e.Next()
 }
 
+// addSeriesState sets the state of the event series based on the current date
 func addSeriesState(record *core.Record) {
 	record.WithCustomData(true)
 	eventSeries := &EventSeries{}

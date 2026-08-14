@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {Calendar, Clock, User} from "lucide-svelte";
+  import {Calendar, Clock, User} from "@lucide/svelte";
   import PriorityBadge from "$lib/dp/components/announcements/PriorityBadge.svelte";
   import CommentSection from "$lib/dp/components/comments/CommentSection.svelte";
   import AnnouncementForm from "$lib/dp/components/forms/AnnouncementForm.svelte";
@@ -75,7 +75,7 @@
     </section>
 
     <section class="prose announcement-body">
-      {@html markdownToHTML($announcement.bodytext)}
+      {@html await markdownToHTML($announcement.bodytext)}
     </section>
 
     {#if $announcement.link}
