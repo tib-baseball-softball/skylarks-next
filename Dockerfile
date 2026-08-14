@@ -7,6 +7,8 @@
 FROM node:24-alpine AS ui-builder
 WORKDIR /app/ui
 
+ENV CI=true
+
 RUN npm i -g corepack && corepack enable && corepack prepare pnpm@latest --activate
 
 COPY ui/pnpm-lock.yaml ui/package.json ui/.npmrc* ./
