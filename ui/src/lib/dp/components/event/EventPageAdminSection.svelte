@@ -1,17 +1,23 @@
 <script lang="ts">
-  import {CalendarArrowDown, CalendarPlus, Info, SquarePen} from "lucide-svelte";
-  import {goto} from "$app/navigation";
+  import {
+    CalendarArrowDown,
+    CalendarPlus,
+    Info,
+    SquarePen,
+  } from "@lucide/svelte";
+  import { goto, invalidate } from "$app/navigation";
   import EventForm from "$lib/dp/components/forms/EventForm.svelte";
   import DeleteButton from "$lib/dp/components/utils/DeleteButton.svelte";
-  import {client} from "$lib/dp/client.svelte.js";
-  import type {ExpandedEvent} from "$lib/dp/types/ExpandedResponse.ts";
-  import type {EventsUpdate} from "$lib/dp/types/pb-types.ts";
+  import { client } from "$lib/dp/client.svelte.js";
+  import type { ExpandedEvent } from "$lib/dp/types/ExpandedResponse.ts";
+  import type { EventsUpdate } from "$lib/dp/types/pb-types.ts";
+  import { Collection } from "$lib/dp/enum/Collection";
 
   interface Props {
     event: ExpandedEvent;
   }
 
-  const {event}: Props = $props();
+  const { event }: Props = $props();
 
   const guestPlayerForm = $state({
     name: "",
@@ -20,20 +26,23 @@
   async function submitNewGuestPlayer(e: SubmitEvent) {
     e.preventDefault();
 
-    await client.collection("events").update<EventsUpdate>(event.id, {
+    await client.collection(Collection.Events).update<EventsUpdate>(event.id, {
       guests:
-        event.guests.length === 0 ? guestPlayerForm.name : event.guests + "," + guestPlayerForm.name,
+        event.guests.length === 0
+          ? guestPlayerForm.name
+          : event.guests + "," + guestPlayerForm.name,
     });
     guestPlayerForm.name = "";
+    await invalidate("event:single");
   }
 
   async function deleteEvent(id: string) {
-    await client.collection("events").delete(id);
+    await client.collection(Collection.Events).delete(id);
     await goto(`/account/team/${event.team}`);
   }
 </script>
 
-<hr class="admin-divider"/>
+<hr class="admin-divider" />
 
 <h2 class="admin-title">Admin Section</h2>
 
@@ -45,7 +54,7 @@
 
     <section class="card-section info-section">
       <div class="info-row">
-        <span class="icon"><Info/></span>
+        <span class="icon"><Info /></span>
         <div>
           <p class="info-label">BSM event ID</p>
           <p>{event.bsm_id}</p>
@@ -53,7 +62,7 @@
       </div>
 
       <div class="info-row">
-        <span class="icon"><CalendarPlus/></span>
+        <span class="icon"><CalendarPlus /></span>
         <div>
           <p class="info-label">Created</p>
           <p>{new Date(event.created).toLocaleString()}</p>
@@ -61,7 +70,7 @@
       </div>
 
       <div class="info-row">
-        <span class="icon"><CalendarArrowDown/></span>
+        <span class="icon"><CalendarArrowDown /></span>
         <div>
           <p class="info-label">Last Updated</p>
           <p>{new Date(event.updated).toLocaleString()}</p>
@@ -78,15 +87,19 @@
     <section class="card-section">
       <form class="guest-form" onsubmit={submitNewGuestPlayer}>
         <label class="label">
-          Name
+          <span>Name</span>
           <input
             bind:value={guestPlayerForm.name}
             class="input name-input"
             placeholder="Enter the guest player's name"
             type="text"
+            required
           />
         </label>
-        <button class="btn preset-filled-secondary-500 submit-guest" type="submit">Submit</button>
+        <button
+          class="btn preset-filled-secondary-500 submit-guest"
+          type="submit">Submit</button
+        >
       </form>
     </section>
   </div>
@@ -98,15 +111,15 @@
 
     <section class="card-section actions-section">
       <div class="actions-container">
-
         <EventForm
-          clubID={event?.expand?.team?.club ?? ""}
-          event={event}
+          mode={event.team ? "teamEvent" : "clubEvent"}
+          clubID={event.club ? event.club : (event?.expand?.team?.club ?? "")}
+          {event}
           teamID={event.team}
           triggerVariant="filled-secondary"
         >
           {#snippet triggerContent()}
-            <SquarePen/>
+            <SquarePen />
             <span>Edit Event</span>
           {/snippet}
         </EventForm>
@@ -201,7 +214,7 @@
 
   @media (prefers-color-scheme: dark) {
     .submit-guest {
-      border: 1px solid white
+      border: 1px solid white;
     }
   }
 </style>

@@ -93,65 +93,47 @@ func BindDPHooks(app core.App, client bsm.APIClient, pushService PushService) {
 		return e.Next()
 	})
 
-	app.OnRecordAuthWithOAuth2Request(UserCollection).BindFunc(func(e *core.RecordAuthWithOAuth2RequestEvent) error {
-		return OAuthUpdateUserData(e)
-	})
+	app.OnRecordAuthWithOAuth2Request(UserCollection).BindFunc(OAuthUpdateUserData)
 
-	app.OnRecordCreateRequest(UserCollection).BindFunc(func(event *core.RecordRequestEvent) error {
-		return ValidateSignupKey(event)
-	})
+	app.OnRecordCreateRequest(UserCollection).BindFunc(ValidateSignupKey)
 
 	app.OnRecordAfterCreateSuccess(UserCollection).BindFunc(func(e *core.RecordEvent) error {
 		return NotifyAdminsUserCreation(e, pushService)
 	})
 
-	app.OnRecordEnrich(UserCollection).BindFunc(func(e *core.RecordEnrichEvent) error {
-		return AddUserICalLink(e)
-	})
+	app.OnRecordEnrich(UserCollection).BindFunc(AddUserICalLink)
 
-	app.OnRecordUpdateExecute(UserCollection).BindFunc(func(event *core.RecordEvent) error {
-		return SetDisplayName(event)
-	})
+	app.OnRecordUpdateExecute(UserCollection).BindFunc(SetDisplayName)
 
 	app.OnRecordsListRequest(LeagueGroupsCollection).BindFunc(func(event *core.RecordsListRequestEvent) error {
 		return TriggerLeagueImport(event.App, client, event)
 	})
 
-	app.OnRecordCreateRequest(EventsCollection).BindFunc(func(e *core.RecordRequestEvent) error {
-		return ValidateEventTimes(e)
-	})
+	app.OnRecordCreateRequest(EventsCollection).BindFunc(ValidateEventTimes)
 
-	app.OnRecordUpdateRequest(EventsCollection).BindFunc(func(e *core.RecordRequestEvent) error {
-		return ValidateEventTimes(e)
-	})
+	app.OnRecordUpdateRequest(EventsCollection).BindFunc(ValidateEventTimes)
+
+	app.OnRecordValidate(EventsCollection).BindFunc(ValidateEvent)
 
 	app.OnRecordEnrich(EventsCollection).BindFunc(func(event *core.RecordEnrichEvent) error {
 		return AddEventParticipationData(event.App, event)
 	})
 
-	app.OnRecordEnrich(EventSeriesCollection).BindFunc(func(event *core.RecordEnrichEvent) error {
-		return AddSeriesState(event)
+	app.OnRecordEnrich(EventSeriesCollection).BindFunc(AddSeriesState)
+
+	app.OnRecordEnrich(ServiceEntryCollection).BindFunc(HideCommunityServiceAdminFields)
+
+	app.OnRecordCreateRequest(EventSeriesCollection).BindFunc(func(e *core.RecordRequestEvent) error {
+		return CreateOrUpdateEventsForSeries(e, CreateEventSeriesMode)
 	})
 
-	app.OnRecordEnrich(ServiceEntryCollection).BindFunc(func(event *core.RecordEnrichEvent) error {
-		return HideCommunityServiceAdminFields(event)
+	app.OnRecordUpdateRequest(EventSeriesCollection).BindFunc(func(e *core.RecordRequestEvent) error {
+		return CreateOrUpdateEventsForSeries(e, UpdateEventSeriesMode)
 	})
 
-	app.OnRecordAfterCreateSuccess(EventSeriesCollection).BindFunc(func(e *core.RecordEvent) error {
-		return CreateOrUpdateEventsForSeries(e)
-	})
+	app.OnRecordDelete(EventSeriesCollection).BindFunc(DeleteEventsForSeries)
 
-	app.OnRecordAfterUpdateSuccess(EventSeriesCollection).BindFunc(func(e *core.RecordEvent) error {
-		return CreateOrUpdateEventsForSeries(e)
-	})
-
-	app.OnRecordDelete(EventSeriesCollection).BindFunc(func(e *core.RecordEvent) error {
-		return DeleteEventsForSeries(e)
-	})
-
-	app.OnRecordEnrich(TeamsCollection).BindFunc(func(event *core.RecordEnrichEvent) error {
-		return HideTeamSignupKey(event)
-	})
+	app.OnRecordEnrich(TeamsCollection).BindFunc(HideTeamSignupKey)
 
 	//------------------- Hooks - Web Push -------------------------//
 

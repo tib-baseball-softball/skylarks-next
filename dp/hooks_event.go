@@ -1,6 +1,8 @@
 package dp
 
 import (
+	"errors"
+	"slices"
 	"time"
 
 	"github.com/pocketbase/pocketbase/core"
@@ -26,6 +28,69 @@ func ValidateEventTimes(e *core.RecordRequestEvent) error {
 	return e.Next()
 }
 
+func ValidateEvent(e *core.RecordEvent) error {
+	event := &Event{}
+	event.SetProxyRecord(e.Record)
+
+	eventClubID := event.Club()
+	eventTeamID := event.Team()
+	additionalTeams := event.AdditionalTeams()
+
+	if eventClubID == "" && eventTeamID == "" {
+		err := LogicError{"An event needs to have either a club or a primary team set"}
+		e.App.Logger().Error("event failed validation", "err", err, "event", event)
+		return err
+	}
+
+	if eventClubID != "" && (eventTeamID != "" || event.HasAdditionalTeams()) {
+		err := LogicError{"An event cannot both be club-wide and team-scoped"}
+		e.App.Logger().Error("event failed validation", "err", err, "event", event)
+		return err
+	}
+
+	if eventTeamID == "" && event.HasAdditionalTeams() {
+		err := LogicError{"An event cannot have additional teams without a primary team"}
+		e.App.Logger().Error("event failed validation", "err", err, "event", event)
+		return err
+	}
+
+	if slices.Contains(additionalTeams, eventTeamID) {
+		err := LogicError{"Cannot assign a team to an event both as primary and additional team"}
+		e.App.Logger().Error("event failed validation", "err", err, "event", event)
+		return err
+	}
+
+	// from here: additional teams validations and sanity checks
+	if !event.HasAdditionalTeams() || eventClubID != "" {
+		return e.Next()
+	}
+
+	if errs := e.App.ExpandRecord(event.Record, []string{"team", "additional_teams"}, nil); len(errs) > 0 {
+		e.App.Logger().Error("failed to expand:", "errors", errs, "event", event, "file", "hooks_event.go")
+		return errors.New("Couldn't validate event")
+	}
+
+	primaryTeam := &Team{}
+	primaryTeamRecord := event.ExpandedOne("team")
+	if primaryTeamRecord != nil {
+		primaryTeam.SetProxyRecord(primaryTeamRecord)
+	}
+
+	additionalTeamRecords := event.ExpandedAll("additional_teams")
+	for _, record := range additionalTeamRecords {
+		team := &Team{}
+		team.SetProxyRecord(record)
+
+		if primaryTeam.Club() != team.Club() {
+			err := LogicError{"Additional teams must belong to the same club as the primary team"}
+			e.App.Logger().Error("event failed validation", "err", err, "event", event)
+			return err
+		}
+	}
+
+	return e.Next()
+}
+
 // NotifyNewEvent sends a push notification to all subscribed team members when a new event is created.
 func NotifyNewEvent(e *core.RecordEvent, ps PushService) error {
 	event := &Event{}
@@ -37,33 +102,33 @@ func NotifyNewEvent(e *core.RecordEvent, ps PushService) error {
 	}
 
 	if errs := e.App.ExpandRecord(event.Record, []string{"location"}, nil); len(errs) > 0 {
-		e.App.Logger().Warn("failed to expand:", "errors", errs, "event", event, "file", "hooks_push.go")
+		e.App.Logger().Warn("failed to expand:", "errors", errs, "event", event, "file", "hooks_event.go")
 		return e.Next()
 	}
 
 	team := &Team{}
 	teamRecord, err := e.App.FindRecordById(TeamsCollection, event.Team())
 	if err != nil {
-		e.App.Logger().Warn("Failed to load team record for event, data corrupted", "teamID", event.Team(), "error", err, "file", "hooks_push.go")
+		e.App.Logger().Warn("Failed to load team record for event, data corrupted", "teamID", event.Team(), "error", err, "file", "hooks_event.go")
 		return e.Next()
 	}
 	team.SetProxyRecord(teamRecord)
 
 	subs, err := GetSubscriptionsForTeamOrClub(team.Id, TeamsCollection, e.App)
 	if err != nil {
-		e.App.Logger().Warn("Error fetching subscriptions", "error", err, "teamID", teamRecord.Id, "file", "hooks_push.go")
+		e.App.Logger().Warn("Error fetching subscriptions", "error", err, "teamID", teamRecord.Id, "file", "hooks_event.go")
 		return e.Next()
 	}
 
 	timeLocation, err := LoadAppTimeZone()
 	if err != nil {
-		e.App.Logger().Error("Failed to load app timezone", "error", err, "file", "hooks_push.go")
+		e.App.Logger().Error("Failed to load app timezone", "error", err, "file", "hooks_event.go")
 		return e.Next()
 	}
 
 	eventStartInAppTimeZone, err := types.ParseDateTime(event.StartTime().Time().In(timeLocation))
 	if err != nil {
-		e.App.Logger().Error("Failed to parse event start time", "error", err, "file", "hooks_push.go")
+		e.App.Logger().Error("Failed to parse event start time", "error", err, "file", "hooks_event.go")
 		return e.Next()
 	}
 

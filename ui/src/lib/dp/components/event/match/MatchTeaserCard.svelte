@@ -10,7 +10,7 @@
 
   interface Props {
     match: Match;
-    teamName?: string;
+    teamName: string;
   }
 
   const {match, teamName}: Props = $props();

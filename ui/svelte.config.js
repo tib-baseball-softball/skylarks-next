@@ -27,6 +27,7 @@ const config = {
         ],
         "connect-src": [
           "self",
+          "data:",
           "https://*.baseball-softball.de",
           "https://tib-baseball.de",
           "https://*.tib-baseball.de",
@@ -54,6 +55,10 @@ const config = {
         "frame-src": [
           "https://bsm.berlinskylarks.de"
         ],
+        "worker-src": [
+          "self",
+          "blob:"
+        ]
       },
     },
   },

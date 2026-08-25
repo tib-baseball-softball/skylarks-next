@@ -18,7 +18,7 @@ type AppRecordProxy interface {
 // Caution: `proxy` needs to be a pointer to a struct that implements AppRecordProxy, not a value.
 func FindRecordProxyByID(app core.App, proxy AppRecordProxy, id string) error {
 	err := app.RecordQuery(proxy.CollectionName()).
-		AndWhere(dbx.HashExp{"id": id}).
+		AndWhere(dbx.NewExp("id = {:id}", dbx.Params{"id": id})).
 		Limit(1).
 		One(proxy)
 	if err != nil {

@@ -57,19 +57,12 @@ See also: [Project History](docs/History.md)
 
 1. Clone the repository
 
-```bash
-git clone git@github.com:tib-baseball-softball/skylarks-next.git
-git submodule update --init
-cd skylarks-next
-```
-
 2. Set up environment
 
 ```bash
 cp .env.dist .env
 ```
 
-* BSM API key (from BSM user account with at the club admin scope for Berlin Skylarks)
 * `PUBLIC_TYPO3_URL` can either be set to a TYPO3 dev environment running locally or the production URL
 
 3. Get project dependencies
@@ -90,7 +83,8 @@ pnpm install
 ```
 
 4. Start the dev server (frontend watches for file changes automatically, backend needs to be restarted manually)
-   backend
+
+backend
 
 ```bash
 go run . serve

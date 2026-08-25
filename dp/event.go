@@ -97,6 +97,30 @@ func (e *Event) SetTeam(team string) {
 	e.Set("team", team)
 }
 
+func (e *Event) AdditionalTeams() []string {
+	return e.GetStringSlice("additional_teams")
+}
+
+func (e *Event) SetAdditionalTeams(additionalTeams []string) {
+	e.Set("additional_teams", additionalTeams)
+}
+
+func (e *Event) AddAdditionalTeam(team string) {
+	e.SetAdditionalTeams(append(e.AdditionalTeams(), team))
+}
+
+func (e *Event) HasAdditionalTeams() bool {
+	return len(e.AdditionalTeams()) > 0
+}
+
+func (e *Event) Club() string {
+	return e.GetString("club")
+}
+
+func (e *Event) SetClub(club string) {
+	e.Set("club", club)
+}
+
 func (e *Event) Location() string {
 	return e.GetString("location")
 }
@@ -143,4 +167,18 @@ func (e *Event) Series() string {
 
 func (e *Event) SetSeries(series string) {
 	e.Set("series", series)
+}
+
+// SetParticipations sets a virtual (non-DB) field
+// to include participation data (back-relation).
+func (e *Event) SetParticipations(participations ParticipationsByType) {
+	e.WithCustomData(true)
+	e.Set("participations", participations)
+}
+
+// SetUserParticipation sets a virtual (non-DB) field to include
+// participation data for the currently-logged-in user.
+func (e *Event) SetUserParticipation(participation *core.Record) {
+	e.WithCustomData(true)
+	e.Set("userParticipation", participation)
 }

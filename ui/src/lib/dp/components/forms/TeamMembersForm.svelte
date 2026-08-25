@@ -1,19 +1,29 @@
 <script lang="ts">
-  import {invalidateAll} from "$app/navigation";
+  import { invalidateAll } from "$app/navigation";
   import MultiSelectCombobox from "$lib/dp/components/formElements/MultiSelectCombobox.svelte";
-  import {authSettings, client, manualAuthRefresh} from "$lib/dp/client.svelte.ts";
-  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
-  import type {CustomAuthModel, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
-  import type {ClubsResponse, UsersResponse, UsersUpdate} from "$lib/dp/types/pb-types.ts";
-  import {closeModal} from "$lib/dp/utility/closeModal.ts";
-  import {Collection} from "$lib/dp/enum/Collection.ts";
+  import {
+    authSettings,
+    client,
+    manualAuthRefresh,
+  } from "$lib/dp/client.svelte.ts";
+  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  import type {
+    CustomAuthModel,
+    ExpandedTeam,
+  } from "$lib/dp/types/ExpandedResponse.ts";
+  import type {
+    ClubsResponse,
+    UsersResponse,
+    UsersUpdate,
+  } from "$lib/dp/types/pb-types.ts";
+  import { Collection } from "$lib/dp/enum/Collection.ts";
 
   interface Props {
     club: ClubsResponse;
     team: ExpandedTeam;
   }
 
-  const {club, team}: Props = $props();
+  const { club, team }: Props = $props();
 
   let form = $derived.by(() => {
     const ret = $state({
@@ -26,10 +36,12 @@
 
   let selectedUsers: UsersResponse[] = $state([]);
 
-  const allUsersForClub = $derived(client.collection(Collection.Users).getFullList<UsersResponse>({
-    filter: `club ?~ '${club.id}' && teams !~ '${team.id}'`, // all users that are club members, but not members of this team
-    sort: "+last_name",
-  }));
+  const allUsersForClub = $derived(
+    client.collection(Collection.Users).getFullList<UsersResponse>({
+      filter: `club ?~ '${club.id}' && teams !~ '${team.id}'`, // all users that are club members, but not members of this team
+      sort: "+last_name",
+    }),
+  );
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
@@ -54,11 +66,10 @@
       toastController.triggerGenericFormErrorMessage("Team members");
     }
     await invalidateAll();
-    closeModal();
   }
 </script>
 
-<form class="mt-4 space-y-3" onsubmit={submitForm}>
+<form class="edit-form" onsubmit={submitForm}>
   <div class="edit-form-grid">
     <input
       autocomplete="off"
@@ -69,8 +80,8 @@
       type="hidden"
     />
 
-    <label class="label space-y-3 field-wide">
-      <span>Selected Users:</span><br>
+    <label class="label field-wide">
+      <span>Selected Users:</span><br />
 
       {#if selectedUsers.length === 0}
         <span>---</span>
@@ -78,6 +89,7 @@
 
       {#await allUsersForClub then users}
         <MultiSelectCombobox
+          labelFunc={(item) => `${item.first_name} ${item.last_name}`}
           itemName="Member"
           bind:selectedItems={selectedUsers}
           allItems={users}
@@ -87,11 +99,13 @@
     </label>
   </div>
 
-  <hr class="my-5!"/>
+  <hr />
 
-  <div class="flex justify-center gap-3">
-    <button class="mt-2 btn preset-tonal-primary border border-primary-500" type="submit">
-      Submit
-    </button>
-  </div>
+  <button
+    data-dialog-close
+    class="btn preset-tonal-primary border border-primary-500"
+    type="submit"
+  >
+    Submit
+  </button>
 </form>

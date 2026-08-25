@@ -6,7 +6,7 @@
   import type {CustomAuthModel, ExpandedClub,} from "$lib/dp/types/ExpandedResponse.ts";
   import type {LocationsResponse} from "$lib/dp/types/pb-types.ts";
   import {MapUtility} from "$lib/dp/service/MapUtility.ts";
-  import {Map} from "lucide-svelte";
+  import {Map} from "@lucide/svelte";
   import {Collection} from "$lib/dp/enum/Collection.ts";
 
   interface Props {

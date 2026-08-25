@@ -32,6 +32,8 @@ export type ExpandedEvent = Extension<
       >[];
       attire?: UniformsetsResponse;
       team?: ExpandedTeam;
+      club?: ClubsResponse;
+      additional_teams?: TeamsResponse[]
       location?: LocationsResponse;
       comments_via_event?: ExpandedComment[];
     };
@@ -102,6 +104,9 @@ export type EventSeriesCreationData = Extension<
     desc: EventsCreate["desc"];
     series_start: string;
     series_end: string;
+    expand?: {
+      additional_teams?: TeamsResponse[]
+    }
   }
 >;
 
@@ -109,6 +114,9 @@ export type ExpandedEventSeries = Extension<
   EventseriesResponse,
   {
     series_state: "ongoing" | "past" | "future";
+    expand?: {
+      additional_teams?: TeamsResponse[]
+    }
   }
 >;
 

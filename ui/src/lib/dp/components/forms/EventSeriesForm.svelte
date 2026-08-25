@@ -1,11 +1,20 @@
 <script lang="ts">
-  import {invalidate} from "$app/navigation";
-  import Flatpickr from "$lib/dp/components/formElements/Flatpickr.svelte";
-  import {client} from "$lib/dp/client.svelte.js";
-  import {DateTimeUtility} from "$lib/dp/service/DateTimeUtility.js";
-  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
-  import type {EventSeriesCreationData, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
-  import type {LocationsResponse} from "$lib/dp/types/pb-types.ts";
+  import { invalidate } from "$app/navigation";
+  import { client } from "$lib/dp/client.svelte.js";
+  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  import type {
+    EventSeriesCreationData,
+    ExpandedTeam,
+  } from "$lib/dp/types/ExpandedResponse.ts";
+  import type {
+    LocationsResponse,
+    TeamsResponse,
+  } from "$lib/dp/types/pb-types.ts";
+  import { Collection } from "$lib/dp/enum/Collection";
+  import { dev } from "$app/environment";
+  import type { EventSeriesAction } from "$lib/dp/types/EventSeriesState";
+  import ISODatePicker from "../formElements/ISODatePicker.svelte";
+  import MultiSelectCombobox from "../formElements/MultiSelectCombobox.svelte";
 
   interface Props {
     eventSeries: EventSeriesCreationData | null;
@@ -13,10 +22,12 @@
     showForm: boolean;
   }
 
-  let {eventSeries, team, showForm = $bindable()}: Props = $props();
+  let { eventSeries, team, showForm = $bindable() }: Props = $props();
 
-  function formFromProps(data: EventSeriesCreationData | null): EventSeriesCreationData {
-    return data ?? {
+  function formFromProps(
+    data: EventSeriesCreationData | null,
+  ): EventSeriesCreationData {
+    const ret = data ?? {
       id: "",
       title: "",
       interval: 7,
@@ -26,31 +37,69 @@
       desc: "",
       location: "",
       team: team?.id,
+      additional_teams: [],
+      expand: {
+        additional_teams: [],
+      },
     };
+    // additional_teams needs to have a value even if no expand is sent from the backend (= none exist yet)
+    if (ret.additional_teams?.length === 0) {
+      ret.expand = {};
+      ret.expand.additional_teams = [];
+    }
+    return ret;
   }
 
   let form: EventSeriesCreationData = $derived.by(() => {
-    const formData = $state(formFromProps(eventSeries));
+    // we don't want to pass the reactive proxy here, we just need its data
+    const data = $state.snapshot(eventSeries);
+    
+    const formData = $state(formFromProps(data));
     return formData;
   });
 
+  let additionalTeams = $derived(form?.expand?.additional_teams ?? []);
+
   const isNewSeries = $derived(form.id === "");
 
-  const locationOptions = $derived(client.collection("locations").getFullList<LocationsResponse>({
-    filter: `club = "${team.club}"`,
-    requestKey: `locations-for-eventSeries-${team.id}`,
-  }));
+  const locationOptions = $derived(
+    client.collection(Collection.Locations).getFullList<LocationsResponse>({
+      filter: `club = "${team.club}"`,
+      requestKey: `locations-for-eventSeries-${team.id}`,
+    }),
+  );
+
+  const additionalTeamOptions = $derived(
+    client.collection(Collection.Teams).getFullList<TeamsResponse>({
+      filter: `club = "${team.club}" && id != "${team.id}"`,
+      requestKey: `team-options-${team.club}`,
+    }),
+  );
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
+    const action = e.submitter?.dataset.action as EventSeriesAction | undefined;
+    if (dev) {
+      console.debug("submitting data with action", action);
+    }
 
     let result: EventSeriesCreationData | null = null;
 
+    form.additional_teams = additionalTeams.map((team) => team.id);
+
     try {
       if (form.id) {
-        result = await client.collection("eventseries").update<EventSeriesCreationData>(form.id, form);
+        result = await client
+          .collection(Collection.EventSeries)
+          .update<EventSeriesCreationData>(form.id, form, {
+            query: {
+              action: action,
+            },
+          });
       } else {
-        result = await client.collection("eventseries").create<EventSeriesCreationData>(form);
+        result = await client
+          .collection(Collection.EventSeries)
+          .create<EventSeriesCreationData>(form);
       }
     } catch {
       toastController.triggerGenericFormErrorMessage("Event Series");
@@ -71,16 +120,8 @@
     Create new Event Series for {team.name}
   {/if}
 </h3>
-<form onsubmit={submitForm}>
+<form class="edit-form" onsubmit={submitForm}>
   <div class="edit-form-grid">
-    {#if !isNewSeries}
-      <span class="field-wide text-sm font-light block">
-        When editing an event series, only select fields can be changed because editing past events would affect
-        participation statistics. If you want to change a long-running practice series, end the previous one by
-        setting the end date accordingly and create a new series.
-      </span>
-    {/if}
-
     <input
       autocomplete="off"
       bind:value={form.id}
@@ -90,32 +131,22 @@
       type="hidden"
     />
 
-    {#if isNewSeries}
-      <label class="label field-wide">
-        Series First Occurrence
-        <Flatpickr
-          bind:value={form.series_start}
-          options={Object.assign(DateTimeUtility.datePickerOptions, {
-                  static: true, // render the picker as a child element to the form to work in a sheet portal context
-              })}
-        />
-      </label>
+    <label class="label">
+      Series First Occurrence
+      <ISODatePicker bind:value={form.series_start} required={true} />
+    </label>
 
-      <span class="field-wide hint hint-prominent">
-      This is the first event in your new series. It will have the exact start time you enter here.<br>
-      The next events are then created <em>RECURRING INTERVAL</em> days after the previous one and all will have
-      the end time set to <em>DURATION</em> minutes after their start time.
+    <span class="field-wide hint hint-prominent">
+      This is the first event in your new series. It will have the exact start
+      time you enter here.<br />
+      The next events are then created <em>RECURRING INTERVAL</em> days after
+      the previous one and all will have the end time set to <em>DURATION</em> minutes
+      after their start time.
     </span>
-    {/if}
 
-    <label class="label field-wide">
+    <label class="label">
       Series End
-      <Flatpickr
-        bind:value={form.series_end}
-        options={Object.assign(DateTimeUtility.datePickerOptionsNoTime, {
-                  static: true,
-              })}
-      />
+      <ISODatePicker bind:value={form.series_end} type="date" required={true} />
       <span class=" hint">No events will be created after this date.</span>
     </label>
 
@@ -130,67 +161,121 @@
       />
     </label>
 
-    {#if isNewSeries}
-      <label class="label">
-        Recurring Interval
-        <input
-          bind:value={form.interval}
-          class="input"
-          name="interval"
-          type="number"
-          step="7"
-          min="7"
-        >
-        <span class="hint">Interval between each series occurrence (in days).</span>
-      </label>
+    <label class="label field-wide">
+      <span>Additional Teams</span><br />
 
-      <label class="label">
-        Duration
-        <input
-          bind:value={form.duration}
-          class="input"
-          name="duration"
-          type="number"
-        >
-        <span class="hint">Duration of each event to determine end time (in minutes).</span>
-      </label>
-    {/if}
+      {#await additionalTeamOptions then options}
+        <MultiSelectCombobox
+          itemName="Team"
+          bind:selectedItems={additionalTeams}
+          allItems={options}
+          labelFunc={(item) => item.name}
+          allowDeletionOfLastItem={true}
+        />
+      {/await}
+    </label>
+
+    <label class="label">
+      Recurring Interval
+      <input
+        bind:value={form.interval}
+        class="input"
+        name="interval"
+        type="number"
+        step="7"
+        min="7"
+      />
+      <span class="hint"
+        >Interval between each series occurrence (in days).</span
+      >
+    </label>
+
+    <label class="label">
+      Duration
+      <input
+        bind:value={form.duration}
+        class="input"
+        name="duration"
+        type="number"
+      />
+      <span class="hint"
+        >Duration of each event to determine end time (in minutes).</span
+      >
+    </label>
 
     <label class="label">
       Description
-      <textarea bind:value={form.desc} class="textarea" name="desc"
-      ></textarea>
+      <textarea bind:value={form.desc} class="textarea" name="desc"></textarea>
     </label>
 
     <label class="label">
       Location
-      <select
-        bind:value={form.location}
-        class="select"
-      >
+      <select bind:value={form.location} class="select">
         {#await locationOptions then options}
           <option value="">None</option>
           {#each options as option}
-            <option value={option.id}>{option?.address_addon ? option.address_addon : "No additional name"}
-              ({option.name}), {option.street}, {option.postal_code} {option.city}, {option.country}</option>
+            <option value={option.id}
+              >{option?.address_addon
+                ? option.address_addon
+                : "No additional name"}
+              ({option.name}), {option.street}, {option.postal_code}
+              {option.city}, {option.country}</option
+            >
           {/each}
         {/await}
       </select>
     </label>
 
+    {#if !isNewSeries}
+      <span class="field-wide hint">
+        Choose whether to change all existing events in the series or just
+        future ones. For more severe changes (change from winter to summer), it
+        is advisable to end the previous series instead by setting the end date
+        accordingly, then create a new series.
+      </span>
+    {/if}
   </div>
 
-  <hr/>
+  <hr />
 
   <div class="submit-container">
-    <button class="btn preset-tonal border-surface-500" onclick={() => {if (showForm) showForm = false}}
-            type="button">
+    <button
+      class="btn preset-tonal border-surface-500"
+      onclick={() => {
+        if (showForm) {
+          showForm = false;
+        }
+      }}
+      type="button"
+    >
       Cancel
     </button>
 
-    <button class="btn preset-filled-primary-500" type="submit">
-      Submit
-    </button>
+    {#if isNewSeries}
+      <button
+        data-action="create"
+        class="btn preset-filled-primary-500"
+        type="submit"
+      >
+        Submit
+      </button>
+    {:else}
+      <button
+        data-action="update-all"
+        class="btn preset-outlined-primary-500"
+        type="submit"
+      >
+        Update all events
+      </button>
+
+      <button
+        data-action="update-future"
+        class="btn preset-filled-primary-500"
+        type="submit"
+      >
+        Update future events
+      </button>
+    {/if}
   </div>
 </form>
 
@@ -201,6 +286,7 @@
 
   .submit-container {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: calc(var(--spacing) * 3);
   }
@@ -219,6 +305,7 @@
   }
 
   .edit-form-grid {
+    margin-block-start: calc(var(--spacing) * 5);
     gap: calc(var(--spacing) * 4);
   }
 </style>

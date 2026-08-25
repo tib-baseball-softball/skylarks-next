@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {SquarePen} from "lucide-svelte";
+  import {SquarePen} from "@lucide/svelte";
   import {invalidate} from "$app/navigation";
   import UniformSetForm from "$lib/dp/components/forms/UniformSetForm.svelte";
   import Cap from "$lib/dp/components/icons/Cap.svelte";

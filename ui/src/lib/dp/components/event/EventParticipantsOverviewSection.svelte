@@ -1,29 +1,27 @@
 <script lang="ts">
-  import {Check, CircleQuestionMark, Ghost, Trash, X} from "lucide-svelte";
-  import {fade} from "svelte/transition";
+  import { Check, CircleQuestionMark, Ghost, Trash, X } from "@lucide/svelte";
   import ExternalParticipationWrapper from "$lib/dp/components/event/ExternalParticipationWrapper.svelte";
   import IndividualParticipationEditButton from "$lib/dp/components/event/IndividualParticipationEditButton.svelte";
-  import {authSettings, client} from "$lib/dp/client.svelte.js";
+  import { authSettings, client } from "$lib/dp/client.svelte.js";
   import type {
     CustomAuthModel,
     ExpandedEvent,
     ExpandedParticipation,
-    ParticipationType
+    ParticipationType,
   } from "$lib/dp/types/ExpandedResponse.ts";
-  import type {EventsUpdate} from "$lib/dp/types/pb-types.ts";
-  import {Collection} from "$lib/dp/enum/Collection.ts";
-  import {sendParticipationData} from "$lib/dp/utility/sendParticipationData.ts";
-  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
-  import {invalidate} from "$app/navigation";
-  import {participationDTOToExpandedParticipation} from "$lib/dp/types/UserParticipationDTO.ts";
-
-  //@ts-ignore - library does not provide types
+  import type { EventsUpdate } from "$lib/dp/types/pb-types.ts";
+  import { Collection } from "$lib/dp/enum/Collection.ts";
+  import { sendParticipationData } from "$lib/dp/utility/sendParticipationData.ts";
+  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  import { invalidate } from "$app/navigation";
+  import { participationDTOToExpandedParticipation } from "$lib/dp/types/UserParticipationDTO.ts";
+  import { PUBLIC_APPLICATION_CONTEXT } from "$env/static/public";
 
   interface Props {
     event: ExpandedEvent;
   }
 
-  const {event}: Props = $props();
+  const { event }: Props = $props();
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
@@ -31,14 +29,17 @@
   const isAdmin = $derived(
     (event.expand?.team?.admins.includes(authRecord.id) ||
       event?.expand?.team?.expand?.club?.admins.includes(authRecord.id)) ??
-    false
+      false,
   );
 
   async function removeGuestPlayer(playerToRemove: string) {
-    const newGuestPlayerList = displayedGuestPlayers.filter((player) => player !== playerToRemove);
+    const newGuestPlayerList = displayedGuestPlayers.filter(
+      (player) => player !== playerToRemove,
+    );
     await client.collection(Collection.Events).update<EventsUpdate>(event.id, {
       guests: newGuestPlayerList.join(),
     });
+    await invalidate("event:single")
   }
 
   let currentDraggedParticipation: ExpandedParticipation | null = $state(null);
@@ -63,9 +64,19 @@
 
   async function ondrop(event: DragEvent, type: ParticipationType) {
     event.preventDefault();
-    console.log('Drop event triggered for participation:', event.dataTransfer?.getData("participation"));
 
-    if (currentDraggedParticipation === null || currentDraggedParticipation.state === type) {
+    //@wc-ignore
+    if (PUBLIC_APPLICATION_CONTEXT !== "Production") {
+      console.log(
+        "Drop event triggered for participation:",
+        event.dataTransfer?.getData("participation"),
+      );
+    }
+
+    if (
+      currentDraggedParticipation === null ||
+      currentDraggedParticipation.state === type
+    ) {
       return;
     }
 
@@ -75,8 +86,8 @@
       await sendParticipationData(currentDraggedParticipation);
     } catch (e) {
       toastController.trigger({
-        message: 'Failed to send participation data',
-        background: 'preset-filled-error-500',
+        message: "Failed to send participation data",
+        background: "preset-filled-error-500",
       });
     }
     currentDraggedParticipation = null;
@@ -92,7 +103,7 @@
     {ondragover}
   >
     <header class="participation-header">
-      <span><Check/></span>
+      <span><Check /></span>
       <h3 class="h4">In</h3>
     </header>
 
@@ -100,7 +111,10 @@
       <ul class="participation-content">
         {#key event.participations.in}
           {#each event.participations.in as inResponse (inResponse.id)}
-            <li draggable="true" in:fade|global={{delay: 200}} ondragstart={(event) => ondragstart(event, inResponse)}>
+            <li
+              draggable="true"
+              ondragstart={(event) => ondragstart(event, inResponse)}
+            >
               <IndividualParticipationEditButton
                 participation={inResponse}
                 {isAdmin}
@@ -110,8 +124,8 @@
           {/each}
 
           {#each displayedGuestPlayers as guestPlayer}
-            {#if guestPlayer /* can be an empty string */}
-              <li in:fade|global={{delay: 200}}>
+            {#if guestPlayer}
+              <li>
                 <button
                   aria-label="guest player name, click removes the player from the event"
                   class="chip guest-chip preset-tonal border-surface"
@@ -119,7 +133,7 @@
                 >
                   {guestPlayer}
                   {#if isAdmin}
-                    <Trash size="10"/>
+                    <Trash size="10" />
                   {/if}
                 </button>
               </li>
@@ -136,7 +150,7 @@
     {ondragover}
   >
     <header class="participation-header">
-      <span><CircleQuestionMark/></span>
+      <span><CircleQuestionMark /></span>
       <h3 class="h4">Maybe</h3>
     </header>
 
@@ -144,8 +158,10 @@
       <ul class="participation-content">
         {#key event.participations.maybe}
           {#each event.participations.maybe as maybeResponse (maybeResponse.id)}
-            <li draggable="true" in:fade|global={{delay: 200}}
-                ondragstart={(event) => ondragstart(event, maybeResponse)}>
+            <li
+              draggable="true"
+              ondragstart={(event) => ondragstart(event, maybeResponse)}
+            >
               <IndividualParticipationEditButton
                 participation={maybeResponse}
                 {isAdmin}
@@ -164,7 +180,7 @@
     {ondragover}
   >
     <header class="participation-header">
-      <span><X/></span>
+      <span><X /></span>
       <h3 class="h4">Out</h3>
     </header>
 
@@ -172,7 +188,10 @@
       <ul class="participation-content">
         {#key event.participations.out}
           {#each event.participations.out as outResponse (outResponse.id)}
-            <li draggable="true" in:fade|global={{delay: 200}} ondragstart={(event) => ondragstart(event, outResponse)}>
+            <li
+              draggable="true"
+              ondragstart={(event) => ondragstart(event, outResponse)}
+            >
               <IndividualParticipationEditButton
                 participation={outResponse}
                 {isAdmin}
@@ -186,32 +205,43 @@
   </article>
 </section>
 
-<section class="no-response-section">
-  <article class="card participant-card preset-outlined-card">
-    <header class="participation-header">
-      <span><Ghost/></span>
-      <h3 class="h4">No Response</h3>
-    </header>
+{#if event.team}
+  <section class="no-response-section">
+    <article class="card participant-card preset-outlined-card">
+      <header class="participation-header">
+        <span><Ghost /></span>
+        <h3 class="h4">No Response</h3>
+      </header>
 
-    <section>
-      <ul class="participation-content">
-        {#key event.participations.unspecified}
-          {#each event.participations.unspecified as ghostResponse (ghostResponse.id)}
-            <li draggable="true" in:fade|global={{delay: 200}}
-                ondragstart={(e) => ondragstart(e, participationDTOToExpandedParticipation(ghostResponse, event.id))}>
-              <ExternalParticipationWrapper
-                dto={ghostResponse}
-                eventID={event.id}
-                {isAdmin}
-                classes="chip preset-outlined"
-              />
-            </li>
-          {/each}
-        {/key}
-      </ul>
-    </section>
-  </article>
-</section>
+      <section>
+        <ul class="participation-content">
+          {#key event.participations.unspecified}
+            {#each event.participations.unspecified as ghostResponse (ghostResponse.id)}
+              <li
+                draggable="true"
+                ondragstart={(e) =>
+                  ondragstart(
+                    e,
+                    participationDTOToExpandedParticipation(
+                      ghostResponse,
+                      event.id,
+                    ),
+                  )}
+              >
+                <ExternalParticipationWrapper
+                  dto={ghostResponse}
+                  eventID={event.id}
+                  {isAdmin}
+                  classes="chip preset-outlined"
+                />
+              </li>
+            {/each}
+          {/key}
+        </ul>
+      </section>
+    </article>
+  </section>
+{/if}
 
 <style>
   .participants-title {

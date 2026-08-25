@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {ClipboardList, Dumbbell, ShieldHalf} from "lucide-svelte";
+  import {ClipboardList, Dumbbell, ShieldHalf} from "@lucide/svelte";
   import {invalidate} from "$app/navigation";
   import TeamForm from "$lib/dp/components/forms/TeamForm.svelte";
   import DeleteButton from "$lib/dp/components/utils/DeleteButton.svelte";

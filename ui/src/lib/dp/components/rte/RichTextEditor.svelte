@@ -1,32 +1,40 @@
 <script lang="ts">
-  import {Carta, MarkdownEditor} from 'carta-md';
-  import 'carta-md/default.css';
-  import DOMPurify from 'dompurify';
-  import {onMount} from "svelte";
+  import { onMount } from "svelte";
+  import { MaerkchenEditor } from "maerkchen";
 
   interface Props {
     value: string;
+    label?: string;
+    formElementName?: string;
     required?: boolean;
   }
 
-  let {value = $bindable(), required = false}: Props = $props();
+  let editor: MaerkchenEditor;
 
-  const carta = new Carta({
-    sanitizer: DOMPurify.sanitize,
-  });
+  let {
+    value = $bindable(),
+    label,
+    formElementName,
+    required = false,
+  }: Props = $props();
 
   onMount(() => {
-    // this is a hack, for some reason no classes can be added via the component
-    const cartaRenderers = document.querySelectorAll('.carta-renderer.markdown-body');
-    if (cartaRenderers.length === 0) {
-      console.warn('Carta renderer elements not found');
-      return;
-    }
-
-    cartaRenderers.forEach((renderer) => {
-      renderer.classList.add("prose");
-    });
+    editor.addEventListener("change", () => {
+      value = editor.markdownText;
+    })
   });
 </script>
 
-<MarkdownEditor bind:value mode="auto" {carta} textarea={{required: required}}/>
+<maerkchen-editor
+  bind:this={editor}
+  {label}
+  {formElementName}
+  {required}
+  markdownText={value}
+></maerkchen-editor>
+
+<style>
+  maerkchen-editor {
+    --color-border: light-dark(var(--color-surface-50), #334155);
+  }
+</style>

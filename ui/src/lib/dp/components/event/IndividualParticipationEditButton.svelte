@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { MessageCircleMore } from "lucide-svelte";
+  import { MessageCircleMore } from "@lucide/svelte";
   import ParticipationForm from "$lib/dp/components/forms/ParticipationForm.svelte";
   import Dialog from "$lib/dp/components/modal/Dialog.svelte";
   import { authSettings } from "$lib/dp/client.svelte.js";
@@ -7,7 +7,6 @@
     CustomAuthModel,
     ExpandedParticipation,
   } from "$lib/dp/types/ExpandedResponse.ts";
-  import type { HTMLButtonAttributes } from "svelte/elements";
 
   interface Props {
     participation: ExpandedParticipation;
@@ -33,14 +32,6 @@
       ? new Date(participation.updated).toLocaleString()
       : "---",
   );
-
-  const triggerProps: {
-    popovertarget: HTMLButtonAttributes["popovertarget"];
-    popovertargetaction: HTMLButtonAttributes["popovertargetaction"];
-  } = {
-    popovertarget: id,
-    popovertargetaction: "hide",
-  };
 </script>
 
 <button class="{classes} trigger-button" popovertarget={id}>
@@ -72,7 +63,6 @@
   {#if canEdit}
     <Dialog
       triggerClasses="btn btn-sm preset-tonal-primary border border-primary-500 edit-btn"
-      {triggerProps}
     >
       {#snippet triggerContent()}
         Edit

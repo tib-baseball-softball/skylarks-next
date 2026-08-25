@@ -1,18 +1,19 @@
 <script lang="ts">
-  import {authSettings, client} from "$lib/dp/client.svelte.js";
-  import type {CustomAuthModel, ExpandedServiceEntry} from "$lib/dp/types/ExpandedResponse.ts";
-  import {closeModal} from "$lib/dp/utility/closeModal.ts";
+  import { authSettings, client } from "$lib/dp/client.svelte.js";
+  import type {
+    CustomAuthModel,
+    ExpandedServiceEntry,
+  } from "$lib/dp/types/ExpandedResponse.ts";
   import type {
     ClubsResponse,
     ServiceentriesResponse,
     ServiceentriesUpdate,
-    UsersResponse
+    UsersResponse,
   } from "$lib/dp/types/pb-types.ts";
-  import {Collection} from "$lib/dp/enum/Collection.ts";
-  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
-  import {invalidate} from "$app/navigation";
-  import Flatpickr from "$lib/dp/components/formElements/Flatpickr.svelte";
-  import {DateTimeUtility} from "$lib/dp/service/DateTimeUtility.ts";
+  import { Collection } from "$lib/dp/enum/Collection.ts";
+  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  import { invalidate } from "$app/navigation";
+  import ISODatePicker from "$lib/dp/components/formElements/ISODatePicker.svelte";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
@@ -21,40 +22,44 @@
     club: ClubsResponse;
   }
 
-  let {serviceEntry, club}: Props = $props();
+  let { serviceEntry, club }: Props = $props();
 
   type MinuteSuggestion = {
-    value: number,
-    label: string,
-  }
+    value: number;
+    label: string;
+  };
   const minutesSuggestions: MinuteSuggestion[] = [
-    {value: 30, label: "0.5h"},
-    {value: 60, label: "1h"},
-    {value: 90, label: "1.5h"},
-    {value: 120, label: "2h"},
-    {value: 150, label: "2.5h"},
-    {value: 180, label: "3h"},
-    {value: 210, label: "3.5h"},
-    {value: 240, label: "4h"},
-    {value: 270, label: "4.5h"},
-    {value: 300, label: "5h"},
+    { value: 30, label: "0.5h" },
+    { value: 60, label: "1h" },
+    { value: 90, label: "1.5h" },
+    { value: 120, label: "2h" },
+    { value: 150, label: "2.5h" },
+    { value: 180, label: "3h" },
+    { value: 210, label: "3.5h" },
+    { value: 240, label: "4h" },
+    { value: 270, label: "4.5h" },
+    { value: 300, label: "5h" },
   ];
 
   function setSuggestion(suggestion: MinuteSuggestion) {
     form.minutes = suggestion.value;
   }
 
-  function formFromProps(data: ExpandedServiceEntry | null): ServiceentriesUpdate {
-    return data ?? {
-      id: "",
-      service_date: "",
-      minutes: 0,
-      member: authRecord.id,
-      club: club.id,
-      title: "",
-      description: "",
-      board_member: "",
-    };
+  function formFromProps(
+    data: ExpandedServiceEntry | null,
+  ): ServiceentriesUpdate {
+    return (
+      data ?? {
+        id: "",
+        service_date: "",
+        minutes: 0,
+        member: authRecord.id,
+        club: club.id,
+        title: "",
+        description: "",
+        board_member: "",
+      }
+    );
   }
 
   const form: ServiceentriesUpdate = $derived.by(() => {
@@ -64,14 +69,18 @@
 
   const isAdmin = $derived(club?.admins.includes(authRecord.id));
 
-  const possibleClubs = $derived(client.collection(Collection.Clubs).getFullList<ClubsResponse>({
-    requestKey: null,
-  }));
+  const possibleClubs = $derived(
+    client.collection(Collection.Clubs).getFullList<ClubsResponse>({
+      requestKey: null,
+    }),
+  );
 
-  const allClubMembers = $derived(client.collection(Collection.Users).getFullList<UsersResponse>({
-    filter: `club ?~ '${club.id}'`,
-    requestKey: null,
-  }));
+  const allClubMembers = $derived(
+    client.collection(Collection.Users).getFullList<UsersResponse>({
+      filter: `club ?~ '${club.id}'`,
+      requestKey: null,
+    }),
+  );
 
   async function submitForm(e: SubmitEvent) {
     e.preventDefault();
@@ -80,17 +89,22 @@
 
     try {
       if (form.id) {
-        result = await client.collection(Collection.ServiceEntries).update(form.id, form);
+        result = await client
+          .collection(Collection.ServiceEntries)
+          .update(form.id, form);
       } else {
-        result = await client.collection(Collection.ServiceEntries).create(form);
+        result = await client
+          .collection(Collection.ServiceEntries)
+          .create(form);
       }
     } catch (e) {
       toastController.triggerGenericFormErrorMessage("Community Service Entry");
     }
 
     if (result) {
-      toastController.triggerGenericFormSuccessMessage("Community Service Entry");
-      closeModal();
+      toastController.triggerGenericFormSuccessMessage(
+        "Community Service Entry",
+      );
       await invalidate("communityservice:list");
       await invalidate("communityservice:admin");
     }
@@ -98,9 +112,8 @@
 </script>
 
 <form class="edit-form" onsubmit={submitForm}>
-
   <label class="label">
-    Title
+    <span>Title</span>
     <input
       bind:value={form.title}
       class="input"
@@ -111,20 +124,22 @@
   </label>
 
   <label class="label">
-    Date
-    <Flatpickr
-      bind:value={form.service_date}
-      options={Object.assign(DateTimeUtility.datePickerOptionsNoTime, {
-                      static: true, // render the picker as a child element to the form to work in a sheet portal context
-                  })}
-    />
+    <span>Date</span>
+
+    {#if typeof form.service_date === "string"}
+      <ISODatePicker
+        bind:value={form.service_date}
+        type="date"
+        required={true}
+      />
+    {/if}
   </label>
 
   <fieldset class="rounded-base">
     <legend class="legend">Duration</legend>
 
     <label class="label">
-      Minutes
+      <span>Minutes</span>
       <input
         autocomplete="off"
         bind:value={form.minutes}
@@ -149,24 +164,18 @@
   </fieldset>
 
   <label class="label">
-    Description
+    <span>Description</span>
     <textarea
       bind:value={form.description}
       class="textarea"
       name="desc"
-      rows="2"
-    ></textarea>
+      rows="2"></textarea>
   </label>
 
   {#if !form.id && isAdmin}
     <label class="label">
-      Club
-      <select
-        bind:value={form.club}
-        class="select"
-        name="club"
-        required
-      >
+      <span>Club</span>
+      <select bind:value={form.club} class="select" name="club" required>
         {#await possibleClubs then clubs}
           {#each clubs as club}
             <option value={club.id}>{club.name}</option>
@@ -177,7 +186,7 @@
   {/if}
 
   <label class="label">
-    Board Member
+    <span>Board Member</span>
     <select
       bind:value={form.board_member}
       class="select"
@@ -185,8 +194,10 @@
       required
     >
       {#await allClubMembers then members}
-        {#each members.filter((element) => club?.admins.includes(element.id)) as member}
-          <option value={member.id}>{member.first_name} {member.last_name}</option>
+        {#each members.filter( (element) => club?.admins.includes(element.id) ) as member}
+          <option value={member.id}
+            >{member.first_name} {member.last_name}</option
+          >
         {/each}
       {/await}
     </select>
@@ -194,16 +205,13 @@
 
   {#if isAdmin}
     <label class="label">
-      Member
-      <select
-        bind:value={form.member}
-        class="select"
-        name="member"
-        required
-      >
+      <span>Member</span>
+      <select bind:value={form.member} class="select" name="member" required>
         {#await allClubMembers then members}
           {#each members as member}
-            <option value={member.id}>{member.first_name} {member.last_name}</option>
+            <option value={member.id}
+              >{member.first_name} {member.last_name}</option
+            >
           {/each}
         {/await}
       </select>
@@ -211,10 +219,8 @@
   {/if}
 
   <div class="submit-wrapper">
-    <button
-      class="btn preset-tonal-primary"
-      type="submit"
-    >Confirm
+    <button class="btn preset-tonal-primary" type="submit" data-dialog-close
+      >Confirm
     </button>
   </div>
 </form>

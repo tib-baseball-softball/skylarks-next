@@ -3,7 +3,7 @@
   import CommunityServiceItemCard from "$lib/dp/components/communityservice/CommunityServiceItemCard.svelte";
   import TargetVisualizer from "$lib/dp/components/communityservice/TargetVisualizer.svelte";
   import {toHours} from "$lib/dp/utility/toHours.ts";
-  import {Plus} from "lucide-svelte";
+  import {Plus} from "@lucide/svelte";
   import ServiceEntryForm from "$lib/dp/components/forms/ServiceEntryForm.svelte";
   import Dialog from "$lib/dp/components/modal/Dialog.svelte";
 

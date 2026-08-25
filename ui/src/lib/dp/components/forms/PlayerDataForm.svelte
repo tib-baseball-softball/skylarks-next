@@ -1,19 +1,19 @@
 <script lang="ts">
-  import {SquarePen} from "lucide-svelte";
+  import { SquarePen } from "@lucide/svelte";
   import TabsRadioGroup from "$lib/dp/components/formElements/TabsRadioGroup.svelte";
   import Switch from "$lib/dp/components/formElements/Switch.svelte";
-  //@ts-ignore
-  import * as Sheet from "$lib/dp/components/modal/sheet";
   import TagsInput from "$lib/dp/components/formElements/TagsInput.svelte";
-  import {authSettings, client} from "$lib/dp/client.svelte.js";
-  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
+  import { authSettings, client } from "$lib/dp/client.svelte.js";
+  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
   import {
     getAllBaseballPositionStringValues,
     positionEnumStringValuesToKeys,
     positionKeysToEnumStringValues,
   } from "$lib/dp/types/BaseballPosition.ts";
-  import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
-  import {Collection} from "$lib/dp/enum/Collection.ts";
+  import type { CustomAuthModel } from "$lib/dp/types/ExpandedResponse.ts";
+  import { Collection } from "$lib/dp/enum/Collection.ts";
+  import Sheet from "$lib/dp/components/modal/Sheet.svelte";
+  import clsx from "clsx";
 
   interface ValidateArgs {
     inputValue: string;
@@ -21,7 +21,12 @@
   }
 
   interface Props {
-    triggerVariant?: "filled-primary" | "tonal-primary" | "tonal-secondary" | "tonal-tertiary" | "tonal-surface";
+    triggerVariant?:
+      | "filled-primary"
+      | "tonal-primary"
+      | "tonal-secondary"
+      | "tonal-tertiary"
+      | "tonal-surface";
     triggerSize?: "default" | "sm";
     triggerIcon?: boolean;
     triggerSpaced?: boolean;
@@ -60,7 +65,9 @@
 
   const possiblePositionValues = getAllBaseballPositionStringValues();
   // svelte-ignore state_referenced_locally - this component uses manual state management
-  let selectedPositions: string[] = $state(positionKeysToEnumStringValues(authRecord.position));
+  let selectedPositions: string[] = $state(
+    positionKeysToEnumStringValues(authRecord.position),
+  );
 
   function validatePositionValue(details: ValidateArgs): boolean {
     return possiblePositionValues.includes(details.inputValue);
@@ -85,7 +92,9 @@
     let result: CustomAuthModel | null = null;
 
     try {
-      result = await client.collection(Collection.Users).update<CustomAuthModel>(form.id, form);
+      result = await client
+        .collection(Collection.Users)
+        .update<CustomAuthModel>(form.id, form);
     } catch {
       toastController.triggerGenericFormErrorMessage("Player data");
     }
@@ -96,91 +105,93 @@
     }
   }
 
-  const onValueChange = (e: { value: string[] }) => (selectedPositions = e.value);
+  const onValueChange = (e: { value: string[] }) =>
+    (selectedPositions = e.value);
 </script>
 
-<Sheet.Root bind:open={open}>
-  <Sheet.Trigger
-    class={[
-      "btn",
-      "trigger-button",
-      `trigger-variant-${triggerVariant}`,
-      triggerSize === "sm" && "btn-sm",
-      triggerIcon && "btn-icon",
-      triggerSpaced && "trigger-spaced",
-      triggerVariant === "filled-primary" && "preset-filled-primary-500",
-      triggerVariant === "tonal-primary" && "preset-tonal-primary",
-      triggerVariant === "tonal-secondary" && "preset-filled-secondary-100-900",
-      triggerVariant === "tonal-tertiary" && "preset-tonal-tertiary",
-      triggerVariant === "tonal-surface" && "preset-outlined-card",
-    ]}
-  >
-    <SquarePen/>
+<Sheet
+  side="right"
+  bind:open
+  triggerClasses={clsx([
+    "btn",
+    "trigger-button",
+    `trigger-variant-${triggerVariant}`,
+    triggerSize === "sm" && "btn-sm",
+    triggerIcon && "btn-icon",
+    triggerSpaced && "trigger-spaced",
+    triggerVariant === "filled-primary" && "preset-filled-primary-500",
+    triggerVariant === "tonal-primary" && "preset-tonal-primary",
+    triggerVariant === "tonal-secondary" && "preset-filled-secondary-100-900",
+    triggerVariant === "tonal-tertiary" && "preset-tonal-tertiary",
+    triggerVariant === "tonal-surface" && "preset-outlined-card",
+  ])}
+>
+  {#snippet triggerContent()}
+    <SquarePen />
     <span>Edit Player Data</span>
-  </Sheet.Trigger>
+  {/snippet}
 
-  <Sheet.Content>
-    <Sheet.Header></Sheet.Header>
-
+  {#snippet title()}
     <header>
       <h2 class="h3">
         Edit Player Data for "{`${authRecord.first_name} ${authRecord.last_name}`}"
       </h2>
     </header>
+  {/snippet}
 
-    <form onsubmit={submitForm}>
-      <div class="edit-form-grid">
+  <form class="edit-form" onsubmit={submitForm}>
+    <div class="edit-form-grid">
+      <input
+        autocomplete="off"
+        bind:value={form.id}
+        class="input"
+        name="id"
+        readonly
+        type="hidden"
+      />
+
+      <label class="label">
+        Jersey Number
         <input
           autocomplete="off"
-          bind:value={form.id}
+          bind:value={form.number}
           class="input"
-          name="id"
-          readonly
-          type="hidden"
+          name="number"
+          type="number"
         />
+      </label>
 
-        <label class="label">
-          Jersey Number
-          <input
-            autocomplete="off"
-            bind:value={form.number}
-            class="input"
-            name="number"
-            type="number"
-          />
-        </label>
+      <label class="label">
+        BSM ID (Player Pass Number)
+        <input
+          autocomplete="off"
+          bind:value={form.bsm_id}
+          class="input"
+          name="bsm_id"
+          readonly
+          type="text"
+        />
+      </label>
 
-        <label class="label">
-          BSM ID (Player Pass Number)
-          <input
-            autocomplete="off"
-            bind:value={form.bsm_id}
-            class="input"
-            name="bsm_id"
-            readonly
-            type="text"
-          />
-        </label>
+      <span class="label-wide">
+        <Switch
+          bind:checked={form.display_on_website}
+          name="display_on_website"
+        >
+          Display this data publicly on team website
+        </Switch>
+      </span>
 
-        <span class="label-wide">
-          <Switch
-            bind:checked={form.display_on_website}
-            name="display_on_website"
-          >
-            Display this data publicly on team website
-          </Switch>
-        </span>
-
-        <label class="label label-wide">
-          Positions
-          <TagsInput
-            name="positions"
-            onValueChange={onValueChange}
-            placeholder="Enter positions or click buttons..."
-            validate={validatePositionValue}
-            value={selectedPositions}
-          />
-          <span class="label-wide position-labels">
+      <label class="label label-wide">
+        Positions
+        <TagsInput
+          name="positions"
+          {onValueChange}
+          placeholder="Enter positions or click buttons..."
+          validate={validatePositionValue}
+          value={selectedPositions}
+        />
+        <span class="label-wide position-labels">
           {#each possiblePositionValues as value}
             <button
               type="button"
@@ -191,47 +202,49 @@
             </button>
           {/each}
         </span>
-        </label>
+      </label>
 
-        <TabsRadioGroup
-          bind:value={form.bats}
-          label="Bats"
-          name="bats"
-          options={["left", "right", "switch"]}
-        />
+      <TabsRadioGroup
+        bind:value={form.bats}
+        label="Bats"
+        name="bats"
+        options={["left", "right", "switch"]}
+      />
 
-        <TabsRadioGroup
-          bind:value={form.throws}
-          label="Throws"
-          name="throws"
-          options={["left", "right", "switch"]}
-        />
+      <TabsRadioGroup
+        bind:value={form.throws}
+        label="Throws"
+        name="throws"
+        options={["left", "right", "switch"]}
+      />
 
-        <TabsRadioGroup
-          bind:value={form.umpire}
-          label="Umpire License"
-          name="umpire"
-          options={["none", "A", "B", "C", "D"]}
-        />
+      <TabsRadioGroup
+        bind:value={form.umpire}
+        label="Umpire License"
+        name="umpire"
+        options={["none", "A", "B", "C", "D"]}
+      />
 
-        <TabsRadioGroup
-          bind:value={form.scorer}
-          label="Scorer License"
-          name="scorer"
-          options={["none", "A", "B", "C", "D"]}
-        />
-      </div>
+      <TabsRadioGroup
+        bind:value={form.scorer}
+        label="Scorer License"
+        name="scorer"
+        options={["none", "A", "B", "C", "D"]}
+      />
+    </div>
 
-      <hr>
+    <hr />
 
-      <div class="submit-container">
-        <button class="btn preset-tonal-primary border border-primary-500" type="submit">
-          Submit
-        </button>
-      </div>
-    </form>
-  </Sheet.Content>
-</Sheet.Root>
+    <div class="submit-container">
+      <button
+        class="btn preset-tonal-primary border border-primary-500"
+        type="submit"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</Sheet>
 
 <style>
   form {

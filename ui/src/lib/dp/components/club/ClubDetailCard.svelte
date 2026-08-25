@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Info, Shield, Tag } from "lucide-svelte";
+  import { Info, Shield, Tag } from "@lucide/svelte";
   import ClubForm from "$lib/dp/components/forms/ClubForm.svelte";
   import { authSettings } from "$lib/dp/client.svelte.js";
   import type {

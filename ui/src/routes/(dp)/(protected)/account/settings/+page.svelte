@@ -2,7 +2,7 @@
   import {authSettings} from "$lib/dp/client.svelte.js";
   import PasswordRequestButton from "$lib/dp/auth/PasswordRequestButton.svelte";
   import Dialog from "$lib/dp/components/modal/Dialog.svelte";
-  import {Lock, Mail, User} from "lucide-svelte";
+  import {Lock, Mail, User} from "@lucide/svelte";
   import ChangeEmailForm from "$lib/dp/auth/ChangeEmailForm.svelte";
   import UserDetailsForm from "$lib/dp/components/forms/UserDetailsForm.svelte";
   import PushSettingsSection from "$lib/dp/components/settings/PushSettingsSection.svelte";

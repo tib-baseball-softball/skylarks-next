@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-gotestsum --format testname
+gotestsum --format testname --format-icons hivis

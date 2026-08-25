@@ -1,8 +1,7 @@
 <script lang="ts">
-  import {authSettings, client} from "$lib/dp/client.svelte.js";
-  import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
-  import {closeModal} from "$lib/dp/utility/closeModal.ts";
-  import {Collection} from "$lib/dp/enum/Collection.ts";
+  import { authSettings, client } from "$lib/dp/client.svelte.js";
+  import type { CustomAuthModel } from "$lib/dp/types/ExpandedResponse.ts";
+  import { Collection } from "$lib/dp/enum/Collection.ts";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
@@ -47,13 +46,15 @@
       }
     }
 
-    client.collection(Collection.Users).update(form.id, formData, {expand: "club"}).then(closeModal);
+    client
+      .collection(Collection.Users)
+      .update(form.id, formData, { expand: "club" });
   }
 </script>
 
 <p class="info-text">
-  This data is only used for internal purposes and never shown anywhere publicly.
-  (Your team and club administrators have access).
+  This data is only used for internal purposes and never shown anywhere
+  publicly. (Your team and club administrators have access).
 </p>
 
 <form class="user-details-form" onsubmit={submitForm}>
@@ -91,23 +92,17 @@
   <label class="label">
     <span>Display Name</span>
 
-    <span class="info-text">
-      Will be set automatically if left blank.
-    </span>
+    <span class="info-text"> Will be set automatically if left blank. </span>
 
-    <input
-      bind:value={form.displayName}
-      class="input"
-      name="display_name"
-    />
+    <input bind:value={form.displayName} class="input" name="display_name" />
   </label>
-
 
   <label class="label">
     <span>Profile Image</span>
 
     <span class="info-text">
-      This is your app profile picture. It will not be used for your player profile image.
+      This is your app profile picture. It will not be used for your player
+      profile image.
     </span>
 
     <input
@@ -127,7 +122,9 @@
   {/if}
 
   <div class="actions">
-    <button class="btn preset-tonal-primary" type="submit">Confirm</button>
+    <button data-dialog-close class="btn preset-tonal-primary" type="submit"
+      >Confirm</button
+    >
   </div>
 </form>
 
