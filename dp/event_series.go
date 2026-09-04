@@ -3,6 +3,7 @@ package dp
 import (
 	"container/list"
 	"fmt"
+	"time"
 
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
@@ -132,6 +133,58 @@ func (s *EventSeries) DetermineState() SeriesState {
 		return SeriesStatePast
 	} else {
 		return SeriesStateOngoing
+	}
+}
+
+// PracticeSeason represents summer or winter in practice context.
+type PracticeSeason uint8
+
+// String returns a string representation of the underlying integer constant.
+func (ps PracticeSeason) String() string {
+	if ps == PracticeSeasonSummer {
+		return "Summer"
+	}
+	return "Winter"
+}
+
+const (
+	PracticeSeasonSummer PracticeSeason = 0
+	PracticeSeasonWinter PracticeSeason = 1
+)
+
+// PracticeDTO represents a single event series in a calendaric format.
+type PracticeDTO struct {
+	TeamID         string
+	Season         PracticeSeason
+	HumanSeason    string
+	DayOfWeek      time.Weekday
+	HumanDayOfWeek string
+	StartTime      string
+	EndTime        string
+	Location       string
+	Desc           string
+}
+
+// ToPracticeDTO converts an event series to a PracticeDTO.
+func (s *EventSeries) ToPracticeDTO(loc *time.Location) *PracticeDTO {
+	seriesStart := s.SeriesStart().Time()//.In(loc)
+	endTimeFirstOccurence := seriesStart.Add((time.Duration(s.Duration()) * time.Minute))
+
+	season := PracticeSeasonWinter
+	if seriesStart.Month() >= time.April && seriesStart.Month() <= time.October {
+	    season = PracticeSeasonSummer
+	}
+
+	return &PracticeDTO{
+		TeamID:         s.Team(),
+		Season:         season,
+		HumanSeason:    season.String(),
+		DayOfWeek:      seriesStart.Weekday(),
+		HumanDayOfWeek: seriesStart.Weekday().String(),
+		StartTime:      seriesStart.Format(time.TimeOnly),
+		EndTime:        endTimeFirstOccurence.Format(time.TimeOnly),
+		Location:       "TODO",
+		Desc:           s.Desc(),
 	}
 }
 

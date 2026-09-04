@@ -222,6 +222,7 @@ func BindDPHooks(app core.App, client bsm.APIClient, pushService PushService) {
 
 		clubAdminGroup.Bind(RequireClubAdminAccess())
 		clubAdminGroup.GET("/communityservice", GetClubCommunityService())
+		clubAdminGroup.GET("/practices", HandleClubPractices())
 		return se.Next()
 	})
 

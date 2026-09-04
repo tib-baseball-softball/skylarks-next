@@ -1,10 +1,12 @@
 package dp
 
 import (
+	"fmt"
 	"net/http"
 	"slices"
 	"strconv"
 
+	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/hook"
 	"github.com/pocketbase/pocketbase/tools/types"
@@ -72,4 +74,59 @@ func GetClubCommunityService() func(event *core.RequestEvent) error {
 		}
 		return e.JSON(http.StatusOK, rows)
 	}
+}
+
+// HandleClubPractices is a handler func that returns all event series
+// for a single club in a format suitable for external systems.
+//
+// Authentication is expected to be handled by a preceding middleware.
+func HandleClubPractices() func(e *core.RequestEvent) error {
+	return handleClubPractices
+}
+
+func handleClubPractices(e *core.RequestEvent) error {
+	club, ok := e.Get(EventStoreKeyClub).(Club)
+	ctx := &ErrorContext{
+		Key: "local",
+		Values: map[string]any{
+			"clubID":   club.Id,
+			"clubName": club.Name(),
+		},
+	}
+	if !ok {
+		err := fmt.Errorf("Club not properly set in request context")
+		ForwardErrorToExternalSystem(err, ctx, nil)
+		return e.InternalServerError("", err)
+	}
+
+	seriesRecords, err := e.App.FindRecordsByFilter(
+		EventSeriesCollection,
+		"series_start <= @now && series_end >= @now && team.club.id = {:clubID}",
+		"+series_start",
+		0,
+		0,
+		dbx.Params{
+			"clubID": club.Id,
+		},
+	)
+	if err != nil {
+		ForwardErrorToExternalSystem(err, ctx, nil)
+		return e.InternalServerError("", err)
+	}
+
+	location, err := LoadAppTimeZone()
+	if err != nil {
+		ForwardErrorToExternalSystem(err, ctx, nil)
+		return e.InternalServerError("", err)
+	}
+
+	var dtos []*PracticeDTO
+
+	for _, record := range seriesRecords {
+		s := &EventSeries{}
+		s.SetProxyRecord(record)
+		dtos = append(dtos, s.ToPracticeDTO(location))
+	}
+
+	return e.JSON(http.StatusOK, dtos)
 }
