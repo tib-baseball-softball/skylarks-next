@@ -119,7 +119,20 @@ func (s *EventSeries) SetDuration(duration int) {
 }
 
 func (s *EventSeries) SetState(state SeriesState) {
+	s.WithCustomData(true)
 	s.Set("series_state", string(state))
+}
+
+func (s *EventSeries) DetermineState() SeriesState {
+	now := types.NowDateTime()
+
+	if s.SeriesStart().After(now) {
+		return SeriesStateFuture
+	} else if s.SeriesEnd().Before(now) {
+		return SeriesStatePast
+	} else {
+		return SeriesStateOngoing
+	}
 }
 
 // findEventRecordsForSeries fetches all events associated with a given eventSeries.

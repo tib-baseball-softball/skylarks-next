@@ -262,13 +262,5 @@ func addSeriesState(record *core.Record) {
 	eventSeries := &EventSeries{}
 	eventSeries.SetProxyRecord(record)
 
-	now := types.NowDateTime()
-
-	if eventSeries.SeriesStart().After(now) {
-		eventSeries.SetState(SeriesStateFuture)
-	} else if eventSeries.SeriesEnd().Before(now) {
-		eventSeries.SetState(SeriesStatePast)
-	} else {
-		eventSeries.SetState(SeriesStateOngoing)
-	}
+	eventSeries.SetState(eventSeries.DetermineState())
 }
