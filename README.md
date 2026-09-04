@@ -49,7 +49,7 @@ See also: [Project History](docs/History.md)
 
 * basic familiarity with the concepts of SvelteKit and Svelte – there is an
   excellent [official tutorial](https://learn.svelte.dev/tutorial/welcome-to-svelte) available
-* Go `v1.26` or higher
+* Go `v1.27` or higher
 * Node.js `v24` or higher
 * access to Berlin Skylarks environment secrets and API keys
 

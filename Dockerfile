@@ -23,7 +23,7 @@ RUN pnpm $BUILD_MODE
 
 
 # 2) Go/PocketBase build stage
-FROM golang:1.26-alpine AS go-builder
+FROM golang:1.27-alpine AS go-builder
 WORKDIR /app
 
 COPY go.mod go.sum ./
