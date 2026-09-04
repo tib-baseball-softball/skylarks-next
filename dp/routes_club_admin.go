@@ -113,6 +113,10 @@ func handleClubPractices(e *core.RequestEvent) error {
 		ForwardErrorToExternalSystem(err, ctx, nil)
 		return e.InternalServerError("", err)
 	}
+	errs := e.App.ExpandRecords(seriesRecords, []string{"location"}, nil)
+	if len(errs) > 0 {
+		return fmt.Errorf("failed to expand: %v", errs)
+	}
 
 	location, err := LoadAppTimeZone()
 	if err != nil {

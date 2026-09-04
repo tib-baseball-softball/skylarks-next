@@ -154,28 +154,30 @@ const (
 
 // PracticeDTO represents a single event series in a calendaric format.
 type PracticeDTO struct {
-	TeamID         string
-	Season         PracticeSeason
-	HumanSeason    string
-	DayOfWeek      time.Weekday
-	HumanDayOfWeek string
-	StartTime      string
-	EndTime        string
-	Location       string
-	Desc           string
+	TeamID         string         `json:"team_id"`
+	Season         PracticeSeason `json:"season"`
+	HumanSeason    string         `json:"human_season"`
+	DayOfWeek      time.Weekday   `json:"day_of_week"`
+	HumanDayOfWeek string         `json:"human_day_of_week"`
+	StartTime      string         `json:"start_time"`
+	EndTime        string         `json:"end_time"`
+	Location       *LocationDTO   `json:"location"`
+	Desc           string         `json:"desc"`
 }
 
 // ToPracticeDTO converts an event series to a PracticeDTO.
+//
+// The returned pointer is never nil.
 func (s *EventSeries) ToPracticeDTO(loc *time.Location) *PracticeDTO {
-	seriesStart := s.SeriesStart().Time()//.In(loc)
+	seriesStart := s.SeriesStart().Time() //.In(loc)
 	endTimeFirstOccurence := seriesStart.Add((time.Duration(s.Duration()) * time.Minute))
 
 	season := PracticeSeasonWinter
 	if seriesStart.Month() >= time.April && seriesStart.Month() <= time.October {
-	    season = PracticeSeasonSummer
+		season = PracticeSeasonSummer
 	}
 
-	return &PracticeDTO{
+	dto := &PracticeDTO{
 		TeamID:         s.Team(),
 		Season:         season,
 		HumanSeason:    season.String(),
@@ -183,9 +185,17 @@ func (s *EventSeries) ToPracticeDTO(loc *time.Location) *PracticeDTO {
 		HumanDayOfWeek: seriesStart.Weekday().String(),
 		StartTime:      seriesStart.Format(time.TimeOnly),
 		EndTime:        endTimeFirstOccurence.Format(time.TimeOnly),
-		Location:       "TODO",
+		Location:       nil,
 		Desc:           s.Desc(),
 	}
+	locationRecord := s.ExpandedOne("location")
+	if locationRecord != nil {
+		eventLoc := &Location{}
+		eventLoc.SetProxyRecord(locationRecord)
+		dto.Location = eventLoc.ToDTO()
+	}
+
+	return dto
 }
 
 // findEventRecordsForSeries fetches all events associated with a given eventSeries.

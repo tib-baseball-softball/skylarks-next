@@ -17,153 +17,193 @@ type Location struct {
 	core.BaseRecordProxy
 }
 
-func (a *Location) CollectionName() string {
+func (l *Location) CollectionName() string {
 	return LocationCollection
 }
 
-func (a *Location) ID() string {
-	return a.Id
+func (l *Location) ID() string {
+	return l.Id
 }
 
-func (a *Location) BSMID() int {
-	return a.GetInt("bsm_id")
+func (l *Location) BSMID() int {
+	return l.GetInt("bsm_id")
 }
 
-func (a *Location) SetBSMID(bsmID int) {
-	a.Set("bsm_id", bsmID)
+func (l *Location) SetBSMID(bsmID int) {
+	l.Set("bsm_id", bsmID)
 }
 
 // Name contains mostly useless data like "Baseball"
 // there is also `internal_name` in the record model to have a field that automatic imports do not overwrite
-func (a *Location) Name() string {
-	return a.GetString("name")
+func (l *Location) Name() string {
+	return l.GetString("name")
 }
 
-func (a *Location) SetName(name string) {
-	a.Set("name", name)
+func (l *Location) SetName(name string) {
+	l.Set("name", name)
 }
 
-func (a *Location) Description() string {
-	return a.GetString("description")
+func (l *Location) InternalName() string {
+	return l.GetString("internal_name")
 }
 
-func (a *Location) SetDescription(description string) {
-	a.Set("description", description)
+func (l *Location) SetInternalName(internalName string) {
+	l.Set("internal_name", internalName)
+}
+
+func (l *Location) Description() string {
+	return l.GetString("description")
+}
+
+func (l *Location) SetDescription(description string) {
+	l.Set("description", description)
 }
 
 // AddressAddon for many BSM datasets contains the actual name of the field
-func (a *Location) AddressAddon() string {
-	return a.GetString("address_addon")
+func (l *Location) AddressAddon() string {
+	return l.GetString("address_addon")
 }
 
-func (a *Location) SetAddressAddon(addressAddon string) {
-	a.Set("address_addon", addressAddon)
+func (l *Location) SetAddressAddon(addressAddon string) {
+	l.Set("address_addon", addressAddon)
 }
 
-func (a *Location) Street() string {
-	return a.GetString("street")
+func (l *Location) Street() string {
+	return l.GetString("street")
 }
 
-func (a *Location) SetStreet(street string) {
-	a.Set("street", street)
+func (l *Location) SetStreet(street string) {
+	l.Set("street", street)
 }
 
-func (a *Location) PostalCode() string {
-	return a.GetString("postal_code")
+func (l *Location) PostalCode() string {
+	return l.GetString("postal_code")
 }
 
-func (a *Location) SetPostalCode(postalCode string) {
-	a.Set("postal_code", postalCode)
+func (l *Location) SetPostalCode(postalCode string) {
+	l.Set("postal_code", postalCode)
 }
 
-func (a *Location) Country() string {
-	return a.GetString("country")
+func (l *Location) Country() string {
+	return l.GetString("country")
 }
 
-func (a *Location) SetCountry(country string) {
-	a.Set("country", country)
+func (l *Location) SetCountry(country string) {
+	l.Set("country", country)
 }
 
-func (a *Location) City() string {
-	return a.GetString("city")
+func (l *Location) City() string {
+	return l.GetString("city")
 }
 
-func (a *Location) SetCity(city string) {
-	a.Set("city", city)
+func (l *Location) SetCity(city string) {
+	l.Set("city", city)
 }
 
-func (a *Location) Longitude() float64 {
-	return a.GetFloat("longitude")
+func (l *Location) Longitude() float64 {
+	return l.GetFloat("longitude")
 }
 
-func (a *Location) SetLongitude(longitude float64) {
-	a.Set("longitude", longitude)
+func (l *Location) SetLongitude(longitude float64) {
+	l.Set("longitude", longitude)
 }
 
-func (a *Location) Latitude() float64 {
-	return a.GetFloat("latitude")
+func (l *Location) Latitude() float64 {
+	return l.GetFloat("latitude")
 }
 
-func (a *Location) SetLatitude(latitude float64) {
-	a.Set("latitude", latitude)
+func (l *Location) SetLatitude(latitude float64) {
+	l.Set("latitude", latitude)
 }
 
-func (a *Location) SpectatorTotal() int {
-	return a.GetInt("spectator_total")
+func (l *Location) SpectatorTotal() int {
+	return l.GetInt("spectator_total")
 }
 
-func (a *Location) SetSpectatorTotal(spectatorTotal int) {
-	a.Set("spectator_total", spectatorTotal)
+func (l *Location) SetSpectatorTotal(spectatorTotal int) {
+	l.Set("spectator_total", spectatorTotal)
 }
 
-func (a *Location) SpectatorSeats() int {
-	return a.GetInt("spectator_seats")
+func (l *Location) SpectatorSeats() int {
+	return l.GetInt("spectator_seats")
 }
 
-func (a *Location) SetSpectatorSeats(spectatorSeats int) {
-	a.Set("spectator_seats", spectatorSeats)
+func (l *Location) SetSpectatorSeats(spectatorSeats int) {
+	l.Set("spectator_seats", spectatorSeats)
 }
 
-func (a *Location) OtherInformation() string {
-	return a.GetString("other_information")
+func (l *Location) OtherInformation() string {
+	return l.GetString("other_information")
 }
 
-func (a *Location) SetOtherInformation(otherInformation string) {
-	a.Set("other_information", otherInformation)
+func (l *Location) SetOtherInformation(otherInformation string) {
+	l.Set("other_information", otherInformation)
 }
 
-func (a *Location) GroundRules() string {
-	return a.GetString("groundrules")
+func (l *Location) GroundRules() string {
+	return l.GetString("groundrules")
 }
 
-func (a *Location) SetGroundRules(groundRules string) {
-	a.Set("groundrules", groundRules)
+func (l *Location) SetGroundRules(groundRules string) {
+	l.Set("groundrules", groundRules)
 }
 
-func (a *Location) HumanCountry() string {
-	return a.GetString("human_country")
+func (l *Location) HumanCountry() string {
+	return l.GetString("human_country")
 }
 
-func (a *Location) SetHumanCountry(humanCountry string) {
-	a.Set("human_country", humanCountry)
+func (l *Location) SetHumanCountry(humanCountry string) {
+	l.Set("human_country", humanCountry)
 }
 
-func (a *Location) PhotoURL() string {
-	return a.GetString("photo_url")
+func (l *Location) PhotoURL() string {
+	return l.GetString("photo_url")
 }
 
-func (a *Location) SetPhotoURL(photoURL string) {
-	a.Set("photo_url", photoURL)
+func (l *Location) SetPhotoURL(photoURL string) {
+	l.Set("photo_url", photoURL)
 }
 
-func (a *Location) Club() string {
-	return a.GetString("club")
+func (l *Location) Club() string {
+	return l.GetString("club")
 }
 
-func (a *Location) SetClub(club string) {
-	a.Set("club", club)
+func (l *Location) SetClub(club string) {
+	l.Set("club", club)
 }
 
-func (a *Location) GetCalendarFormatted() string {
-	return fmt.Sprintf("%s (%s), %s %s, %s, %s, Lat: %f, Lng: %f", a.Name(), a.AddressAddon(), a.Street(), a.PostalCode(), a.City(), a.HumanCountry(), a.Latitude(), a.Longitude())
+func (l *Location) String() string {
+	return l.GetCalendarFormatted()
+}
+
+func (l *Location) GetCalendarFormatted() string {
+	return fmt.Sprintf("%s (%s), %s %s, %s, %s, Lat: %f, Lng: %f", l.Name(), l.AddressAddon(), l.Street(), l.PostalCode(), l.City(), l.HumanCountry(), l.Latitude(), l.Longitude())
+}
+
+type LocationDTO struct {
+	Name         string  `json:"name"`
+	AddressAddon string  `json:"address_addon"`
+	InternalName string  `json:"internal_name"`
+	Latitude     float64 `json:"latitude"`
+	Longitude    float64 `json:"longitude"`
+	Street       string  `json:"street"`
+	PostalCode   string  `json:"postal_code"`
+	City         string  `json:"city"`
+	Country      string  `json:"country"`
+	BSMID        int     `json:"bsm_id"`
+}
+
+func (l *Location) ToDTO() *LocationDTO {
+	return &LocationDTO{
+		Name:         l.Name(),
+		AddressAddon: l.AddressAddon(),
+		InternalName: l.InternalName(),
+		Latitude:     l.Latitude(),
+		Longitude:    l.Longitude(),
+		Street:       l.Street(),
+		PostalCode:   l.PostalCode(),
+		City:         l.City(),
+		Country:      l.Country(),
+		BSMID:        l.BSMID(),
+	}
 }
