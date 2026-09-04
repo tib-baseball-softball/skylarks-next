@@ -161,15 +161,15 @@ type PracticeDTO struct {
 	HumanDayOfWeek string         `json:"human_day_of_week"`
 	StartTime      string         `json:"start_time"`
 	EndTime        string         `json:"end_time"`
-	Location       *LocationDTO   `json:"location"`
 	Desc           string         `json:"desc"`
+	Location       *LocationDTO   `json:"location"`
 }
 
 // ToPracticeDTO converts an event series to a PracticeDTO.
 //
 // The returned pointer is never nil.
 func (s *EventSeries) ToPracticeDTO(loc *time.Location) *PracticeDTO {
-	seriesStart := s.SeriesStart().Time() //.In(loc)
+	seriesStart := s.SeriesStart().Time().In(loc)
 	endTimeFirstOccurence := seriesStart.Add((time.Duration(s.Duration()) * time.Minute))
 
 	season := PracticeSeasonWinter
@@ -185,8 +185,8 @@ func (s *EventSeries) ToPracticeDTO(loc *time.Location) *PracticeDTO {
 		HumanDayOfWeek: seriesStart.Weekday().String(),
 		StartTime:      seriesStart.Format(time.TimeOnly),
 		EndTime:        endTimeFirstOccurence.Format(time.TimeOnly),
-		Location:       nil,
 		Desc:           s.Desc(),
+		Location:       nil,
 	}
 	locationRecord := s.ExpandedOne("location")
 	if locationRecord != nil {
