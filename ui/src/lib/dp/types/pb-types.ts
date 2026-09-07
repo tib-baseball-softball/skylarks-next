@@ -550,17 +550,17 @@ export interface ParticipationsResponse extends BaseCollectionResponse {
 	user: string;
 	event: string;
 	comment: string;
-	state: '' | 'in' | 'out' | 'maybe';
+	state: 'in' | 'out' | 'maybe';
 	created: string;
 	updated: string;
 }
 
 export interface ParticipationsCreate extends BaseCollectionCreate {
 	id?: string;
-	user?: string;
-	event?: string;
+	user: string;
+	event: string;
 	comment?: string;
-	state?: '' | 'in' | 'out' | 'maybe';
+	state: 'in' | 'out' | 'maybe';
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -570,7 +570,7 @@ export interface ParticipationsUpdate extends BaseCollectionUpdate {
 	user?: string;
 	event?: string;
 	comment?: string;
-	state?: '' | 'in' | 'out' | 'maybe';
+	state?: 'in' | 'out' | 'maybe';
 	created?: string | Date;
 	updated?: string | Date;
 }
