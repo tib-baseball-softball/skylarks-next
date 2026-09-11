@@ -3,6 +3,7 @@ package dp
 import (
 	"container/list"
 	"fmt"
+	"time"
 
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
@@ -119,7 +120,84 @@ func (s *EventSeries) SetDuration(duration int) {
 }
 
 func (s *EventSeries) SetState(state SeriesState) {
+	s.WithCustomData(true)
 	s.Set("series_state", string(state))
+}
+
+func (s *EventSeries) DetermineState() SeriesState {
+	now := types.NowDateTime()
+
+	if s.SeriesStart().After(now) {
+		return SeriesStateFuture
+	} else if s.SeriesEnd().Before(now) {
+		return SeriesStatePast
+	} else {
+		return SeriesStateOngoing
+	}
+}
+
+// PracticeSeason represents summer or winter in practice context.
+type PracticeSeason uint8
+
+// String returns a string representation of the underlying integer constant.
+func (ps PracticeSeason) String() string {
+	if ps == PracticeSeasonSummer {
+		return "Summer"
+	}
+	return "Winter"
+}
+
+const (
+	PracticeSeasonSummer PracticeSeason = 0
+	PracticeSeasonWinter PracticeSeason = 1
+)
+
+// PracticeDTO represents a single event series in a calendaric format.
+type PracticeDTO struct {
+	ID             string         `json:"id"`
+	TeamID         string         `json:"team_id"`
+	Season         PracticeSeason `json:"season"`
+	HumanSeason    string         `json:"human_season"`
+	DayOfWeek      time.Weekday   `json:"day_of_week"`
+	HumanDayOfWeek string         `json:"human_day_of_week"`
+	StartTime      string         `json:"start_time"`
+	EndTime        string         `json:"end_time"`
+	Desc           string         `json:"desc"`
+	Location       *LocationDTO   `json:"location"`
+}
+
+// ToPracticeDTO converts an event series to a PracticeDTO.
+//
+// The returned pointer is never nil.
+func (s *EventSeries) ToPracticeDTO(loc *time.Location) *PracticeDTO {
+	seriesStart := s.SeriesStart().Time().In(loc)
+	endTimeFirstOccurence := seriesStart.Add((time.Duration(s.Duration()) * time.Minute))
+
+	season := PracticeSeasonWinter
+	if seriesStart.Month() >= time.April && seriesStart.Month() <= time.October {
+		season = PracticeSeasonSummer
+	}
+
+	dto := &PracticeDTO{
+		ID:             s.Id,
+		TeamID:         s.Team(),
+		Season:         season,
+		HumanSeason:    season.String(),
+		DayOfWeek:      seriesStart.Weekday(),
+		HumanDayOfWeek: seriesStart.Weekday().String(),
+		StartTime:      seriesStart.Format(time.TimeOnly),
+		EndTime:        endTimeFirstOccurence.Format(time.TimeOnly),
+		Desc:           s.Desc(),
+		Location:       nil,
+	}
+	locationRecord := s.ExpandedOne("location")
+	if locationRecord != nil {
+		eventLoc := &Location{}
+		eventLoc.SetProxyRecord(locationRecord)
+		dto.Location = eventLoc.ToDTO()
+	}
+
+	return dto
 }
 
 // findEventRecordsForSeries fetches all events associated with a given eventSeries.
