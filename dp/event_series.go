@@ -155,7 +155,7 @@ const (
 // PracticeDTO represents a single event series in a calendaric format.
 type PracticeDTO struct {
 	ID             string         `json:"id"`
-	TeamID         string         `json:"team_id"`
+	Teams          []string       `json:"teams"`
 	Season         PracticeSeason `json:"season"`
 	HumanSeason    string         `json:"human_season"`
 	DayOfWeek      time.Weekday   `json:"day_of_week"`
@@ -178,9 +178,12 @@ func (s *EventSeries) ToPracticeDTO(loc *time.Location) *PracticeDTO {
 		season = PracticeSeasonSummer
 	}
 
+	teams := []string{s.Team()}
+	teams = append(teams, s.AdditionalTeams()...)
+
 	dto := &PracticeDTO{
 		ID:             s.Id,
-		TeamID:         s.Team(),
+		Teams:          teams,
 		Season:         season,
 		HumanSeason:    season.String(),
 		DayOfWeek:      seriesStart.Weekday(),
