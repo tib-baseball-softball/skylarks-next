@@ -8,7 +8,7 @@ require (
 	github.com/arran4/golang-ical v0.3.6
 	github.com/getsentry/sentry-go v0.49.0
 	github.com/pocketbase/dbx v1.12.0
-	github.com/pocketbase/pocketbase v0.40.3
+	github.com/pocketbase/pocketbase v0.40.2
 	github.com/spf13/cast v1.10.0
 	github.com/spf13/cobra v1.10.2
 	github.com/subosito/gotenv v1.6.0
