@@ -16,6 +16,7 @@
   import type { ClubsResponse, TeamsResponse } from "$lib/dp/types/pb-types.ts";
   import EventTeamBadges from "$lib/dp/components/event/EventTeamBadges.svelte";
   import type { PageProps } from "./$types";
+  import { markdownToHTML } from "$lib/dp/utility/DOMFunctions";
 
   const { data }: PageProps = $props();
 
@@ -94,7 +95,7 @@
 
   <article class="description-section" class:cancelled-text={$event.cancelled}>
     <section>
-      <p>{$event.desc}</p>
+      <p class="prose">{@html await markdownToHTML($event.desc)}</p>
     </section>
   </article>
 

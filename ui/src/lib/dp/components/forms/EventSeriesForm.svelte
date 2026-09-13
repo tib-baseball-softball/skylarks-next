@@ -15,6 +15,7 @@
   import type { EventSeriesAction } from "$lib/dp/types/EventSeriesState";
   import ISODatePicker from "../formElements/ISODatePicker.svelte";
   import MultiSelectCombobox from "../formElements/MultiSelectCombobox.svelte";
+  import RichTextEditor from "../rte/RichTextEditor.svelte";
 
   interface Props {
     eventSeries: EventSeriesCreationData | null;
@@ -53,7 +54,7 @@
   let form: EventSeriesCreationData = $derived.by(() => {
     // we don't want to pass the reactive proxy here, we just need its data
     const data = $state.snapshot(eventSeries);
-    
+
     const formData = $state(formFromProps(data));
     return formData;
   });
@@ -203,10 +204,16 @@
       >
     </label>
 
-    <label class="label">
-      Description
-      <textarea bind:value={form.desc} class="textarea" name="desc"></textarea>
-    </label>
+    <div class="field-wide">
+      {#if form.desc !== undefined}
+        <RichTextEditor
+          bind:value={form.desc}
+          label="Description"
+          formElementName="desc"
+          required={false}
+        />
+      {/if}
+    </div>
 
     <label class="label">
       Location
