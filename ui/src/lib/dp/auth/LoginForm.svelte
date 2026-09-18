@@ -225,7 +225,7 @@
             </div>
 
             <div class="providers">
-              {#each methods.oauth2.providers as provider}
+              {#each methods.oauth2.providers as provider (provider.name)}
                 {#if tabSet === "login"}
                   <!--Login Buttons - no signupKey-->
                   <OAuthProviderButton
