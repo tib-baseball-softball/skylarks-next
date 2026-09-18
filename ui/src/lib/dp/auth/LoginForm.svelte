@@ -1,27 +1,22 @@
 <script lang="ts">
-  import { fade, slide } from "svelte/transition";
   import { goto } from "$app/navigation";
-  import Switch from "$lib/dp/components/formElements/Switch.svelte";
+  import { page } from "$app/state";
   import OAuthProviderButton from "$lib/dp/auth/OAuthProviderButton.svelte";
   import PasswordRequestButton from "$lib/dp/auth/PasswordRequestButton.svelte";
-  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
-  import type { Extension } from "$lib/dp/types/ExpandedResponse.js";
-  import type { UsersUpdate } from "$lib/dp/types/pb-types.ts";
-  import type { Toast } from "$lib/dp/types/Toast.ts";
-  import { client } from "../client.svelte.js";
-  import { page } from "$app/state";
+  import Switch from "$lib/dp/components/formElements/Switch.svelte";
   import TabsRadioGroup, {
     type TabSetOption,
   } from "$lib/dp/components/formElements/TabsRadioGroup.svelte";
+  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  import type { Extension } from "$lib/dp/types/ExpandedResponse.js";
+  import type { UsersUpdate } from "$lib/dp/types/pb-types.ts";
+  import { ClientResponseError } from "pocketbase";
+  import { fade, slide } from "svelte/transition";
+  import { client } from "../client.svelte.js";
 
   const { authCollection = "users", passwordLogin = true } = $props();
 
   const coll = $derived(client.collection(authCollection));
-
-  const failSettings: Toast = {
-    message: "There was an error processing your authentication request.",
-    background: "preset-filled-error-500",
-  };
 
   const prefilledSignupKey = page.url.searchParams.get("signup_key") ?? "";
 
@@ -48,10 +43,10 @@
         if (signupSuccessful) {
           await goto("/signupconfirm");
         } else {
-          toastController.trigger(failSettings);
+          toastController.triggerAuthErrorMessage();
         }
       } catch {
-        toastController.trigger(failSettings);
+        toastController.triggerAuthErrorMessage();
       }
       return;
     }
@@ -77,8 +72,15 @@
         await goto("/account", { invalidateAll: true });
       }
     } catch (error) {
-      console.error(error);
-      toastController.trigger(failSettings);
+      if (error instanceof ClientResponseError && error.status === 400) {
+        toastController.trigger({
+          message:
+            "Login failed: The provided combination of user and password wasn't found.",
+          background: "preset-filled-error-500",
+        });
+      } else {
+        toastController.triggerAuthErrorMessage();
+      }
     }
   }
 

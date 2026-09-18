@@ -44,11 +44,24 @@ class ToastController {
   }
 
   /**
-   * Used for generic errors that could occur anywhere and cannot be handled with the information at the call site.
+   * Used for generic errors that could occur anywhere
+   * and cannot be handled with the information at the call site.
+   * Most likely server errors (500 range) or JS errors that have nothing to do with my code.
    */
   public triggerGenericErrorMessage() {
     this.trigger({
       message: "An unknown error occurred. Please try again later.",
+      background: "preset-filled-error-500",
+    });
+  }
+
+  /**
+   * Generic enough, but still scoped to auth requests.
+   * Should only used when no other helpful feedback can be given.
+   */
+  public triggerAuthErrorMessage() {
+    this.trigger({
+      message: "There was an error processing your authentication request.",
       background: "preset-filled-error-500",
     });
   }
