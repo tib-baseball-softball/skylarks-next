@@ -18,8 +18,8 @@
   import { Collection } from "../enum/Collection.js";
 
   interface Props {
-    authCollection: Collection;
-    passwordLogin: boolean;
+    authCollection?: Collection;
+    passwordLogin?: boolean;
   }
 
   const { authCollection = Collection.Users, passwordLogin = true }: Props =
