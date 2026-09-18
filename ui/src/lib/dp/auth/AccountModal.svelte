@@ -5,8 +5,8 @@
 
   async function logout() {
     authSettings.record = null;
-    client.authStore.clear();
     await goto("/login");
+    client.authStore.clear();
   }
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
