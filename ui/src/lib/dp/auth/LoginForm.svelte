@@ -53,23 +53,24 @@
       } catch {
         toastController.trigger(failSettings);
       }
-    } else {
-      try {
-        const authResponse = await coll.authWithPassword(
-          form.email ?? "",
-          form.password ?? "",
-          {
-            expand: "club",
-          },
-        );
+      return;
+    }
 
-        if (authResponse) {
-          await goto("/account", { invalidateAll: true });
-        }
-      } catch (error) {
-        console.error(error);
-        toastController.trigger(failSettings);
+    try {
+      const authResponse = await coll.authWithPassword(
+        form.email ?? "",
+        form.password ?? "",
+        {
+          expand: "club",
+        },
+      );
+
+      if (authResponse) {
+        await goto("/account", { invalidateAll: true });
       }
+    } catch (error) {
+      console.error(error);
+      toastController.trigger(failSettings);
     }
   }
 

@@ -7,7 +7,7 @@ describe("ToastController", () => {
   const mockToast: Toast = {
     id: "test-id",
     message: "Test message",
-    background: "bg-primary",
+    background: "preset-filled",
   };
 
   // Mock crypto.randomUUID

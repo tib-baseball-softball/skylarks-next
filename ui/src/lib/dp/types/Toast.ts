@@ -5,4 +5,5 @@ export type Toast = {
     | "preset-filled-success-500"
     | "preset-filled-warning-500"
     | "preset-filled-error-500"
+    | "preset-filled";
 };
