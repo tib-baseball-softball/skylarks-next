@@ -56,10 +56,18 @@
       return;
     }
 
+    if (!form.email || !form.password) {
+      toastController.trigger({
+        message: "Email and password are required for login.",
+        background: "preset-filled-error-500",
+      });
+      return;
+    }
+
     try {
       const authResponse = await coll.authWithPassword(
-        form.email ?? "",
-        form.password ?? "",
+        form.email,
+        form.password,
         {
           expand: "club",
         },
