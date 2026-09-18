@@ -13,6 +13,7 @@
   import { ClientResponseError } from "pocketbase";
   import { fade, slide } from "svelte/transition";
   import { client } from "../client.svelte.js";
+  import type { Toast } from "../types/Toast.js";
 
   const { authCollection = "users", passwordLogin = true } = $props();
 
@@ -33,29 +34,50 @@
   async function submit(e: SubmitEvent) {
     e.preventDefault();
 
+    if (!form.email || !form.password) {
+      toastController.trigger({
+        message: "Email and password are required for login/signup.",
+        background: "preset-filled-error-500",
+      });
+      return;
+    }
+
     if (signup) {
+      // Step 1 - create new user
       try {
         await coll.create({ ...form });
-        const signupSuccessful = await coll.requestVerification(
-          form.email ?? "",
-        );
+      } catch (error) {
+        if (error instanceof ClientResponseError) {
+          // email already exists
+          // signup key is invalid
+        } else {
+          toastController.triggerAuthErrorMessage();
+        }
+      }
+
+      // Step 2 - send verification email
+      const sendEmailToastError: Toast = {
+        message:
+          "Sending verification email failed. Please contact your team manager.",
+        background: "preset-filled-error-500",
+      };
+
+      try {
+        const signupSuccessful = await coll.requestVerification(form.email);
 
         if (signupSuccessful) {
           await goto("/signupconfirm");
         } else {
+          toastController.trigger(sendEmailToastError);
+        }
+      } catch (error) {
+        if (error instanceof ClientResponseError) {
+          toastController.trigger(sendEmailToastError);
+        } else {
           toastController.triggerAuthErrorMessage();
         }
-      } catch {
-        toastController.triggerAuthErrorMessage();
       }
-      return;
-    }
 
-    if (!form.email || !form.password) {
-      toastController.trigger({
-        message: "Email and password are required for login.",
-        background: "preset-filled-error-500",
-      });
       return;
     }
 
