@@ -14,8 +14,16 @@
   import { fade, slide } from "svelte/transition";
   import { client } from "../client.svelte.js";
   import type { Toast } from "../types/Toast.js";
+  import { PBErrorCode } from "../types/Error.js";
+  import { Collection } from "../enum/Collection.js";
 
-  const { authCollection = "users", passwordLogin = true } = $props();
+  interface Props {
+    authCollection: Collection;
+    passwordLogin: boolean;
+  }
+
+  const { authCollection = Collection.Users, passwordLogin = true }: Props =
+    $props();
 
   const coll = $derived(client.collection(authCollection));
 
@@ -43,48 +51,68 @@
     }
 
     if (signup) {
-      // Step 1 - create new user
-      try {
-        await coll.create({ ...form });
-      } catch (error) {
-        if (error instanceof ClientResponseError) {
-          // email already exists
-          // signup key is invalid
-        } else {
-          toastController.triggerAuthErrorMessage();
-        }
-      }
-
-      // Step 2 - send verification email
-      const sendEmailToastError: Toast = {
-        message:
-          "Sending verification email failed. Please contact your team manager.",
-        background: "preset-filled-error-500",
-      };
-
-      try {
-        const signupSuccessful = await coll.requestVerification(form.email);
-
-        if (signupSuccessful) {
-          await goto("/signupconfirm");
-        } else {
-          toastController.trigger(sendEmailToastError);
-        }
-      } catch (error) {
-        if (error instanceof ClientResponseError) {
-          toastController.trigger(sendEmailToastError);
-        } else {
-          toastController.triggerAuthErrorMessage();
-        }
-      }
-
+      await signupNewUser();
       return;
     }
 
+    await loginUser();
+  }
+
+  async function signupNewUser() {
+    // Step 1 - create new user
+    try {
+      await coll.create({ ...form });
+    } catch (error) {
+      if (error instanceof ClientResponseError) {
+        switch (error.status) {
+          case 400:
+            // email already exists
+            if (
+              error.response?.email?.code === PBErrorCode.ValidationNotUnique
+            ) {
+              toastController.trigger({
+                message: "Failed to create account. Please double-check the data you provided.",
+                background: "preset-filled-error-500",
+              });
+            }
+        }
+        // signup key is invalid
+        // @todo
+      } else {
+        toastController.triggerAuthErrorMessage();
+      }
+      return;
+    }
+
+    // Step 2 - send verification email
+    const sendEmailToastError: Toast = {
+      message:
+        "Sending verification email failed. Please contact your team manager.",
+      background: "preset-filled-error-500",
+    };
+
+    try {
+      const signupSuccessful = await coll.requestVerification(form.email!);
+
+      if (signupSuccessful) {
+        await goto("/signupconfirm");
+      } else {
+        toastController.trigger(sendEmailToastError);
+      }
+    } catch (error) {
+      if (error instanceof ClientResponseError) {
+        toastController.trigger(sendEmailToastError);
+      } else {
+        toastController.triggerAuthErrorMessage();
+      }
+    }
+  }
+
+  async function loginUser() {
     try {
       const authResponse = await coll.authWithPassword(
-        form.email,
-        form.password,
+        form.email!,
+        form.password!,
         {
           expand: "club",
         },
