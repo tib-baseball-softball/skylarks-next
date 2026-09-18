@@ -1,4 +1,4 @@
-import type {Toast} from "$lib/dp/types/Toast.ts";
+import type { Toast } from "$lib/dp/types/Toast.ts";
 
 class ToastController {
   public toastQueue: Toast[] = $state([]);
@@ -10,6 +10,10 @@ class ToastController {
       ...toast,
       id: toast.id || crypto.randomUUID(),
     };
+
+    if (!toast.background) {
+      toast.background = "preset-filled-error-500";
+    }
 
     this.toastQueue.push(toastWithId);
 
@@ -45,7 +49,7 @@ class ToastController {
   public triggerGenericErrorMessage() {
     this.trigger({
       message: "An unknown error occurred. Please try again later.",
-      background: "preset-filled-error-500"
+      background: "preset-filled-error-500",
     });
   }
 }
