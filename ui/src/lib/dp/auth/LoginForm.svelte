@@ -72,12 +72,25 @@
         await goto("/account", { invalidateAll: true });
       }
     } catch (error) {
-      if (error instanceof ClientResponseError && error.status === 400) {
-        toastController.trigger({
-          message:
-            "Login failed: The provided combination of user and password wasn't found.",
-          background: "preset-filled-error-500",
-        });
+      if (error instanceof ClientResponseError) {
+        switch (error.status) {
+          case 400:
+            toastController.trigger({
+              message:
+                "Login failed: The provided combination of user and password wasn't found.",
+              background: "preset-filled-error-500",
+            });
+            break;
+          case 403:
+            toastController.trigger({
+              message:
+                "Login failed: Your account is not verified yet. Please confirm your email address first.",
+              background: "preset-filled-error-500",
+            });
+            break;
+          default:
+            toastController.triggerAuthErrorMessage();
+        }
       } else {
         toastController.triggerAuthErrorMessage();
       }
