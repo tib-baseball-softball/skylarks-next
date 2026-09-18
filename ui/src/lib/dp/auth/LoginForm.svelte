@@ -68,16 +68,30 @@
           case 400:
             // email already exists
             if (
-              error.response?.email?.code === PBErrorCode.ValidationNotUnique
+              error.response?.data?.email?.code ===
+              PBErrorCode.ValidationNotUnique
             ) {
               toastController.trigger({
-                message: "Failed to create account. Please double-check the data you provided.",
+                message:
+                  "Failed to create account. Please double-check the data you provided. A single email address can only have one account.",
                 background: "preset-filled-error-500",
               });
             }
+
+            // signup key is invalid
+            if (
+              error?.response?.data?.signup_key?.code ===
+              PBErrorCode.SignupKeyInvalid
+            ) {
+              toastController.trigger({
+                message: "The provided signup key is not valid for any team.",
+                background: "preset-filled-error-500",
+              });
+            }
+            break;
+          default:
+            toastController.triggerAuthErrorMessage();
         }
-        // signup key is invalid
-        // @todo
       } else {
         toastController.triggerAuthErrorMessage();
       }

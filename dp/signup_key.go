@@ -1,16 +1,15 @@
 package dp
 
 import (
-	"errors"
-	"net/http"
-
+	validation "github.com/pocketbase/ozzo-validation/v4"
 	"github.com/pocketbase/pocketbase/core"
 )
 
-// ValidateSignupKey checks that a valid signup key is used on every user creation.
+// ValidateSignupKey checks that a valid signup key is used on user creation.
 // A user is assigned a team and club based on the signup key used.
+//
+// Superuser auth bypasses this check (so creating users from PocketBase admin panel is always possible).
 func ValidateSignupKey(e *core.RecordRequestEvent) error {
-	// superuser auth bypasses this check (creating users from PocketBase admin panel)
 	if e.HasSuperuserAuth() {
 		return e.Next()
 	}
@@ -23,7 +22,7 @@ func ValidateSignupKey(e *core.RecordRequestEvent) error {
 		errorText := "failed to get valid signup teams"
 
 		e.App.Logger().Error(errorText, "error", err)
-		return errors.New(errorText)
+		return e.InternalServerError(errorText, err)
 	}
 
 	// read signup key from request body as it's not present in the user record
@@ -31,7 +30,10 @@ func ValidateSignupKey(e *core.RecordRequestEvent) error {
 		SignupKey string `json:"signup_key"`
 	}{}
 	if err := e.BindBody(&body); err != nil {
-		return e.BadRequestError("Failed to read request body", err)
+		msg := "Malformed request body"
+		return e.BadRequestError("Failed to read request body", map[string]validation.Error{
+			"body": validation.NewError("malformed_request_body", msg),
+		})
 	}
 
 	isValid := false
@@ -46,25 +48,25 @@ func ValidateSignupKey(e *core.RecordRequestEvent) error {
 	}
 
 	if !isValid {
-		err := e.JSON(http.StatusBadRequest, map[string]string{
-			"message": "Signup key invalid",
+		msg := "The entered signup key is not valid for any team."
+		return e.BadRequestError(msg, map[string]validation.Error{
+			"signup_key": validation.NewError("signup_key_invalid", msg),
 		})
-		if err != nil {
-			return err
-		}
-		return e.BadRequestError("signup key invalid", err)
 	}
 
 	return e.Next()
 }
 
-// TeamWithSignupKey Reduced record with just the relevant fields
+// TeamWithSignupKey represents a reduced record with just the relevant fields.
 type TeamWithSignupKey struct {
 	Id        string `db:"id"`
 	Club      string `db:"club"`
 	SignupKey string `db:"signup_key"`
 }
 
+// getValidSignupKeys collects all possible signup keys for any team in the database.
+//
+// The query is static, so if this returns an error, something is really wrong.
 func getValidSignupKeys(app core.App) ([]TeamWithSignupKey, error) {
 	var teams []TeamWithSignupKey
 
