@@ -59,6 +59,14 @@
   }
 
   async function signupNewUser() {
+    if (form.password && form.signup_key === form.password) {
+      toastController.trigger({
+        message: "Your password must not be identical to the signup key.",
+        background: "preset-filled-error-500",
+      });
+      return;
+    }
+
     // Step 1 - create new user
     try {
       await coll.create({ ...form });
