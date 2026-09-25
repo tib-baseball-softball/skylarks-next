@@ -41,6 +41,7 @@ export const load = (async ({ fetch, parent, params, url, depends }) => {
     fetch: fetch,
     mode: "team",
     teamID: team.id,
+    clubID: team.club,
   });
 
   const targetDate = new Date();
