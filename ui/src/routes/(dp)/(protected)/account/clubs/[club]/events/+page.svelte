@@ -32,7 +32,7 @@
 
   <Paginator showIfSinglePage={true} store={eventStore} />
 
-  {#if data.club?.admins.includes(authSettings.record?.id)}
+  {#if authSettings.record?.id && data.club?.admins.includes(authSettings.record?.id)}
     <div class="space">
       <EventForm
         mode="clubEvent"

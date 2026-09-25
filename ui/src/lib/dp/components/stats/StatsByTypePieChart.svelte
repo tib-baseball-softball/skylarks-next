@@ -21,7 +21,6 @@
     in: "var(--color-success-500)",
     maybe: "var(--color-warning-500)",
     out: "var(--color-error-500)",
-    "": "",
   };
 
   function mapToConicStops(participationTotals: ParticipationTotal[]): ConicStop[] {
