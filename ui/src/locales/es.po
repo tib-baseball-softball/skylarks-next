@@ -149,7 +149,7 @@ msgstr "¿Enviar solicitud de cambio de contraseña para <0/>? Se cerrará su se
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/lib/dp/auth/LoginForm.svelte
+#: src/lib/dp/service/ToastController.svelte.ts
 msgid "There was an error processing your authentication request."
 msgstr "Ha habido un error al procesar tu solicitud de autenticación."
 
@@ -2174,3 +2174,60 @@ msgstr "Se utiliza para filtrar partidos al importar datos de eventos. Utiliza u
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Minutes"
 msgstr "Minutos"
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Login failed: The provided combination of user and password wasn't found."
+msgstr ""
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Email and password are required for login/signup."
+msgstr ""
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Login failed: Your account is not verified yet. Please confirm your email address first."
+msgstr ""
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Sending verification email failed. Please contact your team manager."
+msgstr ""
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Failed to create account. Please double-check the data you provided. A single email address can only have one account."
+msgstr ""
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "The provided signup key is not valid for any team."
+msgstr ""
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Your password must not be identical to the signup key."
+msgstr ""
+
+#: src/lib/dp/components/forms/UserDetailsForm.svelte
+msgid "Email Visibility"
+msgstr ""
+
+#: src/lib/dp/components/forms/UserDetailsForm.svelte
+msgid "Controls whether other app users can see your email address."
+msgstr ""
+
+#: src/lib/dp/service/ToastController.svelte.ts
+msgid "A server error occurred. This is most likely not user-actionable. Please try again later or contact support."
+msgstr ""
+
+#: src/lib/dp/service/ToastController.svelte.ts
+msgid "The requested resource wasn't found."
+msgstr ""
+
+#: src/lib/dp/service/ToastController.svelte.ts
+msgid "You don't have sufficient permissions to perform this action."
+msgstr ""
+
+#. 0: key; 1: innerError.message
+#: src/lib/dp/service/ToastController.svelte.ts
+msgid "Validation error for field \"{0}\": {1}"
+msgstr ""
+
+#: src/lib/dp/components/forms/TeamGamesModal.svelte
+msgid "Error loading game count."
+msgstr ""
