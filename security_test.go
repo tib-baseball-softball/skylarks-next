@@ -352,6 +352,30 @@ func TestAPIRules(t *testing.T) {
 			TestAppFactory:  setupTestApp,
 		},
 		{
+			Name:   "Team admin (Andrea) can remove team Antelopes member (Alice) from team",
+			Method: http.MethodPatch,
+			URL:    "/api/collections/users/records/" + alice.ID,
+			Headers: map[string]string{
+				"Authorization": andreaToken,
+			},
+			Body:            strings.NewReader(`{"teams-":"` + teamAntelopes.ID + `"}`),
+			ExpectedStatus:  http.StatusOK,
+			NotExpectedContent: []string{`"teams":["` + teamAntelopes.ID + `"]`},
+			TestAppFactory:  setupTestApp,
+		},
+		{
+			Name:   "Club A Admin can remove team Antelopes member (Alice) from team",
+			Method: http.MethodPatch,
+			URL:    "/api/collections/users/records/" + alice.ID,
+			Headers: map[string]string{
+				"Authorization": aClubAdminToken,
+			},
+			Body:            strings.NewReader(`{"teams-":"` + teamAntelopes.ID + `"}`),
+			ExpectedStatus:  http.StatusOK,
+			NotExpectedContent: []string{`"teams":["` + teamAntelopes.ID + `"]`},
+			TestAppFactory:  setupTestApp,
+		},
+		{
 			Name:   "Club A admin can edit user inside own club (Andrea)",
 			Method: http.MethodPatch,
 			URL:    "/api/collections/users/records/" + andreaAntelopeAdmin.ID,
@@ -698,10 +722,10 @@ func TestAPIRules(t *testing.T) {
 			Headers: map[string]string{
 				"Authorization": aClubAdminToken,
 			},
-			Body:            strings.NewReader(`{
-			"title":"Global Club B Event", 
-			"type":"misc", 
-			"starttime":"2024-04-14 11:00:00.000Z", 
+			Body: strings.NewReader(`{
+			"title":"Global Club B Event",
+			"type":"misc",
+			"starttime":"2024-04-14 11:00:00.000Z",
 			"club":"` + clubB.ID + `"
 			}`),
 			ExpectedStatus:  http.StatusBadRequest,
