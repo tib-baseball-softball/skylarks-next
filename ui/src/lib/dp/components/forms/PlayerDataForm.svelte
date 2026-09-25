@@ -14,6 +14,7 @@
   import { Collection } from "$lib/dp/enum/Collection.ts";
   import Sheet from "$lib/dp/components/modal/Sheet.svelte";
   import clsx from "clsx";
+  import { ClientResponseError } from "pocketbase";
 
   interface ValidateArgs {
     inputValue: string;
@@ -95,8 +96,12 @@
       result = await client
         .collection(Collection.Users)
         .update<CustomAuthModel>(form.id, form);
-    } catch {
-      toastController.triggerGenericFormErrorMessage("Player data");
+    } catch (error) {
+      if (error instanceof ClientResponseError) {
+        toastController.handleClientResponseError(error);
+      } else {
+        toastController.triggerGenericFormErrorMessage("Player data");
+      }
     }
 
     if (result) {

@@ -146,10 +146,11 @@ func notifyAdminsUserCreation(record *core.Record, app core.App, ps PushService)
 }
 
 // OAuthUpdateUserData updates user record with information found in the OAuth2 response.
+// 
 // This could also be used to validate the signup key, but does not do that at the moment
-// (see generic record creation hook that also works for password auth)
+// (see generic record creation hook that also works for password auth).
 func OAuthUpdateUserData(e *core.RecordAuthWithOAuth2RequestEvent) error {
-	if e.Record == nil {
+	if e.Record == nil || e.OAuth2User == nil {
 		return e.Next()
 	}
 	user := &User{}
@@ -175,6 +176,7 @@ func OAuthUpdateUserData(e *core.RecordAuthWithOAuth2RequestEvent) error {
 }
 
 // SetDisplayName sets the display name for the user if it is not already set.
+// 
 // Default display name format: first name + first letter of last name + dot
 func SetDisplayName(e *core.RecordEvent) error {
 	user := &User{}

@@ -14,6 +14,7 @@
   import RichTextEditor from "$lib/dp/components/rte/RichTextEditor.svelte";
   import clsx from "clsx";
   import Sheet from "$lib/dp/components/modal/Sheet.svelte";
+  import { ClientResponseError } from "pocketbase";
 
   interface Props {
     club: ClubsResponse;
@@ -98,8 +99,12 @@
           .collection(Collection.Teams)
           .create<ExpandedTeam>(form);
       }
-    } catch {
-      toastController.triggerGenericFormErrorMessage("Team");
+    } catch (error) {
+      if (error instanceof ClientResponseError) {
+        toastController.handleClientResponseError(error);
+      } else {
+        toastController.triggerGenericFormErrorMessage("Team");
+      }
     }
 
     if (result) {

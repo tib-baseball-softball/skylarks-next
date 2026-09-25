@@ -149,7 +149,7 @@ msgstr "Wysłać prośbę o zmianę hasła dla <0/>? Zostaniesz wylogowany, a na
 msgid "Cancel"
 msgstr "Anuluj"
 
-#: src/lib/dp/auth/LoginForm.svelte
+#: src/lib/dp/service/ToastController.svelte.ts
 msgid "There was an error processing your authentication request."
 msgstr "Wystąpił błąd podczas przetwarzania twojego żądania uwierzytelnienia."
 
@@ -860,11 +860,6 @@ msgstr "Spotkanie"
 #: src/lib/dp/components/forms/EventForm.svelte
 msgid "End"
 msgstr "Koniec"
-
-#: src/lib/dp/components/forms/EventForm.svelte
-#: src/lib/dp/components/forms/EventSeriesForm.svelte
-msgid "Description <0/>"
-msgstr "Opis <0/>"
 
 #: src/lib/dp/components/forms/EventForm.svelte
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
@@ -1934,6 +1929,8 @@ msgid "Amount"
 msgstr "Ilość"
 
 #: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
+#: src/lib/dp/components/forms/EventForm.svelte
+#: src/lib/dp/components/forms/EventSeriesForm.svelte
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
 #: src/lib/dp/components/forms/TeamForm.svelte
 msgid "Description"
@@ -2177,3 +2174,60 @@ msgstr "Służy do filtrowania meczów podczas importowania danych o wydarzeniac
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Minutes"
 msgstr "Minut"
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Login failed: The provided combination of user and password wasn't found."
+msgstr "Błąd logowania: Podana kombinacja użytkownika i hasła nie została znaleziona."
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Email and password are required for login/signup."
+msgstr "E-mail i hasło są wymagane do logowania/rejestracji."
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Login failed: Your account is not verified yet. Please confirm your email address first."
+msgstr "Błąd logowania: Twoje konto nie zostało jeszcze zweryfikowane. Proszę najpierw potwierdzić adres e-mail."
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Sending verification email failed. Please contact your team manager."
+msgstr "Nie udało się wysłać e-maila weryfikacyjnego. Skontaktuj się z menedżerem zespołu."
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Failed to create account. Please double-check the data you provided. A single email address can only have one account."
+msgstr "Nie udało się utworzyć konta. Proszę ponownie sprawdzić podane dane. Jeden adres e-mail może być przypisany tylko do jednego konta."
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "The provided signup key is not valid for any team."
+msgstr "Podany klucz rejestracyjny nie jest ważny dla żadnego zespołu."
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Your password must not be identical to the signup key."
+msgstr "Twoje hasło nie może być identyczne z kluczem rejestracyjnym."
+
+#: src/lib/dp/components/forms/UserDetailsForm.svelte
+msgid "Email Visibility"
+msgstr "Widoczność e-maila"
+
+#: src/lib/dp/components/forms/UserDetailsForm.svelte
+msgid "Controls whether other app users can see your email address."
+msgstr "Kontroluje, czy inni użytkownicy aplikacji mogą widzieć Twój adres e-mail."
+
+#: src/lib/dp/service/ToastController.svelte.ts
+msgid "A server error occurred. This is most likely not user-actionable. Please try again later or contact support."
+msgstr "Wystąpił błąd serwera. Prawdopodobnie nie jest to błąd, który możesz naprawić samodzielnie. Spróbuj ponownie później lub skontaktuj się z pomocą techniczną."
+
+#: src/lib/dp/service/ToastController.svelte.ts
+msgid "The requested resource wasn't found."
+msgstr "Nie odnaleziono żądanej zasoby."
+
+#: src/lib/dp/service/ToastController.svelte.ts
+msgid "You don't have sufficient permissions to perform this action."
+msgstr "Nie masz wystarczających uprawnień, aby wykonać tę akcję."
+
+#. 0: key; 1: innerError.message
+#: src/lib/dp/service/ToastController.svelte.ts
+msgid "Validation error for field \"{0}\": {1}"
+msgstr "Błąd walidacji pola \"{0}\": {1}"
+
+#: src/lib/dp/components/forms/TeamGamesModal.svelte
+msgid "Error loading game count."
+msgstr "Błąd podczas ładowania liczby gier."

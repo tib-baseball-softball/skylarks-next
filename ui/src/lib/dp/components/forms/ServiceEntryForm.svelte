@@ -14,6 +14,7 @@
   import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
   import { invalidate } from "$app/navigation";
   import ISODatePicker from "$lib/dp/components/formElements/ISODatePicker.svelte";
+  import { ClientResponseError } from "pocketbase";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
@@ -97,8 +98,14 @@
           .collection(Collection.ServiceEntries)
           .create(form);
       }
-    } catch (e) {
-      toastController.triggerGenericFormErrorMessage("Community Service Entry");
+    } catch (error) {
+      if (error instanceof ClientResponseError) {
+        toastController.handleClientResponseError(error);
+      } else {
+        toastController.triggerGenericFormErrorMessage(
+          "Community Service Entry",
+        );
+      }
     }
 
     if (result) {

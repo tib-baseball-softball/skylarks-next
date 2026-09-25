@@ -149,7 +149,7 @@ msgstr "¿Enviar solicitud de cambio de contraseña para <0/>? Se cerrará su se
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/lib/dp/auth/LoginForm.svelte
+#: src/lib/dp/service/ToastController.svelte.ts
 msgid "There was an error processing your authentication request."
 msgstr "Ha habido un error al procesar tu solicitud de autenticación."
 
@@ -860,11 +860,6 @@ msgstr "Reunión"
 #: src/lib/dp/components/forms/EventForm.svelte
 msgid "End"
 msgstr "Fin"
-
-#: src/lib/dp/components/forms/EventForm.svelte
-#: src/lib/dp/components/forms/EventSeriesForm.svelte
-msgid "Description <0/>"
-msgstr "Descripción <0/>"
 
 #: src/lib/dp/components/forms/EventForm.svelte
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
@@ -1934,6 +1929,8 @@ msgid "Amount"
 msgstr "Cantidad"
 
 #: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
+#: src/lib/dp/components/forms/EventForm.svelte
+#: src/lib/dp/components/forms/EventSeriesForm.svelte
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
 #: src/lib/dp/components/forms/TeamForm.svelte
 msgid "Description"
@@ -2177,3 +2174,60 @@ msgstr "Se utiliza para filtrar partidos al importar datos de eventos. Utiliza u
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Minutes"
 msgstr "Minutos"
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Login failed: The provided combination of user and password wasn't found."
+msgstr "Inicio de sesión fallido: La combinación de usuario y contraseña proporcionada no se encontró."
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Email and password are required for login/signup."
+msgstr "Se requieren correo electrónico y contraseña para iniciar sesión o registrarse."
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Login failed: Your account is not verified yet. Please confirm your email address first."
+msgstr "Inicio de sesión fallido: Tu cuenta aún no está verificada. Por favor, confirma tu dirección de correo electrónico primero."
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Sending verification email failed. Please contact your team manager."
+msgstr "Error al enviar el correo de verificación. Por favor, ponte en contacto con el administrador de tu equipo."
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Failed to create account. Please double-check the data you provided. A single email address can only have one account."
+msgstr "Error al crear la cuenta. Por favor, verifica los datos proporcionados. Una única dirección de correo electrónico solo puede tener una cuenta."
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "The provided signup key is not valid for any team."
+msgstr "La clave de registro proporcionada no es válida para ningún equipo."
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Your password must not be identical to the signup key."
+msgstr "Tu contraseña no debe ser idéntica a la clave de registro."
+
+#: src/lib/dp/components/forms/UserDetailsForm.svelte
+msgid "Email Visibility"
+msgstr "Visibilidad del correo electrónico"
+
+#: src/lib/dp/components/forms/UserDetailsForm.svelte
+msgid "Controls whether other app users can see your email address."
+msgstr "Controla si otros usuarios de la aplicación pueden ver tu dirección de correo electrónico."
+
+#: src/lib/dp/service/ToastController.svelte.ts
+msgid "A server error occurred. This is most likely not user-actionable. Please try again later or contact support."
+msgstr "Se produjo un error en el servidor. Es probable que no sea algo que el usuario pueda solucionar. Por favor, inténtalo de nuevo más tarde o contacta con el soporte."
+
+#: src/lib/dp/service/ToastController.svelte.ts
+msgid "The requested resource wasn't found."
+msgstr "No se encontró el recurso solicitado."
+
+#: src/lib/dp/service/ToastController.svelte.ts
+msgid "You don't have sufficient permissions to perform this action."
+msgstr "No tienes permisos suficientes para realizar esta acción."
+
+#. 0: key; 1: innerError.message
+#: src/lib/dp/service/ToastController.svelte.ts
+msgid "Validation error for field \"{0}\": {1}"
+msgstr "Error de validación en el campo \"{0}\": {1}"
+
+#: src/lib/dp/components/forms/TeamGamesModal.svelte
+msgid "Error loading game count."
+msgstr "Error al cargar la cantidad de juegos."

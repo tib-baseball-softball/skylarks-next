@@ -1,27 +1,31 @@
 <script lang="ts">
-  import { fade, slide } from "svelte/transition";
   import { goto } from "$app/navigation";
-  import Switch from "$lib/dp/components/formElements/Switch.svelte";
+  import { page } from "$app/state";
   import OAuthProviderButton from "$lib/dp/auth/OAuthProviderButton.svelte";
   import PasswordRequestButton from "$lib/dp/auth/PasswordRequestButton.svelte";
-  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
-  import type { Extension } from "$lib/dp/types/ExpandedResponse.js";
-  import type { UsersUpdate } from "$lib/dp/types/pb-types.ts";
-  import type { Toast } from "$lib/dp/types/Toast.ts";
-  import { client } from "../client.svelte.js";
-  import { page } from "$app/state";
+  import Switch from "$lib/dp/components/formElements/Switch.svelte";
   import TabsRadioGroup, {
     type TabSetOption,
   } from "$lib/dp/components/formElements/TabsRadioGroup.svelte";
+  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  import type { Extension } from "$lib/dp/types/ExpandedResponse.js";
+  import type { UsersUpdate } from "$lib/dp/types/pb-types.ts";
+  import { ClientResponseError } from "pocketbase";
+  import { fade, slide } from "svelte/transition";
+  import { client } from "../client.svelte.js";
+  import type { Toast } from "../types/Toast.js";
+  import { PBErrorCode } from "../types/Error.js";
+  import { Collection } from "../enum/Collection.js";
 
-  const { authCollection = "users", passwordLogin = true } = $props();
+  interface Props {
+    authCollection?: Collection;
+    passwordLogin?: boolean;
+  }
+
+  const { authCollection = Collection.Users, passwordLogin = true }: Props =
+    $props();
 
   const coll = $derived(client.collection(authCollection));
-
-  const failSettings: Toast = {
-    message: "There was an error processing your authentication request.",
-    background: "preset-filled-error-500",
-  };
 
   const prefilledSignupKey = page.url.searchParams.get("signup_key") ?? "";
 
@@ -38,37 +42,129 @@
   async function submit(e: SubmitEvent) {
     e.preventDefault();
 
+    if (!form.email || !form.password) {
+      toastController.trigger({
+        message: "Email and password are required for login/signup.",
+        background: "preset-filled-error-500",
+      });
+      return;
+    }
+
     if (signup) {
-      try {
-        await coll.create({ ...form });
-        const signupSuccessful = await coll.requestVerification(
-          form.email ?? "",
-        );
+      await signupNewUser();
+      return;
+    }
 
-        if (signupSuccessful) {
-          await goto("/signupconfirm");
-        } else {
-          toastController.trigger(failSettings);
+    await loginUser();
+  }
+
+  async function signupNewUser() {
+    if (form.password && form.signup_key === form.password) {
+      toastController.trigger({
+        message: "Your password must not be identical to the signup key.",
+        background: "preset-filled-error-500",
+      });
+      return;
+    }
+
+    // Step 1 - create new user
+    try {
+      await coll.create({ ...form });
+    } catch (error) {
+      if (error instanceof ClientResponseError) {
+        switch (error.status) {
+          case 400:
+            // email already exists
+            if (
+              error.response?.data?.email?.code ===
+              PBErrorCode.ValidationNotUnique
+            ) {
+              toastController.trigger({
+                message:
+                  "Failed to create account. Please double-check the data you provided. A single email address can only have one account.",
+                background: "preset-filled-error-500",
+              });
+            }
+
+            // signup key is invalid
+            if (
+              error?.response?.data?.signup_key?.code ===
+              PBErrorCode.SignupKeyInvalid
+            ) {
+              toastController.trigger({
+                message: "The provided signup key is not valid for any team.",
+                background: "preset-filled-error-500",
+              });
+            }
+            break;
+          default:
+            toastController.triggerAuthErrorMessage();
         }
-      } catch {
-        toastController.trigger(failSettings);
+      } else {
+        toastController.triggerAuthErrorMessage();
       }
-    } else {
-      try {
-        const authResponse = await coll.authWithPassword(
-          form.email ?? "",
-          form.password ?? "",
-          {
-            expand: "club",
-          },
-        );
+      return;
+    }
 
-        if (authResponse) {
-          await goto("/account", { invalidateAll: true });
+    // Step 2 - send verification email
+    const sendEmailToastError: Toast = {
+      message:
+        "Sending verification email failed. Please contact your team manager.",
+      background: "preset-filled-error-500",
+    };
+
+    try {
+      const signupSuccessful = await coll.requestVerification(form.email!);
+
+      if (signupSuccessful) {
+        await goto("/signupconfirm");
+      } else {
+        toastController.trigger(sendEmailToastError);
+      }
+    } catch (error) {
+      if (error instanceof ClientResponseError) {
+        toastController.trigger(sendEmailToastError);
+      } else {
+        toastController.triggerAuthErrorMessage();
+      }
+    }
+  }
+
+  async function loginUser() {
+    try {
+      const authResponse = await coll.authWithPassword(
+        form.email!,
+        form.password!,
+        {
+          expand: "club",
+        },
+      );
+
+      if (authResponse) {
+        await goto("/account", { invalidateAll: true });
+      }
+    } catch (error) {
+      if (error instanceof ClientResponseError) {
+        switch (error.status) {
+          case 400:
+            toastController.trigger({
+              message:
+                "Login failed: The provided combination of user and password wasn't found.",
+              background: "preset-filled-error-500",
+            });
+            break;
+          case 403:
+            toastController.trigger({
+              message:
+                "Login failed: Your account is not verified yet. Please confirm your email address first.",
+              background: "preset-filled-error-500",
+            });
+            break;
+          default:
+            toastController.triggerAuthErrorMessage();
         }
-      } catch (error) {
-        console.error(error);
-        toastController.trigger(failSettings);
+      } else {
+        toastController.triggerAuthErrorMessage();
       }
     }
   }
@@ -129,7 +225,7 @@
             </div>
 
             <div class="providers">
-              {#each methods.oauth2.providers as provider}
+              {#each methods.oauth2.providers as provider (provider.name)}
                 {#if tabSet === "login"}
                   <!--Login Buttons - no signupKey-->
                   <OAuthProviderButton

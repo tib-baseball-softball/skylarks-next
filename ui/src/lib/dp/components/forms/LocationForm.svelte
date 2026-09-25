@@ -9,8 +9,10 @@
   import Sheet from "$lib/dp/components/modal/Sheet.svelte";
   import clsx from "clsx";
   import { Collection } from "$lib/dp/enum/Collection";
+  import { ClientResponseError } from "pocketbase";
 
   // Gail S. Halvorsen Park coordinates
+  // @TODO: remove/make generic
   const DEFAULT_LATITUDE = 52.482762;
   const DEFAULT_LONGITUDE = 13.407932;
 
@@ -72,8 +74,12 @@
 
     try {
       result = await save<LocationsResponse>(Collection.Locations, form);
-    } catch {
-      toastController.triggerGenericFormErrorMessage("Location");
+    } catch (error) {
+      if (error instanceof ClientResponseError) {
+        toastController.handleClientResponseError(error);
+      } else {
+        toastController.triggerGenericFormErrorMessage("Location");
+      }
     }
 
     if (result) {

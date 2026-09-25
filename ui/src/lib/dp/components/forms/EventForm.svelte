@@ -17,6 +17,8 @@
   } from "$lib/dp/types/pb-types.ts";
   import clsx from "clsx";
   import type { Snippet } from "svelte";
+  import RichTextEditor from "../rte/RichTextEditor.svelte";
+  import { ClientResponseError } from "pocketbase";
 
   interface Props {
     event: ExpandedEvent | null;
@@ -133,8 +135,12 @@
           .collection(Collection.Events)
           .create<ExpandedEvent>(form);
       }
-    } catch {
-      toastController.triggerGenericFormErrorMessage("Event");
+    } catch (error) {
+      if (error instanceof ClientResponseError) {
+        toastController.handleClientResponseError(error);
+      } else {
+        toastController.triggerGenericFormErrorMessage("Event");
+      }
     }
 
     if (result) {
@@ -242,16 +248,16 @@
         <ISODatePicker bind:value={form.endtime} />
       </label>
 
-      <span></span>
-
-      <label class="label field-wide">
-        Description
-        <textarea
-          bind:value={form.desc}
-          class="textarea"
-          data-testid="event-form-textarea-desc"
-          name="desc"></textarea>
-      </label>
+      <div class="field-wide">
+        {#if form.desc !== undefined}
+          <RichTextEditor
+            bind:value={form.desc}
+            label="Description"
+            formElementName="desc"
+            required={false}
+          />
+        {/if}
+      </div>
 
       <label class="label field-wide">
         Location

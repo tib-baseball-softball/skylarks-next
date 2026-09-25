@@ -149,7 +149,7 @@ msgstr "Passwortänderung für <0/> anfordern? Du wirst abgemeldet und eine E-Ma
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: src/lib/dp/auth/LoginForm.svelte
+#: src/lib/dp/service/ToastController.svelte.ts
 msgid "There was an error processing your authentication request."
 msgstr "Bei der Bearbeitung Ihrer Authentifizierungsanfrage ist ein Fehler aufgetreten."
 
@@ -860,11 +860,6 @@ msgstr "Treffen"
 #: src/lib/dp/components/forms/EventForm.svelte
 msgid "End"
 msgstr "Ende"
-
-#: src/lib/dp/components/forms/EventForm.svelte
-#: src/lib/dp/components/forms/EventSeriesForm.svelte
-msgid "Description <0/>"
-msgstr "Beschreibung <0/>"
 
 #: src/lib/dp/components/forms/EventForm.svelte
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
@@ -1934,6 +1929,8 @@ msgid "Amount"
 msgstr "Anzahl"
 
 #: src/lib/dp/components/communityservice/CommunityServiceDatatableRaw.svelte
+#: src/lib/dp/components/forms/EventForm.svelte
+#: src/lib/dp/components/forms/EventSeriesForm.svelte
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
 #: src/lib/dp/components/forms/TeamForm.svelte
 msgid "Description"
@@ -2177,3 +2174,60 @@ msgstr "Wird für die Filterung von Spielen beim Importieren von Events verwende
 #: src/lib/dp/components/forms/ServiceEntryForm.svelte
 msgid "Minutes"
 msgstr "Minuten"
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Login failed: The provided combination of user and password wasn't found."
+msgstr "Login fehlgeschlagen: Die angegebene Kombination von Benutzer und Passwort wurde nicht gefunden."
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Email and password are required for login/signup."
+msgstr "E-Mail und Passwort sind für den Login/Registrierung erforderlich."
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Login failed: Your account is not verified yet. Please confirm your email address first."
+msgstr "Login fehlgeschlagen: Dein Konto ist noch nicht bestätigt. Bitte bestätige deine E-Mail-Adresse zuerst."
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Sending verification email failed. Please contact your team manager."
+msgstr "Versand der Bestätigungs-E-Mail fehlgeschlagen. Bitte kontaktiere deinen Team-Manager."
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Failed to create account. Please double-check the data you provided. A single email address can only have one account."
+msgstr "Erstellen des Kontos fehlgeschlagen. Bitte überprüfe die Daten, die du angegeben hast. Eine einzige E-Mail-Adresse kann nur ein Konto haben."
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "The provided signup key is not valid for any team."
+msgstr "Der angegebene Anmeldeschlüssel ist für kein Team gültig."
+
+#: src/lib/dp/auth/LoginForm.svelte
+msgid "Your password must not be identical to the signup key."
+msgstr "Dein Passwort darf nicht identisch zum Anmeldeschlüssel sein."
+
+#: src/lib/dp/components/forms/UserDetailsForm.svelte
+msgid "Email Visibility"
+msgstr "E-Mail-Sichtbarkeit"
+
+#: src/lib/dp/components/forms/UserDetailsForm.svelte
+msgid "Controls whether other app users can see your email address."
+msgstr "Steuert, ob andere App-Benutzer deine E-Mail-Adresse sehen können."
+
+#: src/lib/dp/service/ToastController.svelte.ts
+msgid "A server error occurred. This is most likely not user-actionable. Please try again later or contact support."
+msgstr "Ein Serverfehler ist aufgetreten. Dies ist wahrscheinlich nicht durch den Benutzer zu beheben. Bitte versuche es später erneut oder kontaktiere den Support."
+
+#: src/lib/dp/service/ToastController.svelte.ts
+msgid "The requested resource wasn't found."
+msgstr "Die angeforderte Ressource wurde nicht gefunden."
+
+#: src/lib/dp/service/ToastController.svelte.ts
+msgid "You don't have sufficient permissions to perform this action."
+msgstr "Du hast nicht genügend Berechtigungen, um diese Aktion auszuführen."
+
+#. 0: key; 1: innerError.message
+#: src/lib/dp/service/ToastController.svelte.ts
+msgid "Validation error for field \"{0}\": {1}"
+msgstr "Validierungsfehler für das Feld \"{0}\": {1}"
+
+#: src/lib/dp/components/forms/TeamGamesModal.svelte
+msgid "Error loading game count."
+msgstr "Fehler beim Laden der Spielanzahl."

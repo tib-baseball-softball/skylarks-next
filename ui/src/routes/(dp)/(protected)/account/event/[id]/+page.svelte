@@ -16,6 +16,7 @@
   import type { ClubsResponse, TeamsResponse } from "$lib/dp/types/pb-types.ts";
   import EventTeamBadges from "$lib/dp/components/event/EventTeamBadges.svelte";
   import type { PageProps } from "./$types";
+  import { markdownToHTML } from "$lib/dp/utility/DOMFunctions";
 
   const { data }: PageProps = $props();
 
@@ -36,7 +37,6 @@
     return authRecord.teams.some((team) => allApplicableTeams.has(team));
   });
 
-  //@ts-expect-error - the multi-level expanding trips the typedef up
   const club = $derived($event?.expand?.club) as ClubsResponse;
 
   const matchJSON = $derived($event?.match_json) as unknown as Match;
@@ -94,7 +94,7 @@
 
   <article class="description-section" class:cancelled-text={$event.cancelled}>
     <section>
-      <p>{$event.desc}</p>
+      <p class="prose">{@html await markdownToHTML($event.desc)}</p>
     </section>
   </article>
 

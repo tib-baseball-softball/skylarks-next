@@ -19,6 +19,8 @@
   const authRecord = $derived(authSettings.record as CustomAuthModel);
   const { event, canParticipate, growChips = false }: props = $props();
 
+  //@ts-expect-error - the final state is only set when clicking the button
+  // it can safely be an empty string on object creation
   const userParticipation: ParticipationsCreate = $derived(
     event.userParticipation ?? {
       id: "",
