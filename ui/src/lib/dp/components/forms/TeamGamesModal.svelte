@@ -9,6 +9,7 @@
   import type { Toast } from "$lib/dp/types/Toast.ts";
   import { range } from "$lib/dp/utility/range.ts";
   import { Collection } from "$lib/dp/enum/Collection";
+  import { ClientResponseError } from "pocketbase";
 
   interface Props {
     team: ExpandedTeam;
@@ -80,11 +81,15 @@
     try {
       if (form.id) {
         result = await client
-          .collection("teams")
+          .collection(Collection.Teams)
           .update<ExpandedTeam>(form.id, form);
       }
-    } catch {
-      toastController.trigger(toastSettingsGeneralError);
+    } catch (error) {
+      if (error instanceof ClientResponseError) {
+        toastController.handleClientResponseError(error);
+      } else {
+        toastController.trigger(toastSettingsGeneralError);
+      }
     }
 
     if (result) {
@@ -116,11 +121,13 @@
       {team.bsm_league_group !== 0 ? team.bsm_league_group : "None selected"}
     </div>
 
+    <div>BSM-imported games in database:</div>
     {#await getCurrentGamesCount() then count}
-      <div>BSM-imported games in database:</div>
       <div class="badge preset-tonal-primary info-badge">
         {count}
       </div>
+    {:catch}
+      <div>Error loading game count.</div>
     {/await}
 
     <hr class="divider" />

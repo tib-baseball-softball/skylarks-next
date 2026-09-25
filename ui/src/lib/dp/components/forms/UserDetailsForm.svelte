@@ -2,6 +2,8 @@
   import { authSettings, client } from "$lib/dp/client.svelte.js";
   import type { CustomAuthModel } from "$lib/dp/types/ExpandedResponse.ts";
   import { Collection } from "$lib/dp/enum/Collection.ts";
+  import { ClientResponseError } from "pocketbase";
+  import { toastController } from "$lib/dp/service/ToastController.svelte";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 
@@ -13,6 +15,7 @@
       firstName: record.first_name,
       lastName: record.last_name,
       displayName: record.display_name ?? "",
+      emailVisibility: record.emailVisibility,
     };
   }
 
@@ -40,15 +43,31 @@
       formData.append("display_name", form.displayName);
     }
 
+    formData.append(
+      "emailVisibility",
+      form.emailVisibility === true ? "true" : "false",
+    );
+
     if (files) {
       for (const file of files) {
         formData.append("avatar", file);
       }
     }
 
-    client
-      .collection(Collection.Users)
-      .update(form.id, formData, { expand: "club" });
+    try {
+      client
+        .collection(Collection.Users)
+        .update(form.id, formData, { expand: "club" });
+    } catch (error) {
+      if (error instanceof ClientResponseError) {
+        toastController.trigger({
+          message: error.message,
+          background: "preset-filled-error-500",
+        });
+      } else {
+        toastController.triggerGenericErrorMessage();
+      }
+    }
   }
 </script>
 
@@ -97,6 +116,23 @@
     <input bind:value={form.displayName} class="input" name="display_name" />
   </label>
 
+  <div class="check-outer">
+    <div class="check-inner">
+      <input
+        id="checkbox-emailVisibility"
+        type="checkbox"
+        class="checkbox"
+        bind:checked={form.emailVisibility}
+      />
+      <label class="label" for="checkbox-emailVisibility"
+        >Email Visibility</label
+      >
+    </div>
+    <p class="info-text">
+      Controls whether other app users can see your email address.
+    </p>
+  </div>
+
   <label class="label">
     <span>Profile Image</span>
 
@@ -129,6 +165,19 @@
 </form>
 
 <style>
+  .check-inner {
+    display: flex;
+    gap: calc(var(--spacing) * 3);
+    align-items: center;
+    margin-block-start: calc(var(--spacing) * 4);
+  }
+
+  .check-outer {
+    .info-text {
+      margin-block-start: var(--spacing);
+    }
+  }
+
   .info-text {
     margin-block: calc(var(--spacing) * 2);
     font-weight: var(--font-weight-light);

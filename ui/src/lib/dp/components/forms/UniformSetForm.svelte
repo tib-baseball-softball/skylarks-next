@@ -1,11 +1,13 @@
 <script lang="ts">
   import { invalidate } from "$app/navigation";
+  import { Collection } from "$lib/dp/enum/Collection";
   import { save } from "$lib/dp/records/RecordOperations.ts";
   import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
   import type {
     UniformsetsCreate,
     UniformsetsResponse,
   } from "$lib/dp/types/pb-types.ts";
+  import { ClientResponseError } from "pocketbase";
 
   interface Props {
     uniformSet?: UniformsetsResponse | null;
@@ -41,9 +43,13 @@
     let result: UniformsetsResponse | null = null;
 
     try {
-      result = await save<UniformsetsResponse>("uniformsets", form);
-    } catch {
-      toastController.triggerGenericFormErrorMessage("Uniform Set");
+      result = await save<UniformsetsResponse>(Collection.UniformSets, form);
+    } catch (error) {
+      if (error instanceof ClientResponseError) {
+        toastController.handleClientResponseError(error);
+      } else {
+        toastController.triggerGenericFormErrorMessage("Uniform Set");
+      }
     }
 
     if (result) {

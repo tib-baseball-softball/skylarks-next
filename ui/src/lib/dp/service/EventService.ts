@@ -14,7 +14,8 @@ export type EventStoreOptions =
     })
   | (BaseOptions & {
       mode: "team";
-      teamID: string;
+    teamID: string;
+    clubID: string;
     });
 
 /**
@@ -32,7 +33,7 @@ export class EventService {
     let filter = "";
     switch (options.mode) {
       case "team":
-        filter = `(team = "${options.teamID}" || additional_teams.id ?= "${options.teamID}")`;
+        filter = `(team = "${options.teamID}" || additional_teams.id ?= "${options.teamID}" || club = "${options.clubID}")`;
         break;
       case "club":
         filter = `(club = "${options.clubID}")`;

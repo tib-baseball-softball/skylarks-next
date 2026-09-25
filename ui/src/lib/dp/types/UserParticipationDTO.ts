@@ -27,6 +27,7 @@ export function participationDTOToExpandedParticipation(dto: UserParticipationDT
     comment: "",
     created: "",
     event: eventID,
+    //@ts-expect-error - this needs to be unset to function properly; @TODO: find out why
     state: "",
     updated: "",
     user: dto.id

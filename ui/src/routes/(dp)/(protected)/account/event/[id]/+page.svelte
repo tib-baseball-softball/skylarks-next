@@ -37,7 +37,6 @@
     return authRecord.teams.some((team) => allApplicableTeams.has(team));
   });
 
-  //@ts-expect-error - the multi-level expanding trips the typedef up
   const club = $derived($event?.expand?.club) as ClubsResponse;
 
   const matchJSON = $derived($event?.match_json) as unknown as Match;
