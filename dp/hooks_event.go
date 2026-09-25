@@ -5,6 +5,7 @@ import (
 	"slices"
 	"time"
 
+	validation "github.com/pocketbase/ozzo-validation/v4"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
 	"golang.org/x/text/cases"
@@ -13,16 +14,25 @@ import (
 
 // ValidateEventTimes ensures that event times are valid and within the expected range.
 func ValidateEventTimes(e *core.RecordRequestEvent) error {
-	startTime := e.Record.GetDateTime("starttime")
-	endTime := e.Record.GetDateTime("endtime")
-	meetingTime := e.Record.GetDateTime("meetingtime")
+	event := &Event{}
+	event.SetProxyRecord(e.Record)
+
+	startTime := event.StartTime()
+	endTime := event.EndTime()
+	meetingTime := event.MeetingTime()
 
 	if !endTime.IsZero() && startTime.After(endTime) {
-		return e.BadRequestError("Event start time cannot be after end time", nil)
+		msg := "Event start time cannot be after end time"
+		return e.BadRequestError(msg, map[string]validation.Error{
+			"endtime": validation.NewError("event_end_before_start", msg),
+		})
 	}
 
 	if !endTime.IsZero() && meetingTime.After(endTime) {
-		return e.BadRequestError("Event meeting time cannot be after end time", nil)
+		msg := "Event meeting time cannot be after end time"
+		return e.BadRequestError(msg, map[string]validation.Error{
+			"meetingtime": validation.NewError("event_meeting_before_start", msg),
+		})
 	}
 
 	return e.Next()
@@ -60,7 +70,7 @@ func ValidateEvent(e *core.RecordEvent) error {
 		return err
 	}
 
-	// from here: additional teams validations and sanity checks
+	//----------------------- from here: additional teams validations and sanity checks---------------------------//
 	if !event.HasAdditionalTeams() || eventClubID != "" {
 		return e.Next()
 	}
