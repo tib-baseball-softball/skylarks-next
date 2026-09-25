@@ -18,6 +18,7 @@
   import clsx from "clsx";
   import type { Snippet } from "svelte";
   import RichTextEditor from "../rte/RichTextEditor.svelte";
+  import { ClientResponseError } from "pocketbase";
 
   interface Props {
     event: ExpandedEvent | null;
@@ -134,8 +135,12 @@
           .collection(Collection.Events)
           .create<ExpandedEvent>(form);
       }
-    } catch {
-      toastController.triggerGenericFormErrorMessage("Event");
+    } catch (error) {
+      if (error instanceof ClientResponseError) {
+        toastController.handleClientResponseError(error);
+      } else {
+        toastController.triggerGenericFormErrorMessage("Event");
+      }
     }
 
     if (result) {

@@ -7,12 +7,17 @@ import type {
 import { type Readable, readable, type Subscriber } from "svelte/store";
 import { client } from "../client.svelte.js";
 import type { PageStore } from "./PageStore.ts";
+import type { Collection } from "../enum/Collection.ts";
 
 /*
  * Save (create/update) a record (a plain object). Automatically converts to
- * FormData if needed. 
+ * FormData if needed.
  */
-export async function save<T>(collection: string, record: any, create = false) {
+export async function save<T>(
+  collection: Collection,
+  record: any,
+  create = false,
+) {
   // convert obj to FormData in case one of the fields is instanceof FileList
   const data = object2formdata(record);
   if (record.id && !create) {

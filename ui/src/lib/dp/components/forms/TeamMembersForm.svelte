@@ -17,6 +17,7 @@
     UsersUpdate,
   } from "$lib/dp/types/pb-types.ts";
   import { Collection } from "$lib/dp/enum/Collection.ts";
+  import { ClientResponseError } from "pocketbase";
 
   interface Props {
     club: ClubsResponse;
@@ -62,8 +63,11 @@
         await manualAuthRefresh();
       }
     } catch (error) {
-      console.error(error);
-      toastController.triggerGenericFormErrorMessage("Team members");
+      if (error instanceof ClientResponseError) {
+        toastController.handleClientResponseError(error);
+      } else {
+        toastController.triggerGenericFormErrorMessage("Team members");
+      }
     }
     await invalidateAll();
   }

@@ -16,6 +16,7 @@
   import ISODatePicker from "../formElements/ISODatePicker.svelte";
   import MultiSelectCombobox from "../formElements/MultiSelectCombobox.svelte";
   import RichTextEditor from "../rte/RichTextEditor.svelte";
+  import { ClientResponseError } from "pocketbase";
 
   interface Props {
     eventSeries: EventSeriesCreationData | null;
@@ -102,8 +103,12 @@
           .collection(Collection.EventSeries)
           .create<EventSeriesCreationData>(form);
       }
-    } catch {
-      toastController.triggerGenericFormErrorMessage("Event Series");
+    } catch (error) {
+      if (error instanceof ClientResponseError) {
+        toastController.handleClientResponseError(error);
+      } else {
+        toastController.triggerGenericFormErrorMessage("Event Series");
+      }
     }
 
     if (result) {
