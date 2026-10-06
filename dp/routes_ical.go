@@ -154,6 +154,7 @@ func createICalendarFromEventRecords(events []*core.Record, app core.App) (strin
 			location.SetProxyRecord(locationRecord)
 
 			calEvent.SetLocation(location.GetCalendarFormatted())
+			calEvent.SetGeo(location.Latitude(), location.Longitude())
 		}
 	}
 
