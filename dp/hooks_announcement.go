@@ -79,7 +79,7 @@ func PushTeamOrClubAnnouncement(app core.App, coll string, announcement *Announc
 				},
 			},
 			Data: map[string]any{
-				"navigate": "/account/announcements/" + announcement.Id, // TODO: centralized place for frontend routes in backend context
+				"navigate": RouteAnnouncementDetail(announcement.Id),
 			},
 		}
 		err := ps.SendPushMessage(msg, new(sub.ToWebPushSubscription()))

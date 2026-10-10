@@ -177,7 +177,7 @@ func (l *Location) String() string {
 }
 
 func (l *Location) GetCalendarFormatted() string {
-	return fmt.Sprintf("%s (%s), %s %s, %s, %s, Lat: %f, Lng: %f", l.Name(), l.AddressAddon(), l.Street(), l.PostalCode(), l.City(), l.HumanCountry(), l.Latitude(), l.Longitude())
+	return fmt.Sprintf("%s (%s), %s %s, %s, %s", l.Name(), l.AddressAddon(), l.Street(), l.PostalCode(), l.City(), l.HumanCountry())
 }
 
 type LocationDTO struct {

@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"net/url"
 	"os"
 	"slices"
 	"strconv"
@@ -148,12 +149,23 @@ func createICalendarFromEventRecords(events []*core.Record, app core.App) (strin
 		calEvent.SetSummary(event.Title())
 		calEvent.SetDescription(event.Desc())
 
+		if app.Settings() != nil {
+			url, err := url.Parse(app.Settings().Meta.AppURL)
+			if err != nil {
+				app.Logger().Warn("Failed to parse app URL while preparing event for calendar", "event", event)
+			} else {
+			    url = url.JoinPath(RouteEventDetail(event.Id))
+				calEvent.SetURL(url.String())
+			}
+		}
+
 		locationRecord := event.ExpandedOne("location")
 		if locationRecord != nil {
 			location := &Location{}
 			location.SetProxyRecord(locationRecord)
 
 			calEvent.SetLocation(location.GetCalendarFormatted())
+			calEvent.SetGeo(location.Latitude(), location.Longitude())
 		}
 	}
 
