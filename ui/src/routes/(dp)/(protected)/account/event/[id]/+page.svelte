@@ -1,22 +1,22 @@
 <script lang="ts">
   import type { Match } from "bsm.js";
   import { Ban, Clock } from "@lucide/svelte";
-  import CommentSection from "$lib/dp/components/comments/CommentSection.svelte";
-  import EventAttireSection from "$lib/dp/components/event/EventAttireSection.svelte";
-  import EventCoreInfo from "$lib/dp/components/event/EventCoreInfo.svelte";
-  import EventPageAdminSection from "$lib/dp/components/event/EventPageAdminSection.svelte";
-  import EventParticipantsOverviewSection from "$lib/dp/components/event/EventParticipantsOverviewSection.svelte";
-  import EventParticipationSection from "$lib/dp/components/event/EventParticipationSection.svelte";
-  import EventTypeBadge from "$lib/dp/components/event/EventTypeBadge.svelte";
-  import TimeSection from "$lib/dp/components/event/TimeSection.svelte";
-  import MatchDetailLocationCard from "$lib/dp/components/event/match/MatchDetailLocationCard.svelte";
-  import MatchTeaserCard from "$lib/dp/components/event/match/MatchTeaserCard.svelte";
-  import { authSettings } from "$lib/dp/client.svelte.js";
-  import type { CustomAuthModel } from "$lib/dp/types/ExpandedResponse.ts";
-  import type { ClubsResponse, TeamsResponse } from "$lib/dp/types/pb-types.ts";
-  import EventTeamBadges from "$lib/dp/components/event/EventTeamBadges.svelte";
+  import CommentSection from "#lib/dp/components/comments/CommentSection.svelte";
+  import EventAttireSection from "#lib/dp/components/event/EventAttireSection.svelte";
+  import EventCoreInfo from "#lib/dp/components/event/EventCoreInfo.svelte";
+  import EventPageAdminSection from "#lib/dp/components/event/EventPageAdminSection.svelte";
+  import EventParticipantsOverviewSection from "#lib/dp/components/event/EventParticipantsOverviewSection.svelte";
+  import EventParticipationSection from "#lib/dp/components/event/EventParticipationSection.svelte";
+  import EventTypeBadge from "#lib/dp/components/event/EventTypeBadge.svelte";
+  import TimeSection from "#lib/dp/components/event/TimeSection.svelte";
+  import MatchDetailLocationCard from "#lib/dp/components/event/match/MatchDetailLocationCard.svelte";
+  import MatchTeaserCard from "#lib/dp/components/event/match/MatchTeaserCard.svelte";
+  import { authSettings } from "#lib/dp/client.svelte.js";
+  import type { CustomAuthModel } from "#lib/dp/types/ExpandedResponse.ts";
+  import type { ClubsResponse, TeamsResponse } from "#lib/dp/types/pb-types.ts";
+  import EventTeamBadges from "#lib/dp/components/event/EventTeamBadges.svelte";
   import type { PageProps } from "./$types";
-  import { markdownToHTML } from "$lib/dp/utility/DOMFunctions";
+  import { markdownToHTML } from "#lib/dp/utility/DOMFunctions.js";
 
   const { data }: PageProps = $props();
 

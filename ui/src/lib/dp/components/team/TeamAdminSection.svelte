@@ -1,16 +1,16 @@
 <script lang="ts">
   import {CalendarPlus} from "@lucide/svelte";
   import {goto, invalidateAll} from "$app/navigation";
-  import EventSeriesView from "$lib/dp/components/event/EventSeriesView.svelte";
-  import EventForm from "$lib/dp/components/forms/EventForm.svelte";
-  import TeamForm from "$lib/dp/components/forms/TeamForm.svelte";
-  import TeamGamesModal from "$lib/dp/components/forms/TeamGamesModal.svelte";
-  import DeleteButton from "$lib/dp/components/utils/DeleteButton.svelte";
-  import Dialog from "$lib/dp/components/modal/Dialog.svelte";
-  import {authSettings, client} from "$lib/dp/client.svelte.js";
-  import type {CustomAuthModel, ExpandedEventSeries, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
+  import EventSeriesView from "#lib/dp/components/event/EventSeriesView.svelte";
+  import EventForm from "#lib/dp/components/forms/EventForm.svelte";
+  import TeamForm from "#lib/dp/components/forms/TeamForm.svelte";
+  import TeamGamesModal from "#lib/dp/components/forms/TeamGamesModal.svelte";
+  import DeleteButton from "#lib/dp/components/utils/DeleteButton.svelte";
+  import Dialog from "#lib/dp/components/modal/Dialog.svelte";
+  import {authSettings, client} from "#lib/dp/client.svelte.js";
+  import type {CustomAuthModel, ExpandedEventSeries, ExpandedTeam} from "#lib/dp/types/ExpandedResponse.ts";
   import {page} from "$app/state";
-  import {toastController} from "$lib/dp/service/ToastController.svelte";
+  import {toastController} from "#lib/dp/service/ToastController.svelte.js";
 
   interface Props {
     team: ExpandedTeam;

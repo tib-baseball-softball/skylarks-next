@@ -1,6 +1,6 @@
 <script lang="ts">
-  import EventTeaser from "$lib/dp/components/event/EventTeaser.svelte";
-  import type { ExpandedEvent } from "$lib/dp/types/ExpandedResponse.ts";
+  import EventTeaser from "#lib/dp/components/event/EventTeaser.svelte";
+  import type { ExpandedEvent } from "#lib/dp/types/ExpandedResponse.ts";
 
   interface Props {
     events: ExpandedEvent[];

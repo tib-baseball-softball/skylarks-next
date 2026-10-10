@@ -1,13 +1,13 @@
 <script lang="ts">
   import {invalidate} from "$app/navigation";
-  import LocationForm from "$lib/dp/components/forms/LocationForm.svelte";
-  import DeleteButton from "$lib/dp/components/utils/DeleteButton.svelte";
-  import {authSettings, client} from "$lib/dp/client.svelte.js";
-  import type {CustomAuthModel, ExpandedClub,} from "$lib/dp/types/ExpandedResponse.ts";
-  import type {LocationsResponse} from "$lib/dp/types/pb-types.ts";
-  import {MapUtility} from "$lib/dp/service/MapUtility.ts";
+  import LocationForm from "#lib/dp/components/forms/LocationForm.svelte";
+  import DeleteButton from "#lib/dp/components/utils/DeleteButton.svelte";
+  import {authSettings, client} from "#lib/dp/client.svelte.js";
+  import type {CustomAuthModel, ExpandedClub,} from "#lib/dp/types/ExpandedResponse.ts";
+  import type {LocationsResponse} from "#lib/dp/types/pb-types.ts";
+  import {MapUtility} from "#lib/dp/service/MapUtility.ts";
   import {Map} from "@lucide/svelte";
-  import {Collection} from "$lib/dp/enum/Collection.ts";
+  import {Collection} from "#lib/dp/enum/Collection.ts";
 
   interface Props {
     club: ExpandedClub;

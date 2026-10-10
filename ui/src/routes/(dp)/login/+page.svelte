@@ -1,8 +1,8 @@
 <script lang="ts">
   import { browser } from '$app/env';
-  import LoginForm from "$lib/dp/auth/LoginForm.svelte";
-  import {authSettings, client} from "$lib/dp/client.svelte.ts";
-  import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
+  import LoginForm from "#lib/dp/auth/LoginForm.svelte";
+  import {authSettings, client} from "#lib/dp/client.svelte.ts";
+  import type {CustomAuthModel} from "#lib/dp/types/ExpandedResponse.ts";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 </script>

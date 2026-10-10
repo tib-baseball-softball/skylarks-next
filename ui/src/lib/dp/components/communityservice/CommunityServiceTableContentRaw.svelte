@@ -1,16 +1,16 @@
 <script lang="ts">
   import { page } from "$app/state";
-  import { appLocale } from "$lib/dp/locale.svelte";
-  import { DateTimeUtility } from "$lib/dp/service/DateTimeUtility";
-  import type { ExpandedServiceEntry } from "$lib/dp/types/ExpandedResponse";
-  import { toHours } from "$lib/dp/utility/toHours";
+  import { appLocale } from "#lib/dp/locale.svelte.js";
+  import { DateTimeUtility } from "#lib/dp/service/DateTimeUtility.js";
+  import type { ExpandedServiceEntry } from "#lib/dp/types/ExpandedResponse.js";
+  import { toHours } from "#lib/dp/utility/toHours.js";
   import type { TableHandler } from "@vincjo/datatables";
   import Dialog from "../modal/Dialog.svelte";
   import { SquarePen } from "@lucide/svelte";
   import ServiceEntryForm from "../forms/ServiceEntryForm.svelte";
   import DeleteButton from "../utils/DeleteButton.svelte";
-  import { client } from "$lib/dp/client.svelte";
-  import { Collection } from "$lib/dp/enum/Collection";
+  import { client } from "#lib/dp/client.svelte.js";
+  import { Collection } from "#lib/dp/enum/Collection.js";
   import { invalidate } from "$app/navigation";
 
   interface Props {

@@ -1,6 +1,6 @@
 <script lang="ts">
   import type {PageProps} from "./$types";
-  import PlayerProfileClubsSection from "$lib/dp/components/user/PlayerProfileClubsSection.svelte";
+  import PlayerProfileClubsSection from "#lib/dp/components/user/PlayerProfileClubsSection.svelte";
 
   const {data}: PageProps = $props();
 </script>

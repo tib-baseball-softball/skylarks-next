@@ -1,15 +1,15 @@
 <script lang="ts">
-  import {toHours} from "$lib/dp/utility/toHours.ts";
-  import {DateTimeUtility} from "$lib/dp/service/DateTimeUtility.ts";
-  import {appLocale} from "$lib/dp/locale.svelte.ts";
+  import {toHours} from "#lib/dp/utility/toHours.ts";
+  import {DateTimeUtility} from "#lib/dp/service/DateTimeUtility.ts";
+  import {appLocale} from "#lib/dp/locale.svelte.ts";
   import {CalendarDaysIcon, SquarePen} from "@lucide/svelte";
-  import ServiceEntryForm from "$lib/dp/components/forms/ServiceEntryForm.svelte";
-  import type {ExpandedServiceEntry} from "$lib/dp/types/ExpandedResponse.ts";
-  import Dialog from "$lib/dp/components/modal/Dialog.svelte";
-  import DeleteButton from "$lib/dp/components/utils/DeleteButton.svelte";
-  import {client} from "$lib/dp/client.svelte.ts";
+  import ServiceEntryForm from "#lib/dp/components/forms/ServiceEntryForm.svelte";
+  import type {ExpandedServiceEntry} from "#lib/dp/types/ExpandedResponse.ts";
+  import Dialog from "#lib/dp/components/modal/Dialog.svelte";
+  import DeleteButton from "#lib/dp/components/utils/DeleteButton.svelte";
+  import {client} from "#lib/dp/client.svelte.ts";
   import {invalidate} from "$app/navigation";
-  import {Collection} from "$lib/dp/enum/Collection.ts";
+  import {Collection} from "#lib/dp/enum/Collection.ts";
 
   interface Props {
     entry: ExpandedServiceEntry;

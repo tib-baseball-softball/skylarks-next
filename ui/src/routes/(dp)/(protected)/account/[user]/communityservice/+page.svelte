@@ -1,10 +1,10 @@
 <script lang="ts">
   import type {PageProps} from "./$types";
-  import CommunityServiceSection from "$lib/dp/components/communityservice/CommunityServiceSection.svelte";
-  import ProgressRing from "$lib/dp/components/utils/ProgressRing.svelte";
-  import {range} from "$lib/dp/utility/range.ts";
+  import CommunityServiceSection from "#lib/dp/components/communityservice/CommunityServiceSection.svelte";
+  import ProgressRing from "#lib/dp/components/utils/ProgressRing.svelte";
+  import {range} from "#lib/dp/utility/range.ts";
   import {goto} from "$app/navigation";
-  import SeasonSelector from "$lib/dp/components/utils/SeasonSelector.svelte";
+  import SeasonSelector from "#lib/dp/components/utils/SeasonSelector.svelte";
 
   let {data}: PageProps = $props();
 

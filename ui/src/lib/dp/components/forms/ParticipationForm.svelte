@@ -1,7 +1,7 @@
 <script lang="ts">
   import { invalidate } from "$app/navigation";
-  import type { ExpandedParticipation } from "$lib/dp/types/ExpandedResponse.ts";
-  import { sendParticipationData } from "$lib/dp/utility/sendParticipationData.ts";
+  import type { ExpandedParticipation } from "#lib/dp/types/ExpandedResponse.ts";
+  import { sendParticipationData } from "#lib/dp/utility/sendParticipationData.ts";
 
   interface Props {
     participation: ExpandedParticipation;

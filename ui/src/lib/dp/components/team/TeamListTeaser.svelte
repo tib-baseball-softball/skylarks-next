@@ -1,10 +1,10 @@
 <script lang="ts">
   import {ClipboardList, Dumbbell, ShieldHalf} from "@lucide/svelte";
   import {invalidate} from "$app/navigation";
-  import TeamForm from "$lib/dp/components/forms/TeamForm.svelte";
-  import DeleteButton from "$lib/dp/components/utils/DeleteButton.svelte";
-  import {authSettings, client} from "$lib/dp/client.svelte.js";
-  import type {CustomAuthModel, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
+  import TeamForm from "#lib/dp/components/forms/TeamForm.svelte";
+  import DeleteButton from "#lib/dp/components/utils/DeleteButton.svelte";
+  import {authSettings, client} from "#lib/dp/client.svelte.js";
+  import type {CustomAuthModel, ExpandedTeam} from "#lib/dp/types/ExpandedResponse.ts";
 
   /**
    * Used for Teams in List Teasers and on Club Page.

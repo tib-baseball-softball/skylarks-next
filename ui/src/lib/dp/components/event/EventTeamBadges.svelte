@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { ExpandedEvent } from "$lib/dp/types/ExpandedResponse";
+  import type { ExpandedEvent } from "#lib/dp/types/ExpandedResponse.js";
 
   interface Props {
     event: ExpandedEvent;

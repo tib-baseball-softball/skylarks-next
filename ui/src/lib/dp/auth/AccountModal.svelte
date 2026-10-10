@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
-  import type { CustomAuthModel } from "$lib/dp/types/ExpandedResponse.ts";
+  import type { CustomAuthModel } from "#lib/dp/types/ExpandedResponse.ts";
   import { authSettings, client } from "../client.svelte.js";
 
   async function logout() {

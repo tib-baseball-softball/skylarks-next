@@ -1,19 +1,19 @@
 <script lang="ts">
-  import { authSettings, client } from "$lib/dp/client.svelte.js";
+  import { authSettings, client } from "#lib/dp/client.svelte.js";
   import type {
     CustomAuthModel,
     ExpandedServiceEntry,
-  } from "$lib/dp/types/ExpandedResponse.ts";
+  } from "#lib/dp/types/ExpandedResponse.ts";
   import type {
     ClubsResponse,
     ServiceentriesResponse,
     ServiceentriesUpdate,
     UsersResponse,
-  } from "$lib/dp/types/pb-types.ts";
-  import { Collection } from "$lib/dp/enum/Collection.ts";
-  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  } from "#lib/dp/types/pb-types.ts";
+  import { Collection } from "#lib/dp/enum/Collection.ts";
+  import { toastController } from "#lib/dp/service/ToastController.svelte.ts";
   import { invalidate } from "$app/navigation";
-  import ISODatePicker from "$lib/dp/components/formElements/ISODatePicker.svelte";
+  import ISODatePicker from "#lib/dp/components/formElements/ISODatePicker.svelte";
   import { ClientResponseError } from "pocketbase";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);

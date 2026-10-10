@@ -1,12 +1,12 @@
 <script lang="ts">
   import type {Match} from "bsm.js";
-  import GameResultIndicator from "$lib/dp/components/event/match/GameResultIndicator.svelte";
-  import MatchTeaserCardRow from "$lib/dp/components/event/match/MatchTeaserCardRow.svelte";
-  import {DateTimeUtility} from "$lib/dp/service/DateTimeUtility.ts";
-  import {GameWinner} from "$lib/dp/enum/GameWinner.ts";
-  import {LogoUtility} from "$lib/dp/utility/LogoUtility.ts";
-  import {MatchDecorator} from "$lib/dp/service/MatchDecorator.ts";
-  import {appLocale} from "$lib/dp/locale.svelte.ts";
+  import GameResultIndicator from "#lib/dp/components/event/match/GameResultIndicator.svelte";
+  import MatchTeaserCardRow from "#lib/dp/components/event/match/MatchTeaserCardRow.svelte";
+  import {DateTimeUtility} from "#lib/dp/service/DateTimeUtility.ts";
+  import {GameWinner} from "#lib/dp/enum/GameWinner.ts";
+  import {LogoUtility} from "#lib/dp/utility/LogoUtility.ts";
+  import {MatchDecorator} from "#lib/dp/service/MatchDecorator.ts";
+  import {appLocale} from "#lib/dp/locale.svelte.ts";
 
   interface Props {
     match: Match;

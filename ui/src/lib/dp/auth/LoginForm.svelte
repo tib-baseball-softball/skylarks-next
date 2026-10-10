@@ -1,15 +1,15 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
-  import OAuthProviderButton from "$lib/dp/auth/OAuthProviderButton.svelte";
-  import PasswordRequestButton from "$lib/dp/auth/PasswordRequestButton.svelte";
-  import Switch from "$lib/dp/components/formElements/Switch.svelte";
+  import OAuthProviderButton from "#lib/dp/auth/OAuthProviderButton.svelte";
+  import PasswordRequestButton from "#lib/dp/auth/PasswordRequestButton.svelte";
+  import Switch from "#lib/dp/components/formElements/Switch.svelte";
   import TabsRadioGroup, {
     type TabSetOption,
-  } from "$lib/dp/components/formElements/TabsRadioGroup.svelte";
-  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
-  import type { Extension } from "$lib/dp/types/ExpandedResponse.js";
-  import type { UsersUpdate } from "$lib/dp/types/pb-types.ts";
+  } from "#lib/dp/components/formElements/TabsRadioGroup.svelte";
+  import { toastController } from "#lib/dp/service/ToastController.svelte.ts";
+  import type { Extension } from "#lib/dp/types/ExpandedResponse.js";
+  import type { UsersUpdate } from "#lib/dp/types/pb-types.ts";
   import { ClientResponseError } from "pocketbase";
   import { fade, slide } from "svelte/transition";
   import { client } from "../client.svelte.js";

@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type {ClubCommunityServiceRow} from "$lib/dp/types/ClubCommunityServiceRow.ts";
-  import type {ExpandedClub, ExpandedEventSeries, ExpandedServiceEntry} from "$lib/dp/types/ExpandedResponse.ts";
-  import CommunityServiceDatatable from "$lib/dp/components/communityservice/CommunityServiceDatatable.svelte";
+  import type {ClubCommunityServiceRow} from "#lib/dp/types/ClubCommunityServiceRow.ts";
+  import type {ExpandedClub, ExpandedEventSeries, ExpandedServiceEntry} from "#lib/dp/types/ExpandedResponse.ts";
+  import CommunityServiceDatatable from "#lib/dp/components/communityservice/CommunityServiceDatatable.svelte";
   import CommunityServiceDatatableRaw from "./CommunityServiceDatatableRaw.svelte";
 
   interface Props {

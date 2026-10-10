@@ -1,7 +1,7 @@
 <script lang="ts" generics="T extends BaseCollectionResponse">
   import { X } from "@lucide/svelte";
-  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
-  import type { BaseCollectionResponse } from "$lib/dp/types/pb-types";
+  import { toastController } from "#lib/dp/service/ToastController.svelte.ts";
+  import type { BaseCollectionResponse } from "#lib/dp/types/pb-types.js";
 
   interface Props {
     itemName: string;

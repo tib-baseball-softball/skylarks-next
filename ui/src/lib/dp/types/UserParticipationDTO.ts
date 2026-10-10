@@ -1,5 +1,5 @@
-import type {ExpandedParticipation} from "$lib/dp/types/ExpandedResponse.ts";
-import {Collection} from "$lib/dp/enum/Collection.ts";
+import type {ExpandedParticipation} from "#lib/dp/types/ExpandedResponse.ts";
+import {Collection} from "#lib/dp/enum/Collection.ts";
 
 /**
  * Represents user participation in an event.

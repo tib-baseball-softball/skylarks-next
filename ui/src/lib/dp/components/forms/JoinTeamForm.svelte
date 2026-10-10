@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
-  import {client, manualAuthRefresh} from "$lib/dp/client.svelte.ts";
-  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
+  import type {CustomAuthModel} from "#lib/dp/types/ExpandedResponse.ts";
+  import {client, manualAuthRefresh} from "#lib/dp/client.svelte.ts";
+  import {toastController} from "#lib/dp/service/ToastController.svelte.ts";
   import {invalidateAll} from "$app/navigation";
   import {ClientResponseError} from "pocketbase";
 

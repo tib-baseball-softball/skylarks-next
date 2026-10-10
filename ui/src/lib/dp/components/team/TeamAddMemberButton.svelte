@@ -1,9 +1,9 @@
 <script lang="ts">
   import {Plus} from "@lucide/svelte";
-  import TeamMembersForm from "$lib/dp/components/forms/TeamMembersForm.svelte";
-  import Dialog from "$lib/dp/components/modal/Dialog.svelte";
-  import type {ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
-  import type {ClubsResponse} from "$lib/dp/types/pb-types.ts";
+  import TeamMembersForm from "#lib/dp/components/forms/TeamMembersForm.svelte";
+  import Dialog from "#lib/dp/components/modal/Dialog.svelte";
+  import type {ExpandedTeam} from "#lib/dp/types/ExpandedResponse.ts";
+  import type {ClubsResponse} from "#lib/dp/types/pb-types.ts";
 
   interface Props {
     club: ClubsResponse;

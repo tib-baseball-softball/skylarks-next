@@ -1,14 +1,14 @@
 <script lang="ts">
   import {SquarePen} from "@lucide/svelte";
   import {invalidate} from "$app/navigation";
-  import UniformSetForm from "$lib/dp/components/forms/UniformSetForm.svelte";
-  import Cap from "$lib/dp/components/icons/Cap.svelte";
-  import Pants from "$lib/dp/components/icons/Pants.svelte";
-  import Shirt from "$lib/dp/components/icons/Shirt.svelte";
-  import DeleteButton from "$lib/dp/components/utils/DeleteButton.svelte";
-  import Dialog from "$lib/dp/components/modal/Dialog.svelte";
-  import {authSettings, client} from "$lib/dp/client.svelte.js";
-  import type {CustomAuthModel, ExpandedUniformSet} from "$lib/dp/types/ExpandedResponse.ts";
+  import UniformSetForm from "#lib/dp/components/forms/UniformSetForm.svelte";
+  import Cap from "#lib/dp/components/icons/Cap.svelte";
+  import Pants from "#lib/dp/components/icons/Pants.svelte";
+  import Shirt from "#lib/dp/components/icons/Shirt.svelte";
+  import DeleteButton from "#lib/dp/components/utils/DeleteButton.svelte";
+  import Dialog from "#lib/dp/components/modal/Dialog.svelte";
+  import {authSettings, client} from "#lib/dp/client.svelte.js";
+  import type {CustomAuthModel, ExpandedUniformSet} from "#lib/dp/types/ExpandedResponse.ts";
 
   interface Props {
     uniformSet: ExpandedUniformSet;

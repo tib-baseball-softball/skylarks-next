@@ -1,6 +1,6 @@
 <script lang="ts">
   import {X} from "@lucide/svelte";
-  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
+  import {toastController} from "#lib/dp/service/ToastController.svelte.ts";
 
   interface Props {
     name?: string;

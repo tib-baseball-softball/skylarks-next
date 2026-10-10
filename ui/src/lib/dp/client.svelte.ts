@@ -3,10 +3,10 @@ import type { AuthRecord, RecordAuthResponse, RecordModel } from "pocketbase";
 import { browser, dev } from "$app/env";
 import { invalidateAll } from "$app/navigation";
 import { PUBLIC_POCKETBASE_URL, PUBLIC_LOG_LEVEL } from "$app/env/public";
-import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
-import type { CustomAuthModel } from "$lib/dp/types/ExpandedResponse.ts";
-import type { Schema } from "$lib/dp/types/pb-types.ts";
-import { Collection } from "$lib/dp/enum/Collection.ts";
+import { toastController } from "#lib/dp/service/ToastController.svelte.ts";
+import type { CustomAuthModel } from "#lib/dp/types/ExpandedResponse.ts";
+import type { Schema } from "#lib/dp/types/pb-types.ts";
+import { Collection } from "#lib/dp/enum/Collection.ts";
 
 /**
  * baseURL is only explicitly defined in dev, use relative URLs for Prod.

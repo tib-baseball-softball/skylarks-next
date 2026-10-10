@@ -1,18 +1,18 @@
 <script lang="ts">
   import { invalidate } from "$app/navigation";
-  import { client } from "$lib/dp/client.svelte.js";
-  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  import { client } from "#lib/dp/client.svelte.js";
+  import { toastController } from "#lib/dp/service/ToastController.svelte.ts";
   import type {
     EventSeriesCreationData,
     ExpandedTeam,
-  } from "$lib/dp/types/ExpandedResponse.ts";
+  } from "#lib/dp/types/ExpandedResponse.ts";
   import type {
     LocationsResponse,
     TeamsResponse,
-  } from "$lib/dp/types/pb-types.ts";
-  import { Collection } from "$lib/dp/enum/Collection";
+  } from "#lib/dp/types/pb-types.ts";
+  import { Collection } from "#lib/dp/enum/Collection.js";
   import { dev } from "$app/env";
-  import type { EventSeriesAction } from "$lib/dp/types/EventSeriesState";
+  import type { EventSeriesAction } from "#lib/dp/types/EventSeriesState.js";
   import ISODatePicker from "../formElements/ISODatePicker.svelte";
   import MultiSelectCombobox from "../formElements/MultiSelectCombobox.svelte";
   import RichTextEditor from "../rte/RichTextEditor.svelte";

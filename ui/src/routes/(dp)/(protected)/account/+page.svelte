@@ -1,12 +1,12 @@
 <script lang="ts">
-  import TeamListTeaser from "$lib/dp/components/team/TeamListTeaser.svelte";
-  import PlayerProfileClubsSection from "$lib/dp/components/user/PlayerProfileClubsSection.svelte";
-  import UserDataCard from "$lib/dp/components/user/UserDataCard.svelte";
-  import {authSettings} from "$lib/dp/client.svelte.js";
-  import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
-  import AnnouncementSectionContent from "$lib/dp/components/announcements/AnnouncementSectionContent.svelte";
+  import TeamListTeaser from "#lib/dp/components/team/TeamListTeaser.svelte";
+  import PlayerProfileClubsSection from "#lib/dp/components/user/PlayerProfileClubsSection.svelte";
+  import UserDataCard from "#lib/dp/components/user/UserDataCard.svelte";
+  import {authSettings} from "#lib/dp/client.svelte.js";
+  import type {CustomAuthModel} from "#lib/dp/types/ExpandedResponse.ts";
+  import AnnouncementSectionContent from "#lib/dp/components/announcements/AnnouncementSectionContent.svelte";
   import type {PageProps} from "./$types";
-  import EventGrid from "$lib/dp/components/event/EventGrid.svelte";
+  import EventGrid from "#lib/dp/components/event/EventGrid.svelte";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 

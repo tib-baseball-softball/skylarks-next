@@ -1,7 +1,7 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
-  import { appLocale } from "$lib/dp/locale.svelte.ts";
+  import { appLocale } from "#lib/dp/locale.svelte.ts";
 
   async function reload() {
     await goto(page.url, {

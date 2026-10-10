@@ -1,11 +1,11 @@
 <script lang="ts">
-  import EventFilters from "$lib/dp/components/event/EventFilters.svelte";
-  import EventGrid from "$lib/dp/components/event/EventGrid.svelte";
-  import EventForm from "$lib/dp/components/forms/EventForm.svelte";
+  import EventFilters from "#lib/dp/components/event/EventFilters.svelte";
+  import EventGrid from "#lib/dp/components/event/EventGrid.svelte";
+  import EventForm from "#lib/dp/components/forms/EventForm.svelte";
   import { CalendarPlus } from "@lucide/svelte";
   import type { PageProps } from "./$types";
-  import { authSettings } from "$lib/dp/client.svelte";
-  import Paginator from "$lib/dp/utility/Paginator.svelte";
+  import { authSettings } from "#lib/dp/client.svelte.js";
+  import Paginator from "#lib/dp/utility/Paginator.svelte";
 
   const { data }: PageProps = $props();
   const eventStore = $derived(data.eventStore);

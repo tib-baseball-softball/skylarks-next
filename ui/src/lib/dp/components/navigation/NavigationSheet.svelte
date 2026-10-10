@@ -1,10 +1,10 @@
 <script lang="ts">
-  import SidebarNavigation from "$lib/dp/components/meta/SidebarNavigation.svelte";
+  import SidebarNavigation from "#lib/dp/components/meta/SidebarNavigation.svelte";
   import type {
     ExpandedClub,
     ExpandedTeam,
-  } from "$lib/dp/types/ExpandedResponse.ts";
-  import Sheet from "$lib/dp/components/modal/Sheet.svelte";
+  } from "#lib/dp/types/ExpandedResponse.ts";
+  import Sheet from "#lib/dp/components/modal/Sheet.svelte";
 
   interface Props {
     clubs: ExpandedClub[];

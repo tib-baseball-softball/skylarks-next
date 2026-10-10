@@ -1,8 +1,8 @@
 <script lang="ts">
-  import ConicGradient from "$lib/dp/components/charts/ConicGradient.svelte";
-  import type {ParticipationType} from "$lib/dp/types/ExpandedResponse.ts";
-  import type {ParticipationTotal, PersonalAttendanceStatsItem,} from "$lib/dp/types/PersonalAttendanceStats.ts";
-  import {capitalize} from "$lib/dp/utility/capitalize.ts";
+  import ConicGradient from "#lib/dp/components/charts/ConicGradient.svelte";
+  import type {ParticipationType} from "#lib/dp/types/ExpandedResponse.ts";
+  import type {ParticipationTotal, PersonalAttendanceStatsItem,} from "#lib/dp/types/PersonalAttendanceStats.ts";
+  import {capitalize} from "#lib/dp/utility/capitalize.ts";
 
   type ConicStop = {
     label: string;

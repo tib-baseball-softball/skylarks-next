@@ -8,18 +8,18 @@
     Trash,
   } from "@lucide/svelte";
   import { invalidateAll } from "$app/navigation";
-  import Avatar from "$lib/dp/components/utils/Avatar.svelte";
-  import Dialog from "$lib/dp/components/modal/Dialog.svelte";
-  import { client } from "$lib/dp/client.svelte.js";
-  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  import Avatar from "#lib/dp/components/utils/Avatar.svelte";
+  import Dialog from "#lib/dp/components/modal/Dialog.svelte";
+  import { client } from "#lib/dp/client.svelte.js";
+  import { toastController } from "#lib/dp/service/ToastController.svelte.ts";
   import type {
     CustomAuthModel,
     ExpandedTeam,
-  } from "$lib/dp/types/ExpandedResponse.ts";
-  import type { TeamsUpdate, UsersUpdate } from "$lib/dp/types/pb-types.ts";
+  } from "#lib/dp/types/ExpandedResponse.ts";
+  import type { TeamsUpdate, UsersUpdate } from "#lib/dp/types/pb-types.ts";
   import LocalDate from "../utils/LocalDate.svelte";
-  import { positionKeysToEnumStringValues } from "$lib/dp/types/BaseballPosition.ts";
-  import { Collection } from "$lib/dp/enum/Collection.ts";
+  import { positionKeysToEnumStringValues } from "#lib/dp/types/BaseballPosition.ts";
+  import { Collection } from "#lib/dp/enum/Collection.ts";
 
   interface Props {
     handler: TableHandler<CustomAuthModel>;

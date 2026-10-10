@@ -1,6 +1,6 @@
 <script lang="ts">
-  import ClubLocationsSection from "$lib/dp/components/club/ClubLocationsSection.svelte";
-  import type {ExpandedClub} from "$lib/dp/types/ExpandedResponse.ts";
+  import ClubLocationsSection from "#lib/dp/components/club/ClubLocationsSection.svelte";
+  import type {ExpandedClub} from "#lib/dp/types/ExpandedResponse.ts";
   import type {PageProps} from "./$types";
 
   let {data}: PageProps = $props();

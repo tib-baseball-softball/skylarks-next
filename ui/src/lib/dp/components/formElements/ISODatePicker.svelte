@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { DateTimeUtility } from "$lib/dp/service/DateTimeUtility";
+  import { DateTimeUtility } from "#lib/dp/service/DateTimeUtility.js";
   import { onMount } from "svelte";
   import type { HTMLInputAttributes } from "svelte/elements";
 

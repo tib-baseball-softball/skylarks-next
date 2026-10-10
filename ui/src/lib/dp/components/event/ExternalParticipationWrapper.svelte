@@ -1,8 +1,8 @@
 <script lang="ts">
-  import IndividualParticipationEditButton from "$lib/dp/components/event/IndividualParticipationEditButton.svelte";
-  import type {ExpandedParticipation} from "$lib/dp/types/ExpandedResponse.ts";
-  import type {UserParticipationDTO} from "$lib/dp/types/UserParticipationDTO.ts";
-  import {Collection} from "$lib/dp/enum/Collection.ts";
+  import IndividualParticipationEditButton from "#lib/dp/components/event/IndividualParticipationEditButton.svelte";
+  import type {ExpandedParticipation} from "#lib/dp/types/ExpandedResponse.ts";
+  import type {UserParticipationDTO} from "#lib/dp/types/UserParticipationDTO.ts";
+  import {Collection} from "#lib/dp/enum/Collection.ts";
 
   interface Props {
     dto: UserParticipationDTO;

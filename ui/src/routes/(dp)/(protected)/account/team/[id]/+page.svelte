@@ -1,18 +1,18 @@
 <script lang="ts">
-  import { authSettings } from "$lib/dp/client.svelte.js";
-  import AnnouncementSectionContent from "$lib/dp/components/announcements/AnnouncementSectionContent.svelte";
-  import EventGrid from "$lib/dp/components/event/EventGrid.svelte";
-  import AnnouncementForm from "$lib/dp/components/forms/AnnouncementForm.svelte";
-  import ICalSection from "$lib/dp/components/settings/ICalSection.svelte";
-  import JoinTeamSection from "$lib/dp/components/team/JoinTeamSection.svelte";
-  import TeamAdminSection from "$lib/dp/components/team/TeamAdminSection.svelte";
-  import TeamTeaserCard from "$lib/dp/components/team/TeamTeaserCard.svelte";
-  import type { CustomAuthModel } from "$lib/dp/types/ExpandedResponse.js";
-  import { markdownToHTML } from "$lib/dp/utility/DOMFunctions.ts";
-  import Paginator from "$lib/dp/utility/Paginator.svelte";
+  import { authSettings } from "#lib/dp/client.svelte.js";
+  import AnnouncementSectionContent from "#lib/dp/components/announcements/AnnouncementSectionContent.svelte";
+  import EventGrid from "#lib/dp/components/event/EventGrid.svelte";
+  import AnnouncementForm from "#lib/dp/components/forms/AnnouncementForm.svelte";
+  import ICalSection from "#lib/dp/components/settings/ICalSection.svelte";
+  import JoinTeamSection from "#lib/dp/components/team/JoinTeamSection.svelte";
+  import TeamAdminSection from "#lib/dp/components/team/TeamAdminSection.svelte";
+  import TeamTeaserCard from "#lib/dp/components/team/TeamTeaserCard.svelte";
+  import type { CustomAuthModel } from "#lib/dp/types/ExpandedResponse.js";
+  import { markdownToHTML } from "#lib/dp/utility/DOMFunctions.ts";
+  import Paginator from "#lib/dp/utility/Paginator.svelte";
   import { Users } from "@lucide/svelte";
   import type { PageProps } from "./$types";
-  import EventFilters from "$lib/dp/components/event/EventFilters.svelte";
+  import EventFilters from "#lib/dp/components/event/EventFilters.svelte";
 
   const { data }: PageProps = $props();
   const events = $derived(data.events);

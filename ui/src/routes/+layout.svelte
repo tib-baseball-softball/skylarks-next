@@ -1,15 +1,15 @@
 <script lang="ts">
   import "../css/dp/app.css"; // MARK: load diamond planner base styles
   import "../css/skylarks-theme.css"; // ...and apply our custom theme (also requires setting the correct data attribute in app.html)
-  import AppBar from "$lib/dp/components/meta/AppBar.svelte";
-  import Footer from "$lib/dp/components/meta/Footer.svelte";
-  import SidebarNavigation from "$lib/dp/components/meta/SidebarNavigation.svelte";
-  import TopAppBarTrailing from "$lib/dp/components/meta/TopAppBarTrailing.svelte";
-  import BottomNavigation from "$lib/dp/components/navigation/BottomNavigation.svelte";
-  import NavigationSheet from "$lib/dp/components/navigation/NavigationSheet.svelte";
-  import StaticNavigationLinks from "$lib/dp/navigation/StaticNavigationLinks.svelte";
-  import ToastContainer from "$lib/dp/components/toast/ToastContainer.svelte";
-  import { authSettings } from "$lib/dp/client.svelte.ts";
+  import AppBar from "#lib/dp/components/meta/AppBar.svelte";
+  import Footer from "#lib/dp/components/meta/Footer.svelte";
+  import SidebarNavigation from "#lib/dp/components/meta/SidebarNavigation.svelte";
+  import TopAppBarTrailing from "#lib/dp/components/meta/TopAppBarTrailing.svelte";
+  import BottomNavigation from "#lib/dp/components/navigation/BottomNavigation.svelte";
+  import NavigationSheet from "#lib/dp/components/navigation/NavigationSheet.svelte";
+  import StaticNavigationLinks from "#lib/dp/navigation/StaticNavigationLinks.svelte";
+  import ToastContainer from "#lib/dp/components/toast/ToastContainer.svelte";
+  import { authSettings } from "#lib/dp/client.svelte.ts";
   import type { LayoutProps } from "./$types";
   import { page } from "$app/state";
 

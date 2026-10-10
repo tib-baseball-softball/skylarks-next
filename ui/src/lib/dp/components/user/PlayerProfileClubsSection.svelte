@@ -1,8 +1,8 @@
 <script lang="ts">
   import { SquareArrowOutUpRight } from "@lucide/svelte";
-  import ClubDetailCard from "$lib/dp/components/club/ClubDetailCard.svelte";
-  import ClubForm from "$lib/dp/components/forms/ClubForm.svelte";
-  import type { ExpandedClub } from "$lib/dp/types/ExpandedResponse.ts";
+  import ClubDetailCard from "#lib/dp/components/club/ClubDetailCard.svelte";
+  import ClubForm from "#lib/dp/components/forms/ClubForm.svelte";
+  import type { ExpandedClub } from "#lib/dp/types/ExpandedResponse.ts";
 
   interface Props {
     clubs: ExpandedClub[];

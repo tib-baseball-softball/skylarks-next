@@ -2,10 +2,10 @@ import type {
   CustomAuthModel,
   ExpandedAnnouncement,
   ExpandedEvent,
-} from "$lib/dp/types/ExpandedResponse.ts";
-import { Collection } from "$lib/dp/enum/Collection.ts";
-import { authSettings } from "$lib/dp/client.svelte.ts";
-import { watchWithPagination } from "$lib/dp/records/RecordOperations.ts";
+} from "#lib/dp/types/ExpandedResponse.ts";
+import { Collection } from "#lib/dp/enum/Collection.ts";
+import { authSettings } from "#lib/dp/client.svelte.ts";
+import { watchWithPagination } from "#lib/dp/records/RecordOperations.ts";
 
 export const load = async ({ depends, url, fetch }) => {
   const model = authSettings.record as CustomAuthModel;

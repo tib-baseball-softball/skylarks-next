@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
-  import JoinTeamForm from "$lib/dp/components/forms/JoinTeamForm.svelte";
+  import type {CustomAuthModel} from "#lib/dp/types/ExpandedResponse.ts";
+  import JoinTeamForm from "#lib/dp/components/forms/JoinTeamForm.svelte";
 
   interface Props {
     authRecord: CustomAuthModel;

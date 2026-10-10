@@ -1,8 +1,8 @@
 <script lang="ts">
-  import {DateTimeUtility} from "$lib/dp/service/DateTimeUtility.ts";
-  import {appLocale} from "$lib/dp/locale.svelte.ts";
+  import {DateTimeUtility} from "#lib/dp/service/DateTimeUtility.ts";
+  import {appLocale} from "#lib/dp/locale.svelte.ts";
   import type {Snippet} from "svelte";
-  import type {ExpandedEventSeries} from "$lib/dp/types/ExpandedResponse.ts";
+  import type {ExpandedEventSeries} from "#lib/dp/types/ExpandedResponse.ts";
 
   interface Props {
     eventSeries: ExpandedEventSeries;

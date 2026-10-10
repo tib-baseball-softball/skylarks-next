@@ -1,6 +1,6 @@
-import type { Toast } from "$lib/dp/types/Toast.ts";
+import type { Toast } from "#lib/dp/types/Toast.ts";
 import type { ClientResponseError } from "pocketbase";
-import type { FieldValidationError } from "$lib/dp/types/Error";
+import type { FieldValidationError } from "#lib/dp/types/Error.js";
 
 class ToastController {
   public toastQueue: Toast[] = $state([]);

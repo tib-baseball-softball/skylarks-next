@@ -1,11 +1,11 @@
 import type { LayoutLoad } from "./$types";
-import { authSettings, client } from "$lib/dp/client.svelte.ts";
+import { authSettings, client } from "#lib/dp/client.svelte.ts";
 import { browser } from "$app/env";
 import { loadLocale } from "wuchale/load-utils";
-import type { CustomAuthModel, ExpandedClub, ExpandedTeam } from "$lib/dp/types/ExpandedResponse.ts";
+import type { CustomAuthModel, ExpandedClub, ExpandedTeam } from "#lib/dp/types/ExpandedResponse.ts";
 import { locales } from "../locales/data";
-import { appLocale } from "$lib/dp/locale.svelte.ts";
-import { Collection } from "$lib/dp/enum/Collection.ts";
+import { appLocale } from "#lib/dp/locale.svelte.ts";
+import { Collection } from "#lib/dp/enum/Collection.ts";
 
 export const ssr = false;
 

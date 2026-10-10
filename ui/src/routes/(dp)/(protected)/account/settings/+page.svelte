@@ -1,13 +1,13 @@
 <script lang="ts">
-  import {authSettings} from "$lib/dp/client.svelte.js";
-  import PasswordRequestButton from "$lib/dp/auth/PasswordRequestButton.svelte";
-  import Dialog from "$lib/dp/components/modal/Dialog.svelte";
+  import {authSettings} from "#lib/dp/client.svelte.js";
+  import PasswordRequestButton from "#lib/dp/auth/PasswordRequestButton.svelte";
+  import Dialog from "#lib/dp/components/modal/Dialog.svelte";
   import {Lock, Mail, User} from "@lucide/svelte";
-  import ChangeEmailForm from "$lib/dp/auth/ChangeEmailForm.svelte";
-  import UserDetailsForm from "$lib/dp/components/forms/UserDetailsForm.svelte";
-  import PushSettingsSection from "$lib/dp/components/settings/PushSettingsSection.svelte";
-  import ICalSection from "$lib/dp/components/settings/ICalSection.svelte";
-  import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse";
+  import ChangeEmailForm from "#lib/dp/auth/ChangeEmailForm.svelte";
+  import UserDetailsForm from "#lib/dp/components/forms/UserDetailsForm.svelte";
+  import PushSettingsSection from "#lib/dp/components/settings/PushSettingsSection.svelte";
+  import ICalSection from "#lib/dp/components/settings/ICalSection.svelte";
+  import type {CustomAuthModel} from "#lib/dp/types/ExpandedResponse.js";
 
   const model = $derived(authSettings.record) as CustomAuthModel;
 </script>

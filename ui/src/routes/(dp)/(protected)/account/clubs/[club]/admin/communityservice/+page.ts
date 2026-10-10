@@ -1,9 +1,9 @@
 import type {PageLoad} from './$types';
-import {client} from "$lib/dp/client.svelte.ts";
-import type {ClubCommunityServiceRow} from "$lib/dp/types/ClubCommunityServiceRow.ts";
-import { Collection } from '$lib/dp/enum/Collection';
-import { watchWithPagination } from '$lib/dp/records/RecordOperations';
-import type { ExpandedServiceEntry } from '$lib/dp/types/ExpandedResponse';
+import {client} from "#lib/dp/client.svelte.ts";
+import type {ClubCommunityServiceRow} from "#lib/dp/types/ClubCommunityServiceRow.ts";
+import { Collection } from '#lib/dp/enum/Collection.js';
+import { watchWithPagination } from '#lib/dp/records/RecordOperations.js';
+import type { ExpandedServiceEntry } from '#lib/dp/types/ExpandedResponse.js';
 
 export const load: PageLoad = (async ({fetch, params, url, depends, parent}) => {
   type Query = {

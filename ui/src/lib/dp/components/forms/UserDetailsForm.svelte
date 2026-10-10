@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { authSettings, client } from "$lib/dp/client.svelte.js";
-  import type { CustomAuthModel } from "$lib/dp/types/ExpandedResponse.ts";
-  import { Collection } from "$lib/dp/enum/Collection.ts";
+  import { authSettings, client } from "#lib/dp/client.svelte.js";
+  import type { CustomAuthModel } from "#lib/dp/types/ExpandedResponse.ts";
+  import { Collection } from "#lib/dp/enum/Collection.ts";
   import { ClientResponseError } from "pocketbase";
-  import { toastController } from "$lib/dp/service/ToastController.svelte";
+  import { toastController } from "#lib/dp/service/ToastController.svelte.js";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 

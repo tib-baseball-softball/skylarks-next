@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
-  import { DateTimeUtility } from "$lib/dp/service/DateTimeUtility.ts";
-  import { appLocale } from "$lib/dp/locale.svelte";
+  import { DateTimeUtility } from "#lib/dp/service/DateTimeUtility.ts";
+  import { appLocale } from "#lib/dp/locale.svelte.js";
 
   interface Props {
     timeValue: string;
