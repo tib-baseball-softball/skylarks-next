@@ -32,7 +32,7 @@ Create a mutable copy with `new URL(page.url.href)`, mutate that copy, and use i
 
 #### Files to review
 
-- [ ] `src/lib/dp/navigation/StaticNavigationLinks.svelte`
+- [x] `src/lib/dp/navigation/StaticNavigationLinks.svelte`
 
 ### Review `goto` destinations
 
