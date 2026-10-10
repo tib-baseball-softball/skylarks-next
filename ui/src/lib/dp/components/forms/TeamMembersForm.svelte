@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { invalidateAll } from "$app/navigation";
+  import { refreshAll } from "$app/navigation";
   import MultiSelectCombobox from "#lib/dp/components/formElements/MultiSelectCombobox.svelte";
   import {
     authSettings,
@@ -69,7 +69,7 @@
         toastController.triggerGenericFormErrorMessage("Team members");
       }
     }
-    await invalidateAll();
+    await refreshAll();
   }
 </script>
 

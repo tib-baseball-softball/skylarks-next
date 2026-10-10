@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Plus, SquarePen } from "@lucide/svelte";
-  import { invalidateAll } from "$app/navigation";
+  import { refreshAll } from "$app/navigation";
   import { authSettings, client } from "#lib/dp/client.svelte.js";
   import { toastController } from "#lib/dp/service/ToastController.svelte.ts";
   import type {
@@ -93,7 +93,7 @@
       toastController.triggerGenericFormSuccessMessage("Announcement");
       open = false;
     }
-    await invalidateAll();
+    await refreshAll();
   }
 </script>
 

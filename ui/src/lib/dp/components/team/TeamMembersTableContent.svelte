@@ -7,7 +7,7 @@
     LockOpen,
     Trash,
   } from "@lucide/svelte";
-  import { invalidateAll } from "$app/navigation";
+  import { refreshAll } from "$app/navigation";
   import Avatar from "#lib/dp/components/utils/Avatar.svelte";
   import Dialog from "#lib/dp/components/modal/Dialog.svelte";
   import { client } from "#lib/dp/client.svelte.js";
@@ -38,7 +38,7 @@
         message: `User "${model.first_name + " " + model.last_name}" has been added as an admin for team "${team.name}"`,
         background: "preset-filled-success-500",
       });
-      await invalidateAll();
+      await refreshAll();
     } catch (error) {
       console.error(error);
       toastController.trigger({
@@ -57,7 +57,7 @@
         message: `User "${model.first_name + " " + model.last_name}" has been removed as admin for team "${team.name}"`,
         background: "preset-filled-success-500",
       });
-      await invalidateAll();
+      await refreshAll();
     } catch (error) {
       console.error(error);
       toastController.trigger({
@@ -76,7 +76,7 @@
         message: `User "${model.first_name + " " + model.last_name}" has been removed as member from team "${team.name}"`,
         background: "preset-filled-success-500",
       });
-      await invalidateAll();
+      await refreshAll();
     } catch (error) {
       console.error(error);
       toastController.trigger({

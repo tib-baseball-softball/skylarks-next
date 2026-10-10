@@ -1,6 +1,6 @@
 <script lang="ts">
   import { ClipboardPen, Plus } from "@lucide/svelte";
-  import { invalidateAll } from "$app/navigation";
+  import { refreshAll } from "$app/navigation";
   import MultiSelectCombobox from "#lib/dp/components/formElements/MultiSelectCombobox.svelte";
   import { authSettings, client } from "#lib/dp/client.svelte.js";
   import { toastController } from "#lib/dp/service/ToastController.svelte.ts";
@@ -112,7 +112,7 @@
       toastController.triggerGenericFormSuccessMessage("Club");
       open = false;
     }
-    await invalidateAll();
+    await refreshAll();
   }
 </script>
 
