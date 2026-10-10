@@ -18,38 +18,6 @@ Also search the project for `@migration-task` comments. They may describe additi
 
 ## Migration tasks
 
-### Migrate the removed `$service-worker` module
-
-SvelteKit 3 removes `$service-worker` and replaces its exports with several new modules.
-
-#### What to do
-
-Import `version` from `$app/env`, application asset metadata from `$app/manifest`, and path helpers from `$app/paths`. Account for the new manifest value shapes rather than blindly renaming `build` or `files` imports.
-
-#### References
-
-- [Migrating to SvelteKit v3](https://svelte.dev/docs/kit/migrating-to-sveltekit-3#$service-worker-(removed))
-
-#### Files to review
-
-- [ ] `src/service-worker.ts`
-
-### Create a TypeScript project for the service worker
-
-TypeScript service workers now need a separate project with service-worker-specific types.
-
-#### What to do
-
-Exclude the service worker from the root tsconfig and ensure `src/service-worker/tsconfig.json` extends `$app/tsconfig/service-worker`. Move a flat `src/service-worker.ts` entry to `src/service-worker/index.ts` if necessary, preserving any tooling references.
-
-#### References
-
-- [Migrating to SvelteKit v3](https://svelte.dev/docs/kit/migrating-to-sveltekit-3#$app-tsconfig-service-worker)
-
-#### Files to review
-
-- [ ] `src/service-worker.ts`
-
 ### Copy `page.url` before mutating it
 
 `page.url` and its search parameters are readonly in SvelteKit 3.
