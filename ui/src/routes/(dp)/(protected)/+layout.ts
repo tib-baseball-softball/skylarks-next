@@ -1,7 +1,7 @@
-import {redirect} from "@sveltejs/kit";
-import {browser, dev} from "$app/environment";
-import {authSettings, client} from "$lib/dp/client.svelte.ts";
-import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
+import { redirect } from "@sveltejs/kit";
+import { browser, dev } from "$app/env";
+import { authSettings, client } from "$lib/dp/client.svelte.ts";
+import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
 
 export const ssr = false;
 

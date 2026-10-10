@@ -1,8 +1,8 @@
-import {dev} from "$app/environment";
-import {client} from "$lib/dp/client.svelte.ts";
-import {PUBLIC_VAPID_PUBLIC_KEY} from "$env/static/public";
-import type {PushsubscriptionsCreate, PushsubscriptionsResponse} from "$lib/dp/types/pb-types.ts";
-import {Collection} from "$lib/dp/enum/Collection.ts";
+import { dev } from "$app/env";
+import { client } from "$lib/dp/client.svelte.ts";
+import { PUBLIC_VAPID_PUBLIC_KEY } from "$app/env/public";
+import type { PushsubscriptionsCreate, PushsubscriptionsResponse } from "$lib/dp/types/pb-types.ts";
+import { Collection } from "$lib/dp/enum/Collection.ts";
 
 export type PushSubscriptionResult = {
   subscription: PushSubscription | null
@@ -47,10 +47,7 @@ export class PushService {
       applicationServerKey: this.VAPID_PUBLIC_KEY
     });
 
-    return {
-      subscription: subscription,
-      status: 'granted'
-    };
+    return { subscription, status: 'granted' };
   }
 
   public async unsubscribeUser(): Promise<PushSubscription | null> {

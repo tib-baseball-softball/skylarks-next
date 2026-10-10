@@ -1,19 +1,19 @@
-import {TypedPocketBase} from "@tigawanna/typed-pocketbase";
-import type {AuthRecord, RecordAuthResponse, RecordModel} from "pocketbase";
-import {browser, dev} from "$app/environment";
-import {invalidateAll} from "$app/navigation";
-import {env} from "$env/dynamic/public";
-import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
-import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
-import type {Schema} from "$lib/dp/types/pb-types.ts";
-import {Collection} from "$lib/dp/enum/Collection.ts";
+import { TypedPocketBase } from "@tigawanna/typed-pocketbase";
+import type { AuthRecord, RecordAuthResponse, RecordModel } from "pocketbase";
+import { browser, dev } from "$app/env";
+import { invalidateAll } from "$app/navigation";
+import { PUBLIC_POCKETBASE_URL, PUBLIC_LOG_LEVEL } from "$app/env/public";
+import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+import type { CustomAuthModel } from "$lib/dp/types/ExpandedResponse.ts";
+import type { Schema } from "$lib/dp/types/pb-types.ts";
+import { Collection } from "$lib/dp/enum/Collection.ts";
 
 /**
  * baseURL is only explicitly defined in dev, use relative URLs for Prod.
  *
  * No server is involved, so a single shared instance is fine.
  */
-export const client = new TypedPocketBase<Schema>(dev ? env.PUBLIC_POCKETBASE_URL : undefined);
+export const client = new TypedPocketBase<Schema>(dev ? PUBLIC_POCKETBASE_URL : undefined);
 
 /**
  * Global auth state object
@@ -27,7 +27,7 @@ export const authSettings = new AuthSettings();
 // seems to work only on explicit logout, not on token expiration
 client.authStore.onChange((_token: string, record: AuthRecord) => {
   if (browser) {
-    if (dev && env.PUBLIC_LOG_LEVEL === "DEBUG") {
+    if (dev && PUBLIC_LOG_LEVEL === "DEBUG") {
       console.log("Auth Store changed:", record);
     }
     authSettings.record = record;

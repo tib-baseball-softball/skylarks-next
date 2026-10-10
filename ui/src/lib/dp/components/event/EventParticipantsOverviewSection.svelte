@@ -15,7 +15,7 @@
   import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
   import { invalidate } from "$app/navigation";
   import { participationDTOToExpandedParticipation } from "$lib/dp/types/UserParticipationDTO.ts";
-  import { PUBLIC_APPLICATION_CONTEXT } from "$env/static/public";
+  import { PUBLIC_APPLICATION_CONTEXT } from '$app/env/public';
 
   interface Props {
     event: ExpandedEvent;
@@ -100,7 +100,7 @@
   <article
     class="drop-target card participant-card preset-tonal-success"
     ondrop={(e) => ondrop(e, "in")}
-    {ondragover}
+    ondragover={ondragover}
   >
     <header class="participation-header">
       <span><Check /></span>
@@ -117,7 +117,7 @@
             >
               <IndividualParticipationEditButton
                 participation={inResponse}
-                {isAdmin}
+                isAdmin={isAdmin}
                 classes="chip preset-tonal-success border-success"
               />
             </li>
@@ -147,7 +147,7 @@
   <article
     class="drop-target card participant-card preset-tonal-warning"
     ondrop={(e) => ondrop(e, "maybe")}
-    {ondragover}
+    ondragover={ondragover}
   >
     <header class="participation-header">
       <span><CircleQuestionMark /></span>
@@ -164,7 +164,7 @@
             >
               <IndividualParticipationEditButton
                 participation={maybeResponse}
-                {isAdmin}
+                isAdmin={isAdmin}
                 classes="chip preset-tonal-warning border-warning"
               />
             </li>
@@ -177,7 +177,7 @@
   <article
     class="drop-target card participant-card preset-tonal-error"
     ondrop={(e) => ondrop(e, "out")}
-    {ondragover}
+    ondragover={ondragover}
   >
     <header class="participation-header">
       <span><X /></span>
@@ -194,7 +194,7 @@
             >
               <IndividualParticipationEditButton
                 participation={outResponse}
-                {isAdmin}
+                isAdmin={isAdmin}
                 classes="chip preset-tonal-error border-error"
               />
             </li>
@@ -231,7 +231,7 @@
                 <ExternalParticipationWrapper
                   dto={ghostResponse}
                   eventID={event.id}
-                  {isAdmin}
+                  isAdmin={isAdmin}
                   classes="chip preset-outlined"
                 />
               </li>

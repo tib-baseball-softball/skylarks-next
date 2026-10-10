@@ -11,7 +11,7 @@
     TeamsResponse,
   } from "$lib/dp/types/pb-types.ts";
   import { Collection } from "$lib/dp/enum/Collection";
-  import { dev } from "$app/environment";
+  import { dev } from "$app/env";
   import type { EventSeriesAction } from "$lib/dp/types/EventSeriesState";
   import ISODatePicker from "../formElements/ISODatePicker.svelte";
   import MultiSelectCombobox from "../formElements/MultiSelectCombobox.svelte";
@@ -94,9 +94,7 @@
         result = await client
           .collection(Collection.EventSeries)
           .update<EventSeriesCreationData>(form.id, form, {
-            query: {
-              action: action,
-            },
+            query: { action },
           });
       } else {
         result = await client

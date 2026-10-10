@@ -1,6 +1,6 @@
 <script lang="ts">
-  import {env} from "$env/dynamic/public";
-  import type {Snippet} from "svelte";
+  import { PUBLIC_APPLICATION_CONTEXT } from '$app/env/public';
+  import type { Snippet } from "svelte";
 
   interface Props {
     staticLinks?: Snippet;
@@ -25,10 +25,10 @@
 
 <div class="footer-bottom">
   <!-- @wc-ignore -->
-  {#if env.PUBLIC_APPLICATION_CONTEXT !== "Production"}
-    <div class="context-badge preset-tonal-warning rounded-container">
-      {env.PUBLIC_APPLICATION_CONTEXT}
-    </div>
+  {#if PUBLIC_APPLICATION_CONTEXT !== "Production"}
+    <div
+      class="context-badge preset-tonal-warning rounded-container"
+    >{PUBLIC_APPLICATION_CONTEXT}</div>
   {/if}
 
   <span class="attribution">

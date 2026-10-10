@@ -2,7 +2,7 @@
   import { onMount, type Snippet } from "svelte";
   import { X } from "@lucide/svelte";
   import type { HTMLAttributes, HTMLButtonAttributes } from "svelte/elements";
-  import { dev } from "$app/environment";
+  import { dev } from '$app/env';
 
   let dialog: HTMLDialogElement;
 
@@ -53,7 +53,7 @@
   }}
   {...triggerProps}
   class="{triggerClasses} trigger"
-  {disabled}
+  disabled={disabled}
   type="button"
 >
   {@render triggerContent()}

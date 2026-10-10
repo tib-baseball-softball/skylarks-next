@@ -1,11 +1,11 @@
-import type {LayoutLoad} from "./$types";
-import {authSettings, client} from "$lib/dp/client.svelte.ts";
-import {browser} from "$app/environment";
-import {loadLocale} from "wuchale/load-utils";
-import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
-import {locales} from "../locales/data";
-import {appLocale} from "$lib/dp/locale.svelte.ts";
-import {Collection} from "$lib/dp/enum/Collection.ts";
+import type { LayoutLoad } from "./$types";
+import { authSettings, client } from "$lib/dp/client.svelte.ts";
+import { browser } from "$app/env";
+import { loadLocale } from "wuchale/load-utils";
+import type { CustomAuthModel, ExpandedClub, ExpandedTeam } from "$lib/dp/types/ExpandedResponse.ts";
+import { locales } from "../locales/data";
+import { appLocale } from "$lib/dp/locale.svelte.ts";
+import { Collection } from "$lib/dp/enum/Collection.ts";
 
 export const ssr = false;
 
@@ -41,22 +41,19 @@ export const load: LayoutLoad = async ({fetch, depends}) => {
     // both calls are intentionally not filtered to let auth rules do the filtering
     teams = await client.collection(Collection.Teams).getFullList<ExpandedTeam>({
       expand: "club,admins",
-      fetch: fetch,
+      fetch,
       sort: "+name",
       requestKey: null,
     });
 
     clubs = await client.collection(Collection.Clubs).getFullList<ExpandedClub>({
       filter: `"${authRecord?.club}" ?~ id`,
-      fetch: fetch,
+      fetch,
       expand: "admins",
       requestKey: null,
     });
   }
   depends("nav:load");
 
-  return {
-    clubs: clubs,
-    teams: teams,
-  };
+  return { clubs, teams };
 };
