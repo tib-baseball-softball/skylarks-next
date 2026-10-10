@@ -48,18 +48,18 @@ Confirm each destination is an internal route. Use `window.location.href` for ex
 
 #### Files to review
 
-- [ ] `src/lib/dp/auth/AccountModal.svelte`
-- [ ] `src/lib/dp/auth/LoginForm.svelte`
-- [ ] `src/lib/dp/auth/LoginGuard.svelte`
-- [ ] `src/lib/dp/auth/OAuthProviderButton.svelte`
-- [ ] `src/lib/dp/components/event/EventFilters.svelte`
-- [ ] `src/lib/dp/components/event/EventPageAdminSection.svelte`
-- [ ] `src/lib/dp/components/meta/LocalePicker.svelte`
-- [ ] `src/lib/dp/components/team/TeamAdminSection.svelte`
-- [ ] `src/lib/dp/utility/Paginator.svelte`
-- [ ] `src/routes/(dp)/(protected)/account/[user]/communityservice/+page.svelte`
-- [ ] `src/routes/(dp)/(protected)/account/clubs/[club]/admin/communityservice/+page.svelte`
-- [ ] `src/routes/(dp)/(protected)/stats/[user]/+page.svelte`
+- [x] `src/lib/dp/auth/AccountModal.svelte`
+- [x] `src/lib/dp/auth/LoginForm.svelte`
+- [x] `src/lib/dp/auth/LoginGuard.svelte`
+- [x] `src/lib/dp/auth/OAuthProviderButton.svelte`
+- [x] `src/lib/dp/components/event/EventFilters.svelte`
+- [x] `src/lib/dp/components/event/EventPageAdminSection.svelte`
+- [x] `src/lib/dp/components/meta/LocalePicker.svelte`
+- [x] `src/lib/dp/components/team/TeamAdminSection.svelte`
+- [x] `src/lib/dp/utility/Paginator.svelte`
+- [x] `src/routes/(dp)/(protected)/account/[user]/communityservice/+page.svelte`
+- [x] `src/routes/(dp)/(protected)/account/clubs/[club]/admin/communityservice/+page.svelte`
+- [x] `src/routes/(dp)/(protected)/stats/[user]/+page.svelte`
 
 ### Adjust noScroll/keepFocus usage
 
@@ -75,12 +75,12 @@ replace the `noScroll` and `keepFocus` options of `goto` with a single `reset` o
 
 #### Files to review
 
-- [ ] `src/lib/dp/components/event/EventFilters.svelte`
-- [ ] `src/lib/dp/components/meta/LocalePicker.svelte`
-- [ ] `src/lib/dp/utility/Paginator.svelte`
-- [ ] `src/routes/(dp)/(protected)/account/[user]/communityservice/+page.svelte`
-- [ ] `src/routes/(dp)/(protected)/account/clubs/[club]/admin/communityservice/+page.svelte`
-- [ ] `src/routes/(dp)/(protected)/stats/[user]/+page.svelte`
+- [x] `src/lib/dp/components/event/EventFilters.svelte`
+- [x] `src/lib/dp/components/meta/LocalePicker.svelte`
+- [x] `src/lib/dp/utility/Paginator.svelte`
+- [x] `src/routes/(dp)/(protected)/account/[user]/communityservice/+page.svelte`
+- [x] `src/routes/(dp)/(protected)/account/clubs/[club]/admin/communityservice/+page.svelte`
+- [x] `src/routes/(dp)/(protected)/stats/[user]/+page.svelte`
 
 ### Replace `invalidateAll` with `refreshAll`
 

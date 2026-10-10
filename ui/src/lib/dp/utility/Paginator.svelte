@@ -14,7 +14,7 @@
   type PagingAction = "increment" | "decrement";
 
   function pushNavState(action: PagingAction) {
-    const newURL = page.url;
+    const newURL = new URL(page.url.href);
     const currentPage = $store.page;
     switch (action) {
       case "increment":
@@ -25,9 +25,8 @@
         break;
     }
     goto(newURL, {
-      noScroll: true,
-      keepFocus: true,
-      invalidateAll: false,
+      reset: false,
+      refreshAll: false,
     });
   }
 

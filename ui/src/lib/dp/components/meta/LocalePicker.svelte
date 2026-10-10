@@ -4,10 +4,9 @@
   import { appLocale } from "#lib/dp/locale.svelte.ts";
 
   async function reload() {
-    await goto(page.url, {
-      noScroll: true,
-      keepFocus: true,
-      invalidateAll: true,
+    await goto(new URL(page.url.href), {
+      reset: false,
+      refreshAll: true,
     });
     const htmlElement = document.querySelector("html");
 

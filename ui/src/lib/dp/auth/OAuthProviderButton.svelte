@@ -41,7 +41,7 @@
     }
 
     if (authResponse) {
-      await goto("/account", { invalidateAll: true });
+      await goto("/account", { refreshAll: true });
     }
   }
 

@@ -20,7 +20,7 @@
     let queryString = `?season=${selectedSeason}`;
 
     goto(queryString, {
-      noScroll: true,
+      reset: false
     });
   };
 </script>

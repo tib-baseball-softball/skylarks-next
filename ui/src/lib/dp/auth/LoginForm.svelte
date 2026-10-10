@@ -141,7 +141,7 @@
       );
 
       if (authResponse) {
-        await goto("/account", { invalidateAll: true });
+        await goto("/account", { refreshAll: true });
       }
     } catch (error) {
       if (error instanceof ClientResponseError) {

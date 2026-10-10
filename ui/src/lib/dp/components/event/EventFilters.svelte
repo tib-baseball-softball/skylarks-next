@@ -24,8 +24,7 @@
 
   const reloadWithQuery = () => {
     goto(queryString, {
-      noScroll: true,
-      keepFocus: true,
+      reset: false
     });
   };
 
