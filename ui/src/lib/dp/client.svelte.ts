@@ -3,10 +3,11 @@ import { toastController } from "#lib/dp/service/ToastController.svelte.ts";
 import type { CustomAuthModel } from "#lib/dp/types/ExpandedResponse.ts";
 import type { Schema } from "#lib/dp/types/pb-types.ts";
 import { browser, dev } from "$app/env";
-import { PUBLIC_LOG_LEVEL, PUBLIC_POCKETBASE_URL } from "$app/env/public";
+import { LOG_LEVEL, POCKETBASE_URL } from "$app/env/public";
 import { refreshAll } from "$app/navigation";
 import { TypedPocketBase } from "@tigawanna/typed-pocketbase";
 import type { AuthRecord, RecordAuthResponse, RecordModel } from "pocketbase";
+import { LogLevel } from "#lib/dp/types/LogLevel.ts";
 
 /**
  * baseURL is only explicitly defined in dev, use relative URLs for Prod.
@@ -14,7 +15,7 @@ import type { AuthRecord, RecordAuthResponse, RecordModel } from "pocketbase";
  * No server is involved, so a single shared instance is fine.
  */
 export const client = new TypedPocketBase<Schema>(
-  dev ? PUBLIC_POCKETBASE_URL : undefined,
+  dev ? POCKETBASE_URL : undefined,
 );
 
 /**
@@ -29,7 +30,7 @@ export const authSettings = new AuthSettings();
 // seems to work only on explicit logout, not on token expiration
 client.authStore.onChange((_token: string, record: AuthRecord) => {
   if (browser) {
-    if (dev && PUBLIC_LOG_LEVEL === "DEBUG") {
+    if (dev && LOG_LEVEL === LogLevel.Debug) {
       console.log("Auth Store changed:", record);
     }
     authSettings.record = record;

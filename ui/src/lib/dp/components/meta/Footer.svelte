@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { PUBLIC_APPLICATION_CONTEXT } from '$app/env/public';
+  import { APPLICATION_CONTEXT } from "$app/env/public";
   import type { Snippet } from "svelte";
 
   interface Props {
     staticLinks?: Snippet;
   }
 
-  let {staticLinks}: Props = $props();
+  let { staticLinks }: Props = $props();
 </script>
 
 <section class="links-wrapper">
@@ -14,21 +14,19 @@
 </section>
 
 <nav class="list-nav">
-
   <ul class="nav-list">
     <li><a href="/terms">Terms & Conditions</a></li>
     <li><a href="/legalnotice">Impressum</a></li>
     <li><a href="/privacy">Datenschutzerklärung</a></li>
   </ul>
-
 </nav>
 
 <div class="footer-bottom">
   <!-- @wc-ignore -->
-  {#if PUBLIC_APPLICATION_CONTEXT !== "Production"}
-    <div
-      class="context-badge preset-tonal-warning rounded-container"
-    >{PUBLIC_APPLICATION_CONTEXT}</div>
+  {#if APPLICATION_CONTEXT !== "Production"}
+    <div class="context-badge preset-tonal-warning rounded-container">
+      {APPLICATION_CONTEXT}
+    </div>
   {/if}
 
   <span class="attribution">

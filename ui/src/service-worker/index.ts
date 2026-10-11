@@ -4,7 +4,7 @@ import { immutable, assets } from "$app/manifest";
 import { resolve } from "$app/paths";
 
 import type { Extension } from "../lib/dp/types/ExpandedResponse";
-import { PUBLIC_APPLICATION_CONTEXT } from "$app/env/public";
+import { APPLICATION_CONTEXT } from "$app/env/public";
 import { ApplicationContext } from "../lib/dp/types/ApplicationContext";
 
 // Create a unique cache name for this deployment
@@ -48,7 +48,7 @@ type PushOptions = Extension<
 
 self.addEventListener("push", function (event) {
   const payload = event.data?.json() as PushOptions;
-  if (PUBLIC_APPLICATION_CONTEXT !== ApplicationContext.Production) {
+  if (APPLICATION_CONTEXT !== ApplicationContext.Production) {
     console.log("Received a push message", payload);
   }
 
@@ -64,7 +64,7 @@ self.addEventListener("push", function (event) {
 });
 
 self.addEventListener("notificationclick", async (event) => {
-  if (PUBLIC_APPLICATION_CONTEXT !== ApplicationContext.Production) {
+  if (APPLICATION_CONTEXT !== ApplicationContext.Production) {
     console.log("Notification clicked, action:", event.action);
     console.log("Notification clicked, notification:", event.notification);
   }

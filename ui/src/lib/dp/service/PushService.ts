@@ -1,6 +1,6 @@
 import { dev } from "$app/env";
 import { client } from "#lib/dp/client.svelte.ts";
-import { PUBLIC_VAPID_PUBLIC_KEY } from "$app/env/public";
+import { VAPID_PUBLIC_KEY } from "$app/env/public";
 import type { PushsubscriptionsCreate, PushsubscriptionsResponse } from "#lib/dp/types/pb-types.ts";
 import { Collection } from "#lib/dp/enum/Collection.ts";
 
@@ -10,7 +10,7 @@ export type PushSubscriptionResult = {
 }
 
 export class PushService {
-  private VAPID_PUBLIC_KEY = PUBLIC_VAPID_PUBLIC_KEY;
+  private vapidPublicKey = VAPID_PUBLIC_KEY;
 
   public async subscribeUser(): Promise<PushSubscriptionResult> {
     const result = await Notification.requestPermission();
@@ -44,7 +44,7 @@ export class PushService {
     }
     const subscription = await registration.pushManager.subscribe({
       userVisibleOnly: true,
-      applicationServerKey: this.VAPID_PUBLIC_KEY
+      applicationServerKey: this.vapidPublicKey
     });
 
     return { subscription, status: 'granted' };
