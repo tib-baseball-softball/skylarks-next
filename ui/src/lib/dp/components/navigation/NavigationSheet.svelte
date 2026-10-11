@@ -5,6 +5,7 @@
     ExpandedTeam,
   } from "#lib/dp/types/ExpandedResponse.ts";
   import Sheet from "#lib/dp/components/modal/Sheet.svelte";
+  import { Menu, X } from "@lucide/svelte";
 
   interface Props {
     clubs: ExpandedClub[];
@@ -23,11 +24,7 @@
   closeButtonClasses="sr-only"
 >
   {#snippet triggerContent()}
-    <svg viewBox="0 0 100 80" aria-hidden="true">
-      <rect height="20" width="100" />
-      <rect height="20" width="100" y="30" />
-      <rect height="20" width="100" y="60" />
-    </svg>
+    <Menu />
   {/snippet}
 
   {#snippet title()}
@@ -35,14 +32,18 @@
   {/snippet}
 
   <div class="navigation-sheet-content">
-    <a
-      aria-label="to home page"
-      class="anchor"
-      href="/"
-      onclick={() => (open = false)}
-    >
-      <img alt="Diamond Planner Logo" src="/icon_dp.svg" />
-    </a>
+    <div class="navigation-sheet-header-box">
+      <a aria-label="to home page" href="/" onclick={() => (open = false)}>
+        <img alt="Diamond Planner Logo" src="/icon_dp.svg" />
+      </a>
+      <button
+        class="btn preset-outlined-card"
+        onclick={() => (open = false)}
+        aria-label="close navigation drawer"
+      >
+        <X />
+      </button>
+    </div>
 
     <hr />
 
@@ -60,24 +61,18 @@
     }
   }
 
-  a {
+  .navigation-sheet-header-box {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+    align-items: center;
     padding: 0.5em;
 
     img {
-      max-width: calc(var(--spacing) * 14);
+      width: calc(var(--spacing) * 14);
     }
   }
 
   hr {
     margin-block-end: 0.5em;
-  }
-
-  svg {
-    --svg-size: calc(var(--spacing) * 4);
-    width: var(--svg-size);
-    height: var(--svg-size);
-    fill: var(--color-surface-950-50);
   }
 </style>

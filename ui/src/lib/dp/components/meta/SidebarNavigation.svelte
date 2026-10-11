@@ -14,8 +14,12 @@
     Users,
   } from "@lucide/svelte";
   import AccordionItem from "#lib/dp/components/modal/AccordionItem.svelte";
-  import {authSettings} from "#lib/dp/client.svelte.js";
-  import type {CustomAuthModel, ExpandedClub, ExpandedTeam} from "#lib/dp/types/ExpandedResponse.ts";
+  import { authSettings } from "#lib/dp/client.svelte.js";
+  import type {
+    CustomAuthModel,
+    ExpandedClub,
+    ExpandedTeam,
+  } from "#lib/dp/types/ExpandedResponse.ts";
 
   interface Props {
     clubs: ExpandedClub[];
@@ -23,7 +27,7 @@
     sheetOpen?: boolean;
   }
 
-  let {clubs, teams, sheetOpen = $bindable()}: Props = $props();
+  let { clubs, teams, sheetOpen = $bindable() }: Props = $props();
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
   const isUserAuthenticated = $derived(!!authSettings.record);
@@ -39,7 +43,7 @@
   {#if isUserAuthenticated}
     <AccordionItem>
       {#snippet lead()}
-        <SquareUserRound/>
+        <SquareUserRound />
       {/snippet}
 
       {#snippet control()}
@@ -48,38 +52,41 @@
 
       {#snippet panel()}
         <a href="/account" onclick={sheetClose}>
-          <CircleUserRound/>
+          <CircleUserRound />
           <span>Dashboard</span>
         </a>
 
         <a href="/stats/{authRecord?.id}" onclick={sheetClose}>
-          <ChartLine/>
+          <ChartLine />
           <span>Personal Stats</span>
         </a>
 
         <a href="/account/playerprofile" onclick={sheetClose}>
-          <IdCard/>
+          <IdCard />
           <span>Player Profile</span>
         </a>
 
-        <a href="/account/{authRecord.id}/communityservice" onclick={sheetClose}>
-          <ToolCase/>
+        <a
+          href="/account/{authRecord.id}/communityservice"
+          onclick={sheetClose}
+        >
+          <ToolCase />
           <span>Community Service</span>
         </a>
 
         <a href="/account/settings" onclick={sheetClose}>
-          <Settings/>
+          <Settings />
           <span>Settings</span>
         </a>
       {/snippet}
     </AccordionItem>
 
     {#each clubs as club (club.id)}
-      <hr class="hr"/>
-      
+      <hr class="hr" />
+
       <AccordionItem panelInset="default">
         {#snippet lead()}
-          <Shield/>
+          <Shield />
         {/snippet}
 
         {#snippet control()}
@@ -88,15 +95,14 @@
 
         {#snippet panel()}
           <a href="/account/clubs/{club.id}" onclick={sheetClose}>
-            <House/>
+            <House />
             <span>Club Main Page</span>
           </a>
 
           {#if teams?.length > 0}
-
-            {#each teams.filter(team => team.club === club.id) as team (team.id)}
+            {#each teams.filter((team) => team.club === club.id) as team (team.id)}
               <a href="/account/team/{team.id}" onclick={sheetClose}>
-                <Users/>
+                <Users />
                 <span>{team.name} ({team?.expand?.club?.acronym}) </span>
               </a>
             {/each}
@@ -107,7 +113,7 @@
       {#if club.admins.includes(authRecord?.id)}
         <AccordionItem panelInset="default" startOpen={false}>
           {#snippet lead()}
-            <LockKeyhole/>
+            <LockKeyhole />
           {/snippet}
 
           {#snippet control()}
@@ -115,13 +121,19 @@
           {/snippet}
 
           {#snippet panel()}
-            <a href="/account/clubs/{club.id}/admin/attendance" onclick={sheetClose}>
-              <ChartColumnStacked/>
+            <a
+              href="/account/clubs/{club.id}/admin/attendance"
+              onclick={sheetClose}
+            >
+              <ChartColumnStacked />
               <span>Attendance Dashboard</span>
             </a>
 
-            <a href="/account/clubs/{club.id}/admin/communityservice" onclick={sheetClose}>
-              <BookHeart/>
+            <a
+              href="/account/clubs/{club.id}/admin/communityservice"
+              onclick={sheetClose}
+            >
+              <BookHeart />
               <span>Community Service</span>
             </a>
           {/snippet}
