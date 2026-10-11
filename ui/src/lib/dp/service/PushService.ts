@@ -13,7 +13,7 @@ export type PushSubscriptionResult = {
 };
 
 export class PushService {
-  private vapidPublicKey = VAPID_PUBLIC_KEY;
+  #vapidPublicKey = VAPID_PUBLIC_KEY;
 
   public async subscribeUser(): Promise<PushSubscriptionResult> {
     const result = await Notification.requestPermission();
@@ -47,7 +47,7 @@ export class PushService {
     }
     const subscription = await registration.pushManager.subscribe({
       userVisibleOnly: true,
-      applicationServerKey: this.vapidPublicKey,
+      applicationServerKey: this.#vapidPublicKey,
     });
 
     return { subscription, status: "granted" };
