@@ -32,6 +32,10 @@
 
   const uid = $props.id();
 
+  /**
+   * Declarative way to allow child components to close dialog programmtically.
+   * For form submit prefer attributes on form or submit button.
+   */
   onMount(() => {
     const closeButtons: NodeListOf<HTMLElement> = dialog.querySelectorAll(
       "[data-dialog-close]",

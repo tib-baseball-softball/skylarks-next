@@ -25,8 +25,6 @@
   });
 
   async function submitForm(e: SubmitEvent) {
-    e.preventDefault();
-
     const formData = new FormData();
 
     formData.append("id", form.id);
@@ -76,7 +74,7 @@
   publicly. (Your team and club administrators have access).
 </p>
 
-<form class="user-details-form" onsubmit={submitForm}>
+<form class="user-details-form" onsubmit={submitForm} method="dialog">
   <input
     autocomplete="off"
     bind:value={form.id}
@@ -158,9 +156,7 @@
   {/if}
 
   <div class="actions">
-    <button data-dialog-close class="btn preset-tonal-primary" type="submit"
-      >Confirm</button
-    >
+    <button class="btn preset-tonal-primary" type="submit">Confirm</button>
   </div>
 </form>
 

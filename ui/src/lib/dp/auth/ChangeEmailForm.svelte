@@ -14,8 +14,6 @@
   });
 
   async function submitForm(e: SubmitEvent) {
-    e.preventDefault();
-
     const sent = await client
       .collection(Collection.Users)
       .requestEmailChange(form.email);
@@ -35,7 +33,7 @@
   }
 </script>
 
-<form class="form-root" onsubmit={submitForm}>
+<form class="form-root" method="dialog" onsubmit={submitForm}>
   <label class="label">
     E-Mail
     <input
@@ -56,7 +54,6 @@
       class="btn preset-tonal-primary submit-btn"
       disabled={form.email === authRecord.email}
       type="submit"
-      data-dialog-close
     >
       Confirm
     </button>

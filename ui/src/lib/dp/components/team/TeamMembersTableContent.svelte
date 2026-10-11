@@ -40,7 +40,6 @@
       });
       await refreshAll();
     } catch (error) {
-      console.error(error);
       toastController.trigger({
         message: "An error occurred while adding user as admin",
         background: "preset-filled-error-500",
@@ -59,7 +58,6 @@
       });
       await refreshAll();
     } catch (error) {
-      console.error(error);
       toastController.trigger({
         message: "An error occurred while removing user as admin",
         background: "preset-filled-error-500",
@@ -78,7 +76,6 @@
       });
       await refreshAll();
     } catch (error) {
-      console.error(error);
       toastController.trigger({
         message: "An error occurred while removing user as team member",
         background: "preset-filled-error-500",
@@ -89,7 +86,7 @@
   const rows = $derived(handler.rows);
 </script>
 
-{#each rows as row}
+{#each rows as row (row.id)}
   <tr class="content-row">
     <td>
       <div class="avatar-container">

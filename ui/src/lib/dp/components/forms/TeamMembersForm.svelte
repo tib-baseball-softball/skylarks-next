@@ -45,8 +45,6 @@
   );
 
   async function submitForm(e: SubmitEvent) {
-    e.preventDefault();
-
     try {
       let changedAuthRecord = false;
       for (const user of selectedUsers) {
@@ -73,7 +71,7 @@
   }
 </script>
 
-<form class="edit-form" onsubmit={submitForm}>
+<form class="edit-form" method="dialog" onsubmit={submitForm}>
   <div class="edit-form-grid">
     <input
       autocomplete="off"
@@ -106,7 +104,6 @@
   <hr />
 
   <button
-    data-dialog-close
     class="btn preset-tonal-primary border border-primary-500"
     type="submit"
   >
