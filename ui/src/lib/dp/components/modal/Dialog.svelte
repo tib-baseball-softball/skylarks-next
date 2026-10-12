@@ -2,7 +2,7 @@
   import { onMount, type Snippet } from "svelte";
   import { X } from "@lucide/svelte";
   import type { HTMLAttributes, HTMLButtonAttributes } from "svelte/elements";
-  import { dev } from "$app/environment";
+  import { dev } from '$app/env';
 
   let dialog: HTMLDialogElement;
 
@@ -32,6 +32,10 @@
 
   const uid = $props.id();
 
+  /**
+   * Declarative way to allow child components to close dialog programmtically.
+   * For form submit prefer attributes on form or submit button.
+   */
   onMount(() => {
     const closeButtons: NodeListOf<HTMLElement> = dialog.querySelectorAll(
       "[data-dialog-close]",
@@ -53,7 +57,7 @@
   }}
   {...triggerProps}
   class="{triggerClasses} trigger"
-  {disabled}
+  disabled={disabled}
   type="button"
 >
   {@render triggerContent()}

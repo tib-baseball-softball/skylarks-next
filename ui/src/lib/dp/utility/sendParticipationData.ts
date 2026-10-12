@@ -1,8 +1,8 @@
-import {client} from "$lib/dp/client.svelte.js";
-import type {ParticipationsCreate, ParticipationsResponse} from "$lib/dp/types/pb-types.ts";
-import {Collection} from "$lib/dp/enum/Collection.ts";
+import {client} from "#lib/dp/client.svelte.js";
+import type {ParticipationsCreate, ParticipationsResponse} from "#lib/dp/types/pb-types.ts";
+import {Collection} from "#lib/dp/enum/Collection.ts";
 import { ClientResponseError } from "pocketbase";
-import { toastController } from "$lib/dp/service/ToastController.svelte";
+import { toastController } from "#lib/dp/service/ToastController.svelte.js";
 
 export async function sendParticipationData(
   data: ParticipationsCreate

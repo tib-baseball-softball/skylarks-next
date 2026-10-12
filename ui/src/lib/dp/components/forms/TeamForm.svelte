@@ -1,19 +1,19 @@
 <script lang="ts">
   import { Plus, SquarePen } from "@lucide/svelte";
   import { invalidate } from "$app/navigation";
-  import TabsRadioGroup from "$lib/dp/components/formElements/TabsRadioGroup.svelte";
-  import MultiSelectCombobox from "$lib/dp/components/formElements/MultiSelectCombobox.svelte";
-  import { authSettings, client } from "$lib/dp/client.svelte.js";
-  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  import TabsRadioGroup from "#lib/dp/components/formElements/TabsRadioGroup.svelte";
+  import MultiSelectCombobox from "#lib/dp/components/formElements/MultiSelectCombobox.svelte";
+  import { authSettings, client } from "#lib/dp/client.svelte.js";
+  import { toastController } from "#lib/dp/service/ToastController.svelte.ts";
   import type {
     CustomAuthModel,
     ExpandedTeam,
-  } from "$lib/dp/types/ExpandedResponse.ts";
-  import type { ClubsResponse, UsersResponse } from "$lib/dp/types/pb-types.ts";
-  import { Collection } from "$lib/dp/enum/Collection.ts";
-  import RichTextEditor from "$lib/dp/components/rte/RichTextEditor.svelte";
+  } from "#lib/dp/types/ExpandedResponse.ts";
+  import type { ClubsResponse, UsersResponse } from "#lib/dp/types/pb-types.ts";
+  import { Collection } from "#lib/dp/enum/Collection.ts";
+  import RichTextEditor from "#lib/dp/components/rte/RichTextEditor.svelte";
   import clsx from "clsx";
-  import Sheet from "$lib/dp/components/modal/Sheet.svelte";
+  import Sheet from "#lib/dp/components/modal/Sheet.svelte";
   import { ClientResponseError } from "pocketbase";
 
   interface Props {

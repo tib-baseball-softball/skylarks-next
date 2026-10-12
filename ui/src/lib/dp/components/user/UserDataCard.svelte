@@ -1,8 +1,8 @@
 <script lang="ts">
   import {Mail, User} from "@lucide/svelte";
-  import Avatar from "$lib/dp/components/utils/Avatar.svelte";
-  import {client} from "$lib/dp/client.svelte.js";
-  import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
+  import Avatar from "#lib/dp/components/utils/Avatar.svelte";
+  import {client} from "#lib/dp/client.svelte.js";
+  import type {CustomAuthModel} from "#lib/dp/types/ExpandedResponse.ts";
 
   interface Props {
     model: CustomAuthModel;

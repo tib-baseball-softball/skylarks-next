@@ -1,14 +1,14 @@
 <script lang="ts">
   import { Check, CircleQuestionMark, X } from "@lucide/svelte";
   import { invalidate } from "$app/navigation";
-  import { authSettings } from "$lib/dp/client.svelte.js";
-  import type { EventParticipationState } from "$lib/dp/types/EventParticipationState.ts";
+  import { authSettings } from "#lib/dp/client.svelte.js";
+  import type { EventParticipationState } from "#lib/dp/types/EventParticipationState.ts";
   import type {
     CustomAuthModel,
     ExpandedEvent,
-  } from "$lib/dp/types/ExpandedResponse.ts";
-  import type { ParticipationsCreate } from "$lib/dp/types/pb-types.ts";
-  import { sendParticipationData } from "$lib/dp/utility/sendParticipationData.ts";
+  } from "#lib/dp/types/ExpandedResponse.ts";
+  import type { ParticipationsCreate } from "#lib/dp/types/pb-types.ts";
+  import { sendParticipationData } from "#lib/dp/utility/sendParticipationData.ts";
 
   interface props {
     event: ExpandedEvent;

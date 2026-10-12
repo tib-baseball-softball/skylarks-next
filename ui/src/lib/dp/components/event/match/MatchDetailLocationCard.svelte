@@ -1,7 +1,7 @@
 <script lang="ts">
   import type {Field} from "bsm.js";
   import {Building2, LandPlot, Link, MapPin} from "@lucide/svelte";
-  import {MapUtility} from "$lib/dp/service/MapUtility.ts";
+  import {MapUtility} from "#lib/dp/service/MapUtility.ts";
 
   type DisplayedLocation = Omit<
     Field,

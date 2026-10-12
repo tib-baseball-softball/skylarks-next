@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { authSettings, client } from "$lib/dp/client.svelte.js";
-  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
-  import type { CustomAuthModel } from "$lib/dp/types/ExpandedResponse.ts";
+  import { authSettings, client } from "#lib/dp/client.svelte.js";
+  import { toastController } from "#lib/dp/service/ToastController.svelte.ts";
+  import type { CustomAuthModel } from "#lib/dp/types/ExpandedResponse.ts";
   import { Collection } from "../enum/Collection";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
@@ -14,8 +14,6 @@
   });
 
   async function submitForm(e: SubmitEvent) {
-    e.preventDefault();
-
     const sent = await client
       .collection(Collection.Users)
       .requestEmailChange(form.email);
@@ -35,7 +33,7 @@
   }
 </script>
 
-<form class="form-root" onsubmit={submitForm}>
+<form class="form-root" method="dialog" onsubmit={submitForm}>
   <label class="label">
     E-Mail
     <input
@@ -56,7 +54,6 @@
       class="btn preset-tonal-primary submit-btn"
       disabled={form.email === authRecord.email}
       type="submit"
-      data-dialog-close
     >
       Confirm
     </button>

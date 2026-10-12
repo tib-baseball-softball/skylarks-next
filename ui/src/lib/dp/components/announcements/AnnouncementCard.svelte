@@ -1,9 +1,9 @@
 <script lang="ts">
   import {MessageCircle} from "@lucide/svelte";
-  import AnnouncementForm from "$lib/dp/components/forms/AnnouncementForm.svelte";
-  import DeleteButton from "$lib/dp/components/utils/DeleteButton.svelte";
-  import {authSettings, client} from "$lib/dp/client.svelte.ts";
-  import type {CustomAuthModel, ExpandedAnnouncement} from "$lib/dp/types/ExpandedResponse.ts";
+  import AnnouncementForm from "#lib/dp/components/forms/AnnouncementForm.svelte";
+  import DeleteButton from "#lib/dp/components/utils/DeleteButton.svelte";
+  import {authSettings, client} from "#lib/dp/client.svelte.ts";
+  import type {CustomAuthModel, ExpandedAnnouncement} from "#lib/dp/types/ExpandedResponse.ts";
   import AnnouncementCoreContent from "./AnnouncementCoreContent.svelte";
 
   interface Props {

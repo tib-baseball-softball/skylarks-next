@@ -1,20 +1,20 @@
 <script lang="ts">
   import { ClipboardPen, Plus } from "@lucide/svelte";
-  import { invalidateAll } from "$app/navigation";
-  import MultiSelectCombobox from "$lib/dp/components/formElements/MultiSelectCombobox.svelte";
-  import { authSettings, client } from "$lib/dp/client.svelte.js";
-  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  import { refreshAll } from "$app/navigation";
+  import MultiSelectCombobox from "#lib/dp/components/formElements/MultiSelectCombobox.svelte";
+  import { authSettings, client } from "#lib/dp/client.svelte.js";
+  import { toastController } from "#lib/dp/service/ToastController.svelte.ts";
   import type {
     CustomAuthModel,
     ExpandedClub,
-  } from "$lib/dp/types/ExpandedResponse.ts";
+  } from "#lib/dp/types/ExpandedResponse.ts";
   import type {
     ClubsResponse,
     UsersResponse,
     UsersUpdate,
-  } from "$lib/dp/types/pb-types.ts";
-  import { Collection } from "$lib/dp/enum/Collection.ts";
-  import Sheet from "$lib/dp/components/modal/Sheet.svelte";
+  } from "#lib/dp/types/pb-types.ts";
+  import { Collection } from "#lib/dp/enum/Collection.ts";
+  import Sheet from "#lib/dp/components/modal/Sheet.svelte";
   import { clsx } from "clsx";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
@@ -112,7 +112,7 @@
       toastController.triggerGenericFormSuccessMessage("Club");
       open = false;
     }
-    await invalidateAll();
+    await refreshAll();
   }
 </script>
 

@@ -1,5 +1,5 @@
 import type { RecordModel } from "pocketbase";
-import type { UserParticipationDTO } from "$lib/dp/types/UserParticipationDTO.ts";
+import type { UserParticipationDTO } from "#lib/dp/types/UserParticipationDTO.ts";
 import type {
   AnnouncementsResponse,
   ClubsResponse,

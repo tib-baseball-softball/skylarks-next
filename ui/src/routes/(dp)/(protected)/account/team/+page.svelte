@@ -1,8 +1,8 @@
 <script lang="ts">
-  import TeamListTeaser from "$lib/dp/components/team/TeamListTeaser.svelte";
+  import TeamListTeaser from "#lib/dp/components/team/TeamListTeaser.svelte";
   import type {PageProps} from "./$types";
-  import {authSettings} from "$lib/dp/client.svelte.ts";
-  import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
+  import {authSettings} from "#lib/dp/client.svelte.ts";
+  import type {CustomAuthModel} from "#lib/dp/types/ExpandedResponse.ts";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 

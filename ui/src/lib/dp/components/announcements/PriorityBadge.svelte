@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { AnnouncementsResponse } from "$lib/dp/types/pb-types.ts";
+  import type { AnnouncementsResponse } from "#lib/dp/types/pb-types.ts";
 
   type Priority = AnnouncementsResponse["priority"];
 

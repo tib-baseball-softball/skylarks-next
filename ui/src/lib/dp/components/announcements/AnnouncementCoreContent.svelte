@@ -1,9 +1,9 @@
 <script lang="ts">
   import {User} from "@lucide/svelte";
-  import type {ExpandedAnnouncement} from "$lib/dp/types/ExpandedResponse.ts";
+  import type {ExpandedAnnouncement} from "#lib/dp/types/ExpandedResponse.ts";
   import PriorityBadge from "./PriorityBadge.svelte";
-  import LocalDate from "$lib/dp/components/utils/LocalDate.svelte";
-  import {markdownToHTML} from "$lib/dp/utility/DOMFunctions.ts";
+  import LocalDate from "#lib/dp/components/utils/LocalDate.svelte";
+  import {markdownToHTML} from "#lib/dp/utility/DOMFunctions.ts";
 
   interface Props {
     announcement: ExpandedAnnouncement;

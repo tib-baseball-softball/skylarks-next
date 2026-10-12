@@ -1,6 +1,6 @@
 import type {PageLoad} from './$types';
-import {client} from "$lib/dp/client.svelte.ts";
-import type {CommunityServiceData} from "$lib/dp/types/CommunityServiceData.ts";
+import {client} from "#lib/dp/client.svelte.ts";
+import type {CommunityServiceData} from "#lib/dp/types/CommunityServiceData.ts";
 
 export const load: PageLoad = (async ({params, url, fetch, depends}) => {
   let season = url.searchParams.get("season");

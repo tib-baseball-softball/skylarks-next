@@ -1,13 +1,13 @@
 <script lang="ts">
   import {type TableHandler} from "@vincjo/datatables";
   import type {Snippet} from "svelte";
-  import Search from "$lib/dp/components/datatable/Search.svelte";
-  import RowsPerPage from "$lib/dp/components/datatable/RowsPerPage.svelte";
-  import ThSort from "$lib/dp/components/datatable/ThSort.svelte";
-  import ThFilter from "$lib/dp/components/datatable/ThFilter.svelte";
-  import RowCount from "$lib/dp/components/datatable/RowCount.svelte";
-  import type {FilterSortOptions} from "$lib/dp/types/FilterSortOptions.ts";
-  import Pagination from "$lib/dp/components/datatable/Pagination.svelte";
+  import Search from "#lib/dp/components/datatable/Search.svelte";
+  import RowsPerPage from "#lib/dp/components/datatable/RowsPerPage.svelte";
+  import ThSort from "#lib/dp/components/datatable/ThSort.svelte";
+  import ThFilter from "#lib/dp/components/datatable/ThFilter.svelte";
+  import RowCount from "#lib/dp/components/datatable/RowCount.svelte";
+  import type {FilterSortOptions} from "#lib/dp/types/FilterSortOptions.ts";
+  import Pagination from "#lib/dp/components/datatable/Pagination.svelte";
 
   type showInHeader = "filter" | "sort" | "all"
 

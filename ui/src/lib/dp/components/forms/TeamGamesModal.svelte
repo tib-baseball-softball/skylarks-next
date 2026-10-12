@@ -1,14 +1,14 @@
 <script lang="ts">
   import { invalidate } from "$app/navigation";
-  import ProgressRing from "$lib/dp/components/utils/ProgressRing.svelte";
-  import { client } from "$lib/dp/client.svelte.js";
-  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
-  import type { ExpandedTeam } from "$lib/dp/types/ExpandedResponse.ts";
-  import type { GamesCount } from "$lib/dp/types/GamesCount.ts";
-  import type { LeaguegroupsResponse } from "$lib/dp/types/pb-types.ts";
-  import type { Toast } from "$lib/dp/types/Toast.ts";
-  import { range } from "$lib/dp/utility/range.ts";
-  import { Collection } from "$lib/dp/enum/Collection";
+  import ProgressRing from "#lib/dp/components/utils/ProgressRing.svelte";
+  import { client } from "#lib/dp/client.svelte.js";
+  import { toastController } from "#lib/dp/service/ToastController.svelte.ts";
+  import type { ExpandedTeam } from "#lib/dp/types/ExpandedResponse.ts";
+  import type { GamesCount } from "#lib/dp/types/GamesCount.ts";
+  import type { LeaguegroupsResponse } from "#lib/dp/types/pb-types.ts";
+  import type { Toast } from "#lib/dp/types/Toast.ts";
+  import { range } from "#lib/dp/utility/range.ts";
+  import { Collection } from "#lib/dp/enum/Collection.js";
   import { ClientResponseError } from "pocketbase";
 
   interface Props {

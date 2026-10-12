@@ -1,7 +1,7 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
-  import type { EventType } from "$lib/dp/types/ExpandedResponse";
+  import type { EventType } from "#lib/dp/types/ExpandedResponse.js";
   import type { TabSetOption } from "../formElements/TabsRadioGroup.svelte";
   import TabsRadioGroup from "../formElements/TabsRadioGroup.svelte";
 
@@ -24,8 +24,7 @@
 
   const reloadWithQuery = () => {
     goto(queryString, {
-      noScroll: true,
-      keepFocus: true,
+      reset: false
     });
   };
 

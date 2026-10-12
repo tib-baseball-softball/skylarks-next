@@ -6,12 +6,12 @@
     SquarePen,
   } from "@lucide/svelte";
   import { goto, invalidate } from "$app/navigation";
-  import EventForm from "$lib/dp/components/forms/EventForm.svelte";
-  import DeleteButton from "$lib/dp/components/utils/DeleteButton.svelte";
-  import { client } from "$lib/dp/client.svelte.js";
-  import type { ExpandedEvent } from "$lib/dp/types/ExpandedResponse.ts";
-  import type { EventsUpdate } from "$lib/dp/types/pb-types.ts";
-  import { Collection } from "$lib/dp/enum/Collection";
+  import EventForm from "#lib/dp/components/forms/EventForm.svelte";
+  import DeleteButton from "#lib/dp/components/utils/DeleteButton.svelte";
+  import { client } from "#lib/dp/client.svelte.js";
+  import type { ExpandedEvent } from "#lib/dp/types/ExpandedResponse.ts";
+  import type { EventsUpdate } from "#lib/dp/types/pb-types.ts";
+  import { Collection } from "#lib/dp/enum/Collection.js";
 
   interface Props {
     event: ExpandedEvent;

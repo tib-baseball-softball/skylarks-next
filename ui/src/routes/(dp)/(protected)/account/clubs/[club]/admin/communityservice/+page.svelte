@@ -1,10 +1,10 @@
 <script lang="ts">
   import type {PageProps} from "./$types";
-  import ProgressRing from "$lib/dp/components/utils/ProgressRing.svelte";
-  import {range} from "$lib/dp/utility/range.ts";
+  import ProgressRing from "#lib/dp/components/utils/ProgressRing.svelte";
+  import {range} from "#lib/dp/utility/range.ts";
   import {goto} from "$app/navigation";
-  import SeasonSelector from "$lib/dp/components/utils/SeasonSelector.svelte";
-  import ClubCommunityServiceSection from "$lib/dp/components/communityservice/ClubCommunityServiceSection.svelte";
+  import SeasonSelector from "#lib/dp/components/utils/SeasonSelector.svelte";
+  import ClubCommunityServiceSection from "#lib/dp/components/communityservice/ClubCommunityServiceSection.svelte";
 
   let {data}: PageProps = $props();
 
@@ -17,7 +17,7 @@
     let queryString = `?season=${selectedSeason}`;
 
     goto(queryString, {
-      noScroll: true,
+      reset: false
     });
   };
 </script>

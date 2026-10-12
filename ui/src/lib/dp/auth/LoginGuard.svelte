@@ -1,7 +1,7 @@
 <script lang="ts">
   import type {Snippet} from "svelte";
   import {goto} from "$app/navigation";
-  import {authSettings, client} from "$lib/dp/client.svelte.js";
+  import {authSettings, client} from "#lib/dp/client.svelte.js";
 
   const {
     destination,

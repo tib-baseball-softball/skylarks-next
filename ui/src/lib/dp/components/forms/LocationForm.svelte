@@ -1,14 +1,14 @@
 <script lang="ts">
   import { Plus, SquarePen } from "@lucide/svelte";
   import { invalidate } from "$app/navigation";
-  import LeafletMapCoordinatePicker from "$lib/dp/components/map/LeafletMapCoordinatePicker.svelte";
-  import { save } from "$lib/dp/records/RecordOperations.ts";
-  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
-  import type { ExpandedClub } from "$lib/dp/types/ExpandedResponse.ts";
-  import type { LocationsResponse } from "$lib/dp/types/pb-types.ts";
-  import Sheet from "$lib/dp/components/modal/Sheet.svelte";
+  import LeafletMapCoordinatePicker from "#lib/dp/components/map/LeafletMapCoordinatePicker.svelte";
+  import { save } from "#lib/dp/records/RecordOperations.ts";
+  import { toastController } from "#lib/dp/service/ToastController.svelte.ts";
+  import type { ExpandedClub } from "#lib/dp/types/ExpandedResponse.ts";
+  import type { LocationsResponse } from "#lib/dp/types/pb-types.ts";
+  import Sheet from "#lib/dp/components/modal/Sheet.svelte";
   import clsx from "clsx";
-  import { Collection } from "$lib/dp/enum/Collection";
+  import { Collection } from "#lib/dp/enum/Collection.js";
   import { ClientResponseError } from "pocketbase";
 
   // Gail S. Halvorsen Park coordinates

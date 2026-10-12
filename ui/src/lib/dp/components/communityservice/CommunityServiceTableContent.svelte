@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type {ClubCommunityServiceRow} from "$lib/dp/types/ClubCommunityServiceRow.ts";
+  import type {ClubCommunityServiceRow} from "#lib/dp/types/ClubCommunityServiceRow.ts";
   import {CircleCheck, CircleMinus} from "@lucide/svelte";
   import type {TableHandler} from "@vincjo/datatables";
-  import {toHours} from "$lib/dp/utility/toHours.ts";
-  import TargetVisualizer from "$lib/dp/components/communityservice/TargetVisualizer.svelte";
+  import {toHours} from "#lib/dp/utility/toHours.ts";
+  import TargetVisualizer from "#lib/dp/components/communityservice/TargetVisualizer.svelte";
   import {page} from "$app/state";
 
   interface Props {

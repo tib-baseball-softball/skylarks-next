@@ -1,5 +1,5 @@
 <script lang="ts">
-  import PlayerDataProfileSection from "$lib/dp/components/user/PlayerDataProfileSection.svelte";
+  import PlayerDataProfileSection from "#lib/dp/components/user/PlayerDataProfileSection.svelte";
 </script>
 
 <svelte:head>

@@ -6,24 +6,24 @@
     Plus,
     SquareArrowOutUpRight,
   } from "@lucide/svelte";
-  import AnnouncementSectionContent from "$lib/dp/components/announcements/AnnouncementSectionContent.svelte";
-  import ClubDetailCard from "$lib/dp/components/club/ClubDetailCard.svelte";
-  import TeamListTeaser from "$lib/dp/components/team/TeamListTeaser.svelte";
-  import UniformSetInfoCard from "$lib/dp/components/uniformset/UniformSetInfoCard.svelte";
-  import AnnouncementForm from "$lib/dp/components/forms/AnnouncementForm.svelte";
-  import TeamForm from "$lib/dp/components/forms/TeamForm.svelte";
-  import UniformSetForm from "$lib/dp/components/forms/UniformSetForm.svelte";
-  import Dialog from "$lib/dp/components/modal/Dialog.svelte";
-  import { authSettings } from "$lib/dp/client.svelte.js";
+  import AnnouncementSectionContent from "#lib/dp/components/announcements/AnnouncementSectionContent.svelte";
+  import ClubDetailCard from "#lib/dp/components/club/ClubDetailCard.svelte";
+  import TeamListTeaser from "#lib/dp/components/team/TeamListTeaser.svelte";
+  import UniformSetInfoCard from "#lib/dp/components/uniformset/UniformSetInfoCard.svelte";
+  import AnnouncementForm from "#lib/dp/components/forms/AnnouncementForm.svelte";
+  import TeamForm from "#lib/dp/components/forms/TeamForm.svelte";
+  import UniformSetForm from "#lib/dp/components/forms/UniformSetForm.svelte";
+  import Dialog from "#lib/dp/components/modal/Dialog.svelte";
+  import { authSettings } from "#lib/dp/client.svelte.js";
   import type {
     CustomAuthModel,
     ExpandedClub,
     ExpandedTeam,
     ExpandedUniformSet,
-  } from "$lib/dp/types/ExpandedResponse.ts";
+  } from "#lib/dp/types/ExpandedResponse.ts";
   import type { PageProps } from "./$types";
-  import EventForm from "$lib/dp/components/forms/EventForm.svelte";
-  import EventTeaser from "$lib/dp/components/event/EventTeaser.svelte";
+  import EventForm from "#lib/dp/components/forms/EventForm.svelte";
+  import EventTeaser from "#lib/dp/components/event/EventTeaser.svelte";
 
   const { data }: PageProps = $props();
 

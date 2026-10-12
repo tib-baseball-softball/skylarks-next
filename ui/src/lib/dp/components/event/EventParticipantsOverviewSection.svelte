@@ -1,21 +1,21 @@
 <script lang="ts">
   import { Check, CircleQuestionMark, Ghost, Trash, X } from "@lucide/svelte";
-  import ExternalParticipationWrapper from "$lib/dp/components/event/ExternalParticipationWrapper.svelte";
-  import IndividualParticipationEditButton from "$lib/dp/components/event/IndividualParticipationEditButton.svelte";
-  import { authSettings, client } from "$lib/dp/client.svelte.js";
+  import ExternalParticipationWrapper from "#lib/dp/components/event/ExternalParticipationWrapper.svelte";
+  import IndividualParticipationEditButton from "#lib/dp/components/event/IndividualParticipationEditButton.svelte";
+  import { authSettings, client } from "#lib/dp/client.svelte.js";
   import type {
     CustomAuthModel,
     ExpandedEvent,
     ExpandedParticipation,
     ParticipationType,
-  } from "$lib/dp/types/ExpandedResponse.ts";
-  import type { EventsUpdate } from "$lib/dp/types/pb-types.ts";
-  import { Collection } from "$lib/dp/enum/Collection.ts";
-  import { sendParticipationData } from "$lib/dp/utility/sendParticipationData.ts";
-  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  } from "#lib/dp/types/ExpandedResponse.ts";
+  import type { EventsUpdate } from "#lib/dp/types/pb-types.ts";
+  import { Collection } from "#lib/dp/enum/Collection.ts";
+  import { sendParticipationData } from "#lib/dp/utility/sendParticipationData.ts";
+  import { toastController } from "#lib/dp/service/ToastController.svelte.ts";
   import { invalidate } from "$app/navigation";
-  import { participationDTOToExpandedParticipation } from "$lib/dp/types/UserParticipationDTO.ts";
-  import { PUBLIC_APPLICATION_CONTEXT } from "$env/static/public";
+  import { participationDTOToExpandedParticipation } from "#lib/dp/types/UserParticipationDTO.ts";
+  import { APPLICATION_CONTEXT } from "$app/env/public";
 
   interface Props {
     event: ExpandedEvent;
@@ -39,7 +39,7 @@
     await client.collection(Collection.Events).update<EventsUpdate>(event.id, {
       guests: newGuestPlayerList.join(),
     });
-    await invalidate("event:single")
+    await invalidate("event:single");
   }
 
   let currentDraggedParticipation: ExpandedParticipation | null = $state(null);
@@ -66,7 +66,7 @@
     event.preventDefault();
 
     //@wc-ignore
-    if (PUBLIC_APPLICATION_CONTEXT !== "Production") {
+    if (APPLICATION_CONTEXT !== "Production") {
       console.log(
         "Drop event triggered for participation:",
         event.dataTransfer?.getData("participation"),

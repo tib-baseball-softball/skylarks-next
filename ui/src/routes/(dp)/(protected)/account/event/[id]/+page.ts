@@ -1,6 +1,6 @@
-import { Collection } from "$lib/dp/enum/Collection";
-import { watchSingleRecord } from "$lib/dp/records/RecordOperations.ts";
-import type { ExpandedEvent } from "$lib/dp/types/ExpandedResponse.js";
+import { Collection } from "#lib/dp/enum/Collection.js";
+import { watchSingleRecord } from "#lib/dp/records/RecordOperations.ts";
+import type { ExpandedEvent } from "#lib/dp/types/ExpandedResponse.js";
 import type { PageLoad } from "./$types";
 
 export const load = (async ({ fetch, params, depends }) => {

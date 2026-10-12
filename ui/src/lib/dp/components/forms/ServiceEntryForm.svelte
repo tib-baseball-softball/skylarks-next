@@ -1,19 +1,19 @@
 <script lang="ts">
-  import { authSettings, client } from "$lib/dp/client.svelte.js";
+  import { authSettings, client } from "#lib/dp/client.svelte.js";
   import type {
     CustomAuthModel,
     ExpandedServiceEntry,
-  } from "$lib/dp/types/ExpandedResponse.ts";
+  } from "#lib/dp/types/ExpandedResponse.ts";
   import type {
     ClubsResponse,
     ServiceentriesResponse,
     ServiceentriesUpdate,
     UsersResponse,
-  } from "$lib/dp/types/pb-types.ts";
-  import { Collection } from "$lib/dp/enum/Collection.ts";
-  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  } from "#lib/dp/types/pb-types.ts";
+  import { Collection } from "#lib/dp/enum/Collection.ts";
+  import { toastController } from "#lib/dp/service/ToastController.svelte.ts";
   import { invalidate } from "$app/navigation";
-  import ISODatePicker from "$lib/dp/components/formElements/ISODatePicker.svelte";
+  import ISODatePicker from "#lib/dp/components/formElements/ISODatePicker.svelte";
   import { ClientResponseError } from "pocketbase";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
@@ -184,7 +184,7 @@
       <span>Club</span>
       <select bind:value={form.club} class="select" name="club" required>
         {#await possibleClubs then clubs}
-          {#each clubs as club}
+          {#each clubs as club (club.id)}
             <option value={club.id}>{club.name}</option>
           {/each}
         {/await}
@@ -201,7 +201,7 @@
       required
     >
       {#await allClubMembers then members}
-        {#each members.filter( (element) => club?.admins.includes(element.id) ) as member}
+        {#each members.filter( (element) => club?.admins.includes(element.id) ) as member (member.id)}
           <option value={member.id}
             >{member.first_name} {member.last_name}</option
           >
@@ -215,7 +215,7 @@
       <span>Member</span>
       <select bind:value={form.member} class="select" name="member" required>
         {#await allClubMembers then members}
-          {#each members as member}
+          {#each members as member (member.id)}
             <option value={member.id}
               >{member.first_name} {member.last_name}</option
             >
@@ -226,7 +226,7 @@
   {/if}
 
   <div class="submit-wrapper">
-    <button class="btn preset-tonal-primary" type="submit" data-dialog-close
+    <button class="btn preset-tonal-primary" type="submit" formmethod="dialog"
       >Confirm
     </button>
   </div>

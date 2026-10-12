@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {appLocale} from "$lib/dp/locale.svelte.ts";
+  import {appLocale} from "#lib/dp/locale.svelte.ts";
 
   // formats a date in PocketBase string format to local date for display
 

@@ -1,8 +1,8 @@
 <script lang="ts">
   import {TableHandler} from "@vincjo/datatables";
-  import type {ExpandedClub, ExpandedServiceEntry} from "$lib/dp/types/ExpandedResponse.ts";
-  import GenericDatatable from "$lib/dp/components/datatable/GenericDatatable.svelte";
-  import type {FilterSortOptions} from "$lib/dp/types/FilterSortOptions.ts";
+  import type {ExpandedClub, ExpandedServiceEntry} from "#lib/dp/types/ExpandedResponse.ts";
+  import GenericDatatable from "#lib/dp/components/datatable/GenericDatatable.svelte";
+  import type {FilterSortOptions} from "#lib/dp/types/FilterSortOptions.ts";
   import CommunityServiceTableContentRaw from "./CommunityServiceTableContentRaw.svelte";
 
   interface Props {

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { toastController } from "$lib/dp/service/ToastController.svelte";
+  import { toastController } from "#lib/dp/service/ToastController.svelte.js";
   import type { Snippet } from "svelte";
 
   interface Props {

@@ -1,18 +1,18 @@
 <script lang="ts">
   import { SquarePen } from "@lucide/svelte";
-  import TabsRadioGroup from "$lib/dp/components/formElements/TabsRadioGroup.svelte";
-  import Switch from "$lib/dp/components/formElements/Switch.svelte";
-  import TagsInput from "$lib/dp/components/formElements/TagsInput.svelte";
-  import { authSettings, client } from "$lib/dp/client.svelte.js";
-  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  import TabsRadioGroup from "#lib/dp/components/formElements/TabsRadioGroup.svelte";
+  import Switch from "#lib/dp/components/formElements/Switch.svelte";
+  import TagsInput from "#lib/dp/components/formElements/TagsInput.svelte";
+  import { authSettings, client } from "#lib/dp/client.svelte.js";
+  import { toastController } from "#lib/dp/service/ToastController.svelte.ts";
   import {
     getAllBaseballPositionStringValues,
     positionEnumStringValuesToKeys,
     positionKeysToEnumStringValues,
-  } from "$lib/dp/types/BaseballPosition.ts";
-  import type { CustomAuthModel } from "$lib/dp/types/ExpandedResponse.ts";
-  import { Collection } from "$lib/dp/enum/Collection.ts";
-  import Sheet from "$lib/dp/components/modal/Sheet.svelte";
+  } from "#lib/dp/types/BaseballPosition.ts";
+  import type { CustomAuthModel } from "#lib/dp/types/ExpandedResponse.ts";
+  import { Collection } from "#lib/dp/enum/Collection.ts";
+  import Sheet from "#lib/dp/components/modal/Sheet.svelte";
   import clsx from "clsx";
   import { ClientResponseError } from "pocketbase";
 

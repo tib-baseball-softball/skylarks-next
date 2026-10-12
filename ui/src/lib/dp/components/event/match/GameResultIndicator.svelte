@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Match } from "bsm.js";
-  import { MatchState } from "$lib/dp/enum/MatchState.ts";
-  import { MatchDecorator } from "$lib/dp/service/MatchDecorator.ts";
+  import { MatchState } from "#lib/dp/enum/MatchState.ts";
+  import { MatchDecorator } from "#lib/dp/service/MatchDecorator.ts";
 
   interface Props {
     match: Match;

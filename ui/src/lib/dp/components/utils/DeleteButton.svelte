@@ -2,9 +2,9 @@
   import { Trash } from "@lucide/svelte";
   import type { HTMLButtonAttributes } from "svelte/elements";
   import { invalidate } from "$app/navigation";
-  import Dialog from "$lib/dp/components/modal/Dialog.svelte";
-  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
-  import type { Toast } from "$lib/dp/types/Toast.ts";
+  import Dialog from "#lib/dp/components/modal/Dialog.svelte";
+  import { toastController } from "#lib/dp/service/ToastController.svelte.ts";
+  import type { Toast } from "#lib/dp/types/Toast.ts";
 
   interface Props extends HTMLButtonAttributes {
     id: string;

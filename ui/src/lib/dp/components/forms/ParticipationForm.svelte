@@ -1,7 +1,7 @@
 <script lang="ts">
   import { invalidate } from "$app/navigation";
-  import type { ExpandedParticipation } from "$lib/dp/types/ExpandedResponse.ts";
-  import { sendParticipationData } from "$lib/dp/utility/sendParticipationData.ts";
+  import type { ExpandedParticipation } from "#lib/dp/types/ExpandedResponse.ts";
+  import { sendParticipationData } from "#lib/dp/utility/sendParticipationData.ts";
 
   interface Props {
     participation: ExpandedParticipation;
@@ -15,8 +15,6 @@
   });
 
   async function submitForm(e: SubmitEvent) {
-    e.preventDefault();
-
     await sendParticipationData(form);
     await invalidate("event:list");
   }
@@ -33,7 +31,7 @@
   );
 </script>
 
-<form class="participation-form" onsubmit={submitForm}>
+<form class="participation-form" method="dialog" onsubmit={submitForm}>
   <div class="form-grid">
     <dl class="info-item">
       <dt>Created</dt>
@@ -104,11 +102,7 @@
     </div>
 
     <div class="submit-container">
-      <button
-        class="btn preset-filled-primary-500"
-        data-dialog-close
-        type="submit"
-      >
+      <button class="btn preset-filled-primary-500" type="submit">
         Submit
       </button>
     </div>

@@ -1,7 +1,7 @@
-import type { PageStore } from "$lib/dp/records/PageStore.ts";
-import { watchWithPagination } from "$lib/dp/records/RecordOperations.ts";
-import type { ExpandedEvent } from "$lib/dp/types/ExpandedResponse.ts";
-import { Collection } from "$lib/dp/enum/Collection.ts";
+import type { PageStore } from "#lib/dp/records/PageStore.ts";
+import { watchWithPagination } from "#lib/dp/records/RecordOperations.ts";
+import type { ExpandedEvent } from "#lib/dp/types/ExpandedResponse.ts";
+import { Collection } from "#lib/dp/enum/Collection.ts";
 
 type BaseOptions = {
   url: URL;

@@ -1,8 +1,8 @@
-import { authSettings, client } from "$lib/dp/client.svelte.js";
-import { Collection } from "$lib/dp/enum/Collection";
-import type { CustomAuthModel } from "$lib/dp/types/ExpandedResponse.ts";
-import type { PersonalAttendanceStatsItem } from "$lib/dp/types/PersonalAttendanceStats.ts";
-import type { UserStatsQuery } from "$lib/dp/types/UserStatsQuery.ts";
+import { authSettings, client } from "#lib/dp/client.svelte.js";
+import { Collection } from "#lib/dp/enum/Collection.js";
+import type { CustomAuthModel } from "#lib/dp/types/ExpandedResponse.ts";
+import type { PersonalAttendanceStatsItem } from "#lib/dp/types/PersonalAttendanceStats.ts";
+import type { UserStatsQuery } from "#lib/dp/types/UserStatsQuery.ts";
 import type { PageLoad } from "./$types";
 
 export const load = (async ({ fetch, params, url }) => {

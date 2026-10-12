@@ -7,19 +7,19 @@
     LockOpen,
     Trash,
   } from "@lucide/svelte";
-  import { invalidateAll } from "$app/navigation";
-  import Avatar from "$lib/dp/components/utils/Avatar.svelte";
-  import Dialog from "$lib/dp/components/modal/Dialog.svelte";
-  import { client } from "$lib/dp/client.svelte.js";
-  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  import { refreshAll } from "$app/navigation";
+  import Avatar from "#lib/dp/components/utils/Avatar.svelte";
+  import Dialog from "#lib/dp/components/modal/Dialog.svelte";
+  import { client } from "#lib/dp/client.svelte.js";
+  import { toastController } from "#lib/dp/service/ToastController.svelte.ts";
   import type {
     CustomAuthModel,
     ExpandedTeam,
-  } from "$lib/dp/types/ExpandedResponse.ts";
-  import type { TeamsUpdate, UsersUpdate } from "$lib/dp/types/pb-types.ts";
+  } from "#lib/dp/types/ExpandedResponse.ts";
+  import type { TeamsUpdate, UsersUpdate } from "#lib/dp/types/pb-types.ts";
   import LocalDate from "../utils/LocalDate.svelte";
-  import { positionKeysToEnumStringValues } from "$lib/dp/types/BaseballPosition.ts";
-  import { Collection } from "$lib/dp/enum/Collection.ts";
+  import { positionKeysToEnumStringValues } from "#lib/dp/types/BaseballPosition.ts";
+  import { Collection } from "#lib/dp/enum/Collection.ts";
 
   interface Props {
     handler: TableHandler<CustomAuthModel>;
@@ -38,9 +38,8 @@
         message: `User "${model.first_name + " " + model.last_name}" has been added as an admin for team "${team.name}"`,
         background: "preset-filled-success-500",
       });
-      await invalidateAll();
+      await refreshAll();
     } catch (error) {
-      console.error(error);
       toastController.trigger({
         message: "An error occurred while adding user as admin",
         background: "preset-filled-error-500",
@@ -57,9 +56,8 @@
         message: `User "${model.first_name + " " + model.last_name}" has been removed as admin for team "${team.name}"`,
         background: "preset-filled-success-500",
       });
-      await invalidateAll();
+      await refreshAll();
     } catch (error) {
-      console.error(error);
       toastController.trigger({
         message: "An error occurred while removing user as admin",
         background: "preset-filled-error-500",
@@ -76,9 +74,8 @@
         message: `User "${model.first_name + " " + model.last_name}" has been removed as member from team "${team.name}"`,
         background: "preset-filled-success-500",
       });
-      await invalidateAll();
+      await refreshAll();
     } catch (error) {
-      console.error(error);
       toastController.trigger({
         message: "An error occurred while removing user as team member",
         background: "preset-filled-error-500",
@@ -89,7 +86,7 @@
   const rows = $derived(handler.rows);
 </script>
 
-{#each rows as row}
+{#each rows as row (row.id)}
   <tr class="content-row">
     <td>
       <div class="avatar-container">
