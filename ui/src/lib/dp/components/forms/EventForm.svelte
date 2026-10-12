@@ -1,20 +1,20 @@
 <script lang="ts">
   import { invalidate } from "$app/navigation";
-  import { client } from "$lib/dp/client.svelte.js";
-  import ISODatePicker from "$lib/dp/components/formElements/ISODatePicker.svelte";
-  import MultiSelectCombobox from "$lib/dp/components/formElements/MultiSelectCombobox.svelte";
-  import Switch from "$lib/dp/components/formElements/Switch.svelte";
-  import TabsRadioGroup from "$lib/dp/components/formElements/TabsRadioGroup.svelte";
-  import Sheet from "$lib/dp/components/modal/Sheet.svelte";
-  import { Collection } from "$lib/dp/enum/Collection.ts";
-  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
-  import type { Extension } from "$lib/dp/types/ExpandedResponse.js";
-  import type { ExpandedEvent } from "$lib/dp/types/ExpandedResponse.ts";
+  import { client } from "#lib/dp/client.svelte.js";
+  import ISODatePicker from "#lib/dp/components/formElements/ISODatePicker.svelte";
+  import MultiSelectCombobox from "#lib/dp/components/formElements/MultiSelectCombobox.svelte";
+  import Switch from "#lib/dp/components/formElements/Switch.svelte";
+  import TabsRadioGroup from "#lib/dp/components/formElements/TabsRadioGroup.svelte";
+  import Sheet from "#lib/dp/components/modal/Sheet.svelte";
+  import { Collection } from "#lib/dp/enum/Collection.ts";
+  import { toastController } from "#lib/dp/service/ToastController.svelte.ts";
+  import type { Extension } from "#lib/dp/types/ExpandedResponse.js";
+  import type { ExpandedEvent } from "#lib/dp/types/ExpandedResponse.ts";
   import type {
     LocationsResponse,
     TeamsResponse,
     UniformsetsResponse,
-  } from "$lib/dp/types/pb-types.ts";
+  } from "#lib/dp/types/pb-types.ts";
   import clsx from "clsx";
   import type { Snippet } from "svelte";
   import RichTextEditor from "../rte/RichTextEditor.svelte";

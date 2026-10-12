@@ -1,11 +1,11 @@
 <script lang="ts">
-  import PlayerDataForm from "$lib/dp/components/forms/PlayerDataForm.svelte";
-  import PlayerDataCard from "$lib/dp/components/player/PlayerDataCard.svelte";
-  import PlayerHeaderSection from "$lib/dp/components/player/PlayerHeaderSection.svelte";
-  import { authSettings, client } from "$lib/dp/client.svelte.js";
-  import { positionKeysToEnumStringValues } from "$lib/dp/types/BaseballPosition.js";
-  import type { CustomAuthModel } from "$lib/dp/types/ExpandedResponse.ts";
-  import type { Player } from "$lib/dp/types/Player.ts";
+  import PlayerDataForm from "#lib/dp/components/forms/PlayerDataForm.svelte";
+  import PlayerDataCard from "#lib/dp/components/player/PlayerDataCard.svelte";
+  import PlayerHeaderSection from "#lib/dp/components/player/PlayerHeaderSection.svelte";
+  import { authSettings, client } from "#lib/dp/client.svelte.js";
+  import { positionKeysToEnumStringValues } from "#lib/dp/types/BaseballPosition.js";
+  import type { CustomAuthModel } from "#lib/dp/types/ExpandedResponse.ts";
+  import type { Player } from "#lib/dp/types/Player.ts";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
 

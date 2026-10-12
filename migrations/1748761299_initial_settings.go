@@ -11,7 +11,7 @@ func init() {
 		settings := app.Settings()
 
 		settings.Meta.AppName = "Skylarks DiamondPlanner"
-		settings.Meta.AppURL = os.Getenv("PUBLIC_POCKETBASE_URL")
+		settings.Meta.AppURL = os.Getenv("POCKETBASE_URL")
 
 		settings.Logs.MaxDays = 5
 		settings.Logs.LogAuthId = true

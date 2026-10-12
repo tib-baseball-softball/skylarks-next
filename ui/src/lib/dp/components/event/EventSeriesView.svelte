@@ -1,19 +1,19 @@
 <script lang="ts">
-  import { CalendarPlus, SquarePen } from "@lucide/svelte";
-  import { slide } from "svelte/transition";
-  import { invalidateAll } from "$app/navigation";
-  import EventSeriesListItem from "$lib/dp/components/eventseries/EventSeriesListItem.svelte";
-  import EventSeriesForm from "$lib/dp/components/forms/EventSeriesForm.svelte";
-  import DeleteButton from "$lib/dp/components/utils/DeleteButton.svelte";
-  import { client } from "$lib/dp/client.svelte.ts";
-  import Sheet from "$lib/dp/components/modal/Sheet.svelte";
+  import { client } from "#lib/dp/client.svelte.ts";
+  import EventSeriesListItem from "#lib/dp/components/eventseries/EventSeriesListItem.svelte";
+  import EventSeriesForm from "#lib/dp/components/forms/EventSeriesForm.svelte";
+  import Sheet from "#lib/dp/components/modal/Sheet.svelte";
+  import DeleteButton from "#lib/dp/components/utils/DeleteButton.svelte";
+  import { Collection } from "#lib/dp/enum/Collection.js";
   import type {
     EventSeriesCreationData,
     ExpandedEventSeries,
     ExpandedTeam,
-  } from "$lib/dp/types/ExpandedResponse.ts";
+  } from "#lib/dp/types/ExpandedResponse.ts";
+  import { refreshAll } from "$app/navigation";
+  import { CalendarPlus, SquarePen } from "@lucide/svelte";
   import clsx from "clsx";
-  import { Collection } from "$lib/dp/enum/Collection";
+  import { slide } from "svelte/transition";
 
   interface Props {
     team: ExpandedTeam;
@@ -64,7 +64,7 @@
     const success = await client.collection(Collection.EventSeries).delete(id);
 
     if (success) {
-      await invalidateAll();
+      await refreshAll();
       open = false;
       showForm = false;
     }

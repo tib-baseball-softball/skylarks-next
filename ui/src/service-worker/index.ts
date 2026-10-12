@@ -1,36 +1,26 @@
-// Disables access to DOM typings like `HTMLElement` which are not available
-// inside a service worker and instantiates the correct globals
-/// <reference no-default-lib="true"/>
-/// <reference lib="esnext" />
-/// <reference lib="webworker" />
+import { self } from "$app/service-worker";
+import { version } from "$app/env";
+import { immutable, assets } from "$app/manifest";
+import { resolve } from "$app/paths";
 
-// Ensures that the `$service-worker` import has proper type definitions
-/// <reference types="@sveltejs/kit" />
-
-// Only necessary if you have an import from `$env/static/public`
-/// <reference types="../.svelte-kit/ambient.d.ts" />
-
-import {build, files, version} from '$service-worker';
-import type {Extension} from "./lib/dp/types/ExpandedResponse";
-import {PUBLIC_APPLICATION_CONTEXT} from "$env/static/public";
-import {ApplicationContext} from "./lib/dp/types/ApplicationContext";
-
-// This gives `self` the correct types
-const self = globalThis.self as unknown as ServiceWorkerGlobalScope;
+import type { Extension } from "../lib/dp/types/ExpandedResponse";
+import { APPLICATION_CONTEXT } from "$app/env/public";
+import { ApplicationContext } from "../lib/dp/types/ApplicationContext";
 
 // Create a unique cache name for this deployment
 const CACHE = `cache-${version}`;
 
 const ASSETS = [
-  ...build, // the app itself
-  ...files  // everything in `static`
+  ...immutable.map((asset) => resolve(asset.path)), // the Vite output
+  ...assets.map((asset) => resolve(asset.path)), // everything in `static`
 ];
 
 /**
  * Caching mechanism copied verbatim from SvelteKit documentation.
  */
-self.addEventListener('install', (event) => {
+self.addEventListener("install", (event) => {
   // Create a new cache and add all files to it
+
   async function addFilesToCache() {
     const cache = await caches.open(CACHE);
     await cache.addAll(ASSETS);
@@ -39,7 +29,7 @@ self.addEventListener('install', (event) => {
   event.waitUntil(addFilesToCache());
 });
 
-self.addEventListener('activate', (event) => {
+self.addEventListener("activate", (event) => {
   // Remove previous cached data from disk
   async function deleteOldCaches() {
     for (const key of await caches.keys()) {
@@ -50,21 +40,16 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(deleteOldCaches());
 });
 
-type NotificationAction = {
-  action: string;
-  title: string;
-  navigate?: string;
-}
+type NotificationAction = { action: string; title: string; navigate?: string };
+type PushOptions = Extension<
+  NotificationOptions,
+  { title: string; actions?: NotificationAction[] }
+>;
 
-type PushOptions = Extension<NotificationOptions, {
-  title: string,
-  actions?: NotificationAction[]
-}>
-
-self.addEventListener('push', function (event) {
+self.addEventListener("push", function (event) {
   const payload = event.data?.json() as PushOptions;
-  if (PUBLIC_APPLICATION_CONTEXT !== ApplicationContext.Production) {
-    console.log('Received a push message', payload);
+  if (APPLICATION_CONTEXT !== ApplicationContext.Production) {
+    console.log("Received a push message", payload);
   }
 
   const options: NotificationOptions = {
@@ -75,15 +60,13 @@ self.addEventListener('push', function (event) {
     actions: payload.actions,
   };
 
-  event.waitUntil(
-    self.registration.showNotification(payload.title, options)
-  );
+  event.waitUntil(self.registration.showNotification(payload.title, options));
 });
 
 self.addEventListener("notificationclick", async (event) => {
-  if (PUBLIC_APPLICATION_CONTEXT !== ApplicationContext.Production) {
-    console.log('Notification clicked, action:', event.action);
-    console.log('Notification clicked, notification:', event.notification);
+  if (APPLICATION_CONTEXT !== ApplicationContext.Production) {
+    console.log("Notification clicked, action:", event.action);
+    console.log("Notification clicked, notification:", event.notification);
   }
 
   if (event.action === "link") {
@@ -92,8 +75,8 @@ self.addEventListener("notificationclick", async (event) => {
   }
 });
 
-self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET') {
+self.addEventListener("fetch", (event) => {
+  if (event.request.method !== "GET") {
     return;
   }
 
@@ -106,6 +89,7 @@ self.addEventListener('fetch', (event) => {
     const cache = await caches.open(CACHE);
 
     // `build`/`files` can always be served from the cache
+    // @ts-expect-error - ASSETS is very strictly typed, pathname is just a string
     if (ASSETS.includes(url.pathname)) {
       const response = await cache.match(url.pathname);
 
@@ -122,7 +106,7 @@ self.addEventListener('fetch', (event) => {
       // if we're offline, fetch can return a value that is not a Response
       // instead of throwing - and we can't pass this non-Response to respondWith
       if (!(response instanceof Response)) {
-        throw new Error('invalid response from fetch');
+        throw new Error("invalid response from fetch");
       }
 
       if (response.status === 200) {

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type {CustomAuthModel} from "$lib/dp/types/ExpandedResponse.ts";
-  import {client, manualAuthRefresh} from "$lib/dp/client.svelte.ts";
-  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
-  import {invalidateAll} from "$app/navigation";
+  import type {CustomAuthModel} from "#lib/dp/types/ExpandedResponse.ts";
+  import {client, manualAuthRefresh} from "#lib/dp/client.svelte.ts";
+  import {toastController} from "#lib/dp/service/ToastController.svelte.ts";
+  import {refreshAll} from "$app/navigation";
   import {ClientResponseError} from "pocketbase";
 
   type JoinTeamPayload = {
@@ -43,7 +43,7 @@
         });
       }
       await manualAuthRefresh();
-      await invalidateAll();
+      await refreshAll();
     } catch (error) {
       if (error instanceof ClientResponseError) {
         toastController.trigger({

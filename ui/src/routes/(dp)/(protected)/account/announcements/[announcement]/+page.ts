@@ -1,5 +1,5 @@
-import {watchSingleRecord} from "$lib/dp/records/RecordOperations.ts";
-import type {ExpandedAnnouncement} from "$lib/dp/types/ExpandedResponse.ts";
+import {watchSingleRecord} from "#lib/dp/records/RecordOperations.ts";
+import type {ExpandedAnnouncement} from "#lib/dp/types/ExpandedResponse.ts";
 import type {PageLoad} from "./$types";
 
 export const load = (async ({params, fetch, depends}) => {

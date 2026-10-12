@@ -1,5 +1,5 @@
 import {afterEach, beforeEach, describe, expect, it, vi} from "vitest";
-import type {Toast} from "$lib/dp/types/Toast.ts";
+import type {Toast} from "#lib/dp/types/Toast.ts";
 import {toastController} from "./ToastController.svelte.js";
 
 describe("ToastController", () => {

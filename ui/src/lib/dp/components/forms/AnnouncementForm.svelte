@@ -1,20 +1,20 @@
 <script lang="ts">
   import { Plus, SquarePen } from "@lucide/svelte";
-  import { invalidateAll } from "$app/navigation";
-  import { authSettings, client } from "$lib/dp/client.svelte.js";
-  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  import { refreshAll } from "$app/navigation";
+  import { authSettings, client } from "#lib/dp/client.svelte.js";
+  import { toastController } from "#lib/dp/service/ToastController.svelte.ts";
   import type {
     CustomAuthModel,
     ExpandedAnnouncement,
-  } from "$lib/dp/types/ExpandedResponse.ts";
+  } from "#lib/dp/types/ExpandedResponse.ts";
   import type {
     AnnouncementsResponse,
     ClubsResponse,
     TeamsResponse,
-  } from "$lib/dp/types/pb-types.ts";
-  import RichTextEditor from "$lib/dp/components/rte/RichTextEditor.svelte";
-  import { Collection } from "$lib/dp/enum/Collection.ts";
-  import Sheet from "$lib/dp/components/modal/Sheet.svelte";
+  } from "#lib/dp/types/pb-types.ts";
+  import RichTextEditor from "#lib/dp/components/rte/RichTextEditor.svelte";
+  import { Collection } from "#lib/dp/enum/Collection.ts";
+  import Sheet from "#lib/dp/components/modal/Sheet.svelte";
   import clsx from "clsx";
 
   const authRecord = $derived(authSettings.record as CustomAuthModel);
@@ -93,7 +93,7 @@
       toastController.triggerGenericFormSuccessMessage("Announcement");
       open = false;
     }
-    await invalidateAll();
+    await refreshAll();
   }
 </script>
 

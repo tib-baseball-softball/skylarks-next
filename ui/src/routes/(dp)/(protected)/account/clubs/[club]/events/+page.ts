@@ -1,4 +1,4 @@
-import { EventService } from "$lib/dp/service/EventService";
+import { EventService } from "#lib/dp/service/EventService.js";
 import type { PageLoad } from "./$types";
 
 export const load: PageLoad = async ({ fetch, params, depends, url }) => {

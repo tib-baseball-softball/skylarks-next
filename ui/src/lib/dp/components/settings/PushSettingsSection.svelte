@@ -1,8 +1,8 @@
 <script lang="ts">
-  import {PushService, type PushSubscriptionResult} from "$lib/dp/service/PushService.ts";
-  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
-  import Switch from "$lib/dp/components/formElements/Switch.svelte";
-  import {authSettings} from "$lib/dp/client.svelte.ts";
+  import {PushService, type PushSubscriptionResult} from "#lib/dp/service/PushService.ts";
+  import {toastController} from "#lib/dp/service/ToastController.svelte.ts";
+  import Switch from "#lib/dp/components/formElements/Switch.svelte";
+  import {authSettings} from "#lib/dp/client.svelte.ts";
 
   interface Props {
     userID: string;

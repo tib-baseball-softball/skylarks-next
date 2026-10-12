@@ -1,14 +1,14 @@
 <script lang="ts">
   import { Ban } from "@lucide/svelte";
-  import EventTypeBadge from "$lib/dp/components/event/EventTypeBadge.svelte";
+  import EventTypeBadge from "#lib/dp/components/event/EventTypeBadge.svelte";
   import type {
     CustomAuthModel,
     ExpandedEvent,
-  } from "$lib/dp/types/ExpandedResponse.ts";
-  import EventCoreInfo from "$lib/dp/components/event/EventCoreInfo.svelte";
+  } from "#lib/dp/types/ExpandedResponse.ts";
+  import EventCoreInfo from "#lib/dp/components/event/EventCoreInfo.svelte";
   import EventParticipationSection from "./EventParticipationSection.svelte";
-  import EventTeamBadges from "$lib/dp/components/event/EventTeamBadges.svelte";
-  import { authSettings } from "$lib/dp/client.svelte";
+  import EventTeamBadges from "#lib/dp/components/event/EventTeamBadges.svelte";
+  import { authSettings } from "#lib/dp/client.svelte.js";
 
   interface props {
     event: ExpandedEvent;

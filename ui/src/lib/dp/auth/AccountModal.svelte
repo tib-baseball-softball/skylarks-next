@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
-  import type { CustomAuthModel } from "$lib/dp/types/ExpandedResponse.ts";
+  import type { CustomAuthModel } from "#lib/dp/types/ExpandedResponse.ts";
   import { authSettings, client } from "../client.svelte.js";
 
   async function logout() {
@@ -21,9 +21,9 @@
       href="/account"
       data-dialog-close
     >
-      <samp
-        >{`${authRecord?.first_name ?? ""} ${authRecord?.last_name ?? ""}`}</samp
-      >
+      <samp>
+        {`${authRecord?.first_name ?? ""} ${authRecord?.last_name ?? ""}`}
+      </samp>
     </a>
   </div>
 
@@ -43,9 +43,13 @@
     </div>
   </div>
 
-  <button class="btn preset-tonal-primary logout-btn" onclick={logout}
-    >Log out</button
+  <button
+    class="btn preset-tonal-primary logout-btn"
+    data-dialog-close
+    onclick={logout}
   >
+    Log out
+  </button>
 </article>
 
 <style>

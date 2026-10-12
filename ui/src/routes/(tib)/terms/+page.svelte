@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {appLocale} from "$lib/dp/locale.svelte.ts";
+  import {appLocale} from "#lib/dp/locale.svelte.ts";
 </script>
 
 <svelte:head>

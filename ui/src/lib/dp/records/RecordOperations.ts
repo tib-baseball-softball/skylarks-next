@@ -156,7 +156,12 @@ export async function watchWithPagination<T extends RecordModel>(
   async function setPage(newpage: number) {
     const { page, totalPages, perPage } = result;
     if (page > 0 && page <= totalPages) {
-      set((result = await collection.getList(newpage, perPage, queryParams)));
+      set(
+        (result = await collection.getList(newpage, perPage, {
+          ...queryParams,
+          requestKey: `${collection.collectionIdOrName}-fetchPage-${newpage}-perPage-${perPage}`,
+        })),
+      );
     }
   }
 

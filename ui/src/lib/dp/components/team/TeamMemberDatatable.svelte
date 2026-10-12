@@ -1,9 +1,9 @@
 <script lang="ts">
   import {TableHandler} from "@vincjo/datatables";
-  import type {CustomAuthModel, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
+  import type {CustomAuthModel, ExpandedTeam} from "#lib/dp/types/ExpandedResponse.ts";
   import TeamMembersTableContent from "./TeamMembersTableContent.svelte";
-  import GenericDatatable from "$lib/dp/components/datatable/GenericDatatable.svelte";
-  import type {FilterSortOptions} from "$lib/dp/types/FilterSortOptions.ts";
+  import GenericDatatable from "#lib/dp/components/datatable/GenericDatatable.svelte";
+  import type {FilterSortOptions} from "#lib/dp/types/FilterSortOptions.ts";
 
   interface Props {
     data: CustomAuthModel[];

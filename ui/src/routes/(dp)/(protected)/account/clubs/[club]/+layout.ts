@@ -1,14 +1,14 @@
-import { client } from "$lib/dp/client.svelte.js";
-import { watchWithPagination } from "$lib/dp/records/RecordOperations.ts";
+import { client } from "#lib/dp/client.svelte.js";
+import { watchWithPagination } from "#lib/dp/records/RecordOperations.ts";
 import type {
   ExpandedAnnouncement,
   ExpandedClub,
   ExpandedEvent,
   ExpandedTeam,
   ExpandedUniformSet,
-} from "$lib/dp/types/ExpandedResponse.ts";
+} from "#lib/dp/types/ExpandedResponse.ts";
 import type { LayoutLoad } from "./$types";
-import { Collection } from "$lib/dp/enum/Collection.ts";
+import { Collection } from "#lib/dp/enum/Collection.ts";
 
 export const load = (async ({ fetch, params, depends, url }) => {
   const DEFAULT_COUNT_ON_OVERVIEW = 3;

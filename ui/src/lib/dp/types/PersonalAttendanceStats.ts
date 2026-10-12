@@ -1,4 +1,4 @@
-import type {EventType, ParticipationType} from "$lib/dp/types/ExpandedResponse.ts";
+import type {EventType, ParticipationType} from "#lib/dp/types/ExpandedResponse.ts";
 
 export interface PersonalAttendanceStatsItem {
   season: number;

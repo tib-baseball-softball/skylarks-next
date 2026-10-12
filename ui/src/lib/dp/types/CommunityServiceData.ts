@@ -1,4 +1,4 @@
-import type {ClubsResponse, ServiceentriesResponse, UsersResponse} from "$lib/dp/types/pb-types.ts";
+import type {ClubsResponse, ServiceentriesResponse, UsersResponse} from "#lib/dp/types/pb-types.ts";
 
 export type CommunityServiceItem = {
   club: ClubsResponse

@@ -2,7 +2,7 @@
   import {onMount} from "svelte";
   import L, {type LeafletMouseEvent} from "leaflet";
   import "leaflet/dist/leaflet.css";
-  import {env} from "$env/dynamic/public";
+  import { TILE_SERVER } from '$app/env/public';
 
   const DEFAULT_ZOOM = 13;
 
@@ -30,7 +30,7 @@
     let markers = L.layerGroup();
     const map = L.map(mapContainer).setView([latitude, longitude], DEFAULT_ZOOM);
 
-    L.tileLayer(`https://{s}.${env.PUBLIC_TILE_SERVER}/{z}/{x}/{y}.png`, {
+    L.tileLayer(`https://{s}.${TILE_SERVER}/{z}/{x}/{y}.png`, {
       maxZoom: 19,
       detectRetina: true,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',

@@ -8,7 +8,7 @@ dotenv.config({
   path: "../../.env",
 })
 
-const pbUrl = process.env.PUBLIC_POCKETBASE_URL
+const pbUrl = process.env.POCKETBASE_URL
 const adminEmail = process.env.POCKETBASE_EMAIL
 const adminPassword = process.env.POCKETBASE_PASSWORD
 

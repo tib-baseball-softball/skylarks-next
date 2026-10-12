@@ -1,11 +1,11 @@
 <script lang="ts">
   import {Send} from "@lucide/svelte";
   import {invalidate} from "$app/navigation";
-  import CommentRow from "$lib/dp/components/comments/CommentRow.svelte";
-  import {authSettings, client} from "$lib/dp/client.svelte.ts";
-  import {toastController} from "$lib/dp/service/ToastController.svelte.ts";
-  import type {CustomAuthModel, ExpandedComment} from "$lib/dp/types/ExpandedResponse.ts";
-  import type {ClubsResponse, CommentsCreate, CommentsResponse} from "$lib/dp/types/pb-types.ts";
+  import CommentRow from "#lib/dp/components/comments/CommentRow.svelte";
+  import {authSettings, client} from "#lib/dp/client.svelte.ts";
+  import {toastController} from "#lib/dp/service/ToastController.svelte.ts";
+  import type {CustomAuthModel, ExpandedComment} from "#lib/dp/types/ExpandedResponse.ts";
+  import type {ClubsResponse, CommentsCreate, CommentsResponse} from "#lib/dp/types/pb-types.ts";
 
   interface Props {
     targetID: string;

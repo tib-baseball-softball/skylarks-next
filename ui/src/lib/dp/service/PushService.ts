@@ -1,56 +1,56 @@
-import {dev} from "$app/environment";
-import {client} from "$lib/dp/client.svelte.ts";
-import {PUBLIC_VAPID_PUBLIC_KEY} from "$env/static/public";
-import type {PushsubscriptionsCreate, PushsubscriptionsResponse} from "$lib/dp/types/pb-types.ts";
-import {Collection} from "$lib/dp/enum/Collection.ts";
+import { dev } from "$app/env";
+import { client } from "#lib/dp/client.svelte.ts";
+import { VAPID_PUBLIC_KEY } from "$app/env/public";
+import type {
+  PushsubscriptionsCreate,
+  PushsubscriptionsResponse,
+} from "#lib/dp/types/pb-types.ts";
+import { Collection } from "#lib/dp/enum/Collection.ts";
 
 export type PushSubscriptionResult = {
-  subscription: PushSubscription | null
-  status: "granted" | "denied" | "already-subscribed" | "not-found"
-}
+  subscription: PushSubscription | null;
+  status: "granted" | "denied" | "already-subscribed" | "not-found";
+};
 
 export class PushService {
-  private VAPID_PUBLIC_KEY = PUBLIC_VAPID_PUBLIC_KEY;
+  #vapidPublicKey = VAPID_PUBLIC_KEY;
 
   public async subscribeUser(): Promise<PushSubscriptionResult> {
     const result = await Notification.requestPermission();
-    if (result === 'denied') {
-      console.error('The user explicitly denied the permission request.');
+    if (result === "denied") {
+      console.error("The user explicitly denied the permission request.");
       return {
         subscription: null,
-        status: 'denied'
+        status: "denied",
       };
     }
-    if (result === 'granted' && dev) {
-      console.info('The user accepted the permission request.');
+    if (result === "granted" && dev) {
+      console.info("The user accepted the permission request.");
     }
     const registration = await navigator.serviceWorker.getRegistration();
 
     if (!registration) {
-      console.error('Service worker registration not found.');
+      console.error("Service worker registration not found.");
       return {
         subscription: null,
-        status: 'not-found'
+        status: "not-found",
       };
     }
 
     const subscribed = await registration.pushManager.getSubscription();
     if (subscribed) {
-      console.info('User is already subscribed.');
+      console.info("User is already subscribed.");
       return {
         subscription: subscribed,
-        status: 'already-subscribed'
+        status: "already-subscribed",
       };
     }
     const subscription = await registration.pushManager.subscribe({
       userVisibleOnly: true,
-      applicationServerKey: this.VAPID_PUBLIC_KEY
+      applicationServerKey: this.#vapidPublicKey,
     });
 
-    return {
-      subscription: subscription,
-      status: 'granted'
-    };
+    return { subscription, status: "granted" };
   }
 
   public async unsubscribeUser(): Promise<PushSubscription | null> {
@@ -78,7 +78,10 @@ export class PushService {
     return !!subscribed;
   }
 
-  public async sendSubscriptionToServer(subscription: PushSubscription, userID: string): Promise<PushsubscriptionsResponse | null> {
+  public async sendSubscriptionToServer(
+    subscription: PushSubscription,
+    userID: string,
+  ): Promise<PushsubscriptionsResponse | null> {
     const subscriptionData = this.convertToDatabaseFormat(subscription, userID);
 
     const response = await client
@@ -88,10 +91,12 @@ export class PushService {
     return response ?? null;
   }
 
-  public async deleteSubscriptionFromServer(subscription: PushSubscription): Promise<boolean> {
+  public async deleteSubscriptionFromServer(
+    subscription: PushSubscription,
+  ): Promise<boolean> {
     const response = await client.send("/api/webpush/unsubscribe", {
       method: "DELETE",
-      body: JSON.stringify({endpoint: subscription.endpoint})
+      body: JSON.stringify({ endpoint: subscription.endpoint }),
     });
 
     return !!response;
@@ -99,11 +104,14 @@ export class PushService {
 
   public async sendTestNotification(userID: string) {
     await client.send<string>(`/api/webpush/${userID}/notify-me`, {
-      method: "POST"
+      method: "POST",
     });
   }
 
-  protected convertToDatabaseFormat(subscription: PushSubscription, userID: string): PushsubscriptionsCreate {
+  protected convertToDatabaseFormat(
+    subscription: PushSubscription,
+    userID: string,
+  ): PushsubscriptionsCreate {
     if (dev) {
       console.log(subscription);
     }
@@ -124,5 +132,3 @@ export class PushService {
     };
   }
 }
-
-

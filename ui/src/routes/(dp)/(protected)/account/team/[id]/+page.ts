@@ -1,15 +1,15 @@
 import { error } from "@sveltejs/kit";
-import { dev } from "$app/environment";
-import { client } from "$lib/dp/client.svelte.js";
-import { watchWithPagination } from "$lib/dp/records/RecordOperations.ts";
-import { EventService } from "$lib/dp/service/EventService.ts";
+import { dev } from "$app/env";
+import { client } from "#lib/dp/client.svelte.js";
+import { watchWithPagination } from "#lib/dp/records/RecordOperations.ts";
+import { EventService } from "#lib/dp/service/EventService.ts";
 import type {
   ExpandedAnnouncement,
   ExpandedEventSeries,
   ExpandedTeam,
-} from "$lib/dp/types/ExpandedResponse.js";
+} from "#lib/dp/types/ExpandedResponse.js";
 import type { PageLoad } from "./$types";
-import { Collection } from "$lib/dp/enum/Collection.ts";
+import { Collection } from "#lib/dp/enum/Collection.ts";
 
 export const load = (async ({ fetch, parent, params, url, depends }) => {
   const data = await parent();
@@ -22,10 +22,10 @@ export const load = (async ({ fetch, parent, params, url, depends }) => {
       team = await client
         .collection(Collection.Teams)
         .getOne<ExpandedTeam>(params.id, {
-          expand: "club,admins",
-          fetch: fetch,
-          requestKey: `team-${params.id}`,
-        });
+        expand: "club,admins",
+        fetch,
+        requestKey: `team-${params.id}`
+      });
     } catch (e) {
       if (dev) {
         console.error(e);
@@ -36,14 +36,7 @@ export const load = (async ({ fetch, parent, params, url, depends }) => {
   if (!team) throw error(404, "Team not found");
 
   const eventService = new EventService();
-  const events = await eventService.loadEventStore({
-    url: url,
-    fetch: fetch,
-    mode: "team",
-    teamID: team.id,
-    clubID: team.club,
-  });
-
+  const events = await eventService.loadEventStore({ url, fetch, mode: "team", teamID: team.id, clubID: team.club });
   const targetDate = new Date();
   targetDate.setFullYear(targetDate.getFullYear() - 1, 0, 1);
   const eventSeriesCutoff = targetDate.toISOString();
@@ -51,12 +44,12 @@ export const load = (async ({ fetch, parent, params, url, depends }) => {
   const eventSeries = await client
     .collection(Collection.EventSeries)
     .getFullList<ExpandedEventSeries>({
-      filter: `team = "${team.id}" && series_start >= "${eventSeriesCutoff}"`,
-      fetch: fetch,
-      requestKey: `team-${team.id}-eventseries`,
-      sort: "-series_start",
+    filter: `team = "${team.id}" && series_start >= "${eventSeriesCutoff}"`,
+    fetch,
+    requestKey: `team-${team.id}-eventseries`,
+    sort: "-series_start",
       expand: "additional_teams",
-    });
+  });
 
   const pageQuery = url.searchParams.get("page") ?? "1";
   const page = Number(pageQuery);
@@ -66,7 +59,7 @@ export const load = (async ({ fetch, parent, params, url, depends }) => {
     {
       filter: `team.id = "${team.id}"`,
       sort: "-created",
-      fetch: fetch,
+      fetch,
       expand: "author,club,team,comments_via_announcement.user",
       requestKey: `team-${team.id}-announcements`,
     },
@@ -76,10 +69,5 @@ export const load = (async ({ fetch, parent, params, url, depends }) => {
 
   depends("event:list", "comments:list");
 
-  return {
-    team: team,
-    events: events,
-    eventSeries: eventSeries,
-    announcementStore: announcements,
-  };
+  return { team, events, eventSeries, announcementStore: announcements };
 }) satisfies PageLoad;

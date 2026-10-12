@@ -7,8 +7,8 @@
     type RecordService,
   } from "pocketbase";
   import { goto } from "$app/navigation";
-  import { providerLogin } from "$lib/dp/auth/Auth.svelte.js";
-  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  import { providerLogin } from "#lib/dp/auth/Auth.svelte.js";
+  import { toastController } from "#lib/dp/service/ToastController.svelte.ts";
 
   interface Props {
     authProvider: AuthProviderInfo;
@@ -41,7 +41,7 @@
     }
 
     if (authResponse) {
-      await goto("/account", { invalidateAll: true });
+      await goto("/account", { refreshAll: true });
     }
   }
 

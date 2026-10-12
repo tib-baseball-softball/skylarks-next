@@ -1,17 +1,17 @@
 <script lang="ts">
   import { Send, SquarePen, X } from "@lucide/svelte";
   import { invalidate } from "$app/navigation";
-  import Avatar from "$lib/dp/components/utils/Avatar.svelte";
-  import DeleteButton from "$lib/dp/components/utils/DeleteButton.svelte";
-  import { authSettings, client } from "$lib/dp/client.svelte.ts";
-  import { DateTimeUtility } from "$lib/dp/service/DateTimeUtility.ts";
-  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  import Avatar from "#lib/dp/components/utils/Avatar.svelte";
+  import DeleteButton from "#lib/dp/components/utils/DeleteButton.svelte";
+  import { authSettings, client } from "#lib/dp/client.svelte.ts";
+  import { DateTimeUtility } from "#lib/dp/service/DateTimeUtility.ts";
+  import { toastController } from "#lib/dp/service/ToastController.svelte.ts";
   import type {
     CustomAuthModel,
     ExpandedComment,
-  } from "$lib/dp/types/ExpandedResponse.ts";
-  import type { ClubsResponse } from "$lib/dp/types/pb-types.ts";
-  import { appLocale } from "$lib/dp/locale.svelte.ts";
+  } from "#lib/dp/types/ExpandedResponse.ts";
+  import type { ClubsResponse } from "#lib/dp/types/pb-types.ts";
+  import { appLocale } from "#lib/dp/locale.svelte.ts";
 
   interface Props {
     comment: ExpandedComment;

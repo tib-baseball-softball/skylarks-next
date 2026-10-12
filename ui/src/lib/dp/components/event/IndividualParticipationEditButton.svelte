@@ -1,12 +1,12 @@
 <script lang="ts">
   import { MessageCircleMore } from "@lucide/svelte";
-  import ParticipationForm from "$lib/dp/components/forms/ParticipationForm.svelte";
-  import Dialog from "$lib/dp/components/modal/Dialog.svelte";
-  import { authSettings } from "$lib/dp/client.svelte.js";
+  import ParticipationForm from "#lib/dp/components/forms/ParticipationForm.svelte";
+  import Dialog from "#lib/dp/components/modal/Dialog.svelte";
+  import { authSettings } from "#lib/dp/client.svelte.js";
   import type {
     CustomAuthModel,
     ExpandedParticipation,
-  } from "$lib/dp/types/ExpandedResponse.ts";
+  } from "#lib/dp/types/ExpandedResponse.ts";
 
   interface Props {
     participation: ExpandedParticipation;

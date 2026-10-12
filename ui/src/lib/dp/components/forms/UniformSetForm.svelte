@@ -1,12 +1,12 @@
 <script lang="ts">
   import { invalidate } from "$app/navigation";
-  import { Collection } from "$lib/dp/enum/Collection";
-  import { save } from "$lib/dp/records/RecordOperations.ts";
-  import { toastController } from "$lib/dp/service/ToastController.svelte.ts";
+  import { Collection } from "#lib/dp/enum/Collection.js";
+  import { save } from "#lib/dp/records/RecordOperations.ts";
+  import { toastController } from "#lib/dp/service/ToastController.svelte.ts";
   import type {
     UniformsetsCreate,
     UniformsetsResponse,
-  } from "$lib/dp/types/pb-types.ts";
+  } from "#lib/dp/types/pb-types.ts";
   import { ClientResponseError } from "pocketbase";
 
   interface Props {

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Cap from "$lib/dp/components/icons/Cap.svelte";
-  import Pants from "$lib/dp/components/icons/Pants.svelte";
-  import Shirt from "$lib/dp/components/icons/Shirt.svelte";
-  import type {UniformsetsResponse} from "$lib/dp/types/pb-types.ts";
+  import Cap from "#lib/dp/components/icons/Cap.svelte";
+  import Pants from "#lib/dp/components/icons/Pants.svelte";
+  import Shirt from "#lib/dp/components/icons/Shirt.svelte";
+  import type {UniformsetsResponse} from "#lib/dp/types/pb-types.ts";
 
   interface Props {
     attire: UniformsetsResponse;

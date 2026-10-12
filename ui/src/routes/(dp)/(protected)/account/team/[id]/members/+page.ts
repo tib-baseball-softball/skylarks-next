@@ -1,9 +1,9 @@
 import {error} from "@sveltejs/kit";
-import {client} from "$lib/dp/client.svelte.js";
-import {watchWithPagination} from "$lib/dp/records/RecordOperations.ts";
-import type {CustomAuthModel, ExpandedTeam} from "$lib/dp/types/ExpandedResponse.ts";
+import {client} from "#lib/dp/client.svelte.js";
+import {watchWithPagination} from "#lib/dp/records/RecordOperations.ts";
+import type {CustomAuthModel, ExpandedTeam} from "#lib/dp/types/ExpandedResponse.ts";
 import type {PageLoad} from "./$types";
-import {Collection} from "$lib/dp/enum/Collection.ts";
+import {Collection} from "#lib/dp/enum/Collection.ts";
 
 export const load = (async ({fetch, parent, params, depends}) => {
   const data = await parent();

@@ -1,7 +1,7 @@
 <script lang="ts">
-  import {onDestroy, onMount, type Snippet} from "svelte";
-  import {browser} from "$app/environment";
-  import type {Chart as ChartJS, ChartConfiguration} from "chart.js";
+  import { onDestroy, onMount, type Snippet } from "svelte";
+  import { browser } from '$app/env';
+  import type { Chart as ChartJS, ChartConfiguration } from "chart.js";
 
   interface Props {
     config: ChartConfiguration;
@@ -54,7 +54,7 @@
 </script>
 
 <div class="chart-wrapper" style={`height:${height}px`}>
-  {@render (beforeContent?.())}
+  {@render beforeContent?.()}
   <canvas bind:this={canvasEl} class="chart-canvas"></canvas>
 </div>
 
