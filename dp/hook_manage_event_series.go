@@ -139,7 +139,7 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 		for currentDate.Before(endDateSeries) {
 			eventStart := currentDate
 			eventEnd := currentDate.Add(time.Duration(eventSeries.Duration()) * time.Minute)
-			eventMeet := currentDate.Add(time.Duration(eventSeries.Meet()*-1) * time.Minute)
+			eventMeet := currentDate.Add(time.Duration(eventSeries.Meet()) * time.Minute * -1)
 
 			event := &Event{}
 			event.SetProxyRecord(core.NewRecord(eventCollection))
@@ -186,7 +186,7 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 				eventStart = event.StartTime().Add(timeDiff)
 			}
 			eventEnd := eventStart.Add(time.Duration(eventSeries.Duration()) * time.Minute)
-			eventMeet := currentDate.Add(time.Duration(eventSeries.Meet()*-1) * time.Minute)
+			eventMeet := currentDate.Add(time.Duration(eventSeries.Meet()) * time.Minute * -1)
 
 			if eventStart.After(endDateSeries) {
 				eventsToDelete[event.Id] = event
