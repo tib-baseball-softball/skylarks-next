@@ -139,11 +139,12 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 		for currentDate.Before(endDateSeries) {
 			eventStart := currentDate
 			eventEnd := currentDate.Add(time.Duration(eventSeries.Duration()) * time.Minute)
+			eventMeet := currentDate.Add(time.Duration(eventSeries.Meet()) * time.Minute * -1)
 
 			event := &Event{}
 			event.SetProxyRecord(core.NewRecord(eventCollection))
 
-			setValuesForSeriesEvent(event, eventStart, eventEnd, eventSeries)
+			setValuesForSeriesEvent(event, eventMeet, eventStart, eventEnd, eventSeries)
 
 			if eventLinkedList.Len() == 0 {
 				currentElement = eventLinkedList.PushFront(event)
@@ -185,6 +186,7 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 				eventStart = event.StartTime().Add(timeDiff)
 			}
 			eventEnd := eventStart.Add(time.Duration(eventSeries.Duration()) * time.Minute)
+			eventMeet := currentDate.Add(time.Duration(eventSeries.Meet()) * time.Minute * -1)
 
 			if eventStart.After(endDateSeries) {
 				eventsToDelete[event.Id] = event
@@ -196,12 +198,12 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 
 			if action == UpdateAllEventsAction || eventStart.After(today) {
 				// only update future events if set
-				setValuesForSeriesEvent(event, eventStart, eventEnd, eventSeries)
+				setValuesForSeriesEvent(event, eventMeet, eventStart, eventEnd, eventSeries)
 				element.Value = event
 			}
 
 			currentDate = currentDate.AddDate(0, 0, eventSeries.Interval())
-			
+
 			// series has been extended over the original end, append new event to handle in next loop
 			if element.Next() == nil && currentDate.Before(endDateSeries) {
 				app.Logger().Debug("appending new event to extend series", "currentDate", currentDate, "endDateSeries", endDateSeries)
@@ -230,13 +232,20 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 	return events, nil
 }
 
-func setValuesForSeriesEvent(event *Event, eventStart types.DateTime, eventEnd types.DateTime, eventSeries *EventSeries) {
+func setValuesForSeriesEvent(
+	event *Event,
+	eventMeet types.DateTime,
+	eventStart types.DateTime,
+	eventEnd types.DateTime,
+	eventSeries *EventSeries,
+) {
 	if event.Id == "" {
 		event.Id = utils.CreatePocketBaseIDString()
 	}
 	if eventSeries.Id == "" {
 		eventSeries.Id = utils.CreatePocketBaseIDString()
 	}
+	event.SetMeetingTime(eventMeet)
 	event.SetStartTime(eventStart)
 	event.SetEndTime(eventEnd)
 	event.SetTitle(eventSeries.Title())

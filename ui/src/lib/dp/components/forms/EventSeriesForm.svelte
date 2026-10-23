@@ -34,6 +34,7 @@
       title: "",
       interval: 7,
       duration: 0,
+      meet: 0,
       series_start: "",
       series_end: "",
       desc: "",
@@ -82,7 +83,7 @@
     e.preventDefault();
     const action = e.submitter?.dataset.action as EventSeriesAction | undefined;
     if (dev) {
-      console.debug("submitting data with action", action);
+      console.log("submitting data with action", action);
     }
 
     let result: EventSeriesCreationData | null = null;
@@ -204,6 +205,14 @@
       />
       <span class="hint"
         >Duration of each event to determine end time (in minutes).</span
+      >
+    </label>
+
+    <label class="label">
+      <span>Meet</span>
+      <input bind:value={form.meet} class="input" name="meet" type="number" />
+      <span class="hint"
+        >Time to meet in advance before the start of each event (in minutes).</span
       >
     </label>
 
