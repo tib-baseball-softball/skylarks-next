@@ -854,6 +854,7 @@ export interface EventseriesResponse extends BaseCollectionResponse {
 	duration: number;
 	created: string;
 	updated: string;
+	meet: number;
 }
 
 export interface EventseriesCreate extends BaseCollectionCreate {
@@ -869,6 +870,7 @@ export interface EventseriesCreate extends BaseCollectionCreate {
 	duration?: number;
 	created?: string | Date;
 	updated?: string | Date;
+	meet?: number;
 }
 
 export interface EventseriesUpdate extends BaseCollectionUpdate {
@@ -890,6 +892,9 @@ export interface EventseriesUpdate extends BaseCollectionUpdate {
 	'duration-'?: number;
 	created?: string | Date;
 	updated?: string | Date;
+	meet?: number;
+	'meet+'?: number;
+	'meet-'?: number;
 }
 
 export interface EventseriesCollection {

@@ -2231,3 +2231,11 @@ msgstr "Błąd walidacji pola \"{0}\": {1}"
 #: src/lib/dp/components/forms/TeamGamesModal.svelte
 msgid "Error loading game count."
 msgstr "Błąd podczas ładowania liczby gier."
+
+#: src/lib/dp/components/forms/EventSeriesForm.svelte
+msgid "Meet"
+msgstr "Zmaga"
+
+#: src/lib/dp/components/forms/EventSeriesForm.svelte
+msgid "Time to meet in advance before the start of each event (in minutes)."
+msgstr "Wczas na zmogę w advance przed rozpoczęciem każdego wydarzenia (w minutach)."

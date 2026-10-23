@@ -119,6 +119,15 @@ func (s *EventSeries) SetDuration(duration int) {
 	s.Set("duration", duration)
 }
 
+// Meet returns the time (in minutes) to meet 
+// before the start of each event in a series.
+func (s *EventSeries) Meet() int {
+	return s.GetInt("meet")
+}
+func (s *EventSeries) SetMeet(meet int) {
+	s.Set("meet", meet)
+}
+
 func (s *EventSeries) SetState(state SeriesState) {
 	s.WithCustomData(true)
 	s.Set("series_state", string(state))
