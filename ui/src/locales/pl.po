@@ -2234,8 +2234,8 @@ msgstr "Błąd podczas ładowania liczby gier."
 
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
 msgid "Meet"
-msgstr ""
+msgstr "Zmaga"
 
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
 msgid "Time to meet in advance before the start of each event (in minutes)."
-msgstr ""
+msgstr "Wczas na zmogę w advance przed rozpoczęciem każdego wydarzenia (w minutach)."
