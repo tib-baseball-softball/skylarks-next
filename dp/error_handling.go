@@ -3,6 +3,7 @@ package dp
 import (
 	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/tools/store"
 	"github.com/getsentry/sentry-go"
+	"github.com/pocketbase/pocketbase/core"
 )
 
 type LogicError struct {
@@ -20,10 +21,10 @@ type ErrorContext struct {
 
 // LogErrorInternalExternal logs the error to the internal PocketBase logger
 // and forwards it to the external error tracking system.
-func LogErrorInternalExternal(app DiamondPlanner, err error, context *ErrorContext, tags *map[string]string) {
+func LogErrorInternalExternal(app core.App, err error, context *ErrorContext, tags *map[string]string) {
 	app.Logger().Error(err.Error(), "context", context, "tags", tags)
 
-	if app.Flags().Get(store.FlagSentryEnabled) == true {
+	if app.Store().Get(string(store.FlagSentryEnabled)) == true {
 		ForwardErrorToExternalSystem(err, context, tags)
 	}
 }

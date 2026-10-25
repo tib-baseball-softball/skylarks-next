@@ -90,7 +90,7 @@ func setupSentry(app dp.DiamondPlanner) {
 		return se.Next()
 	})
 	app.Logger().Info("Sentry Middleware set up", "DSN", sentryDSN)
-	app.Flags().Set(store.FlagSentryEnabled, true)
+	app.Store().Set(string(store.FlagSentryEnabled), true)
 }
 
 // bindTiBHooks registers TiB-specific handlers that are a superset of core Diamond Planner functionality.
