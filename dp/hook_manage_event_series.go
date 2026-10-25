@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/utils"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/tools/security"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
 )
@@ -240,10 +240,10 @@ func setValuesForSeriesEvent(
 	eventSeries *EventSeries,
 ) {
 	if event.Id == "" {
-		event.Id = utils.CreatePocketBaseIDString()
+		event.Id = security.CreatePocketBaseIDString()
 	}
 	if eventSeries.Id == "" {
-		eventSeries.Id = utils.CreatePocketBaseIDString()
+		eventSeries.Id = security.CreatePocketBaseIDString()
 	}
 	event.SetMeetingTime(eventMeet)
 	event.SetStartTime(eventStart)

@@ -1,4 +1,4 @@
-package utils
+package security
 
 import "github.com/pocketbase/pocketbase/tools/security"
 
