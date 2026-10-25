@@ -48,7 +48,7 @@ func setupTestApp(t testing.TB) *tests.TestApp {
 
 	// no need to clean up since scenario.Test() will do that for us
 	dp.BindDPHooks(testApp, mockClient, pushService)
-	BindTiBHooks(testApp)
+	bindTiBHooks(testApp)
 
 	return testApp
 }

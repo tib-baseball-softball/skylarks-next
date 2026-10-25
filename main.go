@@ -38,38 +38,36 @@ func init() {
 	}
 }
 
-// BindTiBHooks registers TiB-specific handlers that are a superset of core Diamond Planner functionality.
-func BindTiBHooks(app core.App) {
-
-	//------------------- Hooks -------------------------//
-
-	app.OnRecordAfterCreateSuccess(dp.UserCollection).BindFunc(func(e *core.RecordEvent) error {
-		return tib.SendUpdatedPlayerData(e, os.Getenv("PUBLIC_TYPO3_URL"))
-	})
-
-	app.OnRecordAfterUpdateSuccess(dp.UserCollection).BindFunc(func(e *core.RecordEvent) error {
-		return tib.SendUpdatedPlayerData(e, os.Getenv("PUBLIC_TYPO3_URL"))
-	})
-
-	//------------------- Custom Routes -------------------------//
-
-	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
-		se.Router.POST("/webhooks/playerChange", tib.HandlePlayerChangedMessage(app))
-		return se.Next()
-	})
-}
-
 func main() {
 	client := bsm.NewAPIClient()
 	pushService := dp.NewPushService()
 
 	app := dp.NewDiamondPlanner(client, pushService)
 
+	setupSentry(app)
+	bindTiBHooks(app)
+
+	if err := app.Start(); err != nil {
+		log.Fatal(err)
+	}
+}
+
+// setupSentry performs required scaffolding for the Sentry SDK.
+//
+// If the key `SENTRY_DSN` is not found in the environment, setup is skipped.
+func setupSentry(app core.App) {
 	applicationContext := os.Getenv("APPLICATION_CONTEXT")
 	isDevelopment := applicationContext == ContextDevelopment
 
+	sentryDSN, dsnIsSet := os.LookupEnv("SENTRY_DSN")
+
+	if !dsnIsSet {
+		app.Logger().Info("Sentry DSN is not set, skipping Sentry init", "DSN", sentryDSN)
+		return
+	}
+
 	err := sentry.Init(sentry.ClientOptions{
-		Dsn:                  os.Getenv("SENTRY_DSN"),
+		Dsn:                  sentryDSN,
 		Debug:                isDevelopment,
 		SendDefaultPII:       true,
 		DisableClientReports: true,
@@ -90,11 +88,26 @@ func main() {
 
 		return se.Next()
 	})
-	app.Logger().Info("Sentry Middleware set up", "DSN", os.Getenv("SENTRY_DSN"))
+	app.Logger().Info("Sentry Middleware set up", "DSN", sentryDSN)
+}
 
-	BindTiBHooks(app)
+// bindTiBHooks registers TiB-specific handlers that are a superset of core Diamond Planner functionality.
+func bindTiBHooks(app core.App) {
 
-	if err := app.Start(); err != nil {
-		log.Fatal(err)
-	}
+	//------------------- Hooks -------------------------//
+
+	app.OnRecordAfterCreateSuccess(dp.UserCollection).BindFunc(func(e *core.RecordEvent) error {
+		return tib.SendUpdatedPlayerData(e, os.Getenv("PUBLIC_TYPO3_URL"))
+	})
+
+	app.OnRecordAfterUpdateSuccess(dp.UserCollection).BindFunc(func(e *core.RecordEvent) error {
+		return tib.SendUpdatedPlayerData(e, os.Getenv("PUBLIC_TYPO3_URL"))
+	})
+
+	//------------------- Custom Routes -------------------------//
+
+	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
+		se.Router.POST("/webhooks/playerChange", tib.HandlePlayerChangedMessage(app))
+		return se.Next()
+	})
 }
