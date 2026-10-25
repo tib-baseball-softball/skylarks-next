@@ -1,9 +1,33 @@
 package dp
 
 import (
+	"fmt"
+
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/types"
 )
+
+type EventType string
+
+const (
+	EventTypeGame     EventType = "game"
+	EventTypePractice EventType = "practice"
+	EventTypeMisc     EventType = "misc"
+	EventTypeAll      EventType = "all"
+)
+
+func (et EventType) String() string {
+	return string(et)
+}
+
+func ParseEventType(s string) (EventType, error) {
+	switch EventType(s) {
+	case EventTypeGame, EventTypePractice, EventTypeMisc, EventTypeAll:
+		return EventType(s), nil
+	default:
+		return "", fmt.Errorf("invalid EventType: %s", s)
+	}
+}
 
 const (
 	EventsCollection = "events"
@@ -81,12 +105,29 @@ func (e *Event) SetMeetingTime(meetingTime types.DateTime) {
 	e.Set("meetingtime", meetingTime)
 }
 
-func (e *Event) Type() string {
-	return e.GetString("type")
+// Type returns the event type enum:
+// - Game
+// - Practice
+// - Misc
+// 
+// Returns `Misc` if parsing the DB value fails.
+func (e *Event) Type() EventType {
+	t, err := ParseEventType(e.GetString("type"))
+	if err != nil {
+	    return EventTypeMisc
+	}
+	return t
 }
 
-func (e *Event) SetType(eventType string) {
-	e.Set("type", eventType)
+// SetType sets the event type.
+// 
+// Caution: `All` is not a valid value in database context, will be replaced by `Misc`.
+func (e *Event) SetType(eventType EventType) {
+    if eventType == EventTypeAll {
+        e.Set("type", EventTypeMisc.String())
+        return
+    }
+	e.Set("type", eventType.String())
 }
 
 func (e *Event) Team() string {

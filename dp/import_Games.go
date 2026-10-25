@@ -217,7 +217,7 @@ func (s GameImportService) setEventRecordValues(record *core.Record, match bsm.M
 	event.SetBSMID(match.ID)
 	event.SetStartTime(starttime)
 	event.SetEndTime(endDateTime)
-	event.SetType("game")
+	event.SetType(EventTypeGame)
 	event.SetTeam(teamID)
 	event.SetMatchJSON(string(matchJSON))
 	event.SetLocation(location.Id)

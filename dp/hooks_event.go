@@ -142,7 +142,7 @@ func NotifyNewEvent(e *core.RecordEvent, ps PushService) error {
 		return e.Next()
 	}
 
-	messageBody := event.Title() + " (" + cases.Title(language.English, cases.Compact).String(event.Type()) + ") - starts at " + eventStartInAppTimeZone.Time().Format(time.RFC1123)
+	messageBody := event.Title() + " (" + cases.Title(language.English, cases.Compact).String(event.Type().String()) + ") - starts at " + eventStartInAppTimeZone.Time().Format(time.RFC1123)
 
 	locationRecord := event.ExpandedOne("location")
 	if locationRecord != nil {

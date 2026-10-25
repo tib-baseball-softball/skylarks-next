@@ -64,17 +64,17 @@ func LoadUserStats(user *core.Record, requestEvent *core.RequestEvent) (Personal
 	}
 
 	totalsGames := AttendanceTotal{
-		Type:     Game,
+		Type:     EventTypeGame,
 		Attended: 0,
 		Total:    eventCounts.Games,
 	}
 	totalsPractice := AttendanceTotal{
-		Type:     Practice,
+		Type:     EventTypePractice,
 		Attended: 0,
 		Total:    eventCounts.Practices,
 	}
 	totalsMisc := AttendanceTotal{
-		Type:     Misc,
+		Type:     EventTypeMisc,
 		Attended: 0,
 		Total:    eventCounts.Misc,
 	}
@@ -92,13 +92,13 @@ func LoadUserStats(user *core.Record, requestEvent *core.RequestEvent) (Personal
 			return statsItem, err
 		}
 		switch eventType {
-		case Game:
+		case EventTypeGame:
 			participations[i].TotalCount = eventCounts.Games
 			totalsGames.Attended = participation.InCount
-		case Practice:
+		case EventTypePractice:
 			participations[i].TotalCount = eventCounts.Practices
 			totalsPractice.Attended = participation.InCount
-		case Misc:
+		case EventTypeMisc:
 			participations[i].TotalCount = eventCounts.Misc
 			totalsMisc.Attended = participation.InCount
 		}

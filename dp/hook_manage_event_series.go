@@ -254,7 +254,7 @@ func setValuesForSeriesEvent(
 	event.SetDesc(eventSeries.Desc())
 	event.SetLocation(eventSeries.Location())
 	event.SetSeries(eventSeries.Id)
-	event.SetType(Practice.String())
+	event.SetType(EventTypePractice)
 
 }
 
