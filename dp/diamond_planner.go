@@ -6,9 +6,13 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
+	"time"
 
 	"git.berlinskylarks.de/tib-baseball/bsm-go"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/tools/store"
 	"github.com/SherClockHolmes/webpush-go"
+	"github.com/getsentry/sentry-go"
+	sentryhttp "github.com/getsentry/sentry-go/http"
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/apis"
 	"github.com/pocketbase/pocketbase/core"
@@ -16,6 +20,12 @@ import (
 	"github.com/pocketbase/pocketbase/tools/hook"
 	"github.com/pocketbase/pocketbase/tools/osutils"
 	"github.com/spf13/cobra"
+)
+
+const (
+	ContextDevelopment = "Development"
+	ContextStaging     = "Staging"
+	ContextProduction  = "Production"
 )
 
 // DiamondPlanner defines custom extensions to the Pocketbase app.
@@ -258,4 +268,46 @@ func BindDPHooks(app core.App, client bsm.APIClient, pushService PushService) {
 			gamesImportService.ImportGames()
 		})
 	}
+}
+
+// SetupSentry performs required scaffolding for the Sentry SDK.
+//
+// If the key `SENTRY_DSN` is not found in the environment, setup is skipped.
+//
+// The resulting sentry state is written to the app store with key `FlagSentryEnabled`
+func SetupSentry(app DiamondPlanner) {
+	applicationContext := os.Getenv("APPLICATION_CONTEXT")
+	isDevelopment := applicationContext == ContextDevelopment
+
+	sentryDSN, dsnIsSet := os.LookupEnv("SENTRY_DSN")
+
+	if !dsnIsSet {
+		app.Logger().Info("Sentry DSN is not set, skipping Sentry init", "DSN", sentryDSN)
+		return
+	}
+
+	err := sentry.Init(sentry.ClientOptions{
+		Dsn:                  sentryDSN,
+		Debug:                isDevelopment,
+		SendDefaultPII:       false,
+		DisableClientReports: true,
+		Environment:          applicationContext,
+		TracesSampleRate:     0.0,
+	})
+	if err != nil {
+		log.Fatalf("sentry.Init: %s", err)
+	}
+	defer sentry.Flush(2 * time.Second)
+
+	sentryMiddleware := sentryhttp.New(sentryhttp.Options{
+		Repanic: true,
+	})
+
+	app.OnServe().BindFunc(func(se *core.ServeEvent) error {
+		se.Router.BindFunc(apis.WrapStdMiddleware(sentryMiddleware.Handle))
+
+		return se.Next()
+	})
+	app.Logger().Info("Sentry Middleware set up", "DSN", sentryDSN)
+	app.Store().Set(string(store.FlagSentryEnabled), true)
 }
