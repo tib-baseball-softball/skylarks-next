@@ -8,6 +8,7 @@ import (
 
 	"git.berlinskylarks.de/tib-baseball/bsm-go"
 	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/tools/store"
 	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/internal/tib"
 	_ "git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/migrations"
 	"github.com/getsentry/sentry-go"
@@ -55,7 +56,7 @@ func main() {
 // setupSentry performs required scaffolding for the Sentry SDK.
 //
 // If the key `SENTRY_DSN` is not found in the environment, setup is skipped.
-func setupSentry(app core.App) {
+func setupSentry(app dp.DiamondPlanner) {
 	applicationContext := os.Getenv("APPLICATION_CONTEXT")
 	isDevelopment := applicationContext == ContextDevelopment
 
@@ -69,7 +70,7 @@ func setupSentry(app core.App) {
 	err := sentry.Init(sentry.ClientOptions{
 		Dsn:                  sentryDSN,
 		Debug:                isDevelopment,
-		SendDefaultPII:       true,
+		SendDefaultPII:       false,
 		DisableClientReports: true,
 		Environment:          applicationContext,
 		TracesSampleRate:     0.0,
@@ -89,6 +90,7 @@ func setupSentry(app core.App) {
 		return se.Next()
 	})
 	app.Logger().Info("Sentry Middleware set up", "DSN", sentryDSN)
+	app.Flags().Set(store.FlagSentryEnabled, true)
 }
 
 // bindTiBHooks registers TiB-specific handlers that are a superset of core Diamond Planner functionality.

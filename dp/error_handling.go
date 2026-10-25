@@ -1,12 +1,12 @@
 package dp
 
 import (
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/tools/store"
 	"github.com/getsentry/sentry-go"
-	"github.com/pocketbase/pocketbase/core"
 )
 
-type LogicError struct{
-    Message string
+type LogicError struct {
+	Message string
 }
 
 func (e LogicError) Error() string {
@@ -18,14 +18,17 @@ type ErrorContext struct {
 	Values map[string]any
 }
 
-// LogErrorInternalExternal logs the error to the internal PocketBase logger 
+// LogErrorInternalExternal logs the error to the internal PocketBase logger
 // and forwards it to the external error tracking system.
-func LogErrorInternalExternal(app core.App, err error, context *ErrorContext, tags *map[string]string) {
+func LogErrorInternalExternal(app DiamondPlanner, err error, context *ErrorContext, tags *map[string]string) {
 	app.Logger().Error(err.Error(), "context", context, "tags", tags)
-	ForwardErrorToExternalSystem(err, context, tags)
+
+	if app.Flags().Get(store.FlagSentryEnabled) == true {
+		ForwardErrorToExternalSystem(err, context, tags)
+	}
 }
 
-// Forwards the error to the external error tracking system 
+// Forwards the error to the external error tracking system
 // (Sentry-compatible, using self-hosted Bugsink instance).
 func ForwardErrorToExternalSystem(err error, context *ErrorContext, tags *map[string]string) {
 	sentry.ConfigureScope(func(scope *sentry.Scope) {

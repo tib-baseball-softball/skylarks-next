@@ -8,6 +8,7 @@ import (
 	"os"
 
 	"git.berlinskylarks.de/tib-baseball/bsm-go"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/tools/store"
 	"github.com/SherClockHolmes/webpush-go"
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/apis"
@@ -15,16 +16,31 @@ import (
 	"github.com/pocketbase/pocketbase/plugins/migratecmd"
 	"github.com/pocketbase/pocketbase/tools/hook"
 	"github.com/pocketbase/pocketbase/tools/osutils"
+	pbStore "github.com/pocketbase/pocketbase/tools/store"
 	"github.com/spf13/cobra"
 )
 
-type DiamondPlanner struct {
-	*pocketbase.PocketBase
+// DiamondPlanner defines custom extensions to the Pocketbase app.
+type DiamondPlanner interface {
+    core.App
+    Flags() *pbStore.Store[store.FeatureFlagKey, bool]
 }
 
-func NewDiamondPlanner(client bsm.APIClient, pushService PushService) *DiamondPlanner {
-	dp := &DiamondPlanner{
-		pocketbase.New(),
+// BaseDiamondPlanner represents the main DiamondPlanner implementation.
+type BaseDiamondPlanner struct {
+	*pocketbase.PocketBase
+	flags *pbStore.Store[store.FeatureFlagKey, bool]
+}
+
+// Flags returns the app-wide feature flag store.
+func (dp *BaseDiamondPlanner) Flags() *pbStore.Store[store.FeatureFlagKey, bool] {
+	return dp.flags
+}
+
+func NewDiamondPlanner(client bsm.APIClient, pushService PushService) *BaseDiamondPlanner {
+	dp := &BaseDiamondPlanner{
+		PocketBase: pocketbase.New(),
+		flags:      pbStore.New[store.FeatureFlagKey, bool](nil),
 	}
 
 	if os.Getenv("APPLICATION_SECRET") == "" {
