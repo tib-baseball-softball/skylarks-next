@@ -7,6 +7,7 @@ import (
 	"os"
 	"time"
 
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/tools/hash"
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/mailer"
@@ -204,7 +205,7 @@ func AddUserICalLink(e *core.RecordEnrichEvent) error {
 		user.WithCustomData(true)
 
 		appSecret := os.Getenv("APPLICATION_SECRET")
-		hash := GetSHA3Hash(user.Id + appSecret)
+		hash := hash.GetSHA3Hash(user.Id + appSecret)
 		user.SetICalLink(e.App.Settings().Meta.AppURL + "/api/dp/ical/" + user.Id + "/" + hash + "/calendar.ics")
 	}
 

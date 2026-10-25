@@ -10,6 +10,7 @@ import (
 	"strconv"
 	"time"
 
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/tools/hash"
 	ics "github.com/arran4/golang-ical"
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/core"
@@ -34,7 +35,7 @@ func getUserCalendar(app core.App) func(e *core.RequestEvent) error {
 
 		appSecret := os.Getenv("APPLICATION_SECRET")
 		givenHash := e.Request.PathValue("hash")
-		calculatedHash := GetSHA3Hash(user.Id + appSecret)
+		calculatedHash := hash.GetSHA3Hash(user.Id + appSecret)
 
 		if !security.Equal(calculatedHash, givenHash) {
 			return e.BadRequestError("Invalid hash.", "")
