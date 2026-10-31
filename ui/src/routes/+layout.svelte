@@ -72,7 +72,7 @@
       </aside>
     {:else}
       <!-- hack: render empty div to not mess up the grid -->
-      <div class="shame-div" aria-hidden="true"></div>
+      <div class="shame-div" aria-hidden="true" tabindex="-1"></div>
     {/if}
 
     <!-- Main -->

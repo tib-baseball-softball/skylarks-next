@@ -1,4 +1,4 @@
 [tools]
 go = "1.27"
-node = "24"
+node = "26"
 pnpm = "latest"

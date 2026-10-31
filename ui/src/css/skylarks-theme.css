@@ -206,4 +206,5 @@
   --color-surface-contrast-950: var(--color-surface-contrast-light);
 
   --color-border: light-dark(var(--color-surface-50), #334155);
+  --card-padding: calc(var(--spacing) * 4);
 }
