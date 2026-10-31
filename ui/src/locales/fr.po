@@ -2242,32 +2242,32 @@ msgstr "Temps de réunion à l'avance avant le démarrage de chaque événement 
 
 #: src/routes/+page.svelte
 msgid "Help & Documentation"
-msgstr ""
+msgstr "Aide et documentation"
 
 #: src/routes/+page.svelte
 msgid "Get started"
-msgstr ""
+msgstr "Commencer"
 
 #: src/routes/+page.svelte
 msgid "Find out how you can install this app to your home screen on touch devices and to the dock on select desktop browsers."
-msgstr ""
+msgstr "Découvrez comment installer cette application sur l'écran d'accueil de vos appareils tactiles et dans le dock sur certains navigateurs de bureau."
 
 #: src/routes/+page.svelte
 msgid "Read the official documentation on how to use this app, opens in new tab"
-msgstr ""
+msgstr "Lire la documentation officielle sur l'utilisation de cette application (s'ouvre dans un nouvel onglet)"
 
 #: src/routes/+page.svelte
 msgid "Install as web app"
-msgstr ""
+msgstr "Installer en tant qu'application web"
 
 #: src/routes/+page.svelte
 msgid "Installation instructions as a progressive web app"
-msgstr ""
+msgstr "Instructions d'installation en tant qu'application web progressive"
 
 #: src/routes/+page.svelte
 msgid "Installation instructions"
-msgstr ""
+msgstr "Instructions d'installation"
 
 #: src/routes/+page.svelte
 msgid "Find usage information for this app and frequently asked questions on the Skylarks team website."
-msgstr ""
+msgstr "Trouvez des informations d'utilisation pour cette application et les questions fréquemment posées sur le site web de l'équipe Skylarks."
