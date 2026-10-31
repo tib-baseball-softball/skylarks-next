@@ -2239,3 +2239,35 @@ msgstr "Zmaga"
 #: src/lib/dp/components/forms/EventSeriesForm.svelte
 msgid "Time to meet in advance before the start of each event (in minutes)."
 msgstr "Wczas na zmogę w advance przed rozpoczęciem każdego wydarzenia (w minutach)."
+
+#: src/routes/+page.svelte
+msgid "Help & Documentation"
+msgstr ""
+
+#: src/routes/+page.svelte
+msgid "Get started"
+msgstr ""
+
+#: src/routes/+page.svelte
+msgid "Find out how you can install this app to your home screen on touch devices and to the dock on select desktop browsers."
+msgstr ""
+
+#: src/routes/+page.svelte
+msgid "Read the official documentation on how to use this app, opens in new tab"
+msgstr ""
+
+#: src/routes/+page.svelte
+msgid "Install as web app"
+msgstr ""
+
+#: src/routes/+page.svelte
+msgid "Installation instructions as a progressive web app"
+msgstr ""
+
+#: src/routes/+page.svelte
+msgid "Installation instructions"
+msgstr ""
+
+#: src/routes/+page.svelte
+msgid "Find usage information for this app and frequently asked questions on the Skylarks team website."
+msgstr ""
