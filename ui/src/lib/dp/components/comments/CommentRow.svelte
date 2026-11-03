@@ -127,7 +127,7 @@
       class={["date-box", isLoggedInUser ? "" : "by-current-user"]}
       datetime={comment.updated}
     >
-      {DateTimeUtility.dateTimeFormatShort(appLocale.current).format(
+      {DateTimeUtility.dateTimeFormatShort(navigator.language || appLocale.current).format(
         new Date(comment.created),
       )}
     </time>

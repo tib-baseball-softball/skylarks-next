@@ -22,7 +22,7 @@
     {#if timeValue}
       <time datetime={timeValue} class="time"
         >{displayedTime?.toLocaleTimeString(
-          appLocale.current,
+          navigator.language || appLocale.current,
           DateTimeUtility.eventTimeFormat,
         )}</time
       >
