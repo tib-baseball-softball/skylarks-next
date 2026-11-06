@@ -22,7 +22,7 @@
       <Calendar size="18" />
       <time class="event-time" datetime={event.starttime}>
         {startTime.toLocaleDateString(
-          appLocale.current,
+          navigator.language || appLocale.current,
           DateTimeUtility.eventDateFormat,
         )}
       </time>

@@ -1,17 +1,22 @@
 <script lang="ts">
-  import {MessageCircle} from "@lucide/svelte";
+  import { MessageCircle } from "@lucide/svelte";
   import AnnouncementForm from "#lib/dp/components/forms/AnnouncementForm.svelte";
   import DeleteButton from "#lib/dp/components/utils/DeleteButton.svelte";
-  import {authSettings, client} from "#lib/dp/client.svelte.ts";
-  import type {CustomAuthModel, ExpandedAnnouncement} from "#lib/dp/types/ExpandedResponse.ts";
+  import { authSettings, client } from "#lib/dp/client.svelte.ts";
+  import type {
+    CustomAuthModel,
+    ExpandedAnnouncement,
+  } from "#lib/dp/types/ExpandedResponse.ts";
   import AnnouncementCoreContent from "./AnnouncementCoreContent.svelte";
 
   interface Props {
     announcement: ExpandedAnnouncement;
   }
 
-  const {announcement}: Props = $props();
-  const commentCount = $derived(announcement?.expand?.comments_via_announcement?.length ?? 0);
+  const { announcement }: Props = $props();
+  const commentCount = $derived(
+    announcement?.expand?.comments_via_announcement?.length ?? 0,
+  );
 
   function deleteAction(id: string) {
     client.collection("announcements").delete(id);
@@ -20,25 +25,27 @@
   const authRecord = $derived(authSettings.record as CustomAuthModel);
   const canEdit = $derived(
     announcement.expand?.club?.admins.includes(authRecord.id) ||
-    announcement.expand?.team?.admins.includes(authRecord.id)
+      announcement.expand?.team?.admins.includes(authRecord.id),
   );
 </script>
 
 <article class="root card preset-outlined-card">
-  <AnnouncementCoreContent {announcement}/>
+  <AnnouncementCoreContent {announcement} />
 
   <div>
-    <hr class="separator"/>
+    <hr class="separator" />
 
     <footer class="actions">
-
       {#if canEdit}
         <div class="admin-actions">
-          <AnnouncementForm showLabel={false} announcement={announcement} club={announcement.expand?.club ?? null}
-                            team={announcement.expand?.team ?? null}
-                            triggerVariant="tonal-tertiary"
-                            triggerSize="sm"
-                            triggerIcon={true}
+          <AnnouncementForm
+            showLabel={false}
+            {announcement}
+            club={announcement.expand?.club ?? null}
+            team={announcement.expand?.team ?? null}
+            triggerVariant="tonal-tertiary"
+            triggerSize="sm"
+            triggerIcon={true}
           />
 
           <DeleteButton
@@ -50,7 +57,7 @@
             iconSize={16}
           />
         </div>
-      {:else }
+      {:else}
         <div aria-hidden="true"></div>
       {/if}
 
@@ -59,9 +66,9 @@
           <div class="badge-wrapper">
             <span class="sr-only">Number of Comments:</span>
             <span class="badge-icon comment-badge preset-filled-primary-500">
-                {commentCount}
-              </span>
-            <MessageCircle aria-hidden="true"/>
+              {commentCount}
+            </span>
+            <MessageCircle aria-hidden="true" />
           </div>
         {/if}
 
