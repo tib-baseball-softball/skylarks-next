@@ -35,7 +35,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o diamondplanner
 
 
 # 3) Final runtime image
-FROM alpine:3.20
+FROM alpine:3
 WORKDIR /app
 
 RUN apk add --no-cache ca-certificates tzdata && update-ca-certificates
