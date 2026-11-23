@@ -9,6 +9,7 @@ import (
 	"ganigeorgiev.com/pocketbase/dbx"
 	"ganigeorgiev.com/pocketbase/pocketbase/apis"
 	"ganigeorgiev.com/pocketbase/pocketbase/core"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
 )
 
 // GetGamesCount returns the number of official league games in the database for a given team and season.
@@ -75,8 +76,8 @@ type JoinTeamPayload struct {
 func JoinTeam(app core.App) func(e *core.RequestEvent) error {
 	return func(e *core.RequestEvent) error {
 		teamID := e.Request.PathValue("team")
-		team := &Team{}
-		err := FindRecordProxyByID(app, team, teamID)
+		team := &base.Team{}
+		err := base.FindRecordProxyByID(app, team, teamID)
 		if err != nil {
 			return e.BadRequestError("Failed to load teams record", err)
 		}
@@ -102,8 +103,8 @@ func JoinTeam(app core.App) func(e *core.RequestEvent) error {
 			return e.ForbiddenError("User ID does not match authenticated user", nil)
 		}
 
-		user := &User{}
-		err = FindRecordProxyByID(app, user, payload.UserID)
+		user := &base.User{}
+		err = base.FindRecordProxyByID(app, user, payload.UserID)
 		if err != nil {
 			return e.BadRequestError("Failed to load user record", err)
 		}

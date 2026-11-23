@@ -1,13 +1,14 @@
-package dp
+package push
 
 import (
 	"net/http"
 
 	"ganigeorgiev.com/pocketbase/dbx"
 	"ganigeorgiev.com/pocketbase/pocketbase/core"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
 )
 
-func notifyWithTestPushMessage(ps PushService, app core.App) func(e *core.RequestEvent) error {
+func NotifyWithTestPushMessage(ps PushService, app core.App) func(e *core.RequestEvent) error {
 	return func(e *core.RequestEvent) error {
 		userID := e.Request.PathValue("user")
 
@@ -16,7 +17,7 @@ func notifyWithTestPushMessage(ps PushService, app core.App) func(e *core.Reques
 		}
 
 		subRecords, err := app.FindRecordsByFilter(
-			PushSubscriptionsCollection,
+			base.PushSubscriptionsCollection,
 			"user.id = {:userID}",
 			"",
 			0,
@@ -28,7 +29,7 @@ func notifyWithTestPushMessage(ps PushService, app core.App) func(e *core.Reques
 		}
 
 		for _, subRecord := range subRecords {
-			sub := &PushSubscription{}
+			sub := &base.PushSubscription{}
 			sub.SetProxyRecord(subRecord)
 			err := ps.handleTestPush(new(sub.ToWebPushSubscription()))
 			if err != nil {
@@ -41,7 +42,7 @@ func notifyWithTestPushMessage(ps PushService, app core.App) func(e *core.Reques
 	}
 }
 
-func deletePushSubscription(app core.App) func(e *core.RequestEvent) error {
+func DeletePushSubscription(app core.App) func(e *core.RequestEvent) error {
 	return func(e *core.RequestEvent) error {
 		info, err := e.RequestInfo()
 		if err != nil {
@@ -50,7 +51,7 @@ func deletePushSubscription(app core.App) func(e *core.RequestEvent) error {
 		endpoint := info.Body["endpoint"].(string)
 
 		record, err := app.FindFirstRecordByFilter(
-			PushSubscriptionsCollection,
+			base.PushSubscriptionsCollection,
 			"endpoint = {:endpoint}",
 			dbx.Params{"endpoint": endpoint},
 		)
@@ -58,7 +59,7 @@ func deletePushSubscription(app core.App) func(e *core.RequestEvent) error {
 			app.Logger().Error("failed to find subscription to delete", "error", err, "endpoint", endpoint)
 			return e.BadRequestError("", err)
 		}
-		var sub PushSubscription
+		var sub base.PushSubscription
 		sub.SetProxyRecord(record)
 
 		if sub.User() != e.Auth.Id {

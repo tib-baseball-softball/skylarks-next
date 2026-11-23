@@ -4,12 +4,13 @@ import (
 	"net/http"
 
 	"ganigeorgiev.com/pocketbase/pocketbase/core"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
 )
 
 func GetUserStats() func(event *core.RequestEvent) error {
 	return func(event *core.RequestEvent) error {
 		userID := event.Request.PathValue("user")
-		user, err := event.App.FindRecordById(UserCollection, userID)
+		user, err := event.App.FindRecordById(base.UserCollection, userID)
 		if err != nil {
 			return event.NotFoundError("invalid user provided", err)
 		}

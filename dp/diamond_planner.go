@@ -8,17 +8,19 @@ import (
 	"os"
 	"time"
 
-	"git.berlinskylarks.de/tib-baseball/bsm-go"
-	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/tools/store"
-	"github.com/SherClockHolmes/webpush-go"
-	"github.com/getsentry/sentry-go"
-	sentryhttp "github.com/getsentry/sentry-go/http"
 	"ganigeorgiev.com/pocketbase/pocketbase"
 	"ganigeorgiev.com/pocketbase/pocketbase/apis"
 	"ganigeorgiev.com/pocketbase/pocketbase/core"
 	"ganigeorgiev.com/pocketbase/pocketbase/plugins/migratecmd"
 	"ganigeorgiev.com/pocketbase/pocketbase/tools/hook"
 	"ganigeorgiev.com/pocketbase/pocketbase/tools/osutils"
+	"git.berlinskylarks.de/tib-baseball/bsm-go"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/push"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/tools/store"
+	"github.com/SherClockHolmes/webpush-go"
+	"github.com/getsentry/sentry-go"
+	sentryhttp "github.com/getsentry/sentry-go/http"
 	"github.com/spf13/cobra"
 )
 
@@ -38,7 +40,7 @@ type BaseDiamondPlanner struct {
 	*pocketbase.PocketBase
 }
 
-func NewDiamondPlanner(client bsm.APIClient, pushService PushService) *BaseDiamondPlanner {
+func NewDiamondPlanner(client bsm.APIClient, pushService push.PushService) *BaseDiamondPlanner {
 	dp := &BaseDiamondPlanner{
 		PocketBase: pocketbase.New(),
 	}
@@ -94,11 +96,11 @@ func NewDiamondPlanner(client bsm.APIClient, pushService PushService) *BaseDiamo
 	return dp
 }
 
-func BindDPHooks(app core.App, client bsm.APIClient, pushService PushService) {
+func BindDPHooks(app core.App, client bsm.APIClient, pushService push.PushService) {
 
 	//------------------- Hooks -------------------------//
 
-	app.OnRecordAuthRequest(UserCollection).BindFunc(func(e *core.RecordAuthRequestEvent) error {
+	app.OnRecordAuthRequest(base.UserCollection).BindFunc(func(e *core.RecordAuthRequestEvent) error {
 		err := SetLastLogin(e.App, e.Record)
 		if err != nil {
 			app.Logger().Error(
@@ -109,55 +111,55 @@ func BindDPHooks(app core.App, client bsm.APIClient, pushService PushService) {
 		return e.Next()
 	})
 
-	app.OnRecordAuthWithOAuth2Request(UserCollection).BindFunc(OAuthUpdateUserData)
+	app.OnRecordAuthWithOAuth2Request(base.UserCollection).BindFunc(OAuthUpdateUserData)
 
-	app.OnRecordCreateRequest(UserCollection).BindFunc(ValidateSignupKey)
+	app.OnRecordCreateRequest(base.UserCollection).BindFunc(ValidateSignupKey)
 
-	app.OnRecordAfterCreateSuccess(UserCollection).BindFunc(func(e *core.RecordEvent) error {
+	app.OnRecordAfterCreateSuccess(base.UserCollection).BindFunc(func(e *core.RecordEvent) error {
 		return NotifyAdminsUserCreation(e, pushService)
 	})
 
-	app.OnRecordEnrich(UserCollection).BindFunc(AddUserICalLink)
+	app.OnRecordEnrich(base.UserCollection).BindFunc(AddUserICalLink)
 
-	app.OnRecordUpdateExecute(UserCollection).BindFunc(SetDisplayName)
+	app.OnRecordUpdateExecute(base.UserCollection).BindFunc(SetDisplayName)
 
-	app.OnRecordsListRequest(LeagueGroupsCollection).BindFunc(func(event *core.RecordsListRequestEvent) error {
+	app.OnRecordsListRequest(base.LeagueGroupsCollection).BindFunc(func(event *core.RecordsListRequestEvent) error {
 		return TriggerLeagueImport(event.App, client, event)
 	})
 
-	app.OnRecordCreateRequest(EventsCollection).BindFunc(ValidateEventTimes)
+	app.OnRecordCreateRequest(base.EventsCollection).BindFunc(ValidateEventTimes)
 
-	app.OnRecordUpdateRequest(EventsCollection).BindFunc(ValidateEventTimes)
+	app.OnRecordUpdateRequest(base.EventsCollection).BindFunc(ValidateEventTimes)
 
-	app.OnRecordValidate(EventsCollection).BindFunc(ValidateEvent)
+	app.OnRecordValidate(base.EventsCollection).BindFunc(ValidateEvent)
 
-	app.OnRecordEnrich(EventsCollection).BindFunc(func(event *core.RecordEnrichEvent) error {
+	app.OnRecordEnrich(base.EventsCollection).BindFunc(func(event *core.RecordEnrichEvent) error {
 		return AddEventParticipationData(event.App, event)
 	})
 
-	app.OnRecordEnrich(EventSeriesCollection).BindFunc(AddSeriesState)
+	app.OnRecordEnrich(base.EventSeriesCollection).BindFunc(AddSeriesState)
 
-	app.OnRecordEnrich(ServiceEntryCollection).BindFunc(HideCommunityServiceAdminFields)
+	app.OnRecordEnrich(base.ServiceEntryCollection).BindFunc(HideCommunityServiceAdminFields)
 
-	app.OnRecordCreateRequest(EventSeriesCollection).BindFunc(func(e *core.RecordRequestEvent) error {
+	app.OnRecordCreateRequest(base.EventSeriesCollection).BindFunc(func(e *core.RecordRequestEvent) error {
 		return CreateOrUpdateEventsForSeries(e, CreateEventSeriesMode)
 	})
 
-	app.OnRecordUpdateRequest(EventSeriesCollection).BindFunc(func(e *core.RecordRequestEvent) error {
+	app.OnRecordUpdateRequest(base.EventSeriesCollection).BindFunc(func(e *core.RecordRequestEvent) error {
 		return CreateOrUpdateEventsForSeries(e, UpdateEventSeriesMode)
 	})
 
-	app.OnRecordDelete(EventSeriesCollection).BindFunc(DeleteEventsForSeries)
+	app.OnRecordDelete(base.EventSeriesCollection).BindFunc(DeleteEventsForSeries)
 
-	app.OnRecordEnrich(TeamsCollection).BindFunc(HideTeamSignupKey)
+	app.OnRecordEnrich(base.TeamsCollection).BindFunc(HideTeamSignupKey)
 
 	//------------------- Hooks - Web Push -------------------------//
 
-	app.OnRecordAfterCreateSuccess(AnnouncementsCollection).BindFunc(func(e *core.RecordEvent) error {
+	app.OnRecordAfterCreateSuccess(base.AnnouncementsCollection).BindFunc(func(e *core.RecordEvent) error {
 		return NotifyNewAnnouncement(e, pushService)
 	})
 
-	app.OnRecordAfterCreateSuccess(EventsCollection).BindFunc(func(e *core.RecordEvent) error {
+	app.OnRecordAfterCreateSuccess(base.EventsCollection).BindFunc(func(e *core.RecordEvent) error {
 		return NotifyNewEvent(e, pushService)
 	})
 
@@ -246,9 +248,9 @@ func BindDPHooks(app core.App, client bsm.APIClient, pushService PushService) {
 		pushGroup := se.Router.Group("/api/webpush")
 		pushGroup.Bind(apis.RequireAuth())
 
-		pushGroup.POST("/{user}/notify-me", notifyWithTestPushMessage(pushService, app))
+		pushGroup.POST("/{user}/notify-me", push.NotifyWithTestPushMessage(pushService, app))
 
-		pushGroup.DELETE("/unsubscribe", deletePushSubscription(app))
+		pushGroup.DELETE("/unsubscribe", push.DeletePushSubscription(app))
 
 		return se.Next()
 	})

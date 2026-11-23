@@ -1,14 +1,14 @@
 package migrations
 
 import (
-	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp"
 	"ganigeorgiev.com/pocketbase/pocketbase/core"
 	m "ganigeorgiev.com/pocketbase/pocketbase/migrations"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
 )
 
 func init() {
 	m.Register(func(app core.App) error {
-		collection, err := app.FindCollectionByNameOrId(dp.ParticipationsCollection)
+		collection, err := app.FindCollectionByNameOrId(base.ParticipationsCollection)
 		if err != nil {
 			return err
 		}
@@ -29,7 +29,7 @@ func init() {
 
 		return nil
 	}, func(app core.App) error {
-		collection, err := app.FindCollectionByNameOrId(dp.ParticipationsCollection)
+		collection, err := app.FindCollectionByNameOrId(base.ParticipationsCollection)
 		if err != nil {
 			return err
 		}

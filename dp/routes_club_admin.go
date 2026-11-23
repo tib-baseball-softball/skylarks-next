@@ -10,6 +10,7 @@ import (
 	"ganigeorgiev.com/pocketbase/pocketbase/core"
 	"ganigeorgiev.com/pocketbase/pocketbase/tools/hook"
 	"ganigeorgiev.com/pocketbase/pocketbase/tools/types"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
 )
 
 const ClubAdminAccessMiddlewareId = "clubAdminAccess"
@@ -35,11 +36,11 @@ func requireClubAdminAccess() func(*core.RequestEvent) error {
 			return e.BadRequestError("club ID is required", nil)
 		}
 
-		clubRecord, err := e.App.FindRecordById(ClubsCollection, clubID)
+		clubRecord, err := e.App.FindRecordById(base.ClubsCollection, clubID)
 		if err != nil {
 			return e.NotFoundError("", err)
 		}
-		club := Club{}
+		club := base.Club{}
 		club.SetProxyRecord(clubRecord)
 
 		if slices.Contains(club.Admins(), e.Auth.Id) {
@@ -52,7 +53,7 @@ func requireClubAdminAccess() func(*core.RequestEvent) error {
 
 func GetClubCommunityService() func(event *core.RequestEvent) error {
 	return func(e *core.RequestEvent) error {
-		club := e.Get(EventStoreKeyClub).(Club)
+		club := e.Get(EventStoreKeyClub).(base.Club)
 
 		var season int
 		var err error
@@ -85,7 +86,7 @@ func HandleClubPractices() func(e *core.RequestEvent) error {
 }
 
 func handleClubPractices(e *core.RequestEvent) error {
-	club, ok := e.Get(EventStoreKeyClub).(Club)
+	club, ok := e.Get(EventStoreKeyClub).(base.Club)
 	ctx := &ErrorContext{
 		Key: "local",
 		Values: map[string]any{
@@ -100,7 +101,7 @@ func handleClubPractices(e *core.RequestEvent) error {
 	}
 
 	seriesRecords, err := e.App.FindRecordsByFilter(
-		EventSeriesCollection,
+		base.EventSeriesCollection,
 		"series_start <= @now && series_end >= @now && team.club.id = {:clubID}",
 		"+series_start",
 		0,
@@ -124,10 +125,10 @@ func handleClubPractices(e *core.RequestEvent) error {
 		return e.InternalServerError("", err)
 	}
 
-	var dtos []*PracticeDTO
+	var dtos []*base.PracticeDTO
 
 	for _, record := range seriesRecords {
-		s := &EventSeries{}
+		s := &base.EventSeries{}
 		s.SetProxyRecord(record)
 		dtos = append(dtos, s.ToPracticeDTO(location))
 	}

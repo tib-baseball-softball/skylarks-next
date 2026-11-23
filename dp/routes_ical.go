@@ -10,11 +10,12 @@ import (
 	"strconv"
 	"time"
 
-	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/tools/hash"
-	ics "github.com/arran4/golang-ical"
 	"ganigeorgiev.com/pocketbase/dbx"
 	"ganigeorgiev.com/pocketbase/pocketbase/core"
 	"ganigeorgiev.com/pocketbase/pocketbase/tools/security"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/tools/hash"
+	ics "github.com/arran4/golang-ical"
 )
 
 type NotAuthorizedError struct {
@@ -27,8 +28,8 @@ func (e *NotAuthorizedError) Error() string {
 
 func getUserCalendar(app core.App) func(e *core.RequestEvent) error {
 	return func(e *core.RequestEvent) error {
-		user := &User{}
-		err := FindRecordProxyByID(app, user, e.Request.PathValue("user"))
+		user := &base.User{}
+		err := base.FindRecordProxyByID(app, user, e.Request.PathValue("user"))
 		if err != nil {
 			return e.BadRequestError("No valid user given.", "")
 		}
@@ -65,7 +66,7 @@ func getUserCalendar(app core.App) func(e *core.RequestEvent) error {
 	}
 }
 
-func getUserCalendarEvents(app core.App, user *User, teamID string) ([]*core.Record, error) {
+func getUserCalendarEvents(app core.App, user *base.User, teamID string) ([]*core.Record, error) {
 	var events []*core.Record
 	expressions := []dbx.Expression{}
 
@@ -112,7 +113,7 @@ func getUserCalendarEvents(app core.App, user *User, teamID string) ([]*core.Rec
 	// strftime() requires strings for correct comparisons
 	prevYear := strconv.Itoa(time.Now().AddDate(-1, 0, 0).Year())
 
-	err := app.RecordQuery(EventsCollection).
+	err := app.RecordQuery(base.EventsCollection).
 		AndWhere(dbx.Or(expressions...)).
 		AndWhere(dbx.NewExp("strftime('%Y', starttime) >= {:prevYear}", dbx.Params{"prevYear": prevYear})).
 		All(&events)
@@ -130,7 +131,7 @@ func createICalendarFromEventRecords(events []*core.Record, app core.App) (strin
 	}
 
 	for _, eventRecord := range events {
-		event := &Event{}
+		event := &base.Event{}
 		event.SetProxyRecord(eventRecord)
 
 		calEvent := cal.AddEvent(eventRecord.Id)
@@ -155,14 +156,14 @@ func createICalendarFromEventRecords(events []*core.Record, app core.App) (strin
 			if err != nil {
 				app.Logger().Warn("Failed to parse app URL while preparing event for calendar", "event", event)
 			} else {
-			    url = url.JoinPath(RouteEventDetail(event.Id))
+				url = url.JoinPath(RouteEventDetail(event.Id))
 				calEvent.SetURL(url.String())
 			}
 		}
 
 		locationRecord := event.ExpandedOne("location")
 		if locationRecord != nil {
-			location := &Location{}
+			location := &base.Location{}
 			location.SetProxyRecord(locationRecord)
 
 			calEvent.SetLocation(location.GetCalendarFormatted())

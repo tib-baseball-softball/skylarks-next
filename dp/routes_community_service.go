@@ -7,19 +7,20 @@ import (
 	"strconv"
 
 	"ganigeorgiev.com/pocketbase/pocketbase/core"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
 )
 
 func GetUserCommunityService() func(event *core.RequestEvent) error {
 	return func(event *core.RequestEvent) error {
-		authUser := &User{}
+		authUser := &base.User{}
 		authUser.SetProxyRecord(event.Auth)
 
 		userID := event.Request.PathValue("user")
-		userRecord, err := event.App.FindRecordById(UserCollection, userID)
+		userRecord, err := event.App.FindRecordById(base.UserCollection, userID)
 		if err != nil {
 			return event.NotFoundError("invalid user provided", err)
 		}
-		user := &User{}
+		user := &base.User{}
 		user.SetProxyRecord(userRecord)
 
 		requireUserAccess := RequireUserAccess(user.Record)
@@ -39,10 +40,10 @@ func GetUserCommunityService() func(event *core.RequestEvent) error {
 			return event.BadRequestError("season parameter is required", errors.New("season parameter is required"))
 		}
 
-		var readableClubs []Club
-		clubRecords, err := event.App.FindRecordsByIds(ClubsCollection, user.Clubs())
+		var readableClubs []base.Club
+		clubRecords, err := event.App.FindRecordsByIds(base.ClubsCollection, user.Clubs())
 		for _, clubRecord := range clubRecords {
-			club := Club{}
+			club := base.Club{}
 			club.SetProxyRecord(clubRecord)
 			if slices.Contains(club.Admins(), authUser.Id) || authUser.Id == user.Id {
 				readableClubs = append(readableClubs, club)

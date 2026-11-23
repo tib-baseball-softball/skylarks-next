@@ -3,10 +3,11 @@ package dp
 import (
 	"sync"
 
-	"git.berlinskylarks.de/tib-baseball/bsm-go"
 	"ganigeorgiev.com/pocketbase/dbx"
 	"ganigeorgiev.com/pocketbase/pocketbase/core"
 	"ganigeorgiev.com/pocketbase/pocketbase/tools/types"
+	"git.berlinskylarks.de/tib-baseball/bsm-go"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
 	"github.com/spf13/cast"
 )
 
@@ -36,7 +37,7 @@ func ImportLeagueGroups(app core.App, client bsm.LeagueGroupClient, clubID *stri
 
 	for _, clubRecord := range clubs {
 		wg.Go(func() {
-			club := &Club{}
+			club := &base.Club{}
 			club.SetProxyRecord(clubRecord)
 
 			errorContext := &ErrorContext{
@@ -68,13 +69,13 @@ func ImportLeagueGroups(app core.App, client bsm.LeagueGroupClient, clubID *stri
 	return nil
 }
 
-func createOrUpdateLeagueGroups(app core.App, leagueGroups []bsm.LeagueGroup, club *Club) (err error) {
+func createOrUpdateLeagueGroups(app core.App, leagueGroups []bsm.LeagueGroup, club *base.Club) (err error) {
 	for _, leagueGroup := range leagueGroups {
-		record, err := app.FindFirstRecordByData(LeagueGroupsCollection, "bsm_id", leagueGroup.ID)
+		record, err := app.FindFirstRecordByData(base.LeagueGroupsCollection, "bsm_id", leagueGroup.ID)
 
 		// if not found, it throws an error, so create new record
 		if err != nil {
-			collection, err := app.FindCollectionByNameOrId(LeagueGroupsCollection)
+			collection, err := app.FindCollectionByNameOrId(base.LeagueGroupsCollection)
 			if err != nil {
 				app.Logger().Error("Error getting collection", "error", err)
 				return err
@@ -101,8 +102,8 @@ func createOrUpdateLeagueGroups(app core.App, leagueGroups []bsm.LeagueGroup, cl
 	return
 }
 
-func setLeagueGroupRecordValues(record *core.Record, leagueGroup bsm.LeagueGroup, club *Club) {
-	lg := &LeagueGroup{}
+func setLeagueGroupRecordValues(record *core.Record, leagueGroup bsm.LeagueGroup, club *base.Club) {
+	lg := &base.LeagueGroup{}
 	lg.SetProxyRecord(record)
 
 	lg.SetBSMID(leagueGroup.ID)

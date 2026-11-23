@@ -10,8 +10,8 @@ import (
 	"strconv"
 	"time"
 
-	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp"
 	"ganigeorgiev.com/pocketbase/pocketbase/core"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
 )
 
 type PlayerReactionPayload struct {
@@ -45,8 +45,8 @@ func SendUpdatedPlayerData(e *core.RecordEvent, targetURL string) error {
 	return e.Next()
 }
 
-func sendUpdatedPlayerData(record *core.Record, app dp.LogOnlyApp, targetURL string, identifier string, secret string) error {
-	player := &dp.User{}
+func sendUpdatedPlayerData(record *core.Record, app base.LogOnlyApp, targetURL string, identifier string, secret string) error {
+	player := &base.User{}
 	player.SetProxyRecord(record)
 
 	if player.DisplayOnWebsite() == false {
@@ -87,7 +87,7 @@ func sendUpdatedPlayerData(record *core.Record, app dp.LogOnlyApp, targetURL str
 	// fire-and-forget the update call in a separate goroutine.
 	// if it fails, we don't want to block the user update request.
 	// the database transaction is already guaranteed to be committed at this point.
-	go func(body []byte, app dp.LogOnlyApp) {
+	go func(body []byte, app base.LogOnlyApp) {
 		ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 		defer cancel()
 

@@ -7,6 +7,7 @@ import (
 
 	"ganigeorgiev.com/pocketbase/dbx"
 	"ganigeorgiev.com/pocketbase/pocketbase/core"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
 )
 
 type UserServiceApp interface {
@@ -38,12 +39,12 @@ func getCommunityServiceDataForClub(app core.App, clubID string, season string) 
 			"COALESCE(SUM(serviceentries.minutes), 0) AS total_minutes",
 			"CASE WHEN SUM(serviceentries.minutes) >= clubs.service_requirement THEN 1 ELSE 0 END AS target_met",
 		).
-		From(UserCollection).
-		LeftJoin(ServiceEntryCollection, dbx.NewExp(
+		From(base.UserCollection).
+		LeftJoin(base.ServiceEntryCollection, dbx.NewExp(
 			"users.id = serviceentries.member AND strftime('%Y', serviceentries.service_date) = {:season} AND serviceentries.club = {:clubID}",
 			seasonParam, clubParams,
 		)).
-		LeftJoin(ClubsCollection, dbx.NewExp("clubs.id = {:clubID}", clubParams)).
+		LeftJoin(base.ClubsCollection, dbx.NewExp("clubs.id = {:clubID}", clubParams)).
 		AndWhere(dbx.NewExp("strftime('%Y', users.created) <= {:season}", seasonParam)).
 		AndWhere(dbx.Exists(dbx.NewExp("SELECT 1 FROM json_each(users.club) WHERE value = {:clubID}", dbx.Params{"clubID": clubID}))).
 		GroupBy("users.id", "users.email", "clubs.service_requirement")
@@ -56,18 +57,18 @@ func getCommunityServiceDataForClub(app core.App, clubID string, season string) 
 }
 
 type UserCommunityServiceItem struct {
-	Club           Club           `json:"club"`
+	Club           base.Club           `json:"club"`
 	CurrentMinutes int            `json:"current_minutes"`
-	Entries        []ServiceEntry `json:"entries"`
+	Entries        []base.ServiceEntry `json:"entries"`
 }
 
 type UserCommunityServiceData struct {
-	User   User                       `json:"user"`
+	User   base.User                       `json:"user"`
 	Season int                        `json:"season"`
 	Items  []UserCommunityServiceItem `json:"items"`
 }
 
-func getCommunityServiceDataForUser(app UserServiceApp, authID string, user User, season int, clubs []Club) (UserCommunityServiceData, error) {
+func getCommunityServiceDataForUser(app UserServiceApp, authID string, user base.User, season int, clubs []base.Club) (UserCommunityServiceData, error) {
 	serviceData := UserCommunityServiceData{
 		User:   user,
 		Season: season,
@@ -84,7 +85,7 @@ func getCommunityServiceDataForUser(app UserServiceApp, authID string, user User
 			CurrentMinutes: 0,
 		}
 		records, err := app.FindRecordsByFilter(
-			ServiceEntryCollection,
+			base.ServiceEntryCollection,
 			"club = {:clubID} && member = {:userID} && service_date >= {:start} && service_date <= {:end}",
 			"-service_date",
 			0,
@@ -104,9 +105,9 @@ func getCommunityServiceDataForUser(app UserServiceApp, authID string, user User
 			return serviceData, fmt.Errorf("failed to expand: %v", errs)
 		}
 
-		item.Entries = make([]ServiceEntry, len(records))
+		item.Entries = make([]base.ServiceEntry, len(records))
 		for i, record := range records {
-			entry := ServiceEntry{}
+			entry := base.ServiceEntry{}
 			entry.SetProxyRecord(record)
 			if !slices.Contains(club.Admins(), authID) {
 				entry.HideAdminFields()

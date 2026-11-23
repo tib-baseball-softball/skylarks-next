@@ -7,12 +7,13 @@ import (
 
 	"ganigeorgiev.com/pocketbase/dbx"
 	"ganigeorgiev.com/pocketbase/pocketbase/core"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
 )
 
 func AddEventParticipationData(app core.App, event *core.RecordEnrichEvent) error {
 	event.Record.WithCustomData(true)
 
-	eventItem := &Event{}
+	eventItem := &base.Event{}
 	eventItem.SetProxyRecord(event.Record)
 
 	err := enrichParticipationData(app, event.RequestInfo.Auth, eventItem)
@@ -24,7 +25,7 @@ func AddEventParticipationData(app core.App, event *core.RecordEnrichEvent) erro
 	return event.Next()
 }
 
-func enrichParticipationData(app core.App, user *core.Record, event *Event) error {
+func enrichParticipationData(app core.App, user *core.Record, event *base.Event) error {
 	err := addUserParticipation(app, user, event)
 	if err != nil {
 		return err
@@ -38,9 +39,9 @@ func enrichParticipationData(app core.App, user *core.Record, event *Event) erro
 	return nil
 }
 
-func addParticipationsByType(app core.App, event *Event) error {
+func addParticipationsByType(app core.App, event *base.Event) error {
 	participations, err := app.FindRecordsByFilter(
-		ParticipationsCollection,
+		base.ParticipationsCollection,
 		"event = {:eventID}",
 		"",
 		0,
@@ -60,7 +61,7 @@ func addParticipationsByType(app core.App, event *Event) error {
 		app.Logger().Error("EnrichParticipationData error", "error", err, "event", event, "team", event.Team())
 	}
 
-	participationsByType := ParticipationsByType{
+	participationsByType := base.ParticipationsByType{
 		In:          []*core.Record{},
 		Out:         []*core.Record{},
 		Maybe:       []*core.Record{},
@@ -86,7 +87,7 @@ func addParticipationsByType(app core.App, event *Event) error {
 	return nil
 }
 
-func addUserParticipation(app core.App, user *core.Record, event *Event) error {
+func addUserParticipation(app core.App, user *core.Record, event *base.Event) error {
 	userParticipation, err := app.FindFirstRecordByFilter(
 		"participations",
 		"user = {:userID} && event = {:eventID}",
@@ -106,8 +107,8 @@ func addUserParticipation(app core.App, user *core.Record, event *Event) error {
 	return nil
 }
 
-func getUserDTOsWithoutParticipations(app core.App, eventID string, teamID string) ([]UserParticipationDTO, error) {
-	participationDTOS := []UserParticipationDTO{}
+func getUserDTOsWithoutParticipations(app core.App, eventID string, teamID string) ([]base.UserParticipationDTO, error) {
+	participationDTOS := []base.UserParticipationDTO{}
 
 	err := app.DB().
 		NewQuery(`

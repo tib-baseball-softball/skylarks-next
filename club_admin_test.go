@@ -4,17 +4,17 @@ import (
 	"net/http"
 	"testing"
 
-	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp"
 	"ganigeorgiev.com/pocketbase/pocketbase/tests"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
 )
 
 func TestPracticeExport(t *testing.T) {
-	validToken, err := generateToken(dp.UserCollection, bClubAdmin.Email)
+	validToken, err := generateToken(base.UserCollection, bClubAdmin.Email)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	invalidToken, err := generateToken(dp.UserCollection, bertaBeaverAdmin.Email)
+	invalidToken, err := generateToken(base.UserCollection, bertaBeaverAdmin.Email)
 	if err != nil {
 		t.Fatal(err)
 	}

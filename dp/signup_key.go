@@ -3,6 +3,7 @@ package dp
 import (
 	validation "ganigeorgiev.com/pocketbase/ozzo-validation/v4"
 	"ganigeorgiev.com/pocketbase/pocketbase/core"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
 )
 
 // ValidateSignupKey checks that a valid signup key is used on user creation.
@@ -14,7 +15,7 @@ func ValidateSignupKey(e *core.RecordRequestEvent) error {
 		return e.Next()
 	}
 
-	user := &User{}
+	user := &base.User{}
 	user.SetProxyRecord(e.Record)
 
 	teams, err := getValidSignupKeys(e.App)

@@ -4,6 +4,7 @@ import (
 	"strconv"
 
 	"ganigeorgiev.com/pocketbase/pocketbase/core"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
 )
 
 // LoadUserStats gets participation stats by event type and participation state
@@ -34,7 +35,7 @@ func LoadUserStats(user *core.Record, requestEvent *core.RequestEvent) (Personal
 	}
 
 	if eventTypeParam != "" {
-		eventType, err := ParseEventType(eventTypeParam)
+		eventType, err := base.ParseEventType(eventTypeParam)
 		if err != nil {
 			requestEvent.App.Logger().Error("failed to parse eventType: %v", "error", err)
 			return statsItem, err
@@ -64,17 +65,17 @@ func LoadUserStats(user *core.Record, requestEvent *core.RequestEvent) (Personal
 	}
 
 	totalsGames := AttendanceTotal{
-		Type:     EventTypeGame,
+		Type:     base.EventTypeGame,
 		Attended: 0,
 		Total:    eventCounts.Games,
 	}
 	totalsPractice := AttendanceTotal{
-		Type:     EventTypePractice,
+		Type:     base.EventTypePractice,
 		Attended: 0,
 		Total:    eventCounts.Practices,
 	}
 	totalsMisc := AttendanceTotal{
-		Type:     EventTypeMisc,
+		Type:     base.EventTypeMisc,
 		Attended: 0,
 		Total:    eventCounts.Misc,
 	}
@@ -86,19 +87,19 @@ func LoadUserStats(user *core.Record, requestEvent *core.RequestEvent) (Personal
 	// query can only get the totals for which participation data exists,
 	// add raw possible totals from the previous query
 	for i, participation := range participations {
-		eventType, err := ParseEventType(participation.Type)
+		eventType, err := base.ParseEventType(participation.Type)
 		if err != nil {
 			requestEvent.App.Logger().Error("failed to parse eventType: %v", "error", err)
 			return statsItem, err
 		}
 		switch eventType {
-		case EventTypeGame:
+		case base.EventTypeGame:
 			participations[i].TotalCount = eventCounts.Games
 			totalsGames.Attended = participation.InCount
-		case EventTypePractice:
+		case base.EventTypePractice:
 			participations[i].TotalCount = eventCounts.Practices
 			totalsPractice.Attended = participation.InCount
-		case EventTypeMisc:
+		case base.EventTypeMisc:
 			participations[i].TotalCount = eventCounts.Misc
 			totalsMisc.Attended = participation.InCount
 		}

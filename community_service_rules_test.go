@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp"
 	"ganigeorgiev.com/pocketbase/pocketbase/tests"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
 )
 
 type ServiceEntryData struct {
@@ -35,27 +35,27 @@ var serviceEntryDataAliceForClubAAA = ServiceEntryData{
 }
 
 func TestServiceEntryRules(t *testing.T) {
-	aliceToken, err := generateToken(dp.UserCollection, alice.Email)
+	aliceToken, err := generateToken(base.UserCollection, alice.Email)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	bobToken, err := generateToken(dp.UserCollection, bob.Email)
+	bobToken, err := generateToken(base.UserCollection, bob.Email)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	aClubAdminToken, err := generateToken(dp.UserCollection, aClubAdmin.Email)
+	aClubAdminToken, err := generateToken(base.UserCollection, aClubAdmin.Email)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	bClubAdminToken, err := generateToken(dp.UserCollection, bClubAdmin.Email)
+	bClubAdminToken, err := generateToken(base.UserCollection, bClubAdmin.Email)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	andreaToken, err := generateToken(dp.UserCollection, andreaAntelopeAdmin.Email)
+	andreaToken, err := generateToken(base.UserCollection, andreaAntelopeAdmin.Email)
 	if err != nil {
 		t.Fatal(err)
 	}

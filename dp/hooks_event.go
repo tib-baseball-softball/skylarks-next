@@ -8,13 +8,15 @@ import (
 	validation "ganigeorgiev.com/pocketbase/ozzo-validation/v4"
 	"ganigeorgiev.com/pocketbase/pocketbase/core"
 	"ganigeorgiev.com/pocketbase/pocketbase/tools/types"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/push"
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
 )
 
 // ValidateEventTimes ensures that event times are valid and within the expected range.
 func ValidateEventTimes(e *core.RecordRequestEvent) error {
-	event := &Event{}
+	event := &base.Event{}
 	event.SetProxyRecord(e.Record)
 
 	startTime := event.StartTime()
@@ -39,7 +41,7 @@ func ValidateEventTimes(e *core.RecordRequestEvent) error {
 }
 
 func ValidateEvent(e *core.RecordEvent) error {
-	event := &Event{}
+	event := &base.Event{}
 	event.SetProxyRecord(e.Record)
 
 	eventClubID := event.Club()
@@ -80,7 +82,7 @@ func ValidateEvent(e *core.RecordEvent) error {
 		return errors.New("Couldn't validate event")
 	}
 
-	primaryTeam := &Team{}
+	primaryTeam := &base.Team{}
 	primaryTeamRecord := event.ExpandedOne("team")
 	if primaryTeamRecord != nil {
 		primaryTeam.SetProxyRecord(primaryTeamRecord)
@@ -88,7 +90,7 @@ func ValidateEvent(e *core.RecordEvent) error {
 
 	additionalTeamRecords := event.ExpandedAll("additional_teams")
 	for _, record := range additionalTeamRecords {
-		team := &Team{}
+		team := &base.Team{}
 		team.SetProxyRecord(record)
 
 		if primaryTeam.Club() != team.Club() {
@@ -102,8 +104,8 @@ func ValidateEvent(e *core.RecordEvent) error {
 }
 
 // NotifyNewEvent sends a push notification to all subscribed team members when a new event is created.
-func NotifyNewEvent(e *core.RecordEvent, ps PushService) error {
-	event := &Event{}
+func NotifyNewEvent(e *core.RecordEvent, ps push.PushService) error {
+	event := &base.Event{}
 	event.SetProxyRecord(e.Record)
 
 	// if an event is part of a series, don't flood users with notifications as the series will handle this
@@ -116,15 +118,15 @@ func NotifyNewEvent(e *core.RecordEvent, ps PushService) error {
 		return e.Next()
 	}
 
-	team := &Team{}
-	teamRecord, err := e.App.FindRecordById(TeamsCollection, event.Team())
+	team := &base.Team{}
+	teamRecord, err := e.App.FindRecordById(base.TeamsCollection, event.Team())
 	if err != nil {
 		e.App.Logger().Warn("Failed to load team record for event, data corrupted", "teamID", event.Team(), "error", err, "file", "hooks_event.go")
 		return e.Next()
 	}
 	team.SetProxyRecord(teamRecord)
 
-	subs, err := GetSubscriptionsForTeamOrClub(team.Id, TeamsCollection, e.App)
+	subs, err := push.GetSubscriptionsForTeamOrClub(team.Id, base.TeamsCollection, e.App)
 	if err != nil {
 		e.App.Logger().Warn("Error fetching subscriptions", "error", err, "teamID", teamRecord.Id, "file", "hooks_event.go")
 		return e.Next()
@@ -146,19 +148,19 @@ func NotifyNewEvent(e *core.RecordEvent, ps PushService) error {
 
 	locationRecord := event.ExpandedOne("location")
 	if locationRecord != nil {
-		location := &Location{}
+		location := &base.Location{}
 		location.SetProxyRecord(locationRecord)
 		messageBody += " at " + location.Name() + " (" + location.AddressAddon() + ")"
 	}
 
 	for _, sub := range subs {
-		msg := &PushMessage{
+		msg := &push.PushMessage{
 			Title: "New Event in " + team.Name(),
 			Body:  messageBody,
 			Tag:   "team_new_event",
-			Actions: []PushActionData{
+			Actions: []push.PushActionData{
 				{
-					Action: PushActionLink,
+					Action: push.PushActionLink,
 					Title:  "Go to Event",
 					Type:   "button",
 				},

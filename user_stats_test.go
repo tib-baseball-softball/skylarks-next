@@ -4,17 +4,17 @@ import (
 	"net/http"
 	"testing"
 
-	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp"
 	"ganigeorgiev.com/pocketbase/pocketbase/tests"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
 )
 
 func TestGetUserStatsEndpoint(t *testing.T) {
-	validToken, err := generateToken(dp.UserCollection, "karltestmichel@example.com")
+	validToken, err := generateToken(base.UserCollection, "karltestmichel@example.com")
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	invalidToken, err := generateToken(dp.UserCollection, "otheruser@example.com")
+	invalidToken, err := generateToken(base.UserCollection, "otheruser@example.com")
 	if err != nil {
 		t.Fatal(err)
 	}

@@ -1,4 +1,4 @@
-package dp
+package base
 
 import (
 	"container/list"
@@ -213,7 +213,7 @@ func (s *EventSeries) ToPracticeDTO(loc *time.Location) *PracticeDTO {
 }
 
 // findEventRecordsForSeries fetches all events associated with a given eventSeries.
-func findEventRecordsForSeries(app core.App, eventSeries *EventSeries) (events []*Event, err error) {
+func FindEventRecordsForSeries(app core.App, eventSeries *EventSeries) (events []*Event, err error) {
 	err = app.RecordQuery(EventsCollection).
 		AndWhere(dbx.NewExp("series = {:seriesID}", dbx.Params{"seriesID": eventSeries.Id})).
 		OrderBy("starttime ASC").
@@ -235,7 +235,7 @@ func findEventRecordsForSeries(app core.App, eventSeries *EventSeries) (events [
 // records needs to be already ordered.
 //
 // list will always point to a non-nil value unless an error occurs.
-func createEventSeriesLinkedListFromSlice(records []*Event) (*list.List, error) {
+func CreateEventSeriesLinkedListFromSlice(records []*Event) (*list.List, error) {
 	list := &list.List{}
 	list.Init()
 

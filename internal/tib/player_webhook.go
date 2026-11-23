@@ -6,9 +6,9 @@ import (
 	"net/http"
 	"os"
 
-	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp"
 	"ganigeorgiev.com/pocketbase/dbx"
 	"ganigeorgiev.com/pocketbase/pocketbase/core"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
 )
 
 type PlayerChangedMessage struct {
@@ -46,7 +46,7 @@ func HandlePlayerChangedMessage(app core.App) func(e *core.RequestEvent) error {
 		}
 
 		record, err := app.FindFirstRecordByFilter(
-			dp.UserCollection,
+			base.UserCollection,
 			"first_name = {:firstName} && last_name = {:lastName}",
 			dbx.Params{"firstName": message.FirstName, "lastName": message.LastName},
 		)
@@ -55,7 +55,7 @@ func HandlePlayerChangedMessage(app core.App) func(e *core.RequestEvent) error {
 			return e.JSON(http.StatusNotFound, "Player not found.")
 		}
 
-		player := &dp.User{}
+		player := &base.User{}
 		player.SetProxyRecord(record)
 
 		if player.BSMID() != 0 {

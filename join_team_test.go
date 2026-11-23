@@ -5,15 +5,15 @@ import (
 	"strings"
 	"testing"
 
-	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp"
 	"ganigeorgiev.com/pocketbase/pocketbase/tests"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
 )
 
 func TestJoinTeam_Integration(t *testing.T) {
 	testApp := setupTestApp(t)
 	defer testApp.Cleanup()
 
-	userToken, err := generateToken(dp.UserCollection, alice.Email)
+	userToken, err := generateToken(base.UserCollection, alice.Email)
 	if err != nil {
 		t.Fatal(err)
 	}

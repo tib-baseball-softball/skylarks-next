@@ -10,8 +10,8 @@ import (
 	"testing"
 	"time"
 
-	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp"
 	"ganigeorgiev.com/pocketbase/pocketbase/core"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
 )
 
 type mockLogOnlyApp struct{ logger *slog.Logger }
@@ -19,9 +19,9 @@ type mockLogOnlyApp struct{ logger *slog.Logger }
 func (m *mockLogOnlyApp) Logger() *slog.Logger { return m.logger }
 
 func buildTestRecord() *core.Record {
-	collection := core.NewAuthCollection(dp.UserCollection, "usersColTest")
+	collection := core.NewAuthCollection(base.UserCollection, "usersColTest")
 	record := core.NewRecord(collection)
-	player := &dp.User{}
+	player := &base.User{}
 	player.SetProxyRecord(record)
 
 	player.Id = "user123"

@@ -1,19 +1,21 @@
 package dp
 
+import "git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
+
 type PersonalAttendanceStatsItem struct {
 	Season              int                          `json:"season"`
 	TotalPossibleEvents int                          `json:"totalPossibleEvents"`
 	AttendanceTotals    []AttendanceTotal            `json:"attendanceTotals"`
 	ParticipationTotals []ParticipationTotal         `json:"participationTotals"`
-	Type                EventType                    `json:"type"`
+	Type                base.EventType               `json:"type"`
 	Values              []ParticipationStatsByPerson `json:"values"`
 	TeamName            string                       `json:"teamName"`
 }
 
 type AttendanceTotal struct {
-	Type     EventType `json:"type"`
-	Attended int       `json:"attended"`
-	Total    int       `json:"total"`
+	Type     base.EventType `json:"type"`
+	Attended int            `json:"attended"`
+	Total    int            `json:"total"`
 }
 
 type ParticipationTotal struct {

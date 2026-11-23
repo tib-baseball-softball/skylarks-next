@@ -7,6 +7,7 @@ import (
 	"ganigeorgiev.com/pocketbase/pocketbase/core"
 	"ganigeorgiev.com/pocketbase/pocketbase/tests"
 	"ganigeorgiev.com/pocketbase/pocketbase/tools/types"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
 )
 
 // helper that must never fail inside the test body
@@ -25,7 +26,7 @@ func mustParseDateTime(t *testing.T, tm time.Time) types.DateTime {
 func prepareEventsCollection(t *testing.T, app *tests.TestApp) {
 	t.Helper()
 
-	coll := core.NewBaseCollection(EventsCollection)
+	coll := core.NewBaseCollection(base.EventsCollection)
 
 	coll.Fields.Add(&core.TextField{Name: "title"})
 	coll.Fields.Add(&core.TextField{Name: "desc"})
@@ -51,12 +52,12 @@ func buildSeriesRecord(
 	start, end time.Time,
 	intervalDays int,
 	durationMinutes int,
-) *EventSeries {
+) *base.EventSeries {
 	t.Helper()
 
-	seriesColl := core.NewBaseCollection(EventSeriesCollection)
+	seriesColl := core.NewBaseCollection(base.EventSeriesCollection)
 	record := core.NewRecord(seriesColl)
-	series := &EventSeries{}
+	series := &base.EventSeries{}
 	series.SetProxyRecord(record)
 
 	series.SetTitle(title)

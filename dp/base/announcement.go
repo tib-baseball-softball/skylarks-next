@@ -1,4 +1,4 @@
-package dp
+package base
 
 import "ganigeorgiev.com/pocketbase/pocketbase/core"
 

@@ -5,9 +5,10 @@ import (
 	"fmt"
 	"time"
 
-	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/tools/security"
 	"ganigeorgiev.com/pocketbase/pocketbase/core"
 	"ganigeorgiev.com/pocketbase/pocketbase/tools/types"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/tools/security"
 )
 
 type EventSeriesMode string
@@ -57,10 +58,10 @@ func CreateOrUpdateEventsForSeries(e *core.RecordRequestEvent, mode EventSeriesM
 
 // DeleteEventsForSeries deletes all events associated with a given event series record.
 func DeleteEventsForSeries(e *core.RecordEvent) error {
-	eventSeries := &EventSeries{}
+	eventSeries := &base.EventSeries{}
 	eventSeries.SetProxyRecord(e.Record)
 
-	eventsToBeDeleted, err := findEventRecordsForSeries(e.App, eventSeries)
+	eventsToBeDeleted, err := base.FindEventRecordsForSeries(e.App, eventSeries)
 	if err != nil {
 		return err
 	}
@@ -80,9 +81,9 @@ func DeleteEventsForSeries(e *core.RecordEvent) error {
 }
 
 // generateSeriesEvents contains the main logic to handle single events belonging to a series.
-func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMode, action EventSeriesAction) ([]*Event, error) {
-	var events []*Event
-	eventSeries := &EventSeries{}
+func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMode, action EventSeriesAction) ([]*base.Event, error) {
+	var events []*base.Event
+	eventSeries := &base.EventSeries{}
 	eventSeries.SetProxyRecord(record)
 
 	location, err := LoadAppTimeZone()
@@ -99,7 +100,7 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 		return nil, fmt.Errorf("series start date is after series end date")
 	}
 
-	eventCollection, err := app.FindCollectionByNameOrId(EventsCollection)
+	eventCollection, err := app.FindCollectionByNameOrId(base.EventsCollection)
 	if err != nil {
 		return nil, err
 	}
@@ -112,17 +113,17 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 		},
 	}
 
-	existingEvents := []*Event{}
+	existingEvents := []*base.Event{}
 
 	if mode == UpdateEventSeriesMode {
-		existingEvents, err = findEventRecordsForSeries(app, eventSeries)
+		existingEvents, err = base.FindEventRecordsForSeries(app, eventSeries)
 		if err != nil {
 			LogErrorInternalExternal(app, err, errorContext, nil)
 			return nil, err
 		}
 	}
 
-	eventLinkedList, err := createEventSeriesLinkedListFromSlice(existingEvents)
+	eventLinkedList, err := base.CreateEventSeriesLinkedListFromSlice(existingEvents)
 	if err != nil {
 		LogErrorInternalExternal(app, err, errorContext, nil)
 		return nil, err
@@ -141,7 +142,7 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 			eventEnd := currentDate.Add(time.Duration(eventSeries.Duration()) * time.Minute)
 			eventMeet := currentDate.Add(time.Duration(eventSeries.Meet()) * time.Minute * -1)
 
-			event := &Event{}
+			event := &base.Event{}
 			event.SetProxyRecord(core.NewRecord(eventCollection))
 
 			setValuesForSeriesEvent(event, eventMeet, eventStart, eventEnd, eventSeries)
@@ -156,19 +157,19 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 		}
 	case UpdateEventSeriesMode:
 		// available because the hook runs before record persistence
-		existingSeries := &EventSeries{}
-		err = FindRecordProxyByID(app, existingSeries, eventSeries.Id)
+		existingSeries := &base.EventSeries{}
+		err = base.FindRecordProxyByID(app, existingSeries, eventSeries.Id)
 		if err != nil {
 			return nil, fmt.Errorf("failed to find existing series: %w", err)
 		}
 
-		eventsToDelete := make(map[string]*Event)
+		eventsToDelete := make(map[string]*base.Event)
 
 		for element := eventLinkedList.Front(); element != nil; element = element.Next() {
 			app.Logger().Debug("processing event", "element", element)
 
 			// process the event for this loop
-			event, ok := element.Value.(*Event)
+			event, ok := element.Value.(*base.Event)
 			if !ok {
 				// this really should not happen, but better be safe than sorry
 				err = fmt.Errorf("data corrupted: event %v is not an Event pointer", element.Value)
@@ -208,7 +209,7 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 			if element.Next() == nil && currentDate.Before(endDateSeries) {
 				app.Logger().Debug("appending new event to extend series", "currentDate", currentDate, "endDateSeries", endDateSeries)
 
-				event := &Event{}
+				event := &base.Event{}
 				event.SetProxyRecord(core.NewRecord(eventCollection))
 				eventLinkedList.InsertAfter(event, element)
 			}
@@ -223,7 +224,7 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 			}
 		}
 	}
-	events, err = EventSeriesLinkedListToSlice(eventLinkedList)
+	events, err = base.EventSeriesLinkedListToSlice(eventLinkedList)
 	if err != nil {
 		LogErrorInternalExternal(app, err, errorContext, nil)
 	}
@@ -233,11 +234,11 @@ func generateSeriesEvents(app core.App, record *core.Record, mode EventSeriesMod
 }
 
 func setValuesForSeriesEvent(
-	event *Event,
+	event *base.Event,
 	eventMeet types.DateTime,
 	eventStart types.DateTime,
 	eventEnd types.DateTime,
-	eventSeries *EventSeries,
+	eventSeries *base.EventSeries,
 ) {
 	if event.Id == "" {
 		event.Id = security.CreatePocketBaseIDString()
@@ -254,7 +255,7 @@ func setValuesForSeriesEvent(
 	event.SetDesc(eventSeries.Desc())
 	event.SetLocation(eventSeries.Location())
 	event.SetSeries(eventSeries.Id)
-	event.SetType(EventTypePractice)
+	event.SetType(base.EventTypePractice)
 
 }
 
@@ -268,7 +269,7 @@ func AddSeriesState(e *core.RecordEnrichEvent) error {
 // addSeriesState sets the state of the event series based on the current date
 func addSeriesState(record *core.Record) {
 	record.WithCustomData(true)
-	eventSeries := &EventSeries{}
+	eventSeries := &base.EventSeries{}
 	eventSeries.SetProxyRecord(record)
 
 	eventSeries.SetState(eventSeries.DetermineState())

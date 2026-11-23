@@ -7,17 +7,19 @@ import (
 	"os"
 	"time"
 
-	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/tools/hash"
 	"ganigeorgiev.com/pocketbase/dbx"
 	"ganigeorgiev.com/pocketbase/pocketbase/core"
 	"ganigeorgiev.com/pocketbase/pocketbase/tools/mailer"
 	"ganigeorgiev.com/pocketbase/pocketbase/tools/template"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/push"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/tools/hash"
 	"github.com/spf13/cast"
 )
 
 // NotifyAdminsUserCreation is a hook that handles push notifications to club admins when a new user is created
 // as well as email notifications to superusers.
-func NotifyAdminsUserCreation(e *core.RecordEvent, ps PushService) error {
+func NotifyAdminsUserCreation(e *core.RecordEvent, ps push.PushService) error {
 	err := notifyAdminsUserCreation(e.Record, e.App, ps)
 	if err != nil {
 		e.App.Logger().Warn(err.Error())
@@ -33,7 +35,7 @@ func sendSuperUserNotificationForNewUsers(record *core.Record, app core.App) {
 		ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 		defer cancel()
 
-		user := &User{}
+		user := &base.User{}
 		user.SetProxyRecord(record)
 
 		superusers, err := app.FindAllRecords(core.CollectionNameSuperusers)
@@ -93,8 +95,8 @@ func sendSuperUserNotificationForNewUsers(record *core.Record, app core.App) {
 }
 
 // notifyAdminsUserCreation sends a push notification to club admins when a new user is created.
-func notifyAdminsUserCreation(record *core.Record, app core.App, ps PushService) error {
-	user := &User{}
+func notifyAdminsUserCreation(record *core.Record, app core.App, ps push.PushService) error {
+	user := &base.User{}
 	user.SetProxyRecord(record)
 
 	ids := make([]any, len(user.Clubs()))
@@ -102,8 +104,8 @@ func notifyAdminsUserCreation(record *core.Record, app core.App, ps PushService)
 		ids[i] = id
 	}
 
-	var clubs []Club
-	err := app.RecordQuery(ClubsCollection).
+	var clubs []base.Club
+	err := app.RecordQuery(base.ClubsCollection).
 		AndWhere(dbx.In("id", ids...)).
 		All(&clubs)
 	if err != nil {
@@ -123,13 +125,13 @@ func notifyAdminsUserCreation(record *core.Record, app core.App, ps PushService)
 		}
 	}
 
-	subs, err := GetSubscriptionsForUserIDs(adminIDs, app)
+	subs, err := push.GetSubscriptionsForUserIDs(adminIDs, app)
 	if err != nil {
 		app.Logger().Warn("Could not get subscriptions for users", "userIDs", adminIDs, "error", err)
 		return err
 	}
 
-	msg := &PushMessage{
+	msg := &push.PushMessage{
 		Title: "New User Created in Diamond Planner",
 		Body:  fmt.Sprintf("A new user has been created for your club: %s %s.", user.FirstName(), user.LastName()),
 		Tag:   "user_created",
@@ -147,14 +149,14 @@ func notifyAdminsUserCreation(record *core.Record, app core.App, ps PushService)
 }
 
 // OAuthUpdateUserData updates user record with information found in the OAuth2 response.
-// 
+//
 // This could also be used to validate the signup key, but does not do that at the moment
 // (see generic record creation hook that also works for password auth).
 func OAuthUpdateUserData(e *core.RecordAuthWithOAuth2RequestEvent) error {
 	if e.Record == nil || e.OAuth2User == nil {
 		return e.Next()
 	}
-	user := &User{}
+	user := &base.User{}
 	user.SetProxyRecord(e.Record)
 
 	rawUser := e.OAuth2User.RawUser
@@ -177,10 +179,10 @@ func OAuthUpdateUserData(e *core.RecordAuthWithOAuth2RequestEvent) error {
 }
 
 // SetDisplayName sets the display name for the user if it is not already set.
-// 
+//
 // Default display name format: first name + first letter of last name + dot
 func SetDisplayName(e *core.RecordEvent) error {
-	user := &User{}
+	user := &base.User{}
 	user.SetProxyRecord(e.Record)
 
 	if user.DisplayName() == "" {
@@ -192,7 +194,7 @@ func SetDisplayName(e *core.RecordEvent) error {
 
 // AddUserICalLink adds the user's custom iCal link to the JSON response.
 func AddUserICalLink(e *core.RecordEnrichEvent) error {
-	user := &User{}
+	user := &base.User{}
 	user.SetProxyRecord(e.Record)
 
 	auth := e.RequestInfo.Auth

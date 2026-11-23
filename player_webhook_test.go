@@ -6,10 +6,10 @@ import (
 	"strings"
 	"testing"
 
-	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp"
-	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/internal/tib"
 	"ganigeorgiev.com/pocketbase/pocketbase/core"
 	"ganigeorgiev.com/pocketbase/pocketbase/tests"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/internal/tib"
 )
 
 // Full integration scenarios inferred from the webhook handler.
@@ -160,11 +160,11 @@ func TestWebhookEndpoint_IntegrationScenarios(t *testing.T) {
 				_ = os.Setenv("PLAYER_CHANGE_WEBHOOK_SECRET", secret)
 			},
 			AfterTestFunc: func(t testing.TB, app *tests.TestApp, res *http.Response) {
-				record, err := app.FindAuthRecordByEmail(dp.UserCollection, "alexsample@example.com")
+				record, err := app.FindAuthRecordByEmail(base.UserCollection, "alexsample@example.com")
 				if err != nil {
 					t.Fatalf("Could not find user %s", "alexsample@example.com")
 				}
-				player := &dp.User{}
+				player := &base.User{}
 				player.SetProxyRecord(record)
 
 				player.SetBSMID(0)

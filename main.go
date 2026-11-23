@@ -5,11 +5,13 @@ import (
 	"os"
 	_ "time/tzdata"
 
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
 	"git.berlinskylarks.de/tib-baseball/bsm-go"
 	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/push"
 	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/internal/tib"
 	_ "git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/migrations"
-	"ganigeorgiev.com/pocketbase/pocketbase/core"
 	"github.com/subosito/gotenv"
 )
 
@@ -31,7 +33,7 @@ func init() {
 
 func main() {
 	client := bsm.NewAPIClient()
-	pushService := dp.NewPushService()
+	pushService := push.NewPushService()
 
 	app := dp.NewDiamondPlanner(client, pushService)
 
@@ -48,11 +50,11 @@ func bindTiBHooks(app core.App) {
 
 	//------------------- Hooks -------------------------//
 
-	app.OnRecordAfterCreateSuccess(dp.UserCollection).BindFunc(func(e *core.RecordEvent) error {
+	app.OnRecordAfterCreateSuccess(base.UserCollection).BindFunc(func(e *core.RecordEvent) error {
 		return tib.SendUpdatedPlayerData(e, os.Getenv("PUBLIC_TYPO3_URL"))
 	})
 
-	app.OnRecordAfterUpdateSuccess(dp.UserCollection).BindFunc(func(e *core.RecordEvent) error {
+	app.OnRecordAfterUpdateSuccess(base.UserCollection).BindFunc(func(e *core.RecordEvent) error {
 		return tib.SendUpdatedPlayerData(e, os.Getenv("PUBLIC_TYPO3_URL"))
 	})
 

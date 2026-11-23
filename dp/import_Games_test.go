@@ -6,9 +6,10 @@ import (
 	"log/slog"
 	"testing"
 
-	"git.berlinskylarks.de/tib-baseball/bsm-go"
 	"ganigeorgiev.com/pocketbase/dbx"
 	"ganigeorgiev.com/pocketbase/pocketbase/core"
+	"git.berlinskylarks.de/tib-baseball/bsm-go"
+	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/base"
 )
 
 // MockApp implements GameImportServiceApp for tests.
@@ -50,7 +51,7 @@ func TestCreateOrUpdateField_NewLocation(t *testing.T) {
 			return nil, errors.New("not found")
 		},
 		findCollectionByNameOrIdFunc: func(_ string) (*core.Collection, error) {
-			collection := core.NewCollection("möp", LocationCollection)
+			collection := core.NewCollection("möp", base.LocationCollection)
 			return collection, nil
 		},
 		saveFunc: func(_ core.Model) error {
@@ -62,7 +63,7 @@ func TestCreateOrUpdateField_NewLocation(t *testing.T) {
 	service := GameImportService{App: mockApp}
 	testField := bsm.Field{BSMID: 123, Name: "Test Field"}
 	testTeamRecord := core.NewRecord(testTeamCollection)
-	testTeam := &Team{}
+	testTeam := &base.Team{}
 	testTeam.SetProxyRecord(testTeamRecord)
 	
 
@@ -102,7 +103,7 @@ func TestCreateOrUpdateField_UpdateExistingLocation(t *testing.T) {
 	service := GameImportService{App: mockApp}
 	testField := bsm.Field{BSMID: 123, Name: "UpdatedLocationName"}
 	testTeamRecord := core.NewRecord(testTeamCollection)
-	testTeam := &Team{}
+	testTeam := &base.Team{}
 	testTeam.SetProxyRecord(testTeamRecord)
 
 	location, err := service.createOrUpdateField(testTeam, testField)
@@ -138,7 +139,7 @@ func TestCreateOrUpdateField_SaveError(t *testing.T) {
 	service := GameImportService{App: mockApp}
 	testField := bsm.Field{BSMID: 123, Name: "Failing Field"}
 	testTeamRecord := core.NewRecord(testTeamCollection)
-	testTeam := &Team{}
+	testTeam := &base.Team{}
 	testTeam.SetProxyRecord(testTeamRecord)
 
 	location, err := service.createOrUpdateField(testTeam, testField)
