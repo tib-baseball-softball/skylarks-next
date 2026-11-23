@@ -51,7 +51,7 @@
 
       <div class="badges">
         <span class="badge preset-outlined">
-          {new Intl.DateTimeFormat(appLocale.current, options).format(startDate)}
+          {new Intl.DateTimeFormat(navigator.language || appLocale.current, options).format(startDate)}
         </span>
 
         {#if eventSeries.series_state === "ongoing"}

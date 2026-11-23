@@ -35,7 +35,7 @@
       <div>
         <h3 class="league-name">{match.league?.name}</h3>
         <p class="match-date">
-          {DateTimeUtility.dateTimeFormatMedium(appLocale.current).format(matchDate)}
+          {DateTimeUtility.dateTimeFormatMedium(navigator.language || appLocale.current).format(matchDate)}
         </p>
       </div>
       <GameResultIndicator {match} {teamName}/>

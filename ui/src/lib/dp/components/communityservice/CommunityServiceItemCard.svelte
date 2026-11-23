@@ -36,7 +36,7 @@
   <time class="service-date" datetime="{entry.service_date}">
     <CalendarDaysIcon size="16"/>
     <span>
-      {serviceDate.toLocaleDateString(appLocale.current, DateTimeUtility.eventSeriesDateFormat)}
+      {serviceDate.toLocaleDateString(navigator.language || appLocale.current, DateTimeUtility.eventSeriesDateFormat)}
     </span>
   </time>
 

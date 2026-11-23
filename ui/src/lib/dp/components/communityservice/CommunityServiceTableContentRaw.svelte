@@ -35,7 +35,7 @@
   <tr>
     <td>
       <strong>
-        {DateTimeUtility.dateFormatMedium(appLocale.current).format(
+        {DateTimeUtility.dateFormatMedium(navigator.language || appLocale.current).format(
           new Date(row.service_date),
         )}
       </strong>

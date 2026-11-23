@@ -65,12 +65,12 @@
 
       <p class="date-info">
         <Calendar size="28"/>
-        <time class="h6" datetime="{created}">{new Date(created).toLocaleDateString(appLocale.current)}</time>
+        <time class="h6" datetime="{created}">{new Date(created).toLocaleDateString(navigator.language || appLocale.current)}</time>
       </p>
 
       <p class="time-info">
         <Clock size="28"/>
-        <time class="h6" datetime="{created}">{new Date(created).toLocaleTimeString(appLocale.current)}</time>
+        <time class="h6" datetime="{created}">{new Date(created).toLocaleTimeString(navigator.language || appLocale.current)}</time>
       </p>
     </section>
 
