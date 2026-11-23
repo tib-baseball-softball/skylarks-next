@@ -9,7 +9,7 @@ import (
 	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp"
 	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/internal/tib"
 	_ "git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/migrations"
-	"github.com/pocketbase/pocketbase/core"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
 	"github.com/subosito/gotenv"
 )
 

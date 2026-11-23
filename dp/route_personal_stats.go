@@ -3,7 +3,7 @@ package dp
 import (
 	"net/http"
 
-	"github.com/pocketbase/pocketbase/core"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
 )
 
 func GetUserStats() func(event *core.RequestEvent) error {

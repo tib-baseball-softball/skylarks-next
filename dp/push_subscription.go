@@ -2,8 +2,8 @@ package dp
 
 import (
 	"github.com/SherClockHolmes/webpush-go"
-	"github.com/pocketbase/dbx"
-	"github.com/pocketbase/pocketbase/core"
+	"ganigeorgiev.com/pocketbase/dbx"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
 )
 
 const (

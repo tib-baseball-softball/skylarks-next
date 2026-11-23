@@ -8,8 +8,8 @@ import (
 
 	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp"
 	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/internal/tib"
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/tests"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
+	"ganigeorgiev.com/pocketbase/pocketbase/tests"
 )
 
 // Full integration scenarios inferred from the webhook handler.

@@ -2,8 +2,8 @@ package migrations
 
 import (
 	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp"
-	"github.com/pocketbase/pocketbase/core"
-	m "github.com/pocketbase/pocketbase/migrations"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
+	m "ganigeorgiev.com/pocketbase/pocketbase/migrations"
 )
 
 func init() {

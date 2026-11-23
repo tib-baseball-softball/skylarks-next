@@ -3,7 +3,7 @@ package dp
 import (
 	"fmt"
 
-	"github.com/pocketbase/pocketbase/core"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
 )
 
 const (

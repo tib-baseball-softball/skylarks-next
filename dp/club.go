@@ -1,6 +1,6 @@
 package dp
 
-import "github.com/pocketbase/pocketbase/core"
+import "ganigeorgiev.com/pocketbase/pocketbase/core"
 
 const (
 	ClubsCollection = "clubs"

@@ -7,8 +7,8 @@ import (
 	"testing"
 
 	"git.berlinskylarks.de/tib-baseball/bsm-go"
-	"github.com/pocketbase/dbx"
-	"github.com/pocketbase/pocketbase/core"
+	"ganigeorgiev.com/pocketbase/dbx"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
 )
 
 // MockApp implements GameImportServiceApp for tests.

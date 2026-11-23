@@ -3,7 +3,7 @@ package dp
 import (
 	"strconv"
 
-	"github.com/pocketbase/pocketbase/core"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
 )
 
 // LoadUserStats gets participation stats by event type and participation state

@@ -3,7 +3,7 @@ package dp
 import (
 	"time"
 
-	"github.com/pocketbase/pocketbase/core"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
 )
 
 func SetLastLogin(app core.App, record *core.Record) (err error) {

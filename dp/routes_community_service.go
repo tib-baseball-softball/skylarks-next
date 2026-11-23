@@ -6,7 +6,7 @@ import (
 	"slices"
 	"strconv"
 
-	"github.com/pocketbase/pocketbase/core"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
 )
 
 func GetUserCommunityService() func(event *core.RequestEvent) error {

@@ -11,7 +11,7 @@ import (
 	"time"
 
 	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp"
-	"github.com/pocketbase/pocketbase/core"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
 )
 
 type PlayerReactionPayload struct {

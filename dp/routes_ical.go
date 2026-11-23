@@ -12,9 +12,9 @@ import (
 
 	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/tools/hash"
 	ics "github.com/arran4/golang-ical"
-	"github.com/pocketbase/dbx"
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/tools/security"
+	"ganigeorgiev.com/pocketbase/dbx"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
+	"ganigeorgiev.com/pocketbase/pocketbase/tools/security"
 )
 
 type NotAuthorizedError struct {

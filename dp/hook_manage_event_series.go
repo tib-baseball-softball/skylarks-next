@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/tools/security"
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/tools/types"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
+	"ganigeorgiev.com/pocketbase/pocketbase/tools/types"
 )
 
 type EventSeriesMode string

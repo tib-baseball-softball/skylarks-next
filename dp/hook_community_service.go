@@ -3,7 +3,7 @@ package dp
 import (
 	"slices"
 
-	"github.com/pocketbase/pocketbase/core"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
 )
 
 func HideCommunityServiceAdminFields(e *core.RecordEnrichEvent) error {

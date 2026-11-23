@@ -1,6 +1,6 @@
 package security
 
-import "github.com/pocketbase/pocketbase/tools/security"
+import "ganigeorgiev.com/pocketbase/pocketbase/tools/security"
 
 // IDRandomAlphabet defines the alphabet used for generating random IDs, conforming to PB default validation.
 const IDRandomAlphabet = "abcdefghijklmnopqrstuvwxyz0123456789"

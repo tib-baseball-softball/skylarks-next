@@ -5,7 +5,7 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/pocketbase/pocketbase/core"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
 )
 
 // BlockKnownPaths acts as a simple blocker for some scriptkiddie "attacks" (every 404 response creates a log entry).

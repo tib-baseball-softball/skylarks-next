@@ -3,7 +3,7 @@ package dp
 import (
 	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/tools/store"
 	"github.com/getsentry/sentry-go"
-	"github.com/pocketbase/pocketbase/core"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
 )
 
 type LogicError struct {

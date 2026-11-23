@@ -3,7 +3,7 @@ package dp
 import (
 	"slices"
 
-	"github.com/pocketbase/pocketbase/core"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
 )
 
 // HideTeamSignupKey hides the signup key for a team record if the current user is not an admin.

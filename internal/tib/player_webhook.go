@@ -7,8 +7,8 @@ import (
 	"os"
 
 	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp"
-	"github.com/pocketbase/dbx"
-	"github.com/pocketbase/pocketbase/core"
+	"ganigeorgiev.com/pocketbase/dbx"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
 )
 
 type PlayerChangedMessage struct {

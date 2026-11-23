@@ -4,8 +4,8 @@ import (
 	"strconv"
 
 	"git.berlinskylarks.de/tib-baseball/bsm-go"
-	"github.com/pocketbase/pocketbase/apis"
-	"github.com/pocketbase/pocketbase/core"
+	"ganigeorgiev.com/pocketbase/pocketbase/apis"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
 )
 
 // TriggerLeagueImport called on every league group listing if the result is empty and special query parameters `season`

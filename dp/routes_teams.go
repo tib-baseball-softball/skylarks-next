@@ -6,9 +6,9 @@ import (
 	"net/http"
 	"slices"
 
-	"github.com/pocketbase/dbx"
-	"github.com/pocketbase/pocketbase/apis"
-	"github.com/pocketbase/pocketbase/core"
+	"ganigeorgiev.com/pocketbase/dbx"
+	"ganigeorgiev.com/pocketbase/pocketbase/apis"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
 )
 
 // GetGamesCount returns the number of official league games in the database for a given team and season.

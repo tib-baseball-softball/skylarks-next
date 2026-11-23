@@ -125,10 +125,10 @@ export async function watchWithPagination<T extends RecordModel>(
         "*",
         ({ action, record }) => {
           (async (action: string) => {
-            // see https://github.com/pocketbase/pocketbase/discussions/505
+            // see https://ganigeorgiev.com/pocketbase/pocketbase/discussions/505
             switch (action) {
               // ISSUE: no subscribe event when a record is modified and no longer fits the "filter"
-              // @see https://github.com/pocketbase/pocketbase/issues/4717
+              // @see https://ganigeorgiev.com/pocketbase/pocketbase/issues/4717
               case "update":
               case "create": {
                 // record = await expand(queryParams.expand, record);

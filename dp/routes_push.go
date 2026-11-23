@@ -3,8 +3,8 @@ package dp
 import (
 	"net/http"
 
-	"github.com/pocketbase/dbx"
-	"github.com/pocketbase/pocketbase/core"
+	"ganigeorgiev.com/pocketbase/dbx"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
 )
 
 func notifyWithTestPushMessage(ps PushService, app core.App) func(e *core.RequestEvent) error {

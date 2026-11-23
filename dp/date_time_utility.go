@@ -4,7 +4,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/pocketbase/pocketbase/tools/types"
+	"ganigeorgiev.com/pocketbase/pocketbase/tools/types"
 )
 
 const (

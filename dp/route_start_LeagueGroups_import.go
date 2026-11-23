@@ -5,8 +5,8 @@ import (
 	"slices"
 
 	"git.berlinskylarks.de/tib-baseball/bsm-go"
-	"github.com/pocketbase/pocketbase/apis"
-	"github.com/pocketbase/pocketbase/core"
+	"ganigeorgiev.com/pocketbase/pocketbase/apis"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
 )
 
 // StartLeagueGroupsImport runs import cron for league groups exactly once for one specific club.

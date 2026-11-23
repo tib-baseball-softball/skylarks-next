@@ -8,10 +8,10 @@ import (
 	"time"
 
 	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp/tools/hash"
-	"github.com/pocketbase/dbx"
-	"github.com/pocketbase/pocketbase/core"
-	"github.com/pocketbase/pocketbase/tools/mailer"
-	"github.com/pocketbase/pocketbase/tools/template"
+	"ganigeorgiev.com/pocketbase/dbx"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
+	"ganigeorgiev.com/pocketbase/pocketbase/tools/mailer"
+	"ganigeorgiev.com/pocketbase/pocketbase/tools/template"
 	"github.com/spf13/cast"
 )
 

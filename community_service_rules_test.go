@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"git.berlinskylarks.de/tib-baseball/skylarks-diamond-planner/dp"
-	"github.com/pocketbase/pocketbase/tests"
+	"ganigeorgiev.com/pocketbase/pocketbase/tests"
 )
 
 type ServiceEntryData struct {

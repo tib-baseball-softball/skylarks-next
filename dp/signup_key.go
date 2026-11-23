@@ -1,8 +1,8 @@
 package dp
 
 import (
-	validation "github.com/pocketbase/ozzo-validation/v4"
-	"github.com/pocketbase/pocketbase/core"
+	validation "ganigeorgiev.com/pocketbase/ozzo-validation/v4"
+	"ganigeorgiev.com/pocketbase/pocketbase/core"
 )
 
 // ValidateSignupKey checks that a valid signup key is used on user creation.
