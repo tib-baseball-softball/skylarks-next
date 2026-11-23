@@ -250,7 +250,7 @@ func BindDPHooks(app core.App, client bsm.APIClient, pushService push.PushServic
 
 		pushGroup.POST("/{user}/notify-me", push.NotifyWithTestPushMessage(pushService, app))
 
-		pushGroup.DELETE("/unsubscribe", push.DeletePushSubscription(app))
+		pushGroup.DELETE("/unsubscribe", push.DeleteSubscription(app))
 
 		return se.Next()
 	})

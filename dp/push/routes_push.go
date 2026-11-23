@@ -42,7 +42,7 @@ func NotifyWithTestPushMessage(ps PushService, app core.App) func(e *core.Reques
 	}
 }
 
-func DeletePushSubscription(app core.App) func(e *core.RequestEvent) error {
+func DeleteSubscription(app core.App) func(e *core.RequestEvent) error {
 	return func(e *core.RequestEvent) error {
 		info, err := e.RequestInfo()
 		if err != nil {

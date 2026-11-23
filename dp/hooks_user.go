@@ -131,7 +131,7 @@ func notifyAdminsUserCreation(record *core.Record, app core.App, ps push.PushSer
 		return err
 	}
 
-	msg := &push.PushMessage{
+	msg := &push.Message{
 		Title: "New User Created in Diamond Planner",
 		Body:  fmt.Sprintf("A new user has been created for your club: %s %s.", user.FirstName(), user.LastName()),
 		Tag:   "user_created",

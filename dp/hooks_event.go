@@ -154,11 +154,11 @@ func NotifyNewEvent(e *core.RecordEvent, ps push.PushService) error {
 	}
 
 	for _, sub := range subs {
-		msg := &push.PushMessage{
+		msg := &push.Message{
 			Title: "New Event in " + team.Name(),
 			Body:  messageBody,
 			Tag:   "team_new_event",
-			Actions: []push.PushActionData{
+			Actions: []push.ActionData{
 				{
 					Action: push.PushActionLink,
 					Title:  "Go to Event",

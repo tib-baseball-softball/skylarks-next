@@ -71,11 +71,11 @@ func PushTeamOrClubAnnouncement(app core.App, coll string, announcement *base.An
 	for _, sub := range subs {
 		app.Logger().Debug("Sending push notification to user", "user", sub.User)
 
-		msg := &push.PushMessage{
+		msg := &push.Message{
 			Title: "New Announcement in " + proxy.Name(),
 			Body:  announcement.Title(),
 			Tag:   "team_club_new_announcement",
-			Actions: []push.PushActionData{
+			Actions: []push.ActionData{
 				{
 					Action: push.PushActionLink,
 					Title:  "Read Announcement",

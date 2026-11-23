@@ -11,36 +11,36 @@ import (
 	"github.com/SherClockHolmes/webpush-go"
 )
 
-type PushActionType string
+type ActionType string
 
 const (
 	VAPIDSubscriberEnvName = "VAPID_SUBSCRIBER"
 	VAPIDPublicKeyEnvName  = "VAPID_PUBLIC_KEY"
 	VAPIDPrivateKeyEnvName = "VAPID_PRIVATE_KEY"
 
-	PushActionLink PushActionType = "link"
+	PushActionLink ActionType = "link"
 )
 
-type PushActionData struct {
-	Action PushActionType `json:"action"`
+type ActionData struct {
+	Action ActionType `json:"action"`
 	Title  string         `json:"title"`
 	Type   string         `json:"type"`
 }
 
-// PushMessage represents the raw data for a push notification message that is encoded into the JSON payload. Closely
+// Message represents the raw data for a push notification message that is encoded into the JSON payload. Closely
 // follows the DOM type `NotificationOptions`.
-type PushMessage struct {
+type Message struct {
 	Title   string           `json:"title"`
 	Body    string           `json:"body"`
 	Data    map[string]any   `json:"data"`
 	Tag     string           `json:"tag"`
-	Actions []PushActionData `json:"actions"`
+	Actions []ActionData `json:"actions"`
 }
 
 // PushService defines the app-wide interface for sending push notifications.
 type PushService interface {
 	handleTestPush(sub *webpush.Subscription) error
-	SendPushMessage(msg *PushMessage, sub *webpush.Subscription) error
+	SendPushMessage(msg *Message, sub *webpush.Subscription) error
 }
 
 // PushServiceImpl is the default implementation of PushService. It is meant as a singleton, to be instantiated only once.
@@ -66,7 +66,7 @@ func NewPushService() PushService {
 }
 
 // SendPushMessage sends a push notification to the given subscription.
-func (p PushServiceImpl) SendPushMessage(msg *PushMessage, sub *webpush.Subscription) error {
+func (p PushServiceImpl) SendPushMessage(msg *Message, sub *webpush.Subscription) error {
 	blob, err := json.Marshal(msg)
 	if err != nil {
 		return err
@@ -96,11 +96,11 @@ func (p PushServiceImpl) SendPushMessage(msg *PushMessage, sub *webpush.Subscrip
 
 // handleTestPush sends a test push notification to the given subscription.
 func (p PushServiceImpl) handleTestPush(sub *webpush.Subscription) error {
-	msg := PushMessage{
+	msg := Message{
 		Title: "Hello there",
 		Body:  "Real men test in production",
 		Tag:   "Test Tag",
-		Actions: []PushActionData{
+		Actions: []ActionData{
 			{
 				Action: PushActionLink,
 				Title:  "Example Action",
